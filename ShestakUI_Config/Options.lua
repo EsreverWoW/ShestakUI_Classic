@@ -163,11 +163,11 @@ do
 	local welcome_message = ns.CreateCheckBox(parent, "welcome_message", L_GUI_GENERAL_WELCOME_MESSAGE)
 	welcome_message:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
 
-	local auto_scale = ns.CreateCheckBox(parent, "auto_scale", L_GUI_GENERAL_AUTOSCALE)
-	auto_scale:SetPoint("TOPLEFT", welcome_message, "BOTTOMLEFT", 0, 0)
-
 	local bottom_lines = ns.CreateCheckBox(parent, "bottom_lines", L_GUI_GENERAL_BOTTOMLINES)
-	bottom_lines:SetPoint("TOPLEFT", auto_scale, "BOTTOMLEFT", 0, 0)
+	bottom_lines:SetPoint("TOPLEFT", welcome_message, "BOTTOMLEFT", 0, 0)
+
+	local auto_scale = ns.CreateCheckBox(parent, "auto_scale", L_GUI_GENERAL_AUTOSCALE)
+	auto_scale:SetPoint("TOPLEFT", bottom_lines, "BOTTOMLEFT", 0, 0)
 
 	local uiscale = ns.CreateNumberSlider(parent, "uiscale", nil, nil, 0.4, 1.1, 0.01, true, L_GUI_GENERAL_UISCALE)
 	uiscale:SetPoint("TOPLEFT", auto_scale, "BOTTOMLEFT", 0, -20)
