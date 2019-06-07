@@ -1,16 +1,31 @@
-if not IsClassicBuild() then return end
-
 local lib = LibStub("LibClassicDurations", true)
 if not lib then return end
 
 local Spell = lib.AddAura
 local Talent = lib.Talent
+
+------------------
+-- GLOBAL
+------------------
+
+Spell( 11196, { duration = 60 }) -- Recently Bandaged
+
+Spell({ 13099, 13138, 16566 }, { 
+    duration = function(spellID)
+        if spellID == 13138 then return 20 -- backfire
+        elseif spellID == 16566 then return 30 -- backfire
+        else return 10 end
+    end
+}) -- Net-o-Matic
+Spell({ 4068, 19769 }, { duration = 3 }) -- Iron Grenade, Thorium
+-- too lazy to add more, everyone is using iron anyway
+
 -------------
 -- PRIEST
 -------------
 
-Spell( 552, { duration = 20, type = "BUFF" })
-Spell({ 17, 592, 600, 3747, 6065, 6066, 10898, 10899, 10900, 10901 }, {duration = 30, type = "BUFF" })
+Spell( 552, { duration = 20, type = "BUFF" }) -- Abolish Disease
+Spell({ 17, 592, 600, 3747, 6065, 6066, 10898, 10899, 10900, 10901 }, {duration = 30, type = "BUFF" }) -- PWS
 Spell( 6788, { duration = 15, isStacking = false, type = "DEBUFF" }) -- Weakened Soul
 Spell({ 139, 6074, 6075, 6076, 6077, 6078, 10927, 10928, 10929, 25315 }, { duration = 15, type = "BUFF" }) -- Renew
 
@@ -46,6 +61,7 @@ Spell( 15286 ,{ duration = 60 }) -- Vampiric Embrace
 -- DRUID
 ---------------
 
+Spell({ 467, 782, 1075, 8914, 9756, 9910 }, { duration = 600, type = "BUFF" }) -- Thorns
 Spell( 22812 ,{ duration = 15, type = "BUFF" }) -- Barkskin
 Spell({ 339, 1062, 5195, 5196, 9852, 9853 }, {
     duration = function(spellID)
@@ -103,6 +119,9 @@ Spell({ 5570, 24974, 24975, 24976, 24977 }, { duration = 12, stacking = true }) 
 -------------
 -- WARRIOR
 -------------
+
+Spell( 24573, { duration = 5 }) -- Mortal Strke Healind Reduction
+
 Spell( 18498, { duration = 3 }) -- Improved Shield Bash
 
 Spell( 20230, { duration = 15, type = "BUFF" }) -- Retaliation
@@ -123,7 +142,7 @@ Spell( 12721, { duration = 12, stacking = true }) -- Deep Wounds
 
 Spell({ 1715, 7372, 7373 }, { duration = 15 }) -- Hamstring
 Spell( 23694 , { duration = 5 }) -- Improved Hamstring
-
+Spell({ 6343, 8198, 8204, 8205, 11580, 11581 }, { duration = 10 }) -- Thunder Clap
 Spell({ 694, 7400, 7402, 20559, 20560 }, { duration = 6 }) -- Mocking Blow
 Spell( 1161 ,{ duration = 6 }) -- Challenging Shout
 Spell( 355 ,{ duration = 3 }) -- Taunt
@@ -153,6 +172,16 @@ Spell({ 12966, 12967, 12968, 12969, 12970 }, { duration = 15, type = "BUFF" }) -
 --------------
 -- ROGUE
 --------------
+
+Spell({ 3409, 11201 }, { duration = 12 }) -- Crippling Poison
+Spell({ 2818, 2819, 11353, 11354, 25349 }, { duration = 12, stacking = true }) -- Deadly Poison
+Spell({ 5760, 8692, 11398 }, {
+    duration = function(spellID)
+        if spellID == 5760 then return 10
+        elseif spellID == 8692 then return 12
+        else return 14 end
+    end
+}) -- Mind-numbing Poison
 
 Spell( 18425, { duration = 2 }) -- Improved Kick Silence
 Spell( 13750, { duration = 15, type = "BUFF" }) -- Adrenaline Rush
@@ -249,6 +278,24 @@ Spell( 29203 ,{ duration = 15, type = "BUFF" }) -- Healing Way
 -- PALADIN
 --------------
 
+Spell({ 19740, 19834, 19835, 19836, 19837, 19838, 25291 }, { duration = 300, type = "BUFF" }) -- Blessing of Might
+Spell({ 25782, 25916 }, { duration = 900, type = "BUFF" }) -- Greater Blessing of Might
+
+Spell({ 19742, 19850, 19852, 19853, 19854, 25290 }, { duration = 300, type = "BUFF" }) -- Blessing of Wisdom
+Spell({ 25894, 25918 }, { duration = 900, type = "BUFF" }) -- Greater Blessing of Might
+
+Spell(20217, { duration = 300, type = "BUFF" }) -- Blessing of Kings
+Spell(25898, { duration = 900, type = "BUFF" }) -- Greater Blessing of Kings
+
+Spell({ 20911, 20912, 20913 }, { duration = 300, type = "BUFF" }) -- Blessing of Sanctuary
+Spell(25899, { duration = 900, type = "BUFF" }) -- Greater Blessing of Sanctuary
+
+Spell(1038, { duration = 300, type = "BUFF" }) -- Blessing of Salvation
+Spell(25895, { duration = 900, type = "BUFF" }) -- Greater Blessing of Salvation
+
+Spell({ 19977, 19978, 19979 }, { duration = 300, type = "BUFF" }) -- Blessing of Light
+Spell(25890, { duration = 900, type = "BUFF" }) -- Greater Blessing of Light
+
 Spell( 20066, { duration = 6 }) -- Repentance
 Spell({ 2878, 5627, 5627 }, {
     duration = function(spellID)
@@ -344,6 +391,10 @@ Spell(24394, { duration = 3 }) -- Intimidation
 -------------
 -- MAGE
 -------------
+
+
+Spell({ 604, 8450, 8451, 10173, 10174 }, { duration = 600, type = "BUFF" }) -- Dampen Magic
+Spell({ 1008, 8455, 10169, 10170 }, { duration = 600, type = "BUFF" }) -- Amplify Magic
 
 Spell(18469, { duration = 4 }) -- Imp CS Silence
 Spell({ 118, 12824, 12825, 12826, 28270, 28271, 28272 }, {

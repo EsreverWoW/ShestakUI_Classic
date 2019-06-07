@@ -1,5 +1,3 @@
-if not IsClassicBuild() then return end
-
 --[================[
 LibClassicDurations
 Author: d87
