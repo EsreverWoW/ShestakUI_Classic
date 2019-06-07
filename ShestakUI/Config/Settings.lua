@@ -32,6 +32,7 @@ C["general"] = {
 	["welcome_message"] = true,					-- Enable welcome message in chat
 	["auto_scale"] = true,						-- Autoscale
 	["uiscale"] = 0.96,							-- Your value (between 0.2 and 1) if "auto_scale" is disable
+	["bottom_lines"] = true,					-- Show bottom panel lines
 }
 
 ----------------------------------------------------------------------------------------

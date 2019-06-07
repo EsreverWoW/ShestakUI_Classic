@@ -14,6 +14,7 @@ L_GUI_GENERAL_SUBTEXT = "These settings control the general user interface setti
 L_GUI_GENERAL_WELCOME_MESSAGE = "Welcome message in chat"
 L_GUI_GENERAL_AUTOSCALE = "Auto UI Scale"
 L_GUI_GENERAL_UISCALE = "UI Scale (if auto-scale is disabled)"
+L_GUI_GENERAL_BOTTOMLINES = "Show Bottom Panel Lines"
 L.media_border_color = "Color for borders"
 L.media_backdrop_color = "Color for borders backdrop"
 L.media_backdrop_alpha = "Alpha for transparent backdrop"

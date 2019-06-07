@@ -17,6 +17,7 @@ L_GUI_GENERAL_SUBTEXT = "Эти настройки контролируют об
 L_GUI_GENERAL_WELCOME_MESSAGE = "Приветственное сообщение в чате"
 L_GUI_GENERAL_AUTOSCALE = "Автоматически масштабировать интерфейс"
 L_GUI_GENERAL_UISCALE = "Масштаб интерфейса"
+L_GUI_GENERAL_BOTTOMLINES = "Show Bottom Panel Lines" -- Need review
 L.media_border_color = "Цвет для окантовки"
 L.media_backdrop_color = "Цвет для фона"
 L.media_backdrop_alpha = "Прозрачность фона"

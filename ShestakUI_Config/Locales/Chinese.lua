@@ -17,6 +17,7 @@ L_GUI_GENERAL_SUBTEXT = "一般用戶界面设置，键入 /uihelp 获取更多�
 L_GUI_GENERAL_WELCOME_MESSAGE = "欢迎信息"
 L_GUI_GENERAL_AUTOSCALE = "自动UI缩放"
 L_GUI_GENERAL_UISCALE = "自定义UI缩放"
+L_GUI_GENERAL_BOTTOMLINES = "Show Bottom Panel Lines" -- Need review
 L.media_border_color = "背景颜色"
 L.media_backdrop_color = "边框背景颜色"
 L.media_backdrop_alpha = "透明背景"

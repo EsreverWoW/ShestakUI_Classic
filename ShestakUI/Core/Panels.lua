@@ -89,10 +89,14 @@ end)
 ----------------------------------------------------------------------------------------
 --	Bottom line
 ----------------------------------------------------------------------------------------
-local bottompanel = CreateFrame("Frame", "BottomPanel", UIParent)
-bottompanel:CreatePanel("ClassColor", 1, 1, "BOTTOM", UIParent, "BOTTOM", 0, 20)
-bottompanel:SetPoint("LEFT", UIParent, "LEFT", 21, 0)
-bottompanel:SetPoint("RIGHT", UIParent, "RIGHT", -21, 0)
+local bottompanel
+
+if C.general.bottom_lines then
+	bottompanel = CreateFrame("Frame", "BottomPanel", UIParent)
+	bottompanel:CreatePanel("ClassColor", 1, 1, "BOTTOM", UIParent, "BOTTOM", 0, 20)
+	bottompanel:SetPoint("LEFT", UIParent, "LEFT", 21, 0)
+	bottompanel:SetPoint("RIGHT", UIParent, "RIGHT", -21, 0)
+end
 
 ----------------------------------------------------------------------------------------
 --	Chat background
@@ -110,8 +114,11 @@ if C.chat.background == true then
 		chattabs:SetBackdropColor(0, 0, 0, C.chat.background_alpha)
 	end
 else
-	local leftpanel = CreateFrame("Frame", "LeftPanel", UIParent)
-	leftpanel:CreatePanel("ClassColor", 1, C.chat.height - 2, "BOTTOMLEFT", bottompanel, "LEFT", 0, 0)
+	local leftpanel
+	if C.general.bottom_lines then
+		leftpanel = CreateFrame("Frame", "LeftPanel", UIParent)
+		leftpanel:CreatePanel("ClassColor", 1, C.chat.height - 2, "BOTTOMLEFT", bottompanel, "LEFT", 0, 0)
+	end
 end
 
 ----------------------------------------------------------------------------------------
