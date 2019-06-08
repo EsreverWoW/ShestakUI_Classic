@@ -1,3 +1,5 @@
+if not IsClassicBuild() then return end
+
 local lib = LibStub("LibClassicDurations", true)
 if not lib then return end
 
