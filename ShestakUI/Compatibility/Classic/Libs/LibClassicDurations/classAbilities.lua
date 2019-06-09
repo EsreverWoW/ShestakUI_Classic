@@ -1,7 +1,10 @@
 if not IsClassicBuild() then return end
 
-local lib = LibStub("LibClassicDurations", true)
+local lib = LibStub and LibStub("LibClassicDurations", true)
 if not lib then return end
+
+local Type, Version = "SpellTable", 5
+if lib:GetDataVersion(Type) >= Version then return end  -- older versions didn't have that function
 
 local Spell = lib.AddAura
 local Talent = lib.Talent
@@ -12,7 +15,7 @@ local Talent = lib.Talent
 
 Spell( 11196, { duration = 60 }) -- Recently Bandaged
 
-Spell({ 13099, 13138, 16566 }, { 
+Spell({ 13099, 13138, 16566 }, {
     duration = function(spellID)
         if spellID == 13138 then return 20 -- backfire
         elseif spellID == 16566 then return 30 -- backfire
@@ -36,7 +39,7 @@ Spell({ 10797, 19296, 19299, 19302, 19303, 19304, 19305 }, { duration = 6, stack
 Spell({ 2944, 19276, 19277, 19278, 19279, 19280 }, { duration = 24, stacking = true }) --devouring plague
 Spell({ 453, 8192, 10953 }, { duration = 15 }) -- mind soothe
 
-Spell({ 9484, 9485, 10955 }, { 
+Spell({ 9484, 9485, 10955 }, {
     duration = function(spellID)
         if spellID == 9484 then return 30
         elseif spellID == 9485 then return 40
@@ -51,7 +54,7 @@ Spell({ 8122, 8124, 10888, 10890 }, { duration = 8,  }) -- Psychic Scream
 Spell({ 589, 594, 970, 992, 2767, 10892, 10893, 10894 }, { stacking = true,
     duration = function(spellID, isSrcPlayer)
         -- Improved SWP, 2 ranks: Increases the duration of your Shadow Word: Pain spell by 3 sec.
-        local talents = isSrcPlayer and Talent(12313, 12804, 12807) or 0
+        local talents = isSrcPlayer and 3*Talent(15275, 15317) or 0
         return 18 + talents
     end
 }) -- SW:P
@@ -98,7 +101,7 @@ Spell( 6795, { duration = 3 }) -- Taunt
 Spell({ 1850, 9821 }, { duration = 15, type = "BUFF" }) -- Dash
 Spell( 5229, { duration = 10, type = "BUFF" }) -- Enrage
 Spell({ 22842, 22895, 22896 }, { duration = 10, type = "BUFF" }) -- Frenzied Regeneration
-Spell( 16922, { duration = 3 }) -- Imp Starfire Stun 
+Spell( 16922, { duration = 3 }) -- Imp Starfire Stun
 Spell({ 9005, 9823, 9827 }, { duration = 2 }) -- Pounce
 Spell({ 9007, 9824, 9826 }, { duration = 18, stacking = true, }) -- Pounce Bleed
 Spell({ 8921, 8924, 8925, 8926, 8927, 8928, 8929, 9833, 9834, 9835 }, {
@@ -122,8 +125,9 @@ Spell({ 5570, 24974, 24975, 24976, 24977 }, { duration = 12, stacking = true }) 
 -- WARRIOR
 -------------
 
-Spell( 12294, { duration = 10 }) -- Mortal Strke Healind Reduction
+Spell( 12294, { duration = 10 }) -- Mortal Strike Healing Reduction
 
+Spell({72, 1671, 1672}, { duration = 6 }) -- Shield Bash
 Spell( 18498, { duration = 3 }) -- Improved Shield Bash
 
 Spell( 20230, { duration = 15, type = "BUFF" }) -- Retaliation
@@ -144,12 +148,26 @@ Spell( 12721, { duration = 12, stacking = true }) -- Deep Wounds
 
 Spell({ 1715, 7372, 7373 }, { duration = 15 }) -- Hamstring
 Spell( 23694 , { duration = 5 }) -- Improved Hamstring
-Spell({ 6343, 8198, 8204, 8205, 11580, 11581 }, { duration = 10 }) -- Thunder Clap
+Spell({ 6343, 8198, 8204, 8205, 11580, 11581 }, {
+    duration = function(spellID)
+        if spellID == 6343 then return 10
+        elseif spellID == 8198 then return 14
+        elseif spellID == 8204 then return 18
+        elseif spellID == 8205 then return 22
+        elseif spellID == 11580 then return 26
+        else return 30 end
+    end
+}) -- Thunder Clap
 Spell({ 694, 7400, 7402, 20559, 20560 }, { duration = 6 }) -- Mocking Blow
 Spell( 1161 ,{ duration = 6 }) -- Challenging Shout
 Spell( 355 ,{ duration = 3 }) -- Taunt
 Spell({ 5242, 6192, 6673, 11549, 11550, 11551, 25289 }, { duration = 120, type = "BUFF" }) -- Battle Shout
-Spell({ 1160, 6190, 11554, 11555, 11556 }, { duration = 30 }) -- Demoralizing Shout
+Spell({ 1160, 6190, 11554, 11555, 11556 }, {
+    duration = function(spellID, isSrcPlayer)
+        local talents = isSrcPlayer and Talent(12321, 12835, 12836, 12837, 12838) or 0
+        return 30 * (1 + 0.1 * talents)
+    end
+}) -- Demoralizing Shout, varies
 Spell( 18499, { duration = 10, type = "BUFF" }) -- Berserker Rage
 Spell({ 20253, 20614, 20615 }, { duration = 3 }) -- Intercept
 Spell( 12323, { duration = 6 }) -- Piercing Howl
@@ -169,7 +187,8 @@ Spell( 12809 ,{ duration = 5 }) -- Concussion Blow
 Spell( 12292 ,{ duration = 20, type = "BUFF" }) -- Sweeping Strikes
 Spell({ 12880, 14201, 14202, 14203, 14204 }, { duration = 12, type = "BUFF" }) -- Enrage
 Spell({ 12966, 12967, 12968, 12969, 12970 }, { duration = 15, type = "BUFF" }) -- Flurry
-
+Spell(7922, { duration = 1 }) -- Charge
+Spell(5530, { duration = 3 }) -- Mace Specialization
 
 --------------
 -- ROGUE
@@ -230,7 +249,7 @@ Spell({ 704, 7658, 7659, 11717 }, { duration = 120 }) -- Curse of Recklessness
 Spell( 603 ,{ duration = 60, stacking = true }) -- Curse of Doom
 Spell( 18223 ,{ duration = 12 }) -- Curse of Exhaustion
 Spell( 6358, { duration = 20 }) -- Seduction, varies, Improved Succubus
-Spell({ 5484, 17928 }, { 
+Spell({ 5484, 17928 }, {
     duration = function(spellID)
         return spellID == 5484 and 10 or 15
     end
@@ -443,3 +462,7 @@ Spell({ 122, 865, 6131, 10230 }, { duration = 8 }) -- Frost Nova
 -- Spell(12536, { duration = 15 }) -- Clearcasting
 Spell(12043, { duration = 15 }) -- Presence of Mind
 Spell(12042, { duration = 15 }) -- Arcane Power
+
+
+
+lib:SetDataVersion(Type, Version)

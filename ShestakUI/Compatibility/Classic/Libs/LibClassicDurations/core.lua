@@ -7,11 +7,9 @@ Description: tracking expiration times
 --]================]
 
 
-local MAJOR, MINOR = "LibClassicDurations", 1.02
+local MAJOR, MINOR = "LibClassicDurations", 2
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
-
--- lib.callbacks = lib.callbacks or LibStub("CallbackHandler-1.0"):New(lib)
 
 lib.frame = lib.frame or CreateFrame("Frame")
 
@@ -34,6 +32,16 @@ local GetTime = GetTime
 f:SetScript("OnEvent", function(self, event, ...)
     return self[event](self, event, ...)
 end)
+
+local SpellDataVersions = {}
+
+function lib:SetDataVersion(dataType, version)
+    SpellDataVersions[dataType] = version
+end
+
+function lib:GetDataVersion(dataType)
+    return SpellDataVersions[dataType] or 0
+end
 
 
 lib.AddAura = lib.AddAura or function(id, opts)
@@ -70,7 +78,7 @@ local COMBATLOG_OBJECT_REACTION_FRIENDLY = COMBATLOG_OBJECT_REACTION_FRIENDLY
 
 local DRMultipliers = { 0.5, 0.25, 0}
 local function addDRLevel(dstGUID, category)
-    local guitTable = DRInfo[dstGUID]
+    local guidTable = DRInfo[dstGUID]
     if not guidTable then
         DRInfo[dstGUID] = {}
         guidTable = DRInfo[dstGUID]
@@ -98,7 +106,7 @@ local function getDRMul(dstGUID, spellID)
     local category = lib.DR_CategoryBySpellID[spellID]
     if not category then return 1 end
 
-    local guitTable = DRInfo[dstGUID]
+    local guidTable = DRInfo[dstGUID]
     if guidTable then
         local catTable = guidTable[category]
         if catTable then
@@ -212,7 +220,7 @@ function f:COMBAT_LOG_EVENT_UNFILTERED(event)
     spellID, spellName, spellSchool, auraType, amount = CombatLogGetCurrentEventInfo()
 
     CountDiminishingReturns(eventType, srcGUID, srcFlags, dstGUID, dstFlags, spellID, auraType)
-    
+
     if auraType == "BUFF" or auraType == "DEBUFF" then
         local opts = spells[spellID]
         if  eventType == "SPELL_AURA_REFRESH" or
@@ -242,7 +250,7 @@ end
 
 local function GetGUIDAuraTime(dstGUID, spellID, srcGUID, isStacking)
     local guidTable = guids[dstGUID]
-    if guidTable then        
+    if guidTable then
         -- local isStacking = opts.stacking
         local spellTable = guidTable[spellID]
         if spellTable then
