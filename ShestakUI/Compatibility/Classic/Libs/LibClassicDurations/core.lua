@@ -7,13 +7,13 @@ Description: tracking expiration times
 --]================]
 
 
-local MAJOR, MINOR = "LibClassicDurations", 2
+local MAJOR, MINOR = "LibClassicDurations", 3
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
 lib.frame = lib.frame or CreateFrame("Frame")
 
-local weakKeysMeta = { __mode == "k" }
+local weakKeysMeta = { __mode = "k" }
 lib.guids = lib.guids or setmetatable({}, weakKeysMeta)
 lib.spells = lib.spells or {
 
@@ -144,12 +144,39 @@ local function CountDiminishingReturns(eventType, srcGUID, srcFlags, dstGUID, ds
     end
 end
 
+------------------------
+-- COMBO POINTS
+------------------------
+
+local GetComboPoints = GetComboPoints
+local _, playerClass = UnitClass("player")
+local cpWas = 0
+local cpNow = 0
+local function GetCP()
+    if not cpNow then return GetComboPoints("player", "target") end
+    return cpWas > cpNow and cpWas or cpNow
+end
+
+function f:PLAYER_TARGET_CHANGED(event)
+    return self:UNIT_POWER_UPDATE(event, "player", "COMBO_POINTS")
+end
+function f:UNIT_POWER_UPDATE(event,unit, ptype)
+    if ptype == "COMBO_POINTS" then
+        cpWas = cpNow
+        cpNow = GetComboPoints(unit, "target")
+    end
+end
+
 --------------------------------------------
 
 local function cleanDuration(duration, spellID, srcGUID)
     if type(duration) == "function" then
         local isSrcPlayer = srcGUID == UnitGUID("player")
-        return duration(spellID, isSrcPlayer)
+        local comboPoints
+        if isSrcPlayer and playerClass == "ROGUE" then
+            comboPoints = GetCP()
+        end
+        return duration(spellID, isSrcPlayer, comboPoints)
     end
     return duration
 end
@@ -201,6 +228,9 @@ local function SetTimer(srcGUID, dstGUID, dstName, dstFlags, spellID, spellName,
     end
 
     local duration = cleanDuration(opts.duration, spellID, srcGUID)
+    if not duration or duration == 0 then
+        return SetTimer(srcGUID, dstGUID, dstName, dstFlags, spellID, spellName, opts, auraType, true)
+    end
     local mul = getDRMul(dstGUID, spellID)
     duration = duration * mul
     local now = GetTime()
@@ -291,6 +321,10 @@ function lib:RegisterFrame(frame)
     activeFrames[frame] = true
     if next(activeFrames) then
         f:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
+        if playerClass == "ROGUE" then
+            f:RegisterEvent("PLAYER_TARGET_CHANGED")
+            f:RegisterUnitEvent("UNIT_POWER_UPDATE", "player")
+        end
     end
 end
 
@@ -298,5 +332,9 @@ function lib:UnregisterFrame(frame)
     activeFrames[frame] = nil
     if not next(activeFrames) then
         f:UnregisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
+        if playerClass == "ROGUE" then
+            f:UnregisterEvent("PLAYER_TARGET_CHANGED")
+            f:UnregisterEvent("UNIT_POWER_UPDATE")
+        end
     end
 end

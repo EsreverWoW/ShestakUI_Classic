@@ -3,7 +3,7 @@ if not IsClassicBuild() then return end
 local lib = LibStub("LibClassicDurations", true)
 if not lib then return end
 
-local Type, Version = "DRTable", 5
+local Type, Version = "DRTable", 6
 if lib:GetDataVersion(Type) >= Version then return end
 
 local FEAR = "FEAR"
@@ -27,6 +27,7 @@ lib.DR_CategoryBySpellID = {
     -- Are random stuns even diminished at all among themselves?
     -- Random roots?
 
+    [835] = STUN, -- Tidal Charm
     [20549] = STUN, -- War Stomp
     [16566] = ROOT, -- Net-o-Matic
 
