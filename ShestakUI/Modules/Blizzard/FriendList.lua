@@ -164,7 +164,12 @@ hooksecurefunc("WorldStateScoreFrame_Update", function()
 
 	for i = 1, GetNumBattlefieldScores() do
 		local index = offset + i
-		local name, _, _, _, _, faction, _, _, class = GetBattlefieldScore(index)
+		local name, faction, class, rank
+		if not T.classic then
+			name, _, _, _, _, faction, _, _, class = GetBattlefieldScore(index)
+		else
+			name, _, _, _, _, faction, rank, _, _, class = GetBattlefieldScore(index)
+		end
 		if name then
 			local n, r = strsplit("-", name, 2)
 			n = classColor[class]..n.."|r"

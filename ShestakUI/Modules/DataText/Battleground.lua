@@ -26,7 +26,13 @@ BGFrame:EnableMouse(true)
 BGFrame:SetScript("OnEnter", function(self)
 	local numScores = GetNumBattlefieldScores()
 	for i = 1, numScores do
-		local name, _, honorableKills, deaths, _, _, _, _, _, damageDone, healingDone = GetBattlefieldScore(i)
+		local name, honorableKills, deaths, damageDone, healingDone, rank
+		if not T.classic then
+			name, _, honorableKills, deaths, _, _, _, _, _, damageDone, healingDone = GetBattlefieldScore(i)
+		else
+			-- changes in build 30786 changed returns - possibly 10 total, meaning no dmg/heals
+			name, _, honorableKills, deaths, _, _, rank, _, _, _, damageDone, healingDone = GetBattlefieldScore(i)
+		end
 		if name and name == T.name then
 			local areaID = C_Map.GetBestMapForUnit("player") or 0
 			GameTooltip:SetOwner(self, "ANCHOR_TOPLEFT", 0, T.Scale(4))
@@ -114,7 +120,13 @@ local function Update(self, t)
 		RequestBattlefieldScoreData()
 		local numScores = GetNumBattlefieldScores()
 		for i = 1, numScores do
-			local name, killingBlows, _, _, honorGained, _, _, _, _, damageDone, healingDone = GetBattlefieldScore(i)
+			local name, killingBlows, honorGained, damageDone, healingDone, rank
+			if not T.classic then
+				name, killingBlows, _, _, honorGained, _, _, _, _, damageDone, healingDone = GetBattlefieldScore(i)
+			else
+				-- changes in build 30786 changed returns - possibly 10 total, meaning no dmg/heals
+				name, killingBlows, _, _, honorGained, _, rank, _, _, _, damageDone, healingDone = GetBattlefieldScore(i)
+			end
 			if healingDone > damageDone then
 				dmgtxt = (classcolor..SHOW_COMBAT_HEALING.." :|r "..T.ShortValue(healingDone))
 			else

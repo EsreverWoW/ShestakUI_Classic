@@ -14,7 +14,13 @@ local function Update(object, event, unit)
 	local _, instanceType = IsInInstance()
 	if instanceType == "pvp" then
 		for i = 1, GetNumBattlefieldScores() do
-			local name, _, _, _, _, _, _, _, _, _, _, _, _, _, _, talentSpec = GetBattlefieldScore(i)
+			local name, talentSpec
+			if not T.classic then
+				name, _, _, _, _, _, _, _, _, _, _, _, _, _, _, talentSpec = GetBattlefieldScore(i)
+			else
+				-- changes in build 30786 changed returns - possibly 10 total, meaning no talentSpec
+				name, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, talentSpec = GetBattlefieldScore(i)
+			end
 			if GetUnitName(unit, true) == name then
 				object.EnemySpec:SetText(talentSpec)
 			end

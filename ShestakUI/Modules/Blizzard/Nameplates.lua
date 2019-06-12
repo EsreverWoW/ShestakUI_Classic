@@ -97,8 +97,10 @@ if C.nameplate.healer_icon == true then
 						name = name:match("(.+)%-.+") or name
 						healList[name] = talentSpec
 					end
-				else -- Temporary? Look into localized names for custom GetSpecializationInfoByID in Classic.
-					local name, _, _, _, _, faction, _, _, classToken, damageDone, healingDone, _, _, _, _, talentSpec = GetBattlefieldScore(i)
+				else
+					-- Temporary? Look into localized names for custom GetSpecializationInfoByID in Classic.
+					-- changes in build 30786 changed returns - possibly 10 total, meaning no dmg/heals/talentSpec
+					local name, _, _, _, _, faction, rank, _, _, classToken, damageDone, healingDone, _, _, _, _, talentSpec = GetBattlefieldScore(i)
 
 					if name and healerClassTokens[classToken] and healingDone >= damageDone and t.factions[UnitFactionGroup("player")] == faction then
 						name = name:match("(.+)%-.+") or name
