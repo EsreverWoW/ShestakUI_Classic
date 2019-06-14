@@ -82,6 +82,7 @@ local function LoadSkin()
 		"DisplayPanelInstantQuestText",
 		"DisplayPanelAutoQuestWatch",
 		"DisplayPanelHideOutdoorWorldState",
+		"DisplayPanelShowMinimapClock",
 		"DisplayPanelShowDetailedTooltips",
 		"DisplayPanelShowLoadingScreenTip",
 		-- Social
