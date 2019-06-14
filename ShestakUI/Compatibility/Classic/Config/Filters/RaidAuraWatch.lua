@@ -195,65 +195,66 @@ if C.raidframe.plugins_pvp_debuffs == true then
 	T.PvPDebuffs = {
 		--[[
 		-- Druid
-		[SpellName(339)] = 2,		-- Entangling Roots
 		[SpellName(5211)] = 3,		-- Bash
-		[SpellName(22570)] = 3,		-- Mangle
-		[SpellName(2637)] = 3,		-- Hibernate
-		[SpellName(9005)] = 3,		-- Pounce
-		[SpellName(19675)] = 2,		-- Feral Charge Effect
 		[SpellName(16922)] = 3,		-- Celestial Focus
+		[SpellName(339)] = 2,		-- Entangling Roots
 		[SpellName(19975)] = 2,		-- Entangling Roots (Nature's Grasp)
+		[SpellName(19675)] = 2,		-- Feral Charge Effect
+		[SpellName(2637)] = 3,		-- Hibernate
+		[SpellName(22570)] = 3,		-- Mangle
+		[SpellName(9005)] = 3,		-- Pounce
 		-- Hunter
+		[SpellName(19306)] = 2,		-- Counterattack
+		[SpellName(19185)] = 2,		-- Entrapment
 		[SpellName(3355)] = 3,		-- Freezing Trap
-		[SpellName(19386)] = 3,		-- Wyvern Sting
+		[SpellName(2637)] = 3,		-- Hibernate
+		[SpellName(19410)] = 3,		-- Improved Concussive Shot
+		[SpellName(19229)] = 2,		-- Improved Wing Clip
 		[SpellName(24394)] = 3,		-- Intimidation
 		[SpellName(19503)] = 3,		-- Scatter Shot
-		[SpellName(19185)] = 2,		-- Entrapment
-		[SpellName(19410)] = 3,		-- Improved Concussive Shot
-		[SpellName(2637)] = 3,		-- Hibernate
-		[SpellName(19306)] = 2,		-- Counterattack
-		[SpellName(19229)] = 2,		-- Improved Wing Clip
+		[SpellName(19386)] = 3,		-- Wyvern Sting
 		-- Mage
-		[SpellName(118)] = 3,		-- Polymorph
+		[SpellName(12494)] = 2,		-- Frostbite
 		[SpellName(122)] = 2,		-- Frost Nova
 		[SpellName(12355)] = 3,		-- Impact
+		[SpellName(118)] = 3,		-- Polymorph
+		[SpellName(28272)] = 3,		-- Polymorph: Pig
+		[SpellName(28271)] = 3,		-- Polymorph: Turtle
 		[SpellName(18469)] = 3,		-- Silenced - Improved Counterspell
-		[SpellName(28272)] = 3,		-- Polymorph (Pig)
-		[SpellName(28271)] = 3,		-- Polymorph (Turtle)
-		[SpellName(12494)] = 2,		-- Frostbite
 		-- Paladin
-		[SpellName(20066)] = 3,		-- Repentance
 		[SpellName(853)] = 3,		-- Hammer of Justice
+		[SpellName(20066)] = 3,		-- Repentance
 		[SpellName(20170)] = 3,		-- Stun (Seal of Justice Proc)
 		[SpellName(2878)] = 3,		-- Turn Undead
 		-- Priest
+		[SpellName(15269)] = 3,		-- Blackout
 		[SpellName(605)] = 3,		-- Mind Control
 		[SpellName(8122)] = 3,		-- Psychic Scream
-		[SpellName(15487)] = 3,		-- Silence
-		[SpellName(15269)] = 3,		-- Blackout
 		[SpellName(9484)] = 3,		-- Shackle Undead
+		[SpellName(15487)] = 3,		-- Silence
 		-- Rogue
-		[SpellName(6770)] = 3,		-- Sap
 		[SpellName(2094)] = 3,		-- Blind
+		[SpellName(1833)] = 3,		-- Cheap Shot
 		[SpellName(1776)] = 3,		-- Gouge
 		[SpellName(408)] = 3,		-- Kidney Shot
-		[SpellName(1833)] = 3,		-- Cheap Shot
-		[SpellName(18425)] = 3,		-- Silenced - Improved Kick
 		[SpellName(14251)] = 3,		-- Riposte
+		[SpellName(6770)] = 3,		-- Sap
+		[SpellName(18425)] = 3,		-- Silenced - Improved Kick
 		-- Warlock
-		[SpellName(5782)] = 3,		-- Fear
 		[SpellName(6789)] = 3,		-- Death Coil
+		[SpellName(5782)] = 3,		-- Fear
 		[SpellName(5484)] = 3,		-- Howl of Terror
+		[SpellName(18093)] = 3,		-- Pyroclasm
 		[SpellName(6358)] = 3,		-- Seduction (Succubus)
 		[SpellName(24259)] = 3,		-- Spell Lock (Felhunter)
-		[SpellName(18093)] = 3,		-- Pyroclasm
 		-- Warrior
-		[SpellName(5246)] = 3,		-- Intimidating Shout
 		[SpellName(7922)] = 3,		-- Charge Stun
 		[SpellName(12809)] = 3,		-- Concussion Blow
-		[SpellName(20253)] = 3,		-- Intercept Stun
-		[SpellName(23694)] = 2,		-- Improved Hamstring
 		[SpellName(676)] = 3,		-- Disarm
+		[SpellName(23694)] = 2,		-- Improved Hamstring
+		[SpellName(5246)] = 3,		-- Intimidating Shout
+		[SpellName(20253)] = 3,		-- Intercept Stun
+		[SpellName(12798)] = 3,		-- Revenge Stun
 		[SpellName(18498)] = 3,		-- Shield Bash - Silenced
 		-- Racial
 		[SpellName(20549)] = 3,		-- War Stomp

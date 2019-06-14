@@ -182,6 +182,7 @@ T.DebuffWhiteList = {
 	[SpellName(12294)] = true,	-- Mortal Strike
 	[SpellName(12323)] = true,	-- Piercing Howl
 	[SpellName(772)] = true,	-- Rend
+	[SpellName(12798)] = true,	-- Revenge Stun
 	[SpellName(18498)] = true,	-- Shield Bash - Silenced
 	[SpellName(7386)] = true,	-- Sunder Armor
 	[SpellName(6343)] = true,	-- Thunder Clap

@@ -26,6 +26,7 @@ T.ArenaControl = {
 	[SpellName(9005)] = 5,		-- Pounce
 	-- Hunter
 	[SpellName(3355)] = 5,		-- Freezing Trap
+	[SpellName(19410)] = 5,		-- Improved Concussive Shot
 	[SpellName(24394)] = 5,		-- Intimidation
 	[SpellName(1513)] = 5,		-- Scare Beast
 	[SpellName(19503)] = 5,		-- Scatter Shot
@@ -33,8 +34,8 @@ T.ArenaControl = {
 	-- Mage
 	[SpellName(12355)] = 5,		-- Impact
 	[SpellName(118)] = 5,		-- Polymorph
-	-- [SpellName(28272)] = 5,		-- Polymorph (Pig)
-	-- [SpellName(28271)] = 5,		-- Polymorph (Turtle)
+	-- [SpellName(28272)] = 5,		-- Polymorph: Pig
+	-- [SpellName(28271)] = 5,		-- Polymorph: Turtle
 	-- Paladin
 	[SpellName(853)] = 5,		-- Hammer of Justice
 	[SpellName(20066)] = 5,		-- Repentance
@@ -56,12 +57,14 @@ T.ArenaControl = {
 	[SpellName(6789)] = 5,		-- Death Coil
 	[SpellName(5782)] = 5,		-- Fear
 	[SpellName(5484)] = 5,		-- Howl of Terror
+	[SpellName(18093)] = 5,		-- Pyroclasm
 	[SpellName(6358)] = 5,		-- Seduction (Succubus)
 	-- Warrior
 	[SpellName(7922)] = 5,		-- Charge Stun
 	[SpellName(12809)] = 5,		-- Concussion Blow
 	[SpellName(20253)] = 5,		-- Intercept Stun
 	[SpellName(5246)] = 5,		-- Intimidating Shout
+	[SpellName(12798)] = 5,		-- Revenge Stun
 	-- Mace Specialization
 	[SpellName(5530)] = 5,		-- Mace Specialization (Rogue / Warrior)
 	-- Racial

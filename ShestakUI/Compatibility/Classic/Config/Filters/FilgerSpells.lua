@@ -2519,6 +2519,8 @@ C["filger_spells"] = {
 			{spellID = 12323, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Rend
 			{spellID = 772, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Revenge Stun
+			{spellID = 12798, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Shield Bash - Silenced
 			{spellID = 18498, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Sunder Armor
@@ -2819,10 +2821,10 @@ C["filger_spells"] = {
 			{spellID = 12355, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Polymorph
 			{spellID = 118, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
-			-- -- Polymorph (Turtle)
-			-- {spellID = 28271, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
-			-- -- Polymorph (Pig)
-			-- {spellID = 28272, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
+			-- Polymorph: Turtle
+			{spellID = 28271, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
+			-- Polymorph: Pig
+			{spellID = 28272, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
 
 			-- Paladin
 			-- Hammer of Justice
@@ -2887,6 +2889,8 @@ C["filger_spells"] = {
 			{spellID = 20511, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
 			-- Intimidating Shout (Fear)
 			{spellID = 5246, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
+			-- Revenge Stun
+			{spellID = 12798, unitID = "player", caster = "all", filter = "DEBUFF"},
 
 			-- Mace Specialization
 			-- Mace Stun Effect

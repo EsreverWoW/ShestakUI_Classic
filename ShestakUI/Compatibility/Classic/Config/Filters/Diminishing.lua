@@ -26,14 +26,15 @@ T.DiminishingSpells = {
 	[15269] = {"stunproc"},			-- Blackout
 	[20170] = {"stunproc"},			-- Seal of Justice
 	-- [18093] = {"stunproc"},			-- Pyroclasm
+	[12798] = {"stunproc"},			-- Revenge Stun
 	[5530] = {"stunproc"},			-- Mace Specialization
 	--]]
 
 	-- Disorients
 	[22570] = {"disorient"},		-- Mangle
 	[118] = {"disorient"},			-- Polymorph
-	-- [28272] = {"disorient"},		-- Polymorph (Pig)
-	-- [28271] = {"disorient"},		-- Polymorph (Turtle)
+	[28272] = {"disorient"},		-- Polymorph: Pig
+	[28271] = {"disorient"},		-- Polymorph: Turtle
 	[1776] = {"disorient"},			-- Gouge
 	[6770] = {"disorient"},			-- Sap
 
