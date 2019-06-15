@@ -394,6 +394,7 @@ C["minimap"] = {
 
 if T.classic then
 	C["minimap"]["tracking_icon"] = true
+	C["minimap"]["fog_of_war"] = true
 end
 
 ----------------------------------------------------------------------------------------
