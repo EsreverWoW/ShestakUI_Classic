@@ -31,7 +31,7 @@ if C.automation.accept_invite == true then
 	local ai = CreateFrame("Frame")
 	ai:RegisterEvent("PARTY_INVITE_REQUEST")
 	ai:SetScript("OnEvent", function(self, event, name)
-		if QueueStatusMinimapButton:IsShown() or GetNumGroupMembers() > 0 then return end
+		if MiniMapBattlefieldFrame:IsShown() or QueueStatusMinimapButton:IsShown() or GetNumGroupMembers() > 0 then return end
 		if CheckFriend(name) then
 			RaidNotice_AddMessage(RaidWarningFrame, L_INFO_INVITE..name, {r = 0.41, g = 0.8, b = 0.94}, 3)
 			print(format("|cffffff00"..L_INFO_INVITE..name..".|r"))
@@ -65,7 +65,7 @@ local autoinvite = CreateFrame("Frame")
 autoinvite:RegisterEvent("CHAT_MSG_WHISPER")
 autoinvite:RegisterEvent("CHAT_MSG_BN_WHISPER")
 autoinvite:SetScript("OnEvent", function(self, event, arg1, arg2, ...)
-	if ((not UnitExists("party1") or UnitIsGroupLeader("player") or UnitIsGroupAssistant("player")) and arg1:lower():match(C.automation.invite_keyword)) and SavedOptionsPerChar.AutoInvite == true and not QueueStatusMinimapButton:IsShown() then
+	if ((not UnitExists("party1") or UnitIsGroupLeader("player") or UnitIsGroupAssistant("player")) and arg1:lower():match(C.automation.invite_keyword)) and SavedOptionsPerChar.AutoInvite == true and (not MiniMapBattlefieldFrame:IsShown() or not QueueStatusMinimapButton:IsShown()) then
 		if event == "CHAT_MSG_WHISPER" then
 			InviteUnit(arg2)
 		elseif event == "CHAT_MSG_BN_WHISPER" then

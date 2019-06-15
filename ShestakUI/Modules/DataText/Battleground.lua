@@ -86,7 +86,7 @@ end)
 
 BGFrame:SetScript("OnLeave", function(self) GameTooltip:Hide() end)
 BGFrame:SetScript("OnMouseUp", function(self, button)
-	if QueueStatusMinimapButton:IsShown() then
+	if MiniMapBattlefieldFrame:IsShown() or QueueStatusMinimapButton:IsShown() then
 		if button == "RightButton" then
 			ToggleBattlefieldMap()
 		else
