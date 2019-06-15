@@ -11,8 +11,8 @@ local frames = {
 	"PetitionFrame", "HelpFrame", "GossipFrame", "DressUpFrame", "GuildRegistrarFrame",
 	"WorldStateScoreFrame", "ChatConfigFrame", "RaidBrowserFrame", "InterfaceOptionsFrame",
 	"GameMenuFrame", "VideoOptionsFrame", "GuildInviteFrame", "ItemTextFrame", "BankFrame",
-	"OpenMailFrame", "StackSplitFrame", "MacOptionsFrame", "TutorialFrame",
-	"ScrollOfResurrectionSelectionFrame", "QuestLogFrame", "GuildFrame"
+	"OpenMailFrame", "StackSplitFrame", "MacOptionsFrame", "TutorialFrame", "StaticPopup1",
+	"StaticPopup2", "ScrollOfResurrectionSelectionFrame", "QuestLogFrame", "GuildFrame"
 }
 
 for i, v in pairs(frames) do
