@@ -14,13 +14,7 @@ local function Update(object, event, unit)
 	local _, instanceType = IsInInstance()
 	if instanceType == "pvp" then
 		for i = 1, GetNumBattlefieldScores() do
-			local name, talentSpec
-			if not T.classic then
-				name, _, _, _, _, _, _, _, _, _, _, _, _, _, _, talentSpec = GetBattlefieldScore(i)
-			else
-				-- changes in build 30786 changed returns - possibly 10 total, meaning no talentSpec
-				name, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, talentSpec = GetBattlefieldScore(i)
-			end
+			local name, _, _, _, _, _, _, _, _, _, _, _, _, _, _, talentSpec = GetBattlefieldScore(i)
 			if GetUnitName(unit, true) == name then
 				object.EnemySpec:SetText(talentSpec)
 			end
@@ -38,18 +32,14 @@ end
 local function Enable(object)
 	if not object.EnemySpec then return end
 	object:RegisterEvent("UPDATE_BATTLEFIELD_SCORE", Update, true)
-	if not IsClassicBuild() then
-		object:RegisterEvent("ARENA_OPPONENT_UPDATE", Update, true)
-	end
+	object:RegisterEvent("ARENA_OPPONENT_UPDATE", Update, true)
 	return true
 end
 
 local function Disable(object)
 	if object.EnemySpec then
 		object:UnregisterEvent("UPDATE_BATTLEFIELD_SCORE", Update)
-		if not IsClassicBuild() then
-			object:UnregisterEvent("ARENA_OPPONENT_UPDATE", Update)
-		end
+		object:UnregisterEvent("ARENA_OPPONENT_UPDATE", Update)
 	end
 end
 

@@ -168,7 +168,8 @@ hooksecurefunc("WorldStateScoreFrame_Update", function()
 		if not T.classic then
 			name, _, _, _, _, faction, _, _, class = GetBattlefieldScore(index)
 		else
-			name, _, _, _, _, faction, rank, _, _, class = GetBattlefieldScore(index)
+			-- build 30786 changed returns, removing dmg/heals/spec and adding rank
+			name, _, _, _, _, faction, _, _, _, class = GetBattlefieldScore(index)
 		end
 		if name then
 			local n, r = strsplit("-", name, 2)

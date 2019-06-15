@@ -882,7 +882,7 @@ local function Shared(self, unit)
 			end
 
 			-- Enemy specialization
-			if C.unitframe.plugins_enemy_spec == true then
+			if not T.classic and C.unitframe.plugins_enemy_spec == true then
 				self.EnemySpec = T.SetFontString(self.Power, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
 				self.EnemySpec:SetTextColor(1, 0, 0)
 				self.EnemySpec:SetPoint("BOTTOM", self.Power, "BOTTOM", 0, -1)
@@ -1300,7 +1300,6 @@ if C.unitframe.show_pet == true then
 	pet:SetSize(105, 16)
 end
 
--- if not T.classic then
 if not T.classic then
 	if C.unitframe.show_focus == true then
 		local focus = oUF:Spawn("focus", "oUF_Focus")

@@ -30,8 +30,8 @@ BGFrame:SetScript("OnEnter", function(self)
 		if not T.classic then
 			name, _, honorableKills, deaths, _, _, _, _, _, damageDone, healingDone = GetBattlefieldScore(i)
 		else
-			-- changes in build 30786 changed returns - possibly 10 total, meaning no dmg/heals
-			name, _, honorableKills, deaths, _, _, rank, _, _, _, damageDone, healingDone = GetBattlefieldScore(i)
+			-- build 30786 changed returns, removing dmg/heals/spec and adding rank
+			name, _, honorableKills, deaths, _, _, rank = GetBattlefieldScore(i)
 		end
 		if name and name == T.name then
 			local areaID = C_Map.GetBestMapForUnit("player") or 0
@@ -43,8 +43,12 @@ BGFrame:SetScript("OnEnter", function(self)
 			GameTooltip:AddLine(" ")
 			GameTooltip:AddDoubleLine(HONORABLE_KILLS..":", honorableKills, 1, 1, 1)
 			GameTooltip:AddDoubleLine(DEATHS..":", deaths, 1, 1, 1)
-			GameTooltip:AddDoubleLine(DAMAGE..":", damageDone, 1, 1, 1)
-			GameTooltip:AddDoubleLine(SHOW_COMBAT_HEALING..":", healingDone, 1, 1, 1)
+			if not T.classic then
+				GameTooltip:AddDoubleLine(DAMAGE..":", damageDone, 1, 1, 1)
+				GameTooltip:AddDoubleLine(SHOW_COMBAT_HEALING..":", healingDone, 1, 1, 1)
+			else
+				GameTooltip:AddDoubleLine(RANK..":", rank, 1, 1, 1)
+			end
 			-- Add extra statistics depending on what BG you are
 			if areaID == WSG or areaID == TP then
 				GameTooltip:AddDoubleLine(GetBattlefieldStatInfo(1)..":", GetBattlefieldStatData(i, 1), 1, 1, 1)
@@ -116,7 +120,7 @@ local int = 2
 local function Update(self, t)
 	int = int - t
 	if int < 0 then
-		local dmgtxt
+		local dmgtxt, ranktxt
 		RequestBattlefieldScoreData()
 		local numScores = GetNumBattlefieldScores()
 		for i = 1, numScores do
@@ -124,16 +128,20 @@ local function Update(self, t)
 			if not T.classic then
 				name, killingBlows, _, _, honorGained, _, _, _, _, damageDone, healingDone = GetBattlefieldScore(i)
 			else
-				-- changes in build 30786 changed returns - possibly 10 total, meaning no dmg/heals
-				name, killingBlows, _, _, honorGained, _, rank, _, _, _, damageDone, healingDone = GetBattlefieldScore(i)
+				-- build 30786 changed returns, removing dmg/heals/spec and adding rank
+				name, killingBlows, _, _, honorGained, _, rank = GetBattlefieldScore(i)
 			end
-			if healingDone > damageDone then
-				dmgtxt = (classcolor..SHOW_COMBAT_HEALING.." :|r "..T.ShortValue(healingDone))
+			if not T.classic then
+				if healingDone > damageDone then
+					dmgtxt = (classcolor..SHOW_COMBAT_HEALING.." :|r "..T.ShortValue(healingDone))
+				else
+					dmgtxt = (classcolor..DAMAGE.." :|r "..T.ShortValue(damageDone))
+				end
 			else
-				dmgtxt = (classcolor..DAMAGE.." :|r "..T.ShortValue(damageDone))
+				ranktxt = (classcolor..RANK.." :|r "..rank)
 			end
 			if name and name == T.name then
-				Text1:SetText(dmgtxt)
+				Text1:SetText(not T.classic and dmgtxt or ranktxt)
 				Text2:SetText(classcolor..COMBAT_HONOR_GAIN.." :|r "..format("%d", honorGained))
 				Text3:SetText(classcolor..KILLING_BLOWS.." :|r "..killingBlows)
 			end

@@ -713,6 +713,7 @@ do
 		show_arena,
 		arena_on_right,
 		plugins_artifact_bar,
+		plugins_enemy_spec,
 		plugins_diminishing
 	}
 
@@ -1154,6 +1155,14 @@ do
 
 	local totem_icons = ns.CreateCheckBox(parent, "totem_icons", L_GUI_NAMEPLATE_TOTEM_ICONS)
 	totem_icons:SetPoint("TOPLEFT", healer_icon, "BOTTOMLEFT", 0, 0)
+
+	local classic = {
+		healer_icon -- needs fixing since build 30786
+	}
+
+	if IsClassicBuild() then
+		HideOptions(classic)
+	end
 
 	-- Panel 2
 	local parent, enhance_threat, good_color, near_color, bad_color, offtank_color
