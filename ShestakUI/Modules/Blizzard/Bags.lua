@@ -1632,6 +1632,7 @@ StaticPopupDialogs.BUY_BANK_SLOT = {
 	hasMoneyFrame = 1,
 	timeout = 0,
 	hideOnEscape = 1,
+	preferredIndex = STATICPOPUPS_NUMDIALOGS,
 }
 
 -- Kill Blizzard functions

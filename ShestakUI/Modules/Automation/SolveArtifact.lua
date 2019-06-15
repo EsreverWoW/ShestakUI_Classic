@@ -10,7 +10,7 @@ StaticPopupDialogs.ARCHAEOLOGY_SOLVE = {
 	button2 = CANCEL,
 	OnAccept = SolveArtifact,
 	timeout = 0,
-	preferredIndex = 5,
+	preferredIndex = STATICPOPUPS_NUMDIALOGS,
 }
 
 local fragment = {

@@ -224,7 +224,7 @@ StaticPopupDialogs.SETTINGS_BIGWIGS = {
 	timeout = 0,
 	whileDead = 1,
 	hideOnEscape = true,
-	preferredIndex = 5,
+	preferredIndex = STATICPOPUPS_NUMDIALOGS,
 }
 
 SlashCmdList.BWTEST = function(msg)

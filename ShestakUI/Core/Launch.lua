@@ -121,7 +121,7 @@ StaticPopupDialogs.INSTALL_UI = {
 	timeout = 0,
 	whileDead = 1,
 	hideOnEscape = false,
-	preferredIndex = 5,
+	preferredIndex = STATICPOPUPS_NUMDIALOGS,
 }
 
 StaticPopupDialogs.DISABLE_UI = {
@@ -133,7 +133,7 @@ StaticPopupDialogs.DISABLE_UI = {
 	timeout = 0,
 	whileDead = 1,
 	hideOnEscape = true,
-	preferredIndex = 5,
+	preferredIndex = STATICPOPUPS_NUMDIALOGS,
 }
 
 StaticPopupDialogs.RESET_UI = {
@@ -146,7 +146,7 @@ StaticPopupDialogs.RESET_UI = {
 	timeout = 0,
 	whileDead = 1,
 	hideOnEscape = true,
-	preferredIndex = 5,
+	preferredIndex = STATICPOPUPS_NUMDIALOGS,
 }
 
 StaticPopupDialogs.RESET_STATS = {
@@ -158,7 +158,7 @@ StaticPopupDialogs.RESET_STATS = {
 	timeout = 0,
 	whileDead = 1,
 	hideOnEscape = true,
-	preferredIndex = 5,
+	preferredIndex = STATICPOPUPS_NUMDIALOGS,
 }
 
 StaticPopupDialogs.SWITCH_RAID = {
@@ -172,7 +172,7 @@ StaticPopupDialogs.SWITCH_RAID = {
 	timeout = 0,
 	whileDead = 1,
 	hideOnEscape = false,
-	preferredIndex = 5,
+	preferredIndex = STATICPOPUPS_NUMDIALOGS,
 }
 
 SLASH_CONFIGURE1 = "/resetui"

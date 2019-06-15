@@ -653,7 +653,7 @@ StaticPopupDialogs.XCT_LOCK = {
 	whileDead = 1,
 	hideOnEscape = true,
 	showAlert = true,
-	preferredIndex = 5,
+	preferredIndex = STATICPOPUPS_NUMDIALOGS,
 }
 
 local placed = {

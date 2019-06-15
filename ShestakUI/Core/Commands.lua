@@ -104,7 +104,7 @@ StaticPopupDialogs.DISBAND_RAID = {
 	timeout = 0,
 	whileDead = 1,
 	hideOnEscape = true,
-	preferredIndex = 5,
+	preferredIndex = STATICPOPUPS_NUMDIALOGS,
 }
 
 SlashCmdList.GROUPDISBAND = function()

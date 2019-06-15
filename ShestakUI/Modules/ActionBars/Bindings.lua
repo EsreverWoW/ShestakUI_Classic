@@ -281,7 +281,7 @@ SlashCmdList.MOUSEOVERBIND = function()
 			timeout = 0,
 			whileDead = 1,
 			hideOnEscape = false,
-			preferredIndex = 5,
+			preferredIndex = STATICPOPUPS_NUMDIALOGS,
 		}
 
 		-- Registering

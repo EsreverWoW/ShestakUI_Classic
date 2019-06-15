@@ -409,7 +409,7 @@ StaticPopupDialogs.RESET_UF = {
 	timeout = 0,
 	whileDead = 1,
 	hideOnEscape = true,
-	preferredIndex = 5,
+	preferredIndex = STATICPOPUPS_NUMDIALOGS,
 }
 
 SlashCmdList.RESETUF = function() StaticPopup_Show("RESET_UF") end

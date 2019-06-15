@@ -386,7 +386,7 @@ StaticPopupDialogs.SETTINGS_ALL = {
 	timeout = 0,
 	whileDead = 1,
 	hideOnEscape = true,
-	preferredIndex = 5,
+	preferredIndex = STATICPOPUPS_NUMDIALOGS,
 }
 
 SlashCmdList.SETTINGS = function(msg)
