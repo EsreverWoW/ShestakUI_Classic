@@ -6,7 +6,11 @@ if C.actionbar.enable ~= true or C.actionbar.micromenu ~= true then return end
 ----------------------------------------------------------------------------------------
 local frame = CreateFrame("Frame", "MicroAnchor", T_PetBattleFrameHider)
 frame:SetPoint(unpack(C.position.micro_menu))
-frame:SetSize(284, 30)
+if not T.classic then
+	frame:SetSize(284, 30)
+else
+	frame:SetSize(208, 30)
+end
 frame.shown = false
 
 UpdateMicroButtonsParent(frame)
@@ -60,22 +64,38 @@ for _, button in pairs(MICRO_BUTTONS) do
 	f:SetFrameLevel(1)
 	f:SetFrameStrata("BACKGROUND")
 	f:SetPoint("BOTTOMLEFT", m, "BOTTOMLEFT", 2, 0)
-	f:SetPoint("TOPRIGHT", m, "TOPRIGHT", -2, -6)
+	if not T.classic then
+		f:SetPoint("TOPRIGHT", m, "TOPRIGHT", -2, -6)
+	else
+		f:SetPoint("TOPRIGHT", m, "TOPRIGHT", -2, -28)
+	end
 	f:SetTemplate("Default")
 	m.frame = f
 
-	pushed:SetTexCoord(0.22, 0.81, 0.26, 0.82)
+	if not T.classic then
+		pushed:SetTexCoord(0.22, 0.81, 0.26, 0.82)
+	else
+		pushed:SetTexCoord(0.17, 0.87, 0.5, 0.908)
+	end
 	pushed:ClearAllPoints()
 	pushed:SetPoint("TOPLEFT", m.frame, "TOPLEFT", 2, -2)
 	pushed:SetPoint("BOTTOMRIGHT", m.frame, "BOTTOMRIGHT", -2, 2)
 
-	normal:SetTexCoord(0.22, 0.81, 0.26, 0.82)
+	if not T.classic then
+		normal:SetTexCoord(0.22, 0.81, 0.26, 0.82)
+	else
+		normal:SetTexCoord(0.17, 0.87, 0.5, 0.908)
+	end
 	normal:ClearAllPoints()
 	normal:SetPoint("TOPLEFT", m.frame, "TOPLEFT", 2, -2)
 	normal:SetPoint("BOTTOMRIGHT", m.frame, "BOTTOMRIGHT", -2, 2)
 
 	if disabled then
-		disabled:SetTexCoord(0.22, 0.81, 0.26, 0.82)
+		if not T.classic then
+			disabled:SetTexCoord(0.22, 0.81, 0.26, 0.82)
+		else
+			disabled:SetTexCoord(0.17, 0.87, 0.5, 0.908)
+		end
 		disabled:ClearAllPoints()
 		disabled:SetPoint("TOPLEFT", m.frame, "TOPLEFT", 2, -2)
 		disabled:SetPoint("BOTTOMRIGHT", m.frame, "BOTTOMRIGHT", -2, 2)
