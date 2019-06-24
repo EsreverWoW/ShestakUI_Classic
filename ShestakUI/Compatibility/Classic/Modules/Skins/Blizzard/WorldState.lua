@@ -10,7 +10,7 @@ local function LoadSkin()
 	WorldStateScoreFrame:CreateBackdrop("Transparent")
 	WorldStateScoreFrame.backdrop:SetAllPoints()
 	WorldStateScoreFrame.backdrop:SetPoint("TOPLEFT", 10, -12)
-	WorldStateScoreFrame.backdrop:SetPoint("BOTTOMRIGHT", -38, 66)
+	WorldStateScoreFrame.backdrop:SetPoint("BOTTOMRIGHT", -112, 66)
 
 	WorldStateScoreFrameLabel:ClearAllPoints()
 	WorldStateScoreFrameLabel:SetPoint("TOP", WorldStateScoreFrame.backdrop, "TOP", 0, -6)
