@@ -56,6 +56,18 @@ T.CheckChat = function(warning)
 end
 
 ----------------------------------------------------------------------------------------
+--	Player's level check
+----------------------------------------------------------------------------------------
+local function CheckLevel()
+	local playerLevel = UnitLevel("player")
+	if T.level ~= playerLevel then T.level = playerLevel end
+end
+local LevelUpdater = CreateFrame("Frame")
+LevelUpdater:RegisterEvent("PLAYER_LEVEL_UP")
+LevelUpdater:RegisterEvent("PLAYER_LEVEL_CHANGED")
+LevelUpdater:SetScript("OnEvent", CheckLevel)
+
+----------------------------------------------------------------------------------------
 --	Player's role check
 ----------------------------------------------------------------------------------------
 local isCaster = {

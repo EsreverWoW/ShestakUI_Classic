@@ -6,7 +6,7 @@
 local function InstallUI()
 	-- Don't need to set CVar multiple time
 	SetCVar("screenshotQuality", 8)
-	SetCVar("cameraDistanceMaxZoomFactor", 2.6)
+	SetCVar("cameraDistanceMaxZoomFactor", not T.classic and 2.6 or 3.4)
 	SetCVar("showTutorials", 0)
 	SetCVar("gameTip", "0")
 	SetCVar("UberTooltips", 1)
@@ -95,6 +95,10 @@ local function InstallUI()
 	SavedOptionsPerChar.SplitBars = true
 	SavedOptionsPerChar.RightBars = C.actionbar.rightbars
 	SavedOptionsPerChar.BottomBars = C.actionbar.bottombars
+
+	if T.classic and T.level < 60 then
+		SavedOptions.Experience = true
+	end
 
 	if SavedOptions.RaidLayout ~= "UNKNOWN" then
 		ReloadUI()
