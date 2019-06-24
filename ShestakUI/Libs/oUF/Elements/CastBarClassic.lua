@@ -397,7 +397,7 @@ end
 local function UNIT_SPELLCAST_START(self, event, unit)
 	if(self.unit ~= unit and self.realUnit ~= unit) then return end
 
-	local element = self.Castbar
+	local element = self.CastbarClassic
 	local name, text, texture, startTime, endTime, _, castID, notInterruptible, spellID = UnitCastingInfo(unit)
 	if(not name) then
 		return element:Hide()
@@ -455,7 +455,7 @@ end
 local function UNIT_SPELLCAST_FAILED(self, event, unit, castID)
 	if(self.unit ~= unit and self.realUnit ~= unit) then return end
 
-	local element = self.Castbar
+	local element = self.CastbarClassic
 	--[[
 	if(element.castID ~= castID) then
 		return
@@ -485,7 +485,7 @@ end
 local function UNIT_SPELLCAST_INTERRUPTED(self, event, unit, castID)
 	if(self.unit ~= unit and self.realUnit ~= unit) then return end
 
-	local element = self.Castbar
+	local element = self.CastbarClassic
 	--[[
 	if(element.castID ~= castID) then
 		return
@@ -515,7 +515,7 @@ end
 local function UNIT_SPELLCAST_INTERRUPTIBLE(self, event, unit)
 	if(self.unit ~= unit and self.realUnit ~= unit) then return end
 
-	local element = self.Castbar
+	local element = self.CastbarClassic
 	local shield = element.Shield
 	if(shield) then
 		shield:Hide()
@@ -537,7 +537,7 @@ end
 local function UNIT_SPELLCAST_NOT_INTERRUPTIBLE(self, event, unit)
 	if(self.unit ~= unit and self.realUnit ~= unit) then return end
 
-	local element = self.Castbar
+	local element = self.CastbarClassic
 	local shield = element.Shield
 	if(shield) then
 		shield:Show()
@@ -559,7 +559,7 @@ end
 local function UNIT_SPELLCAST_DELAYED(self, event, unit)
 	if(self.unit ~= unit and self.realUnit ~= unit) then return end
 
-	local element = self.Castbar
+	local element = self.CastbarClassic
 	local name, _, _, startTime = UnitCastingInfo(unit)
 	if(not startTime or not element:IsShown()) then return end
 
@@ -586,7 +586,7 @@ end
 local function UNIT_SPELLCAST_STOP(self, event, unit, castID)
 	if(self.unit ~= unit and self.realUnit ~= unit) then return end
 
-	local element = self.Castbar
+	local element = self.CastbarClassic
 	--[[
 	if(element.castID ~= castID) then
 		return
@@ -610,7 +610,7 @@ end
 local function UNIT_SPELLCAST_CHANNEL_START(self, event, unit, _, spellID)
 	if(self.unit ~= unit and self.realUnit ~= unit) then return end
 
-	local element = self.Castbar
+	local element = self.CastbarClassic
 	local name, _, texture, startTime, endTime, _, notInterruptible = UnitChannelInfo(unit)
 	if(not name) then
 		return
@@ -674,7 +674,7 @@ end
 local function UNIT_SPELLCAST_CHANNEL_UPDATE(self, event, unit)
 	if(self.unit ~= unit and self.realUnit ~= unit) then return end
 
-	local element = self.Castbar
+	local element = self.CastbarClassic
 	local name, _, _, startTime, endTime = UnitChannelInfo(unit)
 	if(not name or not element:IsShown()) then
 		return
@@ -704,7 +704,7 @@ end
 local function UNIT_SPELLCAST_CHANNEL_STOP(self, event, unit)
 	if(self.unit ~= unit and self.realUnit ~= unit) then return end
 
-	local element = self.Castbar
+	local element = self.CastbarClassic
 	if(element:IsShown()) then
 		element.channeling = nil
 		element.notInterruptible = nil
@@ -917,7 +917,7 @@ local function ForceUpdate(element)
 end
 
 local function Enable(self, unit)
-	local element = self.Castbar
+	local element = self.CastbarClassic
 	if(element) then
 		element.__owner = self
 		element.ForceUpdate = ForceUpdate
@@ -972,7 +972,7 @@ local function Enable(self, unit)
 end
 
 local function Disable(self)
-	local element = self.Castbar
+	local element = self.CastbarClassic
 	if(element) then
 		element:Hide()
 
@@ -992,4 +992,4 @@ local function Disable(self)
 	end
 end
 
-oUF:AddElement('Castbar', Update, Enable, Disable)
+oUF:AddElement('CastbarClassic', Update, Enable, Disable)
