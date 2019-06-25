@@ -49,6 +49,9 @@ ShowFriends = _G.ShowFriends or function()
 	return C_FriendList.ShowFriends()
 end
 
+-- SaveBindings removed in WoW Classic build 30901
+SaveBindings = _G.SaveBindings or _G.AttemptToSaveBindings
+
 ----------------------------------------------------------------------------------------
 --	Classic Bugs
 ----------------------------------------------------------------------------------------
@@ -359,9 +362,9 @@ GetSpellRank = function(spellID)
 	end
 end
 
-local OldGetSpelInfo = GetSpellInfo
+local OldGetSpellInfo = _G.GetSpellInfo
 GetSpellInfo = function(spellID)
-	local name, rank, icon, castTime, minRange, maxRange, spellId = OldGetSpelInfo(spellID)
+	local name, rank, icon, castTime, minRange, maxRange, spellId = OldGetSpellInfo(spellID)
 	rank = rank or GetSpellRank(spellID)
 	return name, rank, icon, castTime, minRange, maxRange, spellId
 end
