@@ -12,21 +12,18 @@ frame:SetScript("OnEvent", function(self, event, addon)
 		end
 	end
 
-	-- Temporarily permit Blizzard CRFM since oUF is presently not spawning correctly.
-	if not T.classic then
-		if C.unitframe.enable and (SavedOptions and (SavedOptions.RaidLayout == "HEAL" or SavedOptions.RaidLayout == "DPS")) then
-			InterfaceOptionsFrameCategoriesButton10:SetScale(0.00001)
-			InterfaceOptionsFrameCategoriesButton10:SetAlpha(0)
-			if not InCombatLockdown() then
-				CompactRaidFrameManager:Kill()
-				CompactRaidFrameContainer:Kill()
-			end
-			ShowPartyFrame = T.dummy
-			HidePartyFrame = T.dummy
-			CompactUnitFrameProfiles_ApplyProfile = T.dummy
-			CompactRaidFrameManager_UpdateShown = T.dummy
-			CompactRaidFrameManager_UpdateOptionsFlowContainer = T.dummy
+	if C.unitframe.enable and (SavedOptions and (SavedOptions.RaidLayout == "HEAL" or SavedOptions.RaidLayout == "DPS")) then
+		InterfaceOptionsFrameCategoriesButton10:SetScale(0.00001)
+		InterfaceOptionsFrameCategoriesButton10:SetAlpha(0)
+		if not InCombatLockdown() then
+			CompactRaidFrameManager:Kill()
+			CompactRaidFrameContainer:Kill()
 		end
+		ShowPartyFrame = T.dummy
+		HidePartyFrame = T.dummy
+		CompactUnitFrameProfiles_ApplyProfile = T.dummy
+		CompactRaidFrameManager_UpdateShown = T.dummy
+		CompactRaidFrameManager_UpdateOptionsFlowContainer = T.dummy
 	end
 
 	Advanced_UseUIScale:Kill()
