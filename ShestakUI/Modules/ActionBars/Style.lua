@@ -49,7 +49,11 @@ local function StyleNormalButton(self)
 
 	if C.actionbar.hotkey == true then
 		hotkey:ClearAllPoints()
-		hotkey:SetPoint("TOPRIGHT", 0, 0)
+		if C.font.action_bars_font == C.media.pixel_font then
+			hotkey:SetPoint("TOPRIGHT", 0, 0)
+		else
+			hotkey:SetPoint("TOPRIGHT", 1, -1)
+		end
 		hotkey:SetFont(C.font.action_bars_font, C.font.action_bars_font_size, C.font.action_bars_font_style)
 		hotkey:SetShadowOffset(C.font.action_bars_font_shadow and 1 or 0, C.font.action_bars_font_shadow and -1 or 0)
 		hotkey:SetWidth(C.actionbar.button_size - 1)

@@ -114,6 +114,56 @@ ResetButton:SetScript("OnClick", function()
 end)
 tinsert(ns.buttons, ResetButton)
 
+StaticPopupDialogs.SHESTAKUI_PIXEL_FONT_PERCHAR = {
+	text = L_GUI_PIXEL_FONT_CHAR,
+	button1 = ACCEPT,
+	button2 = CANCEL,
+	OnAccept = function()
+		ShestakUIOptionsPerChar.font = {}
+		ReloadUI()
+	end,
+	whileDead = true,
+	hideOnEscape = true,
+}
+
+StaticPopupDialogs.SHESTAKUI_PIXEL_FONT = {
+	text = L_GUI_PIXEL_FONT_ALL,
+	button1 = ACCEPT,
+	button2 = CANCEL,
+	OnAccept = function()
+		ShestakUIOptions.font = {}
+		ReloadUI()
+	end,
+	whileDead = true,
+	hideOnEscape = true,
+}
+
+StaticPopupDialogs.SHESTAKUI_NORMAL_FONT_PERCHAR = {
+	text = L_GUI_NORMAL_FONT_CHAR,
+	button1 = ACCEPT,
+	button2 = CANCEL,
+	OnAccept = function()
+		ShestakUIOptionsPerChar.font = {}
+		ShestakUIOptionsPerChar.font = C.normal_font
+		ReloadUI()
+	end,
+	whileDead = true,
+	hideOnEscape = true,
+}
+
+StaticPopupDialogs.SHESTAKUI_NORMAL_FONT = {
+	text = L_GUI_NORMAL_FONT_ALL,
+	button1 = ACCEPT,
+	button2 = CANCEL,
+	OnAccept = function()
+		ShestakUIOptions.font = {}
+		ShestakUIOptions.font = C.normal_font
+		ReloadUI()
+	end,
+	whileDead = true,
+	hideOnEscape = true,
+}
+
 -- Font
 local FontTable = {
 	"Interface\\AddOns\\ShestakUI\\Media\\Fonts\\Normal.ttf",
@@ -179,6 +229,35 @@ do
 
 	auto_scale:HookScript("OnClick", toggleUIScaleOptions)
 	uiscale:HookScript("OnShow", toggleUIScaleOptions)
+
+	local subheader = ns.addSubCategory(parent, L.general_subheader_font_style)
+	subheader:SetPoint("TOPLEFT", uiscale, "BOTTOMLEFT", 0, 0)
+
+	local PixelFontButton = CreateFrame("Button", nil, parent, "UIPanelButtonTemplate")
+	PixelFontButton:SetSize(180, 23)
+	PixelFontButton:SetText("Pixel Fonts")
+	PixelFontButton:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -12)
+	PixelFontButton:SetScript("OnClick", function()
+		if ShestakUIOptionsGlobal[realm][name] == true then
+			StaticPopup_Show("SHESTAKUI_PIXEL_FONT_PERCHAR")
+		else
+			StaticPopup_Show("SHESTAKUI_PIXEL_FONT")
+		end
+	end)
+	tinsert(ns.buttons, PixelFontButton)
+
+	local NormalFontButton = CreateFrame("Button", nil, parent, "UIPanelButtonTemplate")
+	NormalFontButton:SetSize(180, 23)
+	NormalFontButton:SetText("Normal Fonts")
+	NormalFontButton:SetPoint("TOPLEFT", PixelFontButton, "BOTTOMLEFT", 0, -6)
+	NormalFontButton:SetScript("OnClick", function()
+		if ShestakUIOptionsGlobal[realm][name] == true then
+			StaticPopup_Show("SHESTAKUI_NORMAL_FONT_PERCHAR")
+		else
+			StaticPopup_Show("SHESTAKUI_NORMAL_FONT")
+		end
+	end)
+	tinsert(ns.buttons, NormalFontButton)
 
 	-- Panel 2
 	local parent = ShestakUIOptionsPanel.general2
