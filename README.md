@@ -4,7 +4,7 @@ ShestakUI is a modular, lightweight, all-in-one overhaul for the World of Warcra
 This version of ShestakUI is meant to retain compatibility modern WoW, while also providing compatibility so that it may additionally function in WoW Classic.
 
 ## BETA PLAYERS:
-**Please realize that this is still in early stages and you will very likely encounter bugs. Please report them on the [issue tracker](https://github.com/EsreverWoW/ShestakUI_Classic/issues) and I will do my best to correct them. I still do not have beta access, so I am limited in my ability to easily rectify some issues.**
+**If you encounter any bugs, please report them on the [issue tracker](https://github.com/EsreverWoW/ShestakUI_Classic/issues) and I will do my best to correct them. I still do not have beta access myself, so I am limited in my ability to easily rectify some issues.**
 
 **Download from [here](https://github.com/EsreverWoW/ShestakUI_Classic/archive/master.zip). Extract `ShestakUI` and `ShestakUI_Config` to your `Interface\AddOns` folder.**
 
@@ -89,7 +89,7 @@ ShestakUI supports and contains language specific code for the following game cl
 - [Changelog](https://github.com/EsreverWoW/ShestakUI_Classic/commits)
 
 ## Credits:
-AcidWeb, Aezay, Affli, Ailae, Allez, ALZA, Ammo, Astromech, Beoko, Bitbyte, Blamdarot, Bozo, Caellian, Califpornia, Camealion, Chiril, CrusaderHeimdall, Cybey, d87, Dawn, Don Kaban, Dridzt, Duffed, Durcyn, Eclipse, Egingell, Elv22, Es (EsreverWoW), Evilpaul, Evl, Favorit, Fernir, Foof, Freebaser, g0st, Gethe, Gorlasch, Gsuz, Haleth, Haste, havoc74, Hoochie, Hungtar, Hydra, HyPeRnIcS, Ildyria, Ipse, iSpawnAtHome, Jaslm, Karl_w_w, Karudon, Katae, Kellett, Kemayo, Ketho, Killakhan, Kraftman, Leatrix, m2jest1c, Magdain, Meurtcriss, Mikk, Monolit, MrRuben5, Myrilandell of Lothar, Nathanyel, Nefarion, Nevcairiel, Nightcracker, Nils Ruesch, p3lim, Partha, Phanx, Renstrom, RustamIrzaev, Safturento, Sanex, Sara.Festung, SDPhantom, Semlar, Sildor, Silverwind, SinaC, Slakah, Soeters, Starlon, Suicidal Katt, Syzgyn, Tekkub, Telroth, Thalyra, Thizzelle, Tia Lynn, Tohveli, Tukz, Tuller, Veev, Villiv, Wetxius, Woffle of Dark Iron, Wrug, Xuerian, Yleaf, Zork.
+AcidWeb, Aezay, Affli, Ailae, Allez, ALZA, Ammo, Astromech, Beoko, Bitbyte, Blamdarot, Bozo, Caellian, Califpornia, Camealion, Chiril, CrusaderHeimdall, Cybey, d87, Dawn, Don Kaban, Dridzt, Duffed, Durcyn, Eclipse, Egingell, Elv22, Es (EsreverWoW), Evilpaul, Evl, Favorit, Fernir, Foof, Freebaser, g0st, Gethe, Gorlasch, Gsuz, Haleth, Haste, havoc74, Hoochie, Hungtar, Hydra, HyPeRnIcS, Ildyria, iSpawnAtHome, Jaslm, Karl_w_w, Karudon, Katae, Kellett, Kemayo, Ketho, Killakhan, Kraftman, Leatrix, m2jest1c, Magdain, Meurtcriss, Monolit, MrRuben5, Myrilandell of Lothar, Nathanyel, Nefarion, Nevcairiel, Nightcracker, Nils Ruesch, p3lim, Partha, Phanx, Renstrom, RustamIrzaev, Safturento, Sanex, Sara.Festung, SDPhantom, Semlar, Sildor, Silverwind, SinaC, Slakah, Soeters, Starlon, Suicidal Katt, Syzgyn, Tekkub, Telroth, Thalyra, Thizzelle, Tia Lynn, Tohveli, Tukz, Tuller, Veev, Villiv, Wetxius, Woffle of Dark Iron, Wrug, Xuerian, Yleaf, Zork.
 
 ## Translation:
 Aelb, AlbertDuval, Alwa, Baine, Chubidu, Cranan, eXecrate, F5Hellbound, Ianchan, Leg883, Mania, Nanjiqq, Oz, Puree, Sakaras, Seal, Sinaris, Spacedragon, Tat2dawn, Tibles, Vienchen, Wetxius.
