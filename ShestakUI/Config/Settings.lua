@@ -184,6 +184,10 @@ C["raidframe"] = {
 	["plugins_auto_resurrection"] = false,		-- Auto cast resurrection on middle-click (doesn't work with Clique)
 }
 
+if T.classic then
+	C["raidframe"]["raid_groups"] = 8
+end
+
 ----------------------------------------------------------------------------------------
 --	ActionBar options
 ----------------------------------------------------------------------------------------
