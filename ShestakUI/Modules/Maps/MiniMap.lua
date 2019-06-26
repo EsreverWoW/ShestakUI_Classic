@@ -386,7 +386,7 @@ end
 ----------------------------------------------------------------------------------------
 if T.classic then
 	MiniMapBattlefieldFrame:ClearAllPoints()
-	MiniMapBattlefieldFrame:SetPoint("BOTTOMRIGHT", MinimapAnchor, "BOTTOMRIGHT", 2, -2)
+	MiniMapBattlefieldFrame:SetPoint("TOPRIGHT", MinimapAnchor, "TOPRIGHT", 2, 2)
 	MiniMapBattlefieldBorder:Hide()
 	MiniMapBattlefieldIcon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 	MiniMapBattlefieldIcon:SetSize(16, 16)
