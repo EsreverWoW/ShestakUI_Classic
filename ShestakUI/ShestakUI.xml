@@ -25,6 +25,8 @@
 	<Script file="Config\Fonts.lua"/>
 	<Script file="Config\Profiles.lua"/>
 
+	<Script file="Compatibility\Classic\Config\Profiles.lua"/>
+
 	<Script file="Core\GUI.lua"/>
 	<Script file="Core\PixelPerfect.lua"/>
 
