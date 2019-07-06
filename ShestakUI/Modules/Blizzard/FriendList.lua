@@ -207,6 +207,40 @@ hooksecurefunc("WorldStateScoreFrame_Update", function()
 	end
 end)
 --]]
+if T.classic then
+	hooksecurefunc("WorldStateScoreFrame_Update", function()
+		local offset = FauxScrollFrame_GetOffset(WorldStateScoreScrollFrame)
+
+		for i = 1, GetNumBattlefieldScores() do
+			local index = offset + i
+			local name, _, _, _, _, faction, _, _, _, class = GetBattlefieldScore(index)
+			if name then
+				local n, r = strsplit("-", name, 2)
+				n = classColor[class]..n.."|r"
+
+				if name == myName then
+					n = ">>> "..n.." <<<"
+				end
+
+				if r then
+					local color
+					if faction == 1 then
+						color = "|cff00adf0"
+					else
+						color = "|cffff1919"
+					end
+					r = color..r.."|r"
+					n = n.."|cffffffff - |r"..r
+				end
+
+				local button = _G["WorldStateScoreButton"..i]
+				if button then
+					button.name.text:SetText(n)
+				end
+			end
+		end
+	end)
+end
 
 local _VIEW
 
