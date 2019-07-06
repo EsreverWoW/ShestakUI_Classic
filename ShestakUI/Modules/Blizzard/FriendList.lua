@@ -155,6 +155,7 @@ if not T.classic then
 end
 
 -- WorldStateScoreList
+--[[FIXME
 hooksecurefunc("WorldStateScoreFrame_Update", function()
 	local inArena
 	if not T.classic then
@@ -205,6 +206,7 @@ hooksecurefunc("WorldStateScoreFrame_Update", function()
 		end
 	end
 end)
+--]]
 
 local _VIEW
 

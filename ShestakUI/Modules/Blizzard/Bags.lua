@@ -102,7 +102,6 @@ local function Stuffing_OnShow()
 	Stuffing:Layout()
 	Stuffing:SearchReset()
 	PlaySound(SOUNDKIT.IG_BACKPACK_OPEN)
-	collectgarbage("collect")
 end
 
 local function StuffingBank_OnHide()
@@ -142,12 +141,11 @@ end
 local trashButton = {}
 local trashBag = {}
 
--- Tooltip used for scanning
-local scanner = CreateFrame("GameTooltip", "iLvlScanningTooltip", nil, "GameTooltipTemplate")
-local scannerName = scanner:GetName()
-
 -- Tooltip and scanning by Phanx @ http://www.wowinterface.com/forums/showthread.php?p=271406
 local S_ITEM_LEVEL = "^" .. gsub(_G.ITEM_LEVEL, "%%d", "(%%d+)")
+
+local scanner = CreateFrame("GameTooltip", "BagScanningTooltip", nil, "GameTooltipTemplate")
+local scannerName = scanner:GetName()
 
 local ItemDB = {}
 
