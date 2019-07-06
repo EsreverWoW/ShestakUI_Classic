@@ -10,8 +10,11 @@ MinimapAnchor:CreatePanel("ClassColor", C.minimap.size, C.minimap.size, unpack(C
 ----------------------------------------------------------------------------------------
 --	Shape, location and scale
 ----------------------------------------------------------------------------------------
--- Kill Minimap Cluster
-MinimapCluster:Kill()
+-- Disable Minimap Cluster
+MinimapCluster:EnableMouse(false)
+if T.classic then
+	MinimapCluster:Kill()
+end
 
 -- Parent Minimap into our frame
 Minimap:SetParent(MinimapAnchor)
@@ -386,7 +389,7 @@ end
 ----------------------------------------------------------------------------------------
 if T.classic then
 	MiniMapBattlefieldFrame:ClearAllPoints()
-	MiniMapBattlefieldFrame:SetPoint("BOTTOMRIGHT", MinimapAnchor, "BOTTOMRIGHT", 2, -2)
+	MiniMapBattlefieldFrame:SetPoint("TOPRIGHT", MinimapAnchor, "TOPRIGHT", 2, 2)
 	MiniMapBattlefieldBorder:Hide()
 	MiniMapBattlefieldIcon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 	MiniMapBattlefieldIcon:SetSize(16, 16)

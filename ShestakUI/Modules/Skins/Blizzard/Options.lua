@@ -188,6 +188,7 @@ local function LoadSkin()
 		"AudioOptionsVoicePanelVoiceChatMicVolume",
 		"AudioOptionsVoicePanelVoiceChatMicSensitivity",
 		"AudioOptionsVoicePanelVoiceChatVolume",
+		"AudioOptionsVoicePanelVoiceChatDucking",
 		"RaidGraphics_Quality",
 		"RaidGraphics_ViewDistanceSlider",
 		"RaidGraphics_EnvironmentalDetailSlider",

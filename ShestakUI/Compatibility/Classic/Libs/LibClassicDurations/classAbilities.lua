@@ -204,7 +204,12 @@ Spell({ 6343, 8198, 8204, 8205, 11580, 11581 }, {
 Spell({ 694, 7400, 7402, 20559, 20560 }, { duration = 6 }) -- Mocking Blow
 Spell( 1161 ,{ duration = 6 }) -- Challenging Shout
 Spell( 355 ,{ duration = 3 }) -- Taunt
-Spell({ 5242, 6192, 6673, 11549, 11550, 11551, 25289 }, { duration = 120, type = "BUFF" }) -- Battle Shout
+Spell({ 5242, 6192, 6673, 11549, 11550, 11551, 25289 }, { type = "BUFF",
+    duration = function(spellID, isSrcPlayer)
+        local talents = isSrcPlayer and Talent(12321, 12835, 12836, 12837, 12838) or 0
+        return 120 * (1 + 0.1 * talents)
+    end
+}) -- Battle Shout
 Spell({ 1160, 6190, 11554, 11555, 11556 }, {
     duration = function(spellID, isSrcPlayer)
         local talents = isSrcPlayer and Talent(12321, 12835, 12836, 12837, 12838) or 0
