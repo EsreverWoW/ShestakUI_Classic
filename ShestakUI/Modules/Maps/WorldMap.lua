@@ -71,6 +71,7 @@ local coords = CreateFrame("Frame", "CoordsFrame", WorldMapFrame)
 if not T.classic then
 	coords:SetFrameLevel(WorldMapFrame.BorderFrame:GetFrameLevel() + 2)
 	coords:SetFrameStrata(WorldMapFrame.BorderFrame:GetFrameStrata())
+
 	coords.PlayerText = coords:CreateFontString(nil, "ARTWORK", "GameFontNormal")
 	coords.PlayerText:SetPoint("BOTTOM", WorldMapFrame.ScrollContainer, "BOTTOM", 5, 20)
 	coords.PlayerText:SetJustifyH("LEFT")
@@ -94,45 +95,54 @@ else
 	coords.MouseText:SetText(L_MAP_CURSOR..": 0,0")
 end
 
+local mapRects, tempVec2D = {}, CreateVector2D(0, 0)
+local function GetPlayerMapPos(mapID)
+	tempVec2D.x, tempVec2D.y = UnitPosition("player")
+	if not tempVec2D.x then return end
+
+	local mapRect = mapRects[mapID]
+	if not mapRect then
+		mapRect = {
+			select(2, C_Map.GetWorldPosFromMapPos(mapID, CreateVector2D(0, 0))),
+			select(2, C_Map.GetWorldPosFromMapPos(mapID, CreateVector2D(1, 1)))}
+		mapRect[2]:Subtract(mapRect[1])
+		mapRects[mapID] = mapRect
+	end
+	tempVec2D:Subtract(mapRect[1])
+
+	return (tempVec2D.y/mapRect[2].y), (tempVec2D.x/mapRect[2].x)
+end
+
 local int = 0
 WorldMapFrame:HookScript("OnUpdate", function(self)
 	if not WorldMapFrame:IsShown() then return end
 
 	int = int + 1
 	if int >= 3 then
-		local UnitMap = C_Map.GetBestMapForUnit("player")
+		local unitMap = C_Map.GetBestMapForUnit("player")
 		local x, y = 0, 0
 
-		if UnitMap then
-			local GetPlayerMapPosition = C_Map.GetPlayerMapPosition(UnitMap, "player")
-			if GetPlayerMapPosition then
-				x, y = GetPlayerMapPosition:GetXY()
-			end
+		if unitMap then
+			x, y = GetPlayerMapPos(unitMap)
 		end
 
-		x = math.floor(100 * x)
-		y = math.floor(100 * y)
 		if x ~= 0 and y ~= 0 then
-			coords.PlayerText:SetText(UnitName("player")..": "..x..","..y)
+			coords.PlayerText:SetFormattedText("%s: %.0f,%.0f", T.name, x * 100, y * 100)
 		else
 			coords.PlayerText:SetText(UnitName("player")..": ".."|cffff0000"..L_MAP_BOUNDS.."|r")
 		end
 
-		local scale = WorldMapFrame.ScrollContainer:GetEffectiveScale()
-		local width = WorldMapFrame.ScrollContainer:GetWidth()
-		local height = WorldMapFrame.ScrollContainer:GetHeight()
-		local centerX, centerY = WorldMapFrame.ScrollContainer:GetCenter()
-		local x, y = GetCursorPosition()
-		local adjustedX = (x / scale - (centerX - (width/2))) / width
-		local adjustedY = (centerY + (height/2) - y / scale) / height
-
-		if adjustedX >= 0 and adjustedY >= 0 and adjustedX <= 1 and adjustedY <= 1 then
-			adjustedX = math.floor(100 * adjustedX)
-			adjustedY = math.floor(100 * adjustedY)
-			coords.MouseText:SetText(L_MAP_CURSOR..adjustedX..","..adjustedY)
+		if WorldMapFrame.ScrollContainer:IsMouseOver() then
+			local mouseX, mouseY = WorldMapFrame.ScrollContainer:GetNormalizedCursorPosition()
+			if mouseX and mouseY and mouseX >= 0 and mouseY >= 0 then
+				coords.MouseText:SetFormattedText("%s %.0f,%.0f", L_MAP_CURSOR, mouseX * 100, mouseY * 100)
+			else
+				coords.MouseText:SetText(L_MAP_CURSOR.."|cffff0000"..L_MAP_BOUNDS.."|r")
+			end
 		else
 			coords.MouseText:SetText(L_MAP_CURSOR.."|cffff0000"..L_MAP_BOUNDS.."|r")
 		end
+
 		int = 0
 	end
 end)

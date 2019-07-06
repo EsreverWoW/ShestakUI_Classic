@@ -74,6 +74,24 @@ end)
 -- Config missing?
 if not modules then return end
 
+local mapRects, tempVec2D = {}, CreateVector2D(0, 0)
+local function GetPlayerMapPos(mapID)
+	tempVec2D.x, tempVec2D.y = UnitPosition("player")
+	if not tempVec2D.x then return end
+
+	local mapRect = mapRects[mapID]
+	if not mapRect then
+		mapRect = {
+			select(2, C_Map.GetWorldPosFromMapPos(mapID, CreateVector2D(0, 0))),
+			select(2, C_Map.GetWorldPosFromMapPos(mapID, CreateVector2D(1, 1)))}
+		mapRect[2]:Subtract(mapRect[1])
+		mapRects[mapID] = mapRect
+	end
+	tempVec2D:Subtract(mapRect[1])
+
+	return (tempVec2D.y/mapRect[2].y), (tempVec2D.x/mapRect[2].x)
+end
+
 if modules and ((coords and coords.enabled) or (location and location.enabled)) then
 	ls:SetScript("OnUpdate", function(self, elapsed)
 		self.elapsed = (self.elapsed or 0) + elapsed
@@ -81,11 +99,7 @@ if modules and ((coords and coords.enabled) or (location and location.enabled)) 
 			local unitMap = C_Map.GetBestMapForUnit("player")
 
 			if unitMap then
-				local GetPlayerMapPosition = C_Map.GetPlayerMapPosition(C_Map.GetBestMapForUnit("player"), "player")
-
-				if GetPlayerMapPosition then
-					coordX, coordY = C_Map.GetPlayerMapPosition(C_Map.GetBestMapForUnit("player"), "player"):GetXY()
-				end
+				coordX, coordY = GetPlayerMapPos(unitMap)
 			end
 
 			self.elapsed = 0
@@ -296,7 +310,6 @@ if memory.enabled then
 			end, update = 5,
 		},
 		OnEnter = function(self)
-			collectgarbage()
 			self.hovered = true
 			GameTooltip:SetOwner(self, "ANCHOR_NONE")
 			GameTooltip:ClearAllPoints()
@@ -685,6 +698,7 @@ if gold.enabled then
 					Currency(1716)	-- Honorbound Service Medal
 					Currency(1717)	-- 7th Legion Service Medal
 					Currency(1718)	-- Titan Residuum
+					Currency(1721)	-- Prismatic Manapearl
 					Currency(1560)	-- War Resources
 					Currency(1710)	-- Seafarer's Dubloon
 					Currency(515)	-- Darkmoon Prize Ticket
@@ -986,7 +1000,7 @@ if guild.enabled then
 	local function BuildGuildTable()
 		wipe(guildTable)
 		for i = 1, GetNumGuildMembers() do
-			local name, rank, _, level, _, zone, note, officernote, connected, status, class, _, _, mobile = GetGuildRosterInfo(i)
+			local name, rank, _, level, _, zone, note, officernote, connected, status, class, _, _, mobile = C_GuildInfo.C_GuildInfo.GetGuildRosterInfo(i)
 			name = Ambiguate(name, "none")
 			guildTable[i] = {name, rank, level, zone, note, officernote, connected, status, class, mobile}
 		end
@@ -1105,7 +1119,7 @@ if guild.enabled then
 							if online > 2 then GameTooltip:AddLine(format("%d %s (%s)", online - guild.maxguild, L_STATS_HIDDEN, ALT_KEY), ttsubh.r, ttsubh.g, ttsubh.b) end
 							break
 						end
-						name, rank, _, level, _, zone, note, officernote, connected, status, class, _, _, isMobile = GetGuildRosterInfo(i)
+						name, rank, _, level, _, zone, note, officernote, connected, status, class, _, _, isMobile = C_GuildInfo.GetGuildRosterInfo(i)
 						if (connected or isMobile) and level >= guild.threshold then
 							name = Ambiguate(name, "all")
 							if GetRealZoneText() == zone then zone_r, zone_g, zone_b = 0.3, 1, 0.3 else zone_r, zone_g, zone_b = 1, 1, 1 end
