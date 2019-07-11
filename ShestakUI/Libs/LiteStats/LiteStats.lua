@@ -1000,7 +1000,7 @@ if guild.enabled then
 	local function BuildGuildTable()
 		wipe(guildTable)
 		for i = 1, GetNumGuildMembers() do
-			local name, rank, _, level, _, zone, note, officernote, connected, status, class, _, _, mobile = C_GuildInfo.C_GuildInfo.GetGuildRosterInfo(i)
+			local name, rank, _, level, _, zone, note, officernote, connected, status, class, _, _, mobile = C_GuildInfo.GetGuildRosterInfo(i)
 			name = Ambiguate(name, "none")
 			guildTable[i] = {name, rank, level, zone, note, officernote, connected, status, class, mobile}
 		end
