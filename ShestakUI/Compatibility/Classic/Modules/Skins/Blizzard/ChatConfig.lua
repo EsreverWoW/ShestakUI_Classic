@@ -88,10 +88,10 @@ local function LoadSkin()
 		"CombatConfigColorsColorizeDamageSchoolCheck",
 		"CombatConfigColorsColorizeEntireLineCheck",
 		"CombatConfigFormattingShowTimeStamp",
-		"CombatConfigFormattingShowBraces",
-		"CombatConfigFormattingUnitNames",
-		"CombatConfigFormattingSpellNames",
-		"CombatConfigFormattingItemNames",
+		-- "CombatConfigFormattingShowBraces",
+		-- "CombatConfigFormattingUnitNames",
+		-- "CombatConfigFormattingSpellNames",
+		-- "CombatConfigFormattingItemNames",
 		"CombatConfigFormattingFullText",
 		"CombatConfigSettingsShowQuickButton",
 		"CombatConfigSettingsSolo",
@@ -104,6 +104,8 @@ local function LoadSkin()
 	for i = 1, getn(checkboxes) do
 		T.SkinCheckBox(_G[checkboxes[i]])
 	end
+
+	-- TODO: Skin Available Channels
 
 	local ReskinColourSwatch = function(f)
 		f:StripTextures()
