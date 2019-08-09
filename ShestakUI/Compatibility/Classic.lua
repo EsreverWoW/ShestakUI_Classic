@@ -385,6 +385,14 @@ if LibClassicDurations then
 end
 
 ----------------------------------------------------------------------------------------
+--	TBC+ Shaman Coloring (config option later)
+----------------------------------------------------------------------------------------
+RAID_CLASS_COLORS.SHAMAN.r = 0
+RAID_CLASS_COLORS.SHAMAN.g = 0.44
+RAID_CLASS_COLORS.SHAMAN.b = 0.87
+RAID_CLASS_COLORS.SHAMAN.colorStr = "0070de"
+
+----------------------------------------------------------------------------------------
 --	Specialization Functions
 ----------------------------------------------------------------------------------------
 local specializationID = {
