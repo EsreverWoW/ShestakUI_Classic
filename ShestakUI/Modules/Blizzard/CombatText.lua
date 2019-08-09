@@ -822,7 +822,11 @@ if C.combattext.damage then
 						amount = "|cffFF0000"..C.combattext.crit_prefix.."|r"..amount.."|cffFF0000"..C.combattext.crit_postfix.."|r"
 					end
 					if C.combattext.icons then
+						if spellId and spellId ~= 0 then
 						icon = GetSpellTexture(spellId)
+					else
+						icon = ""
+					end
 						msg = " \124T"..icon..":"..C.combattext.icon_size..":"..C.combattext.icon_size..":0:0:64:64:5:59:5:59\124t"
 					end
 					if C.combattext.merge_aoe_spam then
@@ -853,7 +857,11 @@ if C.combattext.damage then
 						amount = "|cffFF0000"..C.combattext.crit_prefix.."|r"..amount.."|cffFF0000"..C.combattext.crit_postfix.."|r"
 					end
 					if C.combattext.icons then
-						icon = GetSpellTexture(spellId)
+						if spellId and spellId ~= 0 then
+							icon = GetSpellTexture(spellId)
+						else
+							icon = ""
+						end
 					end
 					if C.combattext.damage_color then
 						if ct.dmgcolor[spellSchool] then
@@ -908,7 +916,11 @@ if C.combattext.damage then
 				local spellId, _, _, missType = select(12, CombatLogGetCurrentEventInfo())
 				if missType == "IMMUNE" and spellId == 118895 then return end
 				if C.combattext.icons then
-					icon = GetSpellTexture(spellId)
+					if spellId and spellId ~= 0 then
+						icon = GetSpellTexture(spellId)
+					else
+						icon = ""
+					end
 					missType = misstypes[missType].." \124T"..icon..":"..C.combattext.icon_size..":"..C.combattext.icon_size..":0:0:64:64:5:59:5:59\124t"
 				else
 					missType = misstypes[missType]
@@ -918,7 +930,11 @@ if C.combattext.damage then
 				local id, effect, _, etype = select(15, CombatLogGetCurrentEventInfo())
 				local color
 				if C.combattext.icons then
-					icon = GetSpellTexture(id)
+					if id and id ~= 0 then
+						icon = GetSpellTexture(id)
+					else
+						icon = ""
+					end
 				end
 				if icon then
 					msg = " \124T"..icon..":"..C.combattext.icon_size..":"..C.combattext.icon_size..":0:0:64:64:5:59:5:59\124t"
@@ -937,7 +953,11 @@ if C.combattext.damage then
 				local id, effect = select(15, CombatLogGetCurrentEventInfo())
 				local color = {1, 0.5, 0}
 				if C.combattext.icons then
-					icon = GetSpellTexture(id)
+					if id and id ~= 0 then
+						icon = GetSpellTexture(id)
+					else
+						icon = ""
+					end
 				end
 				if icon then
 					msg = " \124T"..icon..":"..C.combattext.icon_size..":"..C.combattext.icon_size..":0:0:64:64:5:59:5:59\124t"
@@ -951,7 +971,11 @@ if C.combattext.damage then
 				local id, effect = select(15, CombatLogGetCurrentEventInfo())
 				local color = {1, 0.5, 0}
 				if C.combattext.icons then
-					icon = GetSpellTexture(id)
+					if id and id ~= 0 then
+						icon = GetSpellTexture(id)
+					else
+						icon = ""
+					end
 				end
 				if icon then
 					msg = " \124T"..icon..":"..C.combattext.icon_size..":"..C.combattext.icon_size..":0:0:64:64:5:59:5:59\124t"
@@ -1013,7 +1037,11 @@ if C.combattext.healing then
 							color = {0.1, 0.65, 0.1}
 						end
 						if C.combattext.icons then
-							icon = GetSpellTexture(spellId)
+							if spellId and spellId ~= 0 then
+								icon = GetSpellTexture(spellId)
+							else
+								icon = ""
+							end
 						else
 							msg = ""
 						end
