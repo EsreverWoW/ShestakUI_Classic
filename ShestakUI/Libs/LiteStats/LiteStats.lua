@@ -1000,7 +1000,7 @@ if guild.enabled then
 	local function BuildGuildTable()
 		wipe(guildTable)
 		for i = 1, GetNumGuildMembers() do
-			local name, rank, _, level, _, zone, note, officernote, connected, status, class, _, _, mobile = T.classic and C_GuildInfo.GetGuildRosterInfo(i) or GetGuildRosterInfo(i)
+			local name, rank, _, level, _, zone, note, officernote, connected, status, class, _, _, mobile = C_GuildInfo.GetGuildRosterInfo(i)
 			name = Ambiguate(name, "none")
 			guildTable[i] = {name, rank, level, zone, note, officernote, connected, status, class, mobile}
 		end
@@ -1119,7 +1119,7 @@ if guild.enabled then
 							if online > 2 then GameTooltip:AddLine(format("%d %s (%s)", online - guild.maxguild, L_STATS_HIDDEN, ALT_KEY), ttsubh.r, ttsubh.g, ttsubh.b) end
 							break
 						end
-						name, rank, _, level, _, zone, note, officernote, connected, status, class, _, _, isMobile = T.classic and C_GuildInfo.GetGuildRosterInfo(i) or GetGuildRosterInfo(i)
+						name, rank, _, level, _, zone, note, officernote, connected, status, class, _, _, isMobile = C_GuildInfo.GetGuildRosterInfo(i)
 						if (connected or isMobile) and level >= guild.threshold then
 							name = Ambiguate(name, "all")
 							if GetRealZoneText() == zone then zone_r, zone_g, zone_b = 0.3, 1, 0.3 else zone_r, zone_g, zone_b = 1, 1, 1 end
