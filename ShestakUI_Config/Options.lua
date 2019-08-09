@@ -1236,6 +1236,7 @@ do
 	totem_icons:SetPoint("TOPLEFT", healer_icon, "BOTTOMLEFT", 0, 0)
 
 	local classic = {
+		distance, -- broken in Classic
 		healer_icon -- needs fixing since build 30786
 	}
 

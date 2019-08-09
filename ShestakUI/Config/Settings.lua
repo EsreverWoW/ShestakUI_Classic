@@ -310,7 +310,6 @@ C["nameplate"] = {
 }
 
 if T.classic then
-	C["nameplate"]["distance"] = 60
 	C["nameplate"]["health_value"] = true
 	C["nameplate"]["show_castbar_name"] = true
 	C["nameplate"]["track_debuffs"] = true
