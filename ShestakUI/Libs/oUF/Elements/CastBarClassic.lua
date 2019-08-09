@@ -92,7 +92,7 @@ function CastScanner:AddCast(unitGUID, castID, spellID, castTime, channelStatus)
 	local currentTime = GetTime() * 1e3
 	local name, rank, texture = GetSpellInfo(spellID)
 
-	rank = rank or GetSpellRank(spellID)
+	if rank and rank == 0 then rank = nil end
 
 	local text = (rank and tostring(name.." (r"..rank..")")) or name
 	local isTradeSkill = (select(2, GetSpellTradeSkillLink(spellID) and true)) or false
