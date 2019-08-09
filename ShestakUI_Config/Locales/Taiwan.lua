@@ -68,6 +68,7 @@ L_GUI_UF_TOTAL_VALUE = "玩家/目標框架顯示詳細的文字變化"
 L_GUI_UF_COLOR_VALUE = "生命值/魔法值按職業著色"
 L_GUI_UF_BAR_COLOR_VALUE = "生命值按剩餘血量著色"
 L_GUI_UF_LINES = "玩家/目標框架顯示劃線"
+L_GUI_UF_PLAYER_NAME = "Show player's name and level" -- Needs review
 L_GUI_UF_SUBHEADER_CAST = "施法條"
 L_GUI_UF_UNIT_CASTBAR = "施法條增強"
 L_GUI_UF_CASTBAR_ICON = "法術圖標"

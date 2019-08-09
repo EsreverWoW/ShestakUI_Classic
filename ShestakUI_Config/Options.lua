@@ -672,9 +672,12 @@ do
 	local lines = ns.CreateCheckBox(parent, "lines", L_GUI_UF_LINES)
 	lines:SetPoint("TOPLEFT", bar_color_value, "BOTTOMLEFT", 0, 0)
 
+	local player_name = ns.CreateCheckBox(parent, "player_name", L_GUI_UF_PLAYER_NAME)
+	player_name:SetPoint("TOPLEFT", lines, "BOTTOMLEFT", 0, 0)
+
 	-- Cast bars
 	local subheader = ns.addSubCategory(parent, L_GUI_UF_SUBHEADER_CAST)
-	subheader:SetPoint("TOPLEFT", lines, "BOTTOMLEFT", 0, -16)
+	subheader:SetPoint("TOPLEFT", player_name, "BOTTOMLEFT", 0, -16)
 
 	local unit_castbar = ns.CreateCheckBox(parent, "unit_castbar", L_GUI_UF_UNIT_CASTBAR)
 	unit_castbar:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -8)

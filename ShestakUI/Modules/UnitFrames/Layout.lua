@@ -215,6 +215,16 @@ local function Shared(self, unit)
 	end
 
 	if unit == "player" then
+		if C.unitframe.player_name then
+			self.Info = T.SetFontString(self.Health, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
+			self.Info:SetPoint("LEFT", self.Health, "LEFT", 2, 0)
+			self:Tag(self.Info, "[GetNameColor][NameLong]")
+
+			self.Level = T.SetFontString(self.Power, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
+			self.Level:SetPoint("LEFT", self.Power, "LEFT", 2, 0)
+			self:Tag(self.Level, "[DiffColor][level][shortclassification]")
+		end
+
 		self.FlashInfo = CreateFrame("Frame", "FlashInfo", self)
 		self.FlashInfo:SetScript("OnUpdate", T.UpdateManaLevel)
 		self.FlashInfo:SetFrameLevel(self.Health:GetFrameLevel() + 1)

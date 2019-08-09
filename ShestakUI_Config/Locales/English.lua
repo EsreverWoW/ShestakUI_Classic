@@ -90,6 +90,7 @@ L_GUI_UF_TOTAL_VALUE = "Display of info text on player and target with XXXX/Tota
 L_GUI_UF_COLOR_VALUE = "Health/mana value is colored"
 L_GUI_UF_BAR_COLOR_VALUE = "Health bar color by current health remaining"
 L_GUI_UF_LINES = "Show Player and Target lines"
+L_GUI_UF_PLAYER_NAME = "Show player's name and level"
 L_GUI_UF_SUBHEADER_CAST = "Castbars"
 L_GUI_UF_UNIT_CASTBAR = "Show castbars"
 L_GUI_UF_CASTBAR_ICON = "Show castbar icons"
