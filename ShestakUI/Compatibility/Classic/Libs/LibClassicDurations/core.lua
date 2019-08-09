@@ -63,7 +63,7 @@ Usage example 2:
 --]================]
 
 
-local MAJOR, MINOR = "LibClassicDurations", 6
+local MAJOR, MINOR = "LibClassicDurations", 8
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
@@ -73,6 +73,7 @@ lib.frame = lib.frame or CreateFrame("Frame")
 lib.guids = lib.guids or {}
 lib.spells = lib.spells or {}
 lib.npc_spells = lib.npc_spells or {}
+lib.spellNameToID = lib.npc_spells or {}
 
 lib.DRInfo = lib.DRInfo or {}
 local DRInfo = lib.DRInfo
@@ -94,6 +95,7 @@ local callbacks = lib.callbacks
 local guids = lib.guids
 local spells = lib.spells
 local npc_spells = lib.npc_spells
+local spellNameToID = lib.spellNameToID
 
 local PURGE_INTERVAL = 900
 local PURGE_THRESHOLD = 1800
@@ -102,6 +104,7 @@ local UNKNOWN_AURA_DURATION = 3600 -- 60m
 local CombatLogGetCurrentEventInfo = CombatLogGetCurrentEventInfo
 local UnitGUID = UnitGUID
 local UnitAura = UnitAura
+local GetSpellInfo = GetSpellInfo
 local GetTime = GetTime
 local tinsert = table.insert
 local unpack = unpack
@@ -117,6 +120,7 @@ local SpellDataVersions = {}
 function lib:SetDataVersion(dataType, version)
     SpellDataVersions[dataType] = version
     npc_spells = lib.npc_spells
+    spellNameToID = lib.spellNameToID
 end
 
 function lib:GetDataVersion(dataType)
@@ -124,8 +128,22 @@ function lib:GetDataVersion(dataType)
 end
 
 
-lib.AddAura = lib.AddAura or function(id, opts)
+lib.AddAura = function(id, opts)
     if not opts then return end
+
+    local lastRankID
+    if type(id) == "table" then
+        local clones = id
+        lastRankID = clones[#clones]
+    else
+        lastRankID = id
+    end
+    local mixin = Spell:CreateFromSpellID(lastRankID)
+    mixin:ContinueOnSpellLoad(function()
+        local spellName = mixin:GetSpellName()
+
+        spellNameToID[spellName] = lastRankID
+    end)
 
     if type(id) == "table" then
         for _, spellID in ipairs(id) do
@@ -136,7 +154,8 @@ lib.AddAura = lib.AddAura or function(id, opts)
     end
 end
 
-lib.Talent = lib.Talent or function (...)
+
+lib.Talent = function (...)
     for i=1, 5 do
         local spellID = select(i, ...)
         if not spellID then break end
@@ -283,7 +302,6 @@ local function cleanDuration(duration, spellID, srcGUID)
     return duration
 end
 
-
 local function SetTimer(srcGUID, dstGUID, dstName, dstFlags, spellID, spellName, opts, auraType, doRemove)
     if not opts then return end
 
@@ -329,21 +347,24 @@ local function SetTimer(srcGUID, dstGUID, dstName, dstFlags, spellID, spellName,
         applicationTable = spellTable
     end
 
-    local duration = cleanDuration(opts.duration, spellID, srcGUID)
+    -- local duration = cleanDuration(opts.duration, spellID, srcGUID)
+    local duration = opts.duration
     if not duration then
         return SetTimer(srcGUID, dstGUID, dstName, dstFlags, spellID, spellName, opts, auraType, true)
     end
-    local mul = getDRMul(dstGUID, spellID)
-    duration = duration * mul
+    -- local mul = getDRMul(dstGUID, spellID)
+    -- duration = duration * mul
     local now = GetTime()
-    local expirationTime
-    if duration == 0 then
-        expirationTime = now + UNKNOWN_AURA_DURATION -- 60m
-    else
-        expirationTime = now + duration
-    end
+    -- local expirationTime
+    -- if duration == 0 then
+    --     expirationTime = now + UNKNOWN_AURA_DURATION -- 60m
+    -- else
+    --     -- local temporaryDuration = cleanDuration(opts.duration, spellID, srcGUID)
+    --     expirationTime = now + duration
+    -- end
     applicationTable[1] = duration
-    applicationTable[2] = expirationTime
+    applicationTable[2] = now
+    -- applicationTable[2] = expirationTime
     applicationTable[3] = auraType
 
     guidAccessTimes[dstGUID] = now
@@ -369,12 +390,24 @@ function f:COMBAT_LOG_EVENT_UNFILTERED(event)
     dstGUID, dstName, dstFlags, dstFlags2,
     spellID, spellName, spellSchool, auraType, amount = CombatLogGetCurrentEventInfo()
 
-    CountDiminishingReturns(eventType, srcGUID, srcFlags, dstGUID, dstFlags, spellID, auraType)
-
     if auraType == "BUFF" or auraType == "DEBUFF" then
+        if spellID == 0 then
+            -- so not to rewrite the whole thing to spellnames after the combat log change
+            -- just treat everything as max/first rank id of that spell name
+            local sid = spellNameToID[spellName]
+            if sid then
+                spellID = sid
+            else
+                return
+            end
+        end
+
+        CountDiminishingReturns(eventType, srcGUID, srcFlags, dstGUID, dstFlags, spellID, auraType)
+
         local isDstFriendly = bit_band(dstFlags, COMBATLOG_OBJECT_REACTION_FRIENDLY) > 0
 
         local opts = spells[spellID]
+        --[[
         if not opts then
             local npc_aura_duration = npc_spells[spellID]
             if npc_aura_duration then
@@ -383,6 +416,7 @@ function f:COMBAT_LOG_EVENT_UNFILTERED(event)
                 opts = { duration = 0 } -- it'll be accepted but as an indefinite aura
             end
         end
+        ]]
         if opts then
             -- print(eventType, srcGUID, "=>", dstName, spellID, spellName, auraType )
             if  eventType == "SPELL_AURA_REFRESH" or
@@ -520,11 +554,13 @@ end
 ---------------------------
 -- PUBLIC FUNCTIONS
 ---------------------------
-local function GetGUIDAuraTime(dstGUID, spellID, srcGUID, isStacking)
+local function GetGUIDAuraTime(dstGUID, spellName, spellID, srcGUID, isStacking)
     local guidTable = guids[dstGUID]
     if guidTable then
-        -- local isStacking = opts.stacking
-        local spellTable = guidTable[spellID]
+
+        local lastRankID = spellNameToID[spellName]
+
+        local spellTable = guidTable[lastRankID]
         if spellTable then
             local applicationTable
             if isStacking then
@@ -537,7 +573,12 @@ local function GetGUIDAuraTime(dstGUID, spellID, srcGUID, isStacking)
                 applicationTable = spellTable
             end
             if not applicationTable then return end
-            local duration, expirationTime = unpack(applicationTable)
+            local durationFunc, startTime = unpack(applicationTable)
+            local duration = cleanDuration(durationFunc, spellID, srcGUID)
+            local mul = getDRMul(dstGUID, spellID)
+            -- local mul = getDRMul(dstGUID, lastRankID)
+            duration = duration * mul
+            local expirationTime = startTime + duration
             if GetTime() <= expirationTime then
                 return duration, expirationTime
             end
@@ -545,13 +586,14 @@ local function GetGUIDAuraTime(dstGUID, spellID, srcGUID, isStacking)
     end
 end
 
-function lib.GetAuraDurationByUnitDirect(unit, spellID, casterUnit)
+function lib.GetAuraDurationByUnitDirect(unit, spellID, casterUnit, spellName)
     assert(spellID, "spellID is nil")
     local opts = spells[spellID]
     if not opts then return end
     local dstGUID = UnitGUID(unit)
     local srcGUID = casterUnit and UnitGUID(casterUnit)
-    return GetGUIDAuraTime(dstGUID, spellID, srcGUID, opts.stacking)
+    if not spellName then spellName = GetSpellInfo(spellID) end
+    return GetGUIDAuraTime(dstGUID, spellName, spellID, srcGUID, opts.stacking)
 end
 GetAuraDurationByUnitDirect = lib.GetAuraDurationByUnitDirect
 
@@ -563,6 +605,18 @@ function lib:GetAuraDurationByGUID(dstGUID, spellID, srcGUID)
     local opts = spells[spellID]
     if not opts then return end
     return GetGUIDAuraTime(dstGUID, spellID, srcGUID, opts.stacking)
+end
+
+function lib:GetLastRankSpellIDByName(spellName)
+    return spellNameToID[spellName]
+end
+
+function lib:GetDurationForRank(spellName, spellID, srcGUID)
+    local lastRankID = spellNameToID[spellName]
+    local opts = spells[lastRankID]
+    if opts then
+        return cleanDuration(opts.duration, spellID, srcGUID)
+    end
 end
 
 local activeFrames = {}

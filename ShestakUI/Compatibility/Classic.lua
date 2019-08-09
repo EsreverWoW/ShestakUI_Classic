@@ -69,20 +69,6 @@ end
 SaveBindings = _G.SaveBindings or _G.AttemptToSaveBindings
 
 ----------------------------------------------------------------------------------------
---	Classic Bugs
-----------------------------------------------------------------------------------------
--- https://git.tukui.org/Tukz/Tukui/commit/ca387b55e84bc6cb13719c648ae6d34d7d3c7493#15effd8cfb7a22a107bef69a493f44fe34236102
--- BUG TO REPORT AT BLIZZARD
-
--- Message: Interface\FrameXML\SecureGroupHeaders.lua:303: attempt to call global 'UnitGroupRolesAssigned' (a nil value)
--- Cause: UnitGroupRolesAssigned still exist in SecureGroupHeaders, it should not
--- UnitGroupRolesAssigned = function() return "" end
-
--- Message: Interface\FrameXML\SecureTemplates.lua:219: attempt to call global 'UnitIsOtherPlayersBattlePet' (a nil value)
--- Cause: UnitIsOtherPlayersBattlePet still exist in SecureTemplates, it should not
-UnitIsOtherPlayersBattlePet = function(unit) return false end
-
-----------------------------------------------------------------------------------------
 --	Quest Functions
 ----------------------------------------------------------------------------------------
 GetAvailableQuestInfo = _G.GetAvailableQuestInfo or function(index)
@@ -395,7 +381,7 @@ LibClassicDurations = LibStub("LibClassicDurations")
 
 if LibClassicDurations then
 	_G.LibClassicDurations = _G.LibClassicDurations or LibClassicDurations
-	LibClassicDurations:RegisterFrame(ClassicAuraTracker)
+	LibClassicDurations:Register(ClassicAuraTracker)
 end
 
 ----------------------------------------------------------------------------------------
