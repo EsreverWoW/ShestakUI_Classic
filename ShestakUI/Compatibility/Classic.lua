@@ -65,6 +65,9 @@ ShowFriends = _G.ShowFriends or function()
 	return C_FriendList.ShowFriends()
 end
 
+-- SaveBindings removed in WoW Classic build 30901
+SaveBindings = _G.SaveBindings or _G.AttemptToSaveBindings
+
 ----------------------------------------------------------------------------------------
 --	Quest Functions
 ----------------------------------------------------------------------------------------
