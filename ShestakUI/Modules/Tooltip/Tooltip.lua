@@ -305,11 +305,21 @@ local OnTooltipSetUnit = function(self)
 		end
 
 		if GetGuildInfo(unit) then
-			_G["GameTooltipTextLeft2"]:SetFormattedText("%s", GetGuildInfo(unit))
-			if UnitIsInMyGuild(unit) then
-				_G["GameTooltipTextLeft2"]:SetTextColor(1, 1, 0)
+			if not T.classic then
+				_G["GameTooltipTextLeft2"]:SetFormattedText("%s", GetGuildInfo(unit))
+				if UnitIsInMyGuild(unit) then
+					_G["GameTooltipTextLeft2"]:SetTextColor(1, 1, 0)
+				else
+					_G["GameTooltipTextLeft2"]:SetTextColor(0, 1, 1)
+				end
 			else
-				_G["GameTooltipTextLeft2"]:SetTextColor(0, 1, 1)
+				local guildColor = {}
+				if UnitIsInMyGuild(unit) then
+					guildColor.r, guildColor.g, guildColor.b = 1, 1, 0
+				else
+					guildColor.r, guildColor.g, guildColor.b = 0, 1, 1
+				end
+				_G["GameTooltipTextLeft2"]:SetFormattedText("|cff%02x%02x%02x%s|r |cff%02x%02x%02x%s|r", levelColor.r * 255, levelColor.g * 255, levelColor.b * 255, level, guildColor.r * 255, guildColor.g * 255, guildColor.b * 255, GetGuildInfo(unit))
 			end
 		end
 
