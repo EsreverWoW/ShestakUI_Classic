@@ -23,8 +23,19 @@ local function OnMouseUp(self)
 		RemoveQuestWatch(self.questIndex)
 		QuestWatch_Update()
 	else -- open to quest log
-		ShowUIPanel(QuestLogFrame)
-		QuestLog_SetSelection(self.questIndex)
+		if QuestLogEx then -- https://www.wowinterface.com/downloads/info24980-QuestLogEx.html
+			ShowUIPanel(QuestLogExFrame)
+			QuestLogEx:QuestLog_SetSelection(self.questIndex)
+			QuestLogEx:Maximize()
+		elseif ClassicQuestLog then -- https://www.wowinterface.com/downloads/info24937-ClassicQuestLogforClassic.html
+			ShowUIPanel(ClassicQuestLog)
+			QuestLog_SetSelection(self.questIndex)
+		else
+			ShowUIPanel(QuestLogFrame)
+			QuestLog_SetSelection(self.questIndex)
+			local valueStep = QuestLogListScrollFrame.ScrollBar:GetValueStep()
+			QuestLogListScrollFrame.ScrollBar:SetValue(self.questIndex*valueStep/2)
+		end
 	end
 	QuestLog_Update()
 end
@@ -128,8 +139,7 @@ hooksecurefunc("QuestWatch_Update", function()
 				end
 			end
 		end
-		-- hide/show frames since we cant parent to a FontString
-		--  so it doesn't eat clicks while still allowing OnEnter/OnLeave scripts
+		-- hide/show frames so it doesnt eat clicks, since we cant parent to a FontString
 		for _, frame in pairs(ClickFrames) do
 			frame[GetQuestIndexForWatch(frame.watchIndex) and "Show" or "Hide"](frame)
 		end
@@ -137,6 +147,18 @@ hooksecurefunc("QuestWatch_Update", function()
 		ObjectiveTracker:Hide()
 	end
 end)
+
+local function OnEvent(self, event, questIndex)
+	-- tracking otherwise untrackable quests (without any objectives) would still count against the watch limit
+	-- calling AddQuestWatch() while on the max watch limit silently fails
+	if GetCVarBool("autoQuestWatch") and GetNumQuestLeaderBoards(questIndex) ~= 0 and GetNumQuestWatches() < MAX_WATCHABLE_QUESTS then
+		AutoQuestWatch_Insert(questIndex, QUEST_WATCH_NO_EXPIRE)
+	end
+end
+
+local f = CreateFrame("Frame")
+f:RegisterEvent("QUEST_ACCEPTED")
+f:SetScript("OnEvent", OnEvent)
 
 ----------------------------------------------------------------------------------------
 --	Move QuestTimerFrame (issues with the mover)
