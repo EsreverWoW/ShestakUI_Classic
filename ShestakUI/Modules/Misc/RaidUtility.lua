@@ -5,10 +5,14 @@ if C.misc.raid_tools ~= true then return end
 --	Raid Utility(by Elv22)
 ----------------------------------------------------------------------------------------
 -- Create main frame
-local RaidUtilityPanel = CreateFrame("Frame", "RaidUtilityPanel", T_PetBattleFrameHider)
-RaidUtilityPanel:CreatePanel("Transparent", 170, 145, unpack(C.position.raid_utility))
+local RaidUtilityPanelAnchor = CreateFrame("Frame", "RaidUtilityPanelAnchor", T_PetBattleFrameHider)
+RaidUtilityPanelAnchor:SetPoint(unpack(C.position.raid_utility))
+RaidUtilityPanelAnchor:SetSize(171, 21)
+
+local RaidUtilityPanel = CreateFrame("Frame", "RaidUtilityPanel", RaidUtilityPanelAnchor)
+RaidUtilityPanel:CreatePanel("Transparent", 170, 145, "TOP", RaidUtilityPanelAnchor, "TOP", 0, 0)
 if GetCVarBool("watchFrameWidth") then
-	RaidUtilityPanel:SetPoint(C.position.raid_utility[1], C.position.raid_utility[2], C.position.raid_utility[3], C.position.raid_utility[4] + 100, C.position.raid_utility[5])
+	RaidUtilityPanel:SetPoint("TOP", RaidUtilityPanelAnchor, "TOP", 100, 0)
 end
 RaidUtilityPanel.toggled = false
 
