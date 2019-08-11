@@ -4,6 +4,7 @@ if not T.classic or C.skins.blizzard_frames ~= true then return end
 ----------------------------------------------------------------------------------------
 --	TrainerUI skin
 ----------------------------------------------------------------------------------------
+--[[
 local function LoadSkin()
 	ClassTrainerFrame:StripTextures(true)
 	ClassTrainerFrame:CreateBackdrop("Transparent")
@@ -52,3 +53,4 @@ local function LoadSkin()
 end
 
 T.SkinFuncs["Blizzard_TrainerUI"] = LoadSkin
+--]]
