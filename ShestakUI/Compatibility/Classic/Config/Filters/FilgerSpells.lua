@@ -275,7 +275,7 @@ C["filger_spells"] = {
 			{spellID = 16857, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Feral Charge Effect
 			{spellID = 19675, unitID = "target", caster = "player", filter = "DEBUFF"},
-			-- -- Hurricane
+			-- Hurricane
 			-- {spellID = 16914, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Insect Swarm
 			{spellID = 5570, unitID = "target", caster = "player", filter = "DEBUFF"},
@@ -291,7 +291,7 @@ C["filger_spells"] = {
 			{spellID = 1822, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Rip
 			{spellID = 1079, unitID = "target", caster = "player", filter = "DEBUFF"},
-			-- -- Soothe Animal
+			-- Soothe Animal
 			-- {spellID = 2908, unitID = "target", caster = "player", filter = "DEBUFF"},
 
 			-- Trinket Effects
@@ -331,7 +331,7 @@ C["filger_spells"] = {
 
 			-- Entangling Roots
 			{spellID = 339, unitID = "focus", caster = "all", filter = "DEBUFF"},
-			-- -- Entangling Roots (Nature's Grasp)
+			-- Entangling Roots (Nature's Grasp)
 			-- {spellID = 19975, unitID = "focus", caster = "all", filter = "DEBUFF"},
 			-- Hibernate
 			{spellID = 2637, unitID = "focus", caster = "all", filter = "DEBUFF"},
@@ -420,31 +420,31 @@ C["filger_spells"] = {
 			IconSize = C.filger.buffs_size,
 			Position = {"TOP", P_BUFF_ICON_Anchor},
 
-			-- -- Aspect of the Beast
+			-- Aspect of the Beast
 			-- {spellID = 13161, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Aspect of the Cheetah
 			{spellID = 5118, unitID = "player", caster = "player", filter = "BUFF"},
-			-- -- Aspect of the Hawk
+			-- Aspect of the Hawk
 			-- {spellID = 13165, unitID = "player", caster = "player", filter = "BUFF"},
-			-- -- Aspect of the Monkey
+			-- Aspect of the Monkey
 			-- {spellID = 13163, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Aspect of the Pack
 			{spellID = 13159, unitID = "player", caster = "player", filter = "BUFF"},
-			-- -- Aspect of the Wild
+			-- Aspect of the Wild
 			-- {spellID = 20043, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Bestial Wrath
 			{spellID = 19574, unitID = "pet", caster = "player", filter = "BUFF"},
 			-- Cobra Reflexes
 			{spellID = 25077, unitID = "pet", caster = "all", filter = "BUFF"},
-			-- -- Dash (Boar / Cat / Hyena / Raptor / Tallstrider / Wolf)
+			-- Dash (Boar / Cat / Hyena / Raptor / Tallstrider / Wolf)
 			-- {spellID = 23099, unitID = "pet", caster = "all", filter = "BUFF"},
 			-- Deterrence
 			{spellID = 19263, unitID = "player", caster = "player", filter = "BUFF"},
-			-- -- Dive (Bat / Bird of Prey / Carrion Bird / Wind Serpent)
+			-- Dive (Bat / Bird of Prey / Carrion Bird / Wind Serpent)
 			-- {spellID = 23145, unitID = "pet", caster = "all", filter = "BUFF"},
-			-- -- Eyes of the Beast
+			-- Eyes of the Beast
 			-- {spellID = 1002, unitID = "player", caster = "player", filter = "BUFF"},
-			-- -- Feed Pet Effect
+			-- Feed Pet Effect
 			-- {spellID = 1539, unitID = "pet", caster = "player", filter = "BUFF"},
 			-- Feign Death
 			{spellID = 5384, unitID = "player", caster = "player", filter = "BUFF"},
@@ -454,15 +454,15 @@ C["filger_spells"] = {
 			{spellID = 24604, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Mend Pet
 			{spellID = 136, unitID = "pet", caster = "player", filter = "BUFF"},
-			-- -- Prowl (Cat)
+			-- Prowl (Cat)
 			-- {spellID = 24450, unitID = "pet", caster = "all", filter = "BUFF"},
 			-- Rapid Fire
 			{spellID = 3045, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Shell Shield (Turtle)
 			{spellID = 26064, unitID = "pet", caster = "all", filter = "BUFF"},
-			-- -- Spirit Bond
+			-- Spirit Bond
 			-- {spellID = 19579, unitID = "player", caster = "player", filter = "BUFF"},
-			-- -- Tame Beast
+			-- Tame Beast
 			-- {spellID = 1515, unitID = "player", caster = "player", filter = "BUFF"},
 		},
 		{
@@ -528,7 +528,7 @@ C["filger_spells"] = {
 			IconSize = C.filger.buffs_size,
 			Position = {"TOP", T_DEBUFF_ICON_Anchor},
 
-			-- -- Beast Lore
+			-- Beast Lore
 			-- {spellID = 1462, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Black Arrow
 			{spellID = 3674, unitID = "target", caster = "player", filter = "DEBUFF"},
@@ -540,15 +540,15 @@ C["filger_spells"] = {
 			{spellID = 19306, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Entrapment
 			{spellID = 19185, unitID = "target", caster = "player", filter = "DEBUFF"},
-			-- -- Explosive Trap Effect
+			-- Explosive Trap Effect
 			-- {spellID = 13812, unitID = "target", caster = "player", filter = "DEBUFF"},
-			-- -- Flare
+			-- Flare
 			-- {spellID = 1543, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Frost Trap Aura
 			{spellID = 13810, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Hunter's Mark
 			{spellID = 1130, unitID = "target", caster = "player", filter = "DEBUFF"},
-			-- -- Immolation Trap Effect
+			-- Immolation Trap Effect
 			-- {spellID = 13797, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Improved Concussive Shot
 			{spellID = 19410, unitID = "target", caster = "player", filter = "DEBUFF"},
@@ -872,7 +872,7 @@ C["filger_spells"] = {
 
 			-- Blast Wave
 			{spellID = 11113, unitID = "target", caster = "player", filter = "DEBUFF"},
-			-- -- Blizzard
+			-- Blizzard
 			-- {spellID = 10, unitID = "target", caster = "player", filter = "DEBUFF"},
 			--[[
 			-- Chilled r1 (Blizzard)
@@ -924,7 +924,7 @@ C["filger_spells"] = {
 			{spellID = 25306, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
 			-- Fire Vulnerability (Improved Scorch)
 			{spellID = 22959, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- -- Flamestrike
+			-- Flamestrike
 			-- {spellID = 2120, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
 			-- Frost Nova
 			{spellID = 122, unitID = "target", caster = "player", filter = "DEBUFF"},
@@ -1076,9 +1076,9 @@ C["filger_spells"] = {
 			IconSize = C.filger.buffs_size,
 			Position = {"TOP", P_BUFF_ICON_Anchor},
 
-			-- -- Concentration Aura
+			-- Concentration Aura
 			-- {spellID = 19746, unitID = "player", caster = "player", filter = "BUFF"},
-			-- -- Devotion Aura
+			-- Devotion Aura
 			-- {spellID = 465, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Divine Favor
 			{spellID = 20216, unitID = "player", caster = "player", filter = "BUFF"},
@@ -1088,9 +1088,9 @@ C["filger_spells"] = {
 			{spellID = 5573, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Divine Shield
 			{spellID = 642, unitID = "player", caster = "player", filter = "BUFF"},
-			-- -- Fire Resistance Aura
+			-- Fire Resistance Aura
 			-- {spellID = 19891, unitID = "player", caster = "player", filter = "BUFF"},
-			-- -- Frost Resistance Aura
+			-- Frost Resistance Aura
 			-- {spellID = 19888, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Holy Shield r1
 			{spellID = 20925, unitID = "player", caster = "player", filter = "BUFF", absID = true},
@@ -1098,9 +1098,9 @@ C["filger_spells"] = {
 			{spellID = 20927, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Holy Shield r3
 			{spellID = 20928, unitID = "player", caster = "player", filter = "BUFF", absID = true},
-			-- -- Retribution Aura
+			-- Retribution Aura
 			-- {spellID = 7294, unitID = "player", caster = "player", filter = "BUFF"},
-			-- -- Sanctity Aura
+			-- Sanctity Aura
 			-- {spellID = 20218, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Seal of Command
 			{spellID = 20735, unitID = "player", caster = "player", filter = "BUFF"},
@@ -1114,7 +1114,7 @@ C["filger_spells"] = {
 			{spellID = 20166, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Seal of the Crusader
 			{spellID = 21082, unitID = "player", caster = "player", filter = "BUFF"},
-			-- -- Shadow Resistance Aura
+			-- Shadow Resistance Aura
 			-- {spellID = 19876, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Vengeance r1
 			{spellID = 20050, unitID = "player", caster = "player", filter = "BUFF", absID = true},
@@ -1250,7 +1250,7 @@ C["filger_spells"] = {
 			IconSize = C.filger.buffs_size,
 			Position = {"TOP", T_DEBUFF_ICON_Anchor},
 
-			-- -- Consecration
+			-- Consecration
 			-- {spellID = 26573, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Hammer of Justice
 			{spellID = 853, unitID = "target", caster = "player", filter = "DEBUFF"},
@@ -1408,7 +1408,7 @@ C["filger_spells"] = {
 			{spellID = 27827, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Touch of Weakness
 			{spellID = 2652, unitID = "player", caster = "player", filter = "BUFF"},
-			-- -- Vampiric Embrace
+			-- Vampiric Embrace
 			-- {spellID = 15290, unitID = "player", caster = "player", filter = "BUFF"},
 		},
 		{
@@ -1695,7 +1695,7 @@ C["filger_spells"] = {
 			{spellID = 5171, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Sprint
 			{spellID = 2983, unitID = "player", caster = "player", filter = "BUFF"},
-			-- -- Stealth
+			-- Stealth
 			-- {spellID = 1784, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 		},
 		{
@@ -1935,27 +1935,31 @@ C["filger_spells"] = {
 			{spellID = 30165, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Elemental Mastery
 			{spellID = 16166, unitID = "player", caster = "player", filter = "BUFF"},
-			-- -- Fire Resistance Totem r1
-			-- {spellID = 8185, unitID = "player", caster = "player", filter = "BUFF", absID = true},
-			-- -- Fire Resistance Totem r2
-			-- {spellID = 10534, unitID = "player", caster = "player", filter = "BUFF", absID = true},
-			-- -- Fire Resistance Totem r3
-			-- {spellID = 10535, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			--[[
+			-- Fire Resistance Totem r1
+			{spellID = 8185, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Fire Resistance Totem r2
+			{spellID = 10534, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Fire Resistance Totem r3
+			{spellID = 10535, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			--]]
 			-- Flurry
 			{spellID = 16257, unitID = "player", caster = "player", filter = "BUFF"},
-			-- -- Frost Resistance Totem r1
-			-- {spellID = 8182, unitID = "player", caster = "player", filter = "BUFF", absID = true},
-			-- -- Frost Resistance Totem r2
-			-- {spellID = 10476, unitID = "player", caster = "player", filter = "BUFF", absID = true},
-			-- -- Frost Resistance Totem r3
-			-- {spellID = 10477, unitID = "player", caster = "player", filter = "BUFF", absID = true},
-			-- -- Ghost Wolf
+			--[[
+			-- Frost Resistance Totem r1
+			{spellID = 8182, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Frost Resistance Totem r2
+			{spellID = 10476, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Frost Resistance Totem r3
+			{spellID = 10477, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			--]]
+			-- Ghost Wolf
 			-- {spellID = 2645, unitID = "player", caster = "player", filter = "BUFF", absID = true},
-			-- -- Grace of Air
+			-- Grace of Air
 			-- {spellID = 8836, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Grounding Totem Effect
 			{spellID = 8178, unitID = "player", caster = "player", filter = "BUFF"},
-			-- -- Healing Stream
+			-- Healing Stream
 			-- {spellID = 5672, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Lightning Shield r1
 			{spellID = 324, unitID = "player", caster = "player", filter = "BUFF", absID = true},
@@ -1971,31 +1975,35 @@ C["filger_spells"] = {
 			{spellID = 10431, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Lightning Shield r7
 			{spellID = 10432, unitID = "player", caster = "player", filter = "BUFF", absID = true},
-			-- -- Mana Spring Totem r1
-			-- {spellID = 5677, unitID = "player", caster = "player", filter = "BUFF", absID = true},
-			-- -- Mana Spring Totem r2
-			-- {spellID = 10491, unitID = "player", caster = "player", filter = "BUFF", absID = true},
-			-- -- Mana Spring Totem r3
-			-- {spellID = 10493, unitID = "player", caster = "player", filter = "BUFF", absID = true},
-			-- -- Mana Spring Totem r4
-			-- {spellID = 10494, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			--[[
+			-- Mana Spring Totem r1
+			{spellID = 5677, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Mana Spring Totem r2
+			{spellID = 10491, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Mana Spring Totem r3
+			{spellID = 10493, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Mana Spring Totem r4
+			{spellID = 10494, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			--]]
 			-- Nature's Swiftness
 			{spellID = 16188, unitID = "player", caster = "player", filter = "BUFF"},
-			-- -- Nature Resistance Totem r1
-			-- {spellID = 10596, unitID = "player", caster = "player", filter = "BUFF", absID = true},
-			-- -- Nature Resistance Totem r2
-			-- {spellID = 10598, unitID = "player", caster = "player", filter = "BUFF", absID = true},
-			-- -- Nature Resistance Totem r3
-			-- {spellID = 10599, unitID = "player", caster = "player", filter = "BUFF", absID = true},
-			-- -- Sentry Totem
+			--[[
+			-- Nature Resistance Totem r1
+			{spellID = 10596, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Nature Resistance Totem r2
+			{spellID = 10598, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Nature Resistance Totem r3
+			{spellID = 10599, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			--]]
+			-- Sentry Totem
 			-- {spellID = 6495, unitID = "player", caster = "player", filter = "BUFF"},
-			-- -- Stoneskin Totem
+			-- Stoneskin Totem
 			-- {spellID = 8072, unitID = "player", caster = "player", filter = "BUFF"},
-			-- -- Strength of Earth
+			-- Strength of Earth
 			-- {spellID = 8076, unitID = "player", caster = "player", filter = "BUFF"},
-			-- -- Windwall Totem
+			-- Windwall Totem
 			-- {spellID = 15108, unitID = "player", caster = "player", filter = "BUFF"},
-			-- -- Wrath of Air Totem
+			-- Wrath of Air Totem
 			-- {spellID = 2895, unitID = "player", caster = "player", filter = "BUFF"},
 		},
 		{
@@ -2014,7 +2022,7 @@ C["filger_spells"] = {
 			{spellID = 29063, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Item Sets
-			-- -- Lightning Shield (Mp5, Proc) [The Earthshatterer]
+			-- Lightning Shield (Mp5, Proc) [The Earthshatterer]
 			-- {spellID = 28820, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Stormcaller's Wrath (Spell Power, Proc) [Stormcaller's Garb]
 			{spellID = 26121, unitID = "player", caster = "player", filter = "BUFF"},
@@ -2153,7 +2161,7 @@ C["filger_spells"] = {
 			{spellID = 16177, unitID = "target", caster = "player", filter = "BUFF"},
 			-- Healing Way
 			{spellID = 29203, unitID = "target", caster = "player", filter = "BUFF"},
-			-- -- Lightning Shield (Special, Proc) [The Ten Storms]
+			-- Lightning Shield (Special, Proc) [The Ten Storms]
 			-- {spellID = 23552, unitID = "target", caster = "player", filter = "BUFF", absID = true},
 			-- Totemic Power (Armor, Proc) [The Earthshatterer]
 			{spellID = 28827, unitID = "target", caster = "player", filter = "BUFF", absID = true},
@@ -2255,11 +2263,11 @@ C["filger_spells"] = {
 
 			-- Amplify Curse
 			{spellID = 18288, unitID = "player", caster = "player", filter = "BUFF"},
-			-- -- Blood Pact (Imp)
+			-- Blood Pact (Imp)
 			-- {spellID = 6307, unitID = "player", caster = "all", filter = "BUFF"},
-			-- -- Consume Shadows (Voidwalker)
+			-- Consume Shadows (Voidwalker)
 			-- {spellID = 17767, unitID = "pet", caster = "all", filter = "BUFF"},
-			-- -- Eye of Kilrogg
+			-- Eye of Kilrogg
 			-- {spellID = 126, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Fire Shield r1 (Imp)
 			{spellID = 2947, unitID = "player", caster = "all", filter = "BUFF", absID = true},
@@ -2271,9 +2279,9 @@ C["filger_spells"] = {
 			{spellID = 11770, unitID = "player", caster = "all", filter = "BUFF", absID = true},
 			-- Fire Shield r5 (Imp)
 			{spellID = 11771, unitID = "player", caster = "all", filter = "BUFF", absID = true},
-			-- -- Health Funnel
+			-- Health Funnel
 			-- {spellID = 755, unitID = "player", caster = "player", filter = "BUFF"},
-			-- -- Hellfire
+			-- Hellfire
 			-- {spellID = 1949, unitID = "player", caster = "player", filter = "BUFF"},
 			--[[
 			-- Master Demonologist (Imp - Reduced Threat)
@@ -2285,17 +2293,17 @@ C["filger_spells"] = {
 			-- Master Demonologist (Felhunter - Increased Resistance)
 			{spellID = 23762, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			--]]
-			-- -- Paranoia (Felhunter)
+			-- Paranoia (Felhunter)
 			-- {spellID = 19480, unitID = "player", caster = "all", filter = "BUFF", absID = true},
-			-- -- Phase Shift (Imp)
+			-- Phase Shift (Imp)
 			-- {spellID = 4511, unitID = "pet", caster = "all", filter = "BUFF"},
 			-- Sacrifice (Voidwalker)
 			{spellID = 7812, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Shadow Ward
 			{spellID = 6229, unitID = "player", caster = "player", filter = "BUFF"},
-			-- -- Soul Link
+			-- Soul Link
 			-- {spellID = 25228, unitID = "player", caster = "player", filter = "BUFF"},
-			-- -- Tainted Blood (Felhunter)
+			-- Tainted Blood (Felhunter)
 			-- {spellID = 19478, unitID = "pet", caster = "all", filter = "BUFF"},
 		},
 		{
@@ -2429,7 +2437,7 @@ C["filger_spells"] = {
 			{spellID = 348, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Pyroclasm
 			{spellID = 18093, unitID = "target", caster = "player", filter = "DEBUFF"},
-			-- -- Rain of Fire
+			-- Rain of Fire
 			-- {spellID = 5740, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Seduction (Succubus)
 			{spellID = 6358, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
@@ -3258,9 +3266,9 @@ C["filger_spells"] = {
 			{spellID = 12486, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
 			--]]
 			-- Chilled (Frost Armor)
-			{spellID = 6136, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
+			-- {spellID = 6136, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
 			-- Chilled (Ice Armor)
-			{spellID = 7321, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
+			-- {spellID = 7321, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
 			-- Cone of Cold r1
 			{spellID = 120, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
 			-- Cone of Cold r2
