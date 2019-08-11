@@ -402,7 +402,7 @@ local function UpdateName(self)
 
 	if C.nameplate.class_icons == true then
 		local reaction = UnitReaction(self.unit, "player")
-		if UnitIsPlayer(self.unit) and (reaction and reaction <= 4) then
+		if UnitIsPlayer(self.unit) then --and (reaction and reaction <= 4) then
 			local _, class = UnitClass(self.unit)
 			local texcoord = CLASS_ICON_TCOORDS[class]
 			self.Class.Icon:SetTexCoord(texcoord[1] + 0.015, texcoord[2] - 0.02, texcoord[3] + 0.018, texcoord[4] - 0.02)
