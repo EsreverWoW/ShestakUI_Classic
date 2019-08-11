@@ -83,6 +83,7 @@ C["unitframe"] = {
 	["bar_color_value"] = false,				-- Health bar color by current health remaining
 	["lines"] = true,							-- Show Player and Target lines
 	["player_name"] = false,					-- Show player's name and level
+	["bar_color_happiness"] = true,				-- Pet health bar color by happiness
 	-- Cast bars
 	["unit_castbar"] = true,					-- Show castbars
 	["castbar_icon"] = false,					-- Show castbar icons

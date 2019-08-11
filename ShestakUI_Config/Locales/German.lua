@@ -69,6 +69,7 @@ L_GUI_UF_COLOR_VALUE = "Lebens/Mana Werte einfärben"
 L_GUI_UF_BAR_COLOR_VALUE = "Lebensbalken nach vorhandenem Leben einfärben"
 L_GUI_UF_LINES = "Zeige Spieler & Ziel Extra Linien an"
 L_GUI_UF_PLAYER_NAME = "Show player's name and level" -- Needs review
+L_GUI_UF_BAR_COLOR_HAPPINESS = "Color pet health bar by happiness" -- Needs review
 L_GUI_UF_SUBHEADER_CAST = "Zauberleiste"
 L_GUI_UF_UNIT_CASTBAR = "Zeige Zauberleisten"
 L_GUI_UF_CASTBAR_ICON = "Zeige Symbole der Zauberleisten an"

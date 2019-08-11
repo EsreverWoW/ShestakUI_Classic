@@ -69,6 +69,7 @@ L_GUI_UF_COLOR_VALUE = "Valori di salute e mana colorati"
 L_GUI_UF_BAR_COLOR_VALUE = "Barra della salute colorata in base alla salute restante"
 L_GUI_UF_LINES = "Mostra le linee per giocatore e bersaglio"
 L_GUI_UF_PLAYER_NAME = "Show player's name and level" -- Needs review
+L_GUI_UF_BAR_COLOR_HAPPINESS = "Color pet health bar by happiness" -- Needs review
 L_GUI_UF_SUBHEADER_CAST = "Castbars" -- Need review
 L_GUI_UF_UNIT_CASTBAR = "Mostra le barre incantesimi"
 L_GUI_UF_CASTBAR_ICON = "Mostra le icone della barra incantesimi"

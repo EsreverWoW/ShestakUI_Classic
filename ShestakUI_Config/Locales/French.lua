@@ -69,6 +69,7 @@ L_GUI_UF_COLOR_VALUE = "Valeur de vie/mana colorée"
 L_GUI_UF_BAR_COLOR_VALUE = "Couleur de barre de vie en fonction des points de vie"
 L_GUI_UF_LINES = "Afficher les barres réduites du Joueur et de la Cible" -- Need review
 L_GUI_UF_PLAYER_NAME = "Show player's name and level" -- Needs review
+L_GUI_UF_BAR_COLOR_HAPPINESS = "Color pet health bar by happiness" -- Needs review
 L_GUI_UF_SUBHEADER_CAST = "Castbars" -- Need review
 L_GUI_UF_UNIT_CASTBAR = "Voir la barre de cast"
 L_GUI_UF_CASTBAR_ICON = "Voir l'icone de la barre de cast"

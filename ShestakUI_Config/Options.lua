@@ -675,9 +675,12 @@ do
 	local player_name = ns.CreateCheckBox(parent, "player_name", L_GUI_UF_PLAYER_NAME)
 	player_name:SetPoint("TOPLEFT", lines, "BOTTOMLEFT", 0, 0)
 
+	local bar_color_happiness = ns.CreateCheckBox(parent, "bar_color_happiness", L_GUI_UF_BAR_COLOR_HAPPINESS)
+	bar_color_happiness:SetPoint("TOPLEFT", player_name, "BOTTOMLEFT", 0, 0)
+
 	-- Cast bars
 	local subheader = ns.addSubCategory(parent, L_GUI_UF_SUBHEADER_CAST)
-	subheader:SetPoint("TOPLEFT", player_name, "BOTTOMLEFT", 0, -16)
+	subheader:SetPoint("TOPLEFT", IsClassicBuild() and bar_color_happiness or player_name, "BOTTOMLEFT", 0, -16)
 
 	local unit_castbar = ns.CreateCheckBox(parent, "unit_castbar", L_GUI_UF_UNIT_CASTBAR)
 	unit_castbar:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -8)
@@ -799,8 +802,14 @@ do
 		plugins_diminishing
 	}
 
+	local retail = {
+		bar_color_happiness,
+	}
+
 	if IsClassicBuild() then
 		HideOptions(classic)
+	else
+		HideOptions(retail)
 	end
 end
 

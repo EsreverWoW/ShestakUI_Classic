@@ -39,9 +39,23 @@ end
 oUF.Tags.Events["DiffColor"] = "UNIT_LEVEL"
 
 oUF.Tags.Methods["PetNameColor"] = function(unit)
-	return string.format("|cff%02x%02x%02x", T.color.r * 255, T.color.g * 255, T.color.b * 255)
+	if T.classic and T.class == "HUNTER" and C.unitframe.bar_color_happiness then
+		local mood = GetPetHappiness()
+		if mood then
+			local r, g, b = unpack(T.oUF_colors.happiness[mood])
+			if b then
+				return string.format("|cff%02x%02x%02x", r * 255, g * 255, b * 255)
+			end
+		end
+	else
+		return string.format("|cff%02x%02x%02x", T.color.r * 255, T.color.g * 255, T.color.b * 255)
+	end
 end
-oUF.Tags.Events["PetNameColor"] = "UNIT_POWER_UPDATE"
+if not T.classic then
+	oUF.Tags.Events["PetNameColor"] = "UNIT_POWER_UPDATE"
+else
+	oUF.Tags.Events["PetNameColor"] = "UNIT_POWER_UPDATE UNIT_HAPPINESS"
+end
 
 oUF.Tags.Methods["GetNameColor"] = function(unit)
 	local reaction = UnitReaction(unit, "player")

@@ -111,6 +111,19 @@ local tagStrings = {
 		end
 	end]],
 
+	['happiness'] = [[function(u)
+		if(UnitIsUnit(u, 'pet')) then
+			local happiness = GetPetHappiness()
+			if(happiness == 1) then
+				return ":<"
+			elseif(happiness == 2) then
+				return ":|"
+			elseif(happiness == 3) then
+				return ":D"
+			end
+		end
+	end]],
+
 	['difficulty'] = [[function(u)
 		if UnitCanAttack('player', u) then
 			local l = UnitEffectiveLevel(u)
@@ -430,6 +443,7 @@ local tagEvents = {
 	['difficulty']          = 'UNIT_FACTION',
 	['faction']             = 'NEUTRAL_FACTION_SELECT_RESULT',
 	['group']               = 'GROUP_ROSTER_UPDATE',
+	['happiness']           = 'UNIT_HAPPINESS',
 	['holypower']           = 'UNIT_POWER_UPDATE PLAYER_TALENT_UPDATE',
 	['leader']              = 'PARTY_LEADER_CHANGED',
 	['leaderlong']          = 'PARTY_LEADER_CHANGED',

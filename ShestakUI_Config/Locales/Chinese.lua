@@ -69,6 +69,7 @@ L_GUI_UF_COLOR_VALUE = "生命值/魔法值按职业着色"
 L_GUI_UF_BAR_COLOR_VALUE = "生命值按剩余血量着色"
 L_GUI_UF_LINES = "玩家/目标框架显示划线"
 L_GUI_UF_PLAYER_NAME = "Show player's name and level" -- Needs review
+L_GUI_UF_BAR_COLOR_HAPPINESS = "Color pet health bar by happiness" -- Needs review
 L_GUI_UF_SUBHEADER_CAST = "施法条"
 L_GUI_UF_UNIT_CASTBAR = "施法条增强"
 L_GUI_UF_CASTBAR_ICON = "法术图标"

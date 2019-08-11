@@ -785,17 +785,34 @@ T.PostUpdateHealth = function(health, unit, min, max)
 			end
 		end
 		if unit == "pet" or unit == "vehicle" then
-			local _, class = UnitClass("player")
-			local r, g, b = unpack(T.oUF_colors.class[class])
-			if C.unitframe.own_color == true then
-				health:SetStatusBarColor(unpack(C.unitframe.uf_color))
-				health.bg:SetVertexColor(0.1, 0.1, 0.1)
+			local r, g, b
+
+			if T.classic and T.class == "HUNTER" and C.unitframe.bar_color_happiness then
+				local mood = GetPetHappiness()
+				if mood then
+					r, g, b = unpack(T.oUF_colors.happiness[mood])
+					if b then
+						health:SetStatusBarColor(r, g, b)
+						if health.bg and health.bg.multiplier then
+							local mu = health.bg.multiplier
+							health.bg:SetVertexColor(r * mu, g * mu, b * mu)
+						end
+					end
+				end
 			else
-				if b then
-					health:SetStatusBarColor(r, g, b)
-					if health.bg and health.bg.multiplier then
-						local mu = health.bg.multiplier
-						health.bg:SetVertexColor(r * mu, g * mu, b * mu)
+				local _, class = UnitClass("player")
+				r, g, b = unpack(T.oUF_colors.class[class])
+
+				if C.unitframe.own_color == true then
+					health:SetStatusBarColor(unpack(C.unitframe.uf_color))
+					health.bg:SetVertexColor(0.1, 0.1, 0.1)
+				else
+					if b then
+						health:SetStatusBarColor(r, g, b)
+						if health.bg and health.bg.multiplier then
+							local mu = health.bg.multiplier
+							health.bg:SetVertexColor(r * mu, g * mu, b * mu)
+						end
 					end
 				end
 			end

@@ -203,6 +203,9 @@ local function Enable(self)
 		self:RegisterEvent('UNIT_MAXPOWER', Path)
 		self:RegisterEvent('UNIT_FACTION', Path) -- For tapping
 		self:RegisterEvent('UNIT_FLAGS', Path) -- For selection
+		if IsClassicBuild() then
+			self:RegisterEvent('UNIT_HAPPINESS', Path)
+		end
 
 		if(element:IsObjectType('StatusBar')) then
 			element.texture = element:GetStatusBarTexture() and element:GetStatusBarTexture():GetTexture() or [[Interface\TargetingFrame\UI-StatusBar]]
@@ -233,6 +236,9 @@ local function Disable(self)
 		self:UnregisterEvent('UNIT_MAXPOWER', Path)
 		self:UnregisterEvent('UNIT_FACTION', Path)
 		self:UnregisterEvent('UNIT_FLAGS', Path)
+		if IsClassicBuild() then
+			self:UnregisterEvent('UNIT_HAPPINESS', Path)
+		end
 	end
 end
 
