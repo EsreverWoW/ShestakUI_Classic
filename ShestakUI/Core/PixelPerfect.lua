@@ -17,7 +17,7 @@ T.UIScale = function()
 end
 T.UIScale()
 
-local mult = 768 / T.screenHeight / C.general.uiscale
+local mult = T.screenHeight / 1440 * C.general.uiscale
 local Scale = function(x)
 	return mult * math.floor(x / mult + 0.5)
 end
