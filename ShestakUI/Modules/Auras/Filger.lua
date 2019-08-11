@@ -59,7 +59,7 @@ function Filger:UnitAura(unitID, inSpellID, spellName, filter, absID)
 		if not name then break end
 		if (absID and spellID == inSpellID) or (not absID and name == spellName) then
 			if T.classic and LibClassicDurations then
-				local durationNew, expirationTimeNew = LibClassicDurations:GetAuraDurationByUnit(unitID, spellID, unitCaster)
+				local durationNew, expirationTimeNew = LibClassicDurations:GetAuraDurationByUnit(unitID, spellID, unitCaster, name)
 
 				if duration == 0 and durationNew then
 					duration = durationNew
@@ -340,7 +340,7 @@ function Filger:OnEvent(event, unit, _, castID)
 					if ((data.filter == "BUFF" and filter == "HELPFUL") or (data.filter == "DEBUFF" and filter == "HARMFUL")) and (not data.spec or data.spec == ptt) and (not data.talentID or isTalent) then
 						if not data.count or count >= data.count then
 							if T.classic and LibClassicDurations then
-								local durationNew, expirationTimeNew = LibClassicDurations:GetAuraDurationByUnit(unit, spid, caster)
+								local durationNew, expirationTimeNew = LibClassicDurations:GetAuraDurationByUnit(unit, spid, caster, name)
 
 								if duration == 0 and durationNew then
 									duration = durationNew

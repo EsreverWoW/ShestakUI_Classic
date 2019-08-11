@@ -87,7 +87,7 @@ local function updateIcon(unit, icons, index, offset, filter, isDebuff, visible)
 		end
 
 		if IsClassicBuild() and LibClassicDurations then
-			local durationNew, expirationTimeNew = LibClassicDurations:GetAuraDurationByUnit(unit, spellID, caster)
+			local durationNew, expirationTimeNew = LibClassicDurations:GetAuraDurationByUnit(unit, spellID, caster, name)
 
 			if duration == 0 and durationNew then
 				duration = durationNew
