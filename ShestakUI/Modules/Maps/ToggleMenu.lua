@@ -72,7 +72,7 @@ C["togglemainmenu"] = {
 				SlashCmdList.TESTROLL()
 			end
 			if C.threat.enable == true then
-				SlashCmdList.alThreat()
+				if not T.classic then SlashCmdList.alThreat() end
 			end
 			SlashCmdList.DBMTEST()
 			if not T.classic then
