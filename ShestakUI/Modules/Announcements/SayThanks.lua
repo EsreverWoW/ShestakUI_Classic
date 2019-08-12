@@ -15,14 +15,26 @@ local spells = {
 	[115178] = true,	-- Resuscitate
 }
 
+-- temporary
+local classicLookup = {
+	[GetSpellInfo(20484)] = 20484,		-- Rebirth
+	[GetSpellInfo(20707)] = 20707,		-- Soulstone
+	[GetSpellInfo(2006)] = 2006,		-- Resurrection
+	[GetSpellInfo(7328)] = 7328,		-- Redemption
+	[GetSpellInfo(2008)] = 2008,		-- Ancestral Spirit
+}
+
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 frame:SetScript("OnEvent", function()
-	local _, subEvent, _, _, buffer, _, _, _, player, _, _, spell = CombatLogGetCurrentEventInfo()
+	local _, subEvent, _, _, buffer, _, _, _, player, _, _, spellID, spellName = CombatLogGetCurrentEventInfo()
+	if T.classic and spellID == 0 then
+		spellID = classicLookup[spellName]
+	end
 	for key, value in pairs(spells) do
-		if spell == key and value == true and player == T.name and buffer ~= T.name and subEvent == "SPELL_CAST_SUCCESS" then
-			SendChatMessage(L_ANNOUNCE_SS_THANKS..GetSpellLink(spell)..", "..buffer:gsub("%-[^|]+", ""), "WHISPER", nil, buffer)
-			print(GetSpellLink(spell)..L_ANNOUNCE_SS_RECEIVED..buffer)
+		if spellID == key and value == true and player == T.name and buffer ~= T.name and subEvent == "SPELL_CAST_SUCCESS" then
+			SendChatMessage(L_ANNOUNCE_SS_THANKS..GetSpellLink(spellID)..", "..buffer:gsub("%-[^|]+", ""), "WHISPER", nil, buffer)
+			print(GetSpellLink(spellID)..L_ANNOUNCE_SS_RECEIVED..buffer)
 		end
 	end
 end)
