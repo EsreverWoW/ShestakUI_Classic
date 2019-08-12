@@ -1,5 +1,5 @@
 ﻿local T, C, L, _ = unpack(select(2, ...))
-if C.threat.enable ~= true then return end
+if T.classic or C.threat.enable ~= true then return end
 
 ----------------------------------------------------------------------------------------
 --	Based on alThreatMeter(by Allez)
