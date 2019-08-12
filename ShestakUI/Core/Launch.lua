@@ -96,8 +96,12 @@ local function InstallUI()
 	SavedOptionsPerChar.RightBars = C.actionbar.rightbars
 	SavedOptionsPerChar.BottomBars = C.actionbar.bottombars
 
-	if T.classic and T.level < 60 then
-		SavedOptions.Experience = true
+	if T.classic then
+		if T.level < 60 then
+			SavedOptions.Experience = true
+		end
+
+		SavedOptions.Reputation = true
 	end
 
 	if SavedOptions.RaidLayout ~= "UNKNOWN" then
