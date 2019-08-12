@@ -48,7 +48,7 @@ local function LoadSkin()
 	for i = 1, #questHeader do
 		local frame = questHeader[i]
 		frame:CreateBackdrop("Overlay")
-		frame.backdrop:SetPoint("TOPLEFT", 6, -2)
+		frame.backdrop:SetPoint("TOPLEFT", 6, -9)
 		frame.backdrop:SetPoint("BOTTOMRIGHT", -6, 2)
 		frame.HighlightTexture:Hide()
 		frame.Background:Hide()
@@ -107,9 +107,14 @@ local function LoadSkin()
 
 	QuestNPCModel:StripTextures()
 	QuestNPCModel:CreateBackdrop("Transparent")
+	QuestNPCModelNameTooltipFrame:CreateBackdrop("Overlay")
+	QuestNPCModelNameTooltipFrame.backdrop:SetPoint("TOPLEFT", QuestNPCModel.backdrop, "BOTTOMLEFT", 0, -1)
+	QuestNPCModelNameTooltipFrame.backdrop:SetPoint("TOPRIGHT", QuestNPCModel.backdrop, "BOTTOMRIGHT", 0, -1)
+	QuestNPCModelNameText:SetPoint("TOPLEFT", QuestNPCModelNameplate, 15, -15)
+	QuestNPCModelNameText:SetPoint("BOTTOMRIGHT", QuestNPCModelNameplate, -15, 12)
 	QuestNPCModelTextFrame:StripTextures()
 	QuestNPCModelTextFrame:CreateBackdrop("Overlay")
-	QuestNPCModelTextFrame.backdrop:SetPoint("TOPLEFT", QuestNPCModel.backdrop, "BOTTOMLEFT", 0, -1)
+	QuestNPCModelTextFrame.backdrop:SetPoint("TOPLEFT", QuestNPCModelNameTooltipFrame.backdrop, "BOTTOMLEFT", 0, -1)
 	hooksecurefunc("QuestFrame_ShowQuestPortrait", function(parentFrame, _, _, _, _, x, y)
 		if parentFrame == QuestLogPopupDetailFrame or parentFrame == QuestFrame then
 			x = x + 8
@@ -176,10 +181,7 @@ local function LoadSkin()
 		frame.BountyName:SetFont(C.media.normal_font, 16)
 		frame.BountyName:SetShadowOffset(1, -1)
 
-		T.SkinCloseButton(frame.TutorialBox.CloseButton)
-		frame.TutorialBox:StripTextures()
-		frame.TutorialBox.Arrow:Hide()
-		frame.TutorialBox:CreateBackdrop("Transparent")
+		T.SkinHelpBox(frame.TutorialBox)
 	end
 
 	-- Elements

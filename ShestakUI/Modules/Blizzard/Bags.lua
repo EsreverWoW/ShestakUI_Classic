@@ -15,62 +15,92 @@ local bag_bars = 0
 local unusable
 
 if T.class == "DEATHKNIGHT" then
-	unusable = {{LE_ITEM_WEAPON_BOWS, LE_ITEM_WEAPON_GUNS, LE_ITEM_WEAPON_WARGLAIVE, LE_ITEM_WEAPON_STAFF, LE_ITEM_WEAPON_UNARMED, LE_ITEM_WEAPON_DAGGER, LE_ITEM_WEAPON_THROWN, LE_ITEM_WEAPON_CROSSBOW, LE_ITEM_WEAPON_WAND}, {LE_ITEM_ARMOR_SHIELD}} -- weapons, armor, dual wield
+	unusable = { -- weapon, armor, dual-wield
+		{LE_ITEM_WEAPON_BOWS, LE_ITEM_WEAPON_GUNS, LE_ITEM_WEAPON_WARGLAIVE, LE_ITEM_WEAPON_STAFF,LE_ITEM_WEAPON_UNARMED, LE_ITEM_WEAPON_DAGGER, LE_ITEM_WEAPON_THROWN, LE_ITEM_WEAPON_CROSSBOW, LE_ITEM_WEAPON_WAND},
+		{LE_ITEM_ARMOR_SHIELD}
+	}
 elseif T.class == "DEMONHUNTER" then
-	unusable = {{LE_ITEM_WEAPON_AXE2H, LE_ITEM_WEAPON_BOWS, LE_ITEM_WEAPON_GUNS, LE_ITEM_WEAPON_MACE2H, LE_ITEM_WEAPON_POLEARM, LE_ITEM_WEAPON_SWORD2H, LE_ITEM_WEAPON_STAFF, LE_ITEM_WEAPON_THROWN, LE_ITEM_WEAPON_CROSSBOW, LE_ITEM_WEAPON_WAND}, {LE_ITEM_ARMOR_MAIL, LE_ITEM_ARMOR_PLATE, LE_ITEM_ARMOR_SHIELD}}
+	unusable = {
+		{LE_ITEM_WEAPON_AXE2H, LE_ITEM_WEAPON_BOWS, LE_ITEM_WEAPON_GUNS, LE_ITEM_WEAPON_MACE1H, LE_ITEM_WEAPON_MACE2H, LE_ITEM_WEAPON_POLEARM, LE_ITEM_WEAPON_SWORD2H, LE_ITEM_WEAPON_STAFF, LE_ITEM_WEAPON_THROWN, LE_ITEM_WEAPON_CROSSBOW, LE_ITEM_WEAPON_WAND},
+		{LE_ITEM_ARMOR_MAIL, LE_ITEM_ARMOR_PLATE, LE_ITEM_ARMOR_SHIELD}
+	}
 elseif T.class == "DRUID" then
-	unusable = {{LE_ITEM_WEAPON_AXE1H, LE_ITEM_WEAPON_AXE2H, LE_ITEM_WEAPON_BOWS, LE_ITEM_WEAPON_GUNS, LE_ITEM_WEAPON_SWORD1H, LE_ITEM_WEAPON_SWORD2H, LE_ITEM_WEAPON_WARGLAIVE, LE_ITEM_WEAPON_THROWN, LE_ITEM_WEAPON_CROSSBOW, LE_ITEM_WEAPON_WAND}, {LE_ITEM_ARMOR_MAIL, LE_ITEM_ARMOR_PLATE, LE_ITEM_ARMOR_SHIELD}, true}
+	unusable = {
+		{LE_ITEM_WEAPON_AXE1H, LE_ITEM_WEAPON_AXE2H, LE_ITEM_WEAPON_BOWS, LE_ITEM_WEAPON_GUNS, LE_ITEM_WEAPON_SWORD1H, LE_ITEM_WEAPON_SWORD2H, LE_ITEM_WEAPON_WARGLAIVE, LE_ITEM_WEAPON_THROWN, LE_ITEM_WEAPON_CROSSBOW, LE_ITEM_WEAPON_WAND},
+		{LE_ITEM_ARMOR_MAIL, LE_ITEM_ARMOR_PLATE, LE_ITEM_ARMOR_SHIELD},
+		true
+	}
 elseif T.class == "HUNTER" then
-	unusable = {{LE_ITEM_WEAPON_MACE1H, LE_ITEM_WEAPON_MACE2H, LE_ITEM_WEAPON_WARGLAIVE, LE_ITEM_WEAPON_THROWN, LE_ITEM_WEAPON_WAND}, {LE_ITEM_ARMOR_PLATE, LE_ITEM_ARMOR_SHIELD}}
+	unusable = {
+		{LE_ITEM_WEAPON_MACE1H, LE_ITEM_WEAPON_MACE2H, LE_ITEM_WEAPON_WARGLAIVE, LE_ITEM_WEAPON_THROWN, LE_ITEM_WEAPON_WAND},
+		{LE_ITEM_ARMOR_PLATE, LE_ITEM_ARMOR_SHIELD}
+	}
 elseif T.class == "MAGE" then
-	unusable = {{LE_ITEM_WEAPON_AXE1H, LE_ITEM_WEAPON_AXE2H, LE_ITEM_WEAPON_BOWS, LE_ITEM_WEAPON_GUNS, LE_ITEM_WEAPON_MACE1H, LE_ITEM_WEAPON_MACE2H, LE_ITEM_WEAPON_POLEARM, LE_ITEM_WEAPON_SWORD2H, LE_ITEM_WEAPON_WARGLAIVE, LE_ITEM_WEAPON_UNARMED, LE_ITEM_WEAPON_THROWN, LE_ITEM_WEAPON_CROSSBOW}, {LE_ITEM_ARMOR_LEATHER, LE_ITEM_ARMOR_MAIL, LE_ITEM_ARMOR_PLATE, LE_ITEM_ARMOR_SHIELD,}, true}
+	unusable = {
+		{LE_ITEM_WEAPON_AXE1H, LE_ITEM_WEAPON_AXE2H, LE_ITEM_WEAPON_BOWS, LE_ITEM_WEAPON_GUNS, LE_ITEM_WEAPON_MACE1H, LE_ITEM_WEAPON_MACE2H, LE_ITEM_WEAPON_POLEARM, LE_ITEM_WEAPON_SWORD2H, LE_ITEM_WEAPON_WARGLAIVE, LE_ITEM_WEAPON_UNARMED, LE_ITEM_WEAPON_THROWN, LE_ITEM_WEAPON_CROSSBOW},
+		{LE_ITEM_ARMOR_LEATHER, LE_ITEM_ARMOR_MAIL, LE_ITEM_ARMOR_PLATE, LE_ITEM_ARMOR_SHIELD},
+		true
+	}
 elseif T.class == "MONK" then
-	unusable = {{LE_ITEM_WEAPON_AXE2H, LE_ITEM_WEAPON_BOWS, LE_ITEM_WEAPON_GUNS, LE_ITEM_WEAPON_MACE2H, LE_ITEM_WEAPON_SWORD2H, LE_ITEM_WEAPON_WARGLAIVE, LE_ITEM_WEAPON_DAGGER, LE_ITEM_WEAPON_THROWN, LE_ITEM_WEAPON_CROSSBOW, LE_ITEM_WEAPON_WAND}, {LE_ITEM_ARMOR_MAIL, LE_ITEM_ARMOR_PLATE, LE_ITEM_ARMOR_SHIELD}}
+	unusable = {
+		{LE_ITEM_WEAPON_AXE2H, LE_ITEM_WEAPON_BOWS, LE_ITEM_WEAPON_GUNS, LE_ITEM_WEAPON_MACE2H, LE_ITEM_WEAPON_SWORD2H, LE_ITEM_WEAPON_WARGLAIVE, LE_ITEM_WEAPON_DAGGER, LE_ITEM_WEAPON_THROWN, LE_ITEM_WEAPON_CROSSBOW, LE_ITEM_WEAPON_WAND},
+		{LE_ITEM_ARMOR_MAIL, LE_ITEM_ARMOR_PLATE, LE_ITEM_ARMOR_SHIELD}
+	}
 elseif T.class == "PALADIN" then
-	unusable = {{LE_ITEM_WEAPON_BOWS, LE_ITEM_WEAPON_GUNS, LE_ITEM_WEAPON_WARGLAIVE, LE_ITEM_WEAPON_STAFF, LE_ITEM_WEAPON_UNARMED, LE_ITEM_WEAPON_DAGGER, LE_ITEM_WEAPON_THROWN, LE_ITEM_WEAPON_CROSSBOW, LE_ITEM_WEAPON_WAND}, {}, true}
+	unusable = {
+		{LE_ITEM_WEAPON_BOWS, LE_ITEM_WEAPON_GUNS, LE_ITEM_WEAPON_WARGLAIVE, LE_ITEM_WEAPON_STAFF, LE_ITEM_WEAPON_UNARMED, LE_ITEM_WEAPON_DAGGER, LE_ITEM_WEAPON_THROWN, LE_ITEM_WEAPON_CROSSBOW, LE_ITEM_WEAPON_WAND},
+		{},
+		true
+	}
 elseif T.class == "PRIEST" then
-	unusable = {{LE_ITEM_WEAPON_AXE1H, LE_ITEM_WEAPON_AXE2H, LE_ITEM_WEAPON_BOWS, LE_ITEM_WEAPON_GUNS, LE_ITEM_WEAPON_MACE2H, LE_ITEM_WEAPON_POLEARM, LE_ITEM_WEAPON_SWORD1H, LE_ITEM_WEAPON_SWORD2H, LE_ITEM_WEAPON_WARGLAIVE, LE_ITEM_WEAPON_UNARMED, LE_ITEM_WEAPON_THROWN, LE_ITEM_WEAPON_CROSSBOW}, {LE_ITEM_ARMOR_LEATHER, LE_ITEM_ARMOR_MAIL, LE_ITEM_ARMOR_PLATE, LE_ITEM_ARMOR_SHIELD}, true}
+	unusable = {
+		{LE_ITEM_WEAPON_AXE1H, LE_ITEM_WEAPON_AXE2H, LE_ITEM_WEAPON_BOWS, LE_ITEM_WEAPON_GUNS, LE_ITEM_WEAPON_MACE2H, LE_ITEM_WEAPON_POLEARM, LE_ITEM_WEAPON_SWORD1H, LE_ITEM_WEAPON_SWORD2H, LE_ITEM_WEAPON_WARGLAIVE, LE_ITEM_WEAPON_UNARMED, LE_ITEM_WEAPON_THROWN, LE_ITEM_WEAPON_CROSSBOW},
+		{LE_ITEM_ARMOR_LEATHER, LE_ITEM_ARMOR_MAIL, LE_ITEM_ARMOR_PLATE, LE_ITEM_ARMOR_SHIELD},
+		true
+	}
 elseif T.class == "ROGUE" then
-	unusable = {{LE_ITEM_WEAPON_AXE2H, LE_ITEM_WEAPON_MACE2H, LE_ITEM_WEAPON_POLEARM, LE_ITEM_WEAPON_SWORD2H, LE_ITEM_WEAPON_WARGLAIVE, LE_ITEM_WEAPON_STAFF, LE_ITEM_WEAPON_WAND}, {LE_ITEM_ARMOR_MAIL, LE_ITEM_ARMOR_PLATE, LE_ITEM_ARMOR_SHIELD}}
+	unusable = {
+		{LE_ITEM_WEAPON_AXE2H, LE_ITEM_WEAPON_MACE2H, LE_ITEM_WEAPON_POLEARM, LE_ITEM_WEAPON_SWORD2H, LE_ITEM_WEAPON_WARGLAIVE, LE_ITEM_WEAPON_STAFF, LE_ITEM_WEAPON_WAND},
+		{LE_ITEM_ARMOR_MAIL, LE_ITEM_ARMOR_PLATE, LE_ITEM_ARMOR_SHIELD}
+	}
 elseif T.class == "SHAMAN" then
-	unusable = {{LE_ITEM_WEAPON_BOWS, LE_ITEM_WEAPON_GUNS, LE_ITEM_WEAPON_POLEARM, LE_ITEM_WEAPON_SWORD1H, LE_ITEM_WEAPON_SWORD2H, LE_ITEM_WEAPON_WARGLAIVE, LE_ITEM_WEAPON_THROWN, LE_ITEM_WEAPON_CROSSBOW, LE_ITEM_WEAPON_WAND}, {LE_ITEM_ARMOR_PLATE}}
+	unusable = {
+		{LE_ITEM_WEAPON_BOWS, LE_ITEM_WEAPON_GUNS, LE_ITEM_WEAPON_POLEARM, LE_ITEM_WEAPON_SWORD1H, LE_ITEM_WEAPON_SWORD2H, LE_ITEM_WEAPON_WARGLAIVE, LE_ITEM_WEAPON_THROWN, LE_ITEM_WEAPON_CROSSBOW, LE_ITEM_WEAPON_WAND},
+		{LE_ITEM_ARMOR_PLATE}
+	}
 elseif T.class == "WARLOCK" then
-	unusable = {{LE_ITEM_WEAPON_AXE1H, LE_ITEM_WEAPON_AXE2H, LE_ITEM_WEAPON_BOWS, LE_ITEM_WEAPON_GUNS, LE_ITEM_WEAPON_MACE1H, LE_ITEM_WEAPON_MACE2H, LE_ITEM_WEAPON_POLEARM, LE_ITEM_WEAPON_SWORD2H, LE_ITEM_WEAPON_WARGLAIVE, LE_ITEM_WEAPON_UNARMED, LE_ITEM_WEAPON_THROWN, LE_ITEM_WEAPON_CROSSBOW}, {LE_ITEM_ARMOR_LEATHER, LE_ITEM_ARMOR_MAIL, LE_ITEM_ARMOR_PLATE, LE_ITEM_ARMOR_SHIELD}, true}
+	unusable = {
+		{LE_ITEM_WEAPON_AXE1H, LE_ITEM_WEAPON_AXE2H, LE_ITEM_WEAPON_BOWS, LE_ITEM_WEAPON_GUNS, LE_ITEM_WEAPON_MACE1H, LE_ITEM_WEAPON_MACE2H, LE_ITEM_WEAPON_POLEARM, LE_ITEM_WEAPON_SWORD2H, LE_ITEM_WEAPON_WARGLAIVE, LE_ITEM_WEAPON_UNARMED, LE_ITEM_WEAPON_THROWN, LE_ITEM_WEAPON_CROSSBOW},
+		{LE_ITEM_ARMOR_LEATHER, LE_ITEM_ARMOR_MAIL, LE_ITEM_ARMOR_PLATE, LE_ITEM_ARMOR_SHIELD},
+		true
+	}
 elseif T.class == "WARRIOR" then
 	unusable = {{LE_ITEM_WEAPON_WARGLAIVE, LE_ITEM_WEAPON_WAND}, {}}
 else
 	unusable = {{}, {}}
 end
 
-local subs = {}
-for k = 0, 20 do
-	subs[k + 1] = GetItemSubClassInfo(LE_ITEM_CLASS_WEAPON, k)
+local _unusable = {}
+
+for i, class in ipairs({LE_ITEM_CLASS_WEAPON, LE_ITEM_CLASS_ARMOR}) do
+	local list = {}
+	for _, subclass in ipairs(unusable[i]) do
+		list[subclass] = true
+	end
+
+	_unusable[class] = list
 end
 
-for _, subclass in ipairs(unusable[1]) do
-	unusable[subs[subclass+1]] = true
-end
-
-subs = {}
-for k = 0, 11 do
-	subs[k + 1] = GetItemSubClassInfo(LE_ITEM_CLASS_ARMOR, k)
-end
-
-for i, subclass in ipairs(unusable[2]) do
-	unusable[subs[subclass + 1]] = true
-end
-
-
-local function IsClassUnusable(subclass, slot)
-	if subclass then
-		return slot ~= "" and unusable[subclass] or slot == "INVTYPE_WEAPONOFFHAND" and unusable[3]
+local function IsClassUnusable(class, subclass, slot)
+	if class and subclass and _unusable[class] then
+		return slot ~= '' and _unusable[class][subclass] or slot == 'INVTYPE_WEAPONOFFHAND' and unusable[3]
 	end
 end
 
 local function IsItemUnusable(...)
 	if ... then
-		local subclass, _, slot = select(7, GetItemInfo(...))
-		return IsClassUnusable(subclass, slot)
+		local slot, _,_, class, subclass = select(9, GetItemInfo(...))
+		return IsClassUnusable(class, subclass, slot)
 	end
 end
 
@@ -188,7 +218,7 @@ end
 function Stuffing:SlotUpdate(b)
 	local texture, count, locked, quality = GetContainerItemInfo(b.bag, b.slot)
 	local clink = GetContainerItemLink(b.bag, b.slot)
-	local isQuestItem, questId = GetContainerItemQuestInfo(b.bag, b.slot)
+	local isQuestItem, questId, isActiveQuest = GetContainerItemQuestInfo(b.bag, b.slot)
 
 	-- Set all slot color to default ShestakUI on update
 	if not b.frame.lock then
@@ -251,7 +281,9 @@ function Stuffing:SlotUpdate(b)
 		-- Color slot according to item quality
 		if not b.frame.lock and quality and quality > 1 and not (isQuestItem or questId) then
 			b.frame:SetBackdropBorderColor(GetItemQualityColor(quality))
-		elseif isQuestItem or questId then
+		elseif questId and not isActiveQuest then
+			b.frame:SetBackdropBorderColor(1, 0.3, 0.3)
+		elseif questId or isQuestItem then
 			b.frame:SetBackdropBorderColor(1, 1, 0)
 		end
 	else
@@ -619,7 +651,7 @@ function Stuffing:BagType(bag)
 end
 
 function Stuffing:BagNew(bag, f)
-	for i, v in pairs(self.bags) do
+	for _, v in pairs(self.bags) do
 		if v:GetID() == bag then
 			v.bagType = self:BagType(bag)
 			return v
@@ -838,6 +870,7 @@ function Stuffing:InitBags()
 	self.buttons = {}
 	self.bags = {}
 	self.bagframe_buttons = {}
+	self.bags_num = {}
 
 	local f = self:CreateBagFrame("Bags")
 	f:SetScript("OnShow", Stuffing_OnShow)
@@ -1016,6 +1049,7 @@ function Stuffing:Layout(isBank)
 
 			slots = slots + GetContainerNumSlots(i)
 		end
+		self.bags_num[i] = x
 	end
 
 	rows = floor(slots / cols)
@@ -1157,6 +1191,7 @@ function Stuffing:ADDON_LOADED(addon)
 	if not T.classic then
 		self:RegisterEvent("SCRAPPING_MACHINE_SHOW")
 	end
+	self:RegisterEvent("BAG_UPDATE_DELAYED")
 
 	self:InitBags()
 
@@ -1223,6 +1258,16 @@ function Stuffing:BAG_UPDATE(id)
 	self:BagSlotUpdate(id)
 end
 
+function Stuffing:BAG_UPDATE_DELAYED(id)
+	for _, i in ipairs(BAGS_BACKPACK) do
+		local numSlots = GetContainerNumSlots(i)
+		if self.bags_num[i] and self.bags_num[i] ~= numSlots then
+			self:Layout()
+			return
+		end
+	end
+end
+
 function Stuffing:ITEM_LOCK_CHANGED(bag, slot)
 	if slot == nil then return end
 	for _, v in ipairs(self.buttons) do
@@ -1270,6 +1315,7 @@ function Stuffing:BAG_CLOSED(id)
 		table.remove(self.bags, id)
 		b:Hide()
 		table.insert(trashBag, #trashBag + 1, b)
+		self.bags_num[id] = -1
 	end
 
 	while true do
@@ -1292,11 +1338,13 @@ function Stuffing:BAG_CLOSED(id)
 			break
 		end
 	end
-	Stuffing_Close()
+	if id > 4 then
+		Stuffing_Close() -- prevent graphical bug with empty slots
+	end
 end
 
 function Stuffing:BAG_UPDATE_COOLDOWN()
-	for i, v in pairs(self.buttons) do
+	for _, v in pairs(self.buttons) do
 		self:UpdateCooldowns(v)
 	end
 end
@@ -1413,7 +1461,7 @@ function Stuffing:SortBags()
 
 					local n, _, q, iL, rL, c1, c2, _, Sl = GetItemInfo(itemLink)
 					-- Hearthstone
-					if n == GetItemInfo(6948) or n == GetItemInfo(110560) then
+					if n == GetItemInfo(6948) or n == GetItemInfo(110560) or n == GetItemInfo(140192) then
 						q = 9
 					end
 					-- Fix for battle pets
@@ -1477,17 +1525,17 @@ function Stuffing:Restack()
 
 	Stuffing_Open()
 
-	for i, v in pairs(self.buttons) do
+	for _, v in pairs(self.buttons) do
 		if InBags(v.bag) then
 			local _, cnt, _, _, _, _, clink = GetContainerItemInfo(v.bag, v.slot)
 			if clink then
 				local n, _, _, _, _, _, _, s = GetItemInfo(clink)
 
 				if n and cnt ~= s then
-					if not st[n] then
-						st[n] = {{item = v, size = cnt, max = s}}
+					if not st[clink] then
+						st[clink] = {{item = v, size = cnt, max = s}}
 					else
-						table.insert(st[n], {item = v, size = cnt, max = s})
+						table.insert(st[clink], {item = v, size = cnt, max = s})
 					end
 				end
 			end
@@ -1496,7 +1544,7 @@ function Stuffing:Restack()
 
 	local did_restack = false
 
-	for i, v in pairs(st) do
+	for _, v in pairs(st) do
 		if #v > 1 then
 			for j = 2, #v, 2 do
 				local a, b = v[j - 1], v[j]

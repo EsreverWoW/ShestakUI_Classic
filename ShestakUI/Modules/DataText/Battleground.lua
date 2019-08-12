@@ -39,7 +39,6 @@ BGFrame:SetScript("OnEnter", function(self)
 			name, _, honorableKills, deaths, _, _, rank = GetBattlefieldScore(i)
 		end
 		if name and name == T.name then
-			local areaID = C_Map.GetBestMapForUnit("player") or 0
 			GameTooltip:SetOwner(self, "ANCHOR_TOPLEFT", 0, T.Scale(4))
 			GameTooltip:ClearLines()
 			GameTooltip:SetPoint("BOTTOM", self, "TOP", 0, 1)

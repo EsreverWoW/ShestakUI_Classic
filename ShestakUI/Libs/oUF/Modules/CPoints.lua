@@ -5,7 +5,7 @@ local oUF = ns.oUF
 
 local MAX_COMBO_POINTS = MAX_COMBO_POINTS
 
-local function Update(self, event, unit, powerType)
+local function Update(self, _, unit, powerType)
 	if(self.unit ~= unit and (powerType and (powerType ~= "COMBO_POINTS"))) then return end
 
 	local element = self.CPoints
@@ -24,7 +24,7 @@ local function Update(self, event, unit, powerType)
 		max = UnitPowerMax("player", 14)
 	end
 
-	if max == 0 then
+	if max == 0 or max > 6 then
 		max = MAX_COMBO_POINTS
 	end
 

@@ -25,14 +25,9 @@ end
 local realm = GetRealmName()
 local name = UnitName("player")
 
-local _, pysHeight = _G.GetPhysicalScreenSize()
-local fixedHeight = 768 / pysHeight
-local scale = tonumber(floor(fixedHeight*100 + .5)/100)
-local mult = fixedHeight / scale
-
 -- Main window
 local options = CreateFrame("Frame", "ShestakUIOptionsPanel", UIParent)
-options:SetSize(800 * mult, 770 * mult)
+options:SetSize(800, 770)
 options:SetPoint("CENTER")
 options:SetFrameStrata("HIGH")
 options:EnableMouse(true)
@@ -1001,14 +996,14 @@ do
 	local classcolor_border = ns.CreateCheckBox(parent, "classcolor_border", L_GUI_ACTIONBAR_CLASSCOLOR_BORDER)
 	classcolor_border:SetPoint("TOPLEFT", split_bars, "BOTTOMLEFT", 0, 0)
 
-	local toggle_mode = ns.CreateCheckBox(parent, "toggle_mode", L_GUI_ACTIONBAR_TOGGLE_MODE)
-	toggle_mode:SetPoint("TOPLEFT", classcolor_border, "BOTTOMLEFT", 0, 0)
-
 	local hide_highlight = ns.CreateCheckBox(parent, "hide_highlight", L_GUI_ACTIONBAR_HIDE_HIGHLIGHT)
-	hide_highlight:SetPoint("TOPLEFT", toggle_mode, "BOTTOMLEFT", 0, 0)
+	hide_highlight:SetPoint("TOPLEFT", classcolor_border, "BOTTOMLEFT", 0, 0)
+
+	local toggle_mode = ns.CreateCheckBox(parent, "toggle_mode")
+	toggle_mode:SetPoint("TOPLEFT", hide_highlight, "BOTTOMLEFT", 0, 0)
 
 	local bottombars = ns.CreateNumberSlider(parent, "bottombars", nil, nil, 1, 3, 1, true, L_GUI_ACTIONBAR_BOTTOMBARS)
-	bottombars:SetPoint("TOPLEFT", hide_highlight, "BOTTOMLEFT", 0, -20)
+	bottombars:SetPoint("TOPLEFT", toggle_mode, "BOTTOMLEFT", 0, -20)
 
 	local rightbars = ns.CreateNumberSlider(parent, "rightbars", nil, nil, 0, 3, 1, true, L_GUI_ACTIONBAR_RIGHTBARS)
 	rightbars:SetPoint("LEFT", bottombars, "RIGHT", 120, 0)
@@ -1854,11 +1849,8 @@ do
 	local latency = ns.CreateCheckBox(parent, "latency", L_GUI_STATS_LATENCY)
 	latency:SetPoint("TOPLEFT", clock, "BOTTOMLEFT", 0, 0)
 
-	local memory = ns.CreateCheckBox(parent, "memory", L_GUI_STATS_MEMORY)
-	memory:SetPoint("TOPLEFT", latency, "BOTTOMLEFT", 0, 0)
-
 	local fps = ns.CreateCheckBox(parent, "fps", L_GUI_STATS_FPS)
-	fps:SetPoint("TOPLEFT", memory, "BOTTOMLEFT", 0, 0)
+	fps:SetPoint("TOPLEFT", latency, "BOTTOMLEFT", 0, 0)
 
 	local friend = ns.CreateCheckBox(parent, "friend", FRIENDS)
 	friend:SetPoint("TOPLEFT", fps, "BOTTOMLEFT", 0, 0)

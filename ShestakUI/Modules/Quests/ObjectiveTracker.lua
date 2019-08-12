@@ -6,19 +6,13 @@ if T.classic then return end
 ----------------------------------------------------------------------------------------
 local frame = CreateFrame("Frame", "ObjectiveTrackerAnchor", UIParent)
 frame:SetPoint(unpack(C.position.quest))
-frame:SetHeight(150)
-frame:SetWidth(224)
+frame:SetSize(224, 150)
 
 ObjectiveTrackerFrame:ClearAllPoints()
 ObjectiveTrackerFrame:SetPoint("TOPLEFT", frame, "TOPLEFT", 20, 0)
 ObjectiveTrackerFrame:SetHeight(T.screenHeight / 1.6)
 
-hooksecurefunc(ObjectiveTrackerFrame, "SetPoint", function(_, _, parent)
-	if parent ~= frame then
-		ObjectiveTrackerFrame:ClearAllPoints()
-		ObjectiveTrackerFrame:SetPoint("TOPLEFT", frame, "TOPLEFT", 20, 0)
-	end
-end)
+ObjectiveTrackerFrame.IsUserPlaced = function() return true end
 
 for _, headerName in pairs({"QuestHeader", "AchievementHeader", "ScenarioHeader"}) do
 	ObjectiveTrackerFrame.BlocksFrame[headerName].Background:Hide()
@@ -282,6 +276,13 @@ hooksecurefunc("BonusObjectiveTracker_ShowRewardsTooltip", function(block)
 	if IsFramePositionedLeft(ObjectiveTrackerFrame) then
 		GameTooltip:ClearAllPoints()
 		GameTooltip:SetPoint("TOPLEFT", block, "TOPRIGHT", 0, 0)
+	end
+end)
+
+ScenarioStageBlock:HookScript("OnEnter", function(self)
+	if IsFramePositionedLeft(ObjectiveTrackerFrame) then
+		GameTooltip:ClearAllPoints()
+		GameTooltip:SetPoint("LEFT", self, "RIGHT", 50, 0)
 	end
 end)
 

@@ -32,7 +32,6 @@ if C.skins.blizzard_frames ~= true then return end
 local function LoadSkin()
 	CollectionsJournal:StripTextures()
 	CollectionsJournal:SetTemplate("Transparent")
-	CollectionsJournal:Hide()
 	CollectionsJournalPortrait:SetAlpha(0)
 
 	for i = 1, 5 do
@@ -458,9 +457,12 @@ local function LoadSkin()
 			button:StyleButton(nil, 0)
 			button:CreateBackdrop("Default")
 
-			button.level:SetFontObject("SystemFont_Outline_Small")
-			button.level.SetFontObject = T.dummy
-			button.level:SetTextColor(1, 1, 1)
+			hooksecurefunc(button.level, "SetFontObject", function(self, font)
+				if font ~= "SystemFont_Outline_Small" then
+					self:SetFontObject("SystemFont_Outline_Small")
+					self:SetTextColor(1, 1, 1)
+				end
+			end)
 
 			button.levelBackground:SetAlpha(0)
 
@@ -588,6 +590,8 @@ local function LoadSkin()
 			button.border:CreateBackdrop("Default")
 			button.border.backdrop:SetPoint("TOPLEFT", button.Icon, -2, 2)
 			button.border.backdrop:SetPoint("BOTTOMRIGHT", button.Icon, 2, -2)
+
+			button.ProgressBar:SetPoint("TOPLEFT", button.backdrop, "BOTTOMLEFT", 2, 4)
 
 			button.isSkinned = true
 		end

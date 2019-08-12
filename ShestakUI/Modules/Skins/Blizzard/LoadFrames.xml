@@ -8,6 +8,7 @@
 	<Script file="Artifact.lua"/>
 	<Script file="Auction.lua"/>
 	<Script file="Azerite.lua"/>
+	<Script file="AzeriteEssence.lua"/>
 	<Script file="AzeriteRespec.lua"/>
 	<Script file="BarberShop.lua"/>
 	<Script file="Binding.lua"/>
@@ -74,6 +75,7 @@
 	<Script file="TradeSkill.lua"/>
 	<Script file="Trainer.lua"/>
 	<Script file="Tutorial.lua"/>
+	<Script file="UIWidget.lua"/>
 	<Script file="VoidStorage.lua"/>
 	<Script file="Warboard.lua"/>
 	<Script file="WorldMap.lua"/>

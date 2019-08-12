@@ -203,8 +203,8 @@ C["actionbar"] = {
 	["button_space"] = 3,						-- Buttons space
 	["split_bars"] = false,						-- Split the fifth bar on two bars on 6 buttons
 	["classcolor_border"] = false,				-- Enable classcolor border
-	["toggle_mode"] = true,						-- Enable toggle mode
 	["hide_highlight"] = false,					-- Hide proc highlight
+	["toggle_mode"] = true,						-- Enable toggle mode
 	-- Bottom bars
 	["bottombars"] = 2,							-- Number of action bars on the bottom (1, 2 or 3)
 	-- Right bars
@@ -559,7 +559,6 @@ C["toppanel"] = {
 C["stats"] = {
 	["clock"] = true,							-- Clock
 	["latency"] = true,							-- Latency
-	["memory"] = true,							-- Memory
 	["fps"] = true,								-- FPS
 	["friend"] = true,							-- Friends
 	["guild"] = true,							-- Guild

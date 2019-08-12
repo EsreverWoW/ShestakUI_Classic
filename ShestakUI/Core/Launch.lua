@@ -87,8 +87,8 @@ local function InstallUI()
 	SavedOptionsPerChar = {}
 
 	SavedOptionsPerChar.Install = true
-	SavedOptionsPerChar.FogOfWar = T.classic and true or false
-	SavedOptionsPerChar.Coords = T.classic and true or false
+	SavedOptionsPerChar.FogOfWar = true
+	SavedOptionsPerChar.Coords = true
 	SavedOptionsPerChar.AutoInvite = false
 	SavedOptionsPerChar.Archaeology = false
 	SavedOptionsPerChar.BarsLocked = false
@@ -190,7 +190,7 @@ SlashCmdList.RESETSTATS = function() StaticPopup_Show("RESET_STATS") end
 ----------------------------------------------------------------------------------------
 local OnLogon = CreateFrame("Frame")
 OnLogon:RegisterEvent("PLAYER_ENTERING_WORLD")
-OnLogon:SetScript("OnEvent", function(self, event)
+OnLogon:SetScript("OnEvent", function(self)
 	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 
 	-- Create empty CVar if they doesn't exist
@@ -199,8 +199,8 @@ OnLogon:SetScript("OnEvent", function(self, event)
 	if SavedAddonProfiles == nil then SavedAddonProfiles = {} end
 	if SavedOptionsPerChar == nil then SavedOptionsPerChar = {} end
 	if SavedOptions.RaidLayout == nil then SavedOptions.RaidLayout = "UNKNOWN" end
-	if SavedOptionsPerChar.FogOfWar == nil then SavedOptionsPerChar.FogOfWar = T.classic and true or false end
-	if SavedOptionsPerChar.Coords == nil then SavedOptionsPerChar.Coords = T.classic and true or false end
+	if SavedOptionsPerChar.FogOfWar == nil then SavedOptionsPerChar.FogOfWar = true end
+	if SavedOptionsPerChar.Coords == nil then SavedOptionsPerChar.Coords = true end
 	if SavedOptionsPerChar.AutoInvite == nil then SavedOptionsPerChar.AutoInvite = false end
 	if SavedOptionsPerChar.Archaeology == nil then SavedOptionsPerChar.Archaeology = false end
 	if SavedOptionsPerChar.BarsLocked == nil then SavedOptionsPerChar.BarsLocked = false end

@@ -43,6 +43,7 @@ SkinBlizzUI:SetScript("OnEvent", function(self, event, addon)
 
 		QueueStatusFrame:StripTextures()
 		GameMenuFrame:StripTextures()
+		LFDRoleCheckPopup:StripTextures()
 
 		for i = 1, getn(bgskins) do
 			local frame = _G[bgskins[i]]
@@ -101,6 +102,7 @@ SkinBlizzUI:SetScript("OnEvent", function(self, event, addon)
 
 		-- Cinematic popup
 		_G["CinematicFrameCloseDialog"]:SetScale(C.general.uiscale)
+		_G["CinematicFrameCloseDialog"]:StripTextures()
 		_G["CinematicFrameCloseDialog"]:SetTemplate("Transparent")
 		_G["CinematicFrameCloseDialogConfirmButton"]:SkinButton()
 		_G["CinematicFrameCloseDialogResumeButton"]:SkinButton()

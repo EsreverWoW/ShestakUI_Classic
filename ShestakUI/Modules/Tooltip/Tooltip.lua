@@ -56,7 +56,7 @@ end
 -- Extra tooltip's skin
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("PLAYER_LOGIN")
-frame:SetScript("OnEvent", function(self)
+frame:SetScript("OnEvent", function()
 	if not IsAddOnLoaded("Auc-Advanced") then return end
 
 	local LT = LibStub("LibExtraTip-1")
@@ -100,7 +100,7 @@ ricon:SetHeight(18)
 ricon:SetWidth(18)
 ricon:SetPoint("BOTTOM", GameTooltip, "TOP", 0, 5)
 
-GameTooltip:HookScript("OnHide", function(self) ricon:SetTexture(nil) end)
+GameTooltip:HookScript("OnHide", function() ricon:SetTexture(nil) end)
 
 -- Add "Targeted By" line
 local targetedList = {}
@@ -384,7 +384,7 @@ GameTooltip:HookScript("OnTooltipSetUnit", OnTooltipSetUnit)
 --	Adds guild rank to tooltips(GuildRank by Meurtcriss)
 ----------------------------------------------------------------------------------------
 if C.tooltip.rank == true then
-	GameTooltip:HookScript("OnTooltipSetUnit", function(self, ...)
+	GameTooltip:HookScript("OnTooltipSetUnit", function(self)
 		-- Get the unit
 		local _, unit = self:GetUnit()
 		if not unit then
@@ -522,7 +522,7 @@ end)
 ----------------------------------------------------------------------------------------
 --	Fix GameTooltipMoneyFrame font size
 ----------------------------------------------------------------------------------------
-local function FixFont(self)
+local function FixFont()
 	for i = 1, 2 do
 		if _G["GameTooltipMoneyFrame"..i] then
 			_G["GameTooltipMoneyFrame"..i.."PrefixText"]:SetFontObject("GameTooltipText")

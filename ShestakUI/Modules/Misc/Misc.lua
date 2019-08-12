@@ -191,19 +191,6 @@ if not T.classic then
 end
 
 ----------------------------------------------------------------------------------------
---	Force quit
-----------------------------------------------------------------------------------------
-local CloseWoW = CreateFrame("Frame")
-CloseWoW:RegisterEvent("CHAT_MSG_SYSTEM")
-CloseWoW:SetScript("OnEvent", function(self, event, msg)
-	if event == "CHAT_MSG_SYSTEM" then
-		if msg and msg == IDLE_MESSAGE then
-			ForceQuit()
-		end
-	end
-end)
-
-----------------------------------------------------------------------------------------
 --	Old achievements filter
 ----------------------------------------------------------------------------------------
 if not T.classic then
@@ -223,7 +210,7 @@ if not T.classic then
 
 	local filter = CreateFrame("Frame")
 	filter:RegisterEvent("ADDON_LOADED")
-	filter:SetScript("OnEvent", function(self, event, addon, ...)
+	filter:SetScript("OnEvent", function(_, _, addon)
 		if addon == "Blizzard_AchievementUI" then
 			if AchievementFrame then
 				old_nocomplete_filter_init()
