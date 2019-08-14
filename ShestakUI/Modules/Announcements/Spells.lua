@@ -5,12 +5,14 @@ if C.announcements.spells ~= true then return end
 --	Announce some spells
 ----------------------------------------------------------------------------------------
 -- temporary
-local classicLookup = {
-	[GetSpellInfo(20484)] = 20484,		-- Rebirth
-	[GetSpellInfo(20707)] = 20707,		-- Soulstone
-	[GetSpellInfo(633)] = 633,			-- Lay on Hands
-	[GetSpellInfo(19801)] = 19801,		-- Tranquilizing Shot
-}
+if T.classic then
+	local classicLookup = {
+		[GetSpellInfo(20484)] = 20484,		-- Rebirth
+		[GetSpellInfo(20707)] = 20707,		-- Soulstone
+		[GetSpellInfo(633)] = 633,			-- Lay on Hands
+		[GetSpellInfo(19801)] = 19801,		-- Tranquilizing Shot
+	}
+end
 
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
