@@ -61,15 +61,8 @@ local function Update(self, event, unit)
 	local cur, max = UnitHealth(unit), UnitHealthMax(unit)
 	local disconnected = not UnitIsConnected(unit)
 
-	local hpRMH, maxhpRMH
-	if IsClassicBuild() and IsAddOnLoaded("RealMobHealth") then
-		if GetAddOnMetadata("RealMobHealth", "Version") == "1.0" then
-			if RealMobHealth.GetHealth then
-				hpRMH, maxhpRMH = RealMobHealth.GetHealth(unit, true)
-			end
-		else
-			hpRMH, maxhpRMH = RealMobHealth.GetUnitHealth(unit, true)
-		end
+	if(oUF:IsClassic() and IsAddOnLoaded('RealMobHealth')) then
+		local hpRMH, maxhpRMH = RealMobHealth.GetUnitHealth(unit, true)
 
 		if hpRMH and maxhpRMH then
 			cur, max = hpRMH, maxhpRMH
