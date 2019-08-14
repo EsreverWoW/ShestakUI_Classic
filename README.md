@@ -4,7 +4,7 @@ ShestakUI is a modular, lightweight, all-in-one overhaul for the World of Warcra
 This version of ShestakUI is meant to retain compatibility modern WoW, while also providing compatibility so that it may additionally function in WoW Classic.
 
 ## BUGS:
-**If you encounter any bugs, please report them on the [issue tracker](https://github.com/EsreverWoW/ShestakUI_Classic/issues) and I will do my best to correct them.
+**If you encounter any bugs, please report them on the [issue tracker](https://github.com/EsreverWoW/ShestakUI_Classic/issues) and I will do my best to correct them.**
 
 **Download from [here](https://github.com/EsreverWoW/ShestakUI_Classic/archive/master.zip). Extract `ShestakUI` and `ShestakUI_Config` to your `Interface\AddOns` folder.**
 
