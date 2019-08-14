@@ -168,10 +168,9 @@ local tagStrings = {
 
 	['level'] = [[function(u)
 		local l = UnitLevel(u)
-		if not IsClassicBuild() then
-			if(UnitIsWildBattlePet(u) or UnitIsBattlePetCompanion(u)) then
-				l = UnitBattlePetLevel(u)
-			end
+
+		if((_G.WOW_PROJECT_ID ~= _G.WOW_PROJECT_CLASSIC) and (UnitIsWildBattlePet(u) or UnitIsBattlePetCompanion(u))) then
+			l = UnitBattlePetLevel(u)
 		end
 
 		if(l > 0) then

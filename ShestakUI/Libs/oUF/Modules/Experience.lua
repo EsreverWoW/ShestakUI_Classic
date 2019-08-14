@@ -175,7 +175,7 @@ end
 local function ElementEnable(self)
 	local element = self.Experience
 	self:RegisterEvent('PLAYER_XP_UPDATE', Path, true)
-	if not IsClassicBuild() then
+	if(not oUF:IsClassic()) then
 		self:RegisterEvent('HONOR_XP_UPDATE', Path, true)
 	end
 	self:RegisterEvent('ZONE_CHANGED', Path, true)
@@ -249,13 +249,13 @@ local function Enable(self, unit)
 		element.restedAlpha = element.restedAlpha or 0.15
 
 		self:RegisterEvent('PLAYER_LEVEL_UP', VisibilityPath, true)
-		if not IsClassicBuild() then
+		if(not oUF:IsClassic()) then
 			self:RegisterEvent('HONOR_LEVEL_UPDATE', VisibilityPath, true)
 		end
 		self:RegisterEvent('DISABLE_XP_GAIN', VisibilityPath, true)
 		self:RegisterEvent('ENABLE_XP_GAIN', VisibilityPath, true)
 
-		if not IsClassicBuild() then
+		if(not oUF:IsClassic()) then
 			hooksecurefunc('SetWatchingHonorAsXP', function()
 				if(self:IsElementEnabled('Experience')) then
 					VisibilityPath(self, 'SetWatchingHonorAsXP', 'player')
@@ -307,7 +307,7 @@ local function Disable(self)
 	local element = self.Experience
 	if(element) then
 		self:UnregisterEvent('PLAYER_LEVEL_UP', VisibilityPath)
-		if not IsClassicBuild() then
+		if(not oUF:IsClassic()) then
 			self:UnregisterEvent('HONOR_LEVEL_UPDATE', VisibilityPath)
 		end
 		self:UnregisterEvent('DISABLE_XP_GAIN', VisibilityPath)

@@ -447,7 +447,7 @@ local function Enable(self, unit)
 		element.__owner = self
 		element.ForceUpdate = ForceUpdate
 
-		if(not IsClassicBuild()) then
+		if(not oUF:IsClassic()) then
 			if(not (unit and unit:match'%wtarget$')) then
 				self:RegisterEvent('UNIT_SPELLCAST_START', UNIT_SPELLCAST_START)
 				self:RegisterEvent('UNIT_SPELLCAST_FAILED', UNIT_SPELLCAST_FAILED)

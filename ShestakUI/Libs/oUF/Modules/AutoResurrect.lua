@@ -1,5 +1,5 @@
 local T, C, L = unpack(select(2, ...))
-if C.unitframe.enable ~= true or C.raidframe.plugins_auto_resurrection ~= true or C.misc.click_cast == true or T.class == "ROGUE" or T.class == "WARRIOR" or T.class == "HUNTER" or T.class == "MAGE" or (IsClassicBuild() and T.class == "WARLOCK")then return end
+if C.unitframe.enable ~= true or C.raidframe.plugins_auto_resurrection ~= true or C.misc.click_cast == true or T.class == "ROGUE" or T.class == "WARRIOR" or T.class == "HUNTER" or T.class == "MAGE" or (T.classic and T.class == "WARLOCK")then return end
 
 ----------------------------------------------------------------------------------------
 --	Based on FreebAutoRez(by Freebaser)
@@ -65,7 +65,7 @@ local function macroBody(class)
 			body = body.."[@mouseover,help,dead] "..oocspell.."; "
 		end
 
-		if not IsClassicBuild() and class == "WARLOCK" then
+		if not oUF:IsClassic() and class == "WARLOCK" then
 			local name = GetSpellInfo(6203)
 			body = body.."\n/use "..name.."\n "
 		end

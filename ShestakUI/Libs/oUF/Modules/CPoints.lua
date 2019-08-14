@@ -11,7 +11,7 @@ local function Update(self, _, unit, powerType)
 	local element = self.CPoints
 	local cur, max
 
-	if not IsClassicBuild() then
+	if(not oUF:IsClassic()) then
 		if UnitHasVehicleUI("player") then
 			cur = UnitPower("vehicle", 4)
 			max = UnitPowerMax("vehicle", 4)
@@ -33,18 +33,11 @@ local function Update(self, _, unit, powerType)
 	local s = 0
 
 	if element.max ~= max then
-		if not IsClassicBuild() then
-			if max == 6 then
-				element[6]:Show()
-			else
-				element[6]:Hide()
-			end
+		local maxPoints = not oUF:IsClassic() and 6 or 5
+		if max == maxPoints then
+			element[maxPoints]:Show()
 		else
-			if max == 5 then
-				element[5]:Show()
-			else
-				element[5]:Hide()
-			end
+			element[maxPoints]:Hide()
 		end
 
 		for i = 1, max do

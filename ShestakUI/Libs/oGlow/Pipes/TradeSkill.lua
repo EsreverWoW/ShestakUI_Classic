@@ -23,7 +23,7 @@ local doHook = function()
 			if _E then return pipe(...) end
 		end
 
-		if not IsClassicBuild() then
+		if not oGlow:IsClassic() then
 			hooksecurefunc(TradeSkillFrame.RecipeList, "SetSelectedRecipeID", hook)
 		end
 	end

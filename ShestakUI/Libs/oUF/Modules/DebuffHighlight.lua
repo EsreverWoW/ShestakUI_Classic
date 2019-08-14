@@ -34,7 +34,7 @@ local function GetDebuffType(unit, filter)
 end
 
 local function CheckSpec()
-	if not IsClassicBuild() then
+	if not oUF:IsClassic() then
 		local spec = GetSpecialization()
 
 		if T.class == "DRUID" then
@@ -128,7 +128,7 @@ local function Enable(object)
 
 	-- Make sure aura scanning is active for this object
 	object:RegisterEvent("UNIT_AURA", Update)
-	if not IsClassicBuild() then
+	if not oUF:IsClassic() then
 		object:RegisterEvent("PLAYER_TALENT_UPDATE", CheckSpec, true)
 	else
 		object:RegisterEvent("CHARACTER_POINTS_CHANGED", CheckSpec, true)
@@ -151,7 +151,7 @@ end
 local function Disable(object)
 	if object.DebuffHighlightBackdrop or object.DebuffHighlightBackdropBorder or object.DebuffHighlight then
 		object:UnregisterEvent("UNIT_AURA", Update)
-		if not IsClassicBuild() then
+		if not oUF:IsClassic() then
 			object:UnregisterEvent("PLAYER_TALENT_UPDATE", CheckSpec)
 		else
 			object:UnregisterEvent("CHARACTER_POINTS_CHANGED", CheckSpec)

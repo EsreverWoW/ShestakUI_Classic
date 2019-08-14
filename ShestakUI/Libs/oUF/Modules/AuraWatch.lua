@@ -104,7 +104,7 @@ local function Update(frame, event, unit)
 			end
 			icon = icons[key]
 			if icon and not T.RaidBuffsIgnore[spellID] and (icon.anyUnit or (caster and icon.fromUnits and icon.fromUnits[caster])) then
-				if IsClassicBuild() and LibClassicDurations then
+				if oUF:IsClassic() and LibClassicDurations then
 					local durationNew, expirationTimeNew = LibClassicDurations:GetAuraDurationByUnit(unit, spellID, caster, name)
 
 					if duration == 0 and durationNew then

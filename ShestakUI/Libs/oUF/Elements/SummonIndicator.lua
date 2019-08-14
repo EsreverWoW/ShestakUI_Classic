@@ -1,7 +1,7 @@
 local _, ns = ...
 local oUF = ns.oUF
 
-if IsClassicBuild() then return end
+if(oUF:IsClassic()) then return end
 
 -- sourced from Blizzard_APIDocumentation/IncomingSummonDocumentation.lua
 local SUMMON_STATUS_NONE = Enum.SummonStatus.None or 0

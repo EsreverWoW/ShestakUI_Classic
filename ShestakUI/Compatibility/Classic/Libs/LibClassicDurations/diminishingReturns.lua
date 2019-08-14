@@ -1,4 +1,4 @@
-if not IsClassicBuild() then return end
+if _G.WOW_PROJECT_ID ~= _G.WOW_PROJECT_CLASSIC then return end
 
 local lib = LibStub("LibClassicDurations", true)
 if not lib then return end

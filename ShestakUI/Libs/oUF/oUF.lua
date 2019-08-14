@@ -282,7 +282,7 @@ local function initObject(unit, style, styleFunc, header, ...)
 		end
 
 		if(not (suffix == 'target' or objectUnit and objectUnit:match('target'))) then
-			if not IsClassicBuild() then
+			if not oUF:IsClassic() then
 				object:RegisterEvent('UNIT_ENTERED_VEHICLE', updateActiveUnit)
 				object:RegisterEvent('UNIT_EXITED_VEHICLE', updateActiveUnit)
 			end
@@ -373,6 +373,15 @@ local function walkObject(object, unit)
 	end
 
 	return initObject(unit, style, styleFunc, header, object, object:GetChildren())
+end
+
+--[[ oUF:IsClassic()
+Used to determine if runninig retail or classic.
+
+* self - the global oUF object
+--]]
+function oUF:IsClassic()
+	return _G.WOW_PROJECT_ID == _G.WOW_PROJECT_CLASSIC
 end
 
 --[[ oUF:RegisterInitCallback(func)

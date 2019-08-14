@@ -1,4 +1,4 @@
-if not IsClassicBuild() then return end
+if _G.WOW_PROJECT_ID ~= _G.WOW_PROJECT_CLASSIC then return end
 
 --[[ $Id: CallbackHandler-1.0.lua 22 2018-07-21 14:17:22Z nevcairiel $ ]]
 local MAJOR, MINOR = "CallbackHandler-1.0", 7

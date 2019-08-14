@@ -203,7 +203,7 @@ local function Enable(self)
 		self:RegisterEvent('UNIT_MAXPOWER', Path)
 		self:RegisterEvent('UNIT_FACTION', Path) -- For tapping
 		self:RegisterEvent('UNIT_FLAGS', Path) -- For selection
-		if IsClassicBuild() then
+		if(oUF:IsClassic()) then
 			self:RegisterEvent('UNIT_HAPPINESS', Path)
 		end
 
@@ -236,7 +236,7 @@ local function Disable(self)
 		self:UnregisterEvent('UNIT_MAXPOWER', Path)
 		self:UnregisterEvent('UNIT_FACTION', Path)
 		self:UnregisterEvent('UNIT_FLAGS', Path)
-		if IsClassicBuild() then
+		if(oUF:IsClassic()) then
 			self:UnregisterEvent('UNIT_HAPPINESS', Path)
 		end
 	end

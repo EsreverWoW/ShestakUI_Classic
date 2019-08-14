@@ -2,7 +2,7 @@ if IsAddOnLoaded("Fizzle") then return end
 
 local _E
 local slots = {}
-if not IsClassicBuild() then
+if not oGlow:IsClassic() then
 	slots = {
 		"Head", "Neck", "Shoulder", "Shirt", "Chest", "Waist", "Legs", "Feet", "Wrist", "Hands",
 		"Finger0", "Finger1", "Trinket0", "Trinket1", "Back", "MainHand", "SecondaryHand", [19] = "Tabard"

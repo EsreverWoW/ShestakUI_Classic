@@ -1,7 +1,7 @@
-if not IsClassicBuild() then return end
-
 local _, ns = ...
 local oUF = ns.oUF
+
+if(not oUF:IsClassic()) then return end
 
 local Update = function(self, event, unit, powerType)
 	if(self.unit ~= unit) then return end
