@@ -569,7 +569,7 @@ local function GetGUIDAuraTime(dstGUID, spellName, spellID, srcGUID, isStacking)
             if isStacking then
                 if srcGUID then
                     applicationTable = spellTable.applications[srcGUID]
-                else -- return some duration
+                elseif spellTable.applications then -- return some duration
                     applicationTable = select(2,next(spellTable.applications))
                 end
             else
