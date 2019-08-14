@@ -469,11 +469,7 @@ function Stuffing:BagFrameSlotNew(p, slot)
 	if slot > 3 then
 		ret.slot = slot
 		slot = slot - 4
-		if not T.classic then
-			ret.frame = CreateFrame("ItemButton", "StuffingBBag"..slot.."Slot", p, "BankItemButtonBagTemplate")
-		else
-			ret.frame = CreateFrame("CheckButton", "StuffingBBag"..slot.."Slot", p, "BankItemButtonBagTemplate")
-		end
+		ret.frame = CreateFrame(T.classic and "CheckButton" or "ItemButton", "StuffingBBag"..slot.."Slot", p, "BankItemButtonBagTemplate")
 		ret.frame:StripTextures()
 		ret.frame:SetID(slot)
 		hooksecurefunc(ret.frame.IconBorder, "SetVertexColor", function(self, r, g, b)
@@ -502,11 +498,7 @@ function Stuffing:BagFrameSlotNew(p, slot)
 			SetItemButtonTextureVertexColor(ret.frame, 1.0, 1.0, 1.0)
 		end
 	else
-		if not T.classic then
-			ret.frame = CreateFrame("ItemButton", "StuffingFBag"..slot.."Slot", p, "BagSlotButtonTemplate")
-		else
-			ret.frame = CreateFrame("CheckButton", "StuffingFBag"..slot.."Slot", p, "BagSlotButtonTemplate")
-		end
+		ret.frame = CreateFrame(T.classic and "CheckButton" or "ItemButton", "StuffingFBag"..slot.."Slot", p, "BagSlotButtonTemplate")
 
 		hooksecurefunc(ret.frame.IconBorder, "SetVertexColor", function(self, r, g, b)
 			if r ~= 0.65882 and g ~= 0.65882 and b ~= 0.65882 then
@@ -578,11 +570,7 @@ function Stuffing:SlotNew(bag, slot)
 	end
 
 	if not ret.frame then
-		if not T.classic then
-			ret.frame = CreateFrame("ItemButton", "StuffingBag"..bag.."_"..slot, self.bags[bag], tpl)
-		else
-			ret.frame = CreateFrame("Button", "StuffingBag"..bag.."_"..slot, self.bags[bag], tpl)
-		end
+		ret.frame = CreateFrame(T.classic and "Button" or "ItemButton", "StuffingBag"..bag.."_"..slot, self.bags[bag], tpl)
 		ret.frame:StyleButton()
 		ret.frame:SetTemplate("Default")
 		ret.frame:SetNormalTexture(nil)
@@ -1177,18 +1165,14 @@ function Stuffing:ADDON_LOADED(addon)
 	self:RegisterEvent("ITEM_LOCK_CHANGED")
 	self:RegisterEvent("BANKFRAME_OPENED")
 	self:RegisterEvent("BANKFRAME_CLOSED")
-	if not T.classic then
-		self:RegisterEvent("GUILDBANKFRAME_OPENED")
-		self:RegisterEvent("GUILDBANKFRAME_CLOSED")
-	end
 	self:RegisterEvent("PLAYERBANKSLOTS_CHANGED")
-	if not T.classic then
-		self:RegisterEvent("PLAYERBANKBAGSLOTS_CHANGED")
-		self:RegisterEvent("PLAYERREAGENTBANKSLOTS_CHANGED")
-	end
 	self:RegisterEvent("BAG_CLOSED")
 	self:RegisterEvent("BAG_UPDATE_COOLDOWN")
 	if not T.classic then
+		self:RegisterEvent("GUILDBANKFRAME_OPENED")
+		self:RegisterEvent("GUILDBANKFRAME_CLOSED")
+		self:RegisterEvent("PLAYERBANKBAGSLOTS_CHANGED")
+		self:RegisterEvent("PLAYERREAGENTBANKSLOTS_CHANGED")
 		self:RegisterEvent("SCRAPPING_MACHINE_SHOW")
 	end
 	self:RegisterEvent("BAG_UPDATE_DELAYED")
@@ -1425,11 +1409,7 @@ function Stuffing:SortBags()
 	if _G["StuffingFrameReagent"] and _G["StuffingFrameReagent"]:IsShown() then
 		bagList = {-3}
 	elseif Stuffing.bankFrame and Stuffing.bankFrame:IsShown() then
-		if not T.classic then
-			bagList = {11, 10, 9, 8, 7, 6, 5, -1}
-		else
-			bagList = {10, 9, 8, 7, 6, 5, -1}
-		end
+		bagList = T.classic and {10, 9, 8, 7, 6, 5, -1} or {11, 10, 9, 8, 7, 6, 5, -1}
 	else
 		bagList = {4, 3, 2, 1, 0}
 	end

@@ -317,12 +317,7 @@ end)
 
 SlashCmdList.TESTROLL = function()
 	local f = GetFrame()
-	local items = {}
-	if not T.classic then
-		items = {32837, 34196, 33820, 84004}
-	else
-		items = {19019, 22811, 20530, 19972}
-	end
+	local items = T.classic and {19019, 22811, 20530, 19972} or {32837, 34196, 33820, 84004}
 	if f:IsShown() then
 		f:Hide()
 	else

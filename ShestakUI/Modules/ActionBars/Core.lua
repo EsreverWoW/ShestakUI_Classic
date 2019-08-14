@@ -9,13 +9,11 @@ frame:RegisterEvent("PLAYER_LOGIN")
 frame:SetScript("OnEvent", function()
 	MainMenuBar:SetScale(0.00001)
 	MainMenuBar:EnableMouse(false)
-	if not T.classic then
-		OverrideActionBar:SetScale(0.00001)
-		OverrideActionBar:EnableMouse(false)
-	end
 	PetActionBarFrame:EnableMouse(false)
 	StanceBarFrame:EnableMouse(false)
 	if not T.classic then
+		OverrideActionBar:SetScale(0.00001)
+		OverrideActionBar:EnableMouse(false)
 		MicroButtonAndBagsBar:SetScale(0.00001)
 		MicroButtonAndBagsBar:EnableMouse(false)
 	end

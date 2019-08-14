@@ -259,7 +259,8 @@ if latency.enabled then
 		OnEnter = function(self)
 			local _, _, latencyHome, latencyWorld = GetNetStats()
 			local latency
-			if not T.classic then -- For some reason formatting the localized string directly isn't working in Classic
+			-- For some reason formatting the localized string directly isn't working in Classic
+			if not T.classic then
 				latency = format(MAINMENUBAR_LATENCY_LABEL, latencyHome, latencyWorld)
 			else
 				latency = format("Latency:\n%.0f ms (home)\n%.0f ms (world)", latencyHome, latencyWorld)
@@ -996,7 +997,7 @@ if guild.enabled then
 	local function BuildGuildTable()
 		wipe(guildTable)
 		for i = 1, GetNumGuildMembers() do
-			local name, rank, _, level, _, zone, note, officernote, connected, status, class, _, _, mobile = not T.classic and C_GuildInfo.GetGuildRosterInfo(i) or GetGuildRosterInfo(i)
+			local name, rank, _, level, _, zone, note, officernote, connected, status, class, _, _, mobile = T.classic and GetGuildRosterInfo(i) or C_GuildInfo.GetGuildRosterInfo(i)
 			name = Ambiguate(name, "none")
 			guildTable[i] = {name, rank, level, zone, note, officernote, connected, status, class, mobile}
 		end
@@ -1013,7 +1014,7 @@ if guild.enabled then
 				if IsInGuild() then
 					local total, _, online = GetNumGuildMembers()
 					return format(guild.fmt, online, total)
-				else return not T.classic and LOOKINGFORGUILD or format("%s %s", NO, GUILD) end
+				else return LOOKINGFORGUILD or format("%s %s", NO, GUILD) end
 			end, update = 5
 		},
 		OnLoad = function(self)
@@ -1123,7 +1124,7 @@ if guild.enabled then
 							if online > 2 then GameTooltip:AddLine(format("%d %s (%s)", online - guild.maxguild, L_STATS_HIDDEN, ALT_KEY), ttsubh.r, ttsubh.g, ttsubh.b) end
 							break
 						end
-						name, rank, _, level, _, zone, note, officernote, connected, status, class, _, _, isMobile = not T.classic and C_GuildInfo.GetGuildRosterInfo(i) or GetGuildRosterInfo(i)
+						name, rank, _, level, _, zone, note, officernote, connected, status, class, _, _, isMobile = T.classic and GetGuildRosterInfo(i) or C_GuildInfo.GetGuildRosterInfo(i)
 						if (connected or isMobile) and level >= guild.threshold then
 							name = Ambiguate(name, "all")
 							if GetRealZoneText() == zone then zone_r, zone_g, zone_b = 0.3, 1, 0.3 else zone_r, zone_g, zone_b = 1, 1, 1 end

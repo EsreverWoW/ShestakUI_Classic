@@ -347,17 +347,15 @@ end
 
 -- Hide blizzard combat text
 if C.combattext.blizz_head_numbers ~= true then
-	if C.combattext.blizz_head_numbers ~= true then
-		if not T.classic then
-			SetCVar("floatingCombatTextCombatHealing", 0)
-		end
-		SetCVar("floatingCombatTextCombatDamage", 0)
-	else
-		if not T.classic then
-			SetCVar("floatingCombatTextCombatHealing", 1)
-		end
-		SetCVar("floatingCombatTextCombatDamage", 1)
+	if not T.classic then
+		SetCVar("floatingCombatTextCombatHealing", 0)
 	end
+	SetCVar("floatingCombatTextCombatDamage", 0)
+else
+	if not T.classic then
+		SetCVar("floatingCombatTextCombatHealing", 1)
+	end
+	SetCVar("floatingCombatTextCombatDamage", 1)
 end
 
 local frame = CreateFrame("Frame")

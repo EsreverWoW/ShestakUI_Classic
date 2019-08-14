@@ -285,7 +285,7 @@ if T.classic then
 	tremove(micromenu, 12)
 	tremove(micromenu, 11)
 	tremove(micromenu, 10)
-	tremove(micromenu, 9) -- remove once PvP is added in
+	tremove(micromenu, 9) -- remove once PvP is added in?
 	tremove(micromenu, 6)
 	tremove(micromenu, 4)
 end

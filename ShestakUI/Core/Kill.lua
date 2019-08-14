@@ -28,17 +28,13 @@ frame:SetScript("OnEvent", function(_, _, addon)
 
 	Advanced_UseUIScale:Kill()
 	Advanced_UIScaleSlider:Kill()
+	HelpOpenTicketButtonTutorial:Kill()
+	BagHelpBox:Kill()
 	if not T.classic then
 		TutorialFrameAlertButton:Kill()
-	end
-	HelpOpenTicketButtonTutorial:Kill()
-	if not T.classic then
 		TalentMicroButtonAlert:Kill()
 		CollectionsMicroButtonAlert:Kill()
 		ReagentBankHelpBox:Kill()
-	end
-	BagHelpBox:Kill()
-	if not T.classic then
 		EJMicroButtonAlert:Kill()
 		PremadeGroupsPvETutorialAlert:Kill()
 	end

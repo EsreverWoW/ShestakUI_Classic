@@ -420,15 +420,10 @@ local function Shared(self, unit)
 			self.CPoints:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, 7)
 			self.CPoints:SetSize(217, 7)
 
-			local maxComboPoints
-			if not T.classic then
-				maxComboPoints = 6
-			else
-				maxComboPoints = 5
-			end
-			for i = 1, maxComboPoints or 6 do
+			local maxComboPoints = T.classic and 5 or 6
+			for i = 1, maxComboPoints do
 				self.CPoints[i] = CreateFrame("StatusBar", self:GetName().."_ComboBar", self.CPoints)
-				self.CPoints[i]:SetSize(213 / maxComboPoints or 6, 7)
+				self.CPoints[i]:SetSize(213 / maxComboPoints, 7)
 				if i == 1 then
 					self.CPoints[i]:SetPoint("LEFT", self.CPoints)
 				else
@@ -453,11 +448,7 @@ local function Shared(self, unit)
 			self.TotemBar:CreateBackdrop("Default")
 			self.TotemBar:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, 7)
 			self.TotemBar:SetSize(217, 7)
-			if not T.classic then
-				self.TotemBar.Destroy = true
-			else
-				self.TotemBar.Destroy = false
-			end
+			self.TotemBar.Destroy = T.classic and false or true
 
 			for i = 1, 4 do
 				self.TotemBar[i] = CreateFrame("StatusBar", self:GetName().."_TotemBar", self.TotemBar)
@@ -774,15 +765,10 @@ local function Shared(self, unit)
 				self.CPoints:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, 7)
 				self.CPoints:SetSize(217, 7)
 
-				local maxComboPoints
-				if not T.classic then
-					maxComboPoints = 6
-				else
-					maxComboPoints = 5
-				end
-				for i = 1, maxComboPoints or 6 do
+				local maxComboPoints = T.classic and 5 or 6
+				for i = 1, maxComboPoints do
 					self.CPoints[i] = CreateFrame("StatusBar", self:GetName().."_ComboBar", self.CPoints)
-					self.CPoints[i]:SetSize(213 / maxComboPoints or 6, 7)
+					self.CPoints[i]:SetSize(213 / maxComboPoints, 7)
 					if i == 1 then
 						self.CPoints[i]:SetPoint("LEFT", self.CPoints)
 					else
@@ -901,7 +887,7 @@ local function Shared(self, unit)
 			end
 			self.Castbar:SetHeight(16)
 		elseif unit == "target" then
-			local Castbar = not T.classic and self.Castbar or self.CastbarClassic
+			local Castbar = T.classic and self.CastbarClassic or self.Castbar
 			if C.unitframe.castbar_icon == true then
 				if C.unitframe.plugins_swing == true then
 					Castbar:SetPoint(C.position.unitframes.target_castbar[1], C.position.unitframes.target_castbar[2], C.position.unitframes.target_castbar[3], C.position.unitframes.target_castbar[4] - 23, C.position.unitframes.target_castbar[5] + 12)
@@ -919,12 +905,12 @@ local function Shared(self, unit)
 			end
 			Castbar:SetHeight(16)
 		elseif unit == "arena" or unit == "boss" then
-			local Castbar = not T.classic and self.Castbar or self.CastbarClassic
+			local Castbar = T.classic and self.CastbarClassic or self.Castbar
 			Castbar:SetPoint("TOPLEFT", self, "BOTTOMLEFT", 0, -7)
 			Castbar:SetWidth(150)
 			Castbar:SetHeight(16)
 		else
-			local Castbar = not T.classic and self.Castbar or self.CastbarClassic
+			local Castbar = T.classic and self.CastbarClassic or self.Castbar
 			Castbar:SetPoint("TOPLEFT", self, "BOTTOMLEFT", 0, -7)
 			Castbar:SetWidth(105)
 			Castbar:SetHeight(5)
@@ -966,7 +952,7 @@ local function Shared(self, unit)
 			if unit == "player" then
 				Castbar = self.Castbar
 			else
-				Castbar = not T.classic and self.Castbar or self.CastbarClassic
+				Castbar = T.classic and self.CastbarClassic or self.Castbar
 			end
 			Castbar.Time = T.SetFontString(Castbar, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
 			Castbar.Time:SetPoint("RIGHT", Castbar, "RIGHT", 0, 0)

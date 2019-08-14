@@ -153,7 +153,7 @@ local function Update(self, t)
 				ranktxt = (classcolor..RANK.." :|r "..rank)
 			end
 			if name and name == T.name then
-				Text1:SetText(not T.classic and dmgtxt or ranktxt)
+				Text1:SetText(T.classic and ranktxt or dmgtxt)
 				Text2:SetText(classcolor..COMBAT_HONOR_GAIN.." :|r "..format("%d", honorGained))
 				Text3:SetText(classcolor..KILLING_BLOWS.." :|r "..killingBlows)
 			end

@@ -288,13 +288,8 @@ function T.SkinTab(tab, bg)
 		tab.backdrop:SetPoint("BOTTOMRIGHT", -3, 2)
 	else
 		tab.backdrop:SetTemplate("Transparent")
-		if not T.classic then
-			tab.backdrop:SetPoint("TOPLEFT", 10, -3)
-			tab.backdrop:SetPoint("BOTTOMRIGHT", -10, 3)
-		else
-			tab.backdrop:SetPoint("TOPLEFT", 10, 0)
-			tab.backdrop:SetPoint("BOTTOMRIGHT", -10, 6)
-		end
+		tab.backdrop:SetPoint("TOPLEFT", 10, T.classic and 0 or -3)
+		tab.backdrop:SetPoint("BOTTOMRIGHT", -10, T.classic and 6 or 3)
 	end
 end
 

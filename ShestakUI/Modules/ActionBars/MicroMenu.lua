@@ -6,11 +6,7 @@ if C.actionbar.enable ~= true or C.actionbar.micromenu ~= true then return end
 ----------------------------------------------------------------------------------------
 local frame = CreateFrame("Frame", "MicroAnchor", T_PetBattleFrameHider)
 frame:SetPoint(unpack(C.position.micro_menu))
-if not T.classic then
-	frame:SetSize(284, 30)
-else
-	frame:SetSize(208, 30)
-end
+frame:SetSize(T.classic and 208 or 284, 30)
 frame.shown = false
 
 UpdateMicroButtonsParent(frame)
@@ -64,6 +60,7 @@ for _, button in pairs(MICRO_BUTTONS) do
 	f:SetFrameLevel(1)
 	f:SetFrameStrata("BACKGROUND")
 	f:SetPoint("BOTTOMLEFT", m, "BOTTOMLEFT", 2, 0)
+	f:SetPoint("TOPRIGHT", m, "TOPRIGHT", -2, T.classic and -28 or -6)
 	if not T.classic then
 		f:SetPoint("TOPRIGHT", m, "TOPRIGHT", -2, -6)
 	else

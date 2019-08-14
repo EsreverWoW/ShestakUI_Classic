@@ -22,9 +22,7 @@ if not T.classic then
 	SlashCmdList.JOURNAL = function() ToggleEncounterJournal() end
 	SLASH_JOURNAL1 = "/ej"
 	SLASH_JOURNAL2 = "/уо"
-end
 
-if not T.classic then
 	SlashCmdList.ROLECHECK = function() InitiateRolePoll() end
 	SLASH_ROLECHECK1 = "/role"
 	SLASH_ROLECHECK2 = "/кщду"
