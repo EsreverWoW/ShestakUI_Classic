@@ -4,20 +4,18 @@
 --	Announce Feasts/Souls/Repair Bots/Portals/Ritual of Summoning
 ----------------------------------------------------------------------------------------
 -- temporary
-if T.classic then
-	local classicLookup = {
-		[GetSpellInfo(698)] = 698,			-- Ritual of Summoning
-		[GetSpellInfo(18400)] = 18400,		-- Piccolo of the Flaming Fire
-		[GetSpellInfo(22700)] = 22700,		-- Field Repair Bot 74A
-		[GetSpellInfo(10059)] = 10059,		-- Portal: Stormwind
-		[GetSpellInfo(11416)] = 11416,		-- Portal: Ironforge
-		[GetSpellInfo(11419)] = 11419,		-- Portal: Darnassus
-		[GetSpellInfo(11417)] = 11417,		-- Portal: Orgrimmar
-		[GetSpellInfo(11420)] = 11420,		-- Portal: Thunder Bluff
-		[GetSpellInfo(11418)] = 11418,		-- Portal: Undercity
-		[GetSpellInfo(28148)] = 28148,		-- Portal: Karazhan
-	}
-end
+local classicLookup = T.classic and {
+	[GetSpellInfo(698)] = 698,			-- Ritual of Summoning
+	[GetSpellInfo(18400)] = 18400,		-- Piccolo of the Flaming Fire
+	[GetSpellInfo(22700)] = 22700,		-- Field Repair Bot 74A
+	[GetSpellInfo(10059)] = 10059,		-- Portal: Stormwind
+	[GetSpellInfo(11416)] = 11416,		-- Portal: Ironforge
+	[GetSpellInfo(11419)] = 11419,		-- Portal: Darnassus
+	[GetSpellInfo(11417)] = 11417,		-- Portal: Orgrimmar
+	[GetSpellInfo(11420)] = 11420,		-- Portal: Thunder Bluff
+	[GetSpellInfo(11418)] = 11418,		-- Portal: Undercity
+	[GetSpellInfo(28148)] = 28148,		-- Portal: Karazhan
+}
 
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")

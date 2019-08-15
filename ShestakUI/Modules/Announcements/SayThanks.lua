@@ -16,15 +16,13 @@ local spells = {
 }
 
 -- temporary
-if T.classic then
-	local classicLookup = {
-		[GetSpellInfo(20484)] = 20484,		-- Rebirth
-		[GetSpellInfo(20707)] = 20707,		-- Soulstone
-		[GetSpellInfo(2006)] = 2006,		-- Resurrection
-		[GetSpellInfo(7328)] = 7328,		-- Redemption
-		[GetSpellInfo(2008)] = 2008,		-- Ancestral Spirit
-	}
-end
+local classicLookup = T.classic and {
+	[GetSpellInfo(20484)] = 20484,		-- Rebirth
+	[GetSpellInfo(20707)] = 20707,		-- Soulstone
+	[GetSpellInfo(2006)] = 2006,		-- Resurrection
+	[GetSpellInfo(7328)] = 7328,		-- Redemption
+	[GetSpellInfo(2008)] = 2008,		-- Ancestral Spirit
+}
 
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
