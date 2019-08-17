@@ -9,7 +9,8 @@ local function LoadSkin()
 
 	WorldMapFrame:StripTextures()
 	WorldMapFrame:CreateBackdrop("Transparent")
-	-- WorldMapFrame:SetScale(0.75) -- needs a fix for mouse position
+
+	WorldMapFrame.BorderFrame:SetFrameStrata(WorldMapFrame:GetFrameStrata())
 
 	T.SkinDropDownBox(WorldMapContinentDropDown)
 	T.SkinDropDownBox(WorldMapZoneDropDown)

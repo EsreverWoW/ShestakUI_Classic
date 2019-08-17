@@ -34,15 +34,13 @@ else
 
 	WorldMapFrame.BlackoutFrame:StripTextures()
 	WorldMapFrame.BlackoutFrame:EnableMouse(false)
-	WorldMapFrame:SetParent(UIParent)
-	WorldMapFrame:SetScale(1)
-	WorldMapFrame:EnableKeyboard(false)
-	WorldMapFrame:EnableMouse(false)
-	WorldMapFrame:SetToplevel()
+	WorldMapFrame:SetScale(0.75)
 
-	WorldMapFrame.BorderFrame:SetFrameStrata(WorldMapFrame:GetFrameStrata())
-	WorldMapFrameCloseButton:SetFrameLevel(WorldMapFrame.BorderFrame:GetFrameLevel() + 2)
-	WorldMapZoomOutButton:SetFrameLevel(WorldMapFrame.BorderFrame:GetFrameLevel() + 2)
+	WorldMapFrame.ScrollContainer.GetCursorPosition = function()
+		local x, y = MapCanvasScrollControllerMixin.GetCursorPosition()
+		local s = WorldMapFrame:GetScale()
+		return x / s, y / s
+	end
 
 	table.insert(UISpecialFrames, WorldMapFrame:GetName())
 
@@ -53,15 +51,6 @@ else
 	if WorldMapFrame:GetAttribute("UIPanelLayout-allowOtherPanels") ~= true then
 		SetUIPanelAttribute(WorldMapFrame, "allowOtherPanels", true)
 	end
-
-	DropDownList1:HookScript("OnShow", function()
-		if DropDownList1:GetScale() ~= UIParent:GetScale() then
-			DropDownList1:SetScale(UIParent:GetScale())
-		end
-		DropDownList1:SetFrameLevel(WorldMapFrame.BorderFrame:GetFrameLevel() + 2)
-	end)
-
-	-- WorldMapTooltip:SetFrameLevel(WorldMapPositioningGuide:GetFrameLevel() + 110)
 end
 
 ----------------------------------------------------------------------------------------
