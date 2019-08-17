@@ -232,6 +232,7 @@ L_STATS_JUNK_ADDED = "自動販售 - 已加入"
 L_STATS_JUNK_ADD_ITEM = "增加/移除 物品"
 L_STATS_JUNK_REMOVED = "自動販售 - 已移除"
 L_STATS_JUNK_ITEMS_LIST = "列出自動販售列表"
+L_STATS_NO_GUILD = "No Guild" -- Needs review
 L_STATS_KILLS = "擊殺"
 L_STATS_XP_RATE = "當前等級經驗值趴數"
 L_STATS_HR = "小時"

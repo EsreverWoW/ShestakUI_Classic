@@ -1014,7 +1014,7 @@ if guild.enabled then
 				if IsInGuild() then
 					local total, _, online = GetNumGuildMembers()
 					return format(guild.fmt, online, total)
-				else return LOOKINGFORGUILD or format("%s %s", NO, GUILD) end
+				else return T.classic and L_STATS_NO_GUILD or LOOKINGFORGUILD end
 			end, update = 5
 		},
 		OnLoad = function(self)

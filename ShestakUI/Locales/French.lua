@@ -232,6 +232,7 @@ L_STATS_JUNK_ADDED = "Ajouté à la liste des objets indésirables"
 L_STATS_JUNK_ADD_ITEM = "Ajouter/retirer des objets."
 L_STATS_JUNK_REMOVED = "Retiré de la liste des objets indésirables"
 L_STATS_JUNK_ITEMS_LIST = "Liste des objets à vendre."
+L_STATS_NO_GUILD = "No Guild" -- Needs review
 L_STATS_KILLS = "Tuer"
 L_STATS_XP_RATE = "Niveau/taux de votre XP"
 L_STATS_HR = "Par heure"

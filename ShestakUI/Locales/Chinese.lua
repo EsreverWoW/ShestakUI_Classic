@@ -232,6 +232,7 @@ L_STATS_JUNK_ADDED = "自动出售 - 已加入"
 L_STATS_JUNK_ADD_ITEM = "增加/移除 物品"
 L_STATS_JUNK_REMOVED = "自动出售 - 已移除"
 L_STATS_JUNK_ITEMS_LIST = "列出自动出售名单"
+L_STATS_NO_GUILD = "No Guild" -- Needs review
 L_STATS_KILLS = "击杀"
 L_STATS_XP_RATE = "当前等级经验百分值"
 L_STATS_HR = "小时"

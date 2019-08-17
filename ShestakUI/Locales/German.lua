@@ -232,6 +232,7 @@ L_STATS_JUNK_ADDED = "Added junk additions" -- Need review
 L_STATS_JUNK_ADD_ITEM = "Add/remove items." -- Need review
 L_STATS_JUNK_REMOVED = "Removed junk additions" -- Need review
 L_STATS_JUNK_ITEMS_LIST = "List for sell items." -- Need review
+L_STATS_NO_GUILD = "Keine Gilde"
 L_STATS_KILLS = "G"
 L_STATS_XP_RATE = "Level XP-Rate"
 L_STATS_HR = "std"
