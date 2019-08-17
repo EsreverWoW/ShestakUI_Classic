@@ -3,6 +3,8 @@
 local _, ns = ...
 local oUF = ns.oUF
 
+local LibClassicDurations = oUF:IsClassic() and LibStub("LibClassicDurations")
+
 local VISIBLE = 1
 local HIDDEN = 0
 
@@ -86,10 +88,10 @@ local function updateIcon(unit, icons, index, offset, filter, isDebuff, visible)
 			icon = (icons.CreateIcon or createAuraIcon) (icons, n)
 		end
 
-		if(oUF:IsClassic() and LibClassicDurations) then
+		if(LibClassicDurations) then
 			local durationNew, expirationTimeNew = LibClassicDurations:GetAuraDurationByUnit(unit, spellID, caster, name)
 
-			if duration == 0 and durationNew then
+			if(duration == 0 and durationNew) then
 				duration = durationNew
 				expiration = expirationTimeNew
 			end
