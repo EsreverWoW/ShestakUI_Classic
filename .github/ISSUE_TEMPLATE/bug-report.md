@@ -2,8 +2,8 @@
 name: Bug Report
 about: Create a report to help ShestakUI improve
 title: "[BUG]"
-labels: ''
-assignees: ''
+labels: bug
+assignees: EsreverWoW
 
 ---
 
