@@ -880,6 +880,8 @@ if clock.enabled then
 		OnClick = function(_, b)
 			if not T.classic then
 				(b == "RightButton" and ToggleTimeManager or ToggleCalendar)()
+			else
+				TimeManager_Toggle()
 			end
 		end
 	})
