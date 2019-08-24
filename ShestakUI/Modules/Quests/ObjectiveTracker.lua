@@ -83,6 +83,24 @@ hooksecurefunc(WORLD_QUEST_TRACKER_MODULE, "AddObjective", function(_, block)
 	end
 end)
 
+hooksecurefunc("QuestObjectiveSetupBlockButton_AddRightButton", function(block, button)
+	if button and button.GetPoint then
+		local a, b, c, d, e = button:GetPoint()
+		if block.groupFinderButton and b == block.groupFinderButton and block.itemButton and button == block.itemButton then
+			button:SetPoint(a, b, c, d - 1, e)
+		end
+	end
+end)
+
+hooksecurefunc("QuestObjectiveSetupBlockButton_FindGroup", function(block)
+	if block.hasGroupFinderButton and block.groupFinderButton and not block.groupFinderButton.styled then
+		block.groupFinderButton:SetSize(21, 21)
+		block.groupFinderButton:SkinButton()
+
+		block.groupFinderButton.styled = true
+	end
+end)
+
 ----------------------------------------------------------------------------------------
 --	Difficulty color for ObjectiveTrackerFrame lines
 ----------------------------------------------------------------------------------------
@@ -282,7 +300,7 @@ end)
 ScenarioStageBlock:HookScript("OnEnter", function(self)
 	if IsFramePositionedLeft(ObjectiveTrackerFrame) then
 		GameTooltip:ClearAllPoints()
-		GameTooltip:SetPoint("LEFT", self, "RIGHT", 50, 0)
+		GameTooltip:SetPoint("TOPLEFT", self, "TOPRIGHT", 50, -3)
 	end
 end)
 
@@ -294,4 +312,31 @@ ObjectiveTrackerScenarioRewardsFrame.Show = T.dummy
 hooksecurefunc("BonusObjectiveTracker_AnimateReward", function()
 	ObjectiveTrackerBonusRewardsFrame:ClearAllPoints()
 	ObjectiveTrackerBonusRewardsFrame:SetPoint("BOTTOM", UIParent, "TOP", 0, 90)
+end)
+
+----------------------------------------------------------------------------------------
+--	Skin ScenarioStageBlock
+----------------------------------------------------------------------------------------
+local StageBlock = _G["ScenarioStageBlock"]
+StageBlock:CreateBackdrop("Overlay")
+StageBlock.backdrop:SetPoint("TOPLEFT", ScenarioStageBlock.NormalBG, 3, -3)
+StageBlock.backdrop:SetPoint("BOTTOMRIGHT", ScenarioStageBlock.NormalBG, -6, 3)
+
+StageBlock.NormalBG:SetAlpha(0)
+StageBlock.FinalBG:SetAlpha(0)
+StageBlock.GlowTexture:SetTexture("")
+----------------------------------------------------------------------------------------
+--	Skin Timer bar
+----------------------------------------------------------------------------------------
+hooksecurefunc(DEFAULT_OBJECTIVE_TRACKER_MODULE, "AddTimerBar", function(self, block, line)
+	local timerBar = self.usedTimerBars[block] and self.usedTimerBars[block][line]
+	local bar = timerBar.Bar
+
+	if not timerBar.styled then
+		bar:SetStatusBarTexture(C.media.texture)
+		bar:SetTemplate("Transparent")
+		bar:SetBackdropColor(0, 0, 0, 0)
+		bar:DisableDrawLayer("ARTWORK")
+		timerBar.styled = true
+	end
 end)

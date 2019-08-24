@@ -61,6 +61,8 @@ LoadTootlipSkin:SetScript("OnEvent", function(self, _, addon)
 		GarrisonMissionMechanicTooltip:HookScript("OnShow", function(self)
 			self:SetTemplate("Transparent")
 		end)
+
+		GarrisonLandingPage.FollowerTab.AbilitiesFrame.FlavorText:SetFontObject(SystemFont_Shadow_Med3)
 	end
 end)
 
@@ -114,22 +116,24 @@ local function LoadSkin()
 	GarrisonMissionFrameHelpBox:StripTextures()
 	GarrisonMissionFrameHelpBox:SetTemplate("Transparent")
 
-	for i = 1, 2 do
-		_G["GarrisonMissionFrameMissionsTab"..i]:StripTextures()
-		_G["GarrisonMissionFrameMissionsTab"..i]:StyleButton()
-		_G["GarrisonMissionFrameMissionsTab"..i]:SetHeight(_G["GarrisonMissionFrameMissionsTab"..i]:GetHeight() - 10)
+	local function SkinTab(tab)
+		tab:StripTextures()
+		tab:StyleButton()
+		tab:CreateBackdrop("Overlay")
+		tab.backdrop:SetAllPoints()
+		tab:SetHeight(tab:GetHeight() - 10)
 	end
 
+	SkinTab(GarrisonMissionFrameMissionsTab1)
+	SkinTab(GarrisonMissionFrameMissionsTab2)
 	GarrisonMissionFrameMissionsTab1:SetPoint("BOTTOMLEFT", GarrisonMissionFrameMissions, "TOPLEFT", 18, 0)
+	GarrisonMissionFrameMissionsTab1.backdrop:SetBackdropBorderColor(1, 0.82, 0, 1)
+	GarrisonMissionFrameMissionsTab1.backdrop.overlay:SetVertexColor(1 * 0.3, 0.82 * 0.3, 0, 1)
 
 	hooksecurefunc("GarrisonMissonListTab_SetSelected", function(tab, isSelected)
-		if not tab.backdrop then
-			tab:CreateBackdrop("Overlay")
-			tab.backdrop:SetAllPoints()
-		end
 		if isSelected then
 			tab.backdrop:SetBackdropBorderColor(1, 0.82, 0, 1)
-			tab.backdrop.overlay:SetVertexColor(1, 0.82, 0, 0.3)
+			tab.backdrop.overlay:SetVertexColor(1 * 0.3, 0.82 * 0.3, 0, 1)
 		else
 			tab.backdrop:SetBackdropBorderColor(unpack(C.media.border_color))
 			tab.backdrop.overlay:SetVertexColor(0.1, 0.1, 0.1, 1)
@@ -176,7 +180,7 @@ local function LoadSkin()
 		local size = portrait.Portrait:GetSize() + 2
 		portrait:SetSize(size, size)
 
-		portrait.Portrait:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+		portrait.Portrait:SetTexCoord(0.2, 0.85, 0.2, 0.85)
 		portrait.Portrait:ClearAllPoints()
 		portrait.Portrait:SetPoint("TOPLEFT", 1, -1)
 
@@ -217,6 +221,7 @@ local function LoadSkin()
 						button.Follower.Selection:SetTexture("")
 						button.Follower.AbilitiesBG:SetTexture("")
 						button.Follower.BusyFrame:SetAllPoints()
+						button.Follower.Name:SetWordWrap(false)
 
 						if button.Follower.PortraitFrame then
 							HandleGarrisonPortrait(button.Follower.PortraitFrame)
@@ -246,7 +251,7 @@ local function LoadSkin()
 					if button.Follower.Selection and button.Follower.backdrop then
 						if button.Follower.Selection:IsShown() then
 							button.Follower.backdrop:SetBackdropBorderColor(1, 0.82, 0, 1)
-							button.Follower.backdrop.overlay:SetVertexColor(1, 0.82, 0, 0.3)
+							button.Follower.backdrop.overlay:SetVertexColor(1 * 0.3, 0.82 * 0.3, 0, 1)
 							button.Follower.PortraitFrame.backdrop:SetBackdropBorderColor(1, 0.82, 0, 1)
 						else
 							button.Follower.backdrop:SetBackdropBorderColor(unpack(C.media.border_color))
@@ -320,6 +325,9 @@ local function LoadSkin()
 		local r, g, b
 		if frame.IconBorder and frame.IconBorder:IsShown() then
 			r, g, b = frame.IconBorder:GetVertexColor()
+			if r > 0.64 and r < 0.67 then
+				r, g, b = unpack(C.media.border_color)
+			end
 		else
 			r, g, b = unpack(C.media.border_color)
 		end
@@ -387,7 +395,7 @@ local function LoadSkin()
 
 		self:SetNormalTexture("")
 		self.backdrop:SetBackdropBorderColor(1, 0.82, 0, 1)
-		self.backdrop.overlay:SetVertexColor(1, 0.82, 0, 0.3)
+		self.backdrop.overlay:SetVertexColor(1 * 0.3, 0.82 * 0.3, 0, 1)
 	end)
 
 	for i = 1, #GarrisonLandingPage.Report.List.listScroll.buttons do
@@ -395,6 +403,9 @@ local function LoadSkin()
 		for _, reward in pairs(button.Rewards) do
 			reward.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 			if not reward.backdrop then
+				reward:ClearAllPoints()
+				reward:SetPoint("TOPRIGHT", -5, -5)
+
 				reward:CreateBackdrop("Default")
 				reward.backdrop:SetPoint("TOPLEFT", reward.Icon, "TOPLEFT", -2, 2)
 				reward.backdrop:SetPoint("BOTTOMRIGHT", reward.Icon, "BOTTOMRIGHT", 2, -2)
@@ -474,6 +485,7 @@ local function LoadSkin()
 
 	hooksecurefunc(GarrisonMissionFrame.FollowerList, "ShowFollower", onShowFollower)
 	hooksecurefunc(GarrisonLandingPageFollowerList, "ShowFollower", onShowFollower)
+	hooksecurefunc(GarrisonMissionFrame.FollowerList, "UpdateData", UpdateData)
 	hooksecurefunc(GarrisonLandingPageFollowerList, "UpdateData", UpdateData)
 
 	-- ShipYard
@@ -611,7 +623,9 @@ local function LoadSkin()
 	CapacitiveFollower.Portrait.IconBackdrop:SetTemplate("Default")
 
 	hooksecurefunc(CapacitiveFollower.PortraitRingQuality, "SetVertexColor", function(self, r, g, b)
-		CapacitiveFollower.Portrait.IconBackdrop:SetBackdropBorderColor(r, g, b)
+		if r ~= 1 and g ~= 1 and b ~= 1 then
+			CapacitiveFollower.Portrait.IconBackdrop:SetBackdropBorderColor(r, g, b)
+		end
 		self:SetTexture("")
 	end)
 
@@ -721,16 +735,11 @@ local function LoadSkin()
 	T.SkinCloseButton(OrderHallMissionFrame.MissionTab.ZoneSupportMissionPage.CloseButton)
 	OrderHallMissionFrame.MissionTab.ZoneSupportMissionPage.StartMissionButton:SkinButton()
 
-	for i = 1, 2 do
-		_G["OrderHallMissionFrameMissionsTab"..i]:StripTextures()
-		_G["OrderHallMissionFrameMissionsTab"..i]:CreateBackdrop("Overlay")
-		_G["OrderHallMissionFrameMissionsTab"..i].backdrop:SetAllPoints()
-		_G["OrderHallMissionFrameMissionsTab"..i]:SetHeight(_G["OrderHallMissionFrameMissionsTab"..i]:GetHeight() - 10)
-	end
-
+	SkinTab(OrderHallMissionFrameMissionsTab1)
+	SkinTab(OrderHallMissionFrameMissionsTab2)
 	OrderHallMissionFrameMissionsTab1:SetPoint("BOTTOMLEFT", OrderHallMissionFrameMissions, "TOPLEFT", 18, 0)
 	OrderHallMissionFrameMissionsTab1.backdrop:SetBackdropBorderColor(1, 0.82, 0, 1)
-	OrderHallMissionFrameMissionsTab1.backdrop.overlay:SetVertexColor(1, 0.82, 0, 0.3)
+	OrderHallMissionFrameMissionsTab1.backdrop.overlay:SetVertexColor(1 * 0.3, 0.82 * 0.3, 0, 1)
 
 	for i = 1, #OrderHallMissionFrame.MissionTab.MissionList.listScroll.buttons do
 		local button = OrderHallMissionFrame.MissionTab.MissionList.listScroll.buttons[i]
@@ -795,15 +804,10 @@ local function LoadSkin()
 
 	T.SkinCloseButton(BFAMissionFrame.CloseButton)
 
-	for i = 1, 2 do
-		_G["BFAMissionFrameMissionsTab"..i]:StripTextures()
-		_G["BFAMissionFrameMissionsTab"..i]:CreateBackdrop("Overlay")
-		_G["BFAMissionFrameMissionsTab"..i].backdrop:SetAllPoints()
-		_G["BFAMissionFrameMissionsTab"..i]:SetHeight(_G["BFAMissionFrameMissionsTab"..i]:GetHeight() - 10)
-	end
-
+	SkinTab(BFAMissionFrameMissionsTab1)
+	SkinTab(BFAMissionFrameMissionsTab2)
 	BFAMissionFrameMissionsTab1.backdrop:SetBackdropBorderColor(1, 0.82, 0, 1)
-	BFAMissionFrameMissionsTab1.backdrop.overlay:SetVertexColor(1, 0.82, 0, 0.3)
+	BFAMissionFrameMissionsTab1.backdrop.overlay:SetVertexColor(1 * 0.3, 0.82 * 0.3, 0, 1)
 	BFAMissionFrameMissionsTab1:SetPoint("BOTTOMLEFT", BFAMissionFrameMissions, "TOPLEFT", 18, 0)
 
 	BFAMissionFrameMissions:StripTextures()

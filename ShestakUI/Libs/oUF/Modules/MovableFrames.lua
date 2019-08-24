@@ -310,6 +310,19 @@ do
 end
 
 do
+	local function UpdateCoords(self)
+		local mover = self.child
+		local ap, _, rp, x, y = mover:GetPoint()
+
+		local frame = mover.header or mover.obj
+		frame:ClearAllPoints()
+		frame:SetPoint(ap, "UIParent", rp, x, y)
+	end
+
+	local coordFrame = CreateFrame("Frame")
+	coordFrame:SetScript("OnUpdate", UpdateCoords)
+	coordFrame:Hide()
+
 	local OnShow = function(self)
 		return self.name:SetText(smartName(self.obj, self.header))
 	end
@@ -318,18 +331,21 @@ do
 		saveDefaultPosition(self.obj)
 		self:StartMoving()
 
-		local frame = self.header or self.obj
-		frame:ClearAllPoints()
-		frame:SetAllPoints(self)
+		coordFrame.child = self
+		coordFrame:Show()
 	end
 
 	local OnDragStop = function(self)
 		self:StopMovingOrSizing()
 		savePosition(self.obj, self)
+
+		coordFrame.child = nil
+		coordFrame:Hide()
 	end
 
 	local OnMouseUp = function(self, button)
 		if button == "RightButton" then
+			self.backdrop:SetBackdropColor(0.2, 0.6, 0.2, 0.7)
 			local style, identifier = getObjectInformation(self.obj)
 			_DB[style][identifier] =  nil
 		end

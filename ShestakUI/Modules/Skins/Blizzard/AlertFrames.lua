@@ -198,16 +198,6 @@ local function LoadSkin()
 				end
 			end
 
-			for _, button in next, frame.RewardFrames do
-				if not button.isSkinned then
-					local icon, ring = button:GetRegions()
-					icon:SetSize(18, 18)
-					icon:SkinIcon(true)
-					ring:Hide()
-					button.isSkinned = true
-				end
-			end
-
 			frame.isSkinned = true
 		end
 	end
@@ -288,20 +278,10 @@ local function LoadSkin()
 		frame.QuestTexture.b:SetPoint("TOPLEFT", frame.QuestTexture, "TOPLEFT", -2, 2)
 		frame.QuestTexture.b:SetPoint("BOTTOMRIGHT", frame.QuestTexture, "BOTTOMRIGHT", 2, -2)
 		frame.QuestTexture:SetParent(frame.QuestTexture.b)
-
-		for _, button in next, frame.RewardFrames do
-			if not button.isSkinned then
-				local icon, ring = button:GetRegions()
-				icon:SetSize(18, 18)
-				icon:SkinIcon(true)
-				ring:Hide()
-				button.isSkinned = true
-			end
-		end
 	end
 	hooksecurefunc(WorldQuestCompleteAlertSystem, "setUpFunction", SkinWorldQuestCompleteAlert)
 
-	local function SkinGarrisonFollowerAlert(frame)
+	local function SkinGarrisonFollowerAlert(frame, _, _, _, quality)
 		frame:SetAlpha(1)
 		if not frame.hooked then
 			hooksecurefunc(frame, "SetAlpha", forceAlpha)
@@ -319,7 +299,36 @@ local function LoadSkin()
 		frame.FollowerBG:SetAlpha(0)
 		frame.DieIcon:SetAlpha(0)
 		frame.PortraitFrame:ClearAllPoints()
-		frame.PortraitFrame:SetPoint("LEFT", 15, 0)
+		frame.PortraitFrame:SetPoint("LEFT", 12, -4)
+
+		frame.PortraitFrame.PortraitRing:Hide()
+		frame.PortraitFrame.PortraitRingQuality:SetTexture()
+		frame.PortraitFrame.LevelBorder:SetAlpha(0)
+		frame.PortraitFrame.Portrait:SetTexCoord(0.2, 0.85, 0.2, 0.85)
+
+		local level = frame.PortraitFrame.Level
+		level:ClearAllPoints()
+		level:SetPoint("BOTTOM", frame.PortraitFrame, 0, 10)
+
+		local squareBG = CreateFrame("Frame", nil, frame.PortraitFrame)
+		squareBG:SetFrameLevel(frame.PortraitFrame:GetFrameLevel()-1)
+		squareBG:SetPoint("TOPLEFT", 2, -2)
+		squareBG:SetPoint("BOTTOMRIGHT", -2, 10)
+		squareBG:SetTemplate("Default")
+		frame.PortraitFrame.squareBG = squareBG
+
+		local cover = frame.PortraitFrame.PortraitRingCover
+		if cover then
+			cover:SetColorTexture(0, 0, 0)
+			cover:SetAllPoints(squareBG)
+		end
+
+		local color = ITEM_QUALITY_COLORS[quality]
+		if color and quality > 1 then
+			frame.PortraitFrame.squareBG:SetBackdropBorderColor(color.r, color.g, color.b)
+		else
+			frame.PortraitFrame.squareBG:SetBackdropBorderColor(unpack(C.media.border_color))
+		end
 
 		-- Background
 		for i = 1, frame:GetNumRegions() do
@@ -771,6 +780,20 @@ local function LoadSkin()
 	hooksecurefunc(NewPetAlertSystem, "setUpFunction", SkinNewPetMountAlert)
 	hooksecurefunc(NewMountAlertSystem, "setUpFunction", SkinNewPetMountAlert)
 	hooksecurefunc(NewToyAlertSystem, "setUpFunction", SkinNewPetMountAlert)
+
+	hooksecurefunc("StandardRewardAlertFrame_AdjustRewardAnchors", function(frame)
+		if frame.RewardFrames then
+			for _, button in next, frame.RewardFrames do
+				if not button.isSkinned then
+					local icon, ring = button:GetRegions()
+					icon:SetSize(18, 18)
+					icon:SkinIcon(true)
+					ring:Hide()
+					button.isSkinned = true
+				end
+			end
+		end
+	end)
 
 	-- Bonus Roll Money
 	local frame = BonusRollMoneyWonFrame
