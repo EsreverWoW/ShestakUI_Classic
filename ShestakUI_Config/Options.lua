@@ -798,7 +798,8 @@ do
 		arena_on_right,
 		plugins_artifact_bar,
 		plugins_enemy_spec,
-		plugins_diminishing
+		plugins_diminishing,
+		plugins_absorbs
 	}
 
 	local retail = {
