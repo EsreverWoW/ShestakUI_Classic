@@ -293,7 +293,7 @@ if C.reminder.solo_buffs_enable == true then
 			},
 			--]]
 		},
-		ROGUE = { 
+		ROGUE = {
 			[1] = {	-- Weapon enchants group
 				["weapon"] = true,
 				["combat"] = true,

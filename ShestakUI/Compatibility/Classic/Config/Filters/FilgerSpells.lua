@@ -2963,7 +2963,7 @@ C["filger_spells"] = {
 			{spellID = 23034, unitID = "player", caster = "all", filter = "BUFF", absID = true},
 			-- Horde Battle Standard
 			{spellID = 23035, unitID = "player", caster = "all", filter = "BUFF", absID = true},
-			-- Stormpike Battle Standard 
+			-- Stormpike Battle Standard
 			{spellID = 23539, unitID = "player", caster = "all", filter = "BUFF", absID = true},
 			-- Frostwolf Battle Standard
 			{spellID = 23538, unitID = "player", caster = "all", filter = "BUFF", absID = true},
@@ -3347,7 +3347,7 @@ C["filger_spells"] = {
 			--[[
 			-- Raids: Classic
 			--]]
-			
+
 		},
 		--[[
 		{

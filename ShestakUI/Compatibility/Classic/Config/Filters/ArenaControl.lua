@@ -86,7 +86,7 @@ T.ArenaControl = {
 	[SpellName(122)] = 3,		-- Frost Nova
 	[SpellName(12494)] = 3,		-- Frostbite
 	[SpellName(23694)] = 3,		-- Improved Hamstring
-	
+
 	-- Disarms
 	-- [SpellName(14251)] = 1,		-- Riposte
 	[SpellName(676)] = 1,		-- Disarm

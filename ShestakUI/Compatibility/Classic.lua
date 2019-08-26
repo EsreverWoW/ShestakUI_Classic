@@ -532,7 +532,7 @@ end
 UnitDetailedThreatSituation = _G.UnitDetailedThreatSituation or function(unit, mob)
 	--[[[
 	assert(type(unit) == "string" and (type(mob) == "string"), "Usage: UnitDetailedThreatSituation(\"unit\", \"mob\")")
-	
+
 	local firstGUID, secondGUID = UnitGUID(unit), UnitGUID(mob)
 	local currentThreat, maxThreat = ThreatLib:GetThreat(firstGUID, secondGUID), ThreatLib:GetMaxThreatOnTarget(secondGUID)
 
@@ -540,7 +540,7 @@ UnitDetailedThreatSituation = _G.UnitDetailedThreatSituation or function(unit, m
 	local status, rawthreatpct = GetThreatStatus(currentThreat, maxThreat)
 	local threatpct = nil
 	local threatvalue = currentThreat
-	
+
 	if status > 1 then
 		isTanking = 1
 	end
@@ -552,7 +552,7 @@ end
 UnitThreatSituation = _G.UnitThreatSituation or function(unit, otherunit)
 	--[[
 	assert(type(unit) == "string" and (type(otherunit) == "string"), "Usage: UnitThreatSituation(\"unit\"[, \"otherunit\"])")
-	
+
 	local firstGUID, secondGUID = UnitGUID(unit), UnitGUID(otherunit)
 	local currentThreat, maxThreat = ThreatLib:GetThreat(firstGUID, secondGUID), ThreatLib:GetMaxThreatOnTarget(secondGUID)
 
