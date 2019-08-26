@@ -613,4 +613,5 @@ C["misc"] = {
 	["hide_banner"] = true,						-- Hide Boss Banner Loot Frame
 	["hide_talking_head"] = false,				-- Hide Talking Head Frame
 	["hide_raid_button"] = false,				-- Button to hide raid frames in dps layout (top left mouseover)
+	["max_camera_distance"] = true,				-- Increases camera distance to max on login
 }

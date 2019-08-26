@@ -2,15 +2,6 @@ local T, C, L, _ = unpack(select(2, ...))
 if not T.classic then return end
 
 ----------------------------------------------------------------------------------------
---	Max Camera Distance
-----------------------------------------------------------------------------------------
-local OnLogon = CreateFrame("Frame")
-OnLogon:RegisterEvent("PLAYER_ENTERING_WORLD")
-OnLogon:SetScript("OnEvent", function()
-	SetCVar("cameraDistanceMaxZoomFactor", 3.4)
-end)
-
-----------------------------------------------------------------------------------------
 --	Message for BG Queues (temporary)
 ----------------------------------------------------------------------------------------
 local hasShown = false

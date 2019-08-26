@@ -488,6 +488,7 @@ L_GUI_ERROR_HIDE_COMBAT = "Hide all errors in combat" -- Needs review
 
 -- Miscellaneous options
 L_GUI_MISC_SUBTEXT = "Other settings that add interesting features." -- Need review
+L.misc_max_camera_distance = "Increase camera distance to max on login" -- Needs review
 L.misc_shift_marking = "Marks mouseover target" -- Need review
 L.misc_shift_marking_desc = "Marks mouseover target when you push Shift (only in group)" -- Need review
 L_GUI_MISC_SPIN_CAMERA = "Rotar cámara mientras estás ausente"

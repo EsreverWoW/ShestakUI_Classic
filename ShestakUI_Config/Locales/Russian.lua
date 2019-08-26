@@ -488,6 +488,7 @@ L_GUI_ERROR_HIDE_COMBAT = "Спрятать все ошибки во время 
 
 -- Miscellaneous options
 L_GUI_MISC_SUBTEXT = "Прочие настройки, которые добавляют интересные возможности."
+L.misc_max_camera_distance = "Increase camera distance to max on login" -- Needs review
 L.misc_shift_marking = "Меню с метками цели"
 L.misc_shift_marking_desc = "Shift-клик по врагу вызывает меню с метками (работает только в группе)"
 L_GUI_MISC_SPIN_CAMERA = "Вращать камеру во время афк"

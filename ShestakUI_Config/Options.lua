@@ -1939,8 +1939,11 @@ end
 do
 	local parent = ShestakUIOptionsPanel.misc
 
+	local max_camera_distance = ns.CreateCheckBox(parent, "max_camera_distance", L_GUI_MISC_MAX_CAMERA_DISTANCE)
+	max_camera_distance:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
+
 	local shift_marking = ns.CreateCheckBox(parent, "shift_marking")
-	shift_marking:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
+	shift_marking:SetPoint("TOPLEFT", max_camera_distance, "BOTTOMLEFT", 0, 0)
 
 	local afk_spin_camera = ns.CreateCheckBox(parent, "afk_spin_camera", L_GUI_MISC_SPIN_CAMERA)
 	afk_spin_camera:SetPoint("TOPLEFT", shift_marking, "BOTTOMLEFT", 0, 0)

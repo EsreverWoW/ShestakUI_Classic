@@ -510,6 +510,7 @@ L_GUI_ERROR_HIDE_COMBAT = "Hide all errors in combat"
 
 -- Miscellaneous options
 L_GUI_MISC_SUBTEXT = "Other settings that add interesting features."
+L.misc_max_camera_distance = "Increase camera distance to max on login"
 L.misc_shift_marking = "Marks mouseover target"
 L.misc_shift_marking_desc = "Marks mouseover target when you push Shift (only in group)"
 L_GUI_MISC_SPIN_CAMERA = "Spin camera while afk"

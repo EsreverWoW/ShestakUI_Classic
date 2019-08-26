@@ -488,6 +488,7 @@ L_GUI_ERROR_HIDE_COMBAT = "战斗中隐藏所有错误提示"
 
 -- Miscellaneous options
 L_GUI_MISC_SUBTEXT = "一些便捷的功能设置"
+L.misc_max_camera_distance = "Increase camera distance to max on login" -- Needs review
 L.misc_shift_marking = "鼠标目标标记"
 L.misc_shift_marking_desc = "鼠标指向目标Shift+左键显示团队标记菜单(仅限队伍/团队)"
 L_GUI_MISC_SPIN_CAMERA = "AFK时旋转镜头"

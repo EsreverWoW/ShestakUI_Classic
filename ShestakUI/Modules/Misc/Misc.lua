@@ -316,3 +316,18 @@ end
 --	Change UIErrorsFrame strata
 ----------------------------------------------------------------------------------------
 UIErrorsFrame:SetFrameLevel(0)
+
+----------------------------------------------------------------------------------------
+--	Max Camera Distance
+----------------------------------------------------------------------------------------
+if C.misc.max_camera_distance == true then
+	local OnLogon = CreateFrame("Frame")
+	OnLogon:RegisterEvent("PLAYER_ENTERING_WORLD")
+	OnLogon:SetScript("OnEvent", function()
+		if T.classic then
+			SetCVar("cameraDistanceMaxZoomFactor", 3.4)
+		else
+			SetCVar("cameraDistanceMaxZoomFactor", 2.6)
+		end
+	end)
+end
