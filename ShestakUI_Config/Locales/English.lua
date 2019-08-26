@@ -232,6 +232,7 @@ L_GUI_TOOLTIP_WHO_TARGETTING = "Display who is targeting the unit that is in you
 L_GUI_TOOLTIP_ITEM_COUNT = "Item stack count"
 L_GUI_TOOLTIP_UNIT_ROLE = "Unit role"
 L_GUI_TOOLTIP_INSTANCE_LOCK = "Your instance lock status in tooltip"
+L.tooltip_vendor_price = "Show vendor price"
 
 -- Chat options
 L_GUI_CHAT_SUBTEXT = "Here you can change the settings of the chat window."

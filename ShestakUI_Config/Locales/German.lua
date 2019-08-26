@@ -210,6 +210,7 @@ L_GUI_TOOLTIP_WHO_TARGETTING = "Zeige an, wer die Eihneit, die in deiner Gruppe/
 L_GUI_TOOLTIP_ITEM_COUNT = "Gegenstandsanzahl"
 L_GUI_TOOLTIP_UNIT_ROLE = "Klassenrolle (Tank/Schaden/Heiler)"
 L_GUI_TOOLTIP_INSTANCE_LOCK = "Deine abgeschlossenen Instanzen im Tooltip"
+L.tooltip_vendor_price = "Show vendor price" -- Needs review
 
 -- Chat options
 L_GUI_CHAT_SUBTEXT = "Hier Einstellungen des Chat-Fensters ändern."

@@ -1,6 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
--- if C.tooltip.enable ~= true or C.tooltip.item_price ~= true then return end
-if not T.classic or C.tooltip.enable ~= true then return end
+if not T.classic or C.tooltip.enable ~= true or C.tooltip.vendor_price ~= true then return end
 
 ----------------------------------------------------------------------------------------
 --	Item Price

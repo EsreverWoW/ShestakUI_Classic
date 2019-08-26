@@ -241,6 +241,7 @@ C["tooltip"] = {
 	["hide_combat"] = false,					-- Hide tooltip in combat
 	-- Plugins
 	["talents"] = false,						-- Show tooltip talents
+	["vendor_price"] = false,						-- Show vendor price
 	["achievements"] = true,					-- Comparing achievements in tooltip
 	["target"] = true,							-- Target player in tooltip
 	["title"] = false,							-- Player title in tooltip
@@ -259,6 +260,7 @@ C["tooltip"] = {
 if T.classic then
 	C["tooltip"]["realm"] = false
 	C["tooltip"]["item_count"] = true
+	C["tooltip"]["vendor_price"] = true
 end
 
 ----------------------------------------------------------------------------------------

@@ -210,6 +210,7 @@ L_GUI_TOOLTIP_WHO_TARGETTING = "Показать, кто выбрал целью
 L_GUI_TOOLTIP_ITEM_COUNT = "Количество предметов в стопке"
 L_GUI_TOOLTIP_UNIT_ROLE = "Роль игрока"
 L_GUI_TOOLTIP_INSTANCE_LOCK = "Ваш статус прохождения подземелий в подсказке"
+L.tooltip_vendor_price = "Show vendor price" -- Needs review
 
 -- Chat options
 L_GUI_CHAT_SUBTEXT = "Здесь можно изменить настройки окна чата."

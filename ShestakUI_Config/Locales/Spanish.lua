@@ -210,6 +210,7 @@ L_GUI_TOOLTIP_WHO_TARGETTING = "Muestra quien está marcando la unidad que está
 L_GUI_TOOLTIP_ITEM_COUNT = "Contador del objeto"
 L_GUI_TOOLTIP_UNIT_ROLE = "Unit role" -- Needs review
 L_GUI_TOOLTIP_INSTANCE_LOCK = "Your instance lock status in tooltip" -- Needs review
+L.tooltip_vendor_price = "Show vendor price" -- Needs review
 
 -- Chat options
 L_GUI_CHAT_SUBTEXT = "Here you can change the settings of the chat window." -- Need review

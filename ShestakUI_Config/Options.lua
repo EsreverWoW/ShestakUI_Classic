@@ -1105,6 +1105,9 @@ do
 	local talents = ns.CreateCheckBox(parent, "talents", L_GUI_TOOLTIP_TALENTS)
 	talents:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -8)
 
+	local vendor_price = ns.CreateCheckBox(parent, "vendor_price")
+	vendor_price:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -8)
+
 	local achievements = ns.CreateCheckBox(parent, "achievements", L_GUI_TOOLTIP_ACHIEVEMENTS)
 	achievements:SetPoint("TOPLEFT", talents, "BOTTOMLEFT", 0, 0)
 
@@ -1145,13 +1148,20 @@ do
 	instance_lock:SetPoint("TOPLEFT", unit_role, "BOTTOMLEFT", 0, 0)
 
 	local classic = {
+		talents,
 		achievements,
 		arena_experience,
 		unit_role
 	}
 
+	local retail = {
+		vendor_price,
+	}
+
 	if IsClassicBuild() then
 		HideOptions(classic)
+	else
+		HideOptions(retail)
 	end
 end
 

@@ -210,6 +210,7 @@ L_GUI_TOOLTIP_WHO_TARGETTING = "关注成员(在队伍/团队中谁以目标為�
 L_GUI_TOOLTIP_ITEM_COUNT = "物品的简易统计"
 L_GUI_TOOLTIP_UNIT_ROLE = "角色类型"
 L_GUI_TOOLTIP_INSTANCE_LOCK = "自身信息提示"
+L.tooltip_vendor_price = "Show vendor price" -- Needs review
 
 -- Chat options
 L_GUI_CHAT_SUBTEXT = "这里可以设置你的聊天框"
