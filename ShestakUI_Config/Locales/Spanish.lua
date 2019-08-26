@@ -159,6 +159,16 @@ L_GUI_UF_PLUGINS_PVP_DEBUFFS = "Show also PvP debuff icons (from the list)" -- N
 L_GUI_UF_PLUGINS_HEALCOMM = "Barra de sanación entrante"
 L.raidframe_plugins_auto_resurrection = "Auto cast resurrection" -- Need review
 L.raidframe_plugins_auto_resurrection_desc = "Auto lanzar resurreción con click central cuando la unidad este muerta (no funciona cuando Clique está activado)"
+L_GUI_UF_RAID_HEAL_SIZING = "Healer Layout Sizing (takes effect on reload)" -- Needs review
+L_GUI_UF_RAID_DPS_SIZING = "DPS Layout Sizing (takes effect on reload)" -- Needs review
+L.raidframe_heal_unit_width = "Unit Width" -- Needs review
+L.raidframe_heal_unit_height = "Unit Height" -- Needs review
+L.raidframe_dps_party_width = "Party Width" -- Needs review
+L.raidframe_dps_party_height = "Party Height" -- Needs review
+L.raidframe_dps_partytarget_width = "Party Target Width" -- Needs review
+L.raidframe_dps_partytarget_height = "Prty Target Height" -- Needs review
+L.raidframe_dps_unit_width = "Raid Unit Width" -- Needs review
+L.raidframe_dps_unit_height = "Raid Unit Height" -- Needs review
 
 -- ActionBar options
 L_GUI_ACTIONBAR = "Action Bars" -- Need review

@@ -8,12 +8,12 @@ local _, ns = ...
 local oUF = ns.oUF
 
 -- Frame size
-local party_width = 140
-local party_height = 27
-local partytarget_width = 30
-local partytarget_height = 27
-local unit_width = 104
-local unit_height = 17
+local party_width = C.raidframe.dps_party_width or 140
+local party_height = C.raidframe.dps_party_height or 27
+local partytarget_width = C.raidframe.dps_partytarget_width or 30
+local partytarget_height = C.raidframe.dps_partytarget_height or 27
+local unit_width = C.raidframe.dps_unit_width or 104
+local unit_height = C.raidframe.dps_unit_height or 17
 
 -- Create layout
 local function Shared(self, unit)

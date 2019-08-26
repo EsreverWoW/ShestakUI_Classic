@@ -159,6 +159,16 @@ L_GUI_UF_PLUGINS_PVP_DEBUFFS = "Отображать PvP дебаффы (из с
 L_GUI_UF_PLUGINS_HEALCOMM = "Отображать поступающее лечение"
 L.raidframe_plugins_auto_resurrection = "Автокаст воскрешения"
 L.raidframe_plugins_auto_resurrection_desc = "Автокаст воскрешения средней кнопкой мыши (не работает с Clique)"
+L_GUI_UF_RAID_HEAL_SIZING = "Healer Layout Sizing (takes effect on reload)" -- Needs review
+L_GUI_UF_RAID_DPS_SIZING = "DPS Layout Sizing (takes effect on reload)" -- Needs review
+L.raidframe_heal_unit_width = "Unit Width" -- Needs review
+L.raidframe_heal_unit_height = "Unit Height" -- Needs review
+L.raidframe_dps_party_width = "Party Width" -- Needs review
+L.raidframe_dps_party_height = "Party Height" -- Needs review
+L.raidframe_dps_partytarget_width = "Party Target Width" -- Needs review
+L.raidframe_dps_partytarget_height = "Prty Target Height" -- Needs review
+L.raidframe_dps_unit_width = "Raid Unit Width" -- Needs review
+L.raidframe_dps_unit_height = "Raid Unit Height" -- Needs review
 
 -- ActionBar options
 L_GUI_ACTIONBAR = "Панели команд"

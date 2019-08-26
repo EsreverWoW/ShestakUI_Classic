@@ -171,6 +171,15 @@ C["raidframe"] = {
 	["raid_tanks_tt"] = false,					-- Show raid tanks target target
 	["raid_groups"] = 5,						-- Number of groups in raid
 	["raid_groups_vertical"] = false,			-- Vertical raid groups (only for heal layout)
+	-- Size
+	["dps_party_width"] = 140,					-- Party frame width (DPS layout)
+	["dps_party_height"] = 27,					-- Party frame height (DPS layout)
+	["dps_partytarget_width"] = 30,				-- Party frame width (DPS layout)
+	["dps_partytarget_height"] = 27,			-- Party frame height (DPS layout)
+	["dps_unit_width"] = 104,					-- Raid frame width (DPS layout)
+	["dps_unit_height"] = 17,					-- Raid frame height (DPS layout)
+	["heal_unit_width"] = 60.2,					-- Raid frame width (heal layout)
+	["heal_unit_height"] = 26,					-- Raid frame height (heal layout)
 	-- Icons
 	["icons_role"] = false,						-- Role icon on frames
 	["icons_raid_mark"] = true,					-- Raid mark icons on frames

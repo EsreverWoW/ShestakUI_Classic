@@ -980,6 +980,36 @@ do
 	local plugins_auto_resurrection = ns.CreateCheckBox(parent, "plugins_auto_resurrection")
 	plugins_auto_resurrection:SetPoint("TOPLEFT", plugins_healcomm, "BOTTOMLEFT", 0, 0)
 
+	local subheader = ns.addSubCategory(parent, L_GUI_UF_RAID_HEAL_SIZING)
+	subheader:SetPoint("TOPLEFT", plugins_auto_resurrection, "BOTTOMLEFT", 0, -16)
+
+	local heal_unit_width = ns.CreateNumberSlider(parent, "heal_unit_width", nil, nil, 0, 300, 0.1, true)
+	heal_unit_width:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -32)
+
+	local heal_unit_height = ns.CreateNumberSlider(parent, "heal_unit_height", nil, nil, 0, 100, 0.1, true)
+	heal_unit_height:SetPoint("LEFT", heal_unit_width, "RIGHT", 120, 0)
+
+	local subheader = ns.addSubCategory(parent, L_GUI_UF_RAID_DPS_SIZING)
+	subheader:SetPoint("TOPLEFT", heal_unit_width, "BOTTOMLEFT", 0, -16)
+
+	local dps_party_width = ns.CreateNumberSlider(parent, "dps_party_width", nil, nil, 0, 300, 0.1, true)
+	dps_party_width:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -32)
+
+	local dps_party_height = ns.CreateNumberSlider(parent, "dps_party_height", nil, nil, 0, 100, 0.1, true)
+	dps_party_height:SetPoint("LEFT", dps_party_width, "RIGHT", 120, 0)
+
+	local dps_partytarget_width = ns.CreateNumberSlider(parent, "dps_partytarget_width", nil, nil, 0, 300, 0.1, true)
+	dps_partytarget_width:SetPoint("TOPLEFT", dps_party_width, "BOTTOMLEFT", 0, -32)
+
+	local dps_partytarget_height = ns.CreateNumberSlider(parent, "dps_partytarget_height", nil, nil, 0, 100, 0.1, true)
+	dps_partytarget_height:SetPoint("LEFT", dps_partytarget_width, "RIGHT", 120, 0)
+
+	local dps_unit_width = ns.CreateNumberSlider(parent, "dps_unit_width", nil, nil, 0, 300, 0.1, true)
+	dps_unit_width:SetPoint("TOPLEFT", dps_partytarget_width, "BOTTOMLEFT", 0, -32)
+
+	local dps_unit_height = ns.CreateNumberSlider(parent, "dps_unit_height", nil, nil, 0, 100, 0.1, true)
+	dps_unit_height:SetPoint("LEFT", dps_unit_width, "RIGHT", 120, 0)
+
 	local classic = {
 		by_role,
 		icons_role,

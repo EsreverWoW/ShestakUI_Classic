@@ -8,8 +8,8 @@ local _, ns = ...
 local oUF = ns.oUF
 
 -- Frame size
-local unit_width = 60.2
-local unit_height = 26
+local unit_width = C.raidframe.heal_unit_width or 60.2
+local unit_height = C.raidframe.heal_unit_height or 26
 
 -- Create layout
 local function Shared(self, unit)

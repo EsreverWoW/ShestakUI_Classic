@@ -159,6 +159,16 @@ L_GUI_UF_PLUGINS_PVP_DEBUFFS = "PVP DeBuff圖標"
 L_GUI_UF_PLUGINS_HEALCOMM = "即將受到的治療"
 L.raidframe_plugins_auto_resurrection = "中鍵施放復活技能"
 L.raidframe_plugins_auto_resurrection_desc = "滑鼠中鍵點擊已死亡角色時施放復活技能(Clique啟用時無效)"
+L_GUI_UF_RAID_HEAL_SIZING = "Healer Layout Sizing (takes effect on reload)" -- Needs review
+L_GUI_UF_RAID_DPS_SIZING = "DPS Layout Sizing (takes effect on reload)" -- Needs review
+L.raidframe_heal_unit_width = "Unit Width" -- Needs review
+L.raidframe_heal_unit_height = "Unit Height" -- Needs review
+L.raidframe_dps_party_width = "Party Width" -- Needs review
+L.raidframe_dps_party_height = "Party Height" -- Needs review
+L.raidframe_dps_partytarget_width = "Party Target Width" -- Needs review
+L.raidframe_dps_partytarget_height = "Prty Target Height" -- Needs review
+L.raidframe_dps_unit_width = "Raid Unit Width" -- Needs review
+L.raidframe_dps_unit_height = "Raid Unit Height" -- Needs review
 
 -- ActionBar options
 L_GUI_ACTIONBAR = "快捷列"
