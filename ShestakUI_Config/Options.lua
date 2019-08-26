@@ -25,13 +25,31 @@ end
 local realm = GetRealmName()
 local name = UnitName("player")
 
+local function OnDragStart(f)
+	f:StartMoving()
+end
+
+local function OnDragStop(f)
+	f:StopMovingOrSizing()
+end
+
 -- Main window
 local options = CreateFrame("Frame", "ShestakUIOptionsPanel", UIParent)
 options:SetSize(800, 770)
+options:ClearAllPoints()
 options:SetPoint("CENTER")
 options:SetFrameStrata("HIGH")
 options:EnableMouse(true)
+options:SetMovable(true)
+options:RegisterForDrag("LeftButton")
+options:SetScript("OnDragStart", OnDragStart)
+options:SetScript("OnDragStop", OnDragStop)
 tinsert(UISpecialFrames, options:GetName())
+
+options:SetScript("OnShow", function(self)
+	options:ClearAllPoints()
+	options:SetPoint("CENTER")
+end)
 
 local CloseButton = CreateFrame("Button", nil, options, "UIPanelButtonTemplate")
 CloseButton:SetPoint("TOPRIGHT", options, "BOTTOMRIGHT", -10, 30)
