@@ -244,7 +244,4 @@ OnLogon:SetScript("OnEvent", function(self)
 		print("|cffffff00"..L_WELCOME_LINE_1..T.version.." "..T.client..", "..T.name..".|r")
 		print("|cffffff00"..L_WELCOME_LINE_2_1.." |cffffff00"..L_WELCOME_LINE_2_2.."|r")
 	end
-
-	-- Temporary message about early state of enemy cast bars
-	print("|cffffff00".."NOTE: Target/nameplate castbars are in an early state and I am aware of issues surrounding them. Please report other issues to issue tracker.".."|r")
 end)
