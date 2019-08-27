@@ -56,6 +56,10 @@ local function UNIT_SPELLCAST_START(self, event, unit)
 	element:SetMinMaxValues(0, max)
 	element:SetValue(0)
 
+	if(texture == 136235) then
+		texture = 134400
+	end
+
 	if(element.Text) then element.Text:SetText(LibClassicCasterino and name or text) end
 	if(element.Icon) then element.Icon:SetTexture(texture) end
 	if(element.Time) then element.Time:SetText() end
@@ -268,6 +272,10 @@ local function UNIT_SPELLCAST_CHANNEL_START(self, event, unit, _, spellID)
 
 	element:SetMinMaxValues(0, max)
 	element:SetValue(duration)
+
+	if(texture == 136235) then
+		texture = 134400
+	end
 
 	if(element.Text) then element.Text:SetText(name) end
 	if(element.Icon) then element.Icon:SetTexture(texture) end
