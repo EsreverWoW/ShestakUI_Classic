@@ -1,6 +1,8 @@
 local _, ns = ...
 local oUF = ns.oUF
 
+local UnitCastingInfo = UnitCastingInfo or CastingInfo
+
 -- sourced from FrameXML/AlternatePowerBar.lua
 local ADDITIONAL_POWER_BAR_INDEX = ADDITIONAL_POWER_BAR_INDEX or 0
 local ALT_MANA_BAR_PAIR_DISPLAY_INFO = ALT_MANA_BAR_PAIR_DISPLAY_INFO
