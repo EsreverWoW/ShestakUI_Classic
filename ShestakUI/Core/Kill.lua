@@ -16,8 +16,10 @@ frame:SetScript("OnEvent", function(_, _, addon)
 		InterfaceOptionsFrameCategoriesButton10:SetScale(0.00001)
 		InterfaceOptionsFrameCategoriesButton10:SetAlpha(0)
 		if not InCombatLockdown() then
-			CompactRaidFrameManager:Kill()
-			CompactRaidFrameContainer:Kill()
+			if IsAddOnLoaded("Blizzard_RaidUI") then
+				CompactRaidFrameManager:Kill()
+				CompactRaidFrameContainer:Kill()
+			end
 		end
 		ShowPartyFrame = T.dummy
 		HidePartyFrame = T.dummy
