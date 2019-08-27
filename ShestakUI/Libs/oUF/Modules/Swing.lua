@@ -7,6 +7,17 @@ if C.unitframe.enable ~= true or C.unitframe.plugins_swing ~= true then return e
 local _, ns = ...
 local oUF = ns.oUF
 
+local swingResets = {}
+if T.classic then
+	swingResets = {
+		[GetSpellInfo(6807)]	= true, -- Maul
+		[GetSpellInfo(2973)] 	= true, -- Raptor Strike
+		[GetSpellInfo(845)]		= true, -- Cleave
+		[GetSpellInfo(78)]		= true, -- Heroic Strike
+		[GetSpellInfo(1464)]	= true, -- Slam
+	}
+end
+
 local function OnDurationUpdate(self)
 	self:SetMinMaxValues(self.min, self.max)
 
@@ -28,18 +39,25 @@ local function OnDurationUpdate(self)
 end
 
 local function Melee(self)
-	local _, event, _, GUID, _, _, _, tarGUID, _, _, _, missType = CombatLogGetCurrentEventInfo()
+	local _, event, _, GUID, _, _, _, tarGUID, _, _, _, missType, spellName = CombatLogGetCurrentEventInfo()
 	local bar = self.Swing
 
 	if UnitGUID(self.unit) == tarGUID then
-		if string.find(event, "MISSED") then
+		if event == "SWING_MISSED" then
 			if missType == "PARRY" then
 				bar.max = bar.min + ((bar.max - bar.min) * 0.6)
 				bar:SetMinMaxValues(bar.min, bar.max)
 			end
 		end
 	elseif UnitGUID(self.unit) == GUID then
-		if not string.find(event, "SWING") then return end
+		local shouldReset
+		if event == "SPELL_DAMAGE" or event == "SPELL_MISSED" then
+			if swingResets[spellName] then
+				shouldReset = true
+			end
+		end
+
+		if not (string.find(event, "SWING") or shouldReset) then return end
 
 		bar.min = GetTime()
 		bar.max = bar.min + UnitAttackSpeed(self.unit)
