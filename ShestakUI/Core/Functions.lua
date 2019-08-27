@@ -1288,7 +1288,12 @@ T.PostChannelStart = function(Castbar, unit)
 	end
 
 	if unit == "player" and C.unitframe.castbar_ticks == true then
-		local spell = UnitChannelInfo(unit)
+		local spell
+		if T.classic then
+			spell = ChannelInfo()
+		else
+			UnitChannelInfo(unit)
+		end
 		Castbar.channelingTicks = T.CastBarTicks[spell] or 0
 		setBarTicks(Castbar, Castbar.channelingTicks)
 	end
