@@ -31,7 +31,10 @@ if C.automation.accept_invite == true then
 	local ai = CreateFrame("Frame")
 	ai:RegisterEvent("PARTY_INVITE_REQUEST")
 	ai:SetScript("OnEvent", function(self, event, name)
-		if MiniMapBattlefieldFrame:IsShown() or QueueStatusMinimapButton:IsShown() or GetNumGroupMembers() > 0 then return end
+		if not T.classic then
+			if QueueStatusMinimapButton:IsShown() then return end
+		end
+		if MiniMapBattlefieldFrame:IsShown() or GetNumGroupMembers() > 0 then return end
 		if CheckFriend(name) then
 			RaidNotice_AddMessage(RaidWarningFrame, L_INFO_INVITE..name, {r = 0.41, g = 0.8, b = 0.94}, 3)
 			print(format("|cffffff00"..L_INFO_INVITE..name..".|r"))
