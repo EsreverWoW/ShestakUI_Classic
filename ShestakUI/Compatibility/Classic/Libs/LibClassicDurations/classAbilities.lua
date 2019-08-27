@@ -3,7 +3,7 @@ if _G.WOW_PROJECT_ID ~= _G.WOW_PROJECT_CLASSIC then return end
 local lib = LibStub and LibStub("LibClassicDurations", true)
 if not lib then return end
 
-local Type, Version = "SpellTable", 14
+local Type, Version = "SpellTable", 15
 if lib:GetDataVersion(Type) >= Version then return end  -- older versions didn't have that function
 
 local Spell = lib.AddAura
@@ -75,7 +75,13 @@ Spell( 7744, { duration = 5, type = "BUFF" }) -- Will of the Forsaken
 -- PRIEST
 -------------
 
--- Spell({ 1243, 1244, 1245, 2791, 10937, 10938 }, { duration = 1800, type = "BUFF" }) -- Power Word: Fortitude and Prayer of Fortitude
+-- Why long auras are disabled
+-- When you first get in combat log range with a player,
+-- you'll get AURA_APPLIED event as if it was just applied, when it actually wasn't.
+-- That's extremely common for these long self-buffs
+-- So I think it's better not to show anything rather than incorrect time.
+
+-- Spell({ 1243, 1244, 1245, 2791, 10937, 10938 }, { duration = 1800, type = "BUFF" }) -- Power Word: Fortitude
 -- Spell({ 21562, 21564 }, { duration = 3600, type = "BUFF" }) -- Prayer of Fortitude
 -- Spell({ 976, 10957, 10958 }, { duration = 600, type = "BUFF" }) -- Shadow Protection
 -- Spell( 27683, { duration = 600, type = "BUFF" }) -- Prayer of Shadow Protection
@@ -427,7 +433,7 @@ Spell( 18093 ,{ duration = 3 }) -- Pyroclasm
 -- SHAMAN
 ---------------
 
--- Spell({ 324, 325, 905, 945, 8134, 10431, 10432 }, { duration = 600, type = "BUFF" }) -- Lightning Shield
+Spell({ 324, 325, 905, 945, 8134, 10431, 10432 }, { duration = 600, type = "BUFF" }) -- Lightning Shield
 Spell( 546 ,{ duration = 600, type = "BUFF" }) -- Water Walkign
 Spell( 131 ,{ duration = 600, type = "BUFF" }) -- Water Breahing
 Spell({ 16257, 16277, 16278, 16279, 16280 }, { duration = 15, type = "BUFF" }) -- Flurry
@@ -439,7 +445,7 @@ Spell({ 8050, 8052, 8053, 10447, 10448, 29228 }, { duration = 12, stacking = tru
 Spell( 29203 ,{ duration = 15, type = "BUFF" }) -- Healing Way
 Spell({ 8034, 8037, 10458, 16352, 16353 }, { duration = 8 }) -- Frostbrand Attack
 Spell( 3600 ,{ duration = 5 }) -- Earthbind Totem
--- Spell( 8178 ,{ type = "BUFF" }) -- Grounding Totem Effect, no duration
+Spell( 8178 ,{ duration = 45, type = "BUFF" }) -- Grounding Totem Effect, no duration, but lasts 45s. Keeping for enemy buffs
 
 --------------
 -- PALADIN
