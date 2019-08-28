@@ -696,18 +696,7 @@ local function style(self, unit)
 			end
 		end
 
-		self.Auras.PostUpdateIcon = function(_, _, icon, _, _, duration, expiration)
-			if duration and duration > 0 and C.aura.show_timer == true then
-				icon.remaining:Show()
-				icon.timeLeft = expiration
-				icon:SetScript("OnUpdate", CreateAuraTimer)
-			else
-				icon.remaining:Hide()
-				icon.timeLeft = math.huge
-				icon:SetScript("OnUpdate", nil)
-			end
-			icon.first = true
-		end
+		self.Auras.PostUpdateIcon = T.PostUpdateIcon
 	end
 
 	self.Health:RegisterEvent("PLAYER_REGEN_DISABLED")

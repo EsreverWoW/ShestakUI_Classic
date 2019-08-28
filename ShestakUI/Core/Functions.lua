@@ -1521,7 +1521,7 @@ T.PostUpdateIcon = function(_, unit, button, index, _, duration, expiration, deb
 	end
 
 	if T.classic and button.remaining then
-		if durationTime and durationTime > 0 and C.aura.show_timer == true and not unit:match("nameplate") then
+		if durationTime and durationTime > 0 and C.aura.show_timer == true then
 			button.remaining:Show()
 			button.timeLeft = expirationTime
 			button:SetScript("OnUpdate", CreateAuraTimer)
