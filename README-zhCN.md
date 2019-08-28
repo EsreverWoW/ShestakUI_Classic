@@ -1,10 +1,10 @@
 # ShestakUI - WoW Classic (1.13.2) [!["Open Issues"](https://img.shields.io/github/issues-raw/EsreverWoW/ShestakUI_Classic.svg)](https://github.com/EsreverWoW/ShestakUI_Classic/issues) [![Discord](https://img.shields.io/discord/610506253306822663.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/mWGp4ac)
-ShestakUI is a modular, lightweight, all-in-one overhaul for the World of Warcraft interface. It aims to streamline and clean up the interface, removing unnecessary frills and wasted space as well as fill in some of the holes left in the default UI.
+ShestakUI是一款模块化、轻量级、一体式的魔兽世界界面UI插件。 它的目的是简化和清理界面，消除不必要的虚饰和浪费的空间，并填补在默认用户界面中留下的一些漏洞。
 
-This version of ShestakUI is meant to retain compatibility modern WoW, while also providing compatibility so that it may additionally function in WoW Classic.
+这个版本的ShestakUI是为了为官方怀旧所发布的，同时也提供了兼容性，以便它可以在WoW Classic中运行。
 
 ## BUGS:
-**If you encounter any bugs, please report them on the [issue tracker](https://github.com/EsreverWoW/ShestakUI_Classic/issues) and I will do my best to correct them.**
+**请注意，此版本仍然处于早期阶段，你很可能会遇到bug. 请在 [issue tracker](https://github.com/EsreverWoW/ShestakUI_Classic/issues) 上报告bug，作者会尽力修复。**
 
 **Download from [here](https://github.com/EsreverWoW/ShestakUI_Classic/archive/master.zip). Extract `ShestakUI` and `ShestakUI_Config` to your `Interface\AddOns` folder.**
 
