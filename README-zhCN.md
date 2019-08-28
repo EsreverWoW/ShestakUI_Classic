@@ -8,7 +8,7 @@ ShestakUI是一款模块化、轻量级、一体式的魔兽世界界面UI插件
 
 **Download from [here](https://github.com/EsreverWoW/ShestakUI_Classic/archive/master.zip). Extract `ShestakUI` and `ShestakUI_Config` to your `Interface\AddOns` folder.**
 
-## 截图 (current images from retail):
+## 截图 (当前画面为国服，怀旧服截图会在后续更新):
 <img src="https://i.imgur.com/Nm7tcgd.jpg" align="right" width="48.5%">
 <img src="https://i.imgur.com/0g9Hbv7.jpg" width="48.5%">
 <img src="https://i.imgur.com/uvnad8c.jpg" align="right" width="48.5%">
@@ -22,7 +22,7 @@ ShestakUI是一款模块化、轻量级、一体式的魔兽世界界面UI插件
 ```
 /config, /cfg       打开配置设置
 /moveui             移动界面元素
-/hb                 Binding keys.
+/hb                 绑建
 /rl                 重载界面
 /rc                 开始就绪检查
 /gm                 打开GM对话框
@@ -46,7 +46,7 @@ ShestakUI是一款模块化、轻量级、一体式的魔兽世界界面UI插件
 **插件命令**
 ```
 /litestats, /ls     LiteStats版主信息.
-/dbmtest            DBM 测试模式.
+/dbmtest            DBM 测试模块.
 /enemycd            敌方冷却提示测试.
 /raidcd             团队技能冷却提示测试.
 /pulsecd            自己冷却提示测试.
@@ -54,7 +54,7 @@ ShestakUI是一款模块化、轻量级、一体式的魔兽世界界面UI插件
 /testuf             单位框架测试.
 /bags               清理背包.
 /xct                清理战斗信息.
-/testroll           Test group roll.
+/testroll           测试队伍ROLL点.
 ```
 **额外命令**
 ```
