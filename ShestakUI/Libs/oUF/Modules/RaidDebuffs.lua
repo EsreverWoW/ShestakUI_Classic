@@ -214,7 +214,7 @@ local Update = function(self, event, unit)
 			if LibClassicDurations then
 				local durationNew, expirationTimeNew = LibClassicDurations:GetAuraDurationByUnit(unit, spellId, unitCaster, name)
 
-				if duration == 0 and durationNew then
+				if durationNew and durationNew > 0 then
 					duration = durationNew
 					expirationTime = expirationTimeNew
 				end

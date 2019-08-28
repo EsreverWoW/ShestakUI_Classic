@@ -282,7 +282,7 @@ local function initObject(unit, style, styleFunc, header, ...)
 		end
 
 		if(not (suffix == 'target' or objectUnit and objectUnit:match('target'))) then
-			if not oUF:IsClassic() then
+			if(not oUF:IsClassic()) then
 				object:RegisterEvent('UNIT_ENTERED_VEHICLE', updateActiveUnit)
 				object:RegisterEvent('UNIT_EXITED_VEHICLE', updateActiveUnit)
 			end

@@ -109,7 +109,7 @@ local function Update(frame, event, unit)
 				if LibClassicDurations then
 					local durationNew, expirationTimeNew = LibClassicDurations:GetAuraDurationByUnit(unit, spellID, caster, name)
 
-					if duration == 0 and durationNew then
+					if durationNew and durationNew > 0 then
 						duration = durationNew
 						remaining = expirationTimeNew
 					end

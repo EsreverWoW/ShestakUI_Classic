@@ -71,15 +71,8 @@ end
 ----------------------------------------------------------------------------------------
 --	LibClassicDurations (by d87)
 ----------------------------------------------------------------------------------------
-local ClassicAuraTracker = CreateFrame("Frame")
-
-local LibClassicDurations
-LibClassicDurations = LibStub("LibClassicDurations")
-
-if LibClassicDurations then
-	_G.LibClassicDurations = _G.LibClassicDurations or LibClassicDurations
-	LibClassicDurations:Register(ClassicAuraTracker)
-end
+local LibClassicDurations = LibStub("LibClassicDurations")
+LibClassicDurations:Register("ShestakUI")
 
 ----------------------------------------------------------------------------------------
 --	TBC+ Shaman Coloring (config option later)

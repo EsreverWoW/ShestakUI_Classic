@@ -91,9 +91,14 @@ local function updateIcon(unit, icons, index, offset, filter, isDebuff, visible)
 		if(LibClassicDurations) then
 			local durationNew, expirationTimeNew = LibClassicDurations:GetAuraDurationByUnit(unit, spellID, caster, name)
 
-			if(duration == 0 and durationNew) then
+			if durationNew and durationNew > 0 then
 				duration = durationNew
 				expiration = expirationTimeNew
+
+				if(button.cd and not element.disableCooldown) then
+					button.cd:SetCooldown(expiration - duration, duration)
+					button.cd:Show()
+				end
 			end
 		end
 
