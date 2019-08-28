@@ -97,7 +97,7 @@ local function UNIT_SPELLCAST_FAILED(self, event, unit, castID)
 	if(self.unit ~= unit and self.realUnit ~= unit) then return end
 
 	local element = self.Castbar
-	if(element.castID ~= castID) then
+	if(not oUF:IsClassic() and element.castID ~= castID) then
 		return
 	end
 
@@ -125,7 +125,7 @@ local function UNIT_SPELLCAST_INTERRUPTED(self, event, unit, castID)
 	if(self.unit ~= unit and self.realUnit ~= unit) then return end
 
 	local element = self.Castbar
-	if(element.castID ~= castID) then
+	if(not oUF:IsClassic() and element.castID ~= castID) then
 		return
 	end
 
@@ -224,7 +224,7 @@ local function UNIT_SPELLCAST_STOP(self, event, unit, castID)
 	if(self.unit ~= unit and self.realUnit ~= unit) then return end
 
 	local element = self.Castbar
-	if(element.castID ~= castID) then
+	if(not oUF:IsClassic() and element.castID ~= castID) then
 		return
 	end
 
