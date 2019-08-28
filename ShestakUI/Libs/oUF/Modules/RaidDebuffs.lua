@@ -7,8 +7,6 @@ if C.unitframe.enable ~= true or C.raidframe.plugins_aura_watch ~= true then ret
 local _, ns = ...
 local oUF = ns.oUF
 
-local LibClassicDurations = oUF:IsClassic() and LibStub("LibClassicDurations")
-
 local bossDebuffPrio = 9999999
 local invalidPrio = -1
 local auraFilters = {
@@ -210,15 +208,6 @@ local Update = function(self, event, unit)
 			i = i + 1
 			local name, icon, count, debuffType, duration, expirationTime, unitCaster, _, _, spellId, _, isBossDebuff = UnitAura(unit, i, filter)
 			if not name then break end
-
-			if LibClassicDurations then
-				local durationNew, expirationTimeNew = LibClassicDurations:GetAuraDurationByUnit(unit, spellId, unitCaster, name)
-
-				if durationNew and durationNew > 0 then
-					duration = durationNew
-					expirationTime = expirationTimeNew
-				end
-			end
 
 			if rd.ShowBossDebuff and isBossDebuff then
 				local prio = rd.BossDebuffPriority or bossDebuffPrio

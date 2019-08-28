@@ -7,8 +7,6 @@ if C.unitframe.enable ~= true or C.raidframe.plugins_aura_watch ~= true then ret
 local _, ns = ...
 local oUF = ns.oUF
 
-local LibClassicDurations = oUF:IsClassic() and LibStub("LibClassicDurations")
-
 local GUIDs = {}
 
 local PLAYER_UNITS = {
@@ -106,14 +104,6 @@ local function Update(frame, event, unit)
 			end
 			icon = icons[key]
 			if icon and not T.RaidBuffsIgnore[spellID] and (icon.anyUnit or (caster and icon.fromUnits and icon.fromUnits[caster])) then
-				if LibClassicDurations then
-					local durationNew, expirationTimeNew = LibClassicDurations:GetAuraDurationByUnit(unit, spellID, caster, name)
-
-					if durationNew and durationNew > 0 then
-						duration = durationNew
-						remaining = expirationTimeNew
-					end
-				end
 				resetIcon(icon, count, duration, remaining)
 				GUIDs[guid][key] = true
 				found[key] = true

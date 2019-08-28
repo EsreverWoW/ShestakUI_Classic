@@ -3,8 +3,6 @@
 local _, ns = ...
 local oUF = ns.oUF
 
-local LibClassicDurations = oUF:IsClassic() and LibStub("LibClassicDurations")
-
 local VISIBLE = 1
 local HIDDEN = 0
 
@@ -86,20 +84,6 @@ local function updateIcon(unit, icons, index, offset, filter, isDebuff, visible)
 		if(not icon) then
 			icons.createdIcons = icons.createdIcons + 1
 			icon = (icons.CreateIcon or createAuraIcon) (icons, n)
-		end
-
-		if(LibClassicDurations) then
-			local durationNew, expirationTimeNew = LibClassicDurations:GetAuraDurationByUnit(unit, spellID, caster, name)
-
-			if durationNew and durationNew > 0 then
-				duration = durationNew
-				expiration = expirationTimeNew
-
-				if(button.cd and not element.disableCooldown) then
-					button.cd:SetCooldown(expiration - duration, duration)
-					button.cd:Show()
-				end
-			end
 		end
 
 		local show = (icons.CustomFilter or customFilter) (icons, unit, icon, name, texture,
