@@ -1,10 +1,12 @@
+if _G.WOW_PROJECT_ID ~= _G.WOW_PROJECT_CLASSIC then return end
+
 --[================[
 LibClassicCasterino
 Author: d87
 --]================]
 
 
-local MAJOR, MINOR = "LibClassicCasterino", 7
+local MAJOR, MINOR = "LibClassicCasterino", 9
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
@@ -71,6 +73,7 @@ end
 
 local makeCastUID = function(guid, spellName)
     local _, _, _, _, _, npcID = strsplit("-", guid);
+    npcID = npcID or "Unknown"
     return npcID..spellName
 end
 
@@ -180,6 +183,8 @@ function f:COMBAT_LOG_EVENT_UNFILTERED(event)
     elseif eventType == "SPELL_INTERRUPT" then
 
             CastStop(dstGUID, nil, "INTERRUPTED")
+    elseif eventType == "UNIT_DIED" then
+            CastStop(dstGUID, nil, "FAILED")
 
     elseif  eventType == "SPELL_AURA_APPLIED" or
             eventType == "SPELL_AURA_REFRESH" or
