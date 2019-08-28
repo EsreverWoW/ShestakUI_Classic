@@ -1745,6 +1745,9 @@ if experience.enabled then
 	local logintime, playedtotal, playedlevel, playedmsg, gained, lastkill, lastquest = GetTime(), 0, 0, 0, 0
 	local repname, repcolor, standingname, currep, minrep, maxrep
 	local mobxp = gsub(COMBATLOG_XPGAIN_FIRSTPERSON, "%%[sd]", "(.*)")
+	if GetLocale() == "deDE" then
+		mobxp = gsub(COMBATLOG_XPGAIN_FIRSTPERSON, "%%[0-9]$[sd]", "(.*)")
+	end
 	local questxp = gsub(COMBATLOG_XPGAIN_FIRSTPERSON_UNNAMED, "%%[sd]", "(.*)")
 	local AzeritXP, AzeritTotalLevelXP, AzeritLevel = 0, 0, 0
 	local function short(num, tt)
