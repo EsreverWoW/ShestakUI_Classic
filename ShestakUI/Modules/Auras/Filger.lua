@@ -63,7 +63,7 @@ function Filger:UnitAura(unitID, inSpellID, spellName, filter, absID)
 			if LibClassicDurations then
 				local durationNew, expirationTimeNew = LibClassicDurations:GetAuraDurationByUnit(unitID, spellID, unitCaster, name)
 
-				if duration == 0 and durationNew then
+				if durationNew and durationNew > 0 then
 					duration = durationNew
 					expirationTime = expirationTimeNew
 				end
