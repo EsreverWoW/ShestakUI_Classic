@@ -27,7 +27,6 @@ GetCurrencyListSize = _G.GetCurrencyListSize or function()
 end
 
 GetContainerItemEquipmentSetInfo = _G.GetContainerItemEquipmentSetInfo or T.dummy
-GetContainerItemQuestInfo = _G.GetContainerItemQuestInfo or T.dummy
 IsContainerItemAnUpgrade = _G.IsContainerItemAnUpgrade or T.dummy
 
 GetProfessions = _G.GetProfessions or T.dummy
