@@ -16,7 +16,7 @@ frame:SetScript("OnEvent", function(_, _, addon)
 		InterfaceOptionsFrameCategoriesButton10:SetScale(0.00001)
 		InterfaceOptionsFrameCategoriesButton10:SetAlpha(0)
 		if not InCombatLockdown() then
-			if IsAddOnLoaded("Blizzard_RaidUI") then
+			if C.raidframe.show_raid or not IsAddOnLoaded("Grid2") then -- may need to add more addons here
 				CompactRaidFrameManager:Kill()
 				CompactRaidFrameContainer:Kill()
 			end
