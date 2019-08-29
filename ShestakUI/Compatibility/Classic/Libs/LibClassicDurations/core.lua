@@ -1,3 +1,5 @@
+if _G.WOW_PROJECT_ID ~= _G.WOW_PROJECT_CLASSIC then return end
+
 --[================[
 LibClassicDurations
 Author: d87
