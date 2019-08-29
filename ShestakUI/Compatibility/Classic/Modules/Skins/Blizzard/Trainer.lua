@@ -38,7 +38,7 @@ local function LoadSkin()
 	end
 
 	hooksecurefunc("ClassTrainer_SetSelection", function()
-		if ClassTrainerSkillIcon then
+		if ClassTrainerSkillIcon:GetNormalTexture() then
 			ClassTrainerSkillIcon:GetNormalTexture():ClearAllPoints()
 			ClassTrainerSkillIcon:GetNormalTexture():SetPoint("TOPLEFT", 2, -2)
 			ClassTrainerSkillIcon:GetNormalTexture():SetPoint("BOTTOMRIGHT", -2, 2)
