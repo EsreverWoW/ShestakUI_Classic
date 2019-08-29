@@ -414,8 +414,14 @@ function Filger:OnEvent(event, unit, _, castID)
 							start, duration = GetInventoryItemCooldown("player", data.slotID)
 						end
 					end
-					if name and (duration or 0) > 1.5 then
-						found = true
+					if T.classic and HasWandEquipped() then
+						if name and (duration or 0) > 2 then
+							found = true
+						end
+					else
+						if name and (duration or 0) > 1.5 then
+							found = true
+						end
 					end
 				end
 			end
