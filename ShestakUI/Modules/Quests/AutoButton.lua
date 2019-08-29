@@ -104,7 +104,16 @@ Scanner:SetScript("OnEvent", function()
 
 					AutoButton:SetScript("OnUpdate", function()
 						local cd_start, cd_finish, cd_enable = GetContainerItemCooldown(b, s)
-						CooldownFrame_Set(AutoButton.cd, cd_start, cd_finish, cd_enable)
+						if T.classic and HasWandEquipped() then
+							local wandID = GetInventoryItemID("player", 18)
+							local wandSpeed = GetItemCooldown(wandID)
+							if wandSpeed < 1.5 then wandSpeed = 1.5 end
+							if (cd_finish or 0) > wandSpeed then
+								CooldownFrame_Set(AutoButton.cd, cd_start, cd_finish, cd_enable)
+							end
+						else
+							CooldownFrame_Set(AutoButton.cd, cd_start, cd_finish, cd_enable)
+						end
 					end)
 
 					AutoButton:SetScript("OnEnter", function(self)

@@ -117,7 +117,16 @@ local StartTimer = function(name, sID)
 	icon:SetScript("OnUpdate", IconUpdate)
 	icon:SetScript("OnEnter", OnEnter)
 	icon:SetScript("OnLeave", GameTooltip_Hide)
-	CooldownFrame_Set(icon.Cooldown, GetTime(), T.enemy_spells[sID], 1)
+	if T.classic and HasWandEquipped() then
+		local wandID = GetInventoryItemID("player", 18)
+		local wandSpeed = GetItemCooldown(wandID)
+		if wandSpeed < 1.5 then wandSpeed = 1.5 end
+		if (T.enemy_spells[sID] or 0) > wandSpeed then
+			CooldownFrame_Set(icon.Cooldown, GetTime(), T.enemy_spells[sID], 1)
+		end
+	else
+		CooldownFrame_Set(icon.Cooldown, GetTime(), T.enemy_spells[sID], 1)
+	end
 	tinsert(icons, icon)
 	table.sort(icons, sortByExpiration)
 	UpdatePositions()
