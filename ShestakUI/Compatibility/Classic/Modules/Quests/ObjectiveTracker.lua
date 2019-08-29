@@ -217,6 +217,7 @@ end
 
 ExpandButton:SetScript("OnMouseUp", function(self)
 	expanded = not expanded
+	PlaySound(SOUNDKIT.GS_TITLE_OPTION_OK)
 	if expanded then
 		QuestWatchExpand()
 	else
