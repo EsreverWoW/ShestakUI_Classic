@@ -1,5 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
-if T.classic or C.actionbar.enable ~= true then return end
+if C.actionbar.enable ~= true then return end
 
 ----------------------------------------------------------------------------------------
 --	Vehicle exit button(by Tukz)
@@ -22,36 +22,50 @@ vehicle:RegisterForClicks("AnyUp")
 vehicle:SetFrameLevel(3)
 
 hooksecurefunc("MainMenuBarVehicleLeaveButton_Update", function()
-	if CanExitVehicle() then
+	if T.classic then
 		if UnitOnTaxi("player") then
+			vehicle:Show()
 			vehicle:SetScript("OnClick", function(self)
 				TaxiRequestEarlyLanding()
 				self:LockHighlight()
 			end)
 		else
-			vehicle:SetScript("OnClick", function()
-				VehicleExit()
-			end)
+			vehicle:Hide()
 		end
-		vehicle:Show()
 	else
-		vehicle:Hide()
-	end
-end)
-
-hooksecurefunc("PossessBar_UpdateState", function()
-	for i = 1, NUM_POSSESS_SLOTS do
-		local _, name, enabled = GetPossessInfo(i)
-		if enabled then
-			vehicle:SetScript("OnClick", function()
-				CancelUnitBuff("player", name)
-			end)
+		if CanExitVehicle() then
+			if UnitOnTaxi("player") then
+				vehicle:SetScript("OnClick", function(self)
+					TaxiRequestEarlyLanding()
+					self:LockHighlight()
+				end)
+			else
+				vehicle:SetScript("OnClick", function()
+					VehicleExit()
+				end)
+			end
 			vehicle:Show()
 		else
 			vehicle:Hide()
 		end
 	end
 end)
+
+if not T.classic then
+	hooksecurefunc("PossessBar_UpdateState", function()
+		for i = 1, NUM_POSSESS_SLOTS do
+			local _, name, enabled = GetPossessInfo(i)
+			if enabled then
+				vehicle:SetScript("OnClick", function()
+					CancelUnitBuff("player", name)
+				end)
+				vehicle:Show()
+			else
+				vehicle:Hide()
+			end
+		end
+	end)
+end
 
 -- Set tooltip
 vehicle:SetScript("OnEnter", function(self)
@@ -60,10 +74,12 @@ vehicle:SetScript("OnEnter", function(self)
 		GameTooltip:SetText(TAXI_CANCEL, 1, 1, 1)
 		GameTooltip:AddLine(TAXI_CANCEL_DESCRIPTION, 1, 0.8, 0, true)
 		GameTooltip:Show()
-	elseif IsPossessBarVisible() then
-		GameTooltip_AddNewbieTip(self, CANCEL, 1, 1, 1, nil)
-	else
-		GameTooltip_AddNewbieTip(self, LEAVE_VEHICLE, 1, 1, 1, nil)
+	elseif not T.classic then
+		if IsPossessBarVisible() then
+			GameTooltip_AddNewbieTip(self, CANCEL, 1, 1, 1, nil)
+		else
+			GameTooltip_AddNewbieTip(self, LEAVE_VEHICLE, 1, 1, 1, nil)
+		end
 	end
 end)
 vehicle:SetScript("OnLeave", function() GameTooltip:Hide() end)
