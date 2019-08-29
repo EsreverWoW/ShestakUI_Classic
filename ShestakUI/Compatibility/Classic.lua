@@ -20,43 +20,9 @@ end)
 ----------------------------------------------------------------------------------------
 --	NOOP / Pass Functions not found in Classic
 ----------------------------------------------------------------------------------------
-GetCurrencyInfo = _G.GetCurrencyInfo or T.dummy
-GetCurrencyListInfo = _G.GetCurrencyListInfo or T.dummy
-GetCurrencyListSize = _G.GetCurrencyListSize or function()
-	return 0
-end
-
-GetContainerItemEquipmentSetInfo = _G.GetContainerItemEquipmentSetInfo or T.dummy
-IsContainerItemAnUpgrade = _G.IsContainerItemAnUpgrade or T.dummy
-
 GetProfessions = _G.GetProfessions or T.dummy
 
-GetFriendshipReputation = _G.GetFriendshipReputation or T.dummy
-IsXPUserDisabled = _G.IsXPUserDisabled or T.dummy
-IsWatchingHonorAsXP = _G.IsWatchingHonorAsXP or T.dummy
-IsInActiveWorldPVP = _G.IsInActiveWorldPVP or T.dummy
-
 UnitInVehicle = _G.UnitInVehicle or T.dummy
-UnitHasVehicleUI = _G.UnitHasVehicleUI or T.dummy
-UnitIsWildBattlePet = _G.UnitIsWildBattlePet or T.dummy
-UnitIsBattlePetCompanion = _G.UnitIsBattlePetCompanion or T.dummy
-
-PlayerTalentFrame_Toggle = _G.PlayerTalentFrame_Toggle or T.dummy
-
-GetFriendInfo = _G.GetFriendInfo or function(name)
-	return C_FriendList.GetFriendInfo(name)
-end
-
-GetNumFriends = _G.GetNumFriends or function()
-	return C_FriendList.GetNumFriends()
-end
-
-ShowFriends = _G.ShowFriends or function()
-	return C_FriendList.ShowFriends()
-end
-
--- SaveBindings removed in WoW Classic build 30901
-SaveBindings = _G.SaveBindings or _G.AttemptToSaveBindings
 
 ----------------------------------------------------------------------------------------
 --	Quest Functions

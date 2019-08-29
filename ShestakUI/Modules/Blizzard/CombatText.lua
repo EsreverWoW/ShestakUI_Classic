@@ -22,10 +22,14 @@ end
 
 -- Detect vehicle
 local function SetUnit()
-	if UnitHasVehicleUI("player") then
-		ct.unit = "vehicle"
-	else
+	if T.classic then
 		ct.unit = "player"
+	else
+		if UnitHasVehicleUI("player") then
+			ct.unit = "vehicle"
+		else
+			ct.unit = "player"
+		end
 	end
 	CombatTextSetActiveUnit(ct.unit)
 end

@@ -333,7 +333,7 @@ local OnTooltipSetUnit = function(self)
 	else
 		for i = 2, lines do
 			local line = _G["GameTooltipTextLeft"..i]
-			if not line or not line:GetText() or UnitIsBattlePetCompanion(unit) then return end
+			if not line or not line:GetText() or (not T.classic and UnitIsBattlePetCompanion(unit)) then return end
 			if (level and line:GetText():find("^"..LEVEL)) or (creatureType and line:GetText():find("^"..creatureType)) then
 				line:SetFormattedText("|cff%02x%02x%02x%s%s|r %s", levelColor.r * 255, levelColor.g * 255, levelColor.b * 255, level, classification, creatureType or "")
 				break

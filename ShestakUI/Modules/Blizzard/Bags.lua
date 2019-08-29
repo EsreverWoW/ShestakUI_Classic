@@ -257,7 +257,7 @@ function Stuffing:SlotUpdate(b)
 	if b.frame.UpgradeIcon then
 		b.frame.UpgradeIcon:SetPoint("TOPLEFT", C.bag.button_size/2.7, -C.bag.button_size/2.7)
 		b.frame.UpgradeIcon:SetSize(C.bag.button_size/1.7, C.bag.button_size/1.7)
-		local itemIsUpgrade = IsContainerItemAnUpgrade(b.frame:GetParent():GetID(), b.frame:GetID())
+		local itemIsUpgrade = not T.classic and IsContainerItemAnUpgrade(b.frame:GetParent():GetID(), b.frame:GetID())
 		if itemIsUpgrade and itemIsUpgrade == true then
 			b.frame.UpgradeIcon:SetShown(true)
 		else
@@ -705,7 +705,7 @@ function Stuffing:SearchUpdate(str)
 			b.frame:SetAlpha(0.2)
 		end
 		if b.name then
-			local _, setName = GetContainerItemEquipmentSetInfo(b.bag, b.slot)
+			local _, setName = not T.classic and GetContainerItemEquipmentSetInfo(b.bag, b.slot)
 			setName = setName or ""
 			local ilink = GetContainerItemLink(b.bag, b.slot)
 			local class, subclass, _, equipSlot = select(6, GetItemInfo(ilink))

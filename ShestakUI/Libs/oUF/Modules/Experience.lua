@@ -1,4 +1,4 @@
-local T, C, L = unpack(select(2, ...))
+local T, C, L, _ = unpack(select(2, ...))
 if C.unitframe.enable ~= true or C.unitframe.plugins_experience_bar ~= true then return end
 
 ----------------------------------------------------------------------------------------
@@ -210,10 +210,16 @@ local function Visibility(self, event, unit)
 	local element = self.Experience
 	local shouldEnable
 
-	if(not UnitHasVehicleUI('player') and not IsXPUserDisabled()) then
+	if(not oUF:IsClassic()) then
+		if(not UnitHasVehicleUI('player') and not IsXPUserDisabled()) then
+			if(UnitLevel('player') ~= element.__accountMaxLevel) then
+				shouldEnable = true
+			elseif(WatchingHonor()) then
+				shouldEnable = true
+			end
+		end
+	else
 		if(UnitLevel('player') ~= element.__accountMaxLevel) then
-			shouldEnable = true
-		elseif(WatchingHonor()) then
 			shouldEnable = true
 		end
 	end

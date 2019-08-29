@@ -136,7 +136,7 @@ oUF.Tags.Events["IncHeal"] = "UNIT_HEAL_PREDICTION"
 oUF.Tags.Methods["NameplateLevel"] = function(unit)
 	local level = UnitLevel(unit)
 	local c = UnitClassification(unit)
-	if UnitIsWildBattlePet(unit) or UnitIsBattlePetCompanion(unit) then
+	if not T.classic and (UnitIsWildBattlePet(unit) or UnitIsBattlePetCompanion(unit)) then
 		level = UnitBattlePetLevel(unit)
 	end
 

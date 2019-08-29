@@ -391,7 +391,7 @@ local function friendsFrame()
 		index = offset + i
 		if button:IsShown() then
 			if button.buttonType == FRIENDS_BUTTON_TYPE_WOW then
-				local name, level, class, area, connected = GetFriendInfo(button.id)
+				local name, level, class, area, connected = C_FriendList.GetFriendInfo(button.id)
 				if connected then
 					nameText = classColor[class]..name.."|r, "..format(FRIENDS_LEVEL_TEMPLATE, diffColor[level]..level.."|r", class)
 					if area == playerArea then

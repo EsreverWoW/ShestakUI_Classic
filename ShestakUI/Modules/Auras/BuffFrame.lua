@@ -132,12 +132,22 @@ local function UpdateBuffAnchors()
 			buff:SetPoint("TOPRIGHT", BuffsAnchor, "TOPRIGHT", 0, 0)
 		else
 			if numBuffs == 1 then
-				if mainhand and offhand and not UnitHasVehicleUI("player") then
-					buff:SetPoint("RIGHT", TempEnchant2, "LEFT", -3, 0)
-				elseif ((mainhand and not offhand) or (offhand and not mainhand)) and not UnitHasVehicleUI("player") then
-					buff:SetPoint("RIGHT", TempEnchant1, "LEFT", -3, 0)
+				if T.classic then
+					if mainhand and offhand then
+						buff:SetPoint("RIGHT", TempEnchant2, "LEFT", -3, 0)
+					elseif ((mainhand and not offhand) or (offhand and not mainhand)) then
+						buff:SetPoint("RIGHT", TempEnchant1, "LEFT", -3, 0)
+					else
+						buff:SetPoint("TOPRIGHT", BuffsAnchor, "TOPRIGHT", 0, 0)
+					end
 				else
-					buff:SetPoint("TOPRIGHT", BuffsAnchor, "TOPRIGHT", 0, 0)
+					if mainhand and offhand and not UnitHasVehicleUI("player") then
+						buff:SetPoint("RIGHT", TempEnchant2, "LEFT", -3, 0)
+					elseif ((mainhand and not offhand) or (offhand and not mainhand)) and not UnitHasVehicleUI("player") then
+						buff:SetPoint("RIGHT", TempEnchant1, "LEFT", -3, 0)
+					else
+						buff:SetPoint("TOPRIGHT", BuffsAnchor, "TOPRIGHT", 0, 0)
+					end
 				end
 			else
 				buff:SetPoint("RIGHT", previousBuff, "LEFT", -3, 0)

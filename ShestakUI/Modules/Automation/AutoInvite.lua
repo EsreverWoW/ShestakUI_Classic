@@ -5,8 +5,8 @@
 ----------------------------------------------------------------------------------------
 if C.automation.accept_invite == true then
 	local CheckFriend = function(name)
-		for i = 1, GetNumFriends() do
-			if GetFriendInfo(i) == name then
+		for i = 1, C_FriendList.GetNumFriends() do
+			if C_FriendList.GetFriendInfo(i) == name then
 				return true
 			end
 		end

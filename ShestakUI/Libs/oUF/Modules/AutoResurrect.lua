@@ -1,4 +1,4 @@
-local T, C, L = unpack(select(2, ...))
+local T, C, L, _ = unpack(select(2, ...))
 if C.unitframe.enable ~= true or C.raidframe.plugins_auto_resurrection ~= true or C.misc.click_cast == true or T.class == "ROGUE" or T.class == "WARRIOR" or T.class == "HUNTER" or T.class == "MAGE" or (T.classic and T.class == "WARLOCK")then return end
 
 ----------------------------------------------------------------------------------------

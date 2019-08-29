@@ -1,4 +1,4 @@
-local T, C, L = unpack(select(2, ...))
+local T, C, L, _ = unpack(select(2, ...))
 if C.unitframe.enable ~= true or C.unitframe.plugins_reputation_bar ~= true then return end
 
 ----------------------------------------------------------------------------------------
@@ -12,21 +12,24 @@ local function GetReputation()
 	local pendingReward
 	local name, standingID, min, max, cur, factionID = GetWatchedFactionInfo()
 
-	local friendID, _, _, _, _, _, standingText, _, nextThreshold = GetFriendshipReputation(factionID)
-	if(friendID) then
-		if(not nextThreshold) then
-			min, max, cur = 0, 1, 1 -- force a full bar when maxed out
-		end
-		standingID = 5 -- force friends' color
-	elseif(not oUF:IsClassic()) then
-		local value, nextThreshold, _, hasRewardPending = C_Reputation.GetFactionParagonInfo(factionID)
-		if(value) then
-			cur = value % nextThreshold
-			min = 0
-			max = nextThreshold
-			pendingReward = hasRewardPending
-			standingID = MAX_REPUTATION_REACTION + 1 -- force paragon's color
-			standingText = PARAGON
+	local friendID, standingText, nextThreshold
+	if(not oUF:IsClassic()) then
+		friendID, _, _, _, _, _, standingText, _, nextThreshold = not T.classic and GetFriendshipReputation(factionID)
+		if(friendID) then
+			if(not nextThreshold) then
+				min, max, cur = 0, 1, 1 -- force a full bar when maxed out
+			end
+			standingID = 5 -- force friends' color
+		else
+			local value, nextThreshold, _, hasRewardPending = C_Reputation.GetFactionParagonInfo(factionID)
+			if(value) then
+				cur = value % nextThreshold
+				min = 0
+				max = nextThreshold
+				pendingReward = hasRewardPending
+				standingID = MAX_REPUTATION_REACTION + 1 -- force paragon's color
+				standingText = PARAGON
+			end
 		end
 	end
 
