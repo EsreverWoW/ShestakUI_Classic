@@ -91,20 +91,21 @@ local function CreateClickFrame(watchIndex, questIndex, headerText, objectiveTex
 	f.completed = completed
 end
 
+local QuestWatchFrameHeader = CreateFrame("Frame", "QuestWatchFrameHeader", ObjectiveTracker)
+QuestWatchFrameHeader:CreatePanel("ClassColor", 1, 1, "TOPLEFT", QuestWatchFrame, "TOPRIGHT", 0, 0)
+
+QuestWatchFrameHeader.Text = QuestWatchFrameHeader:CreateFontString(nil, "OVERLAY")
+QuestWatchFrameHeader.Text:SetFont(C.media.normal_font, 14, "OUTLINE")
+QuestWatchFrameHeader.Text:SetPoint("LEFT", QuestWatchFrameHeader, "LEFT", -2, 14)
+QuestWatchFrameHeader.Text:SetText(CURRENT_QUESTS)
+
 hooksecurefunc("QuestWatch_Update", function()
 	QuestWatchFrame:SetParent(ObjectiveTrackerAnchor)
 	QuestWatchFrame:ClearAllPoints()
 	QuestWatchFrame:SetPoint("TOPLEFT", ObjectiveTracker, 0, 0)
 
-	local QuestWatchFrameHeader = CreateFrame("Frame", "QuestWatchFrameHeader", ObjectiveTracker)
-	QuestWatchFrameHeader:CreatePanel("ClassColor", 1, 1, "TOPLEFT", QuestWatchFrame, "TOPRIGHT", 0, 0)
 	QuestWatchFrameHeader:SetPoint("TOPLEFT", QuestWatchFrame, "TOPLEFT", 0, 0)
 	QuestWatchFrameHeader:SetPoint("TOPRIGHT", QuestWatchFrame, "TOPLEFT", QuestWatchFrame:GetWidth(), 0)
-
-	QuestWatchFrameHeader.Text = QuestWatchFrameHeader:CreateFontString(nil, "OVERLAY")
-	QuestWatchFrameHeader.Text:SetFont(C.media.normal_font, 14, "OUTLINE")
-	QuestWatchFrameHeader.Text:SetPoint("LEFT", QuestWatchFrameHeader, "LEFT", -2, 14)
-	QuestWatchFrameHeader.Text:SetText(CURRENT_QUESTS)
 
 	-- Change font of watched quests/objectives
 	for i = 1, 30 do
@@ -159,6 +160,94 @@ end
 local f = CreateFrame("Frame")
 f:RegisterEvent("QUEST_ACCEPTED")
 f:SetScript("OnEvent", OnEvent)
+
+----------------------------------------------------------------------------------------
+--	Expand / Collapse Button
+----------------------------------------------------------------------------------------
+local ExpandButton = CreateFrame("Button", "QuestWatchFrameExpandButton", UIParent)
+ExpandButton:CreatePanel("Overlay", 17, 17, "TOPLEFT", QuestWatchFrameHeader, "TOPLEFT", -26, 22)
+ExpandButton:EnableMouse(true)
+ExpandButton:RegisterForClicks("AnyUp")
+ExpandButton:SetFrameLevel(1)
+ExpandButton:SetFrameStrata("HIGH")
+
+ExpandButton.minus = ExpandButton:CreateTexture(nil, "OVERLAY")
+ExpandButton.minus:SetSize(7, 1)
+ExpandButton.minus:SetPoint("CENTER")
+ExpandButton.minus:SetTexture(C.media.blank)
+
+ExpandButton.plus = ExpandButton:CreateTexture(nil, "OVERLAY")
+ExpandButton.plus:SetSize(1, 7)
+ExpandButton.plus:SetPoint("CENTER")
+ExpandButton.plus:SetTexture(C.media.blank)
+
+ExpandButton:HookScript("OnEnter", T.SetModifiedBackdrop)
+ExpandButton:HookScript("OnLeave", T.SetOriginalBackdrop)
+
+ExpandButton:HookScript("OnEnter", T.SetModifiedBackdrop)
+ExpandButton:HookScript("OnLeave", T.SetOriginalBackdrop)
+
+ExpandButton.plus:Hide()
+
+local expanded = true
+
+local function QuestWatchCollapse()
+	local f = ExpandButton
+	f.plus:Show()
+	if C.misc.minimize_mouseover then
+		f:SetAlpha(0)
+		f:HookScript("OnEnter", function() f:SetAlpha(1) end)
+		f:HookScript("OnLeave", function() f:SetAlpha(0) end)
+	end
+	QuestWatchFrame:Hide()
+	QuestWatchFrameHeader:Hide()
+end
+
+local function QuestWatchExpand()
+	local f = ExpandButton
+	f.plus:Hide()
+	if C.misc.minimize_mouseover then
+		f:SetAlpha(1)
+		f:HookScript("OnEnter", function() f:SetAlpha(1) end)
+		f:HookScript("OnLeave", function() f:SetAlpha(1) end)
+	end
+	QuestWatchFrame:Show()
+	QuestWatchFrameHeader:Show()
+end
+
+ExpandButton:SetScript("OnMouseUp", function(self)
+	expanded = not expanded
+	if expanded then
+		QuestWatchExpand()
+	else
+		QuestWatchCollapse()
+	end
+end)
+
+----------------------------------------------------------------------------------------
+--	Auto collapse QuestWatchFrame
+----------------------------------------------------------------------------------------
+if C.automation.auto_collapse or C.automation.auto_collapse_reload then
+	local collapse = CreateFrame("Frame")
+	collapse:RegisterEvent("PLAYER_ENTERING_WORLD")
+	collapse:SetScript("OnEvent", function()
+		if C.automation.auto_collapse and not C.automation.auto_collapse_reload then
+			if IsInInstance() then
+				C_Timer.After(2, QuestWatchCollapse)
+				ExpandButton.plus:Show()
+				expanded = false
+			elseif not expanded and not InCombatLockdown() then
+				C_Timer.After(2, QuestWatchExpand)
+				ExpandButton.plus:Hide()
+				expanded = true
+			end
+		elseif C.automation.auto_collapse_reload then
+			C_Timer.After(2, QuestWatchCollapse)
+			ExpandButton.plus:Show()
+			expanded = false
+		end
+	end)
+end
 
 ----------------------------------------------------------------------------------------
 --	Move QuestTimerFrame (issues with the mover)
