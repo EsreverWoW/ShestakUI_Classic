@@ -2996,7 +2996,7 @@ C["filger_spells"] = {
 			-- Power Infusion
 			{spellID = 10060, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Soulstone Resurrection
-			{spellID = 20707, unitID = "player", caster = "all", filter = "BUFF"},
+			-- {spellID = 20707, unitID = "player", caster = "all", filter = "BUFF"},
 
 			-- Trinket Effects
 			-- Persistent Shield (Absorb, Use) [Scarab Brooch]
