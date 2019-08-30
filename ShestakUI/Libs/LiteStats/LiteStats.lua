@@ -471,7 +471,9 @@ if durability.enabled then
 			end
 			GameTooltip:AddLine(" ")
 			local nodur, totalcost = true, 0
-			for slot, string in gmatch("1HEAD3SHOULDER5CHEST6WAIST7LEGS8FEET9WRIST10HANDS16MAINHAND17SECONDARYHAND", "(%d+)([^%d]+)") do
+			local slotString = "1HEAD3SHOULDER5CHEST6WAIST7LEGS8FEET9WRIST10HANDS16MAINHAND17SECONDARYHAND"
+			if T.classic then slotString = slotString .. "18RANGED" end
+			for slot, string in gmatch(slotString, "(%d+)([^%d]+)") do
 				local dur, dmax = GetInventoryItemDurability(slot)
 				local string = _G[string.."SLOT"]
 				if dur ~= dmax then

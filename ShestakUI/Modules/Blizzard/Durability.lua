@@ -1,10 +1,19 @@
+local T, C, L, _ = unpack(select(2, ...))
+
 ----------------------------------------------------------------------------------------
 --	Durability value on slot buttons in CharacterFrame(tekability by Tekkub)
 ----------------------------------------------------------------------------------------
 local SLOTIDS = {}
-for _, slot in pairs({"Head", "Shoulder", "Chest", "Waist", "Legs", "Feet", "Wrist", "Hands", "MainHand", "SecondaryHand"}) do
-	SLOTIDS[slot] = GetInventorySlotInfo(slot.."Slot")
+if T.classic then
+	for _, slot in pairs({"Head", "Shoulder", "Chest", "Waist", "Legs", "Feet", "Wrist", "Hands", "MainHand", "SecondaryHand", "Ranged"}) do
+		SLOTIDS[slot] = GetInventorySlotInfo(slot.."Slot")
+	end
+else
+	for _, slot in pairs({"Head", "Shoulder", "Chest", "Waist", "Legs", "Feet", "Wrist", "Hands", "MainHand", "SecondaryHand"}) do
+		SLOTIDS[slot] = GetInventorySlotInfo(slot.."Slot")
+	end
 end
+
 local frame = CreateFrame("Frame", nil, CharacterFrame)
 
 local function RYGColorGradient(perc)
