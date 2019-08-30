@@ -1,5 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
-if not T.classic or C.tooltip.enable ~= true or C.tooltip.average_lvl ~= true then return end
+if not T.classic or C.tooltip.enable ~= true or C.tooltip.average_lvl ~= true then return else return end -- FIXME
 
 ----------------------------------------------------------------------------------------
 --	Average item level (AiL by havoc74)
@@ -9,7 +9,7 @@ local MINCOLOR, COLORINC, INCMOD, MinIL, MaxIL = 0.5, 0.2, 0.5, 95, 195
 local slotName = {
 	"HeadSlot", "NeckSlot", "ShoulderSlot", "BackSlot", "ChestSlot", "WristSlot",
 	"HandsSlot", "WaistSlot", "LegsSlot", "FeetSlot", "Finger0Slot", "Finger1Slot",
-	"Trinket0Slot", "Trinket1Slot", "MainHandSlot", "SecondaryHandSlot", "RangedSlot", "AmmoSlot"
+	"Trinket0Slot", "Trinket1Slot", "MainHandSlot", "SecondaryHandSlot", "RangedSlot"
 }
 
 local function GetAiL(unit)
@@ -61,7 +61,7 @@ GameTooltip:HookScript("OnTooltipSetUnit", function(self, ...)
 			ail = GetAiL(unit)
 			d = GetAiL(unit) - GetAiL("player")
 			r, gb = GetAiLColor(ail)
-			-- ClearInspectPlayer(unit) -- Seems to cause issues in Classic
+			ClearInspectPlayer(unit)
 			if unit == "player" then
 				GameTooltip:AddLine(format("|cfffed100"..STAT_AVERAGE_ITEM_LEVEL..":|r "..ail), r, gb, gb)
 			else
