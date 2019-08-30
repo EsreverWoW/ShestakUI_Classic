@@ -13,6 +13,8 @@ end
 SpellBinder:SetSize(300, 400)
 SpellBinder:Hide()
 
+local DB = SpellBinder.db
+
 _G["SpellBinderPortrait"]:SetTexture("Interface\\Spellbook\\Spellbook-Icon")
 
 SpellBinder.title = _G["SpellBinderTitle"] or SpellBinder:CreateFontString("SpellBinderTitle", "OVERLAY", "GameFontNormal")
@@ -74,7 +76,7 @@ SpellBinder.makeSpellsList = function(self, scroll, delete)
 	scroll:SetSize(270, 300)
 
 	if delete then
-		i = 1
+		local i = 1
 		while _G[i.."_cbs"] do
 			_G[i.."_fs"]:SetText("")
 			_G[i.."_texture"]:SetTexture(nil)

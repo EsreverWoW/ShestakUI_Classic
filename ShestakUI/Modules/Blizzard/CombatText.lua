@@ -37,7 +37,7 @@ end
 -- Limit lines
 local function LimitLines()
 	for i = 1, #ct.frames do
-		f = ct.frames[i]
+		local f = ct.frames[i]
 		if i == 4 and C.combattext.icons then
 			f:SetMaxLines(math.floor(f:GetHeight() / (C.combattext.icon_size * 1.5)))
 		else

@@ -68,10 +68,12 @@ end
 
 -- Game Events
 function tullaRange:PLAYER_LOGIN()
-	if not TULLARANGE_COLORS then
-		self:LoadDefaults()
-	end
-	self.colors = TULLARANGE_COLORS
+	self.colors = {
+		normal = {1, 1, 1},
+		oor = {1, 0.3, 0.1},
+		oom = {0.1, 0.3, 1},
+		unusable = {0.4, 0.4, 0.4}
+	}
 
 	self.buttonsToUpdate = {}
 
@@ -197,16 +199,6 @@ function tullaRange.UpdateButtonFlash(button, elapsed)
 	end
 
 	button.flashtime = flashtime
-end
-
--- Configuration
-function tullaRange:LoadDefaults()
-	TULLARANGE_COLORS = {
-		normal = {1, 1, 1},
-		oor = {1, 0.3, 0.1},
-		oom = {0.1, 0.3, 1},
-		unusable = {0.4, 0.4, 0.4}
-	}
 end
 
 function tullaRange:GetColor(index)

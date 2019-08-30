@@ -4,6 +4,8 @@
 --	LitePanels configuration file
 --	BACKUP THIS FILE BEFORE UPDATING!
 ----------------------------------------------------------------------------------------
+local afk_timer
+
 lpanels:CreateLayout("Load For All", {
 
 -- AFK panel

@@ -432,7 +432,7 @@ expandbutton:SetScript("OnMouseUp", function(self)
 end)
 
 for i = 1, GetNumAddOns() do
-	j = totalmainmenusize + i
+	local j = totalmainmenusize + i
 	local name = GetAddOnInfo(i)
 	addonmenuitems[j] = CreateFrame("CheckButton", "AddonMenu"..j, AddonBG)
 	addonmenuitems[j]:CreatePanel("Overlay", buttonwidth(1), buttonheight(1), "BOTTOM", AddonBG, "BOTTOM", 0, buttonspacing(1))
