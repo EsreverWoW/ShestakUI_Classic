@@ -1,5 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
-if not T.classic or C.skins.blizzard_frames ~= true then return else return end -- incomplete
+if not T.classic or C.skins.blizzard_frames ~= true then return end
 
 ----------------------------------------------------------------------------------------
 --	TalentUI skin
@@ -36,7 +36,6 @@ local function LoadSkin()
 	T.SkinScrollBar(TalentFrameScrollFrameScrollBar)
 	TalentFrameScrollFrameScrollBar:SetPoint("TOPLEFT", TalentFrameScrollFrame, "TOPRIGHT", 10, -16)
 
-	-- TalentFrameSpentPoints:SetPoint("TOP", 0, -42)
 	TalentFrameTalentPointsText:SetPoint("BOTTOMRIGHT", TalentFrame, "BOTTOMLEFT", 220, 84)
 
 	for i = 1, MAX_NUM_TALENTS do
@@ -56,6 +55,13 @@ local function LoadSkin()
 			rank:SetFont(C.media.pixel_font, C.media.pixel_font_size, C.media.pixel_font_style)
 		end
 	end
+
+	local f = CreateFrame("Frame")
+	f:RegisterEvent("CHARACTER_POINTS_CHANGED")
+	f:SetScript("OnEvent", function()
+		TalentFrame_Update()
+	end)
+
 end
 
 T.SkinFuncs["Blizzard_TalentUI"] = LoadSkin
