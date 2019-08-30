@@ -1,3 +1,6 @@
+local T, C, L, _ = unpack(select(2, ...))
+if T.classic then return end
+
 ----------------------------------------------------------------------------------------
 --	Universal Mount macro(by Monolit)
 --	/cancelform [noform:4]
