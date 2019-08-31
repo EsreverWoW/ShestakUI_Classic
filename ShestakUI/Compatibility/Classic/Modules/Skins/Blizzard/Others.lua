@@ -105,6 +105,7 @@ SkinBlizzUI:SetScript("OnEvent", function(self, event, addon)
 
 		-- Reskin Dropdown menu
 		hooksecurefunc("UIDropDownMenu_InitializeHelper", function(frame)
+			if self.IsForbidden and self:IsForbidden() then return end
 			for i = 1, UIDROPDOWNMENU_MAXLEVELS do
 				_G["DropDownList"..i.."Backdrop"]:SetTemplate("Transparent")
 				_G["DropDownList"..i.."MenuBackdrop"]:SetTemplate("Transparent")

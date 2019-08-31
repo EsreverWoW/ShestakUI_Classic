@@ -100,7 +100,10 @@ ricon:SetHeight(18)
 ricon:SetWidth(18)
 ricon:SetPoint("BOTTOM", GameTooltip, "TOP", 0, 5)
 
-GameTooltip:HookScript("OnHide", function() ricon:SetTexture(nil) end)
+GameTooltip:HookScript("OnHide", function(self)
+	if self.IsForbidden and self:IsForbidden() then return end
+	ricon:SetTexture(nil)
+end)
 
 -- Add "Targeted By" line
 local targetedList = {}
@@ -175,7 +178,8 @@ end
 hooksecurefunc("GameTooltip_SetDefaultAnchor", GameTooltipDefault)
 
 if C.tooltip.shift_modifer == true then
-	local ShiftShow = function()
+	local ShiftShow = function(self)
+		if self.IsForbidden and self:IsForbidden() then return end
 		if IsShiftKeyDown() then
 			GameTooltip:Show()
 		else

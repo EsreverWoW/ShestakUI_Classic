@@ -6,6 +6,7 @@ if C.tooltip.enable ~= true or C.tooltip.item_count ~= true then return end
 ----------------------------------------------------------------------------------------
 GameTooltip:HookScript("OnTooltipCleared", function(self) self.UIItemTooltip = nil end)
 GameTooltip:HookScript("OnTooltipSetItem", function(self)
+	if self.IsForbidden and self:IsForbidden() then return end
 	if UIItemTooltip and not self.UIItemTooltip and UIItemTooltip.count then
 		local _, link = self:GetItem()
 		local num = GetItemCount(link, true)

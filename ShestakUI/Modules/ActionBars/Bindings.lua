@@ -21,6 +21,7 @@ SlashCmdList.MOUSEOVERBIND = function()
 
 		local elapsed = 0
 		GameTooltip:HookScript("OnUpdate", function(self, e)
+			if self.IsForbidden and self:IsForbidden() then return end
 			elapsed = elapsed + e
 			if elapsed < 0.2 then return else elapsed = 0 end
 			if not self.comparing and IsModifiedClick("COMPAREITEMS") then
@@ -63,6 +64,7 @@ SlashCmdList.MOUSEOVERBIND = function()
 
 				GameTooltip:Show()
 				GameTooltip:SetScript("OnHide", function(self)
+					if self.IsForbidden and self:IsForbidden() then return end
 					self:SetOwner(bind, "ANCHOR_NONE")
 					self:SetPoint("BOTTOM", bind, "TOP", 0, 1)
 					self:AddLine(bind.button.name, 1, 1, 1)
@@ -113,6 +115,7 @@ SlashCmdList.MOUSEOVERBIND = function()
 
 				GameTooltip:Show()
 				GameTooltip:SetScript("OnHide", function(self)
+					if self.IsForbidden and self:IsForbidden() then return end
 					self:SetOwner(bind, "ANCHOR_NONE")
 					self:SetPoint("BOTTOM", bind, "TOP", 0, 1)
 					self:AddLine(bind.button.name, 1, 1, 1)
@@ -156,6 +159,7 @@ SlashCmdList.MOUSEOVERBIND = function()
 				GameTooltip:Show()
 				bind.button.bindings = {GetBindingKey(bind.button.bindstring)}
 				GameTooltip:SetScript("OnHide", function(self)
+					if self.IsForbidden and self:IsForbidden() then return end
 					self:SetOwner(bind, "ANCHOR_NONE")
 					self:SetPoint("BOTTOM", bind, "TOP", 0, 1)
 					self:AddLine(bind.button.name, 1, 1, 1)
