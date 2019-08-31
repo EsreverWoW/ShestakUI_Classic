@@ -362,3 +362,87 @@ elseif T.client == "zhCN" then
 	C["font"].bags_font_style = "OUTLINE"
 	C["font"].bags_font_shadow = true
 end
+
+----------------------------------------------------------------------------------------
+--	Font replace for koKR client
+----------------------------------------------------------------------------------------
+if T.client == "koKR" then
+	C["media"].normal_font = "Fonts\\2002.ttf"
+	C["media"].pixel_font = "Fonts\\2002.ttf"
+	C["media"].pixel_font_style = "OUTLINE"
+	C["media"].pixel_font_size = 10
+
+	C["font"].stats_font = "Fonts\\2002.ttf"
+	C["font"].stats_font_size = 11
+	C["font"].stats_font_style = "OUTLINE"
+	C["font"].stats_font_shadow = true
+
+	C["font"].combat_text_font = "Fonts\\2002.ttf"
+	C["font"].combat_text_font_size = 14
+	C["font"].combat_text_font_style = "OUTLINE"
+	C["font"].combat_text_font_shadow = true
+
+	C["font"].chat_font = "Fonts\\2002.ttf"
+	C["font"].chat_font_style = "OUTLINE"
+	C["font"].chat_font_shadow = true
+
+	C["font"].chat_tabs_font = "Fonts\\2002.ttf"
+	C["font"].chat_tabs_font_size = 11
+	C["font"].chat_tabs_font_style = "OUTLINE"
+	C["font"].chat_tabs_font_shadow = true
+
+	C["font"].action_bars_font = "Fonts\\2002.ttf"
+	C["font"].action_bars_font_size = 11
+	C["font"].action_bars_font_style = "OUTLINE"
+	C["font"].action_bars_font_shadow = true
+
+	C["font"].threat_meter_font = "Fonts\\2002.ttf"
+	C["font"].threat_meter_font_size = 11
+	C["font"].threat_meter_font_style = "OUTLINE"
+	C["font"].threat_meter_font_shadow = true
+
+	C["font"].raid_cooldowns_font = "Fonts\\2002.ttf"
+	C["font"].raid_cooldowns_font_size = 11
+	C["font"].raid_cooldowns_font_style = "OUTLINE"
+	C["font"].raid_cooldowns_font_shadow = true
+
+	C["font"].cooldown_timers_font = "Fonts\\2002.ttf"
+	C["font"].cooldown_timers_font_size = 12
+	C["font"].cooldown_timers_font_style = "OUTLINE"
+	C["font"].cooldown_timers_font_shadow = true
+
+	C["font"].loot_font = "Fonts\\2002.ttf"
+	C["font"].loot_font_size = 12
+	C["font"].loot_font_style = "OUTLINE"
+	C["font"].loot_font_shadow = true
+
+	C["font"].nameplates_font = "Fonts\\2002.ttf"
+	C["font"].nameplates_font_size = 12
+	C["font"].nameplates_font_style = "OUTLINE"
+	C["font"].nameplates_font_shadow = true
+
+	C["font"].unit_frames_font = "Fonts\\2002.ttf"
+	C["font"].unit_frames_font_size = 11
+	C["font"].unit_frames_font_style = "OUTLINE"
+	C["font"].unit_frames_font_shadow = true
+
+	C["font"].auras_font = "Fonts\\2002.ttf"
+	C["font"].auras_font_size = 10
+	C["font"].auras_font_style = "OUTLINE"
+	C["font"].auras_font_shadow = true
+
+	C["font"].filger_font = "Fonts\\2002.ttf"
+	C["font"].filger_font_size = 13
+	C["font"].filger_font_style = "OUTLINE"
+	C["font"].filger_font_shadow = true
+
+	C["font"].stylization_font = "Fonts\\2002.ttf"
+	C["font"].stylization_font_size = 11
+	C["font"].stylization_font_style = ""
+	C["font"].stylization_font_shadow = true
+
+	C["font"].bags_font = "Fonts\\2002.ttf"
+	C["font"].bags_font_size = 10
+	C["font"].bags_font_style = "OUTLINE"
+	C["font"].bags_font_shadow = true
+end
