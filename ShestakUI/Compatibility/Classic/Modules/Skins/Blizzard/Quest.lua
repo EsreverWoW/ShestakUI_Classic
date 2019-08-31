@@ -95,7 +95,7 @@ local function LoadSkin()
 	QuestInfoRewardsFrame.ItemChooseText:SetTextColor(1, 1, 1)
 	QuestInfoRewardsFrame.ItemReceiveText:SetTextColor(1, 1, 1)
 
-	--[[ -- Texture removal blocking AutoQueest selection highlight
+	--[[ -- Texture removal blocking AutoQuest selection highlight
 	local function UpdateQuestRewards()
 		local rewardsFrame = QuestInfoFrame.rewardsFrame
 		local rewardButtons = rewardsFrame.RewardButtons
