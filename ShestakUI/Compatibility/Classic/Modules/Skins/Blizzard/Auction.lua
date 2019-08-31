@@ -9,6 +9,15 @@ local function LoadSkin()
 	AuctionFrame:StripTextures(true)
 	AuctionFrame:SetTemplate("Transparent")
 
+	BrowseTitle:ClearAllPoints()
+    BrowseTitle:SetPoint("TOP", AuctionFrame, "TOP", 0, -6)
+
+	BidTitle:ClearAllPoints()
+    BidTitle:SetPoint("TOP", AuctionFrameBid, "TOP", 37, -6)
+
+	AuctionsTitle:ClearAllPoints()
+    AuctionsTitle:SetPoint("TOP", AuctionFrameAuctions, "TOP", 37, -6)
+
 	BrowseFilterScrollFrame:StripTextures()
 	BrowseScrollFrame:StripTextures()
 	AuctionsScrollFrame:StripTextures()
@@ -206,11 +215,30 @@ local function LoadSkin()
 	end
 	_G["BrowseName"]:SetTextInsets(15, 15, -1, 1)
 	_G["BrowseNameText"]:ClearAllPoints()
-	_G["BrowseNameText"]:SetPoint("TOPLEFT", AuctionFrameBrowse, "TOPLEFT", 19, -38)
-	BrowseLevelHyphen:SetPoint("LEFT", BrowseMinLevel, "RIGHT", 6, 0)
-	BrowseMaxLevel:SetPoint("LEFT", BrowseLevelHyphen, "RIGHT", 2, 0)
+	_G["BrowseNameText"]:SetPoint("TOPLEFT", _G["AuctionFrameBrowse"], "TOPLEFT", 19, -38)
+	_G["BrowseLevelHyphen"]:SetPoint("LEFT", _G["BrowseMinLevel"], "RIGHT", 6, 0)
+	_G["BrowseMaxLevel"]:SetPoint("LEFT", _G["BrowseLevelHyphen"], "RIGHT", 2, 0)
+	if T.client == "zhCN" or T.client == "zhTW" then
+		_G["BrowseMinLevel"]:ClearAllPoints()
+		_G["BrowseMinLevel"]:SetPoint("LEFT", _G["BrowseName"], "RIGHT", 42, 0)
+		_G["BrowseLevelText"]:ClearAllPoints()
+		_G["BrowseLevelText"]:SetPoint("TOPLEFT", _G["BrowseMinLevel"], "TOPLEFT", -2, 16)
+		_G["BrowseDropDown"]:ClearAllPoints()
+		_G["BrowseDropDown"]:SetPoint("LEFT", _G["BrowseMaxLevel"], "RIGHT", 4, -4)
+		_G["BrowseDropDownName"]:ClearAllPoints()
+		_G["BrowseDropDownName"]:SetPoint("TOPLEFT", _G["BrowseDropDown"], "TOPLEFT", 20, 12)
+		_G["ShowOnPlayerCheckButton"]:ClearAllPoints()
+		_G["ShowOnPlayerCheckButton"]:SetPoint("BOTTOMRIGHT", _G["BrowseSearchButton"], "BOTTOMRIGHT", 4, -26)
+		_G["BrowseShowOnCharacterText"]:ClearAllPoints()
+		_G["BrowseShowOnCharacterText"]:SetPoint("RIGHT", _G["ShowOnPlayerCheckButton"], "LEFT", -8, 0)
+	end
 	AuctionsStackSizeEntry.backdrop:SetAllPoints()
 	AuctionsNumStacksEntry.backdrop:SetAllPoints()
+
+	BrowseBidPriceGold.texture:SetDrawLayer("ARTWORK")
+	BidBidPriceGold.texture:SetDrawLayer("ARTWORK")
+	StartPriceGold.texture:SetDrawLayer("ARTWORK")
+	BuyoutPriceGold.texture:SetDrawLayer("ARTWORK")
 
 	for i = 1, NUM_BROWSE_TO_DISPLAY do
 		local button = _G["BrowseButton"..i]
