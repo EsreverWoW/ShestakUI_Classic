@@ -236,9 +236,13 @@ function Stuffing:SlotUpdate(b)
 		if T.classic and HasWandEquipped() then
 			local wandID = GetInventoryItemID("player", 18)
 			local wandSpeed = GetItemCooldown(wandID)
-			if wandSpeed < 1.5 then wandSpeed = 1.5 end
-			if (duration or 0) > wandSpeed then
+			if wandSpeed == 0 then
 				CooldownFrame_Set(b.cooldown, start, duration, enable)
+			else
+				if wandSpeed < 1.5 then wandSpeed = 1.5 end
+				if duration and duration > wandSpeed then
+					CooldownFrame_Set(b.cooldown, start, duration, enable)
+				end
 			end
 		else
 			CooldownFrame_Set(b.cooldown, start, duration, enable)
@@ -330,12 +334,16 @@ function Stuffing:UpdateCooldowns(b)
 		if T.classic and HasWandEquipped() then
 			local wandID = GetInventoryItemID("player", 18)
 			local wandSpeed = GetItemCooldown(wandID)
-			if wandSpeed < 1.5 then wandSpeed = 1.5 end
-			if duration and duration > wandSpeed then
-				CooldownFrame_Set(b.cooldown, start, duration, enable)
+			if wandSpeed == 0 then
+				return CooldownFrame_Set(b.cooldown, start, duration, enable)
+			else
+				if wandSpeed < 1.5 then wandSpeed = 1.5 end
+				if duration and duration > wandSpeed then
+					return CooldownFrame_Set(b.cooldown, start, duration, enable)
+				end
 			end
 		else
-			CooldownFrame_Set(b.cooldown, start, duration, enable)
+			return CooldownFrame_Set(b.cooldown, start, duration, enable)
 		end
 	end
 end
