@@ -1,5 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
-if not T.classic or C.skins.blizzard_frames ~= true then return end -- incomplete
+if not T.classic or C.skins.blizzard_frames ~= true or IsAddOnLoaded("QuestLogEx") then return end -- incomplete
 
 ----------------------------------------------------------------------------------------
 --	QuestLog skin
