@@ -3,12 +3,19 @@ if _G.WOW_PROJECT_ID ~= _G.WOW_PROJECT_CLASSIC then return end
 local lib = LibStub and LibStub("LibClassicDurations", true)
 if not lib then return end
 
-local Type, Version = "SpellTable", 17
+local Type, Version = "SpellTable", 18
 if lib:GetDataVersion(Type) >= Version then return end  -- older versions didn't have that function
 
 local Spell = lib.AddAura
 local Talent = lib.Talent
 
+local _, class = UnitClass("player")
+local locale = GetLocale()
+
+-- temporary
+if locale == "zhCN" then
+    lib.spellNameToID[GetSpellInfo(980)] = nil
+end
 ------------------
 -- GLOBAL
 ------------------
@@ -411,7 +418,11 @@ Spell({ 710, 18647 }, {
 Spell({ 6789, 17925, 17926 }, { duration = 3 }) -- Death Coil
 
 Spell({ 18265, 18879, 18880, 18881}, { duration = 30, stacking = true }) -- Siphon Life
+
+if locale ~= "zhCN" or class ~= "MAGE" then
 Spell({ 980, 1014, 6217, 11711, 11712, 11713 }, { duration = 24, stacking = true }) -- Curse of Agony
+end
+
 Spell({ 172, 6222, 6223, 7648, 11671, 11672, 25311 }, { stacking = true,
     duration = function(spellID)
         if spellID == 172 then
@@ -635,7 +646,11 @@ Spell({ 6143, 8461, 8462, 10177, 28609 }, { duration = 30, type = "BUFF" }) -- F
 
 Spell(12355, { duration = 2 }) -- Impact
 Spell(12654, { duration = 4 }) -- Ignite
+
+if locale ~= "zhCN" or class == "MAGE" then
 Spell(22959, { duration = 30 }) -- Fire Vulnerability
+end
+
 Spell({ 11113, 13018, 13019, 13020, 13021 }, { duration = 6 }) -- Blast Wave
 
 Spell({ 2120, 2121, 8422, 8423, 10215, 10216 }, { duration = 8, stacking = true }) -- Flamestrike

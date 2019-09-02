@@ -63,7 +63,7 @@ Usage example 2:
 --]================]
 
 
-local MAJOR, MINOR = "LibClassicDurations", 13
+local MAJOR, MINOR = "LibClassicDurations", 14
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
@@ -522,7 +522,7 @@ end
 
 local FillInDuration = function(unit, buffName, icon, count, debuffType, duration, expirationTime, caster, canStealOrPurge, nps, spellId, ...)
     if buffName then
-        local durationNew, expirationTimeNew = GetAuraDurationByUnitDirect(unit, spellId, caster)
+        local durationNew, expirationTimeNew = GetAuraDurationByUnitDirect(unit, spellId, caster, buffName)
         if duration == 0 and durationNew then
             duration = durationNew
             expirationTime = expirationTimeNew
@@ -548,6 +548,10 @@ function lib.UnitAuraDirect(unit, index, filter)
     else
         return FillInDuration(unit, UnitAura(unit, index, filter))
     end
+end
+
+function lib.UnitAuraWrapper(unit, ...)
+    return FillInDuration(unit, UnitAura(unit, ...))
 end
 
 function lib:UnitAura(...)
@@ -603,7 +607,7 @@ local function GetGUIDAuraTime(dstGUID, spellName, spellID, srcGUID, isStacking)
             local mul = getDRMul(dstGUID, spellID)
             -- local mul = getDRMul(dstGUID, lastRankID)
             duration = duration * mul
-            local expirationTime = startTime + duration + 0.15
+            local expirationTime = startTime + duration
             if GetTime() <= expirationTime then
                 return duration, expirationTime
             end
