@@ -167,6 +167,14 @@ local function Stuffing_Toggle()
 	end
 end
 
+local function Stuffing_ToggleBag(id)
+	if T.classic and id == -2 then
+		ToggleKeyRing()
+		return
+	end
+	Stuffing_Toggle()
+end
+
 -- Bag slot stuff
 local trashButton = {}
 local trashBag = {}
@@ -1215,7 +1223,7 @@ function Stuffing:ADDON_LOADED(addon)
 	tinsert(UISpecialFrames, "StuffingFrameReagent")
 
 	ToggleBackpack = Stuffing_Toggle
-	ToggleBag = Stuffing_Toggle
+	ToggleBag = Stuffing_ToggleBag
 	ToggleAllBags = Stuffing_Toggle
 	OpenAllBags = Stuffing_Open
 	OpenBackpack = Stuffing_Open
@@ -1669,6 +1677,14 @@ function Stuffing.Menu(self, level)
 		end
 	end
 	UIDropDownMenu_AddButton(info, level)
+
+	--[[
+	wipe(info)
+	info.text = "Show Keyring" -- L_BAG_SHOW_KEYRING
+	info.notCheckable = 1
+	info.func = ToggleKeyRing
+	UIDropDownMenu_AddButton(info, level)
+	--]]
 
 	wipe(info)
 	info.disabled = nil
