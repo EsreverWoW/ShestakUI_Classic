@@ -63,7 +63,7 @@ Usage example 2:
 --]================]
 
 
-local MAJOR, MINOR = "LibClassicDurations", 14
+local MAJOR, MINOR = "LibClassicDurations", 15
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
@@ -478,12 +478,19 @@ end
 ---------------------------
 -- ENEMY BUFFS
 ---------------------------
-local makeBuffInfo = function(spellID, bt)
-    local name, rank, icon, castTime, minRange, maxRange, spellId = GetSpellInfo(spellID)
-    local duration = bt[1]
-    local expirationTime = duration == 0 and 0 or bt[2]
-    -- buffName, icon, count, debuffType, duration, expirationTime, caster, canStealOrPurge, _ , spellId
-    return { name, icon, 1, nil, duration, expirationTime, nil, nil, nil, spellID }
+local makeBuffInfo = function(spellID, applicationTable, dstGUID, srcGUID)
+    local name, rank, icon, castTime, minRange, maxRange, _spellId = GetSpellInfo(spellID)
+    local durationFunc, startTime = unpack(applicationTable)
+    local duration = cleanDuration(durationFunc, spellID, srcGUID) -- srcGUID isn't needed actually
+    -- no DRs on buffs
+    local expirationTime = startTime + duration
+    if duration == 0 then
+        expirationTime = 0
+    end
+    local now = GetTime()
+    if expirationTime > now then
+        return { name, icon, 1, nil, duration, expirationTime, nil, nil, nil, spellID }
+    end
 end
 
 local shouldDisplayAura = function(auraTable)
@@ -505,13 +512,19 @@ local function RegenerateBuffList(dstGUID)
     for spellID, t in pairs(guidTable) do
         if t.applications then
             for srcGUID, auraTable in pairs(t.applications) do
-                if shouldDisplayAura(auraTable) then
-                    tinsert(buffs, makeBuffInfo(spellID, auraTable))
+                if auraTable[3] == "BUFF" then
+                    local buffInfo = makeBuffInfo(spellID, auraTable, dstGUID, srcGUID)
+                    if buffInfo then
+                        tinsert(buffs, buffInfo)
+                    end
                 end
             end
         else
-            if shouldDisplayAura(t) then
-                tinsert(buffs, makeBuffInfo(spellID, t))
+            if t[3] == "BUFF" then
+                local buffInfo = makeBuffInfo(spellID, t, dstGUID)
+                if buffInfo then
+                    tinsert(buffs, buffInfo)
+                end
             end
         end
     end
@@ -534,6 +547,7 @@ end
 function lib.UnitAuraDirect(unit, index, filter)
     if enableEnemyBuffTracking and filter == "HELPFUL" and not UnitIsFriend("player", unit) and not UnitAura(unit, 1, filter) then
         local unitGUID = UnitGUID(unit)
+        if not unitGUID then return end
         if not buffCacheValid[unitGUID] then
             RegenerateBuffList(unitGUID)
         end
