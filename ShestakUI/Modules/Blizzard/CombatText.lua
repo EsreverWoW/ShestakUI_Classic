@@ -396,33 +396,21 @@ for i = 1, numf do
 	f:SetInsertMode(C.combattext.direction and 2 or 1)
 	if i == 1 then
 		f:SetJustifyH(ct.justify_1)
-		if C.unitframe.enable == true and _G.oUF_Player then
-			f:SetPoint("BOTTOMLEFT", "oUF_Player", "TOPLEFT", -3, 60)
-		else
-			f:SetPoint("CENTER", -192, -32)
-		end
+		f:SetPoint(unpack(C.position.xct.frame1))
 	elseif i == 2 then
 		f:SetJustifyH(ct.justify_2)
-		if C.unitframe.enable == true and _G.oUF_Player then
-			f:SetPoint("BOTTOMRIGHT", "oUF_Player", "TOPRIGHT", 5, 60)
-		else
-			f:SetPoint("CENTER", 192, -32)
-		end
+		f:SetPoint(unpack(C.position.xct.frame2))
 	elseif i == 3 then
 		f:SetJustifyH(ct.justify_3)
 		f:SetWidth(256)
-		f:SetPoint("CENTER", 0, 205)
+		f:SetPoint(unpack(C.position.xct.frame3))
 	else
 		f:SetJustifyH(ct.justify_4)
 		f:SetWidth(200)
 		if C.combattext.icons then
 			f:SetHeight(150)
 		end
-		if C.unitframe.enable == true and _G.oUF_Target then
-			f:SetPoint("BOTTOMRIGHT", "oUF_Target", "TOPRIGHT", 2, 278)
-		else
-			f:SetPoint("CENTER", 330, 205)
-		end
+		f:SetPoint(unpack(C.position.xct.frame4))
 		local a, _, c = f:GetFont()
 		if C.font.combat_text_font_size == "auto" then
 			if C.combattext.icons then
@@ -471,6 +459,15 @@ local pr = function(msg)
 	print(tostring(msg))
 end
 
+local function SetPosition(f)
+	local a1, _, a2, x, y = f:GetPoint()
+	for i = 1, #ct.frames do
+		if f == ct.frames[i] then
+			SavedPositions["xCT"..i] = {a1, "UIParent", a2, x, y}
+		end
+	end
+end
+
 -- Configmode and testmode
 local StartConfigmode = function()
 	if not InCombatLockdown()then
@@ -517,6 +514,7 @@ local StartConfigmode = function()
 				end)
 				f.tr:SetScript("OnDragStop", function(self)
 					self:GetParent():StopMovingOrSizing()
+					SetPosition(self:GetParent())
 				end)
 				f.tr:EnableMouse(true)
 				f.tr:RegisterForDrag("LeftButton")
@@ -658,13 +656,6 @@ StaticPopupDialogs.XCT_LOCK = {
 	preferredIndex = STATICPOPUPS_NUMDIALOGS,
 }
 
-local placed = {
-	"xCT1",
-	"xCT2",
-	"xCT3",
-	"xCT4"
-}
-
 -- Slash commands
 SlashCmdList.XCT = function(input)
 	input = string.lower(input)
@@ -689,10 +680,8 @@ SlashCmdList.XCT = function(input)
 			pr("|cffffff00"..L_COMBATTEXT_TEST_ENABLED.."|r")
 		end
 	elseif input == "reset" then
-		for _, v in pairs(placed) do
-			if _G[v] then
-				_G[v]:SetUserPlaced(false)
-			end
+		for i = 1, #ct.frames do
+			SavedPositions["xCT"..i] = nil
 		end
 		ReloadUI()
 	else
