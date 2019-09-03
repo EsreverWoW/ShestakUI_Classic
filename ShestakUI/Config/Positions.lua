@@ -79,6 +79,12 @@ C["position"] = {
 		["cooldown"] = {"BOTTOMRIGHT", "oUF_Player", "TOPRIGHT", 63, C.unitframe.plugins_swing and 49 or 37},	-- "COOLDOWN"
 		["target_bar"] = {"BOTTOMLEFT", C.unitframe.portrait_enable and "oUF_Target_Portrait" or "oUF_Target", "BOTTOMRIGHT", C.unitframe.portrait_enable and 6 or 9, C.unitframe.portrait_enable and -3 or -41},	-- "T_DE/BUFF_BAR"
 	},
+	xct = {
+		["frame1"] = (C.unitframe.enable == true) and {"BOTTOMLEFT", "oUF_Player", "TOPLEFT", -3, 60} or {"CENTER", -192, -32},
+		["frame2"] = (C.unitframe.enable == true) and {"BOTTOMRIGHT", "oUF_Player", "TOPRIGHT", 5, 60} or {"CENTER", 192, -32},
+		["frame3"] = {"CENTER", 0, 205},
+		["frame4"] = (C.unitframe.enable == true) and {"BOTTOMRIGHT", "oUF_Target", "TOPRIGHT", 2, 278} or {"CENTER", 330, 205},
+	},
 }
 
 if T.classic then
