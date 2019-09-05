@@ -364,48 +364,6 @@ local function LoadSkin()
 	end
 	hooksecurefunc("QuestLog_Update", UpdateQuests)
 	--]]
-
-	-- Quest Watch
-	hooksecurefunc("QuestWatch_Update", function()
-		local questIndex, numObjectives, objectivesCompleted
-		local _, finished
-		local text, title, level, color, hex
-		local watchText
-		local watchTextIndex = 1
-
-		for i = 1, GetNumQuestWatches() do
-			questIndex = GetQuestIndexForWatch(i)
-			if questIndex then
-				numObjectives = GetNumQuestLeaderBoards(questIndex)
-				title, level = GetQuestLogTitle(questIndex)
-				color = GetQuestDifficultyColor(level)
-				hex = T.RGBToHex(color.r, color.g, color.b)
-				text = hex.."["..level.."] "..title
-
-				if numObjectives > 0 then
-					watchText = _G["QuestWatchLine"..watchTextIndex]
-					watchText:SetText(text)
-
-					watchTextIndex = watchTextIndex + 1
-					objectivesCompleted = 0
-
-					for j = 1, numObjectives do
-						_, _, finished = GetQuestLogLeaderBoard(j, questIndex)
-						watchText = _G["QuestWatchLine"..watchTextIndex]
-
-						if finished then
-							watchText:SetTextColor(0, 1, 0)
-							objectivesCompleted = objectivesCompleted + 1
-						else
-							watchText:SetTextColor(0.8, 0.8, 0.8)
-						end
-
-						watchTextIndex = watchTextIndex + 1
-					end
-				end
-			end
-		end
-	end)
 end
 
 table.insert(T.SkinFuncs["ShestakUI"], LoadSkin)

@@ -41,14 +41,14 @@ local function OnMouseUp(self)
 end
 
 local function SetHighlightColor(self)
-	self.headerText:SetTextColor(NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b) -- 1, .82, 0
+	self.watchText:SetTextColor(NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b) -- 1, .82, 0
 	for _, text in ipairs(self.objectiveTexts) do
 		text:SetTextColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b) -- 1, 1, 1
 	end
 end
 
 local function SetNormalColor(self)
-	self.headerText:SetTextColor(.75, .61, 0)
+	self.watchText:SetTextColor(.75, .61, 0)
 	for _, text in ipairs(self.objectiveTexts) do
 		text:SetTextColor(.8, .8, .8)
 	end
@@ -75,7 +75,7 @@ local function OnLeave(self)
 	GameTooltip:Hide()
 end
 
-local function CreateClickFrame(watchIndex, questIndex, headerText, objectiveTexts, completed)
+local function CreateClickFrame(watchIndex, questIndex, watchText, objectiveTexts, completed)
 	if not ClickFrames[watchIndex] then
 		ClickFrames[watchIndex] = CreateFrame("Frame")
 		ClickFrames[watchIndex]:SetScript("OnMouseUp", OnMouseUp)
@@ -83,10 +83,10 @@ local function CreateClickFrame(watchIndex, questIndex, headerText, objectiveTex
 		ClickFrames[watchIndex]:SetScript("OnLeave", OnLeave)
 	end
 	local f = ClickFrames[watchIndex]
-	f:SetAllPoints(headerText)
+	f:SetAllPoints(watchText)
 	f.watchIndex = watchIndex
 	f.questIndex = questIndex
-	f.headerText = headerText
+	f.watchText = watchText
 	f.objectiveTexts = objectiveTexts
 	f.completed = completed
 end
@@ -117,26 +117,37 @@ hooksecurefunc("QuestWatch_Update", function()
 	if GetNumQuestWatches() > 0 then
 		ObjectiveTracker:Show()
 
+		local questIndex, numObjectives, title, level, color, hex, watchText, objectivesGroup, objectivesCompleted, finished
 		local watchTextIndex = 1
 		for i = 1, GetNumQuestWatches() do
-			local questIndex = GetQuestIndexForWatch(i)
+			questIndex = GetQuestIndexForWatch(i)
 			if questIndex then
-				local numObjectives = GetNumQuestLeaderBoards(questIndex)
+				numObjectives = GetNumQuestLeaderBoards(questIndex)
+				title, level = GetQuestLogTitle(questIndex)
+				color = GetQuestDifficultyColor(level)
+				hex = T.RGBToHex(color.r, color.g, color.b)
+				text = hex.."["..level.."] "..title
+
 				if numObjectives > 0 then
-					local headerText = _G["QuestWatchLine"..watchTextIndex]
+					watchText = _G["QuestWatchLine"..watchTextIndex]
+					watchText:SetText(text)
+
 					watchTextIndex = watchTextIndex + 1
-					local objectivesGroup = {}
-					local objectivesCompleted = 0
+					objectivesGroup = {}
+					objectivesCompleted = 0
 
 					for j = 1, numObjectives do
-						local finished = select(3, GetQuestLogLeaderBoard(j, questIndex))
+						finished = select(3, GetQuestLogLeaderBoard(j, questIndex))
 						if finished then
+							watchText:SetTextColor(0, 1, 0)
 							objectivesCompleted = objectivesCompleted + 1
+						else
+							watchText:SetTextColor(0.8, 0.8, 0.8)
 						end
 						tinsert(objectivesGroup, _G["QuestWatchLine"..watchTextIndex])
 						watchTextIndex = watchTextIndex + 1
 					end
-					CreateClickFrame(i, questIndex, headerText, objectivesGroup, objectivesCompleted == numObjectives)
+					CreateClickFrame(i, questIndex, watchText, objectivesGroup, objectivesCompleted == numObjectives)
 				end
 			end
 		end
