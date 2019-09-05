@@ -46,10 +46,15 @@ _G.ERR_FRIEND_OFFLINE_S = "[%s] "..L_CHAT_GONE_OFFLINE
 ChatFrameMenuButton:Kill()
 
 -- Kill channel and voice buttons
-ChatFrameChannelButton:Kill()
 if not T.classic then
+	ChatFrameChannelButton:Kill()
 	ChatFrameToggleVoiceDeafenButton:Kill()
 	ChatFrameToggleVoiceMuteButton:Kill()
+else
+	ChatFrameChannelButton:SetSize(20, 20)
+	ChatFrameChannelButton:SkinButton()
+	ChatFrameChannelButton:ClearAllPoints()
+	ChatFrameChannelButton:SetPoint("TOPLEFT", ChatFrame1, "TOPLEFT", -24, 24)
 end
 
 -- Set chat style
