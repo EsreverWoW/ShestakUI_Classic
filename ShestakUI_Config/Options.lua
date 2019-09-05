@@ -5,20 +5,15 @@ local L = ns
 ----------------------------------------------------------------------------------------
 -- Temporary Function
 local function IsClassicBuild()
-	local major, minor, fix = strsplit(".", tostring(GetBuildInfo()))
-	major, minor, fix = tonumber(major) or 0, tonumber(minor) or 0, tonumber(fix) or 0
-
-	local patch = major + (minor / 100)
-	if patch < 2 then
-		return true
-	end
+	return _G.WOW_PROJECT_ID == _G.WOW_PROJECT_CLASSIC
 end
 
 local function HideOptions(list)
 	for i = 1, #list do
 		local frame = list[i]
 		if frame then
-			frame:Hide()
+			frame:SetScale(0.00001)
+			frame:SetAlpha(0)
 		end
 	end
 end
@@ -722,7 +717,7 @@ do
 	show_focus:SetPoint("TOPLEFT", show_pet, "BOTTOMLEFT", 0, 0)
 
 	local show_target_target = ns.CreateCheckBox(parent, "show_target_target", L_GUI_UF_SHOW_TOT)
-	show_target_target:SetPoint("LEFT", show_focus, "RIGHT", 248, 0)
+	show_target_target:SetPoint("LEFT", IsClassicBuild() and show_pet or show_focus, "RIGHT", 248, 0)
 
 	local show_boss = ns.CreateCheckBox(parent, "show_boss", L_GUI_UF_SHOW_BOSS)
 	show_boss:SetPoint("TOPLEFT", show_focus, "BOTTOMLEFT", 0, 0)
@@ -865,7 +860,7 @@ do
 	rune:SetPoint("TOPLEFT", shard, "BOTTOMLEFT", 0, 0)
 
 	local totem = ns.CreateCheckBox(parent, "totem", L_GUI_UF_PLUGINS_TOTEM_BAR)
-	totem:SetPoint("TOPLEFT", rune, "BOTTOMLEFT", 0, 0)
+	totem:SetPoint("TOPLEFT", rune, "BOTTOMLEFT", IsClassicBuild() and -20 or 0, 0)
 
 	local range = ns.CreateCheckBox(parent, "range", L_GUI_UF_PLUGINS_RANGE_BAR)
 	range:SetPoint("TOPLEFT", totem, "BOTTOMLEFT", 0, 0)
@@ -949,7 +944,7 @@ do
 	icons_raid_mark:SetPoint("LEFT", icons_role, "RIGHT", 248, 0)
 
 	local icons_ready_check = ns.CreateCheckBox(parent, "icons_ready_check", L_GUI_UF_ICONS_READY_CHECK)
-	icons_ready_check:SetPoint("TOPLEFT", icons_role, "BOTTOMLEFT", 0, 0)
+	icons_ready_check:SetPoint("TOPLEFT", icons_role, "BOTTOMLEFT", 0, IsClassicBuild() and -8 or 0)
 
 	local icons_leader = ns.CreateCheckBox(parent, "icons_leader", L_GUI_UF_ICONS_LEADER)
 	icons_leader:SetPoint("LEFT", icons_ready_check, "RIGHT", 248, 0)
@@ -1018,6 +1013,7 @@ do
 
 	if IsClassicBuild() then
 		HideOptions(classic)
+		icons_raid_mark:SetPoint("TOPLEFT", icons_ready_check, "BOTTOMLEFT", 0, 0)
 	end
 end
 
@@ -1136,10 +1132,10 @@ do
 	talents:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -8)
 
 	local vendor_price = ns.CreateCheckBox(parent, "vendor_price")
-	vendor_price:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -8)
+	vendor_price:SetPoint("TOPLEFT", talents, "BOTTOMLEFT", 0, -8)
 
 	local achievements = ns.CreateCheckBox(parent, "achievements", L_GUI_TOOLTIP_ACHIEVEMENTS)
-	achievements:SetPoint("TOPLEFT", talents, "BOTTOMLEFT", 0, 0)
+	achievements:SetPoint("TOPLEFT", vendor_price, "BOTTOMLEFT", 0, 0)
 
 	local target = ns.CreateCheckBox(parent, "target", L_GUI_TOOLTIP_TARGET)
 	target:SetPoint("TOPLEFT", achievements, "BOTTOMLEFT", 0, 0)
