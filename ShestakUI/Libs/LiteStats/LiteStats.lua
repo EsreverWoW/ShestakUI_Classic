@@ -324,9 +324,11 @@ if fps.enabled then
 			end
 		},
 		OnEnter = function(self)
+			--[[
 			if T.classic and not InCombatLockdown() then
 				collectgarbage()
 			end
+			--]]
 			self.hovered = true
 			GameTooltip:SetOwner(self, "ANCHOR_NONE")
 			GameTooltip:ClearAllPoints()
