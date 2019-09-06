@@ -146,4 +146,7 @@ frame:SetScript("OnEvent", function()
 	end
 
 	hooksecurefunc("ActionButton_Update", StyleNormalButton)
+	if T.classic then
+		hooksecurefunc("PetActionButton_OnUpdate", StyleNormalButton)
+	end
 end)
