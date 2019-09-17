@@ -25,15 +25,6 @@ GetProfessions = _G.GetProfessions or T.dummy
 UnitInVehicle = _G.UnitInVehicle or T.dummy
 
 ----------------------------------------------------------------------------------------
---	Quest Functions
-----------------------------------------------------------------------------------------
-GetAvailableQuestInfo = _G.GetAvailableQuestInfo or function(index)
-	if not index then return end
-
-	return IsActiveQuestTrivial(index), 1, false, false
-end
-
-----------------------------------------------------------------------------------------
 --	LibClassicDurations (by d87)
 ----------------------------------------------------------------------------------------
 local LibClassicDurations = LibStub("LibClassicDurations")
