@@ -93,7 +93,10 @@ local function LoadSkin()
 		SkinReward(QuestInfoRewardsFrame[name])
 	end
 
-	SkinReward(QuestInfoSkillPointFrame)
+	QuestInfoPlayerTitleFrame.FrameLeft:SetTexture()
+	QuestInfoPlayerTitleFrame.FrameCenter:SetTexture()
+	QuestInfoPlayerTitleFrame.FrameRight:SetTexture()
+	QuestInfoPlayerTitleFrame.Icon:SkinIcon()
 
 	hooksecurefunc("QuestInfo_GetRewardButton", function(rewardsFrame, index)
 		local button = rewardsFrame.RewardButtons[index]

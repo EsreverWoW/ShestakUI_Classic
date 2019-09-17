@@ -304,6 +304,10 @@ local function LoadSkin()
 				r, g, b = unpack(C.media.border_color)
 			end
 
+			if (r > 0.64 and r < 0.67) or (r > 0.99 and g > 0.99 and b > 0.99) then
+				r, g, b = unpack(C.media.border_color)
+			end
+
 			if not reward.backdrop then
 				reward.Icon:SkinIcon()
 				reward.backdrop:SetFrameLevel(reward:GetFrameLevel())
@@ -325,7 +329,7 @@ local function LoadSkin()
 		local r, g, b
 		if frame.IconBorder and frame.IconBorder:IsShown() then
 			r, g, b = frame.IconBorder:GetVertexColor()
-			if r > 0.64 and r < 0.67 then
+			if (r > 0.64 and r < 0.67) or (r > 0.99 and g > 0.99 and b > 0.99) then
 				r, g, b = unpack(C.media.border_color)
 			end
 		else
@@ -414,7 +418,9 @@ local function LoadSkin()
 				reward.Quantity:SetParent(reward.backdrop)
 				reward.IconBorder:SetAlpha(0)
 				hooksecurefunc(reward.IconBorder, "SetVertexColor", function(self, r, g, b)
-					self:GetParent().backdrop:SetBackdropBorderColor(r, g, b)
+					if r ~= 0.65882 and g ~= 0.65882 and b ~= 0.65882 then
+						self:GetParent().backdrop:SetBackdropBorderColor(r, g, b)
+					end
 				end)
 			end
 		end
@@ -718,6 +724,7 @@ local function LoadSkin()
 	OrderHallMissionFrameMissions:StripTextures()
 	OrderHallMissionFrameMissionsListScrollFrame:StripTextures()
 	T.SkinScrollBar(OrderHallMissionFrameMissionsListScrollFrameScrollBar)
+
 	OrderHallMissionFrameMissions.CombatAllyUI:StripTextures()
 	OrderHallMissionFrameMissions.CombatAllyUI:CreateBackdrop("Overlay")
 	OrderHallMissionFrameMissions.CombatAllyUI.backdrop:SetPoint("TOPLEFT", 18, -2)
@@ -725,6 +732,15 @@ local function LoadSkin()
 	OrderHallMissionFrameMissions.CombatAllyUI.InProgress.Unassign:SkinButton()
 	OrderHallMissionFrameMissions.CombatAllyUI.InProgress.CombatAllySpell.iconTexture:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 	OrderHallMissionFrameMissions.CombatAllyUI.InProgress.CombatAllySpell:CreateBackdrop("Default")
+	HandleGarrisonPortrait(OrderHallMissionFrameMissions.CombatAllyUI.InProgress.PortraitFrame)
+	OrderHallMissionFrameMissions.CombatAllyUI.InProgress.CombatAllySpell:SetPoint("BOTTOMLEFT", OrderHallMissionFrameMissions.CombatAllyUI.InProgress.PortraitFrame.backdrop, "BOTTOMRIGHT", 12, -20)
+	hooksecurefunc(OrderHallMissionFrameMissions.CombatAllyUI.InProgress.PortraitFrame.PortraitRingQuality, "SetVertexColor", function(self, r, g, b)
+		if r ~= 1 and g ~= 1 and b ~= 1 then
+			OrderHallMissionFrameMissions.CombatAllyUI.InProgress.PortraitFrame.backdrop:SetBackdropBorderColor(r, g, b)
+		end
+		self:SetTexture("")
+	end)
+
 	OrderHallMissionFrameMissions.MaterialFrame:StripTextures()
 	OrderHallMissionFrame.MissionTab:StripTextures()
 	OrderHallMissionFrame.MissionTab.ZoneSupportMissionPage:StripTextures()

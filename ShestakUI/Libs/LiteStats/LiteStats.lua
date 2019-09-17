@@ -285,11 +285,10 @@ if fps.enabled then
 	end
 
 	local memoryt = {}
-	local cput = {}
 	local function UpdateMemory()
 		local totalMemory = 0
 		UpdateMemUse()
-		for i = 1, #memoryt do memoryt[i] = nil end
+		wipe(memoryt)
 		for i = 1, GetNumAddOns() do
 			local memory = GetAddOnMemoryUsage(i)
 			local addon, name = GetAddOnInfo(i)
@@ -300,14 +299,27 @@ if fps.enabled then
 		return totalMemory
 	end
 
+
+	local startTime
+	C_Timer.After(0.25, function()
+		ResetCPUUsage()
+		startTime = GetTime()
+	end)
+
+	local cput = {}
+	local lastCPU = {}
 	local function UpdateCPU()
 		local totalCPU = 0
 		UpdateAddOnCPUUsage()
-		for i = 1, #cput do cput[i] = nil end
+		wipe(cput)
 		for i = 1, GetNumAddOns() do
 			local cpu = GetAddOnCPUUsage(i)
 			local addon, name = GetAddOnInfo(i)
-			if IsAddOnLoaded(i) then tinsert(cput, {name or addon, cpu}) end
+			local cpus = cpu / (GetTime() - startTime)
+			local cpur = cpu - (lastCPU[i] and lastCPU[i] or cpu)
+			lastCPU[i] = cpu
+
+			if IsAddOnLoaded(i) then tinsert(cput, {name or addon, cpu, cpus, cpur}) end
 			totalCPU = totalCPU + cpu
 		end
 		table.sort(cput, sortdesc)
@@ -343,7 +355,7 @@ if fps.enabled then
 			GameTooltip:AddLine(" ")
 			if fps.max_addons ~= 0 or IsAltKeyDown() then
 				local ctable
-				if isCPU and IsControlKeyDown() then
+				if isCPU and not IsControlKeyDown() then
 					ctable = cput
 				else
 					ctable = memoryt
@@ -360,8 +372,8 @@ if fps.enabled then
 							or t[2] <= 5120 and {1,0.75} -- 2.5mb - 5mb
 							or t[2] <= 8192 and {1,0.5} -- 5mb - 8mb
 							or {1,0.1} -- 8mb +
-						if isCPU and IsControlKeyDown() then
-							GameTooltip:AddDoubleLine(t[1], format("%d ms", t[2]), 1, 1, 1, color[1], color[2], 0)
+						if isCPU and not IsControlKeyDown() then
+							GameTooltip:AddDoubleLine(t[1], format("%d ms (%.2f) | %.2f", t[2], t[3], t[4]), 1, 1, 1, color[1], color[2], 0)
 						else
 							GameTooltip:AddDoubleLine(t[1], formatmem(t[2]), 1, 1, 1, color[1], color[2], 0)
 						end
@@ -581,6 +593,7 @@ if gold.enabled then
 			if event == "MERCHANT_SHOW" then
 				if conf.AutoSell and not (IsAltKeyDown() or IsShiftKeyDown()) then
 					local profit = 0
+					local numItem = 0
 					for bag = 0, NUM_BAG_SLOTS do for slot = 0, GetContainerNumSlots(bag) do
 						local link = GetContainerItemLink(bag, slot)
 						if link then
@@ -588,9 +601,18 @@ if gold.enabled then
 							for _, exception in pairs(SavedStats.JunkIgnore) do
 								if exception == itemstring then ignore = true break end
 							end
-							if (select(3, GetItemInfo(link)) == 0 and not ignore) or (ignore and select(3, GetItemInfo(link)) ~= 0) then
-								profit = profit + select(11, GetItemInfo(link)) * select(2, GetContainerItemInfo(bag, slot))
-								UseContainerItem(bag, slot)
+							local _, _, itemRarity, _, _, _, _, _, _, _, itemSellPrice = GetItemInfo(link)
+							local _, itemCount = GetContainerItemInfo(bag, slot)
+							if (itemRarity == 0 and not ignore) or (ignore and itemRarity ~= 0) then
+								profit = profit + (itemSellPrice * itemCount)
+								numItem = numItem + 1
+								if numItem < 12 then
+									UseContainerItem(bag, slot)
+								else
+									C_Timer.After(numItem/8, function()
+										UseContainerItem(bag, slot)
+									end)
+								end
 							end
 						end
 					end end
@@ -1254,7 +1276,7 @@ if friends.enabled then
 			if b == "MiddleButton" then
 				ToggleIgnorePanel()
 			elseif b == "LeftButton" then
-				ToggleFriendsFrame()
+				ToggleFriendsFrame(1)
 			elseif b == "RightButton" then
 				HideTT(self)
 

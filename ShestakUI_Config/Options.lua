@@ -189,7 +189,7 @@ local FlagsTable = {
 ns.addCategory("general", GENERAL_LABEL, L_GUI_GENERAL_SUBTEXT, true)
 ns.addCategory("font", L.font, L.font_subtext, true, true)
 ns.addCategory("skins", L_GUI_SKINS, L_GUI_SKINS_SUBTEXT)
-ns.addCategory("unitframe", UNITFRAME_LABEL, L_GUI_UF_SUBTEXT, true)
+ns.addCategory("unitframe", UNITFRAME_LABEL, L_GUI_UF_SUBTEXT, true, true)
 ns.addCategory("unitframe_class_bar", L_GUI_UF_PLUGINS_CLASS_BAR, L_GUI_UF_PLUGINS_CLASS_BAR_SUBTEXT)
 ns.addCategory("raidframe", RAID_FRAMES_LABEL, L_GUI_UF_RAIDFRAMES_SUBTEXT, true)
 ns.addCategory("actionbar", L_GUI_ACTIONBAR, ACTIONBARS_SUBTEXT)
@@ -374,7 +374,7 @@ do
 	local parent = ShestakUIOptionsPanel.font2
 
 	if not IsClassicBuild() then
-		local subheader = ns.addSubCategory(parent, not L.font_subheader_threat)
+		local subheader = ns.addSubCategory(parent, L.font_subheader_threat)
 		subheader:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
 
 		local threat_meter_font = ns.CreateDropDown(parent, "threat_meter_font", true, L.font_stats_font, FontTable)
@@ -805,6 +805,27 @@ do
 	local plugins_absorbs = ns.CreateCheckBox(parent, "plugins_absorbs")
 	plugins_absorbs:SetPoint("TOPLEFT", plugins_power_prediction, "BOTTOMLEFT", 0, 0)
 
+	-- Panel 3
+	local parent = ShestakUIOptionsPanel.unitframe3
+
+	local extra_height_auto = ns.CreateCheckBox(parent, "extra_height_auto")
+	extra_height_auto:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
+
+	local extra_health_height = ns.CreateNumberSlider(parent, "extra_health_height", nil, nil, 0, 40, 1, true)
+	extra_health_height:SetPoint("TOPLEFT", extra_height_auto, "BOTTOMLEFT", 0, -20)
+
+	local extra_power_height = ns.CreateNumberSlider(parent, "extra_power_height", nil, nil, 0, 20, 1, true)
+	extra_power_height:SetPoint("LEFT", extra_health_height, "RIGHT", 120, 0)
+
+	local function toggleOptions()
+		local shown = not extra_height_auto:GetChecked()
+		extra_health_height:SetShown(shown)
+		extra_power_height:SetShown(shown)
+	end
+
+	extra_height_auto:HookScript("OnClick", toggleOptions)
+	extra_health_height:HookScript("OnShow", toggleOptions)
+
 	local classic = {
 		show_focus,
 		show_arena,
@@ -975,35 +996,41 @@ do
 	local plugins_auto_resurrection = ns.CreateCheckBox(parent, "plugins_auto_resurrection")
 	plugins_auto_resurrection:SetPoint("TOPLEFT", plugins_healcomm, "BOTTOMLEFT", 0, 0)
 
-	local subheader = ns.addSubCategory(parent, L_GUI_UF_RAID_HEAL_SIZING)
-	subheader:SetPoint("TOPLEFT", plugins_auto_resurrection, "BOTTOMLEFT", 0, -16)
+	local hide_health_value = ns.CreateCheckBox(parent, "hide_health_value")
+	hide_health_value:SetPoint("TOPLEFT", plugins_auto_resurrection, "BOTTOMLEFT", 0, 0)
 
-	local heal_unit_width = ns.CreateNumberSlider(parent, "heal_unit_width", nil, nil, 0, 300, 0.1, true)
-	heal_unit_width:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -32)
+	local subheader = ns.addSubCategory(parent, L.raidframe_subheader_heal_size)
+	subheader:SetPoint("TOPLEFT", hide_health_value, "BOTTOMLEFT", 0, -10)
 
-	local heal_unit_height = ns.CreateNumberSlider(parent, "heal_unit_height", nil, nil, 0, 100, 0.1, true)
-	heal_unit_height:SetPoint("LEFT", heal_unit_width, "RIGHT", 120, 0)
+	local heal_width = ns.CreateNumberSlider(parent, "heal_width", nil, nil, 50, 120, 1, true)
+	heal_width:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -30)
 
-	local subheader = ns.addSubCategory(parent, L_GUI_UF_RAID_DPS_SIZING)
-	subheader:SetPoint("TOPLEFT", heal_unit_width, "BOTTOMLEFT", 0, -16)
+	local heal_height = ns.CreateNumberSlider(parent, "heal_height", nil, nil, 20, 60, 1, true)
+	heal_height:SetPoint("LEFT", heal_width, "RIGHT", 120, 0)
 
-	local dps_party_width = ns.CreateNumberSlider(parent, "dps_party_width", nil, nil, 0, 300, 0.1, true)
-	dps_party_width:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -32)
+	local heal_power_height = ns.CreateNumberSlider(parent, "heal_power_height", nil, nil, 0, 10, 1, true)
+	heal_power_height:SetPoint("TOPLEFT", heal_width, "BOTTOMLEFT", 0, -20)
 
-	local dps_party_height = ns.CreateNumberSlider(parent, "dps_party_height", nil, nil, 0, 100, 0.1, true)
+	local subheader = ns.addSubCategory(parent, L.raidframe_subheader_dps_size)
+	subheader:SetPoint("TOPLEFT", heal_power_height, "BOTTOMLEFT", 0, -10)
+
+	local dps_party_width = ns.CreateNumberSlider(parent, "dps_party_width", nil, nil, 80, 300, 1, true)
+	dps_party_width:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -30)
+
+	local dps_party_height = ns.CreateNumberSlider(parent, "dps_party_height", nil, nil, 15, 60, 1, true)
 	dps_party_height:SetPoint("LEFT", dps_party_width, "RIGHT", 120, 0)
 
-	local dps_partytarget_width = ns.CreateNumberSlider(parent, "dps_partytarget_width", nil, nil, 0, 300, 0.1, true)
-	dps_partytarget_width:SetPoint("TOPLEFT", dps_party_width, "BOTTOMLEFT", 0, -32)
+	local dps_raid_width = ns.CreateNumberSlider(parent, "dps_raid_width", nil, nil, 80, 200, 1, true)
+	dps_raid_width:SetPoint("TOPLEFT", dps_party_width, "BOTTOMLEFT", 0, -20)
 
-	local dps_partytarget_height = ns.CreateNumberSlider(parent, "dps_partytarget_height", nil, nil, 0, 100, 0.1, true)
-	dps_partytarget_height:SetPoint("LEFT", dps_partytarget_width, "RIGHT", 120, 0)
+	local dps_raid_height = ns.CreateNumberSlider(parent, "dps_raid_height", nil, nil, 15, 40, 1, true)
+	dps_raid_height:SetPoint("LEFT", dps_raid_width, "RIGHT", 120, 0)
 
-	local dps_unit_width = ns.CreateNumberSlider(parent, "dps_unit_width", nil, nil, 0, 300, 0.1, true)
-	dps_unit_width:SetPoint("TOPLEFT", dps_partytarget_width, "BOTTOMLEFT", 0, -32)
+	local dps_party_power_height = ns.CreateNumberSlider(parent, "dps_party_power_height", nil, nil, 0, 10, 1, true)
+	dps_party_power_height:SetPoint("TOPLEFT", dps_raid_width, "BOTTOMLEFT", 0, -20)
 
-	local dps_unit_height = ns.CreateNumberSlider(parent, "dps_unit_height", nil, nil, 0, 100, 0.1, true)
-	dps_unit_height:SetPoint("LEFT", dps_unit_width, "RIGHT", 120, 0)
+	local dps_raid_power_height = ns.CreateNumberSlider(parent, "dps_raid_power_height", nil, nil, 0, 10, 1, true)
+	dps_raid_power_height:SetPoint("LEFT", dps_party_power_height, "RIGHT", 120, 0)
 
 	local classic = {
 		by_role,
@@ -1572,6 +1599,9 @@ do
 
 	local auto_confirm_de = ns.CreateCheckBox(parent, "auto_confirm_de", L_GUI_LOOT_AUTODE)
 	auto_confirm_de:SetPoint("TOPLEFT", auto_greed, "BOTTOMLEFT", 0, 0)
+
+	local faster_loot = ns.CreateCheckBox(parent, "faster_loot")
+	faster_loot:SetPoint("TOPLEFT", auto_confirm_de, "BOTTOMLEFT", 0, 0)
 end
 
 -- Filger

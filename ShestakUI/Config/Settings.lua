@@ -121,6 +121,10 @@ C["unitframe"] = {
 	["plugins_diminishing"] = false,			-- Diminishing Returns icons on arena frames
 	["plugins_power_prediction"] = false,		-- Power cost prediction bar on player frame
 	["plugins_absorbs"] = false,				-- Absorbs value on player frame
+	-- Size
+	["extra_height_auto"] = true,				-- Auto height for health/power depending on font size
+	["extra_health_height"] = 0,				-- Additional height for health
+	["extra_power_height"] = 0,					-- Additional height for power
 }
 
 if T.classic then
@@ -193,6 +197,18 @@ C["raidframe"] = {
 	["plugins_pvp_debuffs"] = false,			-- Show also PvP debuff icons (from the list)
 	["plugins_healcomm"] = true,				-- Incoming heal bar on raid frame
 	["plugins_auto_resurrection"] = false,		-- Auto cast resurrection on middle-click (doesn't work with Clique)
+	["hide_health_value"] = false,				-- Hide health value (only for heal layout)
+	-- Heal layout size
+	["heal_width"] = 60.2,						-- Unit width
+	["heal_height"] = 26,						-- Unit height
+	["heal_power_height"] = 2,					-- Raid power height
+	-- DPS layout size
+	["dps_raid_width"] = 104,					-- Raid width
+	["dps_raid_height"] = 17,					-- Raid height
+	["dps_raid_power_height"] = 1,				-- Raid power height
+	["dps_party_width"] = 140,					-- Party width
+	["dps_party_height"] = 27,					-- Party height
+	["dps_party_power_height"] = 5,				-- Party power height
 }
 
 if T.classic then
@@ -423,6 +439,7 @@ C["loot"] = {
 	["width"] = 221,							-- Loot window width
 	["auto_greed"] = true,						-- Push "greed" or "disenchant" button when green item roll at max level
 	["auto_confirm_de"] = true,					-- Auto confirm disenchant
+	["faster_loot"] = false,					-- Faster auto looting
 }
 
 if T.classic then

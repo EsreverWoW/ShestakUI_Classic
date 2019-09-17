@@ -26,7 +26,7 @@ L.general_subheader_font_style = "Global font style (presets which overwrite ind
 L.media_border_color = "Farbe für Rahmen"
 L.media_backdrop_color = "Farbe für Rahmen-Hintergrund"
 L.media_backdrop_alpha = "Alpha für transparenten Hintergrund"
-L.media_subheader_pixel = "Change Pixel font" -- Need review
+L.media_subheader_pixel = "Ändere Pixel Font"
 
 -- Font options
 L.font = "Schriftart"
@@ -99,11 +99,11 @@ L_GUI_UF_SUBHEADER_PLUGINS = "Plugins"
 L_GUI_UF_PLUGINS_GCD = "Blitz für globalen Cooldown"
 L_GUI_UF_PLUGINS_SWING = "Swingleiste"
 L.unitframe_plugins_reputation_bar = "Rufleiste"
-L.unitframe_plugins_reputation_bar_desc = "Rufleiste" -- Need review
+L.unitframe_plugins_reputation_bar_desc = "Rufleiste"
 L.unitframe_plugins_experience_bar = "Erfahrungsleiste"
-L.unitframe_plugins_experience_bar_desc = "Erfahrungsleiste" -- Need review
+L.unitframe_plugins_experience_bar_desc = "Erfahrungsleiste"
 L.unitframe_plugins_artifact_bar = "Azerite Power Leiste"
-L.unitframe_plugins_artifact_bar_desc = "Artifact Power Leiste" -- Need review
+L.unitframe_plugins_artifact_bar_desc = "Artifact Power Leiste"
 L_GUI_UF_PLUGINS_SMOOTH_BAR = "Weichgezeichnete Leisten"
 L_GUI_UF_PLUGINS_ENEMY_SPEC = "Zeige gegnerische Talente"
 L_GUI_UF_PLUGINS_COMBAT_FEEDBACK = "Kampftexts auf Spieler/Zielfenster"
@@ -111,6 +111,10 @@ L_GUI_UF_PLUGINS_FADER = "Blende Einheitenfenster aus"
 L_GUI_UF_PLUGINS_DIMINISHING = "Diminishing Returns Symbole auf Arena Fenstern"
 L_GUI_UF_PLUGINS_POWER_PREDICTION = "Power cost prediction bar on player frame" -- Need review
 L.unitframe_plugins_absorbs = "Absorbs value on player frame" -- Need review
+L.unitframe_extra_height_auto = "Auto height for health/power" -- Need review
+L.unitframe_extra_height_auto_desc = "Smart adjust depending on font size" -- Need review
+L.unitframe_extra_health_height = "Additional height for health" -- Need review
+L.unitframe_extra_power_height = "Additional height for power" -- Need review
 
 -- Unit Frames Class bar options
 L_GUI_UF_PLUGINS_CLASS_BAR = "Unit Frames Klassenleisten"
@@ -146,7 +150,7 @@ L_GUI_UF_SHOW_TANK = "Zeige Raid Tanks an"
 L_GUI_UF_SHOW_TANK_TT = "Zeige Ziel des Raid Tank Ziels (Ziel des Ziels)"
 L_GUI_UF_RAID_GROUP = "Anzahl der Gruppen im Raid"
 L_GUI_UF_RAID_VERTICAL_GROUP = "Vertikale Raidgruppen(Heiler Layout)"
-L_GUI_UF_SUBHEADER_ICONS = "Icons" -- Need review
+L_GUI_UF_SUBHEADER_ICONS = "Icons"
 L_GUI_UF_ICONS_ROLE = "Rollensymbol auf den Unit Frames"
 L_GUI_UF_ICONS_RAID_MARK = "Raidsymbole"
 L_GUI_UF_ICONS_READY_CHECK = "Bereitschaftschecksymbole"
@@ -159,16 +163,19 @@ L_GUI_UF_PLUGINS_PVP_DEBUFFS = "Zeige ebenfalls PvP Debuff Symbol (aus der Liste
 L_GUI_UF_PLUGINS_HEALCOMM = "Leiste für Eingehende Heilung"
 L.raidframe_plugins_auto_resurrection = "Auto cast resurrection" -- Need review
 L.raidframe_plugins_auto_resurrection_desc = "Mittel-Klick um automatisch Auferstehung zu zauber wenn das Ziel tot ist (funktioniert nicht wenn Clique installiert ist)"
-L_GUI_UF_RAID_HEAL_SIZING = "Healer Layout Sizing (takes effect on reload)" -- Needs review
-L_GUI_UF_RAID_DPS_SIZING = "DPS Layout Sizing (takes effect on reload)" -- Needs review
-L.raidframe_heal_unit_width = "Unit Width" -- Needs review
-L.raidframe_heal_unit_height = "Unit Height" -- Needs review
-L.raidframe_dps_party_width = "Party Width" -- Needs review
-L.raidframe_dps_party_height = "Party Height" -- Needs review
-L.raidframe_dps_partytarget_width = "Party Target Width" -- Needs review
-L.raidframe_dps_partytarget_height = "Prty Target Height" -- Needs review
-L.raidframe_dps_unit_width = "Raid Unit Width" -- Needs review
-L.raidframe_dps_unit_height = "Raid Unit Height" -- Needs review
+L.raidframe_hide_health_value = "Hide health value (only for heal layout)" -- Need review
+L.raidframe_subheader_heal_size = "Size for heal layout" -- Need review
+L.raidframe_heal_width = "Frame width" -- Need review
+L.raidframe_heal_height = "Frame height" -- Need review
+L.raidframe_heal_power_height = "Power height" -- Need review
+L.raidframe_subheader_dps_size = "Size for dps layout" -- Need review
+L.raidframe_dps_party_width = "Party width" -- Need review
+L.raidframe_dps_party_height = "Party height" -- Need review
+L.raidframe_dps_raid_width = "Raid width" -- Need review
+L.raidframe_dps_raid_height = "Raid height" -- Need review
+L.raidframe_dps_party_power_height = "Party power height" -- Need review
+L.raidframe_dps_raid_power_height = "Raid power height" -- Need review
+
 
 -- ActionBar options
 L_GUI_ACTIONBAR = "Aktionsleisten"
@@ -342,13 +349,15 @@ L.minimap_fog_of_war = "Nebel des Krieges auf der Weltkarte"
 L.minimap_fog_of_war_desc = "Right click on the close button of World Map to activate the option to hide fog of war" -- Need review
 
 -- Loot options
-L_GUI_LOOT_SUBTEXT = "Settings for loot frame." -- Need review
+L_GUI_LOOT_SUBTEXT = "Einstellungen für den Beuterahmen."
 L_GUI_LOOT_ENABLE = "Plünderfenster aktivieren"
 L_GUI_LOOT_ROLL_ENABLE = "Gruppenplünderfenster aktivieren"
 L_GUI_LOOT_ICON_SIZE = "Symbolgröße"
 L_GUI_LOOT_WIDTH = "Breite des Plünderfensters"
 L_GUI_LOOT_AUTOGREED = "Aktiviere automatisches Würfeln (Gier) für Gegenstände, falls das höchste Level erreicht wurde."
 L_GUI_LOOT_AUTODE = "Entzauberung automatisch bestätigen"
+L.loot_faster_loot = "Schnelleres Plündern"
+L.loot_faster_loot_desc = "Funktioniert nur, wenn die automatische Beute aktiviert ist"
 
 -- Filger
 L_GUI_FILGER = "Timers (Filger)"
@@ -475,7 +484,7 @@ L_GUI_TOP_PANEL_HEIGHT = "Höhe des Panels"
 
 -- Stats options
 L_GUI_STATS = "Statistiken"
-L_GUI_STATS_SUBTEXT = "Statistics blocks located at the bottom of the screen. Type in the chat '/ls' for info." -- Need review
+L_GUI_STATS_SUBTEXT = "Statistik-Anzeige am unteren Bildschirmrand. Im Chat '/ls' für Info."
 L_GUI_STATS_CLOCK = "Uhr"
 L_GUI_STATS_LATENCY = "Latenz"
 L_GUI_STATS_FPS = "BPS"

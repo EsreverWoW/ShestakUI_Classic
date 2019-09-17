@@ -111,6 +111,10 @@ L_GUI_UF_PLUGINS_FADER = "自動隱藏玩家框架"
 L_GUI_UF_PLUGINS_DIMINISHING = "競技場框架顯示技能遞減"
 L_GUI_UF_PLUGINS_POWER_PREDICTION = "即將獲得的資源"
 L.unitframe_plugins_absorbs = "吸收量"
+L.unitframe_extra_height_auto = "血量/能量框架自動增高"
+L.unitframe_extra_height_auto_desc = "按字體大小智能調節框架高度"
+L.unitframe_extra_health_height = "血量框架額外增高"
+L.unitframe_extra_power_height = "能量框架額外增高"
 
 -- Unit Frames Class bar options
 L_GUI_UF_PLUGINS_CLASS_BAR = "職業資源欄"
@@ -145,7 +149,7 @@ L_GUI_UF_PLAYER_PARTY = "隊伍中顯示玩家框架"
 L_GUI_UF_SHOW_TANK = "團隊主坦克框架"
 L_GUI_UF_SHOW_TANK_TT = "坦克目標的目標"
 L_GUI_UF_RAID_GROUP = "小隊數目"
-L_GUI_UF_RAID_VERTICAL_GROUP = "竪向排列團隊隊伍(僅在HPS局中生效)"
+L_GUI_UF_RAID_VERTICAL_GROUP = "竪向排列團隊隊伍(僅在HPS佈局中生效)"
 L_GUI_UF_SUBHEADER_ICONS = "標記"
 L_GUI_UF_ICONS_ROLE = "角色類型標記"
 L_GUI_UF_ICONS_RAID_MARK = "團隊標記"
@@ -159,16 +163,19 @@ L_GUI_UF_PLUGINS_PVP_DEBUFFS = "PVP DeBuff圖標"
 L_GUI_UF_PLUGINS_HEALCOMM = "即將受到的治療"
 L.raidframe_plugins_auto_resurrection = "中鍵施放復活技能"
 L.raidframe_plugins_auto_resurrection_desc = "滑鼠中鍵點擊已死亡角色時施放復活技能(Clique啟用時無效)"
-L_GUI_UF_RAID_HEAL_SIZING = "Healer Layout Sizing (takes effect on reload)" -- Needs review
-L_GUI_UF_RAID_DPS_SIZING = "DPS Layout Sizing (takes effect on reload)" -- Needs review
-L.raidframe_heal_unit_width = "Unit Width" -- Needs review
-L.raidframe_heal_unit_height = "Unit Height" -- Needs review
-L.raidframe_dps_party_width = "Party Width" -- Needs review
-L.raidframe_dps_party_height = "Party Height" -- Needs review
-L.raidframe_dps_partytarget_width = "Party Target Width" -- Needs review
-L.raidframe_dps_partytarget_height = "Prty Target Height" -- Needs review
-L.raidframe_dps_unit_width = "Raid Unit Width" -- Needs review
-L.raidframe_dps_unit_height = "Raid Unit Height" -- Needs review
+L.raidframe_hide_health_value = "隱藏血量(僅在HPS佈局中生效)"
+L.raidframe_subheader_heal_size = "HPS佈局框架大小"
+L.raidframe_heal_width = "框架寬度"
+L.raidframe_heal_height = "框架高度"
+L.raidframe_heal_power_height = "能量框架高度"
+L.raidframe_subheader_dps_size = "DPS佈局框架大小"
+L.raidframe_dps_party_width = "隊伍框架寬度"
+L.raidframe_dps_party_height = "隊伍框架高度"
+L.raidframe_dps_raid_width = "框架寬度"
+L.raidframe_dps_raid_height = "框架高度"
+L.raidframe_dps_party_power_height = "隊伍能量框架高度"
+L.raidframe_dps_raid_power_height = "能量框架高度"
+
 
 -- ActionBar options
 L_GUI_ACTIONBAR = "快捷列"
@@ -349,6 +356,8 @@ L_GUI_LOOT_ICON_SIZE = "拾取框架圖標大小"
 L_GUI_LOOT_WIDTH = "拾取框架寬度"
 L_GUI_LOOT_AUTOGREED = "滿級後自動貪婪綠色物品"
 L_GUI_LOOT_AUTODE = "自動選擇分解"
+L.loot_faster_loot = "快速拾取"
+L.loot_faster_loot_desc = "僅在自動拾取模式中生效"
 
 -- Filger
 L_GUI_FILGER = "法術監視"

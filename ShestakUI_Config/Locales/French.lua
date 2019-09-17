@@ -111,6 +111,10 @@ L_GUI_UF_PLUGINS_FADER = "Barres de unités"
 L_GUI_UF_PLUGINS_DIMINISHING = "Icones de rendement décroissants sur les fenêtre d'arène"
 L_GUI_UF_PLUGINS_POWER_PREDICTION = "Prédiction du coût des sorts sur la fenêtre du joueur"
 L.unitframe_plugins_absorbs = "Absorbs value on player frame" -- Need review
+L.unitframe_extra_height_auto = "Auto height for health/power" -- Need review
+L.unitframe_extra_height_auto_desc = "Smart adjust depending on font size" -- Need review
+L.unitframe_extra_health_height = "Additional height for health" -- Need review
+L.unitframe_extra_power_height = "Additional height for power" -- Need review
 
 -- Unit Frames Class bar options
 L_GUI_UF_PLUGINS_CLASS_BAR = "Barres de classe"
@@ -159,16 +163,18 @@ L_GUI_UF_PLUGINS_PVP_DEBUFFS = "Afficher aussi les debuff JcJ (de la liste)"
 L_GUI_UF_PLUGINS_HEALCOMM = "Barre de soin entrant (incoming)"
 L.raidframe_plugins_auto_resurrection = "Auto cast resurrection" -- Need review
 L.raidframe_plugins_auto_resurrection_desc = "Lance automatiquement le sort de résurrection de masse avec un clic central souris sur une cible morte (ne fonctionne pas avec l'addon Clique activé)"
-L_GUI_UF_RAID_HEAL_SIZING = "Healer Layout Sizing (takes effect on reload)" -- Needs review
-L_GUI_UF_RAID_DPS_SIZING = "DPS Layout Sizing (takes effect on reload)" -- Needs review
-L.raidframe_heal_unit_width = "Unit Width" -- Needs review
-L.raidframe_heal_unit_height = "Unit Height" -- Needs review
-L.raidframe_dps_party_width = "Party Width" -- Needs review
-L.raidframe_dps_party_height = "Party Height" -- Needs review
-L.raidframe_dps_partytarget_width = "Party Target Width" -- Needs review
-L.raidframe_dps_partytarget_height = "Prty Target Height" -- Needs review
-L.raidframe_dps_unit_width = "Raid Unit Width" -- Needs review
-L.raidframe_dps_unit_height = "Raid Unit Height" -- Needs review
+L.raidframe_hide_health_value = "Hide health value (only for heal layout)" -- Need review
+L.raidframe_subheader_heal_size = "Size for heal layout" -- Need review
+L.raidframe_heal_width = "Frame width" -- Need review
+L.raidframe_heal_height = "Frame height" -- Need review
+L.raidframe_heal_power_height = "Power height" -- Need review
+L.raidframe_subheader_dps_size = "Size for dps layout" -- Need review
+L.raidframe_dps_party_width = "Party width" -- Need review
+L.raidframe_dps_party_height = "Party height" -- Need review
+L.raidframe_dps_raid_width = "Raid width" -- Need review
+L.raidframe_dps_raid_height = "Raid height" -- Need review
+L.raidframe_dps_party_power_height = "Party power height" -- Need review
+L.raidframe_dps_raid_power_height = "Raid power height" -- Need review
 
 -- ActionBar options
 L_GUI_ACTIONBAR = "Barres d'action"
@@ -349,6 +355,8 @@ L_GUI_LOOT_ICON_SIZE = "Taille de l'icône"
 L_GUI_LOOT_WIDTH = "Largeur de la fenêtre de butin"
 L_GUI_LOOT_AUTOGREED = "Activer désenchantement automatique pour les objets verts au niveau maximum"
 L_GUI_LOOT_AUTODE = "Confirmation automatique pour le désenchantement"
+L.loot_faster_loot = "Faster looting" -- Need review
+L.loot_faster_loot_desc = "Works only if enabled auto loot" -- Need review
 
 -- Filger
 L_GUI_FILGER = "Timers (Filger)" -- Need review

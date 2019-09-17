@@ -111,6 +111,10 @@ L_GUI_UF_PLUGINS_FADER = "Скрывать рамки вне боя"
 L_GUI_UF_PLUGINS_DIMINISHING = "Иконка диминишинга на рамках арены"
 L_GUI_UF_PLUGINS_POWER_PREDICTION = "Полоса прогноза использования маны/энергии"
 L.unitframe_plugins_absorbs = "Количество поглощения на рамке игрока"
+L.unitframe_extra_height_auto = "Авто высота здоровья и энергии"
+L.unitframe_extra_height_auto_desc = "Умное увеличение в зависимости от размера шрифта"
+L.unitframe_extra_health_height = "Доп. высота для здоровья"
+L.unitframe_extra_power_height = "Доп. высота для энергии"
 
 -- Unit Frames Class bar options
 L_GUI_UF_PLUGINS_CLASS_BAR = "Классовые панели"
@@ -159,16 +163,18 @@ L_GUI_UF_PLUGINS_PVP_DEBUFFS = "Отображать PvP дебаффы (из с
 L_GUI_UF_PLUGINS_HEALCOMM = "Отображать поступающее лечение"
 L.raidframe_plugins_auto_resurrection = "Автокаст воскрешения"
 L.raidframe_plugins_auto_resurrection_desc = "Автокаст воскрешения средней кнопкой мыши (не работает с Clique)"
-L_GUI_UF_RAID_HEAL_SIZING = "Healer Layout Sizing (takes effect on reload)" -- Needs review
-L_GUI_UF_RAID_DPS_SIZING = "DPS Layout Sizing (takes effect on reload)" -- Needs review
-L.raidframe_heal_unit_width = "Unit Width" -- Needs review
-L.raidframe_heal_unit_height = "Unit Height" -- Needs review
-L.raidframe_dps_party_width = "Party Width" -- Needs review
-L.raidframe_dps_party_height = "Party Height" -- Needs review
-L.raidframe_dps_partytarget_width = "Party Target Width" -- Needs review
-L.raidframe_dps_partytarget_height = "Prty Target Height" -- Needs review
-L.raidframe_dps_unit_width = "Raid Unit Width" -- Needs review
-L.raidframe_dps_unit_height = "Raid Unit Height" -- Needs review
+L.raidframe_hide_health_value = "Скрыть значение здоровья (только для раскладки 'Лекарь')"
+L.raidframe_subheader_heal_size = "Размеры для раскладки 'Лекарь'"
+L.raidframe_heal_width = "Ширина рамок"
+L.raidframe_heal_height = "Высота рамок"
+L.raidframe_heal_power_height = "Высота энергии"
+L.raidframe_subheader_dps_size = "Размеры для раскладки 'Боец'"
+L.raidframe_dps_party_width = "Ширина группы"
+L.raidframe_dps_party_height = "Высота группы"
+L.raidframe_dps_raid_width = "Ширина рейда"
+L.raidframe_dps_raid_height = "Высота рейда"
+L.raidframe_dps_party_power_height = "Высота энергии группы"
+L.raidframe_dps_raid_power_height = "Высота энергии рейда"
 
 -- ActionBar options
 L_GUI_ACTIONBAR = "Панели команд"
@@ -349,6 +355,8 @@ L_GUI_LOOT_ICON_SIZE = "Размер иконки"
 L_GUI_LOOT_WIDTH = "Ширина окна добычи"
 L_GUI_LOOT_AUTOGREED = "Авто не откажусь/распылить для зеленых предметов на макс. уровне"
 L_GUI_LOOT_AUTODE = "Убрать запрос о распылении предмета"
+L.loot_faster_loot = "Ускорить взятие добычи"
+L.loot_faster_loot_desc = "Работает, если включен автоматический сбор добычи"
 
 -- Filger
 L_GUI_FILGER = "Таймеры (Filger)"
