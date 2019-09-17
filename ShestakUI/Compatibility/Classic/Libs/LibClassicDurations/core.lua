@@ -1,5 +1,3 @@
-if _G.WOW_PROJECT_ID ~= _G.WOW_PROJECT_CLASSIC then return end
-
 --[================[
 LibClassicDurations
 Author: d87
@@ -61,9 +59,9 @@ Usage example 2:
     end)
 
 --]================]
+if WOW_PROJECT_ID ~= WOW_PROJECT_CLASSIC then return end
 
-
-local MAJOR, MINOR = "LibClassicDurations", 15
+local MAJOR, MINOR = "LibClassicDurations", 20
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
@@ -311,13 +309,11 @@ end
 -- COMBAT LOG
 ---------------------------
 
-local function cleanDuration(duration, spellID, srcGUID)
+local function cleanDuration(duration, spellID, srcGUID, comboPoints)
     if type(duration) == "function" then
         local isSrcPlayer = srcGUID == UnitGUID("player")
-        local comboPoints
-        if isSrcPlayer and playerClass == "ROGUE" then
-            comboPoints = GetCP()
-        end
+        -- Passing startTime for the sole reason of identifying different Rupture/KS applications for Rogues
+        -- Then their duration func will cache one actual duration calculated at the moment of application
         return duration(spellID, isSrcPlayer, comboPoints)
     end
     return duration
@@ -388,6 +384,13 @@ local function SetTimer(srcGUID, dstGUID, dstName, dstFlags, spellID, spellName,
     -- applicationTable[2] = expirationTime
     applicationTable[3] = auraType
 
+    local isSrcPlayer = srcGUID == UnitGUID("player")
+    local comboPoints
+    if isSrcPlayer and playerClass == "ROGUE" then
+        comboPoints = GetCP()
+    end
+    applicationTable[4] = comboPoints
+
     guidAccessTimes[dstGUID] = now
 end
 
@@ -401,6 +404,14 @@ local function NotifyGUIDBuffChange(dstGUID)
     end
 end
 
+local lastSpellCastName
+local lastSpellCastTime = 0
+function f:UNIT_SPELLCAST_SUCCEEDED(event, unit, castID, spellID)
+    lastSpellCastName = GetSpellInfo(spellID)
+    lastSpellCastTime = GetTime()
+end
+
+local SunderArmorName = GetSpellInfo(11597)
 ---------------------------
 -- COMBAT LOG HANDLER
 ---------------------------
@@ -410,6 +421,13 @@ function f:COMBAT_LOG_EVENT_UNFILTERED(event)
     srcGUID, srcName, srcFlags, srcFlags2,
     dstGUID, dstName, dstFlags, dstFlags2,
     spellID, spellName, spellSchool, auraType, amount = CombatLogGetCurrentEventInfo()
+
+    if spellName == SunderArmorName then
+        if eventType == "SPELL_CAST_SUCCESS" then
+            eventType = "SPELL_AURA_REFRESH"
+            auraType = "DEBUFF"
+        end
+    end
 
     if auraType == "BUFF" or auraType == "DEBUFF" then
         local isSrcPlayer = bit_band(srcFlags, COMBATLOG_OBJECT_TYPE_PLAYER) > 0
@@ -444,17 +462,24 @@ function f:COMBAT_LOG_EVENT_UNFILTERED(event)
         end
 
         if opts then
+            local isEnemyBuff = not isDstFriendly and auraType == "BUFF"
             -- print(eventType, srcGUID, "=>", dstName, spellID, spellName, auraType )
             if  eventType == "SPELL_AURA_REFRESH" or
                 eventType == "SPELL_AURA_APPLIED" or
-                eventType == "SPELL_AURA_APPLIED_DOSE" then
-                SetTimer(srcGUID, dstGUID, dstName, dstFlags, spellID, spellName, opts, auraType)
+                eventType == "SPELL_AURA_APPLIED_DOSE"
+            then
+                if not opts.castFilter or
+                    (lastSpellCastName == spellName and lastSpellCastTime + 1 > GetTime()) or
+                    isEnemyBuff
+                then
+                    SetTimer(srcGUID, dstGUID, dstName, dstFlags, spellID, spellName, opts, auraType)
+                end
             elseif eventType == "SPELL_AURA_REMOVED" then
                 SetTimer(srcGUID, dstGUID, dstName, dstFlags, spellID, spellName, opts, auraType, true)
             -- elseif eventType == "SPELL_AURA_REMOVED_DOSE" then
                 -- self:RemoveDose(srcGUID, dstGUID, spellID, spellName, auraType, amount)
             end
-            if enableEnemyBuffTracking and not isDstFriendly and auraType == "BUFF" then
+            if enableEnemyBuffTracking and isEnemyBuff then
                 -- invalidate buff cache
                 buffCacheValid[dstGUID] = nil
 
@@ -480,8 +505,8 @@ end
 ---------------------------
 local makeBuffInfo = function(spellID, applicationTable, dstGUID, srcGUID)
     local name, rank, icon, castTime, minRange, maxRange, _spellId = GetSpellInfo(spellID)
-    local durationFunc, startTime = unpack(applicationTable)
-    local duration = cleanDuration(durationFunc, spellID, srcGUID) -- srcGUID isn't needed actually
+    local durationFunc, startTime, auraType, comboPoints = unpack(applicationTable)
+    local duration = cleanDuration(durationFunc, spellID, srcGUID, comboPoints) -- srcGUID isn't needed actually
     -- no DRs on buffs
     local expirationTime = startTime + duration
     if duration == 0 then
@@ -616,8 +641,8 @@ local function GetGUIDAuraTime(dstGUID, spellName, spellID, srcGUID, isStacking)
                 applicationTable = spellTable
             end
             if not applicationTable then return end
-            local durationFunc, startTime = unpack(applicationTable)
-            local duration = cleanDuration(durationFunc, spellID, srcGUID)
+            local durationFunc, startTime, auraType, comboPoints = unpack(applicationTable)
+            local duration = cleanDuration(durationFunc, spellID, srcGUID, comboPoints)
             local mul = getDRMul(dstGUID, spellID)
             -- local mul = getDRMul(dstGUID, lastRankID)
             duration = duration * mul
@@ -655,6 +680,7 @@ function lib:GetLastRankSpellIDByName(spellName)
     return spellNameToID[spellName]
 end
 
+-- Will not work for cp-based durations, KS and Rupture
 function lib:GetDurationForRank(spellName, spellID, srcGUID)
     local lastRankID = spellNameToID[spellName]
     local opts = spells[lastRankID]
@@ -668,6 +694,7 @@ function lib:RegisterFrame(frame)
     activeFrames[frame] = true
     if next(activeFrames) then
         f:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
+        f:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED")
         if playerClass == "ROGUE" then
             f:RegisterEvent("PLAYER_TARGET_CHANGED")
             f:RegisterUnitEvent("UNIT_POWER_UPDATE", "player")
@@ -680,6 +707,7 @@ function lib:UnregisterFrame(frame)
     activeFrames[frame] = nil
     if not next(activeFrames) then
         f:UnregisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
+        f:UnregisterEvent("UNIT_SPELLCAST_SUCCEEDED")
         if playerClass == "ROGUE" then
             f:UnregisterEvent("PLAYER_TARGET_CHANGED")
             f:UnregisterEvent("UNIT_POWER_UPDATE")
