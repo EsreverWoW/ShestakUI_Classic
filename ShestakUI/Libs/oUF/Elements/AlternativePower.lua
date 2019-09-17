@@ -1,6 +1,8 @@
 local _, ns = ...
 local oUF = ns.oUF
 
+if(oUF:IsClassic()) then return end
+
 -- sourced from FrameXML/UnitPowerBarAlt.lua
 local ALTERNATE_POWER_INDEX = Enum.PowerType.Alternate or 10
 

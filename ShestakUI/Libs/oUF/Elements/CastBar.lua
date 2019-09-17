@@ -5,6 +5,7 @@ local GetNetStats = GetNetStats
 local GetTime = GetTime
 local UnitCastingInfo = UnitCastingInfo or CastingInfo
 local UnitChannelInfo = UnitChannelInfo or ChannelInfo
+local DEFAULT_ICON = 134400 -- [[Interface\ICONS\INV_Misc_QuestionMark]]
 
 local LibClassicCasterino = oUF:IsClassic() and LibStub('LibClassicCasterino', true)
 if(LibClassicCasterino) then
@@ -29,6 +30,14 @@ local function updateSafeZone(self)
 	end
 
 	safeZone:SetWidth(width * safeZoneRatio)
+end
+
+local function resetAttributes(self)
+	self.castID = nil
+	self.casting = nil
+	self.channeling = nil
+	self.notInterruptible = nil
+	self.spellID = nil
 end
 
 local function UNIT_SPELLCAST_START(self, event, unit)
@@ -57,7 +66,7 @@ local function UNIT_SPELLCAST_START(self, event, unit)
 	element:SetValue(0)
 
 	if(texture == 136235) then
-		texture = 134400
+		texture = DEFAULT_ICON
 	end
 
 	if(element.Text) then element.Text:SetText(LibClassicCasterino and name or text) end
@@ -274,7 +283,7 @@ local function UNIT_SPELLCAST_CHANNEL_START(self, event, unit, _, spellID)
 	element:SetValue(duration)
 
 	if(texture == 136235) then
-		texture = 134400
+		texture = DEFAULT_ICON
 	end
 
 	if(element.Text) then element.Text:SetText(name) end

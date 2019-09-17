@@ -38,6 +38,17 @@ local colors = {
 	debuff = {},
 	reaction = {},
 	power = {},
+	happiness = {
+		[1] = {0.69, 0.31, 0.31},
+		[2] = {0.65, 0.63, 0.35},
+		[3] = {0.33, 0.59, 0.33},
+	},
+	totems = {
+		[1] = {0.752, 0.172, 0.02},
+		[2] = {0.741, 0.580, 0.04},
+		[3] = {0, 0.443, 0.631},
+		[4] = {0.6, 1, 0.945},
+	},
 }
 
 -- We do this because people edit the vars directly, and changing the default

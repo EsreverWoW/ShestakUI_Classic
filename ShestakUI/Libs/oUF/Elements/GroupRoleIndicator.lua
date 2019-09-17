@@ -1,6 +1,8 @@
 local _, ns = ...
 local oUF = ns.oUF
 
+if(oUF:IsClassic()) then return end
+
 local function Update(self, event)
 	local element = self.GroupRoleIndicator
 
