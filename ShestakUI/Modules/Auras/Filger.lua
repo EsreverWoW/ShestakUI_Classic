@@ -649,6 +649,7 @@ if C["filger_spells"] and C["filger_spells"][T.class] then
 				elseif data.trigger == "NONE" then
 					frame:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED")
 					break
+				end
 				if data.filter ~= "CD" then
 					frame:RegisterEvent("UNIT_AURA")
 					break
