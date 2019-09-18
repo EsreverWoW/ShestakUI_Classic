@@ -161,7 +161,7 @@ local function HandleTabs(object)
 	if InCombatLockdown() then
 		handler:RegisterEvent("PLAYER_REGEN_ENABLED")
 	else
-		local firstProfession, secondProfession, archaeology, fishing, cooking, firstAid = T.classic and T.dummy or not T.classic and GetProfessions()
+		local firstProfession, secondProfession, archaeology, fishing, cooking, firstAid = not T.classic and GetProfessions()
 
 		ResetTabs(object)
 

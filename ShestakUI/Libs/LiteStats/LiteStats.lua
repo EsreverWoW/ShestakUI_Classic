@@ -624,7 +624,7 @@ if gold.enabled then
 		end,
 		OnEnter = function(self)
 			local curgold = GetMoney()
-			local _, _, archaeology, _, cooking = T.classic and T.dummy or not T.classic and GetProfessions()
+			local _, _, archaeology, _, cooking = not T.classic and GetProfessions()
 			conf.Gold = curgold
 			GameTooltip:SetOwner(self, "ANCHOR_NONE")
 			GameTooltip:ClearAllPoints()
