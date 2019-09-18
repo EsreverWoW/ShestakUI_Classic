@@ -1569,9 +1569,9 @@ if talents.enabled then
 
 			local specTex
 			if T.classic then
-				specTex = T.GetSpecializationInfo(spec)
+				specTex = select(4, T.GetSpecializationInfo(spec))
 			else
-				GetSpecializationInfo(spec)
+				specTex = select(4, GetSpecializationInfo(spec))
 			end
 
 			if specTex then
