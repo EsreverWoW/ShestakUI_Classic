@@ -179,6 +179,7 @@ hooksecurefunc("UseAction", function(slot)
 	local actionType, itemID = GetActionInfo(slot)
 	if actionType == "item" then
 		local texture = GetActionTexture(slot)
+		if texture == 136235 then return end -- prevent temp icon
 		watching[itemID] = {GetTime(), "item", texture}
 	end
 end)
@@ -187,6 +188,7 @@ hooksecurefunc("UseInventoryItem", function(slot)
 	local itemID = GetInventoryItemID("player", slot)
 	if itemID then
 		local texture = GetInventoryItemTexture("player", slot)
+		if texture == 136235 then return end -- prevent temp icon
 		watching[itemID] = {GetTime(), "item", texture}
 	end
 end)
@@ -195,6 +197,7 @@ hooksecurefunc("UseContainerItem", function(bag, slot)
 	local itemID = GetContainerItemID(bag, slot)
 	if itemID then
 		local texture = select(10, GetItemInfo(itemID))
+		if texture == 136235 then return end -- prevent temp icon
 		watching[itemID] = {GetTime(), "item", texture}
 	end
 end)
