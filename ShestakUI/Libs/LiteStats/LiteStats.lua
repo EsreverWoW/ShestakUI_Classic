@@ -624,7 +624,7 @@ if gold.enabled then
 		end,
 		OnEnter = function(self)
 			local curgold = GetMoney()
-			local _, _, archaeology, _, cooking = T.classic and T.dummy or GetProfessions()
+			local _, _, archaeology, _, cooking = T.classic and T.dummy or not T.classic and GetProfessions()
 			conf.Gold = curgold
 			GameTooltip:SetOwner(self, "ANCHOR_NONE")
 			GameTooltip:ClearAllPoints()
@@ -1555,13 +1555,25 @@ if talents.enabled then
 				lootSpecName = lootSpec and select(2, GetSpecializationInfoByID(lootSpec)) or NO
 			end
 
-			local spec = T.classic and T.GetSpecialization() or GetSpecialization()
-			specName = (T.classic and spec and select(2, T.GetSpecializationInfo(spec))) or (spec and select(2, GetSpecializationInfo(spec))) or NO
+			local spec
+			if T.classic then
+				spec = T.GetSpecialization()
+				specName = spec and select(2, T.GetSpecializationInfo(spec)) or NO
+			else
+				spec = GetSpecialization()
+				specName = spec and select(2, GetSpecializationInfo(spec)) or NO
+			end
 
 			local specIcon, lootIcon = "", ""
 			local lootText = LOOT
 
-			local _, _, _, specTex = T.classic and T.GetSpecializationInfo(spec) or GetSpecializationInfo(spec)
+			local specTex
+			if T.classic then
+				specTex = T.GetSpecializationInfo(spec)
+			else
+				GetSpecializationInfo(spec)
+			end
+
 			if specTex then
 				specIcon = format("|T%s:14:14:0:0:64:64:5:59:5:59|t", specTex)
 			end

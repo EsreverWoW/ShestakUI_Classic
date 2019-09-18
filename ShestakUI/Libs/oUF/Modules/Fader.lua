@@ -50,7 +50,7 @@ local conditions = setmetatable({
 	UnitMaxMana = function(_, unit) return unit and not UnitIsDeadOrGhost(unit) and UnitPower(unit) == UnitPowerMax(unit) end,
 	PlayerMaxMana = function() return unit and not UnitIsDeadOrGhost("player") and UnitPower("player") == UnitPowerMax("player") end,
 	Stealth = IsStealthed,
-	Flying = T.classic and T.dummy or IsFlying,
+	Flying = T.classic and T.dummy or not T.classic and IsFlying,
 	Resting = IsResting,
 	Combat = InCombatLockdown,
 	PlayerNotMaxHealth = function(_, unit) return unit and UnitHealth("player") ~= UnitHealthMax("player") end,

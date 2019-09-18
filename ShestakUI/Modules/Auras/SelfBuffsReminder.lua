@@ -87,7 +87,7 @@ local function OnEvent(self, event, arg1)
 	end
 
 	if spec ~= nil then
-		if spec == T.classic and T.GetSpecialization() or GetSpecialization() then
+		if spec == T.classic and T.GetSpecialization() or not T.classic and GetSpecialization() then
 			specpass = true
 		else
 			specpass = false

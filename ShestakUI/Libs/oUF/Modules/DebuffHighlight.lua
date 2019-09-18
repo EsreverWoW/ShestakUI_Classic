@@ -35,7 +35,7 @@ end
 
 local function CheckSpec()
 	if not oUF:IsClassic() then
-		local spec = T.classic and T.GetSpecialization() or GetSpecialization()
+		local spec = T.classic and T.GetSpecialization() or not T.classic and GetSpecialization()
 
 		if T.class == "DRUID" then
 			if spec == 4 then
