@@ -1,5 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
-if T.classic or C.skins.blizzard_frames ~= true then return end
+if C.skins.blizzard_frames ~= true then return end
 
 ----------------------------------------------------------------------------------------
 --	Merchant skin
@@ -14,8 +14,10 @@ local function LoadSkin()
 	MerchantFrameInset:StripTextures()
 	MerchantMoneyBg:StripTextures()
 	MerchantMoneyInset:StripTextures()
-	MerchantExtraCurrencyBg:StripTextures()
-	MerchantExtraCurrencyInset:StripTextures()
+	if not T.classic then
+		MerchantExtraCurrencyBg:StripTextures()
+		MerchantExtraCurrencyInset:StripTextures()
+	end
 
 	-- Skin tabs
 	for i = 1, 2 do
@@ -96,7 +98,9 @@ local function LoadSkin()
 	T.SkinCloseButton(MerchantFrameCloseButton, MerchantFrame.backdrop)
 	T.SkinNextPrevButton(MerchantNextPageButton)
 	T.SkinNextPrevButton(MerchantPrevPageButton)
-	T.SkinDropDownBox(MerchantFrameLootFilter)
+	if not T.classic then
+		T.SkinDropDownBox(MerchantFrameLootFilter)
+	end
 
 	-- Reposition tabs
 	MerchantFrameTab1:ClearAllPoints()
