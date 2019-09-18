@@ -11,9 +11,15 @@ MAGE1 = {
 MAGE2 = MAGE1
 MAGE3 = MAGE1
 
-PRIEST1 = {
-	21562,	-- Power Word: Fortitude
-}
+if T.classic then
+	PRIEST1 = {
+		1243,	-- Power Word: Fortitude
+	}
+else
+	PRIEST1 = {
+		21562,	-- Power Word: Fortitude
+	}
+end
 
 PRIEST2 = PRIEST1
 PRIEST3 = PRIEST1
@@ -46,8 +52,8 @@ btn:SetAttribute("unit", "player")
 
 -- Main function for changing keybinding to mousewheel when a buff is needed
 function CheckBuffs()
-	local spec = GetSpecialization() or 1
-	if IsFlying() or IsMounted() or UnitIsDeadOrGhost("Player") or InCombatLockdown() then return end
+	local spec = (T.classic and T.GetSpecialization()) or GetSpecialization() or 1
+	if (not T.classic and IsFlying()) or IsMounted() or UnitIsDeadOrGhost("Player") or InCombatLockdown() then return end
 	ClearOverrideBindings(btn)
 	btn:SetAttribute("spell", nil)
 	if _G[T.class..spec] then
@@ -75,5 +81,7 @@ frame:RegisterEvent("SPELL_UPDATE_USABLE")
 frame:RegisterEvent("SPELL_UPDATE_COOLDOWN")
 frame:RegisterEvent("PLAYER_LEAVE_COMBAT")
 frame:RegisterEvent("READY_CHECK")
-frame:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
+if not T.classic then
+	frame:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
+end
 frame:SetScript("OnEvent", CheckBuffs)
