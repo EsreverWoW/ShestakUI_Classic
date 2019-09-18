@@ -394,6 +394,11 @@ for i = 1, numf do
 	f:SetClampedToScreen(true)
 	f:SetClampRectInsets(0, 0, C.font.combat_text_font_size, 0)
 	f:SetInsertMode(C.combattext.direction and 2 or 1)
+	if not C.unitframe.enable then
+		C.position.xct.frame1 = {"CENTER", -192, -32}
+		C.position.xct.frame2 = {"CENTER", 192, -32}
+		C.position.xct.frame4 = {"CENTER", 330, 205}
+	end
 	if i == 1 then
 		f:SetJustifyH(ct.justify_1)
 		f:SetPoint(unpack(C.position.xct.frame1))
