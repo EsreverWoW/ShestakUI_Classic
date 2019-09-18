@@ -391,7 +391,7 @@ end
 
 UnitGroupRolesAssigned = _G.UnitGroupRolesAssigned or function(unit) -- Needs work
 	if unit == "player" then
-		local role = GetSpecializationRole()
+		local role = T.GetSpecializationRole()
 		if role == "MELEE" or role == "CASTER" then
 			role = "DAMAGER"
 		else
