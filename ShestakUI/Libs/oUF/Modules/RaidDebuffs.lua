@@ -69,7 +69,7 @@ end
 
 local function CheckSpec()
 	if not oUF:IsClassic() then
-		local spec = GetSpecialization()
+		local spec = T.classic and T.GetSpecialization() or GetSpecialization()
 		if T.class == "DRUID" then
 			if spec == 4 then
 				DispellFilter.Magic = true

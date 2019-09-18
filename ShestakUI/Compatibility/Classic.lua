@@ -20,8 +20,6 @@ end)
 ----------------------------------------------------------------------------------------
 --	NOOP / Pass Functions not found in Classic
 ----------------------------------------------------------------------------------------
-GetProfessions = _G.GetProfessions or T.dummy
-
 UnitInVehicle = _G.UnitInVehicle or T.dummy
 
 ----------------------------------------------------------------------------------------
@@ -329,7 +327,7 @@ local specializationInfoDB = { -- needs localized names
 	},
 }
 
-GetSpecialization = _G.GetSpecialization or function(...)
+function T.GetSpecialization(...)
 	local current = {}
 	local primaryTree = 1
 	for i = 1, 3 do
@@ -341,8 +339,8 @@ GetSpecialization = _G.GetSpecialization or function(...)
 	return primaryTree
 end
 
-GetSpecializationRole = _G.GetSpecializationRole or function()
-	local tree = GetSpecialization()
+function T.GetSpecializationRole()
+	local tree = T.GetSpecialization()
 	local role
 	if ((T.class == "PALADIN" and tree == 2) or (T.class == "WARRIOR" and tree == 3)) or (T.class == "DRUID" and tree == 2 and GetBonusBarOffset() == 3) then
 		role = "TANK"
@@ -364,11 +362,11 @@ GetSpecializationRole = _G.GetSpecializationRole or function()
 	return role
 end
 
-GetSpecializationInfo = _G.GetSpecializationInfo or function(specIndex, ...)
+function T.GetSpecializationInfo(specIndex, ...)
 	local id = specializationID[T.class][specIndex]
 	local name, description, points, background = GetTalentTabInfo(specIndex)
 	local icon = "Interface\\ICONS\\" .. specializationIcons[T.class][specIndex]
-	local role = GetSpecializationRole()
+	local role = T.GetSpecializationRole()
 	if role == "CASTER" or role == "MELEE" then
 		role = "DAMAGER"
 	end
@@ -376,7 +374,7 @@ GetSpecializationInfo = _G.GetSpecializationInfo or function(specIndex, ...)
 	return id, name, description, icon, background, role, primaryStat
 end
 
-GetSpecializationInfoByID = _G.GetSpecializationInfoByID or function(specID)
+function T.GetSpecializationInfoByID(specID)
 	if specializationInfoDB[specID] then
 		local id = specID
 		local name = specializationInfoDB[specID].name

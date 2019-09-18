@@ -10,7 +10,7 @@ if not tab then return end
 local function OnEvent(self, event, arg1)
 	local group = tab[self.id]
 	if not group.spells then return end
-	if not GetSpecialization() then return end
+	if (T.classic and not T.GetSpecialization()) or not GetSpecialization() then return end
 	if event == "UNIT_AURA" and arg1 ~= "player" then return end
 	if group.level and T.level < group.level then return end
 
@@ -87,7 +87,7 @@ local function OnEvent(self, event, arg1)
 	end
 
 	if spec ~= nil then
-		if spec == GetSpecialization() then
+		if spec == T.classic and T.GetSpecialization() or GetSpecialization() then
 			specpass = true
 		else
 			specpass = false

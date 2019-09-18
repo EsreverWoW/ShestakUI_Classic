@@ -74,8 +74,8 @@ local isCaster = {
 }
 
 local function CheckRole()
-	local spec = GetSpecialization()
-	local role = spec and GetSpecializationRole(spec)
+	local spec = T.classic and T.GetSpecialization() or GetSpecialization()
+	local role = ((spec and T.classic) and T.GetSpecializationRole(spec)) or spec and GetSpecializationRole(spec)
 
 	T.Spec = spec
 	if role == "TANK" then

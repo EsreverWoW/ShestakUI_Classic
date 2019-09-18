@@ -624,7 +624,7 @@ if gold.enabled then
 		end,
 		OnEnter = function(self)
 			local curgold = GetMoney()
-			local _, _, archaeology, _, cooking = GetProfessions()
+			local _, _, archaeology, _, cooking = T.classic and T.dummy or GetProfessions()
 			conf.Gold = curgold
 			GameTooltip:SetOwner(self, "ANCHOR_NONE")
 			GameTooltip:ClearAllPoints()
@@ -1555,13 +1555,13 @@ if talents.enabled then
 				lootSpecName = lootSpec and select(2, GetSpecializationInfoByID(lootSpec)) or NO
 			end
 
-			local spec = GetSpecialization()
-			specName = spec and select(2, GetSpecializationInfo(spec)) or NO
+			local spec = T.classic and T.GetSpecialization() or GetSpecialization()
+			specName = (T.classic and spec and select(2, T.GetSpecializationInfo(spec))) or (spec and select(2, GetSpecializationInfo(spec))) or NO
 
 			local specIcon, lootIcon = "", ""
 			local lootText = LOOT
 
-			local _, _, _, specTex = GetSpecializationInfo(spec)
+			local _, _, _, specTex = T.classic and T.GetSpecializationInfo(spec) or GetSpecializationInfo(spec)
 			if specTex then
 				specIcon = format("|T%s:14:14:0:0:64:64:5:59:5:59|t", specTex)
 			end
@@ -1757,7 +1757,11 @@ if stats.enabled then
 		OnUpdate = function(self, u)
 			self.elapsed = self.elapsed + u
 			if self.fired and self.elapsed > 2.5 then
-				self.text:SetText(gsub(stats[format("spec%dfmt", GetSpecialization() and GetSpecialization() or 1)], "%[(%w-)%]", tags))
+				if T.classic then
+					self.text:SetText(gsub(stats[format("spec%dfmt", T.GetSpecialization() and T.GetSpecialization() or 1)], "%[(%w-)%]", tags))
+				else
+					self.text:SetText(gsub(stats[format("spec%dfmt", GetSpecialization() and GetSpecialization() or 1)], "%[(%w-)%]", tags))
+				end
 				self.elapsed, self.fired = 0, false
 			end
 		end
