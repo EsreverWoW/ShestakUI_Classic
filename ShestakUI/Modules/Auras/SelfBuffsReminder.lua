@@ -117,7 +117,7 @@ local function OnEvent(self, event, arg1)
 		if canplaysound == true then PlaySoundFile(C.media.warning_sound, "Master") end
 	elseif ((combat and UnitAffectingCombat("player")) or (instance and difficultyID ~= 0)) and
 	reversecheck == true and not UnitInVehicle("player") then
-		if negate_reversecheck and negate_reversecheck == GetSpecialization() then self:Hide() return end
+		if negate_reversecheck and (negate_reversecheck == T.classic and T.GetSpecialization() or not T.classic and GetSpecialization()) then self:Hide() return end
 		for _, buff in pairs(group.spells) do
 			local name = GetSpellInfo(buff)
 			local icon, unitCaster = T.CheckPlayerBuff(name)
