@@ -855,11 +855,14 @@ if clock.enabled then
 					end
 					if extended then tr, tg, tb = 0.3, 1, 0.3 else tr, tg, tb = 1, 1, 1 end
 
-					local _, _, isHeroic, _, displayHeroic, displayMythic = GetDifficultyInfo(difficulty)
-					if displayMythic then
-						diff = "M"
-					elseif isHeroic or displayHeroic then
-						diff = "H"
+					local isHeroic, displayHeroic, displayMythic
+					if not T.classic then
+						_, _, isHeroic, _, displayHeroic, displayMythic = GetDifficultyInfo(difficulty)
+						if displayMythic then
+							diff = "M"
+						elseif isHeroic or displayHeroic then
+							diff = "H"
+						end
 					end
 
 					if (numEncounters and numEncounters > 0) and (encounterProgress and encounterProgress > 0) then
