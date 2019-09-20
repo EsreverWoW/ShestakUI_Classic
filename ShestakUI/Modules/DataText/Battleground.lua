@@ -104,8 +104,10 @@ BGFrame:SetScript("OnMouseUp", function(self, button)
 	if MiniMapBattlefieldFrame:IsShown() then
 		if button == "RightButton" then
 			ToggleBattlefieldMap()
-		else
+		elseif T.classic then
 			ToggleWorldStateScoreFrame()
+		else
+			TogglePVPScoreboardOrResults()
 		end
 	end
 end)

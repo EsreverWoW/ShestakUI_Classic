@@ -1385,10 +1385,10 @@ if friends.enabled then
 			C_FriendList.ShowFriends()
 			self.hovered = true
 			local online, total = 0, C_FriendList.GetNumFriends()
-			local name, level, class, zone, connected, status, note, classc, levelc, zone_r, zone_g, zone_b, grouped
+			local name, level, class, zone, connected, status, note, classc, levelc, zone_r, zone_g, zone_b, grouped, realm_r, realm_g, realm_b
 			for i = 0, total do if select(5, C_FriendList.GetFriendInfo(i)) then online = online + 1 end end
 			local BNonline, BNtotal = 0, BNGetNumFriends()
-			local presenceName, toonName, toonID, client, isOnline
+			local presenceName, battleTag, toonName, toonID, client, isOnline, isAFK, isDND
 			if BNtotal > 0 then
 				for i = 1, BNtotal do if select(8, BNGetFriendInfo(i)) then BNonline = BNonline + 1 end end
 			end

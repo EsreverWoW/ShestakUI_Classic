@@ -89,12 +89,12 @@ local function Melee(self)
 	end
 end
 
-local function Ranged(self, event, unitTarget, castGUID, spellID)
+local function Ranged(self, _, unit, _, spellID)
 	if spellID ~= 75 and spellID ~= 5019 then return end
 
 	local bar = self.Swing
 	bar.min = GetTime()
-	bar.max = bar.min + UnitRangedDamage(unitTarget)
+	bar.max = bar.min + UnitRangedDamage(unit)
 
 	bar:Show()
 	bar:SetMinMaxValues(bar.min, bar.max)

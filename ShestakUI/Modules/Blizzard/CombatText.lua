@@ -62,7 +62,7 @@ end
 
 -- Partial resists styler
 local part = "-%s [%s %s]"
-local r, g, b
+local r, g, b, lowMana, lowHealth
 
 -- Function, handles everything
 local function OnEvent(self, event, subevent, powerType)
@@ -328,6 +328,7 @@ local function OnEvent(self, event, subevent, powerType)
 		if GetRuneCooldown(arg1) ~= 0 then return end
 		xCT3:AddMessage("+"..COMBAT_TEXT_RUNE_DEATH, 0.75, 0, 0)
 	elseif event == "UNIT_ENTERED_VEHICLE" or event == "UNIT_EXITING_VEHICLE" then
+		local arg1 = subevent
 		if arg1 == "player" then
 			SetUnit()
 		end
@@ -477,7 +478,7 @@ end
 local StartConfigmode = function()
 	if not InCombatLockdown()then
 		for i = 1, #ct.frames do
-			f = ct.frames[i]
+			local f = ct.frames[i]
 			f:SetTemplate("Transparent")
 			f:SetBackdropBorderColor(1, 0, 0, 1)
 
@@ -556,7 +557,7 @@ end
 
 local function EndConfigmode()
 	for i = 1, #ct.frames do
-		f = ct.frames[i]
+		local f = ct.frames[i]
 		f:SetBackdrop(nil)
 		f.iborder:Hide()
 		f.oborder:Hide()
@@ -746,14 +747,15 @@ if C.combattext.merge_aoe_spam then
 	end
 end
 
+local unpack, select, time = unpack, select, time
+local gflags = bit.bor(COMBATLOG_OBJECT_AFFILIATION_MINE,
+	COMBATLOG_OBJECT_REACTION_FRIENDLY,
+	COMBATLOG_OBJECT_CONTROL_PLAYER,
+	COMBATLOG_OBJECT_TYPE_GUARDIAN
+)
+
 -- Damage
 if C.combattext.damage then
-	local unpack, select, time = unpack, select, time
-	local gflags = bit.bor(COMBATLOG_OBJECT_AFFILIATION_MINE,
-		COMBATLOG_OBJECT_REACTION_FRIENDLY,
-		COMBATLOG_OBJECT_CONTROL_PLAYER,
-		COMBATLOG_OBJECT_TYPE_GUARDIAN
-	)
 	local xCTd = CreateFrame("Frame")
 	if C.combattext.damage_color then
 		ct.dmgcolor = {}
@@ -978,7 +980,6 @@ end
 
 -- Healing
 if C.combattext.healing then
-	local unpack, select, time = unpack, select, time
 	local xCTh = CreateFrame("Frame")
 	if C.combattext.icons then
 		ct.blank = "Interface\\AddOns\\ShestakUI\\Media\\Textures\\Blank.tga"

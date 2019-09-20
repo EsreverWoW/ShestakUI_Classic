@@ -111,7 +111,7 @@ function stArch:OnLoad(self)
 	-- Archaeology Skill Level Frame
 	local archSkill = stArch["archSkill"]
 	archSkill["frame"] = CreateFrame("Frame", "ArchSkillFrame", self)
-	archSkill["bar"] = CreateFrame("StatusBar", "ArchSkillBar", archSkill["frame"], "TextStatusbar")
+	archSkill["bar"] = CreateFrame("StatusBar", "ArchSkillBar", archSkill["frame"], "TextStatusBar")
 	archSkill["text"] = archSkill["bar"]:CreateFontString()
 
 	-- Border
@@ -233,7 +233,7 @@ function stArch:UpdateFrameHeight(self)
 	end
 end
 
-function IsArchaeologist()
+local function IsArchaeologist()
 	local _, _, arch = GetProfessions()
 	if arch then
 		return true
