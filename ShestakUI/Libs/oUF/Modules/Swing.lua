@@ -39,14 +39,18 @@ local function OnDurationUpdate(self)
 end
 
 local function Melee(self)
-	local _, event, _, GUID, _, _, _, tarGUID, _, _, _, missType, spellName = CombatLogGetCurrentEventInfo()
+	local _, event, _, GUID, _, _, _, tarGUID, _, _, _, missType, spellName, _, _, _, _, _, _, _, isOffhand = CombatLogGetCurrentEventInfo()
 	local bar = self.Swing
+	local barOH = self.SwingOH
 
-	if UnitGUID(self.unit) == tarGUID then
-		if event == "SWING_MISSED" then
-			if missType == "PARRY" then
-				bar.max = bar.min + ((bar.max - bar.min) * 0.6)
-				bar:SetMinMaxValues(bar.min, bar.max)
+	if UnitGUID(self.unit) == tarGUID and event == "SWING_MISSED" then
+		if missType == "PARRY" then
+			bar.max = bar.min + ((bar.max - bar.min) * 0.6)
+			bar:SetMinMaxValues(bar.min, bar.max)
+
+			if barOH then
+				barOH.max = barOH.min + ((barOH.max - barOH.min) * 0.6)
+				barOH:SetMinMaxValues(barOH.min, barOH.max)
 			end
 		end
 	elseif UnitGUID(self.unit) == GUID then
@@ -59,22 +63,23 @@ local function Melee(self)
 
 		if not (string.find(event, "SWING") or shouldReset) then return end
 
-		bar.min = GetTime()
-		bar.max = bar.min + UnitAttackSpeed(self.unit)
-		local itemId = GetInventoryItemID("player", 17)
+		local now = GetTime()
+		local mhSpeed, ohSpeed = UnitAttackSpeed(self.unit)
 
-		if itemId ~= nil then
-			local _, _, _, _, _, itemType = GetItemInfo(itemId)
-			local _, _, _, _, _, weaponType = GetItemInfo(25)
-			if itemType ~= weaponType then -- Worn Shortsword, little "hack" for language support
-				bar:Show()
-				bar:SetMinMaxValues(bar.min, bar.max)
-				bar:SetScript("OnUpdate", OnDurationUpdate)
-			else
-				bar:Hide()
-				bar:SetScript("OnUpdate", nil)
-			end
+		local itemId = GetInventoryItemID("player", 17)
+		local offhandEvent = (event == "SWING_DAMAGE" and isOffhand == true) or (event == "SWING_MISSED" and spellName == true)
+
+		if itemId ~= nil and barOH and offhandEvent then
+			barOH.min = now
+			barOH.max = barOH.min + ohSpeed
+
+			barOH:Show()
+			barOH:SetMinMaxValues(barOH.min, barOH.max)
+			barOH:SetScript("OnUpdate", OnDurationUpdate)
 		else
+			bar.min = now
+			bar.max = bar.min + mhSpeed
+
 			bar:Show()
 			bar:SetMinMaxValues(bar.min, bar.max)
 			bar:SetScript("OnUpdate", OnDurationUpdate)
@@ -96,11 +101,14 @@ end
 
 local function Ooc(self)
 	local bar = self.Swing
+	local barOH = self.SwingOH
 	bar:Hide()
+	if barOH then barOH:Hide() end
 end
 
 local function Enable(self, unit)
 	local bar = self.Swing
+	local barOH = self.SwingOH
 	if bar and unit == "player" then
 
 		if not bar.disableRanged then
@@ -116,6 +124,7 @@ local function Enable(self, unit)
 		end
 
 		bar:Hide()
+		if barOH then barOH:Hide() end
 
 		return true
 	end
