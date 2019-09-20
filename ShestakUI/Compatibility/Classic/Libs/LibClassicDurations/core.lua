@@ -61,7 +61,7 @@ Usage example 2:
 --]================]
 if WOW_PROJECT_ID ~= WOW_PROJECT_CLASSIC then return end
 
-local MAJOR, MINOR = "LibClassicDurations", 20
+local MAJOR, MINOR = "LibClassicDurations", 22
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
@@ -100,6 +100,7 @@ local callbacks = lib.callbacks
 local guids = lib.guids
 local spells = lib.spells
 local npc_spells = lib.npc_spells
+local indirectRefreshSpells
 
 
 local PURGE_INTERVAL = 900
@@ -115,6 +116,7 @@ local tinsert = table.insert
 local unpack = unpack
 local GetAuraDurationByUnitDirect
 local enableEnemyBuffTracking = false
+local COMBATLOG_OBJECT_CONTROL_PLAYER = COMBATLOG_OBJECT_CONTROL_PLAYER
 
 f:SetScript("OnEvent", function(self, event, ...)
     return self[event](self, event, ...)
@@ -126,6 +128,7 @@ local SpellDataVersions = lib.dataVersions
 function lib:SetDataVersion(dataType, version)
     SpellDataVersions[dataType] = version
     npc_spells = lib.npc_spells
+    indirectRefreshSpells = lib.indirectRefreshSpells
 end
 
 function lib:GetDataVersion(dataType)
@@ -319,6 +322,25 @@ local function cleanDuration(duration, spellID, srcGUID, comboPoints)
     return duration
 end
 
+local function RefreshTimer(srcGUID, dstGUID, spellID)
+    local guidTable = guids[dstGUID]
+    if not guidTable then return end
+
+    local spellTable = guidTable[spellID]
+    if not spellTable then return end
+
+    local applicationTable
+    if spellTable.applications then
+        applicationTable = spellTable.applications[srcGUID]
+    else
+        applicationTable = spellTable
+    end
+    if not applicationTable then return end
+
+    applicationTable[2] = GetTime() -- set start time to now
+    return true
+end
+
 local function SetTimer(srcGUID, dstGUID, dstName, dstFlags, spellID, spellName, opts, auraType, doRemove)
     if not opts then return end
 
@@ -364,8 +386,12 @@ local function SetTimer(srcGUID, dstGUID, dstName, dstFlags, spellID, spellName,
         applicationTable = spellTable
     end
 
-    -- local duration = cleanDuration(opts.duration, spellID, srcGUID)
     local duration = opts.duration
+    local isDstPlayer = bit_band(dstFlags, COMBATLOG_OBJECT_CONTROL_PLAYER) > 0
+    if isDstPlayer and opts.pvpduration then
+        duration = opts.pvpduration
+    end
+
     if not duration then
         return SetTimer(srcGUID, dstGUID, dstName, dstFlags, spellID, spellName, opts, auraType, true)
     end
@@ -379,6 +405,7 @@ local function SetTimer(srcGUID, dstGUID, dstName, dstFlags, spellID, spellName,
     --     -- local temporaryDuration = cleanDuration(opts.duration, spellID, srcGUID)
     --     expirationTime = now + duration
     -- end
+
     applicationTable[1] = duration
     applicationTable[2] = now
     -- applicationTable[2] = expirationTime
@@ -422,10 +449,19 @@ function f:COMBAT_LOG_EVENT_UNFILTERED(event)
     dstGUID, dstName, dstFlags, dstFlags2,
     spellID, spellName, spellSchool, auraType, amount = CombatLogGetCurrentEventInfo()
 
-    if spellName == SunderArmorName then
-        if eventType == "SPELL_CAST_SUCCESS" then
-            eventType = "SPELL_AURA_REFRESH"
-            auraType = "DEBUFF"
+    if indirectRefreshSpells[spellName] then
+        local refreshTable = indirectRefreshSpells[spellName]
+        if refreshTable.event == eventType then
+            local targetSpellID = refreshTable.targetSpellID
+
+            local condition = refreshTable.condition
+            if condition then
+                local isMine = bit_band(srcFlags, COMBATLOG_OBJECT_AFFILIATION_MINE) == COMBATLOG_OBJECT_AFFILIATION_MINE
+                if not condition(isMine) then return end
+            end
+
+            RefreshTimer(srcGUID, dstGUID, targetSpellID)
+            return
         end
     end
 
