@@ -124,12 +124,16 @@ local function Shared(self, unit)
 	end
 
 	-- Agro border
+	local LibBanzai = T.classic and LibStub("LibBanzai-2.0", true)
+
 	if C.raidframe.aggro_border == true then
 		table.insert(self.__elements, T.UpdateThreat)
 		self:RegisterEvent("PLAYER_TARGET_CHANGED", T.UpdateThreat, true)
 		if not T.classic then
 			self:RegisterEvent("UNIT_THREAT_LIST_UPDATE", T.UpdateThreat)
 			self:RegisterEvent("UNIT_THREAT_SITUATION_UPDATE", T.UpdateThreat)
+		elseif LibBanzai then
+			LibBanzai:RegisterCallback(function() T.UpdateThreat(self, "UNIT_THREAT_LIST_UPDATE", unit) end)
 		end
 	end
 

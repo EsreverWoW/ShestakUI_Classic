@@ -427,75 +427,25 @@ GetAverageItemLevel = _G.GetAverageItemLevel or function()
 end
 
 ----------------------------------------------------------------------------------------
---	Threat Functions (mostly useless for now)
+--	Threat Functions
 ----------------------------------------------------------------------------------------
-local threatColors = {
-	[0] = {0.69, 0.69, 0.69},
-	[1] = {1, 1, 0.47},
-	[2] = {1, 0.6, 0},
-	[3] = {1, 0, 0}
-}
+local ThreatLib = LibStub:GetLibrary("ThreatClassic-1.0")
+if not ThreatLib then return end
+
+local ThreatFrame = CreateFrame("Frame")
+
+ThreatLib.RegisterCallback(ThreatFrame, "Activate", T.dummy)
+ThreatLib.RegisterCallback(ThreatFrame, "Deactivate", T.dummy)
+ThreatLib:RequestActiveOnSolo(true)
 
 GetThreatStatusColor = _G.GetThreatStatusColor or function(statusIndex)
-	if not (type(statusIndex) == "number" and statusIndex >= 0 and statusIndex < 4) then
-		statusIndex = 0
-	end
-
-	return threatColors[statusIndex][1], threatColors[statusIndex][2], threatColors[statusIndex][3]
+	return ThreatLib:GetThreatStatusColor(statusIndex)
 end
 
-GetThreatStatus = _G.GetThreatStatus or function(currentThreat, maxThreat) -- Not accounting for 110%/130% modifiers
-	assert(type(currentThreat) == "number" and type(maxThreat) == "number", "Usage: GetThreatStatus(currentThreat, maxThreat)")
-
-	if not maxThreat or maxThreat == 0 then
-		maxThreat = 0
-		maxThreat = 1
-	end
-
-	local threatPercent = currentThreat / maxThreat * 100
-
-	if threatPercent >= 100 then
-		return 3, threatPercent
-	elseif threatPercent < 100 and threatPercent >= 80 then
-		return 2, threatPercent
-	elseif threatPercent < 80 and threatPercent >= 50 then
-		return 1, threatPercent
-	else
-		return 0, threatPercent
-	end
+UnitDetailedThreatSituation = _G.UnitDetailedThreatSituation or function(unit, target)
+	return ThreatLib:UnitDetailedThreatSituation(unit, target)
 end
 
--- local ThreatLib = LibStub("Threat-2.0", true)
-
-UnitDetailedThreatSituation = _G.UnitDetailedThreatSituation or function(unit, mob)
-	--[[[
-	assert(type(unit) == "string" and (type(mob) == "string"), "Usage: UnitDetailedThreatSituation(\"unit\", \"mob\")")
-
-	local firstGUID, secondGUID = UnitGUID(unit), UnitGUID(mob)
-	local currentThreat, maxThreat = ThreatLib:GetThreat(firstGUID, secondGUID), ThreatLib:GetMaxThreatOnTarget(secondGUID)
-
-	local isTanking = nil
-	local status, rawthreatpct = GetThreatStatus(currentThreat, maxThreat)
-	local threatpct = nil
-	local threatvalue = currentThreat
-
-	if status > 1 then
-		isTanking = 1
-	end
-
-	return isTanking, status, threatpct, rawthreatpct, threatvalue
-	--]]
-end
-
-UnitThreatSituation = _G.UnitThreatSituation or function(unit, otherunit)
-	--[[
-	assert(type(unit) == "string" and (type(otherunit) == "string"), "Usage: UnitThreatSituation(\"unit\"[, \"otherunit\"])")
-
-	local firstGUID, secondGUID = UnitGUID(unit), UnitGUID(otherunit)
-	local currentThreat, maxThreat = ThreatLib:GetThreat(firstGUID, secondGUID), ThreatLib:GetMaxThreatOnTarget(secondGUID)
-
-	local status = GetThreatStatus(currentThreat, maxThreat)
-
-	return status
---]]
+UnitThreatSituation = _G.UnitThreatSituation or function(unit, target)
+	return ThreatLib:UnitThreatSituation(unit, target)
 end

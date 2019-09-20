@@ -1571,14 +1571,27 @@ T.PostUpdateIcon = function(_, unit, button, index, _, duration, expiration, deb
 	button.first = true
 end
 
+local LibBanzai = T.classic and LibStub("LibBanzai-2.0", true)
+
 T.UpdateThreat = function(self, _, unit)
 	if self.unit ~= unit then return end
-	local threat = UnitThreatSituation(self.unit)
-	if threat and threat > 1 then
-		r, g, b = GetThreatStatusColor(threat)
-		self.backdrop:SetBackdropBorderColor(r, g, b)
+	local threat
+	if T.classic then
+		if not LibBanzai then return end
+		threat = LibBanzai:GetUnitAggroByUnitId(self.unit)
+		if threat then
+			self.backdrop:SetBackdropBorderColor(1, 0, 0)
+		else
+			self.backdrop:SetBackdropBorderColor(unpack(C.media.border_color))
+		end
 	else
-		self.backdrop:SetBackdropBorderColor(unpack(C.media.border_color))
+		threat = UnitThreatSituation(self.unit)
+		if threat and threat > 1 then
+			r, g, b = GetThreatStatusColor(threat)
+			self.backdrop:SetBackdropBorderColor(r, g, b)
+		else
+			self.backdrop:SetBackdropBorderColor(unpack(C.media.border_color))
+		end
 	end
 end
 

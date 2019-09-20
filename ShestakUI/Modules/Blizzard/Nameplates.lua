@@ -701,9 +701,17 @@ local function style(self, unit)
 
 	self.Health:RegisterEvent("PLAYER_REGEN_DISABLED")
 	self.Health:RegisterEvent("PLAYER_REGEN_ENABLED")
+
+	local ThreatLib = T.classic and LibStub:GetLibrary("ThreatClassic-1.0")
+	local function ThreatLibCallback()
+		return threatColor(main)
+	end
+
 	if not T.classic then
 		self.Health:RegisterEvent("UNIT_THREAT_SITUATION_UPDATE")
 		self.Health:RegisterEvent("UNIT_THREAT_LIST_UPDATE")
+	elseif ThreatLib then
+		ThreatLib.RegisterCallback(self.Health, "ThreatUpdated", ThreatLibCallback)
 	end
 
 	self.Health:SetScript("OnEvent", function(self, event)

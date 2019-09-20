@@ -195,7 +195,7 @@ ns.addCategory("raidframe", RAID_FRAMES_LABEL, L_GUI_UF_RAIDFRAMES_SUBTEXT, true
 ns.addCategory("actionbar", L_GUI_ACTIONBAR, ACTIONBARS_SUBTEXT)
 ns.addCategory("tooltip", L_GUI_TOOLTIP, L_GUI_TOOLTIP_SUBTEXT)
 ns.addCategory("chat", SOCIALS, L_GUI_CHAT_SUBTEXT)
-ns.addCategory("nameplate", UNIT_NAMEPLATES, L_GUI_NAMEPLATE_SUBTEXT, not IsClassicBuild() and true)
+ns.addCategory("nameplate", UNIT_NAMEPLATES, L_GUI_NAMEPLATE_SUBTEXT, true)
 ns.addCategory("combattext", L_GUI_COMBATTEXT, COMBATTEXT_SUBTEXT.." "..L_GUI_COMBATTEXT_SUBTEXT, true)
 ns.addCategory("aura", BUFFOPTIONS_LABEL, BUFFOPTIONS_SUBTEXT)
 ns.addCategory("bag", L_GUI_BAGS, L_GUI_BAGS_SUBTEXT)
@@ -208,9 +208,7 @@ ns.addCategory("reminder", L_GUI_REMINDER, L_GUI_REMINDER_SUBTEXT)
 ns.addCategory("raidcooldown", L_GUI_COOLDOWN_RAID, L_GUI_COOLDOWN_RAID_SUBTEXT)
 ns.addCategory("enemycooldown", L_GUI_COOLDOWN_ENEMY, L_GUI_COOLDOWN_ENEMY_SUBTEXT)
 ns.addCategory("pulsecooldown", L_GUI_COOLDOWN_PULSE, L_GUI_COOLDOWN_PULSE_SUBTEXT)
-if not IsClassicBuild() then
-	ns.addCategory("threat", L_GUI_THREAT, L_GUI_THREAT_SUBTEXT)
-end
+ns.addCategory("threat", L_GUI_THREAT, L_GUI_THREAT_SUBTEXT)
 ns.addCategory("toppanel", L_GUI_TOP_PANEL, L_GUI_TOP_PANEL_SUBTEXT)
 ns.addCategory("stats", L_GUI_STATS, L_GUI_STATS_SUBTEXT)
 ns.addCategory("error", L_GUI_ERROR, L_GUI_ERROR_SUBTEXT)
@@ -373,25 +371,23 @@ do
 	-- Panel 2
 	local parent = ShestakUIOptionsPanel.font2
 
-	if not IsClassicBuild() then
-		local subheader = ns.addSubCategory(parent, L.font_subheader_threat)
-		subheader:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
+	local subheader = ns.addSubCategory(parent, L.font_subheader_threat)
+	subheader:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
 
-		local threat_meter_font = ns.CreateDropDown(parent, "threat_meter_font", true, L.font_stats_font, FontTable)
-		threat_meter_font:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", -16, -10)
+	local threat_meter_font = ns.CreateDropDown(parent, "threat_meter_font", true, L.font_stats_font, FontTable)
+	threat_meter_font:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", -16, -10)
 
-		local threat_meter_font_style = ns.CreateDropDown(parent, "threat_meter_font_style", true, L.font_stats_font_style, FlagsTable)
-		threat_meter_font_style:SetPoint("LEFT", threat_meter_font, "RIGHT", 150, 0)
+	local threat_meter_font_style = ns.CreateDropDown(parent, "threat_meter_font_style", true, L.font_stats_font_style, FlagsTable)
+	threat_meter_font_style:SetPoint("LEFT", threat_meter_font, "RIGHT", 150, 0)
 
-		local threat_meter_font_size = ns.CreateNumberSlider(parent, "threat_meter_font_size", nil, nil, 0, 128, 1, true, FONT_SIZE)
-		threat_meter_font_size:SetPoint("TOPLEFT", threat_meter_font, "BOTTOMLEFT", 16, -16)
+	local threat_meter_font_size = ns.CreateNumberSlider(parent, "threat_meter_font_size", nil, nil, 0, 128, 1, true, FONT_SIZE)
+	threat_meter_font_size:SetPoint("TOPLEFT", threat_meter_font, "BOTTOMLEFT", 16, -16)
 
-		local threat_meter_font_shadow = ns.CreateCheckBox(parent, "threat_meter_font_shadow", L.font_stats_font_shadow)
-		threat_meter_font_shadow:SetPoint("LEFT", threat_meter_font_size, "RIGHT", 160, 0)
-	end
+	local threat_meter_font_shadow = ns.CreateCheckBox(parent, "threat_meter_font_shadow", L.font_stats_font_shadow)
+	threat_meter_font_shadow:SetPoint("LEFT", threat_meter_font_size, "RIGHT", 160, 0)
 
 	local subheader = ns.addSubCategory(parent, L.font_subheader_raidcd)
-	subheader:SetPoint("TOPLEFT", not IsClassicBuild() and threat_meter_font_size or parent.subText, "BOTTOMLEFT", 0, not IsClassicBuild() and -10 or 0)
+	subheader:SetPoint("TOPLEFT", threat_meter_font_size, "BOTTOMLEFT", 0, not IsClassicBuild() and -10 or 0)
 
 	local raid_cooldowns_font = ns.CreateDropDown(parent, "raid_cooldowns_font", true, L.font_stats_font, FontTable)
 	raid_cooldowns_font:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", -16, -10)
@@ -1338,25 +1334,22 @@ do
 	end
 
 	-- Panel 2
-	local parent, enhance_threat, good_color, near_color, bad_color, offtank_color
-	if not IsClassicBuild() then
-		parent = ShestakUIOptionsPanel.nameplate2
+	local parent = ShestakUIOptionsPanel.nameplate2
 
-		local enhance_threat = ns.CreateCheckBox(parent, "enhance_threat", L_GUI_NAMEPLATE_THREAT)
-		enhance_threat:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
+	local enhance_threat = ns.CreateCheckBox(parent, "enhance_threat", L_GUI_NAMEPLATE_THREAT)
+	enhance_threat:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
 
-		local good_color = ns.CreateColourPicker(parent, "good_color", true, L_GUI_NAMEPLATE_GOOD_COLOR)
-		good_color:SetPoint("TOPLEFT", enhance_threat, "BOTTOMLEFT", 4, -10)
+	local good_color = ns.CreateColourPicker(parent, "good_color", true, L_GUI_NAMEPLATE_GOOD_COLOR)
+	good_color:SetPoint("TOPLEFT", enhance_threat, "BOTTOMLEFT", 4, -10)
 
-		local near_color = ns.CreateColourPicker(parent, "near_color", true, L_GUI_NAMEPLATE_NEAR_COLOR)
-		near_color:SetPoint("TOPLEFT", good_color, "BOTTOMLEFT", 0, -10)
+	local near_color = ns.CreateColourPicker(parent, "near_color", true, L_GUI_NAMEPLATE_NEAR_COLOR)
+	near_color:SetPoint("TOPLEFT", good_color, "BOTTOMLEFT", 0, -10)
 
-		local bad_color = ns.CreateColourPicker(parent, "bad_color", true, L_GUI_NAMEPLATE_BAD_COLOR)
-		bad_color:SetPoint("TOPLEFT", near_color, "BOTTOMLEFT", 0, -10)
+	local bad_color = ns.CreateColourPicker(parent, "bad_color", true, L_GUI_NAMEPLATE_BAD_COLOR)
+	bad_color:SetPoint("TOPLEFT", near_color, "BOTTOMLEFT", 0, -10)
 
-		local offtank_color = ns.CreateColourPicker(parent, "offtank_color", true, L_GUI_NAMEPLATE_OFFTANK_COLOR)
-		offtank_color:SetPoint("TOPLEFT", bad_color, "BOTTOMLEFT", 0, -10)
-	end
+	local offtank_color = ns.CreateColourPicker(parent, "offtank_color", true, L_GUI_NAMEPLATE_OFFTANK_COLOR)
+	offtank_color:SetPoint("TOPLEFT", bad_color, "BOTTOMLEFT", 0, -10)
 end
 
 -- Combat text
@@ -1892,25 +1885,23 @@ do
 end
 
 -- Threat
-if not IsClassicBuild() then
-	do
-		local parent = ShestakUIOptionsPanel.threat
+do
+	local parent = ShestakUIOptionsPanel.threat
 
-		local enable = ns.CreateCheckBox(parent, "enable", L_GUI_THREAT_ENABLE)
-		enable:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
+	local enable = ns.CreateCheckBox(parent, "enable", L_GUI_THREAT_ENABLE)
+	enable:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
 
-		local height = ns.CreateNumberSlider(parent, "height", nil, nil, 0, 25, 1, true, L_GUI_THREAT_HEIGHT)
-		height:SetPoint("TOPLEFT", enable, "BOTTOMLEFT", 0, -20)
+	local height = ns.CreateNumberSlider(parent, "height", nil, nil, 0, 25, 1, true, L_GUI_THREAT_HEIGHT)
+	height:SetPoint("TOPLEFT", enable, "BOTTOMLEFT", 0, -20)
 
-		local width = ns.CreateNumberSlider(parent, "width", nil, nil, 0, 300, 1, true, L_GUI_THREAT_WIDTH)
-		width:SetPoint("TOPLEFT", height, "BOTTOMLEFT", 0, -20)
+	local width = ns.CreateNumberSlider(parent, "width", nil, nil, 0, 300, 1, true, L_GUI_THREAT_WIDTH)
+	width:SetPoint("TOPLEFT", height, "BOTTOMLEFT", 0, -20)
 
-		local bar_rows = ns.CreateNumberSlider(parent, "bar_rows", nil, nil, 0, 15, 5, true, L_GUI_THREAT_ROWS)
-		bar_rows:SetPoint("TOPLEFT", width, "BOTTOMLEFT", 0, -20)
+	local bar_rows = ns.CreateNumberSlider(parent, "bar_rows", nil, nil, 0, 15, 5, true, L_GUI_THREAT_ROWS)
+	bar_rows:SetPoint("TOPLEFT", width, "BOTTOMLEFT", 0, -20)
 
-		local hide_solo = ns.CreateCheckBox(parent, "hide_solo", L_GUI_THREAT_HIDE_SOLO)
-		hide_solo:SetPoint("TOPLEFT", bar_rows, "BOTTOMLEFT", 0, -20)
-	end
+	local hide_solo = ns.CreateCheckBox(parent, "hide_solo", L_GUI_THREAT_HIDE_SOLO)
+	hide_solo:SetPoint("TOPLEFT", bar_rows, "BOTTOMLEFT", 0, -20)
 end
 
 -- Top Panel

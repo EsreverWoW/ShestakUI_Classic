@@ -32,6 +32,14 @@
 
 	<Script file="Compatibility\Classic\Libs\LibStub\LibStub.lua"/>
 	<Script file="Compatibility\Classic\Libs\CallbackHandler-1.0\CallbackHandler-1.0.lua"/>
+	<Include file="Compatibility\Classic\Libs\AceAddon-3.0\AceAddon-3.0.xml"/>
+	<Include file="Compatibility\Classic\Libs\AceBucket-3.0\AceBucket-3.0.xml"/>
+	<Include file="Compatibility\Classic\Libs\AceComm-3.0\AceComm-3.0.xml"/>
+	<Include file="Compatibility\Classic\Libs\AceEvent-3.0\AceEvent-3.0.xml"/>
+	<Include file="Compatibility\Classic\Libs\AceTimer-3.0\AceTimer-3.0.xml"/>
+	<Include file="Compatibility\Classic\Libs\AceSerializer-3.0\AceSerializer-3.0.xml"/>
+	<Include file="Compatibility\Classic\Libs\ThreatClassic-1.0\lib.xml"/>
+	<Script file="Compatibility\Classic\Libs\LibBanzai\LibBanzai-2.0.lua"/>
 	<Script file="Compatibility\Classic\Libs\LibClassicCasterino\LibClassicCasterino.lua"/>
 	<Include file="Compatibility\Classic\Libs\LibClassicDurations\LibClassicDurations.xml"/>
 	<Script file="Compatibility\Classic.lua"/>
