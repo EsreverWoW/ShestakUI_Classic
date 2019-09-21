@@ -53,14 +53,14 @@ local function Melee(self)
 
 	if UnitGUID(self.unit) == tarGUID and event == "SWING_MISSED" then
 		if missType == "PARRY" then
-			bar.min = bar.min or GetTime()
+			bar.min = bar.min or now
 			bar.max = bar.max or bar.min + mhSpeed
 
 			bar.max = bar.min + ((bar.max - bar.min) * 0.6)
 			bar:SetMinMaxValues(bar.min, bar.max)
 
 			if isWeapon and barOH then
-				barOH.min = barOH.min or GetTime()
+				barOH.min = barOH.min or now
 				barOH.max = barOH.max or barOH.min + ohSpeed
 
 				barOH.max = barOH.min + ((barOH.max - barOH.min) * 0.6)
