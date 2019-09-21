@@ -47,13 +47,17 @@ local function Melee(self)
 	local mhSpeed, ohSpeed = UnitAttackSpeed(self.unit)
 	local itemId = GetInventoryItemID("player", 17)
 
+	local itemType = itemId and select(6, GetItemInfo(itemId)) or ""
+	local weaponType = GetItemInfo(25) or WEAPON
+	local isWeapon = itemType == weaponType
+
 	if UnitGUID(self.unit) == tarGUID and event == "SWING_MISSED" then
 		if missType == "PARRY" then
 			bar.max = bar.max or bar.min + mhSpeed -- prevent issues swapping from ranged
 			bar.max = bar.min + ((bar.max - bar.min) * 0.6)
 			bar:SetMinMaxValues(bar.min, bar.max)
 
-			if itemId and barOH then
+			if isWeapon and barOH then
 				barOH.max = barOH.max or barOH.min + ohSpeed -- prevent issues swapping from ranged
 				barOH.max = barOH.min + ((barOH.max - barOH.min) * 0.6)
 				barOH:SetMinMaxValues(barOH.min, barOH.max)
@@ -71,7 +75,7 @@ local function Melee(self)
 
 		local offhandEvent = (event == "SWING_DAMAGE" and isOffhand == true) or (event == "SWING_MISSED" and spellName == true)
 
-		if itemId and barOH and offhandEvent then
+		if isWeapon and barOH and offhandEvent then
 			barOH.min = now
 			barOH.max = barOH.min + ohSpeed
 
