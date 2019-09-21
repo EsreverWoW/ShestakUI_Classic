@@ -1453,7 +1453,7 @@ if friends.enabled then
 								if client == "BSAp" or client == "App" then
 									client = gameText
 								else
-									client = clientTags[client]
+									client = clientTags[client] or ""
 								end
 								if isGameAFK then
 									status = "|cffE7E716"..L_CHAT_AFK.."|r"
