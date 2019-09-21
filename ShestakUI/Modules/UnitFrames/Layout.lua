@@ -1160,6 +1160,8 @@ local function Shared(self, unit)
 			self:RegisterEvent("UNIT_THREAT_SITUATION_UPDATE", T.UpdateThreat)
 		elseif LibBanzai then
 			LibBanzai:RegisterCallback(function() T.UpdateThreat(self, "UNIT_THREAT_LIST_UPDATE", unit) end)
+			self:RegisterEvent("PLAYER_REGEN_ENABLED", T.UpdateThreat, true)
+			self:RegisterEvent("PLAYER_REGEN_DISABLED", T.UpdateThreat, true)
 		end
 	end
 

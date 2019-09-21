@@ -1,5 +1,4 @@
 local classic = _G.WOW_PROJECT_ID == _G.WOW_PROJECT_CLASSIC
-if not classic then return end
 
 --[[
 Name: LibBanzai-2.0
@@ -223,4 +222,3 @@ frame:SetScript("OnUpdate", nil)
 frame:SetScript("OnEvent", nil)
 frame:UnregisterAllEvents()
 if #callbacks > 0 then start() end
-
