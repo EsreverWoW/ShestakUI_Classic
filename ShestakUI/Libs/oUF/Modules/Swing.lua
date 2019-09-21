@@ -47,9 +47,8 @@ local function Melee(self)
 	local mhSpeed, ohSpeed = UnitAttackSpeed(self.unit)
 	local itemId = GetInventoryItemID("player", 17)
 
-	local itemType = itemId and select(6, GetItemInfo(itemId)) or ""
-	local weaponType = GetItemInfo(25) or WEAPON
-	local isWeapon = itemType == weaponType
+	local itemType = itemId and select(9, GetItemInfo(itemId)) or ""
+	local isWeapon = itemId and (itemType == "INVTYPE_WEAPON" or itemType == "INVTYPE_WEAPONOFFHAND")
 
 	if UnitGUID(self.unit) == tarGUID and event == "SWING_MISSED" then
 		if missType == "PARRY" then
