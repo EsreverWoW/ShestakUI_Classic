@@ -51,8 +51,8 @@ if C.automation.accept_invite == true then
 					return
 				end
 			end
-		else
-			SendWho(name)
+		elseif not T.classic then
+			C_FriendList.SendWho(name) -- SendWho is protected in Classic as of build 31882
 		end
 	end)
 end
