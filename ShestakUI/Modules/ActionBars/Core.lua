@@ -70,6 +70,9 @@ do
 		UIPARENT_MANAGED_FRAME_POSITIONS[frame] = nil
 	end
 	uiManagedFrames = nil
+
+	-- Hack to avoid right bars resizing according to user display resolution.
+	MinimapCluster.GetBottom = function() return 999999999 end
 end
 
 ----------------------------------------------------------------------------------------
