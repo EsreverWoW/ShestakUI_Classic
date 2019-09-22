@@ -1441,6 +1441,7 @@ if friends.enabled then
 									for k, v in pairs(LOCALIZED_CLASS_NAMES_FEMALE) do if class == v then class = k end end
 								end
 								classc, levelc = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[class], GetQuestDifficultyColor(level)
+								classc = classc or {["r"] = 1, ["g"] = 1, ["b"] = 1}
 								if UnitInParty(toonName) or UnitInRaid(toonName) then grouped = " |cffaaaaaa*|r" else grouped = "" end
 								GameTooltip:AddDoubleLine(format("%s (|cff%02x%02x%02x%d|r |cff%02x%02x%02x%s|r%s) |cff%02x%02x%02x%s|r", client, levelc.r * 255, levelc.g * 255, levelc.b * 255, level, classc.r * 255, classc.g * 255, classc.b * 255, toonName, grouped, 255, 0, 0, status), presenceName, 238, 238, 238, 238, 238, 238)
 								if self.altdown then
