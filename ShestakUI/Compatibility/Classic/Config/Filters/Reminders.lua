@@ -234,7 +234,7 @@ if C.reminder.solo_buffs_enable == true then
 			[3] = {	-- Seals group
 				["spells"] = {
 					21084,	-- Seal of Righteousness
-					20735,	-- Seal of Command
+					20375,	-- Seal of Command
 					20164,	-- Seal of Justice
 					20165,	-- Seal of Light
 					20166,	-- Seal of Wisdom

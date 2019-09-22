@@ -1103,7 +1103,7 @@ C["filger_spells"] = {
 			-- Sanctity Aura
 			-- {spellID = 20218, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Seal of Command
-			{spellID = 20735, unitID = "player", caster = "player", filter = "BUFF"},
+			{spellID = 20375, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Seal of Justice
 			{spellID = 20164, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Seal of Light
