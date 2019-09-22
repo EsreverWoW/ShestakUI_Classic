@@ -121,6 +121,10 @@ local function StyleNormalButton(button)
 
 		button.isSkinned = true
 	end
+
+	if not C.general.auto_scale and not InCombatLockdown() then
+		MultiBarBottomRight:SetScale(MultiBarLeft:GetScale())
+	end
 end
 
 local function StyleSmallButton(normal, button, icon, name, pet)
