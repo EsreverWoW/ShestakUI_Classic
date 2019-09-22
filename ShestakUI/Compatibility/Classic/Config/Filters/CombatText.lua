@@ -46,7 +46,7 @@ elseif T.class == "HUNTER" then
 		T.aoespam[136] = 9			-- Mend Pet
 	end
 	if C.combattext.healing then
-		T.healfilter[19578] = true	-- Spirit Bond
+		T.healfilter[19579] = true	-- Spirit Bond
 	end
 elseif T.class == "MAGE" then
 	if C.combattext.merge_aoe_spam then
