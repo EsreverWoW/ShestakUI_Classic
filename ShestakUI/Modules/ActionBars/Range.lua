@@ -75,7 +75,7 @@ function tullaRange:PLAYER_LOGIN()
 		unusable = {0.4, 0.4, 0.4}
 	}
 
-	-- cKeles: Warrior Ingore Stance Edition
+	-- cKeles: Blue tinting of Buttons disabled for Warrior (OOM same color as unusable)
 	if T.classic and T.class == "WARRIOR" then
 		self.colors = {
 			normal = {1, 1, 1},
