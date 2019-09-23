@@ -1,4 +1,4 @@
-﻿local T, C, L, _ = unpack(select(2, ...))
+local T, C, L, _ = unpack(select(2, ...))
 if T.classic or C.automation.auto_role ~= true then return end
 
 ----------------------------------------------------------------------------------------

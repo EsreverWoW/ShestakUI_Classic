@@ -1,4 +1,4 @@
-﻿local T, C, L, _ = unpack(select(2, ...))
+local T, C, L, _ = unpack(select(2, ...))
 if C.actionbar.enable ~= true or C.skins.flyout_button ~= true then return end
 
 ----------------------------------------------------------------------------------------

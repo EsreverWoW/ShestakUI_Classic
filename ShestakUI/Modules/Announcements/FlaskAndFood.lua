@@ -1,4 +1,4 @@
-﻿local T, C, L, _ = unpack(select(2, ...))
+local T, C, L, _ = unpack(select(2, ...))
 if C.announcements.flask_food ~= true then return end
 
 ----------------------------------------------------------------------------------------

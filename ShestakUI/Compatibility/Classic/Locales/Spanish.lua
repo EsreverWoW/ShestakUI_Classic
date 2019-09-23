@@ -1,4 +1,4 @@
-﻿local T, C, L, _ = unpack(select(2, ...))
+local T, C, L, _ = unpack(select(2, ...))
 if (T.client ~= "esES" and T.client ~= "esMX") or not T.classic then return end
 
 ----------------------------------------------------------------------------------------

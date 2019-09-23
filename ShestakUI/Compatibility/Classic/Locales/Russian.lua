@@ -1,4 +1,4 @@
-﻿local T, C, L, _ = unpack(select(2, ...))
+local T, C, L, _ = unpack(select(2, ...))
 if T.client ~= "ruRU" or not T.classic then return end
 
 ----------------------------------------------------------------------------------------
