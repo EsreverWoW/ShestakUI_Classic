@@ -75,6 +75,16 @@ function tullaRange:PLAYER_LOGIN()
 		unusable = {0.4, 0.4, 0.4}
 	}
 
+	-- cKeles: Warrior Ingore Stance Edition
+	if T.classic and T.class == "WARRIOR" then
+		self.colors = {
+			normal = {1, 1, 1},
+			oor = {1, 0.3, 0.1},
+			oom = {0.4, 0.4, 0.4},
+			unusable = {0.4, 0.4, 0.4}
+		}
+	end
+
 	self.buttonsToUpdate = {}
 
 	hooksecurefunc("ActionButton_OnUpdate", self.RegisterButton)
