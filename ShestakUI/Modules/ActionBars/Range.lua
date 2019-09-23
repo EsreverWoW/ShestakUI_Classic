@@ -77,12 +77,7 @@ function tullaRange:PLAYER_LOGIN()
   
 	-- cKeles: Blue tinting of Actionbar Buttons same as unusable for Warrior
 	if T.classic and T.class == "WARRIOR" then
-		self.colors = {
-			normal = {1, 1, 1},
-			oor = {1, 0.3, 0.1},
-			oom = {0.4, 0.4, 0.4},
-			unusable = {0.4, 0.4, 0.4}
-		}
+		self.colors["oom"] = {0.4, 0.4, 0.4}
 	end
 
 	self.buttonsToUpdate = {}
