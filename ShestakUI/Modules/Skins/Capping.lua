@@ -15,7 +15,7 @@ frame:SetScript("OnEvent", function()
 	db.font = "Hooge"
 	db.fontSize = C.font.stylization_font_size
 
-	CappingFrame:HookScript('OnUpdate', function(self)
+	CappingFrame:HookScript("OnUpdate", function(self)
 		for bar in pairs(self.bars) do
 			if not bar.backdrop then
 				bar:CreateBackdrop("Default")
