@@ -448,7 +448,6 @@ function T.SkinDropDownBox(frame, width, pos)
 		button:SetPoint("RIGHT", frame, "RIGHT", -10, 3)
 	end
 	button.SetPoint = T.dummy
-	scrolldn = false
 	T.SkinNextPrevButton(button)
 
 	frame:CreateBackdrop("Overlay")
@@ -466,7 +465,7 @@ function T.SkinCheckBox(frame, default)
 	frame.backdrop:SetPoint("BOTTOMRIGHT", -4, 4)
 
 	if frame.SetHighlightTexture then
-		local highligh = frame:CreateTexture(nil, nil, self)
+		local highligh = frame:CreateTexture()
 		highligh:SetColorTexture(1, 1, 1, 0.3)
 		highligh:SetPoint("TOPLEFT", frame, 6, -6)
 		highligh:SetPoint("BOTTOMRIGHT", frame, -6, 6)
@@ -475,7 +474,7 @@ function T.SkinCheckBox(frame, default)
 
 	if frame.SetCheckedTexture then
 		if default then return end
-		local checked = frame:CreateTexture(nil, nil, self)
+		local checked = frame:CreateTexture()
 		checked:SetColorTexture(1, 0.82, 0, 0.8)
 		checked:SetPoint("TOPLEFT", frame, 6, -6)
 		checked:SetPoint("BOTTOMRIGHT", frame, -6, 6)
@@ -483,21 +482,12 @@ function T.SkinCheckBox(frame, default)
 	end
 
 	if frame.SetDisabledCheckedTexture then
-		local disabled = frame:CreateTexture(nil, nil, self)
+		local disabled = frame:CreateTexture()
 		disabled:SetColorTexture(0.6, 0.6, 0.6, 0.75)
 		disabled:SetPoint("TOPLEFT", frame, 6, -6)
 		disabled:SetPoint("BOTTOMRIGHT", frame, -6, 6)
 		frame:SetDisabledCheckedTexture(disabled)
 	end
-
-	frame:HookScript("OnDisable", function(self)
-		if not self.SetDisabledTexture then return end
-		if self:GetChecked() then
-			self:SetDisabledTexture(disabled)
-		else
-			self:SetDisabledTexture("")
-		end
-	end)
 end
 
 function T.SkinCloseButton(f, point, text, pixel)
@@ -1522,9 +1512,7 @@ T.PostUpdateIcon = function(_, unit, button, index, _, duration, expiration, deb
 
 	if button.isDebuff then
 		if not UnitIsFriend("player", unit) and not playerUnits[button.caster] then
-			if C.aura.player_aura_only then
-				button:Hide()
-			else
+			if not C.aura.player_aura_only then
 				button:SetBackdropBorderColor(unpack(C.media.border_color))
 				button.icon:SetDesaturated(true)
 			end
@@ -1571,6 +1559,22 @@ T.PostUpdateIcon = function(_, unit, button, index, _, duration, expiration, deb
 	button.first = true
 end
 
+T.CustomFilter = function(_, unit, button, _, _, _, _, _, _, caster)
+	if C.aura.player_aura_only then
+		if button.isDebuff then
+			local playerUnits = {
+				player = true,
+				pet = true,
+				vehicle = true,
+			}
+			if not UnitIsFriend("player", unit) and not playerUnits[caster] then
+				return false
+			end
+		end
+	end
+	return true
+end
+
 local LibBanzai = T.classic and LibStub("LibBanzai-2.0", true)
 
 T.UpdateThreat = function(self, _, unit)
@@ -1587,7 +1591,7 @@ T.UpdateThreat = function(self, _, unit)
 	else
 		threat = UnitThreatSituation(self.unit)
 		if threat and threat > 1 then
-			r, g, b = GetThreatStatusColor(threat)
+			local r, g, b = GetThreatStatusColor(threat)
 			self.backdrop:SetBackdropBorderColor(r, g, b)
 		else
 			self.backdrop:SetBackdropBorderColor(unpack(C.media.border_color))

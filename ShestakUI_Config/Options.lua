@@ -1,3 +1,4 @@
+local T, C
 local _, ns = ...
 local L = ns
 ----------------------------------------------------------------------------------------
@@ -1279,7 +1280,7 @@ do
 	local distance = ns.CreateNumberSlider(parent, "distance", nil, nil, 0, 200, 1, true, L_GUI_NAMEPLATE_DISTANCE)
 	distance:SetPoint("TOPLEFT", enable, "BOTTOMLEFT", 0, -20)
 
-	local alpha = ns.CreateNumberSlider(parent, "alpha", nil, nil, 0, 1, 0.01, true, L_GUI_NAMEPLATE_ALPHA)
+	local alpha = ns.CreateNumberSlider(parent, "alpha", nil, nil, 0, 1, 0.05, true)
 	if IsClassicBuild() then
 		alpha:SetPoint("TOPLEFT", enable, "BOTTOMLEFT", 0, -20)
 	else
@@ -1289,13 +1290,13 @@ do
 	local height = ns.CreateNumberSlider(parent, "height", nil, nil, 0, 20, 1, true, L_GUI_NAMEPLATE_HEIGHT)
 	height:SetPoint("TOPLEFT", IsClassicBuild() and alpha or distance, "BOTTOMLEFT", 0, -20)
 
-	local ad_height = ns.CreateNumberSlider(parent, "ad_height", nil, nil, 0, 30, 1, true, L_GUI_NAMEPLATE_AD_HEIGHT)
+	local ad_height = ns.CreateNumberSlider(parent, "ad_height", nil, nil, 0, 30, 1, true)
 	ad_height:SetPoint("LEFT", height, "RIGHT", 120, 0)
 
 	local width = ns.CreateNumberSlider(parent, "width", nil, nil, 0, 200, 1, true, L_GUI_NAMEPLATE_WIDTH)
 	width:SetPoint("TOPLEFT", height, "BOTTOMLEFT", 0, -20)
 
-	local ad_width = ns.CreateNumberSlider(parent, "ad_width", nil, nil, 0, 50, 1, true, L_GUI_NAMEPLATE_AD_WIDTH)
+	local ad_width = ns.CreateNumberSlider(parent, "ad_width", nil, nil, 0, 50, 1, true)
 	ad_width:SetPoint("LEFT", width, "RIGHT", 120, 0)
 
 	local combat = ns.CreateCheckBox(parent, "combat", L_GUI_NAMEPLATE_COMBAT)
