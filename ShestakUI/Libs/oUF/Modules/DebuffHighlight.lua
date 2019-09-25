@@ -13,7 +13,8 @@ local CanDispel = {
 	MONK = {Magic = false, Poison = true, Disease = true},
 	PALADIN = {Magic = false, Poison = true, Disease = true},
 	PRIEST = {Magic = false, Disease = true},
-	SHAMAN = {Magic = false, Curse = true}
+	SHAMAN = {Magic = false, Curse = true, Poison = false, Disease = false},
+	WARLOCK = {Magic = false}
 }
 
 local dispellist = CanDispel[T.class] or {}
@@ -35,7 +36,7 @@ end
 
 local function CheckSpec()
 	if not oUF:IsClassic() then
-		local spec = T.classic and T.GetSpecialization() or not T.classic and GetSpecialization()
+		local spec = GetSpecialization()
 
 		if T.class == "DRUID" then
 			if spec == 4 then
@@ -74,7 +75,10 @@ local function CheckSpec()
 		elseif T.class == "PRIEST" then
 			dispellist.Magic = true
 		elseif T.class == "SHAMAN" then
+			dispellist.Poison = true
 			dispellist.Disease = true
+		elseif T.class == "WARLOCK" then
+			dispellist.Magic = true
 		end
 	end
 end
