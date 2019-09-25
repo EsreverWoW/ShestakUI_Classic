@@ -20,6 +20,11 @@ else
 	numf = 3
 end
 
+-- WoW Classic requies combat text be enabled to display incoming damage
+if T.classic then
+	SetCVar("enableFloatingCombatText", 1)
+end
+
 -- Detect vehicle
 local function SetUnit()
 	if T.classic then
