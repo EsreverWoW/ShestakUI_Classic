@@ -145,9 +145,9 @@ local function UpdateDebuffAnchors(buttonName, index)
 end
 
 AuraButton_UpdateDuration = function(buff)
-	if not string.find(buff:GetName(), "TempEnchant") then return end
-
 	local name = buff:GetName()
+	if not string.find(name, "TempEnchant") then return end
+
 	local offset, index = 2, 16
 	local weapon = name:sub(-1)
 	if strmatch(weapon, "2") then
