@@ -87,9 +87,29 @@ local function StyleBuffs(buttonName, index)
 	end
 end
 
+local function UpdateDuration(auraButton, timeLeft)
+	local name = auraButton:GetName()
+	if not strmatch(name, "TempEnchant") then return end
+
+	local index = strmatch(name:sub(-1), "2") and 17 or 16
+	local quality = GetInventoryItemQuality("player", index)
+
+	if quality then
+		auraButton:SetBackdropBorderColor(GetItemQualityColor(quality))
+	end
+
+	local duration = auraButton.duration
+	if timeLeft and C.aura.show_timer == true then
+		duration:SetFormattedText(GetFormattedTime(timeLeft))
+		duration:SetVertexColor(1, 1, 1)
+		duration:Show()
+	else
+		duration:Hide()
+	end
+end
+
 local function UpdateBuffAnchors()
-	local buffName = "BuffButton"
-	local enchantName = "TempEnchant"
+	local buttonName = "BuffButton"
 	local previousBuff, aboveBuff
 	local numBuffs = 0
 	local numAuraRows = 0
@@ -97,12 +117,12 @@ local function UpdateBuffAnchors()
 	local mainhand, _, _, _, offhand = GetWeaponEnchantInfo()
 
 	for index = 1, NUM_TEMP_ENCHANT_FRAMES do
-		StyleBuffs(enchantName, index)
+		StyleBuffs("TempEnchant", index)
 	end
 
 	for index = 1, BUFF_ACTUAL_DISPLAY do
-		StyleBuffs(buffName, index)
-		local buff = _G[buffName..index]
+		StyleBuffs(buttonName, index)
+		local buff = _G[buttonName..index]
 		numBuffs = numBuffs + 1
 		index = numBuffs + slack
 		buff:ClearAllPoints()
@@ -115,22 +135,12 @@ local function UpdateBuffAnchors()
 			buff:SetPoint("TOPRIGHT", BuffsAnchor, "TOPRIGHT", 0, 0)
 		else
 			if numBuffs == 1 then
-				if T.classic then
-					if mainhand and offhand then
-						buff:SetPoint("RIGHT", TempEnchant2, "LEFT", -3, 0)
-					elseif ((mainhand and not offhand) or (offhand and not mainhand)) then
-						buff:SetPoint("RIGHT", TempEnchant1, "LEFT", -3, 0)
-					else
-						buff:SetPoint("TOPRIGHT", BuffsAnchor, "TOPRIGHT", 0, 0)
-					end
+				if mainhand and offhand and (T.classic or not UnitHasVehicleUI("player")) then
+					buff:SetPoint("RIGHT", TempEnchant2, "LEFT", -3, 0)
+				elseif ((mainhand and not offhand) or (offhand and not mainhand)) and (T.classic or not UnitHasVehicleUI("player")) then
+					buff:SetPoint("RIGHT", TempEnchant1, "LEFT", -3, 0)
 				else
-					if mainhand and offhand and not UnitHasVehicleUI("player") then
-						buff:SetPoint("RIGHT", TempEnchant2, "LEFT", -3, 0)
-					elseif ((mainhand and not offhand) or (offhand and not mainhand)) and not UnitHasVehicleUI("player") then
-						buff:SetPoint("RIGHT", TempEnchant1, "LEFT", -3, 0)
-					else
-						buff:SetPoint("TOPRIGHT", BuffsAnchor, "TOPRIGHT", 0, 0)
-					end
+					buff:SetPoint("TOPRIGHT", BuffsAnchor, "TOPRIGHT", 0, 0)
 				end
 			else
 				buff:SetPoint("RIGHT", previousBuff, "LEFT", -3, 0)
@@ -144,45 +154,8 @@ local function UpdateDebuffAnchors(buttonName, index)
 	_G[buttonName..index]:Hide()
 end
 
-AuraButton_UpdateDuration = function(buff)
-	local name = buff:GetName()
-	if not string.find(name, "TempEnchant") then return end
-
-	local offset, index = 2, 16
-	local weapon = name:sub(-1)
-	if strmatch(weapon, "2") then
-		offset = 6
-		index = 17
-	end
-
-	local quality = GetInventoryItemQuality("player", index)
-	if quality then
-		buff:SetBackdropBorderColor(GetItemQualityColor(quality))
-	end
-
-	local expirationTime, count = select(offset, GetWeaponEnchantInfo())
-
-	if expirationTime then
-		if count and count > 0 then
-			buff.count:SetText(count)
-		else
-			buff.count:SetText("")
-		end
-		buff.timeLeft = expirationTime / 1e3
-	else
-		buff.timeLeft = nil
-		buff.count:SetText("")
-		buff.duration:SetText("")
-	end
-
-	if buff.timeLeft then
-		buff.duration:SetFormattedText(GetFormattedTime(buff.timeLeft))
-		buff.duration:SetVertexColor(1, 1, 1)
-		buff.duration:Show()
-	else
-		buff.duration:Hide()
-	end
-end
+AuraButton_UpdateDuration = function() end
 
 hooksecurefunc("BuffFrame_UpdateAllBuffAnchors", UpdateBuffAnchors)
 hooksecurefunc("DebuffButton_UpdateAnchors", UpdateDebuffAnchors)
+hooksecurefunc("AuraButton_UpdateDuration", UpdateDuration)
