@@ -22,40 +22,11 @@ local BuffsAnchor = CreateFrame("Frame", "BuffsAnchor", UIParent)
 BuffsAnchor:SetPoint(unpack(C.position.player_buffs))
 BuffsAnchor:SetSize((15 * C.aura.player_buff_size) + 42, (C.aura.player_buff_size * 2) + 3)
 
-for i = 1, NUM_TEMP_ENCHANT_FRAMES do
-	local buff = _G["TempEnchant"..i]
-	local icon = _G["TempEnchant"..i.."Icon"]
-	local border = _G["TempEnchant"..i.."Border"]
-	local duration = _G["TempEnchant"..i.."Duration"]
+TemporaryEnchantFrame:ClearAllPoints()
+TemporaryEnchantFrame:SetPoint("TOPRIGHT", BuffsAnchor, "TOPRIGHT", 0, 0)
 
-	if border then border:Hide() end
-
-	if i ~= 3 then
-		buff:SetTemplate("Default")
-		if C.aura.classcolor_border == true then
-			buff:SetBackdropBorderColor(T.color.r, T.color.g, T.color.b)
-		end
-	end
-
-	buff:SetSize(C.aura.player_buff_size, C.aura.player_buff_size)
-
-	icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-	icon:SetPoint("TOPLEFT", buff, 2, -2)
-	icon:SetPoint("BOTTOMRIGHT", buff, -2, 2)
-	icon:SetDrawLayer("BORDER")
-
-	duration:ClearAllPoints()
-	duration:SetPoint("CENTER", 2, 1)
-	duration:SetDrawLayer("ARTWORK")
-	duration:SetFont(C.font.auras_font, C.font.auras_font_size, C.font.auras_font_style)
-	duration:SetShadowOffset(C.font.auras_font_shadow and 1 or 0, C.font.auras_font_shadow and -1 or 0)
-
-	TemporaryEnchantFrame:ClearAllPoints()
-	TemporaryEnchantFrame:SetPoint("TOPRIGHT", BuffsAnchor, "TOPRIGHT", 0, 0)
-
-	_G["TempEnchant2"]:ClearAllPoints()
-	_G["TempEnchant2"]:SetPoint("RIGHT", _G["TempEnchant1"], "LEFT", -3, 0)
-end
+_G["TempEnchant2"]:ClearAllPoints()
+_G["TempEnchant2"]:SetPoint("RIGHT", _G["TempEnchant1"], "LEFT", -3, 0)
 
 local function StyleBuffs(buttonName, index)
 	local buff = _G[buttonName..index]
@@ -67,9 +38,11 @@ local function StyleBuffs(buttonName, index)
 	if border then border:Hide() end
 
 	if icon and not buff.isSkinned then
-		buff:SetTemplate("Default")
-		if C.aura.classcolor_border == true then
-			buff:SetBackdropBorderColor(T.color.r, T.color.g, T.color.b)
+		if buttonName ~= "TempEnchant" or (buttonName == "TempEnchant" and index ~= 3) then
+			buff:SetTemplate("Default")
+			if C.aura.classcolor_border == true then
+				buff:SetBackdropBorderColor(T.color.r, T.color.g, T.color.b)
+			end
 		end
 
 		buff:SetSize(C.aura.player_buff_size, C.aura.player_buff_size)
@@ -115,16 +88,21 @@ local function StyleBuffs(buttonName, index)
 end
 
 local function UpdateBuffAnchors()
-	local buttonName = "BuffButton"
+	local buffName = "BuffButton"
+	local enchantName = "TempEnchant"
 	local previousBuff, aboveBuff
 	local numBuffs = 0
 	local numAuraRows = 0
 	local slack = BuffFrame.numEnchants
 	local mainhand, _, _, _, offhand = GetWeaponEnchantInfo()
 
+	for index = 1, NUM_TEMP_ENCHANT_FRAMES do
+		StyleBuffs(enchantName, index)
+	end
+
 	for index = 1, BUFF_ACTUAL_DISPLAY do
-		StyleBuffs(buttonName, index)
-		local buff = _G[buttonName..index]
+		StyleBuffs(buffName, index)
+		local buff = _G[buffName..index]
 		numBuffs = numBuffs + 1
 		index = numBuffs + slack
 		buff:ClearAllPoints()
@@ -166,7 +144,45 @@ local function UpdateDebuffAnchors(buttonName, index)
 	_G[buttonName..index]:Hide()
 end
 
-AuraButton_UpdateDuration = function() end
+AuraButton_UpdateDuration = function(buff)
+	if not string.find(buff:GetName(), "TempEnchant") then return end
+
+	local name = buff:GetName()
+	local offset, index = 2, 16
+	local weapon = name:sub(-1)
+	if strmatch(weapon, "2") then
+		offset = 6
+		index = 17
+	end
+
+	local quality = GetInventoryItemQuality("player", index)
+	if quality then
+		buff:SetBackdropBorderColor(GetItemQualityColor(quality))
+	end
+
+	local expirationTime, count = select(offset, GetWeaponEnchantInfo())
+
+	if expirationTime then
+		if count and count > 0 then
+			buff.count:SetText(count)
+		else
+			buff.count:SetText("")
+		end
+		buff.timeLeft = expirationTime / 1e3
+	else
+		buff.timeLeft = nil
+		buff.count:SetText("")
+		buff.duration:SetText("")
+	end
+
+	if buff.timeLeft then
+		buff.duration:SetFormattedText(GetFormattedTime(buff.timeLeft))
+		buff.duration:SetVertexColor(1, 1, 1)
+		buff.duration:Show()
+	else
+		buff.duration:Hide()
+	end
+end
 
 hooksecurefunc("BuffFrame_UpdateAllBuffAnchors", UpdateBuffAnchors)
 hooksecurefunc("DebuffButton_UpdateAnchors", UpdateDebuffAnchors)
