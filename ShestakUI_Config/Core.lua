@@ -1,5 +1,5 @@
+local T, C, L
 local _, ns = ...
-local T, C, L -- loaded in PLAYER_LOGIN
 
 ----------------------------------------------------------------------------------------
 --	GUI for ShestakUI(by Haleth, Solor)

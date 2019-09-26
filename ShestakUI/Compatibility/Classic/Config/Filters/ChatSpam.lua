@@ -1,4 +1,4 @@
-﻿local T, C, L, _ = unpack(select(2, ...))
+local T, C, L, _ = unpack(select(2, ...))
 if not T.classic or C.chat.enable ~= true or C.chat.spam ~= true then return end
 
 T.ChatSpamList = {

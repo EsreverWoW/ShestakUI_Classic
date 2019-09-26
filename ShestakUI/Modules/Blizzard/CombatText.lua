@@ -1,4 +1,4 @@
-﻿local T, C, L, _ = unpack(select(2, ...))
+local T, C, L, _ = unpack(select(2, ...))
 if C.combattext.enable ~= true then return end
 
 ----------------------------------------------------------------------------------------
@@ -18,6 +18,11 @@ if C.combattext.damage or C.combattext.healing then
 	numf = 4
 else
 	numf = 3
+end
+
+-- WoW Classic requies combat text be enabled to display incoming damage
+if T.classic then
+	SetCVar("enableFloatingCombatText", 1)
 end
 
 -- Detect vehicle
@@ -499,14 +504,14 @@ local StartConfigmode = function()
 				f.fs:SetTextColor(1, 1, 0, 0.9)
 			end
 
-			f.t = f:CreateTexture("ARTWORK")
+			f.t = f:CreateTexture(nil, "ARTWORK")
 			f.t:SetPoint("TOPLEFT", f, "TOPLEFT", 1, -1)
 			f.t:SetPoint("TOPRIGHT", f, "TOPRIGHT", -1, -19)
 			f.t:SetHeight(20)
 			f.t:SetColorTexture(0.5, 0.5, 0.5)
 			f.t:SetAlpha(0.3)
 
-			f.d = f:CreateTexture("ARTWORK")
+			f.d = f:CreateTexture(nil, "ARTWORK")
 			f.d:SetHeight(16)
 			f.d:SetWidth(16)
 			f.d:SetPoint("BOTTOMRIGHT", f, "BOTTOMRIGHT", -1, 1)
@@ -687,7 +692,11 @@ SlashCmdList.XCT = function(input)
 		end
 	elseif input == "reset" then
 		for i = 1, #ct.frames do
-			SavedPositions["xCT"..i] = nil
+			local f = "xCT"..i
+			SavedPositions[f] = nil
+			if _G[f] then
+				_G[f]:SetUserPlaced(false)
+			end
 		end
 		ReloadUI()
 	else

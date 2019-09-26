@@ -1,4 +1,4 @@
-﻿local T, C, L, _ = unpack(select(2, ...))
+local T, C, L, _ = unpack(select(2, ...))
 if C.announcements.says_thanks ~= true then return end
 
 ----------------------------------------------------------------------------------------

@@ -119,11 +119,12 @@ local function StyleNormalButton(button)
 
 		UpdateHotkey(button)
 
-		button.isSkinned = true
-	end
+		if _G[name.."FlyoutArrow"] then
+			button.oborder:SetFrameLevel(button:GetFrameLevel())
+			button.iborder:SetFrameLevel(button:GetFrameLevel())
+		end
 
-	if not C.general.auto_scale and not InCombatLockdown() then
-		MultiBarBottomRight:SetScale(MultiBarLeft:GetScale())
+		button.isSkinned = true
 	end
 end
 

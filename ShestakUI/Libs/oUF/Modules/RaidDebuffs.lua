@@ -59,9 +59,13 @@ do
 		},
 		["SHAMAN"] = {
 			["Magic"] = false,
-			["Disease"] = false, -- for Classic
 			["Curse"] = true,
+			["Poison"] = false, -- for Classic
+			["Disease"] = false, -- for Classic
 		},
+		["WARLOCK"] = {
+			["Magic"] = false, -- for Classic
+		}
 	}
 
 	DispellFilter = dispellClasses[T.class] or {}
@@ -69,7 +73,7 @@ end
 
 local function CheckSpec()
 	if not oUF:IsClassic() then
-		local spec = T.classic and T.GetSpecialization() or not T.classic and GetSpecialization()
+		local spec = GetSpecialization()
 		if T.class == "DRUID" then
 			if spec == 4 then
 				DispellFilter.Magic = true
@@ -107,7 +111,10 @@ local function CheckSpec()
 		elseif T.class == "PRIEST" then
 			DispellFilter.Magic = true
 		elseif T.class == "SHAMAN" then
+			DispellFilter.Poison = true
 			DispellFilter.Disease = true
+		elseif T.class == "WARLOCK" then
+			DispellFilter.Magic = true
 		end
 	end
 end

@@ -1,4 +1,4 @@
-﻿local T, C, L, _ = unpack(select(2, ...))
+local T, C, L, _ = unpack(select(2, ...))
 if C.minimap.enable ~= true or C.minimap.toggle_menu ~= true then return end
 
 ----------------------------------------------------------------------------------------
@@ -167,7 +167,7 @@ local defaultframelevel = 0
 
 local function updateTextures(button, checkable)
 	if checkable then
-		local texture = button:CreateTexture(nil, nil, self)
+		local texture = button:CreateTexture()
 		texture:SetColorTexture(1, 1, 1, 0.3)
 		texture:SetPoint("TOPLEFT", button, 2, -2)
 		texture:SetPoint("BOTTOMRIGHT", button, -2, 2)
@@ -384,13 +384,13 @@ local function refreshAddOnMenu()
 			end
 		end
 	end
-	menuwidth = ceil(menusize / 25)
-	menuheight = ceil(menusize / menuwidth)
+	local menuwidth = ceil(menusize / 25)
+	local menuheight = ceil(menusize / menuwidth)
 
 	local lastMenuEntryID = lastMainMenuEntryID
 	menusize = mainmenusize
 	for i = 1, GetNumAddOns() do
-		j = totalmainmenusize + i
+		local j = totalmainmenusize + i
 		local name = GetAddOnInfo(i)
 		addonmenuitems[j]:Hide()
 		if addonInfo[i].is_main or addonInfo[i].parent == i or not addonInfo[addonInfo[i].parent].collapsed then
