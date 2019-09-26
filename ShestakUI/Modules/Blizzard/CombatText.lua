@@ -692,7 +692,11 @@ SlashCmdList.XCT = function(input)
 		end
 	elseif input == "reset" then
 		for i = 1, #ct.frames do
-			SavedPositions["xCT"..i] = nil
+			local f = "xCT"..i
+			SavedPositions[f] = nil
+			if _G[f] then
+				_G[f]:SetUserPlaced(false)
+			end
 		end
 		ReloadUI()
 	else
