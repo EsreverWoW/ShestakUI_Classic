@@ -135,26 +135,29 @@ local function ModifyThreatOnTargetGUID(GUID, targetGUID, ...)
 	end
 end
 
-local onyThreat = function(mob, target)
+local knockAway = function(mob, target)
 	local npcID = ThreatLib:NPCID(mob)
-	if npcID and npcID ~= 10184 then return end
-
-	ModifyThreat(mob, target, 0.75, 0) -- set Onyxia threat *0.75 on Knock Away
+	if npcID and npcID == 10184 then -- Onyxia
+		ModifyThreat(mob, target, 0.75, 0) -- set Onyxia threat *0.75 on Knock Away
+	else -- some other NPC
+		ModifyThreat(mob, target, 0.5, 0) -- set threat *0.5 on Knock Away when done by other NPCs
+	end
 end
 
-local halveThreat = function(mob, target)
-	-- hack to prevent Onyxia threat modifications since spellIDs were removed from CLEU
+local wingBuffet = function(mob, target)
 	local npcID = ThreatLib:NPCID(mob)
+	-- Onyxia's Wing Buffet does not affect threat
 	if npcID and npcID == 10184 then return end
 
 	ModifyThreat(mob, target, 0.5, 0)
 end
 
+local halveThreat = function(mob, target) ModifyThreat(mob, target, 0.5, 0) end
 local threatHalveSpellIDs = {
 	-- Wing Buffet
 	-- We have assumed that all Wing Buffet effects reduce threat by half by default
-	--18500, -- Onyxia, Wing Buffet, recorded combatlog says this spell doesn't actually land on anyone and only exists in SPELL_CAST_START from Onyxia
-	23339, -- Ebonroc, Firemaw, Flamegor, Wing Buffet, needs testing
+	-- 18500, -- Onyxia, Wing Buffet, recorded combatlog says this spell doesn't actually land on anyone and only exists in SPELL_CAST_START from Onyxia
+	-- 23339, -- Ebonroc, Firemaw, Flamegor, Wing Buffet, needs testing (commented out for Classic which requires special handling)
 	29905, -- Shadikith the Glider, Wing Buffet
 	37157, -- Triggered by Phoenix-Hawk ability 37165 called Dive, Wing Buffet
 	37319, -- Phoenix-Hawk Hatchling, Wing Buffet
@@ -167,7 +170,7 @@ local threatHalveSpellIDs = {
 	-- Knock Away
 	-- We have assumed that all Knock Away effects reduce threat by half by default
 	-- 21737, Applies aura to periodically do spellID 25778
-	10101, -- Used by 25 mobs (some are bosses), Knock Away
+	-- 10101, -- Used by 25 mobs (some are bosses), Knock Away (commented out for Classic which requires special handling)
 	11130, -- Gurubashi Berserker, Mekgineer Thermaplugg, Qiraji Champion, Teremus the Devourer, Knock Away
 	18670, -- Used by 8 mobs (some are bosses), Knock Away
 	18813, -- Drillmaster Zurok, Earthen Templar, Shadowmoon Weapon Master, Swamplord Musel'ek, Knock Away
@@ -203,7 +206,8 @@ function ThreatLibNPCModuleCore:OnInitialize()
 	self.ModifyThreatSpells = {}
 
 	-- Necessary for WoW Classic
-	self.ModifyThreatSpells[10101] = onyThreat -- 10101 (instead of 19633) because that's what in the lookup
+	self.ModifyThreatSpells[10101] = knockAway -- special handling for Onyxia vs other NPCs
+	self.ModifyThreatSpells[23339] = wingBuffet -- special handling to prevent threat drops from certain NPCs
 
 	for i = 1, #threatHalveSpellIDs do
 		self.ModifyThreatSpells[threatHalveSpellIDs[i]] = halveThreat
