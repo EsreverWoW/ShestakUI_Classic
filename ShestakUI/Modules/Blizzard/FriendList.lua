@@ -379,7 +379,7 @@ end)
 local FRIENDS_LEVEL_TEMPLATE = FRIENDS_LEVEL_TEMPLATE:gsub("%%d", "%%s")
 FRIENDS_LEVEL_TEMPLATE = FRIENDS_LEVEL_TEMPLATE:gsub("%$d", "%$s")
 local function friendsFrame()
-	local scrollFrame = FriendsFrameFriendsScrollFrame
+	local scrollFrame = T.classic and FriendsFrameFriendsScrollFrame or FriendsListFrameScrollFrame
 	local offset = HybridScrollFrame_GetOffset(scrollFrame)
 	local buttons = scrollFrame.buttons
 
@@ -419,5 +419,9 @@ local function friendsFrame()
 		end
 	end
 end
-hooksecurefunc(FriendsFrameFriendsScrollFrame, "update", friendsFrame)
+if T.classic then
+	hooksecurefunc(FriendsFrameFriendsScrollFrame, "update", friendsFrame)
+else
+	hooksecurefunc(FriendsListFrameScrollFrame, "update", friendsFrame)
+end
 hooksecurefunc("FriendsFrame_UpdateFriends", friendsFrame)

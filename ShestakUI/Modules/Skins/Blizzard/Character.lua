@@ -49,8 +49,8 @@ local function LoadSkin()
 		"SecondaryHandSlot"
 	}
 
-	select(14, _G["CharacterMainHandSlot"]:GetRegions()):Hide()
-	select(14, _G["CharacterSecondaryHandSlot"]:GetRegions()):Hide()
+	select(15, _G["CharacterMainHandSlot"]:GetRegions()):Hide()
+	select(15, _G["CharacterSecondaryHandSlot"]:GetRegions()):Hide()
 
 	for _, i in pairs(slots) do
 		_G["Character"..i.."Frame"]:Hide()
@@ -327,8 +327,8 @@ local function LoadSkin()
 
 	-- Help box
 	T.SkinHelpBox(CharacterFrame.ReputationTabHelpBox)
-	T.SkinHelpBox(PaperDollItemsFrame.HelpTipBox)
-	PaperDollItemsFrame.HelpTipBox.CloseButton.SetPoint = T.dummy
+	--FIXME T.SkinHelpBox(PaperDollItemsFrame.HelpTipBox)
+	-- PaperDollItemsFrame.HelpTipBox.CloseButton.SetPoint = T.dummy
 
 	-- Unit Background Texture
 	CharacterModelFrameBackgroundTopLeft:SetPoint("TOPLEFT", CharacterModelFrame.backdrop, "TOPLEFT", 2, -2)
