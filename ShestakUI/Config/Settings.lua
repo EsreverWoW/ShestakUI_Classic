@@ -489,6 +489,7 @@ C["announcements"] = {
 --	Automation options
 ----------------------------------------------------------------------------------------
 C["automation"] = {
+	["dismount_stand"] = true,					-- Auto dismount/stand
 	["release"] = true,							-- Auto release the spirit in battlegrounds
 	["screenshot"] = false,						-- Take screenshot when player get achievement
 	["solve_artifact"] = true,					-- Auto popup for solve artifact

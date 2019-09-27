@@ -419,6 +419,7 @@ L_GUI_ANNOUNCEMENTS_SAFARI_HAT = "Check Safari Hat when starting Pet Battle"
 -- Automation options
 L_GUI_AUTOMATION = "Automation"
 L_GUI_AUTOMATION_SUBTEXT = "This block contains settings that facilitate the routine."
+L_GUI_AUTOMATION_DISMOUNT_STAND = "Auto dismount/stand"
 L_GUI_AUTOMATION_RELEASE = "Auto release the spirit in battlegrounds"
 L_GUI_AUTOMATION_SCREENSHOT = "Take screenshot when player get achievement"
 L.automation_solve_artifact = "Auto popup for solve artifact"

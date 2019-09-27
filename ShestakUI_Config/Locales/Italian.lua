@@ -398,6 +398,7 @@ L_GUI_ANNOUNCEMENTS_SAFARI_HAT = "Controlla se il Cappello da Safari sia indossa
 -- Automation options
 L_GUI_AUTOMATION = "Automatismi"
 L_GUI_AUTOMATION_SUBTEXT = "This block contains settings that facilitate the routine." -- Need review
+L_GUI_AUTOMATION_DISMOUNT_STAND = "Auto dismount/stand" -- Needs review
 L_GUI_AUTOMATION_RELEASE = "'Auto-risorgi' nei Campi di Battaglia"
 L_GUI_AUTOMATION_SCREENSHOT = "Cattura una schermata quando completi un'impresa"
 L.automation_solve_artifact = "Popup automatico restauro manufatto"

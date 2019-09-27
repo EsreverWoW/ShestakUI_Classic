@@ -398,6 +398,7 @@ L_GUI_ANNOUNCEMENTS_SAFARI_HAT = "Check Safari Hat when starting Pet Battle" -- 
 -- Automation options
 L_GUI_AUTOMATION = "Automation" -- Needs review
 L_GUI_AUTOMATION_SUBTEXT = "This block contains settings that facilitate the routine." -- Need review
+L_GUI_AUTOMATION_DISMOUNT_STAND = "Auto dismount/stand" -- Needs review
 L_GUI_AUTOMATION_RELEASE = "Auto resurrección en los Campos de Batalla" -- Need review
 L_GUI_AUTOMATION_SCREENSHOT = "Tomar una captura de pantalla cuando consigas un logro"
 L.automation_solve_artifact = "Auto popup for solve artifact" -- Needs review

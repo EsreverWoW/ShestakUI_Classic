@@ -1704,8 +1704,11 @@ end
 do
 	local parent = ShestakUIOptionsPanel.automation
 
+	local dismount_stand = ns.CreateCheckBox(parent, "release", L_GUI_AUTOMATION_DISMOUNT_STAND)
+	dismount_stand:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
+
 	local release = ns.CreateCheckBox(parent, "release", L_GUI_AUTOMATION_RELEASE)
-	release:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
+	release:SetPoint("TOPLEFT", dismount_stand, "BOTTOMLEFT", 0, 0)
 
 	local screenshot = ns.CreateCheckBox(parent, "screenshot", L_GUI_AUTOMATION_SCREENSHOT)
 	screenshot:SetPoint("TOPLEFT", release, "BOTTOMLEFT", 0, 0)
@@ -1760,8 +1763,14 @@ do
 		auto_role
 	}
 
+	local retail = {
+		dismount_stand,
+	}
+
 	if IsClassicBuild() then
 		HideOptions(classic)
+	else
+		HideOptions(retail)
 	end
 end
 

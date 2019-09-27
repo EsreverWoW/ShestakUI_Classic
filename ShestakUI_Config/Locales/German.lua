@@ -398,6 +398,7 @@ L_GUI_ANNOUNCEMENTS_SAFARI_HAT = "Überprüfe Safari Hat"
 -- Automation options
 L_GUI_AUTOMATION = "Automatisierung"
 L_GUI_AUTOMATION_SUBTEXT = "This block contains settings that facilitate the routine." -- Need review
+L_GUI_AUTOMATION_DISMOUNT_STAND = "Auto dismount/stand" -- Needs review
 L_GUI_AUTOMATION_RELEASE = "Automatisch im Schlachtfeld wiederbeleben"
 L_GUI_AUTOMATION_SCREENSHOT = "Speicher einen Screenshot wenn ein Achivment errungen wird"
 L.automation_solve_artifact = "Auto Popup für gelöste Artefakte"

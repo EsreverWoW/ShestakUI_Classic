@@ -398,6 +398,7 @@ L_GUI_ANNOUNCEMENTS_SAFARI_HAT = "檢查'狩旅團之帽'使用情況"
 -- Automation options
 L_GUI_AUTOMATION = "自動設定"
 L_GUI_AUTOMATION_SUBTEXT = "一些自動化的設置"
+L_GUI_AUTOMATION_DISMOUNT_STAND = "Auto dismount/stand" -- Needs review
 L_GUI_AUTOMATION_RELEASE = "戰場中自動釋放靈魂"
 L_GUI_AUTOMATION_SCREENSHOT = "獲得成就時自動截屏"
 L.automation_solve_artifact = "自動辨識考古文物"

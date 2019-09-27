@@ -397,6 +397,7 @@ L_GUI_ANNOUNCEMENTS_SAFARI_HAT = "Проверять Шляпу для сафа�
 -- Automation options
 L_GUI_AUTOMATION = "Автоматизация"
 L_GUI_AUTOMATION_SUBTEXT = "В этом блоке расположены настройки, которые облегчают рутину."
+L_GUI_AUTOMATION_DISMOUNT_STAND = "Auto dismount/stand" -- Needs review
 L_GUI_AUTOMATION_RELEASE = "Покидать тело на полях боя"
 L_GUI_AUTOMATION_SCREENSHOT = "Сохранять скриншот, если получено достижение"
 L.automation_solve_artifact = "Предлагать собрать артефакт для Археологии"
