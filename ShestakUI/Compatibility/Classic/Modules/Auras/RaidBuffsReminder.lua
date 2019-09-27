@@ -94,7 +94,7 @@ local function CheckElixir()
 end
 
 local function CheckBuff(list, frame, n)
-	-- if list and list[1] then
+	if list and list[1] then
 		for i, list in pairs(list) do
 			local name, _, icon = GetSpellInfo(list)
 			if i == 1 then
@@ -109,7 +109,7 @@ local function CheckBuff(list, frame, n)
 				isPresent[n] = false
 			end
 		end
-	-- end	
+	end	
 end
 
 -- Main Script
@@ -126,10 +126,7 @@ local function OnAuraChange(self, event, unit)
 	-- Start checking buffs to see if we can find a match from the list
 	CheckElixir()
 
-	if foodBuffs and foodBuffs[1] then
-		CheckBuff(foodBuffs, FoodFrame, "food")
-	end
-
+	CheckBuff(foodBuffs, FoodFrame, "food")
 	CheckBuff(spell3Buffs, Spell3Frame, "spell3")
 	CheckBuff(spell4Buffs, Spell4Frame, "spell4")
 	CheckBuff(spell5Buffs, Spell5Frame, "spell5")
