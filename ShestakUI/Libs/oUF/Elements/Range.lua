@@ -4,7 +4,7 @@ local oUF = ns.oUF
 local _FRAMES = {}
 local OnRangeFrame
 
-local UnitInRange, UnitIsConnected = UnitInRange, UnitIsConnected
+local UnitInRange, UnitIsConnected, CheckInteractDistance = UnitInRange, UnitIsConnected, CheckInteractDistance
 
 local function Update(self, event)
 	local element = self.Range
@@ -22,8 +22,12 @@ local function Update(self, event)
 	local inRange, checkedRange
 	local connected = UnitIsConnected(unit)
 	if(connected) then
-		inRange, checkedRange = UnitInRange(unit)
-		if(checkedRange and not inRange) then
+		if(not oUF:IsClassic()) then
+			inRange, checkedRange = UnitInRange(unit)
+		else
+			inRange = CheckInteractDistance(unit, 4)
+		end
+		if((not oUF:IsClassic() and checkedRange and not inRange) or (not inRange)) then
 			self:SetAlpha(element.outsideAlpha)
 		else
 			self:SetAlpha(element.insideAlpha)
