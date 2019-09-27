@@ -523,6 +523,10 @@ C["reminder"] = {
 	["raid_buffs_alpha"] = 0,					-- Transparent icons when the buff is present
 }
 
+if T.classic then
+	C["reminder"]["raid_buffs_size"] = 16
+end
+
 ----------------------------------------------------------------------------------------
 --	Raid cooldowns options
 ----------------------------------------------------------------------------------------

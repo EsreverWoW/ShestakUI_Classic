@@ -153,6 +153,8 @@
 	<Script file="Modules\Announcements\SayThanks.lua"/>
 	<Script file="Modules\Announcements\Spells.lua"/>
 
+	<Script file="Compatibility\Classic\Modules\Auras\RaidBuffsReminder.lua"/>
+
 	<Script file="Modules\Auras\AuraSource.lua"/>
 	<Script file="Modules\Auras\BuffFrame.lua"/>
 	<Script file="Modules\Auras\Filger.lua"/>
