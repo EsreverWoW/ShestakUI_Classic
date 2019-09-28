@@ -3,26 +3,12 @@ local T, C, L, _ = unpack(select(2, ...))
 ----------------------------------------------------------------------------------------
 --	Announce Feasts/Souls/Repair Bots/Portals/Ritual of Summoning
 ----------------------------------------------------------------------------------------
--- temporary
-local classicLookup = T.classic and {
-	[GetSpellInfo(698)] = 698,			-- Ritual of Summoning
-	[GetSpellInfo(18400)] = 18400,		-- Piccolo of the Flaming Fire
-	[GetSpellInfo(22700)] = 22700,		-- Field Repair Bot 74A
-	[GetSpellInfo(10059)] = 10059,		-- Portal: Stormwind
-	[GetSpellInfo(11416)] = 11416,		-- Portal: Ironforge
-	[GetSpellInfo(11419)] = 11419,		-- Portal: Darnassus
-	[GetSpellInfo(11417)] = 11417,		-- Portal: Orgrimmar
-	[GetSpellInfo(11420)] = 11420,		-- Portal: Thunder Bluff
-	[GetSpellInfo(11418)] = 11418,		-- Portal: Undercity
-	[GetSpellInfo(28148)] = 28148,		-- Portal: Karazhan
-}
-
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 frame:SetScript("OnEvent", function(self)
 	local _, subEvent, _, _, srcName, _, _, _, destName, _, _, spellID, spellName = CombatLogGetCurrentEventInfo()
-	if T.classic and spellID == 0 then
-		spellID = classicLookup[spellName]
+	if T.classic then
+		spellID = T.GetSpellID(spellName)
 	end
 	if not IsInGroup() or InCombatLockdown() or not subEvent or not spellID or not srcName then return end
 	if not UnitInRaid(srcName) and not UnitInParty(srcName) then return end

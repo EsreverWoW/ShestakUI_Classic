@@ -4,20 +4,12 @@ if C.announcements.spells ~= true then return end
 ----------------------------------------------------------------------------------------
 --	Announce some spells
 ----------------------------------------------------------------------------------------
--- temporary
-local classicLookup = T.classic and {
-	[GetSpellInfo(20484)] = 20484,		-- Rebirth
-	[GetSpellInfo(20707)] = 20707,		-- Soulstone
-	[GetSpellInfo(633)] = 633,			-- Lay on Hands
-	[GetSpellInfo(19801)] = 19801,		-- Tranquilizing Shot
-}
-
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 frame:SetScript("OnEvent", function(self)
 	local _, event, _, sourceGUID, sourceName, _, _, _, destName, _, _, spellID, spellName = CombatLogGetCurrentEventInfo()
-	if T.classic and spellID == 0 then
-		spellID = classicLookup[spellName]
+	if T.classic then
+		spellID = T.GetSpellID(spellName)
 	end
 	local spells = T.AnnounceSpells
 	local _, _, difficultyID = GetInstanceInfo()

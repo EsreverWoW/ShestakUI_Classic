@@ -147,8 +147,8 @@ function frame:COMBAT_LOG_EVENT_UNFILTERED()
 	local _, eventType, _, _, _, sourceFlags, _, _, _, _, _, spellID, spellName = CombatLogGetCurrentEventInfo()
 	if eventType == "SPELL_CAST_SUCCESS" then
 		if (bit.band(sourceFlags, COMBATLOG_OBJECT_TYPE_PET) == COMBATLOG_OBJECT_TYPE_PET and bit.band(sourceFlags, COMBATLOG_OBJECT_AFFILIATION_MINE) == COMBATLOG_OBJECT_AFFILIATION_MINE) then
-			if spellID == 0 and spellName then
-				spellID = select(7, GetSpellInfo(spellName))
+			if T.classic then
+				spellID = T.GetSpellID(spellName)
 			end
 			local name = GetSpellInfo(spellID)
 			local index = GetPetActionIndexByName(name)

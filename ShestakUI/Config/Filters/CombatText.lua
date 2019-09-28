@@ -186,6 +186,11 @@ elseif T.class == "DRUID" then
 		T.aoespam[124991] = 3		-- Nature's Vigil
 		T.aoespam[202347] = 3		-- Stellar Flare
 		T.aoespam[155625] = 3		-- Moonfire (Cat Form)
+
+		if T.classic then
+			T.aoespam[779] = 0			-- Swipe (Classic)
+			T.aoespam[8921] = 3			-- Moonfire (Classic)
+		end
 	end
 	if C.combattext.healing then
 		T.healfilter[145109] = true	-- Ysera's Gift (Self)
@@ -256,9 +261,18 @@ elseif T.class == "HUNTER" then
 		T.aoespam[136] = 9			-- Mend Pet
 		T.merge[214303] = 136		-- Mend Pet (Hati)
 		T.aoespam[197161] = 8		-- Mimiron's Shell Heal
+
+		if T.classic then
+			T.aoespam[1978] = 3			-- Serpent Sting (Classic)
+			T.aoespam[1510] = 1			-- Volley (Classic)
+		end
 	end
 	if C.combattext.healing then
 		T.healfilter[197205] = true	-- Spirit Bond
+
+		if T.classic then
+			T.healfilter[19579] = true	-- Spirit Bond (Classic)
+		end
 	end
 elseif T.class == "MAGE" then
 	if C.combattext.merge_aoe_spam then
@@ -312,6 +326,11 @@ elseif T.class == "MAGE" then
 		T.aoespam[211076] = 3		-- Mark of Aluneth
 		T.merge[210817] = 44425		-- Arcane Rebound
 		T.aoespam[44425] = 1.2		-- Arcane Barrage
+
+		if T.classic then
+			T.aoespam[10] = 3		-- Blizzard (Classic)
+			T.aoespam[11113] = 0	-- Blast Wave (Classic)
+		end
 	end
 elseif T.class == "MONK" then
 	if C.combattext.merge_aoe_spam then
@@ -360,7 +379,7 @@ elseif T.class == "PALADIN" then
 		T.aoespam[119952] = 3		-- Arcing Light
 		T.aoespam[144581] = 3		-- Blessing of the Guardians (T16)
 		T.aoespam[210291] = 6		-- Aura of Mercy
-		T.aoespam[183811] = 6		-- Judgment of Light
+		T.aoespam[183811] = 6		-- Judgement of Light
 		T.aoespam[225311] = 1		-- Light of Dawn
 		-- Damaging spells
 		T.aoespam[53600] = 0.5		-- Shield of the Righteous
@@ -385,6 +404,11 @@ elseif T.class == "PALADIN" then
 		T.aoespam[20271] = 1		-- Judgment
 		T.merge[228288] = 20271		-- Judgment Retribution
 		T.aoespam[217020] = 1		-- Zeal
+
+		if T.classic then
+			T.aoespam[20267] = 6		-- Judgement of Light (Classic)
+			T.aoespam[26573] = 3		-- Consecration (Classic)
+		end
 	end
 elseif T.class == "PRIEST" then
 	if C.combattext.merge_aoe_spam then
@@ -427,6 +451,11 @@ elseif T.class == "PRIEST" then
 		T.aoespam[120696] = 3		-- Halo
 		T.aoespam[122128] = 3		-- Divine Star
 		T.aoespam[148859] = 3		-- Shadowy Apparition
+
+		if T.classic then
+			T.aoespam[23455] = 0		-- Holy Nova (Classic - Heal)
+			T.aoespam[15237] = 0		-- Holy Nova (Classic - Damage)
+		end
 	end
 	if C.combattext.healing then
 		T.healfilter[34914] = true	-- Vampiric Touch
@@ -522,6 +551,12 @@ elseif T.class == "SHAMAN" then
 		T.aoespam[210854] = 4		-- Hailstorm
 		T.aoespam[187874] = 1		-- Crash Lightning
 		T.aoespam[195592] = 1		-- Crash Lightning
+
+		if T.classic then
+			T.aoespam[5672] = 5		-- Healing Stream (Classic)
+			T.aoespam[8050] = 4		-- Flame Shock (Classic)
+			T.aoespam[17364] = 0	-- Stormstrike (Classic)
+		end
 	end
 elseif T.class == "WARLOCK" then
 	if C.combattext.merge_aoe_spam then
@@ -568,6 +603,13 @@ elseif T.class == "WARLOCK" then
 		T.aoespam[6262] = 3			-- Healthstone
 		T.aoespam[3716] = 3			-- Torment (Voidwalker)
 		T.merge[157736] = 348		-- Immolate (DoT)
+
+		if T.classic then
+			T.aoespam[172] = 3		-- Corruption (Classic)
+			T.aoespam[18265] = 3	-- Siphon Life (Classic)
+			T.aoespam[5740] = 3		-- Rain of Fire (Classic)
+			T.aoespam[1949] = 3		-- Hellfire (Classic)
+		end
 	end
 	if C.combattext.healing then
 		T.healfilter[198590] = true	-- Drain Soul
@@ -575,6 +617,10 @@ elseif T.class == "WARLOCK" then
 		T.healfilter[205179] = true	-- Phantom Singularity
 		T.healfilter[63106] = true	-- Siphon Life
 		T.healfilter[108359] = true	-- Dark Regeneration
+
+		if T.classic then
+			T.healfilter[18265] = true	-- Siphon Life (Classic)
+		end
 	end
 elseif T.class == "WARRIOR" then
 	if C.combattext.merge_aoe_spam then
@@ -613,8 +659,18 @@ elseif T.class == "WARRIOR" then
 		T.merge[85384] = 96103		-- Raging Blow Off-Hand
 		T.merge[95738] = 50622		-- Bladestorm Off-Hand
 		T.merge[163558] = 280849		-- Execute Off-Hand
+
+		if T.classic then
+			T.aoespam[5308] = 0.5		-- Execute (Classic)
+			T.aoespam[12162] = 3		-- Deep Wounds (Classic)
+			T.aoespam[1680] = 1.5		-- Whirlwind (Classic)
+		end
 	end
 	if C.combattext.healing then
 		T.healfilter[117313] = true	-- Bloodthirst Heal
+
+		if T.classic then
+			T.healfilter[23880] = true	-- Bloodthirst (Classic)
+		end
 	end
 end

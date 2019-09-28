@@ -117,9 +117,13 @@ local eventRegistered = {
 local function CombatLogCheck(self)
 	local _, instanceType = IsInInstance()
 	if instanceType ~= "arena" then return end
-	local _, eventType, _, _, _, _, _, destGUID, _, _, _, spellID, _, _, auraType = CombatLogGetCurrentEventInfo()
+	local _, eventType, _, _, _, _, _, destGUID, _, _, _, spellID, spellName, _, auraType = CombatLogGetCurrentEventInfo()
 	if not eventRegistered[eventType] then return end
 	if destGUID ~= UnitGUID(self.target) then return end
+
+	if T.classic then
+		spellID = T.GetSpellID(spellName)
+	end
 
 	local needupdate = false
 	if eventType == "SPELL_AURA_APPLIED" then

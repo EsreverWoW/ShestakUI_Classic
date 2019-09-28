@@ -821,8 +821,8 @@ if C.combattext.damage then
 			elseif eventType == "RANGE_DAMAGE" then
 				local spellId, spellName, _, amount, _, _, _, _, _, critical = select(12, CombatLogGetCurrentEventInfo())
 				if amount >= C.combattext.treshold then
-					if spellId == 0  and spellName then
-						spellId = select(7, GetSpellInfo(spellName))
+					if T.classic then
+						spellId = T.GetSpellID(spellName)
 					end
 					local rawamount = amount
 					if C.combattext.short_numbers == true then
@@ -832,7 +832,11 @@ if C.combattext.damage then
 						amount = "|cffFF0000"..C.combattext.crit_prefix.."|r"..amount.."|cffFF0000"..C.combattext.crit_postfix.."|r"
 					end
 					if C.combattext.icons then
-						icon = GetSpellTexture(spellId) or ""
+						if spellId and spellId ~= 0 then
+							icon = GetSpellTexture(spellId)
+						else
+							icon = ""
+						end
 						msg = " \124T"..icon..":"..C.combattext.icon_size..":"..C.combattext.icon_size..":0:0:64:64:5:59:5:59\124t"
 					end
 					if C.combattext.merge_aoe_spam then
@@ -854,8 +858,8 @@ if C.combattext.damage then
 			elseif eventType == "SPELL_DAMAGE" or (eventType == "SPELL_PERIODIC_DAMAGE" and C.combattext.dot_damage) then
 				local spellId, spellName, spellSchool, amount, _, _, _, _, _, critical = select(12, CombatLogGetCurrentEventInfo())
 				if amount >= C.combattext.treshold then
-					if spellId == 0  and spellName then
-						spellId = select(7, GetSpellInfo(spellName))
+					if T.classic then
+						spellId = T.GetSpellID(spellName)
 					end
 					local color = {}
 					local rawamount = amount
@@ -866,7 +870,11 @@ if C.combattext.damage then
 						amount = "|cffFF0000"..C.combattext.crit_prefix.."|r"..amount.."|cffFF0000"..C.combattext.crit_postfix.."|r"
 					end
 					if C.combattext.icons then
-						icon = GetSpellTexture(spellId) or ""
+						if spellId and spellId ~= 0 then
+							icon = GetSpellTexture(spellId)
+						else
+							icon = ""
+						end
 					end
 					if C.combattext.damage_color then
 						if ct.dmgcolor[spellSchool] then
@@ -919,9 +927,16 @@ if C.combattext.damage then
 				xCT4:AddMessage(missType)
 			elseif eventType == "SPELL_MISSED" or eventType == "RANGE_MISSED" then
 				local spellId, spellName, _, missType = select(12, CombatLogGetCurrentEventInfo())
+				if T.classic then
+					spellId = T.GetSpellID(spellName)
+				end
 				if missType == "IMMUNE" and spellId == 118895 then return end
 				if C.combattext.icons then
-					icon = GetSpellTexture(spellId) or GetSpellTexture(spellName) or ""
+					if spellId and spellId ~= 0 then
+						icon = GetSpellTexture(spellId)
+					else
+						icon = ""
+					end
 					missType = misstypes[missType].." \124T"..icon..":"..C.combattext.icon_size..":"..C.combattext.icon_size..":0:0:64:64:5:59:5:59\124t"
 				else
 					missType = misstypes[missType]
@@ -929,9 +944,16 @@ if C.combattext.damage then
 				xCT4:AddMessage(missType)
 			elseif eventType == "SPELL_DISPEL" and C.combattext.dispel then
 				local id, effect, _, etype = select(15, CombatLogGetCurrentEventInfo())
+				if T.classic then
+					id = T.GetSpellID(effect)
+				end
 				local color
 				if C.combattext.icons then
-					icon = GetSpellTexture(id) or ""
+					if id and id ~= 0 then
+						icon = GetSpellTexture(id)
+					else
+						icon = ""
+					end
 				end
 				if icon then
 					msg = " \124T"..icon..":"..C.combattext.icon_size..":"..C.combattext.icon_size..":0:0:64:64:5:59:5:59\124t"
@@ -948,9 +970,16 @@ if C.combattext.damage then
 				xCT3:AddMessage(ACTION_SPELL_DISPEL..": "..effect..msg, unpack(color))
 			elseif eventType == "SPELL_STOLEN" and C.combattext.dispel then
 				local id, effect = select(15, CombatLogGetCurrentEventInfo())
+				if T.classic then
+					id = T.GetSpellID(effect)
+				end
 				local color = {1, 0.5, 0}
 				if C.combattext.icons then
-					icon = GetSpellTexture(id) or ""
+					if id and id ~= 0 then
+						icon = GetSpellTexture(id)
+					else
+						icon = ""
+					end
 				end
 				if icon then
 					msg = " \124T"..icon..":"..C.combattext.icon_size..":"..C.combattext.icon_size..":0:0:64:64:5:59:5:59\124t"
@@ -962,9 +991,16 @@ if C.combattext.damage then
 				xCT3:AddMessage(ACTION_SPELL_STOLEN..": "..effect..msg, unpack(color))
 			elseif eventType == "SPELL_INTERRUPT" and C.combattext.interrupt then
 				local id, effect = select(15, CombatLogGetCurrentEventInfo())
+				if T.classic then
+					id = T.GetSpellID(effect)
+				end
 				local color = {1, 0.5, 0}
 				if C.combattext.icons then
-					icon = GetSpellTexture(id) or ""
+					if id and id ~= 0 then
+						icon = GetSpellTexture(id)
+					else
+						icon = ""
+					end
 				end
 				if icon then
 					msg = " \124T"..icon..":"..C.combattext.icon_size..":"..C.combattext.icon_size..":0:0:64:64:5:59:5:59\124t"
@@ -1000,8 +1036,8 @@ if C.combattext.healing then
 			if eventType == "SPELL_HEAL" or (eventType == "SPELL_PERIODIC_HEAL" and C.combattext.show_hots) then
 				if C.combattext.healing then
 					local spellId, spellName, _, amount, overhealing, _, critical = select(12, CombatLogGetCurrentEventInfo())
-					if spellId == 0  and spellName then
-						spellId = select(7, GetSpellInfo(spellName))
+					if T.classic then
+						spellId = T.GetSpellID(spellName)
 					end
 					if T.healfilter[spellId] then
 						return
@@ -1028,7 +1064,11 @@ if C.combattext.healing then
 							color = {0.1, 0.65, 0.1}
 						end
 						if C.combattext.icons then
-							icon = GetSpellTexture(spellId) or ""
+							if spellId and spellId ~= 0 then
+								icon = GetSpellTexture(spellId)
+							else
+								icon = ""
+							end
 						else
 							msg = ""
 						end
