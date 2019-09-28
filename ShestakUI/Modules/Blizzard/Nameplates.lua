@@ -717,7 +717,9 @@ local function style(self, unit)
 		self.Health:RegisterEvent("UNIT_THREAT_SITUATION_UPDATE")
 		self.Health:RegisterEvent("UNIT_THREAT_LIST_UPDATE")
 	elseif ThreatLib then
-		self.Health:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
+		if not UnitIsPlayer(unit) and not UnitIsFriend("player", unit) then
+			self.Health:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
+		end
 		ThreatLib.RegisterCallback(self.Health, "ThreatUpdated", ThreatLibCallback)
 	end
 
