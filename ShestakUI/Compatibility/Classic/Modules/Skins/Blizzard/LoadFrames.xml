@@ -17,7 +17,6 @@
 	<Script file="PetStable.lua"/>
 	<Script file="Quest.lua"/>
 	<Script file="QuestLog.lua"/>
-	<Script file="RaidInfo.lua"/>
 	<Script file="SpellBook.lua"/>
 	<Script file="Tabard.lua"/>
 	<Script file="Talent.lua"/>

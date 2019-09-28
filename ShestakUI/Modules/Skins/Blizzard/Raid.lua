@@ -24,6 +24,10 @@ local function LoadSkin()
 		_G["RaidGroupButton"..i]:SkinButton(true)
 	end
 
+	if T.classic then
+		_G["RaidFrameReadyCheckButton"]:SkinButton()
+	end
+
 	for i = 1, 8 do
 		for j = 1, 5 do
 			_G["RaidGroup"..i.."Slot"..j]:StripTextures()
