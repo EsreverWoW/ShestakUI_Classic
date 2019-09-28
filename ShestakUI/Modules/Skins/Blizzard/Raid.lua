@@ -20,8 +20,10 @@ local function LoadSkin()
 		_G[object]:StripTextures()
 	end
 
-	for i = 1, MAX_RAID_GROUPS * 5 do
-		_G["RaidGroupButton"..i]:SkinButton(true)
+	if not T.classic then -- taint issue
+		for i = 1, MAX_RAID_GROUPS * 5 do
+			_G["RaidGroupButton"..i]:SkinButton(true)
+		end
 	end
 
 	if T.classic then
