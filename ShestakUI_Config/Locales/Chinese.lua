@@ -97,6 +97,7 @@ L_GUI_UF_PORTRAIT_HEIGHT = "头像高度"
 L_GUI_UF_PORTRAIT_WIDTH = "头像宽度"
 L_GUI_UF_SUBHEADER_PLUGINS = "辅助功能"
 L_GUI_UF_PLUGINS_GCD = "公共CD计时条"
+L_GUI_UF_PLUGINS_ENERGY_TICKER = "Enable energy ticker" -- Needs review
 L_GUI_UF_PLUGINS_SWING = "普通攻击计时条"
 L.unitframe_plugins_reputation_bar = "声望条"
 L.unitframe_plugins_reputation_bar_desc = "声望条(玩家框架左侧鼠标悬停显示，中键锁定显示。)"

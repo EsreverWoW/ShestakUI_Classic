@@ -97,6 +97,7 @@ L_GUI_UF_PORTRAIT_HEIGHT = "Hauteur des portraits"
 L_GUI_UF_PORTRAIT_WIDTH = "Largeur des portraits"
 L_GUI_UF_SUBHEADER_PLUGINS = "Plugins" -- Need review
 L_GUI_UF_PLUGINS_GCD = "Scintillement du GCD"
+L_GUI_UF_PLUGINS_ENERGY_TICKER = "Enable energy ticker" -- Needs review
 L_GUI_UF_PLUGINS_SWING = "Barre d'attaque automatique / tir automatique"
 L.unitframe_plugins_reputation_bar = "Reputation bar" -- Need review
 L.unitframe_plugins_reputation_bar_desc = "Barre de réputation" -- Need review
