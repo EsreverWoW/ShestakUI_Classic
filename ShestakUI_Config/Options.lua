@@ -240,7 +240,7 @@ do
 	uiscale:HookScript("OnShow", toggleUIScaleOptions)
 
 	local subheader = ns.addSubCategory(parent, L.general_subheader_font_style)
-	subheader:SetPoint("TOPLEFT", uiscale, "BOTTOMLEFT", 0, 0)
+	subheader:SetPoint("TOPLEFT", uiscale, "BOTTOMLEFT", 0, -12)
 
 	local PixelFontButton = CreateFrame("Button", nil, parent, "UIPanelButtonTemplate")
 	PixelFontButton:SetSize(180, 23)
