@@ -9,86 +9,175 @@ if not T.classic then return end
 if C.reminder.raid_buffs_enable == true or C.announcements.flask_food == true then
 	T.ReminderBuffs = {
 		Flask = {
-			17627,	-- Flask of Distilled Wisdom (+2000 Mana)
 			17628,	-- Flask of Supreme Power (+150 Spell Damage)
+			17627,	-- Flask of Distilled Wisdom (+2000 Mana)
 			17629,	-- Flask of Chromatic Resistance (+25 Magic Resistance)
 			17626,	-- Flask of the Titans (+400 Health)
 		},
-		BattleElixir = {
-			11406,	-- Elixir of Demonslaying (+265 Attack Power to Demons)
-			17539,	-- Greater Arcane Elixir (+35 Spell Damage)
+		Other = {
+			Agility = {
+				11334,	-- Elixir of Greater Agility (+25 Agility)
+				17538,	-- Elixir of the Mongoose (+25 Agility / +2% Crit Chance)
+			},
+			Alcohol = {
+				25804,	-- Rumsey Rum Black Label (+15 Stamina)
+				22789,	-- Gordok Green Grog (+10 Stamina)
+				22790,	-- Kreeg's Stout Beatdown (+25 Spirit / -5 Intellect)
+			},
+			AP = {
+				16329,	-- Juju Might (+40 Attack Power)
+				17038,	-- Winterfall Firewater (+35 Attack Power)
+			},
+			BlastedLands = {
+				10667,	-- R.O.I.D.S. (+25 Strength)
+				10668,	-- Lung Juice Cocktail (+25 Stamina)
+				10669,	-- Ground Scorpok Assay (+25 Agility)
+				10692,	-- Cerebral Cortex Compound (+25 Intellect)
+				10693,	-- Gizzard Gum (+25 Spirit)
+			},
+			SpellDamage = {
+				17539,	-- Greater Arcane Elixir (+35 Spell Damage)
+				11474,	-- Elixir of Shadow Power (+40 Shadow Spell Damage)
+				26276,	-- Elixir of Greater Firepower (+40 Fire Spell Damage)
+				21920,	-- Elixir of Frost Power (+15 Frost Spell Damage)
+			},
+			Strength = {
+				16323,	-- Juju Power (+30 Strength)
+				11405,	-- Elixir of Giants (+25 Strength)
+			},
+			Tanking = {
+				-- Armor
+				11348,	-- Elixir of Superior Defense (+450 Armor)
+				11349,	-- Elixir of Greater Defense (+250 Armor)
 
-		},
-		GuardianElixir = {
-			--spellID,	-- Spell name
+				-- Gift of Arthas
+				11371,	-- Gift of Arthas (+10 Shadow Resistance / Disease Proc)
+
+				-- Health
+				3593,	-- Elixir of Fortitude (+120 Health)
+
+				-- Health Regeneration
+				-- 24361,	-- Major Troll's Blood Potion (+20 Hp5)
+				-- 3223,	-- Mighty Troll's Blood Potion (+12 Hp5)
+			},
+			Zanzas = {
+				24382,	-- Spirit of Zanza (+50 Spirit / +50 Stamina)
+				24383,	-- Swiftness of Zanza (+20% Run Speed)
+				24417,	-- Sheen of Zanza (+3% Spell Reflect Chance)
+			},
+			Resistance = {
+				16325,	-- Juju Chill
+				16326,	-- Juju Ember
+			},
+			Misc = {
+				-- Demonslaying
+				11406,	-- Elixir of Demonslaying (+265 Attack Power to Demons)
+
+				-- Mana Regeneration
+				24363,	-- Mageblood Potion (+12 Mp5)
+			},
 		},
 		Food = {
+			24799,	-- Well Fed (+20 Strength) [Smoked Desert Dumplings]
+			-- 18194,	-- Mana Regeneration (+8 Mp5) [Nightfin Soup]
 			15852,	-- Dragonbreath Chili (Special) [Dragonbreath Chili]
+			18125,	-- Blessed Sunfruit (+10 Strength) [Blessed Sunfruit]
+			18192,	-- Increased Agility (+10 Agility) [Grilled Squid]
+			18141,	-- Blessed Sunfruit Juice (+10 Spirit) [Blessed Sunfruit Juice]
 			22730,	-- Increased Intellect (+10 Intellect) [Runn Tum Tuber Surprise]
-			24799,	-- Well Fed (+20 Strength) [Helboar Bacon / Smoked Desert Dumplings]
 			25661,	-- Increased Stamina (+25 Stamina) [Dirge's Kickin' Chimaerok Chops]
 		},
-		PetFood = {
+		Alliance = {
+			Mp5 = {
+				25894,	-- Greater Blessing of Wisdom
+				19742,	-- Blessing of Wisdom
+			},
+			Physical = {
+				25782,	-- Greater Blessing of Might
+				19740,	-- Blessing of Might
+			},
+			Threat = {
+				25895,	-- Greater Blessing of Salvation
+				1038,	-- Blessing of Salvation
+			},
 		},
-		Kings = {
-			20217,	-- Blessing of Kings
-			25898,	-- Greater Blessing of Kings
+		Horde = {
+			Mp5 = {
+				5677,	-- Mana Spring
+			},
+			Physical = {
+				8076,	-- Strength of Earth
+				8072,	-- Stoneskin
+				8836,	-- Grace of Air
+			},
+			
+			Threat = {
+				25909	-- Tranquil Air
+			},
 		},
-		Mark = {
-			1126,	-- Mark of the Wild
-			21849,	-- Gift of the Wild
-		},
-		Fortitude = {
-			1243,	-- Power Word: Fortitude
-			21562,	-- Prayer of Fortitude
-		},
-		Spirit = {
-			14752,	-- Divine Spirit
-			27681,	-- Prayer of Spirit
-		},
-		Sanctuary = {
-			20911,	-- Blessing of Sanctuary
-			25899,	-- Greater Blessing of Sanctuary
-		},
-		Salvation = {
-			1038,	-- Blessing of Salvation
-			25895,	-- Greater Blessing of Salvation
-		},
-		Might = {
-			19740,	-- Blessing of Might
-			25782,	-- Greater Blessing of Might
+		AP = {
+			6673,	-- Battle Shout
 		},
 		Intellect = {
-			1459,	-- Arcane Intellect
 			23028,	-- Arcane Brilliance
+			1459,	-- Arcane Intellect
 		},
-		Wisdom = {
-			19742,	-- Blessing of Wisdom
-			25894,	-- Greater Blessing of Wisdom
+		Kings = {
+			25898,	-- Greater Blessing of Kings
+			20217,	-- Blessing of Kings
+		},
+		Mark = {
+			21849,	-- Gift of the Wild
+			1126,	-- Mark of the Wild
+		},
+		Spirit = {
+			27681,	-- Prayer of Spirit
+			14752,	-- Divine Spirit
 		},
 		Stamina = {
-			-- 21562,	-- Power Word: Fortitude
-			-- 264764,	-- War-Scroll of Fortitude
+			21562,	-- Prayer of Fortitude
+			1243,	-- Power Word: Fortitude
 		},
 		Custom = {
 			-- spellID,	-- Spell name
-		}
+		},
 	}
+
+	T.ReminderBuffs.Spell3Buff = T.ReminderBuffs["Stamina"]
+	T.ReminderBuffs.Spell7Buff = T.ReminderBuffs["Mark"]
+
+	-- Amount of "other" buffs to consider a fulfillment of the Flask reminder
+	function T.ReminderFlaskRequirements()
+		local requireFlask = true
+		local otherBuffsRequired = 0
+
+		return requireFlask, otherBuffsRequired
+	end
 
 	-- Caster buffs
 	function T.ReminderCasterBuffs()
-		Spell4Buff = {	-- Intellect
-			-- 1459,	-- Arcane Intellect
-			-- 264760,	-- War-Scroll of Intellect
-		}
+		local faction = UnitFactionGroup("player")
+		if not faction or faction == "Neutral" then faction = "Alliance" end
+
+		T.ReminderBuffs.Spell4Buff = T.ReminderBuffs["Intellect"]
+		T.ReminderBuffs.Spell5Buff = T.ReminderBuffs["Spirit"]
+		T.ReminderBuffs.Spell6Buff = T.ReminderBuffs[faction]["Mp5"]
 	end
 
 	-- Physical buffs
 	function T.ReminderPhysicalBuffs()
-		Spell4Buff = {	-- Attack Power
-			-- 6673,	-- Battle Shout
-			-- 264761,	-- War-Scroll of Battle Shout
-		}
+		local faction = UnitFactionGroup("player")
+		if not faction or faction == "Neutral" then faction = "Alliance" end
+
+		T.ReminderBuffs.Spell4Buff = faction == "Alliance" and T.ReminderBuffs["Kings"] or T.ReminderBuffs["Horde"]["Threat"]
+		T.ReminderBuffs.Spell5Buff = T.ReminderBuffs["AP"]
+		T.ReminderBuffs.Spell6Buff = T.ReminderBuffs[faction]["Physical"]
+	end
+
+	if T.Role == "Caster" or T.Role == "Healer" then
+		T.ReminderCasterBuffs()
+	else
+		T.ReminderPhysicalBuffs()
 	end
 end
 

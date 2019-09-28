@@ -518,6 +518,12 @@ local function Shared(self, unit)
 			self.ClassMana:SetTextColor(1, 0.49, 0.04)
 		end
 
+		-- Rogue/Druid Energy Ticker
+		if T.classic and C.unitframe.plugins_energy_ticker == true and (T.class == "DRUID" or T.class == "ROGUE") then
+			self.EnergyTicker = CreateFrame("Frame", nil, self)
+			self.EnergyTicker:SetFrameLevel(self.Power:GetFrameLevel() + 1)
+		end
+
 		-- Experience bar
 		if C.unitframe.plugins_experience_bar == true then
 			self.Experience = CreateFrame("StatusBar", self:GetName().."_Experience", self)

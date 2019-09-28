@@ -44,6 +44,7 @@
 	<Script file="Modules\CPoints.lua"/>
 	<Script file="Modules\DebuffHighlight.lua"/>
 	<Script file="Modules\EnemySpec.lua"/>
+	<Script file="Modules\EnergyTicker.lua"/>
 	<Script file="Modules\Experience.lua"/>
 	<Script file="Modules\FactionIcon.lua"/>
 	<Script file="Modules\Fader.lua"/>

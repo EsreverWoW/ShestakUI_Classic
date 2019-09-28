@@ -97,6 +97,7 @@ L_GUI_UF_PORTRAIT_HEIGHT = "Hauteur des portraits"
 L_GUI_UF_PORTRAIT_WIDTH = "Largeur des portraits"
 L_GUI_UF_SUBHEADER_PLUGINS = "Plugins" -- Need review
 L_GUI_UF_PLUGINS_GCD = "Scintillement du GCD"
+L_GUI_UF_PLUGINS_ENERGY_TICKER = "Enable energy ticker" -- Needs review
 L_GUI_UF_PLUGINS_SWING = "Barre d'attaque automatique / tir automatique"
 L.unitframe_plugins_reputation_bar = "Reputation bar" -- Need review
 L.unitframe_plugins_reputation_bar_desc = "Barre de réputation" -- Need review
@@ -397,6 +398,7 @@ L_GUI_ANNOUNCEMENTS_SAFARI_HAT = "Vérifie l'équipement du Chapeau de Safari"
 -- Automation options
 L_GUI_AUTOMATION = "Automatisation"
 L_GUI_AUTOMATION_SUBTEXT = "This block contains settings that facilitate the routine." -- Need review
+L_GUI_AUTOMATION_DISMOUNT_STAND = "Auto dismount/stand" -- Needs review
 L_GUI_AUTOMATION_RELEASE = "Libération automatique du corps en champ de bataille"
 L_GUI_AUTOMATION_SCREENSHOT = "Prend une capture d'écran quand un haut-fait est accomplie"
 L.automation_solve_artifact = "Affiche automatiquement une fenêtre pour la résolution d'un artéfact"

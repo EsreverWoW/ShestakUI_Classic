@@ -321,7 +321,6 @@ C["nameplate"] = {
 	["distance"] = 40,							-- Show nameplates for units within this range
 	["ad_height"] = 0,							-- Additional height for selected nameplate
 	["ad_width"] = 0,							-- Additional width for selected nameplate
-	["target_alpha"] = 1,						-- Alpha for selected nameplate
 	["combat"] = false,							-- Automatically show nameplate in combat
 	["health_value"] = false,					-- Numeral health value
 	["show_castbar_name"] = false,				-- Show castbar name
@@ -489,6 +488,7 @@ C["announcements"] = {
 --	Automation options
 ----------------------------------------------------------------------------------------
 C["automation"] = {
+	["dismount_stand"] = true,					-- Auto dismount/stand
 	["release"] = true,							-- Auto release the spirit in battlegrounds
 	["screenshot"] = false,						-- Take screenshot when player get achievement
 	["solve_artifact"] = true,					-- Auto popup for solve artifact
@@ -521,6 +521,10 @@ C["reminder"] = {
 	["raid_buffs_size"] = 19.2,					-- Icon size
 	["raid_buffs_alpha"] = 0,					-- Transparent icons when the buff is present
 }
+
+if T.classic then
+	C["reminder"]["raid_buffs_size"] = 16
+end
 
 ----------------------------------------------------------------------------------------
 --	Raid cooldowns options

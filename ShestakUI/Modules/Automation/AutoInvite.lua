@@ -4,38 +4,44 @@ local T, C, L, _ = unpack(select(2, ...))
 --	Accept invites from guild members or friend list(by ALZA)
 ----------------------------------------------------------------------------------------
 if C.automation.accept_invite == true then
-	local CheckFriend = function(name)
-		for i = 1, C_FriendList.GetNumFriends() do
-			if C_FriendList.GetFriendInfo(i) == name then
+	local function CheckFriend(inviter)
+		if T.classic then
+			for i = 1, C_FriendList.GetNumFriends() do
+				if C_FriendList.GetFriendInfo(i) == inviter then
+					return true
+				end
+			end
+			for i = 1, select(2, BNGetNumFriends()) do
+				local presenceID, _, _, _, _, toonID, client, isOnline = BNGetFriendInfo(i)
+				if client == BNET_CLIENT_WOW and isOnline then
+					local _, toonName, _, realmName = BNGetGameAccountInfo(toonID or presenceID)
+					if inviter == toonName or inviter == toonName.."-"..realmName then
+						return true
+					end
+				end
+			end
+			if IsInGuild() then
+				for i = 1, GetNumGuildMembers() do
+					if Ambiguate(GetGuildRosterInfo(i), "none") == inviter then
+						return true
+					end
+				end
+			end
+		else
+			if C_BattleNet.GetAccountInfoByGUID(inviter) or C_FriendList.IsFriend(inviter) or IsGuildMember(inviter) then
 				return true
-			end
-		end
-		for i = 1, select(2, BNGetNumFriends()) do
-			local presenceID, _, _, _, _, toonID, client, isOnline = BNGetFriendInfo(i)
-			if client == BNET_CLIENT_WOW and isOnline then
-				local _, toonName, _, realmName = BNGetGameAccountInfo(toonID or presenceID)
-				if name == toonName or name == toonName.."-"..realmName then
-					return true
-				end
-			end
-		end
-		if IsInGuild() then
-			for i = 1, GetNumGuildMembers() do
-				if Ambiguate(GetGuildRosterInfo(i), "none") == name then
-					return true
-				end
 			end
 		end
 	end
 
 	local ai = CreateFrame("Frame")
 	ai:RegisterEvent("PARTY_INVITE_REQUEST")
-	ai:SetScript("OnEvent", function(self, event, name)
+	ai:SetScript("OnEvent", function(self, event, name, _, _, _, _, _, inviterGUID)
 		if not T.classic then
 			if QueueStatusMinimapButton:IsShown() then return end
 		end
 		if MiniMapBattlefieldFrame:IsShown() or GetNumGroupMembers() > 0 then return end
-		if CheckFriend(name) then
+		if T.classic and CheckFriend(name) or not T.classic and CheckFriend(inviterGUID) then
 			RaidNotice_AddMessage(RaidWarningFrame, L_INFO_INVITE..name, {r = 0.41, g = 0.8, b = 0.94}, 3)
 			print(format("|cffffff00"..L_INFO_INVITE..name..".|r"))
 			AcceptGroup()

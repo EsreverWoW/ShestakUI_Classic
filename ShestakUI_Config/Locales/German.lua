@@ -97,6 +97,7 @@ L_GUI_UF_PORTRAIT_HEIGHT = "Portraithöhe"
 L_GUI_UF_PORTRAIT_WIDTH = "Portraitbreite"
 L_GUI_UF_SUBHEADER_PLUGINS = "Plugins"
 L_GUI_UF_PLUGINS_GCD = "Blitz für globalen Cooldown"
+L_GUI_UF_PLUGINS_ENERGY_TICKER = "Enable energy ticker" -- Needs review
 L_GUI_UF_PLUGINS_SWING = "Swingleiste"
 L.unitframe_plugins_reputation_bar = "Rufleiste"
 L.unitframe_plugins_reputation_bar_desc = "Rufleiste"
@@ -398,6 +399,7 @@ L_GUI_ANNOUNCEMENTS_SAFARI_HAT = "Überprüfe Safari Hat"
 -- Automation options
 L_GUI_AUTOMATION = "Automatisierung"
 L_GUI_AUTOMATION_SUBTEXT = "This block contains settings that facilitate the routine." -- Need review
+L_GUI_AUTOMATION_DISMOUNT_STAND = "Auto dismount/stand" -- Needs review
 L_GUI_AUTOMATION_RELEASE = "Automatisch im Schlachtfeld wiederbeleben"
 L_GUI_AUTOMATION_SCREENSHOT = "Speicher einen Screenshot wenn ein Achivment errungen wird"
 L.automation_solve_artifact = "Auto Popup für gelöste Artefakte"

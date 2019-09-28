@@ -240,7 +240,7 @@ do
 	uiscale:HookScript("OnShow", toggleUIScaleOptions)
 
 	local subheader = ns.addSubCategory(parent, L.general_subheader_font_style)
-	subheader:SetPoint("TOPLEFT", uiscale, "BOTTOMLEFT", 0, 0)
+	subheader:SetPoint("TOPLEFT", uiscale, "BOTTOMLEFT", 0, -12)
 
 	local PixelFontButton = CreateFrame("Button", nil, parent, "UIPanelButtonTemplate")
 	PixelFontButton:SetSize(180, 23)
@@ -769,8 +769,11 @@ do
 	local plugins_gcd = ns.CreateCheckBox(parent, "plugins_gcd", L_GUI_UF_PLUGINS_GCD)
 	plugins_gcd:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -8)
 
+	local plugins_energy_ticker = ns.CreateCheckBox(parent, "plugins_energy_ticker", L_GUI_UF_PLUGINS_ENERGY_TICKER)
+	plugins_energy_ticker:SetPoint("TOPLEFT", plugins_gcd, "BOTTOMLEFT", 0, 0)
+
 	local plugins_swing = ns.CreateCheckBox(parent, "plugins_swing", L_GUI_UF_PLUGINS_SWING)
-	plugins_swing:SetPoint("TOPLEFT", plugins_gcd, "BOTTOMLEFT", 0, 0)
+	plugins_swing:SetPoint("TOPLEFT", plugins_energy_ticker, "BOTTOMLEFT", 0, 0)
 
 	local plugins_reputation_bar = ns.CreateCheckBox(parent, "plugins_reputation_bar")
 	plugins_reputation_bar:SetPoint("TOPLEFT", plugins_swing, "BOTTOMLEFT", 0, 0)
@@ -835,6 +838,7 @@ do
 
 	local retail = {
 		bar_color_happiness,
+		plugins_energy_ticker
 	}
 
 	if IsClassicBuild() then
@@ -1704,8 +1708,11 @@ end
 do
 	local parent = ShestakUIOptionsPanel.automation
 
+	local dismount_stand = ns.CreateCheckBox(parent, "release", L_GUI_AUTOMATION_DISMOUNT_STAND)
+	dismount_stand:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
+
 	local release = ns.CreateCheckBox(parent, "release", L_GUI_AUTOMATION_RELEASE)
-	release:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
+	release:SetPoint("TOPLEFT", dismount_stand, "BOTTOMLEFT", 0, 0)
 
 	local screenshot = ns.CreateCheckBox(parent, "screenshot", L_GUI_AUTOMATION_SCREENSHOT)
 	screenshot:SetPoint("TOPLEFT", release, "BOTTOMLEFT", 0, 0)
@@ -1760,8 +1767,14 @@ do
 		auto_role
 	}
 
+	local retail = {
+		dismount_stand,
+	}
+
 	if IsClassicBuild() then
 		HideOptions(classic)
+	else
+		HideOptions(retail)
 	end
 end
 

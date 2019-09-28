@@ -402,7 +402,6 @@ UnitGroupRolesAssigned = _G.UnitGroupRolesAssigned or function(unit) -- Needs wo
 end
 
 -- Add later
-GetInspectSpecialization = _G.GetInspectSpecialization or T.dummy
 GetAverageItemLevel = _G.GetAverageItemLevel or function()
 	local slotName = {
 		"HeadSlot", "NeckSlot", "ShoulderSlot", "BackSlot", "ChestSlot", "WristSlot",

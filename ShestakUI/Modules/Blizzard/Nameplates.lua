@@ -6,6 +6,7 @@ if C.nameplate.enable ~= true then return end
 ----------------------------------------------------------------------------------------
 local _, ns = ...
 local oUF = ns.oUF
+local ThreatLib = T.classic and LibStub:GetLibrary("ThreatClassic-1.0")
 
 local frame = CreateFrame("Frame")
 frame:SetScript("OnEvent", function(self, event, ...) self[event](self, ...) end)
@@ -299,6 +300,17 @@ local function threatColor(self, forced)
 	if UnitIsPlayer(self.unit) then return end
 	local combat = UnitAffectingCombat("player")
 	local _, threatStatus = UnitDetailedThreatSituation("player", self.unit)
+
+	if T.classic then
+		if UnitAffectingCombat(self.unit) then
+			local maxThreat = ThreatLib:GetMaxThreatOnTarget(UnitGUID(self.unit))
+			if not maxThreat or maxThreat <= 0 then
+				threatStatus = 3
+			else
+				self.Health:UnregisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
+			end
+		end
+	end
 
 	if C.nameplate.enhance_threat ~= true then
 		SetVirtualBorder(self.Health, unpack(C.media.border_color))
@@ -697,7 +709,6 @@ local function style(self, unit)
 	self.Health:RegisterEvent("PLAYER_REGEN_DISABLED")
 	self.Health:RegisterEvent("PLAYER_REGEN_ENABLED")
 
-	local ThreatLib = T.classic and LibStub:GetLibrary("ThreatClassic-1.0")
 	local function ThreatLibCallback()
 		return threatColor(main)
 	end
@@ -706,10 +717,18 @@ local function style(self, unit)
 		self.Health:RegisterEvent("UNIT_THREAT_SITUATION_UPDATE")
 		self.Health:RegisterEvent("UNIT_THREAT_LIST_UPDATE")
 	elseif ThreatLib then
+		if not UnitIsPlayer(unit) and not UnitIsFriend("player", unit) then
+			self.Health:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
+		end
 		ThreatLib.RegisterCallback(self.Health, "ThreatUpdated", ThreatLibCallback)
 	end
 
 	self.Health:SetScript("OnEvent", function(self, event)
+		if event == "COMBAT_LOG_EVENT_UNFILTERED" then
+			local unitGUID = UnitGUID(unit)
+			local _, _, _, srcGUID, _, _, _, dstGUID = CombatLogGetCurrentEventInfo()
+			if unitGUID ~= srcGUID and unitGUID ~= dstGUID then return end
+		end
 		threatColor(main)
 	end)
 

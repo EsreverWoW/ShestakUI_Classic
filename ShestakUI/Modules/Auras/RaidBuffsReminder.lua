@@ -1,5 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
-if C.reminder.raid_buffs_enable ~= true then return end
+if T.classic or C.reminder.raid_buffs_enable ~= true then return end
 
 ----------------------------------------------------------------------------------------
 --	Raid buffs on player(by Elv22)
@@ -180,11 +180,7 @@ local raidbuff_reminder = CreateFrame("Frame", "RaidBuffReminder", UIParent)
 raidbuff_reminder:CreatePanel("Invisible", (C.reminder.raid_buffs_size * 6) + 15, C.reminder.raid_buffs_size + 4, "TOPLEFT", RaidBuffsAnchor, "TOPLEFT", 0, 4)
 raidbuff_reminder:RegisterEvent("UNIT_AURA")
 raidbuff_reminder:RegisterEvent("PLAYER_ENTERING_WORLD")
-if not T.classic then
-	raidbuff_reminder:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
-else
-	raidbuff_reminder:RegisterEvent("CHARACTER_POINTS_CHANGED")
-end
+raidbuff_reminder:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
 raidbuff_reminder:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 raidbuff_reminder:SetScript("OnEvent", OnAuraChange)
 

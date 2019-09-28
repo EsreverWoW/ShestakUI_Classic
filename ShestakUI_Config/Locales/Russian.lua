@@ -97,6 +97,7 @@ L_GUI_UF_PORTRAIT_HEIGHT = "Высота портретов"
 L_GUI_UF_PORTRAIT_WIDTH = "Ширина портретов"
 L_GUI_UF_SUBHEADER_PLUGINS = "Плагины"
 L_GUI_UF_PLUGINS_GCD = "Полоса глобальной перезарядки на рамке игрока"
+L_GUI_UF_PLUGINS_ENERGY_TICKER = "Enable energy ticker" -- Needs review
 L_GUI_UF_PLUGINS_SWING = "Индикатор автоматической атаки"
 L.unitframe_plugins_reputation_bar = "Индикатор репутации"
 L.unitframe_plugins_reputation_bar_desc = "Включить индикатор репутации (слева от игрока по наведению курсора, СКМ - фиксация видимости)"
@@ -397,6 +398,7 @@ L_GUI_ANNOUNCEMENTS_SAFARI_HAT = "Проверять Шляпу для сафа�
 -- Automation options
 L_GUI_AUTOMATION = "Автоматизация"
 L_GUI_AUTOMATION_SUBTEXT = "В этом блоке расположены настройки, которые облегчают рутину."
+L_GUI_AUTOMATION_DISMOUNT_STAND = "Auto dismount/stand" -- Needs review
 L_GUI_AUTOMATION_RELEASE = "Покидать тело на полях боя"
 L_GUI_AUTOMATION_SCREENSHOT = "Сохранять скриншот, если получено достижение"
 L.automation_solve_artifact = "Предлагать собрать артефакт для Археологии"
