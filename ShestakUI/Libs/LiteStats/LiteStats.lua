@@ -1239,7 +1239,7 @@ if friends.enabled then
 				if GetLocale() ~= "enUS" then
 					for k, v in pairs(LOCALIZED_CLASS_NAMES_FEMALE) do if class == v then class = k end end
 				end
-				BNTable[i] = {presenceID, presenceName, battleTag, toonName, toonID, client, isOnline, isAFK, isDND, noteText, realmName, faction, race, class, zoneName, level}
+				BNTable[i] = {presenceID, presenceName, battleTag, toonName or "", toonID, client, isOnline, isAFK, isDND, noteText, realmName, faction, race, class, zoneName, level}
 				if isOnline then
 					totalBattleNetOnline = totalBattleNetOnline + 1
 				end
@@ -1456,17 +1456,6 @@ if friends.enabled then
 							client = accountInfo.gameAccountInfo.clientProgram
 						end
 						if isOnline then
-							--[[
-							if isAFK then
-								status = "|cffE7E716"..L_CHAT_AFK.."|r"
-							else
-								if isDND then
-									status = "|cffff0000"..L_CHAT_DND.."|r"
-								else
-									status = ""
-								end
-							end
-							--]]
 							if client == BNET_CLIENT_WOW then
 								if isAFK or not T.classic and accountInfo.isAFK then
 									status = "|cffE7E716"..L_CHAT_AFK.."|r"
