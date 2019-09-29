@@ -87,8 +87,6 @@ local function LoadSkin()
 		"ScrollOfResurrectionFrameAcceptButton",
 		"ScrollOfResurrectionFrameCancelButton",
 		"RecruitAFriendFrameSendButton",
-		"RaidFrameRaidInfoButton",
-		"RaidFrameConvertToRaidButton",
 	}
 
 	for _, button in pairs(buttons) do

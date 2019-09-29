@@ -15,21 +15,12 @@ local spells = {
 	[115178] = true,	-- Resuscitate
 }
 
--- temporary
-local classicLookup = T.classic and {
-	[GetSpellInfo(20484)] = 20484,		-- Rebirth
-	[GetSpellInfo(20707)] = 20707,		-- Soulstone
-	[GetSpellInfo(2006)] = 2006,		-- Resurrection
-	[GetSpellInfo(7328)] = 7328,		-- Redemption
-	[GetSpellInfo(2008)] = 2008,		-- Ancestral Spirit
-}
-
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 frame:SetScript("OnEvent", function()
 	local _, subEvent, _, _, buffer, _, _, _, player, _, _, spellID, spellName = CombatLogGetCurrentEventInfo()
-	if T.classic and spellID == 0 then
-		spellID = classicLookup[spellName]
+	if T.classic then
+		spellID = T.GetSpellID(spellName)
 	end
 	for key, value in pairs(spells) do
 		if spellID == key and value == true and player == T.name and buffer ~= T.name and subEvent == "SPELL_CAST_SUCCESS" then

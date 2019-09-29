@@ -299,11 +299,14 @@ local OnEvent = function(self, event)
 		local _, eventType, _, _, sourceName, sourceFlags = CombatLogGetCurrentEventInfo()
 		if band(sourceFlags, filter) == 0 then return end
 		if eventType == "SPELL_RESURRECT" or eventType == "SPELL_CAST_SUCCESS" or eventType == "SPELL_AURA_APPLIED" then
-			local spellId = select(12, CombatLogGetCurrentEventInfo())
+			local spellId, spellName = select(12, CombatLogGetCurrentEventInfo())
 			if sourceName then
 				sourceName = sourceName:gsub("-.+", "")
 			else
 				return
+			end
+			if T.classic then
+				spellId = T.GetSpellID(spellName)
 			end
 			if T.raid_spells[spellId] and show[select(2, IsInInstance())] and IsInGroup() then
 				if (sourceName == T.name and C.raidcooldown.show_self == true) or sourceName ~= T.name then

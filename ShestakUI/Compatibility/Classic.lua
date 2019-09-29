@@ -39,6 +39,132 @@ RAID_CLASS_COLORS.SHAMAN.colorStr = "0070de"
 ----------------------------------------------------------------------------------------
 --	Specialization Functions
 ----------------------------------------------------------------------------------------
+local spellLookup = {
+	-- Feasts and Portals
+	[GetSpellInfo(698)] = 698,			-- Ritual of Summoning
+	[GetSpellInfo(18400)] = 18400,		-- Piccolo of the Flaming Fire
+	[GetSpellInfo(22700)] = 22700,		-- Field Repair Bot 74A
+	[GetSpellInfo(10059)] = 10059,		-- Portal: Stormwind
+	[GetSpellInfo(11416)] = 11416,		-- Portal: Ironforge
+	[GetSpellInfo(11419)] = 11419,		-- Portal: Darnassus
+	[GetSpellInfo(11417)] = 11417,		-- Portal: Orgrimmar
+	[GetSpellInfo(11420)] = 11420,		-- Portal: Thunder Bluff
+	[GetSpellInfo(11418)] = 11418,		-- Portal: Undercity
+	[GetSpellInfo(28148)] = 28148,		-- Portal: Karazhan
+
+	-- Announcements / Raid CDs
+	[GetSpellInfo(633)] = 633,			-- Lay on Hands
+	[GetSpellInfo(694)] = 694,			-- Mocking Blow
+	[GetSpellInfo(724)] = 724,			-- Lightwell
+	[GetSpellInfo(740)] = 740,			-- Tranquility
+	[GetSpellInfo(871)] = 871,			-- Shield Wall
+	[GetSpellInfo(1022)] = 1022,		-- Blessing of Protection
+	[GetSpellInfo(1161)] = 1161,		-- Challenging Shout
+	[GetSpellInfo(2006)] = 2006,		-- Resurrection
+	[GetSpellInfo(2008)] = 2008,		-- Ancestral Spirit
+	[GetSpellInfo(5209)] = 5209,		-- Challenging Roar
+	[GetSpellInfo(6346)] = 6346,		-- Fear Ward
+	[GetSpellInfo(7328)] = 7328,		-- Redemption
+	[GetSpellInfo(10060)] = 10060,		-- Power Infusion
+	[GetSpellInfo(12975)] = 12975,		-- Last Stand
+	[GetSpellInfo(16190)] = 16190,		-- Mana Tide Totem
+	[GetSpellInfo(19801)] = 19801,		-- Tranquilizing Shot
+	[GetSpellInfo(20707)] = 20707,		-- Soulstone Resurrection
+	[GetSpellInfo(20484)] = 20484,		-- Rebirth
+	[GetSpellInfo(27740)] = 27740,		-- Reincarnation
+	[GetSpellInfo(29166)] = 29166,		-- Innervate
+
+	-- Enemy CDs
+	-- TODO
+
+	-- Combat Text Heal Filters
+	[GetSpellInfo(774)] = 774,			-- Rejuvenation
+	[GetSpellInfo(8936)] = 8936,		-- Regrowth
+	[GetSpellInfo(19579)] = 19579,		-- Spirit Bond
+	[GetSpellInfo(20267)] = 19579,		-- Judgement of Light
+	[GetSpellInfo(15290)] = 15290,		-- Vampiric Embrace
+	[GetSpellInfo(23455)] = 23455,		-- Holy Nova
+	[GetSpellInfo(139)] = 139,			-- Renew
+	[GetSpellInfo(596)] = 596,			-- Prayer of Healing
+	[GetSpellInfo(5672)] = 5672,		-- Healing Stream
+	[GetSpellInfo(1064)] = 1064,		-- Chain Heal
+	[GetSpellInfo(23880)] = 23880,		-- Bloodthirst
+
+	-- Combat Text Damage Filters
+	[GetSpellInfo(1079)] = 1079,		-- Rip
+	[GetSpellInfo(779)] = 779,			-- Swipe
+	[GetSpellInfo(8921)] = 779,			-- Moonfire
+	[GetSpellInfo(2643)] = 2643,		-- Multi-Shot
+	[GetSpellInfo(1978)] = 1978,		-- Serpent Sting
+	[GetSpellInfo(13812)] = 13812,		-- Explosive Trap Effect
+	[GetSpellInfo(1510)] = 1510,		-- Volley
+	[GetSpellInfo(2120)] = 2120,		-- Flamestrike
+	[GetSpellInfo(12654)] = 12654,		-- Ignite
+	[GetSpellInfo(10)] = 10,			-- Blizzard
+	[GetSpellInfo(122)] = 122,			-- Frost Nova
+	[GetSpellInfo(1449)] = 1449,		-- Arcane Explosion
+	[GetSpellInfo(120)] = 120,			-- Cone of Cold
+	[GetSpellInfo(7268)] = 7268,		-- Arcane Missiles
+	[GetSpellInfo(11113)] = 11113,		-- Blast Wave
+	[GetSpellInfo(26573)] = 26573,		-- Consecration
+	-- [GetSpellInfo(15237)] = 15237,		-- Holy Nova
+	[GetSpellInfo(589)] = 589,		-- Shadow Word: Pain
+	[GetSpellInfo(2818)] = 2818,		-- Deadly Poison
+	[GetSpellInfo(703)] = 703,			-- Garrote
+	[GetSpellInfo(8680)] = 8680,		-- Instant Poison
+	[GetSpellInfo(421)] = 421,			-- Chain Lightning
+	[GetSpellInfo(8349)] = 8349,		-- Fire Nova
+	[GetSpellInfo(8187)] = 8187,		-- Magma Totem
+	[GetSpellInfo(8050)] = 8050,		-- Flame Shock
+	[GetSpellInfo(10444)] = 10444,		-- Flametongue Attack
+	-- [GetSpellInfo(3606)] = 3606,		-- Attack (Searing Bolt)
+	[GetSpellInfo(17364)] = 17364,		-- Stormstrike
+	[GetSpellInfo(172)] = 172,			-- Corruption
+	[GetSpellInfo(348)] = 348,			-- Immolate
+	[GetSpellInfo(980)] = 980,			-- Curse of Agony
+	[GetSpellInfo(18265)] = 18265,		-- Siphon Life
+	[GetSpellInfo(5740)] = 5740,		-- Rain of Fire
+	[GetSpellInfo(1949)] = 1949,		-- Hellfire
+	[GetSpellInfo(845)] = 845,			-- Cleave
+	[GetSpellInfo(5308)] = 5308,		-- Execute
+	[GetSpellInfo(7384)] = 7384,		-- Overpower
+	[GetSpellInfo(1464)] = 1464,		-- Slam
+	[GetSpellInfo(12294)] = 12294,		-- Mortal Strike
+	[GetSpellInfo(12162)] = 12162,		-- Deep Wounds
+	[GetSpellInfo(1680)] = 1680,		-- Whirlwind
+	[GetSpellInfo(6343)] = 6343,		-- Thunder Clap
+	[GetSpellInfo(6572)] = 6572,		-- Revenge
+	[GetSpellInfo(772)] = 772,			-- Rend
+	-- [GetSpellInfo(23881)] = 23881,		-- Bloodthirst
+}
+
+function T.GetSpellID(spellName, unit, auraType)
+	-- change localized MELEE string into the appropriate spellID
+	if spellName == MELEE then
+		return 6603
+	-- get spellID from auras
+	elseif auraType and unit then
+		if auraType == AURA_TYPE_DEBUFF then
+			return select(10, AuraUtil.FindAuraByName(spellName, unit, "HARMFUL")) or 0
+		else
+			return select(10, AuraUtil.FindAuraByName(spellName, unit)) or 0
+		end
+	-- get spellID from lookup/spellbook
+	else
+		-- eventually build a cache from UNIT_SPELLCAST_* events to track lower ranks
+		-- for now, we just assume max rank and get that spellID from the spellbook
+		local spellID = spellLookup[spellName]
+		if not spellID then
+			spellID = select(7, GetSpellInfo(spellName))
+		end
+
+		return spellID or 0
+	end
+end
+
+----------------------------------------------------------------------------------------
+--	Specialization Functions
+----------------------------------------------------------------------------------------
 local specializationID = {
 	["DRUID"] = {
 		[1] = 102, -- Balance

@@ -24,7 +24,7 @@ FixTooltipBags:SetScript("OnEvent", function()
 end)
 
 GameTooltip:HookScript("OnTooltipCleared", function(self)
-	if self.IsForbidden and self:IsForbidden() then return end
+	if self:IsForbidden() then return end
 	if bug and self:NumLines() == 0 then
 		self:Hide()
 		bug = false

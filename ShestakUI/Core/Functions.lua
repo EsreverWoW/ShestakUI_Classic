@@ -1496,9 +1496,14 @@ end
 local LibClassicDurations = T.classic and LibStub("LibClassicDurations")
 
 T.PostUpdateIcon = function(_, unit, button, index, _, duration, expiration, debuffType, isStealable)
-	local name, _, _, debuffType, durationTime, expirationTime, caster, isStealable, _, spellID = UnitAura(unit, index, button.filter)
+	local name, debuffType, durationTime, expirationTime, caster, isStealable, spellID
+	if LibClassicDurations and button.filter == "HELPFUL" then
+		name, _, _, debuffType, durationTime, expirationTime, caster, isStealable, _, spellID = LibClassicDurations:UnitAura(unit, index, button.filter)
+	else
+		name, _, _, debuffType, durationTime, expirationTime, caster, isStealable, _, spellID = UnitAura(unit, index, button.filter)
+	end
 
-	if T.classic and durationTime == 0 and expirationTime == 0 then
+	if LibClassicDurations and durationTime == 0 and expirationTime == 0 then
 		durationTime, expirationTime = LibClassicDurations:GetAuraDurationByUnit(unit, spellID, caster, name)
 
 		button.isLibClassicDuration = true

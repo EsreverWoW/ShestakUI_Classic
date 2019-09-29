@@ -10,7 +10,11 @@ frame:SetScript("OnEvent", function(self)
 	local _, event, _, sourceGUID, _, _, _, _, destName, _, _, _, _, _, spellID, spellName = CombatLogGetCurrentEventInfo()
 	if not (event == "SPELL_INTERRUPT" and sourceGUID == UnitGUID("player")) then return end
 
-	if T.classic and spellID == 0 then
+	if T.classic then
+		spellID = T.GetSpellID(spellName)
+	end
+
+	if spellID == 0 then
 		SendChatMessage(L_ANNOUNCE_INTERRUPTED.." "..destName..": "..spellName, T.CheckChat())
 	else
 		SendChatMessage(L_ANNOUNCE_INTERRUPTED.." "..destName..": "..GetSpellLink(spellID), T.CheckChat())

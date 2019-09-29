@@ -1,5 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
-if T.classic or C.skins.blizzard_frames ~= true then return end
+if C.skins.blizzard_frames ~= true then return end
 
 ----------------------------------------------------------------------------------------
 --	RaidInfo skin
@@ -30,12 +30,16 @@ local function LoadSkin()
 		_G[object]:StripTextures()
 	end
 
-	for _, texture in pairs(KillTextures) do
-		_G[texture]:Kill()
+	if not T.classic then
+		for _, texture in pairs(KillTextures) do
+			_G[texture]:Kill()
+		end
 	end
 
 	for i = 1, #buttons do
-		_G[buttons[i]]:SkinButton()
+		if _G[buttons[i]] then
+			_G[buttons[i]]:SkinButton()
+		end
 	end
 
 	RaidInfoFrame:CreateBackdrop("Transparent")

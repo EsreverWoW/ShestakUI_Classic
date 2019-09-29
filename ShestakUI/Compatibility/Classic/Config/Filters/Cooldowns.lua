@@ -10,6 +10,7 @@ if C.raidcooldown.enable == true then
 	T.raid_spells = {
 		-- Battle resurrection
 		[20484] = 1800,	-- Rebirth
+		[20707] = 1800, -- Soulstone Resurrection
 		[27740] = 3600,	-- Reincarnation (3600sec base / -1200sec from talents / -600sec for Totem)
 		-- Jumper Cables
 		-- [8342] = 1800,	-- Goblin Jumper Cables

@@ -443,7 +443,7 @@ function Filger:OnEvent(event, unit, _, castID)
 					end
 					if T.classic and HasWandEquipped() then
 						local wandID = GetInventoryItemID("player", 18)
-						local wandSpeed = GetItemCooldown(wandID)
+						local wandSpeed = select(2, GetItemCooldown(wandID)) or 0
 						if wandSpeed < 1.5 then wandSpeed = 1.5 end
 						if name and (duration or 0) > wandSpeed then
 							found = true
