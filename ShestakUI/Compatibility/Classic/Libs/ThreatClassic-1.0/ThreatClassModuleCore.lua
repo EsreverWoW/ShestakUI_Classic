@@ -839,7 +839,7 @@ end
 function prototype:calcBuffMods(action, spellId)
 	ThreatLib:Debug("Calculating buff mods, action is %s, spell ID is %s", action, spellId)
 	self.buffThreatMultipliers = 1
-	local name, count, sid, id
+	local name, count, sid, id, _
 	for i = 1, 40 do
 		name, _, count, _, _, _, _, _, _, sid = UnitAura("player", i)
 		if not name then break end
@@ -858,7 +858,7 @@ end
 function prototype:calcDebuffMods(action, spellId)
 	ThreatLib:Debug("Calculating debuff mods, action is %s, spell ID is %s", action, spellId)
 	self.debuffThreatMultipliers = 1
-	local name, count, sid, id
+	local name, count, sid, id, _
 	for i = 1, 40 do
 		name, _, count, _, _, _, _, _, _, sid = UnitAura("player", i, "HARMFUL")
 		if not name then break end
