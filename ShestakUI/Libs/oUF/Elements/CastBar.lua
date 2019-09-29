@@ -32,14 +32,6 @@ local function updateSafeZone(self)
 	safeZone:SetWidth(width * safeZoneRatio)
 end
 
-local function resetAttributes(self)
-	self.castID = nil
-	self.casting = nil
-	self.channeling = nil
-	self.notInterruptible = nil
-	self.spellID = nil
-end
-
 local function UNIT_SPELLCAST_START(self, event, unit)
 	if(self.unit ~= unit and self.realUnit ~= unit) then return end
 
@@ -491,7 +483,7 @@ local function Enable(self, unit)
 			end
 		else
 			if(not (unit and unit:match'%wtarget$')) then
-				if(self.unit ~= "player" and LibClassicCasterino) then
+				if(self.unit ~= 'player' and LibClassicCasterino) then
 					local CastbarEventHandler = function(event, ...)
 						return EventFunctions[event](self, event, ...)
 					end

@@ -3,6 +3,8 @@
 local _, ns = ...
 local oUF = ns.oUF
 
+local LibClassicDurations = LibStub('LibClassicDurations')
+
 local VISIBLE = 1
 local HIDDEN = 0
 
@@ -13,7 +15,7 @@ end
 local function onEnter(self)
 	if(not self:IsVisible()) then return end
 
-	GameTooltip:SetOwner(self, "ANCHOR_BOTTOMRIGHT")
+	GameTooltip:SetOwner(self, 'ANCHOR_BOTTOMRIGHT')
 	self:UpdateTooltip()
 end
 
@@ -22,24 +24,24 @@ local function onLeave()
 end
 
 local function createAuraIcon(icons, index)
-	local button = CreateFrame("Button", icons:GetDebugName().."Button"..index, icons)
+	local button = CreateFrame('Button', icons:GetDebugName()..'Button'..index, icons)
 	button:EnableMouse(true)
-	button:RegisterForClicks'RightButtonUp'
+	button:RegisterForClicks('RightButtonUp')
 
 	button:SetWidth(icons.size or 16)
 	button:SetHeight(icons.size or 16)
 
-	local cd = CreateFrame("Cooldown", "$parentCooldown", button, "CooldownFrameTemplate")
+	local cd = CreateFrame('Cooldown', '$parentCooldown', button, 'CooldownFrameTemplate')
 	cd:SetAllPoints(button)
 	cd:SetDrawEdge(false)
 
-	local icon = button:CreateTexture(nil, "BORDER")
+	local icon = button:CreateTexture(nil, 'BORDER')
 	icon:SetAllPoints(button)
 
-	local count = button:CreateFontString(nil, "OVERLAY", 'NumberFontNormal')
-	count:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", -1, 0)
+	local count = button:CreateFontString(nil, 'OVERLAY', 'NumberFontNormal')
+	count:SetPoint('BOTTOMRIGHT', button, 'BOTTOMRIGHT', -1, 0)
 
-	local overlay = button:CreateTexture(nil, "OVERLAY")
+	local overlay = button:CreateTexture(nil, 'OVERLAY')
 	overlay:SetTexture([[Interface\Buttons\UI-Debuff-Overlays]])
 	overlay:SetAllPoints(button)
 	overlay:SetTexCoord(.296875, .5703125, 0, .515625)
@@ -53,8 +55,8 @@ local function createAuraIcon(icons, index)
 	button.stealable = stealable
 
 	button.UpdateTooltip = UpdateTooltip
-	button:SetScript("OnEnter", onEnter)
-	button:SetScript("OnLeave", onLeave)
+	button:SetScript('OnEnter', onEnter)
+	button:SetScript('OnLeave', onLeave)
 
 	table.insert(icons, button)
 
@@ -76,7 +78,17 @@ end
 local function updateIcon(unit, icons, index, offset, filter, isDebuff, visible)
 	local name, texture, count, debuffType, duration, expiration, caster, isStealable,
 		nameplateShowSelf, spellID, canApply, isBossDebuff, casterIsPlayer, nameplateShowAll,
+		timeMod, effect1, effect2, effect3
+
+	if(LibClassicDurations and filter == 'HELPFUL') then
+		name, texture, count, debuffType, duration, expiration, caster, isStealable,
+		nameplateShowSelf, spellID, canApply, isBossDebuff, casterIsPlayer, nameplateShowAll,
+		timeMod, effect1, effect2, effect3 = LibClassicDurations:UnitAura(unit, index, filter)
+	else
+		name, texture, count, debuffType, duration, expiration, caster, isStealable,
+		nameplateShowSelf, spellID, canApply, isBossDebuff, casterIsPlayer, nameplateShowAll,
 		timeMod, effect1, effect2, effect3 = UnitAura(unit, index, filter)
+	end
 
 	if(name) then
 		local n = visible + offset + 1
@@ -149,9 +161,9 @@ local function SetPosition(icons, x)
 		local gap = icons.gap
 		local sizex = (icons.size or 16) + (icons['spacing-x'] or icons.spacing or 0)
 		local sizey = (icons.size or 16) + (icons['spacing-y'] or icons.spacing or 0)
-		local anchor = icons.initialAnchor or "BOTTOMLEFT"
-		local growthx = (icons["growth-x"] == "LEFT" and -1) or 1
-		local growthy = (icons["growth-y"] == "DOWN" and -1) or 1
+		local anchor = icons.initialAnchor or 'BOTTOMLEFT'
+		local growthx = (icons['growth-x'] == 'LEFT' and -1) or 1
+		local growthy = (icons['growth-y'] == 'DOWN' and -1) or 1
 		local cols = math.floor(icons:GetWidth() / sizex + .5)
 
 		for i = 1, #icons do
@@ -294,7 +306,10 @@ end
 
 local function Enable(self)
 	if(self.Buffs or self.Debuffs or self.Auras) then
-		self:RegisterEvent("UNIT_AURA", Update)
+		self:RegisterEvent('UNIT_AURA', Update)
+		if(LibClassicDurations) then
+			LibClassicDurations.RegisterCallback(self, 'UNIT_BUFF', Update)
+		end
 
 		local buffs = self.Buffs
 		if(buffs) then
@@ -329,7 +344,10 @@ end
 
 local function Disable(self)
 	if(self.Buffs or self.Debuffs or self.Auras) then
-		self:UnregisterEvent("UNIT_AURA", Update)
+		self:UnregisterEvent('UNIT_AURA', Update)
+		if(LibClassicDurations) then
+			LibClassicDurations.UnregisterCallback(self, 'UNIT_BUFF')
+		end
 	end
 end
 
