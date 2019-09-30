@@ -96,7 +96,7 @@ local spellLookup = {
 	-- Combat Text Damage Filters
 	6603,		-- Auto Attack
 	779,		-- Swipe
-	779,		-- Moonfire
+	8921,		-- Moonfire
 	16914,		-- Hurricane
 	1822,		-- Rake
 	22570,		-- Mangle
