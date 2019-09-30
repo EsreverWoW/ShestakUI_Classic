@@ -65,7 +65,7 @@ elseif T.class == "PALADIN" then
 		T.aoespam[20267] = 6		-- Judgment of Light
 		-- Damaging spells
 		T.aoespam[26573] = 3		-- Consecration
-		T.aoespam[20911] = 3		-- Ancient Fury
+		T.aoespam[20911] = 3		-- Blessing of Sanctuary
 		T.aoespam[20925] = 3		-- Holy Shield
 	end
 elseif T.class == "PRIEST" then
@@ -78,7 +78,6 @@ elseif T.class == "PRIEST" then
 		-- Damaging spells
 		T.aoespam[15237] = 0		-- Holy Nova
 		T.aoespam[589] = 4			-- Shadow Word: Pain
-		T.aoespam[15407] = 3		-- Mind Flay
 		T.aoespam[14914] = 3		-- Holy Fire
 	end
 	if C.combattext.healing then
@@ -90,7 +89,6 @@ elseif T.class == "ROGUE" then
 		T.aoespam[703] = 5			-- Garrote
 		T.aoespam[8680] = 3			-- Wound Poison
 		T.aoespam[22482] = 3		-- Blade Flurry
-		T.aoespam[16511] = 3		-- Hemorrhage
 		T.aoespam[1943] = 5			-- Rupture
 	end
 elseif T.class == "SHAMAN" then
@@ -109,17 +107,14 @@ elseif T.class == "SHAMAN" then
 	end
 elseif T.class == "WARLOCK" then
 	if C.combattext.merge_aoe_spam then
-		T.aoespam[689] = 5			-- Drain Life
 		T.aoespam[172] = 3			-- Corruption
 		T.aoespam[348] = 3			-- Immolate
 		T.aoespam[980] = 3			-- Agony
 		T.aoespam[18265] = 3		-- Siphon Life
 		T.aoespam[5740] = 3			-- Rain of Fire
 		T.aoespam[1949] = 3			-- Hellfire
-		T.aoespam[1120] = 3			-- Drain Soul
 		T.aoespam[20153] = 3		-- Immolation (Infrenal)
 		T.aoespam[22703] = 0		-- Infernal Awakening
-		T.aoespam[3110] = 3			-- Firebolt (Imp)
 	end
 	if C.combattext.healing then
 		T.healfilter[689] = true	-- Drain Life
