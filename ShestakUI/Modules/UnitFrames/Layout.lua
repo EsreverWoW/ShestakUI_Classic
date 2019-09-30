@@ -32,7 +32,7 @@ local function Shared(self, unit)
 		self:SetAttribute("type2", "focus")
 		self:SetAttribute("type3", "macro")
 		self:SetAttribute("macrotext3", "/clearfocus")
-		self:SetAttribute('oUF-enableArenaPrep', false)
+		self:SetAttribute("oUF-enableArenaPrep", false)
 	else
 		self:SetAttribute("*type2", "togglemenu")
 	end
@@ -518,12 +518,6 @@ local function Shared(self, unit)
 			self.ClassMana:SetTextColor(1, 0.49, 0.04)
 		end
 
-		-- Rogue/Druid Energy Ticker
-		if T.classic and C.unitframe.plugins_energy_ticker == true and (T.class == "DRUID" or T.class == "ROGUE") then
-			self.EnergyTicker = CreateFrame("Frame", nil, self)
-			self.EnergyTicker:SetFrameLevel(self.Power:GetFrameLevel() + 1)
-		end
-
 		-- Experience bar
 		if C.unitframe.plugins_experience_bar == true then
 			self.Experience = CreateFrame("StatusBar", self:GetName().."_Experience", self)
@@ -640,6 +634,14 @@ local function Shared(self, unit)
 			self.GCD.Color = {1, 1, 1}
 			self.GCD.Height = T.Scale(3)
 			self.GCD.Width = T.Scale(4)
+		end
+
+		-- Power Spark
+		if T.classic and C.unitframe.plugins_power_spark == true then
+			self.PowerSpark = CreateFrame("StatusBar", nil, self.Power)
+			self.PowerSpark:SetFrameLevel(self.Power:GetFrameLevel() + 3)
+			self.PowerSpark:SetAllPoints()
+			self.PowerSpark.Spark = self.PowerSpark:CreateTexture(nil, "OVERLAY")
 		end
 
 		-- Absorbs value

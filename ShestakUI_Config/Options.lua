@@ -769,11 +769,11 @@ do
 	local plugins_gcd = ns.CreateCheckBox(parent, "plugins_gcd", L_GUI_UF_PLUGINS_GCD)
 	plugins_gcd:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -8)
 
-	local plugins_energy_ticker = ns.CreateCheckBox(parent, "plugins_energy_ticker", L_GUI_UF_PLUGINS_ENERGY_TICKER)
-	plugins_energy_ticker:SetPoint("TOPLEFT", plugins_gcd, "BOTTOMLEFT", 0, 0)
+	local plugins_power_spark = ns.CreateCheckBox(parent, "plugins_power_spark", L_GUI_UF_PLUGINS_POWER_SPARK)
+	plugins_power_spark:SetPoint("TOPLEFT", plugins_gcd, "BOTTOMLEFT", 0, 0)
 
 	local plugins_swing = ns.CreateCheckBox(parent, "plugins_swing", L_GUI_UF_PLUGINS_SWING)
-	plugins_swing:SetPoint("TOPLEFT", plugins_energy_ticker, "BOTTOMLEFT", 0, 0)
+	plugins_swing:SetPoint("TOPLEFT", plugins_power_spark, "BOTTOMLEFT", 0, 0)
 
 	local plugins_reputation_bar = ns.CreateCheckBox(parent, "plugins_reputation_bar")
 	plugins_reputation_bar:SetPoint("TOPLEFT", plugins_swing, "BOTTOMLEFT", 0, 0)
