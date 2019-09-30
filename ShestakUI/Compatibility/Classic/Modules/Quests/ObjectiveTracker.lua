@@ -117,7 +117,7 @@ hooksecurefunc("QuestWatch_Update", function()
 	if GetNumQuestWatches() > 0 then
 		ObjectiveTracker:Show()
 
-		local questIndex, numObjectives, title, level, color, hex, watchText, objectivesGroup, objectivesCompleted, finished
+		local questIndex, numObjectives, title, level, color, hex, text, watchText, objectivesGroup, objectivesCompleted, finished
 		local watchTextIndex = 1
 		for i = 1, GetNumQuestWatches() do
 			questIndex = GetQuestIndexForWatch(i)
