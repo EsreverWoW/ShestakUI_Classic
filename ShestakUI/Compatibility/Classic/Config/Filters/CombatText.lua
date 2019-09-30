@@ -115,6 +115,7 @@ elseif T.class == "WARLOCK" then
 		T.aoespam[980] = 3			-- Agony
 		T.aoespam[18265] = 3		-- Siphon Life
 		T.aoespam[5740] = 3			-- Rain of Fire
+		T.aoespam[1949] = 3			-- Hellfire
 		T.aoespam[1120] = 3			-- Drain Soul
 		T.aoespam[20153] = 3		-- Immolation (Infrenal)
 		T.aoespam[22703] = 0		-- Infernal Awakening
@@ -132,13 +133,13 @@ elseif T.class == "WARRIOR" then
 		T.aoespam[1464] = 0.5		-- Slam (Sweeping Strikes)
 		T.aoespam[12294] = 0.5		-- Mortal Strike (Sweeping Strikes)
 		T.aoespam[12162] = 3		-- Deep Wounds
-		T.aoespam[15578] = 1.5		-- Whirlwind
+		T.aoespam[1680] = 1.5		-- Whirlwind
 		T.aoespam[6343] = 0			-- Thunder Clap
 		T.aoespam[6572] = 0			-- Revenge
 		T.aoespam[772] = 3			-- Rend
 		T.aoespam[23881] = 0		-- Bloodthirst
 	end
 	if C.combattext.healing then
-		T.healfilter[23889] = true	-- Bloodthirst Heal
+		T.healfilter[23880] = true	-- Bloodthirst Heal
 	end
 end
