@@ -18,6 +18,7 @@ bar:RegisterEvent("PLAYER_FARSIGHT_FOCUS_CHANGED")
 bar:RegisterEvent("PET_BAR_UPDATE")
 bar:RegisterEvent("PET_BAR_UPDATE_USABLE")
 bar:RegisterEvent("PET_BAR_UPDATE_COOLDOWN")
+bar:RegisterEvent("SPELLS_CHANGED")
 bar:RegisterEvent("UNIT_PET")
 bar:RegisterEvent("UNIT_FLAGS")
 bar:RegisterEvent("UNIT_AURA")
@@ -48,7 +49,11 @@ bar:SetScript("OnEvent", function(self, event, arg1)
 			button:Show()
 			self:SetAttribute("addchild", button)
 		end
-		RegisterStateDriver(self, "visibility", "[pet,novehicleui,nopossessbar,nopetbattle] show; hide")
+		if T.classic then
+			RegisterStateDriver(self, "visibility", "[pet,nooverridebar,nopossessbar] show; hide")
+		else
+			RegisterStateDriver(self, "visibility", "[pet,novehicleui,nopossessbar,nopetbattle] show; hide")
+		end
 		hooksecurefunc("PetActionBar_Update", T.PetBarUpdate)
 	elseif event == "PET_BAR_UPDATE" or event == "PLAYER_CONTROL_LOST" or event == "PLAYER_CONTROL_GAINED" or event == "PLAYER_FARSIGHT_FOCUS_CHANGED"
 	or event == "UNIT_FLAGS" or (event == "UNIT_PET" and arg1 == "player") or (arg1 == "pet" and event == "UNIT_AURA") then
