@@ -2005,6 +2005,7 @@ do
 	currency_misc:SetPoint("TOPLEFT", currency_raid, "BOTTOMLEFT", 0, 0)
 
 	local classic = {
+		talents,
 		currency,
 		currency_archaeology,
 		currency_cooking,
