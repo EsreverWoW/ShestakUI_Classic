@@ -2119,6 +2119,7 @@ do
 
 	local classic = {
 		vehicle_mouseover,
+		profession_tabs, -- TODO: Fix for Classic
 		enchantment_scroll,
 		archaeology,
 		chars_currency,
