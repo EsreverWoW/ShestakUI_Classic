@@ -610,7 +610,7 @@ if C["filger_spells"] and C["filger_spells"][T.class] then
 
 	for i = 1, #SpellGroups, 1 do
 		local data = SpellGroups[i].data
-		local frame = CreateFrame("Frame", "FilgerFrame"..i.."_"..data.Name, T_PetBattleFrameHider)
+		local frame = CreateFrame("Frame", "FilgerFrame"..i.."_"..data.Name, T_PetBattleFrameHider or UIParent)
 		frame.Id = i
 		frame.Name = data.Name
 		frame.Direction = data.Direction or "DOWN"

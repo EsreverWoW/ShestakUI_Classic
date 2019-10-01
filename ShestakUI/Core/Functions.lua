@@ -139,10 +139,12 @@ LevelUpdater:SetScript("OnEvent", CheckLevel)
 ----------------------------------------------------------------------------------------
 --	Pet Battle Hider
 ----------------------------------------------------------------------------------------
-T_PetBattleFrameHider = CreateFrame("Frame", "ShestakUI_PetBattleFrameHider", UIParent, "SecureHandlerStateTemplate")
-T_PetBattleFrameHider:SetAllPoints()
-T_PetBattleFrameHider:SetFrameStrata("LOW")
-RegisterStateDriver(T_PetBattleFrameHider, "visibility", "[petbattle] hide; show")
+if not T.classic then
+	T_PetBattleFrameHider = CreateFrame("Frame", "ShestakUI_PetBattleFrameHider", UIParent, "SecureHandlerStateTemplate")
+	T_PetBattleFrameHider:SetAllPoints()
+	T_PetBattleFrameHider:SetFrameStrata("LOW")
+	RegisterStateDriver(T_PetBattleFrameHider, "visibility", "[petbattle] hide; show")
+end
 
 ----------------------------------------------------------------------------------------
 --	UTF functions

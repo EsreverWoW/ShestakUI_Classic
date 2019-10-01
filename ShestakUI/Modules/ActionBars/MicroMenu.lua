@@ -4,7 +4,7 @@ if C.actionbar.enable ~= true or C.actionbar.micromenu ~= true then return end
 ----------------------------------------------------------------------------------------
 --	Micro menu(by Elv22)
 ----------------------------------------------------------------------------------------
-local frame = CreateFrame("Frame", "MicroAnchor", T_PetBattleFrameHider)
+local frame = CreateFrame("Frame", "MicroAnchor", T_PetBattleFrameHider or UIParent)
 frame:SetPoint(unpack(C.position.micro_menu))
 frame:SetSize(T.classic and 208 or 284, 30)
 frame.shown = false

@@ -40,7 +40,11 @@ local function Shared(self, unit)
 	-- Backdrop for every units
 	self:CreateBackdrop("Default")
 	self:SetFrameStrata("BACKGROUND")
-	self.backdrop:SetFrameLevel(3)
+	if T.classic then
+		self.backdrop:SetFrameLevel(2)
+	else
+		self.backdrop:SetFrameLevel(3)
+	end
 
 	-- Health bar
 	self.Health = CreateFrame("StatusBar", self:GetName().."_Health", self)
@@ -871,7 +875,11 @@ local function Shared(self, unit)
 		self.Castbar.Overlay = CreateFrame("Frame", nil, self.Castbar)
 		self.Castbar.Overlay:SetTemplate("Default")
 		self.Castbar.Overlay:SetFrameStrata("BACKGROUND")
-		self.Castbar.Overlay:SetFrameLevel(3)
+		if T.classic then
+			self.Castbar.Overlay:SetFrameLevel(2)
+		else
+			self.Castbar.Overlay:SetFrameLevel(3)
+		end
 		self.Castbar.Overlay:SetPoint("TOPLEFT", -2, 2)
 		self.Castbar.Overlay:SetPoint("BOTTOMRIGHT", 2, -2)
 
