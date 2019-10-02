@@ -323,9 +323,6 @@ function ThreatLibNPCModuleCore:COMBAT_LOG_EVENT_UNFILTERED(event, ...)
 
 	local timestamp, subEvent, _, sourceGUID, sourceName, sourceFlags, sourceRaidFlags, destGUID, destName, destFlags, destRaidFlags, spellId, spellName = CombatLogGetCurrentEventInfo()
 
-	-- spellId = ThreatLib.Classic and ThreatLib:GetNPCSpellID(spellName) or spellId
-	spellId = ThreatLib:GetNPCSpellID(spellName) or spellId
-
 	if subEvent == "SPELL_DAMAGE" and bit_band(sourceFlags, REACTION_ATTACKABLE) ~= 0 and bit_band(sourceFlags, COMBATLOG_OBJECT_TYPE_NPC) == COMBATLOG_OBJECT_TYPE_NPC then
 		local unitID = nil
 		if bit_band(destFlags, COMBATLOG_FILTER_ME) == COMBATLOG_FILTER_ME then
@@ -456,7 +453,7 @@ function ThreatLibNPCModuleCore.modulePrototype:COMBAT_LOG_EVENT_UNFILTERED(even
 
 	if subEvent == "UNIT_DIED" then
 		if bit_band(destFlags, COMBATLOG_OBJECT_TYPE_NPC) == COMBATLOG_OBJECT_TYPE_NPC then
-			local npc_id = ThreatLib:NPCID(dstGUID)
+			local npc_id = ThreatLib:NPCID(destGUID)
 			local func = self.encounterEnemies[npc_id]
 			if func then
 				func(self, npc_id, destGUID, destName, sourceName, sourceGUID)

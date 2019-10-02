@@ -4,25 +4,47 @@ if not ThreatLib then return en
 local SUPREMUS_ID = 22898
 ThreatLib:GetModule("NPCCore"):RegisterModule(SUPREMUS_ID, function(Supremus)
 	Supremus:RegisterTranslation("enUS", function() return {
-		["Supremus punches the ground in anger!"] = "Supremus punches the ground in anger!"
+		["Supremus punches the ground in anger!"] = "Supremus punches the ground in anger!",
 	} end)
+
 	Supremus:RegisterTranslation("deDE", function() return {
 		["Supremus punches the ground in anger!"] = "Supremus schlägt wütend auf den Boden!",
 	} end)
-	Supremus:RegisterTranslation("koKR", function() return {
-		["Supremus punches the ground in anger!"] = "궁극의 심연이 분노하여 땅을 내리찍습니다!",
+
+	Supremus:RegisterTranslation("esES", function() return {
+		["Supremus punches the ground in anger!"] = nil, -- STRING NEEDED
 	} end)
+
+	Supremus:RegisterTranslation("esMX", function() return {
+		["Supremus punches the ground in anger!"] = nil, -- STRING NEEDED
+	} end)
+
 	Supremus:RegisterTranslation("frFR", function() return {
 		["Supremus punches the ground in anger!"] = "De rage, Supremus frappe le sol !"
 	} end)
-	Supremus:RegisterTranslation("zhTW", function() return {
-		["Supremus punches the ground in anger!"] = "瑟普莫斯憤怒的捶擊地面!"
+
+	Supremus:RegisterTranslation("itIT", function() return {
+		["Supremus punches the ground in anger!"] = nil, -- STRING NEEDED
 	} end)
+
+	Supremus:RegisterTranslation("koKR", function() return {
+		["Supremus punches the ground in anger!"] = "궁극의 심연이 분노하여 땅을 내리찍습니다!",
+	} end)
+
+	Supremus:RegisterTranslation("ptBR", function() return {
+		["Supremus punches the ground in anger!"] = nil, -- STRING NEEDED
+	} end)
+
+	Supremus:RegisterTranslation("ruRU", function() return {
+		["Supremus punches the ground in anger!"] = "Супремус в гневе ударяет по земле!",
+	} end)
+
 	Supremus:RegisterTranslation("zhCN", function() return {
 		["Supremus punches the ground in anger!"] = "苏普雷姆斯愤怒地击打着地面！"
 	} end)
-	Supremus:RegisterTranslation("ruRU", function() return {
-		["Supremus punches the ground in anger!"] = "Супремус в гневе ударяет по земле!"
+
+	Supremus:RegisterTranslation("zhTW", function() return {
+		["Supremus punches the ground in anger!"] = "瑟普莫斯憤怒的捶擊地面!"
 	} end)
 
 	local phaseTransition = Supremus:GetTranslation("Supremus punches the ground in anger!")

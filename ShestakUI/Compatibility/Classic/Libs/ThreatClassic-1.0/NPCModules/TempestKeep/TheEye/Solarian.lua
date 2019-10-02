@@ -14,9 +14,24 @@ ThreatLib:GetModule("NPCCore"):RegisterModule(SOLARIAN_ID, function(Solarian)
 		["You are hopelessly outmatched!"] = "Ihr seid eindeutig in der Unterzahl!",
 	} end)
 
+	Solarian:RegisterTranslation("esES", function() return {
+		["I will crush your delusions of grandeur!"] = nil, -- STRING NEEDED
+		["You are hopelessly outmatched!"] = nil, -- STRING NEEDED
+	} end)
+
+	Solarian:RegisterTranslation("esMX", function() return {
+		["I will crush your delusions of grandeur!"] = nil, -- STRING NEEDED
+		["You are hopelessly outmatched!"] = nil, -- STRING NEEDED
+	} end)
+
 	Solarian:RegisterTranslation("frFR", function() return {
 		["I will crush your delusions of grandeur!"] = "Je vais balayer vos illusions de grandeur !",
 		["You are hopelessly outmatched!"] = "Vous êtes désespérément surclassés !",
+	} end)
+
+	Solarian:RegisterTranslation("itIT", function() return {
+		["I will crush your delusions of grandeur!"] = nil, -- STRING NEEDED
+		["You are hopelessly outmatched!"] = nil, -- STRING NEEDED
 	} end)
 
 	Solarian:RegisterTranslation("koKR", function() return {
@@ -24,14 +39,24 @@ ThreatLib:GetModule("NPCCore"):RegisterModule(SOLARIAN_ID, function(Solarian)
 		["You are hopelessly outmatched!"] = "한 줌의 희망마저 짓밟아주마!",
 	} end)
 
-	Solarian:RegisterTranslation("zhTW", function() return {
-		["I will crush your delusions of grandeur!"] = "我會粉碎你那偉大的夢想!",
-		["You are hopelessly outmatched!"] = "我的實力遠勝於你!",
+	Solarian:RegisterTranslation("ptBR", function() return {
+		["I will crush your delusions of grandeur!"] = nil, -- STRING NEEDED
+		["You are hopelessly outmatched!"] = nil, -- STRING NEEDED
+	} end)
+
+	Solarian:RegisterTranslation("ruRU", function() return {
+		["I will crush your delusions of grandeur!"] = nil, -- STRING NEEDED
+		["You are hopelessly outmatched!"] = nil, -- STRING NEEDED
 	} end)
 
 	Solarian:RegisterTranslation("zhCN", function() return {
 		["I will crush your delusions of grandeur!"] = "我要让你们自以为是的错觉荡然无存！",
 		["You are hopelessly outmatched!"] = "你们势单力薄！",
+	} end)
+
+	Solarian:RegisterTranslation("zhTW", function() return {
+		["I will crush your delusions of grandeur!"] = "我會粉碎你那偉大的夢想!",
+		["You are hopelessly outmatched!"] = "我的實力遠勝於你!",
 	} end)
 
 	local zergPhase1 = Solarian:GetTranslation("I will crush your delusions of grandeur!")
