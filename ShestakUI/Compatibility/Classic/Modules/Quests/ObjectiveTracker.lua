@@ -4,9 +4,10 @@ if not T.classic then return end
 ----------------------------------------------------------------------------------------
 --	Move QuestWatchFrame (with ModernQuestWatch from Ketho - EU-Boulderfist)
 ----------------------------------------------------------------------------------------
-local ObjectiveTracker = CreateFrame("Frame", "ObjectiveTrackerAnchor", UIParent)
 local ExpandButton = CreateFrame("Button", "QuestWatchFrameExpandButton", UIParent)
+local expanded = true
 
+local ObjectiveTracker = CreateFrame("Frame", "ObjectiveTrackerAnchor", UIParent)
 ObjectiveTracker:SetPoint(unpack(C.position.quest))
 ObjectiveTracker:SetHeight(150)
 ObjectiveTracker:SetWidth(224)
@@ -117,8 +118,12 @@ hooksecurefunc("QuestWatch_Update", function()
 	end
 
 	if GetNumQuestWatches() > 0 then
-		ExpandButton:Show()
 		ObjectiveTracker:Show()
+		QuestWatchFrameHeader:Show()
+
+		ExpandButton:Show()
+		ExpandButton.plus:Hide()
+		expanded = true
 
 		local questIndex, numObjectives, title, level, color, hex, text, watchText, objectivesGroup, objectivesCompleted, finished
 		local watchTextIndex = 1
@@ -159,8 +164,11 @@ hooksecurefunc("QuestWatch_Update", function()
 			frame[GetQuestIndexForWatch(frame.watchIndex) and "Show" or "Hide"](frame)
 		end
 	else
-		ExpandButton:Hide()
 		ObjectiveTracker:Hide()
+		QuestWatchFrameHeader:Hide()
+
+		ExpandButton:Hide()
+		expanded = false
 	end
 end)
 
@@ -202,8 +210,6 @@ ExpandButton:HookScript("OnEnter", T.SetModifiedBackdrop)
 ExpandButton:HookScript("OnLeave", T.SetOriginalBackdrop)
 
 ExpandButton.plus:Hide()
-
-local expanded = true
 
 local function QuestWatchCollapse()
 	local f = ExpandButton
