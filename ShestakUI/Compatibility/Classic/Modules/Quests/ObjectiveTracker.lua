@@ -5,6 +5,8 @@ if not T.classic then return end
 --	Move QuestWatchFrame (with ModernQuestWatch from Ketho - EU-Boulderfist)
 ----------------------------------------------------------------------------------------
 local ObjectiveTracker = CreateFrame("Frame", "ObjectiveTrackerAnchor", UIParent)
+local ExpandButton = CreateFrame("Button", "QuestWatchFrameExpandButton", UIParent)
+
 ObjectiveTracker:SetPoint(unpack(C.position.quest))
 ObjectiveTracker:SetHeight(150)
 ObjectiveTracker:SetWidth(224)
@@ -115,6 +117,7 @@ hooksecurefunc("QuestWatch_Update", function()
 	end
 
 	if GetNumQuestWatches() > 0 then
+		ExpandButton:Show()
 		ObjectiveTracker:Show()
 
 		local questIndex, numObjectives, title, level, color, hex, text, watchText, objectivesGroup, objectivesCompleted, finished
@@ -156,6 +159,7 @@ hooksecurefunc("QuestWatch_Update", function()
 			frame[GetQuestIndexForWatch(frame.watchIndex) and "Show" or "Hide"](frame)
 		end
 	else
+		ExpandButton:Hide()
 		ObjectiveTracker:Hide()
 	end
 end)
@@ -175,7 +179,6 @@ f:SetScript("OnEvent", OnEvent)
 ----------------------------------------------------------------------------------------
 --	Expand / Collapse Button
 ----------------------------------------------------------------------------------------
-local ExpandButton = CreateFrame("Button", "QuestWatchFrameExpandButton", UIParent)
 ExpandButton:CreatePanel("Overlay", 17, 17, "TOPLEFT", QuestWatchFrameHeader, "TOPLEFT", -26, 22)
 ExpandButton:EnableMouse(true)
 ExpandButton:RegisterForClicks("AnyUp")
@@ -262,7 +265,7 @@ if C.automation.auto_collapse or C.automation.auto_collapse_reload then
 end
 
 ----------------------------------------------------------------------------------------
---	Move QuestTimerFrame (issues with the mover)
+--	Move QuestTimerFrame
 ----------------------------------------------------------------------------------------
 local ObjectiveTimer = CreateFrame("Frame", "ObjectiveTimerAnchor", UIParent)
 ObjectiveTimer:SetPoint("BOTTOM", Minimap, "TOP", 0, 64)
