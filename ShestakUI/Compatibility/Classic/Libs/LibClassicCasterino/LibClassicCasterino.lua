@@ -4,7 +4,7 @@ Author: d87
 --]================]
 if WOW_PROJECT_ID ~= WOW_PROJECT_CLASSIC then return end
 
-local MAJOR, MINOR = "LibClassicCasterino", 17
+local MAJOR, MINOR = "LibClassicCasterino", 19
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
@@ -25,6 +25,8 @@ local MOVECHECK_TIMEOUT = 4
 
 local UnitGUID = UnitGUID
 local bit_band = bit.band
+
+local GetSpellInfo = GetSpellInfo
 local GetTime = GetTime
 local CastingInfo = CastingInfo
 local ChannelInfo = ChannelInfo
@@ -51,6 +53,10 @@ local NPCSpells
 
 local castTimeCache = {}
 local castTimeCacheStartTimes = setmetatable({}, { __mode = "v" })
+
+local AIMED_SHOT = GetSpellInfo(19434)
+local castingAimedShot = false
+local playerGUID = UnitGUID("player")
 
 --[[
 function DUMPCASTS()
@@ -111,6 +117,11 @@ local function CastStart(srcGUID, castType, spellName, spellID, overrideCastTime
     end
 
     if castType == "CAST" then
+        if srcGUID == playerGUID and spellName == AIMED_SHOT then
+            castingAimedShot = true
+            movecheckGUIDs[srcGUID] = MOVECHECK_TIMEOUT
+            callbacks:Fire("UNIT_SPELLCAST_START", "player")
+        end
         FireToUnits("UNIT_SPELLCAST_START", srcGUID)
     else
         FireToUnits("UNIT_SPELLCAST_CHANNEL_START", srcGUID)
@@ -127,6 +138,10 @@ local function CastStop(srcGUID, castType, suffix )
 
         if castType == "CAST" then
             local event = "UNIT_SPELLCAST_"..suffix
+            if srcGUID == playerGUID and castingAimedShot then
+                castingAimedShot = false
+                callbacks:Fire(event, "player")
+            end
             FireToUnits(event, srcGUID)
         else
             FireToUnits("UNIT_SPELLCAST_CHANNEL_STOP", srcGUID)
@@ -249,7 +264,11 @@ local function IsSlowedDown(unit)
 end
 
 function lib:UnitCastingInfo(unit)
-    if UnitIsUnit(unit,"player") then return CastingInfo() end
+    if UnitIsUnit(unit,"player") then
+        if not castingAimedShot then
+            return CastingInfo()
+        end
+    end
     local guid = UnitGUID(unit)
     local cast = casters[guid]
     if cast then
@@ -280,7 +299,7 @@ end
 
 
 local Passthrough = function(self, event, unit, ...)
-    if unit == "player" then
+    if unit == "player" or UnitIsUnit(unit, "player") then
         callbacks:Fire(event, unit, ...)
     end
 end

@@ -14,9 +14,24 @@ ThreatLib:GetModule("NPCCore"):RegisterModule(HYDROSS_ID, function(Hydross)
 		["Better, much better."] = "Besser, viel besser.",
 	} end)
 
+	Hydross:RegisterTranslation("esES", function() return {
+		["Aaghh, the poison..."] = nil, -- STRING NEEDED
+		["Better, much better."] = nil, -- STRING NEEDED
+	} end)
+
+	Hydross:RegisterTranslation("esMX", function() return {
+		["Aaghh, the poison..."] = nil, -- STRING NEEDED
+		["Better, much better."] = nil, -- STRING NEEDED
+	} end)
+
 	Hydross:RegisterTranslation("frFR", function() return {
 		["Aaghh, the poison..."] = "Aaarrgh, le poison…",
 		["Better, much better."] = "Ça va mieux. Beaucoup mieux.",
+	} end)
+
+	Hydross:RegisterTranslation("itIT", function() return {
+		["Aaghh, the poison..."] = nil, -- STRING NEEDED
+		["Better, much better."] = nil, -- STRING NEEDED
 	} end)
 
 	Hydross:RegisterTranslation("koKR", function() return {
@@ -24,14 +39,24 @@ ThreatLib:GetModule("NPCCore"):RegisterModule(HYDROSS_ID, function(Hydross)
 		["Better, much better."] = "아... 기분이 훨씬 좋군.",
 	} end)
 
-	Hydross:RegisterTranslation("zhTW", function() return {
-		["Aaghh, the poison..."] = "啊，毒……",
-		["Better, much better."] = "很好，舒服多了。",
+	Hydross:RegisterTranslation("ptBR", function() return {
+		["Aaghh, the poison..."] = nil, -- STRING NEEDED
+		["Better, much better."] = nil, -- STRING NEEDED
+	} end)
+
+	Hydross:RegisterTranslation("ruRU", function() return {
+		["Aaghh, the poison..."] = nil, -- STRING NEEDED
+		["Better, much better."] = nil, -- STRING NEEDED
 	} end)
 
 	Hydross:RegisterTranslation("zhCN", function() return {
 		["Aaghh, the poison..."] = "啊……毒性侵袭了我……",
 		["Better, much better."] = "感觉好多了。",
+	} end)
+
+	Hydross:RegisterTranslation("zhTW", function() return {
+		["Aaghh, the poison..."] = "啊，毒……",
+		["Better, much better."] = "很好，舒服多了。",
 	} end)
 
 	local poisonPhase = Hydross:GetTranslation("Aaghh, the poison...")

@@ -2005,6 +2005,7 @@ do
 	currency_misc:SetPoint("TOPLEFT", currency_raid, "BOTTOMLEFT", 0, 0)
 
 	local classic = {
+		talents,
 		currency,
 		currency_archaeology,
 		currency_cooking,
@@ -2118,6 +2119,7 @@ do
 
 	local classic = {
 		vehicle_mouseover,
+		profession_tabs, -- TODO: Fix for Classic
 		enchantment_scroll,
 		archaeology,
 		chars_currency,

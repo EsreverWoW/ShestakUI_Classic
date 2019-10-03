@@ -11,20 +11,40 @@ ThreatLib:GetModule("NPCCore"):RegisterModule(BLACKHEART_ID, function(Blackheart
 		["Time for fun!"] = "Zeit für Spass!",
 	} end)
 
+	Blackheart:RegisterTranslation("esES", function() return {
+		["Time for fun!"] = nil, -- STRING NEEDED
+	} end)
+
+	Blackheart:RegisterTranslation("esMS", function() return {
+		["Time for fun!"] = nil, -- STRING NEEDED
+	} end)
+
 	Blackheart:RegisterTranslation("frFR", function() return {
 		["Time for fun!"] = "Rions un peu !",
+	} end)
+
+	Blackheart:RegisterTranslation("itIT", function() return {
+		["Time for fun!"] = nil, -- STRING NEEDED
 	} end)
 
 	Blackheart:RegisterTranslation("koKR", function() return {
 		["Time for fun!"] = "재미를 볼 시간이다!",
 	} end)
 
-	Blackheart:RegisterTranslation("zhTW", function() return {
-		["Time for fun!"] = "玩樂的時間到了!",
+	Blackheart:RegisterTranslation("ptBR", function() return {
+		["Time for fun!"] = nil, -- STRING NEEDED
+	} end)
+
+	Blackheart:RegisterTranslation("ruRU", function() return {
+		["Time for fun!"] = nil, -- STRING NEEDED
 	} end)
 
 	Blackheart:RegisterTranslation("zhCN", function() return {
 		["Time for fun!"] = "有好玩的啦！",
+	} end)
+
+	Blackheart:RegisterTranslation("zhTW", function() return {
+		["Time for fun!"] = "玩樂的時間到了!",
 	} end)
 
 	local blackheartPhase = Blackheart:GetTranslation("Time for fun!")

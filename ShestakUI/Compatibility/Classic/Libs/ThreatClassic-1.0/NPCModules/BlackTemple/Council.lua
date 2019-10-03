@@ -1,7 +1,6 @@
 local ThreatLib = LibStub and LibStub("ThreatClassic-1.0", true)
 if not ThreatLib then return end
 
-local ThreatLib = _G.ThreatLib
 local VERAS_ID = 22952
 
 ThreatLib:GetModule("NPCCore"):RegisterModule(VERAS_ID, function(Council)

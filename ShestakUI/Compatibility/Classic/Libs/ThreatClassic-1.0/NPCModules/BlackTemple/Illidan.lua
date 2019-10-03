@@ -6,31 +6,47 @@ local FLAME_ID = 22997
 
 ThreatLib:GetModule("NPCCore"):RegisterModule(ILLIDAN_ID, function(Illidan)
 	Illidan:RegisterTranslation("enUS", function() return {
-		["Behold the power... of the demon within!"] = "Behold the power... of the demon within!"
+		["Behold the power... of the demon within!"] = "Behold the power... of the demon within!",
 	} end)
 
 	Illidan:RegisterTranslation("deDE", function() return {
-		["Behold the power... of the demon within!"] = "Erzittert vor der Macht des Dämonen!"
+		["Behold the power... of the demon within!"] = "Erzittert vor der Macht des Dämonen!",
 	} end)
 
-	Illidan:RegisterTranslation("koKR", function() return {
-		["Behold the power... of the demon within!"] = "내 안에 깃든... 악마의 힘을 보여주마!"
+	Illidan:RegisterTranslation("esES", function() return {
+		["Behold the power... of the demon within!"] = nil, -- STRNG NEEDED
+	} end)
+
+	Illidan:RegisterTranslation("esMX", function() return {
+		["Behold the power... of the demon within!"] = nil, -- STRNG NEEDED
 	} end)
 
 	Illidan:RegisterTranslation("frFR", function() return {
-		["Behold the power... of the demon within!"] = "Contemplez la puissance... du démon intérieur !"
+		["Behold the power... of the demon within!"] = "Contemplez la puissance... du démon intérieur !",
 	} end)
 
-	Illidan:RegisterTranslation("zhTW", function() return {
-		["Behold the power... of the demon within!"] = "感受我體內的惡魔之力吧!"
+	Illidan:RegisterTranslation("itIT", function() return {
+		["Behold the power... of the demon within!"] = nil, -- STRNG NEEDED
 	} end)
 
-	Illidan:RegisterTranslation("zhCN", function() return {
-		["Behold the power... of the demon within!"] = "感受我体内的恶魔之力吧！"
+	Illidan:RegisterTranslation("koKR", function() return {
+		["Behold the power... of the demon within!"] = "내 안에 깃든... 악마의 힘을 보여주마!",
+	} end)
+
+	Illidan:RegisterTranslation("ptBR", function() return {
+		["Behold the power... of the demon within!"] = nil, -- STRNG NEEDED
 	} end)
 
 	Illidan:RegisterTranslation("ruRU", function() return {
-		["Behold the power... of the demon within!"] = "Узрите мощь демона!"
+		["Behold the power... of the demon within!"] = "Узрите мощь демона!",
+	} end)
+
+	Illidan:RegisterTranslation("zhCN", function() return {
+		["Behold the power... of the demon within!"] = "感受我体内的恶魔之力吧！",
+	} end)
+
+	Illidan:RegisterTranslation("zhTW", function() return {
+		["Behold the power... of the demon within!"] = "感受我體內的惡魔之力吧!",
 	} end)
 
 	local demon = Illidan:GetTranslation("Behold the power... of the demon within!")
@@ -42,7 +58,7 @@ ThreatLib:GetModule("NPCCore"):RegisterModule(ILLIDAN_ID, function(Illidan)
 		self:RegisterCombatant(ILLIDAN_ID, true)
 		self:RegisterChatEvent("yell", demon, self.PhaseDemon)
 		self:RegisterSpellHandler("SPELL_CAST_SUCCESS", self.flameSpawn, 39855)
-		--self:RegisterSpellHandler("SPELL_CAST_SUCCESS", self.ShadowPrison, 40647)
+		-- self:RegisterSpellHandler("SPELL_CAST_SUCCESS", self.ShadowPrison, 40647)
 		self:RegisterCombatant(FLAME_ID, self.flameDies)
 	end
 
