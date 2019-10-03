@@ -111,6 +111,7 @@ local function CheckSpec()
 		elseif T.class == "PRIEST" then
 			DispellFilter.Magic = true
 		elseif T.class == "SHAMAN" then
+			DispellFilter.Curse = false
 			DispellFilter.Poison = true
 			DispellFilter.Disease = true
 		elseif T.class == "WARLOCK" then
