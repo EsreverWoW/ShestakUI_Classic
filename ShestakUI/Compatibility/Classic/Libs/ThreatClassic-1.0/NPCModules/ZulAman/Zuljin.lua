@@ -17,18 +17,11 @@ ThreatLib:GetModule("NPCCore"):RegisterModule(ZULJIN_ID, function(Zuljin)
 		["Ya don' have to look to da sky to see da dragonhawk!"] = "Was starrt Ihr in die Luft? Der Drachenfalke steht schon vor Euch!",
 	} end)
 
-	Zuljin:RegisterTranslation("esES", function() return {
-		["Got me some new tricks... like me brudda bear...."] = nil, -- STRING NEEDED
-		["Dere be no hidin' from da eagle!"] = nil, -- STRING NEEDED
-		["Let me introduce you to me new bruddas: fang and claw!"] = nil, -- STRING NEEDED
-		["Ya don' have to look to da sky to see da dragonhawk!"] = nil, -- STRING NEEDED
-	} end)
-
-	Zuljin:RegisterTranslation("esMX", function() return {
-		["Got me some new tricks... like me brudda bear...."] = nil, -- STRING NEEDED
-		["Dere be no hidin' from da eagle!"] = nil, -- STRING NEEDED
-		["Let me introduce you to me new bruddas: fang and claw!"] = nil, -- STRING NEEDED
-		["Ya don' have to look to da sky to see da dragonhawk!"] = nil, -- STRING NEEDED
+	Zuljin:RegisterTranslation("koKR", function() return {
+		["Got me some new tricks... like me brudda bear...."] = "새로운 기술을 익혔지... 내 형제, 곰처럼...",
+		["Dere be no hidin' from da eagle!"] = "독수리의 눈을 피할 수는 없다!",
+		["Let me introduce you to me new bruddas: fang and claw!"] = "내 새로운 형제, 송곳니와 발톱을 보아라!",
+		["Ya don' have to look to da sky to see da dragonhawk!"] = "용매를 하늘에서만 찾을 필요는 없다!",
 	} end)
 
 	Zuljin:RegisterTranslation("frFR", function() return {
@@ -38,32 +31,11 @@ ThreatLib:GetModule("NPCCore"):RegisterModule(ZULJIN_ID, function(Zuljin)
 		["Ya don' have to look to da sky to see da dragonhawk!"] = "Pas besoin d'lever les yeux au ciel pour voir l'faucon-dragon !",
 	} end)
 
-	Zuljin:RegisterTranslation("itIT", function() return {
-		["Got me some new tricks... like me brudda bear...."] = nil, -- STRING NEEDED
-		["Dere be no hidin' from da eagle!"] = nil, -- STRING NEEDED
-		["Let me introduce you to me new bruddas: fang and claw!"] = nil, -- STRING NEEDED
-		["Ya don' have to look to da sky to see da dragonhawk!"] = nil, -- STRING NEEDED
-	} end)
-
-	Zuljin:RegisterTranslation("koKR", function() return {
-		["Got me some new tricks... like me brudda bear...."] = "새로운 기술을 익혔지... 내 형제, 곰처럼...",
-		["Dere be no hidin' from da eagle!"] = "독수리의 눈을 피할 수는 없다!",
-		["Let me introduce you to me new bruddas: fang and claw!"] = "내 새로운 형제, 송곳니와 발톱을 보아라!",
-		["Ya don' have to look to da sky to see da dragonhawk!"] = "용매를 하늘에서만 찾을 필요는 없다!",
-	} end)
-
-	Zuljin:RegisterTranslation("ptBR", function() return {
-		["Got me some new tricks... like me brudda bear...."] = nil, -- STRING NEEDED
-		["Dere be no hidin' from da eagle!"] = nil, -- STRING NEEDED
-		["Let me introduce you to me new bruddas: fang and claw!"] = nil, -- STRING NEEDED
-		["Ya don' have to look to da sky to see da dragonhawk!"] = nil, -- STRING NEEDED
-	} end)
-
-	Zuljin:RegisterTranslation("ruRU", function() return {
-		["Got me some new tricks... like me brudda bear...."] = "Выучил новый фокус… прямо как братишка-медведь…",
-		["Dere be no hidin' from da eagle!"] = "От орла нигде не скрыться!",
-		["Let me introduce you to me new bruddas: fang and claw!"] = "Позвольте представить моих двух братцев: клык и коготь!",
-		["Ya don' have to look to da sky to see da dragonhawk!"] = "Для того чтобы увидеть дракондора, в небо смотреть необязательно!",
+	Zuljin:RegisterTranslation("zhTW", function() return {
+		["Got me some new tricks... like me brudda bear...."] = "賜給我一些新的力量……讓我像熊一樣……",
+		["Dere be no hidin' from da eagle!"] = "在雄鷹之下無所遁形!",
+		["Let me introduce you to me new bruddas: fang and claw!"] = "讓我來介紹我的新兄弟:尖牙和利爪!",
+		["Ya don' have to look to da sky to see da dragonhawk!"] = "你不需要仰望天空才看得到龍鷹!",
 	} end)
 
 	Zuljin:RegisterTranslation("zhCN", function() return {
@@ -73,12 +45,13 @@ ThreatLib:GetModule("NPCCore"):RegisterModule(ZULJIN_ID, function(Zuljin)
 		["Ya don' have to look to da sky to see da dragonhawk!"] = "龙鹰，不用抬头就能看见！",
 	} end)
 
-	Zuljin:RegisterTranslation("zhTW", function() return {
-		["Got me some new tricks... like me brudda bear...."] = "賜給我一些新的力量……讓我像熊一樣……",
-		["Dere be no hidin' from da eagle!"] = "在雄鷹之下無所遁形!",
-		["Let me introduce you to me new bruddas: fang and claw!"] = "讓我來介紹我的新兄弟:尖牙和利爪!",
-		["Ya don' have to look to da sky to see da dragonhawk!"] = "你不需要仰望天空才看得到龍鷹!",
+	Zuljin:RegisterTranslation("ruRU", function() return {
+		["Got me some new tricks... like me brudda bear...."] = "Выучил новый фокус… прямо как братишка-медведь…",
+		["Dere be no hidin' from da eagle!"] = "От орла нигде не скрыться!",
+		["Let me introduce you to me new bruddas: fang and claw!"] = "Позвольте представить моих двух братцев: клык и коготь!",
+		["Ya don' have to look to da sky to see da dragonhawk!"] = "Для того чтобы увидеть дракондора, в небо смотреть необязательно!",
 	} end)
+
 
 	local bear = Zuljin:GetTranslation("Got me some new tricks... like me brudda bear....")
 	local eagle = Zuljin:GetTranslation("Dere be no hidin' from da eagle!")

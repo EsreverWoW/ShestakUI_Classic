@@ -1571,7 +1571,7 @@ end
 ----------------------------------------------------------------------------------------
 --	Talents
 ----------------------------------------------------------------------------------------
-if not T.classic and talents.enabled then
+if talents.enabled then
 	local lootSpecName, specName
 	local specList = {
 		{text = SPECIALIZATION, isTitle = true, notCheckable = true},
@@ -1590,7 +1590,11 @@ if not T.classic and talents.enabled then
 	}
 	Inject("Talents", {
 		OnLoad = function(self)
-			RegEvents(self, "PLAYER_ENTERING_WORLD PLAYER_TALENT_UPDATE PLAYER_LOOT_SPEC_UPDATED")
+			if not T.classic then
+				RegEvents(self, "PLAYER_ENTERING_WORLD PLAYER_TALENT_UPDATE PLAYER_LOOT_SPEC_UPDATED")
+			else
+				RegEvents(self, "PLAYER_ENTERING_WORLD CHARACTER_POINTS_CHANGED UNIT_INVENTORY_CHANGED UPDATE_BONUS_ACTIONBAR")
+			end
 		end,
 		OnEvent = function(self)
 			if UnitLevel(P) < SHOW_SPEC_LEVEL then
@@ -1598,32 +1602,53 @@ if not T.classic and talents.enabled then
 				return
 			end
 
-			local lootSpec = GetLootSpecialization()
-			local spec = GetSpecialization()
+			local lootSpec
+			if not T.classic then
+				lootSpec = GetLootSpecialization()
+				lootSpecName = lootSpec and select(2, GetSpecializationInfoByID(lootSpec)) or NO
+			end
 
-			lootSpecName = lootSpec and select(2, GetSpecializationInfoByID(lootSpec)) or NO
-			specName = spec and select(2, GetSpecializationInfo(spec)) or NO
+			local spec
+			if T.classic then
+				spec = T.GetSpecialization()
+				specName = spec and select(2, T.GetSpecializationInfo(spec)) or NO
+			else
+				spec = GetSpecialization()
+				specName = spec and select(2, GetSpecializationInfo(spec)) or NO
+			end
 
 			local specIcon, lootIcon = "", ""
 			local lootText = LOOT
 
-			local _, _, _, specTex = GetSpecializationInfo(spec)
+			local specTex
+			if T.classic then
+				specTex = select(4, T.GetSpecializationInfo(spec))
+			else
+				specTex = select(4, GetSpecializationInfo(spec))
+			end
+
 			if specTex then
 				specIcon = format("|T%s:14:14:0:0:64:64:5:59:5:59|t", specTex)
 			end
 
-			if lootSpec == 0 then
-				lootIcon = specIcon
-				lootText = "|cff55ff55"..lootText.."|r"
-				lootSpecName = "|cff55ff55"..specName.."|r"
-			else
-				local _, _, _, texture = GetSpecializationInfoByID(lootSpec)
-				if texture then
-					lootIcon = format("|T%s:14:14:0:0:64:64:5:59:5:59|t", texture)
+			if not T.classic then
+				if lootSpec == 0 then
+					lootIcon = specIcon
+					lootText = "|cff55ff55"..lootText.."|r"
+					lootSpecName = "|cff55ff55"..specName.."|r"
+				else
+					local _, _, _, texture = GetSpecializationInfoByID(lootSpec)
+					if texture then
+						lootIcon = format("|T%s:14:14:0:0:64:64:5:59:5:59|t", texture)
+					end
 				end
 			end
 
-			self.text:SetText(format("%s:%s  %s:%s", L_STATS_SPEC, specIcon, lootText, lootIcon))
+			if not T.classic then
+				self.text:SetText(format("%s:%s  %s:%s", L_STATS_SPEC, specIcon, lootText, lootIcon))
+			else
+				self.text:SetText(format("%s:%s", L_STATS_SPEC, specIcon))
+			end
 			if specIcon and C.font.stats_font_size ~= 15 and C.font.stats_font_size ~= 17 then
 				local point, relativeTo, relativePoint, xOfs = self.text:GetPoint()
 				self.text:SetPoint(point, relativeTo, relativePoint, xOfs, -1)
@@ -1637,10 +1662,16 @@ if not T.classic and talents.enabled then
 				GameTooltip:ClearAllPoints()
 				GameTooltip:SetPoint(modules.Talents.tip_anchor, modules.Talents.tip_frame, modules.Talents.tip_x, modules.Talents.tip_y)
 				GameTooltip:ClearLines()
-				GameTooltip:AddLine(SPECIALIZATION.."/"..LOOT, tthead.r, tthead.g, tthead.b)
-				GameTooltip:AddLine(" ")
-				GameTooltip:AddDoubleLine(SPECIALIZATION, specName, ttsubh.r, ttsubh.g, ttsubh.b, 1, 1, 1)
-				GameTooltip:AddDoubleLine(LOOT, lootSpecName, ttsubh.r, ttsubh.g, ttsubh.b, 1, 1, 1)
+				if not T.classic then
+					GameTooltip:AddLine(SPECIALIZATION.."/"..LOOT, tthead.r, tthead.g, tthead.b)
+					GameTooltip:AddLine(" ")
+					GameTooltip:AddDoubleLine(SPECIALIZATION, specName, ttsubh.r, ttsubh.g, ttsubh.b, 1, 1, 1)
+					GameTooltip:AddDoubleLine(LOOT, lootSpecName, ttsubh.r, ttsubh.g, ttsubh.b, 1, 1, 1)
+				else
+					GameTooltip:AddLine(SPECIALIZATION, tthead.r, tthead.g, tthead.b)
+					GameTooltip:AddLine(" ")
+					GameTooltip:AddDoubleLine(SPECIALIZATION, specName, ttsubh.r, ttsubh.g, ttsubh.b, 1, 1, 1)
+				end
 				GameTooltip:Show()
 			end
 		end,
@@ -1652,48 +1683,54 @@ if not T.classic and talents.enabled then
 				print("|cffffff00"..format(FEATURE_BECOMES_AVAILABLE_AT_LEVEL, SHOW_SPEC_LEVEL).."|r")
 				return
 			end
-			if b == "LeftButton" then
-				if not PlayerTalentFrame then
-					LoadAddOn("Blizzard_TalentUI")
-				end
-				if IsShiftKeyDown() then
-					PlayerTalentFrame_Toggle()
-				else
+			if not T.classic then
+				if b == "LeftButton" then
+					if not PlayerTalentFrame then
+						LoadAddOn("Blizzard_TalentUI")
+					end
+					if IsShiftKeyDown() then
+						ToggleTalentFrame()
+					else
+						for index = 1, 4 do
+							local id, name, _, texture = GetSpecializationInfo(index)
+							if id then
+								if GetSpecializationInfo(GetSpecialization()) == id then
+									name = "|cff55ff55"..name.."|r"
+								end
+								specList[index + 1].text = format("|T%s:"..t_icon..":"..t_icon..":0:0:64:64:5:59:5:59|t  %s", texture, name)
+								specList[index + 1].func = function() SetSpecialization(index) end
+							else
+								specList[index + 1] = nil
+							end
+						end
+						EasyMenu(specList, LSMenus, self, 0, 24, "MENU")
+					end
+				elseif b == "RightButton" and GetSpecialization() then
+					local lootSpec = GetLootSpecialization()
+					local _, specName = GetSpecializationInfo(GetSpecialization())
+					local specDefault = format(LOOT_SPECIALIZATION_DEFAULT, specName)
+					if lootSpec == 0 then
+						specDefault = "|cff55ff55"..format(LOOT_SPECIALIZATION_DEFAULT, specName).."|r"
+					end
+					lootList[2].text = specDefault
 					for index = 1, 4 do
 						local id, name, _, texture = GetSpecializationInfo(index)
 						if id then
-							if GetSpecializationInfo(GetSpecialization()) == id then
+							if lootSpec == id then
 								name = "|cff55ff55"..name.."|r"
 							end
-							specList[index + 1].text = format("|T%s:"..t_icon..":"..t_icon..":0:0:64:64:5:59:5:59|t  %s", texture, name)
-							specList[index + 1].func = function() SetSpecialization(index) end
+							lootList[index + 2].text = format("|T%s:"..t_icon..":"..t_icon..":0:0:64:64:5:59:5:59|t  %s", texture, name)
+							lootList[index + 2].func = function() SetLootSpecialization(id) end
 						else
-							specList[index + 1] = nil
+							lootList[index + 2] = nil
 						end
 					end
-					EasyMenu(specList, LSMenus, self, 0, 24, "MENU")
+					EasyMenu(lootList, LSMenus, self, 0, 40, "MENU")
 				end
-			elseif b == "RightButton" and GetSpecialization() then
-				local lootSpec = GetLootSpecialization()
-				local _, specName = GetSpecializationInfo(GetSpecialization())
-				local specDefault = format(LOOT_SPECIALIZATION_DEFAULT, specName)
-				if lootSpec == 0 then
-					specDefault = "|cff55ff55"..format(LOOT_SPECIALIZATION_DEFAULT, specName).."|r"
+			else
+				if b == "LeftButton" then
+					ToggleTalentFrame()
 				end
-				lootList[2].text = specDefault
-				for index = 1, 4 do
-					local id, name, _, texture = GetSpecializationInfo(index)
-					if id then
-						if lootSpec == id then
-							name = "|cff55ff55"..name.."|r"
-						end
-						lootList[index + 2].text = format("|T%s:"..t_icon..":"..t_icon..":0:0:64:64:5:59:5:59|t  %s", texture, name)
-						lootList[index + 2].func = function() SetLootSpecialization(id) end
-					else
-						lootList[index + 2] = nil
-					end
-				end
-				EasyMenu(lootList, LSMenus, self, 0, 40, "MENU")
 			end
 		end
 	})

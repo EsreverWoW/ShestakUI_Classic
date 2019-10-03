@@ -1,5 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
-if T.classic or C.misc.profession_tabs ~= true then return end -- TODO: Fix for Classic
+if C.misc.profession_tabs ~= true then return end
 
 ----------------------------------------------------------------------------------------
 --	Professions tabs on tradeskill frame(ProfessionTabs by Beoko)
