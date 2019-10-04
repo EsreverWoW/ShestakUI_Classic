@@ -1702,6 +1702,16 @@ end
 ----------------------------------------------------------------------------------------
 --	Character Stats
 ----------------------------------------------------------------------------------------
+local function IsWearingShield()
+	local slotID = GetInventorySlotInfo("SecondaryHandSlot")
+	local itemID = GetInventoryItemID('player', slotID)
+
+	if itemID then
+		local itemEquipLoc = select(9, GetItemInfo(itemID))
+		return itemEquipLoc == "INVTYPE_SHIELD"
+	end
+end
+
 if stats.enabled then
 	local function tags(sub)
 		local percent, string = true
@@ -1713,9 +1723,7 @@ if stats.enabled then
 			local range = RangedBase + RangedPosBuff + RangedNegBuff
 			local heal = GetSpellBonusHealing()
 			local spell
-			if not T.classic then
-				spell = GetSpellBonusDamage(7)
-			else
+			if T.classic then
 				local current = {}
 				local best = 1
 				for i = 1, 7 do
@@ -1725,6 +1733,8 @@ if stats.enabled then
 					end
 				end
 				spell = best
+			else
+				spell = GetSpellBonusDamage(7)
 			end
 			local attack = Effective
 			if heal > spell then
@@ -1740,22 +1750,107 @@ if stats.enabled then
 				value = power
 			end
 			string = value
-		elseif not T.classic and sub == "mastery" then
-			string = GetMasteryEffect()
+			if T.classic then
+				return format("%.0f", string)
+			end
+		elseif sub == "mastery" then
+			string = not T.classic and GetMasteryEffect() or 0
+		elseif sub == "hit" then
+			local value, physical, spell = 0, GetHitModifier(), GetSpellHitModifier()
+			if physical > spell then
+				value = physical
+			else
+				value = spell
+			end
+			string = value
 		elseif sub == "haste" then
 			string = GetHaste()
-		elseif not T.classic and sub == "resilience" then
-			string, percent = GetCombatRating(16)
+		elseif sub == "resilience" then
+			string, percent = not T.classic and GetCombatRating(16) or 0
 		elseif sub == "crit" then
-			string = GetCritChance()
+			if T.classic then
+				local value, crit
+				local melee, ranged = GetCritChance(), GetRangedCritChance()
+				local spell
+				local current = {}
+				local best = 1
+				for i = 1, 7 do
+					current[i] = GetSpellCritChance(i)
+					if current[i] > current[best] then
+						best = i
+					end
+					spell = best
+				end
+				crit = spell
+				if melee > crit and T.class ~= "HUNTER" then
+					value = melee
+				elseif T.class == "HUNTER" then
+					value = ranged
+				else
+					value = power
+				end
+				string = value
+			else
+				string = GetCritChance()
+			end
 		elseif sub == "dodge" then
 			string = GetDodgeChance()
 		elseif sub == "parry" then
-			string = GetParryChance()
+			if T.class == "DRUID" and GetBonusBarOffset() == 3 then
+				string = 0
+			else
+				string = GetParryChance()
+			end
 		elseif sub == "block" then
-			string = GetBlockChance()
+			string = IsWearingShield() and GetBlockChance() or 0
 		elseif sub == "avoidance" then
-			string = GetDodgeChance() + GetParryChance()
+			if T.classic then
+				local targetLevel, playerLevel, levelDiff = UnitLevel("target"), T.level, 0
+				local dodge, parry, block = GetDodgeChance(), GetParryChance(), GetBlockChance()
+				local baseMissChance = T.race == "NightElf" and 7 or 5
+
+				if targetLevel == -1 then
+					levelDiff = 3
+				elseif targetLevel > playerLevel then
+					levelDiff = (targetLevel - playerLevel)
+				elseif targetLevel < playerLevel and targetLevel > 0 then
+					levelDiff = (targetLevel - playerLevel)
+				else
+					levelDiff = 0
+				end
+
+				if levelDiff >= 0 then
+					dodge = dodge - levelDiff * 1.5
+					parry = parry - levelDiff * 1.5
+					block = block - levelDiff * 1.5
+					baseMissChance = baseMissChance - levelDiff * 1.5
+				else
+					dodge = dodge + abs(levelDiff * 1.5)
+					parry = parry + abs(levelDiff * 1.5)
+					block = block + abs(levelDiff * 1.5)
+					baseMissChance = baseMissChance + abs(levelDiff * 1.5)
+				end
+
+				if dodge <= 0 then dodge = 0 end
+				if parry <= 0 then parry = 0 end
+				if block <= 0 then block = 0 end
+
+				if T.class == "DRUID" and GetBonusBarOffset() == 3 then
+					parry = 0
+				end
+
+				if not IsWearingShield() then
+					block = 0
+				end
+
+				local avoided = dodge + parry + baseMissChance
+				local blocked = (100 - avoided) * block / 100
+				local avoidance = avoided + blocked
+
+				string = avoidance
+			else
+				string = GetDodgeChance() + GetParryChance()
+			end
 		elseif sub == "manaregen" then
 			local I5SR = true
 			if T.class == "ROGUE" or T.class == "WARRIOR" or T.class == "DEATHKNIGHT" then
@@ -1767,10 +1862,10 @@ if stats.enabled then
 		elseif sub == "armor" then
 			local _, eff = UnitArmor(P)
 			string, percent = eff
-		elseif not T.classic and sub == "versatility" then
-			string = GetCombatRatingBonus(CR_VERSATILITY_DAMAGE_DONE) + GetVersatilityBonus(CR_VERSATILITY_DAMAGE_DONE)
-		elseif not T.classic and sub == "leech" then
-			string = GetCombatRating(17)
+		elseif sub == "versatility" then
+			string = not T.classic and GetCombatRatingBonus(CR_VERSATILITY_DAMAGE_DONE) + GetVersatilityBonus(CR_VERSATILITY_DAMAGE_DONE) or 0
+		elseif sub == "leech" then
+			string = not T.classic and GetCombatRating(17) or 0
 		else
 			string, percent = format("[%s]", sub)
 		end
@@ -1779,7 +1874,7 @@ if stats.enabled then
 	end
 	Inject("Stats", {
 		OnLoad = function(self)
-			RegEvents(self, "PLAYER_LOGIN UNIT_STATS UNIT_DAMAGE UNIT_RANGEDDAMAGE PLAYER_DAMAGE_DONE_MODS UNIT_ATTACK_SPEED UNIT_ATTACK_POWER UNIT_RANGED_ATTACK_POWER")
+			RegEvents(self, "PLAYER_LOGIN PLAYER_TARGET_CHANGED PLAYER_EQUIPMENT_CHANGED UNIT_STATS UNIT_AURA UNIT_DAMAGE UNIT_RANGEDDAMAGE PLAYER_DAMAGE_DONE_MODS UNIT_ATTACK_SPEED UNIT_ATTACK_POWER UNIT_RANGED_ATTACK_POWER")
 		end,
 		OnEvent = function(self) self.fired = true end,
 		OnUpdate = function(self, u)

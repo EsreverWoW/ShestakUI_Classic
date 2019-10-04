@@ -48,6 +48,7 @@
 	<Include file="Libs\oGlow\oGlow.xml"/>
 	<Script file="Libs\LitePanels\LitePanels.lua"/>
 	<Script file="Libs\LitePanels\Layout.lua"/>
+	<Script file="Compatibility\Classic\Config\DataText.lua"/>
 	<Script file="Config\DataText.lua"/>
 	<Script file="Libs\LiteStats\LiteStats.lua"/>
 	<Script file="Modules\UnitFrames\Colors.lua"/>

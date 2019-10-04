@@ -5,6 +5,7 @@ local T, C, L, _ = unpack(select(2, ...))
 ----------------------------------------------------------------------------------------
 T.dummy = function() return end
 T.name = UnitName("player")
+T.race = select(2, UnitRace("player"))
 T.class = select(2, UnitClass("player"))
 T.level = UnitLevel("player")
 T.client = GetLocale()
