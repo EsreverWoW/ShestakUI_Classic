@@ -1678,13 +1678,13 @@ function Stuffing.Menu(self, level)
 	end
 	UIDropDownMenu_AddButton(info, level)
 
-	--[[
-	wipe(info)
-	info.text = "Show Keyring" -- L_BAG_SHOW_KEYRING
-	info.notCheckable = 1
-	info.func = ToggleKeyRing
-	UIDropDownMenu_AddButton(info, level)
-	--]]
+	if ToggleKeyRing then -- since KeyRing isn't in phase 1, but it will be in phase 2
+		wipe(info)
+		info.text = "Show Keyring" --TODO: L_BAG_SHOW_KEYRING
+		info.notCheckable = 1
+		info.func = ToggleKeyRing
+		UIDropDownMenu_AddButton(info, level)
+	end
 
 	wipe(info)
 	info.disabled = nil
