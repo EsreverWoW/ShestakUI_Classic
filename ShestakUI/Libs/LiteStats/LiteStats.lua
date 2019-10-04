@@ -1295,7 +1295,11 @@ if friends.enabled then
 			if b == "MiddleButton" then
 				ToggleIgnorePanel()
 			elseif b == "LeftButton" then
-				ToggleFriendsFrame(1)
+				if T.classic then
+					ToggleFrame(FriendsFrame)
+				else
+					ToggleFriendsFrame(1)
+				end
 			elseif b == "RightButton" then
 				HideTT(self)
 

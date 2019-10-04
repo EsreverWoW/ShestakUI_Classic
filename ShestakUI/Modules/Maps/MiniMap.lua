@@ -223,7 +223,11 @@ local micromenu = {
 		ToggleGuildFrame()
 	end},
 	{text = SOCIAL_BUTTON, notCheckable = 1, func = function()
-		ToggleFriendsFrame()
+		if T.classic then
+			ToggleFrame(FriendsFrame)
+		else
+			ToggleFriendsFrame()
+		end
 	end},
 	{text = CHAT_CHANNELS, notCheckable = 1, func = function()
 		ToggleChannelFrame()
