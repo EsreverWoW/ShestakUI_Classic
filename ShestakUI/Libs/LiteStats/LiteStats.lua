@@ -1791,7 +1791,7 @@ if stats.enabled then
 				elseif T.class == "HUNTER" then
 					value = ranged
 				else
-					value = power
+					value = crit
 				end
 				string = value
 			else
