@@ -4,7 +4,7 @@ Author: d87
 --]================]
 if WOW_PROJECT_ID ~= WOW_PROJECT_CLASSIC then return end
 
-local MAJOR, MINOR = "LibClassicCasterino", 19
+local MAJOR, MINOR = "LibClassicCasterino", 20
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
@@ -425,6 +425,18 @@ classCasts = {
     [10216] = 3, -- Flamestrike
     [10207] = 1.5, -- Scorch
     [25304] = 3, -- Frostbolt
+    [3561] = 10, -- Teleport: Stormwind
+    [3562] = 10, -- Teleport: Ironforge
+    [3563] = 10, -- Teleport: Undercity
+    [3565] = 10, -- Teleport: Darnassus
+    [3566] = 10, -- Teleport: Thuner Bluff
+    [3567] = 10, -- Teleport: Orgrimmar
+    [10059] = 10, -- Portal: Stormwind
+    [11416] = 10, -- Portal: Ironforge
+    [11418] = 10, -- Portal: Undercity
+    [11419] = 10, -- Portal: Darnassus
+    [11420] = 10, -- Portal: Thuner Bluff
+    [11417] = 10, -- Portal: Orgrimmar
 
     [10876] = 3, -- Mana Burn
     [10955] = 1.5, -- Shackle Undead
