@@ -1,7 +1,7 @@
 local lib = LibStub and LibStub("LibClassicDurations", true)
 if not lib then return end
 
-local Type, Version = "SpellTable", 30
+local Type, Version = "SpellTable", 33
 if lib:GetDataVersion(Type) >= Version then return end  -- older versions didn't have that function
 
 local Spell = lib.AddAura
@@ -65,6 +65,14 @@ lib.indirectRefreshSpells = {
             ["SPELL_CAST_SUCCESS"] = true
         },
         targetSpellID = 29203, -- Healing Way
+    },
+
+    [GetSpellInfo(10)] = { -- Blizzard
+        events = {
+            ["SPELL_PERIODIC_DAMAGE"] = true
+        },
+        applyAura = true,
+        targetSpellID = 12486, -- Imp Blizzard
     },
 
 }
@@ -467,9 +475,9 @@ Spell( 6358, {
     duration = function(spellID, isSrcPlayer)
         if isSrcPlayer then
             local mul = 1 + Talent(18754, 18755, 18756)*0.1
-            return 20*mul
+            return 15*mul
         else
-            return 20
+            return 15
         end
     end
 }) -- Seduction, varies, Improved Succubus
@@ -688,7 +696,7 @@ Spell(25999, { duration = 1 }) -- Boar Charge
 -------------
 
 Spell({ 1459, 1460, 1461, 10156, 10157 }, { duration = 1800, type = "BUFF", castFilter = true }) -- Arcane Intellect
-Spell( 23028, { duration = 1800, type = "BUFF", castFilter = true }) -- Arcane Brilliance
+Spell( 23028, { duration = 3600, type = "BUFF", castFilter = true }) -- Arcane Brilliance
 Spell({ 6117, 22782, 22783 }, { duration = 1800, type = "BUFF", castFilter = true }) -- Mage Armor
 Spell({ 168, 7300, 7301, 7302, 7320, 10219, 10220 }, { duration = 1800, type = "BUFF", castFilter = true }) -- Frost/Ice Armor
 
@@ -750,20 +758,32 @@ Spell({ 120, 8492, 10159, 10160, 10161 }, {
     end
 }) -- Cone of Cold
 
--- DOESN'T APPEAR IN COMBAT LOG
--- Spell({ 12484, 12485, 12486 }, {
---     duration = function(spellID, isSrcPlayer)
---         local permafrost = isSrcPlayer and Talent(11175, 12569, 12571) or 0
---         return 1.5 + permafrost
---     end
--- }) -- Improved Blizzard
+
+if class == "MAGE" then
+-- Chilled from Imp Blizzard
+Spell({ 12484, 12485, 12486 }, {
+    duration = function(spellID, isSrcPlayer)
+        if Talent(11185, 12487, 12488) > 0 then -- Don't show anything if mage doesn't have imp blizzard talent
+            local permafrost = Talent(11175, 12569, 12571) -- Always count player's permafost, even source isn't player.
+            return 1.5 + permafrost + 0.5
+            -- 0.5 compensates for delay between damage event and slow application
+        else
+            return nil
+        end
+    end
+}) -- Improved Blizzard (Chilled)
+
+-- Manually setting a custom spellname for ImpBlizzard's "Chilled" aura
+lib.spellNameToID["ImpBlizzard"] = 12486
+-- Frost Armor will overwrite Chilled to 7321 right after
+end
 
 Spell({6136, 7321}, {
     duration = function(spellID, isSrcPlayer)
         local permafrost = isSrcPlayer and Talent(11175, 12569, 12571) or 0
         return 5 + permafrost
     end
-}) -- Frost Armor
+}) -- Frost/Ice Armor (Chilled)
 
 Spell({ 116, 205, 837, 7322, 8406, 8407, 8408, 10179, 10180, 10181, 25304 }, {
     duration = function(spellID, isSrcPlayer)

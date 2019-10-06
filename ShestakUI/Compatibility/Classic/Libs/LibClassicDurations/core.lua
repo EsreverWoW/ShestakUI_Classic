@@ -61,7 +61,7 @@ Usage example 2:
 --]================]
 if WOW_PROJECT_ID ~= WOW_PROJECT_CLASSIC then return end
 
-local MAJOR, MINOR = "LibClassicDurations", 24
+local MAJOR, MINOR = "LibClassicDurations", 25
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
@@ -460,7 +460,16 @@ function f:COMBAT_LOG_EVENT_UNFILTERED(event)
                 if not condition(isMine) then return end
             end
 
-            RefreshTimer(srcGUID, dstGUID, targetSpellID)
+            if refreshTable.applyAura then
+                local opts = spells[targetSpellID]
+                if opts then
+                    local targetAuraType = "DEBUFF"
+                    local targetSpellName = GetSpellInfo(targetSpellID)
+                    SetTimer(srcGUID, dstGUID, dstName, dstFlags, targetSpellID, targetSpellName, opts, targetAuraType)
+                end
+            else
+                RefreshTimer(srcGUID, dstGUID, targetSpellID)
+            end
         end
     end
 
@@ -687,6 +696,21 @@ local function GetGUIDAuraTime(dstGUID, spellName, spellID, srcGUID, isStacking)
                 return duration, expirationTime
             end
         end
+    end
+end
+
+if playerClass == "MAGE" then
+    local NormalGetGUIDAuraTime = GetGUIDAuraTime
+    local Chilled = GetSpellInfo(12486)
+    GetGUIDAuraTime = function(dstGUID, spellName, spellID, ...)
+
+        -- Overriding spellName for Improved blizzard's spellIDs
+        if spellName == Chilled and
+            spellID == 12486 or spellID == 12484 or spellID == 12485
+        then
+            spellName = "ImpBlizzard"
+        end
+        return NormalGetGUIDAuraTime(dstGUID, spellName, spellID, ...)
     end
 end
 
