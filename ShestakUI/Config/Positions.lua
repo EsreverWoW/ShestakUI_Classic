@@ -76,8 +76,10 @@ C["position"] = {
 		["target_buff_icon"] = {"BOTTOMLEFT", "oUF_Target", "TOPLEFT", -2, 253},	-- "T_BUFF"
 		["pve_debuff"] = {"BOTTOMRIGHT", "oUF_Player", "TOPRIGHT", 2, 253},			-- "PVE/PVP_DEBUFF"
 		["pve_cc"] = {"TOPLEFT", "oUF_Player", "BOTTOMLEFT", -2, -44},				-- "PVE/PVP_CC"
-		["cooldown"] = {"BOTTOMRIGHT", "oUF_Player", "TOPRIGHT", 63, C.unitframe.plugins_swing and 49 or 37},	-- "COOLDOWN"
-		["target_bar"] = {"BOTTOMLEFT", C.unitframe.portrait_enable and "oUF_Target_Portrait" or "oUF_Target", "BOTTOMRIGHT", C.unitframe.portrait_enable and 6 or 9, C.unitframe.portrait_enable and -3 or -41},	-- "T_DE/BUFF_BAR"
+		["cooldown"] = {"BOTTOMRIGHT", "oUF_Player", "TOPRIGHT", 63, 37},	-- "COOLDOWN"
+		["cooldown_alt"] = {"BOTTOMRIGHT", "oUF_Player", "TOPRIGHT", 63, 49},	-- "COOLDOWN"
+		["target_bar"] = {"BOTTOMLEFT", "oUF_Target", "BOTTOMRIGHT", 9, -41},	-- "T_DE/BUFF_BAR"
+		["target_bar_alt"] = {"BOTTOMLEFT", "oUF_Target_Portrait", "BOTTOMRIGHT", 6, -3},	-- "T_DE/BUFF_BAR"
 	},
 	xct = {
 		["frame1"] = {"BOTTOMLEFT", "oUF_Player", "TOPLEFT", -3, 60},

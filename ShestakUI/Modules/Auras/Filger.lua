@@ -25,10 +25,18 @@ PVE_PVP_DEBUFF_Anchor:SetSize(C.filger.pvp_size, C.filger.pvp_size)
 PVE_PVP_CC_Anchor:SetPoint(unpack(C.position.filger.pve_cc))
 PVE_PVP_CC_Anchor:SetSize(221, 25)
 
-COOLDOWN_Anchor:SetPoint(unpack(C.position.filger.cooldown))
+if C.unitframe.plugins_swing then
+	COOLDOWN_Anchor:SetPoint(unpack(C.position.filger.cooldown_alt))
+else
+	COOLDOWN_Anchor:SetPoint(unpack(C.position.filger.cooldown))
+end
 COOLDOWN_Anchor:SetSize(C.filger.cooldown_size, C.filger.cooldown_size)
 
-T_DE_BUFF_BAR_Anchor:SetPoint(unpack(C.position.filger.target_bar))
+if C.unitframe.portrait_enable then
+	T_DE_BUFF_BAR_Anchor:SetPoint(unpack(C.position.filger.target_bar_alt))
+else
+	T_DE_BUFF_BAR_Anchor:SetPoint(unpack(C.position.filger.target_bar))
+end
 T_DE_BUFF_BAR_Anchor:SetSize(218, 25)
 
 if not T.classic then
