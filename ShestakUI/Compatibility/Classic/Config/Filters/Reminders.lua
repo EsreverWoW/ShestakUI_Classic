@@ -173,12 +173,6 @@ if C.reminder.raid_buffs_enable == true or C.announcements.flask_food == true th
 		T.ReminderBuffs.Spell5Buff = T.ReminderBuffs["AP"]
 		T.ReminderBuffs.Spell6Buff = T.ReminderBuffs[faction]["Physical"]
 	end
-
-	if T.Role == "Caster" or T.Role == "Healer" then
-		T.ReminderCasterBuffs()
-	else
-		T.ReminderPhysicalBuffs()
-	end
 end
 
 ----------------------------------------------------------------------------------------

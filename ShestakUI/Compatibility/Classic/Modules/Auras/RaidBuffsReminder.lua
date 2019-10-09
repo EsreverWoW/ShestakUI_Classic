@@ -123,6 +123,10 @@ local function OnAuraChange(self, event, unit)
 		T.ReminderPhysicalBuffs()
 	end
 
+	spell4Buffs = T.ReminderBuffs["Spell4Buff"]
+	spell5Buffs = T.ReminderBuffs["Spell5Buff"]
+	spell6Buffs = T.ReminderBuffs["Spell6Buff"]
+
 	-- Start checking buffs to see if we can find a match from the list
 	CheckElixir()
 
