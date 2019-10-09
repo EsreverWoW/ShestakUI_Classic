@@ -1736,7 +1736,7 @@ if stats.enabled then
 						best = i
 					end
 				end
-				spell = best
+				spell = GetSpellBonusDamage(best)
 			else
 				spell = GetSpellBonusDamage(7)
 			end
@@ -1783,7 +1783,7 @@ if stats.enabled then
 					if current[i] > current[best] then
 						best = i
 					end
-					spell = best
+					spell = GetSpellCritChance(best)
 				end
 				crit = spell
 				if melee > crit and T.class ~= "HUNTER" then
