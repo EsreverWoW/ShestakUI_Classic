@@ -202,27 +202,49 @@ function T.GetSpecialization(...)
 	return primaryTree
 end
 
+local isCaster = {
+	DRUID = {true},					-- Balance
+	HUNTER = {nil, nil, nil},
+	MAGE = {true, true, true},
+	PALADIN = {nil, nil, nil},
+	PRIEST = {nil, nil, true},		-- Shadow
+	ROGUE = {nil, nil, nil},
+	SHAMAN = {true},				-- Elemental
+	WARLOCK = {true, true, true},
+	WARRIOR = {nil, nil, nil}
+}
+
 function T.GetSpecializationRole()
 	local tree = T.GetSpecialization()
-	local role
-	if ((T.class == "PALADIN" and tree == 2) or (T.class == "WARRIOR" and tree == 3)) or (T.class == "DRUID" and tree == 2 and GetBonusBarOffset() == 3) then
-		role = "TANK"
-	elseif ((T.class == "PALADIN" and tree == 1) or (T.class == "DRUID" and tree == 3) or (T.class == "SHAMAN" and tree == 3) or (T.class == "PRIEST" and tree ~= 3)) then
-		role = "HEALER"
+	-- eventually check for tank stats in case a tanking in a non-traditional spec (mostly for warriors)
+	if (T.class == "PALADIN" and tree == 2) or (T.class == "WARRIOR" and tree == 3) or (T.class == "DRUID" and tree == 2 and GetBonusBarOffset() == 3) then
+		return "TANK"
+	elseif (T.class == "PALADIN" and tree == 1) or (T.class == "DRUID" and tree == 3) or (T.class == "SHAMAN" and tree == 3) or (T.class == "PRIEST" and tree ~= 3) then
+		return "HEALER"
 	else
-		local int = select(2, UnitStat("player", 4))
-		local agi = select(2, UnitStat("player", 2))
 		local base, posBuff, negBuff = UnitAttackPower("player")
-		local ap = base + posBuff + negBuff
 
-		if (((ap > int) or (agi > int)) and not (T.class == "SHAMAN" and tree ~= 1 and tree ~= 3) and not AuraUtil.FindAuraByName(GetSpellInfo(24858), "player")) or T.class == "ROGUE" or T.class == "HUNTER" or (T.class == "SHAMAN" and tree == 2) then
-			role = "MELEE" -- ordinarily "DAMAGER"
+		local current = {}
+		local best = 1
+		for i = 1, 7 do
+			 current[i] = GetSpellBonusDamage(i)
+			 if current[i] > current[best] then
+				best = i
+			end
+		end
+
+		local ap = base + posBuff + negBuff
+		local spell = GetSpellBonusDamage(best)
+		local heal = GetSpellBonusHealing()
+
+		if T.class ~= "HUNTER" and heal >= ap and heal >= spell then
+			return "HEALER" -- healing gear without having the majority of talents in a healing tree
+		elseif T.class ~= "HUNTER" and (isCaster[T.class][tree] or spell >= ap) then
+			return "CASTER" -- ordinarily "DAMAGER"
 		else
-			role = "CASTER" -- ordinarily "DAMAGER"
+			return "MELEE" -- ordinarily "DAMAGER"
 		end
 	end
-
-	return role
 end
 
 UnitGroupRolesAssigned = _G.UnitGroupRolesAssigned or function(unit) -- Needs work
