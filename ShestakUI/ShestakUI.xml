@@ -42,6 +42,7 @@
 	<Script file="Compatibility\Classic\Libs\LibBanzai\LibBanzai-2.0.lua"/>
 	<Script file="Compatibility\Classic\Libs\LibClassicCasterino\LibClassicCasterino.lua"/>
 	<Include file="Compatibility\Classic\Libs\LibClassicDurations\LibClassicDurations.xml"/>
+	<Script file="Compatibility\Classic\Libs\LibRangeCheck-2.0\LibRangeCheck-2.0.lua"/>
 	<Script file="Compatibility\Classic.lua"/>
 
 	<Include file="Libs\oUF\oUF.xml"/>

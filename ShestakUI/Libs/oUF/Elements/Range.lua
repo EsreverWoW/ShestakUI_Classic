@@ -4,7 +4,8 @@ local oUF = ns.oUF
 local _FRAMES = {}
 local OnRangeFrame
 
-local UnitInRange, UnitIsConnected, CheckInteractDistance = UnitInRange, UnitIsConnected, CheckInteractDistance
+local UnitInRange, UnitIsConnected = UnitInRange, UnitIsConnected
+local rc = LibStub("LibRangeCheck-2.0")
 
 local function Update(self, event)
 	local element = self.Range
@@ -25,7 +26,7 @@ local function Update(self, event)
 		if(not oUF:IsClassic()) then
 			inRange, checkedRange = UnitInRange(unit)
 		else
-			inRange = CheckInteractDistance(unit, 4)
+			_, inRange = rc:GetRange(unit, true)
 		end
 		if((not oUF:IsClassic() and checkedRange and not inRange) or (not inRange)) then
 			self:SetAlpha(element.outsideAlpha)
