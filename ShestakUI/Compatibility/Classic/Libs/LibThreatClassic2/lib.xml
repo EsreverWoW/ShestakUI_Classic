@@ -1,0 +1,44 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+
+
+	<Script file="Libs\LibStub\LibStub.lua"/>
+	<Script file="Libs\CallbackHandler-1.0\CallbackHandler-1.0.lua"/>
+	<Include file="Libs\AceAddon-3.0\AceAddon-3.0.xml"/>
+	<Include file="Libs\AceBucket-3.0\AceBucket-3.0.xml"/>
+	<Include file="Libs\AceComm-3.0\AceComm-3.0.xml"/>
+	<Include file="Libs\AceEvent-3.0\AceEvent-3.0.xml"/>
+	<Include file="Libs\AceTimer-3.0\AceTimer-3.0.xml"/>
+	<Include file="Libs\AceSerializer-3.0\AceSerializer-3.0.xml"/>
+
+	<Script file="LibThreatClassic2.lua" />
+
+	<Script file="ThreatClassModuleCore.lua" />
+	
+	<Script file="ClassModules\Classic\Rogue.lua" />
+	<Script file="ClassModules\Classic\Warrior.lua" />
+	<Script file="ClassModules\Classic\Warlock.lua" />
+	<Script file="ClassModules\Classic\Priest.lua" />
+	<Script file="ClassModules\Classic\Paladin.lua" />
+	<Script file="ClassModules\Classic\Druid.lua" />
+	<Script file="ClassModules\Classic\Hunter.lua" />
+	<Script file="ClassModules\Classic\Shaman.lua" />
+	<Script file="ClassModules\Classic\Mage.lua" />
+	<Script file="ClassModules\Classic\Pet.lua" />
+
+
+	<Script file="ThreatNPCModuleCore.lua" />
+
+	<Script file="NPCModules\Azeroth\Azuregos.lua" />
+	<Script file="NPCModules\Onyxia\Onyxia.lua" />
+	<Script file="NPCModules\MoltenCore\Trash.lua" />
+	<Script file="NPCModules\MoltenCore\Shazzrah.lua" />
+	<Script file="NPCModules\MoltenCore\Ragnaros.lua" />
+	<Script file="NPCModules\BlackwingLair\Firemaw.lua" />
+	<Script file="NPCModules\BlackwingLair\Flamegor.lua" />
+	<Script file="NPCModules\BlackwingLair\Ebonroc.lua" />
+	<Script file="NPCModules\BlackwingLair\Nefarian.lua" />
+	<Script file="NPCModules\AQ40\Ouro.lua" />
+	<Script file="NPCModules\Naxxramas\Kelthuzad.lua" />
+	<Script file="NPCModules\Naxxramas\Noth.lua" />
+</Ui>

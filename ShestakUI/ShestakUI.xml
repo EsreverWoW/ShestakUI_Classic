@@ -38,7 +38,7 @@
 	<Include file="Compatibility\Classic\Libs\AceEvent-3.0\AceEvent-3.0.xml"/>
 	<Include file="Compatibility\Classic\Libs\AceTimer-3.0\AceTimer-3.0.xml"/>
 	<Include file="Compatibility\Classic\Libs\AceSerializer-3.0\AceSerializer-3.0.xml"/>
-	<Include file="Compatibility\Classic\Libs\ThreatClassic-1.0\lib.xml"/>
+	<Include file="Compatibility\Classic\Libs\LibThreatClassic2\lib.xml"/>
 	<Script file="Compatibility\Classic\Libs\LibBanzai\LibBanzai-2.0.lua"/>
 	<Script file="Compatibility\Classic\Libs\LibClassicCasterino\LibClassicCasterino.lua"/>
 	<Include file="Compatibility\Classic\Libs\LibClassicDurations\LibClassicDurations.xml"/>
