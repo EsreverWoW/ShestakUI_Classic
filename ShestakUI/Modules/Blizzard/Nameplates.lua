@@ -6,7 +6,7 @@ if C.nameplate.enable ~= true then return end
 ----------------------------------------------------------------------------------------
 local _, ns = ...
 local oUF = ns.oUF
-local ThreatLib = T.classic and LibStub:GetLibrary("ThreatClassic-1.0")
+local ThreatLib = T.classic and LibStub:GetLibrary("LibThreatClassic2")
 
 local frame = CreateFrame("Frame")
 frame:SetScript("OnEvent", function(self, event, ...) self[event](self, ...) end)

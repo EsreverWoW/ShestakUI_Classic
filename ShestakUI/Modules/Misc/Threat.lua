@@ -170,7 +170,7 @@ if not T.classic then
 end
 addon:RegisterEvent("PLAYER_REGEN_ENABLED")
 
-local ThreatLib = T.classic and LibStub:GetLibrary("ThreatClassic-1.0")
+local ThreatLib = T.classic and LibStub:GetLibrary("LibThreatClassic2")
 if ThreatLib then
 	ThreatLib.RegisterCallback(addon, "ThreatUpdated", ThreatLibCallback)
 end

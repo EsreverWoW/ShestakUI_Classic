@@ -286,7 +286,7 @@ end
 ----------------------------------------------------------------------------------------
 --	Threat Functions
 ----------------------------------------------------------------------------------------
-local ThreatLib = LibStub:GetLibrary("ThreatClassic-1.0")
+local ThreatLib = LibStub:GetLibrary("LibThreatClassic2")
 if not ThreatLib then return end
 
 local ThreatFrame = CreateFrame("Frame")
