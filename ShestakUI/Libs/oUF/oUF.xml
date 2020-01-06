@@ -16,6 +16,7 @@
 	<Script file="Elements\GroupRoleIndicator.lua"/>
 	<Script file="Elements\Happiness.lua"/>
 	<Script file="Elements\HealPrediction.lua"/>
+	<Script file="Elements\HealPredictionClassic.lua"/>
 	<Script file="Elements\Health.lua"/>
 	<Script file="Elements\LeaderIndicator.lua"/>
 	<Script file="Elements\Portraits.lua"/>
