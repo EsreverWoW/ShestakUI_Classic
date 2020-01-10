@@ -62,7 +62,7 @@ local function Update(self, event, unit)
 	local previousTexture = self.Health:GetStatusBarTexture()
 
 	previousTexture = UpdateFillBar(self, previousTexture, hp.myBar, myIncomingHeal, maxHealth)
-	previousTexture = UpdateFillBar(self, previousTexture, hp.otherBar, allIncomingHeal, maxHealth)
+	previousTexture = UpdateFillBar(self, previousTexture, hp.otherBar, otherIncomingHeal, maxHealth)
 	-- previousTexture = UpdateFillBar(self, previousTexture, hp.absorbBar, totalAbsorb, maxHealth)
 
 	if(hp.PostUpdate) then

@@ -3,6 +3,8 @@
 local _, ns = ...
 local oUF = ns.oUF
 
+if(oUF:IsClassic()) then return end
+
 local function UpdateFillBar(frame, previousTexture, bar, amount, maxHealth)
 	if amount == 0 then
 		bar:Hide()
