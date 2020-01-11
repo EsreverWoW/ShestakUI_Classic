@@ -199,7 +199,7 @@ local function Shared(self, unit)
 	end
 
 	-- Incoming heal text/bar
-	if not T.classic and C.raidframe.plugins_healcomm == true then
+	if C.raidframe.plugins_healcomm == true then
 		local mhpb = self.Health:CreateTexture(nil, "ARTWORK")
 		mhpb:SetTexture(C.media.texture)
 		mhpb:SetVertexColor(0, 1, 0.5, 0.2)
