@@ -1,10 +1,11 @@
 if not _G.THREATLIB_LOAD_MODULES then return end -- only load if LibThreatClassic2.lua allows it
-local ThreatLib = LibStub and LibStub("LibThreatClassic2", true)
+if not LibStub then return end
+local ThreatLib, MINOR = LibStub("LibThreatClassic2", true)
 if not ThreatLib then return end
 
 if select(2, _G.UnitClass("player")) ~= "PRIEST" then return end
 
-local Priest = ThreatLib:GetOrCreateModule("Player")
+local Priest = ThreatLib:GetOrCreateModule("Player-r"..MINOR)
 
 local _G = _G
 local ipairs = _G.ipairs

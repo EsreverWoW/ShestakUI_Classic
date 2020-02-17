@@ -1,5 +1,6 @@
 if not _G.THREATLIB_LOAD_MODULES then return end -- only load if LibThreatClassic2.lua allows it
-local ThreatLib = LibStub and LibStub("LibThreatClassic2", true)
+if not LibStub then return end
+local ThreatLib, MINOR = LibStub("LibThreatClassic2", true)
 if not ThreatLib then return end
 
 local _G = _G
@@ -10,7 +11,7 @@ local GetPetActionInfo = _G.GetPetActionInfo
 local GetSpellInfo = _G.GetSpellInfo
 local UnitName = _G.UnitName
 
-local Pet = ThreatLib:GetOrCreateModule("Pet")
+local Pet = ThreatLib:GetOrCreateModule("Pet-r"..MINOR)
 
 -- Most of this data come from KTM's pet module
 local spellIDRanks = {}

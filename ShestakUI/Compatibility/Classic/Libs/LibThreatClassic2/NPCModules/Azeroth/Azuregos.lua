@@ -1,10 +1,11 @@
 ﻿if not _G.THREATLIB_LOAD_MODULES then return end -- only load if LibThreatClassic2.lua allows it
-local ThreatLib = LibStub and LibStub("LibThreatClassic2", true)
+if not LibStub then return end
+local ThreatLib, MINOR = LibStub("LibThreatClassic2", true)
 if not ThreatLib then return end
 
 local AZUREGOS_ID = 6109
 
-ThreatLib:GetModule("NPCCore"):RegisterModule(AZUREGOS_ID, function(Azuregos)
+ThreatLib:GetModule("NPCCore-r"..MINOR):RegisterModule(AZUREGOS_ID, function(Azuregos)
 	Azuregos:RegisterTranslation("enUS", function() return {
 		["Come, little ones. Face me!"] = "Come, little ones. Face me!",
 	} end)

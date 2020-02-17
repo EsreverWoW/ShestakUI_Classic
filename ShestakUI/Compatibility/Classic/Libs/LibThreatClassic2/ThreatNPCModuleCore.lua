@@ -1,7 +1,9 @@
 if not _G.THREATLIB_LOAD_MODULES then return end -- only load if LibThreatClassic2.lua allows it
-local ThreatLib = LibStub and LibStub("LibThreatClassic2", true)
+if not LibStub then return end
+local ThreatLib, MINOR = LibStub("LibThreatClassic2", true)
 if not ThreatLib then return end
 
+ThreatLib:Debug("Loading NPC module core revision %s", MINOR)
 ---------------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------
 -- Blizzard Combat Log constants, in case your addon loads before Blizzard_CombatLog or it's disabled by the user
@@ -85,8 +87,8 @@ local COMBATLOG_FILTER_FRIENDLY_UNITS = bit_bor(
 						COMBATLOG_OBJECT_TYPE_OBJECT
 						)
 
-local AURA_TYPE_BUFF = _G.AURA_TYPE_BUFF
-local AURA_TYPE_DEBUFF = _G.AURA_TYPE_DEBUFF
+local AURA_TYPE_BUFF = "BUFF" -- hardcode because _G.AURA_TYPE_BUFF returns nil here
+local AURA_TYPE_DEBUFF = "DEBUFF"  -- hardcode because _G.AURA_TYPE_DEBUFF returns nil here
 
 local AFFILIATION_IN_GROUP = bit_bor(COMBATLOG_OBJECT_AFFILIATION_MINE, COMBATLOG_OBJECT_AFFILIATION_PARTY, COMBATLOG_OBJECT_AFFILIATION_RAID)
 local REACTION_ATTACKABLE = bit_bor(COMBATLOG_OBJECT_REACTION_HOSTILE, COMBATLOG_OBJECT_REACTION_NEUTRAL)
@@ -96,7 +98,7 @@ local REACTION_ATTACKABLE = bit_bor(COMBATLOG_OBJECT_REACTION_HOSTILE, COMBATLOG
 ---------------------------------------------------------------------------------------------------------------
 
 local new, del, newHash, newSet = ThreatLib.new, ThreatLib.del, ThreatLib.newHash, ThreatLib.newSet
-local ThreatLibNPCModuleCore = ThreatLib:GetModule("NPCCore", true) or ThreatLib:NewModule("NPCCore", nil, "AceEvent-3.0", "AceTimer-3.0")
+local ThreatLibNPCModuleCore = ThreatLib:GetModule("NPCCore-r"..MINOR, true) or ThreatLib:NewModule("NPCCore-r"..MINOR, nil, "AceEvent-3.0", "AceTimer-3.0")
 
 local _G = _G
 local GetLocale = _G.GetLocale
@@ -107,6 +109,7 @@ local InCombatLockdown = _G.InCombatLockdown
 local UnitGUID = _G.UnitGUID
 local UnitIsDead = _G.UnitIsDead
 local tostring = _G.tostring
+local GetSpellInfo = _G.GetSpellInfo
 
 ThreatLibNPCModuleCore.modulePrototype = {}
 
@@ -121,13 +124,13 @@ function ThreatLibNPCModuleCore:OnInitialize()
 end
 
 function ThreatLibNPCModuleCore:OnEnable()
-	ThreatLib:Debug("NPCCore module enabled")
+	ThreatLib:Debug("NPCCore module revision %s enabled", MINOR)
 	self:RegisterEvent("UPDATE_MOUSEOVER_UNIT")
 	self:RegisterEvent("PLAYER_TARGET_CHANGED")
 end
 
 function ThreatLibNPCModuleCore:OnDisable()
-	ThreatLib:Debug("NPCCore module disabled")
+	ThreatLib:Debug("NPCCore module revision %s disabled", MINOR)
 	self:UnregisterEvent("UPDATE_MOUSEOVER_UNIT")
 	self:UnregisterEvent("PLAYER_TARGET_CHANGED")
 end
@@ -143,7 +146,7 @@ function ThreatLibNPCModuleCore:RegisterModule(...)
 	if type(npc_id) ~= "number" then
 		error(("Bad argument #2 to `RegisterModule'. Expecting %q, got %q."):format("number", type(npc_id)), 2)
 	end
-	ThreatLib:Debug("Registered module: %s", npc_id)
+	ThreatLib:Debug("Registered npc module: %s", npc_id)
 
 	if registeredModules[npc_id] then
 		error(("Error, module %q already registered"):format(npc_id), 2)
@@ -169,7 +172,7 @@ function ThreatLibNPCModuleCore:RegisterModule(...)
 end
 
 function ThreatLibNPCModuleCore:GetOrCreateModule(name)
-	local nameString = tostring(name)
+	local nameString = tostring(name).."-r"..MINOR
 	return self:GetModule(nameString, true) or self:NewModule(nameString, ThreatLibNPCModuleCore.modulePrototype, "AceEvent-3.0", "AceTimer-3.0")
 end
 
@@ -187,7 +190,7 @@ local function activateModule(self, mobGUID, localActivation)
 
 		local mod = self:GetOrCreateModule(moduleID)
 		self.activeModuleID = moduleID
-		ThreatLib:Debug("Activated %s module", moduleID)
+		ThreatLib:Debug("Activated npc module %s revision %s", moduleID, MINOR)
 		registeredModules[moduleID](mod)
 
 		mod:OnInitialize()
@@ -595,9 +598,9 @@ end
 function ThreatLibNPCModuleCore.modulePrototype:ModifyThreat(guid, target, multi, add)
 	local module
 	if target == "player" then
-		module = ThreatLib:GetModule("Player")
+		module = ThreatLib:GetModule("Player-r"..MINOR)
 	elseif target == "pet" then
-		module = ThreatLib:GetModule("Pet")
+		module = ThreatLib:GetModule("Pet-r"..MINOR)
 	end
 	if module and module.targetThreat[guid] then
 		module:MultiplyTargetThreat(guid, multi)
@@ -606,10 +609,10 @@ function ThreatLibNPCModuleCore.modulePrototype:ModifyThreat(guid, target, multi
 end
 
 function ThreatLibNPCModuleCore.modulePrototype:ModifyThreatOnTargetGUID(GUID, targetGUID, ...)
-	if targetGUID == ThreatLib:GetModule("Player").unitGUID then
+	if targetGUID == ThreatLib:GetModule("Player-r"..MINOR).unitGUID then
 		ModifyThreat(GUID, "player", ...)
 	end
-	if targetGUID == ThreatLib:GetModule("Pet").unitGUID then
+	if targetGUID == ThreatLib:GetModule("Pet-r"..MINOR).unitGUID then
 		ModifyThreat(GUID, "pet", ...)
 	end
 end

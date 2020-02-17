@@ -1,5 +1,6 @@
 if not _G.THREATLIB_LOAD_MODULES then return end -- only load if LibThreatClassic2.lua allows it
-local ThreatLib = LibStub and LibStub("LibThreatClassic2", true)
+if not LibStub then return end
+local ThreatLib, MINOR = LibStub("LibThreatClassic2", true)
 if not ThreatLib then return end
 
 local pairs = _G.pairs
@@ -9,7 +10,7 @@ local ERR_FEIGN_DEATH_RESISTED = _G.ERR_FEIGN_DEATH_RESISTED
 if select(2, _G.UnitClass("player")) ~= "HUNTER" then return end
 
 local _G = _G
-local Hunter = ThreatLib:GetOrCreateModule("Player")
+local Hunter = ThreatLib:GetOrCreateModule("Player-r"..MINOR)
 
 local distractingShotFactor = 600 / 60
 

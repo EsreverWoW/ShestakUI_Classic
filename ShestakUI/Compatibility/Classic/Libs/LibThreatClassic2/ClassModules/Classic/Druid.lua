@@ -1,5 +1,6 @@
 if not _G.THREATLIB_LOAD_MODULES then return end -- only load if LibThreatClassic2.lua allows it
-local ThreatLib = LibStub and LibStub("LibThreatClassic2", true)
+if not LibStub then return end
+local ThreatLib, MINOR = LibStub("LibThreatClassic2", true)
 if not ThreatLib then return end
 
 if select(2, _G.UnitClass("player")) ~= "DRUID" then return end
@@ -11,7 +12,7 @@ local GetTalentInfo = _G.GetTalentInfo
 local GetShapeshiftForm = _G.GetShapeshiftForm
 local UnitGUID = _G.UnitGUID
 
-local Druid = ThreatLib:GetOrCreateModule("Player")
+local Druid = ThreatLib:GetOrCreateModule("Player-r"..MINOR)
 
 local faerieFireFactor = 108 / 54	-- NEED MORE INFO
 
@@ -61,11 +62,9 @@ function Druid:ClassInit()
 	for k, v in pairs(threatValues.cower) do
 		self.CastLandedHandlers[k] = self.Cower
 	end
+
 	for k, v in pairs(threatValues.demoralizingRoar) do
-		self.CastHandlers[k] = self.DemoralizingRoar
-	end
-	for k, v in pairs(threatValues.demoralizingRoar) do
-		self.CastMissHandlers[k] = self.DemoralizingRoarMiss
+		self.MobDebuffHandlers[k] = self.DemoralizingRoar
 	end
 
 	-- Subtlety for all Arcane or Nature Damage, as well as heals.
@@ -101,7 +100,7 @@ end
 
 function Druid:ScanTalents()
 	if ThreatLib.Classic then
-		self.feralinstinctMod = 1 + 0.03 * select(5, GetTalentInfo(2, 3))
+		self.feralinstinctMod = 0.03 * select(5, GetTalentInfo(2, 3))
 		self.subtletyMod = 1 - 0.04 * select(5, GetTalentInfo(3, 8))
 		self.tranqMod = 1 - 0.5 * select(5, GetTalentInfo(3, 13))
 	else
@@ -116,7 +115,7 @@ function Druid:GetStanceThreatMod()
 	local form = GetShapeshiftForm()
 	self.isTanking = false
 	if form == 1 then
-		self.passiveThreatModifiers = 1.3 * self.feralinstinctMod
+		self.passiveThreatModifiers = 1.3 + self.feralinstinctMod
 		self.isTanking = true
 	elseif form == 2 or form == 3 then
 		-- if aquatic form is not learnt, druid cat form is 2 and travel form 3
@@ -171,11 +170,7 @@ function Druid:Cower(spellID, target)
 end
 
 function Druid:DemoralizingRoar(spellID, target)
-	self:AddThreat(threatValues.demoralizingRoar[spellID] * self:threatMods())
-end
-
-function Druid:DemoralizingRoarMiss(spellID, target)
-	self:rollbackTransaction(target, spellID)
+	self:AddTargetThreat(target, threatValues.demoralizingRoar[spellID] * self:threatMods())
 end
 
 function Druid:Subtlety(amount)

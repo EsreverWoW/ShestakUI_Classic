@@ -34,6 +34,7 @@
 	<Script file="NPCModules\MoltenCore\Trash.lua" />
 	<Script file="NPCModules\MoltenCore\Shazzrah.lua" />
 	<Script file="NPCModules\MoltenCore\Ragnaros.lua" />
+	<Script file="NPCModules\BlackwingLair\BroodlordLashlayer.lua" />
 	<Script file="NPCModules\BlackwingLair\Firemaw.lua" />
 	<Script file="NPCModules\BlackwingLair\Flamegor.lua" />
 	<Script file="NPCModules\BlackwingLair\Ebonroc.lua" />

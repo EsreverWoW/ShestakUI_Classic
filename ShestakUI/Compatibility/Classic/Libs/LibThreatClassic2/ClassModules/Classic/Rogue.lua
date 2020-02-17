@@ -1,5 +1,6 @@
 if not _G.THREATLIB_LOAD_MODULES then return end -- only load if LibThreatClassic2.lua allows it
-local ThreatLib = LibStub and LibStub("LibThreatClassic2", true)
+if not LibStub then return end
+local ThreatLib, MINOR = LibStub("LibThreatClassic2", true)
 if not ThreatLib then return end
 
 if select(2, _G.UnitClass("player")) ~= "ROGUE" then return end
@@ -10,7 +11,7 @@ local _G = _G
 local select = _G.select
 local GetTalentInfo = _G.GetTalentInfo
 
-local Rogue = ThreatLib:GetOrCreateModule("Player")
+local Rogue = ThreatLib:GetOrCreateModule("Player-r"..MINOR)
 
 local feintThreatAmounts = {
 	[1966] = -150,

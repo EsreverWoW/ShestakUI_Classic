@@ -1,5 +1,6 @@
 if not _G.THREATLIB_LOAD_MODULES then return end -- only load if LibThreatClassic2.lua allows it
-local ThreatLib = LibStub and LibStub("LibThreatClassic2", true)
+if not LibStub then return end
+local ThreatLib, MINOR = LibStub("LibThreatClassic2", true)
 if not ThreatLib then return end
 
 if select(2, _G.UnitClass("player")) ~= "WARRIOR" then return end
@@ -13,7 +14,7 @@ local pairs, ipairs = _G.pairs, _G.ipairs
 local GetTime = _G.GetTime
 local UnitDebuff = _G.UnitDebuff
 
-local Warrior = ThreatLib:GetOrCreateModule("Player")
+local Warrior = ThreatLib:GetOrCreateModule("Player-r"..MINOR)
 
 -- https://github.com/magey/classic-warrior/wiki/Threat-Mechanics
 -- maxRankThreatValue / maxRankLevelAvailability = factor
@@ -139,7 +140,6 @@ function Warrior:ClassInit()
 	-- Taunt
 	self.CastLandedHandlers[355] = self.Taunt
 
-	-- Non-transactional abilities		
 	init(self, threatValues.heroicStrike, self.HeroicStrike)
 	init(self, threatValues.shieldBash, self.ShieldBash)
 	init(self, threatValues.shieldSlam, self.ShieldSlam)
@@ -148,16 +148,7 @@ function Warrior:ClassInit()
 	init(self, threatValues.hamstring, self.Hamstring)
 	init(self, threatValues.thunderclap, self.Thunderclap)
 	init(self, threatValues.disarm, self.Disarm)
-
-	-- Transactional stuff
-	-- Sunder Armor
-	local func = function(self, spellID, target)
-		self:AddTargetThreatTransactional(target, spellID, self:SunderArmor(spellID))
-	end
-	for k, v in pairs(threatValues.sunder) do
-		self.CastHandlers[k] = func
-		self.MobDebuffHandlers[k] = self.GetSunder
-	end
+	init(self, threatValues.sunder, self.SunderArmor)
 
 	-- Ability damage modifiers
 	for k, v in pairs(threatValues.execute) do
@@ -174,18 +165,11 @@ function Warrior:ClassInit()
 	end
 
 	-- Demoralizing Shout
-	local demoShout = function(self, spellID, target)
-		self:AddThreat(threatValues.demoShout[spellID] * self:threatMods())
+	local demoShoutFunc = function(self, spellID, target)
+		self:AddTargetThreat(target, threatValues.demoShout[spellID] * self:threatMods())
 	end
 	for k, v in pairs(threatValues.demoShout) do
-		self.CastHandlers[k] = demoShout
-	end
-
-	local demoShoutMiss = function(self, spellID, target)
-		self:rollbackTransaction(target, spellID)
-	end
-	for k, v in pairs(threatValues.demoShout) do
-		self.CastMissHandlers[k] = demoShoutMiss
+		self.MobDebuffHandlers[k] = demoShoutFunc
 	end
 
 	-- Set names don't need to be localized.
@@ -296,8 +280,4 @@ end
 
 function Warrior:Disarm(spellID)
 	return threatValues.disarm[spellID] * self:threatMods()
-end
-
-function Warrior:GetSunder(spellID, target)
-	self:AddTargetThreat(target, self:SunderArmor(spellID))
 end

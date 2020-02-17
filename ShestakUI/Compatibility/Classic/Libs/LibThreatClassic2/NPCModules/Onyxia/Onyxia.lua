@@ -1,12 +1,13 @@
 if not _G.THREATLIB_LOAD_MODULES then return end -- only load if LibThreatClassic2.lua allows it
-local ThreatLib = LibStub and LibStub("LibThreatClassic2", true)
+if not LibStub then return end
+local ThreatLib, MINOR = LibStub("LibThreatClassic2", true)
 if not ThreatLib then return end
 
 local ONYXIA_ID = 10184
 local FIREBALL_ID = 18392
 local KNOCK_AWAY_ID = 19633
 
-ThreatLib:GetModule("NPCCore"):RegisterModule(ONYXIA_ID, function(Onyxia)
+ThreatLib:GetModule("NPCCore-r"..MINOR):RegisterModule(ONYXIA_ID, function(Onyxia)
 	function Onyxia:Init()
         self:RegisterCombatant(ONYXIA_ID, true)
 		self:RegisterSpellHandler("SPELL_CAST_SUCCESS", ONYXIA_ID, FIREBALL_ID, self.Fireball)

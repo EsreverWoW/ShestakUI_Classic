@@ -1,10 +1,11 @@
 ﻿if not _G.THREATLIB_LOAD_MODULES then return end -- only load if LibThreatClassic2.lua allows it
-local ThreatLib = LibStub and LibStub("LibThreatClassic2", true)
+if not LibStub then return end
+local ThreatLib, MINOR = LibStub("LibThreatClassic2", true)
 if not ThreatLib then return end
 
 local NEFARIAN_ID = 11583
 
-ThreatLib:GetModule("NPCCore"):RegisterModule(NEFARIAN_ID, function(Nefarian)
+ThreatLib:GetModule("NPCCore-r"..MINOR):RegisterModule(NEFARIAN_ID, function(Nefarian)
 	Nefarian:RegisterTranslation("enUS", function() return {
 		["BURN! You wretches! BURN!"] = "BURN! You wretches! BURN!",
 	} end)
@@ -14,7 +15,7 @@ ThreatLib:GetModule("NPCCore"):RegisterModule(NEFARIAN_ID, function(Nefarian)
 	} end)
 
 	Nefarian:RegisterTranslation("esES", function() return {
-		["BURN! You wretches! BURN!"] = nil, -- STRING NEEDED
+		["BURN! You wretches! BURN!"] = "¡ARDED! ¡Desdichados! ¡ARDED!",
 	} end)
 
 	Nefarian:RegisterTranslation("esMX", function() return {
@@ -42,7 +43,7 @@ ThreatLib:GetModule("NPCCore"):RegisterModule(NEFARIAN_ID, function(Nefarian)
 	} end)
 
 	Nefarian:RegisterTranslation("zhCN", function() return {
-		["BURN! You wretches! BURN!"] = "燃烧吧！你这个",
+		["BURN! You wretches! BURN!"] = "燃烧吧，你们这些悲惨的家伙！燃烧吧！",
 	} end)
 
 	Nefarian:RegisterTranslation("zhTW", function() return {

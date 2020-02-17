@@ -88,7 +88,7 @@ if _G.WOW_PROJECT_ID ~= _G.WOW_PROJECT_CLASSIC then return end
 
 _G.THREATLIB_LOAD_MODULES = false -- don't load modules unless we update this file
 
-local MAJOR, MINOR = "LibThreatClassic2", 5 -- Bump minor on changes, Major is constant lib identifier
+local MAJOR, MINOR = "LibThreatClassic2", 7 -- Bump minor on changes, Major is constant lib identifier
 assert(LibStub, MAJOR .. " requires LibStub")
 
 -- if this version or a newer one is already installed, go no further
@@ -132,9 +132,11 @@ local floor, max, min = _G.math.floor, _G.math.max, _G.math.min
 local tinsert, tremove, tconcat = _G.tinsert, _G.tremove, _G.table.concat
 local table_sort = _G.table.sort
 local tostring, tonumber, type = _G.tostring, _G.tonumber, _G.type
+local string_gmatch = _G.string.gmatch
 
 local UnitName = _G.UnitName
 local UnitIsUnit = _G.UnitIsUnit
+local UnitIsPlayer = _G.UnitIsPlayer
 local setmetatable = _G.setmetatable
 local GetRaidRosterInfo = _G.GetRaidRosterInfo
 local GetNumGroupMembers = _G.GetNumGroupMembers
@@ -166,23 +168,23 @@ end
 
 ThreatLib.OnCommReceive = {}
 ThreatLib.playerName = UnitName("player")
-ThreatLib.partyMemberAgents = ThreatLib.partyMemberAgents or {}
-ThreatLib.lastPublishedThreat = ThreatLib.lastPublishedThreat or {player = {}, pet = {}}
-ThreatLib.threatOffsets = ThreatLib.threatOffsets or {player = {}, pet = {}}
-ThreatLib.publishInterval = ThreatLib.publishInterval or nil
-ThreatLib.lastPublishTime = ThreatLib.lastPublishTime or 0
-ThreatLib.dontPublishThreat = (ThreatLib.dontPublishThreat ~= nil and ThreatLib.dontPublishThreat) or false
-ThreatLib.partyMemberRevisions = ThreatLib.partyMemberRevisions or {}
-ThreatLib.threatTargets = ThreatLib.threatTargets or {}
+ThreatLib.partyMemberAgents = {}
+ThreatLib.lastPublishedThreat = {player = {}, pet = {}}
+ThreatLib.threatOffsets = {player = {}, pet = {}}
+ThreatLib.publishInterval = nil
+ThreatLib.lastPublishTime = 0
+ThreatLib.dontPublishThreat = false
+ThreatLib.partyMemberRevisions = {}
+ThreatLib.threatTargets = {}
 ThreatLib.latestSeenRevision = MINOR -- set later, to get the latest version of the whole lib
 ThreatLib.isIncompatible = nil
 ThreatLib.lastCompatible = LAST_BACKWARDS_COMPATIBLE_REVISION
-ThreatLib.currentPartySize = ThreatLib.currentPartySize or 0
-ThreatLib.latestSeenSender = ThreatLib.latestSeenSender or nil
-ThreatLib.partyUnits = ThreatLib.partyUnits or {}
+ThreatLib.currentPartySize = 0
+ThreatLib.latestSeenSender = nil
+ThreatLib.partyUnits = {}
 
-ThreatLib.GUIDNameLookup = ThreatLib.GUIDNameLookup or setmetatable({}, { __index = function() return "<unknown>" end })
-ThreatLib.threatLog = ThreatLib.threatLog or {}
+ThreatLib.GUIDNameLookup = setmetatable({}, { __index = function() return "<unknown>" end })
+ThreatLib.threatLog = {}
 local guidLookup = ThreatLib.GUIDNameLookup
 
 local threatTargets = ThreatLib.threatTargets
@@ -198,6 +200,7 @@ local new, del, newHash, newSet = ThreatLib.new, ThreatLib.del, ThreatLib.newHas
 -- For development
 ThreatLib.DebugEnabled = false
 ThreatLib.alwaysRunOnSolo = false
+ThreatLib.LogThreat = false -- logs threat in ThreatLib.threatLog and enables ADD_THREAT debug
 
 ------------------------------------------------
 -- Utility Functions
@@ -208,9 +211,9 @@ local tableCount, usedTableCount = 0, 0
 -- #NODOC
 function ThreatLib:Debug(msg, ...)
 	if self.DebugEnabled then
-		if _G.ChatFrame5 then
+		if _G.ChatFrame4 then
 			local a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p = ...
-			_G.ChatFrame5:AddMessage(("|cffffcc00ThreatLib-Debug: |r" .. msg):format(
+			_G.ChatFrame4:AddMessage(("|cffffcc00ThreatLib-Debug: |r" .. msg):format(
 				tostring(a),
 				tostring(b),
 				tostring(c),
@@ -229,10 +232,11 @@ function ThreatLib:Debug(msg, ...)
 				tostring(p)
 			))
 		else
-			_G.DEFAULT_CHAT_FRAME:AddMessage("|cffffcc00ThreatLib-Debug: |rPlease create ChatFrame5 for ThreatLib debug messages.")
+			_G.DEFAULT_CHAT_FRAME:AddMessage("|cffffcc00ThreatLib-Debug: |rPlease create ChatFrame4 for ThreatLib debug messages.")
 		end
 	end
 end
+ThreatLib:Debug("Loading modules revision %s", MINOR)
 
 function ThreatLib:GroupDistribution()
 	if IsInGroup(LE_PARTY_CATEGORY_INSTANCE) then
@@ -442,19 +446,23 @@ function ThreatLib:Log(action, from, to, threat)
 end
 
 function ThreatLib:GetSpellID(spellName, unit, auraType)
+
 	-- get spellID from auras
 	if auraType and unit then
+		local spellId = nil
 		if auraType == AURA_TYPE_DEBUFF then
-			return select(10, AuraUtil.FindAuraByName(spellName, unit, "HARMFUL")) or 0
+			spellId = select(10, AuraUtil.FindAuraByName(spellName, unit, "HARMFUL"))
 		else
-			return select(10, AuraUtil.FindAuraByName(spellName, unit)) or 0
+			spellId = select(10, AuraUtil.FindAuraByName(spellName, unit))
+		end
+		if spellId then
+			return spellId
 		end
 	-- get spellID from cache/spellbook
-	else
-		-- eventually build a cache from UNIT_SPELLCAST_* events to track lower ranks
-		-- for now, we just assume max rank and get that spellID from the spellbook
-		return select(7, GetSpellInfo(spellName)) or 0
 	end
+	-- eventually build a cache from UNIT_SPELLCAST_* events to track lower ranks
+	-- for now, we just assume max rank and get that spellID from the spellbook
+	return select(7, GetSpellInfo(spellName)) or 0
 end
 
 ThreatLib.prefix = "LTC2"
@@ -481,11 +489,11 @@ ThreatLib.inCombat = InCombatLockdown
  NPC IDs to completely ignore all threat calculations on, in decimal.
  This should be things like Crypt Scarabs, which do not have a death message after kamikaze-ing, or
  other very-low-HP enemies that zerg players and for whom threat data is not important.
-
+ 
  The reason for this is to eliminate unnecessary comms traffic gluts when these enemies are spawned, or to
  prevent getting enemies that despawn (and not die) from getting "stuck" in the threat list for the duration
  of the fight.
-]]--
+]]-- 
 
 ThreatLib.BLACKLIST_MOB_IDS = {
 	[17967] = true,		-- Crypt Scarabs, used by Crypt Fiends in Hyjal
@@ -506,7 +514,7 @@ ThreatLib.BLACKLIST_MOB_IDS = {
 	[19833] = true,		-- Snake Trap snakes
 	[19921] = true,		-- Snake Trap snakes
 
-	-- [22144] = true,	-- Test, comment out for production
+	-- [22144] = true,	-- Test, comment out for production 
 }
 
 function ThreatLib:IsMobBlacklisted(guid)
@@ -666,7 +674,7 @@ end
 function ThreatLib:OnEnable()
 	if not initialized then self:OnInitialize() end
 
-	ThreatLib:Debug("Enabling LibThreatClassic module")
+	ThreatLib:Debug("Enabling LibThreatClassic module revision %s", MINOR)
 
 	self:UnregisterAllEvents()
 	self:RegisterEvent("PLAYER_REGEN_DISABLED")
@@ -677,9 +685,12 @@ function ThreatLib:OnEnable()
 	self:RegisterEvent("PLAYER_ALIVE")
 	self:RegisterEvent("PLAYER_LOGIN")
 
+	-- disable all modules including old revision for full reboot
+	for k in pairs(self.modules) do
+		self:DisableModule(k)
+	end
 	-- (re)boot the NPC core
-	self:DisableModule("NPCCore")
-	self:EnableModule("NPCCore")
+	self:EnableModule("NPCCore-r"..MINOR)
 
 	-- Do event registrations here, as a Blizzard bug seems to be causing lockups if these are registered too early
 	self:RegisterEvent("GROUP_ROSTER_UPDATE")
@@ -720,35 +731,35 @@ function ThreatLib:PLAYER_ENTERING_WORLD(force)
 		self:Debug("Disabling, so lonely :'(")
 		self.running = false
 	else
-		self:Debug("Activating...self.alwaysRunOnSolo: %s", self.alwaysRunOnSolo)
+		self:Debug("Activating revision %s... self.alwaysRunOnSolo: %s", MINOR, self.alwaysRunOnSolo)
 		self.running = true
 	end
 	if previousRunning ~= self.running or force then
 		self:Debug("Dispatching event...")
 		if self.running then
 			_callbacks:Fire("Activate")
-			self:EnableModule("Player")
+			self:EnableModule("Player-r"..MINOR)
 			if UnitExists("pet") then
-				self:EnableModule("Pet")
+				self:EnableModule("Pet-r"..MINOR)
 			end
 		else
 			_callbacks:Fire("Deactivate")
-			self:DisableModule("Player")
-			self:DisableModule("Pet")
+			self:DisableModule("Player-r"..MINOR)
+			self:DisableModule("Pet-r"..MINOR)
 		end
 	end
 end
 
 function ThreatLib:PLAYER_LOGIN()
-	self:DisableModule("Player")
-	self:DisableModule("Pet")
+	self:DisableModule("Player-r"..MINOR)
+	self:DisableModule("Pet-r"..MINOR)
 	self:PLAYER_ENTERING_WORLD(true)
 end
 
 function ThreatLib:PLAYER_ALIVE()
 	if not self.booted then
-		self:DisableModule("Player")
-		self:DisableModule("Pet")
+		self:DisableModule("Player-r"..MINOR)
+		self:DisableModule("Pet-r"..MINOR)
 		self.booted = true
 		self:PLAYER_ENTERING_WORLD(true)
 	end
@@ -852,10 +863,10 @@ function ThreatLib:UNIT_PET(event, unit)
 	if unit ~= "player" then return end
 	local exists = UnitExists("pet")
 	if exists and self.running then
-		self:DisableModule("Pet")
-		self:EnableModule("Pet")
+		self:DisableModule("Pet-r"..MINOR)
+		self:EnableModule("Pet-r"..MINOR)
 	else
-		self:DisableModule("Pet")
+		self:DisableModule("Pet-r"..MINOR)
 	end
 	self:GROUP_ROSTER_UPDATE()	--- Does gaining or losing a pet already fire this? Is this needed?
 end
@@ -865,7 +876,7 @@ function ThreatLib:GROUP_ROSTER_UPDATE()
 		self:CancelTimer(timers.UpdateParty, true)
 		timers.UpdateParty = nil
 	end
-	timers.UpdateParty = self:ScheduleTimer("UpdateParty", 0.5)
+	timers.UpdateParty = self:ScheduleTimer("UpdateParty", 1.0)
 end
 ------------------------------------------------------------------------
 -- Handled Chat Messages
@@ -874,14 +885,13 @@ local BLACKLIST_MOB_IDS = ThreatLib.BLACKLIST_MOB_IDS or {}
 
 function ThreatLib.OnCommReceive:THREAT_UPDATE(sender, distribution, msg)
 	if not msg then return end
-	local guid, target_guid, val = strsplit(":", msg)
-	target_guid, val = strsplit("=", target_guid)
-	val = strsub(val, 1, -2)
-	if guid then
-		local dstGUID, threat = target_guid, tonumber(val)
-		-- check against the blacklist to avoid trouble with clients that have an older version not blacklisting the mob
-		if dstGUID and threat then -- and not BLACKLIST_MOB_IDS[ThreatLib:NPCID(dstGUID)] then
-			self:ThreatUpdatedForUnit(guid, dstGUID, threat)
+	local unitGUID, threatUpdates = strsplit(":", msg)
+
+	if unitGUID then
+		for targetGUID, threatUpdate in string_gmatch(threatUpdates, "([^=:]+)=(%d+),") do
+			if targetGUID and threatUpdate then
+				self:ThreatUpdatedForUnit(unitGUID, targetGUID, tonumber(threatUpdate))
+			end
 		end
 	end
 end
@@ -903,8 +913,8 @@ end
 
 do
 	local function wipeAllThreatFunc(self)
-		self:GetModule("Player"):MultiplyThreat(0)
-		local petModule = self:GetModule("Pet")
+		self:GetModule("Player-r"..MINOR):MultiplyThreat(0)
+		local petModule = self:GetModule("Pet-r"..MINOR)
 		if petModule:IsEnabled() then
 			petModule:MultiplyThreat(0)
 		end
@@ -928,19 +938,19 @@ end
 
 local cooldownTimes = {}
 local function mobThreatWipeFunc(self, mob_id)
-	local IDs = self:GetModule("Player"):GetGUIDsByNPCID(mob_id)
+	local IDs = self:GetModule("Player-r"..MINOR):GetGUIDsByNPCID(mob_id)
 	for i = 1, #IDs do
 		local id = IDs[i]
-		self:GetModule("Player"):SetTargetThreat(id, 0)
+		self:GetModule("Player-r"..MINOR):SetTargetThreat(id, 0)
 		self:ResetTPS(id, true)
 		self:ClearStoredThreatTables(id)
 	end
 
 	if UnitExists("pet") then
-		local IDs = self:GetModule("Pet"):GetGUIDsByNPCID(mob_id)
+		local IDs = self:GetModule("Pet-r"..MINOR):GetGUIDsByNPCID(mob_id)
 		for i = 1, #IDs do
 			local id = IDs[i]
-			self:GetModule("Pet"):SetTargetThreat(id, 0)
+			self:GetModule("Pet-r"..MINOR):SetTargetThreat(id, 0)
 			self:ResetTPS(id, true)
 			self:ClearStoredThreatTables(id)
 		end
@@ -972,10 +982,10 @@ function ThreatLib.OnCommReceive:MISDIRECT_THREAT(sender, distribution, target_p
 	if select(2, UnitClass(sender)) ~= "HUNTER" then return end
 	ThreatLib:Debug("%s is a hunter, continuing", sender)
 	if target_player_guid == UnitGUID("player") then
-		self:GetModule("Player"):AddTargetThreat(target_enemy_guid, amount)
+		self:GetModule("Player-r"..MINOR):AddTargetThreat(target_enemy_guid, amount)
 		ThreatLib:Debug("Added %s threat to player", amount)
 	elseif UnitExists("pet") and target_player_guid == UnitGUID("pet") then
-		self:GetModule("Pet"):AddTargetThreat(target_enemy_guid, amount)
+		self:GetModule("Pet-r"..MINOR):AddTargetThreat(target_enemy_guid, amount)
 		ThreatLib:Debug("Added %s threat to pet", amount)
 	end
 end
@@ -1004,13 +1014,13 @@ function ThreatLib.OnCommReceive:CLIENT_INFO(sender, distribution, revision, use
 end
 
 function ThreatLib.OnCommReceive:ACTIVATE_NPC_MODULE(sender, distribution, module_id)
-	self:GetModule("NPCCore"):ActivateModule(module_id)
+	self:GetModule("NPCCore-r"..MINOR):ActivateModule(module_id)
 end
 
 function ThreatLib.OnCommReceive:SET_NPC_MODULE_VALUE(sender, distribution, var_name, var_value)
 	if not partyUnits[sender] then return end
 	if self:IsGroupOfficer(partyUnits[sender]) then
-		self:GetModule("NPCCore"):SetModuleVar(var_name, var_value)
+		self:GetModule("NPCCore-r"..MINOR):SetModuleVar(var_name, var_value)
 		self:Debug("%s set variable %q = %q", sender, var_name, var_value)
 	end
 end
@@ -1156,8 +1166,8 @@ do
 	-- #NODOC
 	function ThreatLib:PublishThreat(force)
 		if (not inParty and not inRaid) or self.dontPublishThreat then return end
-		local playerMsg = getThreatString("player", "Player", force)
-		local petMsg = getThreatString("pet", "Pet", force)
+		local playerMsg = getThreatString("player", "Player-r"..MINOR, force)
+		local petMsg = getThreatString("pet", "Pet-r"..MINOR, force)
 
 		if playerMsg then
 			self:SendCommRaw(self:GroupDistribution(), "THREAT_UPDATE", playerMsg)
@@ -1242,7 +1252,7 @@ end
 
 ------------------------------------------------------------------------
 -- :GetThreat("playerName", "targetName" or "targetHash")
--- Arguments:
+-- Arguments: 
 --  string - Name of the player or pet to get threat for
 --  string - Name or hash of the target to get threat on
 -- Notes:
@@ -1276,7 +1286,7 @@ end
 
 ------------------------------------------------------------------------
 -- :UnitInMeleeRange("unitID")
--- Arguments:
+-- Arguments: 
 --  string - UnitID to check melee range for
 -- Notes:
 -- Returns true if the unit is within 10 yards
@@ -1301,7 +1311,7 @@ end
 ------------------------------------------------------------------------
 function ThreatLib:EncounterMobs()
 	-- TODO: Re-enable mob count
-	return max(1, self:GetModule("Player"):NumMobs())
+	return max(1, self:GetModule("Player-r"..MINOR):NumMobs())
 end
 
 ------------------------------------------------------------------------
@@ -1441,6 +1451,19 @@ do
 end
 
 ------------------------------------------------------------------------
+-- :GetPullAggroRangeModifier("unitGUID", "targetGUID")
+-- Arguments: 
+-- 		string - GUID of the unit to get modifier for
+--		string - GUID of the target to get range modifier for
+-- Notes:
+-- Returns the modifier for pulling aggro based on range to the target
+-- Meele range 1.1 else 1.3
+------------------------------------------------------------------------
+function ThreatLib:GetPullAggroRangeModifier(unitGUID, targetGUID)
+	return 1.1 -- TODO
+end
+
+------------------------------------------------------------------------
 -- :SendThreatTo("GUIDOfGroupMember", "enemyGUID", threatValue)
 -- Arguments:
 --   string - guid of the group member to send threat to
@@ -1457,7 +1480,7 @@ function ThreatLib:SendThreatTo(targetPlayer, targetEnemy, threat)
 
 	if UnitExists("pet") and UnitGUID("pet") == targetPlayer then
 		ThreatLib:Debug("Sending threat to pet")
-		self:GetModule("Pet"):AddTargetThreat(targetEnemy, threat)
+		self:GetModule("Pet-r"..MINOR):AddTargetThreat(targetEnemy, threat)
 	else
 		ThreatLib:Debug("Sending threat to player, %s on %s to %s", threat, targetEnemy, targetPlayer)
 		self:SendComm(self:GroupDistribution(), "MISDIRECT_THREAT", targetPlayer, targetEnemy, threat)
@@ -1470,7 +1493,7 @@ end
 --   integer - NPC ID of the enemy to ask the group to wipe threat on
 -- Notes:
 -- Sends a comm message to the group instructing them to wipe their threat
--- levels on a specific mob. This is not protected as it needs to be able to
+-- levels on a specific mob. This is not protected as it needs to be able to 
 -- be executed by anyone who sees the relevant events.
 --
 -- KTM protects this by requiring 2 or more people to send the event before
@@ -1571,7 +1594,7 @@ end
 
 ------------------------------------------------------------------------
 -- :GetThreatStatusColor("unit", "mob")
--- Arguments:
+-- Arguments: 
 --  integer - the threat status value to get colors for.
 -- Returns:
 --  float - a value between 0 and 1 for the red content of the color
@@ -1595,7 +1618,7 @@ end
 
 ------------------------------------------------------------------------
 -- :UnitDetailedThreatSituation("unit", "mob")
--- Arguments:
+-- Arguments: 
 --  string - unitID of the unit to get threat information for.
 --  string - unitID of the target unit to reference.
 -- Returns:
@@ -1607,43 +1630,80 @@ end
 ------------------------------------------------------------------------
 function ThreatLib:UnitDetailedThreatSituation(unit, target)
 	local isTanking, threatStatus, threatPercent, rawThreatPercent, threatValue = nil, 0, nil, nil, 0
-	if not UnitExists(unit) or not UnitExists(target) then
-		return isTanking, threatStatus, threatPercent, rawThreatPercent, threatValue
-	end
 
 	local unitGUID, targetGUID = UnitGUID(unit), UnitGUID(target)
-	local threatValue = self:GetThreat(unitGUID, targetGUID) or 0
-	if threatValue == 0 then
+
+	if not unitGUID or not targetGUID then
 		return isTanking, threatStatus, threatPercent, rawThreatPercent, threatValue
 	end
 
-	local targetTarget = target .. "target"
+	threatValue = self:GetThreat(unitGUID, targetGUID) or 0
+
+	if threatValue <= 0 then
+		return isTanking, threatStatus, threatPercent, rawThreatPercent, threatValue
+	end
+
+	-- maxThreatValue can never be 0 as unit's threatValue is already greater than 0
+	local maxThreatValue, maxGUID = self:GetMaxThreatOnTarget(targetGUID)
+	local unitPullAggroRangeMod = self:GetPullAggroRangeModifier(unitGUID, targetGUID)
+
+	local targetTarget = target .. "-target"
 	local targetTargetGUID = UnitGUID(targetTarget)
-	local targetTargetVal = self:GetThreat(unitGUID, targetTargetGUID) or 0
 
-	local isPlayer
-	if unit == "player" then isPlayer = true end
-	local class = select(2, UnitClass(unit))
-
-	local aggroMod = 1.3
-	if isPlayer and self:UnitInMeleeRange(targetGUID) or (not isPlayer and (class == "ROGUE" or class == "WARRIOR")) or (strsplit("-", unitGUID) == "Pet" and class ~= "MAGE") then
-		aggroMod = 1.1
+	-- if we have no targetTarget, the current tank can only be guessed based on max threat
+	-- threatStatus 1 and 2 can't be determined without targetTarget
+	if not targetTargetGUID then
+		rawThreatPercent = threatValue / maxThreatValue * 100
+		if threatValue < maxThreatValue then
+			isTanking = false
+			threatStatus = 0
+			threatPercent = rawThreatPercent / unitPullAggroRangeMod
+		else
+			isTanking = true
+			threatStatus = 3
+			threatPercent = 100
+		end
+		return isTanking, threatStatus, threatPercent, rawThreatPercent, floor(threatValue)
 	end
 
-	local maxVal, maxGUID = self:GetMaxThreatOnTarget(targetGUID)
+	-- targetTarget is exactly then the current tank, iff no other unit has more threat than required to overaggro targetTarget
+	-- As the threat required to pull aggro is influenced by the pullAggroRangeModifier of a unit, this is not 
+	-- necessarily the unit with the most threat.
+	--
+	-- Imagine targetTarget has 1000 threat, a meele player has 1200 threat and a range player has 1250 threat
+	-- In this case, targetTarget is clearly not the tank as the meele player has enough threat to gain aggro.
+	-- Meanwhile the range player has more threat than the meele player, but not enough to gain aggro from targetTarget
+	-- In this case, the meele player needs to be considered the tank.
+	--
+	-- Now imagine targetTarget has 1000 threat, a meele player has 1200 threat and a range player has 1400 threat
+	-- Both range and meele have more threat than required to overaggro targetTarget. However, we can't correctly
+	-- determine the currentTank, because the range player does not have enough threat to overaggro the meele player,
+	-- who might be actively tanking.
+	--
+	-- As considering all other units only solves the edge case, some range players have more than 110% but less 
+	-- than 130% threat and some meeles have more than 110% threat of targetTarget, we simplify this function 
+	-- and save some CPU by only checking against the target with the highest threat.
 
-	local aggroVal = 0
-	if targetTargetVal >= maxVal / aggroMod then
-		aggroVal = targetTargetVal
+	local targetTargetThreatValue = self:GetThreat(targetTargetGUID, targetGUID) or 0
+	local maxPullAggroRangeMod = self:GetPullAggroRangeModifier(maxGUID, targetGUID)
+
+	local currentTankThreatValue
+	local currentTankGUID
+
+	if maxThreatValue > targetTargetThreatValue * maxPullAggroRangeMod then
+		currentTankThreatValue = maxThreatValue
+		currentTankGUID = maxGUID
 	else
-		aggroVal = maxVal
+		currentTankThreatValue = targetTargetThreatValue
+		currentTankGUID = targetTargetGUID
 	end
 
-	local hasTarget = UnitExists(target .. "target")
+	rawThreatPercent = threatValue / currentTankThreatValue * 100
 
-	if threatValue >= aggroVal then
-		if UnitIsUnit(unit, targetTarget) then
+	if threatValue >= currentTankThreatValue then
+		if unitGUID == currentTankGUID then
 			isTanking = 1
+
 			if unitGUID == maxGUID then
 				threatStatus = 3
 			else
@@ -1654,22 +1714,18 @@ function ThreatLib:UnitDetailedThreatSituation(unit, target)
 		end
 	end
 
-	rawThreatPercent = threatValue / aggroVal * 100
-
-	if isTanking or (not hasTarget and threatStatus ~= 0 ) then
+	if isTanking then
 		threatPercent = 100
 	else
-		threatPercent = rawThreatPercent / aggroMod
+		threatPercent = rawThreatPercent / unitPullAggroRangeMod
 	end
 
-	threatValue = floor(threatValue)
-
-	return isTanking, threatStatus, threatPercent, rawThreatPercent, threatValue
+	return isTanking, threatStatus, threatPercent, rawThreatPercent, floor(threatValue)
 end
 
 ------------------------------------------------------------------------
 -- :UnitThreatSituation("unit", "mob")
--- Arguments:
+-- Arguments: 
 --  string - unitID of the unit to get threat information for.
 --  string - unitID of the target unit to reference.
 -- Returns:
