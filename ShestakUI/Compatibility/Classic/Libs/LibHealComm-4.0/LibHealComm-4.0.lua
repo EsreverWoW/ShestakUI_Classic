@@ -1,7 +1,7 @@
 if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then return end
 
 local major = "LibHealComm-4.0"
-local minor = 87
+local minor = 89
 assert(LibStub, format("%s requires LibStub.", major))
 
 local HealComm = LibStub:NewLibrary(major, minor)
@@ -877,6 +877,8 @@ if( playerClass == "DRUID" ) then
 	end
 end
 
+local hasDivineFavor
+
 if( playerClass == "PALADIN" ) then
 	LoadClassData = function()
 		local DivineFavor = GetSpellInfo(20216)
@@ -925,16 +927,10 @@ if( playerClass == "PALADIN" ) then
 			},
 		}
 
-		local hasDivineFavor
-
 		AuraHandler = function(unit, guid)
 			if( unit == "player" ) then
 				hasDivineFavor = unitHasAura("player", DivineFavor)
 			end
-		end
-
-		ResetChargeData = function(guid)
-			hasDivineFavor = unitHasAura("player", DivineFavor)
 		end
 
 		GetHealTargets = function(bitType, guid, healAmount, spellID)
@@ -964,7 +960,6 @@ if( playerClass == "PALADIN" ) then
 			end
 
 			if( hasDivineFavor or GetSpellCritChance(2) >= 100 ) then
-				hasDivineFavor = nil
 				healAmount = healAmount * 1.50
 			end
 
@@ -1257,11 +1252,17 @@ HealComm.currentModifiers = HealComm.currentModifiers or {}
 HealComm.healingModifiers = HealComm.healingModifiers or {
 	[28776] = 0.10, -- Necrotic Poison
 	[19716] = 0.25, -- Gehennas' Curse
-	[13218] = 0.50, -- Wound Poison1
-	[13222] = 0.50, -- Wound Poison2
-	[13223] = 0.50, -- Wound Poison3
-	[13224] = 0.50, -- Wound Poison4
-	[21551] = 0.50, -- Mortal Strike
+	[13737] = 0.50, -- Mortal Strike
+	[15708] = 0.50, -- Mortal Strike
+	[16856] = 0.50, -- Mortal Strike
+	[17547] = 0.50, -- Mortal Strike
+	[19643] = 0.50, -- Mortal Strike
+	[24573] = 0.50, -- Mortal Strike
+	[26652] = 0.50, -- Mortal Strike
+	[12294] = 0.50, -- Mortal Strike (Rank 1)
+	[21551] = 0.50, -- Mortal Strike (Rank 2)
+	[21552] = 0.50, -- Mortal Strike (Rank 3)
+	[21553] = 0.50, -- Mortal Strike (Rank 4)
 	[23169] = 0.50, -- Brood Affliction: Green
 	[22859] = 0.50, -- Mortal Cleave
 	[17820] = 0.25, -- Veil of Shadow
@@ -1271,6 +1272,7 @@ HealComm.healingModifiers = HealComm.healingModifiers or {
 	[28440] = 0.25, -- Veil of Shadow
 	[13583] = 0.50, -- Curse of the Deadwood
 	[23230] = 0.50, -- Blood Fury
+	[10060] = 1.20, -- Power Infusion
 }
 
 HealComm.healingStackMods = HealComm.healingStackMods or {
@@ -1296,7 +1298,7 @@ end
 local instanceType
 local function updateDistributionChannel()
 	if( instanceType == "pvp" ) then
-		distribution = "BATTLEGROUND"
+		distribution = "INSTANCE_CHAT"
 	elseif( IsInRaid() ) then
 		distribution = "RAID"
 	elseif( IsInGroup() ) then
@@ -1529,14 +1531,15 @@ local function parseChannelHeal(casterGUID, spellID, amount, totalTicks, ...)
 	wipe(pending)
 	pending.startTime = startTime
 	pending.endTime = endTime
-	pending.duration = max(pending.duration or 0, pending.endTime - pending.startTime)
+	pending.duration = endTime - startTime
 	pending.totalTicks = totalTicks
-	pending.tickInterval = (pending.endTime - pending.startTime) / totalTicks
+	pending.tickInterval = pending.duration / totalTicks
 	pending.spellID = spellID
 	pending.isMultiTarget = (select("#", ...) / inc) > 1
 	pending.bitType = CHANNEL_HEALS
 
-	loadHealList(pending, amount, 1, pending.endTime, ceil(pending.duration / pending.tickInterval), ...)
+	local ticksLeft = ceil((endTime - GetTime()) / pending.tickInterval)
+	loadHealList(pending, amount, 1, endTime, ticksLeft, ...)
 
 	HealComm.callbacks:Fire("HealComm_HealStarted", casterGUID, spellID, pending.bitType, pending.endTime, unpack(tempPlayerList))
 end
@@ -1669,13 +1672,15 @@ local function parseHealDelayed(casterGUID, startTimeRelative, endTimeRelative, 
 	elseif( pending.bitType == CHANNEL_HEALS ) then
 		pending.startTime = startTime
 		pending.endTime = endTime
-		pending.tickInterval = (pending.endTime - pending.startTime)
+		pending.duration = endTime - startTime
+		pending.tickInterval = pending.duration / pending.totalTicks
 	else
 		return
 	end
 
 	wipe(tempPlayerList)
 	for i=1, #(pending), 5 do
+		pending[i + 3] = endTime
 		tinsert(tempPlayerList, pending[i])
 	end
 
@@ -1972,9 +1977,16 @@ function HealComm:UNIT_SPELLCAST_SUCCEEDED(unit, cast, spellID)
 	if( unit ~= "player") then return end
 	local spellName = GetSpellInfo(spellID)
 
+	if spellID == 20216 then
+		hasDivineFavor = true
+	end
+
 	if spellData[spellName] and not spellData[spellName]._isChanneled then
+		hasDivineFavor = nil
 		parseHealEnd(playerGUID, nil, "name", spellID, false)
 		sendMessage(format("S::%d:0", spellID or 0))
+	elseif spellID == 20473 or spellID == 20929 or spellID == 20930 then -- Holy Shock
+		hasDivineFavor = nil
 	end
 end
 
