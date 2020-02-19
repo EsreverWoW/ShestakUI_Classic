@@ -88,7 +88,7 @@ if _G.WOW_PROJECT_ID ~= _G.WOW_PROJECT_CLASSIC then return end
 
 _G.THREATLIB_LOAD_MODULES = false -- don't load modules unless we update this file
 
-local MAJOR, MINOR = "LibThreatClassic2", 7 -- Bump minor on changes, Major is constant lib identifier
+local MAJOR, MINOR = "LibThreatClassic2", 8 -- Bump minor on changes, Major is constant lib identifier
 assert(LibStub, MAJOR .. " requires LibStub")
 
 -- if this version or a newer one is already installed, go no further
@@ -502,6 +502,12 @@ ThreatLib.BLACKLIST_MOB_IDS = {
 	-- AQ40
 	[15630] = true,		-- Spawn of Fankriss
 
+	-- BWL
+	[14022] = true,		-- Corrupted Red Whelp
+	[14023] = true,		-- Corrupted Green Whelp
+	[14024] = true,		-- Corrupted Blue Whelp
+	[14025] = true,		-- Corrupted Bronze Whelp
+
 	-- Strathholme
 	[11197] = true,		-- Mindless Skeleton
 	[11030] = true,		-- Mindless Zombie
@@ -766,6 +772,7 @@ function ThreatLib:PLAYER_ALIVE()
 end
 
 function ThreatLib:PLAYER_REGEN_DISABLED()
+	self.publishInterval = self:GetPublishInterval()
 	-- self.inCombat = true
 	self:CancelTPSReset()
 end
@@ -832,7 +839,6 @@ function ThreatLib:UpdateParty()
 	end
 	_callbacks:Fire("PartyChanged")
 
-	self.publishInterval = self:GetPublishInterval()
 	self:PLAYER_ENTERING_WORLD()
 end
 
@@ -1169,6 +1175,7 @@ do
 		local playerMsg = getThreatString("player", "Player-r"..MINOR, force)
 		local petMsg = getThreatString("pet", "Pet-r"..MINOR, force)
 
+
 		if playerMsg then
 			self:SendCommRaw(self:GroupDistribution(), "THREAT_UPDATE", playerMsg)
 		end
@@ -1181,17 +1188,14 @@ end
 
 -- #NODOC
 function ThreatLib:GetPublishInterval()
-	-- Scale publish interval from 1.0 to 1.5 based on party size, half that for tanks
-	-- We'll be at 1.5 sec for 0-5 party size, scale from 1.5 to 2.5 for 6-25 players, and stay at 2.5 for > 20 players
-	-- This means that we'll transmit less data in a raid
+	local interval = 2
+	local classModule = self:GetModule("Player-r"..MINOR, true)
 	local playerClass = playerClass or select(2, UnitClass("player"))
-	local partyNum = max(0, (self.currentPartySize or 0) - 5)
-	local interval = min(1.5, 1 + (1 * (partyNum / 20)))
-
-	-- Make tanks update more often
-	if playerClass == "WARRIOR" or playerClass == "DRUID" or playerClass == "PALADIN" then
+	-- Make all wariors and tanks update more often
+	if playerClass == "WARRIOR" or (classModule and classModule.isTanking) then
 		interval = interval * 0.5
 	end
+	self:Debug("Current publish interval %s", interval)
 	return interval
 end
 
