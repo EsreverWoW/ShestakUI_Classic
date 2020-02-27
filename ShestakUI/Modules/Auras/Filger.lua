@@ -282,7 +282,9 @@ function Filger:DisplayActives()
 		end
 		if value.duration and value.duration > 0 then
 			if self.Mode == "ICON" then
-				bar.cooldown:SetCooldown(value.start, value.duration)
+				if value.start + value.duration - GetTime() > 0.3 then
+					bar.cooldown:SetCooldown(value.start + 0.1, value.duration)
+				end
 				if value.data.filter == "CD" or value.data.filter == "ICD" then
 					bar.value = value
 					bar:SetScript("OnUpdate", Filger.UpdateCD)
@@ -324,7 +326,7 @@ function Filger:DisplayActives()
 	end
 end
 
-local function FindAuras(self, unit, force)
+local function FindAuras(self, unit)
 	for spid in pairs(self.actives) do
 		if self.actives[spid].data.filter ~= "CD" and self.actives[spid].data.filter ~= "ICD" and self.actives[spid].data.unitID == unit then
 			self.actives[spid] = nil
@@ -354,7 +356,7 @@ local function FindAuras(self, unit, force)
 								expirationTime = expirationTimeNew
 							end
 						end
-						self.actives[spid] = {data = data, name = name, icon = icon, count = count, start = expirationTime - duration, duration = force and duration + 0.4 or duration + 0.1, spid = spid, sort = data.sort}
+						self.actives[spid] = {data = data, name = name, icon = icon, count = count, start = expirationTime - duration, duration = duration, spid = spid, sort = data.sort}
 					end
 				elseif data.filter == "ICD" and (data.trigger == "BUFF" or data.trigger == "DEBUFF") and (not data.spec or data.spec == T.Spec) and (not data.talentID or isTalent) then
 					if data.slotID then
@@ -395,15 +397,15 @@ function Filger:OnEvent(event, unit, _, castID)
 					timer.elapsed = (timer.elapsed or 0) + elapsed
 					if timer.elapsed < 0.1 then return end
 					timer.elapsed = 0
-					FindAuras(self, "player", true)
+					FindAuras(self, "player")
 					if UnitExists("target") then
-						FindAuras(self, "target", true)
+						FindAuras(self, "target")
 					end
 					if UnitExists("pet") then
-						FindAuras(self, "pet", true)
+						FindAuras(self, "pet")
 					end
 					if UnitExists("focus") then
-						FindAuras(self, "focus", true)
+						FindAuras(self, "focus")
 					end
 				end)
 			else
