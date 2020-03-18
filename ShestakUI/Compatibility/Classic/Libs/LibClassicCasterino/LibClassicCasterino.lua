@@ -4,7 +4,7 @@ Author: d87
 --]================]
 if WOW_PROJECT_ID ~= WOW_PROJECT_CLASSIC then return end
 
-local MAJOR, MINOR = "LibClassicCasterino", 29
+local MAJOR, MINOR = "LibClassicCasterino", 30
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
@@ -263,9 +263,14 @@ function f:COMBAT_LOG_EVENT_UNFILTERED(event)
 end
 
 local castTimeIncreases = {
-    [1714] = 1.6,    -- Curse of Tongues (60%)
-    [5760] = 1.6,    -- Mind-Numbing Poison (60%)
-    [1098] = 1.3,    -- Enslave Demon
+    [1714] = 1.5,    -- Curse of Tongues (Rank 1) (50%)
+    [11719] = 1.6,   -- Curse of Tongues (Rank 2) (60%)
+    [5760] = 1.4,    -- Mind-Numbing Poison (Rank 1) (40%)
+    [8692] = 1.5,    -- Mind-Numbing Poison (Rank 2) (50%)
+    [11398] = 1.6,   -- Mind-Numbing Poison (Rank 3) (60%)
+    [1098] = 1.3,    -- Enslave Demon (Rank 1) (30%)
+    [11725] = 1.3,   -- Enslave Demon (Rank 2) (30%)
+    [11726] = 1.3,   -- Enslave Demon (Rank 3) (30%)
 }
 local attackTimeDecreases = {
     [6150] = 1.3,    -- Quick Shots/ Imp Aspect of the Hawk (Aimed)
