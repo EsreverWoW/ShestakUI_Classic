@@ -88,7 +88,7 @@ if _G.WOW_PROJECT_ID ~= _G.WOW_PROJECT_CLASSIC then return end
 
 _G.THREATLIB_LOAD_MODULES = false -- don't load modules unless we update this file
 
-local MAJOR, MINOR = "LibThreatClassic2", 8 -- Bump minor on changes, Major is constant lib identifier
+local MAJOR, MINOR = "LibThreatClassic2", 9 -- Bump minor on changes, Major is constant lib identifier
 assert(LibStub, MAJOR .. " requires LibStub")
 
 -- if this version or a newer one is already installed, go no further
@@ -507,6 +507,17 @@ ThreatLib.BLACKLIST_MOB_IDS = {
 	[14023] = true,		-- Corrupted Green Whelp
 	[14024] = true,		-- Corrupted Blue Whelp
 	[14025] = true,		-- Corrupted Bronze Whelp
+	[14605] = true,		-- Bone Construct
+	[14261] = true,		-- Blue Drakonid
+	[14262] = true,		-- Green Drakonid
+	[14263] = true,		-- Bronze Drakonid
+	[14264] = true,		-- Red Drakonid
+	[14265] = true,		-- Black Drakonid
+	[14662] = true,		-- Corrupted Fire Nova Totem
+	[14663] = true,		-- Corrupted Stoneskin Totem
+	[14664] = true,		-- Corrupted Healing Stream Totem
+	[14666] = true,		-- Corrupted Winfury Totem
+	[14668] = true,		-- Corrupted Infernal
 
 	-- Strathholme
 	[11197] = true,		-- Mindless Skeleton

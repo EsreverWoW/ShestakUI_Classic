@@ -141,6 +141,7 @@ function Warrior:ClassInit()
 	self.CastLandedHandlers[355] = self.Taunt
 
 	init(self, threatValues.heroicStrike, self.HeroicStrike)
+	init(self, threatValues.cleave, self.Cleave)
 	init(self, threatValues.shieldBash, self.ShieldBash)
 	init(self, threatValues.shieldSlam, self.ShieldSlam)
 	init(self, threatValues.revenge, self.Revenge)
@@ -246,6 +247,10 @@ end
 
 function Warrior:HeroicStrike(spellID)
 	return threatValues.heroicStrike[spellID] * self:threatMods()
+end
+
+function Warrior:Cleave(spellID)
+	return threatValues.cleave[spellID] * self:threatMods()
 end
 
 function Warrior:ShieldBash(spellID)
