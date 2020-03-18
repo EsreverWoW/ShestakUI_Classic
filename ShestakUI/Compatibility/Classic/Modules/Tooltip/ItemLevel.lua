@@ -1,10 +1,10 @@
 local T, C, L, _ = unpack(select(2, ...))
-if not T.classic or C.tooltip.enable ~= true or C.tooltip.average_lvl ~= true then return else return end -- FIXME
+if C.tooltip.enable ~= true or C.tooltip.average_lvl ~= true then return end
 
 ----------------------------------------------------------------------------------------
 --	Average item level (AiL by havoc74)
 ----------------------------------------------------------------------------------------
-local MINCOLOR, COLORINC, INCMOD, MinIL, MaxIL = 0.5, 0.2, 0.5, 95, 195
+local MINCOLOR, COLORINC, INCMOD, MinIL, MaxIL = 0.5, 0.2, 0.5, 20, 83
 
 local slotName = {
 	"HeadSlot", "NeckSlot", "ShoulderSlot", "BackSlot", "ChestSlot", "WristSlot",
@@ -13,14 +13,20 @@ local slotName = {
 }
 
 local function GetAiL(unit)
-	local i, total, slot, itn, level = 0, 0, nil, 0
+	local i, total, slot, itn, level = 0, 0, nil, 0, 0
 
-	for i in pairs(slotName) do
-		slot = GetInventoryItemLink(unit, GetInventorySlotInfo(slotName[i]))
-		if slot ~= nil then
-			itn = itn + 1
-			level = select(4, GetItemInfo(slot))
-			total = total + level
+	if (unit ~= nil) then
+		for i in pairs(slotName) do
+			slot = GetInventoryItemID(unit, GetInventorySlotInfo(slotName[i]))
+			if slot ~= nil then
+				level = select(4, GetItemInfo(slot))
+				if (level ~= nil) then
+					if (level > 0) then
+						itn = itn + 1
+						total = total + level
+					end
+				end
+			end
 		end
 	end
 

@@ -123,6 +123,8 @@
 	<Script file="Modules\Misc\Threat.lua"/>
 	<Script file="Modules\Misc\TrainAll.lua"/>
 
+	<Script file="Compatibility\Classic\Modules\Misc\SlotItemLevel.lua"/>
+
 	<Script file="Modules\ActionBars\Core.lua"/>
 	<Script file="Modules\ActionBars\Bindings.lua"/>
 	<Script file="Modules\ActionBars\Bar1.lua"/>
