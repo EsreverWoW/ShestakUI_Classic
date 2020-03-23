@@ -109,7 +109,7 @@ local function CheckBuff(list, frame, n)
 				isPresent[n] = false
 			end
 		end
-	end	
+	end
 end
 
 -- Main Script
@@ -180,13 +180,28 @@ raidbuff_reminder:RegisterEvent("CHARACTER_POINTS_CHANGED")
 raidbuff_reminder:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 raidbuff_reminder:SetScript("OnEvent", OnAuraChange)
 
--- Function to create buttons
-local function CreateButton(name, relativeTo, firstbutton)
+local line = math.ceil(C.minimap.size / (C.reminder.raid_buffs_size + 2))
+
+local buffButtons = {
+	"FlaskFrame",
+	"FoodFrame",
+	"Spell3Frame",
+	"Spell4Frame",
+	"Spell5Frame",
+	"Spell6Frame",
+	"Spell7Frame",
+	"CustomFrame"
+}
+
+for i = 1, #buffButtons do
+	local name = buffButtons[i]
 	local button = CreateFrame("Frame", name, RaidBuffReminder)
-	if firstbutton == true then
-		button:CreatePanel("Default", C.reminder.raid_buffs_size, C.reminder.raid_buffs_size, "BOTTOMLEFT", relativeTo, "BOTTOMLEFT", 0, 0)
+	if i == 1 then
+		button:CreatePanel("Default", C.reminder.raid_buffs_size, C.reminder.raid_buffs_size, "BOTTOMLEFT", RaidBuffReminder, "BOTTOMLEFT", 0, 0)
+	elseif i == line then
+		button:CreatePanel("Default", C.reminder.raid_buffs_size, C.reminder.raid_buffs_size, "BOTTOM", buffButtons[1], "TOP", 0, 3)
 	else
-		button:CreatePanel("Default", C.reminder.raid_buffs_size, C.reminder.raid_buffs_size, "LEFT", relativeTo, "RIGHT", 3, 0)
+		button:CreatePanel("Default", C.reminder.raid_buffs_size, C.reminder.raid_buffs_size, "LEFT", buffButtons[i-1], "RIGHT", 3, 0)
 	end
 	button:SetFrameLevel(RaidBuffReminder:GetFrameLevel() + 2)
 
@@ -194,16 +209,4 @@ local function CreateButton(name, relativeTo, firstbutton)
 	button.t:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 	button.t:SetPoint("TOPLEFT", 2, -2)
 	button.t:SetPoint("BOTTOMRIGHT", -2, 2)
-end
-
--- Create Buttons
-do
-	CreateButton("FlaskFrame", RaidBuffReminder, true)
-	CreateButton("FoodFrame", FlaskFrame, false)
-	CreateButton("Spell3Frame", FoodFrame, false)
-	CreateButton("Spell4Frame", Spell3Frame, false)
-	CreateButton("Spell5Frame", Spell4Frame, false)
-	CreateButton("Spell6Frame", Spell5Frame, false)
-	CreateButton("Spell7Frame", Spell6Frame, false)
-	CreateButton("CustomFrame", Spell7Frame, false)
 end
