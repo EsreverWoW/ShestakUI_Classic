@@ -1,7 +1,7 @@
 local lib = LibStub and LibStub("LibClassicDurations", true)
 if not lib then return end
 
-local Type, Version = "SpellTable", 51
+local Type, Version = "SpellTable", 56
 if lib:GetDataVersion(Type) >= Version then return end  -- older versions didn't have that function
 
 local Spell = lib.AddAura
@@ -24,6 +24,7 @@ lib.indirectRefreshSpells = {
             ["SPELL_CAST_SUCCESS"] = true
         },
         targetSpellID = 11597,
+        rollbackMisses = true,
     },
 
     [GetSpellInfo(25357)] = { -- Healing Wave
@@ -40,7 +41,7 @@ if class == "MAGE" then
             ["SPELL_DAMAGE"] = true
         },
         targetSpellID = 22959, -- Fire Vulnerability
-        targetResistCheck = true,
+        rollbackMisses = true,
         condition = function(isMine) return isMine end,
         -- it'll refresg only from mages personal casts which is fine
         -- because if mage doesn't have imp scorch then he won't even see a Fire Vulnerability timer
@@ -51,7 +52,7 @@ if class == "MAGE" then
             ["SPELL_DAMAGE"] = true
         },
         targetSpellID = 12579, -- Winter's Chill
-        targetResistCheck = true,
+        rollbackMisses = true,
         condition = function(isMine) return isMine end,
     }
 
@@ -60,7 +61,7 @@ if class == "MAGE" then
             ["SPELL_DAMAGE"] = true
         },
         targetSpellID = 12579, -- Winter's Chill
-        targetResistCheck = true,
+        rollbackMisses = true,
         condition = function(isMine) return isMine end,
     }
 
@@ -69,9 +70,12 @@ if class == "MAGE" then
             ["SPELL_DAMAGE"] = true
         },
         targetSpellID = 12579, -- Winter's Chill
-        targetResistCheck = true,
+        rollbackMisses = true,
         condition = function(isMine) return isMine end,
     }
+
+    -- Winter's Chill = Frostbolt
+    lib.indirectRefreshSpells[GetSpellInfo(12579)] = lib.indirectRefreshSpells[GetSpellInfo(25304)]
 
     lib.indirectRefreshSpells[GetSpellInfo(10)] = { -- Blizzard
         events = {
@@ -90,7 +94,8 @@ if class == "PRIEST" then
             ["SPELL_AURA_REFRESH"] = true,
         },
         targetSpellID = 15258, -- Shadow Weaving
-        targetResistCheck = true,
+        -- targetResistCheck = true,
+        rollbackMisses = true,
         condition = function(isMine) return isMine end,
     }
     lib.indirectRefreshSpells[GetSpellInfo(10947)] = { -- Mind Blast
@@ -98,7 +103,8 @@ if class == "PRIEST" then
             ["SPELL_DAMAGE"] = true,
         },
         targetSpellID = 15258, -- Shadow Weaving
-        targetResistCheck = true,
+        -- targetResistCheck = true,
+        rollbackMisses = true,
         condition = function(isMine) return isMine end,
     }
     lib.indirectRefreshSpells[GetSpellInfo(18807)] = { -- Mind Flay
@@ -107,9 +113,14 @@ if class == "PRIEST" then
             ["SPELL_AURA_REFRESH"] = true,
         },
         targetSpellID = 15258, -- Shadow Weaving
-        targetResistCheck = true,
+        -- targetResistCheck = true,
+        rollbackMisses = true,
         condition = function(isMine) return isMine end,
     }
+
+    -- Shadow Weaving = SW: Pain
+    lib.indirectRefreshSpells[GetSpellInfo(15258)] = CopyTable(lib.indirectRefreshSpells[GetSpellInfo(10894)])
+    lib.indirectRefreshSpells[GetSpellInfo(15258)].events = {}
 end
 
 ------------------
@@ -348,7 +359,20 @@ Spell( 2893 ,{ duration = 8, type = "BUFF", buffType = "Magic" }) -- Abolish Poi
 Spell( 29166 , { duration = 20, type = "BUFF", buffType = "Magic" }) -- Innervate
 
 Spell({ 8936, 8938, 8939, 8940, 8941, 9750, 9856, 9857, 9858 }, { duration = 21, type = "BUFF", buffType = "Magic" }) -- Regrowth
-Spell({ 774, 1058, 1430, 2090, 2091, 3627, 8910, 9839, 9840, 9841, 25299 }, { duration = 12, stacking = false, type = "BUFF", buffType = "Magic" }) -- Rejuv
+
+if class == "DRUID" then
+    lib:TrackItemSet("StormrageRaiment", { 16899, 16900, 16901, 16902, 16903, 16904, 16897, 16898, })
+    lib:RegisterSetBonusCallback("StormrageRaiment", 8)
+end
+Spell({ 774, 1058, 1430, 2090, 2091, 3627, 8910, 9839, 9840, 9841, 25299 }, {
+    duration = function(spellID, isSrcPlayer)
+        if isSrcPlayer and lib:IsSetBonusActive("StormrageRaiment", 8) then
+            return 15
+        else
+            return 12
+        end
+    end,
+    stacking = false, type = "BUFF", buffType = "Magic" }) -- Rejuv
 Spell({ 5570, 24974, 24975, 24976, 24977 }, { duration = 12, stacking = true }) -- Insect Swarm
 
 -------------
@@ -649,7 +673,7 @@ Spell(20217, { duration = 300, type = "BUFF", castFilter = true, buffType = "Mag
 Spell(25898, { duration = 900, type = "BUFF", castFilter = true, buffType = "Magic" }) -- Greater Blessing of Kings
 
 Spell({ 20911, 20912, 20913 }, { duration = 300, type = "BUFF", castFilter = true, buffType = "Magic" }) -- Blessing of Sanctuary
-Spell(25899, { duration = 900, type = "BUFF", castFilter = tru, buffType = "Magic" }) -- Greater Blessing of Sanctuary
+Spell(25899, { duration = 900, type = "BUFF", castFilter = true, buffType = "Magic" }) -- Greater Blessing of Sanctuary
 
 Spell(1038, { duration = 300, type = "BUFF", castFilter = true, buffType = "Magic" }) -- Blessing of Salvation
 Spell(25895, { duration = 900, type = "BUFF", castFilter = true, buffType = "Magic" }) -- Greater Blessing of Salvation
