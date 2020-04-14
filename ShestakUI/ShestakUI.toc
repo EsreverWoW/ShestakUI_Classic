@@ -1,8 +1,8 @@
-## Interface: 11303
+## Interface: 11304
 ## Title: ShestakUI (Classic)
 ## Notes: A total UI overhaul for World of Warcraft
 ## Author: Shestak
-## Version: 0.94
+## Version: 0.95
 ## SavedVariables: SavedOptions, SavedStats, SavedAddonProfiles, SavedBindings, SavedCurrency
 ## SavedVariablesPerCharacter: SavedOptionsPerChar, SavedPositions
 
