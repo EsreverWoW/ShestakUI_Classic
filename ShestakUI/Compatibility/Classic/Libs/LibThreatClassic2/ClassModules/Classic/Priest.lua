@@ -269,7 +269,7 @@ function Priest:Holy(amt)
 end
 
 function Priest:Shadow(amt)
-	return amt * self.shadowAffinityMod
+	return amt * self.shadowAffinityMod * self.silentResolveMod
 end
 
 function Priest:VestmentBonus(amt)

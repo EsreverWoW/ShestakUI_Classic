@@ -323,6 +323,18 @@ function prototype:OnInitialize()
 	self.CastLandedHandlers[28548] = function(self)
 		self:AddThreat(-800 * self:threatMods())
 	end
+	self.CastMissHandlers[28548] = function(self)
+		self:AddThreat(800 * self:threatMods())
+	end
+
+	-- Thunderfury nature resist debuff (multi target)
+	self.MobDebuffHandlers[21992] = function(self)
+		self:AddThreat(135 * self:threatMods())
+	end
+	-- Thunderfury attack speed slow (primary target)
+	self.MobDebuffHandlers[27648] = function(self)
+		self:AddThreat(90 * self:threatMods())
+	end
 
 	-- Imp LOTP heals are 0 threat, and in the prototype as any class can proc them
 	self.ExemptGains = newHash()
@@ -1005,16 +1017,8 @@ end
 
 function prototype:parseCast(recipient, spellId, spellName)
 	spellId = ThreatLib:GetSpellID(spellName) or spellId
-
-	if self.unitType == "pet" then
-		-- Pets don't get UNIT_SPELLCAST_SUCCEEDED, so we just parse their handlers here.
-		if self.CastLandedHandlers[spellId] then
-			self.CastLandedHandlers[spellId](self, spellId, recipient)
-		end
-	else
-		if self.CastLandedHandlers[spellId] then
-			self.CastLandedHandlers[spellId](self, spellId, recipient)
-		end
+	if self.CastLandedHandlers[spellId] then
+		self.CastLandedHandlers[spellId](self, spellId, recipient)
 	end
 end
 

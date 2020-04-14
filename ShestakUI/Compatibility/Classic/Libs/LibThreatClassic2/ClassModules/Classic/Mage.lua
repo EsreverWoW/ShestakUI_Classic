@@ -49,6 +49,7 @@ function Mage:ClassInit()
 	-- to test its threat value as well.
 	-- Counterspell
 	self.CastLandedHandlers[2139] = function(self, spellID, target) self:AddTargetThreat(target, 300 * self:threatMods()) end
+	self.CastMissHandlers[2139] = function(self, spellID, target) self:AddTargetThreat(target, -300 * self:threatMods()) end
 
 	-- Remove Lesser Curse
 	self.CastHandlers[475] = function(self, spellID, target) self:AddThreat(14 * self:threatMods()) end

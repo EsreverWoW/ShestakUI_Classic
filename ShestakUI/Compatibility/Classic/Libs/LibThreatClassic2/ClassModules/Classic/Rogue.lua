@@ -24,8 +24,10 @@ local feintThreatAmounts = {
 function Rogue:ClassInit()
 	-- CastHandlers should return true if they modified the threat level, false if they don't
 	local feint = function(self, spellID, target) self:AddTargetThreat(target, self:Feint(spellID)) end
+	local feintMiss = function(self, spellID, target) self:AddTargetThreat(target, -(self:Feint(spellID))) end
 	for k, v in pairs(feintThreatAmounts) do
 		self.CastLandedHandlers[k] = feint
+		self.CastMissHandlers[k] = feintMiss
 	end
 
 	self.CastHandlers[1856] = self.Vanish
