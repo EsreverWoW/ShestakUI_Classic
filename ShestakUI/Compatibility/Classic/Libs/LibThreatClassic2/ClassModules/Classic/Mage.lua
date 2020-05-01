@@ -48,7 +48,7 @@ function Mage:ClassInit()
 	-- I tested Counterspell with a level 32 mage. I would like mages of other levels
 	-- to test its threat value as well.
 	-- Counterspell
-	self.CastLandedHandlers[2139] = function(self, spellID, target) self:AddTargetThreat(target, 300 * self:threatMods()) end
+	self.CastSuccessHandlers[2139] = function(self, spellID, target) self:AddTargetThreat(target, 300 * self:threatMods()) end
 	self.CastMissHandlers[2139] = function(self, spellID, target) self:AddTargetThreat(target, -300 * self:threatMods()) end
 
 	-- Remove Lesser Curse

@@ -88,7 +88,7 @@ if _G.WOW_PROJECT_ID ~= _G.WOW_PROJECT_CLASSIC then return end
 
 _G.THREATLIB_LOAD_MODULES = false -- don't load modules unless we update this file
 
-local MAJOR, MINOR = "LibThreatClassic2", 10 -- Bump minor on changes, Major is constant lib identifier
+local MAJOR, MINOR = "LibThreatClassic2", 12 -- Bump minor on changes, Major is constant lib identifier
 assert(LibStub, MAJOR .. " requires LibStub")
 
 -- if this version or a newer one is already installed, go no further
@@ -1644,7 +1644,7 @@ end
 --  float - returns the unit's total threat on the mob.
 ------------------------------------------------------------------------
 function ThreatLib:UnitDetailedThreatSituation(unit, target)
-	local isTanking, threatStatus, threatPercent, rawThreatPercent, threatValue = nil, 0, nil, nil, 0
+	local isTanking, threatStatus, threatPercent, rawThreatPercent, threatValue = false, 0, nil, nil, 0
 
 	local unitGUID, targetGUID = UnitGUID(unit), UnitGUID(target)
 
@@ -1717,7 +1717,7 @@ function ThreatLib:UnitDetailedThreatSituation(unit, target)
 
 	if threatValue >= currentTankThreatValue then
 		if unitGUID == currentTankGUID then
-			isTanking = 1
+			isTanking = true
 
 			if unitGUID == maxGUID then
 				threatStatus = 3
@@ -1736,6 +1736,31 @@ function ThreatLib:UnitDetailedThreatSituation(unit, target)
 	end
 
 	return isTanking, threatStatus, threatPercent, rawThreatPercent, floor(threatValue)
+end
+
+------------------------------------------------------------------------
+-- :UnitThreatPercentageOfLead("unit", "mob")
+-- Arguments: 
+--  string - unitID of the unit to get threat information for.
+--  string - unitID of the target unit to reference.
+-- Returns:
+--  integer - returns the relative threat percentage compared to the next highest (if tanking) or highest on the threat list
+------------------------------------------------------------------------
+function ThreatLib:UnitThreatPercentageOfLead(unit, target)
+	local unitGUID, targetGUID = UnitGUID(unit), UnitGUID(target)
+	if not (unitGUID and targetGUID) then return 0 end
+
+	local unitValue = self:GetThreat(unitGUID, targetGUID)
+	if unitValue == 0 then return 0 end
+
+	local maxValue = 0
+	for otherGUID in pairs(threatTargets) do
+		if otherGUID ~= unitGUID then
+			local value = self:GetThreat(otherGUID, targetGUID)
+			if value > maxValue then maxValue = value end
+		end
+	end
+	return maxValue > 0 and (100 * unitValue / maxValue) or 0
 end
 
 ------------------------------------------------------------------------

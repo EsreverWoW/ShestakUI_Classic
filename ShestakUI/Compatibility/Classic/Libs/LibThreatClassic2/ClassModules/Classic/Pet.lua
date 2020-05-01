@@ -91,7 +91,7 @@ function Pet:ClassEnable()
 			local v = data.spellIDs[i]
 			spellIDRanks[v] = i
 			spellLookups[v] = name
-			self.CastLandedHandlers[v] = castHandler
+			self.CastSuccessHandlers[v] = castHandler
 			self.CastMissHandlers[v] = castMissHandler
 		end
 	end

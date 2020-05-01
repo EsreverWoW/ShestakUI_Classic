@@ -32,11 +32,11 @@ local threatTable = {
 
 function Hunter:ClassInit()
 	for k, v in pairs(threatTable["DistractingShot"]) do
-		self.CastLandedHandlers[k] = self.DistractingShot
+		self.CastSuccessHandlers[k] = self.DistractingShot
 		self.CastMissHandlers[k] = self.DistractingShotMiss
 	end
 	for k, v in pairs(threatTable["Disengage"]) do
-		self.CastLandedHandlers[k] = self.Disengage
+		self.CastSuccessHandlers[k] = self.Disengage
 		self.CastMissHandlers[k] = self.DisengageMiss
 	end
 

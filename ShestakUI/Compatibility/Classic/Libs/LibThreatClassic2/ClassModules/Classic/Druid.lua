@@ -57,11 +57,11 @@ function Druid:ClassInit()
 	self.MobDebuffHandlers[6795] = self.Growl
 
 	for k, v in pairs(threatValues.faerieFire) do
-		self.CastLandedHandlers[k] = self.FaerieFire
+		self.CastSuccessHandlers[k] = self.FaerieFire
 		self.CastMissHandlers[k] = self.FaerieFireMiss
 	end
 	for k, v in pairs(threatValues.cower) do
-		self.CastLandedHandlers[k] = self.Cower
+		self.CastSuccessHandlers[k] = self.Cower
 		self.CastMissHandlers[k] = self.CowerMiss
 	end
 

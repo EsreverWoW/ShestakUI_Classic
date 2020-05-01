@@ -26,7 +26,7 @@ function Rogue:ClassInit()
 	local feint = function(self, spellID, target) self:AddTargetThreat(target, self:Feint(spellID)) end
 	local feintMiss = function(self, spellID, target) self:AddTargetThreat(target, -(self:Feint(spellID))) end
 	for k, v in pairs(feintThreatAmounts) do
-		self.CastLandedHandlers[k] = feint
+		self.CastSuccessHandlers[k] = feint
 		self.CastMissHandlers[k] = feintMiss
 	end
 

@@ -135,7 +135,7 @@ local function init(self, t, f)
 		self:AddTargetThreat(target, -f(self, spellID))
 	end
 	for k, v in pairs(t) do
-		self.CastLandedHandlers[k] = funcSuccess
+		self.CastSuccessHandlers[k] = funcSuccess
 		self.CastMissHandlers[k] = funcMiss
 	end
 end
