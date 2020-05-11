@@ -19,7 +19,7 @@ Usage example 1:
 --]================]
 if WOW_PROJECT_ID ~= WOW_PROJECT_CLASSIC then return end
 
-local MAJOR, MINOR = "LibClassicDurations", 53
+local MAJOR, MINOR = "LibClassicDurations", 56
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
@@ -76,6 +76,7 @@ local GetTime = GetTime
 local tinsert = table.insert
 local unpack = unpack
 local GetAuraDurationByUnitDirect
+local GetGUIDAuraTime
 
 if lib.enableEnemyBuffTracking == nil then lib.enableEnemyBuffTracking = false end
 local enableEnemyBuffTracking = lib.enableEnemyBuffTracking
@@ -677,30 +678,34 @@ local shouldDisplayAura = function(auraTable)
     return false
 end
 
-local function RegenerateBuffList(dstGUID)
-    local guidTable = guids[dstGUID]
-    if not guidTable then
-        return
-    end
-
+lib.scanTip = lib.scanTip or CreateFrame("GameTooltip", "LibClassicDurationsScanTip", nil, "GameTooltipTemplate")
+local scanTip = lib.scanTip
+scanTip:SetOwner(WorldFrame, "ANCHOR_NONE")
+local function RegenerateBuffList(unit, dstGUID)
     local buffs = {}
-    for spellID, t in pairs(guidTable) do
-        if t.applications then
-            for srcGUID, auraTable in pairs(t.applications) do
-                if auraTable[3] == "BUFF" then
-                    local buffInfo = makeBuffInfo(spellID, auraTable, dstGUID, srcGUID)
-                    if buffInfo then
-                        tinsert(buffs, buffInfo)
-                    end
+    local spellName
+    for i=1, 32 do
+        scanTip:ClearLines()
+        scanTip:SetUnitAura(unit, i, "HELPFUL")
+        spellName = LibClassicDurationsScanTipTextLeft1:GetText()
+        if spellName then
+            local spellID = GetLastRankSpellID(spellName)
+            if spellID then
+                local icon = GetSpellTexture(spellID)
+                local opts = spells[spellID]
+                local buffInfo = { spellName, icon, 0, (opts and opts.buffType), 0, 0, nil, nil, nil, spellID, false, false, false, false, 1 }
+                local isStacking = opts and opts.stacking
+                local srcGUID = nil
+                local duration, expirationTime = GetGUIDAuraTime(dstGUID, spellName, spellID, srcGUID, isStacking)
+                if duration then
+                    buffInfo[5] = duration
+                    buffInfo[6] = expirationTime
                 end
+
+                tinsert(buffs, buffInfo)
             end
         else
-            if t[3] == "BUFF" then
-                local buffInfo = makeBuffInfo(spellID, t, dstGUID)
-                if buffInfo then
-                    tinsert(buffs, buffInfo)
-                end
-            end
+            break
         end
     end
 
@@ -725,7 +730,7 @@ function lib.UnitAuraDirect(unit, index, filter)
         if not unitGUID then return end
         local isValid = buffCacheValid[unitGUID]
         if not isValid or isValid < GetTime() then
-            RegenerateBuffList(unitGUID)
+            RegenerateBuffList(unit, unitGUID)
         end
 
         local buffCacheHit = buffCache[unitGUID]
@@ -780,7 +785,7 @@ end
 ---------------------------
 -- PUBLIC FUNCTIONS
 ---------------------------
-local function GetGUIDAuraTime(dstGUID, spellName, spellID, srcGUID, isStacking, forcedNPCDuration)
+GetGUIDAuraTime = function(dstGUID, spellName, spellID, srcGUID, isStacking, forcedNPCDuration)
     local guidTable = guids[dstGUID]
     if guidTable then
 
