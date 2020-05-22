@@ -51,10 +51,11 @@ if not T.classic then
 	ChatFrameToggleVoiceDeafenButton:Kill()
 	ChatFrameToggleVoiceMuteButton:Kill()
 else
-	ChatFrameChannelButton:SetSize(20, 20)
-	ChatFrameChannelButton:SkinButton()
-	ChatFrameChannelButton:ClearAllPoints()
-	ChatFrameChannelButton:SetPoint("TOPLEFT", ChatFrame1, "TOPLEFT", -24, 24)
+	ChatFrameChannelButton:Kill()
+	-- ChatFrameChannelButton:SetSize(20, 20)
+	-- ChatFrameChannelButton:SkinButton()
+	-- ChatFrameChannelButton:ClearAllPoints()
+	-- ChatFrameChannelButton:SetPoint("TOPLEFT", ChatFrame1, "TOPLEFT", -24, 24)
 end
 
 -- Set chat style
@@ -247,7 +248,6 @@ local function SetupChatPosAndFont(self)
 
 		-- Force chat position
 		if i == 1 then
-			--[[
 			chat:ClearAllPoints()
 			chat:SetSize(C.chat.width, C.chat.height)
 			if C.chat.background == true then
@@ -256,7 +256,6 @@ local function SetupChatPosAndFont(self)
 				chat:SetPoint(C.position.chat[1], C.position.chat[2], C.position.chat[3], C.position.chat[4], C.position.chat[5])
 			end
 			FCF_SavePositionAndDimensions(chat)
-			--]]
 		elseif i == 2 then
 			if C.chat.combatlog ~= true then
 				FCF_DockFrame(chat)
