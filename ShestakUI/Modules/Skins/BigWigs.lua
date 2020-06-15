@@ -68,7 +68,11 @@ local applystyle = function(bar)
 	bar:SetHeight(15)
 	bar:SetScale(1)
 	bar.OldSetScale = bar.SetScale
-	bar.SetScale = T.dummy
+
+	-- Set currect scale if bars attached to nameplates
+	hooksecurefunc(bar, "SetParent", function()
+		bar:SetScale(T.noscalemult)
+	end)
 
 	-- Create or reparent and use bar background
 	local bg = nil
@@ -107,7 +111,8 @@ local applystyle = function(bar)
 	bar.candyBarLabel:SetShadowOffset(C.font.stylization_font_shadow and 1 or 0, C.font.stylization_font_shadow and -1 or 0)
 	bar.candyBarLabel:SetJustifyH("LEFT")
 	bar.candyBarLabel:ClearAllPoints()
-	bar.candyBarLabel:SetPoint("LEFT", bar, "LEFT", 2, 0)
+	bar.candyBarLabel:SetPoint("TOPLEFT", bar, "TOPLEFT", 2, 0)
+	bar.candyBarLabel:SetPoint("BOTTOMRIGHT", bar, "BOTTOMRIGHT", -14, 0)
 
 	bar.candyBarDuration:SetFont(C.font.stylization_font, C.font.stylization_font_size, C.font.stylization_font_style)
 	bar.candyBarDuration:SetShadowOffset(C.font.stylization_font_shadow and 1 or 0, C.font.stylization_font_shadow and -1 or 0)
@@ -121,7 +126,7 @@ local applystyle = function(bar)
 	bar.candyBarBar.OldSetPoint = bar.candyBarBar.SetPoint
 	bar.candyBarBar.SetPoint = T.dummy
 	bar.candyBarBar:SetStatusBarTexture(C.media.texture)
-	if not bar.data["bigwigs:emphasized"] == true then
+	if not bar:Get("bigwigs:emphasized") then
 		bar.candyBarBar:SetStatusBarColor(T.color.r, T.color.g, T.color.b, 1)
 	end
 	bar.candyBarBackground:SetTexture(C.media.texture)
@@ -147,9 +152,17 @@ local function registerStyle()
 		BarStopped = freestyle,
 		GetStyleName = function() return "ShestakUI" end,
 	})
-	if BigWigsLoader and bars.defaultDB.barStyle == "ShestakUI" then
+	if BigWigsLoader and BigWigsClassicDB.namespaces.BigWigs_Plugins_Bars.profiles.Default.barStyle == "ShestakUI" then
 		BigWigsLoader.RegisterMessage("BigWigs_Plugins", "BigWigs_FrameCreated", function()
 			BigWigsProximityAnchor:SetTemplate("Transparent")
+			BigWigsInfoBox:SetTemplate("Transparent")
+		end)
+
+		BigWigsLoader.RegisterMessage("BigWigs_Plugins", "BigWigs_BarEmphasized", function(_, _, bar)
+			local module = bar:Get("bigwigs:module")
+			local key = bar:Get("bigwigs:option")
+			local colors = BigWigs:GetPlugin("Colors")
+			bar.candyBarBar:SetStatusBarColor(colors:GetColor("barEmphasized", module, key))
 		end)
 	end
 end
@@ -159,11 +172,22 @@ f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(_, event, addon)
 	if event == "ADDON_LOADED" then
 		if addon == "BigWigs_Plugins" then
-			if not BigWigs3DB.namespaces.BigWigs_Plugins_Bars or BigWigs3DB.namespaces.BigWigs_Plugins_Bars.profiles.Default.InstalledBars ~= C.actionbar.bottombars then
+			if not BigWigsClassicDB.namespaces.BigWigs_Plugins_Bars or BigWigsClassicDB.namespaces.BigWigs_Plugins_Bars.profiles.Default.InstalledBars ~= C.actionbar.bottombars then
 				StaticPopup_Show("SETTINGS_BIGWIGS")
 			end
 			registerStyle()
 			f:UnregisterEvent("ADDON_LOADED")
+		elseif addon == "ShestakUI" then
+			if BigWigsLoader and C.skins.blizzard_frames == true then
+				BigWigsLoader.RegisterMessage(addon, "BigWigs_FrameCreated", function(_, frame, name)
+					if name == "QueueTimer" then
+						frame:SetSize(240, 15)
+						frame:StripTextures()
+						frame:SetStatusBarTexture(C.media.texture)
+						frame:CreateBackdrop("Overlay")
+					end
+				end)
+			end
 		end
 	end
 end)
@@ -173,41 +197,42 @@ function T.UploadBW()
 	local bars = BigWigs:GetPlugin("Bars", true)
 	if bars then
 		bars.db.profile.barStyle = "ShestakUI"
-		bars.db.profile.font = C.font.stylization_font
+		bars.db.profile.fontName = C.font.stylization_font
 		bars.db.profile.BigWigsAnchor_width = 185
-		bars.db.profile.BigWigsAnchor_x = 38
-		bars.db.profile.BigWigsEmphasizeAnchor_width = 185
-		bars.db.profile.BigWigsEmphasizeAnchor_x = 420
-		bars.db.profile.BigWigsEmphasizeAnchor_y = 248
+		bars.db.profile.BigWigsAnchor_x = 188 / UIParent:GetEffectiveScale()
+		bars.db.profile.BigWigsEmphasizeAnchor_width = 184
+		bars.db.profile.BigWigsEmphasizeAnchor_x = 620
 		bars.db.profile.emphasizeGrowup = true
 		bars.db.profile.InstalledBars = C.actionbar.bottombars
 		if C.actionbar.bottombars == 1 then
-			bars.db.profile.BigWigsAnchor_y = 116
+			bars.db.profile.BigWigsAnchor_y = 185 * UIParent:GetEffectiveScale()
+			bars.db.profile.BigWigsEmphasizeAnchor_y = 344 * UIParent:GetEffectiveScale()
 		elseif C.actionbar.bottombars == 2 then
-			bars.db.profile.BigWigsAnchor_y = 138
+			bars.db.profile.BigWigsAnchor_y = 213 * UIParent:GetEffectiveScale()
+			bars.db.profile.BigWigsEmphasizeAnchor_y = 372 * UIParent:GetEffectiveScale()
 		elseif C.actionbar.bottombars == 3 then
-			bars.db.profile.BigWigsAnchor_y = 159
+			bars.db.profile.BigWigsAnchor_y = 241 * UIParent:GetEffectiveScale()
+			bars.db.profile.BigWigsEmphasizeAnchor_y = 400 * UIParent:GetEffectiveScale()
 		end
 	end
 	local mess = BigWigs:GetPlugin("Messages")
 	if mess then
-		mess.db.profile.font = "Calibri"
+		mess.db.profile.fontName = "Calibri"
 		mess.db.profile.fontSize = 20
-		mess.db.profile.BWMessageAnchor_x = 415
-		mess.db.profile.BWMessageAnchor_y = 320
-		mess.db.profile.BWEmphasizeMessageAnchor_x = 415
-		mess.db.profile.BWEmphasizeMessageAnchor_y = 335
-		mess.db.profile.BWEmphasizeCountdownMessageAnchor_x = 465
-		mess.db.profile.BWEmphasizeCountdownMessageAnchor_y = 370
+		mess.db.profile.BWMessageAnchor_x = 615
+		mess.db.profile.BWMessageAnchor_y = 440
+		mess.db.profile.BWEmphasizeMessageAnchor_x = 618
+		mess.db.profile.BWEmphasizeMessageAnchor_y = 495
+		mess.db.profile.BWEmphasizeCountdownMessageAnchor_x = 665
+		mess.db.profile.BWEmphasizeCountdownMessageAnchor_y = 477
 	end
 	local prox = BigWigs:GetPlugin("Proximity")
 	if prox then
-		prox.db.profile.font = "Calibri"
+		prox.db.profile.fontName = "Calibri"
 		prox.db.profile.objects.ability = false
 	end
-	BigWigsIconDB.hide = true
-	BigWigs:GetPlugin("Super Emphasize").db.profile.font = "Calibri"
-	BigWigs:GetPlugin("Alt Power").db.profile.font = "Calibri"
+	BigWigsIconClassicDB.hide = true
+	BigWigs:GetPlugin("Super Emphasize").db.profile.fontName = "Calibri"
 	if InCombatLockdown() then
 		print("|cffffff00"..ERR_NOT_IN_COMBAT.."|r")
 		print("|cffffff00Reload your UI to apply skin.|r")

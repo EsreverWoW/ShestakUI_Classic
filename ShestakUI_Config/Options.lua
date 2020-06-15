@@ -625,7 +625,7 @@ do
 
 	local classic = {
 		atlasloot,
-		bigwigs,
+		-- bigwigs,
 		blood_shield_tracker,
 		capping,
 		clique,
@@ -648,7 +648,7 @@ do
 		skada,
 		tiny_dps,
 		vanaskos,
-		weak_auras
+		-- weak_auras
 	}
 
 	if IsClassicBuild() then
