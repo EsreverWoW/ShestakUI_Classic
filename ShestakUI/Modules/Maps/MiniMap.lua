@@ -13,6 +13,7 @@ MinimapAnchor:CreatePanel("ClassColor", C.minimap.size, C.minimap.size, unpack(C
 -- Disable Minimap Cluster
 MinimapCluster:EnableMouse(false)
 if T.classic then
+	MinimapCluster:SetPoint("TOPRIGHT", 0, 100) -- Prevent scaling for right panels
 	MinimapCluster:Kill()
 end
 
