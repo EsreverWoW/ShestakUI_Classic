@@ -95,32 +95,62 @@ local function LoadSkin()
 	QuestInfoRewardsFrame.ItemChooseText:SetTextColor(1, 1, 1)
 	QuestInfoRewardsFrame.ItemReceiveText:SetTextColor(1, 1, 1)
 
-	--[[ -- Texture removal blocking AutoQuest selection highlight
-	local function UpdateQuestRewards()
-		local rewardsFrame = QuestInfoFrame.rewardsFrame
-		local rewardButtons = rewardsFrame.RewardButtons
-		for i = 1, #rewardButtons do
-			local item = _G["QuestInfoRewardsFrameQuestInfoItem"..i]
-			local icon = _G["QuestInfoRewardsFrameQuestInfoItem"..i.."IconTexture"]
-			local count = _G["QuestInfoRewardsFrameQuestInfoItem"..i.."Count"]
-
-			-- item:StripTextures()
-			item:SetTemplate("Default")
-			item:StyleButton()
-			item:SetSize(143, 40)
-			item:SetFrameLevel(item:GetFrameLevel() + 2)
-
-			icon:SetSize(32, 32)
-			icon:SetDrawLayer("OVERLAY")
-			icon:SetPoint("TOPLEFT", 4, -4)
-			icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-
-			-- count:SetParent(item.backdrop)
-			count:SetDrawLayer("OVERLAY")
+	local function SkinReward(button, mapReward)
+		if button.NameFrame then button.NameFrame:Hide() end
+		if button.CircleBackground then button.CircleBackground:Hide() end
+		if button.CircleBackgroundGlow then button.CircleBackgroundGlow:Hide() end
+		if button.ValueText then button.ValueText:SetPoint("BOTTOMRIGHT", button.Icon, 0, 0) end
+		if button.IconBorder then button.IconBorder:SetAlpha(0) end
+		button.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+		button:CreateBackdrop("Default")
+		button.backdrop:ClearAllPoints()
+		button.backdrop:SetPoint("TOPLEFT", button.Icon, -2, 2)
+		button.backdrop:SetPoint("BOTTOMRIGHT", button.Icon, 2, -2)
+		if mapReward then
+			button.Icon:SetSize(26, 26)
 		end
 	end
-	QuestInfoRewardsFrame:HookScript("OnShow", UpdateQuestRewards)
-	--]]
+
+	hooksecurefunc("QuestInfo_GetRewardButton", function(rewardsFrame, index)
+		local button = rewardsFrame.RewardButtons[index]
+		if not button.backdrop then
+			SkinReward(button, rewardsFrame == MapQuestInfoRewardsFrame)
+
+			hooksecurefunc(button.IconBorder, "SetVertexColor", function(self, r, g, b)
+				if r ~= 0.65882 and g ~= 0.65882 and b ~= 0.65882 then
+					self:GetParent().backdrop:SetBackdropBorderColor(r, g, b)
+				else
+					self:GetParent().backdrop:SetBackdropBorderColor(unpack(C.media.border_color))
+				end
+				self:SetTexture("")
+			end)
+
+			hooksecurefunc(button.IconBorder, "Hide", function(self)
+				self:GetParent().backdrop:SetBackdropBorderColor(unpack(C.media.border_color))
+			end)
+		end
+	end)
+
+	QuestInfoItemHighlight:StripTextures()
+	QuestInfoItemHighlight:SetTemplate("Default")
+	QuestInfoItemHighlight:SetBackdropBorderColor(1, 1, 0)
+	QuestInfoItemHighlight:SetBackdropColor(0, 0, 0, 0)
+
+	hooksecurefunc("QuestInfoItem_OnClick", function(self)
+		QuestInfoItemHighlight:ClearAllPoints()
+		QuestInfoItemHighlight:SetPoint("TOPLEFT", self.Icon, "TOPLEFT", -2, 2)
+		QuestInfoItemHighlight:SetPoint("BOTTOMRIGHT", self.Icon, "BOTTOMRIGHT", 2, -2)
+
+		local parent = self:GetParent()
+		for i = 1, #parent.RewardButtons do
+			local questItem = QuestInfoRewardsFrame.RewardButtons[i]
+			if questItem ~= self then
+				questItem.Name:SetTextColor(1, 1, 1)
+			else
+				self.Name:SetTextColor(1, 1, 0)
+			end
+		end
+	end)
 
 	for i = 1, 6 do
 		local button = _G["QuestProgressItem"..i]
