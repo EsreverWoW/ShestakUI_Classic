@@ -213,7 +213,7 @@ ns.addCategory("threat", L_GUI_THREAT, L_GUI_THREAT_SUBTEXT)
 ns.addCategory("toppanel", L_GUI_TOP_PANEL, L_GUI_TOP_PANEL_SUBTEXT)
 ns.addCategory("stats", L_GUI_STATS, L_GUI_STATS_SUBTEXT)
 ns.addCategory("error", L_GUI_ERROR, L_GUI_ERROR_SUBTEXT)
-ns.addCategory("misc", OTHER, L_GUI_MISC_SUBTEXT, true)
+ns.addCategory("misc", OTHER, L_GUI_MISC_SUBTEXT)
 
 -- General
 do
@@ -2102,20 +2102,17 @@ do
 	local merchant_itemlevel = ns.CreateCheckBox(parent, "merchant_itemlevel", L_GUI_MISC_MERCHANT_ITEMLEVEL)
 	merchant_itemlevel:SetPoint("TOPLEFT", armory_link, "BOTTOMLEFT", 0, 0)
 
-	-- Panel 2
-	local parent = ShestakUIOptionsPanel.misc2
-
 	local minimize_mouseover = ns.CreateCheckBox(parent, "minimize_mouseover", L_GUI_MISC_MINIMIZE_MOUSEOVER)
-	minimize_mouseover:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
+	minimize_mouseover:SetPoint("TOPLEFT", merchant_itemlevel, "BOTTOMLEFT", 0, 0)
+
+	local hide_raid_button = ns.CreateCheckBox(parent, "hide_raid_button")
+	hide_raid_button:SetPoint("TOPLEFT", minimize_mouseover, "BOTTOMLEFT", 0, 0)
 
 	local hide_banner = ns.CreateCheckBox(parent, "hide_banner", L_GUI_MISC_HIDE_BANNER)
-	hide_banner:SetPoint("TOPLEFT", minimize_mouseover, "BOTTOMLEFT", 0, 0)
+	hide_banner:SetPoint("TOPLEFT", hide_raid_button, "BOTTOMLEFT", 0, 0)
 
 	local hide_talking_head = ns.CreateCheckBox(parent, "hide_talking_head", L_GUI_MISC_HIDE_TALKING_HEAD)
 	hide_talking_head:SetPoint("TOPLEFT", hide_banner, "BOTTOMLEFT", 0, 0)
-
-	local hide_raid_button = ns.CreateCheckBox(parent, "hide_raid_button")
-	hide_raid_button:SetPoint("TOPLEFT", hide_talking_head, "BOTTOMLEFT", 0, 0)
 
 	local classic = {
 		vehicle_mouseover,
