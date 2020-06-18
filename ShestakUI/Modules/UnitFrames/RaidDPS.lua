@@ -232,27 +232,13 @@ local function Shared(self, unit)
 	self.DebuffHighlightAlpha = 1
 	self.DebuffHighlightFilter = true
 
-	-- Incoming heal text/bar
+	-- Incoming heal bar
 	if C.raidframe.plugins_healcomm == true then
-		local mhpb = self.Health:CreateTexture(nil, "ARTWORK")
-		mhpb:SetTexture(C.media.texture)
-		mhpb:SetVertexColor(0, 1, 0.5, 0.2)
-
-		local ohpb = self.Health:CreateTexture(nil, "ARTWORK")
-		ohpb:SetTexture(C.media.texture)
-		ohpb:SetVertexColor(0, 1, 0, 0.2)
-
-		local ahpb = self.Health:CreateTexture(nil, "ARTWORK")
-		ahpb:SetTexture(C.media.texture)
-		ahpb:SetVertexColor(1, 1, 0, 0.2)
-
-		self.HealPrediction = {
-			myBar = mhpb,
-			otherBar = ohpb,
-			absorbBar = ahpb,
-			maxOverflow = 1,
-			frequentUpdates = true
-		}
+		local healBar = CreateFrame("StatusBar", nil, self)
+		healBar:SetAllPoints(self.Health)
+		healBar:SetStatusBarTexture(C.media.texture)
+		healBar:SetStatusBarColor(0, 1, 0, 0.2)
+		self.HealPrediction = healBar
 	end
 
 	-- Range alpha

@@ -3,31 +3,9 @@
 local _, ns = ...
 local oUF = ns.oUF
 
-if(oUF:IsClassic()) then return end
+if(not oUF:IsClassic()) then return end
 
-local function UpdateFillBar(frame, previousTexture, bar, amount, maxHealth)
-	if amount == 0 then
-		bar:Hide()
-		return previousTexture
-	end
-
-	local totalWidth, totalHeight = frame.Health:GetSize()
-	if frame.Health:GetOrientation() == "VERTICAL" then
-		bar:SetPoint("BOTTOM", previousTexture, "TOP", 0, 0)
-
-		local barSize = (amount / maxHealth) * totalHeight
-		bar:SetHeight(barSize)
-	else
-		bar:SetPoint('TOPLEFT', previousTexture, 'TOPRIGHT', 0, 0)
-		bar:SetPoint('BOTTOMLEFT', previousTexture, 'BOTTOMRIGHT', 0, 0)
-
-		local barSize = (amount / maxHealth) * totalWidth
-		bar:SetWidth(barSize)
-	end
-	bar:Show()
-
-	return bar
-end
+local HealComm = LibStub("LibHealComm-4.0")
 
 local function Update(self, event, unit)
 	if(self.unit ~= unit) then return end
@@ -35,35 +13,21 @@ local function Update(self, event, unit)
 	local hp = self.HealPrediction
 	if(hp.PreUpdate) then hp:PreUpdate(unit) end
 
-	local myIncomingHeal = UnitGetIncomingHeals(unit, 'player') or 0
-	local allIncomingHeal = UnitGetIncomingHeals(unit) or 0
-	local totalAbsorb = UnitGetTotalAbsorbs(unit) or 0
+	local GUID = UnitGUID(unit)
+	local IncomingHeals = (HealComm:GetHealAmount(GUID, HealComm.ALL_HEALS) or 0) * (HealComm:GetHealModifier(GUID) or 1)
+	local Health = UnitHealth(unit)
+	local MaxHealth = UnitHealthMax(unit)
 
-	local health, maxHealth = UnitHealth(unit), UnitHealthMax(unit)
+	if self.HealPrediction then
+		self.HealPrediction:SetMinMaxValues(0, MaxHealth)
 
-	if(health + allIncomingHeal > maxHealth * hp.maxOverflow) then
-		allIncomingHeal = maxHealth * hp.maxOverflow - health
-	end
-
-	if(allIncomingHeal < myIncomingHeal) then
-		myIncomingHeal = allIncomingHeal
-		allIncomingHeal = 0
-	else
-		allIncomingHeal = allIncomingHeal - myIncomingHeal
-	end
-
-	if health + myIncomingHeal + allIncomingHeal + totalAbsorb >= maxHealth then
-		totalAbsorb = max(0, maxHealth - (health + myIncomingHeal + allIncomingHeal))
-	end
-
-	local previousTexture = self.Health:GetStatusBarTexture()
-
-	previousTexture = UpdateFillBar(self, previousTexture, hp.myBar, myIncomingHeal, maxHealth)
-	previousTexture = UpdateFillBar(self, previousTexture, hp.otherBar, allIncomingHeal, maxHealth)
-	previousTexture = UpdateFillBar(self, previousTexture, hp.absorbBar, totalAbsorb, maxHealth)
-
-	if(hp.PostUpdate) then
-		return hp:PostUpdate(unit)
+		if (IncomingHeals == 0) then
+			self.HealPrediction:SetValue(0)
+		elseif (Health + IncomingHeals >= MaxHealth) then
+			self.HealPrediction:SetValue(MaxHealth)
+		else
+			self.HealPrediction:SetValue(Health + IncomingHeals)
+		end
 	end
 end
 
@@ -76,52 +40,54 @@ local ForceUpdate = function(element)
 end
 
 local function Enable(self)
-	local hp = self.HealPrediction
-	if(hp) then
-		hp.__owner = self
-		hp.ForceUpdate = ForceUpdate
+	local element = self.HealPrediction
+	if(element) then
+		element.__owner = self
+		element.ForceUpdate = ForceUpdate
+		element.healType = element.healType or HealComm.ALL_HEALS
 
-		self:RegisterEvent('UNIT_HEAL_PREDICTION', Path)
+		self:RegisterEvent('UNIT_HEALTH_FREQUENT', Path)
 		self:RegisterEvent('UNIT_MAXHEALTH', Path)
-		if(hp.frequentUpdates) then
-			self:RegisterEvent('UNIT_HEALTH_FREQUENT', Path)
-		else
-			self:RegisterEvent('UNIT_HEALTH', Path)
-		end
-		self:RegisterEvent('UNIT_ABSORB_AMOUNT_CHANGED', Path)
-		self:RegisterEvent('UNIT_HEAL_ABSORB_AMOUNT_CHANGED', Path)
 
-		if(not hp.maxOverflow) then
-			hp.maxOverflow = 1.05
-		end
-
-		if(hp.myBar) then
-			if(hp.myBar:IsObjectType'StatusBar' and not hp.myBar:GetStatusBarTexture()) then
-				hp.myBar:SetStatusBarTexture([[Interface\TargetingFrame\UI-StatusBar]])
+		local function HealCommUpdate(...)
+			if self.HealPrediction and self:IsVisible() then
+				for i = 1, select('#', ...) do
+					if self.unit and UnitGUID(self.unit) == select(i, ...) then
+						Path(self, nil, self.unit)
+					end
+				end
 			end
-
-			hp.myBar:Show()
 		end
-		if(hp.otherBar) then
-			if(hp.otherBar:IsObjectType'StatusBar' and not hp.otherBar:GetStatusBarTexture()) then
-				hp.otherBar:SetStatusBarTexture([[Interface\TargetingFrame\UI-StatusBar]])
-			end
 
-			hp.otherBar:Show()
+		local function HealComm_Heal_Update(event, casterGUID, spellID, healType, _, ...)
+			HealCommUpdate(...)
 		end
-		if(hp.absorbBar) then
-			if(hp.absorbBar:IsObjectType'StatusBar' and not hp.absorbBar:GetStatusBarTexture()) then
-				hp.absorbBar:SetStatusBarTexture([[Interface\TargetingFrame\UI-StatusBar]])
-			end
 
-			hp.absorbBar:Show()
+		local function HealComm_Modified(event, guid)
+			HealCommUpdate(guid)
 		end
-		if(hp.healAbsorbBar) then
-			if(hp.healAbsorbBar:IsObjectType'StatusBar' and not hp.healAbsorbBar:GetStatusBarTexture()) then
-				hp.healAbsorbBar:SetStatusBarTexture([[Interface\TargetingFrame\UI-StatusBar]])
-			end
 
-			hp.healAbsorbBar:Show()
+		HealComm.RegisterCallback(element, 'HealComm_HealStarted', HealComm_Heal_Update)
+		HealComm.RegisterCallback(element, 'HealComm_HealUpdated', HealComm_Heal_Update)
+		HealComm.RegisterCallback(element, 'HealComm_HealDelayed', HealComm_Heal_Update)
+		HealComm.RegisterCallback(element, 'HealComm_HealStopped', HealComm_Heal_Update)
+		HealComm.RegisterCallback(element, 'HealComm_ModifierChanged', HealComm_Modified)
+		HealComm.RegisterCallback(element, 'HealComm_GUIDDisappeared', HealComm_Modified)
+
+		if(not element.maxOverflow) then
+			element.maxOverflow = 1.05
+		end
+
+		if(element.myBar) then
+			if(element.myBar:IsObjectType('StatusBar') and not element.myBar:GetStatusBarTexture()) then
+				element.myBar:SetStatusBarTexture([[Interface\TargetingFrame\UI-StatusBar]])
+			end
+		end
+
+		if(element.otherBar) then
+			if(element.otherBar:IsObjectType('StatusBar') and not element.otherBar:GetStatusBarTexture()) then
+				element.otherBar:SetStatusBarTexture([[Interface\TargetingFrame\UI-StatusBar]])
+			end
 		end
 
 		return true
@@ -129,28 +95,27 @@ local function Enable(self)
 end
 
 local function Disable(self)
-	local hp = self.HealPrediction
-	if(hp) then
-		if(hp.myBar) then
-			hp.myBar:Hide()
-		end
-		if(hp.otherBar) then
-			hp.otherBar:Hide()
-		end
-		if(hp.absorbBar) then
-			hp.absorbBar:Hide()
-		end
-		if(hp.healAbsorbBar) then
-			hp.healAbsorbBar:Hide()
+	local element = self.HealPrediction
+	if(element) then
+		if(element.myBar) then
+			element.myBar:Hide()
 		end
 
-		self:UnregisterEvent('UNIT_HEAL_PREDICTION', Path)
+		if(element.otherBar) then
+			element.otherBar:Hide()
+		end
+
+		HealComm.UnregisterCallback(element, 'HealComm_HealStarted')
+		HealComm.UnregisterCallback(element, 'HealComm_HealUpdated')
+		HealComm.UnregisterCallback(element, 'HealComm_HealDelayed')
+		HealComm.UnregisterCallback(element, 'HealComm_HealStopped')
+		HealComm.UnregisterCallback(element, 'HealComm_ModifierChanged')
+		HealComm.UnregisterCallback(element, 'HealComm_GUIDDisappeared')
+
 		self:UnregisterEvent('UNIT_MAXHEALTH', Path)
-		self:UnregisterEvent('UNIT_HEALTH', Path)
 		self:UnregisterEvent('UNIT_HEALTH_FREQUENT', Path)
-		self:UnregisterEvent('UNIT_ABSORB_AMOUNT_CHANGED', Path)
-		self:UnregisterEvent('UNIT_HEAL_ABSORB_AMOUNT_CHANGED', Path)
 	end
 end
+
 
 oUF:AddElement('HealPrediction', Path, Enable, Disable)
