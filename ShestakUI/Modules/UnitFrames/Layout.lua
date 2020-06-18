@@ -53,7 +53,7 @@ local function Shared(self, unit)
 	elseif unit == "arenatarget" then
 		self.Health:SetHeight(27 + T.extraHeight)
 	else
-		self.Health:SetHeight(13)
+		self.Health:SetHeight(13 + (C.unitframe.extra_health_height / 2))
 	end
 	self.Health:SetPoint("TOPLEFT", self, "TOPLEFT", 0, 0)
 	self.Health:SetPoint("TOPRIGHT", self, "TOPRIGHT", 0, 0)
@@ -182,18 +182,17 @@ local function Shared(self, unit)
 	-- Names
 	if unit ~= "player" then
 		self.Info = T.SetFontString(self.Health, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
+		self.Info:SetWordWrap(false)
 		if unit ~= "arenatarget" then
 			self.Level = T.SetFontString(self.Power, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
 		end
 		if unit == "target" then
 			self.Info:SetPoint("RIGHT", self.Health, "RIGHT", 0, 0)
+			self.Info:SetPoint("LEFT", self.Health.value, "RIGHT", 0, 0)
+			self.Info:SetJustifyH("RIGHT")
 			self:Tag(self.Info, "[GetNameColor][NameLong]")
 			self.Level:SetPoint("RIGHT", self.Power, "RIGHT", 0, 0)
-			if not T.classic then
-				self:Tag(self.Level, "[cpoints] [Threat] [DiffColor][level][shortclassification]")
-			else
-				self:Tag(self.Level, "[cpoints] [DiffColor][level][shortclassification]")
-			end
+			self:Tag(self.Level, "[cpoints] [Threat] [DiffColor][level][shortclassification]")
 		elseif unit == "focus" or unit == "pet" then
 			self.Info:SetPoint("LEFT", self.Health, "LEFT", 2, 0)
 			self.Info:SetPoint("RIGHT", self.Health.value, "LEFT", 0, 0)
@@ -209,15 +208,23 @@ local function Shared(self, unit)
 		elseif unit == "arena" then
 			if C.unitframe.arena_on_right == true then
 				self.Info:SetPoint("RIGHT", self.Health, "RIGHT", 0, 0)
+				self.Info:SetPoint("LEFT", self.Health.value, "RIGHT", 0, 0)
+				self.Info:SetJustifyH("RIGHT")
 			else
 				self.Info:SetPoint("LEFT", self.Health, "LEFT", 2, 0)
+				self.Info:SetPoint("RIGHT", self.Health.value, "LEFT", 0, 0)
+				self.Info:SetJustifyH("LEFT")
 			end
 			self:Tag(self.Info, "[GetNameColor][NameMedium]")
 		elseif unit == "boss" then
 			if C.unitframe.boss_on_right == true then
 				self.Info:SetPoint("RIGHT", self.Health, "RIGHT", 0, 0)
+				self.Info:SetPoint("LEFT", self.Health.value, "RIGHT", 0, 0)
+				self.Info:SetJustifyH("RIGHT")
 			else
 				self.Info:SetPoint("LEFT", self.Health, "LEFT", 2, 0)
+				self.Info:SetPoint("RIGHT", self.Health.value, "LEFT", 0, 0)
+				self.Info:SetJustifyH("LEFT")
 			end
 			self:Tag(self.Info, "[GetNameColor][NameMedium]")
 		else
@@ -522,17 +529,17 @@ local function Shared(self, unit)
 			self.ClassMana:SetTextColor(1, 0.49, 0.04)
 		end
 
-		-- Experience bar
+-- Experience bar
 		if C.unitframe.plugins_experience_bar == true then
 			self.Experience = CreateFrame("StatusBar", self:GetName().."_Experience", self)
 			self.Experience:CreateBackdrop("Default")
 			self.Experience:EnableMouse(true)
 			if C.unitframe.portrait_enable == true then
-				self.Experience:SetPoint("TOPLEFT", self, "TOPLEFT", -25 - C.unitframe.portrait_width, 27)
+				self.Experience:SetPoint("TOPLEFT", self, "TOPLEFT", -25 - C.unitframe.portrait_width, 28)
 			else
-				self.Experience:SetPoint("TOPLEFT", self, "TOPLEFT", -18, 27)
+				self.Experience:SetPoint("TOPLEFT", self, "TOPLEFT", -18, 28)
 			end
-			self.Experience:SetSize(7, 94)
+			self.Experience:SetSize(7, 94 + T.extraHeight + (C.unitframe.extra_health_height / 2))
 			self.Experience:SetOrientation("Vertical")
 			self.Experience:SetStatusBarTexture(C.media.texture)
 
@@ -556,18 +563,18 @@ local function Shared(self, unit)
 			self.Reputation:EnableMouse(true)
 			if C.unitframe.portrait_enable == true then
 				if self.Experience and self.Experience:IsShown() then
-					self.Reputation:SetPoint("TOPLEFT", self, "TOPLEFT", -39 - C.unitframe.portrait_width, 27)
+					self.Reputation:SetPoint("TOPLEFT", self, "TOPLEFT", -39 - C.unitframe.portrait_width, 28)
 				else
-					self.Reputation:SetPoint("TOPLEFT", self, "TOPLEFT", -25 - C.unitframe.portrait_width, 27)
+					self.Reputation:SetPoint("TOPLEFT", self, "TOPLEFT", -25 - C.unitframe.portrait_width, 28)
 				end
 			else
 				if self.Experience and self.Experience:IsShown() then
-					self.Reputation:SetPoint("TOPLEFT", self, "TOPLEFT", -32, 27)
+					self.Reputation:SetPoint("TOPLEFT", self, "TOPLEFT", -32, 28)
 				else
-					self.Reputation:SetPoint("TOPLEFT", self, "TOPLEFT", -18, 27)
+					self.Reputation:SetPoint("TOPLEFT", self, "TOPLEFT", -18, 28)
 				end
 			end
-			self.Reputation:SetSize(7, 94)
+			self.Reputation:SetSize(7, 94 + T.extraHeight + (C.unitframe.extra_health_height / 2))
 			self.Reputation:SetOrientation("Vertical")
 			self.Reputation:SetStatusBarTexture(C.media.texture)
 
@@ -1261,18 +1268,18 @@ target:SetSize(217, 27 + T.extraHeight)
 if C.unitframe.show_pet == true then
 	local pet = oUF:Spawn("pet", "oUF_Pet")
 	pet:SetPoint(unpack(C.position.unitframes.pet))
-	pet:SetSize(105, 16)
+	pet:SetSize(105, 16 + (C.unitframe.extra_health_height / 2))
 end
 
 if not T.classic then
 	if C.unitframe.show_focus == true then
 		local focus = oUF:Spawn("focus", "oUF_Focus")
 		focus:SetPoint(unpack(C.position.unitframes.focus))
-		focus:SetSize(105, 16)
+		focus:SetSize(105, 16 + (C.unitframe.extra_health_height / 2))
 
 		local focustarget = oUF:Spawn("focustarget", "oUF_FocusTarget")
 		focustarget:SetPoint(unpack(C.position.unitframes.focus_target))
-		focustarget:SetSize(105, 16)
+		focustarget:SetSize(105, 16 + (C.unitframe.extra_health_height / 2))
 	else
 		local focus = oUF:Spawn("focus", "oUF_Focus")
 	end
@@ -1281,7 +1288,7 @@ end
 if C.unitframe.show_target_target == true then
 	local targettarget = oUF:Spawn("targettarget", "oUF_TargetTarget")
 	targettarget:SetPoint(unpack(C.position.unitframes.target_target))
-	targettarget:SetSize(105, 16)
+	targettarget:SetSize(105, 16 + (C.unitframe.extra_health_height / 2))
 end
 
 if C.unitframe.show_boss == true then
@@ -1495,10 +1502,10 @@ SLASH_TEST_UF4 = "/еуыега"
 ----------------------------------------------------------------------------------------
 if C.unitframe.lines == true then
 	local HorizontalPlayerLine = CreateFrame("Frame", "HorizontalPlayerLine", oUF_Player)
-	HorizontalPlayerLine:CreatePanel("ClassColor", 228, 1, "TOPLEFT", "oUF_Player", "BOTTOMLEFT", -5, -5)
+	HorizontalPlayerLine:CreatePanel("ClassColor", 217 + 11, 1, "TOPLEFT", "oUF_Player", "BOTTOMLEFT", -5, -5)
 
 	local VerticalPlayerLine = CreateFrame("Frame", "VerticalPlayerLine", oUF_Player)
-	VerticalPlayerLine:CreatePanel("ClassColor", 1, 98 + T.extraHeight, "RIGHT", HorizontalPlayerLine, "LEFT", 0, 13 + (T.extraHeight) / 2)
+	VerticalPlayerLine:CreatePanel("ClassColor", 1, 98 + T.extraHeight + (C.unitframe.extra_health_height / 2), "TOPRIGHT", "oUF_Player", "TOPLEFT", -5, 30)
 end
 
 ----------------------------------------------------------------------------------------
@@ -1506,7 +1513,7 @@ end
 ----------------------------------------------------------------------------------------
 if C.unitframe.lines == true then
 	local HorizontalTargetLine = CreateFrame("Frame", "HorizontalTargetLine", oUF_Target)
-	HorizontalTargetLine:CreatePanel("ClassColor", 228, 1, "TOPRIGHT", "oUF_Target", "BOTTOMRIGHT", 5, -5)
+	HorizontalTargetLine:CreatePanel("ClassColor", 217 + 11, 1, "TOPRIGHT", "oUF_Target", "BOTTOMRIGHT", 5, -5)
 	HorizontalTargetLine:RegisterEvent("PLAYER_TARGET_CHANGED")
 	HorizontalTargetLine:SetScript("OnEvent", function(self)
 		local _, class = UnitClass("target")
@@ -1519,7 +1526,7 @@ if C.unitframe.lines == true then
 	end)
 
 	local VerticalTargetLine = CreateFrame("Frame", "VerticalTargetLine", oUF_Target)
-	VerticalTargetLine:CreatePanel("ClassColor", 1, 98 + T.extraHeight, "LEFT", HorizontalTargetLine, "RIGHT", 0, 13 + (T.extraHeight) / 2)
+	VerticalTargetLine:CreatePanel("ClassColor", 1, 98 + T.extraHeight + (C.unitframe.extra_health_height / 2), "TOPLEFT", "oUF_Target", "TOPRIGHT", 5, 30)
 	VerticalTargetLine:RegisterEvent("PLAYER_TARGET_CHANGED")
 	VerticalTargetLine:SetScript("OnEvent", function(self)
 		local _, class = UnitClass("target")
