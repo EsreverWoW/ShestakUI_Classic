@@ -1,5 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
-if T.classic or C.skins.blizzard_frames ~= true then return end
+if not T.classic or C.skins.blizzard_frames ~= true then return end
 
 ----------------------------------------------------------------------------------------
 --	Friends skin
@@ -9,31 +9,44 @@ local function LoadSkin()
 		"FriendsFrame",
 		"FriendsListFrame",
 		"FriendsTabHeader",
-		"FriendsListFrameScrollFrame",
+		"FriendsFrameFriendsScrollFrame",
 		"WhoFrameColumnHeader1",
 		"WhoFrameColumnHeader2",
 		"WhoFrameColumnHeader3",
 		"WhoFrameColumnHeader4",
 		"AddFriendFrame",
-		-- "AddFriendNoteFrame",
+		"AddFriendNoteFrame",
 		"FriendsFriendsFrame",
-		--FIXME "FriendsFriendsList",
+		"FriendsFriendsList",
 		"IgnoreListFrame",
 		"FriendsFrameInset",
 		"WhoFrameListInset",
 		"WhoFrameEditBoxInset",
-		"LFRQueueFrameListInset",
-		"LFRQueueFrameRoleInset",
-		"LFRQueueFrameCommentInset",
-		-- "ScrollOfResurrectionSelectionFrame",
-		-- "ScrollOfResurrectionSelectionFrameList",
-		-- "ScrollOfResurrectionFrame",
-		-- "ScrollOfResurrectionFrameNoteFrame",
+		"GuildFrame",
+		"GuildFrameLFGFrame",
+		"GuildFrameColumnHeader1",
+		"GuildFrameColumnHeader2",
+		"GuildFrameColumnHeader3",
+		"GuildFrameColumnHeader4",
+		"GuildFrameGuildStatusColumnHeader1",
+		"GuildFrameGuildStatusColumnHeader2",
+		"GuildFrameGuildStatusColumnHeader3",
+		"GuildFrameGuildStatusColumnHeader4",
+		"GuildMemberDetailFrame",
+		"GuildMemberNoteBackground",
+		"GuildMemberOfficerNoteBackground",
+		-- "LFRQueueFrameListInset",
+		-- "LFRQueueFrameRoleInset",
+		-- "LFRQueueFrameCommentInset",
+		"ScrollOfResurrectionSelectionFrame",
+		"ScrollOfResurrectionSelectionFrameList",
+		"ScrollOfResurrectionFrame",
+		"ScrollOfResurrectionFrameNoteFrame",
 		"FriendsFrameBattlenetFrame",
 		"BattleTagInviteFrame",
-		-- "RecruitAFriendNoteFrame",
-		"QuickJoinScrollFrame",
-		"QuickJoinRoleSelectionFrame"
+		"RecruitAFriendNoteFrame",
+		-- "QuickJoinScrollFrame",
+		-- "QuickJoinRoleSelectionFrame",
 	}
 
 	for _, object in pairs(StripAllTextures) do
@@ -42,9 +55,9 @@ local function LoadSkin()
 
 	local KillTextures = {
 		"FriendsFrameIcon",
-		--FIXME "FriendsFrameBroadcastInputLeft",
-		-- "FriendsFrameBroadcastInputRight",
-		-- "FriendsFrameBroadcastInputMiddle"
+		"FriendsFrameBroadcastInputLeft",
+		"FriendsFrameBroadcastInputRight",
+		"FriendsFrameBroadcastInputMiddle"
 	}
 
 	for _, texture in pairs(KillTextures) do
@@ -62,13 +75,18 @@ local function LoadSkin()
 		"AddFriendEntryFrameAcceptButton",
 		"AddFriendEntryFrameCancelButton",
 		"AddFriendInfoFrameContinueButton",
-		--FIXME "FriendsFriendsCloseButton",
-		-- "FriendsFriendsSendRequestButton",
-		-- "ScrollOfResurrectionSelectionFrameAcceptButton",
-		-- "ScrollOfResurrectionSelectionFrameCancelButton",
-		-- "ScrollOfResurrectionFrameAcceptButton",
-		-- "ScrollOfResurrectionFrameCancelButton",
-		-- "RecruitAFriendFrameSendButton"
+		"FriendsFriendsCloseButton",
+		"FriendsFriendsSendRequestButton",
+		"GuildFrameGuildInformationButton",
+		"GuildFrameAddMemberButton",
+		"GuildFrameControlButton",
+		"GuildMemberRemoveButton",
+		"GuildMemberGroupInviteButton",
+		"ScrollOfResurrectionSelectionFrameAcceptButton",
+		"ScrollOfResurrectionSelectionFrameCancelButton",
+		"ScrollOfResurrectionFrameAcceptButton",
+		"ScrollOfResurrectionFrameCancelButton",
+		"RecruitAFriendFrameSendButton",
 	}
 
 	for _, button in pairs(buttons) do
@@ -76,16 +94,20 @@ local function LoadSkin()
 	end
 
 	local scrollbars = {
-		FriendsListFrameScrollFrame.scrollBar,
-		FriendsFriendsScrollFrame.scrollBar,
-		IgnoreListFrameScrollFrame.scrollBar,
-		WhoListScrollFrame.scrollBar,
-		QuickJoinScrollFrame.scrollBar
+		"FriendsFrameFriendsScrollFrameScrollBar",
+		"FriendsFrameIgnoreScrollFrameScrollBar",
+		"FriendsFriendsScrollFrameScrollBar",
+		"WhoListScrollFrameScrollBar",
+		"GuildListScrollFrameScrollBar",
+		-- "QuickJoinScrollFrameScrollBar",
 	}
 
 	for _, scrollbar in pairs(scrollbars) do
-		T.SkinScrollBar(scrollbar)
+		T.SkinScrollBar(_G[scrollbar])
 	end
+
+	T.SkinCheckBox(GuildFrameLFGButton)
+	T.SkinCheckBox(RaidFrameAllAssistCheckButton)
 
 	-- Reposition buttons
 	WhoFrameWhoButton:SetPoint("RIGHT", WhoFrameAddFriendButton, "LEFT", -3, 0)
@@ -95,6 +117,7 @@ local function LoadSkin()
 	FriendsFrameSendMessageButton:SetPoint("BOTTOMRIGHT", FriendsFrame, "BOTTOMRIGHT", -4, 4)
 	FriendsFrameIgnorePlayerButton:SetPoint("BOTTOMLEFT", FriendsFrame, "BOTTOMLEFT", 4, 4)
 	FriendsFrameUnsquelchButton:SetPoint("BOTTOMRIGHT", FriendsFrame, "BOTTOMRIGHT", -4, 4)
+	GuildFrameLFGButton:SetPoint("TOPRIGHT", GuildFrame, "TOPRIGHT", -8, -36)
 
 	-- Resize Buttons
 	WhoFrameWhoButton:SetSize(WhoFrameWhoButton:GetWidth() + 7, WhoFrameWhoButton:GetHeight())
@@ -107,20 +130,10 @@ local function LoadSkin()
 	AddFriendNameEditBox:SetHeight(AddFriendNameEditBox:GetHeight() - 5)
 	AddFriendFrame:SetTemplate("Transparent")
 	FriendsFriendsFrame:SetTemplate("Transparent")
-	--FIXME FriendsFriendsList:SetTemplate("Overlay")
-
-	-- Quick Join Frame
-	QuickJoinFrame.JoinQueueButton:SkinButton()
-	QuickJoinRoleSelectionFrame:SetTemplate("Transparent")
-	QuickJoinRoleSelectionFrame.AcceptButton:SkinButton()
-	QuickJoinRoleSelectionFrame.CancelButton:SkinButton()
-	T.SkinCloseButton(QuickJoinRoleSelectionFrame.CloseButton)
-	T.SkinCheckBox(QuickJoinRoleSelectionFrame.RoleButtonTank.CheckButton)
-	T.SkinCheckBox(QuickJoinRoleSelectionFrame.RoleButtonHealer.CheckButton)
-	T.SkinCheckBox(QuickJoinRoleSelectionFrame.RoleButtonDPS.CheckButton)
+	FriendsFriendsList:SetTemplate("Overlay")
 
 	-- Pending invites
-	FriendsListFrameScrollFrame.PendingInvitesHeaderButton:SkinButton()
+	FriendsFrameFriendsScrollFrame.PendingInvitesHeaderButton:SkinButton()
 	local function SkinFriendRequest(frame)
 		if not frame.isSkinned then
 			frame.DeclineButton:SetPoint("RIGHT", frame, "RIGHT", -2, 1)
@@ -129,8 +142,8 @@ local function LoadSkin()
 			frame.isSkinned = true
 		end
 	end
-	hooksecurefunc(FriendsListFrameScrollFrame.invitePool, "Acquire", function()
-		for object in pairs(FriendsListFrameScrollFrame.invitePool.activeObjects) do
+	hooksecurefunc(FriendsFrameFriendsScrollFrame.invitePool, "Acquire", function()
+		for object in pairs(FriendsFrameFriendsScrollFrame.invitePool.activeObjects) do
 			SkinFriendRequest(object)
 		end
 	end)
@@ -146,10 +159,32 @@ local function LoadSkin()
 	WhoListScrollFrame:ClearAllPoints()
 	WhoListScrollFrame:SetPoint("TOPRIGHT", WhoFrameListInset, -25, 0)
 
+	-- Guild Frame
+	GuildListScrollFrame:StripTextures()
+	GuildListScrollFrame:CreateBackdrop("Overlay")
+	GuildListScrollFrame.backdrop:SetPoint("TOPLEFT", -2, 4)
+	GuildListScrollFrame.backdrop:SetPoint("BOTTOMRIGHT", 25, -4)
+
+	GuildListScrollFrameScrollBar:SetPoint("TOPRIGHT", GuildListScrollFrame.backdrop, -6, 0)
+
+	-- GuildFrameGuildListToggleButton:SkinButton()
+
+	GuildMemberDetailFrame:CreateBackdrop("Transparent")
+
+	T.SkinCloseButton(GuildMemberDetailCloseButton, GuildMemberDetailCloseButton.backdrop)
+
+	GuildMemberNoteBackground:CreateBackdrop("Overlay")
+	GuildMemberNoteBackground.backdrop:SetPoint("TOPLEFT", -5, -2)
+	GuildMemberNoteBackground.backdrop:SetPoint("BOTTOMRIGHT", 7, 3)
+
+	GuildMemberOfficerNoteBackground:CreateBackdrop("Overlay")
+	GuildMemberOfficerNoteBackground.backdrop:SetPoint("TOPLEFT", -5, -2)
+	GuildMemberOfficerNoteBackground.backdrop:SetPoint("BOTTOMRIGHT", 7, 3)
+
 	-- BNet Frame
-	--FIXME FriendsFrameBroadcastInput:CreateBackdrop("Overlay")
-	-- FriendsFrameBroadcastInput.backdrop:SetPoint("TOPLEFT", -2, 2)
-	-- FriendsFrameBroadcastInput.backdrop:SetPoint("BOTTOMRIGHT", 0, 1)
+	FriendsFrameBroadcastInput:CreateBackdrop("Overlay")
+	FriendsFrameBroadcastInput.backdrop:SetPoint("TOPLEFT", -2, 2)
+	FriendsFrameBroadcastInput.backdrop:SetPoint("BOTTOMRIGHT", 0, 1)
 
 	FriendsFrameBattlenetFrame.BroadcastButton:SetAlpha(0)
 	FriendsFrameBattlenetFrame.BroadcastButton:ClearAllPoints()
@@ -160,12 +195,12 @@ local function LoadSkin()
 	FriendsFrameBattlenetFrame.BroadcastFrame.backdrop:SetPoint("TOPLEFT", 1, 1)
 	FriendsFrameBattlenetFrame.BroadcastFrame.backdrop:SetPoint("BOTTOMRIGHT", 1, 1)
 
-	--FIXME FriendsFrameBattlenetFrame.BroadcastFrame.ScrollFrame:StripTextures()
-	-- FriendsFrameBattlenetFrame.BroadcastFrame.ScrollFrame:CreateBackdrop("Overlay")
-	-- FriendsFrameBattlenetFrame.BroadcastFrame.ScrollFrame.backdrop:SetPoint("TOPLEFT", -2, 4)
-	-- FriendsFrameBattlenetFrame.BroadcastFrame.ScrollFrame.backdrop:SetPoint("BOTTOMRIGHT", 2, 0)
-	-- FriendsFrameBattlenetFrame.BroadcastFrame.ScrollFrame.CancelButton:SkinButton()
-	-- FriendsFrameBattlenetFrame.BroadcastFrame.ScrollFrame.UpdateButton:SkinButton()
+	FriendsFrameBattlenetFrame.BroadcastFrame.ScrollFrame:StripTextures()
+	FriendsFrameBattlenetFrame.BroadcastFrame.ScrollFrame:CreateBackdrop("Overlay")
+	FriendsFrameBattlenetFrame.BroadcastFrame.ScrollFrame.backdrop:SetPoint("TOPLEFT", -2, 4)
+	FriendsFrameBattlenetFrame.BroadcastFrame.ScrollFrame.backdrop:SetPoint("BOTTOMRIGHT", 2, 0)
+	FriendsFrameBattlenetFrame.BroadcastFrame.ScrollFrame.CancelButton:SkinButton()
+	FriendsFrameBattlenetFrame.BroadcastFrame.ScrollFrame.UpdateButton:SkinButton()
 
 	FriendsFrameBattlenetFrame.UnavailableInfoFrame:StripTextures()
 	FriendsFrameBattlenetFrame.UnavailableInfoFrame:CreateBackdrop("Transparent")
@@ -182,94 +217,55 @@ local function LoadSkin()
 
 	FriendsFrame:SetTemplate("Transparent")
 
-	--FIXME ScrollOfResurrectionSelectionFrame:SetTemplate("Transparent")
-	-- ScrollOfResurrectionSelectionFrameList:SetTemplate("Overlay")
-	-- T.SkinEditBox(ScrollOfResurrectionSelectionFrameTargetEditBox, nil, ScrollOfResurrectionSelectionFrameTargetEditBox:GetHeight() - 5)
+	ScrollOfResurrectionSelectionFrame:SetTemplate("Transparent")
+	ScrollOfResurrectionSelectionFrameList:SetTemplate("Overlay")
+	T.SkinEditBox(ScrollOfResurrectionSelectionFrameTargetEditBox, nil, ScrollOfResurrectionSelectionFrameTargetEditBox:GetHeight() - 5)
 
-	-- ScrollOfResurrectionFrame:SetTemplate("Transparent")
-	-- ScrollOfResurrectionFrameNoteFrame:SetTemplate("Overlay")
-	-- T.SkinEditBox(ScrollOfResurrectionFrameTargetEditBox, nil, ScrollOfResurrectionFrameTargetEditBox:GetHeight() - 5)
+	ScrollOfResurrectionFrame:SetTemplate("Transparent")
+	ScrollOfResurrectionFrameNoteFrame:SetTemplate("Overlay")
+	T.SkinEditBox(ScrollOfResurrectionFrameTargetEditBox, nil, ScrollOfResurrectionFrameTargetEditBox:GetHeight() - 5)
 
 	RecruitAFriendFrame:SetTemplate("Transparent")
-	-- T.SkinCloseButton(RecruitAFriendFrameCloseButton)
-	-- T.SkinEditBox(RecruitAFriendNameEditBox)
-	-- T.SkinEditBox(RecruitAFriendNoteFrame)
+	T.SkinCloseButton(RecruitAFriendFrameCloseButton)
+	T.SkinEditBox(RecruitAFriendNameEditBox)
+	T.SkinEditBox(RecruitAFriendNoteFrame)
 
-	--FIXME RecruitAFriendSentFrame:SetTemplate("Transparent")
-	-- RecruitAFriendSentFrame.OKButton:SkinButton()
-	-- T.SkinCloseButton(RecruitAFriendSentFrameCloseButton)
+	RecruitAFriendSentFrame:SetTemplate("Transparent")
+	RecruitAFriendSentFrame.OKButton:SkinButton()
+	T.SkinCloseButton(RecruitAFriendSentFrameCloseButton)
 
-	-- FriendsTabHeaderSoRButton:SetTemplate("Default")
-	-- FriendsTabHeaderSoRButton:StyleButton()
-	-- FriendsTabHeaderSoRButton.icon:SetDrawLayer("OVERLAY")
-	-- FriendsTabHeaderSoRButton.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-	-- FriendsTabHeaderSoRButton.icon:ClearAllPoints()
-	-- FriendsTabHeaderSoRButton.icon:SetPoint("TOPLEFT", 2, -2)
-	-- FriendsTabHeaderSoRButton.icon:SetPoint("BOTTOMRIGHT", -2, 2)
+	FriendsTabHeaderSoRButton:SetTemplate("Default")
+	FriendsTabHeaderSoRButton:StyleButton()
+	FriendsTabHeaderSoRButton.icon:SetDrawLayer("OVERLAY")
+	FriendsTabHeaderSoRButton.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+	FriendsTabHeaderSoRButton.icon:ClearAllPoints()
+	FriendsTabHeaderSoRButton.icon:SetPoint("TOPLEFT", 2, -2)
+	FriendsTabHeaderSoRButton.icon:SetPoint("BOTTOMRIGHT", -2, 2)
 
-	-- FriendsTabHeaderRecruitAFriendButton:SetTemplate("Default")
-	-- FriendsTabHeaderRecruitAFriendButton:StyleButton()
-	-- FriendsTabHeaderRecruitAFriendButton:SetSize(23, 23)
-	-- FriendsTabHeaderRecruitAFriendButton:ClearAllPoints()
-	-- FriendsTabHeaderRecruitAFriendButton:SetPoint("TOPRIGHT", FriendsFrame, -9, -58)
-	-- FriendsTabHeaderRecruitAFriendButtonIcon:SetDrawLayer("OVERLAY")
-	-- FriendsTabHeaderRecruitAFriendButtonIcon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-	-- FriendsTabHeaderRecruitAFriendButtonIcon:ClearAllPoints()
-	-- FriendsTabHeaderRecruitAFriendButtonIcon:SetPoint("TOPLEFT", 2, -2)
-	-- FriendsTabHeaderRecruitAFriendButtonIcon:SetPoint("BOTTOMRIGHT", -2, 2)
-
-	FriendsFrameStatusDropDown:SetPoint("TOPLEFT", 1, -27)
-
-	for i = 1, FRIENDS_TO_DISPLAY do
-		local button = _G["FriendsListFrameScrollFrameButton"..i]
-		local icon = button.gameIcon
-
-		icon.b = CreateFrame("Frame", nil, button)
-		icon.b:SetTemplate("Default")
-		icon.b:SetPoint("TOPLEFT", icon, "TOPLEFT", -2, 2)
-		icon.b:SetPoint("BOTTOMRIGHT", icon, "BOTTOMRIGHT", 2, -2)
-
-		icon:SetParent(icon.b)
-		icon:SetSize(22, 22)
-		icon:SetTexCoord(.15, .85, .15, .85)
-		icon:ClearAllPoints()
-		icon:SetPoint("RIGHT", button, "RIGHT", -24, 0)
-		icon.SetPoint = T.dummy
-
-		button.travelPassButton:SetSize(20, 32)
-		button.travelPassButton:SkinButton()
-		button.background:Hide()
-
-		button.inv = button.travelPassButton:CreateTexture(nil, "OVERLAY", nil, 7)
-		button.inv:SetTexture([[Interface\FriendsFrame\PlusManz-PlusManz]])
-		button.inv:SetPoint("TOPRIGHT", 1, -4)
-		button.inv:SetSize(22, 22)
-	end
-
-	hooksecurefunc("FriendsFrame_UpdateFriendButton", function(button)
-		if button.buttonType == FRIENDS_BUTTON_TYPE_BNET and button.travelPassButton then
-			local isEnabled = button.travelPassButton:IsEnabled()
-			button.travelPassButton:SetAlpha(isEnabled and 1 or 0.4)
-		end
-
-		if button.gameIcon.b then
-			button.gameIcon.b:SetShown(button.gameIcon:IsShown())
-		end
-	end)
+	FriendsTabHeaderRecruitAFriendButton:SetTemplate("Default")
+	FriendsTabHeaderRecruitAFriendButton:StyleButton()
+	FriendsTabHeaderRecruitAFriendButton:SetSize(23, 23)
+	FriendsTabHeaderRecruitAFriendButton:ClearAllPoints()
+	FriendsTabHeaderRecruitAFriendButton:SetPoint("TOPRIGHT", FriendsFrame, -9, -58)
+	FriendsTabHeaderRecruitAFriendButtonIcon:SetDrawLayer("OVERLAY")
+	FriendsTabHeaderRecruitAFriendButtonIcon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+	FriendsTabHeaderRecruitAFriendButtonIcon:ClearAllPoints()
+	FriendsTabHeaderRecruitAFriendButtonIcon:SetPoint("TOPLEFT", 2, -2)
+	FriendsTabHeaderRecruitAFriendButtonIcon:SetPoint("BOTTOMRIGHT", -2, 2)
 
 	T.SkinCloseButton(FriendsFrameCloseButton)
 	T.SkinDropDownBox(WhoFrameDropDown, 150)
 	T.SkinDropDownBox(FriendsFrameStatusDropDown, 70)
 	T.SkinDropDownBox(FriendsFriendsFrameDropDown)
 
-	--FIXME T.SkinHelpBox(FriendsTabHeader.FriendsFrameQuickJoinHelpTip)
-
 	-- Bottom Tabs
-	for i = 1, 4 do
+	FriendsFrameTab1:ClearAllPoints()
+	FriendsFrameTab1:SetPoint("TOPLEFT", FriendsFrame, "BOTTOMLEFT", 2, -2)
+	for i = 1, 5 do
 		T.SkinTab(_G["FriendsFrameTab"..i])
 	end
 
-	for i = 1, 3 do
+	for i = 1, 2 do
 		T.SkinTab(_G["FriendsTabHeaderTab"..i], true)
 	end
 end

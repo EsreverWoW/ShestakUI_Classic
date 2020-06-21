@@ -1,32 +1,68 @@
 local T, C, L, _ = unpack(select(2, ...))
-if T.classic or C.skins.blizzard_frames ~= true then return end
+if not T.classic or C.skins.blizzard_frames ~= true then return end
 
 ----------------------------------------------------------------------------------------
 --	Character skin
 ----------------------------------------------------------------------------------------
 local function LoadSkin()
-	T.SkinCloseButton(CharacterFrameCloseButton)
+	local magicResTextureCords = {
+		{0.21875, 0.78125, 0.25, 0.3203125},		-- Arcane
+		{0.21875, 0.78125, 0.0234375, 0.09375},		-- Fire
+		{0.21875, 0.78125, 0.13671875, 0.20703125},	-- Nature
+		{0.21875, 0.78125, 0.36328125, 0.43359375},	-- Frost
+		{0.21875, 0.78125, 0.4765625, 0.546875}		-- Shadow
+	}
 
-	-- Azerite Items
-	local function UpdateAzeriteItem(self)
-		if not self.styled then
-			self.AzeriteTexture:SetAlpha(0)
-			self.RankFrame.Texture:SetTexture("")
-			self.RankFrame.Label:SetFontObject("SystemFont_Outline_Small")
-			self.RankFrame.Label:SetPoint("CENTER", self.RankFrame.Texture, 0, 3)
+	CharacterFrame:StripTextures(true)
+	CharacterFrame:CreateBackdrop("Transparent")
+	CharacterFrame.backdrop:SetPoint("TOPLEFT", 10, -12)
+	CharacterFrame.backdrop:SetPoint("BOTTOMRIGHT", -32, 76)
 
-			self.styled = true
+	T.SkinCloseButton(CharacterFrameCloseButton, CharacterFrame.backdrop)
+
+	CharacterNameText:ClearAllPoints()
+	CharacterNameText:SetPoint("TOP", CharacterFrame.backdrop, "TOP", 0, -6)
+
+	CharacterFrameTab1:ClearAllPoints()
+	CharacterFrameTab1:SetPoint("TOPLEFT", CharacterFrame.backdrop, "BOTTOMLEFT", 2, -2)
+	for i = 1, #CHARACTERFRAME_SUBFRAMES do
+		local tab = _G["CharacterFrameTab"..i]
+		T.SkinTab(tab)
+	end
+
+	-- Character Frame
+	PaperDollFrame:StripTextures()
+	CharacterAttributesFrame:StripTextures()
+	CharacterResistanceFrame:StripTextures()
+
+	CharacterModelFrame:SetPoint("TOPLEFT", 66, -74)
+
+	T.SkinRotateButton(CharacterModelFrameRotateLeftButton)
+	CharacterModelFrameRotateLeftButton:SetPoint("TOPLEFT", 2, -2)
+
+	T.SkinRotateButton(CharacterModelFrameRotateRightButton)
+	CharacterModelFrameRotateRightButton:SetPoint("TOPLEFT", CharacterModelFrameRotateLeftButton, "TOPRIGHT", 3, 0)
+
+	local function HandleResistanceFrame(frameName)
+		for i, coords in pairs(magicResTextureCords) do
+			local frame = _G[frameName..i]
+
+			frame:SetSize(24, 24)
+			frame:SetTemplate("Default")
+
+			if i ~= 1 then
+				frame:ClearAllPoints()
+				frame:SetPoint("TOP", _G[frameName..i-1], "BOTTOM", 0, -3)
+			end
+
+			select(1, _G[frameName..i]:GetRegions()):SetInside()
+			select(1, _G[frameName..i]:GetRegions()):SetDrawLayer("ARTWORK")
+			select(2, _G[frameName..i]:GetRegions()):SetDrawLayer("OVERLAY")
+			select(1, _G[frameName..i]:GetRegions()):SetTexCoord(coords[1], coords[2], coords[3], coords[4])
 		end
-		self:GetHighlightTexture():SetColorTexture(1, 1, 1, 0.3)
-		self:GetHighlightTexture():SetAllPoints()
 	end
 
-	local function UpdateAzeriteEmpoweredItem(self)
-		self.AzeriteTexture:SetAtlas("AzeriteIconFrame")
-		self.AzeriteTexture:SetPoint("TOPLEFT", 2, -2)
-		self.AzeriteTexture:SetPoint("BOTTOMRIGHT", -2, 2)
-		self.AzeriteTexture:SetDrawLayer("BORDER", 1)
-	end
+	HandleResistanceFrame("MagicResFrame")
 
 	local slots = {
 		"HeadSlot",
@@ -46,295 +82,293 @@ local function LoadSkin()
 		"Trinket0Slot",
 		"Trinket1Slot",
 		"MainHandSlot",
-		"SecondaryHandSlot"
+		"SecondaryHandSlot",
+		"RangedSlot",
+		"AmmoSlot"
 	}
 
-	select(15, _G["CharacterMainHandSlot"]:GetRegions()):Hide()
-	select(15, _G["CharacterSecondaryHandSlot"]:GetRegions()):Hide()
+	for _, slot in pairs(slots) do
+		local icon = _G["Character"..slot.."IconTexture"]
+		local cooldown = _G["Character"..slot.."Cooldown"]
 
-	for _, i in pairs(slots) do
-		_G["Character"..i.."Frame"]:Hide()
-		local icon = _G["Character"..i.."IconTexture"]
-		local slot = _G["Character"..i]
-		local border = _G["Character"..i].IconBorder
-
-		border:Kill()
-		slot:StyleButton()
-		slot:SetNormalTexture("")
-		slot.SetHighlightTexture = T.dummy
-		slot:GetHighlightTexture().SetAllPoints = T.dummy
-		slot:SetFrameLevel(slot:GetFrameLevel() + 2)
-		slot:SetTemplate("Default")
+		slot = _G["Character"..slot]
+		slot:StripTextures()
+		slot:StyleButton(false)
+		slot:SetTemplate("Default", true, true)
 
 		icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-		icon:ClearAllPoints()
-		icon:SetPoint("TOPLEFT", 2, -2)
-		icon:SetPoint("BOTTOMRIGHT", -2, 2)
+		icon:SetInside()
 
-		hooksecurefunc(slot, "DisplayAsAzeriteItem", UpdateAzeriteItem)
-		hooksecurefunc(slot, "DisplayAsAzeriteEmpoweredItem", UpdateAzeriteEmpoweredItem)
+		slot:SetFrameLevel(PaperDollFrame:GetFrameLevel() + 2)
+
+		if(cooldown and C.unitframe.enable) then
+			T.CreateAuraWatch(cooldown)
+		end
 	end
 
-	-- Strip Textures
-	local charframe = {
-		"CharacterFrame",
-		"CharacterModelFrame",
-		"CharacterFrameInset",
-		"CharacterStatsPane",
-		"CharacterFrameInsetRight",
-		"PaperDollSidebarTabs",
-		"PaperDollEquipmentManagerPane"
-	}
+	local function ColorItemBorder()
+		if event == "UNIT_INVENTORY_CHANGED" and unit ~= "player" then return end
 
-	for _, object in pairs(charframe) do
-		_G[object]:StripTextures()
-	end
+		for _, slot in pairs(slots) do
+			local target = _G["Character"..slot]
+			local slotId = GetInventorySlotInfo(slot)
+			local itemId = GetInventoryItemTexture("player", slotId)
 
-	EquipmentFlyoutFrameHighlight:Kill()
-	local function SkinItemFlyouts()
-		EquipmentFlyoutFrameButtons:StripTextures()
-
-		for i = 1, 23 do
-			local button = _G["EquipmentFlyoutFrameButton"..i]
-			local icon = _G["EquipmentFlyoutFrameButton"..i.."IconTexture"]
-			if button then
-				button:StyleButton()
-				button.IconBorder:Hide()
-
-				icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-				button:GetNormalTexture():SetTexture(nil)
-
-				icon:ClearAllPoints()
-				icon:SetPoint("TOPLEFT", 2, -2)
-				icon:SetPoint("BOTTOMRIGHT", -2, 2)
-				button:SetFrameStrata("DIALOG")
-				if not button.backdrop then
-					button:CreateBackdrop("Default")
-					button.backdrop:SetAllPoints()
+			if itemId then
+				local rarity = GetInventoryItemQuality("player", slotId)
+				if rarity and rarity > 1 then
+					target:SetBackdropBorderColor(GetItemQualityColor(rarity))
+				else
+					target:SetBackdropBorderColor(unpack(C.media.border_color))
 				end
+			else
+				target:SetBackdropBorderColor(unpack(C.media.border_color))
 			end
 		end
 	end
 
-	-- Swap item flyout frame (shown when holding alt over a slot)
-	EquipmentFlyoutFrame:HookScript("OnShow", SkinItemFlyouts)
-	hooksecurefunc("EquipmentFlyout_Show", SkinItemFlyouts)
+	local CheckItemBorderColor = CreateFrame("Frame")
+	CheckItemBorderColor:RegisterEvent("UNIT_INVENTORY_CHANGED")
+	CheckItemBorderColor:SetScript("OnEvent", ColorItemBorder)
+	CharacterFrame:HookScript("OnShow", ColorItemBorder)
+	ColorItemBorder()
 
-	-- Icon in upper right corner of character frame
-	CharacterFramePortrait:Kill()
-	CharacterModelFrameBackgroundOverlay:SetColorTexture(0, 0, 0)
-	CharacterModelFrame:CreateBackdrop("Default")
-	CharacterModelFrame.backdrop:SetPoint("TOPLEFT", -3, 4)
-	CharacterModelFrame.backdrop:SetPoint("BOTTOMRIGHT", 4, 0)
+	-- Pet Frame
+	PetNameText:ClearAllPoints()
+	PetNameText:SetPoint("TOP", CharacterFrame.backdrop, "TOP", 0, -4)
 
-	local scrollbars = {
-		"PaperDollTitlesPaneScrollBar",
-		"PaperDollEquipmentManagerPaneScrollBar",
-		"TokenFrameContainerScrollBar",
-		"ReputationListScrollFrameScrollBar",
-		"GearManagerDialogPopupScrollFrameScrollBar"
-	}
+	PetPaperDollFrame:StripTextures()
+	
+	PetPaperDollCloseButton:StripTextures()
+	PetPaperDollCloseButton:SkinButton()
 
-	for _, scrollbar in pairs(scrollbars) do
-		T.SkinScrollBar(_G[scrollbar])
+	T.SkinRotateButton(PetModelFrameRotateLeftButton)
+	PetModelFrameRotateLeftButton:ClearAllPoints()
+	PetModelFrameRotateLeftButton:SetPoint("TOPLEFT", 3, -3)
+
+	T.SkinRotateButton(PetModelFrameRotateRightButton)
+	PetModelFrameRotateRightButton:ClearAllPoints()
+	PetModelFrameRotateRightButton:SetPoint("TOPLEFT", PetModelFrameRotateLeftButton, "TOPRIGHT", 3, 0)
+
+	PetAttributesFrame:StripTextures()
+
+	HandleResistanceFrame("PetMagicResFrame")
+
+	PetPaperDollFrameExpBar:StripTextures()
+	PetPaperDollFrameExpBar:CreateBackdrop("Default")
+	PetPaperDollFrameExpBar:SetStatusBarTexture(C.media.blank)
+
+	local function updHappiness(self)
+		local happiness = GetPetHappiness()
+		local _, isHunterPet = HasPetUI()
+		if not happiness or not isHunterPet then return end
+
+		local texture = self:GetRegions()
+		if happiness == 1 then
+			texture:SetTexCoord(0.41, 0.53, 0.06, 0.30)
+		elseif happiness == 2 then
+			texture:SetTexCoord(0.22, 0.345, 0.06, 0.30)
+		elseif happiness == 3 then
+			texture:SetTexCoord(0.04, 0.15, 0.06, 0.30)
+		end
 	end
 
-	local function SkinStatsPane(frame)
-		frame:StripTextures()
+	PetPaperDollPetInfo:CreateBackdrop("Default")
+	PetPaperDollPetInfo:SetPoint("TOPLEFT", PetModelFrameRotateLeftButton, "BOTTOMLEFT", 9, -3)
+	PetPaperDollPetInfo:GetRegions():SetTexCoord(0.04, 0.15, 0.06, 0.30)
+	PetPaperDollPetInfo:SetFrameLevel(PetModelFrame:GetFrameLevel() + 2)
+	PetPaperDollPetInfo:SetSize(24, 24)
 
-		local bg = frame.Background
-		bg:SetTexture(C.media.blank)
-		bg:ClearAllPoints()
-		bg:SetPoint("CENTER", 0, -15)
-		bg:SetSize(165, 1)
-		bg:SetVertexColor(unpack(C.media.border_color))
+	updHappiness(PetPaperDollPetInfo)
+	PetPaperDollPetInfo:RegisterEvent("UNIT_HAPPINESS")
+	PetPaperDollPetInfo:SetScript("OnEvent", updHappiness)
+	PetPaperDollPetInfo:SetScript("OnShow", updHappiness)
 
-		local border = CreateFrame("Frame", "$parentOuterBorder", frame)
-		border:SetPoint("TOPLEFT", bg, "TOPLEFT", -T.mult, T.mult)
-		border:SetPoint("BOTTOMRIGHT", bg, "BOTTOMRIGHT", T.mult, -T.mult)
-		border:SetFrameLevel(frame:GetFrameLevel() + 1)
-		border:SetBackdrop({
-			edgeFile = C.media.blank, edgeSize = T.mult,
-			insets = {left = T.mult, right = T.mult, top = T.mult, bottom = T.mult}
-		})
-		border:SetBackdropBorderColor(unpack(C.media.backdrop_color))
+	-- Reputation Frame
+	ReputationFrame:StripTextures()
+
+	for i = 1, NUM_FACTIONS_DISPLAYED do
+		local bar = _G["ReputationBar"..i]
+		local header = _G["ReputationHeader"..i]
+		local name = _G["ReputationBar"..i.."FactionName"]
+		local war = _G["ReputationBar"..i.."AtWarCheck"]
+
+		bar:StripTextures()
+		bar:CreateBackdrop("Default")
+		bar:SetStatusBarTexture(C.media.blank)
+		bar:SetSize(108, 13)
+
+		if i == 1 then
+			bar:SetPoint("TOPLEFT", 190, -86)
+		end
+		
+		name:SetPoint("LEFT", bar, "LEFT", -150, 0)
+		name:SetWidth(140)
+
+		header:StripTextures(true)
+		header:SetNormalTexture(nil)
+		header:SetPoint("TOPLEFT", bar, "TOPLEFT", -170, 0)
+		
+		header.Text = header:CreateFontString(nil, "OVERLAY")
+		header.Text:SetFont(C.media.pixel_font, C.media.pixel_font_size, C.media.pixel_font_style)
+		header.Text:SetPoint("LEFT", header, "LEFT", 10, 1)
+		header.Text:SetText("-")
+
+		war:StripTextures()
+		war:SetPoint("LEFT", bar, "RIGHT", 0, 0)
+
+		war.icon = war:CreateTexture(nil, "OVERLAY")
+		war.icon:SetPoint("LEFT", 3, -6)
+		war.icon:SetTexture("Interface\\Buttons\\UI-CheckBox-SwordCheck")
 	end
 
-	CharacterStatsPane.ItemLevelFrame.Value:SetFont(C.media.normal_font, 18)
-	CharacterStatsPane.ItemLevelFrame.Value:SetShadowOffset(1, -1)
-	CharacterStatsPane.ItemLevelFrame.Background:Hide()
+	local function UpdateFaction()
+		local numFactions = GetNumFactions()
+		local offset = FauxScrollFrame_GetOffset(ReputationListScrollFrame)
+		local index, header
 
-	SkinStatsPane(CharacterStatsPane.ItemLevelCategory)
-	SkinStatsPane(CharacterStatsPane.AttributesCategory)
-	SkinStatsPane(CharacterStatsPane.EnhancementsCategory)
+		for i = 1, NUM_FACTIONS_DISPLAYED, 1 do
+			header = _G["ReputationHeader"..i]
+			index = offset + i
 
-	-- Titles
-	PaperDollTitlesPane:HookScript("OnShow", function(self)
-		for _, object in pairs(PaperDollTitlesPane.buttons) do
-			object.BgTop:SetTexture(nil)
-			object.BgBottom:SetTexture(nil)
-			object.BgMiddle:SetTexture(nil)
-			object.Check:SetTexture(nil)
+			if index <= numFactions then
+				header:SetSize(16, 16)
+				header:StripTextures()
+				header:SetTemplate("Overlay")
+				header:SetPoint("CENTER")
+				header:SetHitRectInsets(1, 1, 1, 1)
+
+				header.Text:ClearAllPoints()
+				header.Text:SetPoint("LEFT", header, "RIGHT", 8, 0)
+
+				header.minus = header:CreateTexture(nil, "OVERLAY")
+				header.minus:SetSize(7, 1)
+				header.minus:SetPoint("CENTER")
+				header.minus:SetTexture(C.media.blank)
+
+				if header.isCollapsed then
+					header.plus = header:CreateTexture(nil, "OVERLAY")
+					header.plus:SetSize(1, 7)
+					header.plus:SetPoint("CENTER")
+					header.plus:SetTexture(C.media.blank)
+				end
+			end
+		end
+	end
+	hooksecurefunc("ReputationFrame_Update", UpdateFaction)
+
+	ReputationFrameStandingLabel:SetPoint("TOPLEFT", 223, -59)
+	ReputationFrameFactionLabel:SetPoint("TOPLEFT", 55, -59)
+
+	ReputationListScrollFrame:StripTextures()
+	T.SkinScrollBar(ReputationListScrollFrameScrollBar)
+
+	ReputationDetailFrame:StripTextures()
+	ReputationDetailFrame:SetTemplate("Transparent")
+	ReputationDetailFrame:SetPoint("TOPLEFT", ReputationFrame, "TOPRIGHT", -32, -12)
+
+	T.SkinCloseButton(ReputationDetailCloseButton)
+	ReputationDetailCloseButton:SetPoint("TOPRIGHT", -4, -4)
+
+	T.SkinCheckBox(ReputationDetailAtWarCheckBox)
+	ReputationDetailAtWarCheckBox:SetCheckedTexture("Interface\\Buttons\\UI-CheckBox-SwordCheck")
+	T.SkinCheckBox(ReputationDetailInactiveCheckBox)
+	T.SkinCheckBox(ReputationDetailMainScreenCheckBox)
+
+	-- Skill Frame
+	SkillFrame:StripTextures()
+
+	SkillFrameExpandButtonFrame:DisableDrawLayer("BACKGROUND")
+	SkillFrameCollapseAllButton:SetPoint("LEFT", SkillFrameExpandTabLeft, "RIGHT", -60, -3)
+
+	SkillFrameCollapseAllButtonText:ClearAllPoints()
+	SkillFrameCollapseAllButtonText:SetPoint("LEFT", SkillFrameCollapseAllButton, "RIGHT", 6, 0)
+
+	SkillFrameCollapseAllButton:SetSize(14, 14)
+	SkillFrameCollapseAllButton:SetPoint("CENTER")
+	SkillFrameCollapseAllButton:SetHitRectInsets(1, 1, 1, 1)
+
+	hooksecurefunc(SkillFrameCollapseAllButton, "SetNormalTexture", function(self, texture)
+		self:StripTextures()
+		self:SetTemplate("Overlay")
+
+		self.minus = self:CreateTexture(nil, "OVERLAY")
+		self.minus:SetSize(7, 1)
+		self.minus:SetPoint("CENTER")
+		self.minus:SetTexture(C.media.blank)
+
+		if not string.find(texture, "MinusButton") then
+			self.plus = self:CreateTexture(nil, "OVERLAY")
+			self.plus:SetSize(1, 7)
+			self.plus:SetPoint("CENTER")
+			self.plus:SetTexture(C.media.blank)
 		end
 	end)
 
-	-- Equipement Manager
-	PaperDollEquipmentManagerPaneEquipSet:SkinButton()
-	PaperDollEquipmentManagerPaneSaveSet:SkinButton()
-	PaperDollEquipmentManagerPaneEquipSet:SetWidth(PaperDollEquipmentManagerPaneEquipSet:GetWidth() - 8)
-	PaperDollEquipmentManagerPaneSaveSet:SetWidth(PaperDollEquipmentManagerPaneSaveSet:GetWidth() - 8)
-	PaperDollEquipmentManagerPaneEquipSet:SetPoint("TOPLEFT", PaperDollEquipmentManagerPane, "TOPLEFT", 8, 0)
-	PaperDollEquipmentManagerPaneSaveSet:SetPoint("LEFT", PaperDollEquipmentManagerPaneEquipSet, "RIGHT", 4, 0)
-	PaperDollEquipmentManagerPane:HookScript("OnShow", function(self)
-		for _, object in pairs(PaperDollEquipmentManagerPane.buttons) do
-			object.BgTop:SetTexture(nil)
-			object.BgBottom:SetTexture(nil)
-			object.BgMiddle:SetTexture(nil)
+	SkillFrameCancelButton:SkinButton()
 
-			object.Check:SetTexture(nil)
-			object.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+	for i = 1, SKILLS_TO_DISPLAY do
+		local bar = _G["SkillRankFrame"..i]
+		local label = _G["SkillTypeLabel"..i]
+		local text = _G["SkillTypeLabel"..i.."Text"]
+		local border = _G["SkillRankFrame"..i.."Border"]
+		local background = _G["SkillRankFrame"..i.."Background"]
 
-			if not object.backdrop then
-				object:CreateBackdrop("Default")
+		bar:CreateBackdrop("Default")
+		bar:SetStatusBarTexture(C.media.blank)
+
+		border:StripTextures()
+		background:SetTexture(nil)
+
+		label:SetPoint("TOPLEFT", bar, "TOPLEFT", -20, 0)
+		label:SetSize(14, 14)
+		label:SetPoint("CENTER")
+		label:SetHitRectInsets(1, 1, 1, 1)
+
+		text:SetPoint("LEFT", label, "RIGHT", 6, 0)
+
+		hooksecurefunc(label, "SetNormalTexture", function(self, texture)
+			self:StripTextures()
+			self:SetTemplate("Overlay")
+
+			self.minus = self:CreateTexture(nil, "OVERLAY")
+			self.minus:SetSize(7, 1)
+			self.minus:SetPoint("CENTER")
+			self.minus:SetTexture(C.media.blank)
+
+			if not string.find(texture, "MinusButton") then
+				self.plus = self:CreateTexture(nil, "OVERLAY")
+				self.plus:SetSize(1, 7)
+				self.plus:SetPoint("CENTER")
+				self.plus:SetTexture(C.media.blank)
 			end
-
-			object.backdrop:SetPoint("TOPLEFT", object.icon, "TOPLEFT", -2, 2)
-			object.backdrop:SetPoint("BOTTOMRIGHT", object.icon, "BOTTOMRIGHT", 2, -2)
-			object.icon:SetParent(object.backdrop)
-
-			-- Making all icons the same size and position because otherwise BlizzardUI tries to attach itself to itself when it refreshes
-			object.icon:SetPoint("LEFT", object, "LEFT", 4, 0)
-			object.icon.SetPoint = T.dummy
-			object.icon:SetSize(36, 36)
-			object.icon.SetSize = T.dummy
-		end
-	end)
-
-	T.SkinIconSelectionFrame(GearManagerDialogPopup, NUM_GEARSET_ICONS_SHOWN, "GearManagerDialogPopupButton")
-
-	-- Handle Tabs at bottom of character frame
-	for i = 1, 4 do
-		T.SkinTab(_G["CharacterFrameTab"..i])
+		end)
 	end
 
-	-- Buttons used to toggle between equipment manager, titles, and character stats
-	local function FixSidebarTabCoords()
-		for i = 1, #PAPERDOLL_SIDEBARS do
-			local tab = _G["PaperDollSidebarTab"..i]
-			if tab then
-				tab.Highlight:SetColorTexture(1, 1, 1, 0.3)
-				tab.Highlight:SetPoint("TOPLEFT", 3, -4)
-				tab.Highlight:SetPoint("BOTTOMRIGHT", -1, 0)
-				tab.Hider:SetColorTexture(0.4, 0.4, 0.4, 0.4)
-				tab.Hider:SetPoint("TOPLEFT", 3, -4)
-				tab.Hider:SetPoint("BOTTOMRIGHT", -1, 0)
-				tab.TabBg:Kill()
+	SkillListScrollFrame:StripTextures()
+	T.SkinScrollBar(SkillListScrollFrameScrollBar)
 
-				if i == 1 then
-					for i = 1, tab:GetNumRegions() do
-						local region = select(i, tab:GetRegions())
-						region:SetTexCoord(0.16, 0.86, 0.16, 0.86)
-						region.SetTexCoord = T.dummy
-					end
-				end
-				tab:CreateBackdrop("Default")
-				tab.backdrop:SetPoint("TOPLEFT", 1, -2)
-				tab.backdrop:SetPoint("BOTTOMRIGHT", 1, -2)
-			end
-		end
-	end
-	hooksecurefunc("PaperDollFrame_UpdateSidebarTabs", FixSidebarTabCoords)
+	SkillDetailScrollFrame:StripTextures()
+	T.SkinScrollBar(SkillDetailScrollFrameScrollBar)
 
-	-- Reputation
-	local function UpdateFactionSkins()
-		ReputationListScrollFrame:StripTextures()
-		ReputationFrame:StripTextures(true)
-		local factionOffset = FauxScrollFrame_GetOffset(ReputationListScrollFrame)
-		for i = 1, GetNumFactions() do
-			local statusbar = _G["ReputationBar"..i.."ReputationBar"]
-			local button = _G["ReputationBar"..i.."ExpandOrCollapseButton"]
-			local factionIndex = factionOffset + i
-			local _, _, _, _, _, _, _, _, _, isCollapsed = GetFactionInfo(factionIndex)
+	SkillDetailStatusBar:StripTextures()
+	SkillDetailStatusBar:CreateBackdrop("Default")
+	SkillDetailStatusBar:SetParent(SkillDetailScrollFrame)
+	SkillDetailStatusBar:SetStatusBarTexture(C.media.blank)
 
-			if statusbar then
-				statusbar:SetStatusBarTexture(C.media.texture)
+	T.SkinNextPrevButton(SkillDetailStatusBarUnlearnButton)
+	SkillDetailStatusBarUnlearnButton:SetSize(24, 24)
+	SkillDetailStatusBarUnlearnButton:SetPoint("LEFT", SkillDetailStatusBarBorder, "RIGHT", 5, 0)
+	SkillDetailStatusBarUnlearnButton:SetHitRectInsets(0, 0, 0, 0)
 
-				if not statusbar.backdrop then
-					statusbar:CreateBackdrop("Overlay")
-				end
+	-- Honor Frame
+	HonorFrame:StripTextures(true)
 
-				_G["ReputationBar"..i.."Background"]:SetTexture(nil)
-				_G["ReputationBar"..i.."ReputationBarHighlight1"]:SetTexture(nil)
-				_G["ReputationBar"..i.."ReputationBarHighlight2"]:SetTexture(nil)
-				_G["ReputationBar"..i.."ReputationBarAtWarHighlight1"]:SetTexture(nil)
-				_G["ReputationBar"..i.."ReputationBarAtWarHighlight2"]:SetTexture(nil)
-				_G["ReputationBar"..i.."ReputationBarLeftTexture"]:SetTexture(nil)
-				_G["ReputationBar"..i.."ReputationBarRightTexture"]:SetTexture(nil)
-			end
-
-			if button then
-				if not button.isSkinned then
-					T.SkinExpandOrCollapse(button)
-					if isCollapsed then
-						button.bg.plus:Show()
-					else
-						button.bg.plus:Hide()
-					end
-					button.isSkinned = true
-				end
-			end
-		end
-		ReputationDetailFrame:StripTextures()
-		ReputationDetailFrame:SetTemplate("Transparent")
-		ReputationDetailFrame:SetPoint("TOPLEFT", ReputationFrame, "TOPRIGHT", 3, 0)
-		T.SkinCloseButton(ReputationDetailCloseButton)
-		T.SkinCheckBox(ReputationDetailMainScreenCheckBox)
-		T.SkinCheckBox(ReputationDetailInactiveCheckBox)
-		T.SkinCheckBox(ReputationDetailAtWarCheckBox)
-		T.SkinCheckBox(ReputationDetailLFGBonusReputationCheckBox)
-	end
-	ReputationFrame:HookScript("OnShow", UpdateFactionSkins)
-	hooksecurefunc("ExpandFactionHeader", UpdateFactionSkins)
-	hooksecurefunc("CollapseFactionHeader", UpdateFactionSkins)
-
-	-- Currency
-	TokenFrame:HookScript("OnShow", function()
-		local buttons = TokenFrameContainer.buttons
-		local numButtons = #buttons
-
-		for i = 1, numButtons do
-			local button = buttons[i]
-			if button then
-				button.highlight:Kill()
-				button.categoryMiddle:Kill()
-				button.categoryLeft:Kill()
-				button.categoryRight:Kill()
-
-				if button.icon then
-					button.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-				end
-			end
-		end
-		TokenFramePopup:StripTextures()
-		TokenFramePopup:SetTemplate("Transparent")
-		TokenFramePopup:SetPoint("TOPLEFT", TokenFrame, "TOPRIGHT", 3, 0)
-		T.SkinCloseButton(TokenFramePopupCloseButton)
-		T.SkinCheckBox(TokenFramePopupBackpackCheckBox)
-		T.SkinCheckBox(TokenFramePopupInactiveCheckBox)
-	end)
-
-	CharacterFrame:SetTemplate("Transparent")
-
-	-- Help box
-	T.SkinHelpBox(CharacterFrame.ReputationTabHelpBox)
-	--FIXME T.SkinHelpBox(PaperDollItemsFrame.HelpTipBox)
-	-- PaperDollItemsFrame.HelpTipBox.CloseButton.SetPoint = T.dummy
-
-	-- Unit Background Texture
-	CharacterModelFrameBackgroundTopLeft:SetPoint("TOPLEFT", CharacterModelFrame.backdrop, "TOPLEFT", 2, -2)
-	CharacterModelFrameBackgroundTopRight:SetPoint("TOPRIGHT", CharacterModelFrame.backdrop, "TOPRIGHT", -2, -2)
-	CharacterModelFrameBackgroundBotLeft:SetPoint("BOTTOMLEFT", CharacterModelFrame.backdrop, "BOTTOMLEFT", 2, -50)
-	CharacterModelFrameBackgroundBotRight:SetPoint("BOTTOMRIGHT", CharacterModelFrame.backdrop, "BOTTOMRIGHT", -2, -50)
+	HonorFrameProgressBar:ClearAllPoints()
+	HonorFrameProgressBar:SetPoint("TOP", CharacterFrame.backdrop, "TOP", 1, -65)
+	
+	HonorFrameProgressBar:CreateBackdrop("Default")
+	HonorFrameProgressBar:SetHeight(24)
 end
 
-tinsert(T.SkinFuncs["ShestakUI"], LoadSkin)
+table.insert(T.SkinFuncs["ShestakUI"], LoadSkin)

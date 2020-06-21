@@ -1,5 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
-if T.classic or C.skins.blizzard_frames ~= true then return end
+if not T.classic or C.skins.blizzard_frames ~= true then return else return end -- incomplete
 
 ----------------------------------------------------------------------------------------
 --	Bank/Container skin
@@ -221,7 +221,7 @@ local function LoadSkin()
 			leftMostPoint = screenWidth - xOffset
 			column = 1
 			local frameHeight
-			for _, frameName in ipairs(ContainerFrame1.bags) do
+			for index, frameName in ipairs(ContainerFrame1.bags) do
 				frameHeight = _G[frameName]:GetHeight()
 				if freeScreenHeight < frameHeight then
 					column = column + 1

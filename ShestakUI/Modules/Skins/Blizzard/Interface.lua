@@ -1,5 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
-if T.classic or C.skins.blizzard_frames ~= true then return end
+if not T.classic or C.skins.blizzard_frames ~= true then return end
 
 ----------------------------------------------------------------------------------------
 --	Interface skin
@@ -18,7 +18,9 @@ local function LoadSkin()
 	local frames = {
 		"InterfaceOptionsFramePanelContainer",
 		"InterfaceOptionsFrameAddOns",
-		"InterfaceOptionsFrameCategories"
+		"InterfaceOptionsFrameCategories",
+		"InterfaceOptionsFrameTab1",
+		"InterfaceOptionsFrameTab2"
 	}
 
 	for i = 1, getn(frames) do
@@ -34,7 +36,6 @@ local function LoadSkin()
 		"InterfaceOptionsFrameCancel",
 		"InterfaceOptionsFrameTab1",
 		"InterfaceOptionsFrameTab2",
-		"InterfaceOptionsSocialPanelTwitterLoginButton",
 		"InterfaceOptionsDisplayPanelResetTutorials",
 		"InterfaceOptionsSocialPanelRedockChat"
 	}
@@ -49,7 +50,6 @@ local function LoadSkin()
 	local checkboxes = {
 		-- Controls
 		"ControlsPanelStickyTargeting",
-		"ControlsPanelAutoDismount",
 		"ControlsPanelAutoClearAFK",
 		"ControlsPanelLootAtMouse",
 		"ControlsPanelAutoLootCorpse",
@@ -57,13 +57,34 @@ local function LoadSkin()
 		-- Combat
 		"CombatPanelAutoSelfCast",
 		"CombatPanelTargetOfTarget",
-		"CombatPanelLossOfControl",
 		"CombatPanelFlashLowHealthWarning",
 		"CombatPanelEnableFloatingCombatText",
+		"CombatPanelCombatTextLowManaHealth",
+		"CombatPanelCombatTextAuras",
+		"CombatPanelCombatTextAuraFade",
+		"CombatPanelCombatTextState",
+		"CombatPanelCombatTextParryDodgeMiss",
+		"CombatPanelCombatTextResistances",
+		"CombatPanelCombatTextReputation",
+		"CombatPanelCombatTextReactives",
+		"CombatPanelCombatTextFriendlyNames",
+		"CombatPanelCombatTextComboPoints",
+		"CombatPanelCombatTextEnergyGains",
+		"CombatPanelCombatTextHonorGains",
+		"CombatPanelEnableCombatDamageText",
+		"CombatPanelEnablePeriodicDamage",
+		"CombatPanelEnablePetDamage",
 		-- Display
 		"DisplayPanelRotateMinimap",
-		"DisplayPanelAJAlerts",
 		"DisplayPanelShowTutorials",
+		"DisplayPanelShowHelm",
+		"DisplayPanelShowCloak",
+		"DisplayPanelInstantQuestText",
+		"DisplayPanelAutoQuestWatch",
+		"DisplayPanelHideOutdoorWorldState",
+		"DisplayPanelShowMinimapClock",
+		"DisplayPanelShowDetailedTooltips",
+		"DisplayPanelShowLoadingScreenTip",
 		-- Social
 		"SocialPanelProfanityFilter",
 		"SocialPanelSpamFilter",
@@ -71,14 +92,12 @@ local function LoadSkin()
 		"SocialPanelBlockGuildInvites",
 		"SocialPanelBlockChatChannelInvites",
 		"SocialPanelGuildMemberAlert",
-		"SocialPanelShowAccountAchievments",
 		"SocialPanelOnlineFriends",
 		"SocialPanelOfflineFriends",
 		"SocialPanelBroadcasts",
-		"SocialPanelAutoAcceptQuickJoinRequests",
 		"SocialPanelFriendRequests",
 		"SocialPanelShowToastWindow",
-		"SocialPanelEnableTwitter",
+		"SocialPanelShowLootSpam",
 		-- ActionBars
 		"ActionBarsPanelBottomLeft",
 		"ActionBarsPanelBottomRight",
@@ -97,16 +116,18 @@ local function LoadSkin()
 		"NamesPanelEnemyMinions",
 		"NamesPanelUnitNameplatesFriends",
 		"NamesPanelFriendlyMinions",
-		"NamesPanelUnitNameplatesPersonalResource",
-		"NamesPanelUnitNameplatesPersonalResourceOnEnemy",
 		"NamesPanelUnitNameplatesFriendlyMinions",
 		"NamesPanelUnitNameplatesMakeLarger",
 		"NamesPanelUnitNameplatesShowAll",
-		"NamesPanelUnitNameplatesAggroFlash",
 		"NamesPanelUnitNameplatesEnemyMinions",
 		"NamesPanelUnitNameplatesEnemyMinus",
+		"NamesPanelTitles",
+		"NamesPanelNPCNames",
 		-- Camera
 		"CameraPanelWaterCollision",
+		"CameraPanelFollowTerrain",
+		"CameraPanelHeadBob",
+		"CameraPanelSmartPivot",
 		-- Mouse
 		"MousePanelInvertMouse",
 		"MousePanelClickToMove",
@@ -131,17 +152,14 @@ local function LoadSkin()
 		"AutoActivate5Players",
 		"AutoActivate10Players",
 		"AutoActivate15Players",
+		"AutoActivate20Players",
 		"AutoActivate25Players",
 		"AutoActivate40Players",
-		"AutoActivateSpec1",
-		"AutoActivateSpec2",
 		"AutoActivatePvE",
 		"AutoActivatePvP",
 		"KeepGroupsTogether",
 		"HorizontalGroups",
-		"DisplayIncomingHeals",
 		"DisplayPowerBar",
-		"DisplayAggroHighlight",
 		"UseClassColors",
 		"DisplayPets",
 		"DisplayMainTankAndAssist",
@@ -161,13 +179,12 @@ local function LoadSkin()
 
 	local dropdown = {
 		"ControlsPanelAutoLootKeyDropDown",
-		"CombatPanelFocusCastKeyDropDown",
+		"CombatPanelCombatTextFloatModeDropDown",
 		"CombatPanelSelfCastKeyDropDown",
 		"SocialPanelWhisperMode",
 		"SocialPanelTimestamps",
 		"SocialPanelChatStyle",
 		"ActionBarsPanelPickupActionKeyDropDown",
-		"NamesPanelNPCNamesDropDown",
 		"NamesPanelUnitNameplatesMotionDropDown",
 		"CameraPanelStyleDropDown",
 		"MousePanelClickMoveStyleDropDown",
@@ -203,7 +220,6 @@ local function LoadSkin()
 	end
 
 	local sliders = {
-		"InterfaceOptionsCombatPanelSpellAlertOpacitySlider",
 		"CompactUnitFrameProfilesGeneralOptionsFrameHeightSlider",
 		"CompactUnitFrameProfilesGeneralOptionsFrameWidthSlider",
 		"InterfaceOptionsCameraPanelMaxDistanceSlider",

@@ -1,5 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
-if T.classic or C.skins.blizzard_frames ~= true then return end
+if not T.classic or C.skins.blizzard_frames ~= true then return end
 
 ----------------------------------------------------------------------------------------
 --	Options skin
@@ -56,6 +56,7 @@ local function LoadSkin()
 		"VideoOptionsFrameOkay",
 		"VideoOptionsFrameCancel",
 		"VideoOptionsFrameDefaults",
+		"VideoOptionsFrameClassic",
 		"VideoOptionsFrameApply",
 		"RecordLoopbackSoundButton",
 		"PlayLoopbackSoundButton"
@@ -188,7 +189,6 @@ local function LoadSkin()
 		"AudioOptionsVoicePanelVoiceChatMicVolume",
 		"AudioOptionsVoicePanelVoiceChatMicSensitivity",
 		"AudioOptionsVoicePanelVoiceChatVolume",
-		"AudioOptionsVoicePanelVoiceChatDucking",
 		"RaidGraphics_Quality",
 		"RaidGraphics_ViewDistanceSlider",
 		"RaidGraphics_EnvironmentalDetailSlider",
@@ -213,6 +213,8 @@ local function LoadSkin()
 
 	_G["VideoOptionsFrameDefaults"]:ClearAllPoints()
 	_G["VideoOptionsFrameDefaults"]:SetPoint("TOPLEFT", _G["VideoOptionsFrameCategoryFrame"], "BOTTOMLEFT", 0, -14)
+	_G["VideoOptionsFrameClassic"]:ClearAllPoints()
+	_G["VideoOptionsFrameClassic"]:SetPoint("LEFT", _G["VideoOptionsFrameDefaults"], "RIGHT", 4, 0)
 	_G["VideoOptionsFrameCancel"]:ClearAllPoints()
 	_G["VideoOptionsFrameCancel"]:SetPoint("TOPRIGHT", _G["VideoOptionsFramePanelContainer"], "BOTTOMRIGHT", 0, -14)
 	_G["VideoOptionsFrameOkay"]:ClearAllPoints()

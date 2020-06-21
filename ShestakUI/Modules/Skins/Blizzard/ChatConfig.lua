@@ -1,5 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
-if T.classic or C.skins.blizzard_frames ~= true then return end
+if not T.classic or C.skins.blizzard_frames ~= true then return end
 
 ----------------------------------------------------------------------------------------
 --	ChatConfig skin
@@ -88,10 +88,10 @@ local function LoadSkin()
 		"CombatConfigColorsColorizeDamageSchoolCheck",
 		"CombatConfigColorsColorizeEntireLineCheck",
 		"CombatConfigFormattingShowTimeStamp",
-		"CombatConfigFormattingShowBraces",
-		"CombatConfigFormattingUnitNames",
-		"CombatConfigFormattingSpellNames",
-		"CombatConfigFormattingItemNames",
+		-- "CombatConfigFormattingShowBraces",
+		-- "CombatConfigFormattingUnitNames",
+		-- "CombatConfigFormattingSpellNames",
+		-- "CombatConfigFormattingItemNames",
 		"CombatConfigFormattingFullText",
 		"CombatConfigSettingsShowQuickButton",
 		"CombatConfigSettingsSolo",
@@ -104,6 +104,8 @@ local function LoadSkin()
 	for i = 1, getn(checkboxes) do
 		T.SkinCheckBox(_G[checkboxes[i]])
 	end
+
+	-- TODO: Skin Available Channels
 
 	local ReskinColourSwatch = function(f)
 		f:StripTextures()
@@ -125,7 +127,7 @@ local function LoadSkin()
 			local checkBoxNameString = frame:GetName().."CheckBox"
 
 			if checkBoxTemplate == "ChatConfigCheckBoxTemplate" then
-				for index in ipairs(checkBoxTable) do
+				for index, value in ipairs(checkBoxTable) do
 					local checkBoxName = checkBoxNameString..index
 					local checkbox = _G[checkBoxName]
 
@@ -137,7 +139,7 @@ local function LoadSkin()
 					T.SkinCheckBox(_G[checkBoxName.."Check"])
 				end
 			elseif checkBoxTemplate == "ChatConfigCheckBoxWithSwatchTemplate" or checkBoxTemplate == "ChatConfigWideCheckBoxWithSwatchTemplate" or checkBoxTemplate == "MovableChatConfigWideCheckBoxWithSwatchTemplate" then
-				for index in ipairs(checkBoxTable) do
+				for index, value in ipairs(checkBoxTable) do
 					local checkBoxName = checkBoxNameString..index
 					local checkbox = _G[checkBoxName]
 
@@ -160,7 +162,7 @@ local function LoadSkin()
 
 		local nameString = frame:GetName().."Swatch"
 
-		for index in ipairs(swatchTable) do
+		for index, value in ipairs(swatchTable) do
 			local swatchName = nameString..index
 			local swatch = _G[swatchName]
 
@@ -188,7 +190,7 @@ local function LoadSkin()
 		ReskinColourSwatch(CombatConfigColorsColorizeSpellNamesColorSwatch)
 		ReskinColourSwatch(CombatConfigColorsColorizeDamageNumberColorSwatch)
 
-		for i = 1, 4 do
+		for i = 1, 5 do
 			for j = 1, 4 do
 				if _G["CombatConfigMessageTypesLeftCheckBox"..i] and _G["CombatConfigMessageTypesLeftCheckBox"..i.."_"..j] then
 					T.SkinCheckBox(_G["CombatConfigMessageTypesLeftCheckBox"..i])

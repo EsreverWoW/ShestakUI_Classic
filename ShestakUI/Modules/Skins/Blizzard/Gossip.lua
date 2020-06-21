@@ -1,13 +1,51 @@
 local T, C, L, _ = unpack(select(2, ...))
-if T.classic or C.skins.blizzard_frames ~= true then return end
+if not T.classic or C.skins.blizzard_frames ~= true then return end
 
 ----------------------------------------------------------------------------------------
 --	Gossip skin
 ----------------------------------------------------------------------------------------
 local function LoadSkin()
+	GossipFrame:CreateBackdrop("Transparent")
+	GossipFrame.backdrop:SetAllPoints()
+	GossipFrame.backdrop:SetPoint("TOPLEFT", 10, -12)
+	GossipFrame.backdrop:SetPoint("BOTTOMRIGHT", -32, 66)
+
+	GossipFrameNpcNameText:ClearAllPoints()
+	GossipFrameNpcNameText:SetPoint("TOP", GossipFrame.backdrop, "TOP", 0, -6)
+
+	T.SkinCloseButton(GossipFrameCloseButton, GossipFrame.backdrop)
+
+	GossipGreetingText:SetTextColor(1, 1, 1)
+	GossipGreetingText:SetShadowOffset(1, -1)
+
+	GossipGreetingScrollFrame:ClearAllPoints()
+	GossipGreetingScrollFrame:SetPoint("TOPLEFT", GossipFrame, "TOPLEFT", 22, -76)
+	GossipGreetingScrollFrame:StripTextures()
+	T.SkinScrollBar(GossipGreetingScrollFrameScrollBar)
+
+	NPCFriendshipStatusBar:StripTextures()
+	NPCFriendshipStatusBar:SetStatusBarTexture(C.media.texture)
+	NPCFriendshipStatusBar:CreateBackdrop("Overlay")
+	NPCFriendshipStatusBar.icon:SetPoint("TOPLEFT", -30, 7)
+
+	local buttons = {
+		"QuestFrameGreetingGoodbyeButton",
+		"GossipFrameGreetingGoodbyeButton",
+		"QuestFrameDeclineButton",
+		"QuestFrameAcceptButton",
+		"QuestFrameGoodbyeButton",
+		"QuestFrameCompleteButton",
+		"QuestFrameCancelButton",
+		"QuestFrameCompleteQuestButton"
+	}
+
+	for i = 1, #buttons do
+		_G[buttons[i]]:SkinButton(true)
+	end
+
 	local StripAllTextures = {
 		"GossipFrame",
-		"GossipFrameInset",
+		-- "GossipFrameInset",
 		"GossipFrameGreetingPanel"
 	}
 
@@ -23,35 +61,11 @@ local function LoadSkin()
 		_G[texture]:Kill()
 	end
 
-	local buttons = {
-		"GossipFrameGreetingGoodbyeButton"
-	}
-
-	for i = 1, #buttons do
-		_G[buttons[i]]:SkinButton(true)
-	end
-
 	for i = 1, NUMGOSSIPBUTTONS do
 		local obj = select(3, _G["GossipTitleButton"..i]:GetRegions())
 		obj:SetTextColor(1, 1, 1)
 		obj:SetShadowOffset(1, -1)
 	end
-
-	GossipGreetingText:SetTextColor(1, 1, 1)
-	GossipGreetingText:SetShadowOffset(1, -1)
-
-	GossipFrame:CreateBackdrop("Transparent")
-	GossipFrame.backdrop:SetAllPoints()
-
-	T.SkinCloseButton(GossipFrameCloseButton, GossipFrame.backdrop)
-
-	GossipGreetingScrollFrame:StripTextures()
-	T.SkinScrollBar(GossipGreetingScrollFrameScrollBar)
-
-	NPCFriendshipStatusBar:StripTextures()
-	NPCFriendshipStatusBar:SetStatusBarTexture(C.media.texture)
-	NPCFriendshipStatusBar:CreateBackdrop("Overlay")
-	NPCFriendshipStatusBar.icon:SetPoint("TOPLEFT", -30, 7)
 
 	-- Extreme hackage, blizzard makes button text on quest frame use hex color codes for some reason
 	hooksecurefunc("GossipFrameUpdate", function()

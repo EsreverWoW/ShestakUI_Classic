@@ -1,5 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
-if T.classic or C.skins.blizzard_frames ~= true then return end
+if not T.classic or C.skins.blizzard_frames ~= true then return end
 
 ----------------------------------------------------------------------------------------
 --	AuctionUI skin
@@ -8,6 +8,15 @@ local function LoadSkin()
 	T.SkinCloseButton(AuctionFrameCloseButton)
 	AuctionFrame:StripTextures(true)
 	AuctionFrame:SetTemplate("Transparent")
+
+	BrowseTitle:ClearAllPoints()
+    BrowseTitle:SetPoint("TOP", AuctionFrame, "TOP", 0, -6)
+
+	BidTitle:ClearAllPoints()
+    BidTitle:SetPoint("TOP", AuctionFrameBid, "TOP", 37, -6)
+
+	AuctionsTitle:ClearAllPoints()
+    AuctionsTitle:SetPoint("TOP", AuctionFrameAuctions, "TOP", 37, -6)
 
 	BrowseFilterScrollFrame:StripTextures()
 	BrowseScrollFrame:StripTextures()
@@ -21,23 +30,30 @@ local function LoadSkin()
 
 	T.SkinDropDownBox(BrowseDropDown)
 	T.SkinDropDownBox(PriceDropDown)
-	T.SkinDropDownBox(DurationDropDown, 80)
+	-- T.SkinDropDownBox(DurationDropDown, 80)
 
 	T.SkinCheckBox(IsUsableCheckButton)
 	T.SkinCheckBox(ShowOnPlayerCheckButton)
-	T.SkinCheckBox(ExactMatchCheckButton)
+	-- T.SkinCheckBox(ExactMatchCheckButton)
 
 	-- Dress Up Frame
 	AuctionFrame:HookScript("OnShow", function()
+		SideDressUpFrame:StripTextures(true)
+		SideDressUpFrame:SetTemplate("Transparent")
+
 		SideDressUpFrame:ClearAllPoints()
 		SideDressUpFrame:SetPoint("TOPLEFT", AuctionFrame, "TOPRIGHT", 3, 0)
+
+		SideDressUpModelResetButton:SkinButton()
+		T.SkinCloseButton(SideDressUpModelCloseButton)
+		SideDressUpModelCloseButton:SetPoint("TOPRIGHT", 6, 8)
 	end)
 
 	-- WoW Token
-	WowTokenGameTimeTutorial.NineSlice:Hide()
+	-- WowTokenGameTimeTutorial.NineSlice:Hide()
 	WowTokenGameTimeTutorial.TitleBg:Hide()
 	WowTokenGameTimeTutorial:CreateBackdrop("Transparent")
-	WowTokenGameTimeTutorialInset.NineSlice:Hide()
+	-- WowTokenGameTimeTutorialInset.NineSlice:Hide()
 	WowTokenGameTimeTutorialBg:Hide()
 	StoreButton:SkinButton()
 	T.SkinCloseButton(WowTokenGameTimeTutorial.CloseButton)
@@ -94,7 +110,7 @@ local function LoadSkin()
 		"AuctionsCreateAuctionButton",
 		"AuctionsCancelAuctionButton",
 		"AuctionsCloseButton",
-		"BrowseResetButton",
+		-- "BrowseResetButton",
 		"AuctionsStackSizeMaxButton",
 		"AuctionsNumStacksMaxButton"
 	}
@@ -112,17 +128,19 @@ local function LoadSkin()
 	BrowseCloseButton:SetPoint("BOTTOMRIGHT", AuctionFrameBrowse, "BOTTOMRIGHT", 66, 10)
 	BrowseBuyoutButton:SetPoint("RIGHT", BrowseCloseButton, "LEFT", -4, 0)
 	BrowseBidButton:SetPoint("RIGHT", BrowseBuyoutButton, "LEFT", -4, 0)
-	BrowseSearchButton:SetPoint("TOPRIGHT", AuctionFrameBrowse, "TOPRIGHT", 25, -34)
-	BrowseResetButton:ClearAllPoints()
-	BrowseResetButton:SetPoint("BOTTOMLEFT", BrowseSearchButton, "TOPLEFT", 0, 3)
-	BrowseResetButton:SetWidth(80)
+	BrowseSearchButton:ClearAllPoints()
+	BrowseSearchButton:SetPoint("TOPRIGHT", AuctionFrameBrowse, "TOPRIGHT", 52, -28)
+	BrowseSearchButton:SetWidth(130)
+	-- BrowseResetButton:ClearAllPoints()
+	-- BrowseResetButton:SetPoint("BOTTOMLEFT", BrowseSearchButton, "TOPLEFT", 0, 3)
+	-- BrowseResetButton:SetWidth(80)
 
 	AuctionsItemButton:StripTextures()
 	AuctionsItemButton:StyleButton(true)
 	AuctionsItemButton:SetTemplate("Default")
 	AuctionsItemButton.IconBorder:Kill()
 
-	AuctionsItemButton:HookScript("OnEvent", function(self, event)
+	AuctionsItemButton:HookScript("OnEvent", function(self, event, ...)
 		if event == "NEW_AUCTION_UPDATE" and self:GetNormalTexture() then
 			self:GetNormalTexture():SetTexCoord(0.1, 0.9, 0.1, 0.9)
 			self:GetNormalTexture():ClearAllPoints()
@@ -166,7 +184,7 @@ local function LoadSkin()
 		_G["AuctionFilterButton"..i.."NormalTexture"].SetAlpha = T.dummy
 	end
 
-	local editboxs = {
+	local editboxes = {
 		"BrowseName",
 		"BrowseMinLevel",
 		"BrowseMaxLevel",
@@ -186,14 +204,41 @@ local function LoadSkin()
 		"BuyoutPriceCopper"
 	}
 
-	for _, editbox in pairs(editboxs) do
+	for _, editbox in pairs(editboxes) do
 		T.SkinEditBox(_G[editbox])
 		_G[editbox]:SetTextInsets(1, 1, -1, 1)
+		if editbox ~= "BrowseName" then
+			_G[editbox]:SetWidth(_G[editbox]:GetWidth() + 4)
+		else
+			_G[editbox]:SetWidth(_G[editbox]:GetWidth() + 19)
+		end
 	end
 	_G["BrowseName"]:SetTextInsets(15, 15, -1, 1)
-	BrowseMaxLevel:SetPoint("LEFT", BrowseMinLevel, "RIGHT", 8, 0)
+	_G["BrowseNameText"]:ClearAllPoints()
+	_G["BrowseNameText"]:SetPoint("TOPLEFT", _G["AuctionFrameBrowse"], "TOPLEFT", 19, -38)
+	_G["BrowseLevelHyphen"]:SetPoint("LEFT", _G["BrowseMinLevel"], "RIGHT", 6, 0)
+	_G["BrowseMaxLevel"]:SetPoint("LEFT", _G["BrowseLevelHyphen"], "RIGHT", 2, 0)
+	if T.client == "zhCN" or T.client == "zhTW" then
+		_G["BrowseMinLevel"]:ClearAllPoints()
+		_G["BrowseMinLevel"]:SetPoint("LEFT", _G["BrowseName"], "RIGHT", 42, 0)
+		_G["BrowseLevelText"]:ClearAllPoints()
+		_G["BrowseLevelText"]:SetPoint("TOPLEFT", _G["BrowseMinLevel"], "TOPLEFT", -2, 16)
+		_G["BrowseDropDown"]:ClearAllPoints()
+		_G["BrowseDropDown"]:SetPoint("LEFT", _G["BrowseMaxLevel"], "RIGHT", 4, -4)
+		_G["BrowseDropDownName"]:ClearAllPoints()
+		_G["BrowseDropDownName"]:SetPoint("TOPLEFT", _G["BrowseDropDown"], "TOPLEFT", 20, 12)
+		_G["ShowOnPlayerCheckButton"]:ClearAllPoints()
+		_G["ShowOnPlayerCheckButton"]:SetPoint("BOTTOMRIGHT", _G["BrowseSearchButton"], "BOTTOMRIGHT", 4, -26)
+		_G["BrowseShowOnCharacterText"]:ClearAllPoints()
+		_G["BrowseShowOnCharacterText"]:SetPoint("RIGHT", _G["ShowOnPlayerCheckButton"], "LEFT", -8, 0)
+	end
 	AuctionsStackSizeEntry.backdrop:SetAllPoints()
 	AuctionsNumStacksEntry.backdrop:SetAllPoints()
+
+	BrowseBidPriceGold.texture:SetDrawLayer("ARTWORK")
+	BidBidPriceGold.texture:SetDrawLayer("ARTWORK")
+	StartPriceGold.texture:SetDrawLayer("ARTWORK")
+	BuyoutPriceGold.texture:SetDrawLayer("ARTWORK")
 
 	for i = 1, NUM_BROWSE_TO_DISPLAY do
 		local button = _G["BrowseButton"..i]
@@ -464,7 +509,7 @@ local function LoadSkin()
 
 	T.SkinScrollBar(AuctionatorScrollFrameScrollBar)
 
-	hooksecurefunc("AuctionFrameTab_OnClick", function(self)
+	hooksecurefunc("AuctionFrameTab_OnClick", function(self, button, down, index)
 		local index = self:GetID()
 		if index == 4 then
 			Atr_Hlist:SetPoint("TOPLEFT", -193, -67)

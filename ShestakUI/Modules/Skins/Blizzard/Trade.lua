@@ -1,5 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
-if C.skins.blizzard_frames ~= true then return end
+if not T.classic or C.skins.blizzard_frames ~= true then return end
 
 ----------------------------------------------------------------------------------------
 --	Trade skin
@@ -15,10 +15,8 @@ local function LoadSkin()
 	TradeRecipientMoneyInset:StripTextures()
 	TradeRecipientMoneyBg:StripTextures()
 
-	if not T.classic then
-		TradeFrame.RecipientOverlay.portrait:SetAlpha(0)
-		TradeFrame.RecipientOverlay.portraitFrame:SetAlpha(0)
-	end
+	-- TradeFrame.RecipientOverlay.portrait:SetAlpha(0)
+	-- TradeFrame.RecipientOverlay.portraitFrame:SetAlpha(0)
 
 	TradeFrame:CreateBackdrop("Transparent")
 	TradeFrame.backdrop:SetPoint("TOPLEFT", 0, 0)

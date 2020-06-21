@@ -1,5 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
-if T.classic or C.skins.blizzard_frames ~= true then return end
+if not T.classic or C.skins.blizzard_frames ~= true then return end
 
 ----------------------------------------------------------------------------------------
 --	Tabard skin
@@ -7,17 +7,19 @@ if T.classic or C.skins.blizzard_frames ~= true then return end
 local function LoadSkin()
 	TabardFrame:StripTextures()
 	TabardFrame:CreateBackdrop("Transparent")
-	TabardFrame.backdrop:SetPoint("TOPLEFT", 0, 0)
-	TabardFrame.backdrop:SetPoint("BOTTOMRIGHT", 0, 0)
+	TabardFrame.backdrop:SetPoint("TOPLEFT", 10, -12)
+	TabardFrame.backdrop:SetPoint("BOTTOMRIGHT", -32, 76)
 
-	TabardFrameInset:StripTextures()
 	TabardFramePortrait:Kill()
 
 	TabardModel:CreateBackdrop("Overlay")
-	TabardModel.backdrop:SetPoint("TOPLEFT", 2, 0)
-	TabardModel.backdrop:SetPoint("BOTTOMRIGHT", 2, -4)
+	TabardModel.backdrop:SetPoint("TOPLEFT", -8, 0)
+	TabardModel.backdrop:SetPoint("BOTTOMRIGHT", 16, -4)
 
 	T.SkinCloseButton(TabardFrameCloseButton, TabardFrame.backdrop)
+
+	TabardFrameGreetingText:ClearAllPoints()
+	TabardFrameGreetingText:SetPoint("TOP", TabardFrame.backdrop, "TOP", 0, -28)
 
 	TabardFrameCancelButton:SkinButton()
 	TabardFrameAcceptButton:SkinButton()
@@ -31,9 +33,10 @@ local function LoadSkin()
 	TabardCharacterModelRotateRightButton:ClearAllPoints()
 	TabardCharacterModelRotateRightButton:SetPoint("LEFT", TabardCharacterModelRotateLeftButton, "RIGHT", 3, 0)
 
-	TabardFrameMoneyBg:StripTextures()
-	TabardFrameMoneyInset:StripTextures()
 	TabardFrameCostFrame:StripTextures()
+	TabardFrameCostFrame:ClearAllPoints()
+	TabardFrameCostFrame:SetPoint("TOPRIGHT", TabardModel.backdrop, "TOPRIGHT", 8, -2)
+
 	TabardFrameCustomizationFrame:StripTextures()
 
 	for i = 1, 5 do
@@ -47,7 +50,7 @@ local function LoadSkin()
 			_G[custom]:SetPoint("TOP", _G["TabardFrameCustomization"..i-1], "BOTTOM", 0, -6)
 		else
 			local point, anchor, point2, x, y = _G[custom]:GetPoint()
-			_G[custom]:SetPoint(point, anchor, point2, x, y + 4)
+			_G[custom]:SetPoint(point, anchor, point2, x + 14, y + 2)
 		end
 	end
 end

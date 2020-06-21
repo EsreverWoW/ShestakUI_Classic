@@ -1,51 +1,36 @@
 local T, C, L, _ = unpack(select(2, ...))
-if T.classic or C.skins.blizzard_frames ~= true then return end
+if not T.classic or C.skins.blizzard_frames ~= true then return end
 
 ----------------------------------------------------------------------------------------
 --	DressUp skin
 ----------------------------------------------------------------------------------------
 local function LoadSkin()
 	DressUpFrame:StripTextures()
-	DressUpFrame:SetTemplate("Transparent")
+	DressUpFrame:CreateBackdrop("Transparent")
+	DressUpFrame.backdrop:SetPoint("TOPLEFT", 10, -12)
+	DressUpFrame.backdrop:SetPoint("BOTTOMRIGHT", -34, 76)
+
 	DressUpFramePortrait:Hide()
-	DressUpFrameInset:Hide()
 
-	DressUpFrame.ModelScene:CreateBackdrop("Default")
-	DressUpFrame.ModelScene.backdrop:SetPoint("TOPLEFT", -3, 4)
-	DressUpFrame.ModelScene.backdrop:SetPoint("BOTTOMRIGHT", 2, 1)
-	DressUpFrame.ModelBackground:SetDrawLayer("BACKGROUND", 3)
+	T.SkinCloseButton(DressUpFrameCloseButton, DressUpFrame.backdrop)
 
-	T.SkinMaxMinFrame(MaximizeMinimizeFrame, DressUpFrameCloseButton)
+	DressUpFrameTitleText:ClearAllPoints()
+	DressUpFrameTitleText:SetPoint("TOP", DressUpFrame.backdrop, "TOP", 0, -5)
+
+	DressUpFrameDescriptionText:ClearAllPoints()
+	DressUpFrameDescriptionText:SetPoint("TOP", DressUpFrame.backdrop, "TOP", 0, -25)
+
+
+	T.SkinRotateButton(DressUpModelFrameRotateLeftButton)
+	DressUpModelFrameRotateLeftButton:SetPoint("TOPLEFT", 3, -3)
+
+	T.SkinRotateButton(DressUpModelFrameRotateRightButton)
+	DressUpModelFrameRotateRightButton:SetPoint("TOPLEFT", DressUpModelFrameRotateLeftButton, "TOPRIGHT", 3, 0)
 
 	DressUpFrameCancelButton:SkinButton()
 	DressUpFrameResetButton:SkinButton()
 	DressUpFrameResetButton:SetPoint("RIGHT", DressUpFrameCancelButton, "LEFT", -2, 0)
 	DressUpFrameUndressButton:SkinButton()
-
-	T.SkinDropDownBox(DressUpFrameOutfitDropDown)
-	DressUpFrameOutfitDropDown:SetSize(195, 34)
-	DressUpFrameOutfitDropDown.SaveButton:SkinButton()
-	DressUpFrameOutfitDropDown.SaveButton:ClearAllPoints()
-	DressUpFrameOutfitDropDown.SaveButton:SetPoint("RIGHT", DressUpFrameOutfitDropDown, 86, 4)
-
-	T.SkinCloseButton(DressUpFrameCloseButton, DressUpFrame.backdrop)
-
-	SideDressUpFrame:StripTextures()
-	SideDressUpFrame:SetTemplate("Transparent")
-	--FIXME SideDressUpModelResetButton:SkinButton()
-	-- T.SkinCloseButton(SideDressUpModelCloseButton, SideDressUpFrame)
-
-	WardrobeOutfitFrame:StripTextures(true)
-	WardrobeOutfitFrame:CreateBackdrop("Transparent")
-	WardrobeOutfitFrame.backdrop:SetPoint("TOPLEFT", WardrobeOutfitFrame, "TOPLEFT", 6, -6)
-	WardrobeOutfitFrame.backdrop:SetPoint("BOTTOMRIGHT", WardrobeOutfitFrame, "BOTTOMRIGHT", -6, 6)
-
-	WardrobeOutfitEditFrame:StripTextures(true)
-	WardrobeOutfitEditFrame:SetTemplate("Transparent")
-	WardrobeOutfitEditFrame.AcceptButton:SkinButton()
-	WardrobeOutfitEditFrame.CancelButton:SkinButton()
-	WardrobeOutfitEditFrame.DeleteButton:SkinButton()
-	T.SkinEditBox(WardrobeOutfitEditFrame.EditBox, 250, 25)
 end
 
-tinsert(T.SkinFuncs["ShestakUI"], LoadSkin)
+table.insert(T.SkinFuncs["ShestakUI"], LoadSkin)

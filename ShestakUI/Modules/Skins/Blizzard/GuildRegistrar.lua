@@ -1,5 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
-if T.classic or C.skins.blizzard_frames ~= true then return end
+if not T.classic or C.skins.blizzard_frames ~= true then return end
 
 ----------------------------------------------------------------------------------------
 --	GuildRegistrar skin
@@ -7,9 +7,10 @@ if T.classic or C.skins.blizzard_frames ~= true then return end
 local function LoadSkin()
 	GuildRegistrarFrame:StripTextures(true)
 	GuildRegistrarFrame:CreateBackdrop("Transparent")
-	GuildRegistrarFrame.backdrop:SetAllPoints()
+	GuildRegistrarFrame.backdrop:SetPoint("TOPLEFT", 10, -12)
+	GuildRegistrarFrame.backdrop:SetPoint("BOTTOMRIGHT", -32, 76)
+
 	GuildRegistrarGreetingFrame:StripTextures()
-	GuildRegistrarFrameInset:StripTextures()
 
 	GuildRegistrarFramePurchaseButton:SkinButton()
 	GuildRegistrarFrameCancelButton:SkinButton()
@@ -22,6 +23,9 @@ local function LoadSkin()
 	GuildRegistrarFrameGoodbyeButton:SetPoint("BOTTOMRIGHT", GuildRegistrarFrame.backdrop, "BOTTOMRIGHT", -4, 4)
 
 	T.SkinCloseButton(GuildRegistrarFrameCloseButton, GuildRegistrarFrame.backdrop)
+
+	PetitionFrameNpcNameText:ClearAllPoints()
+	PetitionFrameNpcNameText:SetPoint("TOP", GuildRegistrarFrame.backdrop, "TOP", 0, -6)
 
 	GuildRegistrarFrameEditBox:StripTextures(true)
 	T.SkinEditBox(GuildRegistrarFrameEditBox, nil, GuildRegistrarFrameEditBox:GetHeight() - 15)
