@@ -1,5 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
-if T.classic then return end
+if not T.classic then return end
 
 ----------------------------------------------------------------------------------------
 --	The best way to add or delete spell is to go at www.wowhead.com, search for a spell.
@@ -9,84 +9,83 @@ if T.classic then return end
 if C.raidcooldown.enable == true then
 	T.raid_spells = {
 		-- Battle resurrection
-		[20484] = 600,	-- Rebirth
-		[61999] = 600,	-- Raise Ally
-		[20707] = 600,	-- Soulstone
-		-- Heroism
-		[32182] = 300,	-- Heroism
-		[2825] = 300,	-- Bloodlust
-		[80353] = 300,	-- Time Warp
-		[264667] = 300,	-- Primal Rage [Hunter's pet]
+		[20484] = 1800,	-- Rebirth
+		[20707] = 1800, -- Soulstone Resurrection
+		[27740] = 3600,	-- Reincarnation (3600sec base / -1200sec from talents / -600sec for Totem)
+		-- Jumper Cables
+		-- [8342] = 1800,	-- Goblin Jumper Cables
+		-- [22999] = 1800,	-- Goblin Jumper Cables XL
 		-- Healing
-		[633] = 600,	-- Lay on Hands
-		[740] = 180,	-- Tranquility
-		[115310] = 180,	-- Revival
-		[64843] = 180,	-- Divine Hymn
-		[108280] = 180,	-- Healing Tide Totem
-		[15286] = 180,	-- Vampiric Embrace
-		[108281] = 120,	-- Ancestral Guidance
+		[740] = 300,	-- Tranquility
+		[724] = 600,	-- Lightwell
 		-- Defense
-		[62618] = 180,	-- Power Word: Barrier
-		[33206] = 180,	-- Pain Suppression
-		[47788] = 180,	-- Guardian Spirit
-		[31821] = 180,	-- Aura Mastery
-		[98008] = 180,	-- Spirit Link Totem
-		[97462] = 180,	-- Rallying Cry
-		[88611] = 180,	-- Smoke Bomb
-		[51052] = 120,	-- Anti-Magic Zone
-		[116849] = 120,	-- Life Cocoon
-		[6940] = 120,	-- Blessing of Sacrifice
-		[114030] = 120,	-- Vigilance
-		[102342] = 60,	-- Ironbark
+		[1022] = 300,	-- Blessing of Protection (300sec base / -120sec from talents)
+		[633] = 3600,	-- Lay on Hands (3600sec base / -1200sec from talents)
+		[871] = 1800,	-- Shield Wall
+		[12975] = 600,	-- Last Stand
+		-- Taunts
+		[5209] = 600,	-- Challenging Roar
+		[1161] = 600,	-- Challenging Shout
+		[694] = 120,	-- Mocking Blow
+		-- Mana Regeneration
+		[29166] = 360,	-- Innervate
+		[16190] = 300,	-- Mana Tide Totem
 		-- Other
-		[106898] = 120,	-- Stampeding Roar
+		[6346] = 30,	-- Fear Ward
+		[10060] = 180,	-- Power Infusion
 	}
 end
 
 if C.enemycooldown.enable == true then
 	T.enemy_spells = {
 		-- Interrupts and Silences
-		[57994] = 12,	-- Wind Shear
-		[47528] = 15,	-- Mind Freeze
-		[106839] = 15,	-- Skull Bash
-		[116705] = 15,	-- Spear Hand Strike
-		[96231] = 15,	-- Rebuke
-		[1766] = 15,	-- Kick
-		[6552] = 15,	-- Pummel
-		[147362] = 24,	-- Counter Shot
-		[2139] = 24,	-- Counterspell
-		[19647] = 24,	-- Spell Lock
-		[115781] = 24,	-- Optical Blast
+		[2139] = 30,	-- Counterspell
 		[15487] = 45,	-- Silence
-		[47476] = 60,	-- Strangulate
-		[78675] = 60,	-- Solar Beam
+		[1766] = 10,	-- Kick
+		[8042] = 5,		-- Earth Shock (5sec base / -1sec from talents)
+		[19244] = 30,	-- Spell Lock (Felhunter)
+		[6552] = 10,	-- Pummel
 		-- Crowd Controls
-		[115078] = 15,	-- Paralysis
-		[20066] = 15,	-- Repentance
-		[187650] = 30,	-- Freezing Trap
-		[8122] = 30,	-- Psychic Scream
-		[30283] = 30,	-- Shadowfury
-		[107570] = 30,	-- Storm Bolt
-		[51514] = 30,	-- Hex
+		[1499] = 15,	-- Freezing Trap
+		[19503] = 30,	-- Scatter Shot
+		[19386] = 120,	-- Wyvern Sting
+		[11113] = 45,	-- Blast Wave
+		[853] = 50,		-- Hammer of Justice (60sec base / -15sec from talents)
+		[20066] = 60,	-- Repentance
+		[6789] = 120,	-- Death Coil (120sec base / -18sec from ZG Set)
+		[8122] = 30,	-- Psychic Scream (30sec base / -4sec from talents)
+		[2094] = 210,	-- Blind (300sec base / -90sec from talents)
 		[5484] = 40,	-- Howl of Terror
-		[108194] = 45,	-- Asphyxiate
-		[19386] = 45,	-- Wyvern Sting
-		[113724] = 45,	-- Ring of Frost
-		[119381] = 45,	-- Leg Sweep
-		[64044] = 45,	-- Psychic Horror
-		[6789] = 45,	-- Mortal Coil
-		[853] = 60,		-- Hammer of Justice
+		[12809] = 45,	-- Concussion Blow
 		-- Defense abilities
-		[48707] = 60,	-- Anti-Magic Shell
-		[31224] = 90,	-- Cloak of Shadows
-		[46924] = 90,	-- Bladestorm
-		[287081] = 60,	-- Lichborne
-		[213664] = 120,	-- Nimble Brew
-		[47585] = 120,	-- Dispersion
-		[1856] = 120,	-- Vanish
-		[7744] = 120,	-- Will of the Forsaken (Racial)
-		[186265] = 180,	-- Aspect of the Turtle
-		[33206] = 180,	-- Pain Suppression
+		[22812] = 60,	-- Barkskin
+		[19263] = 300,	-- Deterrence
+		[11958] = 300,	-- Ice Block
+		[1044] = 20,	-- Blessing of Freedom
+		[1022] = 180,	-- Blessing of Protection (300sec base / -120sec from talents)
+		[498] = 300,	-- Divine Protection
+		[642] = 300,	-- Divine Shield
+		[6346] = 30,	-- Fear Ward
+		[5277] = 210,	-- Evasion (-90sec from talents)
+		[1856] = 210,	-- Vanish (300sec base / -90sec from talents)
+		-- [8178] = 13,	-- Grounding Totem (15sec base / -2sec from talents)
+		[18499] = 30,	-- Berserker Rage
+		[20600] = 180,	-- Perception
+		[20594] = 180,	-- Stoneform
+		[7744] = 120,	-- Will of the Forsaken
+		-- Heals
+		-- Disarms
+		-- [14251] = 6,		-- Riposte
+		[676] = 60,		-- Disarm
+		-- Mana Regeneration
+		[29166] = 360,	-- Innervate
+		[16190] = 300,	-- Mana Tide Totem
+		-- Trinket (TEMPORARY)
+		[23277] = 300,	-- PvP Trinket (Druid)
+		[5579] = 300,	-- PvP Trinket (Hunter/Shaman/Warrior)
+		[23274] = 300,	-- PvP Trinket (Mage)
+		[23276] = 300,	-- PvP Trinket (Paladin/Priest)
+		[23273] = 300,	-- PvP Trinket (Rogue/Warlock)
 	}
 end
 

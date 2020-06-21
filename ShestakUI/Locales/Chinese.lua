@@ -50,7 +50,7 @@ L_MISC_BUY_STACK = "Alt+右键批量购买"
 L_MISC_ONECLICK_BUYOUT = "Shift+右键 不弹出确认框体直接购买"
 L_MISC_ONECLICK_BID = "Shift+右鍵 不弹出确认框体直接竞标"
 L_MISC_ONECLICK_CANCEL = "Shift+右键 不弹出确认框体直接取消选择的物品"
-L_MISC_UI_OUTDATED = "ShestakUI 版本已过期，请至 www.shestak.org 下载最新版。"
+L_MISC_UI_OUTDATED = "ShestakUI 版本已过期，请至 https://github.com/Wetxius/ShestakUI_Classic 下载最新版。"
 L_MISC_HEADER_MARK = "鼠标悬停显示团队图标"
 L_MISC_BINDER_OPEN = "鼠标绑定"
 L_MISC_SCROLL = "附魔羊皮纸"
@@ -191,8 +191,8 @@ L_POPUP_SETTINGS_BW = "需要改变BigWigs锚点及样式元素"
 L_POPUP_ARMORY = "英雄榜"
 
 -- Welcome message
-L_WELCOME_LINE_1 = "欢迎使用ShestakUI "
-L_WELCOME_LINE_2_1 = "键入 /cfg 进行插件设置, 或者访问http://shestak.org"
+L_WELCOME_LINE_1 = "欢迎使用ShestakUI (Classic) "
+L_WELCOME_LINE_2_1 = "键入 /cfg 进行插件设置, 或者访问https://github.com/EsreverWoW/ShestakUI_Classic"
 L_WELCOME_LINE_2_2 = "获取更多信息。"
 
 -- Combat text

@@ -1,5 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
-if T.classic or C.unitframe.enable ~= true or C.unitframe.castbar_ticks ~= true then return end
+if not T.classic or C.unitframe.enable ~= true or C.unitframe.castbar_ticks ~= true then return end
 
 ----------------------------------------------------------------------------------------
 --	The best way to add or delete spell is to go at www.wowhead.com, search for a spell.
@@ -11,39 +11,27 @@ local function SpellName(id)
 	if name then
 		return name
 	else
-		print("|cffff0000WARNING: spell ID ["..tostring(id).."] no longer exists! Report this to Shestak.|r")
+		print("|cffff0000WARNING: spell ID ["..tostring(id).."] no longer exists! Report this to EsreverWoW.|r")
 		return "Empty"
 	end
 end
 
 T.CastBarTicks = {
 	-- Druid
-	[SpellName(740)] = 4,		-- Tranquility
+	[SpellName(740)] = 5,		-- Tranquility
+	[SpellName(16914)] = 10,	-- Hurricane
+	-- Hunter
+	[SpellName(1510)] = 6,		-- Volley
 	-- Mage
-	[SpellName(5143)] = 5,		-- Arcane Missiles
-	[SpellName(205021)] = 5,	-- Ray of Frost
-	-- Monk
-	[SpellName(113656)] = 4,	-- Fists of Fury
-	[SpellName(115175)] = 8,	-- Soothing Mist
-	[SpellName(117952)] = 4,	-- Crackling Jade Lightning
+	-- [SpellName(5143)] = 5,		-- Arcane Missiles (accurate for r8 - lower ranks have less ticks)
+	[SpellName(10)] = 8,		-- Blizzard
 	-- Priest
-	[SpellName(15407)] = 4,		-- Mind Flay
-	[SpellName(48045)] = 4,		-- Mind Sear
-	[SpellName(47540)] = 3,		-- Penance
-	[SpellName(64843)] = 4,		-- Divine Hymn
+	[SpellName(15407)] = 3,		-- Mind Flay
 	-- Warlock
-	[SpellName(755)] = 5,		-- Health Funnel
-	[SpellName(198590)] = 5,	-- Drain Soul
-	[SpellName(234153)] = 5,	-- Drain Life
+	[SpellName(1120)] = 5,		-- Drain Soul
+	[SpellName(755)] = 10,		-- Health Funnel
+	[SpellName(689)] = 5,		-- Drain Life
+	[SpellName(5138)] = 5,		-- Drain Mana
+	[SpellName(1949)] = 15,		-- Hellfire
+	[SpellName(5740)] = 8,		-- Rain of Fire
 }
-
-local f = CreateFrame("Frame")
-f:RegisterEvent("PLAYER_ENTERING_WORLD")
-f:RegisterEvent("PLAYER_TALENT_UPDATE")
-f:SetScript("OnEvent", function()
-	if T.class ~= "PRIEST" then return end
-
-	-- Penance
-	local penanceTicks = IsPlayerSpell(193134) and 4 or 3
-	T.CastBarTicks[SpellName(47540)] = penanceTicks
-end)

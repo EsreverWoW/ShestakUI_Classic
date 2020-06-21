@@ -11,15 +11,6 @@
 	<Script file="Locales\Spanish.lua"/>
 	<Script file="Locales\Taiwan.lua"/>
 
-	<Script file="Compatibility\Classic\Locales\English.lua"/>
-	<Script file="Compatibility\Classic\Locales\Chinese.lua"/>
-	<Script file="Compatibility\Classic\Locales\French.lua"/>
-	<Script file="Compatibility\Classic\Locales\German.lua"/>
-	<Script file="Compatibility\Classic\Locales\Italian.lua"/>
-	<Script file="Compatibility\Classic\Locales\Russian.lua"/>
-	<Script file="Compatibility\Classic\Locales\Spanish.lua"/>
-	<Script file="Compatibility\Classic\Locales\Taiwan.lua"/>
-
 	<Script file="Config\Settings.lua"/>
 	<Script file="Config\Positions.lua"/>
 	<Script file="Config\Fonts.lua"/>
@@ -30,21 +21,20 @@
 	<Script file="Core\GUI.lua"/>
 	<Script file="Core\PixelPerfect.lua"/>
 
-	<Include file="Compatibility\Classic\Libs\LibThreatClassic2\lib.xml"/>
-	<Script file="Compatibility\Classic\Libs\LibBanzai\LibBanzai-2.0.lua"/>
-	<Script file="Compatibility\Classic\Libs\LibClassicCasterino\LibClassicCasterino.lua"/>
-	<Include file="Compatibility\Classic\Libs\LibClassicDurations\LibClassicDurations.xml"/>
-	<Script file="Compatibility\Classic\Libs\LibRangeCheck-2.0\LibRangeCheck-2.0.lua"/>
-	<Script file="Compatibility\Classic\Libs\LibHealComm-4.0\ChatThrottleLib.lua"/>
-	<Script file="Compatibility\Classic\Libs\LibHealComm-4.0\LibHealComm-4.0.lua"/>
-	<Script file="Compatibility\Classic\Libs\LibTotemInfo\GetTotemInfo.lua"/>
+	<Include file="Libs\Classic\LibThreatClassic2\lib.xml"/>
+	<Script file="Libs\Classic\LibBanzai\LibBanzai-2.0.lua"/>
+	<Script file="Libs\Classic\LibClassicCasterino\LibClassicCasterino.lua"/>
+	<Include file="Libs\Classic\LibClassicDurations\LibClassicDurations.xml"/>
+	<Script file="Libs\Classic\LibRangeCheck-2.0\LibRangeCheck-2.0.lua"/>
+	<Script file="Libs\Classic\LibHealComm-4.0\ChatThrottleLib.lua"/>
+	<Script file="Libs\Classic\LibHealComm-4.0\LibHealComm-4.0.lua"/>
+	<Script file="Libs\Classic\LibTotemInfo\GetTotemInfo.lua"/>
 	<Script file="Compatibility\Classic.lua"/>
 
 	<Include file="Libs\oUF\oUF.xml"/>
 	<Include file="Libs\oGlow\oGlow.xml"/>
 	<Script file="Libs\LitePanels\LitePanels.lua"/>
 	<Script file="Libs\LitePanels\Layout.lua"/>
-	<Script file="Compatibility\Classic\Config\DataText.lua"/>
 	<Script file="Config\DataText.lua"/>
 	<Script file="Libs\LiteStats\LiteStats.lua"/>
 	<Script file="Modules\UnitFrames\Colors.lua"/>

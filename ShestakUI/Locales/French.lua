@@ -50,7 +50,7 @@ L_MISC_BUY_STACK = "Alt-Clic pour acheter une pile d'objet"
 L_MISC_ONECLICK_BUYOUT = "Maj-Clic-Droit pour acheter l'objet sélectionné sans confirmation"
 L_MISC_ONECLICK_BID = "Maj-Clic-Droit pour enchérir sur l'objet sélectionné sans confirmation"
 L_MISC_ONECLICK_CANCEL = "Maj-Clic-Droit pour annuler l'objet sélectionné sans confirmation"
-L_MISC_UI_OUTDATED = "Une version plus récente de ShestakUI est disponible. Vous pouvez la télécharger sur www.shestak.org"
+L_MISC_UI_OUTDATED = "Une version plus récente de ShestakUI est disponible. Vous pouvez la télécharger sur https://github.com/Wetxius/ShestakUI_Classic"
 L_MISC_HEADER_MARK = "Icône de raid au survol de la souris"
 L_MISC_BINDER_OPEN = "Assignations des boutons de la souris"
 L_MISC_SCROLL = "Parchemin"
@@ -191,8 +191,8 @@ L_POPUP_SETTINGS_BW = "La position des éléments de BigWigs doit être changée
 L_POPUP_ARMORY = "Armurerie"
 
 -- Welcome message
-L_WELCOME_LINE_1 = "Bienvenue sur ShestakUI "
-L_WELCOME_LINE_2_1 = "Tapez /cfg pour configurer l'interface, ou visitez http://shestak.org"
+L_WELCOME_LINE_1 = "Bienvenue sur ShestakUI (Classic) "
+L_WELCOME_LINE_2_1 = "Tapez /cfg pour configurer l'interface, ou visitez https://github.com/EsreverWoW/ShestakUI_Classic"
 L_WELCOME_LINE_2_2 = "pour plus d'informations"
 
 -- Combat text

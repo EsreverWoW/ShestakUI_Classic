@@ -1,5 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
-if T.classic or (C.error.white ~= true and C.error.black ~= true) then return end
+if not T.classic or (C.error.white ~= true and C.error.black ~= true) then return end
 
 ----------------------------------------------------------------------------------------
 --	All errors on http://wowwiki.wikia.com/wiki/WoW_Constants/Errors
@@ -44,24 +44,9 @@ T.black_list = {
 	[ERR_ABILITY_COOLDOWN] = true,
 	[ERR_NO_ATTACK_TARGET] = true,
 	[ERR_SPELL_COOLDOWN] = true,
-	[ERR_OUT_OF_ARCANE_CHARGES] = true,
-	[ERR_OUT_OF_BALANCE_NEGATIVE] = true,
-	[ERR_OUT_OF_BALANCE_POSITIVE] = true,
-	[ERR_OUT_OF_BURNING_EMBERS] = true,
-	[ERR_OUT_OF_CHI] = true,
-	[ERR_OUT_OF_DARK_FORCE] = true,
-	[ERR_OUT_OF_DEMONIC_FURY] = true,
-	[ERR_OUT_OF_FURY] = true,
-	[ERR_OUT_OF_PAIN] = true,
-	[ERR_OUT_OF_SOUL_SHARDS] = true,
-	[ERR_OUT_OF_LIGHT_FORCE] = true,
-	[ERR_OUT_OF_SHADOW_ORBS] = true,
-	[ERR_OUT_OF_HOLY_POWER] = true,
 	[ERR_OUT_OF_ENERGY] = true,
 	[ERR_OUT_OF_RAGE] = true,
 	[ERR_OUT_OF_FOCUS] = true,
-	[ERR_OUT_OF_RUNES] = true,
-	[ERR_OUT_OF_RUNIC_POWER] = true,
 	[ERR_OUT_OF_MANA] = true,
 	[ERR_OUT_OF_POWER_DISPLAY] = true,
 	[ERR_OUT_OF_RANGE] = true,
