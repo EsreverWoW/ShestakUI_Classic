@@ -192,7 +192,7 @@ local function Shared(self, unit)
 			self.Info:SetJustifyH("RIGHT")
 			self:Tag(self.Info, "[GetNameColor][NameLong]")
 			self.Level:SetPoint("RIGHT", self.Power, "RIGHT", 0, 0)
-			self:Tag(self.Level, "[cpoints] [Threat] [DiffColor][level][shortclassification]")
+			self:Tag(self.Level, "[cpoints] [DiffColor][level][shortclassification]")
 		elseif unit == "focus" or unit == "pet" then
 			self.Info:SetPoint("LEFT", self.Health, "LEFT", 2, 0)
 			self.Info:SetPoint("RIGHT", self.Health.value, "LEFT", 0, 0)
