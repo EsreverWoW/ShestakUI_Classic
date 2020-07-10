@@ -1,7 +1,7 @@
 local lib = LibStub and LibStub("LibClassicDurations", true)
 if not lib then return end
 
-local Type, Version = "SpellTable", 58
+local Type, Version = "SpellTable", 63
 if lib:GetDataVersion(Type) >= Version then return end  -- older versions didn't have that function
 
 local Spell = lib.AddAura
@@ -20,107 +20,155 @@ end
 -- https://github.com/rgd87/LibClassicDurations/issues/11
 lib.indirectRefreshSpells = {
     [GetSpellInfo(11597)] = { -- Sunder Armor
-        events = {
-            ["SPELL_CAST_SUCCESS"] = true
-        },
-        targetSpellID = 11597,
-        rollbackMisses = true,
+        [11597] = {
+            events = {
+                ["SPELL_CAST_SUCCESS"] = true
+            },
+            -- targetSpellID = 11597,
+            rollbackMisses = true,
+        }
     },
 
     [GetSpellInfo(25357)] = { -- Healing Wave
-        events = {
-            ["SPELL_CAST_SUCCESS"] = true
-        },
-        targetSpellID = 29203, -- Healing Way
+        [29203] = {
+            events = {
+                ["SPELL_CAST_SUCCESS"] = true
+            },
+            -- targetSpellID = 29203, -- Healing Way
+        }
     },
 }
 
 if class == "MAGE" then
-    lib.indirectRefreshSpells[GetSpellInfo(10207)] = { -- Scorch
-        events = {
-            ["SPELL_DAMAGE"] = true
-        },
-        targetSpellID = 22959, -- Fire Vulnerability
-        rollbackMisses = true,
-        condition = function(isMine) return isMine end,
-        -- it'll refresg only from mages personal casts which is fine
-        -- because if mage doesn't have imp scorch then he won't even see a Fire Vulnerability timer
-    }
+
 
     lib.indirectRefreshSpells[GetSpellInfo(25304)] = { -- Frostbolt
-        events = {
-            ["SPELL_DAMAGE"] = true
-        },
-        targetSpellID = 12579, -- Winter's Chill
-        rollbackMisses = true,
-        condition = function(isMine) return isMine end,
+        [12579] = {
+            events = {
+                ["SPELL_DAMAGE"] = true
+            },
+            targetSpellID = 12579, -- Winter's Chill
+            rollbackMisses = true,
+            condition = function(isMine) return isMine end,
+        }
     }
 
     lib.indirectRefreshSpells[GetSpellInfo(10161)] = { -- Cone of Cold
-        events = {
-            ["SPELL_DAMAGE"] = true
-        },
-        targetSpellID = 12579, -- Winter's Chill
-        rollbackMisses = true,
-        condition = function(isMine) return isMine end,
+        [12579] = {
+            events = {
+                ["SPELL_DAMAGE"] = true
+            },
+            targetSpellID = 12579, -- Winter's Chill
+            rollbackMisses = true,
+            condition = function(isMine) return isMine end,
+        }
     }
 
     lib.indirectRefreshSpells[GetSpellInfo(10230)] = { -- Frost Nova
-        events = {
-            ["SPELL_DAMAGE"] = true
-        },
-        targetSpellID = 12579, -- Winter's Chill
-        rollbackMisses = true,
-        condition = function(isMine) return isMine end,
+        [12579] = {
+            events = {
+                ["SPELL_DAMAGE"] = true
+            },
+            targetSpellID = 12579, -- Winter's Chill
+            rollbackMisses = true,
+            condition = function(isMine) return isMine end,
+        }
     }
 
     -- Winter's Chill = Frostbolt
     lib.indirectRefreshSpells[GetSpellInfo(12579)] = lib.indirectRefreshSpells[GetSpellInfo(25304)]
 
     lib.indirectRefreshSpells[GetSpellInfo(10)] = { -- Blizzard
-        events = {
-            ["SPELL_PERIODIC_DAMAGE"] = true
-        },
-        applyAura = true,
-        targetSpellID = 12486, -- Imp Blizzard
+        [12486] = {
+            events = {
+                ["SPELL_PERIODIC_DAMAGE"] = true
+            },
+            applyAura = true,
+            targetSpellID = 12486, -- Imp Blizzard
+        }
     }
+
+    -- Ignite
+
+    -- Scorch is separate
+    local fire_spells = {133, 2136, 2120, 11113} -- Fireball, Fireblast, Flamestrike, Blast Wave
+
+    for _, spellId in ipairs(fire_spells) do
+        lib.indirectRefreshSpells[GetSpellInfo(spellId)] = { -- Fireball
+            [12654] = {
+                events = {
+                    ["SPELL_DAMAGE"] = true
+                },
+                -- targetSpellID = 12654, -- Ignite
+                rollbackMisses = true,
+                condition = function(isMine, isCrit) return isCrit end,
+            }
+        }
+    end
+
+    lib.indirectRefreshSpells[GetSpellInfo(10207)] = { -- Scorch
+        [22959] = {
+            events = {
+                ["SPELL_DAMAGE"] = true
+            },
+            -- targetSpellID = 22959, -- Fire Vulnerability
+            rollbackMisses = true,
+            -- condition = function(isMine) return isMine end,
+            -- it'll refresg only from mages personal casts which is fine
+            -- because if mage doesn't have imp scorch then he won't even see a Fire Vulnerability timer
+        },
+        [12654] = { -- Ignite
+            events = {
+                ["SPELL_DAMAGE"] = true
+            },
+            -- targetSpellID = 12654, -- Ignite
+            rollbackMisses = true,
+            condition = function(isMine, isCrit) return isCrit end,
+        }
+    }
+
+    lib.indirectRefreshSpells[GetSpellInfo(12654)] = CopyTable(lib.indirectRefreshSpells[GetSpellInfo(133)]) -- Just adding Ignite to indirectRefreshSpells table
+    lib.indirectRefreshSpells[GetSpellInfo(12654)][12654].events = {}
 end
 
 if class == "PRIEST" then
     -- Shadow Weaving
     lib.indirectRefreshSpells[GetSpellInfo(10894)] = { -- SW:Pain
-        events = {
-            ["SPELL_AURA_APPLIED"] = true,
-            ["SPELL_AURA_REFRESH"] = true,
-        },
-        targetSpellID = 15258, -- Shadow Weaving
-        -- targetResistCheck = true,
-        rollbackMisses = true,
-        condition = function(isMine) return isMine end,
+        [15258] = {
+            events = {
+                ["SPELL_AURA_APPLIED"] = true,
+                ["SPELL_AURA_REFRESH"] = true,
+            },
+            -- targetSpellID = 15258, -- Shadow Weaving
+            -- targetResistCheck = true,
+            rollbackMisses = true,
+            condition = function(isMine) return isMine end,
+        }
     }
     lib.indirectRefreshSpells[GetSpellInfo(10947)] = { -- Mind Blast
-        events = {
-            ["SPELL_DAMAGE"] = true,
-        },
-        targetSpellID = 15258, -- Shadow Weaving
-        -- targetResistCheck = true,
-        rollbackMisses = true,
-        condition = function(isMine) return isMine end,
+        [15258] = {
+            events = {
+                ["SPELL_DAMAGE"] = true,
+            },
+            -- targetResistCheck = true,
+            rollbackMisses = true,
+            condition = function(isMine) return isMine end,
+        }
     }
     lib.indirectRefreshSpells[GetSpellInfo(18807)] = { -- Mind Flay
-        events = {
-            ["SPELL_AURA_APPLIED"] = true,
-            ["SPELL_AURA_REFRESH"] = true,
-        },
-        targetSpellID = 15258, -- Shadow Weaving
-        -- targetResistCheck = true,
-        rollbackMisses = true,
-        condition = function(isMine) return isMine end,
+        [15258] = {
+            events = {
+                ["SPELL_AURA_APPLIED"] = true,
+                ["SPELL_AURA_REFRESH"] = true,
+            },
+            rollbackMisses = true,
+            condition = function(isMine) return isMine end,
+        }
     }
 
     -- Shadow Weaving = SW: Pain
     lib.indirectRefreshSpells[GetSpellInfo(15258)] = CopyTable(lib.indirectRefreshSpells[GetSpellInfo(10894)])
-    lib.indirectRefreshSpells[GetSpellInfo(15258)].events = {}
+    lib.indirectRefreshSpells[GetSpellInfo(15258)][15258].events = {}
 end
 
 ------------------
@@ -177,6 +225,7 @@ Spell( 13141, { duration = 20, type = "BUFF" }) -- Gnomish Rocket Boots
 Spell( 8892, { duration = 20, type = "BUFF" }) -- Goblin Rocket Boots
 Spell( 9774, { duration = 5, type = "BUFF" }) -- Spider Belt & Ornate Mithril Boots
 Spell({ 746, 1159, 3267, 3268, 7926, 7927, 10838, 10839, 18608, 18610, 23567, 23568, 23569, 23696, 24412, 24413, 24414}, { duration = 8, type = "BUFF" }) -- First Aid
+Spell({ 21992, 27648 }, { duration = 12 }) -- Thunderfury, -Nature Resist, -Atk Spd
 
 
 -------------
@@ -229,7 +278,19 @@ Spell({ 7001, 27873, 27874 }, { duration = 10, type = "BUFF", buffType = "Magic"
 Spell( 552, { duration = 20, type = "BUFF", buffType = "Magic" }) -- Abolish Disease
 Spell({ 17, 592, 600, 3747, 6065, 6066, 10898, 10899, 10900, 10901 }, {duration = 30, type = "BUFF", buffType = "Magic" }) -- PWS
 Spell( 6788, { duration = 15 }) -- Weakened Soul
-Spell({ 139, 6074, 6075, 6076, 6077, 6078, 10927, 10928, 10929, 25315 }, { duration = 15, type = "BUFF", buffType = "Magic" }) -- Renew
+if class == "PRIEST" then
+    lib:TrackItemSet("Garments of the Oracle", { 21349, 21350, 21348, 21352, 21351 })
+    lib:RegisterSetBonusCallback("Garments of the Oracle", 5)
+end
+Spell({ 139, 6074, 6075, 6076, 6077, 6078, 10927, 10928, 10929, 25315 }, {
+    duration = function(spellID, isSrcPlayer)
+        if isSrcPlayer and lib:IsSetBonusActive("Garments of the Oracle", 5) then
+            return 18
+        else
+            return 15
+        end
+    end,
+    type = "BUFF", buffType = "Magic" }) -- Renew
 
 Spell( 15487, { duration = 5 }) -- Silence
 Spell({ 10797, 19296, 19299, 19302, 19303, 19304, 19305 }, { duration = 6, stacking = true }) -- starshards
@@ -247,7 +308,25 @@ Spell({ 9484, 9485, 10955 }, {
 Spell( 10060, { duration = 15, type = "BUFF", buffType = "Magic" }) --Power Infusion
 Spell({ 14914, 15261, 15262, 15263, 15264, 15265, 15266, 15267 }, { duration = 10, stacking = true }) -- Holy Fire, stacking?
 Spell({ 586, 9578, 9579, 9592, 10941, 10942 }, { duration = 10, type = "BUFF" }) -- Fade
-Spell({ 8122, 8124, 10888, 10890 }, { duration = 8,  }) -- Psychic Scream
+if class == "PRIEST" then
+    lib:TrackItemSet("PriestPvPSet", {
+        17604, 17603, 17605, 17608, 17607, 17602,
+        17623, 17625, 17622, 17624, 17618, 17620,
+        22869, 22859, 22882, 22885, 23261, 23262,
+        23302, 23303, 23288, 23289, 23316, 23317,
+    })
+    lib:RegisterSetBonusCallback("PriestPvPSet", 3)
+end
+Spell({ 8122, 8124, 10888, 10890 }, {
+    duration = function(spellID, isSrcPlayer)
+        if isSrcPlayer then
+            local pvpSetBonus = lib:IsSetBonusActive("PriestPvPSet", 3) and 1 or 0
+            return 8 + pvpSetBonus
+        else
+            return 8
+        end
+    end
+}) -- Psychic Scream
 Spell({ 589, 594, 970, 992, 2767, 10892, 10893, 10894 }, { stacking = true,
     duration = function(spellID, isSrcPlayer)
         -- Improved SWP, 2 ranks: Increases the duration of your Shadow Word: Pain spell by 3 sec.
@@ -636,7 +715,7 @@ Spell({ 8076, 8162, 8163, 10441, 25362 }, { duration = INFINITY, type = "BUFF" }
 Spell({ 8836, 10626, 25360 }, { duration = INFINITY, type = "BUFF" }) -- Grace of Air Totem
 Spell({ 8072, 8156, 8157, 10403, 10404, 10405 }, { duration = INFINITY, type = "BUFF" }) -- Stoneskin Totem
 Spell({ 16191, 17355, 17360 }, { duration = 12, type = "BUFF" }) -- Mana Tide Totem
-
+Spell( 16166, { duration = INFINITY, type = "BUFF" }) -- Elemental Mastery
 
 Spell( 8178 ,{ duration = 45, type = "BUFF" }) -- Grounding Totem Effect, no duration, but lasts 45s. Keeping for enemy buffs
 
@@ -698,7 +777,12 @@ Spell({ 2878, 5627, 5627 }, {
     end
 }) -- Turn Undead
 
-Spell( 1044, { duration = 10, type = "BUFF", buffType = "Magic" }) -- Blessing of Freedom
+Spell( 1044, {
+    duration = function(spellID, isSrcPlayer)
+        local talents = 0
+        if isSrcPlayer then talents = 3*Talent(20174, 20175)  end
+        return 10 + talents
+    end, type = "BUFF", buffType = "Magic" }) -- Blessing of Freedom
 Spell({ 6940, 20729 }, { duration = 30, type = "BUFF", buffType = "Magic" }) -- Blessing of Sacrifice
 Spell({ 1022, 5599, 10278 }, { type = "BUFF",
     buffType = "Magic",
