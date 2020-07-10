@@ -4,7 +4,7 @@ Author: d87
 --]================]
 if WOW_PROJECT_ID ~= WOW_PROJECT_CLASSIC then return end
 
-local MAJOR, MINOR = "LibClassicCasterino", 31
+local MAJOR, MINOR = "LibClassicCasterino", 32
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
@@ -269,11 +269,13 @@ function f:COMBAT_LOG_EVENT_UNFILTERED(event)
         then
             if resisted or blocked or absorbed then return end
             local currentCast = casters[UnitGUID("player")]
-            refreshCastTable(currentCast, currentCast[1], currentCast[2], currentCast[3], currentCast[4], currentCast[5] + (AimedDelay *1000))
-            if AimedDelay > 0.2 then
-                AimedDelay = AimedDelay - 0.2
+            if currentCast then
+                refreshCastTable(currentCast, currentCast[1], currentCast[2], currentCast[3], currentCast[4], currentCast[5] + (AimedDelay *1000))
+                if AimedDelay > 0.2 then
+                    AimedDelay = AimedDelay - 0.2
+                end
+                callbacks:Fire("UNIT_SPELLCAST_DELAYED", "player")
             end
-            callbacks:Fire("UNIT_SPELLCAST_DELAYED", "player")
         end
     end
 
