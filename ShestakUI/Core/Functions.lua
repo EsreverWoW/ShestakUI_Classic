@@ -1582,27 +1582,14 @@ T.CustomFilter = function(_, unit, button, _, _, _, _, _, _, caster)
 	return true
 end
 
-local LibBanzai = T.classic and LibStub("LibBanzai-2.0", true)
-
 T.UpdateThreat = function(self, _, unit)
 	if self.unit ~= unit then return end
-	local threat
-	if T.classic then
-		if not LibBanzai then return end
-		threat = LibBanzai:GetUnitAggroByUnitId(self.unit)
-		if threat then
-			self.backdrop:SetBackdropBorderColor(1, 0, 0)
-		else
-			self.backdrop:SetBackdropBorderColor(unpack(C.media.border_color))
-		end
+	local threat = UnitThreatSituation(self.unit)
+	if threat and threat > 1 then
+		local r, g, b = GetThreatStatusColor(threat)
+		self.backdrop:SetBackdropBorderColor(r, g, b)
 	else
-		threat = UnitThreatSituation(self.unit)
-		if threat and threat > 1 then
-			local r, g, b = GetThreatStatusColor(threat)
-			self.backdrop:SetBackdropBorderColor(r, g, b)
-		else
-			self.backdrop:SetBackdropBorderColor(unpack(C.media.border_color))
-		end
+		self.backdrop:SetBackdropBorderColor(unpack(C.media.border_color))
 	end
 end
 

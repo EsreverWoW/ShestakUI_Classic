@@ -19,8 +19,8 @@
 	<Script file="Core\GUI.lua"/>
 	<Script file="Core\PixelPerfect.lua"/>
 
-	<Include file="Libs\Classic\LibThreatClassic2\lib.xml"/>
-	<Script file="Libs\Classic\LibBanzai\LibBanzai-2.0.lua"/>
+	<Script file="Libs\Classic\LibStub\LibStub.lua"/>
+	<Script file="Libs\Classic\CallbackHandler-1.0\CallbackHandler-1.0.lua"/>
 	<Script file="Libs\Classic\LibClassicCasterino\LibClassicCasterino.lua"/>
 	<Include file="Libs\Classic\LibClassicDurations\LibClassicDurations.xml"/>
 	<Script file="Libs\Classic\LibRangeCheck-2.0\LibRangeCheck-2.0.lua"/>

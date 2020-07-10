@@ -192,7 +192,7 @@ local function Shared(self, unit)
 			self.Info:SetJustifyH("RIGHT")
 			self:Tag(self.Info, "[GetNameColor][NameLong]")
 			self.Level:SetPoint("RIGHT", self.Power, "RIGHT", 0, 0)
-			self:Tag(self.Level, "[cpoints] [DiffColor][level][shortclassification]")
+			self:Tag(self.Level, "[cpoints] [Threat] [DiffColor][level][shortclassification]")
 		elseif unit == "focus" or unit == "pet" then
 			self.Info:SetPoint("LEFT", self.Health, "LEFT", 2, 0)
 			self.Info:SetPoint("RIGHT", self.Health.value, "LEFT", 0, 0)
@@ -1176,19 +1176,11 @@ local function Shared(self, unit)
 	end
 
 	-- Agro border
-	local LibBanzai = T.classic and LibStub("LibBanzai-2.0", true)
-
 	if C.raidframe.aggro_border == true and unit ~= "arenatarget" then
 		table.insert(self.__elements, T.UpdateThreat)
 		self:RegisterEvent("PLAYER_TARGET_CHANGED", T.UpdateThreat, true)
-		if not T.classic then
-			self:RegisterEvent("UNIT_THREAT_LIST_UPDATE", T.UpdateThreat)
-			self:RegisterEvent("UNIT_THREAT_SITUATION_UPDATE", T.UpdateThreat)
-		elseif LibBanzai then
-			LibBanzai:RegisterCallback(function() T.UpdateThreat(self, "UNIT_THREAT_LIST_UPDATE", unit) end)
-			self:RegisterEvent("PLAYER_REGEN_ENABLED", T.UpdateThreat, true)
-			self:RegisterEvent("PLAYER_REGEN_DISABLED", T.UpdateThreat, true)
-		end
+		self:RegisterEvent("UNIT_THREAT_LIST_UPDATE", T.UpdateThreat)
+		self:RegisterEvent("UNIT_THREAT_SITUATION_UPDATE", T.UpdateThreat)
 	end
 
 	-- Raid marks

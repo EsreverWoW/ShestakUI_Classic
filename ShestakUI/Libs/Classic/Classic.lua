@@ -286,23 +286,17 @@ end
 ----------------------------------------------------------------------------------------
 --	Threat Functions
 ----------------------------------------------------------------------------------------
-local ThreatLib = LibStub:GetLibrary("LibThreatClassic2")
-if not ThreatLib then return end
-
-local ThreatFrame = CreateFrame("Frame")
-
-ThreatLib.RegisterCallback(ThreatFrame, "Activate", T.dummy)
-ThreatLib.RegisterCallback(ThreatFrame, "Deactivate", T.dummy)
-ThreatLib:RequestActiveOnSolo(true)
+local threatColors = {
+	[0] = {0.69, 0.69, 0.69},
+	[1] = {1, 1, 0.47},
+	[2] = {1, 0.6, 0},
+	[3] = {1, 0, 0}
+}
 
 GetThreatStatusColor = _G.GetThreatStatusColor or function(statusIndex)
-	return ThreatLib:GetThreatStatusColor(statusIndex)
-end
+	if not (type(statusIndex) == "number" and statusIndex >= 0 and statusIndex < 4) then
+		statusIndex = 0
+	end
 
-UnitDetailedThreatSituation = _G.UnitDetailedThreatSituation or function(unit, target)
-	return ThreatLib:UnitDetailedThreatSituation(unit, target)
-end
-
-UnitThreatSituation = _G.UnitThreatSituation or function(unit, target)
-	return ThreatLib:UnitThreatSituation(unit, target)
+	return threatColors[statusIndex][1], threatColors[statusIndex][2], threatColors[statusIndex][3]
 end
