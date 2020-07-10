@@ -30,8 +30,8 @@
 	<Script file="Core\GUI.lua"/>
 	<Script file="Core\PixelPerfect.lua"/>
 
-	<Include file="Compatibility\Classic\Libs\LibThreatClassic2\lib.xml"/>
-	<Script file="Compatibility\Classic\Libs\LibBanzai\LibBanzai-2.0.lua"/>
+	<Script file="Compatibility\Classic\Libs\LibStub\LibStub.lua"/>
+	<Script file="Compatibility\Classic\Libs\CallbackHandler-1.0\CallbackHandler-1.0.lua"/>
 	<Script file="Compatibility\Classic\Libs\LibClassicCasterino\LibClassicCasterino.lua"/>
 	<Include file="Compatibility\Classic\Libs\LibClassicDurations\LibClassicDurations.xml"/>
 	<Script file="Compatibility\Classic\Libs\LibRangeCheck-2.0\LibRangeCheck-2.0.lua"/>

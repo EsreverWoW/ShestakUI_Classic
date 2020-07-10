@@ -15,7 +15,6 @@ else
 end
 
 local bar, tList, barList = {}, {}, {}
-local max = math.max
 local targeted = false
 
 RAID_CLASS_COLORS["PET"] = {r = 0, g = 0.7, b = 0, colorStr = "ff00b200"}
@@ -32,10 +31,8 @@ local truncate = function(value)
 		return string.format("%.2fb", value / 1e6)
 	elseif value >= 1e3 then
 		return string.format("%.2fm", value / 1e3)
-	elseif value > 1 then
-		return string.format("%.0fk", value)
 	else
-		return tostring(value * 1e3	)
+		return string.format("%.0fk", value)
 	end
 end
 
@@ -109,10 +106,6 @@ local UpdateBars = function()
 				bar[i]:SetPoint("TOPLEFT", bar[i-1], "BOTTOMLEFT", 0, -spacing)
 			end
 		end
-		if i == 1 then
-			cur.pct = 100
-			max.pct = 100
-		end
 		bar[i]:SetValue(100 * cur.pct / max.pct)
 		local color = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[cur.class]
 		bar[i]:SetStatusBarColor(color.r, color.g, color.b)
@@ -137,8 +130,6 @@ local UpdateThreat = function()
 	UpdateBars()
 end
 
-local lastCombatLogUpdate = 0
-
 local OnEvent = function(_, event)
 	if event == "PLAYER_TARGET_CHANGED" or event == "UNIT_THREAT_LIST_UPDATE" then
 		if C.threat.hide_solo == true and GetNumGroupMembers() == 0 then
@@ -158,22 +149,11 @@ local OnEvent = function(_, event)
 	UpdateThreat()
 end
 
-local function ThreatLibCallback()
-	return OnEvent(addon, "UNIT_THREAT_LIST_UPDATE")
-end
-
 local addon = CreateFrame("Frame")
 addon:SetScript("OnEvent", OnEvent)
 addon:RegisterEvent("PLAYER_TARGET_CHANGED")
-if not T.classic then
-	addon:RegisterEvent("UNIT_THREAT_LIST_UPDATE")
-end
+addon:RegisterEvent("UNIT_THREAT_LIST_UPDATE")
 addon:RegisterEvent("PLAYER_REGEN_ENABLED")
-
-local ThreatLib = T.classic and LibStub:GetLibrary("LibThreatClassic2")
-if ThreatLib then
-	ThreatLib.RegisterCallback(addon, "ThreatUpdated", ThreatLibCallback)
-end
 
 SlashCmdList.alThreat = function()
 	for i = 1, C.threat.bar_rows do
