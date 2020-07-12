@@ -434,6 +434,10 @@ C["filger_spells"] = {
 			-- {spellID = 20043, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Bestial Wrath
 			{spellID = 19574, unitID = "pet", caster = "player", filter = "BUFF"},
+			-- Quick Shots
+			{spellID = 6150, unitID = "pet", caster = "player", filter = "BUFF"},
+			-- Trueshot Aura
+			{spellID = 20905, unitID = "pet", caster = "player", filter = "BUFF"},
 			-- Cobra Reflexes
 			{spellID = 25077, unitID = "pet", caster = "all", filter = "BUFF"},
 			-- Dash (Boar / Cat / Hyena / Raptor / Tallstrider / Wolf)
@@ -518,6 +522,8 @@ C["filger_spells"] = {
 			{spellID = 24662, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Slayer's Crest (Attack Power, Use) [Slayer's Crest]
 			{spellID = 28777, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Devilsaur Fury (Attack Power, Use) [Devilsaur Eye]
+			{spellID = 24352, unitID = "player", caster = "player", filter = "BUFF"},
 		},
 		{
 			Name = "T_DEBUFF_ICON",
