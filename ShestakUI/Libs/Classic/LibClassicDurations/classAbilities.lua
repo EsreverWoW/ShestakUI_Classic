@@ -1,7 +1,7 @@
 local lib = LibStub and LibStub("LibClassicDurations", true)
 if not lib then return end
 
-local Type, Version = "SpellTable", 63
+local Type, Version = "SpellTable", 65
 if lib:GetDataVersion(Type) >= Version then return end  -- older versions didn't have that function
 
 local Spell = lib.AddAura
@@ -15,6 +15,9 @@ local locale = GetLocale()
 -- Erases Fire Vulnerability from the name to id table in case older version of the lib written it there
 if locale == "zhCN" then
     lib.spellNameToID[GetSpellInfo(980)] = nil
+end
+if locale == "ruRU" then
+    lib.spellNameToID[GetSpellInfo(12721)] = nil -- Deep Wounds conflict with Rake on ruRU
 end
 
 -- https://github.com/rgd87/LibClassicDurations/issues/11
@@ -426,7 +429,7 @@ Spell({ 9005, 9823, 9827 }, { -- Pounce stun doesn't create a debuff icon, so th
     end
 }) -- Pounce
 Spell({ 9007, 9824, 9826 }, { duration = 18, stacking = true, }) -- Pounce Bleed
-Spell({ 8921, 8924, 8925, 8926, 8927, 8928, 8929, 9833, 9834, 9835 }, {
+Spell({ 8921, 8924, 8925, 8926, 8927, 8928, 8929, 9833, 9834, 9835 }, { stacking = true,
     duration = function(spellID)
         if spellID == 8921 then return 9
         else return 12 end
@@ -483,7 +486,9 @@ Spell({ 772, 6546, 6547, 6548, 11572, 11573, 11574 }, { stacking = true,
         else return 21 end
     end
 }) -- Rend
+if locale ~= "ruRU" or class ~= "DRUID" then
 Spell( 12721, { duration = 12, stacking = true }) -- Deep Wounds
+end
 
 Spell({ 1715, 7372, 7373 }, { duration = 15 }) -- Hamstring
 Spell( 23694 , { duration = 5 }) -- Improved Hamstring
