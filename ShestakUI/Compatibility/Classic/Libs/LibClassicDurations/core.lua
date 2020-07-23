@@ -19,7 +19,7 @@ Usage example 1:
 --]================]
 if WOW_PROJECT_ID ~= WOW_PROJECT_CLASSIC then return end
 
-local MAJOR, MINOR = "LibClassicDurations", 61
+local MAJOR, MINOR = "LibClassicDurations", 62
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
@@ -631,7 +631,7 @@ function f:CombatLogHandler(...)
                     -- All the following APPLIED events are accepted while cast pass is valid
                     -- (Unconfirmed whether timestamp is the same even for a 40m raid)
                 local now = GetTime()
-                castEventPass = castLog:IsCurrent(srcGUID, spellID, now, 0.4)
+                castEventPass = castLog:IsCurrent(srcGUID, spellID, now, 0.8)
                 if not castEventPass and (eventType == "SPELL_AURA_REFRESH" or eventType == "SPELL_AURA_APPLIED") then
                     eventSnapshot = { timestamp, eventType, hideCaster,
                     srcGUID, srcName, srcFlags, srcFlags2,
