@@ -4,7 +4,7 @@ Author: d87
 --]================]
 if WOW_PROJECT_ID ~= WOW_PROJECT_CLASSIC then return end
 
-local MAJOR, MINOR = "LibClassicCasterino", 32
+local MAJOR, MINOR = "LibClassicCasterino", 33
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
@@ -105,7 +105,7 @@ local function CastStart(srcGUID, castType, spellName, spellID, overrideCastTime
     end
     local decreased = talentDecreased[spellID]
     if decreased then
-        castTime = castTime - decreased
+        castTime = castTime - decreased*1000
     end
     if overrideCastTime then
         castTime = overrideCastTime
