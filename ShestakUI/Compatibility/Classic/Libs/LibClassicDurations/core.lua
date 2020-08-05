@@ -19,7 +19,7 @@ Usage example 1:
 --]================]
 if WOW_PROJECT_ID ~= WOW_PROJECT_CLASSIC then return end
 
-local MAJOR, MINOR = "LibClassicDurations", 62
+local MAJOR, MINOR = "LibClassicDurations", 63
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
@@ -362,7 +362,7 @@ local function cleanDuration(duration, spellID, srcGUID, comboPoints)
     return duration
 end
 
-local function RefreshTimer(srcGUID, dstGUID, spellID, overrideTime)
+local function GetSpellTable(srcGUID, dstGUID, spellID)
     local guidTable = guids[dstGUID]
     if not guidTable then return end
 
@@ -375,6 +375,12 @@ local function RefreshTimer(srcGUID, dstGUID, spellID, overrideTime)
     else
         applicationTable = spellTable
     end
+    if not applicationTable then return end
+    return applicationTable
+end
+
+local function RefreshTimer(srcGUID, dstGUID, spellID, overrideTime)
+    local applicationTable = GetSpellTable(srcGUID, dstGUID, spellID)
     if not applicationTable then return end
 
     local oldStartTime = applicationTable[2]
@@ -531,6 +537,8 @@ local function ProcIndirectRefresh(eventType, spellName, srcGUID, srcFlags, dstG
                     local targetSpellName = GetSpellInfo(targetSpellID)
                     SetTimer(srcGUID, dstGUID, dstName, dstFlags, targetSpellID, targetSpellName, opts, targetAuraType)
                 end
+            elseif refreshTable.customAction then
+                refreshTable.customAction(srcGUID, dstGUID, targetSpellID)
             else
                 local _, oldStartTime = RefreshTimer(srcGUID, dstGUID, targetSpellID)
 
@@ -546,6 +554,37 @@ local function ProcIndirectRefresh(eventType, spellName, srcGUID, srcFlags, dstG
     end
 end
 
+local igniteName = GetSpellInfo(12654)
+do
+    local igniteOpts = { duration = 4 }
+    function f:IngiteHandler(...)
+        local timestamp, eventType, hideCaster,
+        srcGUID, srcName, srcFlags, srcFlags2,
+        dstGUID, dstName, dstFlags, dstFlags2,
+        spellID, spellName, spellSchool, auraType, _, _, _, _, _, isCrit = ...
+
+        spellID = 12654
+        local opts = igniteOpts
+
+        if eventType == "SPELL_AURA_APPLIED" then
+            SetTimer(srcGUID, dstGUID, dstName, dstFlags, spellID, spellName, opts, auraType)
+            local spellTable = GetSpellTable(srcGUID, dstGUID, spellID)
+            spellTable.tickExtended = true -- skipping first tick by treating it as already extended
+        elseif eventType == "SPELL_PERIODIC_DAMAGE" then
+            local spellTable = GetSpellTable(srcGUID, dstGUID, spellID)
+            spellTable.tickExtended = false -- unmark tick
+        elseif eventType == "SPELL_AURA_REMOVED" then
+            SetTimer(srcGUID, dstGUID, dstName, dstFlags, spellID, spellName, opts, auraType, true)
+        end
+    end
+    -- if playerClass ~= "MAGE" then
+        -- f.IngiteHandler = function() end
+    -- end
+    function lib:GetSpellTable(...)
+        return GetSpellTable(...)
+    end
+end
+
 function f:CombatLogHandler(...)
     local timestamp, eventType, hideCaster,
     srcGUID, srcName, srcFlags, srcFlags2,
@@ -553,6 +592,10 @@ function f:CombatLogHandler(...)
     spellID, spellName, spellSchool, auraType, _, _, _, _, _, isCrit = ...
 
     ProcIndirectRefresh(eventType, spellName, srcGUID, srcFlags, dstGUID, dstFlags, dstName, isCrit)
+
+    if spellName == igniteName then
+        self:IngiteHandler(...)
+    end
 
     if  eventType == "SPELL_MISSED" and
         bit_band(srcFlags, COMBATLOG_OBJECT_AFFILIATION_MINE) == COMBATLOG_OBJECT_AFFILIATION_MINE
