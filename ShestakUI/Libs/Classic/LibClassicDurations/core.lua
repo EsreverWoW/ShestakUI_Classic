@@ -19,7 +19,7 @@ Usage example 1:
 --]================]
 if WOW_PROJECT_ID ~= WOW_PROJECT_CLASSIC then return end
 
-local MAJOR, MINOR = "LibClassicDurations", 63
+local MAJOR, MINOR = "LibClassicDurations", 64
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
@@ -557,7 +557,7 @@ end
 local igniteName = GetSpellInfo(12654)
 do
     local igniteOpts = { duration = 4 }
-    function f:IngiteHandler(...)
+    function f:IgniteHandler(...)
         local timestamp, eventType, hideCaster,
         srcGUID, srcName, srcFlags, srcFlags2,
         dstGUID, dstName, dstFlags, dstFlags2,
@@ -570,15 +570,26 @@ do
             SetTimer(srcGUID, dstGUID, dstName, dstFlags, spellID, spellName, opts, auraType)
             local spellTable = GetSpellTable(srcGUID, dstGUID, spellID)
             spellTable.tickExtended = true -- skipping first tick by treating it as already extended
+            if lib.DEBUG_IGNITE then
+                print(GetTime(), "[Ignite] Applied", dstGUID, "StartTime:", spellTable[2])
+            end
         elseif eventType == "SPELL_PERIODIC_DAMAGE" then
             local spellTable = GetSpellTable(srcGUID, dstGUID, spellID)
-            spellTable.tickExtended = false -- unmark tick
+            if spellTable then
+                if lib.DEBUG_IGNITE then
+                    print(GetTime(), "[Ignite] Tick", dstGUID)
+                end
+                spellTable.tickExtended = false -- unmark tick
+            end
         elseif eventType == "SPELL_AURA_REMOVED" then
             SetTimer(srcGUID, dstGUID, dstName, dstFlags, spellID, spellName, opts, auraType, true)
+            if lib.DEBUG_IGNITE then
+                print(GetTime(), "[Ignite] Removed", dstGUID)
+            end
         end
     end
     -- if playerClass ~= "MAGE" then
-        -- f.IngiteHandler = function() end
+        -- f.IgniteHandler = function() end
     -- end
     function lib:GetSpellTable(...)
         return GetSpellTable(...)
@@ -594,7 +605,7 @@ function f:CombatLogHandler(...)
     ProcIndirectRefresh(eventType, spellName, srcGUID, srcFlags, dstGUID, dstFlags, dstName, isCrit)
 
     if spellName == igniteName then
-        self:IngiteHandler(...)
+        self:IgniteHandler(...)
     end
 
     if  eventType == "SPELL_MISSED" and

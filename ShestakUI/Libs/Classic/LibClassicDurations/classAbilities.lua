@@ -1,7 +1,7 @@
 local lib = LibStub and LibStub("LibClassicDurations", true)
 if not lib then return end
 
-local Type, Version = "SpellTable", 66
+local Type, Version = "SpellTable", 67
 if lib:GetDataVersion(Type) >= Version then return end  -- older versions didn't have that function
 
 local Spell = lib.AddAura
@@ -127,6 +127,9 @@ if class == "MAGE" then
                     local igniteStartTime = spellTable[2]
                     spellTable[2] = igniteStartTime + 2
                     spellTable.tickExtended = true
+                    if lib.DEBUG_IGNITE then
+                        print(GetTime(), "[Ignite] Extended", dstGUID, "New start time:", spellTable[2])
+                    end
                 end
             end,
         }
@@ -264,7 +267,7 @@ Spell( 14751, { duration = INFINITY, type = "BUFF", buffType = "Magic" }) -- Inn
 Spell({ 1243, 1244, 1245, 2791, 10937, 10938 }, { duration = 1800, type = "BUFF", castFilter = true, buffType = "Magic" }) -- Power Word: Fortitude
 Spell({ 21562, 21564 }, { duration = 3600, type = "BUFF", castFilter = true, buffType = "Magic" }) -- Prayer of Fortitude
 Spell({ 976, 10957, 10958 }, { duration = 600, type = "BUFF", castFilter = true, buffType = "Magic" }) -- Shadow Protection
-Spell( 27683, { duration = 600, type = "BUFF", castFilter = true, buffType = "Magic" }) -- Prayer of Shadow Protection
+Spell( 27683, { duration = 1200, type = "BUFF", castFilter = true, buffType = "Magic" }) -- Prayer of Shadow Protection
 Spell({ 14752, 14818, 14819, 27841 }, { duration = 1800, type = "BUFF", castFilter = true, buffType = "Magic" }) -- Divine Spirit
 Spell( 27681, { duration = 3600, type = "BUFF", castFilter = true, buffType = "Magic" }) -- Prayer of Spirit
 
