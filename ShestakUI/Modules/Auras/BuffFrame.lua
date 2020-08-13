@@ -114,20 +114,19 @@ local function UpdateBuffAnchors()
 		index = numBuffs + slack
 		buff:ClearAllPoints()
 		if (index > 1) and (mod(index, rowbuffs) == 1) then
-			if index == rowbuffs + 1 then
-				buff:SetPoint("TOP", BuffButton1, "BOTTOM", 0, -3)
-			else
-				buff:SetPoint("TOP", aboveBuff, "BOTTOM", 0, -3)
-			end
+			buff:SetPoint("TOP", aboveBuff, "BOTTOM", 0, -3)
 			aboveBuff = buff
 		elseif index == 1 then
 			buff:SetPoint("TOPRIGHT", BuffsAnchor, "TOPRIGHT", 0, 0)
+			aboveBuff = buff
 		else
 			if numBuffs == 1 then
 				if mainhand and offhand and (T.classic or not UnitHasVehicleUI("player")) then
 					buff:SetPoint("RIGHT", TempEnchant2, "LEFT", -3, 0)
+					aboveBuff = TempEnchant1
 				elseif ((mainhand and not offhand) or (offhand and not mainhand)) and (T.classic or not UnitHasVehicleUI("player")) then
 					buff:SetPoint("RIGHT", TempEnchant1, "LEFT", -3, 0)
+					aboveBuff = TempEnchant1
 				else
 					buff:SetPoint("TOPRIGHT", BuffsAnchor, "TOPRIGHT", 0, 0)
 				end
