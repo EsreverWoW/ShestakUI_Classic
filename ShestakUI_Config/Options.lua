@@ -546,11 +546,11 @@ do
 	local ace3 = ns.CreateCheckBox(parent, "ace3", L_GUI_SKINS_ACE3)
 	ace3:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -8)
 
-	-- local atlasloot = ns.CreateCheckBox(parent, "atlasloot", L_GUI_SKINS_ATLASLOOT)
-	-- atlasloot:SetPoint("TOPLEFT", ace3, "BOTTOMLEFT", 0, 0)
-
 	local bigwigs = ns.CreateCheckBox(parent, "bigwigs", L_GUI_SKINS_BW)
 	bigwigs:SetPoint("LEFT", ace3, "RIGHT", 320, 0)
+
+	local atlasloot = ns.CreateCheckBox(parent, "atlasloot", L_GUI_SKINS_ATLASLOOT)
+	atlasloot:SetPoint("TOPLEFT", ace3, "BOTTOMLEFT", 0, 0)
 
 	-- local blood_shield_tracker = ns.CreateCheckBox(parent, "blood_shield_tracker", L_GUI_SKINS_BLOOD_SHIELD_TRACKER)
 	-- blood_shield_tracker:SetPoint("TOPLEFT", atlasloot, "BOTTOMLEFT", 0, 0)
@@ -565,7 +565,7 @@ do
 	-- cool_line:SetPoint("LEFT", clique, "RIGHT", 320, 0)
 
 	local dbm = ns.CreateCheckBox(parent, "dbm", L_GUI_SKINS_DBM)
-	dbm:SetPoint("TOPLEFT", ace3, "BOTTOMLEFT", 0, 0)
+	dbm:SetPoint("TOPLEFT", atlasloot, "BOTTOMLEFT", 0, 0)
 
 	local dbm_movable = ns.CreateCheckBox(parent, "dbm_movable", L_GUI_SKINS_DBM_MOVABLE)
 	dbm_movable:SetPoint("TOPLEFT", dbm, "BOTTOMLEFT", 20, 0)
@@ -625,32 +625,6 @@ do
 
 	local weak_auras = ns.CreateCheckBox(parent, "weak_auras", L_GUI_SKINS_WEAK_AURAS)
 	weak_auras:SetPoint("LEFT", recount, "RIGHT", 320, 0)
-
-	local classic = {
-		atlasloot,
-		blood_shield_tracker,
-		capping,
-		clique,
-		cool_line,
-		flyout_button,
-		ls_toasts,
-		mage_nuggets,
-		my_role_play,
-		npcscan,
-		nug_running,
-		omen,
-		opie,
-		ovale,
-		postal,
-		rematch,
-		skada,
-		tiny_dps,
-		vanaskos
-	}
-
-	if IsClassicBuild() then
-		HideOptions(classic)
-	end
 end
 
 -- Unit Frames
