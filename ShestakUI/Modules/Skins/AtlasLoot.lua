@@ -37,7 +37,7 @@ frame:RegisterEvent("PLAYER_ENTERING_WORLD")
 frame:SetScript("OnEvent", function(self)
 	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 	if IsAddOnLoaded("Skinner") or IsAddOnLoaded("Aurora") then return end
-	if not IsAddOnLoaded("AtlasLoot") then return end
+	if not IsAddOnLoaded("AtlasLootClassic") then return end
 
 	local AtlasLootFrame = _G["AtlasLoot_GUI-Frame"]
 	local AtlasLootItemFrame = _G["AtlasLoot_GUI-ItemFrame"]
