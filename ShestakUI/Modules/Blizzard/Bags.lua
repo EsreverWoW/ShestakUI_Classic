@@ -244,10 +244,12 @@ function Stuffing:SlotUpdate(b)
 	if b.frame.UpgradeIcon then
 		b.frame.UpgradeIcon:SetPoint("TOPLEFT", C.bag.button_size/2.7, -C.bag.button_size/2.7)
 		b.frame.UpgradeIcon:SetSize(C.bag.button_size/1.7, C.bag.button_size/1.7)
-		if IsAddOnLoaded("Pawn") then
-			itemIsUpgrade = PawnIsContainerItemAnUpgrade(b.frame:GetParent():GetID(), b.frame:GetID())
-		elseif not T.classic then
-			itemIsUpgrade = IsContainerItemAnUpgrade(b.frame:GetParent():GetID(), b.frame:GetID())
+		if not T.classic then
+			if IsAddOnLoaded("Pawn") then
+				itemIsUpgrade = PawnIsContainerItemAnUpgrade(b.frame:GetParent():GetID(), b.frame:GetID())
+			else
+				itemIsUpgrade = IsContainerItemAnUpgrade(b.frame:GetParent():GetID(), b.frame:GetID())
+			end
 		end
 		if itemIsUpgrade and itemIsUpgrade == true then
 			b.frame.UpgradeIcon:SetShown(true)
@@ -526,7 +528,9 @@ function Stuffing:BagFrameSlotNew(p, slot)
 		ret.slot = slot
 		slot = slot - 4
 		ret.frame = CreateFrame(T.classic and "CheckButton" or "ItemButton", "StuffingBBag"..slot.."Slot", p, "BankItemButtonBagTemplate")
-		Mixin(ret.frame, BackdropTemplateMixin)
+		if not T.classic then
+			Mixin(ret.frame, BackdropTemplateMixin)
+		end
 		ret.frame:StripTextures()
 		ret.frame:SetID(slot)
 		hooksecurefunc(ret.frame.IconBorder, "SetVertexColor", function(self, r, g, b)
@@ -556,7 +560,9 @@ function Stuffing:BagFrameSlotNew(p, slot)
 		end
 	else
 		ret.frame = CreateFrame(T.classic and "CheckButton" or "ItemButton", "StuffingFBag"..slot.."Slot", p, "BagSlotButtonTemplate")
-		Mixin(ret.frame, BackdropTemplateMixin)
+		if not T.classic then
+			Mixin(ret.frame, BackdropTemplateMixin)
+		end
 		hooksecurefunc(ret.frame.IconBorder, "SetVertexColor", function(self, r, g, b)
 			if r ~= 0.65882 and g ~= 0.65882 and b ~= 0.65882 then
 				self:GetParent():SetBackdropBorderColor(r, g, b)

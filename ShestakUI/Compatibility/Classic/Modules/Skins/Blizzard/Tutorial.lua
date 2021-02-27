@@ -26,7 +26,7 @@ local function LoadSkin()
 	TutorialFrameOkayButton:ClearAllPoints()
 	TutorialFrameOkayButton:SetPoint("BOTTOMRIGHT", TutorialFrame.backdrop, "BOTTOMRIGHT", -4, 4)
 
-	T.SkinCheckBox(TutorialFrameCheckButton, true)
+	T.SkinCheckBox(TutorialFrameCheckButton)
 	TutorialFrameCheckButton:ClearAllPoints()
 	TutorialFrameCheckButton:SetPoint("BOTTOMLEFT", TutorialFrame.backdrop, "BOTTOMLEFT", 2, 2)
 end

@@ -107,7 +107,7 @@ RaidUtilityMainAssistButton:SetAttribute("unit", "target")
 RaidUtilityMainAssistButton:SetAttribute("action", "toggle")
 
 -- Ready Check button
-CreateButton("RaidUtilityReadyCheckButton", RaidUtilityPanel, "UIPanelButtonTemplate", RaidUtilityRoleButton:GetWidth() * 0.75, 18, "TOPLEFT", RaidUtilityMainTankButton, "BOTTOMLEFT", 0, -5, READY_CHECK)
+CreateButton("RaidUtilityReadyCheckButton", RaidUtilityPanel, "UIPanelButtonTemplate", (RaidUtilityPanel:GetWidth() * 0.8) * 0.75, 18, "TOPLEFT", RaidUtilityMainTankButton, "BOTTOMLEFT", 0, -5, READY_CHECK)
 RaidUtilityReadyCheckButton:SetScript("OnMouseUp", function() DoReadyCheck() end)
 
 -- World Marker button
@@ -125,7 +125,7 @@ if not T.classic then
 end
 
 -- Raid Control Panel
-CreateButton("RaidUtilityRaidControlButton", RaidUtilityPanel, "UIPanelButtonTemplate", RaidUtilityRoleButton:GetWidth(), 18, "TOPLEFT", RaidUtilityReadyCheckButton, "BOTTOMLEFT", 0, -5, RAID_CONTROL)
+CreateButton("RaidUtilityRaidControlButton", RaidUtilityPanel, "UIPanelButtonTemplate", (RaidUtilityPanel:GetWidth() * 0.8), 18, "TOPLEFT", RaidUtilityReadyCheckButton, "BOTTOMLEFT", 0, -5, RAID_CONTROL)
 RaidUtilityRaidControlButton:SetScript("OnMouseUp", function()
 	if T.classic then
 		ToggleRaidFrame()

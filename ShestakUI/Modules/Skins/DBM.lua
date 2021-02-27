@@ -49,7 +49,9 @@ DBMSkin:SetScript("OnEvent", function()
 							icon2.overlay:SetTemplate("Transparent")
 						end
 
-						Mixin(tbar, BackdropTemplateMixin)
+						if not T.classic then
+							Mixin(tbar, BackdropTemplateMixin)
+						end
 						if bar.color then
 							tbar:SetStatusBarColor(bar.color.r, bar.color.g, bar.color.b)
 							tbar:SetBackdrop(backdrop)

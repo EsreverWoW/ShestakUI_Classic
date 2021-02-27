@@ -2732,7 +2732,7 @@ do
 		currency:SetPoint("TOPLEFT", bottom_line, "BOTTOMLEFT", 0, -16)
 	else
 		currency = CreateFrame("Frame", nil, ShestakUIOptionsPanel)
-		EXPANSION_NAME7 = EXPANSION_NAME7 or "Battle for Azeroth"
+		EXPANSION_NAME8 = EXPANSION_NAME8 or "Shadowlands"
 	end
 
 	local currency_archaeology = ns.CreateCheckBox(parent, "currency_archaeology", L_GUI_STATS_CURRENCY_ARCHAEOLOGY)

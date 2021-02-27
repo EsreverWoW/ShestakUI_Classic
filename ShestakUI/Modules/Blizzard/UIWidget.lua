@@ -85,7 +85,9 @@ local function SkinStatusBar(widget)
 		bar.Spark:SetAlpha(0)
 		local parent = widget:GetParent():GetParent()
 		if parent.castBar or parent.UnitFrame then -- nameplate
-			Mixin(bar, BackdropTemplateMixin)
+			if not T.classic then
+				Mixin(bar, BackdropTemplateMixin)
+			end
 			bar:SetBackdrop({
 				bgFile = C.media.blank,
 				insets = {left = 0, right = 0, top = 0, bottom = 0}
@@ -141,25 +143,27 @@ local function SkinCaptureBar(widget)
 	end
 end
 
-local frame = CreateFrame("Frame")
-frame:RegisterEvent("UPDATE_UI_WIDGET")
-frame:RegisterEvent("UPDATE_ALL_UI_WIDGETS")
-frame:RegisterEvent("PLAYER_ENTERING_WORLD")
-frame:SetScript("OnEvent", function()
-	for _, widget in pairs(UIWidgetTopCenterContainerFrame.widgetFrames) do
-		if widget.widgetType == _G.Enum.UIWidgetVisualizationType.StatusBar then
-			SkinStatusBar(widget)
-		elseif widget.widgetType == _G.Enum.UIWidgetVisualizationType.DoubleStatusBar then
-			SkinDoubleStatusBar(widget)
+if not T.classic then
+	local frame = CreateFrame("Frame")
+	frame:RegisterEvent("UPDATE_UI_WIDGET")
+	frame:RegisterEvent("UPDATE_ALL_UI_WIDGETS")
+	frame:RegisterEvent("PLAYER_ENTERING_WORLD")
+	frame:SetScript("OnEvent", function()
+		for _, widget in pairs(UIWidgetTopCenterContainerFrame.widgetFrames) do
+			if widget.widgetType == _G.Enum.UIWidgetVisualizationType.StatusBar then
+				SkinStatusBar(widget)
+			elseif widget.widgetType == _G.Enum.UIWidgetVisualizationType.DoubleStatusBar then
+				SkinDoubleStatusBar(widget)
+			end
 		end
-	end
 
-	for _, widget in pairs(UIWidgetBelowMinimapContainerFrame.widgetFrames) do
-		if widget.widgetType == Enum.UIWidgetVisualizationType.CaptureBar then
-			SkinCaptureBar(widget)
+		for _, widget in pairs(UIWidgetBelowMinimapContainerFrame.widgetFrames) do
+			if widget.widgetType == Enum.UIWidgetVisualizationType.CaptureBar then
+				SkinCaptureBar(widget)
+			end
 		end
-	end
-end)
+	end)
+end
 
 hooksecurefunc(UIWidgetTemplateScenarioHeaderCurrenciesAndBackgroundMixin, "Setup", function(widgetInfo)
 	widgetInfo.Frame:SetAlpha(0)

@@ -56,11 +56,13 @@ end
 ----------------------------------------------------------------------------------------
 --	Count of quests
 ----------------------------------------------------------------------------------------
-local numQuest = CreateFrame("Frame", nil, QuestMapFrame)
-numQuest.text = numQuest:CreateFontString(nil, "ARTWORK", "GameFontNormal")
-numQuest.text:SetPoint("TOP", QuestMapFrame, "TOP", 0, -21)
-numQuest.text:SetJustifyH("LEFT")
-numQuest.text:SetText(select(2, C_QuestLog.GetNumQuestLogEntries()).."/"..C_QuestLog.GetMaxNumQuestsCanAccept())
+if not T.classic then
+	local numQuest = CreateFrame("Frame", nil, QuestMapFrame)
+	numQuest.text = numQuest:CreateFontString(nil, "ARTWORK", "GameFontNormal")
+	numQuest.text:SetPoint("TOP", QuestMapFrame, "TOP", 0, -21)
+	numQuest.text:SetJustifyH("LEFT")
+	numQuest.text:SetText(select(2, C_QuestLog.GetNumQuestLogEntries()).."/"..C_QuestLog.GetMaxNumQuestsCanAccept())
+end
 
 ----------------------------------------------------------------------------------------
 --	Creating coordinate
@@ -140,7 +142,9 @@ WorldMapFrame:HookScript("OnUpdate", function()
 			coords.MouseText:SetText(L_MAP_CURSOR.."|cffff0000"..L_MAP_BOUNDS.."|r")
 		end
 
-		numQuest.text:SetText(select(2, C_QuestLog.GetNumQuestLogEntries()).."/"..C_QuestLog.GetMaxNumQuestsCanAccept())
+		if not T.classic then
+			numQuest.text:SetText(select(2, C_QuestLog.GetNumQuestLogEntries()).."/"..C_QuestLog.GetMaxNumQuestsCanAccept())
+		end
 
 		int = 0
 	end

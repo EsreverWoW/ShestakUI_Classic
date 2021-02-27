@@ -87,13 +87,15 @@ frame:SetScript("OnEvent", function(_, _, addon)
 	end
 end)
 
-local function AcknowledgeTips()
-	if InCombatLockdown() then return end
+if not T.classic then
+	local function AcknowledgeTips()
+		if InCombatLockdown() then return end
 
-	for frame in _G.HelpTip.framePool:EnumerateActive() do
-		frame:Acknowledge()
+		for frame in _G.HelpTip.framePool:EnumerateActive() do
+			frame:Acknowledge()
+		end
 	end
-end
 
-AcknowledgeTips()
-hooksecurefunc(_G.HelpTip, "Show", AcknowledgeTips)
+	AcknowledgeTips()
+	hooksecurefunc(_G.HelpTip, "Show", AcknowledgeTips)
+end

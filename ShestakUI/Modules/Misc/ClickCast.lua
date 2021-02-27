@@ -86,7 +86,7 @@ SpellBinder.makeSpellsList = function(_, delete)
 	for i, spell in ipairs(DB.spells) do
 		local v = spell.spell
 		if v then
-			local bf = _G["SpellBinder"..i.."_cbs"] or CreateFrame("Button", "SpellBinder"..i.."_cbs", scroll, "BackdropTemplate")
+			local bf = _G["SpellBinder"..i.."_cbs"] or CreateFrame("Button", "SpellBinder"..i.."_cbs", scroll, not T.classic and "BackdropTemplate" or nil)
 			spell.checked = spell.checked or false
 
 			if i == 1 then

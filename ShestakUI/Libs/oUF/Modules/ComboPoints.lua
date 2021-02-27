@@ -155,7 +155,7 @@ local Enable = function(self)
 			element.hadler:SetScript("OnEvent", function() Visibility(self) end)
 		end
 
-		for i = 1, 6 do
+		for i = 1, oUF:IsClassic() and 5 or 6 do
 			element[i]:SetStatusBarColor(unpack(element.Colors[i]))
 		end
 

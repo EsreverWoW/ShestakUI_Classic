@@ -118,7 +118,7 @@ T.PostUpdateHealth = function(health, unit, min, max)
 				end
 			end
 		else
-			if (unit == "player" and not UnitHasVehicleUI("player") or unit == "vehicle") then
+			if (T.classic and unit =="player") or (unit == "player" and not UnitHasVehicleUI("player") or unit == "vehicle") then
 				if C.unitframe.color_value == true then
 					health.value:SetText("|cff559655"..max.."|r")
 				else

@@ -180,6 +180,7 @@ local function ElementDisable(self)
 end
 
 local function Visibility(self, event, unit)
+	local element = self.Experience
 	local shouldEnable
 
 	if(not oUF:IsClassic()) then
@@ -220,12 +221,13 @@ local function Enable(self, unit)
 		element.restedAlpha = element.restedAlpha or 0.15
 
 		self:RegisterEvent('PLAYER_LEVEL_UP', VisibilityPath, true)
-		self:RegisterEvent('HONOR_LEVEL_UPDATE', VisibilityPath, true)
 		self:RegisterEvent('DISABLE_XP_GAIN', VisibilityPath, true)
 		self:RegisterEvent('ENABLE_XP_GAIN', VisibilityPath, true)
 		self:RegisterEvent('UPDATE_EXPANSION_LEVEL', VisibilityPath, true)
 
 		if(not oUF:IsClassic()) then
+			self:RegisterEvent('HONOR_LEVEL_UPDATE', VisibilityPath, true)
+
 			hooksecurefunc('SetWatchingHonorAsXP', function()
 				if(self:IsElementEnabled('Experience')) then
 					VisibilityPath(self, 'SetWatchingHonorAsXP', 'player')

@@ -33,7 +33,7 @@ end
 
 frame:RegisterEvent("PLAYER_LOGIN")
 function frame:PLAYER_LOGIN()
-	if C.nameplate.enhance_threat == true then
+	if not T.classic and C.nameplate.enhance_threat == true then
 		SetCVar("threatWarning", 3)
 	end
 	SetCVar("nameplateGlobalScale", 1)
@@ -721,7 +721,7 @@ local function style(self, unit)
 
 	-- Target Glow
 	if C.nameplate.target_glow then
-		self.Glow = CreateFrame("Frame", nil, self, "BackdropTemplate")
+		self.Glow = CreateFrame("Frame", nil, self, not T.classic and "BackdropTemplate" or nil)
 		self.Glow:SetBackdrop({edgeFile = [[Interface\AddOns\ShestakUI\Media\Textures\Glow.tga]], edgeSize = 4 * T.noscalemult})
 		self.Glow:SetPoint("TOPLEFT", -7 * T.noscalemult, 7 * T.noscalemult)
 		self.Glow:SetPoint("BOTTOMRIGHT", 7 * T.noscalemult, -7 * T.noscalemult)

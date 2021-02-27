@@ -54,7 +54,7 @@ end
 local function CreateBorder(f, i, o)
 	if i then
 		if f.iborder then return end
-		local border = CreateFrame("Frame", "$parentInnerBorder", f, "BackdropTemplate")
+		local border = CreateFrame("Frame", "$parentInnerBorder", f, not T.classic and "BackdropTemplate" or nil)
 		border:SetPoint("TOPLEFT", Mult, -Mult)
 		border:SetPoint("BOTTOMRIGHT", -Mult, Mult)
 		border:SetBackdrop({
@@ -67,7 +67,7 @@ local function CreateBorder(f, i, o)
 
 	if o then
 		if f.oborder then return end
-		local border = CreateFrame("Frame", "$parentOuterBorder", f, "BackdropTemplate")
+		local border = CreateFrame("Frame", "$parentOuterBorder", f, not T.classic and "BackdropTemplate" or nil)
 		border:SetPoint("TOPLEFT", -Mult, Mult)
 		border:SetPoint("BOTTOMRIGHT", Mult, -Mult)
 		border:SetFrameLevel(f:GetFrameLevel() + 1)
@@ -91,7 +91,9 @@ local function GetTemplate(t)
 end
 
 local function SetTemplate(f, t)
-	Mixin(f, BackdropTemplateMixin) -- 9.0 to set backdrop
+	if not T.classic then
+		Mixin(f, BackdropTemplateMixin) -- 9.0 to set backdrop
+	end
 	GetTemplate(t)
 
 	f:SetBackdrop({
@@ -114,7 +116,9 @@ local function SetTemplate(f, t)
 end
 
 local function CreatePanel(f, t, w, h, a1, p, a2, x, y)
-	Mixin(f, BackdropTemplateMixin) -- 9.0 to set backdrop
+	if not T.classic then
+		Mixin(f, BackdropTemplateMixin) -- 9.0 to set backdrop
+	end
 	GetTemplate(t)
 
 	f:SetWidth(w)

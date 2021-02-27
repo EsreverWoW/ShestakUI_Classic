@@ -7,9 +7,19 @@ if C.skins.bubbles ~= true then return end
 local function styleBubble(bubble)
 	if bubble:IsForbidden() then return end
 
-	local frame = bubble:GetChildren(1)
-	frame:DisableDrawLayer("BORDER")
-	frame.Tail:Hide()
+	local frame = T.classic and bubble or bubble:GetChildren(1)
+
+	if T.classic then
+		for i = 1, frame:GetNumRegions() do
+			local region = select(i, frame:GetRegions())
+			if region:IsObjectType("Texture") then
+				region:SetTexture(nil)
+			end
+		end
+	else
+		frame:DisableDrawLayer("BORDER")
+		frame.Tail:Hide()
+	end
 
 	frame:CreateBackdrop("Transparent")
 	frame.backdrop:SetPoint("TOPLEFT", 2, -2)

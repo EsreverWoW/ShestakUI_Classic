@@ -295,7 +295,9 @@ do
 		StyleNormalButton(_G["MultiBarBottomRightButton"..i], C.actionbar.editor and C.actionbar.bar5_size)
 	end
 
-	StyleNormalButton(ExtraActionButton1)
+	if not T.classic then
+		StyleNormalButton(ExtraActionButton1)
+	end
 end
 
 if not T.classic then
@@ -319,7 +321,9 @@ if C.actionbar.hotkey == true then
 			UpdateHotkey(_G["StanceButton"..i])
 			UpdateHotkey(_G["PetActionButton"..i])
 		end
-		UpdateHotkey(ExtraActionButton1)
+		if not T.classic then
+			UpdateHotkey(ExtraActionButton1)
+		end
 	end)
 end
 if C.actionbar.hide_highlight == true then

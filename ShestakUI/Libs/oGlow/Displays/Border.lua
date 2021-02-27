@@ -15,9 +15,9 @@ local createBorder = function(self, point)
 	if not bc then
 		if C.skins.blizzard_frames == true or IsAddOnLoaded("Aurora") then
 			if not self:IsObjectType("Frame") then
-				bc = CreateFrame("Frame", nil, self:GetParent(), "BackdropTemplate")
+				bc = CreateFrame("Frame", nil, self:GetParent(), not T.classic and "BackdropTemplate" or nil)
 			else
-				bc = CreateFrame("Frame", nil, self, "BackdropTemplate")
+				bc = CreateFrame("Frame", nil, self, not T.classic and "BackdropTemplate" or nil)
 			end
 
 			bc:SetBackdrop({

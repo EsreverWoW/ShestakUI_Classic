@@ -11,9 +11,9 @@ if not T.classic then
 	StoryTooltip:SetFrameLevel(4)
 
 	CampaignTooltip = QuestScrollFrame.CampaignTooltip
-end
 
-T.SkinCloseButton(_G.ItemRefTooltip.CloseButton)
+	T.SkinCloseButton(_G.ItemRefTooltip.CloseButton)
+end
 
 local tooltips = {
 	GameTooltip,

@@ -461,7 +461,7 @@ do
 		if not target:GetCenter() then return end
 		if backdropPool[target] then return backdropPool[target] end
 
-		local backdrop = CreateFrame("Frame", nil, UIParent, "BackdropTemplate")
+		local backdrop = CreateFrame("Frame", nil, UIParent, not T.classic and "BackdropTemplate" or nil)
 		backdrop:Hide()
 
 		backdrop:SetFrameStrata("MEDIUM")

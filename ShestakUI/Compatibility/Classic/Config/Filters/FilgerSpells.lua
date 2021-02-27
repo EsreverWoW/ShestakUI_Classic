@@ -3621,3 +3621,5 @@ C["filger_spells"] = {
 		--]]
 	},
 }
+
+T.CustomFilgerSpell = T.CustomFilgerSpell or {}
