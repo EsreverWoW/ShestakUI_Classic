@@ -658,7 +658,7 @@ function T.SkinDropDownBox(frame, width, pos)
 	frame.backdrop:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", 2, -2)
 end
 
-function T.SkinCheckBox(frame, size)
+function T.SkinCheckBox(frame, size, default)
 	if size then
 		frame:SetSize(size, size)
 	end
@@ -678,6 +678,7 @@ function T.SkinCheckBox(frame, size)
 	end
 
 	if frame.SetCheckedTexture then
+		if default then return end
 		local checked = frame:CreateTexture()
 		checked:SetColorTexture(1, 0.82, 0, 0.8)
 		checked:SetPoint("TOPLEFT", frame, 6, -6)

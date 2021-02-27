@@ -25,7 +25,11 @@ local function LoadSkin()
 	AddonListInset:SetPoint("BOTTOMRIGHT", -6, 29)
 
 	for i = 1, MAX_ADDONS_DISPLAYED do
-		T.SkinCheckBox(_G["AddonListEntry"..i.."Enabled"])
+		if T.classic then
+			T.SkinCheckBox(_G["AddonListEntry"..i.."Enabled"], nil, true)
+		else
+			T.SkinCheckBox(_G["AddonListEntry"..i.."Enabled"])
+		end
 		_G["AddonListEntry"..i.."Load"]:SkinButton()
 	end
 
@@ -36,14 +40,27 @@ local function LoadSkin()
 	T.SkinCheckBox(AddonListForceLoad)
 	AddonListForceLoad:SetSize(25, 25)
 
-	--FIXME hooksecurefunc("TriStateCheckbox_SetState", function(_, checkButton)
-		-- local tex = checkButton:GetCheckedTexture()
-		-- if checkButton.state == 2 then
-			-- tex:SetColorTexture(1, 0.82, 0, 0.8)
-		-- elseif checkButton.state == 1 then
-			-- tex:SetColorTexture(0.6, 0.6, 0.6, 0.75)
-		-- end
-	-- end)
+	if T.classic then
+		hooksecurefunc("TriStateCheckbox_SetState", function(_, checkButton)
+			local tex = checkButton:GetCheckedTexture()
+			tex:SetPoint("TOPLEFT", checkButton, 6, -6)
+			tex:SetPoint("BOTTOMRIGHT", checkButton, -6, 6)
+			if checkButton.state == 2 then
+				tex:SetColorTexture(1, 0.82, 0, 0.8)
+			elseif checkButton.state == 1 then
+				tex:SetColorTexture(0.6, 0.6, 0.6, 0.75)
+			end
+		end)
+	else
+		--FIXME hooksecurefunc("TriStateCheckbox_SetState", function(_, checkButton)
+			-- local tex = checkButton:GetCheckedTexture()
+			-- if checkButton.state == 2 then
+				-- tex:SetColorTexture(1, 0.82, 0, 0.8)
+			-- elseif checkButton.state == 1 then
+				-- tex:SetColorTexture(0.6, 0.6, 0.6, 0.75)
+			-- end
+		-- end)
+	end
 end
 
 tinsert(T.SkinFuncs["ShestakUI"], LoadSkin)
