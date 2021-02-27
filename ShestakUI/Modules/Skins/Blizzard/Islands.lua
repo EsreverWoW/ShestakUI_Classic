@@ -1,4 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
+if C.skins.blizzard_frames ~= true then return end
 
 ----------------------------------------------------------------------------------------
 --	Islands skin
@@ -66,11 +67,3 @@ local function LoadSkin()
 end
 
 T.SkinFuncs["Blizzard_IslandsQueueUI"] = LoadSkin
-
-local function LoadSecondarySkin()
-	IslandsPartyPoseFrame:StripTextures()
-	IslandsPartyPoseFrame:CreateBackdrop("Transparent")
-	IslandsPartyPoseFrame.LeaveButton:SkinButton()
-end
-
-T.SkinFuncs["Blizzard_IslandsPartyPoseUI"] = LoadSecondarySkin

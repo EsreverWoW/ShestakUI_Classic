@@ -8,9 +8,9 @@ local function LoadSkin()
 	ChatConfigFrame:StripTextures()
 	ChatConfigFrame:SetTemplate("Transparent")
 
-	ChatConfigFrameHeader:SetTexture(nil)
-	ChatConfigFrameHeader:ClearAllPoints()
-	ChatConfigFrameHeader:SetPoint("TOP", ChatConfigFrame, 0, 7)
+	ChatConfigFrame.Header:StripTextures()
+	ChatConfigFrame.Header:ClearAllPoints()
+	ChatConfigFrame.Header:SetPoint("TOP", ChatConfigFrame, 0, 7)
 
 	local frames = {
 		"ChatConfigCategoryFrame",
@@ -106,17 +106,13 @@ local function LoadSkin()
 	end
 
 	local ReskinColourSwatch = function(f)
-		f:StripTextures()
+		if f.InnerBorder then
+			f.InnerBorder:SetAlpha(0)
+			f.SwatchBg:SetAlpha(0)
+		end
 		f:CreateBackdrop("Overlay")
 		f:SetFrameLevel(f:GetFrameLevel() + 2)
-		f.backdrop:SetPoint("TOPLEFT", 1, 0)
-		f.backdrop:SetPoint("BOTTOMRIGHT", 1, 1)
-
-		f:SetNormalTexture(C.media.texture)
-		local nt = f:GetNormalTexture()
-
-		nt:SetPoint("TOPLEFT", 3, -2)
-		nt:SetPoint("BOTTOMRIGHT", -1, 3)
+		f.backdrop:SetOutside(f.Color, 2, 2)
 	end
 
 	hooksecurefunc("ChatConfig_CreateCheckboxes", function(frame, checkBoxTable, checkBoxTemplate)
@@ -141,10 +137,12 @@ local function LoadSkin()
 					local checkBoxName = checkBoxNameString..index
 					local checkbox = _G[checkBoxName]
 
+					checkbox:StripTextures()
 					local bg = CreateFrame("Frame", nil, checkbox)
 					bg:SetPoint("TOPLEFT", 2, -1)
 					bg:SetPoint("BOTTOMRIGHT", -2, 1)
-					bg:SetTemplate("Overlay")
+					bg:CreateBackdrop("Overlay")
+					bg.backdrop:SetAllPoints(bg)
 
 					ReskinColourSwatch(_G[checkBoxName.."ColorSwatch"])
 
@@ -184,7 +182,7 @@ local function LoadSkin()
 		frame.styled = true
 	end)
 
-	ChatConfigBackgroundFrame:SetScript("OnShow", function(self)
+	ChatConfigBackgroundFrame:SetScript("OnShow", function()
 		ReskinColourSwatch(CombatConfigColorsColorizeSpellNamesColorSwatch)
 		ReskinColourSwatch(CombatConfigColorsColorizeDamageNumberColorSwatch)
 

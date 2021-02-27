@@ -6,39 +6,41 @@ if C.skins.blizzard_frames ~= true then return end
 ----------------------------------------------------------------------------------------
 local function LoadSkin()
 	local StripAllTextures = {
-		"RaidInfoScrollFrame",
-		"RaidInfoFrame",
-		"RaidInfoInstanceLabel",
-		"RaidInfoIDLabel"
+		RaidInfoScrollFrame,
+		RaidInfoFrame,
+		RaidInfoInstanceLabel,
+		RaidInfoIDLabel,
+		RaidInfoFrame.Header
 	}
 
 	local KillTextures = {
-		"RaidInfoScrollFrameScrollBarBG",
-		"RaidInfoScrollFrameScrollBarTop",
-		"RaidInfoScrollFrameScrollBarBottom",
-		"RaidInfoScrollFrameScrollBarMiddle"
+		RaidInfoScrollFrameScrollBarBG,
+		RaidInfoScrollFrameScrollBarTop,
+		RaidInfoScrollFrameScrollBarBottom,
+		RaidInfoScrollFrameScrollBarMiddle
 	}
 
 	local buttons = {
-		"RaidFrameConvertToRaidButton",
-		"RaidFrameRaidInfoButton",
-		"RaidInfoExtendButton",
-		"RaidInfoCancelButton"
+		RaidFrameConvertToRaidButton,
+		RaidFrameRaidInfoButton,
+		RaidInfoExtendButton,
+		RaidInfoCancelButton
 	}
 
 	for _, object in pairs(StripAllTextures) do
-		_G[object]:StripTextures()
+		object:StripTextures()
 	end
 
 	if not T.classic then
 		for _, texture in pairs(KillTextures) do
-			_G[texture]:Kill()
+			texture:Kill()
 		end
 	end
 
 	for i = 1, #buttons do
-		if _G[buttons[i]] then
-			_G[buttons[i]]:SkinButton()
+		local button = buttons[i]
+		if button then
+			button:SkinButton()
 		end
 	end
 

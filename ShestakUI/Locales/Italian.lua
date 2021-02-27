@@ -21,7 +21,6 @@ L_ANNOUNCE_PC_MSG = "Avvio incontro %s in %s.."
 L_ANNOUNCE_PC_ABORTED = "Avvio incontro ANNULLATO!"
 
 -- Announce feasts and portals
-L_ANNOUNCE_FP_STAT = "%s ha preparato un/una %s - [%s]."
 L_ANNOUNCE_FP_PRE = "%s ha preparato un/una %s."
 L_ANNOUNCE_FP_PUT = "%s ha messo già un/una %s."
 L_ANNOUNCE_FP_CAST = "%s sta lanciando %s."
@@ -47,9 +46,6 @@ L_TOOLTIP_INSPECT_OPEN = "Il riquadro 'Ispeziona' è aperto"
 L_MISC_UNDRESS = "Senza vestiti"
 L_MISC_DRINKING = " sta bevendo."
 L_MISC_BUY_STACK = "Alt + click per comprarne una pila"
-L_MISC_ONECLICK_BUYOUT = "Shift + click sul destro per comprare direttamente l'oggetto selezionato senza conferma"
-L_MISC_ONECLICK_BID = "Shift + click sul destro per fare una puntata sull'oggetto selezionato senza conferma"
-L_MISC_ONECLICK_CANCEL = "Shift + click sul destro per cancellare l'oggetto selezionato senza conferma"
 L_MISC_UI_OUTDATED = "La tua versione della ShestakUI non è aggiornata: puoi scaricare la nuova versione da www.shestak.org."
 L_MISC_HEADER_MARK = "Marchi d'incursione al passaggio del mouse"
 L_MISC_BINDER_OPEN = "Assegnazione pulsanti mouse"
@@ -59,8 +55,6 @@ L_MISC_SCROLL = "Pergamena"
 L_RAID_UTIL_DISBAND = "Sciogli il gruppo"
 
 -- Zone name
-L_ZONE_ARATHIBASIN = "Bacino d'Arathi"
-L_ZONE_GILNEAS = "Battaglia per Gilneas"
 L_ZONE_ANCIENTDALARAN = "Cratere di Dalaran"
 
 -- WatchFrame Wowhead link
@@ -93,6 +87,8 @@ L_MINIMAP_CALENDAR = "Calendario"
 L_MINIMAP_HEAL_LAYOUT = "Click-Sinistro - Disposizione da Guaritore"
 L_MINIMAP_DPS_LAYOUT = "Click-Destro - Disposizione d'Assaltatore"
 L_MINIMAP_BLIZZ_LAYOUT = "Click-Centrale - Disposizione Blizzard"
+L_MINIMAP_FARM = "Minimap size" -- Need review
+L_MINIMAP_TOGGLE = "Toggle action bars" -- Need review
 
 -- Chat
 L_CHAT_WHISPER = "Da"
@@ -150,10 +146,6 @@ L_COOLDOWNS_COMBATRESS = "Resurrezione in Combattimento"
 L_COOLDOWNS_COMBATRESS_REMAINDER = "Resurrezione in combattimento: "
 L_COOLDOWNS_NEXTTIME = "Tempi di ricarica: "
 
--- Autoinvite
-L_INVITE_ENABLE = "Invito automatico attivato: "
-L_INVITE_DISABLE = "Invito automatico disattivato"
-
 -- Bind key
 L_BIND_SAVED = "Tutte le assegnazioni tasti sono state salvate."
 L_BIND_DISCARD = "Tutte le nuove assegnazioni tasti non sono state salvate."
@@ -197,14 +189,11 @@ L_WELCOME_LINE_2_2 = "per maggiori informazioni."
 
 -- Combat text
 L_COMBATTEXT_KILLING_BLOW = "Colpo di grazia"
-L_COMBATTEXT_ALREADY_UNLOCKED = "Testo di combattimento già sbloccato."
-L_COMBATTEXT_ALREADY_LOCKED = "Testo di combattimento già bloccato."
 L_COMBATTEXT_TEST_DISABLED = "Modalità 'prova' del testo di combattimento disabilitata."
 L_COMBATTEXT_TEST_ENABLED = "Modalità 'prova' del testo di combattimento abilitata."
-L_COMBATTEXT_TEST_USE_UNLOCK = "Digita /xct per sbloccare e quindi poter muovere e ridimensionare i riquadri del testo di combattimento."
-L_COMBATTEXT_TEST_USE_LOCK = "Digita /xct per bloccare i riquadri del testo di combattimento."
-L_COMBATTEXT_TEST_USE_TEST = "Digita /xct test per attivare la modalità 'prova' per il testo di combattimento."
-L_COMBATTEXT_TEST_USE_RESET = "Digita /xct reset to ripristinare le posizioni predefinite."
+L_COMBATTEXT_TEST_USE_MOVE = "Digita '/xct move' per sbloccare e quindi poter muovere e ridimensionare i riquadri del testo di combattimento."
+L_COMBATTEXT_TEST_USE_TEST = "Digita '/xct test' per attivare la modalità 'prova' per il testo di combattimento."
+L_COMBATTEXT_TEST_USE_RESET = "Digita '/xct reset' to ripristinare le posizioni predefinite."
 L_COMBATTEXT_POPUP = "Per poter salvare la posizione delle finestre del testo di combattimento è necessario riavviare la tua interfaccia utente."
 L_COMBATTEXT_UNSAVED = "La posizione delle finestre del testo di combattimento non è ancora stata salvata: non dimenticare di riavviare l'interfaccia utente."
 L_COMBATTEXT_UNLOCKED = "Testo di combattimento sbloccato."
@@ -291,25 +280,23 @@ L_SLASHCMD_HELP = {
 	"/rd - Sciogli gruppo o incursione.",
 	"/toraid - Trasforma il gruppo in incursione.",
 	"/teleport - Teletrasporto dalle spedizioni casuali.",
-	"/spec, /ss - Passa da una specializzazione dei talenti all'altra",
+	"/ss - Passa da una specializzazione dei talenti all'altra",
+	"/tt - Sussurra al bersaglio.",
 	"/heal - Passa alla configurazione 'guaritori'.",
 	"/dps - Passa alla configurazione 'assaltatori'.",
-	"/frame - La descrizione non è pronta.",
 	"/farmmode - Incrementa le dimensioni della minimappa.",
-	"/moveui - Consenti lo spostamento degli elementi dell'interfaccia.", -- Need review
 	"/resetui - Ripristina le impostazioni generali iniziali.",
 	"/resetuf - Riporta i riquadri delle unità alla loro posizione originaria.",
 	"/resetconfig - Riporta le impostazioni della ShestakUI_Config a quelle iniziali.",
 	"/resetstats - Riazzera le statistiche su oro e tempo di gioco.",
-	"/settings ADDON_NAME - Applica le impostazioni a MSBT, DBM, Skada o a tutte le AddOns.",
-	"/ls, /litestats - Comandi d'aiuto per LiteStats.",
+	"/settings - Applica le impostazioni a MSBT, DBM, Skada o a tutte le AddOns.",
+	"/ls - Comandi d'aiuto per LiteStats.",
 	"/xct - Gestione testo di combattimento.",
 	"/raidcd - Prova i recuperi d'incursione.",
 	"/enemycd - Prova i recuperi del nemico.",
 	"/pulsecd - Prova i tuoi recuperi con effetto 'pulse'.",
 	"/threat - Prova il Contatore Minaccia.",
-	"/tt - Sussurra al bersaglio.",
-	"/ainv - Attiva gli inviti automatici.",
 	"/testuf - Prova i riquadri delle unità.",
+	"/moveui - Consenti lo spostamento degli elementi dell'interfaccia.", -- Need review
 	"/cfg - Apri il pannello impostazioni interfaccia.",
 }

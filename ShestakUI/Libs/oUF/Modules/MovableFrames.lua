@@ -10,60 +10,7 @@ local oUF = ns.oUF
 local _DB
 local _LOCK
 
-local round = function(n)
-	return math.floor(n * 1e5 + .5) / 1e5
-end
-
 local backdropPool = {}
-
-local getPoint = function(obj, anchor)
-	if not anchor then
-		local UIx, UIy = UIParent:GetCenter()
-		local Ox, Oy = obj:GetCenter()
-
-		-- Frame doesn't really have a positon yet
-		if not Ox then return end
-
-		local UIS = UIParent:GetEffectiveScale()
-		local OS = obj:GetEffectiveScale()
-
-		local UIWidth, UIHeight = UIParent:GetRight(), UIParent:GetTop()
-
-		local LEFT = UIWidth / 3
-		local RIGHT = UIWidth * 2 / 3
-
-		local point, x, y
-		if Ox >= RIGHT then
-			point = "RIGHT"
-			x = obj:GetRight() - UIWidth
-		elseif Ox <= LEFT then
-			point = "LEFT"
-			x = obj:GetLeft()
-		else
-			x = Ox - UIx
-		end
-
-		local BOTTOM = UIHeight / 3
-		local TOP = UIHeight * 2 / 3
-
-		if Oy >= TOP then
-			point = "TOP"..(point or "")
-			y = obj:GetTop() - UIHeight
-		elseif Oy <= BOTTOM then
-			point = "BOTTOM"..(point or "")
-			y = obj:GetBottom()
-		else
-			if not point then point = "CENTER" end
-			y = Oy - UIy
-		end
-
-		return string.format("%s\031%s\031%d\031%d", point, "UIParent", round(x * UIS / OS), round(y * UIS / OS))
-	else
-		local point, _, _, x, y = anchor:GetPoint()
-
-		return string.format("%s\031%s\031%d\031%d", point, "UIParent", round(x), round(y))
-	end
-end
 
 local getObjectInformation = function(obj)
 	-- This won't be set if we're dealing with oUF <1.3.22. Due to this we're just
@@ -91,41 +38,55 @@ local getObjectInformation = function(obj)
 	return style, identifier, isHeader
 end
 
-local restoreDefaultPosition = function(style, identifier)
-	-- We've not saved any default position for this style
-	if not _DB.__INITIAL or not _DB.__INITIAL[style] or not _DB.__INITIAL[style][identifier] then return end
-
-	local obj, isHeader
-	for _, frame in next, oUF.objects do
-		local fStyle, fIdentifier, fIsHeader = getObjectInformation(frame)
-		if fStyle == style and fIdentifier == identifier then
-			obj = frame
-			isHeader = fIsHeader
-
-			break
-		end
-	end
-
-	if obj then
-		local scale = obj:GetScale()
-		local target = isHeader or obj
-		local SetPoint = getmetatable(target).__index.SetPoint
-
+local restoreDefaultPosition = function(style, identifier, obj)
+	local style, identifier, isHeader = getObjectInformation(obj)
+	local target = isHeader or obj
+	if ShestakUIPositions.Default[target:GetName()] then
 		target:ClearAllPoints()
-
-		local point, parentName, x, y = string.split("\031", _DB.__INITIAL[style][identifier])
-		SetPoint(target, point, parentName, point, x / scale, y / scale)
-
+		target:SetPoint(unpack(ShestakUIPositions.Default[target:GetName()]))
 		local backdrop = backdropPool[target]
 		if backdrop then
 			backdrop:ClearAllPoints()
 			backdrop:SetAllPoints(target)
 		end
+		ShestakUIPositions.Default[target:GetName()] = nil
+		ShestakUIPositions.UnitFrame[target:GetName()] = nil
+	else
+		-- We've not saved any default position for this style
+		if not _DB.__INITIAL or not _DB.__INITIAL[style] or not _DB.__INITIAL[style][identifier] then return end
 
-		-- We don't need this anymore
-		_DB.__INITIAL[style][identifier] = nil
-		if not next(_DB.__INITIAL[style]) then
-			_DB[style] = nil
+		local obj, isHeader
+		for _, frame in next, oUF.objects do
+			local fStyle, fIdentifier, fIsHeader = getObjectInformation(frame)
+			if fStyle == style and fIdentifier == identifier then
+				obj = frame
+				isHeader = fIsHeader
+
+				break
+			end
+		end
+
+		if obj then
+			local scale = obj:GetScale()
+			local target = isHeader or obj
+			local SetPoint = getmetatable(target).__index.SetPoint
+
+			target:ClearAllPoints()
+
+			local point, parentName, x, y = string.split("\031", _DB.__INITIAL[style][identifier])
+			SetPoint(target, point, parentName, point, x / scale, y / scale)
+
+			local backdrop = backdropPool[target]
+			if backdrop then
+				backdrop:ClearAllPoints()
+				backdrop:SetAllPoints(target)
+			end
+
+			-- We don't need this anymore
+			_DB.__INITIAL[style][identifier] = nil
+			if not next(_DB.__INITIAL[style]) then
+				_DB[style] = nil
+			end
 		end
 	end
 end
@@ -133,52 +94,186 @@ end
 local function restorePosition(obj)
 	if InCombatLockdown() then return end
 	local style, identifier, isHeader = getObjectInformation(obj)
-	-- We've not saved any custom position for this style
-	if not _DB[style] or not _DB[style][identifier] then return end
-
-	local scale = obj:GetScale()
 	local target = isHeader or obj
-	local SetPoint = getmetatable(target).__index.SetPoint
+	if ShestakUIPositions.UnitFrame[target:GetName()] then
+		local SetPoint = getmetatable(target).__index.SetPoint
 
-	-- Hah, a spot you have to use semi-colon!
-	-- Guess I've never experienced that as these are usually wrapped in do end
-	-- statements.
-	target.SetPoint = restorePosition
-	target:ClearAllPoints()
+		-- Hah, a spot you have to use semi-colon!
+		-- Guess I've never experienced that as these are usually wrapped in do end
+		-- statements.
+		if(not target._SetPoint) then
+			target._SetPoint = target.SetPoint
+			target.SetPoint = restorePosition
+		end
+		target:ClearAllPoints()
 
-	-- damn it Blizzard, _how_ did you manage to get the input of this function
-	-- reversed. Any sane person would implement this as: split(str, dlm, lim)
-	local point, parentName, x, y = string.split("\031", _DB[style][identifier])
-	SetPoint(target, point, parentName, point, x / scale, y / scale)
+		SetPoint(target, unpack(ShestakUIPositions.UnitFrame[target:GetName()]))
+	else
+		-- We've not saved any custom position for this style
+		if not _DB[style] or not _DB[style][identifier] then return end
+
+		local scale = obj:GetScale()
+		local target = isHeader or obj
+		local SetPoint = getmetatable(target).__index.SetPoint
+
+		-- Hah, a spot you have to use semi-colon!
+		-- Guess I've never experienced that as these are usually wrapped in do end
+		-- statements.
+		if(not target._SetPoint) then
+			target._SetPoint = target.SetPoint
+			target.SetPoint = restorePosition
+		end
+		target:ClearAllPoints()
+
+		-- damn it Blizzard, _how_ did you manage to get the input of this function
+		-- reversed. Any sane person would implement this as: split(str, dlm, lim)
+		local point, parentName, x, y = string.split("\031", _DB[style][identifier])
+		SetPoint(target, point, parentName, point, x / scale, y / scale)
+	end
 end
 
 local saveDefaultPosition = function(obj)
-	local style, identifier, isHeader = getObjectInformation(obj)
-	if not _DB.__INITIAL then
-		_DB.__INITIAL = {}
-	end
+	local _, _, isHeader = getObjectInformation(obj)
+	local target = isHeader or obj
 
-	if not _DB.__INITIAL[style] then
-		_DB.__INITIAL[style] = {}
-	end
-
-	if not _DB.__INITIAL[style][identifier] then
-		local point
-		if isHeader then
-			point = getPoint(isHeader)
-		else
-			point = getPoint(obj)
+	local ap, p, rp, x, y = target:GetPoint()
+	ShestakUIPositions.Default = ShestakUIPositions.Default or {}
+	if not ShestakUIPositions.Default[target:GetName()] then
+		if not p then
+			p = UIParent
 		end
-
-		_DB.__INITIAL[style][identifier] = point
+		ShestakUIPositions.Default[target:GetName()] = {ap, p:GetName(), rp, x, y}
 	end
 end
 
 local savePosition = function(obj, anchor)
-	local style, identifier, isHeader = getObjectInformation(obj)
-	if not _DB[style] then _DB[style] = {} end
+	local x, y, ap = T.CalculateMoverPoints(anchor)
+	ShestakUIPositions.UnitFrame[anchor.target:GetName()] = {ap, "UIParent", ap, x, y}
+end
 
-	_DB[style][identifier] = getPoint(isHeader or obj, anchor)
+-- Controls
+local controls = CreateFrame("frame", nil, UIParent)
+controls:SetPoint("CENTER", UIParent)
+controls:SetSize(65, 25)
+controls:SetFrameStrata("TOOLTIP")
+controls:SetFrameLevel(100)
+controls:SetClampedToScreen(true)
+controls:Hide()
+controls:SetScript("OnLeave", function(self)
+	if MouseIsOver(self) then return end
+	if not self._frame then
+		self:Hide()
+	elseif not MouseIsOver(self._frame) then
+		self:Hide()
+	end
+	controls.x:SetText("")
+	controls.y:SetText("")
+end)
+
+local function CreateArrow(moveX, moveY, callback)
+	moveX = moveX or 0
+	moveY = moveY or 0
+
+	local button = CreateFrame("button", nil, controls)
+	button:SetSize(14, 14)
+	button.controls = controls
+
+	button.tex = button:CreateTexture(nil, "OVERLAY")
+	button.tex:SetTexture("Interface\\OPTIONSFRAME\\VoiceChat-Play")
+
+	button.tex:SetPoint("CENTER")
+	button.tex:SetSize(12, 12)
+	button.tex:SetVertexColor(0.6, 0.6, 0.6)
+
+	button:SetScript("OnEnter", function(self)
+		self.tex:SetVertexColor(1, 1, 1)
+	end)
+	button:SetScript("OnLeave", function(self)
+		self.tex:SetVertexColor(0.6, 0.6, 0.6)
+	end)
+
+	callback = callback or function(self)
+		local frame = self.controls._frame
+		if not frame then return end
+		local point, relativeTo, relativePoint, xOfs, yOfs = frame.target:GetPoint()
+		saveDefaultPosition(frame.obj)
+		if IsControlKeyDown() then
+			frame.target:SetPoint(point, relativeTo, relativePoint, xOfs + (moveX * 20), yOfs + (moveY * 20))
+		elseif IsShiftKeyDown() then
+			frame.target:SetPoint(point, relativeTo, relativePoint, xOfs + (moveX * 5), yOfs + (moveY * 5))
+		else
+			frame.target:SetPoint(point, relativeTo, relativePoint, xOfs + (moveX * 1), yOfs + (moveY * 1))
+		end
+		local point, relativeTo, relativePoint, xOfs, yOfs = frame.target:GetPoint()
+		if not relativeTo then
+			relativeTo = UIParent
+		end
+		ShestakUIPositions.UnitFrame[frame.target:GetName()] = {point, relativeTo:GetName(), relativePoint, xOfs, yOfs}
+		frame:SetAllPoints(frame.target)
+		controls.x:SetText(T.Round(xOfs))
+		controls.y:SetText(T.Round(yOfs))
+	end
+
+	button:SetScript("OnClick", callback)
+
+	if controls.last then
+		button:SetPoint("LEFT", controls.last, "RIGHT", 2, 0)
+	else
+		button:SetPoint("LEFT", controls, "LEFT", 2, 0)
+	end
+
+	controls.last = button
+
+	return button
+end
+
+controls.left = CreateArrow(-1, 0)
+controls.left.tex:SetRotation(3.14159)
+
+controls.up = CreateArrow(0, 1)
+controls.up.tex:SetRotation(1.5708)
+
+controls.down = CreateArrow(0, -1)
+controls.down.tex:SetRotation(-1.5708)
+
+controls.right = CreateArrow(1, 0)
+controls.right.tex:SetRotation(0)
+
+controls.x = controls:CreateFontString(nil, "OVERLAY")
+controls.x:SetFont(C.media.pixel_font, C.media.pixel_font_size, C.media.pixel_font_style)
+controls.x:SetPoint("RIGHT", controls, "LEFT", -10, 0)
+
+controls.y = controls:CreateFontString(nil, "OVERLAY")
+controls.y:SetFont(C.media.pixel_font, C.media.pixel_font_size, C.media.pixel_font_style)
+controls.y:SetPoint("LEFT", controls, "RIGHT", 10, 0)
+
+controls.shadow = controls:CreateTexture(nil, "OVERLAY")
+controls.shadow:SetPoint("TOPLEFT", controls.x, "TOPLEFT", -5, 5)
+controls.shadow:SetPoint("BOTTOMRIGHT", controls.y, "BOTTOMRIGHT", 2, -5)
+controls.shadow:SetTexture(C.media.texture)
+controls.shadow:SetVertexColor(0.1, 0.1, 0.1, 0.8)
+
+local function GetQuadrant(frame)
+	local _, y = frame:GetCenter()
+	local vhalf = (y > UIParent:GetHeight() / 2) and "TOP" or "BOTTOM"
+	return vhalf
+end
+
+local function ShowControls(frame)
+	local y = GetQuadrant(frame)
+	controls._frame = frame
+	controls:Show()
+	controls:SetAlpha(1)
+	controls:ClearAllPoints()
+	if y == "TOP" then
+		controls:SetPoint("TOP", frame, "BOTTOM", 0, 0)
+	else
+		controls:SetPoint("BOTTOM", frame, "TOP", 0, 0)
+	end
+
+	local _, _, _, xOfs, yOfs = frame.target:GetPoint()
+	controls.x:SetText(T.Round(xOfs))
+	controls.y:SetText(T.Round(yOfs))
 end
 
 -- Attempt to figure out a more sane name to dispaly
@@ -293,10 +388,13 @@ do
 	end)
 
 	function frame:VARIABLES_LOADED()
+		-- TODO remove after while
 		-- I honestly don't trust the load order of CVs
-		if SavedOptionsPerChar == nil then SavedOptionsPerChar = {} end
-		_DB = SavedOptionsPerChar.UFPos or {}
-		SavedOptionsPerChar.UFPos = _DB
+		if ShestakUIPositions == nil then ShestakUIPositions = {} end
+		_DB = ShestakUIPositions.UFPos or {}
+		ShestakUIPositions.UFPos = _DB
+
+		ShestakUIPositions.UnitFrame = ShestakUIPositions.UnitFrame or {}
 
 		-- Got to catch them all
 		for _, obj in next, oUF.objects do
@@ -313,11 +411,13 @@ local getBackdrop
 do
 	local function UpdateCoords(self)
 		local mover = self.child
-		local ap, _, rp, x, y = mover:GetPoint()
+		local x, y, ap = T.CalculateMoverPoints(mover)
+		controls.x:SetText(T.Round(x))
+		controls.y:SetText(T.Round(y))
 
-		local frame = mover.header or mover.obj
+		local frame = mover.target
 		frame:ClearAllPoints()
-		frame:SetPoint(ap, "UIParent", rp, x, y)
+		frame:SetPoint(ap, "UIParent", ap, x, y)
 	end
 
 	local coordFrame = CreateFrame("Frame")
@@ -342,13 +442,17 @@ do
 
 		coordFrame.child = nil
 		coordFrame:Hide()
+
+		self:ClearAllPoints()
+		self:SetAllPoints(self.header or self.obj)
 	end
 
 	local OnMouseUp = function(self, button)
 		if button == "RightButton" then
-			self.backdrop:SetBackdropColor(0.2, 0.6, 0.2, 0.7)
 			local style, identifier = getObjectInformation(self.obj)
-			_DB[style][identifier] =  nil
+			restoreDefaultPosition(style, identifier, self.obj)
+		elseif button == "MiddleButton" then
+			self:Hide()
 		end
 	end
 
@@ -357,8 +461,7 @@ do
 		if not target:GetCenter() then return end
 		if backdropPool[target] then return backdropPool[target] end
 
-		local backdrop = CreateFrame("Frame")
-		backdrop:SetParent(UIParent)
+		local backdrop = CreateFrame("Frame", nil, UIParent, "BackdropTemplate")
 		backdrop:Hide()
 
 		backdrop:SetFrameStrata("MEDIUM")
@@ -367,20 +470,24 @@ do
 		backdrop:CreateBackdrop("Transparent")
 		backdrop:EnableMouse(true)
 		backdrop:SetMovable(true)
+		backdrop:SetClampedToScreen(true)
 		backdrop:RegisterForDrag("LeftButton")
 
 		backdrop:SetScript("OnShow", OnShow)
 
 		local name = backdrop:CreateFontString(nil, "OVERLAY")
-		name:SetFont(C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
+		name:SetFont(C.media.pixel_font, C.media.pixel_font_size, C.media.pixel_font_style)
 		name:SetTextColor(1, 1, 1)
 		name:SetAllPoints(target)
 
 		backdrop.name = name
 		backdrop.obj = obj
 		backdrop.header = isHeader
+		backdrop.target = target
 
 		backdrop.backdrop:SetBackdropBorderColor(1, 0, 0)
+
+		backdrop.baseWidth, backdrop.baseHeight = obj:GetSize()
 
 		-- We have to define a minHeight on the header if it doesn't have one. The
 		-- reason for this is that the header frame will have an height of 0.1 when
@@ -402,13 +509,20 @@ do
 			backdrop.baseWidth, backdrop.baseHeight = isHeader:GetSize()
 		end
 
+		local frame = backdrop.header or backdrop.obj
+		if frame._SetPoint then
+			frame.SetPoint = frame._SetPoint
+		end
+
 		backdrop:SetScript("OnDragStart", OnDragStart)
 		backdrop:SetScript("OnDragStop", OnDragStop)
 		backdrop:SetScript("OnEnter", function(self)
-			self.backdrop:SetBackdropBorderColor(T.color.r, T.color.g, T.color.b)
+			self.backdrop:SetBackdropBorderColor(unpack(C.media.classborder_color))
+			ShowControls(backdrop)
 		end)
 		backdrop:SetScript("OnLeave", function(self)
 			self.backdrop:SetBackdropBorderColor(1, 0, 0)
+			if not MouseIsOver(controls) then controls:Hide() end
 		end)
 		backdrop:SetScript("OnMouseUp", OnMouseUp)
 
@@ -422,7 +536,7 @@ StaticPopupDialogs.RESET_UF = {
 	text = L_POPUP_RESETUI,
 	button1 = ACCEPT,
 	button2 = CANCEL,
-	OnAccept = function() if InCombatLockdown() then print("|cffffff00"..ERR_NOT_IN_COMBAT.."|r") else SavedOptionsPerChar.UFPos = {} ReloadUI() end end,
+	OnAccept = function() if InCombatLockdown() then print("|cffffff00"..ERR_NOT_IN_COMBAT.."|r") else ShestakUIPositions.UFPos = {} ShestakUIPositions.UnitFrame = {} ReloadUI() end end,
 	timeout = 0,
 	whileDead = 1,
 	hideOnEscape = true,
@@ -450,6 +564,7 @@ T.MoveUnitFrames = function()
 			bdrop:Hide()
 		end
 
+		controls:Hide()
 		_LOCK = nil
 	end
 end

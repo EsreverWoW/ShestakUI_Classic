@@ -12,11 +12,9 @@ C["position"] = {
 	["chat"] = {"BOTTOMLEFT", UIParent, "BOTTOMLEFT", 24, 23},						-- Chat
 	["bag"] = {"BOTTOMRIGHT", Minimap, "TOPRIGHT", 2, 5},							-- Bag
 	["bank"] = {"LEFT", UIParent, "LEFT", 23, 150},									-- Bank
-	["bn_popup"] = {"BOTTOMLEFT", ChatFrame1, "TOPLEFT", -3, 24},					-- Battle.net popup
+	["bn_popup"] = {"BOTTOMLEFT", ChatFrame1, "TOPLEFT", -3, 27},					-- Battle.net popup
 	["achievement"] = {"TOP", UIParent, "TOP", 0, -21},								-- Achievements frame
 	["tooltip"] = {"BOTTOMRIGHT", Minimap, "TOPRIGHT", 2, 5},						-- Tooltip
-	["uiwidget"] = {"TOP", UIParent, "TOP", 0, -25},								-- UIWidget frame
-	["capture_bar"] = {"TOP", UIParent, "TOP", 0, 3},								-- BG capture bars
 	["vehicle"] = {"BOTTOM", Minimap, "TOP", 0, 27},								-- Vehicle frame
 	["ghost"] = {"BOTTOM", Minimap, "TOP", 0, 5},									-- Ghost frame
 	["uierror"] = {"TOP", UIParent, "TOP", 0, -30},									-- Errors frame
@@ -37,13 +35,16 @@ C["position"] = {
 	["archaeology"] = {"BOTTOMRIGHT", Minimap, "TOPRIGHT", 2, 5},					-- Archaeology frame
 	["auto_button"] = {"BOTTOMLEFT", Minimap, "TOPLEFT", -2, 27},					-- Auto button
 	["extra_button"] = {"BOTTOMRIGHT", ActionButton1, "BOTTOMLEFT", -3, 0},			-- Extra action button
-	["alt_power_bar"] = {"TOP", UIParent, "TOP", 0, -21},							-- Alt power bar
+	["zone_button"] = {"BOTTOMRIGHT", ActionButton1, "BOTTOMLEFT", -3, 0},			-- Zone action button
+	["alt_power_bar"] = {"TOP", UIWidgetTopCenterContainerFrame, "BOTTOM", 0, -7},	-- Alt power bar
 	["talking_head"] = {"TOP", UIParent, "TOP", 0, -21},							-- Talking Head
+	["uiwidget_top"] = {"TOP", UIParent, "TOP", 0, -21},							-- Top Widget
+	["uiwidget_below"] = {"TOP", UIWidgetTopCenterContainerFrame, "BOTTOM", 0, -15},-- Below Widget
 	-- ActionBar positions
 	["bottom_bars"] = {"BOTTOM", UIParent, "BOTTOM", 0, 8},							-- Bottom bars
 	["right_bars"] = {"BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -21, 330},			-- Right bars
-	["pet_horizontal"] = {"BOTTOMRIGHT", UIParent, "BOTTOM", -175, 167},			-- Horizontal pet bar
-	["stance_bar"] = {"BOTTOMRIGHT", UIParent, "BOTTOM", -202, 167},				-- Stance bar
+	["pet_horizontal"] = {"BOTTOMRIGHT", UIParent, "BOTTOM", -173, 167},			-- Horizontal pet bar
+	["stance_bar"] = {"BOTTOMLEFT", UIParent, "BOTTOM", -394, 167},					-- Stance bar
 	["vehicle_bar"] = {"BOTTOMRIGHT", ActionButton1, "BOTTOMLEFT", -3, 0},			-- Vehicle button
 	["micro_menu"] = {"TOPLEFT", UIParent, "TOPLEFT", 2, -2},						-- Micro menu
 	-- UnitFrame positions
@@ -76,11 +77,10 @@ C["position"] = {
 		["target_buff_icon"] = {"BOTTOMLEFT", "oUF_Target", "TOPLEFT", -2, 253},	-- "T_BUFF"
 		["pve_debuff"] = {"BOTTOMRIGHT", "oUF_Player", "TOPRIGHT", 2, 253},			-- "PVE/PVP_DEBUFF"
 		["pve_cc"] = {"TOPLEFT", "oUF_Player", "BOTTOMLEFT", -2, -44},				-- "PVE/PVP_CC"
-		["cooldown"] = {"BOTTOMRIGHT", "oUF_Player", "TOPRIGHT", 63, 37},	-- "COOLDOWN"
-		["cooldown_alt"] = {"BOTTOMRIGHT", "oUF_Player", "TOPRIGHT", 63, 49},	-- "COOLDOWN"
-		["target_bar"] = {"BOTTOMLEFT", "oUF_Target", "BOTTOMRIGHT", 9, -41},	-- "T_DE/BUFF_BAR"
-		["target_bar_alt"] = {"BOTTOMLEFT", "oUF_Target_Portrait", "BOTTOMRIGHT", 6, -3},	-- "T_DE/BUFF_BAR"
+		["cooldown"] = {"BOTTOMRIGHT", "oUF_Player", "TOPRIGHT", 63, 17},			-- "COOLDOWN"
+		["target_bar"] = {"BOTTOMLEFT", "oUF_Target", "BOTTOMRIGHT", 9, -41},		-- "T_DE/BUFF_BAR"
 	},
+	-- xCT positions
 	xct = {
 		["frame1"] = {"BOTTOMLEFT", "oUF_Player", "TOPLEFT", -3, 60},
 		["frame2"] = {"BOTTOMRIGHT", "oUF_Player", "TOPRIGHT", 5, 60},
@@ -92,3 +92,5 @@ C["position"] = {
 if T.classic then
 	C.position.quest = {"TOPLEFT", UIParent, "TOPLEFT", 40, -36}
 end
+
+}

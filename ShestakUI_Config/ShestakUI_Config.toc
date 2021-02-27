@@ -1,16 +1,15 @@
-## Interface: 11305
+## Interface: 11306
 ## Title: ShestakUI (Classic) Config
 ## Notes: In-game configuration for ShestakUI
-## Author: Haleth, Solor
+## Author: Shestak
 ## Version: 1.00
 ## RequiredDeps: ShestakUI
 ## SavedVariables: ShestakUIOptionsGlobal, ShestakUIOptions
 ## SavedVariablesPerCharacter: ShestakUIOptionsPerChar
 
-## X-Website: http://shestak.org
+## X-Website: https://github.com/EsreverWoW/ShestakUI_Classic
+## X-Credits: Haleth, Solor
 ## X-Thanks: Tryllemann, Wetxius
-
-Core.lua
 
 Locales\English.lua
 Locales\Chinese.lua
@@ -21,4 +20,5 @@ Locales\Russian.lua
 Locales\Spanish.lua
 Locales\Taiwan.lua
 
+Core.lua
 Options.lua

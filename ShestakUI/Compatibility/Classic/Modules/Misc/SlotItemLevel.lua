@@ -1,6 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
-if C.misc.item_level ~= true then return end
-if not T.classic then return end
+if not T.classic or C.misc.item_level ~= true then return end
 
 ----------------------------------------------------------------------------------------
 --	Item level on slot buttons in Character/InspectFrame(by Tukz)

@@ -21,7 +21,6 @@ L_ANNOUNCE_PC_MSG = "Pull %s in %s.."
 L_ANNOUNCE_PC_ABORTED = "Pull ABGEBROCHEN!"
 
 -- Announce feasts and portals
-L_ANNOUNCE_FP_STAT = "%s bereitet ein %s vor - [%s]."
 L_ANNOUNCE_FP_PRE = "%s bereitet ein %s vor."
 L_ANNOUNCE_FP_PUT = "%s stellt ein %s auf."
 L_ANNOUNCE_FP_CAST = "%s zaubert ein %s."
@@ -47,9 +46,6 @@ L_TOOLTIP_INSPECT_OPEN = "Betrachtungsfenster offen"
 L_MISC_UNDRESS = "Ausziehen"
 L_MISC_DRINKING = " trinkt."
 L_MISC_BUY_STACK = "Alt-Klick um einen Stapel zu kaufen"
-L_MISC_ONECLICK_BUYOUT = "Shift-Right-Click um den ausgewählten Gegenstand ohne Bestätigung zu kaufen"
-L_MISC_ONECLICK_BID = "Shift-Right-Click um auf den ausgewählten Gegenstand ohne Bestätigung zu bieten"
-L_MISC_ONECLICK_CANCEL = "Shift-Right-Click um den ausgewählten Gegenstand ohne Bestätigung abzubrechen"
 L_MISC_UI_OUTDATED = "Deine Version von ShestakUI ist veraltet. Du kannst die aktuelle Version von www.shestak.org laden"
 L_MISC_HEADER_MARK = "Mausdrüber Raid Icon"
 L_MISC_BINDER_OPEN = "Maus gebunden"
@@ -59,8 +55,6 @@ L_MISC_SCROLL = "Rolle"
 L_RAID_UTIL_DISBAND = "Gruppe auflösen"
 
 -- Zone name
-L_ZONE_ARATHIBASIN = "Arathibecken"
-L_ZONE_GILNEAS = "Die Schlacht um Gilneas"
 L_ZONE_ANCIENTDALARAN = "Dalarankrater"
 
 -- WatchFrame Wowhead link
@@ -93,6 +87,8 @@ L_MINIMAP_CALENDAR = "Kalender"
 L_MINIMAP_HEAL_LAYOUT = "Links-Klick - Heiler Layout"
 L_MINIMAP_DPS_LAYOUT = "Rechts-Klick - DPS Layout"
 L_MINIMAP_BLIZZ_LAYOUT = "Mittel-Klick - Blizzard Layout"
+L_MINIMAP_FARM = "Minimap größe"
+L_MINIMAP_TOGGLE = "Aktionsleisten umschalten"
 
 -- Chat
 L_CHAT_WHISPER = "Von"
@@ -150,10 +146,6 @@ L_COOLDOWNS_COMBATRESS = "Battlerezz"
 L_COOLDOWNS_COMBATRESS_REMAINDER = "Battlerezz übrig: "
 L_COOLDOWNS_NEXTTIME = "Nächste möglichkeit: "
 
--- Autoinvite
-L_INVITE_ENABLE = "Autoinvite AN: "
-L_INVITE_DISABLE = "Autoinvite AUS"
-
 -- Bind key
 L_BIND_SAVED = "Alle Tastenbelegungen wurden gespeichert."
 L_BIND_DISCARD = "Alle grade neu belegten Tastenbelegungen wurden verworfen."
@@ -197,12 +189,9 @@ L_WELCOME_LINE_2_2 = "für weitere Informationen."
 
 -- Combat text
 L_COMBATTEXT_KILLING_BLOW = "Todesstoß"
-L_COMBATTEXT_ALREADY_UNLOCKED = "Kampftext bereits freigegeben."
-L_COMBATTEXT_ALREADY_LOCKED = "Kampftext bereits gespert."
 L_COMBATTEXT_TEST_DISABLED = "Kampftext Testmodus deaktiviert."
 L_COMBATTEXT_TEST_ENABLED = "Kampftext Testmodus aktiviert."
-L_COMBATTEXT_TEST_USE_UNLOCK = "Gib '/xct' ein um die Kampftext Fenster freizugeben um sie verschieben und verändern zu können."
-L_COMBATTEXT_TEST_USE_LOCK = "Gib '/xct' ein um den Kampftext Testmodus zu sperren."
+L_COMBATTEXT_TEST_USE_MOVE = "Gib '/xct move' ein um die Kampftext Fenster freizugeben um sie verschieben und verändern zu können."
 L_COMBATTEXT_TEST_USE_TEST = "Gib '/xct' ein um den Kampftext Testmodus zu aktivieren."
 L_COMBATTEXT_TEST_USE_RESET = "Gib /xct reset ein, um die Standardpositionen wiederherzustellen."
 L_COMBATTEXT_POPUP = "Um die Kampftext Fensterpositionen zu sichern muss das Interface neu geladen werden."
@@ -221,17 +210,17 @@ L_STATS_TOTAL_MEMORY_USAGE = "Gesamte Speicherausnutzung:"
 L_STATS_TOTAL_CPU_USAGE = "Gesamte CPU-Auslastung:"
 L_STATS_GARBAGE_COLLECTED = "Abfall zusammengefasst"
 L_STATS_HIDDEN = "Versteckt"
-L_STATS_JUNK_ALREADY_ADDITIONS = "is already in additions list." -- Need review
+L_STATS_JUNK_ALREADY_ADDITIONS = "ist bereits in der Ergänzungsliste."
 L_STATS_JUNK_ITEMLINK = "itemlink"
-L_STATS_JUNK_ADDITIONS = "Junk additions" -- Need review
+L_STATS_JUNK_ADDITIONS = "Junk-Ergänzungen"
 L_STATS_JUNK_LIST = "Junk-Liste"
 L_STATS_JUNK_PROFIT = "Junk-Gewinn"
-L_STATS_JUNK_CLEARED = "Junk list cleared." -- Need review
-L_STATS_JUNK_CLEAR_ADDITIONS = "Clear additions list." -- Need review
-L_STATS_JUNK_ADDED = "Added junk additions" -- Need review
-L_STATS_JUNK_ADD_ITEM = "Add/remove items." -- Need review
-L_STATS_JUNK_REMOVED = "Removed junk additions" -- Need review
-L_STATS_JUNK_ITEMS_LIST = "List for sell items." -- Need review
+L_STATS_JUNK_CLEARED = "Junk-Liste bereinigt."
+L_STATS_JUNK_CLEAR_ADDITIONS = "Ergänzungsliste leeren."
+L_STATS_JUNK_ADDED = "Hinzufügen von Junk"
+L_STATS_JUNK_ADD_ITEM = "Items hinzufügen/entfernen."
+L_STATS_JUNK_REMOVED = "Entfernen von Junk-Zusätzen"
+L_STATS_JUNK_ITEMS_LIST = "Liste für Verkaufsartikel."
 L_STATS_NO_GUILD = "Keine Gilde"
 L_STATS_KILLS = "G"
 L_STATS_XP_RATE = "Level XP-Rate"
@@ -263,7 +252,7 @@ L_STATS_VIEW_NOTES = "Halte die Alt-Taste gedrückt, zum Anzeigen der Ränge, No
 L_STATS_CHANGE_SORTING = "[Gilde] Rechts-Klick, zum Ändern der Sortierung und Umschalt-Rechts-Klick zum Umkehren der Reihenfolge."
 L_STATS_OPEN_CHARACTER = "Links-Klick, zum Öffnen des Charakterfensters."
 L_STATS_RC_AUTO_REPAIRING1 = "Rechts-Klick, zum Ein- oder Ausschalten des automatischen Reparieren."
-L_STATS_RC_AUTO_REPAIRING2 = "Middle-Click toggles Guild AutoRepairing." -- Need review
+L_STATS_RC_AUTO_REPAIRING2 = "Mittelklick schaltet Gilde AutoReparatur ein und aus."
 L_STATS_EQUIPMENT_CHANGER = "Umschalt-Klick oder Alt-Klick für den Ausrüstungsmanager."
 L_STATS_RC_EXPERIENCE = "Rechts-Klick, zum Wechseln zwischen Erfahrung, gespielte Zeit und Fraktionsüberwachung."
 L_STATS_WATCH_FACTIONS = "Überwache Fraktionen aus dem Ruffenster."
@@ -276,7 +265,7 @@ L_STATS_WORLD_MAP = "Klicken, zum Öffnen der World-Map."
 L_STATS_INSERTS_COORDS = "Umschalt-Klick auf das Standort/Koordination Modul, zum Einfügen Deiner aktuellen Koordinaten in den Chat."
 L_STATS_OPEN_CURRENCY = "Links-Klick, zum Öffnen des Abzeichen-Fensters."
 L_STATS_RC_AUTO_SELLING = "Rechts-Klick, zum Ein- oder Ausschalten des automatischen Verkaufen."
-L_STATS_NEED_TO_SELL = "Use /junk to configure which items need to sell." -- Need review
+L_STATS_NEED_TO_SELL = "Verwende /junk, um zu konfigurieren, welche Artikel verkauft werden sollen."
 L_STATS_WATCH_CURRENCY = "Bereits gesehene Gegenstände aus dem Abzeichen-Fenster werden im Tooltip angezeigt."
 L_STATS_OTHER_OPTIONS = "Weitere Einstellungen können in %s konfiguriert werden"
 
@@ -291,25 +280,23 @@ L_SLASHCMD_HELP = {
 	"/rd - Gruppe oder Schlachtzug auflösen.",
 	"/toraid - In Gruppe oder Schlachtzug umwandeln.",
 	"/teleport - Teleport vom beliebigen Dungeon.",
-	"/spec, /ss - Zwischen den Talenten wechseln.",
+	"/ss - Zwischen den Talenten wechseln.",
+	"/tt - Ziehl anflüstern.",
 	"/heal - Zum Heiler Layout wechseln.",
 	"/dps - Zum DPS Layout wechseln.",
-	"/frame - Beschreibung nicht verfügbar.",
 	"/farmmode - Erhöht die Größe der Minimap.",
-	"/moveui - Ermöglicht das Bewegen der Interface Elemente.", -- Need review
 	"/resetui - Zurücksetzen der allgemeinen Einstellungen auf die Standardwerte.",
 	"/resetuf - Zurücksetzen der Einheitenfenster auf die Standardposition.",
 	"/resetconfig - Zurücksetzen der ShestakUI_Config Einstellungen.",
 	"/resetstats - Gold Statistik und gespielte Zeit zurücksetzen.",
-	"/settings ADDON_NAME - Einstellungen für msbt, dbm, skada, oder alle Addons anwenden.",
-	"/ls, /litestats - Hilfe für LiteStats.",
+	"/settings - Einstellungen für msbt, dbm, skada, oder alle Addons anwenden.",
+	"/ls - Hilfe für LiteStats.",
 	"/xct - Kampflogtext verwalten.",
 	"/raidcd - Abklingzeiten für Schlachtzüge testen.",
 	"/enemycd - Gegnerische Abklingzeiten testen.",
 	"/pulsecd - Pulsierende Abklingzeiten testen.",
 	"/threat - Bedrohungsmeter testen.",
-	"/tt - Ziehl anflüstern.",
-	"/ainv - Automatisches Einladen aktivieren.",
 	"/testuf - Einheitenfenster testen.",
+	"/moveui - Ermöglicht das Bewegen der Interface Elemente.", -- Need review
 	"/cfg - Interface Einstellungen öffnen.",
 }

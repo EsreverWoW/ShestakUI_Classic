@@ -16,7 +16,7 @@ local function reset()
 	lastupdate = 0
 end
 
-local function pull(self, elapsed)
+local function pull(_, elapsed)
 	local tname = UnitName("target")
 	if tname then
 		target = tname
@@ -52,6 +52,7 @@ function frame.Pull(timer)
 end
 
 SlashCmdList.PULLCOUNTDOWN = function(msg)
+	if not IsInGroup() then return end
 	if tonumber(msg) ~= nil then
 		frame.Pull(msg)
 	else

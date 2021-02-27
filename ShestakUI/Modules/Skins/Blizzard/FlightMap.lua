@@ -7,6 +7,7 @@ if T.classic or C.skins.blizzard_frames ~= true then return end
 local function LoadSkin()
 	FlightMapFrame:CreateBackdrop("Transparent")
 	FlightMapFrame.BorderFrame:StripTextures()
+	FlightMapFramePortrait:Kill()
 
 	FlightMapFrame.ScrollContainer:ClearAllPoints()
 	FlightMapFrame.ScrollContainer:SetPoint("TOPLEFT")

@@ -6,7 +6,7 @@ if T.classic then return end
 ----------------------------------------------------------------------------------------
 local SkinBlizzUI = CreateFrame("Frame")
 SkinBlizzUI:RegisterEvent("ADDON_LOADED")
-SkinBlizzUI:SetScript("OnEvent", function(self, event, addon)
+SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 	if IsAddOnLoaded("Skinner") or IsAddOnLoaded("Aurora") then return end
 
 	-- Stuff not in Blizzard load-on-demand
@@ -45,6 +45,8 @@ SkinBlizzUI:SetScript("OnEvent", function(self, event, addon)
 		GameMenuFrame:StripTextures()
 		LFDRoleCheckPopup:StripTextures()
 		RolePollPopup:StripTextures()
+		OpacityFrame:StripTextures()
+		ColorPickerFrame.Border:Hide()
 
 		for i = 1, getn(bgskins) do
 			local frame = _G[bgskins[i]]
@@ -101,6 +103,8 @@ SkinBlizzUI:SetScript("OnEvent", function(self, event, addon)
 		end
 		_G["StaticPopup1ExtraButton"]:SkinButton()
 
+		T.SkinCloseButton(_G["RolePollPopupCloseButton"])
+
 		-- Cinematic popup
 		_G["CinematicFrameCloseDialog"]:SetScale(C.general.uiscale)
 		_G["CinematicFrameCloseDialog"]:StripTextures()
@@ -131,6 +135,10 @@ SkinBlizzUI:SetScript("OnEvent", function(self, event, addon)
 			end
 		end)
 
+		if RaiderIO_CustomDropDownListMenuBackdrop then
+			RaiderIO_CustomDropDownListMenuBackdrop:StripTextures()
+		end
+
 		-- Reskin menu
 		local ChatMenus = {
 			"ChatMenu",
@@ -155,16 +163,16 @@ SkinBlizzUI:SetScript("OnEvent", function(self, event, addon)
 
 		-- Hide header textures and move text/buttons
 		local BlizzardHeader = {
-			"GameMenuFrame",
-			"ColorPickerFrame"
+			GameMenuFrame,
+			ColorPickerFrame
 		}
 
-		for i = 1, getn(BlizzardHeader) do
-			local title = _G[BlizzardHeader[i].."Header"]
+		for _, frame in pairs(BlizzardHeader) do
+			local title = frame.Header
 			if title then
-				title:SetTexture(nil)
+				title:StripTextures()
 				title:ClearAllPoints()
-				title:SetPoint("TOP", BlizzardHeader[i], 0, 7)
+				title:SetPoint("TOP", frame, 0, 7)
 			end
 		end
 
@@ -268,12 +276,6 @@ SkinBlizzUI:SetScript("OnEvent", function(self, event, addon)
 		StackSplitFrame.OkayButton:SkinButton()
 		StackSplitFrame.CancelButton:SkinButton()
 
-		_G["StaticPopup1CloseButton"]:HookScript("OnShow", function(self)
-			self:StripTextures(true)
-			T.SkinCloseButton(self, nil, "-")
-		end)
-		T.SkinCloseButton(_G["RolePollPopupCloseButton"])
-		T.SkinCloseButton(_G["ItemRefCloseButton"])
 		if C.skins.blizzard_frames == true then
 			-- Social Browser frame
 			SocialBrowserFrame:StripTextures()
@@ -354,6 +356,10 @@ SkinBlizzUI:SetScript("OnEvent", function(self, event, addon)
 			hooksecurefunc("BuildIconArray", function(_, baseName, _, rowSize, numRows)
 				local numIcons = rowSize * numRows
 				SkinIconArray(baseName, numIcons)
+			end)
+
+			hooksecurefunc(HelpTipTemplateMixin, "ApplyText", function(self)
+				T.SkinHelpBox(self)
 			end)
 		end
 	end

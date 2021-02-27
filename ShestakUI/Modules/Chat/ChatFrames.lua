@@ -132,7 +132,7 @@ local function SetChatStyle(frame)
 
 	-- Script to hide editbox instead of fading editbox to 0.35 alpha via IM Style
 	_G[chat.."EditBox"]:HookScript("OnEditFocusGained", function(self) self:Show() end)
-	_G[chat.."EditBox"]:HookScript("OnEditFocusLost", function(self) self:Hide() end)
+	_G[chat.."EditBox"]:HookScript("OnEditFocusLost", function(self) if self:GetText() == "" then self:Hide() end end)
 
 	-- Hide edit box every time we click on a tab
 	_G[chat.."Tab"]:HookScript("OnClick", function() _G[chat.."EditBox"]:Hide() end)
@@ -190,19 +190,20 @@ local function SetChatStyle(frame)
 		origs[_G[chat]] = _G[chat].AddMessage
 		_G[chat].AddMessage = AddMessage
 		-- Custom timestamps color
-		_G.TIMESTAMP_FORMAT_HHMM = T.RGBToHex(unpack(C.chat.time_color)).."[%I:%M]|r "
-		_G.TIMESTAMP_FORMAT_HHMMSS = T.RGBToHex(unpack(C.chat.time_color)).."[%I:%M:%S]|r "
-		_G.TIMESTAMP_FORMAT_HHMMSS_24HR = T.RGBToHex(unpack(C.chat.time_color)).."[%H:%M:%S]|r "
-		_G.TIMESTAMP_FORMAT_HHMMSS_AMPM = T.RGBToHex(unpack(C.chat.time_color)).."[%I:%M:%S %p]|r "
-		_G.TIMESTAMP_FORMAT_HHMM_24HR = T.RGBToHex(unpack(C.chat.time_color)).."[%H:%M]|r "
-		_G.TIMESTAMP_FORMAT_HHMM_AMPM = T.RGBToHex(unpack(C.chat.time_color)).."[%I:%M %p]|r "
+		local color = C.chat.custom_time_color and T.RGBToHex(unpack(C.chat.time_color)) or ""
+		_G.TIMESTAMP_FORMAT_HHMM = color.."[%I:%M]|r "
+		_G.TIMESTAMP_FORMAT_HHMMSS = color.."[%I:%M:%S]|r "
+		_G.TIMESTAMP_FORMAT_HHMMSS_24HR = color.."[%H:%M:%S]|r "
+		_G.TIMESTAMP_FORMAT_HHMMSS_AMPM = color.."[%I:%M:%S %p]|r "
+		_G.TIMESTAMP_FORMAT_HHMM_24HR = color.."[%H:%M]|r "
+		_G.TIMESTAMP_FORMAT_HHMM_AMPM = color.."[%I:%M %p]|r "
 	end
 
 	frame.skinned = true
 end
 
 -- Setup chatframes 1 to 10 on login
-local function SetupChat(self)
+local function SetupChat()
 	for i = 1, NUM_CHAT_WINDOWS do
 		local frame = _G[format("ChatFrame%s", i)]
 		SetChatStyle(frame)
@@ -229,7 +230,7 @@ local function SetupChat(self)
 	ChatTypeInfo.CHANNEL.sticky = var
 end
 
-local function SetupChatPosAndFont(self)
+local function SetupChatPosAndFont()
 	for i = 1, NUM_CHAT_WINDOWS do
 		local chat = _G[format("ChatFrame%s", i)]
 		local id = chat:GetID()
@@ -271,11 +272,37 @@ local function SetupChatPosAndFont(self)
 	-- Reposition Quick Join Toast and battle.net popup
 	if not T.classic then
 		QuickJoinToastButton:ClearAllPoints()
-		QuickJoinToastButton:SetPoint(unpack(C.position.bn_popup))
-		QuickJoinToastButton:EnableMouse(false)
+		QuickJoinToastButton:SetPoint("TOPLEFT", 0, 90)
 		QuickJoinToastButton.ClearAllPoints = T.dummy
 		QuickJoinToastButton.SetPoint = T.dummy
-		QuickJoinToastButton:SetAlpha(0)
+
+		QuickJoinToastButton.Toast:ClearAllPoints()
+		QuickJoinToastButton.Toast:SetPoint(unpack(C.position.bn_popup))
+		QuickJoinToastButton.Toast.Background:SetTexture("")
+		QuickJoinToastButton.Toast:CreateBackdrop("Transparent")
+		QuickJoinToastButton.Toast.backdrop:SetPoint("TOPLEFT", 0, 0)
+		QuickJoinToastButton.Toast.backdrop:SetPoint("BOTTOMRIGHT", 0, 0)
+		QuickJoinToastButton.Toast.backdrop:Hide()
+		QuickJoinToastButton.Toast:SetWidth(C.chat.width + 7)
+		QuickJoinToastButton.Toast.Text:SetWidth(C.chat.width - 20)
+
+		hooksecurefunc(QuickJoinToastButton, "ShowToast", function() QuickJoinToastButton.Toast.backdrop:Show() end)
+		hooksecurefunc(QuickJoinToastButton, "HideToast", function() QuickJoinToastButton.Toast.backdrop:Hide() end)
+
+		hooksecurefunc(BNToastFrame, "SetPoint", function(self, _, anchor)
+			if anchor == QuickJoinToastButton then
+				self:SetPoint(unpack(C.position.bn_popup))
+			end
+		end)
+
+		-- /run BNToastFrame:AddToast(BN_TOAST_TYPE_ONLINE, 1)
+		hooksecurefunc(BNToastFrame, "ShowToast", function(self)
+			if not self.IsSkinned then
+				T.SkinCloseButton(self.CloseButton, nil, "x")
+				self.CloseButton:SetSize(16, 16)
+				self.IsSkinned = true
+			end
+		end)
 	end
 end
 
@@ -316,7 +343,7 @@ function FCFManager_GetNumDedicatedFrames(...)
 end
 
 -- Remove player's realm name
-local function RemoveRealmName(self, event, msg, author, ...)
+local function RemoveRealmName(_, _, msg, author, ...)
 	local realm = string.gsub(T.realm, " ", "")
 	if msg:find("-" .. realm) then
 		return false, gsub(msg, "%-"..realm, ""), author, ...
@@ -337,4 +364,86 @@ for i = 1, NUM_CHAT_WINDOWS do
 	if i ~= 2 then
 		hooksecurefunc(_G["ChatFrame"..i], "AddMessage", TypoHistory_Posthook_AddMessage)
 	end
+end
+
+----------------------------------------------------------------------------------------
+--	Loot icons
+----------------------------------------------------------------------------------------
+if C.chat.loot_icons == true then
+	local function AddLootIcons(_, _, message, ...)
+		local function Icon(link)
+			local texture = GetItemIcon(link)
+			return "\124T"..texture..":12:12:0:0:64:64:5:59:5:59\124t"..link
+		end
+		message = message:gsub("(\124c%x+\124Hitem:.-\124h\124r)", Icon)
+		return false, message, ...
+	end
+
+	ChatFrame_AddMessageEventFilter("CHAT_MSG_LOOT", AddLootIcons)
+end
+
+----------------------------------------------------------------------------------------
+--	Swith channels by Tab
+----------------------------------------------------------------------------------------
+local cycles = {
+	{chatType = "SAY", use = function() return 1 end},
+	{chatType = "PARTY", use = function() return not IsInRaid() and IsInGroup(LE_PARTY_CATEGORY_HOME) end},
+	{chatType = "RAID", use = function() return IsInRaid(LE_PARTY_CATEGORY_HOME) end},
+	{chatType = "INSTANCE_CHAT", use = function() return IsPartyLFG() end},
+	{chatType = "GUILD", use = function() return IsInGuild() end},
+	{chatType = "SAY", use = function() return 1 end},
+}
+
+local function UpdateTabChannelSwitch(self)
+	if strsub(tostring(self:GetText()), 1, 1) == "/" then return end
+	local currChatType = self:GetAttribute("chatType")
+	for i, curr in ipairs(cycles) do
+		if curr.chatType == currChatType then
+			local h, r, step = i + 1, #cycles, 1
+			if IsShiftKeyDown() then h, r, step = i - 1, 1, -1 end
+			for j = h, r, step do
+				if cycles[j]:use(self, currChatType) then
+					self:SetAttribute("chatType", cycles[j].chatType)
+					ChatEdit_UpdateHeader(self)
+					return
+				end
+			end
+		end
+	end
+end
+hooksecurefunc("ChatEdit_CustomTabPressed", UpdateTabChannelSwitch)
+
+----------------------------------------------------------------------------------------
+--	Role icons
+----------------------------------------------------------------------------------------
+if C.chat.role_icons == true then
+	local chats = {
+		CHAT_MSG_SAY = 1, CHAT_MSG_YELL = 1,
+		CHAT_MSG_WHISPER = 1, CHAT_MSG_WHISPER_INFORM = 1,
+		CHAT_MSG_PARTY = 1, CHAT_MSG_PARTY_LEADER = 1,
+		CHAT_MSG_INSTANCE_CHAT = 1, CHAT_MSG_INSTANCE_CHAT_LEADER = 1,
+		CHAT_MSG_RAID = 1, CHAT_MSG_RAID_LEADER = 1, CHAT_MSG_RAID_WARNING = 1,
+	}
+
+	local role_tex = {
+		TANK = "\124T"..[[Interface\AddOns\ShestakUI\Media\Textures\Tank.tga]]..":12:12:0:0:64:64:5:59:5:59\124t",
+		HEALER	= "\124T"..[[Interface\AddOns\ShestakUI\Media\Textures\Healer.tga]]..":12:12:0:0:64:64:5:59:5:59\124t",
+		DAMAGER = "\124T"..[[Interface\AddOns\ShestakUI\Media\Textures\Damager.tga]]..":12:12:0:0:64:64:5:59:5:59\124t",
+	}
+
+	local GetColoredName_orig = _G.GetColoredName
+	local function GetColoredName_hook(event, arg1, arg2, ...)
+		local ret = GetColoredName_orig(event, arg1, arg2, ...)
+		if chats[event] then
+			local role = UnitGroupRolesAssigned(arg2)
+			if role == "NONE" and arg2:match(" *- *"..GetRealmName().."$") then
+				role = UnitGroupRolesAssigned(arg2:gsub(" *-[^-]+$",""))
+			end
+			if role and role ~= "NONE" then
+				ret = role_tex[role]..""..ret
+			end
+		end
+		return ret
+	end
+	_G.GetColoredName = GetColoredName_hook
 end

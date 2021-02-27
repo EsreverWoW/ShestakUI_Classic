@@ -7,7 +7,6 @@ if T.classic or C.skins.blizzard_frames ~= true then return end
 local function LoadSkin()
 	local StripAllTextures = {
 		"GossipFrame",
-		"GossipFrameInset",
 		"GossipFrameGreetingPanel"
 	}
 
@@ -31,10 +30,21 @@ local function LoadSkin()
 		_G[buttons[i]]:SkinButton(true)
 	end
 
-	for i = 1, NUMGOSSIPBUTTONS do
-		local obj = select(3, _G["GossipTitleButton"..i]:GetRegions())
-		obj:SetTextColor(1, 1, 1)
-		obj:SetShadowOffset(1, -1)
+	local function ColorGossipText()
+		local buttons = _G.GossipFrame.buttons
+		if buttons and next(buttons) then
+			for _, button in ipairs(buttons) do
+				local str = button:GetFontString()
+				if str then
+					str:SetTextColor(1, 1, 1)
+					str:SetShadowOffset(1, -1)
+
+					if str:GetText() and str:GetText():find("|cff000000") then
+						str:SetText(string.gsub(str:GetText(), "|cff000000", "|cffFFFF00"))
+					end
+				end
+			end
+		end
 	end
 
 	GossipGreetingText:SetTextColor(1, 1, 1)
@@ -42,6 +52,7 @@ local function LoadSkin()
 
 	GossipFrame:CreateBackdrop("Transparent")
 	GossipFrame.backdrop:SetAllPoints()
+	GossipFrame:DisableDrawLayer("BACKGROUND")
 
 	T.SkinCloseButton(GossipFrameCloseButton, GossipFrame.backdrop)
 
@@ -54,17 +65,7 @@ local function LoadSkin()
 	NPCFriendshipStatusBar.icon:SetPoint("TOPLEFT", -30, 7)
 
 	-- Extreme hackage, blizzard makes button text on quest frame use hex color codes for some reason
-	hooksecurefunc("GossipFrameUpdate", function()
-		for i = 1, NUMGOSSIPBUTTONS do
-			local button = _G["GossipTitleButton"..i]
-
-			if button:GetFontString() then
-				if button:GetFontString():GetText() and button:GetFontString():GetText():find("|cff000000") then
-					button:GetFontString():SetText(string.gsub(button:GetFontString():GetText(), "|cff000000", "|cffFFFF00"))
-				end
-			end
-		end
-	end)
+	hooksecurefunc("GossipFrameUpdate", ColorGossipText)
 end
 
 tinsert(T.SkinFuncs["ShestakUI"], LoadSkin)

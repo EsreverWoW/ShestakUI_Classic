@@ -19,6 +19,11 @@ end)
 
 if C.skins.blizzard_frames ~= true then return end
 local function LoadSkin()
+	-- Set texture to hide circle
+	PVPQueueFrame.CategoryButton1.Icon:SetTexture("Interface\\Icons\\achievement_bg_winwsg")
+	PVPQueueFrame.CategoryButton2.Icon:SetTexture("Interface\\Icons\\achievement_bg_killxenemies_generalsroom")
+	PVPQueueFrame.CategoryButton3.Icon:SetTexture("Interface\\Icons\\Achievement_General_StayClassy")
+
 	for i = 1, 3 do
 		local button = _G["PVPQueueFrameCategoryButton"..i]
 		button.Ring:Kill()
@@ -64,9 +69,6 @@ local function LoadSkin()
 	HonorFrameSpecificFrameScrollBar:SetPoint("BOTTOMLEFT", HonorFrameSpecificFrame, "BOTTOMRIGHT", 0, 15)
 	HonorFrameQueueButton:SkinButton(true)
 
-	T.SkinHelpBox(PremadeGroupsPvPTutorialAlert)
-	T.SkinHelpBox(HonorFrame.BonusFrame.BrawlHelpBox)
-
 	PVPQueueFrame.HonorInset:StripTextures()
 	PVPQueueFrame.HonorInset.RatedPanel.Label:SetWidth(160)
 
@@ -75,7 +77,7 @@ local function LoadSkin()
 	RewardFrameSeason.CircleMask:Hide()
 	RewardFrameSeason.Icon:SkinIcon()
 
-	for _, i in pairs({"RandomBGButton", "RandomEpicBGButton", "Arena1Button", "BrawlButton"}) do
+	for _, i in pairs({"RandomBGButton", "RandomEpicBGButton", "Arena1Button", "BrawlButton", "SpecialEventButton"}) do
 		local button = HonorFrame.BonusFrame[i]
 		button:StripTextures()
 		button:SetTemplate("Overlay")
@@ -92,6 +94,7 @@ local function LoadSkin()
 		reward:SetTemplate("Default")
 		reward:SetSize(40, 40)
 		reward:SetPoint("RIGHT", button, "RIGHT", -8, 0)
+		reward.CircleMask:Hide()
 
 		reward.Icon:SetAllPoints()
 		reward.Icon:SetPoint("TOPLEFT", 2, -2)
@@ -109,6 +112,31 @@ local function LoadSkin()
 		EnlistmentBonusIcon:SetTexture("Interface\\Icons\\achievement_guildperk_honorablemention_rank2")
 		EnlistmentBonusIcon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 	end
+
+	hooksecurefunc("PVPUIFrame_ConfigureRewardFrame", function(rewardFrame, _, _, itemRewards, currencyRewards)
+		local rewardTexture, rewardQuaility, _ = nil, 1
+
+		if currencyRewards then
+			for _, reward in ipairs(currencyRewards) do
+				local info = C_CurrencyInfo.GetCurrencyInfo(reward.id)
+				if infon and info.quality == Enum.ItemQuality.Legendary then
+					_, rewardTexture, _, rewardQuaility = CurrencyContainerUtil.GetCurrencyContainerInfo(reward.id, reward.quantity, info.name, info.iconFileID, info.quality)
+				end
+			end
+		end
+
+		if not rewardTexture and itemRewards then
+			local reward = itemRewards[1]
+			if reward then
+				_, _, rewardQuaility, _, _, _, _, _, _, rewardTexture = GetItemInfo(reward.id)
+			end
+		end
+
+		if rewardTexture then
+			rewardFrame.Icon:SetTexture(rewardTexture)
+			rewardFrame:SetBackdropBorderColor(GetItemQualityColor(rewardQuaility))
+		end
+	end)
 
 	for i = 1, #HonorFrame.SpecificFrame.buttons do
 		local button = HonorFrame.SpecificFrame.buttons[i]
@@ -185,8 +213,9 @@ local function LoadSkin()
 
 		button.Reward:StripTextures()
 		button.Reward:SetTemplate("Default")
-		button.Reward:SetSize(35, 35)
+		button.Reward:SetSize(40, 40)
 		button.Reward:SetPoint("RIGHT", button, "RIGHT", -7, -1)
+		button.Reward.CircleMask:Hide()
 
 		button.Reward.Icon:SetAllPoints()
 		button.Reward.Icon:SetPoint("TOPLEFT", 2, -2)
@@ -210,13 +239,14 @@ local function LoadSkin()
 	NewSeasonPopup.SeasonDescription:SetShadowOffset(1, -1)
 	NewSeasonPopup.SeasonDescription2:SetTextColor(1, 1, 1)
 	NewSeasonPopup.SeasonDescription2:SetShadowOffset(1, -1)
+	NewSeasonPopup.SeasonDescription2:SetWidth(400)
+	NewSeasonPopup.SeasonRewardText:SetTextColor(1, 0.8, 0)
+	NewSeasonPopup.SeasonRewardText:SetShadowOffset(1, -1)
 
-	local RewardFrame = SeasonRewardFrame
+	local RewardFrame = NewSeasonPopup.SeasonRewardFrame
 	RewardFrame.Ring:Hide()
 	RewardFrame.CircleMask:Hide()
 	RewardFrame.Icon:SkinIcon()
-	select(3, RewardFrame:GetRegions()):SetTextColor(1, 1, 1)
-	select(3, RewardFrame:GetRegions()):SetShadowOffset(1, -1)
 
 	NewSeasonPopup.Leave:SkinButton()
 end

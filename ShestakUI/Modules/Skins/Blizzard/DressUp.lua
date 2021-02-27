@@ -15,7 +15,7 @@ local function LoadSkin()
 	DressUpFrame.ModelScene.backdrop:SetPoint("BOTTOMRIGHT", 2, 1)
 	DressUpFrame.ModelBackground:SetDrawLayer("BACKGROUND", 3)
 
-	T.SkinMaxMinFrame(MaximizeMinimizeFrame, DressUpFrameCloseButton)
+	T.SkinMaxMinFrame(DressUpFrame.MaximizeMinimizeFrame, DressUpFrameCloseButton)
 
 	DressUpFrameCancelButton:SkinButton()
 	DressUpFrameResetButton:SkinButton()
@@ -32,8 +32,11 @@ local function LoadSkin()
 
 	SideDressUpFrame:StripTextures()
 	SideDressUpFrame:SetTemplate("Transparent")
-	--FIXME SideDressUpModelResetButton:SkinButton()
-	-- T.SkinCloseButton(SideDressUpModelCloseButton, SideDressUpFrame)
+	SideDressUpFrame.ResetButton:SkinButton()
+	SideDressUpFrame.BGTopLeft:SetPoint("TOPLEFT", 2, -2)
+	SideDressUpFrame.BGTopLeft:SetSize(183, 292)
+	SideDressUpFrame.BGBottomLeft:SetSize(183, 93)
+	T.SkinCloseButton(SideDressUpFrameCloseButton, SideDressUpFrame)
 
 	WardrobeOutfitFrame:StripTextures(true)
 	WardrobeOutfitFrame:CreateBackdrop("Transparent")

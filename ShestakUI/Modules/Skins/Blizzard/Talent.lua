@@ -38,7 +38,7 @@ local function LoadSkin()
 		select(i, PlayerTalentFrameSpecialization:GetRegions()):Hide()
 	end
 
-	select(7, PlayerTalentFrameSpecialization:GetChildren()):DisableDrawLayer("OVERLAY")
+	select(8, PlayerTalentFrameSpecialization:GetChildren()):DisableDrawLayer("OVERLAY")
 
 	for i = 1, 5 do
 		select(i, PlayerTalentFrameSpecializationSpellScrollFrameScrollChild:GetRegions()):Hide()
@@ -52,7 +52,7 @@ local function LoadSkin()
 			select(i, PlayerTalentFramePetSpecialization:GetRegions()):Hide()
 		end
 
-		select(7, PlayerTalentFramePetSpecialization:GetChildren()):DisableDrawLayer("OVERLAY")
+		select(8, PlayerTalentFramePetSpecialization:GetChildren()):DisableDrawLayer("OVERLAY")
 
 		for i = 1, 5 do
 			select(i, PlayerTalentFramePetSpecializationSpellScrollFrameScrollChild:GetRegions()):Hide()
@@ -95,10 +95,12 @@ local function LoadSkin()
 		local playerTalentSpec = GetSpecialization(nil, self.isPet, PlayerSpecTab2:GetChecked() and 2 or 1)
 		local shownSpec = spec or playerTalentSpec or 1
 		local numSpecs = GetNumSpecializations(nil, self.isPet)
+		local sex = self.isPet and UnitSex("pet") or UnitSex("player")
 
-		local id, _, _, icon = GetSpecializationInfo(shownSpec, nil, self.isPet)
+		local id, _, _, icon = GetSpecializationInfo(shownSpec, nil, self.isPet, nil, sex)
+		if not id then return end
+
 		local scrollChild = self.spellsScroll.child
-
 		scrollChild.specIcon:SetTexture(icon)
 
 		local index = 1
@@ -224,9 +226,9 @@ local function LoadSkin()
 				local bu = _G["PlayerTalentFrameTalentsTalentRow"..i.."Talent"..j]
 				local selected = _G["PlayerTalentFrameTalentsTalentRow"..i.."Talent"..j.."Selection"]
 				if selected:IsShown() then
-					bu.backdrop:SetBackdropBorderColor(T.color.r, T.color.g, T.color.b, 1)
-					bu.bg.backdrop:SetBackdropBorderColor(T.color.r, T.color.g, T.color.b, 1)
-					bu.bg.backdrop.overlay:SetVertexColor(T.color.r, T.color.g, T.color.b, 0.3)
+					bu.backdrop:SetBackdropBorderColor(unpack(C.media.classborder_color))
+					bu.bg.backdrop:SetBackdropBorderColor(unpack(C.media.classborder_color))
+					bu.bg.backdrop.overlay:SetVertexColor(C.media.classborder_color[1], C.media.classborder_color[2], C.media.classborder_color[3], 0.3)
 				else
 					bu.backdrop:SetBackdropBorderColor(unpack(C.media.border_color))
 					bu.bg.backdrop:SetBackdropBorderColor(unpack(C.media.border_color))
@@ -289,7 +291,12 @@ local function LoadSkin()
 	PlayerTalentFrameTalents.PvpTalentFrame:StripTextures()
 	PlayerTalentFrameTalentsPvpTalentFrameTalentList:StripTextures()
 	PlayerTalentFrameTalentsPvpTalentFrameTalentList:CreateBackdrop("Transparent")
+	PlayerTalentFrameTalentsPvpTalentFrameTalentList.backdrop:SetPoint("TOPLEFT", 3, 2)
 	T.SkinScrollBar(PlayerTalentFrameTalentsPvpTalentFrameTalentListScrollFrameScrollBar)
+
+	PlayerTalentFrameTalentsPvpTalentFrameTalentList:ClearAllPoints()
+	PlayerTalentFrameTalentsPvpTalentFrameTalentList:SetPoint("TOPLEFT", PlayerTalentFrame, "TOPRIGHT", 0, -2)
+	PlayerTalentFrameTalentsPvpTalentFrameTalentList:SetHeight(465)
 
 	local TalentList_CloseButton = select(4, PlayerTalentFrameTalents.PvpTalentFrame.TalentList:GetChildren())
 	if TalentList_CloseButton and TalentList_CloseButton:HasScript("OnClick") then
@@ -319,9 +326,9 @@ local function LoadSkin()
 	hooksecurefunc(PlayerTalentFrameTalents.PvpTalentFrame.TalentList, "Update", function()
 		for _, button in pairs(PlayerTalentFrameTalents.PvpTalentFrame.TalentList.ScrollFrame.buttons) do
 			if button.Selected:IsShown() then
-				button.backdrop:SetBackdropBorderColor(T.color.r, T.color.g, T.color.b, 1)
-				button.bg.backdrop:SetBackdropBorderColor(T.color.r, T.color.g, T.color.b, 1)
-				button.bg.backdrop.overlay:SetVertexColor(T.color.r, T.color.g, T.color.b, 0.3)
+				button.backdrop:SetBackdropBorderColor(unpack(C.media.classborder_color))
+				button.bg.backdrop:SetBackdropBorderColor(unpack(C.media.classborder_color))
+				button.bg.backdrop.overlay:SetVertexColor(C.media.classborder_color[1], C.media.classborder_color[2], C.media.classborder_color[3], 0.3)
 			else
 				button.backdrop:SetBackdropBorderColor(unpack(C.media.border_color))
 				button.bg.backdrop:SetBackdropBorderColor(unpack(C.media.border_color))
@@ -336,7 +343,6 @@ local function LoadSkin()
 
 	-- Help box
 	local HelpBox = {
-		PlayerTalentFrameTalentsPvpTalentFrame.TrinketSlot.HelpBox,
 		PlayerTalentFrameTalentsPvpTalentFrame.WarmodeTutorialBox
 	}
 

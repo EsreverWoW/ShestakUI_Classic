@@ -7,7 +7,7 @@ if T.classic then return end
 --	Take the number ID at the end of the URL, and add it to the list
 ----------------------------------------------------------------------------------------
 if C.announcements.spells == true then
-	T.AnnounceSpells = {
+	T.announce_spells = {
 		61999,	-- Raise Ally
 		20484,	-- Rebirth
 		20707,	-- Soulstone
@@ -18,6 +18,18 @@ if C.announcements.spells == true then
 		19801,	-- Tranquilizing Shot
 		2908,	-- Soothe
 	}
+
+	if #C.announcements.spells_list > 0 then
+		T.announce_spells = C.announcements.spells_list
+	else
+		if C.options.announcements and C.options.announcements.spells_list then
+			C.options.announcements.spells_list = nil
+		end
+	end
+	T.AnnounceSpells = {}
+	for _, spell in pairs(T.announce_spells) do
+		T.AnnounceSpells[spell] = true
+	end
 end
 
 if C.announcements.toys == true then
@@ -28,6 +40,11 @@ if C.announcements.toys == true then
 end
 
 if C.announcements.feasts == true then
+	T.AnnounceFeast = {
+		[308458] = true,	-- Surprisingly Palatable Feast
+		[308462] = true,	-- Feast of Gluttonous Hedonism
+		[307157] = true,	-- Eternal Cauldron
+	}
 	T.AnnounceBots = {
 		[22700] = true,		-- Field Repair Bot 74A
 		[44389] = true,		-- Field Repair Bot 110G
@@ -35,8 +52,9 @@ if C.announcements.feasts == true then
 		[67826] = true,		-- Jeeves
 		[126459] = true,	-- Blingtron 4000
 		[161414] = true,	-- Blingtron 5000
+		[298926] = true,	-- Blingtron 7000
 		[199109] = true,	-- Auto-Hammer
-		[226241] = true,	-- Codex of the Tranquil Mind
+		[324029] = true,	-- Codex of the Still Mind
 	}
 end
 
@@ -68,6 +86,7 @@ if C.announcements.portals == true then
 		[53142] = true,		-- Dalaran
 		[120146] = true,	-- Ancient Dalaran
 		[224871] = true,	-- Dalaran, Broken Isles
+		[344597] = true,	-- Oribos
 	}
 end
 
@@ -79,7 +98,6 @@ if C.announcements.bad_gear == true then
 			88710,	-- Nat's Hat
 			33820,	-- Weather-Beaten Fishing Hat
 			19972,	-- Lucky Fishing Hat
-			46349,	-- Chef's Hat
 		},
 		-- Neck
 		[2] = {

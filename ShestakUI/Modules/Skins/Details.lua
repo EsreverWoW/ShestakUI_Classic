@@ -4,7 +4,7 @@ if C.skins.details ~= true or not IsAddOnLoaded("Details") then return end
 ----------------------------------------------------------------------------------------
 --	Details skin
 ----------------------------------------------------------------------------------------
-hooksecurefunc(_detalhes.gump, "CriaNovaBarra", function(_, instancia, index)
+hooksecurefunc(_detalhes.gump, "CreateNewLine", function(_, instancia, index)
 	local bar = _G["DetailsBarra_"..instancia.meu_id.."_"..index]
 	local icon = _G["DetailsBarra_IconFrame_"..instancia.meu_id.."_"..index]
 
@@ -16,6 +16,24 @@ hooksecurefunc(_detalhes.gump, "CriaNovaBarra", function(_, instancia, index)
 		bar.bg:SetAllPoints(bar)
 		bar.bg:SetTexture(C.media.texture)
 		bar.bg:SetVertexColor(.6, .6, .6, 0.25)
+	end
+
+	local frame = _G["DetailsUpFrameInstance"..instancia.meu_id]
+	if not frame.b then
+		frame.b = CreateFrame("Frame", nil, frame:GetParent())
+		frame.b:SetTemplate("Overlay")
+		frame.b:SetPoint("TOPLEFT", frame, "TOPLEFT", -23, 2)
+		frame.b:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", 34, 4)
+	end
+end)
+
+hooksecurefunc(_detalhes, "SetFontOutline", function(_, fontString)
+	local fonte, size = fontString:GetFont()
+	if fonte == "Interface\\AddOns\\ShestakUI\\Media\\Fonts\\Pixel.ttf" then
+		fontString:SetFont(fonte, size, "MONOCHROMEOUTLINE")
+		if fontString:GetShadowColor() then
+			fontString:SetShadowColor(0, 0, 0, 0)
+		end
 	end
 end)
 
@@ -183,7 +201,6 @@ local skinTable = {
 				["lower_alpha"] = 0.1,
 				["upper_enabled"] = false,
 			},
-			-- ["texture_custom_file"d = "AddOns\\ShestakUI\\Media\\Textures\\Texture.tga",
 			["textR_class_colors"] = false,
 			["texture_custom"] = "AddOns\\ShestakUI\\Media\\Textures\\Texture.tga",
 			["texture"] = "Smooth!",
@@ -271,7 +288,7 @@ local skinTable = {
 		["stretch_button_side"] = 1,
 		["attribute_text"] = {
 			["enabled"] = true,
-			["shadow"] = false,
+			["shadow"] = true,
 			["side"] = 1,
 			["text_size"] = 8,
 			["custom_text"] = "{name}",

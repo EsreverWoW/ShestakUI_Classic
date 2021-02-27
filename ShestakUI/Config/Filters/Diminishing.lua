@@ -9,6 +9,7 @@ if T.classic or C.unitframe.enable ~= true or C.unitframe.show_arena ~= true or 
 T.DiminishingSpells = {
 	-- Stuns
 	[210141] = {"stun"},			-- Zombie Explosion
+	[334693] = {"stun"},			-- Absolute Zero (Breath of Sindragosa)
 	[108194] = {"stun"},			-- Asphyxiate (Unholy)
 	[221562] = {"stun"},			-- Asphyxiate (Blood)
 	[91800] = {"stun"},				-- Gnaw (Ghoul)
@@ -21,16 +22,17 @@ T.DiminishingSpells = {
 	[22570] = {"stun"},				-- Maim
 	[163505] = {"stun"},			-- Rake (Prowl)
 	[5211] = {"stun"},				-- Mighty Bash
-	[202244] = {"stun"},			-- Overrun (Also a knockback)
+	[202244] = {"stun"},			-- Overrun
+	[325321] = {"stun"},			-- Wild Hunt's Charge
 	[24394] = {"stun"},				-- Intimidation
 	[119381] = {"stun"},			-- Leg Sweep
 	[202346] = {"stun"},			-- Double Barrel
 	[853] = {"stun"},				-- Hammer of Justice
+	[255941] = {"stun"},			-- Wake of Ashes
 	[64044] = {"stun"},				-- Psychic Horror
 	[200200] = {"stun"},			-- Holy Word: Chastise Censure
 	[1833] = {"stun"},				-- Cheap Shot
 	[408] = {"stun"},				-- Kidney Shot
-	[199804] = {"stun"},			-- Between the Eyes
 	[118905] = {"stun"},			-- Static Charge (Capacitor Totem)
 	[118345] = {"stun"},			-- Pulverize (Primal Earth Elemental)
 	[305485] = {"stun"},			-- Lightning Lasso
@@ -44,7 +46,8 @@ T.DiminishingSpells = {
 	[199085] = {"stun"},			-- Warpath
 	[20549] = {"stun"},				-- War Stomp (Tauren)
 	[255723] = {"stun"},			-- Bull Rush (Highmountain Tauren)
-	--PTR [287712] = {"stun"},			-- Haymaker (Kul Tiran)
+	[287712] = {"stun"},			-- Haymaker (Kul Tiran)
+	[332423] = {"stun"},			-- Sparkling Driftglobe Core
 
 	-- Roots
 	[204085] = {"root"},			-- Deathchill (Chains of Ice)
@@ -61,7 +64,9 @@ T.DiminishingSpells = {
 	[198121] = {"root"},			-- Frostbite
 	[233582] = {"root"},			-- Entrenched in Flame
 	[116706] = {"root"},			-- Disable
+	[324382] = {"root"},			-- Clash
 	[64695] = {"root"},				-- Earthgrab (Totem effect)
+	[285515] = {"root"},			-- Surge of Power
 
 	-- Incapacitates
 	[217832] = {"incapacitate"},	-- Imprison
@@ -101,6 +106,7 @@ T.DiminishingSpells = {
 	[211010] = {"incapacitate"},	-- Hex (Snake)
 	[211015] = {"incapacitate"},	-- Hex (Cockroach)
 	[269352] = {"incapacitate"},	-- Hex (Skeletal Hatchling)
+	[309328] = {"incapacitate"},	-- Hex (Living Honey)
 	[277778] = {"incapacitate"},	-- Hex (Zandalari Tendonripper)
 	[277784] = {"incapacitate"},	-- Hex (Wicker Mongrel)
 	[197214] = {"incapacitate"},	-- Sundering
@@ -111,31 +117,32 @@ T.DiminishingSpells = {
 	[207167] = {"disorient"},		-- Blinding Sleet
 	[207685] = {"disorient"},		-- Sigil of Misery
 	[33786] = {"disorient"},		-- Cyclone
-	[209753] = {"disorient"},		-- Cyclone (Honor talent)
+	[1513]  = "disorient",			-- Scare Beast
 	[31661] = {"disorient"},		-- Dragon's Breath
 	[198909] = {"disorient"},		-- Song of Chi-ji
 	[202274] = {"disorient"},		-- Incendiary Brew
 	[105421] = {"disorient"},		-- Blinding Light
+	[10326] = {"disorient"},		-- Turn Evil (For Lichborne?)
 	[605] = {"disorient"},			-- Mind Control
 	[8122] = {"disorient"},			-- Psychic Scream
 	[226943] = {"disorient"},		-- Mind Bomb
 	[2094] = {"disorient"},			-- Blind
 	[118699] = {"disorient"},		-- Fear
+	[5484] = {"disorient"},			-- Howl of Terror
 	[6358] = {"disorient"},			-- Seduction (Succubus)
 	[261589] = {"disorient"},		-- Seduction (Grimoire of Sacrifice)
 	[5246] = {"disorient"},			-- Intimidating Shout
+	[331866] = {"disorient"},		-- Agent of Chaos (Venthyr Covenant)
 
 	-- Silences
 	[47476] = {"silence"},			-- Strangulate
 	[204490] = {"silence"},			-- Sigil of Silence
 	[202933] = {"silence"},			-- Spider Sting
-	[233022] = {"silence"},			-- Spider Sting 2 (TODO: incorrect?)
 	[217824] = {"silence"},			-- Shield of Virtue
 	[199683] = {"silence"},			-- Last Word
 	[15487] = {"silence"},			-- Silence
 	[1330] = {"silence"},			-- Garrote
-	[43523] = {"silence"},			-- Unstable Affliction Silence Effect (TODO: incorrect?)
-	[196364] = {"silence"},			-- Unstable Affliction Silence Effect 2
+	[196364] = {"silence"},			-- Unstable Affliction Silence Effect
 }
 
 local function GetIcon(id)

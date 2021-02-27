@@ -1,5 +1,6 @@
-local T, C, L
+local T, C
 local _, ns = ...
+local L = ns
 
 ----------------------------------------------------------------------------------------
 --	GUI for ShestakUI(by Haleth, Solor)
@@ -9,8 +10,8 @@ local name = UnitName("player")
 
 -- [[ Variables ]]
 
-ns.localization = {}
 ns.buttons = {}
+ns.NextPrevButtons = {}
 
 local checkboxes = {}
 local sliders = {}
@@ -38,6 +39,7 @@ local function setReloadNeeded(isNeeded)
 		ShestakUIOptionsPanelOkayButton:Disable()
 	end
 end
+ns.setReloadNeeded = setReloadNeeded
 
 -- check if a reload is needed
 local function checkIsReloadNeeded()
@@ -95,30 +97,6 @@ local function toggle(self)
 	else
 		PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_OFF)
 	end
-	if self.group == "error" then
-		if self.option == "white" and checked then
-			local black = ShestakUIOptionsPanelerror.black
-			if black:GetChecked() then
-				black:SetChecked(false)
-				SaveValue(black, false)
-				if old[black] == nil then
-					old[black] = not black:GetChecked()
-				end
-			end
-		end
-
-		if self.option == "black" and checked then
-			local white = ShestakUIOptionsPanelerror.white
-			if white:GetChecked() then
-				white:SetChecked(false)
-				SaveValue(white, false)
-
-				if old[white] == nil then
-					old[white] = not white:GetChecked()
-				end
-			end
-		end
-	end
 
 	SaveValue(self, checked)
 	if self.children then toggleChildren(self, checked) end
@@ -138,7 +116,6 @@ ns.CreateCheckBox = function(parent, option, text, textDesc)
 	f.group = parent.tag
 	f.option = option
 
-	f.Text:SetSize(520, 20)
 	if text then
 		f.Text:SetText(text)
 	else
@@ -187,6 +164,65 @@ local function onValueChanged(self, value)
 	end
 end
 
+local function onMouseWheel(self, delta)
+	if not IsControlKeyDown() and not IsShiftKeyDown() then
+		local script = self.parent:GetScript("OnMouseWheel")
+		if script then
+			script(self.parent, delta)
+		end
+		return
+	end
+
+	value = self.textInput:GetText()
+
+	local step = self.step
+	if IsControlKeyDown() then
+		step = self.step * 5
+	elseif IsShiftKeyDown() then
+		step = self.step
+	end
+
+	if delta < 0 then
+		value = value + step
+	else
+		value = value - step
+	end
+
+	if self.step < 1 then
+		if self.option == "uiscale" then
+			value = tonumber(string.format("%.3f", value))
+		else
+			value = tonumber(string.format("%.2f", value))
+		end
+	else
+		value = floor(value + 0.5)
+	end
+
+	if value < self.min then
+		value = self.min
+	elseif value > self.max then
+		value = self.max
+	end
+
+	if self.textInput then
+		self.textInput:SetText(value)
+	end
+
+	self:SetValue(value)
+
+	if userChangedSlider then
+		SaveValue(self, value)
+
+		if self.needsReload then
+			if self.step < 1 then
+				self.oldValue = tonumber(string.format("%.2f", self.oldValue))
+			end
+			old[self] = self.oldValue
+			checkIsReloadNeeded()
+		end
+	end
+end
+
 local function createSlider(parent, option, lowText, highText, low, high, step, needsReload, text, textDesc)
 	local sliderName = parent:GetName()..option
 	local f = CreateFrame("Slider", sliderName, parent, "OptionsSliderTemplate")
@@ -211,13 +247,18 @@ local function createSlider(parent, option, lowText, highText, low, high, step, 
 	f:SetMinMaxValues(low, high)
 	f:SetObeyStepOnDrag(true)
 	f:SetValueStep(step)
+	f:SetWidth(150)
 
 	f.tooltipText = ns[parent.tag.."_"..option.."_desc"] or textDesc or ns[parent.tag.."_"..option] or text
 
 	f.needsReload = needsReload
 	f.step = step
+	f.min = low
+	f.max = high
+	f.parent = parent
 
 	f:SetScript("OnValueChanged", onValueChanged)
+	f:SetScript("OnMouseWheel", onMouseWheel)
 	parent[option] = f
 
 	tinsert(sliders, f)
@@ -251,12 +292,12 @@ ns.CreateNumberSlider = function(parent, option, lowText, highText, low, high, s
 
 	local f = CreateFrame("EditBox", parent:GetName()..option.."TextInput", slider, "InputBoxTemplate")
 	f:SetAutoFocus(false)
-	f:SetWidth(60)
-	f:SetHeight(20)
+	f:SetWidth(50)
+	f:SetHeight(18)
 	f:SetMaxLetters(8)
 	f:SetFontObject(GameFontHighlight)
 
-	f:SetPoint("LEFT", slider, "RIGHT", 20, 0)
+	f:SetPoint("LEFT", slider, "RIGHT", 10, 0)
 
 	f:SetScript("OnEscapePressed", onSliderEscapePressed)
 	f:SetScript("OnEnterPressed", onSliderEnterPressed)
@@ -281,8 +322,8 @@ end
 ns.CreateEditBox = function(parent, option, needsReload, text, number)
 	local f = CreateFrame("EditBox", parent:GetName()..option.."TextInput", parent, "InputBoxTemplate")
 	f:SetAutoFocus(false)
-	f:SetWidth(55)
-	f:SetHeight(20)
+	f:SetWidth(60)
+	f:SetHeight(18)
 	f:SetMaxLetters(8)
 	f:SetFontObject(GameFontHighlight)
 
@@ -291,7 +332,6 @@ ns.CreateEditBox = function(parent, option, needsReload, text, number)
 	f.value = ""
 	f.valueNumber = number and true or false
 
-	f:SetScript("OnEscapePressed", onSliderEscapePressed)
 	f:SetScript("OnEscapePressed", function(self) self:ClearFocus() self:SetText(f.value) end)
 	f:SetScript("OnEnterPressed", onEnterPressed)
 	f:SetScript("OnEditFocusGained", function() f.value = f:GetText() end)
@@ -309,6 +349,7 @@ ns.CreateEditBox = function(parent, option, needsReload, text, number)
 		label:SetText(ns[parent.tag.."_"..option])
 	end
 
+	f.label = label
 	f.tooltipText = ns[parent.tag.."_"..option.."_desc"] or text
 
 	f:SetScript("OnEnter", function()
@@ -362,9 +403,14 @@ local function resetColour(previousValues)
 	checkIsReloadNeeded()
 end
 
-local function onColourSwatchClicked(self)
-	local colourTable = C[self.group][self.option]
+local function onColourSwatchClicked(self, button)
+	if button == "RightButton" then
+		C.options[self.group][self.option] = nil
+		setReloadNeeded(true)
+		return
+	end
 
+	local colourTable = C[self.group][self.option]
 	local r, g, b = unpack(colourTable)
 	r, g, b = round(r), round(g), round(b)
 	local originalR, originalG, originalB = r, g, b
@@ -409,7 +455,7 @@ ns.CreateColourPicker = function(parent, option, needsReload, text)
 
 	f.needsReload = needsReload
 
-	f:SetScript("OnClick", onColourSwatchClicked)
+	f:SetScript("OnMouseUp", onColourSwatchClicked)
 	parent[option] = f
 
 	tinsert(colourpickers, f)
@@ -419,29 +465,46 @@ end
 
 -- DropDown
 local DropDownText = {
+	["Interface\\AddOns\\ShestakUI\\Media\\Textures\\Texture.tga"] = "Normal texture",
 	["Interface\\AddOns\\ShestakUI\\Media\\Fonts\\Normal.ttf"] = "Normal font",
 	["Interface\\AddOns\\ShestakUI\\Media\\Fonts\\Pixel.ttf"] = "Pixel Font",
-	[STANDARD_TEXT_FONT] = "Blizzard font"
+	[STANDARD_TEXT_FONT] = "Blizzard font",
+	["BLACKLIST"] = L.general_error_blacklist,
+	["WHITELIST"] = L.general_error_whitelist,
+	["COMBAT"] = L.general_error_combat,
+	["NONE"] = L.general_error_none,
+	["RAID"] = L.automation_auto_collapse_raid,
+	["RELOAD"] = L.automation_auto_collapse_reload,
+	["DYNAMIC"] = L.raidframe_auto_position_dynamic,
+	["STATIC"] = L.raidframe_auto_position_static,
 }
 
-ns.CreateDropDown = function(parent, option, needsReload, text, tableValue)
+ns.CreateDropDown = function(parent, option, needsReload, text, tableValue, LSM, isFont)
 	local f = CreateFrame("Frame", parent:GetName()..option.."DropDown", parent, "UIDropDownMenuTemplate")
 	UIDropDownMenu_SetWidth(f, 110)
 
 	UIDropDownMenu_Initialize(f, function(self)
 		local info = UIDropDownMenu_CreateInfo()
 		info.func = self.SetValue
-		for _, value in pairs(tableValue) do
-			info.text = DropDownText[value] or value
+		for key, value in pairs(tableValue) do
+			info.text = LSM and (DropDownText[value] or key) or DropDownText[value] or value
 			info.arg1 = value
+			info.arg2 = key
 			info.checked = value == f.selectedValue
+
+			if isFont then
+				local fObject = CreateFont(info.text)
+				fObject:SetFont(value, 12)
+				info.fontObject = fObject
+			end
+
 			UIDropDownMenu_AddButton(info)
 		end
 	end)
 
-	function f:SetValue(newValue)
+	function f:SetValue(newValue, newkey)
 		f.selectedValue = newValue
-		local text = DropDownText[newValue] or newValue
+		local text = LSM and (DropDownText[newValue] or newkey) or DropDownText[newValue] or newValue
 		UIDropDownMenu_SetText(f, text)
 		SaveValue(f, newValue)
 		old[f] = f.oldValue
@@ -455,10 +518,23 @@ ns.CreateDropDown = function(parent, option, needsReload, text, tableValue)
 	else
 		label:SetText(ns[parent.tag.."_"..option])
 	end
-	label:SetWidth(440)
+	-- label:SetWidth(440)
 	label:SetHeight(20)
 	label:SetJustifyH("LEFT")
 	label:SetPoint("LEFT", 160, 4)
+	f.label = label
+
+	f.tooltipText = ns[parent.tag.."_"..option.."_desc"]
+	if f.tooltipText then
+		f:SetScript("OnEnter", function()
+			GameTooltip:SetOwner(f, "ANCHOR_RIGHT", 0, 0)
+			GameTooltip:SetText(f.tooltipText, nil, nil, nil, nil, true)
+		end)
+
+		f:SetScript("OnLeave", function()
+			GameTooltip:Hide()
+		end)
+	end
 
 	f.group = parent.tag
 	f.option = option
@@ -483,11 +559,13 @@ local function setActiveTab(tab)
 	activeTab.panel.tab.Text:SetTextColor(1, 1, 1)
 
 	activeTab.panel:Show()
-	if activeTab.panel.second then
-		activeTab.panel.general:Show()
-	end
 
 	if activeTab.panel_2 then
+		activeTab.panel.PrevPageButton:Show()
+		activeTab.panel.PrevPageButton:Disable()
+		activeTab.panel.NextPageButton:Enable()
+		activeTab.panel.pageText:SetFormattedText(COLLECTION_PAGE_NUMBER, 1, activeTab.panel.maxPages)
+		activeTab.panel.currentPage = 1
 		activeTab.panel_2:Hide()
 	end
 
@@ -499,22 +577,22 @@ local onTabClick = function(tab)
 
 	activeTab.panel.tab.Text:SetTextColor(1, 0.82, 0)
 
-	if activeTab.panel.second then
-		activeTab.panel.general:Hide()
+	if activeTab.panel_2 then
+		activeTab.panel.PrevPageButton:Hide()
 		activeTab.panel_2:Hide()
-
-		activeTab.panel.general.Text:SetTextColor(1, 1, 1)
-		activeTab.panel.optional.Text:SetTextColor(1, 0.82, 0)
 	end
 
-	if activeTab.panel.third then
+	if activeTab.panel_3 then
 		activeTab.panel_3:Hide()
-		activeTab.panel.general.Text:SetTextColor(1, 1, 1)
-		activeTab.panel.optional.Text:SetTextColor(1, 0.82, 0)
-		activeTab.panel.more.Text:SetTextColor(1, 0.82, 0)
+	end
+
+	if activeTab.panel_4 then
+		activeTab.panel_4:Hide()
 	end
 
 	setActiveTab(tab)
+
+	ns.HideSpellList()
 end
 
 local function CreateOptionPanel(name, text, subText)
@@ -538,134 +616,7 @@ local function CreateOptionPanel(name, text, subText)
 	return panel
 end
 
-ns.addCategory = function(name, text, subText, second, third)
-	local tag = strlower(name)
-	local panel, panel_2, panel_3 = CreateOptionPanel(baseName..name, text, subText)
-
-	if second then
-		local name2 = name.."2"
-		local tag2 = strlower(name2)
-		panel_2 = CreateOptionPanel(baseName..name2, text, subText)
-
-		local general = CreateFrame("Button", nil, ShestakUIOptionsPanel, "UIPanelButtonTemplate")
-		general:SetPoint("TOPRIGHT", -195, -44)
-		general:SetSize(128, 25)
-		general:SetText(GENERAL_LABEL)
-		general:SetWidth(general.Text:GetWidth() + 15)
-		general.Text:SetTextColor(1, 1, 1)
-		general:Hide()
-
-		local optional = CreateFrame("Button", nil, general, "UIPanelButtonTemplate")
-		optional:SetPoint("LEFT", general, "RIGHT", 5, 0)
-		optional:SetSize(128, 25)
-		optional:SetText(ADVANCED_LABEL)
-		optional:SetWidth(optional.Text:GetWidth() + 15)
-
-		general:SetScript("OnClick", function()
-			panel:Show()
-			panel_2:Hide()
-			general.Text:SetTextColor(1, 1, 1)
-			optional.Text:SetTextColor(1, 0.82, 0)
-		end)
-
-		optional:SetScript("OnClick", function()
-			panel:Hide()
-			panel_2:Show()
-			general.Text:SetTextColor(1, 0.82, 0)
-			optional.Text:SetTextColor(1, 1, 1)
-		end)
-
-		tinsert(panels, panel_2)
-		tinsert(ns.buttons, general)
-		tinsert(ns.buttons, optional)
-
-		panel.second = true
-		panel.general = general
-		panel.optional = optional
-
-		if name == "general" then
-			panel_2.tag = "media"
-		else
-			panel_2.tag = tag
-		end
-
-		ShestakUIOptionsPanel[tag2] = panel_2
-
-		panel:SetScript("OnMouseWheel", function(_, delta)
-			if delta < 0 then
-				optional:Click()
-			end
-		end)
-
-		panel_2:SetScript("OnMouseWheel", function(_, delta)
-			if delta > 0 then
-				general:Click()
-			end
-		end)
-
-		if third then
-			local name3 = name.."3"
-			local tag3 = strlower(name3)
-			panel_3 = CreateOptionPanel(baseName..name3, text, subText)
-
-			local more = CreateFrame("Button", nil, general, "UIPanelButtonTemplate")
-			more:SetPoint("LEFT", optional, "RIGHT", 5, 0)
-			more:SetSize(128, 25)
-			more:SetText(LFG_LIST_MORE)
-			more:SetWidth(more.Text:GetWidth() + 15)
-
-			general:SetScript("OnClick", function()
-				panel:Show()
-				panel_2:Hide()
-				panel_3:Hide()
-				general.Text:SetTextColor(1, 1, 1)
-				optional.Text:SetTextColor(1, 0.82, 0)
-				more.Text:SetTextColor(1, 0.82, 0)
-			end)
-
-			optional:SetScript("OnClick", function()
-				panel:Hide()
-				panel_2:Show()
-				panel_3:Hide()
-				general.Text:SetTextColor(1, 0.82, 0)
-				optional.Text:SetTextColor(1, 1, 1)
-				more.Text:SetTextColor(1, 0.82, 0)
-			end)
-
-			more:SetScript("OnClick", function()
-				panel:Hide()
-				panel_2:Hide()
-				panel_3:Show()
-				general.Text:SetTextColor(1, 0.82, 0)
-				optional.Text:SetTextColor(1, 0.82, 0)
-				more.Text:SetTextColor(1, 1, 1)
-			end)
-
-			tinsert(panels, panel_3)
-			tinsert(ns.buttons, more)
-
-			panel.third = true
-			panel.more = more
-
-			panel_3.tag = tag
-			ShestakUIOptionsPanel[tag3] = panel_3
-
-			panel_2:SetScript("OnMouseWheel", function(_, delta)
-				if delta > 0 then
-					general:Click()
-				elseif delta < 0 then
-					more:Click()
-				end
-			end)
-
-			panel_3:SetScript("OnMouseWheel", function(_, delta)
-				if delta > 0 then
-					optional:Click()
-				end
-			end)
-		end
-	end
-
+ns.addCategory = function(name, text, subText, num)
 	local tab = CreateFrame("Button", nil, ShestakUIOptionsPanel)
 	tab:SetPoint("TOPLEFT", 11, -offset)
 	tab:SetSize(168, 22)
@@ -677,18 +628,166 @@ ns.addCategory = function(name, text, subText, second, third)
 	tab.Text:SetJustifyH("LEFT")
 
 	tab:SetScript("OnMouseUp", onTabClick)
+	offset = (offset + 24)
 
-	tab.panel = panel
-	tab.panel_2 = panel_2
-	tab.panel_3 = panel_3
-	panel.tab = tab
-	panel.tag = tag
-
-	ShestakUIOptionsPanel[tag] = panel
-
+	local tag = strlower(name)
+	local panel = CreateOptionPanel(baseName..name, text, subText)
+	panel[1] = panel
 	tinsert(panels, panel)
 
-	offset = (offset + 24)
+	tab.panel = panel
+	panel.tab = tab
+	panel.tag = tag
+	ShestakUIOptionsPanel[tag] = panel
+
+	local numPages = num or 1
+	if numPages > 1 then
+		local name2 = name.."2"
+		local tag2 = strlower(name2)
+		local panel_2 = CreateOptionPanel(baseName..name2, text, subText)
+		panel[2] = panel_2
+		tinsert(panels, panel_2)
+
+		if name == "general" then
+			panel_2.tag = "media"
+		else
+			panel_2.tag = tag
+		end
+
+		ShestakUIOptionsPanel[tag2] = panel_2
+		tab.panel_2 = panel_2
+
+		local PrevPageButton = CreateFrame("Button", baseName..name.."PrevButton", ShestakUIOptionsPanel)
+		PrevPageButton:SetPoint("TOPRIGHT", -45, -44)
+		PrevPageButton:SetSize(28, 28)
+		PrevPageButton:SetHighlightTexture("Interface\Buttons\UI-Common-MouseHilight")
+		PrevPageButton:Hide()
+		PrevPageButton:Disable()
+
+		local pageText = PrevPageButton:CreateFontString(nil, "ARTWORK", "GameFontHighlight")
+		pageText:SetPoint("RIGHT", PrevPageButton, "LEFT", -5, 0)
+		panel.pageText = pageText
+
+		local NextPageButton = CreateFrame("Button", baseName..name.."NextButton", PrevPageButton)
+		NextPageButton:SetPoint("LEFT", PrevPageButton, "RIGHT", 5, 0)
+		NextPageButton:SetSize(28, 28)
+		NextPageButton:SetHighlightTexture("Interface\Buttons\UI-Common-MouseHilight")
+
+		panel.currentPage = 1
+		panel.maxPages = numPages
+		local function SetPage(prev)
+			panel.currentPage = panel.currentPage + (prev and - 1 or 1)
+			pageText:SetFormattedText(COLLECTION_PAGE_NUMBER, panel.currentPage, panel.maxPages)
+
+			for i = 1, numPages do
+				panel[i]:Hide()
+			end
+
+			if panel.currentPage == 1 then
+				PrevPageButton:Disable()
+				NextPageButton:Enable()
+				panel[1]:Show()
+			elseif panel.currentPage == 2 then
+				PrevPageButton:Enable()
+				if numPages > 2 then
+					NextPageButton:Enable()
+				else
+					NextPageButton:Disable()
+				end
+				panel[2]:Show()
+			elseif panel.currentPage == 3 then
+				PrevPageButton:Enable()
+				if numPages > 3 then
+					NextPageButton:Enable()
+				else
+					NextPageButton:Disable()
+				end
+				panel[3]:Show()
+			elseif panel.currentPage == 4 then
+				PrevPageButton:Enable()
+				NextPageButton:Disable()
+				panel[4]:Show()
+			end
+		end
+
+		PrevPageButton:SetScript("OnClick", function()
+			SetPage(true)
+		end)
+
+		NextPageButton:SetScript("OnClick", function()
+			SetPage(false)
+		end)
+
+		tinsert(ns.NextPrevButtons, PrevPageButton)
+		tinsert(ns.NextPrevButtons, NextPageButton)
+
+		panel.PrevPageButton = PrevPageButton
+		panel.NextPageButton = NextPageButton
+
+		panel:SetScript("OnMouseWheel", function(_, delta)
+			if delta < 0 then
+				NextPageButton:Click()
+			end
+		end)
+
+		panel_2:SetScript("OnMouseWheel", function(_, delta)
+			if delta > 0 then
+				PrevPageButton:Click()
+			end
+		end)
+
+		if numPages > 2 then
+			local name3 = name.."3"
+			local tag3 = strlower(name3)
+			local panel_3 = CreateOptionPanel(baseName..name3, text, subText)
+			panel[3] = panel_3
+			tinsert(panels, panel_3)
+
+			tab.panel_3 = panel_3
+			panel_3.tag = tag
+			ShestakUIOptionsPanel[tag3] = panel_3
+
+			panel_2:SetScript("OnMouseWheel", function(_, delta)
+				if delta > 0 then
+					PrevPageButton:Click()
+				elseif delta < 0 then
+					NextPageButton:Click()
+				end
+			end)
+
+			panel_3:SetScript("OnMouseWheel", function(_, delta)
+				if delta > 0 then
+					PrevPageButton:Click()
+				end
+			end)
+
+			if numPages > 3 then
+				local name4 = name.."4"
+				local tag4 = strlower(name4)
+				local panel_4 = CreateOptionPanel(baseName..name4, text, subText)
+				panel[4] = panel_4
+				tinsert(panels, panel_4)
+
+				tab.panel_4 = panel_4
+				panel_4.tag = tag
+				ShestakUIOptionsPanel[tag4] = panel_4
+
+				panel_3:SetScript("OnMouseWheel", function(_, delta)
+					if delta > 0 then
+						PrevPageButton:Click()
+					elseif delta < 0 then
+						NextPageButton:Click()
+					end
+				end)
+
+				panel_4:SetScript("OnMouseWheel", function(_, delta)
+					if delta > 0 then
+						PrevPageButton:Click()
+					end
+				end)
+			end
+		end
+	end
 end
 
 ns.addSubCategory = function(category, name)
@@ -720,7 +819,7 @@ local function changeProfile()
 	for group, options in pairs(profile) do
 		if C[group] then
 			for option, value in pairs(options) do
-				if C[group][option] == nil or (group == "unitframes" and (tonumber(profile[group][option]) or type(profile[group][option]) == "table")) then
+				if C[group][option] == nil or C[group][option] == value then
 					profile[group][option] = nil
 				else
 					C[group][option] = value
@@ -744,11 +843,11 @@ local function displaySettings()
 
 	for _, slider in pairs(sliders) do
 		local value = C[slider.group][slider.option]
-		if slider.group == "font" and T.screenHeight > 1200 then
+		if T.screenHeight > 1200 and slider.group == "font" and slider.option ~= "nameplates_font_size" then
 			value = value / T.mult
 		end
 		slider:SetValue(value)
-		slider.textInput:SetText(floor(value*1000)/1000)
+		slider.textInput:SetText(floor(value * 1000) / 1000)
 		slider.textInput:SetCursorPosition(0)
 		slider.oldValue = value
 	end
@@ -774,7 +873,7 @@ init:RegisterEvent("PLAYER_LOGIN")
 init:SetScript("OnEvent", function()
 	if not ShestakUI then return end
 
-	T, C, L = unpack(ShestakUI)
+	T, C = unpack(ShestakUI)
 
 	local ShestakUIOptionsPanel = ShestakUIOptionsPanel
 
@@ -808,9 +907,6 @@ init:SetScript("OnEvent", function()
 		StaticPopup_Show("PERCHAR")
 	end)
 
-	-- F.CreateBD(ShestakUIOptionsPanel)
-	-- F.CreateSD(ShestakUIOptionsPanel)
-
 	ShestakUIOptionsPanel:SetTemplate("Transparent")
 
 	local sunFrame = CreateFrame("Frame", nil, ShestakUIOptionsPanel)
@@ -826,15 +922,14 @@ init:SetScript("OnEvent", function()
 		panel:CreateBackdrop("Overlay")
 		panel.backdrop:SetPoint("TOPLEFT", -10, 2)
 		panel.backdrop:SetPoint("BOTTOMRIGHT", -10, -5)
-		-- local bg = F.CreateBDFrame(panel.tab.Icon)
-		-- F.Reskin(panel.tab)
-		-- panel.tab:SkinButton()
 	end
-
-	setActiveTab(ShestakUIOptionsPanel.general.tab)
 
 	for _, button in pairs(ns.buttons) do
 		button:SkinButton()
+	end
+
+	for _, button in pairs(ns.NextPrevButtons) do
+		T.SkinNextPrevButton(button, nil, "Any")
 	end
 
 	for _, box in pairs(checkboxes) do
@@ -843,15 +938,10 @@ init:SetScript("OnEvent", function()
 
 	for _, slider in pairs(sliders) do
 		T.SkinSlider(slider)
-		T.SkinEditBox(slider.textInput, nil, 18)
-		-- F.ReskinSlider(slider)
-		-- F.ReskinInput(slider.textInput)
-		-- F.SetFS(slider.textInput)
-		-- F.SetFS(slider.text)
+		T.SkinEditBox(slider.textInput)
 	end
 
 	for _, picker in pairs(colourpickers) do
-		-- F.CreateBG(picker)
 		local value = C[picker.group][picker.option]
 		picker:SetTemplate("Transparent")
 		picker:SetBackdropBorderColor(unpack(value))
@@ -859,7 +949,7 @@ init:SetScript("OnEvent", function()
 	end
 
 	for _, editbox in pairs(editboxes) do
-		T.SkinEditBox(editbox, nil, 18)
+		T.SkinEditBox(editbox)
 	end
 
 	for _, dropdown in pairs(dropdowns) do
@@ -869,6 +959,8 @@ init:SetScript("OnEvent", function()
 	local title = ShestakUIOptionsPanel:CreateFontString("UIConfigTitleVer", "OVERLAY", "GameFontNormal")
 	title:SetPoint("TOP", 0, -10)
 	title:SetText("ShestakUI "..T.version)
+
+	setActiveTab(ShestakUIOptionsPanel.general.tab)
 
 	displaySettings()
 end)

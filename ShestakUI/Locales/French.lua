@@ -21,7 +21,6 @@ L_ANNOUNCE_PC_MSG = "Pull %s dans %s.."
 L_ANNOUNCE_PC_ABORTED = "Pull ABANDONNE !"
 
 -- Announce feasts and portals
-L_ANNOUNCE_FP_STAT = "%s a préparé un %s - [%s]."
 L_ANNOUNCE_FP_PRE = "%s a préparé un %s."
 L_ANNOUNCE_FP_PUT = "%s a déposé au sol un %s."
 L_ANNOUNCE_FP_CAST = "%s lance le sort %s."
@@ -47,9 +46,6 @@ L_TOOLTIP_INSPECT_OPEN = "La fenêtre d'inspection est ouverte"
 L_MISC_UNDRESS = "Déshabillé"
 L_MISC_DRINKING = " est entrain de boire."
 L_MISC_BUY_STACK = "Alt-Clic pour acheter une pile d'objet"
-L_MISC_ONECLICK_BUYOUT = "Maj-Clic-Droit pour acheter l'objet sélectionné sans confirmation"
-L_MISC_ONECLICK_BID = "Maj-Clic-Droit pour enchérir sur l'objet sélectionné sans confirmation"
-L_MISC_ONECLICK_CANCEL = "Maj-Clic-Droit pour annuler l'objet sélectionné sans confirmation"
 L_MISC_UI_OUTDATED = "Une version plus récente de ShestakUI est disponible. Vous pouvez la télécharger sur www.shestak.org"
 L_MISC_HEADER_MARK = "Icône de raid au survol de la souris"
 L_MISC_BINDER_OPEN = "Assignations des boutons de la souris"
@@ -59,8 +55,6 @@ L_MISC_SCROLL = "Parchemin"
 L_RAID_UTIL_DISBAND = "Dissoudre le raid"
 
 -- Zone name
-L_ZONE_ARATHIBASIN = "Bassin d'Arathi"
-L_ZONE_GILNEAS = "La bataille de Gilnéas"
 L_ZONE_ANCIENTDALARAN = "Cratère de Dalaran"
 
 -- WatchFrame Wowhead link
@@ -93,6 +87,8 @@ L_MINIMAP_CALENDAR = "Calendrier"
 L_MINIMAP_HEAL_LAYOUT = "Clic-Gauche - Interface Heal"
 L_MINIMAP_DPS_LAYOUT = "Clic-Droit - Interface DPS"
 L_MINIMAP_BLIZZ_LAYOUT = "Clic-Centre - Interface Blizzard"
+L_MINIMAP_FARM = "Minimap size" -- Need review
+L_MINIMAP_TOGGLE = "Toggle action bars" -- Need review
 
 -- Chat
 L_CHAT_WHISPER = "De"
@@ -150,10 +146,6 @@ L_COOLDOWNS_COMBATRESS = "Résurrection en combat"
 L_COOLDOWNS_COMBATRESS_REMAINDER = "Résurrection en combat : "
 L_COOLDOWNS_NEXTTIME = "Suivant : "
 
--- Autoinvite
-L_INVITE_ENABLE = "Invitation automatique activée : "
-L_INVITE_DISABLE = "Invitation automatique désactivée"
-
 -- Bind key
 L_BIND_SAVED = "Vos assignations de touches ont été sauvegardées."
 L_BIND_DISCARD = "Vos nouvelles assignations de touches n'ont pas été sauvegardées."
@@ -197,12 +189,9 @@ L_WELCOME_LINE_2_2 = "pour plus d'informations"
 
 -- Combat text
 L_COMBATTEXT_KILLING_BLOW = "Coup Fatal"
-L_COMBATTEXT_ALREADY_UNLOCKED = "Fenêtre des textes de combat déjà déverrouillée."
-L_COMBATTEXT_ALREADY_LOCKED = "Fenêtre des textes de combat déjà verrouillée."
 L_COMBATTEXT_TEST_DISABLED = "Mode test de la fenêtre des textes de combat désactivé."
 L_COMBATTEXT_TEST_ENABLED = "Mode test de la fenêtre des textes de combat activé."
-L_COMBATTEXT_TEST_USE_UNLOCK = "Tapez /xct unlock pour bouger et redimensionner la fenêtre des textes de combat."
-L_COMBATTEXT_TEST_USE_LOCK = "Tapez /xct lock pour verrouiller la fenêtre des textes de combat."
+L_COMBATTEXT_TEST_USE_MOVE = "Tapez /xct move pour bouger et redimensionner la fenêtre des textes de combat."
 L_COMBATTEXT_TEST_USE_TEST = "Tapez /xct test pour activer le mode test de la fenêtre des textes de combat."
 L_COMBATTEXT_TEST_USE_RESET = "Type /xct reset pour réstaurer les positions par défaut."
 L_COMBATTEXT_POPUP = "Pour sauvegardez vos modifications vous devez recharger l'interface."
@@ -291,25 +280,23 @@ L_SLASHCMD_HELP = {
 	"/rd - Dissout le groupe ou raid.",
 	"/toraid - Active le mode raid.",
 	"/teleport - Téléportation dans le donjon aléatoire en cours.",
-	"/spec, /ss - Bascule d'une spécialisation talent à l'autre.",
+	"/ss - Bascule d'une spécialisation talent à l'autre.",
+	"/tt - Chuchote à la cible.",
 	"/heal - Bascule vers l'interface 'Heal'.",
 	"/dps - Bascule sur l'interface 'DPS'.",
-	"/frame - Description is not ready.",
 	"/farmmode - Agrandi la taille de la minimap.",
-	"/moveui - Permet de déplacer des éléments de l'interface.", -- Need review
 	"/resetui - Remet les paramètres généraux à leurs valeurs par défaut.",
 	"/resetuf - Remet les cadres d'unité à leur position par défaut.",
 	"/resetconfig - Remet les paramètres ShestakUI_Config à leurs valeurs par défaut.",
 	"/resetstats - Remet à zéro les statitisques or et temps passé en jeu.",
-	"/settings ADDON_NAME - Applique les paramètres pour msbt, dbm, skada, ou à tous les addons.",
-	"/ls, /litestats - Menu d'aide pour LiteStats.",
+	"/settings - Applique les paramètres pour msbt, dbm, skada, ou à tous les addons.",
+	"/ls - Menu d'aide pour LiteStats.",
 	"/xct - Menu d'aide pour le texte de combat.",
 	"/raidcd - Lance un test du temps de recharge Raid.",
 	"/enemycd - Lance un test du temps de recharge Ennemi.",
 	"/pulsecd - Lance un test local de Cooldown pulse.",
 	"/threat - Lance un test des barres de menace.",
-	"/tt - Chuchote à la cible.",
-	"/ainv - Active l'invitation automatique.",
 	"/testuf - Lance un test des cadres d'unité.",
+	"/moveui - Permet de déplacer des éléments de l'interface.", -- Need review
 	"/cfg - Ouvre les paramètres de l'interface.",
 }

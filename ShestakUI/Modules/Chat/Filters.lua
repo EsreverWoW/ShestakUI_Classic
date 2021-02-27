@@ -37,6 +37,16 @@ if C.chat.filter == true then
 	ERR_LEARN_SPELL_S = ""
 	ERR_LEARN_PASSIVE_S = ""
 	ERR_SPELL_UNLEARNED_S = ""
+	-- ERR_CHAT_THROTTLED = ""
+
+	-- Prevent empty line
+	local function systemFilter(_, _, text)
+		if text and text == "" then
+			return true
+		end
+	end
+
+	ChatFrame_AddMessageEventFilter("CHAT_MSG_SYSTEM", systemFilter)
 end
 
 ----------------------------------------------------------------------------------------
@@ -44,14 +54,14 @@ end
 ----------------------------------------------------------------------------------------
 if C.chat.spam == true then
 	-- Repeat spam filter
-	local lastMessage
-	local function repeatMessageFilter(self, event, text, sender)
+	local function repeatMessageFilter(self, _, text, sender)
+		sender = Ambiguate(sender, "guild")
 		if sender == T.name or UnitIsInMyGuild(sender) then return end
-		if not self.repeatMessages or self.repeatCount > 100 then
+		if not self.repeatMessages or self.repeatCount > 20 then
 			self.repeatCount = 0
 			self.repeatMessages = {}
 		end
-		lastMessage = self.repeatMessages[sender]
+		local lastMessage = self.repeatMessages[sender]
 		if lastMessage == text then
 			return true
 		end
@@ -64,7 +74,8 @@ if C.chat.spam == true then
 
 	-- Gold/portals spam filter
 	local SpamList = T.ChatSpamList
-	local function tradeFilter(self, event, text, sender)
+	local function tradeFilter(_, _, text, sender)
+		sender = Ambiguate(sender, "guild")
 		if sender == T.name or UnitIsInMyGuild(sender) then return end
 		for _, value in pairs(SpamList) do
 			if text:lower():match(value) then

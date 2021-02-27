@@ -34,42 +34,37 @@ local function LoadSkin()
 	QuestMapFrame.backdrop:SetSize(284, 468)
 
 	QuestScrollFrame:ClearAllPoints()
+	QuestScrollFrame:SetPoint("TOP", WorldMapFrame.backdrop, "TOP", 0, -3)
 	QuestScrollFrame:SetPoint("LEFT", WorldMapFrame.backdrop, "RIGHT", 4, 0)
 	QuestScrollFrame.DetailFrame:StripTextures()
-	QuestScrollFrame.Background:SetAlpha(0)
+	QuestScrollFrame.DetailFrame.BottomDetail:Hide()
 	QuestScrollFrame.Contents.Separator.Divider:Hide()
 	QuestScrollFrame:SetSize(259, 463)
 
-	local questHeader = {
-		QuestScrollFrame.Contents.WarCampaignHeader,
-		QuestScrollFrame.Contents.StoryHeader
-	}
+	local CampaignOverview = QuestMapFrame.CampaignOverview
+	CampaignOverview:StripTextures()
+	CampaignOverview.ScrollFrame:StripTextures()
+	T.SkinScrollBar(QuestMapFrameScrollBar)
+	CampaignOverview:CreateBackdrop("Overlay")
+	CampaignOverview.backdrop:SetPoint("TOPLEFT", CampaignOverview.Header, "TOPLEFT",  8, -2)
+	CampaignOverview.backdrop:SetPoint("BOTTOMRIGHT", CampaignOverview.Header, "BOTTOMRIGHT", -4, 10)
+	CampaignOverview.backdrop.overlay:SetVertexColor(1, 1, 1, 0.2)
+	CampaignOverview.Header.Background:SetAlpha(0)
+	CampaignOverview.Header.TopFiligree:Hide()
 
-	for i = 1, #questHeader do
-		local frame = questHeader[i]
+	do
+		local frame = QuestScrollFrame.Contents.StoryHeader
 		frame:CreateBackdrop("Overlay")
-		if i == 1 then
-			frame.backdrop:SetPoint("TOPLEFT", 6, -5)
-		else
-			frame.backdrop:SetPoint("TOPLEFT", 6, -9)
-		end
+		frame.backdrop:SetPoint("TOPLEFT", 6, -9)
 		frame.backdrop:SetPoint("BOTTOMRIGHT", -6, 11)
 		frame.HighlightTexture:Hide()
-		frame.Background:Hide()
-		if i == 1 then -- WarCampaignHeader
-			if UnitFactionGroup("player") == "Horde" then
-				frame.backdrop.overlay:SetVertexColor(0.2, 0.1, 0.1)
-			else
-				frame.backdrop.overlay:SetVertexColor(0.1, 0.1, 0.2)
-			end
-		else -- StoryHeader
-			frame.backdrop.overlay:SetVertexColor(1, 1, 1, 0.2)
-		end
+		frame.Background:SetAlpha(0)
+		frame.backdrop.overlay:SetVertexColor(1, 1, 1, 0.2)
 	end
 
-	QuestScrollFrameScrollBar:SetPoint("TOPLEFT", QuestScrollFrame, "TOPRIGHT", 4, -16)
-	QuestScrollFrameScrollBar:SetPoint("BOTTOMLEFT", QuestScrollFrame, "BOTTOMRIGHT", 4, 15)
-	T.SkinScrollBar(QuestScrollFrameScrollBar)
+	QuestScrollFrame.ScrollBar:SetPoint("TOPLEFT", QuestScrollFrame, "TOPRIGHT", 4, -16)
+	QuestScrollFrame.ScrollBar:SetPoint("BOTTOMLEFT", QuestScrollFrame, "BOTTOMRIGHT", 4, 15)
+	T.SkinScrollBar(QuestScrollFrame.ScrollBar)
 
 	local QuestScrollFrameTopBorder = CreateFrame("Frame", "$parentBorder", QuestScrollFrame)
 	QuestScrollFrameTopBorder:CreateBackdrop("Overlay")
@@ -77,8 +72,17 @@ local function LoadSkin()
 	QuestScrollFrameTopBorder.backdrop:SetSize(284, 23)
 	QuestScrollFrameTopBorder.backdrop:SetPoint("LEFT", WorldMapFrame.Header, "RIGHT", 2, 0)
 
-	QuestMapDetailsScrollFrameScrollBar:SetPoint("TOPLEFT", QuestMapDetailsScrollFrame, "TOPRIGHT", 0, -18)
-	T.SkinScrollBar(QuestMapDetailsScrollFrameScrollBar)
+	local QuestScrollFrameTopBorder = CreateFrame("Frame", "$parentBorder", QuestMapFrame.CampaignOverview)
+	QuestScrollFrameTopBorder:CreateBackdrop("Overlay")
+	QuestScrollFrameTopBorder.backdrop:ClearAllPoints()
+	QuestScrollFrameTopBorder.backdrop:SetSize(284, 23)
+	QuestScrollFrameTopBorder.backdrop:SetPoint("LEFT", WorldMapFrame.Header, "RIGHT", 2, 0)
+
+	QuestMapDetailsScrollFrame:SetPoint("TOPLEFT", 1, 0)
+	QuestMapDetailsScrollFrame.ScrollBar:SetPoint("TOPLEFT", QuestMapDetailsScrollFrame, "TOPRIGHT", 0, -18)
+	T.SkinScrollBar(QuestMapDetailsScrollFrame.ScrollBar)
+
+	QuestMapFrame.Background:SetAlpha(0)
 
 	QuestMapFrame.DetailsFrame:StripTextures()
 	QuestMapFrame.DetailsFrame.RewardsFrame:StripTextures()
@@ -108,25 +112,6 @@ local function LoadSkin()
 	QuestMapFrame.DetailsFrame.CompleteQuestFrame:StripTextures()
 	QuestMapFrame.DetailsFrame.CompleteQuestFrame.CompleteButton:SkinButton(true)
 	QuestMapFrame.DetailsFrame.CompleteQuestFrame.CompleteButton:SetPoint("TOP", 0, 4)
-
-	--FIXME QuestNPCModel:StripTextures()
-	-- QuestNPCModel:CreateBackdrop("Transparent")
-	-- QuestNPCModelNameTooltipFrame:CreateBackdrop("Overlay")
-	-- QuestNPCModelNameTooltipFrame.backdrop:SetPoint("TOPLEFT", QuestNPCModel.backdrop, "BOTTOMLEFT", 0, -1)
-	-- QuestNPCModelNameTooltipFrame.backdrop:SetPoint("TOPRIGHT", QuestNPCModel.backdrop, "BOTTOMRIGHT", 0, -1)
-	-- QuestNPCModelNameText:SetPoint("TOPLEFT", QuestNPCModelNameplate, 15, -15)
-	-- QuestNPCModelNameText:SetPoint("BOTTOMRIGHT", QuestNPCModelNameplate, -15, 12)
-	-- QuestNPCModelTextFrame:StripTextures()
-	-- QuestNPCModelTextFrame:CreateBackdrop("Overlay")
-	-- QuestNPCModelTextFrame.backdrop:SetPoint("TOPLEFT", QuestNPCModelNameTooltipFrame.backdrop, "BOTTOMLEFT", 0, -1)
-	-- hooksecurefunc("QuestFrame_ShowQuestPortrait", function(parentFrame, _, _, _, _, x, y)
-		-- if parentFrame == QuestLogPopupDetailFrame or parentFrame == QuestFrame then
-			-- x = x + 8
-			-- y = y + 40
-		-- end
-		-- QuestNPCModel:ClearAllPoints()
-		-- QuestNPCModel:SetPoint("TOPLEFT", parentFrame, "TOPRIGHT", x, y)
-	-- end)
 
 	-- Quests Buttons
 	for i = 1, 2 do
@@ -180,18 +165,65 @@ local function LoadSkin()
 		tex:SetAllPoints(button.Icon)
 	end
 
-	-- Bounty Board
-	local function WorldMapBountyBoard(frame)
-		frame.BountyName:SetFont(C.media.normal_font, 16)
-		frame.BountyName:SetShadowOffset(1, -1)
+	-- Tracking Pin
+	local function WorldMapTrackingPinButton(button)
+		local shadow = button:GetRegions()
+		shadow:Hide()
 
-		T.SkinHelpBox(frame.TutorialBox)
+		button.Background:Hide()
+		button.IconOverlay:SetAlpha(0)
+		button.Border:Hide()
+
+		local tex = button:GetHighlightTexture()
+		tex:SetAtlas("Waypoint-MapPin-Untracked")
+		tex:SetAllPoints(button.Icon)
 	end
 
 	-- Elements
 	WorldMapFloorNavigationDropDown(WorldMapFrame.overlayFrames[1])
 	WorldMapTrackingOptionsButton(WorldMapFrame.overlayFrames[2])
-	WorldMapBountyBoard(WorldMapFrame.overlayFrames[3])
+	WorldMapTrackingPinButton(WorldMapFrame.overlayFrames[3])
+
+	-- QuestSessionManagement skin (based on skin from Aurora)
+	QuestMapFrame.QuestSessionManagement:StripTextures()
+
+	local ExecuteSessionCommand = QuestMapFrame.QuestSessionManagement.ExecuteSessionCommand
+	ExecuteSessionCommand:SetTemplate("Default")
+	ExecuteSessionCommand:StyleButton()
+
+	local icon = ExecuteSessionCommand:CreateTexture(nil, "ARTWORK")
+	icon:SetPoint("TOPLEFT", 0, 0)
+	icon:SetPoint("BOTTOMRIGHT", 0, 0)
+	ExecuteSessionCommand.normalIcon = icon
+
+	local sessionCommandToButtonAtlas = { -- Skin from Aurora
+		[_G.Enum.QuestSessionCommand.Start] = "QuestSharing-DialogIcon",
+		[_G.Enum.QuestSessionCommand.Stop] = "QuestSharing-Stop-DialogIcon"
+	}
+
+	hooksecurefunc(QuestMapFrame.QuestSessionManagement, "UpdateExecuteCommandAtlases", function(self, command)
+		self.ExecuteSessionCommand:SetNormalTexture("")
+		self.ExecuteSessionCommand:SetPushedTexture("")
+		self.ExecuteSessionCommand:SetDisabledTexture("")
+
+		local atlas = sessionCommandToButtonAtlas[command]
+		if atlas then
+			self.ExecuteSessionCommand.normalIcon:SetAtlas(atlas)
+		end
+	end)
+
+	hooksecurefunc(QuestSessionManager, "NotifyDialogShow", function(_, dialog)
+		if not dialog.isSkinned then
+			dialog:StripTextures()
+			dialog:SetTemplate("Transparent")
+			dialog.ButtonContainer.Confirm:SkinButton()
+			dialog.ButtonContainer.Decline:SkinButton()
+			if dialog.MinimizeButton then
+				T.SkinCloseButton(dialog.MinimizeButton, nil, "-")
+			end
+			dialog.isSkinned = true
+		end
+	end)
 end
 
 tinsert(T.SkinFuncs["ShestakUI"], LoadSkin)

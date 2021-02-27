@@ -21,7 +21,6 @@ L_ANNOUNCE_PC_MSG = "准备接怪: %s，倒数 %s.."
 L_ANNOUNCE_PC_ABORTED = "取消拉怪 !"
 
 -- Announce feasts and portals
-L_ANNOUNCE_FP_STAT = "%s 放置了 %s - [%s]。"
 L_ANNOUNCE_FP_PRE = "%s 放置了 %s"
 L_ANNOUNCE_FP_PUT = "%s 放置了 %s"
 L_ANNOUNCE_FP_CAST = "%s 开启了 %s"
@@ -47,9 +46,6 @@ L_TOOLTIP_INSPECT_OPEN = "检查框体已开启"
 L_MISC_UNDRESS = "无装备"
 L_MISC_DRINKING = " 进食中..."
 L_MISC_BUY_STACK = "Alt+右键批量购买"
-L_MISC_ONECLICK_BUYOUT = "Shift+右键 不弹出确认框体直接购买"
-L_MISC_ONECLICK_BID = "Shift+右鍵 不弹出确认框体直接竞标"
-L_MISC_ONECLICK_CANCEL = "Shift+右键 不弹出确认框体直接取消选择的物品"
 L_MISC_UI_OUTDATED = "ShestakUI 版本已过期，请至 www.shestak.org 下载最新版。"
 L_MISC_HEADER_MARK = "鼠标悬停显示团队图标"
 L_MISC_BINDER_OPEN = "鼠标绑定"
@@ -59,8 +55,6 @@ L_MISC_SCROLL = "附魔羊皮纸"
 L_RAID_UTIL_DISBAND = "解散团队"
 
 -- Zone name
-L_ZONE_ARATHIBASIN = "阿拉希盆地"
-L_ZONE_GILNEAS = "吉尔尼斯之战"
 L_ZONE_ANCIENTDALARAN = "达拉然巨坑"
 
 -- WatchFrame Wowhead link
@@ -93,6 +87,8 @@ L_MINIMAP_CALENDAR = "日历"
 L_MINIMAP_HEAL_LAYOUT = "左鍵 - HPS 布局"
 L_MINIMAP_DPS_LAYOUT = "右键 - DPS 布局"
 L_MINIMAP_BLIZZ_LAYOUT = "中键 - 暴雪 布局"
+L_MINIMAP_FARM = "小地图缩放"
+L_MINIMAP_TOGGLE = "动作条自由折叠"
 
 -- Chat
 L_CHAT_WHISPER = "From"
@@ -150,10 +146,6 @@ L_COOLDOWNS_COMBATRESS = "战复"
 L_COOLDOWNS_COMBATRESS_REMAINDER = "战复剩余: "
 L_COOLDOWNS_NEXTTIME = "下次: "
 
--- Autoinvite
-L_INVITE_ENABLE = "自动邀请已启用 关键词: "
-L_INVITE_DISABLE = "自动邀请已关闭"
-
 -- Bind key
 L_BIND_SAVED = "快捷键设置已保存"
 L_BIND_DISCARD = "新的快捷键设置已撤消"
@@ -197,12 +189,9 @@ L_WELCOME_LINE_2_2 = "获取更多信息。"
 
 -- Combat text
 L_COMBATTEXT_KILLING_BLOW = "最后一击"
-L_COMBATTEXT_ALREADY_UNLOCKED = "战斗信息已解锁"
-L_COMBATTEXT_ALREADY_LOCKED = "战斗信息已锁定"
 L_COMBATTEXT_TEST_DISABLED = "战斗信息测试模式已禁用"
 L_COMBATTEXT_TEST_ENABLED = "战斗信息测试模式已启用"
-L_COMBATTEXT_TEST_USE_UNLOCK = "键入 /xct unlock 移动/调整战斗信息框架大小"
-L_COMBATTEXT_TEST_USE_LOCK = "键入 /xct lock 锁定战斗信息框架"
+L_COMBATTEXT_TEST_USE_MOVE = "键入 /xct move 移动/调整战斗信息框架大小"
 L_COMBATTEXT_TEST_USE_TEST = "键入 /xct test 启用/禁用战斗信息测试模式"
 L_COMBATTEXT_TEST_USE_RESET = "键入 /xct reset 恢复到初始位置"
 L_COMBATTEXT_POPUP = "保存战斗信息窗口的位置须重载插件"
@@ -268,12 +257,12 @@ L_STATS_EQUIPMENT_CHANGER = "Shift+左键或Alt+左键开启套装选单"
 L_STATS_RC_EXPERIENCE = "右键切换在线时间/神器信息/经验值/声望值"
 L_STATS_WATCH_FACTIONS = "左键开/关相关界面"
 L_STATS_TOOLTIP_EXPERIENCE = "未达最高等级时将优先显示经验值信息"
-L_STATS_TOOLTIP_TIME_PLAYED = "达到最高等级后将优先显示角色在线时间纪录"
-L_STATS_OPEN_TALENT = "左键开启专精选单"
+L_STATS_TOOLTIP_TIME_PLAYED = "达到最高等级后将优先显示角色在线时间"
+L_STATS_OPEN_TALENT = "左键开启专精选单，Shift+左键开启专精界面"
 L_STATS_RC_TALENT = "右键开启拾取专精选单"
 L_STATS_LOCATION = "位置/座标"
 L_STATS_WORLD_MAP = "点击开/关世界地图"
-L_STATS_INSERTS_COORDS = "Shift+左键地名/座标自动复制到输入框"
+L_STATS_INSERTS_COORDS = "Shift+左键地名/座标/定位标记自动复制到输入框"
 L_STATS_OPEN_CURRENCY = "左键开/关货币界面"
 L_STATS_RC_AUTO_SELLING = "右键开/关自动出售"
 L_STATS_NEED_TO_SELL = "键入 /junk 列出常用命令"
@@ -291,25 +280,23 @@ L_SLASHCMD_HELP = {
 	"/rd - 解散队伍",
 	"/toraid - 转换为队伍/团队",
 	"/teleport - 传送随机副本",
-	"/spec - 切换天赋",
+	"/ss - 切换天赋",
+	"/tt - 密语当前目标",
 	"/heal - 载入HPS布局",
 	"/dps - 载入DPS布局",
-	"/frame - 在聊天框输出鼠标指向的框体名字",
 	"/farmmode - 开启/关闭小地图采集模式",
-	"/moveui - 解锁/锁定 界面中所有可移动的框体，Ctrl+右键选中的框架重置到预设位置",
 	"/resetui - 重置一般设置到初始值",
 	"/resetuf - 重置头像框架到初始位置",
 	"/resetconfig - 重置ShestakUI_Config到初始值",
 	"/resetstats - 重置所有角色游戏时间和金币的统计数据",
-	"/settings ADDON_NAME - 设置指定插件",
+	"/settings - 设置指定插件",
 	"/ls - 信息条功能说明",
 	"/xct - 战斗信息选项",
 	"/raidcd - 团队技能冷却测试模式",
 	"/enemycd - 敌对技能冷却测试模式",
 	"/pulsecd - 技能冷却闪烁测试模式",
 	"/threat - 仇恨栏測試模式",
-	"/tt - 密语当前目标",
-	"/ainv - 开/关密语关键词自动邀请进组",
 	"/testuf - 头像框架测试模式",
+	"/moveui - 解锁/锁定 界面中所有可移动的框体，Ctrl+右键选中的框架重置到预设位置", -- Need review
 	"/cfg - 开启ShestakUI设置界面",
 }

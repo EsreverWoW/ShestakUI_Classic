@@ -12,13 +12,14 @@ local foodbuffs = T.ReminderBuffs["Food"]
 local staminabuffs = T.ReminderBuffs["Stamina"]
 local custombuffs = T.ReminderBuffs["Custom"]
 local visible, flask, battleelixir, guardianelixir, food, stamina, spell4, custom
+local playerBuff = {}
 
 -- We need to check if you have two different elixirs if your not flasked, before we say your not flasked
-local function CheckElixir(unit)
-	if battleelixirbuffs and battleelixirbuffs[1] then
-		for _, battleelixirbuffs in pairs(battleelixirbuffs) do
-			local name, _, icon = GetSpellInfo(battleelixirbuffs)
-			if T.CheckPlayerBuff(name) then
+local function CheckElixir()
+	if #battleelixirbuffs > 0 then
+		for i = 1, #battleelixirbuffs do
+			local name, icon = unpack(battleelixirbuffs[i])
+			if playerBuff[name] then
 				FlaskFrame.t:SetTexture(icon)
 				battleelixir = true
 				break
@@ -28,10 +29,10 @@ local function CheckElixir(unit)
 		end
 	end
 
-	if guardianelixirbuffs and guardianelixirbuffs[1] then
-		for _, guardianelixirbuffs in pairs(guardianelixirbuffs) do
-			local name, _, icon = GetSpellInfo(guardianelixirbuffs)
-			if T.CheckPlayerBuff(name) then
+	if #guardianelixirbuffs > 0 then
+		for i = 1, #guardianelixirbuffs do
+			local name, icon = unpack(guardianelixirbuffs[i])
+			if playerBuff[name] then
 				guardianelixir = true
 				if not battleelixir then
 					FlaskFrame.t:SetTexture(icon)
@@ -54,8 +55,17 @@ local function CheckElixir(unit)
 end
 
 -- Main Script
-local function OnAuraChange(self, event, arg1, unit)
+local function OnAuraChange(_, event, arg1)
 	if event == "UNIT_AURA" and arg1 ~= "player" then return end
+
+	wipe(playerBuff)
+	local i = 1
+	while true do
+		local name = UnitBuff("player", i)
+		if not name then break end
+		playerBuff[name] = true
+		i = i + 1
+	end
 
 	-- If We're a caster we may want to see different buffs
 	if T.Role == "Caster" or T.Role == "Healer" then
@@ -65,45 +75,41 @@ local function OnAuraChange(self, event, arg1, unit)
 	end
 
 	-- Start checking buffs to see if we can find a match from the list
-	if flaskbuffs and flaskbuffs[1] then
-		for i, flaskbuffs in pairs(flaskbuffs) do
-			local name, _, icon = GetSpellInfo(flaskbuffs)
-			if i == 1 then
-				FlaskFrame.t:SetTexture(icon)
-			end
-			if T.CheckPlayerBuff(name) then
-				FlaskFrame:SetAlpha(C.reminder.raid_buffs_alpha)
-				flask = true
-				break
-			else
-				CheckElixir()
-			end
+	for i = 1, #flaskbuffs do
+		local name, icon = unpack(flaskbuffs[i])
+		if i == 1 then
+			FlaskFrame.t:SetTexture(icon)
+		end
+		if playerBuff[name] then
+			FlaskFrame:SetAlpha(C.reminder.raid_buffs_alpha)
+			flask = true
+			break
+		else
+			CheckElixir()
 		end
 	end
 
-	if foodbuffs and foodbuffs[1] then
-		for i, foodbuffs in pairs(foodbuffs) do
-			local name, _, icon = GetSpellInfo(foodbuffs)
-			if i == 1 then
-				FoodFrame.t:SetTexture(icon)
-			end
-			if T.CheckPlayerBuff(name) then
-				FoodFrame:SetAlpha(C.reminder.raid_buffs_alpha)
-				food = true
-				break
-			else
-				FoodFrame:SetAlpha(1)
-				food = false
-			end
+	for i = 1, #foodbuffs do
+		local name, icon = unpack(foodbuffs[i])
+		if i == 1 then
+			FoodFrame.t:SetTexture(icon)
+		end
+		if playerBuff[name] then
+			FoodFrame:SetAlpha(C.reminder.raid_buffs_alpha)
+			food = true
+			break
+		else
+			FoodFrame:SetAlpha(1)
+			food = false
 		end
 	end
 
-	for i, staminabuffs in pairs(staminabuffs) do
-		local name, _, icon = GetSpellInfo(staminabuffs)
+	for i = 1, #staminabuffs do
+		local name, icon = unpack(staminabuffs[i])
 		if i == 1 then
 			StaminaFrame.t:SetTexture(icon)
 		end
-		if T.CheckPlayerBuff(name) then
+		if playerBuff[name] then
 			StaminaFrame:SetAlpha(C.reminder.raid_buffs_alpha)
 			stamina = true
 			break
@@ -113,12 +119,12 @@ local function OnAuraChange(self, event, arg1, unit)
 		end
 	end
 
-	for i, Spell4Buff in pairs(Spell4Buff) do
-		local name, _, icon = GetSpellInfo(Spell4Buff)
+	for i = 1, #Spell4Buff do
+		local name, icon = unpack(Spell4Buff[i])
 		if i == 1 then
 			Spell4Frame.t:SetTexture(icon)
 		end
-		if T.CheckPlayerBuff(name) then
+		if playerBuff[name] then
 			Spell4Frame:SetAlpha(C.reminder.raid_buffs_alpha)
 			spell4 = true
 			break
@@ -128,13 +134,13 @@ local function OnAuraChange(self, event, arg1, unit)
 		end
 	end
 
-	if custombuffs and custombuffs[1] then
-		for i, custombuffs in pairs(custombuffs) do
-			local name, _, icon = GetSpellInfo(custombuffs)
+	if #custombuffs > 0 then
+		for i = 1, #custombuffs do
+			local name, icon = unpack(custombuffs[i])
 			if i == 1 then
 				CustomFrame.t:SetTexture(icon)
 			end
-			if T.CheckPlayerBuff(name) then
+			if playerBuff[name] then
 				CustomFrame:SetAlpha(C.reminder.raid_buffs_alpha)
 				custom = true
 				break
@@ -184,13 +190,25 @@ raidbuff_reminder:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
 raidbuff_reminder:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 raidbuff_reminder:SetScript("OnEvent", OnAuraChange)
 
--- Function to create buttons
-local function CreateButton(name, relativeTo, firstbutton)
+local line = math.ceil(C.minimap.size / (C.reminder.raid_buffs_size + 2))
+
+local buffButtons = {
+	"FlaskFrame",
+	"FoodFrame",
+	"StaminaFrame",
+	"Spell4Frame",
+	"CustomFrame"
+}
+
+for i = 1, #buffButtons do
+	local name = buffButtons[i]
 	local button = CreateFrame("Frame", name, RaidBuffReminder)
-	if firstbutton == true then
-		button:CreatePanel("Default", C.reminder.raid_buffs_size, C.reminder.raid_buffs_size, "BOTTOMLEFT", relativeTo, "BOTTOMLEFT", 0, 0)
+	if i == 1 then
+		button:CreatePanel("Default", C.reminder.raid_buffs_size, C.reminder.raid_buffs_size, "BOTTOMLEFT", RaidBuffReminder, "BOTTOMLEFT", 0, 0)
+	elseif i == line then
+		button:CreatePanel("Default", C.reminder.raid_buffs_size, C.reminder.raid_buffs_size, "BOTTOM", buffButtons[1], "TOP", 0, 3)
 	else
-		button:CreatePanel("Default", C.reminder.raid_buffs_size, C.reminder.raid_buffs_size, "LEFT", relativeTo, "RIGHT", 3, 0)
+		button:CreatePanel("Default", C.reminder.raid_buffs_size, C.reminder.raid_buffs_size, "LEFT", buffButtons[i-1], "RIGHT", 3, 0)
 	end
 	button:SetFrameLevel(RaidBuffReminder:GetFrameLevel() + 2)
 
@@ -198,13 +216,4 @@ local function CreateButton(name, relativeTo, firstbutton)
 	button.t:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 	button.t:SetPoint("TOPLEFT", 2, -2)
 	button.t:SetPoint("BOTTOMRIGHT", -2, 2)
-end
-
--- Create Buttons
-do
-	CreateButton("FlaskFrame", RaidBuffReminder, true)
-	CreateButton("FoodFrame", FlaskFrame, false)
-	CreateButton("StaminaFrame", FoodFrame, false)
-	CreateButton("Spell4Frame", StaminaFrame, false)
-	CreateButton("CustomFrame", Spell4Frame, false)
 end

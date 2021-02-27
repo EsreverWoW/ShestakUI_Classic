@@ -1,5 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
-if T.class ~= "MAGE" or T.level < 17 then return end
+if T.class ~= "MAGE" or T.level < 11 then return end
 
 ----------------------------------------------------------------------------------------
 --	Mage portals menu(by Foof and Tohveli)
@@ -21,6 +21,7 @@ if not T.classic then
 		[12] = {193759, 193759}, 	-- Hall of the Guardian (OrderHall)
 		[13] = {224869, 224871}, 	-- Dalaran, Broken Isles
 		[14] = {281404, 281402}, 	-- Dazar'alor
+		[15] = {344587, 344597}, 	-- Oribos
 	} or { -- Alliance
 		[1] = {3561,10059},			-- Stormwind
 		[2] = {3562,11416},			-- Ironforge
@@ -36,6 +37,7 @@ if not T.classic then
 		[12] = {193759, 193759}, 	-- Hall of the Guardian (OrderHall)
 		[13] = {224869, 224871}, 	-- Dalaran, Broken Isles
 		[14] = {281403, 281400}, 	-- Boralus
+		[15] = {344587, 344597}, 	-- Oribos
 	}
 else
 	spells = (UnitFactionGroup("player") == "Horde") and {
@@ -67,12 +69,14 @@ for i, spell in pairs(spells) do
 
 	local b = CreateFrame("Button", nil, frame, "SecureActionButtonTemplate")
 	b:CreatePanel("Transparent", C.minimap.size, 20, "BOTTOMLEFT", frame, "BOTTOMLEFT", 0, ((i - 1) * 21))
-	b:SetBackdropBorderColor(T.color.r, T.color.g, T.color.b)
+	b:SetBackdropBorderColor(unpack(C.media.classborder_color))
 	b:SetFrameStrata("HIGH")
 
 	local l = b:CreateFontString("TeleportMenuName"..i, "OVERLAY")
 	l:SetFont(C.media.pixel_font, C.media.pixel_font_size, C.media.pixel_font_style)
-	if i == 9 then
+	if i == 5 and UnitFactionGroup("player") == "Horde" then
+		l:SetText(C_Map.GetAreaInfo(75))
+	elseif i == 9 then
 		l:SetText(L_ZONE_ANCIENTDALARAN)
 	else
 		l:SetText(string.sub(teleport, (string.find(teleport, ":") and string.find(teleport, ":") + 1) or 0))
@@ -80,7 +84,7 @@ for i, spell in pairs(spells) do
 
 	l:SetPoint("LEFT", b, "LEFT", 2, 0)
 	l:SetPoint("RIGHT", b, "RIGHT", -2, 0)
-	l:SetHeight(C.media.pixel_font_size)
+	l:SetWordWrap(false)
 
 	b:SetFontString(l)
 
@@ -116,7 +120,7 @@ button.t:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 button.t:SetPoint("TOPLEFT", button, 2, -2)
 button.t:SetPoint("BOTTOMRIGHT", button, -2, 2)
 
-button:SetScript("OnClick", function(self)
+button:SetScript("OnClick", function()
 	if not InCombatLockdown() then
 		if _G["TeleportMenu"]:IsShown() then
 			_G["TeleportMenu"]:Hide()

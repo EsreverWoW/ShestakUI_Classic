@@ -5,7 +5,11 @@ if C.actionbar.enable ~= true then return end
 --	Vehicle exit button(by Tukz)
 ----------------------------------------------------------------------------------------
 local anchor = CreateFrame("Frame", "VehicleButtonAnchor", UIParent)
-anchor:SetPoint(unpack(C.position.vehicle_bar))
+if C.actionbar.split_bars then
+	anchor:SetPoint(C.position.vehicle_bar[1], SplitBarLeft, C.position.vehicle_bar[3], C.position.vehicle_bar[4], C.position.vehicle_bar[5])
+else
+	anchor:SetPoint(unpack(C.position.vehicle_bar))
+end
 anchor:SetSize(C.actionbar.button_size, C.actionbar.button_size)
 
 local vehicle = CreateFrame("Button", "VehicleButton", UIParent)
@@ -46,6 +50,7 @@ hooksecurefunc("MainMenuBarVehicleLeaveButton_Update", function()
 			end
 			vehicle:Show()
 		else
+			vehicle:UnlockHighlight()
 			vehicle:Hide()
 		end
 	end
@@ -54,10 +59,10 @@ end)
 if not T.classic then
 	hooksecurefunc("PossessBar_UpdateState", function()
 		for i = 1, NUM_POSSESS_SLOTS do
-			local _, name, enabled = GetPossessInfo(i)
+			local _, _, enabled = GetPossessInfo(i)
 			if enabled then
 				vehicle:SetScript("OnClick", function()
-					CancelUnitBuff("player", name)
+					CancelPetPossess()
 				end)
 				vehicle:Show()
 			else
@@ -76,9 +81,11 @@ vehicle:SetScript("OnEnter", function(self)
 		GameTooltip:Show()
 	elseif not T.classic then
 		if IsPossessBarVisible() then
-			GameTooltip_AddNewbieTip(self, CANCEL, 1, 1, 1, nil)
+			GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+			GameTooltip_SetTitle(GameTooltip, CANCEL)
 		else
-			GameTooltip_AddNewbieTip(self, LEAVE_VEHICLE, 1, 1, 1, nil)
+			GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+			GameTooltip_SetTitle(GameTooltip, LEAVE_VEHICLE)
 		end
 	end
 end)

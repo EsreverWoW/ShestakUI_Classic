@@ -70,9 +70,12 @@ local applystyle = function(bar)
 	bar.OldSetScale = bar.SetScale
 
 	-- Set currect scale if bars attached to nameplates
-	hooksecurefunc(bar, "SetParent", function()
-		bar:SetScale(T.noscalemult)
-	end)
+	if not bar.hook then
+		hooksecurefunc(bar, "SetParent", function()
+			bar:SetScale(T.noscalemult)
+		end)
+		bar.hook = true
+	end
 
 	-- Create or reparent and use bar background
 	local bg = nil
@@ -140,11 +143,9 @@ local applystyle = function(bar)
 	bar.candyBarIconFrame:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 end
 
-local function registerStyle()
+local function registerStyle(myProfile)
 	if not BigWigs then return end
-	local bars = BigWigs:GetPlugin("Bars", true)
-	if not bars then return end
-	bars:RegisterBarStyle("ShestakUI", {
+	BigWigsAPI:RegisterBarStyle("ShestakUI", {
 		apiVersion = 1,
 		version = 1,
 		GetSpacing = function() return T.Scale(13) end,
@@ -152,7 +153,8 @@ local function registerStyle()
 		BarStopped = freestyle,
 		GetStyleName = function() return "ShestakUI" end,
 	})
-	if BigWigsLoader and BigWigsClassicDB.namespaces.BigWigs_Plugins_Bars.profiles.Default.barStyle == "ShestakUI" then
+
+	if BigWigsLoader and myProfile and myProfile.barStyle == "ShestakUI" then
 		BigWigsLoader.RegisterMessage("BigWigs_Plugins", "BigWigs_FrameCreated", function()
 			BigWigsProximityAnchor:SetTemplate("Transparent")
 			BigWigsInfoBox:SetTemplate("Transparent")
@@ -172,15 +174,25 @@ f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(_, event, addon)
 	if event == "ADDON_LOADED" then
 		if addon == "BigWigs_Plugins" then
-			if not BigWigsClassicDB.namespaces.BigWigs_Plugins_Bars or BigWigsClassicDB.namespaces.BigWigs_Plugins_Bars.profiles.Default.InstalledBars ~= C.actionbar.bottombars then
-				StaticPopup_Show("SETTINGS_BIGWIGS")
+			local myProfile
+			if BigWigs3DB then
+				if BigWigs3DB.profileKeys and BigWigs3DB.namespaces and BigWigs3DB.namespaces.BigWigs_Plugins_Bars and BigWigs3DB.namespaces.BigWigs_Plugins_Bars.profiles then
+					myProfile = BigWigs3DB.namespaces.BigWigs_Plugins_Bars.profiles[BigWigs3DB.profileKeys[UnitName("player").." - "..GetRealmName()]]
+				end
+				if not myProfile or myProfile.InstalledBars ~= C.actionbar.bottombars then
+					StaticPopup_Show("SETTINGS_BIGWIGS")
+				end
 			end
-			registerStyle()
+
+			registerStyle(myProfile)
 			f:UnregisterEvent("ADDON_LOADED")
 		elseif addon == "ShestakUI" then
-			if BigWigsLoader and C.skins.blizzard_frames == true then
+			if BigWigsLoader then
 				BigWigsLoader.RegisterMessage(addon, "BigWigs_FrameCreated", function(_, frame, name)
-					if name == "QueueTimer" then
+					if name == "AltPower" then
+						frame:SetTemplate("Transparent")
+					end
+					if name == "QueueTimer" and C.skins.blizzard_frames then
 						frame:SetSize(240, 15)
 						frame:StripTextures()
 						frame:SetStatusBarTexture(C.media.texture)
@@ -231,8 +243,9 @@ function T.UploadBW()
 		prox.db.profile.fontName = "Calibri"
 		prox.db.profile.objects.ability = false
 	end
-	BigWigsIconClassicDB.hide = true
+	BigWigsIconDB.hide = true
 	BigWigs:GetPlugin("Super Emphasize").db.profile.fontName = "Calibri"
+	BigWigs:GetPlugin("Alt Power").db.profile.fontName = "Calibri"
 	if InCombatLockdown() then
 		print("|cffffff00"..ERR_NOT_IN_COMBAT.."|r")
 		print("|cffffff00Reload your UI to apply skin.|r")
@@ -249,7 +262,7 @@ StaticPopupDialogs.SETTINGS_BIGWIGS = {
 	timeout = 0,
 	whileDead = 1,
 	hideOnEscape = true,
-	preferredIndex = STATICPOPUPS_NUMDIALOGS,
+	preferredIndex = 5,
 }
 
 SlashCmdList.BWTEST = function(msg)

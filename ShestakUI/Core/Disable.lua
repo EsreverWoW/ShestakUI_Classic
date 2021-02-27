@@ -11,12 +11,11 @@ if C.actionbar.bottombars > 3 then
 	C.actionbar.bottombars = 3
 end
 
-if C.actionbar.bottombars == 3 and C.actionbar.rightbars == 3 then
+if C.actionbar.split_bars == true then
 	C.actionbar.bottombars = 3
-	C.actionbar.rightbars = 2
 end
 
-if C.actionbar.split_bars == true then
+if C.actionbar.bottombars == 3 and C.actionbar.rightbars == 3 then
 	C.actionbar.bottombars = 3
 	C.actionbar.rightbars = 2
 end
@@ -25,17 +24,10 @@ if C.actionbar.bottombars < 1 then
 	C.actionbar.bottombars = 1
 end
 
-if C.actionbar.petbar_horizontal == true then
-	C.actionbar.stancebar_horizontal = false
-end
-
-if C.error.black == true and C.error.white == true then
-	C.error.white = false
-end
-
-if C.error.combat == true then
-	C.error.black = false
-	C.error.white = false
+if C.actionbar.editor then
+	C.actionbar.bottombars_mouseover = false
+	C.actionbar.rightbars_mouseover = false
+	C.actionbar.toggle_mode = false
 end
 
 ----------------------------------------------------------------------------------------
@@ -50,7 +42,7 @@ if IsAddOnLoaded("Grid") or IsAddOnLoaded("Grid2") or IsAddOnLoaded("HealBot") o
 	C.raidframe.show_raid = false
 end
 
-if IsAddOnLoaded("TidyPlates") or IsAddOnLoaded("nPlates") or IsAddOnLoaded("Kui_Nameplates") or IsAddOnLoaded("rNamePlates") or IsAddOnLoaded("EKplates") or IsAddOnLoaded("bdNameplates") then
+if IsAddOnLoaded("TidyPlates") or IsAddOnLoaded("nPlates") or IsAddOnLoaded("Kui_Nameplates") or IsAddOnLoaded("rNamePlates") or IsAddOnLoaded("EKplates") or IsAddOnLoaded("bdNameplates") or IsAddOnLoaded("Plater") or IsAddOnLoaded("Nameplates") or IsAddOnLoaded("NeatPlates") then
 	C.nameplate.enable = false
 end
 
@@ -63,7 +55,7 @@ if IsAddOnLoaded("Mapster") then
 	C.minimap.fog_of_war = false
 end
 
-if IsAddOnLoaded("Prat-3.0") or IsAddOnLoaded("Chatter") or IsAddOnLoaded("BasicChatMods") then
+if IsAddOnLoaded("Prat-3.0") or IsAddOnLoaded("Chatter") or IsAddOnLoaded("BasicChatMods") or IsAddOnLoaded("Glass") then
 	C.chat.enable = false
 end
 
@@ -110,7 +102,7 @@ if IsAddOnLoaded("Doom_CooldownPulse") then
 end
 
 if IsAddOnLoaded("GnomishVendorShrinker") or IsAddOnLoaded("AlreadyKnown") then
-	C.misc.already_known = false
+	C.trade.already_known = false
 end
 
 if IsAddOnLoaded("Clique") or IsAddOnLoaded("sBinder") then
@@ -140,4 +132,8 @@ end
 
 if IsAddOnLoaded("BigWigs") or IsAddOnLoaded("DBM-Core") then
 	C.automation.auto_role = false
+end
+
+if IsAddOnLoaded("QuickQuest") then
+	C.automation.accept_quest = false
 end

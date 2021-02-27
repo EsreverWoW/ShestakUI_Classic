@@ -1,26 +1,34 @@
 local T, C, L, _ = unpack(select(2, ...))
+
+-- Spells lists initialization
+C.filger.buff_spells_list = {}
+C.filger.proc_spells_list = {}
+C.filger.debuff_spells_list = {}
+C.filger.aura_bar_spells_list = {}
+C.filger.cd_spells_list = {}
+C.filger.ignore_spells_list = {}
+C.raidframe.plugins_aura_watch_list = {}
+C.announcements.spells_list = {}
+C.raidcooldown.spells_list = {}
+C.enemycooldown.spells_list = {}
+C.nameplate.debuffs_list = {}
+C.nameplate.buffs_list = {}
+C.chat.spam_list = ""
+C.media.profile = "-- Insert Your code here\n"
+C.options = {}
+
 if not IsAddOnLoaded("ShestakUI_Config") then return end
 
 ----------------------------------------------------------------------------------------
 --	This Module loads new user settings if ShestakUI_Config is loaded
 ----------------------------------------------------------------------------------------
--- Сreate the profile boolean
+-- Create the profile boolean
 if not ShestakUIOptionsGlobal then ShestakUIOptionsGlobal = {} end
 if ShestakUIOptionsGlobal[T.realm] == nil then ShestakUIOptionsGlobal[T.realm] = {} end
 if ShestakUIOptionsGlobal[T.realm][T.name] == nil then ShestakUIOptionsGlobal[T.realm][T.name] = false end
 
--- Сreate the main options table
+-- Create the main options table
 if ShestakUIOptions == nil then ShestakUIOptions = {} end
-
--- TODO: Remove Backward compatible for old GUI after while
-if GUIConfigSettings then
-	ShestakUIOptions = GUIConfigSettings
-end
-
-if GUIConfigAll and GUIConfigAll[T.realm][T.name] == true then
-	ShestakUIOptionsGlobal[T.realm][T.name] = true
-	ShestakUIOptionsPerChar = GUIConfig
-end
 
 -- Determine which settings to use
 local profile
@@ -51,3 +59,6 @@ end
 
 -- Add global options variable
 C.options = profile
+
+-- Load edited profile code
+loadstring("local T, C, L = unpack(ShestakUI)\n"..C["media"].profile)()

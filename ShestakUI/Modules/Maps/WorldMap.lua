@@ -10,7 +10,7 @@ MapQuestInfoRewardsFrame.XPFrame.Name:SetFont(C.media.normal_font, 13)
 ----------------------------------------------------------------------------------------
 if not T.classic then
 	hooksecurefunc(WorldMapFrame, "SynchronizeDisplayState", function()
-		if CharacterFrame:IsShown() or SpellBookFrame:IsShown() or (PlayerTalentFrame and PlayerTalentFrame:IsShown()) or (ChannelFrame and ChannelFrame:IsShown()) or PVEFrame:IsShown() or (MacroFrame and MacroFrame:IsShown()) then return end
+		if CharacterFrame:IsShown() or SpellBookFrame:IsShown() or (PlayerTalentFrame and PlayerTalentFrame:IsShown()) or (ChannelFrame and ChannelFrame:IsShown()) or PVEFrame:IsShown() or (MacroFrame and MacroFrame:IsShown()) or (GarrisonLandingPage and GarrisonLandingPage:IsShown()) then return end
 		if not WorldMapFrame:IsMaximized() then
 			WorldMapFrame:ClearAllPoints()
 			WorldMapFrame:SetPoint(unpack(C.position.map))
@@ -54,6 +54,15 @@ else
 end
 
 ----------------------------------------------------------------------------------------
+--	Count of quests
+----------------------------------------------------------------------------------------
+local numQuest = CreateFrame("Frame", nil, QuestMapFrame)
+numQuest.text = numQuest:CreateFontString(nil, "ARTWORK", "GameFontNormal")
+numQuest.text:SetPoint("TOP", QuestMapFrame, "TOP", 0, -21)
+numQuest.text:SetJustifyH("LEFT")
+numQuest.text:SetText(select(2, C_QuestLog.GetNumQuestLogEntries()).."/"..C_QuestLog.GetMaxNumQuestsCanAccept())
+
+----------------------------------------------------------------------------------------
 --	Creating coordinate
 ----------------------------------------------------------------------------------------
 local coords = CreateFrame("Frame", "CoordsFrame", WorldMapFrame)
@@ -62,7 +71,7 @@ if not T.classic then
 	coords:SetFrameStrata(WorldMapFrame.BorderFrame:GetFrameStrata())
 
 	coords.PlayerText = coords:CreateFontString(nil, "ARTWORK", "GameFontNormal")
-	coords.PlayerText:SetPoint("BOTTOM", WorldMapFrame.ScrollContainer, "BOTTOM", 5, 20)
+	coords.PlayerText:SetPoint("BOTTOMLEFT", WorldMapFrame.ScrollContainer, "BOTTOM", -40, 20)
 	coords.PlayerText:SetJustifyH("LEFT")
 	coords.PlayerText:SetText(UnitName("player")..": 0,0")
 
@@ -91,9 +100,10 @@ local function GetPlayerMapPos(mapID)
 
 	local mapRect = mapRects[mapID]
 	if not mapRect then
-		mapRect = {
-			select(2, C_Map.GetWorldPosFromMapPos(mapID, CreateVector2D(0, 0))),
-			select(2, C_Map.GetWorldPosFromMapPos(mapID, CreateVector2D(1, 1)))}
+		local _, pos1 = C_Map.GetWorldPosFromMapPos(mapID, CreateVector2D(0, 0))
+		local _, pos2 = C_Map.GetWorldPosFromMapPos(mapID, CreateVector2D(1, 1))
+		if not pos1 or not pos2 then return end
+		mapRect = {pos1, pos2}
 		mapRect[2]:Subtract(mapRect[1])
 		mapRects[mapID] = mapRect
 	end
@@ -103,9 +113,7 @@ local function GetPlayerMapPos(mapID)
 end
 
 local int = 0
-WorldMapFrame:HookScript("OnUpdate", function(self)
-	if not WorldMapFrame:IsShown() then return end
-
+WorldMapFrame:HookScript("OnUpdate", function()
 	int = int + 1
 	if int >= 3 then
 		local unitMap = C_Map.GetBestMapForUnit("player")
@@ -132,6 +140,8 @@ WorldMapFrame:HookScript("OnUpdate", function(self)
 			coords.MouseText:SetText(L_MAP_CURSOR.."|cffff0000"..L_MAP_BOUNDS.."|r")
 		end
 
+		numQuest.text:SetText(select(2, C_QuestLog.GetNumQuestLogEntries()).."/"..C_QuestLog.GetMaxNumQuestsCanAccept())
+
 		int = 0
 	end
 end)
@@ -139,108 +149,171 @@ end)
 coords:RegisterEvent("PLAYER_ENTERING_WORLD")
 coords:SetScript("OnEvent", function(self, event)
 	self:UnregisterEvent(event)
-	if SavedOptionsPerChar and SavedOptionsPerChar.Coords ~= true then
+	if ShestakUISettingsPerChar and ShestakUISettingsPerChar.Coords ~= true then
 		coords:SetAlpha(0)
 	end
 end)
 
 ----------------------------------------------------------------------------------------
---	Dropdown menu for close button
+--	Added options to map tracking button
 ----------------------------------------------------------------------------------------
-local WorldMap_DDMenu = CreateFrame("Frame", "WorldMapDropDownMenu")
-WorldMap_DDMenu.displayMode = "MENU"
-WorldMap_DDMenu.info = {}
-WorldMap_DDMenu.HideMenu = function()
-	if UIDROPDOWNMENU_OPEN_MENU == WorldMap_DDMenu then
-		CloseDropDownMenus()
-	end
-end
+if not T.classic then
+	hooksecurefunc(WorldMapFrame.overlayFrames[2], "InitializeDropDown", function(self)
+		UIDropDownMenu_AddSeparator()
+		local info = UIDropDownMenu_CreateInfo()
 
-local function WorldMapMenu(self, level)
-	if not level then return end
+		info.isTitle = true
+		info.notCheckable = true
+		info.text = "ShestakUI"
 
-	local info = self.info
+		UIDropDownMenu_AddButton(info)
+		info.text = nil
 
-	wipe(info)
+		info.isTitle = nil
+		info.disabled = nil
+		info.notCheckable = nil
+		info.isNotRadio = true
+		info.keepShownOnClick = true
 
-	if level ~= 1 then return end
-
-	wipe(info)
-	info.text = L_MAP_COORDS
-	info.checked = function()
-		return SavedOptionsPerChar.Coords == true
-	end
-
-	info.func = function()
-		if SavedOptionsPerChar.Coords == true then
-			SavedOptionsPerChar.Coords = false
-			coords:SetAlpha(0)
-		else
-			SavedOptionsPerChar.Coords = true
-			coords:SetAlpha(1)
-		end
-	end
-	UIDropDownMenu_AddButton(info, level)
-
-	if C.minimap.fog_of_war == true then
-		wipe(info)
-		info.text = L_MAP_FOG
+		info.text = L_MAP_COORDS
 		info.checked = function()
-			return SavedOptionsPerChar.FogOfWar == true
+			return ShestakUISettingsPerChar.Coords == true
 		end
 
 		info.func = function()
-			if SavedOptionsPerChar.FogOfWar == true then
-				SavedOptionsPerChar.FogOfWar = false
-				for i = 1, #T.overlayTextures do
-					T.overlayTextures[i]:Hide()
-				end
+			if ShestakUISettingsPerChar.Coords == true then
+				ShestakUISettingsPerChar.Coords = false
+				coords:SetAlpha(0)
 			else
-				SavedOptionsPerChar.FogOfWar = true
-				for i = 1, #T.overlayTextures do
-					T.overlayTextures[i]:Show()
+				ShestakUISettingsPerChar.Coords = true
+				coords:SetAlpha(1)
+			end
+		end
+		UIDropDownMenu_AddButton(info)
+
+		if C.minimap.fog_of_war == true then
+			info.text = L_MAP_FOG
+			info.checked = function()
+				return ShestakUISettingsPerChar.FogOfWar == true
+			end
+
+			info.func = function()
+				if ShestakUISettingsPerChar.FogOfWar == true then
+					ShestakUISettingsPerChar.FogOfWar = false
+					for i = 1, #T.overlayTextures do
+						T.overlayTextures[i]:Hide()
+					end
+				else
+					ShestakUISettingsPerChar.FogOfWar = true
+					for i = 1, #T.overlayTextures do
+						T.overlayTextures[i]:Show()
+					end
 				end
+			end
+			UIDropDownMenu_AddButton(info)
+		end
+	end)
+end
+
+----------------------------------------------------------------------------------------
+--	Dropdown menu for close button
+----------------------------------------------------------------------------------------
+if T.classic then
+	local WorldMap_DDMenu = CreateFrame("Frame", "WorldMapDropDownMenu")
+	WorldMap_DDMenu.displayMode = "MENU"
+	WorldMap_DDMenu.info = {}
+	WorldMap_DDMenu.HideMenu = function()
+		if UIDROPDOWNMENU_OPEN_MENU == WorldMap_DDMenu then
+			CloseDropDownMenus()
+		end
+	end
+
+	local function WorldMapMenu(self, level)
+		if not level then return end
+
+		local info = self.info
+
+		wipe(info)
+
+		if level ~= 1 then return end
+
+		wipe(info)
+		info.text = L_MAP_COORDS
+		info.checked = function()
+			return SavedOptionsPerChar.Coords == true
+		end
+
+		info.func = function()
+			if SavedOptionsPerChar.Coords == true then
+				SavedOptionsPerChar.Coords = false
+				coords:SetAlpha(0)
+			else
+				SavedOptionsPerChar.Coords = true
+				coords:SetAlpha(1)
 			end
 		end
 		UIDropDownMenu_AddButton(info, level)
+
+		if C.minimap.fog_of_war == true then
+			wipe(info)
+			info.text = L_MAP_FOG
+			info.checked = function()
+				return SavedOptionsPerChar.FogOfWar == true
+			end
+
+			info.func = function()
+				if SavedOptionsPerChar.FogOfWar == true then
+					SavedOptionsPerChar.FogOfWar = false
+					for i = 1, #T.overlayTextures do
+						T.overlayTextures[i]:Hide()
+					end
+				else
+					SavedOptionsPerChar.FogOfWar = true
+					for i = 1, #T.overlayTextures do
+						T.overlayTextures[i]:Show()
+					end
+				end
+			end
+			UIDropDownMenu_AddButton(info, level)
+		end
+
+		wipe(info)
+		info.disabled = nil
+		info.notCheckable = 1
+		info.text = CLOSE
+		info.func = self.HideMenu
+		info.tooltipTitle = CLOSE
+		UIDropDownMenu_AddButton(info, level)
 	end
 
-	wipe(info)
-	info.disabled = nil
-	info.notCheckable = 1
-	info.text = CLOSE
-	info.func = self.HideMenu
-	info.tooltipTitle = CLOSE
-	UIDropDownMenu_AddButton(info, level)
-end
-
-WorldMapFrameCloseButton:RegisterForClicks("AnyUp")
-WorldMapFrameCloseButton:SetScript("OnClick", function(self, btn)
-	if btn == "RightButton" then
-		if WorldMap_DDMenu.initialize ~= WorldMapMenu then
-			CloseDropDownMenus()
-			WorldMap_DDMenu.initialize = WorldMapMenu
-		end
-		ToggleDropDownMenu(nil, nil, WorldMap_DDMenu, self:GetName(), -10, -6)
-		return
-	else
-		if not T.classic then
-			UIPanelCloseButton_OnClick(self)
+	WorldMapFrameCloseButton:RegisterForClicks("AnyUp")
+	WorldMapFrameCloseButton:SetScript("OnClick", function(self, btn)
+		if btn == "RightButton" then
+			if WorldMap_DDMenu.initialize ~= WorldMapMenu then
+				CloseDropDownMenus()
+				WorldMap_DDMenu.initialize = WorldMapMenu
+			end
+			ToggleDropDownMenu(nil, nil, WorldMap_DDMenu, self:GetName(), -10, -6)
+			return
 		else
-			ToggleWorldMap()
+			if not T.classic then
+				UIPanelCloseButton_OnClick(self)
+			else
+				ToggleWorldMap()
+			end
 		end
+	end)
+
+	local tooltip_hide = function()
+		GameTooltip:Hide()
 	end
-end)
 
-local tooltip_hide = function()
-	GameTooltip:Hide()
+	local tooltip_show = function(self)
+		GameTooltip:SetOwner(self, "ANCHOR_LEFT", 19, 7)
+		GameTooltip:ClearLines()
+		GameTooltip:SetText(L_BAG_RIGHT_CLICK_CLOSE)
+	end
+
+	WorldMapFrameCloseButton:HookScript("OnEnter", tooltip_show)
+	WorldMapFrameCloseButton:HookScript("OnLeave", tooltip_hide)
 end
-
-local tooltip_show = function(self)
-	GameTooltip:SetOwner(self, "ANCHOR_LEFT", 19, 7)
-	GameTooltip:ClearLines()
-	GameTooltip:SetText(L_BAG_RIGHT_CLICK_CLOSE)
-end
-
-WorldMapFrameCloseButton:HookScript("OnEnter", tooltip_show)
-WorldMapFrameCloseButton:HookScript("OnLeave", tooltip_hide)

@@ -31,8 +31,7 @@ bar:SetScript("OnEvent", function(self, event, arg1)
 		for i = 1, 10 do
 			local button = _G["PetActionButton"..i]
 			button:ClearAllPoints()
-			button:SetParent(PetHolder)
-			button:SetSize(C.actionbar.button_size, C.actionbar.button_size)
+			button:SetParent(self)
 			if i == 1 then
 				if C.actionbar.petbar_horizontal == true then
 					button:SetPoint("BOTTOMLEFT", 0, 0)
@@ -40,10 +39,11 @@ bar:SetScript("OnEvent", function(self, event, arg1)
 					button:SetPoint("TOPLEFT", 0, 0)
 				end
 			else
+				local previous = _G["PetActionButton"..i-1]
 				if C.actionbar.petbar_horizontal == true then
-					button:SetPoint("LEFT", _G["PetActionButton"..i-1], "RIGHT", C.actionbar.button_space, 0)
+					button:SetPoint("LEFT", previous, "RIGHT", C.actionbar.button_space, 0)
 				else
-					button:SetPoint("TOP", _G["PetActionButton"..i-1], "BOTTOM", 0, -C.actionbar.button_space)
+					button:SetPoint("TOP", previous, "BOTTOM", 0, -C.actionbar.button_space)
 				end
 			end
 			button:Show()
@@ -56,7 +56,7 @@ bar:SetScript("OnEvent", function(self, event, arg1)
 		end
 		hooksecurefunc("PetActionBar_Update", T.PetBarUpdate)
 	elseif event == "PET_BAR_UPDATE" or event == "PLAYER_CONTROL_LOST" or event == "PLAYER_CONTROL_GAINED" or event == "PLAYER_FARSIGHT_FOCUS_CHANGED"
-	or event == "UNIT_FLAGS" or (event == "UNIT_PET" and arg1 == "player") or (arg1 == "pet" and event == "UNIT_AURA") then
+	or event == "UNIT_FLAGS" or (event == "UNIT_PET" and arg1 == "player") or (event == "UNIT_AURA" and arg1 == "pet") then
 		T.PetBarUpdate()
 	elseif event == "PET_BAR_UPDATE_COOLDOWN" then
 		PetActionBar_UpdateCooldowns()
@@ -75,7 +75,7 @@ if C.actionbar.rightbars_mouseover == true and C.actionbar.petbar_horizontal == 
 		b:HookScript("OnLeave", function() if not HoverBind.enabled then RightBarMouseOver(0) end end)
 	end
 end
-if C.actionbar.petbar_mouseover == true and C.actionbar.petbar_horizontal == true then
+if C.actionbar.petbar_mouseover == true and (C.actionbar.petbar_horizontal == true or C.actionbar.editor) then
 	PetActionBarAnchor:SetAlpha(0)
 	PetActionBarAnchor:SetScript("OnEnter", function() PetBarMouseOver(1) end)
 	PetActionBarAnchor:SetScript("OnLeave", function() if not HoverBind.enabled then PetBarMouseOver(0) end end)

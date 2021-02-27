@@ -5,7 +5,7 @@ if T.classic or C.skins.blizzard_frames ~= true then return end
 --	BonusRoll skin
 ----------------------------------------------------------------------------------------
 local function LoadSkin()
-	-- /run BonusRollFrame_StartBonusRoll(242969,'test',40,515,79,14)
+	-- /run BonusRollFrame_StartBonusRoll(242969,"test",40,515,79,14)
 	BonusRollFrame:StripTextures()
 	BonusRollFrame:CreateBackdrop("Transparent")
 	BonusRollFrame.backdrop:SetFrameLevel(0)
@@ -24,7 +24,7 @@ local function LoadSkin()
 	BonusRollFrame.PromptFrame.IconBackdrop:SetPoint("BOTTOMRIGHT", BonusRollFrame.PromptFrame.Icon, 2, -2)
 
 	BonusRollFrame.PromptFrame.Timer:CreateBackdrop("Default")
-	BonusRollFrame.PromptFrame.Timer.Bar:SetColorTexture(1, 1, 1)
+	BonusRollFrame.PromptFrame.Timer:SetStatusBarTexture(C.media.texture)
 	BonusRollFrame.PromptFrame.Timer:SetPoint("BOTTOMLEFT", BonusRollFrame.PromptFrame, "BOTTOMLEFT", 0, 1)
 
 	BonusRollFrame.SpecRing:SetTexture("")
@@ -51,15 +51,13 @@ local function LoadSkin()
 		end
 	end)
 
+	-- Skin currency icons
 	hooksecurefunc("BonusRollFrame_StartBonusRoll", function()
-		-- skin currency icons
 		local ccf, pfifc = BonusRollFrame.CurrentCountFrame.Text, BonusRollFrame.PromptFrame.InfoFrame.Cost
 		local text1, text2 = ccf and ccf:GetText(), pfifc and pfifc:GetText()
-		if text1 and text1:find('|t') then ccf:SetText(text1:gsub('|T(.-):.-|t', '|T%1:16:16:0:0:64:64:5:59:5:59|t')) end
-		if text2 and text2:find('|t') then pfifc:SetText(text2:gsub('|T(.-):.-|t', '|T%1:16:16:0:0:64:64:5:59:5:59|t')) end
+		if text1 and text1:find("|t") then ccf:SetText(text1:gsub("|T(.-):.-|t", "|T%1:16:16:0:0:64:64:5:59:5:59|t")) end
+		if text2 and text2:find("|t") then pfifc:SetText(text2:gsub("|T(.-):.-|t", "|T%1:16:16:0:0:64:64:5:59:5:59|t")) end
 	end)
-
-	T.SkinHelpBox(BonusRollFrame.PromptFrame.EncounterJournalLinkButtonHelp)
 end
 
 tinsert(T.SkinFuncs["ShestakUI"], LoadSkin)

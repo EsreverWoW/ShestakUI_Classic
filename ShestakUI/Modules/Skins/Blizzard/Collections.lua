@@ -6,7 +6,7 @@ if T.classic then return end
 ----------------------------------------------------------------------------------------
 local LoadTootlipSkin = CreateFrame("Frame")
 LoadTootlipSkin:RegisterEvent("ADDON_LOADED")
-LoadTootlipSkin:SetScript("OnEvent", function(self, event, addon)
+LoadTootlipSkin:SetScript("OnEvent", function(self, _, addon)
 	if IsAddOnLoaded("Skinner") or IsAddOnLoaded("Aurora") or not C.tooltip.enable then
 		self:UnregisterEvent("ADDON_LOADED")
 		return
@@ -77,23 +77,28 @@ local function LoadSkin()
 	MountJournal.MountDisplay.ShadowOverlay:StripTextures()
 	MountJournal.MountCount:StripTextures()
 
+	MountJournal.MountDisplay:SetPoint("BOTTOMRIGHT", MountJournal.RightInset, "BOTTOMRIGHT", -3, 6)
 	MountJournal.MountDisplay:CreateBackdrop("Overlay")
 	MountJournal.MountDisplay.backdrop:SetPoint("TOPLEFT", 2, -2)
-	MountJournal.MountDisplay.backdrop:SetPoint("BOTTOMRIGHT", 1, 2)
+	MountJournal.MountDisplay.backdrop:SetPoint("BOTTOMRIGHT", 1, -2)
 
 	T.SkinEditBox(MountJournalSearchBox, nil, 18)
 	T.SkinScrollBar(MountJournalListScrollFrameScrollBar)
 	T.SkinRotateButton(MountJournal.MountDisplay.ModelScene.RotateLeftButton)
 	T.SkinRotateButton(MountJournal.MountDisplay.ModelScene.RotateRightButton)
 
+	MountJournalListScrollFrameScrollBar:SetPoint("TOPLEFT", MountJournalListScrollFrame, "TOPRIGHT", 4, 17)
 	MountJournalFilterButton:SetPoint("TOPLEFT", MountJournalSearchBox, "TOPRIGHT", 5, 2)
 
 	-- New Mount Equip. 8.2
 	MountJournal.BottomLeftInset:StripTextures()
-	MountJournal.BottomLeftInset:CreateBackdrop("Transparent")
-	MountJournal.BottomLeftInset:SetPoint("BOTTOMLEFT", 0, 33)
+	MountJournal.BottomLeftInset:CreateBackdrop("Overlay")
+	MountJournal.BottomLeftInset.backdrop:SetPoint("TOPLEFT", 0, 2)
+	MountJournal.BottomLeftInset:SetPoint("BOTTOMLEFT", 0, 32)
 	MountJournal.BottomLeftInset.SlotButton:StripTextures()
 	MountJournal.BottomLeftInset.SlotButton.ItemIcon:SkinIcon()
+
+	T.SkinCheckBox(MountJournal.MountDisplay.ModelScene.TogglePlayer, 26)
 
 	for i = 1, #MountJournal.ListScrollFrame.buttons do
 		local button = _G["MountJournalListScrollFrameButton"..i]
@@ -176,6 +181,8 @@ local function LoadSkin()
 	PetJournalLoadoutBorderSlotHeaderText:SetParent(PetJournal)
 	PetJournalLoadoutBorderSlotHeaderText:SetPoint("CENTER", PetJournalLoadoutBorderTop, "TOP", 0, 4)
 
+	PetJournalListScrollFrameScrollBar:SetPoint("TOPLEFT", PetJournalListScrollFrame, "TOPRIGHT", 4, 17)
+	PetJournalListScrollFrameScrollBar:SetPoint("BOTTOMLEFT", PetJournalListScrollFrame, "BOTTOMRIGHT", 4, 14)
 	T.SkinScrollBar(PetJournalListScrollFrameScrollBar)
 
 	for i = 1, #PetJournal.listScroll.buttons do
@@ -445,7 +452,7 @@ local function LoadSkin()
 		end
 	end)
 
-	hooksecurefunc(HeirloomsJournal, "UpdateButton", function(self, button)
+	hooksecurefunc(HeirloomsJournal, "UpdateButton", function(_, button)
 		if not button.styled then
 			button:StyleButton(nil, 0)
 			button:CreateBackdrop("Default")
@@ -493,10 +500,10 @@ local function LoadSkin()
 	WardrobeTransmogFrame.SpecButton:SkinButton()
 	WardrobeTransmogFrame.ApplyButton:SkinButton()
 	WardrobeTransmogFrame.SpecButton:SetPoint("RIGHT", WardrobeTransmogFrame.ApplyButton, "LEFT", -2, 0)
-	WardrobeTransmogFrame.Model.ClearAllPendingButton:SkinButton()
+	WardrobeTransmogFrame.ModelScene.ClearAllPendingButton:SkinButton()
 
-	for i = 1, #WardrobeTransmogFrame.Model.SlotButtons do
-		local slot = WardrobeTransmogFrame.Model.SlotButtons[i]
+	for i = 1, #WardrobeTransmogFrame.ModelScene.SlotButtons do
+		local slot = WardrobeTransmogFrame.ModelScene.SlotButtons[i]
 		local icon = slot.Icon
 		local border = slot.Border
 
@@ -542,7 +549,7 @@ local function LoadSkin()
 	WardrobeCollectionFrameScrollFrameScrollBar:SetPoint("TOPLEFT", WardrobeCollectionFrame.SetsCollectionFrame.ScrollFrame, "TOPRIGHT", 4, 15)
 	WardrobeCollectionFrameScrollFrameScrollBar:SetPoint("BOTTOMLEFT", WardrobeCollectionFrame.SetsCollectionFrame.ScrollFrame, "BOTTOMRIGHT", 4, 14)
 
-	local function SetItemQuality(self, itemFrame)
+	local function SetItemQuality(_, itemFrame)
 		if (itemFrame.backdrop) then
 			local _, _, quality = GetItemInfo(itemFrame.itemID);
 			local alpha = 1
@@ -620,55 +627,32 @@ local function LoadSkin()
 		end
 	end)
 
-	-- for i = 1, 3 do
-		-- for j = 1, 6 do
-			-- WardrobeCollectionFrame.ItemsCollectionFrame["ModelR"..i.."C"..j]:StripTextures()
-			-- WardrobeCollectionFrame.ItemsCollectionFrame["ModelR"..i.."C"..j]:SetFrameLevel(WardrobeCollectionFrame.ItemsCollectionFrame["ModelR"..i.."C"..j]:GetFrameLevel() + 2)
-			-- WardrobeCollectionFrame.ItemsCollectionFrame["ModelR"..i.."C"..j]:CreateBackdrop("Overlay")
-			-- WardrobeCollectionFrame.ItemsCollectionFrame["ModelR"..i.."C"..j].Border:Kill()
-		-- end
-	-- end
-
     for i = 1, #WardrobeCollectionFrame.ItemsCollectionFrame.Models do
         local model = WardrobeCollectionFrame.ItemsCollectionFrame.Models[i]
-		--FIXME model:StripTextures()
-		-- model:SetFrameLevel(model:GetFrameLevel() + 2)
-		-- model:CreateBackdrop("Overlay")
-		model.Border:Kill()
+		model.Border:SetAlpha(0)
+		local bg = CreateFrame("Frame", nil, model)
+		bg:CreateBackdrop("Overlay")
+		bg.backdrop:SetOutside(model, 3, 3)
+
+		hooksecurefunc(model.Border, 'SetAtlas', function(_, texture)
+			local color
+			if texture == "transmog-wardrobe-border-uncollected" then
+				color = {0.3, 0.3, 1}
+			elseif texture == "transmog-wardrobe-border-unusable" then
+				color = {0.8, 0, 0}
+			else
+				color = C.media.border_color
+			end
+			bg.backdrop:SetBackdropBorderColor(unpack(color))
+		end)
     end
 
-	hooksecurefunc(WardrobeCollectionFrame.ItemsCollectionFrame, "UpdateItems", function(self)
-		local indexOffset = (self.PagingFrame:GetCurrentPage() - 1) * self.PAGE_SIZE
-		for i = 1, self.PAGE_SIZE do
-			local model = self.Models[i]
-			local index = i + indexOffset
-			local visualInfo = self.filteredVisualsList[index]
-			if visualInfo then
-				local color
-				if not visualInfo.isCollected then
-					color = {0.3, 0.3, 1}
-				elseif not visualInfo.isUsable then
-					color = {0.8, 0, 0}
-				else
-					color = C.media.border_color
-				end
-				if model.backdrop then
-					model.backdrop:SetBackdropBorderColor(unpack(color))
-				end
-			end
-		end
-	end)
-
-	-- for i = 1, 2 do
-		-- for j = 1, 4 do
-			-- WardrobeCollectionFrame.SetsTransmogFrame["ModelR"..i.."C"..j]:StripTextures()
-			-- WardrobeCollectionFrame.SetsTransmogFrame["ModelR"..i.."C"..j]:CreateBackdrop("Overlay")
-		-- end
-	-- end
-
-	-- FIXME
 	for i = 1, #WardrobeCollectionFrame.SetsTransmogFrame.Models do
         local model = WardrobeCollectionFrame.SetsTransmogFrame.Models[i]
+		model.Border:SetAlpha(0)
+		local bg = CreateFrame("Frame", nil, model)
+		bg:CreateBackdrop("Overlay")
+		bg.backdrop:SetOutside(model, 3, 3)
     end
 
 	local function SkinSetItemButtons(self)
@@ -682,8 +666,6 @@ local function LoadSkin()
 	-- Help box
 	local HelpBox = {
 		ToyBox.favoriteHelpBox,
-		--FIXME HeirloomsJournal.UpgradeLevelHelpBox,
-		-- CollectionsJournal.WardrobeTabHelpBox,
 		WardrobeCollectionFrame.ItemsCollectionFrame.HelpBox,
 		WardrobeCollectionFrame.SetsTabHelpBox,
 		WardrobeTransmogFrame.SpecHelpBox,

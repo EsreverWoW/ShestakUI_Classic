@@ -1,4 +1,4 @@
-local T, C, L, _ = unpack(select(2, ...))
+local T, C, L = unpack(select(2, ...))
 if C.unitframe.enable ~= true or C.unitframe.plugins_gcd ~= true then return end
 
 ----------------------------------------------------------------------------------------
@@ -14,18 +14,18 @@ local spells
 
 if not T.classic then
 	spells = {
-		["DEATHKNIGHT"] = 50977,
-		["DEMONHUNTER"] = 204157,
-		["DRUID"] = 8921,
-		["HUNTER"] = 982,
-		["MAGE"] = 118,
-		["MONK"] = 100780,
-		["PALADIN"] = 35395,
-		["PRIEST"] = 585,
-		["ROGUE"] = 1752,
-		["SHAMAN"] = 403,
-		["WARLOCK"] = 686,
-		["WARRIOR"] = 57755,
+		["DEATHKNIGHT"] = 61304,
+		["DEMONHUNTER"] = 61304,
+		["DRUID"] = 61304,
+		["HUNTER"] = 61304,
+		["MAGE"] = 61304,
+		["MONK"] = 61304,
+		["PALADIN"] = 61304,
+		["PRIEST"] = 61304,
+		["ROGUE"] = 61304,
+		["SHAMAN"] = 61304,
+		["WARLOCK"] = 61304,
+		["WARRIOR"] = 61304,
 	}
 else
 	spells = {

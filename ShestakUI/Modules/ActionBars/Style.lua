@@ -39,7 +39,7 @@ local function UpdateHotkey(self)
 	end
 end
 
-local function StyleNormalButton(button)
+local function StyleNormalButton(button, size)
 	if not button.isSkinned then
 		local name = button:GetName()
 		local icon = _G[name.."Icon"]
@@ -51,6 +51,8 @@ local function StyleNormalButton(button)
 		local normal = _G[name.."NormalTexture"]
 		local float = _G[name.."FloatingBG"]
 		local highlight = button.SpellHighlightTexture
+		local isExtraAction = name:match("ExtraAction")
+		local isFlyout = name:match("Flyout")
 
 		flash:SetTexture("")
 		button:SetNormalTexture("")
@@ -63,10 +65,12 @@ local function StyleNormalButton(button)
 			border:SetTexture("")
 		end
 
-		count:ClearAllPoints()
-		count:SetPoint("BOTTOMRIGHT", 0, 2)
-		count:SetFont(C.font.action_bars_font, C.font.action_bars_font_size, C.font.action_bars_font_style)
-		count:SetShadowOffset(C.font.action_bars_font_shadow and 1 or 0, C.font.action_bars_font_shadow and -1 or 0)
+		if not isExtraAction then
+			count:ClearAllPoints()
+			count:SetPoint("BOTTOMRIGHT", 0, 2)
+			count:SetFont(C.font.action_bars_font, C.font.action_bars_font_size, C.font.action_bars_font_style)
+			count:SetShadowOffset(C.font.action_bars_font_shadow and 1 or 0, C.font.action_bars_font_shadow and -1 or 0)
+		end
 
 		if btname then
 			if C.actionbar.macro == true then
@@ -92,12 +96,12 @@ local function StyleNormalButton(button)
 			hotkey:Kill()
 		end
 
-		if button:GetHeight() ~= C.actionbar.button_size and not InCombatLockdown() and not name:match("ExtraAction") then
-			button:SetSize(C.actionbar.button_size, C.actionbar.button_size)
+		if not isFlyout and not isExtraAction then
+			button:SetSize(size or C.actionbar.button_size, size or C.actionbar.button_size)
 		end
 		button:SetTemplate("Transparent")
 		if C.actionbar.classcolor_border == true then
-			button:SetBackdropBorderColor(T.color.r, T.color.g, T.color.b)
+			button:SetBackdropBorderColor(unpack(C.media.classborder_color))
 		end
 
 		icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
@@ -117,12 +121,14 @@ local function StyleNormalButton(button)
 			highlight:SetPoint("BOTTOMRIGHT", 4, -4)
 		end
 
-		UpdateHotkey(button)
+		button.oborder:SetFrameLevel(button:GetFrameLevel())
+		button.iborder:SetFrameLevel(button:GetFrameLevel())
 
-		if _G[name.."FlyoutArrow"] then
-			button.oborder:SetFrameLevel(button:GetFrameLevel())
-			button.iborder:SetFrameLevel(button:GetFrameLevel())
+		if button.QuickKeybindHighlightTexture then
+			button.QuickKeybindHighlightTexture:SetTexture("")
 		end
+
+		button:StyleButton()
 
 		button.isSkinned = true
 	end
@@ -160,7 +166,7 @@ local function StyleSmallButton(normal, button, icon, name, pet)
 		button:SetSize(C.actionbar.button_size, C.actionbar.button_size)
 		button:SetTemplate("Transparent")
 		if C.actionbar.classcolor_border == true then
-			button:SetBackdropBorderColor(T.color.r, T.color.g, T.color.b)
+			button:SetBackdropBorderColor(unpack(C.media.classborder_color))
 		end
 
 		icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
@@ -188,7 +194,11 @@ local function StyleSmallButton(normal, button, icon, name, pet)
 			normal:SetPoint("BOTTOMRIGHT")
 		end
 
-		UpdateHotkey(button)
+		if button.QuickKeybindHighlightTexture then
+			button.QuickKeybindHighlightTexture:SetTexture("")
+		end
+
+		button:StyleButton()
 
 		button.isSkinned = true
 	end
@@ -225,13 +235,19 @@ local function SetupFlyoutButton()
 
 			if not button.IsSkinned then
 				StyleNormalButton(button)
-				button:StyleButton()
 
 				if C.actionbar.rightbars_mouseover == true then
 					SpellFlyout:HookScript("OnEnter", function() RightBarMouseOver(1) end)
 					SpellFlyout:HookScript("OnLeave", function() RightBarMouseOver(0) end)
 					button:HookScript("OnEnter", function() RightBarMouseOver(1) end)
 					button:HookScript("OnLeave", function() RightBarMouseOver(0) end)
+				end
+
+				if C.actionbar.bottombars_mouseover == true then
+					SpellFlyout:HookScript("OnEnter", function() BottomBarMouseOver(1) end)
+					SpellFlyout:HookScript("OnLeave", function() BottomBarMouseOver(0) end)
+					button:HookScript("OnEnter", function() BottomBarMouseOver(1) end)
+					button:HookScript("OnLeave", function() BottomBarMouseOver(0) end)
 				end
 				button.IsSkinned = true
 			end
@@ -272,25 +288,39 @@ end
 
 do
 	for i = 1, 12 do
-		_G["ActionButton"..i]:StyleButton()
-		_G["MultiBarBottomLeftButton"..i]:StyleButton()
-		_G["MultiBarBottomRightButton"..i]:StyleButton()
-		_G["MultiBarLeftButton"..i]:StyleButton()
-		_G["MultiBarRightButton"..i]:StyleButton()
+		StyleNormalButton(_G["ActionButton"..i], C.actionbar.editor and C.actionbar.bar1_size)
+		StyleNormalButton(_G["MultiBarBottomLeftButton"..i], C.actionbar.editor and C.actionbar.bar2_size)
+		StyleNormalButton(_G["MultiBarLeftButton"..i], C.actionbar.editor and C.actionbar.bar3_size)
+		StyleNormalButton(_G["MultiBarRightButton"..i], C.actionbar.editor and C.actionbar.bar4_size)
+		StyleNormalButton(_G["MultiBarBottomRightButton"..i], C.actionbar.editor and C.actionbar.bar5_size)
 	end
 
-	for i = 1, 10 do
-		_G["StanceButton"..i]:StyleButton()
-		_G["PetActionButton"..i]:StyleButton()
-	end
+	StyleNormalButton(ExtraActionButton1)
 end
 
-hooksecurefunc("ActionButton_Update", StyleNormalButton)
 if not T.classic then
 	hooksecurefunc("ActionButton_UpdateFlyout", StyleFlyoutButton)
+	hooksecurefunc("SpellButton_OnClick", StyleFlyoutButton)
 end
+
 if C.actionbar.hotkey == true then
-	hooksecurefunc("ActionButton_UpdateHotkeys", UpdateHotkey)
+	local frame = CreateFrame("Frame")
+	frame:RegisterEvent("UPDATE_BINDINGS")
+	frame:RegisterEvent("PLAYER_ENTERING_WORLD")
+	frame:SetScript("OnEvent", function()
+		for i = 1, 12 do
+			UpdateHotkey(_G["ActionButton"..i])
+			UpdateHotkey(_G["MultiBarBottomLeftButton"..i])
+			UpdateHotkey(_G["MultiBarBottomRightButton"..i])
+			UpdateHotkey(_G["MultiBarLeftButton"..i])
+			UpdateHotkey(_G["MultiBarRightButton"..i])
+		end
+		for i = 1, 10 do
+			UpdateHotkey(_G["StanceButton"..i])
+			UpdateHotkey(_G["PetActionButton"..i])
+		end
+		UpdateHotkey(ExtraActionButton1)
+	end)
 end
 if C.actionbar.hide_highlight == true then
 	hooksecurefunc("ActionButton_ShowOverlayGlow", HideHighlightButton)

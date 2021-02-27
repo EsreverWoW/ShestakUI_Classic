@@ -8,9 +8,9 @@ local function LoadSkin()
 	VideoOptionsFrame:StripTextures()
 	VideoOptionsFrame:SetTemplate("Transparent")
 
-	VideoOptionsFrameHeader:SetTexture(nil)
-	VideoOptionsFrameHeader:ClearAllPoints()
-	VideoOptionsFrameHeader:SetPoint("TOP", VideoOptionsFrame, 0, 0)
+	VideoOptionsFrame.Header:StripTextures()
+	VideoOptionsFrame.Header:ClearAllPoints()
+	VideoOptionsFrame.Header:SetPoint("TOP", VideoOptionsFrame, 0, 0)
 
 	local frames = {
 		"VideoOptionsFrameCategoryFrame",
@@ -71,6 +71,7 @@ local function LoadSkin()
 	local checkboxes = {
 		"Advanced_MaxFPSCheckBox",
 		"Advanced_MaxFPSBKCheckBox",
+		"Advanced_TargetFPSCheckBox",
 		"Advanced_DesktopGamma",
 		"AudioOptionsSoundPanelEnableSound",
 		"AudioOptionsSoundPanelSoundEffects",
@@ -107,6 +108,7 @@ local function LoadSkin()
 		"Display_PrimaryMonitorDropDown",
 		"Display_AntiAliasingDropDown",
 		"Display_VerticalSyncDropDown",
+		"Graphics_SpellDensityDropDown",
 		"Graphics_TextureResolutionDropDown",
 		"Graphics_FilteringDropDown",
 		"Graphics_ProjectedTexturesDropDown",
@@ -121,6 +123,9 @@ local function LoadSkin()
 		"Graphics_LightingQualityDropDown",
 		"Graphics_OutlineModeDropDown",
 		"Advanced_BufferingDropDown",
+		"Advanced_FilteringDropDown",
+		"Advanced_SSAOTypeDropDown",
+		"Advanced_RTShadowQualityDropDown",
 		"Advanced_LagDropDown",
 		"Advanced_HardwareCursorDropDown",
 		"Advanced_GraphicsAPIDropDown",
@@ -139,6 +144,7 @@ local function LoadSkin()
 		"Graphics_SSAODropDown",
 		"Graphics_RefractionDropDown",
 		"RaidGraphics_TextureResolutionDropDown",
+		"RaidGraphics_SpellDensityDropDown",
 		"RaidGraphics_FilteringDropDown",
 		"RaidGraphics_ProjectedTexturesDropDown",
 		"RaidGraphics_ViewDistanceDropDown",
@@ -170,6 +176,7 @@ local function LoadSkin()
 		"Advanced_UIScaleSlider",
 		"Advanced_MaxFPSSlider",
 		"Advanced_MaxFPSBKSlider",
+		"Advanced_TargetFPSSlider",
 		"Advanced_GammaSlider",
 		"Advanced_RenderScaleSlider",
 		"Advanced_ContrastSlider",
