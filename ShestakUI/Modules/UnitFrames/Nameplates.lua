@@ -581,7 +581,9 @@ local function callback(self, event, unit)
 		local unitGUID = UnitGUID(unit)
 		self.npcID = unitGUID and select(6, strsplit('-', unitGUID))
 		self.unitName = UnitName(unit)
-		self.widgetsOnly = UnitNameplateShowsWidgetsOnly(unit)
+		if not T.classic then
+			self.widgetsOnly = UnitNameplateShowsWidgetsOnly(unit)
+		end
 		if self.npcID and T.PlateBlacklist[self.npcID] then
 			self:Hide()
 		else
@@ -599,11 +601,18 @@ local function callback(self, event, unit)
 			self.Castbar:SetAlpha(1)
 			self.RaidTargetIndicator:SetAlpha(1)
 
-			if self.widgetsOnly or (UnitWidgetSet(unit) and UnitIsOwnerOrControllerOfUnit("player", unit)) then
-				self.Health:SetAlpha(0)
-				self.Level:SetAlpha(0)
-				self.Name:SetAlpha(0)
-				self.Castbar:SetAlpha(0)
+			if not T.classic then
+				if self.widgetsOnly or (UnitWidgetSet(unit) and UnitIsOwnerOrControllerOfUnit("player", unit)) then
+					self.Health:SetAlpha(0)
+					self.Level:SetAlpha(0)
+					self.Name:SetAlpha(0)
+					self.Castbar:SetAlpha(0)
+				else
+					self.Health:SetAlpha(1)
+					self.Level:SetAlpha(1)
+					self.Name:SetAlpha(1)
+					self.Castbar:SetAlpha(1)
+				end
 			else
 				self.Health:SetAlpha(1)
 				self.Level:SetAlpha(1)
