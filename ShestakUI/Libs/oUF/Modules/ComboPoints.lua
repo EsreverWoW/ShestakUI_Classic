@@ -60,7 +60,7 @@ local function Update(self, _, unit, powerType)
 		end
 	end
 
-	if T.class == "ROGUE" then
+	if not T.classic and T.class == "ROGUE" then
 		for i = 2, 4 do
 			element[i]:SetStatusBarColor(unpack(element.Colors[i]))
 		end
