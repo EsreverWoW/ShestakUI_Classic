@@ -1,7 +1,7 @@
 local _, ns = ...
 local oUF = ns.oUF
 
-local LibClassicDurations = LibStub('LibClassicDurations')
+local LibClassicDurations = oUF:IsClassic() and LibStub('LibClassicDurations')
 
 local VISIBLE = 1
 local HIDDEN = 0

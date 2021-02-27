@@ -92,5 +92,3 @@ C["position"] = {
 if T.classic then
 	C.position.quest = {"TOPLEFT", UIParent, "TOPLEFT", 40, -36}
 end
-
-}

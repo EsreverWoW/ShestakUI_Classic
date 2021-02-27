@@ -1,3 +1,5 @@
+local T, C, L, _ = unpack(select(2, ...))
+
 if IsAddOnLoaded("yClassColor") then return end
 
 ----------------------------------------------------------------------------------------
@@ -100,7 +102,7 @@ end
 -- WhoList
 local function whoFrame()
 	local scrollFrame = WhoListScrollFrame
-	ocal offset = T.classic and FauxScrollFrame_GetOffset(WhoListScrollFrame) or HybridScrollFrame_GetOffset(scrollFrame)
+	local offset = T.classic and FauxScrollFrame_GetOffset(WhoListScrollFrame) or HybridScrollFrame_GetOffset(scrollFrame)
 	local buttons = not T.classic and scrollFrame.buttons or 0
 	local numWhos = C_FriendList.GetNumWhoResults()
 

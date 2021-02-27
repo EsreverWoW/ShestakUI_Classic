@@ -109,9 +109,6 @@ Scanner:SetScript("OnEvent", function()
 					else
 						return CooldownFrame_Set(AutoButton.cd, cd_start, cd_finish, cd_enable)
 					end
-					else
-						return CooldownFrame_Set(AutoButton.cd, cd_start, cd_finish, cd_enable)
-					end
 				end)
 
 				AutoButton:SetScript("OnEnter", function(self)
