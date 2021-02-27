@@ -29,7 +29,8 @@ end
 ----------------------------------------------------------------------------------------
 --	Pixel perfect fonts for high resolution
 ----------------------------------------------------------------------------------------
-if T.screenHeight <= 1200 then return end
+if T.screenHeight <= 1200 or T.HiDPI then return end
+
 C.media.pixel_font_size = C.media.pixel_font_size * T.mult
 C.font.chat_tabs_font_size = C.font.chat_tabs_font_size * T.mult
 C.font.action_bars_font_size = C.font.action_bars_font_size * T.mult
