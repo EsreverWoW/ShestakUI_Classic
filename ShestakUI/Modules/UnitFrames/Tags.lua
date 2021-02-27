@@ -28,7 +28,7 @@ oUF.Tags.Methods["DiffColor"] = function(unit)
 			r, g, b = 0.71, 0.43, 0.27
 		elseif DiffColor >= -2 then
 			r, g, b = 0.84, 0.75, 0.65
-		elseif -DiffColor <= T.classic and GetQuestGreenRange() or 5 then
+		elseif (T.classic and -DiffColor <= GetQuestGreenRange()) or -DiffColor <= 5 then
 			r, g, b = 0.33, 0.59, 0.33
 		else
 			r, g, b = 0.55, 0.57, 0.61
@@ -126,8 +126,10 @@ oUF.Tags.Events["AltPower"] = "UNIT_POWER_UPDATE"
 oUF.Tags.Methods["NameplateLevel"] = function(unit)
 	local level = UnitLevel(unit)
 	local c = UnitClassification(unit)
-	if UnitIsWildBattlePet(unit) or UnitIsBattlePetCompanion(unit) then
-		level = UnitBattlePetLevel(unit)
+	if not T.classic then
+		if UnitIsWildBattlePet(unit) or UnitIsBattlePetCompanion(unit) then
+			level = UnitBattlePetLevel(unit)
+		end
 	end
 
 	if level == T.level and c == "normal" then return end
