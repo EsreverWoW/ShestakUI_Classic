@@ -229,7 +229,7 @@ function Stuffing:SlotUpdate(b)
 		end
 	end
 
-	if C.bag.ilvl == true then
+	if C.bag.ilvl == true and b.frame.text then
 		b.frame.text:SetText("")
 	end
 
