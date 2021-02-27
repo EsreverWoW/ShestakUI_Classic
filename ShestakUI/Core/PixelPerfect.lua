@@ -21,6 +21,9 @@ end
 
 T.mult = 768 / T.screenHeight / C.general.uiscale
 T.noscalemult = T.mult * C.general.uiscale
+if T.HiDPI then
+	T.noscalemult = T.noscalemult * 2
+end
 
 T.Scale = function(x)
 	return T.mult * math.floor(x / T.mult + 0.5)
