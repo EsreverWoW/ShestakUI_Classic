@@ -138,7 +138,9 @@ SlashCmdList.MOUSEOVERBIND = function()
 					self.button.bindstring = "CLICK "..self.button.name..":LeftButton"
 				else
 					local modact = 1 + (self.button.action - 1) % 12
-					if self.button.action < 13 or self.button.action > 72 then
+					if self.button.name == "ExtraActionButton1" then
+						self.button.bindstring = "EXTRAACTIONBUTTON1"
+					elseif self.button.action < 13 or self.button.action > 72 then
 						self.button.bindstring = "ACTIONBUTTON"..modact
 					elseif self.button.action < 73 and self.button.action > 60 then
 						self.button.bindstring = "MULTIACTIONBAR1BUTTON"..modact
@@ -153,6 +155,7 @@ SlashCmdList.MOUSEOVERBIND = function()
 					end
 				end
 
+				GameTooltip:AddLine(bind.button.name)
 				GameTooltip:Show()
 				bind.button.bindings = {GetBindingKey(bind.button.bindstring)}
 				GameTooltip:SetScript("OnHide", function(self)
@@ -228,6 +231,9 @@ SlashCmdList.MOUSEOVERBIND = function()
 			self.enabled = true
 			self:RegisterEvent("PLAYER_REGEN_DISABLED")
 			if C.actionbar.enable then
+				if C.actionbar.bottombars_mouseover == true then
+					BottomBarMouseOver(1)
+				end
 				if C.actionbar.rightbars_mouseover == true then
 					RightBarMouseOver(1)
 				end
@@ -261,6 +267,9 @@ SlashCmdList.MOUSEOVERBIND = function()
 			self:UnregisterEvent("PLAYER_REGEN_DISABLED")
 			StaticPopup_Hide("KEYBIND_MODE")
 			if C.actionbar.enable then
+				if C.actionbar.bottombars_mouseover == true then
+					BottomBarMouseOver(0)
+				end
 				if C.actionbar.rightbars_mouseover == true then
 					RightBarMouseOver(0)
 				end
@@ -289,33 +298,39 @@ SlashCmdList.MOUSEOVERBIND = function()
 		}
 
 		-- Registering
-		local stance = StanceButton1:GetScript("OnClick")
-		local pet = PetActionButton1:GetScript("OnClick")
-		local button = ActionButton1:GetScript("OnClick")
+		for i = 1, 12 do
+			local b = _G["ActionButton"..i]
+			b:HookScript("OnEnter", function(self) bind:Update(self) end)
 
-		local function register(val)
-			if val.IsProtected and val.GetObjectType and val.GetScript and val:GetObjectType() == "CheckButton" and val:IsProtected() then
-				local script = val:GetScript("OnClick")
-				if script == button then
-					val:HookScript("OnEnter", function(self) bind:Update(self) end)
-				elseif script == stance then
-					val:HookScript("OnEnter", function(self) bind:Update(self, "STANCE") end)
-				elseif script == pet then
-					val:HookScript("OnEnter", function(self) bind:Update(self, "PET") end)
-				end
-			end
+			b = _G["MultiBarBottomLeftButton"..i]
+			b:HookScript("OnEnter", function(self) bind:Update(self) end)
+
+			b = _G["MultiBarLeftButton"..i]
+			b:HookScript("OnEnter", function(self) bind:Update(self) end)
+
+			b = _G["MultiBarRightButton"..i]
+			b:HookScript("OnEnter", function(self) bind:Update(self) end)
+
+			b = _G["MultiBarBottomRightButton"..i]
+			b:HookScript("OnEnter", function(self) bind:Update(self) end)
 		end
 
-		local val = EnumerateFrames()
-		while val do
-			register(val)
-			val = EnumerateFrames(val)
+		for i = 1, NUM_STANCE_SLOTS do
+			local b = _G["StanceButton"..i]
+			b:HookScript("OnEnter", function(self) bind:Update(self, "STANCE") end)
+		end
+
+		for i = 1, NUM_PET_ACTION_SLOTS do
+			local b = _G["PetActionButton"..i]
+			b:HookScript("OnEnter", function(self) bind:Update(self, "PET") end)
 		end
 
 		for i = 1, 12 do
 			local b = _G["SpellButton"..i]
 			b:HookScript("OnEnter", function(self) bind:Update(self, "SPELL") end)
 		end
+
+		ExtraActionButton1:HookScript("OnEnter", function(self) bind:Update(self) end)
 
 		local function registermacro()
 			for i = 1, MAX_ACCOUNT_MACROS do

@@ -13,16 +13,19 @@ local function LoadSkin()
 			self.AzeriteTexture:SetAlpha(0)
 			self.RankFrame.Texture:SetTexture("")
 			self.RankFrame.Label:SetFontObject("SystemFont_Outline_Small")
-			self.RankFrame.Label:SetPoint("CENTER", self.RankFrame.Texture, 0, 3)
+			self.RankFrame.Label:SetShadowOffset(0, 0)
+			self.RankFrame.Label:SetPoint("CENTER", self.RankFrame.Texture, 0, 2)
 
 			self.styled = true
 		end
 		self:GetHighlightTexture():SetColorTexture(1, 1, 1, 0.3)
-		self:GetHighlightTexture():SetAllPoints()
+		self:GetHighlightTexture():SetPoint("TOPLEFT", 2, -2)
+		self:GetHighlightTexture():SetPoint("BOTTOMRIGHT", -2, 2)
 	end
 
 	local function UpdateAzeriteEmpoweredItem(self)
 		self.AzeriteTexture:SetAtlas("AzeriteIconFrame")
+		self.AzeriteTexture:SetTexCoord(0.05, 0.95, 0.05, 0.95)
 		self.AzeriteTexture:SetPoint("TOPLEFT", 2, -2)
 		self.AzeriteTexture:SetPoint("BOTTOMRIGHT", -2, 2)
 		self.AzeriteTexture:SetDrawLayer("BORDER", 1)
@@ -49,8 +52,8 @@ local function LoadSkin()
 		"SecondaryHandSlot"
 	}
 
-	select(15, _G["CharacterMainHandSlot"]:GetRegions()):Hide()
-	select(15, _G["CharacterSecondaryHandSlot"]:GetRegions()):Hide()
+	select(17, _G["CharacterMainHandSlot"]:GetRegions()):Hide()
+	select(17, _G["CharacterSecondaryHandSlot"]:GetRegions()):Hide()
 
 	for _, i in pairs(slots) do
 		_G["Character"..i.."Frame"]:Hide()
@@ -70,6 +73,12 @@ local function LoadSkin()
 		icon:ClearAllPoints()
 		icon:SetPoint("TOPLEFT", 2, -2)
 		icon:SetPoint("BOTTOMRIGHT", -2, 2)
+
+		if slot.popoutButton:GetPoint() == "TOP" then
+			slot.popoutButton:SetPoint("TOP", slot, "BOTTOM", 0, 2)
+		else
+			slot.popoutButton:SetPoint("LEFT", slot, "RIGHT", -2, 0)
+		end
 
 		hooksecurefunc(slot, "DisplayAsAzeriteItem", UpdateAzeriteItem)
 		hooksecurefunc(slot, "DisplayAsAzeriteEmpoweredItem", UpdateAzeriteEmpoweredItem)
@@ -91,6 +100,14 @@ local function LoadSkin()
 	end
 
 	EquipmentFlyoutFrameHighlight:Kill()
+	EquipmentFlyoutFrame.NavigationFrame:StripTextures()
+	EquipmentFlyoutFrame.NavigationFrame.BottomBackground:Hide()
+	EquipmentFlyoutFrame.NavigationFrame:SetTemplate("Transparent")
+	EquipmentFlyoutFrame.NavigationFrame:SetPoint("TOPLEFT", EquipmentFlyoutFrameButtons, "BOTTOMLEFT", 3, -1)
+	EquipmentFlyoutFrame.NavigationFrame:SetPoint("TOPRIGHT", EquipmentFlyoutFrameButtons, "BOTTOMRIGHT", 0, -1)
+	T.SkinNextPrevButton(EquipmentFlyoutFrame.NavigationFrame.PrevButton)
+	T.SkinNextPrevButton(EquipmentFlyoutFrame.NavigationFrame.NextButton)
+
 	local function SkinItemFlyouts()
 		EquipmentFlyoutFrameButtons:StripTextures()
 
@@ -149,7 +166,7 @@ local function LoadSkin()
 		bg:SetSize(165, 1)
 		bg:SetVertexColor(unpack(C.media.border_color))
 
-		local border = CreateFrame("Frame", "$parentOuterBorder", frame)
+		local border = CreateFrame("Frame", "$parentOuterBorder", frame, "BackdropTemplate")
 		border:SetPoint("TOPLEFT", bg, "TOPLEFT", -T.mult, T.mult)
 		border:SetPoint("BOTTOMRIGHT", bg, "BOTTOMRIGHT", T.mult, -T.mult)
 		border:SetFrameLevel(frame:GetFrameLevel() + 1)
@@ -169,7 +186,7 @@ local function LoadSkin()
 	SkinStatsPane(CharacterStatsPane.EnhancementsCategory)
 
 	-- Titles
-	PaperDollTitlesPane:HookScript("OnShow", function(self)
+	PaperDollTitlesPane:HookScript("OnShow", function()
 		for _, object in pairs(PaperDollTitlesPane.buttons) do
 			object.BgTop:SetTexture(nil)
 			object.BgBottom:SetTexture(nil)
@@ -185,7 +202,7 @@ local function LoadSkin()
 	PaperDollEquipmentManagerPaneSaveSet:SetWidth(PaperDollEquipmentManagerPaneSaveSet:GetWidth() - 8)
 	PaperDollEquipmentManagerPaneEquipSet:SetPoint("TOPLEFT", PaperDollEquipmentManagerPane, "TOPLEFT", 8, 0)
 	PaperDollEquipmentManagerPaneSaveSet:SetPoint("LEFT", PaperDollEquipmentManagerPaneEquipSet, "RIGHT", 4, 0)
-	PaperDollEquipmentManagerPane:HookScript("OnShow", function(self)
+	PaperDollEquipmentManagerPane:HookScript("OnShow", function()
 		for _, object in pairs(PaperDollEquipmentManagerPane.buttons) do
 			object.BgTop:SetTexture(nil)
 			object.BgBottom:SetTexture(nil)
@@ -291,7 +308,6 @@ local function LoadSkin()
 		T.SkinCheckBox(ReputationDetailMainScreenCheckBox)
 		T.SkinCheckBox(ReputationDetailInactiveCheckBox)
 		T.SkinCheckBox(ReputationDetailAtWarCheckBox)
-		T.SkinCheckBox(ReputationDetailLFGBonusReputationCheckBox)
 	end
 	ReputationFrame:HookScript("OnShow", UpdateFactionSkins)
 	hooksecurefunc("ExpandFactionHeader", UpdateFactionSkins)
@@ -324,11 +340,6 @@ local function LoadSkin()
 	end)
 
 	CharacterFrame:SetTemplate("Transparent")
-
-	-- Help box
-	T.SkinHelpBox(CharacterFrame.ReputationTabHelpBox)
-	--FIXME T.SkinHelpBox(PaperDollItemsFrame.HelpTipBox)
-	-- PaperDollItemsFrame.HelpTipBox.CloseButton.SetPoint = T.dummy
 
 	-- Unit Background Texture
 	CharacterModelFrameBackgroundTopLeft:SetPoint("TOPLEFT", CharacterModelFrame.backdrop, "TOPLEFT", 2, -2)

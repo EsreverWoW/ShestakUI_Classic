@@ -140,7 +140,7 @@ local function LoadSkin()
 		_G[highlight:GetName().."Middle"]:SetAllPoints(frame)
 	end
 
-	AchievementFrame:HookScript("OnShow", function(self)
+	AchievementFrame:HookScript("OnShow", function()
 		for i = 1, 20 do
 			local frame = _G["AchievementFrameCategoriesContainerButton"..i]
 
@@ -152,7 +152,11 @@ local function LoadSkin()
 		end
 		if IsAddOnLoaded("Overachiever_Tabs") then
 			for i = 4, 6 do
-				T.SkinTab(_G["AchievementFrameTab"..i])
+				local tab = _G["AchievementFrameTab"..i]
+				if tab and not tab.isSkinned then
+					T.SkinTab(_G["AchievementFrameTab"..i])
+					tab.isSkinned = true
+				end
 			end
 		end
 	end)
@@ -188,7 +192,7 @@ local function LoadSkin()
 			_G["AchievementFrameSummaryAchievement"..i.."Description"]:SetShadowOffset(1, -1)
 
 			if not frame.backdrop then
-				frame:CreateBackdrop("Overlay", true)
+				frame:CreateBackdrop("Overlay")
 				frame.backdrop:SetPoint("TOPLEFT", 2, -2)
 				frame.backdrop:SetPoint("BOTTOMRIGHT", -2, 2)
 
@@ -205,8 +209,8 @@ local function LoadSkin()
 				_G["AchievementFrameSummaryAchievement"..i.."IconTexture"]:SetPoint("BOTTOMRIGHT", -2, 2)
 			end
 
-			if frame.accountWide then
-				frame.backdrop:SetBackdropBorderColor(ACHIEVEMENTUI_BLUEBORDER_R, ACHIEVEMENTUI_BLUEBORDER_G, ACHIEVEMENTUI_BLUEBORDER_B)
+			if frame.accountWide and AchievementFrameHeaderTitle:GetText() == _G.ACHIEVEMENT_TITLE then
+				frame.backdrop:SetBackdropBorderColor(ACHIEVEMENT_BLUE_BORDER_COLOR:GetRGB())
 			else
 				frame.backdrop:SetBackdropBorderColor(unpack(C.media.border_color))
 			end
@@ -347,13 +351,13 @@ local function LoadSkin()
 		if not player.bg3 or not friend.bg3 then return end
 
 		if player.accountWide then
-			player.bg3:SetColorTexture(ACHIEVEMENTUI_BLUEBORDER_R, ACHIEVEMENTUI_BLUEBORDER_G, ACHIEVEMENTUI_BLUEBORDER_B)
+			player.bg3:SetColorTexture(ACHIEVEMENT_BLUE_BORDER_COLOR:GetRGB())
 		else
 			player.bg3:SetColorTexture(unpack(C.media.border_color))
 		end
 
 		if friend.accountWide then
-			friend.bg3:SetColorTexture(ACHIEVEMENTUI_BLUEBORDER_R, ACHIEVEMENTUI_BLUEBORDER_G, ACHIEVEMENTUI_BLUEBORDER_B)
+			friend.bg3:SetColorTexture(ACHIEVEMENT_BLUE_BORDER_COLOR:GetRGB())
 		else
 			friend.bg3:SetColorTexture(unpack(C.media.border_color))
 		end

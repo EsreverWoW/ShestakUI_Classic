@@ -6,69 +6,64 @@ if T.classic or C.skins.blizzard_frames ~= true then return end
 ----------------------------------------------------------------------------------------
 local function LoadSkin()
 	local StripAllTextures = {
-		"PVEFrame",
-		"PVEFrameLeftInset",
-		"LFDParentFrame",
-		"LFDParentFrameInset",
-		"RaidFinderFrame",
-		"RaidFinderQueueFrame",
-		"RaidFinderFrameBottomInset",
-		"RaidFinderFrameRoleInset",
-		"ScenarioFinderFrame",
-		"LFGDungeonReadyDialog",
-		"LFGDungeonReadyStatus",
-		"LFDQueueFrameCooldownFrame",
-		"RaidFinderQueueFrameCooldownFrame",
-		"RaidFinderQueueFramePartyBackfill",
-		"LFDQueueFramePartyBackfill",
-		"LFDQueueFrame",
-		"LFGListApplicationDialog"
+		PVEFrame,
+		PVEFrameLeftInset,
+		LFDParentFrame,
+		LFDParentFrameInset,
+		RaidFinderFrame,
+		RaidFinderQueueFrame,
+		RaidFinderFrameBottomInset,
+		RaidFinderFrameRoleInset,
+		LFGDungeonReadyDialog,
+		LFGDungeonReadyStatus,
+		LFDQueueFrameCooldownFrame,
+		RaidFinderQueueFrameCooldownFrame,
+		RaidFinderQueueFramePartyBackfill,
+		LFDQueueFramePartyBackfill,
+		LFDQueueFrame,
+		LFGListApplicationDialog
 	}
 
-	for _, object in pairs(StripAllTextures) do
-		_G[object]:StripTextures()
+	for i = 1, #StripAllTextures do
+		StripAllTextures[i]:StripTextures()
 	end
 
 	local KillTextures = {
-		"LFDQueueFrameBackground",
-		"PVEFramePortrait",
-		"ScenarioFinderFrameInset",
-		"LFGDungeonReadyDialogBackground",
-		"RaidFinderQueueFrameBackground",
-		"LFGDungeonReadyDialogBottomArt",
-		"LFGDungeonReadyDialogFiligree",
-		"ScenarioQueueFrameRandomScrollFrameScrollBackground",
-		"ScenarioQueueFrameRandomScrollFrameScrollBackgroundTopLeft",
-		"ScenarioQueueFrameRandomScrollFrameScrollBackgroundBottomRight",
-		"RaidFinderQueueFrameScrollFrameScrollBackground",
-		"RaidFinderQueueFrameScrollFrameScrollBackgroundTopLeft",
-		"RaidFinderQueueFrameScrollFrameScrollBackgroundBottomRight"
+		LFDQueueFrameBackground,
+		PVEFramePortrait,
+		LFGDungeonReadyDialogBackground,
+		RaidFinderQueueFrameBackground,
+		LFGDungeonReadyDialogBottomArt,
+		LFGDungeonReadyDialogFiligree,
+		RaidFinderQueueFrameScrollFrameScrollBackground,
+		RaidFinderQueueFrameScrollFrameScrollBackgroundTopLeft,
+		RaidFinderQueueFrameScrollFrameScrollBackgroundBottomRight,
+		PVEFrame.shadows,
+		LFGListFrame.EntryCreation.ActivityFinder.Background
 	}
 
-	for _, texture in pairs(KillTextures) do
-		_G[texture]:Kill()
+	for i = 1, #KillTextures do
+		KillTextures[i]:Kill()
 	end
 
 	local buttons = {
-		"LFDQueueFrameFindGroupButton",
-		"RaidFinderFrameFindRaidButton",
-		"ScenarioQueueFrameFindGroupButton",
-		"LFGDungeonReadyDialogLeaveQueueButton",
-		"LFGDungeonReadyDialogEnterDungeonButton",
-		"RaidFinderQueueFramePartyBackfillBackfillButton",
-		"RaidFinderQueueFramePartyBackfillNoBackfillButton",
-		"LFDQueueFramePartyBackfillBackfillButton",
-		"LFDQueueFramePartyBackfillNoBackfillButton",
-		"LFGInvitePopupAcceptButton",
-		"LFGInvitePopupDeclineButton"
+		LFDQueueFrameFindGroupButton,
+		RaidFinderFrameFindRaidButton,
+		LFGDungeonReadyDialogLeaveQueueButton,
+		LFGDungeonReadyDialogEnterDungeonButton,
+		RaidFinderQueueFramePartyBackfillBackfillButton,
+		RaidFinderQueueFramePartyBackfillNoBackfillButton,
+		LFDQueueFramePartyBackfillBackfillButton,
+		LFDQueueFramePartyBackfillNoBackfillButton,
+		LFGInvitePopupAcceptButton,
+		LFGInvitePopupDeclineButton,
+		LFGListApplicationDialog.SignUpButton,
+		LFGListApplicationDialog.CancelButton
 	}
 
 	for i = 1, #buttons do
-		_G[buttons[i]]:SkinButton()
+		buttons[i]:SkinButton()
 	end
-
-	LFGListApplicationDialog.SignUpButton:SkinButton()
-	LFGListApplicationDialog.CancelButton:SkinButton()
 
 	local checkButtons = {
 		LFDQueueFrameRoleButtonTank,
@@ -94,22 +89,29 @@ local function LoadSkin()
 		T.SkinCheckBox(roleButton.checkButton or roleButton.CheckButton)
 	end
 
+	hooksecurefunc("SetCheckButtonIsRadio", function(button)
+		T.SkinCheckBox(button)
+	end)
+
 	local scrollbars = {
-		"ScenarioQueueFrameSpecificScrollFrameScrollBar",
-		"LFGListApplicationViewerScrollFrameScrollBar",
-		"LFDQueueFrameSpecificListScrollFrameScrollBar",
-		"LFDQueueFrameRandomScrollFrameScrollBar",
-		"RaidFinderQueueFrameScrollFrameScrollBar",
-		"LFGListEntryCreationSearchScrollFrameScrollBar"
+		LFGListApplicationViewerScrollFrameScrollBar,
+		LFDQueueFrameSpecificListScrollFrameScrollBar,
+		LFDQueueFrameRandomScrollFrameScrollBar,
+		RaidFinderQueueFrameScrollFrameScrollBar,
+		LFGListEntryCreationSearchScrollFrameScrollBar,
+		LFGListFrame.SearchPanel.ScrollFrame.scrollBar
 	}
 
-	for _, scrollbar in pairs(scrollbars) do
-		T.SkinScrollBar(_G[scrollbar])
+	for i = 1, #scrollbars do
+		T.SkinScrollBar(scrollbars[i])
 	end
 
-	T.SkinScrollBar(LFGListFrame.SearchPanel.ScrollFrame.scrollBar)
+	-- Set texture to hide circle
+	_G.GroupFinderFrame.groupButton1.icon:SetTexture("Interface\\Icons\\INV_Helmet_08")
+	_G.GroupFinderFrame.groupButton2.icon:SetTexture("Interface\\LFGFrame\\UI-LFR-PORTRAIT")
+	_G.GroupFinderFrame.groupButton3.icon:SetTexture("Interface\\Icons\\Achievement_General_StayClassy")
 
-	for i = 1, 4 do
+	for i = 1, 3 do
 		local button = GroupFinderFrame["groupButton"..i]
 
 		button.ring:Hide()
@@ -132,7 +134,7 @@ local function LoadSkin()
 
 	hooksecurefunc("GroupFinderFrame_SelectGroupButton", function(index)
 		local self = GroupFinderFrame
-		for i = 1, 4 do
+		for i = 1, 3 do
 			local button = self["groupButton"..i]
 			if i == index then
 				button.backdrop:SetBackdropBorderColor(1, 0.82, 0, 1)
@@ -159,6 +161,17 @@ local function LoadSkin()
 			item.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 			item.Icon:SetDrawLayer("OVERLAY")
 			item.Icon:SetParent(item.border)
+
+			hooksecurefunc(item.IconBorder, "SetVertexColor", function(self, r, g, b)
+				if r ~= 0.65882 and g ~= 0.65882 and b ~= 0.65882 then
+					self:GetParent().border.backdrop:SetBackdropBorderColor(r, g, b)
+				end
+				self:SetTexture("")
+			end)
+
+			hooksecurefunc(item.IconBorder, "Hide", function(self)
+				self:GetParent().border.backdrop:SetBackdropBorderColor(unpack(C.media.border_color))
+			end)
 
 			item.Count:SetDrawLayer("OVERLAY")
 			item.Count:SetParent(item.border)
@@ -191,7 +204,6 @@ local function LoadSkin()
 	end
 	SkinMoney("LFDQueueFrameRandomScrollFrameChildFrameMoneyReward")
 	SkinMoney("RaidFinderQueueFrameScrollFrameChildFrameMoneyReward")
-	SkinMoney("ScenarioQueueFrameRandomScrollFrameChildFrameMoneyReward")
 
 	hooksecurefunc("LFGDungeonListButton_SetDungeon", function(button)
 		if not button.expandOrCollapseButton.isSkinned then
@@ -210,8 +222,6 @@ local function LoadSkin()
 	LFGListApplicationDialog:SetTemplate("Transparent")
 	PVEFrame:CreateBackdrop("Transparent")
 	PVEFrame.backdrop:SetAllPoints()
-	PVEFrame.shadows:Kill()
-	ScenarioQueueFrame.Bg:Hide()
 
 	LFDQueueFrameNoLFDWhileLFR:CreateBackdrop("Overlay")
 	LFDQueueFrameNoLFDWhileLFR.backdrop:SetPoint("TOPLEFT", 2, 5)
@@ -239,12 +249,6 @@ local function LoadSkin()
 	T.SkinDropDownBox(RaidFinderQueueFrameSelectionDropDown, 300)
 	RaidFinderQueueFrameSelectionDropDown:SetPoint("RIGHT", -10, 0)
 
-	T.SkinDropDownBox(ScenarioQueueFrameTypeDropDown, 300)
-	ScenarioQueueFrameSpecificScrollFrameScrollBackgroundTopLeft:Hide()
-	ScenarioQueueFrameSpecificScrollFrameScrollBackgroundBottomRight:Hide()
-	ScenarioQueueFrameRandomScrollFrameChildFrame.bonusRepFrame.ChooseButton:SkinButton()
-	ScenarioQueueFrameTypeDropDown:SetPoint("RIGHT", -10, 0)
-
 	LFGListFrame.SearchPanel.ResultsInset:StripTextures()
 	LFGListFrame.NothingAvailable:StripTextures()
 	LFGListFrame.CategorySelection:StripTextures()
@@ -259,6 +263,17 @@ local function LoadSkin()
 	LFGListFrame.SearchPanel.RefreshButton.Icon:SetPoint("CENTER")
 	LFGListFrame.SearchPanel.FilterButton:SkinButton()
 	LFGListFrame.SearchPanel.FilterButton:SetPoint("LEFT", LFGListFrame.SearchPanel.SearchBox, "RIGHT", 5, 0)
+
+	hooksecurefunc("LFGListApplicationViewer_UpdateApplicant", function(button)
+		if not button.DeclineButton.isSkinned then
+			button.DeclineButton:SkinButton()
+			button.DeclineButton.isSkinned = true
+		end
+		if not button.InviteButton.isSkinned then
+			button.InviteButton:SkinButton()
+			button.InviteButton.isSkinned = true
+		end
+	end)
 
 	hooksecurefunc("LFGListSearchEntry_Update", function(button)
 		if button and not button.isSkinned then
@@ -310,12 +325,25 @@ local function LoadSkin()
 	LFDQueueFrameRandomScrollFrameScrollBackground:SetTexture(nil)
 	LFDQueueFrameRandomScrollFrameScrollBackgroundTopLeft:SetTexture(nil)
 	LFDQueueFrameRandomScrollFrameScrollBackgroundBottomRight:SetTexture(nil)
-	LFDQueueFrameRandomScrollFrameChildFrameBonusRepFrame.ChooseButton:SkinButton()
 
 	LFGInvitePopup:StripTextures()
 	LFGInvitePopup:SetTemplate("Transparent")
 	LFGDungeonReadyPopup:SetTemplate("Transparent")
 	LFGDungeonReadyDialog.SetBackdrop = T.dummy
+	LFGDungeonReadyDialog.Border:Hide()
+	LFGDungeonReadyStatus.Border:Hide()
+
+	hooksecurefunc("LFGDungeonReadyDialog_UpdateRewards", function()
+		for i = 1, LFD_MAX_REWARDS do
+			local reward = LFGDungeonReadyDialogRewardsFrame.Rewards[i]
+			if not reward.isSkinned then
+				reward.texture:SetSize(18, 18)
+				reward.texture:SkinIcon(true)
+				reward:DisableDrawLayer("OVERLAY")
+				reward.isSkinned = true
+			end
+		end
+	end)
 
 	LFGListFrame.CategorySelection.CategoryButtons[1]:SetNormalFontObject(GameFontNormal)
 	hooksecurefunc("LFGListCategorySelection_AddButton", function(self, index)
@@ -331,6 +359,8 @@ local function LoadSkin()
 			button.SelectedTexture:SetColorTexture(1, 0.82, 0, 0.3)
 			button.SelectedTexture:SetPoint("TOPLEFT", 2, -2)
 			button.SelectedTexture:SetPoint("BOTTOMRIGHT", -2, 2)
+
+			button.Label:SetFontObject(_G.GameFontNormal)
 			button.styled = true
 		end
 	end)
@@ -360,7 +390,6 @@ local function LoadSkin()
 	LFGListFrame.EntryCreation.ListGroupButton:SkinButton()
 	LFGListFrame.EntryCreation.CancelButton:SkinButton()
 
-	LFGListFrame.EntryCreation.ActivityFinder.Background:Kill()
 	LFGListFrame.EntryCreation.ActivityFinder.Dialog:StripTextures()
 	LFGListFrame.EntryCreation.ActivityFinder.Dialog:SetTemplate("Transparent")
 	LFGListFrame.EntryCreation.ActivityFinder.Dialog.BorderFrame:StripTextures()
@@ -370,32 +399,108 @@ local function LoadSkin()
 	LFGListFrame.EntryCreation.ActivityFinder.Dialog.CancelButton:SkinButton()
 
 	-- ApplicationViewer (Custom Groups)
-	LFGListFrame.ApplicationViewer.InfoBackground:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 	T.SkinCheckBox(LFGListFrame.ApplicationViewer.AutoAcceptButton)
 	LFGListFrame.ApplicationViewer.Inset:StripTextures()
 	LFGListFrame.ApplicationViewer.Inset:SetTemplate("Transparent")
+
 	LFGListFrame.ApplicationViewer.NameColumnHeader:SkinButton(true)
-	LFGListFrame.ApplicationViewer.RoleColumnHeader:SkinButton(true)
-	LFGListFrame.ApplicationViewer.ItemLevelColumnHeader:SkinButton(true)
 	LFGListFrame.ApplicationViewer.NameColumnHeader:ClearAllPoints()
 	LFGListFrame.ApplicationViewer.NameColumnHeader:SetPoint("BOTTOMLEFT", LFGListFrame.ApplicationViewer.Inset, "TOPLEFT", 0, 1)
+	LFGListFrame.ApplicationViewer.NameColumnHeader.Label:SetFont(C.media.normal_font, 10)
+
+	LFGListFrame.ApplicationViewer.RoleColumnHeader:SkinButton(true)
 	LFGListFrame.ApplicationViewer.RoleColumnHeader:ClearAllPoints()
 	LFGListFrame.ApplicationViewer.RoleColumnHeader:SetPoint("LEFT", LFGListFrame.ApplicationViewer.NameColumnHeader, "RIGHT", 1, 0)
+	LFGListFrame.ApplicationViewer.RoleColumnHeader.Label:SetFont(C.media.normal_font, 10)
+
+	LFGListFrame.ApplicationViewer.ItemLevelColumnHeader:SkinButton(true)
 	LFGListFrame.ApplicationViewer.ItemLevelColumnHeader:ClearAllPoints()
 	LFGListFrame.ApplicationViewer.ItemLevelColumnHeader:SetPoint("LEFT", LFGListFrame.ApplicationViewer.RoleColumnHeader, "RIGHT", 1, 0)
+	LFGListFrame.ApplicationViewer.ItemLevelColumnHeader.Label:SetFont(C.media.normal_font, 10)
+
 	LFGListFrame.ApplicationViewer.RefreshButton:SkinButton()
 	LFGListFrame.ApplicationViewer.RefreshButton:SetSize(24,24)
 	LFGListFrame.ApplicationViewer.RefreshButton:ClearAllPoints()
 	LFGListFrame.ApplicationViewer.RefreshButton:SetPoint("BOTTOMRIGHT", LFGListFrame.ApplicationViewer.Inset, "TOPRIGHT", 16, 4)
+
 	LFGListFrame.ApplicationViewer.RemoveEntryButton:SkinButton(true)
-	LFGListFrame.ApplicationViewer.EditButton:SkinButton(true)
 	LFGListFrame.ApplicationViewer.RemoveEntryButton:ClearAllPoints()
 	LFGListFrame.ApplicationViewer.RemoveEntryButton:SetPoint("BOTTOMLEFT", -1, 3)
+
+	LFGListFrame.ApplicationViewer.EditButton:SkinButton(true)
 	LFGListFrame.ApplicationViewer.EditButton:ClearAllPoints()
 	LFGListFrame.ApplicationViewer.EditButton:SetPoint("BOTTOMRIGHT", -6, 3)
+
 	LFGListApplicationViewerScrollFrameScrollBar:ClearAllPoints()
 	LFGListApplicationViewerScrollFrameScrollBar:SetPoint("TOPLEFT", LFGListFrame.ApplicationViewer.Inset, "TOPRIGHT", 0, -14)
 	LFGListApplicationViewerScrollFrameScrollBar:SetPoint("BOTTOMLEFT", LFGListFrame.ApplicationViewer.Inset, "BOTTOMRIGHT", 0, 14)
+
+	LFGListFrame.ApplicationViewer.InfoBackground:SkinIcon()
+	LFGListFrame.ApplicationViewer.InfoBackground:SetPoint("TOPLEFT", 1, -27)
+	LFGListFrame.ApplicationViewer.InfoBackground:SetSize(326, 90)
+
+	if IsAddOnLoaded("PremadeGroupsFilter") then
+		T.SkinCheckBox(UsePFGButton)
+		PremadeGroupsFilterDialog:StripTextures()
+		PremadeGroupsFilterDialog:CreateBackdrop("Transparent")
+		PremadeGroupsFilterDialog.backdrop:SetPoint("TOPLEFT", 3, 0)
+		PremadeGroupsFilterDialog.backdrop:SetPoint("BOTTOMRIGHT", 0, -1)
+		PremadeGroupsFilterDialog.ResetButton:SkinButton()
+		PremadeGroupsFilterDialog.RefreshButton:SkinButton()
+		T.SkinCloseButton(PremadeGroupsFilterDialog.CloseButton)
+
+		T.SkinCloseButton(PremadeGroupsFilterDialog.MinimizeButton, nil, "-")
+		PremadeGroupsFilterDialog.MinimizeButton:SetHitRectInsets(0, 0, 0, 0)
+		PremadeGroupsFilterDialog.MinimizeButton:ClearAllPoints()
+		PremadeGroupsFilterDialog.MinimizeButton:SetPoint("TOPRIGHT", PremadeGroupsFilterDialog.CloseButton, "TOPLEFT", -3, 0)
+		T.SkinCloseButton(PremadeGroupsFilterDialog.MaximizeButton, nil, "+")
+		PremadeGroupsFilterDialog.MaximizeButton:SetHitRectInsets(0, 0, 0, 0)
+		PremadeGroupsFilterDialog.MaximizeButton:ClearAllPoints()
+		PremadeGroupsFilterDialog.MaximizeButton:SetPoint("TOPRIGHT", PremadeGroupsFilterDialog.CloseButton, "TOPLEFT", -3, 0)
+		PremadeGroupsFilterDialog.MoveableToggle:SetPoint("LEFT", PremadeGroupsFilterDialog, "LEFT", 0, 0)
+
+		T.SkinDropDownBox(PremadeGroupsFilterDialog.Difficulty.DropDown)
+		T.SkinEditBox(PremadeGroupsFilterDialog.Expression)
+		PremadeGroupsFilterDialog.Advanced:StripTextures()
+		PremadeGroupsFilterDialog.Difficulty.DropDown:SetPoint("TOPRIGHT", PremadeGroupsFilterDialog.Difficulty, "TOPRIGHT", 5, 1)
+		PremadeGroupsFilterDialog.ResetButton:SetPoint("BOTTOMLEFT", PremadeGroupsFilterDialog, "BOTTOMLEFT", 9, 3)
+		PremadeGroupsFilterDialog.RefreshButton:SetPoint("BOTTOMRIGHT", PremadeGroupsFilterDialog, "BOTTOMRIGHT", -11, 3)
+
+		local checkButtons = {
+			PremadeGroupsFilterDialog.Difficulty.Act,
+			PremadeGroupsFilterDialog.Ilvl.Act,
+			PremadeGroupsFilterDialog.Noilvl.Act,
+			PremadeGroupsFilterDialog.Defeated.Act,
+			PremadeGroupsFilterDialog.Members.Act,
+			PremadeGroupsFilterDialog.Tanks.Act,
+			PremadeGroupsFilterDialog.Heals.Act,
+			PremadeGroupsFilterDialog.Dps.Act
+		}
+
+		for _, button in pairs(checkButtons) do
+			button:SetSize(27, 27)
+			T.SkinCheckBox(button)
+		end
+
+		local editBoxes = {
+			PremadeGroupsFilterDialog.Ilvl.Min,
+			PremadeGroupsFilterDialog.Ilvl.Max,
+			PremadeGroupsFilterDialog.Defeated.Min,
+			PremadeGroupsFilterDialog.Defeated.Max,
+			PremadeGroupsFilterDialog.Members.Min,
+			PremadeGroupsFilterDialog.Members.Max,
+			PremadeGroupsFilterDialog.Tanks.Min,
+			PremadeGroupsFilterDialog.Tanks.Max,
+			PremadeGroupsFilterDialog.Heals.Min,
+			PremadeGroupsFilterDialog.Heals.Max,
+			PremadeGroupsFilterDialog.Dps.Min,
+			PremadeGroupsFilterDialog.Dps.Max
+		}
+
+		for _, box in pairs(editBoxes) do
+			T.SkinEditBox(box, nil, 17)
+		end
+	end
 end
 
 tinsert(T.SkinFuncs["ShestakUI"], LoadSkin)
@@ -403,6 +508,7 @@ tinsert(T.SkinFuncs["ShestakUI"], LoadSkin)
 local function LoadSecondarySkin()
 	ChallengesFrameInset:StripTextures()
 	ChallengesFrame:DisableDrawLayer("BACKGROUND")
+	ChallengesFrame.WeeklyInfo.Child:DisableDrawLayer("BACKGROUND")
 
 	hooksecurefunc("ChallengesFrame_Update", function(self)
 		for _, frame in ipairs(self.DungeonIcons) do
@@ -466,6 +572,7 @@ local function LoadSecondarySkin()
 	NoticeFrame.SeasonDescription:SetShadowOffset(1, -1)
 	NoticeFrame.SeasonDescription2:SetTextColor(1, 1, 1)
 	NoticeFrame.SeasonDescription2:SetShadowOffset(1, -1)
+	NoticeFrame.SeasonDescription2:SetWidth(400)
 	NoticeFrame.SeasonDescription3:SetTextColor(1, 0.8, 0)
 	NoticeFrame.SeasonDescription3:SetShadowOffset(1, -1)
 

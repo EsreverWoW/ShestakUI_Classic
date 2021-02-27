@@ -204,7 +204,7 @@ local UpdateDebuffFrame = function(rd, icon, count, debuffType, duration, expira
 	end
 end
 
-local Update = function(self, event, unit)
+local Update = function(self, _, unit)
 	if unit ~= self.unit then return end
 	local rd = self.RaidDebuffs
 	rd.priority = invalidPrio
@@ -248,17 +248,9 @@ local Update = function(self, event, unit)
 				end
 			end
 
-			local prio = rd.Debuffs and rd.Debuffs[rd.MatchBySpellName and name or spellId]
-			local prioPvP
-			if C.raidframe.plugins_pvp_debuffs == true then
-				prioPvP = rd.Debuffs and T.PvPDebuffs[rd.MatchBySpellName and name or spellId]
-			end
-			if not T.RaidDebuffsIgnore[spellId] and (prio and (prio > rd.priority) or prioPvP and (prioPvP > rd.priority)) then
-				if (prio and not prioPvP) or ((prio and prioPvP) and prio > prioPvP) then
-					rd.priority = prio
-				else
-					rd.priority = prioPvP
-				end
+			local prio = T.RaidDebuffs[rd.MatchBySpellName and name or spellId]
+			if not T.RaidDebuffsIgnore[spellId] and prio and (prio > rd.priority) then
+				rd.priority = prio
 				rd.index = i
 				rd.type = "Custom"
 				rd.filter = filter

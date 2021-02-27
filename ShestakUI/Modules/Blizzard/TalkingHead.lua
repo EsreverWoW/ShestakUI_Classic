@@ -5,10 +5,26 @@ local T, C, L, _ = unpack(select(2, ...))
 ------------------------------------------------------------------------------------------
 local Load = CreateFrame("Frame")
 Load:RegisterEvent("ADDON_LOADED")
-Load:SetScript("OnEvent", function(self, event, addon)
+Load:SetScript("OnEvent", function(_, _, addon)
 	if addon == "Blizzard_TalkingHeadUI" then
 		TalkingHeadFrame.ignoreFramePositionManager = true
 		TalkingHeadFrame:ClearAllPoints()
 		TalkingHeadFrame:SetPoint(unpack(C.position.talking_head))
 	end
 end)
+
+----------------------------------------------------------------------------------------
+--	Hide TalkingHeadFrame
+----------------------------------------------------------------------------------------
+if C.general.hide_talking_head == true then
+	local frame = CreateFrame("Frame")
+	frame:RegisterEvent("ADDON_LOADED")
+	frame:SetScript("OnEvent", function(self, event, addon)
+		if addon == "Blizzard_TalkingHeadUI" then
+			hooksecurefunc("TalkingHeadFrame_PlayCurrent", function()
+				TalkingHeadFrame:Hide()
+			end)
+			self:UnregisterEvent(event)
+		end
+	end)
+end

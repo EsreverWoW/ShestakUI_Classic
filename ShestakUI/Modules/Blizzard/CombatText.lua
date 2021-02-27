@@ -70,7 +70,7 @@ local part = "-%s [%s %s]"
 local r, g, b, lowMana, lowHealth
 
 -- Function, handles everything
-local function OnEvent(self, event, subevent, powerType)
+local function OnEvent(_, event, subevent, powerType)
 	if event == "COMBAT_TEXT_UPDATE" then
 		local arg2, arg3 = GetCurrentCombatTextEventInfo()
 		if SHOW_COMBAT_TEXT == "0" then
@@ -313,9 +313,9 @@ local function OnEvent(self, event, subevent, powerType)
 			end
 		end
 	elseif event == "PLAYER_REGEN_ENABLED" and COMBAT_TEXT_SHOW_COMBAT_STATE == "1" then
-			xCT3:AddMessage("-"..LEAVING_COMBAT, 0.1, 1, 0.1)
+		xCT3:AddMessage("-"..LEAVING_COMBAT, 0.1, 1, 0.1)
 	elseif event == "PLAYER_REGEN_DISABLED" and COMBAT_TEXT_SHOW_COMBAT_STATE == "1" then
-			xCT3:AddMessage("+"..ENTERING_COMBAT, 1, 0.1, 0.1)
+		xCT3:AddMessage("+"..ENTERING_COMBAT, 1, 0.1, 0.1)
 	elseif event == "UNIT_POWER_UPDATE" and COMBAT_TEXT_SHOW_ENERGIZE == "1" then
 		if subevent == ct.unit then
 			if powerType and powerType ~= 'COMBO_POINTS' then return end
@@ -370,7 +370,7 @@ end
 
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("PLAYER_LOGOUT")
-frame:SetScript("OnEvent", function(self, event)
+frame:SetScript("OnEvent", function(_, event)
 	if event == "PLAYER_LOGOUT" then
 		if not T.classic then
 			SetCVar("floatingCombatTextCombatHealing", 1)
@@ -474,7 +474,7 @@ local function SetPosition(f)
 	local a1, _, a2, x, y = f:GetPoint()
 	for i = 1, #ct.frames do
 		if f == ct.frames[i] then
-			SavedPositions["xCT"..i] = {a1, "UIParent", a2, x, y}
+			ShestakUIPositions["xCT"..i] = {a1, "UIParent", a2, x, y}
 		end
 	end
 end
@@ -600,7 +600,7 @@ local function StartTestMode()
 	end
 
 	for i = 1, #ct.frames do
-		ct.frames[i]:SetScript("OnUpdate", function(self, elapsed)
+		ct.frames[i]:SetScript("OnUpdate", function(_, elapsed)
 			UpdateInterval = random(65, 1000) / 250
 			TimeSinceLastUpdate = TimeSinceLastUpdate + elapsed
 			if TimeSinceLastUpdate > UpdateInterval then
@@ -664,23 +664,30 @@ StaticPopupDialogs.XCT_LOCK = {
 	whileDead = 1,
 	hideOnEscape = true,
 	showAlert = true,
-	preferredIndex = STATICPOPUPS_NUMDIALOGS,
+	preferredIndex = 5,
+}
+
+local placed = {
+	"xCT1",
+	"xCT2",
+	"xCT3",
+	"xCT4"
 }
 
 -- Slash commands
 SlashCmdList.XCT = function(input)
 	input = string.lower(input)
-	if input == "unlock" then
+	if input == "move" then
 		if ct.locked then
 			StartConfigmode()
-		else
-			pr("|cffffff00"..L_COMBATTEXT_ALREADY_UNLOCKED.."|r")
-		end
-	elseif input == "lock" then
-		if ct.locked then
-			pr("|cffffff00"..L_COMBATTEXT_ALREADY_LOCKED.."|r")
+			if not ct.testmode then
+				StartTestMode()
+			end
 		else
 			StaticPopup_Show("XCT_LOCK")
+			if ct.testmode then
+				EndTestMode()
+			end
 		end
 	elseif input == "test" then
 		if ct.testmode then
@@ -691,17 +698,15 @@ SlashCmdList.XCT = function(input)
 			pr("|cffffff00"..L_COMBATTEXT_TEST_ENABLED.."|r")
 		end
 	elseif input == "reset" then
-		for i = 1, #ct.frames do
-			local f = "xCT"..i
-			SavedPositions[f] = nil
-			if _G[f] then
-				_G[f]:SetUserPlaced(false)
+		for _, v in pairs(placed) do
+			if _G[v] then
+				ShestakUIPositions[f] = nil
+				_G[v]:SetUserPlaced(false)
 			end
 		end
 		ReloadUI()
 	else
-		pr("|cffffff00"..L_COMBATTEXT_TEST_USE_UNLOCK.."|r")
-		pr("|cffffff00"..L_COMBATTEXT_TEST_USE_LOCK.."|r")
+		pr("|cffffff00"..L_COMBATTEXT_TEST_USE_MOVE.."|r")
 		pr("|cffffff00"..L_COMBATTEXT_TEST_USE_TEST.."|r")
 		pr("|cffffff00"..L_COMBATTEXT_TEST_USE_RESET.."|r")
 	end
@@ -730,7 +735,7 @@ if C.combattext.merge_aoe_spam then
 		end
 		local tslu = 0
 		local xCTspam = CreateFrame("Frame")
-		xCTspam:SetScript("OnUpdate", function(self, elapsed)
+		xCTspam:SetScript("OnUpdate", function(_, elapsed)
 			local count
 			tslu = tslu + elapsed
 			if tslu > 0.5 then
@@ -758,9 +763,9 @@ end
 
 local unpack, select, time = unpack, select, time
 local gflags = bit.bor(COMBATLOG_OBJECT_AFFILIATION_MINE,
-	COMBATLOG_OBJECT_REACTION_FRIENDLY,
-	COMBATLOG_OBJECT_CONTROL_PLAYER,
-	COMBATLOG_OBJECT_TYPE_GUARDIAN
+		COMBATLOG_OBJECT_REACTION_FRIENDLY,
+		COMBATLOG_OBJECT_CONTROL_PLAYER,
+		COMBATLOG_OBJECT_TYPE_GUARDIAN
 )
 
 -- Damage
@@ -780,7 +785,7 @@ if C.combattext.damage then
 		ct.blank = "Interface\\AddOns\\ShestakUI\\Media\\Textures\\Blank.tga"
 	end
 	local misstypes = {ABSORB = ABSORB, BLOCK = BLOCK, DEFLECT = DEFLECT, DODGE = DODGE, EVADE = EVADE, IMMUNE = IMMUNE, MISS = MISS, MISFIRE = MISS, PARRY = PARRY, REFLECT = REFLECT, RESIST = RESIST}
-	local dmg = function(self, event)
+	local dmg = function()
 		local msg, icon
 		local _, eventType, _, sourceGUID, _, sourceFlags, _, destGUID = CombatLogGetCurrentEventInfo()
 		if (sourceGUID == ct.pguid and destGUID ~= ct.pguid) or (sourceGUID == UnitGUID("pet") and C.combattext.pet_damage) or (sourceFlags == gflags) then
@@ -800,7 +805,13 @@ if C.combattext.damage then
 						else
 							icon = GetSpellTexture(6603)
 						end
+					end
+					if icon then
 						msg = " \124T"..icon..":"..C.combattext.icon_size..":"..C.combattext.icon_size..":0:0:64:64:5:59:5:59\124t"
+					elseif C.combattext.icons then
+						msg = " \124T"..ct.blank..":"..C.combattext.icon_size..":"..C.combattext.icon_size..":0:0:64:64:5:59:5:59\124t"
+					else
+						msg = ""
 					end
 					local color = {1, 1, 1}
 					if C.combattext.merge_aoe_spam and C.combattext.merge_melee then
@@ -835,9 +846,13 @@ if C.combattext.damage then
 						if spellId and spellId ~= 0 then
 							icon = GetSpellTexture(spellId)
 						else
-							icon = ""
+							icon = ct.blank
 						end
+					end
+					if icon then
 						msg = " \124T"..icon..":"..C.combattext.icon_size..":"..C.combattext.icon_size..":0:0:64:64:5:59:5:59\124t"
+					else
+						msg = ""
 					end
 					if C.combattext.merge_aoe_spam then
 						spellId = T.merge[spellId] or spellId
@@ -873,7 +888,7 @@ if C.combattext.damage then
 						if spellId and spellId ~= 0 then
 							icon = GetSpellTexture(spellId)
 						else
-							icon = ""
+							icon = ct.blank
 						end
 					end
 					if C.combattext.damage_color then
@@ -887,8 +902,6 @@ if C.combattext.damage then
 					end
 					if icon then
 						msg = " \124T"..icon..":"..C.combattext.icon_size..":"..C.combattext.icon_size..":0:0:64:64:5:59:5:59\124t"
-					elseif C.combattext.icons then
-						msg = " \124T"..ct.blank..":"..C.combattext.icon_size..":"..C.combattext.icon_size..":0:0:64:64:5:59:5:59\124t"
 					else
 						msg = ""
 					end
@@ -896,6 +909,10 @@ if C.combattext.damage then
 						spellId = T.merge[spellId] or spellId
 						if bit.band(sourceFlags, COMBATLOG_OBJECT_AFFILIATION_MINE) ~= COMBATLOG_OBJECT_AFFILIATION_MINE then
 							spellId = 6603
+						end
+						if (sourceGUID == UnitGUID("pet") or sourceFlags == gflags) and not T.aoespam[spellId] then
+							T.aoespam[spellId] = 3
+							SQ[spellId] = {queue = 0, msg = "", color = {}, count = 0, utime = 0, locked = false}
 						end
 						if T.aoespam[spellId] then
 							SQ[spellId]["locked"] = true
@@ -930,12 +947,12 @@ if C.combattext.damage then
 				if T.classic then
 					spellId = T.GetSpellID(spellName)
 				end
-				if missType == "IMMUNE" and spellId == 118895 then return end
+				if missType == "IMMUNE" and spellId == 204242 then return end -- Consecration slow
 				if C.combattext.icons then
 					if spellId and spellId ~= 0 then
 						icon = GetSpellTexture(spellId)
 					else
-						icon = ""
+						icon = ct.blank
 					end
 					missType = misstypes[missType].." \124T"..icon..":"..C.combattext.icon_size..":"..C.combattext.icon_size..":0:0:64:64:5:59:5:59\124t"
 				else
@@ -952,13 +969,11 @@ if C.combattext.damage then
 					if id and id ~= 0 then
 						icon = GetSpellTexture(id)
 					else
-						icon = ""
+						icon = ct.blank
 					end
 				end
 				if icon then
 					msg = " \124T"..icon..":"..C.combattext.icon_size..":"..C.combattext.icon_size..":0:0:64:64:5:59:5:59\124t"
-				elseif C.combattext.icons then
-					msg = " \124T"..ct.blank..":"..C.combattext.icon_size..":"..C.combattext.icon_size..":0:0:64:64:5:59:5:59\124t"
 				else
 					msg = ""
 				end
@@ -978,13 +993,11 @@ if C.combattext.damage then
 					if id and id ~= 0 then
 						icon = GetSpellTexture(id)
 					else
-						icon = ""
+						icon = ct.blank
 					end
 				end
 				if icon then
 					msg = " \124T"..icon..":"..C.combattext.icon_size..":"..C.combattext.icon_size..":0:0:64:64:5:59:5:59\124t"
-				elseif C.combattext.icons then
-					msg = " \124T"..ct.blank..":"..C.combattext.icon_size..":"..C.combattext.icon_size..":0:0:64:64:5:59:5:59\124t"
 				else
 					msg = ""
 				end
@@ -999,13 +1012,11 @@ if C.combattext.damage then
 					if id and id ~= 0 then
 						icon = GetSpellTexture(id)
 					else
-						icon = ""
+						icon = ct.blank
 					end
 				end
 				if icon then
 					msg = " \124T"..icon..":"..C.combattext.icon_size..":"..C.combattext.icon_size..":0:0:64:64:5:59:5:59\124t"
-				elseif C.combattext.icons then
-					msg = " \124T"..ct.blank..":"..C.combattext.icon_size..":"..C.combattext.icon_size..":0:0:64:64:5:59:5:59\124t"
 				else
 					msg = ""
 				end
@@ -1029,7 +1040,7 @@ if C.combattext.healing then
 	if C.combattext.icons then
 		ct.blank = "Interface\\AddOns\\ShestakUI\\Media\\Textures\\Blank.tga"
 	end
-	local heal = function(self, event)
+	local heal = function()
 		local msg, icon
 		local _, eventType, _, sourceGUID, _, sourceFlags = CombatLogGetCurrentEventInfo()
 		if sourceGUID == ct.pguid or sourceFlags == gflags then
@@ -1064,18 +1075,16 @@ if C.combattext.healing then
 							color = {0.1, 0.65, 0.1}
 						end
 						if C.combattext.icons then
-							if spellId and spellId ~= 0 then
-								icon = GetSpellTexture(spellId)
+							if id and id ~= 0 then
+								icon = GetSpellTexture(id)
 							else
-								icon = ""
+								icon = ct.blank
 							end
-						else
-							msg = ""
 						end
 						if icon then
 							msg = " \124T"..icon..":"..C.combattext.icon_size..":"..C.combattext.icon_size..":0:0:64:64:5:59:5:59\124t"
-						elseif C.combattext.icons then
-							msg = " \124T"..ct.blank..":"..C.combattext.icon_size..":"..C.combattext.icon_size..":0:0:64:64:5:59:5:59\124t"
+						else
+							msg = ""
 						end
 						if C.combattext.merge_aoe_spam then
 							spellId = T.merge[spellId] or spellId

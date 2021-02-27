@@ -6,23 +6,25 @@ if not T.classic then return end
 --	Example: Misdirection -> http://www.wowhead.com/spell=34477
 --	Take the number ID at the end of the URL, and add it to the list
 ----------------------------------------------------------------------------------------
-local function SpellName(id)
-	local name = GetSpellInfo(id)
-	if name then
-		return name
-	else
-		print("|cffff0000WARNING: spell ID ["..tostring(id).."] no longer exists! Report this to EsreverWoW.|r")
-		return "Empty"
-	end
-end
-
 if C.announcements.spells == true then
-	T.AnnounceSpells = {
-		SpellName(20484),	-- Rebirth
-		SpellName(20707),	-- Soulstone
-		SpellName(633),		-- Lay on Hands
-		SpellName(19801),	-- Tranquilizing Shot
+	T.announce_spells = {
+		20484,	-- Rebirth
+		20707,	-- Soulstone
+		633,	-- Lay on Hands
+		19801,	-- Tranquilizing Shot
 	}
+
+	if #C.announcements.spells_list > 0 then
+		T.announce_spells = C.announcements.spells_list
+	else
+		if C.options.announcements and C.options.announcements.spells_list then
+			C.options.announcements.spells_list = nil
+		end
+	end
+	T.AnnounceSpells = {}
+	for _, spell in pairs(T.announce_spells) do
+		T.AnnounceSpells[spell] = true
+	end
 end
 
 if C.announcements.toys == true then
@@ -31,6 +33,8 @@ if C.announcements.toys == true then
 end
 
 if C.announcements.feasts == true then
+	T.AnnounceFeast = {
+	}
 	T.AnnounceBots = {
 		[22700] = true,		-- Field Repair Bot 74A
 	}

@@ -72,7 +72,7 @@ if T.name == "Oz" and T.realm == "Pozzo dell'Eternità" then
 	C["general"].welcome_message = false
 	C["misc"].invite_keyword = "inv"
 	C["misc"].item_level = true
-	C["misc"].move_blizzard = true
+	C["general"].move_blizzard = true
 	C["announcements"].flask_food = true
 	C["announcements"].pull_countdown = false
 	C["automation"].release = false
@@ -107,7 +107,6 @@ if T.name == "Oz" and T.realm == "Pozzo dell'Eternità" then
 	C["chat"].damage_meter_spam = true
 	C["minimap"].size = 116
 	C["minimap"].toggle_menu = false
-	C["map"].map_boss_count = true
 	C["loot"].auto_greed = false
 	C["nameplate"].show_castbar_name = true
 	C["nameplate"].class_icons = true
@@ -149,13 +148,12 @@ end
 ----------------------------------------------------------------------------------------
 if Sw2rT1 then
 	C["general"].welcome_message = false
+	C["general"].hide_banner = false
+	C["general"].hide_talking_head = true
 	C["misc"].shift_marking = false
 	C["misc"].raid_tools = false
-	C["misc"].hide_bg_spam = true
-	C["misc"].disenchanting = true
-	C["misc"].hide_banner = false
-	C["misc"].hide_talking_head = true
 	C["misc"].hide_raid_button = true
+	C["trade"].disenchanting = true
 	C["announcements"].pull_countdown = false
 	C["automation"].accept_invite = true
 	--C["automation"].accept_quest = true
@@ -163,9 +161,12 @@ if Sw2rT1 then
 	C["skins"].blizzard_frames = true
 	C["skins"].minimap_buttons = true
 	C["skins"].dbm = true
+	C["skins"].details = true
 	C["skins"].weak_auras = true
 	C["combattext"].crit_prefix = ""
 	C["combattext"].crit_postfix = ""
+	C["minimap"].size = 165
+	C["minimap"].fog_of_war = true
 	C["raidcooldown"].enable = false
 	C["threat"].enable = false
 	C["tooltip"].item_icon = true
@@ -177,7 +178,6 @@ if Sw2rT1 then
 	C["chat"].combatlog = false
 	C["chat"].damage_meter_spam = true
 	C["bag"].ilvl = true
-	C["minimap"].fog_of_war = true
 	C["filger"].enable = false
 	C["unitframe"].enemy_health_color = false
 	C["unitframe"].castbar_latency = false
@@ -192,27 +192,19 @@ end
 ----------------------------------------------------------------------------------------
 if IsWetxius then
 	C["general"].welcome_message = false
-	C["misc"].shift_marking = false
-	C["misc"].vehicle_mouseover = true
-	C["misc"].quest_auto_button = true
-	C["misc"].disenchanting = true
-	C["misc"].click_cast = true
-	C["misc"].enchantment_scroll = true
-	C["announcements"].bad_gear = true
-	C["automation"].accept_invite = true
-	C["automation"].accept_quest = true
-	C["automation"].auto_collapse = true
-	C["automation"].auto_role = true
-	C["automation"].tab_binder = true
+	C["general"].vehicle_mouseover = true
 	C["skins"].blizzard_frames = true
 	C["skins"].minimap_buttons = true
 	C["skins"].bigwigs = true
-	C["combattext"].crit_prefix = ""
-	C["combattext"].blizz_head_numbers = true
-	C["combattext"].dk_runes = false
-	C["pulsecooldown"].enable = true
-	C["pulsecooldown"].threshold = 8
-	C["threat"].enable = false
+	C["skins"].details = true
+	C["unitframe"].castbar_icon = true
+	C["unitframe"].plugins_enemy_spec = true
+	C["raidframe"].solo_mode = true
+	C["raidframe"].icons_leader = false
+	C["aura"].show_spiral = true
+	C["aura"].cast_by = true
+	C["actionbar"].toggle_mode = false
+	C["actionbar"].bottombars = 3
 	C["tooltip"].hide_combat = true
 	C["tooltip"].rank = false
 	C["tooltip"].spell_id = true
@@ -223,35 +215,63 @@ if IsWetxius then
 	C["chat"].chat_bar = true
 	C["chat"].chat_bar_mouseover = true
 	C["chat"].combatlog = false
-	C["minimap"].toggle_menu = false
-	C["minimap"].fog_of_war = true
+	C["chat"].loot_icons = true
 	C["nameplate"].health_value = true
 	C["nameplate"].healer_icon = true
-	C["actionbar"].toggle_mode = false
-	C["actionbar"].bottombars = 3
-	C["aura"].show_spiral = true
-	C["aura"].cast_by = true
+	C["combattext"].crit_prefix = ""
+	C["combattext"].blizz_head_numbers = true
+	C["combattext"].dk_runes = false
+	C["combattext"].heal_treshold = UnitHealthMax("player")/100
+	C["minimap"].toggle_menu = false
+	C["minimap"].fog_of_war = true
 	C["filger"].show_tooltip = true
-	C["unitframe"].castbar_icon = true
-	C["unitframe"].plugins_enemy_spec = true
-	C["raidframe"].solo_mode = true
-	C["raidframe"].icons_leader = false
+	C["announcements"].bad_gear = true
+	C["automation"].accept_invite = true
+	C["automation"].screenshot = true
+	C["automation"].auto_role = true
+	C["automation"].tab_binder = true
+	C["automation"].open_items = true
+	C["enemycooldown"].show_inparty = true
+	C["enemycooldown"].class_color = true
+	C["pulsecooldown"].enable = true
+	C["pulsecooldown"].threshold = 6
+	C["threat"].enable = false
 	C["toppanel"].enable = false
 	C["stats"].battleground = true
 	C["stats"].currency_cooking = false
 	C["stats"].currency_professions = false
 	C["stats"].currency_raid = false
 	C["stats"].currency_misc = false
+	C["trade"].disenchanting = true
+	C["trade"].enchantment_scroll = true
+	C["misc"].shift_marking = false
+	C["misc"].quest_auto_button = true
+	C["misc"].click_cast = true
 	C["font"].stats_font = C.media.normal_font
 	C["font"].stats_font_style = "OUTLINE"
 	C["font"].stats_font_size = 12
+	C["position"].raid_cooldown = {"TOPLEFT", UIParent, "TOPLEFT", 300, -14}
 	C["position"].bag = {"BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -21, 20}
 	C["position"].bank = {"BOTTOMLEFT", UIParent, "BOTTOMLEFT", 21, 20}
 	C["position"].auto_button = {"BOTTOMLEFT", "oUF_Player", "TOPRIGHT", 33, 83}
 	C["position"].unitframes.arena = {"BOTTOMRIGHT", UIParent, "RIGHT", -55, -70}
-	if T.level == MAX_PLAYER_LEVEL then
-		C["automation"].screenshot = true
-		C["combattext"].heal_treshold = 1000
-		C["stats"].experience = false
-	end
+
+	local frame = CreateFrame("Frame")
+	frame:RegisterEvent("PLAYER_LOGIN")
+	frame:SetScript("OnEvent", function()
+		xCT3:SetPoint("CENTER", 0, 305)
+		xCT3:SetWidth(400)
+	end)
+
+	T.CustomFilgerSpell = {
+		{"P_PROC_ICON", {spellID = 328908, unitID = "player", caster = "player", filter = "BUFF"}}, -- Combat Meditation
+		{"P_PROC_ICON", {spellID = 26573, filter = "ICD", trigger = "NONE", totem = true}}, -- Consecration
+	}
+end
+
+----------------------------------------------------------------------------------------
+--	Load external profile https://github.com/Wetxius/ShestakUI_Profile
+----------------------------------------------------------------------------------------
+if ShestakUICustomProfile then
+	ShestakUICustomProfile()
 end

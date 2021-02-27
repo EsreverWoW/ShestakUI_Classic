@@ -4,7 +4,7 @@ Author: d87
 --]================]
 if WOW_PROJECT_ID ~= WOW_PROJECT_CLASSIC then return end
 
-local MAJOR, MINOR = "LibClassicCasterino", 20
+local MAJOR, MINOR = "LibClassicCasterino", 36
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
@@ -51,10 +51,17 @@ local spellNameToID = {}
 local NPCspellNameToID = {}
 local NPCSpells
 
-local castTimeCache = {}
+local function makeCastUIDFromSpellID(npcID, spellID)
+    return tostring(npcID)..GetSpellInfo(spellID)
+end
+local castTimeCache = {
+    [makeCastUIDFromSpellID(15990, 8407)] = 2, -- Kel'Thuzad, "Frostbolt"
+}
 local castTimeCacheStartTimes = setmetatable({}, { __mode = "v" })
 
 local AIMED_SHOT = GetSpellInfo(19434)
+local MULTI_SHOT = GetSpellInfo(25294)
+local AimedDelay = 1
 local castingAimedShot = false
 local playerGUID = UnitGUID("player")
 
@@ -89,14 +96,21 @@ local makeCastUID = function(guid, spellName)
 end
 
 local function CastStart(srcGUID, castType, spellName, spellID, overrideCastTime, isSrcEnemyPlayer )
+    -- This cast time can't be used reliably because it's changing depending on player's own haste
     local _, _, icon, castTime = GetSpellInfo(spellID)
+    if castType == "CAST" then
+        local knownCastDuration = classCasts[spellID]
+        if knownCastDuration then
+            castTime = knownCastDuration*1000
+        end
+    end
     if castType == "CHANNEL" then
         local channelDuration = classChannelsByAura[spellID] or classChannelsByCast[spellID]
         castTime = channelDuration*1000
-        local decreased = talentDecreased[spellID]
-        if decreased then
-            castTime = castTime - decreased
-        end
+    end
+    local decreased = talentDecreased[spellID]
+    if decreased then
+        castTime = castTime - decreased*1000
     end
     if overrideCastTime then
         castTime = overrideCastTime
@@ -113,13 +127,19 @@ local function CastStart(srcGUID, castType, spellName, spellID, overrideCastTime
     end
 
     if isSrcEnemyPlayer then
-        movecheckGUIDs[srcGUID] = MOVECHECK_TIMEOUT
+        if not (spellID == 4068 or spellID == 19769) then -- Iron Grenade, Thorium Grenade
+            movecheckGUIDs[srcGUID] = MOVECHECK_TIMEOUT
+        end
     end
 
     if castType == "CAST" then
-        if srcGUID == playerGUID and spellName == AIMED_SHOT then
+        if srcGUID == playerGUID and (spellName == AIMED_SHOT or spellName == MULTI_SHOT) then
             castingAimedShot = true
+            AimedDelay = 1
             movecheckGUIDs[srcGUID] = MOVECHECK_TIMEOUT
+            if spellName == MULTI_SHOT then
+                casters[srcGUID][5] = startTime + 500
+            end
             callbacks:Fire("UNIT_SPELLCAST_START", "player")
         end
         FireToUnits("UNIT_SPELLCAST_START", srcGUID)
@@ -128,7 +148,7 @@ local function CastStart(srcGUID, castType, spellName, spellID, overrideCastTime
     end
 end
 
-local function CastStop(srcGUID, castType, suffix )
+local function CastStop(srcGUID, castType, suffix, suffix2 )
     local currentCast = casters[srcGUID]
     if currentCast then
         castType = castType or currentCast[1]
@@ -143,6 +163,9 @@ local function CastStop(srcGUID, castType, suffix )
                 callbacks:Fire(event, "player")
             end
             FireToUnits(event, srcGUID)
+            if suffix2 then
+                FireToUnits("UNIT_SPELLCAST_"..suffix2, srcGUID)
+            end
         else
             FireToUnits("UNIT_SPELLCAST_CHANNEL_STOP", srcGUID)
         end
@@ -154,7 +177,8 @@ function f:COMBAT_LOG_EVENT_UNFILTERED(event)
     local timestamp, eventType, hideCaster,
     srcGUID, srcName, srcFlags, srcFlags2,
     dstGUID, dstName, dstFlags, dstFlags2,
-    spellID, spellName, arg3, arg4, arg5 = CombatLogGetCurrentEventInfo()
+    spellID, spellName, arg3, arg4, arg5,
+    arg6, resisted, blocked, absorbed = CombatLogGetCurrentEventInfo()
 
     local isSrcPlayer = bit_band(srcFlags, COMBATLOG_OBJECT_TYPE_PLAYER_OR_PET) > 0
     if isSrcPlayer and spellID == 0 then
@@ -183,7 +207,7 @@ function f:COMBAT_LOG_EVENT_UNFILTERED(event)
         end
     elseif eventType == "SPELL_CAST_FAILED" then
 
-            CastStop(srcGUID, "CAST", "FAILED")
+            CastStop(srcGUID, "CAST", "INTERRUPTED", "STOP")
 
     elseif eventType == "SPELL_CAST_SUCCESS" then
             if isSrcPlayer then
@@ -214,13 +238,13 @@ function f:COMBAT_LOG_EVENT_UNFILTERED(event)
                     end
                 end
             end
-            CastStop(srcGUID, nil, "STOP")
+            CastStop(srcGUID, nil, "SUCCEEDED", "STOP")
 
     elseif eventType == "SPELL_INTERRUPT" then
 
-            CastStop(dstGUID, nil, "INTERRUPTED")
+            CastStop(dstGUID, nil, "INTERRUPTED", "STOP")
     elseif eventType == "UNIT_DIED" then
-            CastStop(dstGUID, nil, "FAILED")
+            CastStop(dstGUID, nil, "INTERRUPTED", "STOP")
 
     elseif  eventType == "SPELL_AURA_APPLIED" or
             eventType == "SPELL_AURA_REFRESH" or
@@ -228,7 +252,7 @@ function f:COMBAT_LOG_EVENT_UNFILTERED(event)
     then
         if isSrcPlayer then
             if crowdControlAuras[spellName] then
-                CastStop(dstGUID, nil, "INTERRUPTED")
+                CastStop(dstGUID, nil, "INTERRUPTED", "STOP")
                 return
             end
 
@@ -245,22 +269,68 @@ function f:COMBAT_LOG_EVENT_UNFILTERED(event)
                 CastStop(srcGUID, "CHANNEL", "STOP")
             end
         end
+    elseif castingAimedShot and dstGUID == UnitGUID("player") then
+        if eventType == "SWING_DAMAGE" or
+           eventType == "ENVIRONMENTAL_DAMAGE" or
+           eventType == "RANGE_DAMAGE" or
+           eventType == "SPELL_DAMAGE"
+        then
+            if resisted or blocked or absorbed then return end
+            local currentCast = casters[UnitGUID("player")]
+            if currentCast then
+                refreshCastTable(currentCast, currentCast[1], currentCast[2], currentCast[3], currentCast[4], currentCast[5] + (AimedDelay *1000))
+                if AimedDelay > 0.2 then
+                    AimedDelay = AimedDelay - 0.2
+                end
+                callbacks:Fire("UNIT_SPELLCAST_DELAYED", "player")
+            end
+        end
     end
 
 end
 
--- local castTimeIncreases = {
---     [1714] = 60,    -- Curse of Tongues (60%)
---     [5760] = 60,    -- Mind-Numbing Poison (60%)
--- }
-local function IsSlowedDown(unit)
-    for i=1,16 do
-        local name, _, _, _, _, _, _, _, _, spellID = UnitAura(unit, i, "HARMFUL")
-        if not name then return end
-        if spellID == 1714 or spellID == 5760 then
-            return true
+local castTimeIncreases = {
+    [1714] = 1.5,    -- Curse of Tongues (Rank 1) (50%)
+    [11719] = 1.6,   -- Curse of Tongues (Rank 2) (60%)
+    [5760] = 1.4,    -- Mind-Numbing Poison (Rank 1) (40%)
+    [8692] = 1.5,    -- Mind-Numbing Poison (Rank 2) (50%)
+    [11398] = 1.6,   -- Mind-Numbing Poison (Rank 3) (60%)
+    [1098] = 1.3,    -- Enslave Demon (Rank 1) (30%)
+    [11725] = 1.3,   -- Enslave Demon (Rank 2) (30%)
+    [11726] = 1.3,   -- Enslave Demon (Rank 3) (30%)
+}
+local attackTimeDecreases = {
+    [6150] = 1.3,    -- Quick Shots/ Imp Aspect of the Hawk (Aimed)
+    [3045] = 1.4,    -- Rapid Fire (Aimed)
+    [28866] = 1.2,   -- Kiss of the Spider (Increases your _attack speed_ by 20% for 15 sec.) -- For Aimed
+}
+
+local function GetTrollBerserkHaste(unit)
+    local perc = UnitHealth(unit)/UnitHealthMax(unit)
+    local speed = min((1.3 - perc)/3, .3) + 1
+    return speed
+end
+local function GetRangedHaste(unit)
+    local positiveMul = 1
+    for i=1, 100 do
+        local name, _, _, _, _, _, _, _, _, spellID = UnitAura(unit, i, "HELPFUL")
+        if not name then return positiveMul end
+        if attackTimeDecreases[spellID] or spellID == 26635 then
+            positiveMul = positiveMul * (attackTimeDecreases[spellID] or GetTrollBerserkHaste(unit))
         end
     end
+    return positiveMul
+end
+local function GetCastSlowdown(unit)
+    local negativeEx = 1
+    for i=1, 100 do
+        local name, _, _, _, _, _, _, _, _, spellID = UnitAura(unit, i, "HARMFUL")
+        if not name then return negativeEx end
+        if castTimeIncreases[spellID] then
+            negativeEx = math.max(negativeEx, castTimeIncreases[spellID])
+        end
+    end
+    return negativeEx
 end
 
 function lib:UnitCastingInfo(unit)
@@ -273,10 +343,18 @@ function lib:UnitCastingInfo(unit)
     local cast = casters[guid]
     if cast then
         local castType, name, icon, startTimeMS, endTimeMS, spellID = unpack(cast)
-        if IsSlowedDown(unit) then
+        if castingAimedShot and spellID ~= 25294 then -- Multi-Shot spellID
+            local haste = GetRangedHaste(unit)
             local duration = endTimeMS - startTimeMS
-            endTimeMS = startTimeMS + duration * 1.6
+            endTimeMS = startTimeMS + duration/haste
         end
+
+        local slowdown = GetCastSlowdown(unit)
+        if slowdown ~= 1 then
+            local duration = endTimeMS - startTimeMS
+            endTimeMS = startTimeMS + duration * slowdown
+        end
+
         if castType == "CAST" and endTimeMS > GetTime()*1000 then
             local castID = nil
             return name, nil, icon, startTimeMS, endTimeMS, nil, castID, false, spellID
@@ -476,6 +554,7 @@ classCasts = {
     [11605] = 1.5, -- Slam
 
     [20904] = 3, -- Aimed Shot
+    [25294] = 0.5, -- Multi-Shot
     [1002] = 2, -- Eyes of the Beast
     [2641] = 5, -- Dismiss pet
     [982] = 10, -- Revive Pet
@@ -483,6 +562,8 @@ classCasts = {
 
     [8690] = 10, -- Hearthstone
     [4068] = 1, -- Iron Grenade
+    [19769] = 1, -- Thorium Grenade
+    [20589] = 0.5, -- Escape Artist
 
     -- Munts do not generate SPELL_CAST_START
     -- [8394] = 3, -- Striped Frostsaber
@@ -703,12 +784,15 @@ do
         while guid ~= nil do
             -- Removing while iterating here, but it doesn't matter
 
-            local unit = GetUnitForFreshGUID(guid)
-            if unit then
-                if GetUnitSpeed(unit) ~= 0 then
-                    CastStop(guid, nil, "FAILED")
-                    movecheckGUIDs[guid] = nil
-                    return
+            local timeStart = MOVECHECK_TIMEOUT - timeout
+            if timeStart > 0.25 then
+                local unit = GetUnitForFreshGUID(guid)
+                if unit then
+                    if GetUnitSpeed(unit) ~= 0 then
+                        CastStop(guid, nil, "INTERRUPTED")
+                        movecheckGUIDs[guid] = nil
+                        return
+                    end
                 end
             end
 

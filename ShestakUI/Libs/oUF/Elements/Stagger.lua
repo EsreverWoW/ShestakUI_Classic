@@ -106,14 +106,16 @@ local function Visibility(self, event, unit)
 		if(self.Stagger:IsShown()) then
 			self.Stagger:Hide()
 			self:UnregisterEvent('UNIT_AURA', Path)
+		end
+		if SPEC_MONK_WINDWALKER ~= GetSpecialization() then
 			if self.Debuffs then self.Debuffs:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 2, 5) end	-- ShestakUI
 		end
 	else
 		if(not self.Stagger:IsShown()) then
 			self.Stagger:Show()
 			self:RegisterEvent('UNIT_AURA', Path)
-			if self.Debuffs then self.Debuffs:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 2, 19) end	-- ShestakUI
 		end
+		if self.Debuffs then self.Debuffs:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 2, 19) end	-- ShestakUI
 
 		return Path(self, event, unit)
 	end
@@ -143,6 +145,11 @@ local function Enable(self)
 		self:RegisterEvent('UNIT_DISPLAYPOWER', VisibilityPath)
 		self:RegisterEvent('PLAYER_TALENT_UPDATE', VisibilityPath, true)
 
+		element.hadler = CreateFrame("Frame", nil, element)	-- ShestakUI
+		element.hadler:RegisterEvent("PLAYER_TALENT_UPDATE")
+		element.hadler:RegisterEvent("PLAYER_ENTERING_WORLD")
+		element.hadler:SetScript("OnEvent", function() Visibility(self) end)
+
 		if(element:IsObjectType('StatusBar') and not element:GetStatusBarTexture()) then
 			element:SetStatusBarTexture([[Interface\TargetingFrame\UI-StatusBar]])
 		end
@@ -157,6 +164,7 @@ local function Enable(self)
 		MonkStaggerBar:UnregisterEvent('UNIT_EXITED_VEHICLE')
 		MonkStaggerBar:UnregisterEvent('UPDATE_VEHICLE_ACTIONBAR')
 
+		-- do not change this without taking Visibility into account
 		element:Hide()
 
 		return true

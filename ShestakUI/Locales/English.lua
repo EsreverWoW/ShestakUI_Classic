@@ -17,7 +17,6 @@ L_ANNOUNCE_PC_MSG = "Pulling %s in %s.."
 L_ANNOUNCE_PC_ABORTED = "Pull ABORTED!"
 
 -- Announce feasts and portals
-L_ANNOUNCE_FP_STAT = "%s has prepared a %s - [%s]."
 L_ANNOUNCE_FP_PRE = "%s has prepared a %s."
 L_ANNOUNCE_FP_PUT = "%s has put down a %s."
 L_ANNOUNCE_FP_CAST = "%s is casting %s."
@@ -43,9 +42,6 @@ L_TOOLTIP_INSPECT_OPEN = "Inspect Frame is open"
 L_MISC_UNDRESS = "Undress"
 L_MISC_DRINKING = " is drinking."
 L_MISC_BUY_STACK = "Alt-Click to buy a stack"
-L_MISC_ONECLICK_BUYOUT = "Shift-Right-Click to buyout the selected item without confirmation"
-L_MISC_ONECLICK_BID = "Shift-Right-Click to bid on the selected item without confirmation"
-L_MISC_ONECLICK_CANCEL = "Shift-Right-Click to cancel on the selected item without confirmation"
 L_MISC_UI_OUTDATED = "Your version of ShestakUI is out of date. You can download the latest version from www.shestak.org"
 L_MISC_HEADER_MARK = "Mouseover Raid Icons"
 L_MISC_BINDER_OPEN = "Mouse Bindings"
@@ -55,8 +51,6 @@ L_MISC_SCROLL = "Scroll"
 L_RAID_UTIL_DISBAND = "Disband Group"
 
 -- Zone name
-L_ZONE_ARATHIBASIN = "Arathi Basin"
-L_ZONE_GILNEAS = "The Battle for Gilneas"
 L_ZONE_ANCIENTDALARAN = "Dalaran Crater"
 
 -- WatchFrame Wowhead link
@@ -89,6 +83,8 @@ L_MINIMAP_CALENDAR = "Calendar"
 L_MINIMAP_HEAL_LAYOUT = "Left-Click - Heal Layout"
 L_MINIMAP_DPS_LAYOUT = "Right-Click - DPS Layout"
 L_MINIMAP_BLIZZ_LAYOUT = "Middle-Click - Blizzard Layout"
+L_MINIMAP_FARM = "Minimap size"
+L_MINIMAP_TOGGLE = "Toggle action bars"
 
 -- Chat
 L_CHAT_WHISPER = "From"
@@ -146,10 +142,6 @@ L_COOLDOWNS_COMBATRESS = "BattleRes"
 L_COOLDOWNS_COMBATRESS_REMAINDER = "Battle Resurrection: "
 L_COOLDOWNS_NEXTTIME = "Next time: "
 
--- Autoinvite
-L_INVITE_ENABLE = "Autoinvite ON: "
-L_INVITE_DISABLE = "Autoinvite OFF"
-
 -- Bind key
 L_BIND_SAVED = "All keybindings have been saved."
 L_BIND_DISCARD = "All newly set keybindings have been discarded."
@@ -193,12 +185,9 @@ L_WELCOME_LINE_2_2 = "for more information."
 
 -- Combat text
 L_COMBATTEXT_KILLING_BLOW = "Killing Blow"
-L_COMBATTEXT_ALREADY_UNLOCKED = "Combat text already unlocked."
-L_COMBATTEXT_ALREADY_LOCKED = "Combat text already locked."
 L_COMBATTEXT_TEST_DISABLED = "Combat text test mode disabled."
 L_COMBATTEXT_TEST_ENABLED = "Combat text test mode enabled."
-L_COMBATTEXT_TEST_USE_UNLOCK = "Type /xct unlock to move and resize combat text frames."
-L_COMBATTEXT_TEST_USE_LOCK = "Type /xct lock to lock combat text frames."
+L_COMBATTEXT_TEST_USE_MOVE = "Type /xct move to move and resize combat text frames."
 L_COMBATTEXT_TEST_USE_TEST = "Type /xct test to toggle combat text testmode."
 L_COMBATTEXT_TEST_USE_RESET = "Type /xct reset to restore default positions."
 L_COMBATTEXT_POPUP = "To save combat text window positions you need to reload your UI."
@@ -287,25 +276,23 @@ L_SLASHCMD_HELP = {
 	"/rd - Disband party or raid.",
 	"/toraid - Convert to party or raid.",
 	"/teleport - Teleportation from random dungeon.",
-	"/spec, /ss - Switches between talent spec's.",
+	"/ss - Switches between talent spec's.",
+	"/tt - Whisper target.",
 	"/heal - Switches to 'Heal' layout.",
 	"/dps - Switches to 'DPS' layout.",
-	"/frame - Description is not ready.",
 	"/farmmode - Increase the size of the minimap.",
-	"/moveui - Allows the movement of interface elements. Ctrl + Right-Click to reset position",
 	"/resetui - Resets general settings to default.",
 	"/resetuf - Resets the unit frames to their default position.",
 	"/resetconfig - Resets ShestakUI_Config settings.",
 	"/resetstats - Resets the statistics of gold and time spent.",
-	"/settings ADDON_NAME - Applies settings to msbt, dbm, skada, or all addons.",
-	"/ls, /litestats - Help for LiteStats.",
+	"/settings - Applies settings to msbt, dbm, skada, bw addons.",
+	"/ls - Help for LiteStats.",
 	"/xct - Manage the combat text.",
 	"/raidcd - Raid cooldown test.",
 	"/enemycd - Enemy cooldown test.",
 	"/pulsecd - Self cooldown pulse test.",
 	"/threat - Threat meter test.",
-	"/tt - Whisper target.",
-	"/ainv - Enables automatic invitation.",
 	"/testuf - Unit frame test.",
+	"/moveui - Allows the movement of interface elements. Right-Click to reset position",
 	"/cfg - Opens interface settings.",
 }

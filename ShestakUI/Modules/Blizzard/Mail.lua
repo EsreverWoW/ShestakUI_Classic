@@ -8,6 +8,7 @@ local deletedelay, t = 0.5, 0
 local takingOnlyCash = false
 local button, button2, waitForMail, openAll, openAllCash, openMail, lastopened, stopOpening, onEvent, needsToWait, copper_to_pretty_money, total_cash
 local baseInboxFrame_OnClick
+local profit = 0
 
 function openAll()
 	if GetInboxNumItems() == 0 then return end
@@ -25,29 +26,30 @@ function openAllCash()
 end
 
 function openMail(index)
-	if not InboxFrame:IsVisible() then return stopOpening("|cffffff00"..L_MAIL_NEED) end
-	if index == 0 then MiniMapMailFrame:Hide() return stopOpening("|cffffff00"..L_MAIL_COMPLETE) end
+	if not InboxFrame:IsVisible() then return stopOpening(L_MAIL_NEED) end
+	if index == 0 then MiniMapMailFrame:Hide() return stopOpening(L_MAIL_COMPLETE) end
 	local _, _, _, _, money, COD, _, numItems = GetInboxHeaderInfo(index)
 	if money > 0 then
 		TakeInboxMoney(index)
 		needsToWait = true
 		if total_cash then total_cash = total_cash - money end
+		profit = profit + money
 	elseif (not takingOnlyCash) and (numItems and numItems > 0) and COD <= 0 then
 		TakeInboxItem(index)
 		needsToWait = true
 	end
 	local items = GetInboxNumItems()
-	if (numItems and numItems > 1) or (items > 1 and index <= items) then
+	if (numItems and numItems > 0) or (items > 1 and index <= items) then
 		lastopened = index
 		t = 0
 		button:SetScript("OnUpdate", waitForMail)
 	else
-		stopOpening("|cffffff00"..L_MAIL_COMPLETE)
+		stopOpening(L_MAIL_COMPLETE)
 		MiniMapMailFrame:Hide()
 	end
 end
 
-function waitForMail(self, elapsed)
+function waitForMail(_, elapsed)
 	t = t + elapsed
 	if (not needsToWait) or (t > deletedelay) then
 		needsToWait = false
@@ -61,7 +63,17 @@ function waitForMail(self, elapsed)
 	end
 end
 
-function stopOpening(msg, ...)
+function copper_to_pretty_money(c)
+	if c > 10000 then
+		return ("%d|cffffd700"..GOLD_AMOUNT_SYMBOL.."|r %d|cffc7c7cf"..SILVER_AMOUNT_SYMBOL.."|r %d|cffeda55f"..COPPER_AMOUNT_SYMBOL.."|r"):format(c / 10000, (c / 100) % 100, c % 100)
+	elseif c > 100 then
+		return ("%d|cffc7c7cf"..SILVER_AMOUNT_SYMBOL.."|r %d|cffeda55f"..COPPER_AMOUNT_SYMBOL.."|r"):format((c / 100) % 100, c % 100)
+	else
+		return ("%d|cffeda55f"..COPPER_AMOUNT_SYMBOL.."|r"):format(c % 100)
+	end
+end
+
+function stopOpening(msg)
 	button:SetScript("OnUpdate", nil)
 	button:SetScript("OnClick", openAll)
 	button2:SetScript("OnClick", openAllCash)
@@ -71,26 +83,17 @@ function stopOpening(msg, ...)
 	button:UnregisterEvent("UI_ERROR_MESSAGE")
 	takingOnlyCash = false
 	total_cash = nil
-	if msg then print(msg, ...) end
+	if msg then print("|cffffff00"..msg.."|r") end
+	if profit > 0 then print(format("|cff66C6FF%s |cffFFFFFF%s", AMOUNT_RECEIVED_COLON, copper_to_pretty_money(profit))) profit = 0 end
 end
 
-function onEvent(_, event, arg1)
+function onEvent(_, event, _, text)
 	if event == "UI_ERROR_MESSAGE" then
-		if arg1 == ERR_INV_FULL then
-			stopOpening("|cffffff00"..L_MAIL_STOPPED)
-		elseif arg1 == ERR_ITEM_MAX_COUNT then
-			stopOpening("|cffffff00"..L_MAIL_UNIQUE)
+		if text == ERR_INV_FULL then
+			stopOpening(L_MAIL_STOPPED)
+		elseif text == ERR_ITEM_MAX_COUNT then
+			stopOpening(L_MAIL_UNIQUE)
 		end
-	end
-end
-
-function copper_to_pretty_money(c)
-	if c > 10000 then
-		return ("%d|cffffd700"..GOLD_AMOUNT_SYMBOL.."|r %d|cffc7c7cf"..SILVER_AMOUNT_SYMBOL.."|r %d|cffeda55f"..COPPER_AMOUNT_SYMBOL.."|r"):format(c / 10000, (c / 100) % 100, c % 100)
-	elseif c > 100 then
-		return ("%d|cffc7c7cf"..SILVER_AMOUNT_SYMBOL.."|r %d|cffeda55f"..COPPER_AMOUNT_SYMBOL.."|r"):format((c / 100) % 100, c % 100)
-	else
-		return ("%d|cffeda55f"..COPPER_AMOUNT_SYMBOL.."|r"):format(c % 100)
 	end
 end
 

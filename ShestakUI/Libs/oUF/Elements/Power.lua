@@ -7,10 +7,11 @@ local unitSelectionType = Private.unitSelectionType
 -- sourced from FrameXML/UnitPowerBarAlt.lua
 local ALTERNATE_POWER_INDEX = Enum.PowerType.Alternate or 10
 
-local function getDisplayPower(unit)
-	local _, min, _, _, _, _, showOnRaid = UnitAlternatePowerInfo(unit)
-	if(showOnRaid) then
-		return ALTERNATE_POWER_INDEX, min
+local function GetDisplayPower(element)
+	local unit = element.__owner.unit
+	local barInfo = GetUnitPowerBarInfo(unit)
+	if(barInfo and barInfo.showOnRaid and (UnitInParty(unit) or UnitInRaid(unit))) then
+		return ALTERNATE_POWER_INDEX, barInfo.minPower
 	end
 end
 
@@ -105,7 +106,7 @@ local function Update(self, event, unit)
 
 	local displayType, min
 	if(element.displayAltPower) then
-		displayType, min = getDisplayPower(unit)
+		displayType, min = element:GetDisplayPower()
 	end
 
 	local cur, max = UnitPower(unit, displayType), UnitPowerMax(unit, displayType)
@@ -214,6 +215,10 @@ local function Enable(self)
 
 		if(not element.UpdateColor) then
 			element.UpdateColor = UpdateColor
+		end
+
+		if(not element.GetDisplayPower) then
+			element.GetDisplayPower = GetDisplayPower
 		end
 
 		element:Show()

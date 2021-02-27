@@ -14,10 +14,11 @@ Butsu:SetScript("OnEvent", function(self, event, ...)
 	self[event](self, event, ...)
 end)
 
-function Butsu:LOOT_OPENED(_, autoloot)
+function Butsu:LOOT_OPENED(_, ...)
 	self:Show()
 	lb:Show()
 
+	local autoLoot = ...
 	if not self:IsShown() then
 		CloseLoot(not autoLoot)
 	end
@@ -169,10 +170,12 @@ do
 end
 
 Butsu:SetScript("OnMouseDown", function(self, button)
-	if IsAltKeyDown() then
+	if IsAltKeyDown() or IsShiftKeyDown() then
 		self:StartMoving()
 	elseif IsControlKeyDown() and button == "RightButton" then
+		self:ClearAllPoints()
 		self:SetPoint(unpack(C.position.loot))
+		self:SetUserPlaced(false)
 	end
 end)
 
@@ -188,7 +191,6 @@ end)
 Butsu:SetMovable(true)
 Butsu:RegisterForClicks("AnyUp")
 Butsu:SetParent(UIParent)
-Butsu:SetUserPlaced(true)
 Butsu:SetPoint(unpack(C.position.loot))
 Butsu:SetTemplate("Transparent")
 Butsu:SetClampedToScreen(true)
@@ -198,7 +200,7 @@ Butsu:SetFrameLevel(10)
 
 local close = CreateFrame("Button", "LootCloseButton", Butsu, "UIPanelCloseButton")
 T.SkinCloseButton(close, nil, nil, true)
-close:SetSize(14, 14)
+close:SetSize(15, 15)
 close:SetScript("OnClick", function() CloseLoot() end)
 
 ----------------------------------------------------------------------------------------
@@ -268,9 +270,9 @@ local function LDD_Initialize()
 end
 
 T.SkinCloseButton(lb, LootCloseButton, "-", true)
-lb:SetSize(14, 14)
+lb:SetSize(15, 15)
 lb:ClearAllPoints()
-lb:SetPoint("BOTTOMRIGHT", Butsu, "TOPRIGHT", -21, -18)
+lb:SetPoint("BOTTOMRIGHT", Butsu, "TOPRIGHT", -22, -19)
 lb:SetFrameStrata("DIALOG")
 lb:RegisterForClicks("RightButtonUp", "LeftButtonUp")
 lb:SetScript("OnClick", function(_, button)

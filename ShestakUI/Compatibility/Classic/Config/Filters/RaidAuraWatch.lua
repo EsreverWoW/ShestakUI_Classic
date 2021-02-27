@@ -262,6 +262,10 @@ if C.raidframe.plugins_pvp_debuffs == true then
 		[SpellName(5530)] = 3,		-- Mace Specialization
 		--]]
 	}
+
+	for spell, prio in pairs(PvPDebuffs) do
+		T.RaidDebuffs[spell] = prio
+	end
 end
 
 T.RaidDebuffsReverse = {
@@ -271,3 +275,7 @@ T.RaidDebuffsReverse = {
 T.RaidDebuffsIgnore = {
 	--[spellID] = true,			-- Spell name
 }
+
+for _, spell in pairs(C.raidframe.plugins_aura_watch_list) do
+	T.RaidDebuffs[SpellName(spell)] = 3
+end

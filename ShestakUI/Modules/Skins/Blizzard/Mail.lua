@@ -54,6 +54,9 @@ local function LoadSkin()
 
 	T.SkinScrollBar(SendMailScrollFrameScrollBar)
 
+	select(3, SendMailNameEditBox:GetRegions()):SetDrawLayer("OVERLAY")
+	select(3, SendMailSubjectEditBox:GetRegions()):SetDrawLayer("OVERLAY")
+
 	T.SkinEditBox(SendMailNameEditBox)
 	T.SkinEditBox(SendMailSubjectEditBox)
 	T.SkinEditBox(SendMailMoneyGold)
@@ -64,6 +67,10 @@ local function LoadSkin()
 	SendMailNameEditBox.backdrop:SetPoint("BOTTOMRIGHT", 2, 3)
 	SendMailSubjectEditBox.backdrop:SetPoint("TOPLEFT", -3, 0)
 	SendMailSubjectEditBox.backdrop:SetPoint("BOTTOMRIGHT", -4, 0)
+
+	SendMailNameEditBox:ClearAllPoints()
+	SendMailNameEditBox:SetPoint('TOPLEFT', SendMailFrame, 'TOPLEFT', 90, -30)
+	SendMailNameEditBox.SetPoint = T.dummy
 
 	local function MailFrameSkin()
 		for i = 1, ATTACHMENTS_MAX_SEND do

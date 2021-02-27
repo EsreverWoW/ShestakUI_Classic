@@ -14,6 +14,14 @@ local function Update(self, _, unit, powerType)
 		element:PreUpdate(unit)
 	end
 
+	if UnitHasVehicleUI("player") then
+		element:Hide()
+		if self.Debuffs then self.Debuffs:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 2, 5) end
+	else
+		element:Show()
+		if self.Debuffs then self.Debuffs:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 2, 19) end
+	end
+
 	local cur = UnitPower("player", SPELL_POWER_HOLY_POWER)
 	local max = 5 -- Cause we don't use :Factory to spawn frames it return sometimes "3"
 
@@ -40,15 +48,12 @@ end
 
 local function Visibility(self)
 	local element = self.HolyPower
-	local spec = GetSpecialization()
 
-	if spec == SPEC_PALADIN_RETRIBUTION then
+	if not UnitHasVehicleUI("player") then
 		element:Show()
 		if self.Debuffs then self.Debuffs:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 2, 19) end
-	else
-		element:Hide()
-		if self.Debuffs then self.Debuffs:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 2, 5) end
 	end
+	self:RegisterEvent("UNIT_POWER_UPDATE", Path)
 end
 
 local function Enable(self)
@@ -56,8 +61,6 @@ local function Enable(self)
 	if(element) then
 		element.__owner = self
 		element.ForceUpdate = ForceUpdate
-
-		self:RegisterEvent('UNIT_POWER_UPDATE', Path)
 
 		element.hadler = CreateFrame("Frame", nil, element)
 		element.hadler:RegisterEvent("PLAYER_TALENT_UPDATE")
@@ -71,7 +74,6 @@ end
 local function Disable(self)
 	local element = self.HolyPower
 	if(element) then
-		self:UnregisterEvent('UNIT_POWER_UPDATE', Path)
 		element.hadler:UnregisterEvent("PLAYER_TALENT_UPDATE")
 		element.hadler:UnregisterEvent("PLAYER_ENTERING_WORLD")
 	end

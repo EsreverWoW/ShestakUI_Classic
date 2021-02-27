@@ -36,9 +36,9 @@ local function CheckElixir()
 	FlaskFrame.t:SetTexture("")
 
 	if requireFlask then
-		if flaskBuffs and flaskBuffs[1] then
-			for i, flaskBuffs in pairs(flaskBuffs) do
-				local name, _, icon = GetSpellInfo(flaskBuffs)
+		if #flaskBuffs > 0 then
+			for i = 1, #flaskBuffs do
+				local name, icon = unpack(flaskBuffs[i])
 				if i == 1 then
 					FlaskFrame.t:SetTexture(icon)
 				end
@@ -64,16 +64,14 @@ local function CheckElixir()
 	end
 
 	if otherBuffsRequired > 0 then
-		if otherBuffs then
-			for k, _ in pairs(otherBuffs) do
-				for _, v in pairs(otherBuffs[k]) do
-					local name = GetSpellInfo(v)
-					if T.CheckPlayerBuff(name) then
-						otherBuffsCount = otherBuffsCount + 1
-						if otherBuffsCount >= otherBuffsRequired then
-							meetsRequirements = true
-							break
-						end
+		if #otherBuffs > 0 then
+			for i = 1, #otherBuffs do
+				local name = unpack(otherBuffs[i])
+				if T.CheckPlayerBuff(name) then
+					otherBuffsCount = otherBuffsCount + 1
+					if otherBuffsCount >= otherBuffsRequired then
+						meetsRequirements = true
+						break
 					end
 				end
 			end
@@ -94,9 +92,9 @@ local function CheckElixir()
 end
 
 local function CheckBuff(list, frame, n)
-	if list and list[1] then
-		for i, list in pairs(list) do
-			local name, _, icon = GetSpellInfo(list)
+	if list and #list > 0 then
+		for i = 1, #list do
+			local name, icon = unpack(list[i])
 			if i == 1 then
 				frame.t:SetTexture(icon)
 			end
@@ -109,11 +107,11 @@ local function CheckBuff(list, frame, n)
 				isPresent[n] = false
 			end
 		end
-	end	
+	end
 end
 
 -- Main Script
-local function OnAuraChange(self, event, unit)
+local function OnAuraChange(_, event, unit)
 	if event == "UNIT_AURA" and unit ~= "player" then return end
 
 	-- If We're a caster we may want to see different buffs
@@ -137,7 +135,7 @@ local function OnAuraChange(self, event, unit)
 	CheckBuff(spell6Buffs, Spell6Frame, "spell6")
 	CheckBuff(spell7Buffs, Spell7Frame, "spell7")
 
-	if customBuffs and customBuffs[1] then
+	if customBuffs and #customBuffs > 0 then
 		CheckBuff(customBuffs, CustomFrame, "custom")
 	else
 		CustomFrame:Hide()
@@ -180,13 +178,28 @@ raidbuff_reminder:RegisterEvent("CHARACTER_POINTS_CHANGED")
 raidbuff_reminder:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 raidbuff_reminder:SetScript("OnEvent", OnAuraChange)
 
--- Function to create buttons
-local function CreateButton(name, relativeTo, firstbutton)
+local line = math.ceil(C.minimap.size / (C.reminder.raid_buffs_size + 2))
+
+local buffButtons = {
+	"FlaskFrame",
+	"FoodFrame",
+	"Spell3Frame",
+	"Spell4Frame",
+	"Spell5Frame",
+	"Spell6Frame",
+	"Spell7Frame",
+	"CustomFrame"
+}
+
+for i = 1, #buffButtons do
+	local name = buffButtons[i]
 	local button = CreateFrame("Frame", name, RaidBuffReminder)
-	if firstbutton == true then
-		button:CreatePanel("Default", C.reminder.raid_buffs_size, C.reminder.raid_buffs_size, "BOTTOMLEFT", relativeTo, "BOTTOMLEFT", 0, 0)
+	if i == 1 then
+		button:CreatePanel("Default", C.reminder.raid_buffs_size, C.reminder.raid_buffs_size, "BOTTOMLEFT", RaidBuffReminder, "BOTTOMLEFT", 0, 0)
+	elseif i == line then
+		button:CreatePanel("Default", C.reminder.raid_buffs_size, C.reminder.raid_buffs_size, "BOTTOM", buffButtons[1], "TOP", 0, 3)
 	else
-		button:CreatePanel("Default", C.reminder.raid_buffs_size, C.reminder.raid_buffs_size, "LEFT", relativeTo, "RIGHT", 3, 0)
+		button:CreatePanel("Default", C.reminder.raid_buffs_size, C.reminder.raid_buffs_size, "LEFT", buffButtons[i-1], "RIGHT", 3, 0)
 	end
 	button:SetFrameLevel(RaidBuffReminder:GetFrameLevel() + 2)
 
@@ -194,16 +207,4 @@ local function CreateButton(name, relativeTo, firstbutton)
 	button.t:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 	button.t:SetPoint("TOPLEFT", 2, -2)
 	button.t:SetPoint("BOTTOMRIGHT", -2, 2)
-end
-
--- Create Buttons
-do
-	CreateButton("FlaskFrame", RaidBuffReminder, true)
-	CreateButton("FoodFrame", FlaskFrame, false)
-	CreateButton("Spell3Frame", FoodFrame, false)
-	CreateButton("Spell4Frame", Spell3Frame, false)
-	CreateButton("Spell5Frame", Spell4Frame, false)
-	CreateButton("Spell6Frame", Spell5Frame, false)
-	CreateButton("Spell7Frame", Spell6Frame, false)
-	CreateButton("CustomFrame", Spell7Frame, false)
 end

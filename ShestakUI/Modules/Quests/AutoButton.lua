@@ -4,16 +4,13 @@ if C.misc.quest_auto_button ~= true then return end
 ----------------------------------------------------------------------------------------
 --	AutoButton for used items(by Elv22) (use macro /click AutoButton)
 ----------------------------------------------------------------------------------------
-local Items = T.ABItems
-local EquipedItems = T.ABEquipedItems
-
 local function AutoButtonHide()
 	AutoButton:SetAlpha(0)
 	if not InCombatLockdown() then
 		AutoButton:EnableMouse(false)
 	else
 		AutoButton:RegisterEvent("PLAYER_REGEN_ENABLED")
-		AutoButton:SetScript("OnEvent", function(self, event)
+		AutoButton:SetScript("OnEvent", function(_, event)
 			if event == "PLAYER_REGEN_ENABLED" then
 				AutoButton:EnableMouse(false)
 				AutoButton:UnregisterEvent("PLAYER_REGEN_ENABLED")
@@ -31,7 +28,7 @@ local function AutoButtonShow(item)
 		end
 	else
 		AutoButton:RegisterEvent("PLAYER_REGEN_ENABLED")
-		AutoButton:SetScript("OnEvent", function(self, event)
+		AutoButton:SetScript("OnEvent", function(_, event)
 			if event == "PLAYER_REGEN_ENABLED" then
 				AutoButton:EnableMouse(true)
 				if item then
@@ -59,22 +56,21 @@ AutoButton:SetAttribute("type", "item")
 AutoButtonHide()
 
 -- Texture for our button
-AutoButton.t = AutoButton:CreateTexture(nil, "OVERLAY")
-AutoButton.t:SetPoint("TOPLEFT", AutoButton, "TOPLEFT", 2, -2)
-AutoButton.t:SetPoint("BOTTOMRIGHT", AutoButton, "BOTTOMRIGHT", -2, 2)
+AutoButton.t = AutoButton:CreateTexture(nil, "BORDER")
+AutoButton.t:SetPoint("TOPLEFT", 2, -2)
+AutoButton.t:SetPoint("BOTTOMRIGHT", -2, 2)
 AutoButton.t:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 
 -- Count text for our button
 AutoButton.c = AutoButton:CreateFontString(nil, "OVERLAY")
-AutoButton.c:SetFont(C.media.pixel_font, C.media.pixel_font_size * 2, C.media.pixel_font_style)
-AutoButton.c:SetTextColor(1, 1, 1, 1)
-AutoButton.c:SetPoint("BOTTOMRIGHT", AutoButton, "BOTTOMRIGHT", 1, -2)
-AutoButton.c:SetJustifyH("CENTER")
+AutoButton.c:SetFont(C.font.cooldown_timers_font, C.font.cooldown_timers_font_size, C.font.cooldown_timers_font_style)
+AutoButton.c:SetShadowOffset(C.font.cooldown_timers_font_shadow and 1 or 0, C.font.cooldown_timers_font_shadow and -1 or 0)
+AutoButton.c:SetPoint("BOTTOMRIGHT", 1, -2)
 
 -- Cooldown
 AutoButton.cd = CreateFrame("Cooldown", nil, AutoButton, "CooldownFrameTemplate")
-AutoButton.cd:SetPoint("TOPLEFT", AutoButton, "TOPLEFT", 2, -2)
-AutoButton.cd:SetPoint("BOTTOMRIGHT", AutoButton, "BOTTOMRIGHT", -2, 2)
+AutoButton.cd:SetAllPoints(AutoButton.t)
+AutoButton.cd:SetFrameLevel(1)
 
 local Scanner = CreateFrame("Frame")
 Scanner:RegisterEvent("BAG_UPDATE")
@@ -86,69 +82,38 @@ Scanner:SetScript("OnEvent", function()
 		for s = 1, GetContainerNumSlots(b) do
 			local itemID = GetContainerItemID(b, s)
 			itemID = tonumber(itemID)
-			for _, Items in pairs(Items) do
-				if itemID == Items then
-					local itemName = GetItemInfo(itemID)
-					local count = GetItemCount(itemID)
-					local itemIcon = GetItemIcon(itemID)
-
-					-- Set our texture to the item found in bags
-					AutoButton.t:SetTexture(itemIcon)
-
-					-- Get the count if there is one
-					if count and count > 1 then
-						AutoButton.c:SetText(count)
-					else
-						AutoButton.c:SetText("")
-					end
-
-					AutoButton:SetScript("OnUpdate", function()
-						local cd_start, cd_finish, cd_enable = GetContainerItemCooldown(b, s)
-						if T.classic and HasWandEquipped() then
-							local wandID = GetInventoryItemID("player", 18)
-							local wandSpeed = GetItemCooldown(wandID)
-							if wandSpeed < 1.5 then wandSpeed = 1.5 end
-							if (cd_finish or 0) > wandSpeed then
-								CooldownFrame_Set(AutoButton.cd, cd_start, cd_finish, cd_enable)
-							end
-						else
-							CooldownFrame_Set(AutoButton.cd, cd_start, cd_finish, cd_enable)
-						end
-					end)
-
-					AutoButton:SetScript("OnEnter", function(self)
-						GameTooltip:SetOwner(self, "ANCHOR_LEFT")
-						GameTooltip:SetHyperlink(format("item:%s", itemID))
-						GameTooltip:Show()
-					end)
-
-					AutoButton:SetScript("OnLeave", GameTooltip_Hide)
-
-					AutoButtonShow(itemName)
-				end
-			end
-		end
-	end
-
-	-- Scan inventory for Equipment matches
-	for w = 1, 19 do
-		for _, EquipedItems in pairs(EquipedItems) do
-			if GetInventoryItemID("player", w) == EquipedItems then
-				local itemName = GetItemInfo(EquipedItems)
-				local itemIcon = GetInventoryItemTexture("player", w)
+			if T.ABItems[itemID] then
+				local itemName = GetItemInfo(itemID)
+				local count = GetItemCount(itemID)
+				local itemIcon = GetItemIcon(itemID)
 
 				-- Set our texture to the item found in bags
 				AutoButton.t:SetTexture(itemIcon)
-				AutoButton.c:SetText("")
+
+				-- Get the count if there is one
+				if count and count > 1 then
+					AutoButton.c:SetText(count)
+				else
+					AutoButton.c:SetText("")
+				end
 
 				AutoButton:SetScript("OnUpdate", function()
-					local cd_start, cd_finish, cd_enable = GetInventoryItemCooldown("player", w)
-					CooldownFrame_Set(AutoButton.cd, cd_start, cd_finish, cd_enable)
+					local cd_start, cd_finish, cd_enable = GetContainerItemCooldown(b, s)
+					if T.classic then
+						local wandID = GetInventoryItemID("player", 18)
+						local wandSpeed = GetItemCooldown(wandID)
+						if wandSpeed < 1.5 then wandSpeed = 1.5 end
+						if (cd_finish or 0) > wandSpeed then
+							return CooldownFrame_Set(AutoButton.cd, cd_start, cd_finish, cd_enable)
+						end
+					else
+						return CooldownFrame_Set(AutoButton.cd, cd_start, cd_finish, cd_enable)
+					end
 				end)
 
 				AutoButton:SetScript("OnEnter", function(self)
 					GameTooltip:SetOwner(self, "ANCHOR_LEFT")
-					GameTooltip:SetHyperlink(format("item:%s", EquipedItems))
+					GameTooltip:SetHyperlink(format("item:%s", itemID))
 					GameTooltip:Show()
 				end)
 

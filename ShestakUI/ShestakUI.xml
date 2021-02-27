@@ -32,16 +32,12 @@
 
 	<Script file="Compatibility\Classic\Libs\LibStub\LibStub.lua"/>
 	<Script file="Compatibility\Classic\Libs\CallbackHandler-1.0\CallbackHandler-1.0.lua"/>
-	<Include file="Compatibility\Classic\Libs\AceAddon-3.0\AceAddon-3.0.xml"/>
-	<Include file="Compatibility\Classic\Libs\AceBucket-3.0\AceBucket-3.0.xml"/>
-	<Include file="Compatibility\Classic\Libs\AceComm-3.0\AceComm-3.0.xml"/>
-	<Include file="Compatibility\Classic\Libs\AceEvent-3.0\AceEvent-3.0.xml"/>
-	<Include file="Compatibility\Classic\Libs\AceTimer-3.0\AceTimer-3.0.xml"/>
-	<Include file="Compatibility\Classic\Libs\AceSerializer-3.0\AceSerializer-3.0.xml"/>
-	<Include file="Compatibility\Classic\Libs\ThreatClassic-1.0\lib.xml"/>
-	<Script file="Compatibility\Classic\Libs\LibBanzai\LibBanzai-2.0.lua"/>
 	<Script file="Compatibility\Classic\Libs\LibClassicCasterino\LibClassicCasterino.lua"/>
 	<Include file="Compatibility\Classic\Libs\LibClassicDurations\LibClassicDurations.xml"/>
+	<Script file="Compatibility\Classic\Libs\LibRangeCheck-2.0\LibRangeCheck-2.0.lua"/>
+	<Script file="Compatibility\Classic\Libs\LibHealComm-4.0\ChatThrottleLib.lua"/>
+	<Script file="Compatibility\Classic\Libs\LibHealComm-4.0\LibHealComm-4.0.lua"/>
+	<Script file="Compatibility\Classic\Libs\LibTotemInfo\GetTotemInfo.lua"/>
 	<Script file="Compatibility\Classic.lua"/>
 
 	<Include file="Libs\oUF\oUF.xml"/>
@@ -65,7 +61,6 @@
 	<Script file="Config\Filters\Errors.lua"/>
 	<Script file="Config\Filters\FilgerSpells.lua"/>
 	<Script file="Config\Filters\Nameplates.lua"/>
-	<Script file="Config\Filters\NeedItems.lua"/>
 	<Script file="Config\Filters\OpenItems.lua"/>
 	<Script file="Config\Filters\RaidAuraWatch.lua"/>
 	<Script file="Config\Filters\Reminders.lua"/>
@@ -82,7 +77,6 @@
 	<Script file="Compatibility\Classic\Config\Filters\Errors.lua"/>
 	<Script file="Compatibility\Classic\Config\Filters\FilgerSpells.lua"/>
 	<Script file="Compatibility\Classic\Config\Filters\Nameplates.lua"/>
-	<Script file="Compatibility\Classic\Config\Filters\NeedItems.lua"/>
 	<Script file="Compatibility\Classic\Config\Filters\OpenItems.lua"/>
 	<Script file="Compatibility\Classic\Config\Filters\RaidAuraWatch.lua"/>
 	<Script file="Compatibility\Classic\Config\Filters\Reminders.lua"/>
@@ -98,34 +92,38 @@
 	<Script file="Core\CheckVersion.lua"/>
 	<Script file="Core\Panels.lua"/>
 
+	<Script file="Modules\UnitFrames\Functions.lua"/>
 	<Script file="Modules\UnitFrames\Tags.lua"/>
 	<Script file="Modules\UnitFrames\Layout.lua"/>
 	<Script file="Modules\UnitFrames\RaidDPS.lua"/>
 	<Script file="Modules\UnitFrames\RaidHeal.lua"/>
+	<Script file="Modules\UnitFrames\Nameplates.lua"/>
 
-	<Script file="Modules\Misc\AlreadyKnown.lua"/>
-	<Script file="Modules\Misc\Archaeology.lua"/>
-	<Script file="Modules\Misc\ArmoryLink.lua"/>
+	<Script file="Modules\Misc\BattlefieldScore.lua"/>
 	<Script file="Modules\Misc\CharsCurrency.lua"/>
 	<Script file="Modules\Misc\ClickCast.lua"/>
-	<Script file="Modules\Misc\GuildFinderSort.lua"/>
 	<Script file="Modules\Misc\LFGQueueTimer.lua"/>
 	<Script file="Modules\Misc\MagePortals.lua"/>
-	<Script file="Modules\Misc\Merchant.lua"/>
-	<Script file="Modules\Misc\MerchantItemlevel.lua"/>
+	<Script file="Modules\Misc\Marking.lua"/>
 	<Script file="Modules\Misc\Misc.lua"/>
 	<Script file="Modules\Misc\Mounts.lua"/>
-	<Script file="Modules\Misc\MouseoverMarking.lua"/>
-	<Script file="Modules\Misc\OneClickBuyOut.lua"/>
-	<Script file="Modules\Misc\OneClickDisenchanting.lua"/>
-	<Script file="Modules\Misc\OneClickEnchantScroll.lua"/>
-	<Script file="Modules\Misc\ProfessionTabs.lua"/>
 	<Script file="Modules\Misc\PvPQueueTimer.lua"/>
 	<Script file="Modules\Misc\RaidUtility.lua"/>
 	<Script file="Modules\Misc\SlotItemLevel.lua"/>
-	<Script file="Modules\Misc\SumAucBuyouts.lua"/>
 	<Script file="Modules\Misc\Threat.lua"/>
-	<Script file="Modules\Misc\TrainAll.lua"/>
+
+	<Script file="Compatibility\Classic\Modules\Misc\SlotItemLevel.lua"/>
+
+	<Script file="Modules\Trade\AlreadyKnown.lua"/>
+	<Script file="Modules\Trade\Archaeology.lua"/>
+	<Script file="Modules\Trade\Merchant.lua"/>
+	<Script file="Modules\Trade\OneClickDisenchanting.lua"/>
+	<Script file="Modules\Trade\OneClickEnchantScroll.lua"/>
+	<Script file="Modules\Trade\ProfessionTabs.lua"/>
+	<Script file="Modules\Trade\SumAucBuyouts.lua"/>
+	<Script file="Modules\Trade\TrainAll.lua"/>
+
+	<Script file="Compatibility\Classic\Modules\Trade\OneClickBuyOut.lua"/>
 
 	<Script file="Modules\ActionBars\Core.lua"/>
 	<Script file="Modules\ActionBars\Bindings.lua"/>
@@ -151,7 +149,6 @@
 	<Script file="Modules\Announcements\Interrupts.lua"/>
 	<Script file="Modules\Announcements\PullCountdown.lua"/>
 	<Script file="Modules\Announcements\SafariHat.lua"/>
-	<Script file="Modules\Announcements\SayThanks.lua"/>
 	<Script file="Modules\Announcements\Spells.lua"/>
 
 	<Script file="Compatibility\Classic\Modules\Auras\RaidBuffsReminder.lua"/>
@@ -171,16 +168,18 @@
 	<Script file="Modules\Automation\CancelBadBuffs.lua"/>
 	<Script file="Modules\Automation\DeclineDuel.lua"/>
 	<Script file="Modules\Automation\LoggingCombat.lua"/>
+	<Script file="Modules\Automation\Resurrection.lua"/>
 	<Script file="Modules\Automation\Screenshots.lua"/>
 	<Script file="Modules\Automation\SetRole.lua"/>
 	<Script file="Modules\Automation\SkipCinematic.lua"/>
 	<Script file="Modules\Automation\SolveArtifact.lua"/>
+	<Script file="Modules\Automation\Summon.lua"/>
 	<Script file="Modules\Automation\TabBinder.lua"/>
 
+	<Include file="Modules\Blizzard\TaintLess.xml"/>
 	<Script file="Modules\Blizzard\AlertFrames.lua"/>
 	<Script file="Modules\Blizzard\AltPowerBar.lua"/>
 	<Script file="Modules\Blizzard\Bags.lua"/>
-	<Script file="Modules\Blizzard\CaptureBar.lua"/>
 	<Script file="Modules\Blizzard\ColorPicker.lua"/>
 	<Script file="Modules\Blizzard\CombatText.lua"/>
 	<Script file="Modules\Blizzard\Durability.lua"/>
@@ -191,9 +190,7 @@
 	<Script file="Modules\Blizzard\Mail.lua"/>
 	<Script file="Modules\Blizzard\MirrorBars.lua"/>
 	<Script file="Modules\Blizzard\MoveBlizzFrames.lua"/>
-	<Script file="Modules\Blizzard\Nameplates.lua"/>
 	<Script file="Modules\Blizzard\PetBattle.lua"/>
-	<Script file="Modules\Blizzard\ShiftMark.lua"/>
 	<Script file="Modules\Blizzard\TalkingHead.lua"/>
 	<Script file="Modules\Blizzard\TimerTracker.lua"/>
 	<Script file="Modules\Blizzard\UIWidget.lua"/>
@@ -205,6 +202,7 @@
 	<Script file="Modules\Chat\CopyChat.lua"/>
 	<Script file="Modules\Chat\ChatBars.lua"/>
 	<Script file="Modules\Chat\Filters.lua"/>
+	<Script file="Modules\Chat\History.lua"/>
 	<Script file="Modules\Chat\Invite.lua"/>
 	<Script file="Modules\Chat\MouseScroll.lua"/>
 	<Script file="Modules\Chat\Sounds.lua"/>
@@ -217,8 +215,6 @@
 	<Script file="Modules\Cooldowns\EnemyCD.lua"/>
 	<Script file="Modules\Cooldowns\PulseCD.lua"/>
 	<Script file="Modules\Cooldowns\RaidCD.lua"/>
-
-	<Script file="Modules\DataText\Battleground.lua"/>
 
 	<Script file="Modules\Loot\AutoConfirm.lua"/>
 	<Script file="Modules\Loot\AutoGreed.lua"/>
@@ -243,7 +239,6 @@
 	<Script file="Modules\Quests\AutoAccept.lua"/>
 	<Script file="Modules\Quests\AutoButton.lua"/>
 	<Script file="Modules\Quests\ObjectiveTracker.lua"/>
-	<Script file="Modules\Quests\QuestLog.lua"/>
 	<Script file="Modules\Quests\WowheadLink.lua"/>
 
 	<Include file="Modules\Skins\Blizzard\LoadFrames.xml"/>
@@ -257,6 +252,7 @@
 	<Script file="Modules\Skins\Clique.lua"/>
 	<Script file="Modules\Skins\CoolLine.lua"/>
 	<Script file="Modules\Skins\DBM.lua"/>
+	<Script file="Modules\Skins\Details.lua"/>
 	<Script file="Modules\Skins\Dominos.lua"/>
 	<Script file="Modules\Skins\FlyoutButtonCustom.lua"/>
 	<Script file="Modules\Skins\MageNuggets.lua"/>
@@ -281,8 +277,8 @@
 	<Script file="Modules\Tooltip\Talents.lua"/>
 	<Script file="Modules\Tooltip\ItemIcons.lua"/>
 	<Script file="Modules\Tooltip\ItemLevel.lua"/>
+	<Script file="Modules\Tooltip\MountSource.lua"/>
 	<Script file="Modules\Tooltip\MultiItemRef.lua"/>
-	<Script file="Modules\Tooltip\PvPRating.lua"/>
 	<Script file="Modules\Tooltip\RuFix.lua"/>
 	<Script file="Modules\Tooltip\SpellID.lua"/>
 	<Script file="Modules\Tooltip\ItemCount.lua"/>

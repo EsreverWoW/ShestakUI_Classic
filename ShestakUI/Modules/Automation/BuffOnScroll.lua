@@ -4,37 +4,52 @@ if C.automation.buff_on_scroll ~= true or T.level ~= MAX_PLAYER_LEVEL then retur
 ----------------------------------------------------------------------------------------
 --	Cast buff on mouse scroll(by Gsuz)
 ----------------------------------------------------------------------------------------
-MAGE1 = {
-	1459,	-- Arcane Intellect
-}
+local function SpellName(id)
+	local name = GetSpellInfo(id)
+	if name then
+		return name
+	else
+		print("|cffff0000WARNING: spell ID ["..tostring(id).."] no longer exists! Report this to EsreverWoW.|r")
+		return "Empty"
+	end
+end
 
-MAGE2 = MAGE1
-MAGE3 = MAGE1
+local spells = {}
+if not T.classic then
+	spells = {
+		MAGE = {
+			[SpellName(1459)] = true,	-- Arcane Intellect
+		},
 
-if T.classic then
-	PRIEST1 = {
-		1243,	-- Power Word: Fortitude
+		PRIEST = {
+			[SpellName(21562)] = true,	-- Power Word: Fortitude
+		},
+
+		WARRIOR = {
+			[SpellName(6673)] = true,	-- Battle Shout
+		},
 	}
 else
-	PRIEST1 = {
-		21562,	-- Power Word: Fortitude
+	spells = {
+		MAGE = {
+			[SpellName(1459)] = true,	-- Arcane Intellect
+		},
+
+		PRIEST = {
+			[SpellName(1243)] = true,	-- Power Word: Fortitude
+		},
+
+		WARRIOR = {
+			[SpellName(6673)] = true,	-- Battle Shout
+		},
 	}
 end
 
-PRIEST2 = PRIEST1
-PRIEST3 = PRIEST1
-
-WARRIOR1 = {
-	6673,	-- Battle Shout
-}
-
-WARRIOR2 = WARRIOR1
-WARRIOR3 = WARRIOR1
-
+local specSpells = spells[T.class]
 local frame = CreateFrame("Frame")
 -- Function for waiting through the global cooldown
-local GcTimer = 0
-local function WaitForGC(self, elapsed)
+local GcTimer, CheckBuffs = 0
+local function WaitForGC(_, elapsed)
 	GcTimer = GcTimer + elapsed
 	if GcTimer >= 1.5 then
 		CheckBuffs()
@@ -52,13 +67,11 @@ btn:SetAttribute("unit", "player")
 
 -- Main function for changing keybinding to mousewheel when a buff is needed
 function CheckBuffs()
-	local spec = (T.classic and T.GetSpecialization()) or (not T.classic and GetSpecialization()) or 1
 	if (not T.classic and IsFlying()) or IsMounted() or UnitIsDeadOrGhost("Player") or InCombatLockdown() then return end
 	ClearOverrideBindings(btn)
 	btn:SetAttribute("spell", nil)
-	if _G[T.class..spec] then
-		for _, spell in pairs(_G[T.class..spec]) do
-			local name = GetSpellInfo(spell)
+	if specSpells then
+		for name in pairs(specSpells) do
 			if name and not T.CheckPlayerBuff(name) then
 				if GetSpellCooldown(name) == 0 then
 					btn:SetAttribute("spell", name)

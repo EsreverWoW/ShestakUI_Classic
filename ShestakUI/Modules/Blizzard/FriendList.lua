@@ -1,4 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
+
 if IsAddOnLoaded("yClassColor") then return end
 
 ----------------------------------------------------------------------------------------
@@ -6,7 +7,6 @@ if IsAddOnLoaded("yClassColor") then return end
 ----------------------------------------------------------------------------------------
 local GUILD_INDEX_MAX = 12
 local SMOOTH = {1, 0, 0, 1, 1, 0, 0, 1, 0}
-local myName = UnitName("player")
 local BC = {}
 for k, v in pairs(LOCALIZED_CLASS_NAMES_MALE) do
 	BC[v] = k
@@ -173,58 +173,6 @@ if not T.classic then
 end
 
 -- WorldStateScoreList
---[[FIXME
-hooksecurefunc("WorldStateScoreFrame_Update", function()
-	local inArena
-	if not T.classic then
-		inArena = IsActiveBattlefieldArena()
-	end
-	local offset = FauxScrollFrame_GetOffset(WorldStateScoreScrollFrame)
-
-	for i = 1, GetNumBattlefieldScores() do
-		local index = offset + i
-		local name, faction, class, rank
-		if not T.classic then
-			name, _, _, _, _, faction, _, _, class = GetBattlefieldScore(index)
-		else
-			-- build 30786 changed returns, removing dmg/heals/spec and adding rank
-			name, _, _, _, _, faction, _, _, _, class = GetBattlefieldScore(index)
-		end
-		if name then
-			local n, r = strsplit("-", name, 2)
-			n = classColor[class]..n.."|r"
-
-			if name == myName then
-				n = ">>> "..n.." <<<"
-			end
-
-			if r then
-				local color
-				if inArena then
-					if faction == 1 then
-						color = "|cffffd100"
-					else
-						color = "|cff19ff19"
-					end
-				else
-					if faction == 1 then
-						color = "|cff00adf0"
-					else
-						color = "|cffff1919"
-					end
-				end
-				r = color..r.."|r"
-				n = n.."|cffffffff - |r"..r
-			end
-
-			local button = _G["WorldStateScoreButton"..i]
-			if button then
-				button.name.text:SetText(n)
-			end
-		end
-	end
-end)
---]]
 if T.classic then
 	hooksecurefunc("WorldStateScoreFrame_Update", function()
 		local offset = FauxScrollFrame_GetOffset(WorldStateScoreScrollFrame)
@@ -257,6 +205,44 @@ if T.classic then
 				end
 			end
 		end
+	end)
+end
+
+-- PVPMatchResults
+if not T.classic then
+	hooksecurefunc(PVPCellNameMixin, "Populate", function(self, rowData)
+		local name = rowData.name
+		local className = rowData.className or ""
+		local n, r = strsplit("-", name, 2)
+		n = classColor[className]..n.."|r"
+
+		if name == UnitName("player") then
+			n = ">>> "..n.." <<<"
+		end
+
+		if r then
+			local color
+			local faction = rowData.faction
+			local inArena = IsActiveBattlefieldArena()
+			if inArena then
+				if faction == 1 then
+					color = "|cffffd100"
+				else
+					color = "|cff19ff19"
+				end
+			else
+				if faction == 1 then
+					color = "|cff00adf0"
+				else
+					color = "|cffff1919"
+				end
+			end
+			r = color..r.."|r"
+			n = n.."|cffffffff - |r"..r
+		end
+
+		local text = self.text
+		text:SetText(n)
 	end)
 end
 
@@ -398,7 +384,6 @@ local FRIENDS_LEVEL_TEMPLATE = FRIENDS_LEVEL_TEMPLATE:gsub("%%d", "%%s")
 FRIENDS_LEVEL_TEMPLATE = FRIENDS_LEVEL_TEMPLATE:gsub("%$d", "%$s")
 local function friendsFrame()
 	local scrollFrame = T.classic and FriendsFrameFriendsScrollFrame or FriendsListFrameScrollFrame
-	local offset = HybridScrollFrame_GetOffset(scrollFrame)
 	local buttons = scrollFrame.buttons
 
 	local playerArea = GetRealZoneText()
@@ -408,11 +393,21 @@ local function friendsFrame()
 		local button = buttons[i]
 		if button:IsShown() then
 			if button.buttonType == FRIENDS_BUTTON_TYPE_WOW then
-				local name, level, class, area, connected = C_FriendList.GetFriendInfo(button.id)
-				if connected then
-					nameText = classColor[class]..name.."|r, "..format(FRIENDS_LEVEL_TEMPLATE, diffColor[level]..level.."|r", class)
-					if area == playerArea then
-						infoText = format("|cff00ff00%s|r", area)
+				if T.classic then
+					local name, level, class, area, connected = C_FriendList.GetFriendInfo(button.id)
+					if connected then
+						nameText = classColor[class]..name.."|r, "..format(FRIENDS_LEVEL_TEMPLATE, diffColor[level]..level.."|r", class)
+						if area == playerArea then
+							infoText = format("|cff00ff00%s|r", area)
+						end
+					end
+				else
+					local info = C_FriendList.GetFriendInfoByIndex(button.id)
+					if info.connected then
+						nameText = classColor[info.className]..info.name.."|r, "..format(FRIENDS_LEVEL_TEMPLATE, diffColor[info.level]..info.level.."|r", info.className)
+						if info.area == playerArea then
+							infoText = format("|cff00ff00%s|r", info.area)
+						end
 					end
 				end
 			elseif button.buttonType == FRIENDS_BUTTON_TYPE_BNET then

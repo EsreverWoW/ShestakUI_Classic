@@ -25,11 +25,11 @@ local function CreatCopyFrame()
 	frame:SetFrameStrata("DIALOG")
 	tinsert(UISpecialFrames, "CopyFrame")
 	frame:Hide()
+	frame:EnableMouse(true)
 
 	editBox = CreateFrame("EditBox", "CopyBox", frame)
 	editBox:SetMultiLine(true)
 	editBox:SetMaxLetters(99999)
-	editBox:EnableMouse(true)
 	editBox:SetAutoFocus(false)
 	editBox:SetFontObject(ChatFontNormal)
 	editBox:SetWidth(500)
@@ -61,19 +61,30 @@ local function CreatCopyFrame()
 	isf = true
 end
 
-local function MessageIsProtected(message)
-	return strmatch(message, '[^|]-|K[vq]%d-[^|]-|k')
+local canChangeMessage = function(arg1, id)
+	if id and arg1 == "" then return id end
 end
+
+local function MessageIsProtected(message)
+	return message and (message ~= gsub(message, '(:?|?)|K(.-)|k', canChangeMessage))
+end
+
+-- local function colorizeLine(text, r, g, b)
+-- local hexCode = T.RGBToHex(r, g, b)
+-- return format("%s%s|r", hexCode, text)
+-- end
 
 local function Copy(cf)
 	if not isf then CreatCopyFrame() end
 	local text = ""
 	for i = 1, cf:GetNumMessages() do
-		local line = cf:GetMessageInfo(i)
-		if not MessageIsProtected(line) then
-			font:SetFormattedText("%s\n", line)
+		local line, r, g, b = cf:GetMessageInfo(i)
+		if line and not MessageIsProtected(line) then
+			r, g, b = r or 1, g or 1, b or 1
+			font:SetFormattedText("%s \n", line)
 			local cleanLine = font:GetText() or ""
 			text = text..cleanLine
+			--FIXME text = colorizeLine(text, r, g, b)
 		end
 	end
 	text = text:gsub("|T[^\\]+\\[^\\]+\\[Uu][Ii]%-[Rr][Aa][Ii][Dd][Tt][Aa][Rr][Gg][Ee][Tt][Ii][Nn][Gg][Ii][Cc][Oo][Nn]_(%d)[^|]+|t", "{rt%1}")
@@ -99,14 +110,14 @@ for i = 1, NUM_CHAT_WINDOWS do
 	button:SetSize(20, 20)
 	button:SetAlpha(0)
 	button:SetTemplate("Transparent")
-	button:SetBackdropBorderColor(T.color.r, T.color.g, T.color.b)
+	button:SetBackdropBorderColor(unpack(C.media.classborder_color))
 
 	local icon = button:CreateTexture(nil, "BORDER")
 	icon:SetPoint("CENTER")
 	icon:SetTexture("Interface\\BUTTONS\\UI-GuildButton-PublicNote-Up")
 	icon:SetSize(16, 16)
 
-	button:SetScript("OnMouseUp", function(self, btn)
+	button:SetScript("OnMouseUp", function(_, btn)
 		if btn == "RightButton" then
 			ToggleFrame(ChatMenu)
 		elseif btn == "MiddleButton" then
@@ -117,8 +128,8 @@ for i = 1, NUM_CHAT_WINDOWS do
 	end)
 	button:SetScript("OnEnter", function() button:FadeIn() end)
 	button:SetScript("OnLeave", function() button:FadeOut() end)
+end
 
-	SlashCmdList.COPY_CHAT = function()
-		Copy(_G["ChatFrame1"])
-	end
+SlashCmdList.COPY_CHAT = function()
+	Copy(_G["ChatFrame1"])
 end

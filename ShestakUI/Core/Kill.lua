@@ -12,7 +12,7 @@ frame:SetScript("OnEvent", function(_, _, addon)
 		end
 	end
 
-	if C.unitframe.enable and (SavedOptions and (SavedOptions.RaidLayout == "HEAL" or SavedOptions.RaidLayout == "DPS")) then
+	if C.unitframe.enable and (ShestakUISettings and (ShestakUISettings.RaidLayout == "HEAL" or ShestakUISettings.RaidLayout == "DPS")) then
 		InterfaceOptionsFrameCategoriesButton10:SetScale(0.00001)
 		InterfaceOptionsFrameCategoriesButton10:SetAlpha(0)
 		if not InCombatLockdown() then
@@ -28,30 +28,25 @@ frame:SetScript("OnEvent", function(_, _, addon)
 		CompactRaidFrameManager_UpdateOptionsFlowContainer = T.dummy
 	end
 
-	Advanced_UseUIScale:Kill()
-	Advanced_UIScaleSlider:Kill()
-	HelpOpenTicketButtonTutorial:Kill()
-	BagHelpBox:Kill()
-	if not T.classic then
+	if T.classic then
+		Advanced_UseUIScale:Kill()
+		Advanced_UIScaleSlider:Kill()
+		HelpOpenTicketButtonTutorial:Kill()
+		BagHelpBox:Kill()
+	else
+		Display_UseUIScale:Kill()
+		Display_UIScaleSlider:Kill()
 		TutorialFrameAlertButton:Kill()
-		TalentMicroButtonAlert:Kill()
-		CollectionsMicroButtonAlert:Kill()
-		ReagentBankHelpBox:Kill()
-		EJMicroButtonAlert:Kill()
-		PremadeGroupsPvETutorialAlert:Kill()
 	end
 	SetCVarBitfield("closedInfoFrames", LE_FRAME_TUTORIAL_WORLD_MAP_FRAME, true)
 	SetCVarBitfield("closedInfoFrames", LE_FRAME_TUTORIAL_PET_JOURNAL, true)
 	SetCVarBitfield("closedInfoFrames", LE_FRAME_TUTORIAL_GARRISON_BUILDING, true)
 
 	SetCVar("countdownForCooldowns", 0)
-	InterfaceOptionsActionBarsPanelCountdownCooldowns:Kill()
-
-	if not T.classic then
-		SetCVar("fstack_preferParentKeys", 0)
-	end
+	InterfaceOptionsActionBarsPanelCountdownCooldowns:Hide()
 
 	if C.chat.enable then
+		InterfaceOptionsSocialPanelChatStyle:Hide()
 		SetCVar("chatStyle", "im")
 	end
 
@@ -59,17 +54,21 @@ frame:SetScript("OnEvent", function(_, _, addon)
 		if T.class == "DEATHKNIGHT" and C.unitframe_class_bar.rune ~= true then
 			RuneFrame:Kill()
 		end
-		InterfaceOptionsCombatPanelTargetOfTarget:Kill()
+		InterfaceOptionsDisplayPanelDisplayDropDown:Hide()
+		InterfaceOptionsCombatPanelTargetOfTarget:Hide()
 		SetCVar("showPartyBackground", 0)
 	end
 
 	if C.actionbar.enable then
-		InterfaceOptionsActionBarsPanelBottomLeft:Kill()
-		InterfaceOptionsActionBarsPanelBottomRight:Kill()
-		InterfaceOptionsActionBarsPanelRight:Kill()
-		InterfaceOptionsActionBarsPanelRightTwo:Kill()
-		InterfaceOptionsActionBarsPanelAlwaysShowActionBars:Kill()
-		InterfaceOptionsActionBarsPanelStackRightBars:Kill()
+		InterfaceOptionsActionBarsPanelBottomLeft:Hide()
+		InterfaceOptionsActionBarsPanelBottomRight:Hide()
+		InterfaceOptionsActionBarsPanelRight:Hide()
+		InterfaceOptionsActionBarsPanelRightTwo:Hide()
+		InterfaceOptionsActionBarsPanelAlwaysShowActionBars:Hide()
+		InterfaceOptionsActionBarsPanelStackRightBars:Hide()
+		if not InCombatLockdown() then
+			SetCVar("multiBarRightVerticalLayout", 0)
+		end
 	end
 
 	if C.nameplate.enable then
@@ -77,7 +76,7 @@ frame:SetScript("OnEvent", function(_, _, addon)
 	end
 
 	if C.minimap.enable then
-		InterfaceOptionsDisplayPanelRotateMinimap:Kill()
+		InterfaceOptionsDisplayPanelRotateMinimap:Hide()
 	end
 
 	if C.bag.enable then
@@ -87,3 +86,14 @@ frame:SetScript("OnEvent", function(_, _, addon)
 		SetInsertItemsLeftToRight(false)
 	end
 end)
+
+local function AcknowledgeTips()
+	if InCombatLockdown() then return end
+
+	for frame in _G.HelpTip.framePool:EnumerateActive() do
+		frame:Acknowledge()
+	end
+end
+
+AcknowledgeTips()
+hooksecurefunc(_G.HelpTip, "Show", AcknowledgeTips)

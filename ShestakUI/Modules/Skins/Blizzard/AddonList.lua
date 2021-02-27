@@ -25,15 +25,25 @@ local function LoadSkin()
 	AddonListInset:SetPoint("BOTTOMRIGHT", -6, 29)
 
 	for i = 1, MAX_ADDONS_DISPLAYED do
-		T.SkinCheckBox(_G["AddonListEntry"..i.."Enabled"], true)
+		T.SkinCheckBox(_G["AddonListEntry"..i.."Enabled"])
 		_G["AddonListEntry"..i.."Load"]:SkinButton()
 	end
 
+	AddonListScrollFrame:StripTextures()
 	T.SkinScrollBar(AddonListScrollFrameScrollBar)
 	T.SkinCloseButton(AddonListCloseButton)
 	T.SkinDropDownBox(AddonCharacterDropDown)
 	T.SkinCheckBox(AddonListForceLoad)
 	AddonListForceLoad:SetSize(25, 25)
+
+	--FIXME hooksecurefunc("TriStateCheckbox_SetState", function(_, checkButton)
+		-- local tex = checkButton:GetCheckedTexture()
+		-- if checkButton.state == 2 then
+			-- tex:SetColorTexture(1, 0.82, 0, 0.8)
+		-- elseif checkButton.state == 1 then
+			-- tex:SetColorTexture(0.6, 0.6, 0.6, 0.75)
+		-- end
+	-- end)
 end
 
 tinsert(T.SkinFuncs["ShestakUI"], LoadSkin)

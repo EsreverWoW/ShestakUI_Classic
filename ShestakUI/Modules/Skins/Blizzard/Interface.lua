@@ -8,9 +8,9 @@ local function LoadSkin()
 	InterfaceOptionsFrame:StripTextures()
 	InterfaceOptionsFrame:SetTemplate("Transparent")
 
-	InterfaceOptionsFrameHeader:SetTexture(nil)
-	InterfaceOptionsFrameHeader:ClearAllPoints()
-	InterfaceOptionsFrameHeader:SetPoint("TOP", InterfaceOptionsFrame, 0, 0)
+	InterfaceOptionsFrame.Header:StripTextures()
+	InterfaceOptionsFrame.Header:ClearAllPoints()
+	InterfaceOptionsFrame.Header:SetPoint("TOP", InterfaceOptionsFrame, 0, 0)
 
 	InterfaceOptionsFrameTab1:StripTextures()
 	InterfaceOptionsFrameTab2:StripTextures()
@@ -63,6 +63,7 @@ local function LoadSkin()
 		-- Display
 		"DisplayPanelRotateMinimap",
 		"DisplayPanelAJAlerts",
+		"DisplayPanelShowInGameNavigation",
 		"DisplayPanelShowTutorials",
 		-- Social
 		"SocialPanelProfanityFilter",
@@ -115,7 +116,8 @@ local function LoadSkin()
 		-- Assessability
 		"AccessibilityPanelMovePad",
 		"AccessibilityPanelCinematicSubtitles",
-		"AccessibilityPanelColorblindMode"
+		"AccessibilityPanelColorblindMode",
+		"AccessibilityPanelOverrideFadeOut"
 	}
 
 	for i = 1, getn(checkboxes) do
@@ -135,6 +137,8 @@ local function LoadSkin()
 		"AutoActivate40Players",
 		"AutoActivateSpec1",
 		"AutoActivateSpec2",
+		"AutoActivateSpec3",
+		"AutoActivateSpec4",
 		"AutoActivatePvE",
 		"AutoActivatePvP",
 		"KeepGroupsTogether",
@@ -172,6 +176,8 @@ local function LoadSkin()
 		"CameraPanelStyleDropDown",
 		"MousePanelClickMoveStyleDropDown",
 		"AccessibilityPanelColorFilterDropDown",
+		"AccessibilityPanelMotionSicknessDropdown",
+		"AccessibilityPanelShakeIntensityDropdown",
 		"DisplayPanelOutlineDropDown",
 		"DisplayPanelSelfHighlightDropDown",
 		"DisplayPanelDisplayDropDown",

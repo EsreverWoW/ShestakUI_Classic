@@ -4,13 +4,16 @@ if C.tooltip.enable ~= true then return end
 ----------------------------------------------------------------------------------------
 --	Based on aTooltip(by ALZA)
 ----------------------------------------------------------------------------------------
-local StoryTooltip, WarCampaignTooltip
+local StoryTooltip, CampaignTooltip
+
 if not T.classic then
 	StoryTooltip = QuestScrollFrame.StoryTooltip
 	StoryTooltip:SetFrameLevel(4)
 
-	WarCampaignTooltip = QuestScrollFrame.WarCampaignTooltip
+	CampaignTooltip = QuestScrollFrame.CampaignTooltip
 end
+
+T.SkinCloseButton(_G.ItemRefTooltip.CloseButton)
 
 local tooltips = {
 	GameTooltip,
@@ -20,13 +23,18 @@ local tooltips = {
 	FriendsTooltip,
 	ItemRefShoppingTooltip1,
 	ItemRefShoppingTooltip2,
-	AtlasLootTooltip,
-	QuestHelperTooltip,
-	QuestGuru_QuestWatchTooltip,
 	StoryTooltip,
 	ReputationParagonTooltip,
-	WarCampaignTooltip,
-	EmbeddedItemTooltip
+	CampaignTooltip,
+	EmbeddedItemTooltip,
+	QuickKeybindTooltip,
+	-- Addons
+	AtlasLootTooltip,
+	QuestGuru_QuestWatchTooltip,
+	TomTomTooltip,
+	LibDBIconTooltip,
+	AceConfigDialogTooltip,
+	BigWigsOptionsTooltip
 }
 
 local backdrop = {
@@ -53,7 +61,7 @@ for _, tt in pairs(tooltips) do
 	end
 end
 
--- Extra tooltip's skin
+-- LibExtraTip skin
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("PLAYER_LOGIN")
 frame:SetScript("OnEvent", function()
@@ -79,6 +87,31 @@ frame:SetScript("OnEvent", function()
 		end)
 	end
 end)
+
+if IsAddOnLoaded("RaiderIO") then
+	PVEFrame:HookScript("OnShow", function(self)
+		if not RaiderIOProfileTooltip.styled then
+			RaiderIOProfileTooltip:SetBackdrop(nil)
+			RaiderIOProfileTooltip.SetBackdrop = T.dummy
+			RaiderIOProfileTooltip:CreateBackdrop("Transparent")
+			RaiderIOProfileTooltip.backdrop:SetPoint("TOPLEFT", 3, 0)
+			RaiderIOProfileTooltip.backdrop:SetPoint("BOTTOMRIGHT", -2, 0)
+			RaiderIOProfileTooltip.styled = true
+
+			if DF_Frame and C.skins.blizzard_frames then
+				DF_Frame:StripTextures()
+				DF_Frame:SetTemplate("Transparent")
+				T.SkinEditBox(DF_Frame.minRioEdit, nil, 15)
+				T.SkinEditBox(DF_Frame.maxRioEdit, nil, 15)
+				T.SkinCheckBox(DF_Frame.showRIO)
+				T.SkinCheckBox(DF_Frame.showClass)
+				T.SkinCheckBox(DF_Frame.removeSelfRole)
+				T.SkinCheckBox(DF_Frame.showPreviousRIO)
+				DF_Frame.applyBtn:SkinButton()
+			end
+		end
+	end)
+end
 
 local anchor = CreateFrame("Frame", "TooltipAnchor", UIParent)
 anchor:SetSize(200, 40)
@@ -136,7 +169,7 @@ end
 ----------------------------------------------------------------------------------------
 --	Unit tooltip styling
 ----------------------------------------------------------------------------------------
-function GameTooltip_UnitColor(unit)
+local function GetColor(unit)
 	if not unit then return end
 	local r, g, b
 
@@ -213,14 +246,13 @@ if C.tooltip.health_value == true then
 		local _, unit = GameTooltip:GetUnit()
 		if unit then
 			min, max = UnitHealth(unit), UnitHealthMax(unit)
-			local hpRMH, maxhpRMH
 			if T.classic and IsAddOnLoaded("RealMobHealth") and UnitExists(unit) then
 				local hpRMH, maxhpRMH = RealMobHealth.GetUnitHealth(unit, true)
 
 				if hpRMH and maxhpRMH then
 					min, max = hpRMH, maxhpRMH
 				end
-			end
+				end
 			if not self.text then
 				self.text = self:CreateFontString(nil, "OVERLAY", "Tooltip_Med")
 				self.text:SetPoint("CENTER", GameTooltipStatusBar, 0, 1.5)
@@ -246,7 +278,8 @@ local OnTooltipSetUnit = function(self)
 	local creatureType = UnitCreatureType(unit)
 	local _, faction = UnitFactionGroup(unit)
 	local _, playerFaction = UnitFactionGroup("player")
-	local UnitPVPName = UnitPVPName
+	local titleName = UnitPVPName(unit)
+	local isPlayer = UnitIsPlayer(unit)
 
 	if level and level == -1 then
 		if classification == "worldboss" then
@@ -262,24 +295,25 @@ local OnTooltipSetUnit = function(self)
 	else classification = "" end
 
 
-	if UnitPVPName(unit) and C.tooltip.title then
-		name = UnitPVPName(unit)
+	if titleName and C.tooltip.title then
+		name = titleName
 	end
 
-	_G["GameTooltipTextLeft1"]:SetText(name)
+	local r, g, b = GetColor(unit)
+	_G["GameTooltipTextLeft1"]:SetFormattedText("|cff%02x%02x%02x%s|r", r * 255, g * 255, b * 255, name or "")
+
 	if realm and realm ~= "" and C.tooltip.realm then
 		self:AddLine(FRIENDS_LIST_REALM.."|cffffffff"..realm.."|r")
 	end
 
-
-	if UnitIsPlayer(unit) then
+	if isPlayer then
 		if UnitIsAFK(unit) then
 			self:AppendText((" %s"):format("|cffE7E716"..L_CHAT_AFK.."|r"))
 		elseif UnitIsDND(unit) then
 			self:AppendText((" %s"):format("|cffFF0000"..L_CHAT_DND.."|r"))
 		end
 
-		if UnitIsPlayer(unit) and englishRace == "Pandaren" and faction ~= nil and faction ~= playerFaction then
+		if isPlayer and englishRace == "Pandaren" and faction ~= nil and faction ~= playerFaction then
 			local hex = "cffff3333"
 			if faction == "Alliance" then
 				hex = "cff69ccf0"
@@ -287,31 +321,30 @@ local OnTooltipSetUnit = function(self)
 			self:AppendText((" [|%s%s|r]"):format(hex, faction:sub(1, 2)))
 		end
 
-		if GetGuildInfo(unit) then
-			if not T.classic then
-				_G["GameTooltipTextLeft2"]:SetFormattedText("%s", GetGuildInfo(unit))
-				if UnitIsInMyGuild(unit) then
-					_G["GameTooltipTextLeft2"]:SetTextColor(1, 1, 0)
-				else
-					_G["GameTooltipTextLeft2"]:SetTextColor(0, 1, 1)
-				end
+		local guildName, guildRank = GetGuildInfo(unit)
+		if guildName then
+			_G["GameTooltipTextLeft2"]:SetFormattedText("%s", guildName)
+			if UnitIsInMyGuild(unit) then
+				_G["GameTooltipTextLeft2"]:SetTextColor(1, 1, 0)
 			else
-				local guildColor = {}
-				if UnitIsInMyGuild(unit) then
-					guildColor.r, guildColor.g, guildColor.b = 1, 1, 0
-				else
-					guildColor.r, guildColor.g, guildColor.b = 0, 1, 1
-				end
-				_G["GameTooltipTextLeft2"]:SetFormattedText("|cff%02x%02x%02x%s|r |cff%02x%02x%02x%s|r", levelColor.r * 255, levelColor.g * 255, levelColor.b * 255, level, guildColor.r * 255, guildColor.g * 255, guildColor.b * 255, GetGuildInfo(unit))
+				_G["GameTooltipTextLeft2"]:SetTextColor(0, 1, 1)
+			end
+			if C.tooltip.rank then
+				self:AddLine(RANK..": |cffffffff"..guildRank.."|r")
 			end
 		end
 
-		local n = GetGuildInfo(unit) and 3 or 2
+		local n = guildName and 3 or 2
 		-- thx TipTac for the fix above with color blind enabled
-		if GetCVar("colorblindMode") == "1" then n = n + 1 end
-		_G["GameTooltipTextLeft"..n]:SetFormattedText("|cff%02x%02x%02x%s|r %s", levelColor.r * 255, levelColor.g * 255, levelColor.b * 255, level, race or UNKNOWN)
+		if GetCVar("colorblindMode") == "1" then
+			n = n + 1
+			local class = UnitClass(unit)
+			_G["GameTooltipTextLeft"..n]:SetFormattedText("|cff%02x%02x%02x%s|r %s %s", levelColor.r * 255, levelColor.g * 255, levelColor.b * 255, level, race or UNKNOWN, class or "")
+		else
+			_G["GameTooltipTextLeft"..n]:SetFormattedText("|cff%02x%02x%02x%s|r %s", levelColor.r * 255, levelColor.g * 255, levelColor.b * 255, level, race or UNKNOWN)
+		end
 
-		for i = 2, lines do
+		for i = n + 1, lines do
 			local line = _G["GameTooltipTextLeft"..i]
 			if not line or not line:GetText() then return end
 			if line and line:GetText() and (line:GetText() == FACTION_HORDE or line:GetText() == FACTION_ALLIANCE) then
@@ -331,7 +364,7 @@ local OnTooltipSetUnit = function(self)
 	end
 
 	if C.tooltip.target == true and UnitExists(unit.."target") then
-		local r, g, b = GameTooltip_UnitColor(unit.."target")
+		local r, g, b = GetColor(unit.."target")
 		local text = ""
 
 		if UnitIsEnemy("player", unit.."target") then
@@ -353,6 +386,8 @@ local OnTooltipSetUnit = function(self)
 		local raidIndex = GetRaidTargetIndex(unit)
 		if raidIndex then
 			ricon:SetTexture("Interface\\TargetingFrame\\UI-RaidTargetingIcon_"..raidIndex)
+		else
+			ricon:SetTexture(nil)
 		end
 	end
 
@@ -362,29 +397,6 @@ local OnTooltipSetUnit = function(self)
 end
 
 GameTooltip:HookScript("OnTooltipSetUnit", OnTooltipSetUnit)
-
-----------------------------------------------------------------------------------------
---	Adds guild rank to tooltips(GuildRank by Meurtcriss)
-----------------------------------------------------------------------------------------
-if C.tooltip.rank == true then
-	GameTooltip:HookScript("OnTooltipSetUnit", function(self)
-		-- Get the unit
-		local _, unit = self:GetUnit()
-		if not unit then
-			local mFocus = GetMouseFocus()
-			if mFocus and mFocus.unit then
-				unit = mFocus.unit
-			end
-		end
-		-- Get and display guild rank
-		if UnitIsPlayer(unit) then
-			local guildName, guildRank = GetGuildInfo(unit)
-			if guildName then
-				self:AddLine(RANK..": |cffffffff"..guildRank.."|r")
-			end
-		end
-	end)
-end
 
 ----------------------------------------------------------------------------------------
 --	Hide tooltips in combat for action bars, pet bar and stance bar
@@ -404,130 +416,180 @@ end
 ----------------------------------------------------------------------------------------
 --	Fix compare tooltips(by Blizzard)(../FrameXML/GameTooltip.lua)
 ----------------------------------------------------------------------------------------
-hooksecurefunc("GameTooltip_ShowCompareItem", function(self, anchorFrame)
-	if not self then
-		self = GameTooltip
-	end
-
-	if not anchorFrame then
-		anchorFrame = self.overrideComparisonAnchorFrame or self
-	end
-
-	if self.needsReset then
-		self:ResetSecondaryCompareItem()
-		GameTooltip_AdvanceSecondaryCompareItem(self)
-		self.needsReset = false
-	end
-
-	local shoppingTooltip1, shoppingTooltip2 = unpack(self.shoppingTooltips)
-	local primaryItemShown, secondaryItemShown = shoppingTooltip1:SetCompareItem(shoppingTooltip2, self)
-	local leftPos = anchorFrame:GetLeft()
-	local rightPos = anchorFrame:GetRight()
-
-	local side
-	local anchorType = self:GetAnchorType()
-	local totalWidth = 0
-	if primaryItemShown then
-		totalWidth = totalWidth + shoppingTooltip1:GetWidth()
-	end
-	if secondaryItemShown then
-		totalWidth = totalWidth + shoppingTooltip2:GetWidth()
-	end
-	if self.overrideComparisonAnchorSide then
-		side = self.overrideComparisonAnchorSide
-	else
-		-- Find correct side
-		local rightDist = 0
-		if not rightPos then
-			rightPos = 0
-		end
-		if not leftPos then
-			leftPos = 0
-		end
-
-		rightDist = GetScreenWidth() - rightPos
-
-		if anchorType and totalWidth < leftPos and (anchorType == "ANCHOR_LEFT" or anchorType == "ANCHOR_TOPLEFT" or anchorType == "ANCHOR_BOTTOMLEFT") then
-			side = "left"
-		elseif anchorType and totalWidth < rightDist and (anchorType == "ANCHOR_RIGHT" or anchorType == "ANCHOR_TOPRIGHT" or anchorType == "ANCHOR_BOTTOMRIGHT") then
-			side = "right"
-		elseif rightDist < leftPos then
-			side = "left"
+if not T.classic then
+	hooksecurefunc("GameTooltip_AnchorComparisonTooltips", function(_, anchorFrame, shoppingTooltip1, shoppingTooltip2, _, secondaryItemShown)
+		local point = shoppingTooltip1:GetPoint(2)
+		if secondaryItemShown then
+			if point == "TOP" then
+				shoppingTooltip1:ClearAllPoints()
+				shoppingTooltip2:ClearAllPoints()
+				shoppingTooltip1:SetPoint("TOPLEFT", anchorFrame, "TOPRIGHT", 3, -10)
+				shoppingTooltip2:SetPoint("TOPLEFT", shoppingTooltip1, "TOPRIGHT", 3, 0)
+			elseif point == "RIGHT" then
+				shoppingTooltip1:ClearAllPoints()
+				shoppingTooltip2:ClearAllPoints()
+				shoppingTooltip1:SetPoint("TOPRIGHT", anchorFrame, "TOPLEFT", -3, -10)
+				shoppingTooltip2:SetPoint("TOPRIGHT", shoppingTooltip1, "TOPLEFT", -3, 0)
+			end
 		else
-			side = "right"
+			if point == "LEFT" then
+				shoppingTooltip1:ClearAllPoints()
+				shoppingTooltip1:SetPoint("TOPLEFT", anchorFrame, "TOPRIGHT", 3, -10)
+			elseif point == "RIGHT" then
+				shoppingTooltip1:ClearAllPoints()
+				shoppingTooltip1:SetPoint("TOPRIGHT", anchorFrame, "TOPLEFT", -3, -10)
+			end
 		end
-	end
-
-	-- See if we should slide the tooltip
-	if anchorType and anchorType ~= "ANCHOR_PRESERVE" then
-		if (side == "left") and (totalWidth > leftPos) then
-			self:SetAnchorType(anchorType, (totalWidth - leftPos), 0)
-		elseif (side == "right") and (rightPos + totalWidth) > GetScreenWidth() then
-			self:SetAnchorType(anchorType, -((rightPos + totalWidth) - GetScreenWidth()), 0)
+	end)
+else
+	hooksecurefunc("GameTooltip_ShowCompareItem", function(self, anchorFrame)
+		if not self then
+			self = GameTooltip
 		end
-	end
 
-	if secondaryItemShown then
-		shoppingTooltip2:SetOwner(self, "ANCHOR_NONE")
-		shoppingTooltip2:ClearAllPoints()
-		shoppingTooltip1:SetOwner(self, "ANCHOR_NONE")
-		shoppingTooltip1:ClearAllPoints()
+		if not anchorFrame then
+			anchorFrame = self.overrideComparisonAnchorFrame or self
+		end
 
-		if side and side == "left" then
-			shoppingTooltip1:SetPoint("TOPRIGHT", anchorFrame, "TOPLEFT", -3, -10)
+		if self.needsReset then
+			self:ResetSecondaryCompareItem()
+			GameTooltip_AdvanceSecondaryCompareItem(self)
+			self.needsReset = false
+		end
+
+		local shoppingTooltip1, shoppingTooltip2 = unpack(self.shoppingTooltips)
+		local primaryItemShown, secondaryItemShown = shoppingTooltip1:SetCompareItem(shoppingTooltip2, self)
+		local leftPos = anchorFrame:GetLeft()
+		local rightPos = anchorFrame:GetRight()
+
+		local side
+		local anchorType = self:GetAnchorType()
+		local totalWidth = 0
+		if primaryItemShown then
+			totalWidth = totalWidth + shoppingTooltip1:GetWidth()
+		end
+		if secondaryItemShown then
+			totalWidth = totalWidth + shoppingTooltip2:GetWidth()
+		end
+		if self.overrideComparisonAnchorSide then
+			side = self.overrideComparisonAnchorSide
 		else
-			shoppingTooltip2:SetPoint("TOPLEFT", anchorFrame, "TOPRIGHT", 3, -10)
+			-- Find correct side
+			local rightDist = 0
+			if not rightPos then
+				rightPos = 0
+			end
+			if not leftPos then
+				leftPos = 0
+			end
+
+			rightDist = GetScreenWidth() - rightPos
+
+			if anchorType and totalWidth < leftPos and (anchorType == "ANCHOR_LEFT" or anchorType == "ANCHOR_TOPLEFT" or anchorType == "ANCHOR_BOTTOMLEFT") then
+				side = "left"
+			elseif anchorType and totalWidth < rightDist and (anchorType == "ANCHOR_RIGHT" or anchorType == "ANCHOR_TOPRIGHT" or anchorType == "ANCHOR_BOTTOMRIGHT") then
+				side = "right"
+			elseif rightDist < leftPos then
+				side = "left"
+			else
+				side = "right"
+			end
 		end
 
-		if side and side == "left" then
-			shoppingTooltip2:SetPoint("TOPRIGHT", shoppingTooltip1, "TOPLEFT", -3, 0)
+		-- See if we should slide the tooltip
+		if anchorType and anchorType ~= "ANCHOR_PRESERVE" then
+			if (side == "left") and (totalWidth > leftPos) then
+				self:SetAnchorType(anchorType, (totalWidth - leftPos), 0)
+			elseif (side == "right") and (rightPos + totalWidth) > GetScreenWidth() then
+				self:SetAnchorType(anchorType, -((rightPos + totalWidth) - GetScreenWidth()), 0)
+			end
+		end
+
+		if secondaryItemShown then
+			shoppingTooltip2:SetOwner(self, "ANCHOR_NONE")
+			shoppingTooltip2:ClearAllPoints()
+			shoppingTooltip1:SetOwner(self, "ANCHOR_NONE")
+			shoppingTooltip1:ClearAllPoints()
+
+			if side and side == "left" then
+				shoppingTooltip1:SetPoint("TOPRIGHT", anchorFrame, "TOPLEFT", -3, -10)
+			else
+				shoppingTooltip2:SetPoint("TOPLEFT", anchorFrame, "TOPRIGHT", 3, -10)
+			end
+
+			if side and side == "left" then
+				shoppingTooltip2:SetPoint("TOPRIGHT", shoppingTooltip1, "TOPLEFT", -3, 0)
+			else
+				shoppingTooltip1:SetPoint("TOPLEFT", shoppingTooltip2, "TOPRIGHT", 3, 0)
+			end
 		else
-			shoppingTooltip1:SetPoint("TOPLEFT", shoppingTooltip2, "TOPRIGHT", 3, 0)
+			shoppingTooltip1:SetOwner(self, "ANCHOR_NONE")
+			shoppingTooltip1:ClearAllPoints()
+
+			if side and side == "left" then
+				shoppingTooltip1:SetPoint("TOPRIGHT", anchorFrame, "TOPLEFT", -3, -10)
+			else
+				shoppingTooltip1:SetPoint("TOPLEFT", anchorFrame, "TOPRIGHT", 3, -10)
+			end
+
+			shoppingTooltip2:Hide()
 		end
-	else
-		shoppingTooltip1:SetOwner(self, "ANCHOR_NONE")
-		shoppingTooltip1:ClearAllPoints()
 
-		if side and side == "left" then
-			shoppingTooltip1:SetPoint("TOPRIGHT", anchorFrame, "TOPLEFT", -3, -10)
-		else
-			shoppingTooltip1:SetPoint("TOPLEFT", anchorFrame, "TOPRIGHT", 3, -10)
-		end
-
-		shoppingTooltip2:Hide()
-	end
-
-	-- We have to call this again because :SetOwner clears the tooltip.
-	shoppingTooltip1:SetCompareItem(shoppingTooltip2, self)
-	shoppingTooltip1:Show()
-end)
+		-- We have to call this again because :SetOwner clears the tooltip.
+		shoppingTooltip1:SetCompareItem(shoppingTooltip2, self)
+		shoppingTooltip1:Show()
+	end)
+end
 
 ----------------------------------------------------------------------------------------
 --	Fix GameTooltipMoneyFrame font size
 ----------------------------------------------------------------------------------------
-local function FixFont()
-	for i = 1, 2 do
-		if _G["GameTooltipMoneyFrame"..i] then
-			_G["GameTooltipMoneyFrame"..i.."PrefixText"]:SetFontObject("GameTooltipText")
-			_G["GameTooltipMoneyFrame"..i.."SuffixText"]:SetFontObject("GameTooltipText")
-			_G["GameTooltipMoneyFrame"..i.."GoldButton"]:SetNormalFontObject("GameTooltipText")
-			_G["GameTooltipMoneyFrame"..i.."SilverButton"]:SetNormalFontObject("GameTooltipText")
-			_G["GameTooltipMoneyFrame"..i.."CopperButton"]:SetNormalFontObject("GameTooltipText")
+if not T.classic then
+	hooksecurefunc("SetTooltipMoney", function()
+		for i = 1, 2 do
+			if _G["GameTooltipMoneyFrame"..i] then
+				_G["GameTooltipMoneyFrame"..i.."PrefixText"]:SetFontObject("GameTooltipText")
+				_G["GameTooltipMoneyFrame"..i.."SuffixText"]:SetFontObject("GameTooltipText")
+				_G["GameTooltipMoneyFrame"..i.."GoldButton"]:SetNormalFontObject("GameTooltipText")
+				_G["GameTooltipMoneyFrame"..i.."SilverButton"]:SetNormalFontObject("GameTooltipText")
+				_G["GameTooltipMoneyFrame"..i.."CopperButton"]:SetNormalFontObject("GameTooltipText")
+			end
+		end
+		for i = 1, 2 do
+			if _G["ItemRefTooltipMoneyFrame"..i] then
+				_G["ItemRefTooltipMoneyFrame"..i.."PrefixText"]:SetFontObject("GameTooltipText")
+				_G["ItemRefTooltipMoneyFrame"..i.."SuffixText"]:SetFontObject("GameTooltipText")
+				_G["ItemRefTooltipMoneyFrame"..i.."GoldButton"]:SetNormalFontObject("GameTooltipText")
+				_G["ItemRefTooltipMoneyFrame"..i.."SilverButton"]:SetNormalFontObject("GameTooltipText")
+				_G["ItemRefTooltipMoneyFrame"..i.."CopperButton"]:SetNormalFontObject("GameTooltipText")
+			end
+		end
+	end)
+else
+	local function FixFont()
+		for i = 1, 2 do
+			if _G["GameTooltipMoneyFrame"..i] then
+				_G["GameTooltipMoneyFrame"..i.."PrefixText"]:SetFontObject("GameTooltipText")
+				_G["GameTooltipMoneyFrame"..i.."SuffixText"]:SetFontObject("GameTooltipText")
+				_G["GameTooltipMoneyFrame"..i.."GoldButton"]:SetNormalFontObject("GameTooltipText")
+				_G["GameTooltipMoneyFrame"..i.."SilverButton"]:SetNormalFontObject("GameTooltipText")
+				_G["GameTooltipMoneyFrame"..i.."CopperButton"]:SetNormalFontObject("GameTooltipText")
+			end
+		end
+		for i = 1, 2 do
+			if _G["ItemRefTooltipMoneyFrame"..i] then
+				_G["ItemRefTooltipMoneyFrame"..i.."PrefixText"]:SetFontObject("GameTooltipText")
+				_G["ItemRefTooltipMoneyFrame"..i.."SuffixText"]:SetFontObject("GameTooltipText")
+				_G["ItemRefTooltipMoneyFrame"..i.."GoldButton"]:SetNormalFontObject("GameTooltipText")
+				_G["ItemRefTooltipMoneyFrame"..i.."SilverButton"]:SetNormalFontObject("GameTooltipText")
+				_G["ItemRefTooltipMoneyFrame"..i.."CopperButton"]:SetNormalFontObject("GameTooltipText")
+			end
 		end
 	end
-	for i = 1, 2 do
-		if _G["ItemRefTooltipMoneyFrame"..i] then
-			_G["ItemRefTooltipMoneyFrame"..i.."PrefixText"]:SetFontObject("GameTooltipText")
-			_G["ItemRefTooltipMoneyFrame"..i.."SuffixText"]:SetFontObject("GameTooltipText")
-			_G["ItemRefTooltipMoneyFrame"..i.."GoldButton"]:SetNormalFontObject("GameTooltipText")
-			_G["ItemRefTooltipMoneyFrame"..i.."SilverButton"]:SetNormalFontObject("GameTooltipText")
-			_G["ItemRefTooltipMoneyFrame"..i.."CopperButton"]:SetNormalFontObject("GameTooltipText")
-		end
-	end
-end
 
-GameTooltip:HookScript("OnTooltipSetItem", FixFont)
-ItemRefTooltip:HookScript("OnTooltipSetItem", FixFont)
+	GameTooltip:HookScript("OnTooltipSetItem", FixFont)
+	ItemRefTooltip:HookScript("OnTooltipSetItem", FixFont)
+end
 
 ----------------------------------------------------------------------------------------
 --	Skin GameTooltip.ItemTooltip and EmbeddedItemTooltip
@@ -550,6 +612,9 @@ if not T.classic then
 	GameTooltip.ItemTooltip.backdrop:SetPoint("BOTTOMRIGHT", GameTooltip.ItemTooltip.Icon, "BOTTOMRIGHT", 2, -2)
 	GameTooltip.ItemTooltip.Count:ClearAllPoints()
 	GameTooltip.ItemTooltip.Count:SetPoint("BOTTOMRIGHT", GameTooltip.ItemTooltip.Icon, "BOTTOMRIGHT", 1, 0)
+
+	BONUS_OBJECTIVE_REWARD_FORMAT = "|T%1$s:16:16:0:0:64:64:5:59:5:59|t %2$s"
+	BONUS_OBJECTIVE_REWARD_WITH_COUNT_FORMAT = "|T%1$s:16:16:0:0:64:64:5:59:5:59|t |cffffffff%2$d|r %3$s"
 end
 
 local reward = EmbeddedItemTooltip.ItemTooltip
@@ -583,6 +648,7 @@ hooksecurefunc("GameTooltip_ShowProgressBar", function(tt)
 	if bar then
 		bar:StripTextures()
 		bar:CreateBackdrop("Transparent")
+		bar.backdrop:SetBackdropColor(0.1, 0.1, 0.1, 1)
 		bar:SetStatusBarTexture(C.media.texture)
 		label:ClearAllPoints()
 		label:SetPoint("CENTER", bar, 0, 0)

@@ -89,7 +89,7 @@ local function Timer_Create(self)
 	timer.text = text
 
 	Timer_OnSizeChanged(timer, scaler:GetSize())
-	scaler:SetScript("OnSizeChanged", function(self, ...) Timer_OnSizeChanged(timer, ...) end)
+	scaler:SetScript("OnSizeChanged", function(_, ...) Timer_OnSizeChanged(timer, ...) end)
 
 	self.timer = timer
 	return timer
@@ -120,6 +120,9 @@ hooksecurefunc(Cooldown_MT, "SetCooldown", function(cooldown, start, duration, m
 	local show = (start and start > 0) and (duration and duration > 2) and (modRate == nil or modRate > 0)
 
 	if show then
+		local parent = cooldown:GetParent()
+		if parent and parent.chargeCooldown == cooldown then return end
+
 		local timer = cooldown.timer or Timer_Create(cooldown)
 		timer.start = start
 		timer.duration = duration

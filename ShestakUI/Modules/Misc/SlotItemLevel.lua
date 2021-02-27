@@ -1,5 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
-if C.misc.item_level ~= true then return end
+if not T.classic or C.misc.item_level ~= true then return end
 
 ----------------------------------------------------------------------------------------
 --	Item level on slot buttons in Character/InspectFrame(iLevel by Sanex)
@@ -11,6 +11,9 @@ local f = CreateFrame("Frame", nil, _G.PaperDollFrame) -- iLvel number frame
 local g -- iLvel number for Inspect frame
 f:RegisterEvent("ADDON_LOADED")
 f:RegisterEvent("PLAYER_LOGIN")
+
+local fontObject = CreateFont("iLvLFont")
+fontObject:SetFontObject("SystemFont_Outline_Small")
 
 -- Tooltip and scanning by Phanx @ http://www.wowinterface.com/forums/showthread.php?p=271406
 local S_ITEM_LEVEL = "^" .. gsub(ITEM_LEVEL, "%%d", "(%%d+)")
@@ -59,42 +62,28 @@ local function _updateItems(unit, frame)
 				equiped[i] = itemLink
 			end
 
-			local delay = false
-			if itemLink then
-				local _, _, quality = GetItemInfo(itemLink)
+			local realItemLevel = _getRealItemLevel(i, unit)
+			realItemLevel = realItemLevel or ""
+			if realItemLevel and tonumber(realItemLevel) == 1 then
+				realItemLevel = ""
+			end
 
-				if (quality == 6) and (i == 16 or i == 17) then
-					local relics = {select(4, strsplit(":", itemLink))}
-					for i = 1, 3 do
-						local relicID = relics[i] ~= "" and relics[i]
-						local relicLink = select(2, GetItemGem(itemLink, i))
-						if relicID and not relicLink then
-							delay = true
-						end
-					end
-					if delay then
-						C_Timer.After(0.1, function()
-							local realItemLevel = _getRealItemLevel(i, unit)
-							realItemLevel = realItemLevel or ""
-							frame[i]:SetText("|cFFFFFF00"..realItemLevel)
-						end)
-					end
+			local color = "|cffFFFF00"
+			if itemLink and (i == 15 or i == 5 or i == 16 or i == 11 or i == 12) and (realItemLevel ~= "" and tonumber(realItemLevel) > 184) then
+				local _, _, enchant = strsplit(":", itemLink)
+				if enchant and enchant == "" then
+					color = "|cffFF0000"
 				end
 			end
 
-			local realItemLevel = _getRealItemLevel(i, unit)
-			realItemLevel = realItemLevel or ""
-			if realItemLevel and realItemLevel == 1 then
-				realItemLevel = ""
-			end
-			frame[i]:SetText("|cFFFFFF00"..realItemLevel)
+			frame[i]:SetText(color..realItemLevel)
 		end
 	end
 end
 
 local function _createStrings()
 	local function _stringFactory(parent)
-		local s = f:CreateFontString(nil, "OVERLAY", "SystemFont_Outline_Small")
+		local s = f:CreateFontString(nil, "OVERLAY", "iLvLFont")
 		s:SetPoint("TOP", parent, "TOP", 0, -2)
 
 		return s
@@ -121,17 +110,12 @@ local function _createStrings()
 	f[16] = _stringFactory(_G.CharacterMainHandSlot)
 	f[17] = _stringFactory(_G.CharacterSecondaryHandSlot)
 
-	if T.classic then
-		f[18] = _stringFactory(_G.CharacterRangedSlot)
-		-- f[0] = _stringFactory(_G.CharacterAmmoSlot)
-	end
-
 	f:Hide()
 end
 
 local function _createGStrings()
 	local function _stringFactory(parent)
-		local s = g:CreateFontString(nil, "OVERLAY", "SystemFont_Outline_Small")
+		local s = g:CreateFontString(nil, "OVERLAY", "iLvLFont")
 		s:SetPoint("TOP", parent, "TOP", 0, -2)
 
 		return s
@@ -158,23 +142,34 @@ local function _createGStrings()
 	g[16] = _stringFactory(_G.InspectMainHandSlot)
 	g[17] = _stringFactory(_G.InspectSecondaryHandSlot)
 
-	if T.classic then
-		g[18] = _stringFactory(_G.CharacterRangedSlot)
-		-- g[0] = _stringFactory(_G.CharacterAmmoSlot)
-	end
-
 	g:Hide()
 end
 
-local function OnEvent(self, event, ...) -- Event handler
+local function OnEvent(self, event, ...)
 	if event == "ADDON_LOADED" and (...) == "Blizzard_InspectUI" then
 		self:UnregisterEvent(event)
+
+		if not InspectFrameiLvL and not C.tooltip.average_lvl then
+			local text = InspectModelFrame:CreateFontString("InspectFrameiLvL", "OVERLAY", "SystemFont_Outline_Small")
+			text:SetPoint("BOTTOM", 5, 20)
+			text:Hide()
+			InspectPaperDollFrame:HookScript("OnShow", function()
+				local avgilvl = C_PaperDollInfo.GetInspectItemLevel("target")
+				if avgilvl and tonumber(avgilvl) > 0 then
+					text:SetText("|cFFFFFF00"..avgilvl)
+					text:Show()
+				end
+			end)
+			InspectPaperDollFrame:HookScript("OnHide", function()
+				text:Hide()
+			end)
+		end
 
 		g = CreateFrame("Frame", nil, _G.InspectPaperDollFrame) -- iLevel number frame for Inspect
 		_createGStrings()
 		_createGStrings = nil
 
-		_G.InspectPaperDollFrame:HookScript("OnShow", function(self)
+		_G.InspectPaperDollFrame:HookScript("OnShow", function()
 			g:SetFrameLevel(_G.InspectHeadSlot:GetFrameLevel())
 			f:RegisterEvent("INSPECT_READY")
 			f:RegisterEvent("UNIT_INVENTORY_CHANGED")
@@ -182,7 +177,7 @@ local function OnEvent(self, event, ...) -- Event handler
 			g:Show()
 		end)
 
-		_G.InspectPaperDollFrame:HookScript("OnHide", function(self)
+		_G.InspectPaperDollFrame:HookScript("OnHide", function()
 			f:UnregisterEvent("INSPECT_READY")
 			f:UnregisterEvent("UNIT_INVENTORY_CHANGED")
 			g:Hide()
@@ -193,25 +188,21 @@ local function OnEvent(self, event, ...) -- Event handler
 		_createStrings()
 		_createStrings = nil
 
-		_G.PaperDollFrame:HookScript("OnShow", function(self)
+		_G.PaperDollFrame:HookScript("OnShow", function()
 			f:RegisterEvent("PLAYER_EQUIPMENT_CHANGED")
-			if not T.classic then
-				f:RegisterEvent("ITEM_UPGRADE_MASTER_UPDATE")
-				f:RegisterEvent("ARTIFACT_UPDATE")
-				f:RegisterEvent("SOCKET_INFO_UPDATE")
-			end
+			f:RegisterEvent("ITEM_UPGRADE_MASTER_UPDATE")
+			f:RegisterEvent("ARTIFACT_UPDATE")
+			f:RegisterEvent("SOCKET_INFO_UPDATE")
 			f:RegisterEvent("COMBAT_RATING_UPDATE")
 			_updateItems("player", f)
 			f:Show()
 		end)
 
-		_G.PaperDollFrame:HookScript("OnHide", function(self)
+		_G.PaperDollFrame:HookScript("OnHide", function()
 			f:UnregisterEvent("PLAYER_EQUIPMENT_CHANGED")
-			if not T.classic then
-				f:UnregisterEvent("ITEM_UPGRADE_MASTER_UPDATE")
-				f:UnregisterEvent("ARTIFACT_UPDATE")
-				f:UnregisterEvent("SOCKET_INFO_UPDATE")
-			end
+			f:UnregisterEvent("ITEM_UPGRADE_MASTER_UPDATE")
+			f:UnregisterEvent("ARTIFACT_UPDATE")
+			f:UnregisterEvent("SOCKET_INFO_UPDATE")
 			f:UnregisterEvent("COMBAT_RATING_UPDATE")
 			f:Hide()
 		end)
@@ -227,3 +218,60 @@ local function OnEvent(self, event, ...) -- Event handler
 	end
 end
 f:SetScript("OnEvent", OnEvent)
+
+----------------------------------------------------------------------------------------
+--	Item level on flyout buttons (by Merathilis)
+----------------------------------------------------------------------------------------
+local ItemDB = {}
+
+local function _getRealItemLevel(link, bag, slot)
+	if ItemDB[link] then return ItemDB[link] end
+
+	local realItemLevel
+	if bag and type(bag) == "string" then
+		realItemLevel = C_Item.GetCurrentItemLevel(ItemLocation:CreateFromEquipmentSlot(slot))
+	else
+		realItemLevel = C_Item.GetCurrentItemLevel(ItemLocation:CreateFromBagAndSlot(bag, slot))
+	end
+
+	ItemDB[link] = tonumber(realItemLevel)
+	return realItemLevel
+end
+
+local function SetupFlyoutLevel(button, bag, slot)
+	if not button.iLvl then
+		button.iLvl = button:CreateFontString(nil, "OVERLAY", "iLvLFont")
+		button.iLvl:SetPoint("TOP", 0, -2)
+	end
+
+	local link, level
+	if bag then
+		link = GetContainerItemLink(bag, slot)
+		level = _getRealItemLevel(link, bag, slot)
+	else
+		link = GetInventoryItemLink("player", slot)
+		level = _getRealItemLevel(link, "player", slot)
+	end
+
+	if level then
+		button.iLvl:SetText("|cFFFFFF00"..level)
+	end
+end
+
+hooksecurefunc("EquipmentFlyout_DisplayButton", function(button)
+	local location = button.location
+
+	if not location or location >= EQUIPMENTFLYOUT_FIRST_SPECIAL_LOCATION then
+		if button.iLvl then button.iLvl:SetText("") end
+		return
+	end
+
+	local _, _, bags, voidStorage, slot, bag = EquipmentManager_UnpackLocation(location)
+	if voidStorage then return end
+
+	if bags then
+		SetupFlyoutLevel(button, bag, slot)
+	else
+		SetupFlyoutLevel(button, nil, slot)
+	end
+end)

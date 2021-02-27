@@ -1,5 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
-if C.misc.move_blizzard ~= true then return end
+if C.general.move_blizzard ~= true then return end
 
 ----------------------------------------------------------------------------------------
 --	Move some Blizzard frames
@@ -67,7 +67,7 @@ local AddOnFrames = {
 
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("ADDON_LOADED")
-frame:SetScript("OnEvent", function(self, event, addon)
+frame:SetScript("OnEvent", function(_, _, addon)
 	if AddOnFrames[addon] then
 		for _, v in pairs(AddOnFrames[addon]) do
 			if _G[v] then

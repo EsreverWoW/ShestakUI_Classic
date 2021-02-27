@@ -70,10 +70,21 @@ end
 SLASH_ENABLE_ADDON1 = "/en"
 SLASH_ENABLE_ADDON2 = "/enable"
 
+SlashCmdList.ONLY_UI = function()
+	for i = 1, GetNumAddOns() do
+		local name = GetAddOnInfo(i)
+		if name ~= "ShestakUI" and name ~= "ShestakUI_Config" and name ~= "!BaudErrorFrame" and GetAddOnEnableState(T.name, name) == 2 then
+			DisableAddOn(name, T.name)
+		end
+	end
+	ReloadUI()
+end
+SLASH_ONLY_UI1 = "/onlyui"
+
 ----------------------------------------------------------------------------------------
 --	Disband party or raid(by Monolit)
 ----------------------------------------------------------------------------------------
-function DisbandRaidGroup()
+local function DisbandRaidGroup()
 	if InCombatLockdown() then return end
 	if UnitInRaid("player") then
 		SendChatMessage(L_INFO_DISBAND, "RAID")
@@ -91,7 +102,7 @@ function DisbandRaidGroup()
 			end
 		end
 	end
-	LeaveParty()
+	C_PartyInfo.LeaveParty()
 end
 
 StaticPopupDialogs.DISBAND_RAID = {
@@ -102,7 +113,7 @@ StaticPopupDialogs.DISBAND_RAID = {
 	timeout = 0,
 	whileDead = 1,
 	hideOnEscape = true,
-	preferredIndex = STATICPOPUPS_NUMDIALOGS,
+	preferredIndex = 5,
 }
 
 SlashCmdList.GROUPDISBAND = function()
@@ -117,9 +128,9 @@ SLASH_GROUPDISBAND2 = "/кв"
 SlashCmdList.PARTYTORAID = function()
 	if GetNumGroupMembers() > 0 then
 		if UnitInRaid("player") and (UnitIsGroupLeader("player")) then
-			ConvertToParty()
+			C_PartyInfo.ConvertToParty()
 		elseif UnitInParty("player") and (UnitIsGroupLeader("player")) then
-			ConvertToRaid()
+			C_PartyInfo.ConvertToRaid()
 		end
 	else
 		print("|cffffff00"..ERR_NOT_IN_GROUP.."|r")
@@ -151,18 +162,32 @@ end
 ----------------------------------------------------------------------------------------
 if not T.classic then
 	SlashCmdList.SPEC = function(spec)
-		if T.level >= SHOW_SPEC_LEVEL then
+		local canUse, failureReason = C_SpecializationInfo.CanPlayerUseTalentSpecUI()()
+		if canUse then
 			if GetSpecialization() ~= tonumber(spec) then
 				SetSpecialization(spec)
 			end
 		else
-			print("|cffffff00"..format(FEATURE_BECOMES_AVAILABLE_AT_LEVEL, SHOW_SPEC_LEVEL).."|r")
+			print("|cffffff00"..failureReason.."|r")
 		end
 	end
 	SLASH_SPEC1 = "/ss"
 	SLASH_SPEC2 = "/spec"
 	SLASH_SPEC3 = "/ыы"
 end
+
+----------------------------------------------------------------------------------------
+--	Get target NPC name and ID
+----------------------------------------------------------------------------------------
+SlashCmdList.NPCID = function()
+	local name = UnitName("target")
+	local unitGUID = UnitGUID("target")
+	local id = unitGUID and select(6, strsplit('-', unitGUID))
+	if id then
+		print(name..": "..id)
+	end
+end
+SLASH_NPCID1 = "/getid"
 
 ----------------------------------------------------------------------------------------
 --	Demo mode for DBM
@@ -172,20 +197,20 @@ SLASH_DBMTEST1 = "/dbmtest"
 SLASH_DBMTEST2 = "/виьеуые"
 
 ----------------------------------------------------------------------------------------
---	Switch to heal layout
+--	Switch to Heal layout
 ----------------------------------------------------------------------------------------
 SlashCmdList.HEAL = function()
-	SavedOptions.RaidLayout = "HEAL"
+	ShestakUISettings.RaidLayout = "HEAL"
 	ReloadUI()
 end
 SLASH_HEAL1 = "/heal"
 SLASH_HEAL2 = "/руфд"
 
 ----------------------------------------------------------------------------------------
---	Switch to dps layout
+--	Switch to DPS layout
 ----------------------------------------------------------------------------------------
 SlashCmdList.DPS = function()
-	SavedOptions.RaidLayout = "DPS"
+	ShestakUISettings.RaidLayout = "DPS"
 	ReloadUI()
 end
 SLASH_DPS1 = "/dps"
@@ -200,7 +225,7 @@ SlashCmdList.FRAME = function(arg)
 	else
 		arg = GetMouseFocus()
 	end
-	if arg ~= nil then FRAME = arg end
+	if arg ~= nil then _G.FRAME = arg end
 	if arg ~= nil and not arg:IsForbidden() and arg:GetName() ~= nil then
 		local point, relativeTo, relativePoint, xOfs, yOfs = arg:GetPoint()
 		print("|cffCC0000--------------------------------------------------------------------|r")
@@ -304,18 +329,20 @@ if not T.classic then
 		GuildChallengeAlertSystem:AddAlert(3, 2, 5)
 		InvasionAlertSystem:AddAlert(678, DUNGEON_FLOOR_THENEXUS1, true, 1, 1)
 		WorldQuestCompleteAlertSystem:AddAlert(AlertFrameMixin:BuildQuestData(42114))
-		-- GarrisonFollowerAlertSystem:AddAlert(32, "Dagg", 90, 2, true, C_Garrison.GetFollowerInfo(32)) -- error when mouseover
-		-- GarrisonShipFollowerAlertSystem:AddAlert(592, "Ship", "Transport", "GarrBuilding_Barracks_1_H", 3, 2, 1) -- error when mouseover
+		-- GarrisonFollowerAlertSystem:AddAlert(32, "Dagg", 90, 2, true, C_Garrison.GetFollowerInfo(32))
+		-- GarrisonShipFollowerAlertSystem:AddAlert(592, "Ship", "Transport", "GarrBuilding_Barracks_1_H", 3, 2, 1)
 		GarrisonBuildingAlertSystem:AddAlert(GARRISON_CACHE)
-		GarrisonTalentAlertSystem:AddAlert(3, _G.C_Garrison.GetTalent(370))
-		LegendaryItemAlertSystem:AddAlert("\124cffa335ee\124Hitem:18832:0:0:0:0:0:0:0:0:0:0\124h[Brutality Blade]\124h\124r")
-		LootAlertSystem:AddAlert("\124cffa335ee\124Hitem:18832::::::::::\124h[Brutality Blade]\124h\124r", 1, 1, 100, 2, false, false, 0, false, false)
-		LootUpgradeAlertSystem:AddAlert("\124cffa335ee\124Hitem:18832::::::::::\124h[Brutality Blade]\124h\124r", 1, 1, 1, nil, nil, false)
+		GarrisonTalentAlertSystem:AddAlert(3, _G.C_Garrison.GetTalentInfo(370))
+		-- LegendaryItemAlertSystem:AddAlert("|cffa335ee|Hitem:158712::::::::60:66::16:4:6534:6513:1533:4786::::|h[Rezan's Gleaming Eye]|h|r")
+		-- LootAlertSystem:AddAlert("|cffa335ee|Hitem:158712::::::::60:66::16:4:6534:6513:1533:4786::::|h[Rezan's Gleaming Eye]|h|r", 1, 1, 100, 2, false, false, 0, false, false)
+		-- LootUpgradeAlertSystem:AddAlert("|cffa335ee|Hitem:158712::::::::60:66::16:4:6534:6513:1533:4786::::|h[Rezan's Gleaming Eye]|h|r", 1, 1, 1, nil, nil, false)
 		MoneyWonAlertSystem:AddAlert(81500)
 		EntitlementDeliveredAlertSystem:AddAlert("", "Interface\\Icons\\Ability_pvp_gladiatormedallion", TRINKET0SLOT, 214)
 		RafRewardDeliveredAlertSystem:AddAlert("", "Interface\\Icons\\Ability_pvp_gladiatormedallion", TRINKET0SLOT, 214)
-		DigsiteCompleteAlertSystem:AddAlert("Human")
+		-- DigsiteCompleteAlertSystem:AddAlert("Human")
 		NewRecipeLearnedAlertSystem:AddAlert(204)
+		NewRuneforgePowerAlertSystem:AddAlert(204)
+		-- BonusRollFrame_StartBonusRoll(242969, 'test', 20, 515, 15, 14)
 	end
 	SLASH_TEST_ACHIEVEMENT1 = "/tach"
 	SLASH_TEST_ACHIEVEMENT2 = "/ефср"
@@ -336,6 +363,7 @@ if not T.classic then
 			ExtraActionButton1.icon:SetTexture("Interface\\Icons\\spell_deathknight_breathofsindragosa")
 			ExtraActionButton1.icon:Show()
 			ExtraActionButton1.icon:SetAlpha(1)
+			ExtraActionButton1.Count:SetText("2")
 		end
 	end
 	SLASH_TEST_EXTRABUTTON1 = "/teb"
@@ -346,11 +374,12 @@ end
 --	Grid on screen
 ----------------------------------------------------------------------------------------
 local grid
-SlashCmdList.GRIDONSCREEN = function()
+SlashCmdList.GRIDONSCREEN = function(msg)
 	if grid then
 		grid:Hide()
 		grid = nil
 	else
+		if msg and msg == "hide" then return end
 		grid = CreateFrame("Frame", nil, UIParent)
 		grid:SetAllPoints(UIParent)
 		local width = GetScreenWidth() / 128

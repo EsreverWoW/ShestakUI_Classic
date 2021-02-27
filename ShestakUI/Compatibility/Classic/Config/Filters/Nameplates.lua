@@ -194,6 +194,10 @@ T.DebuffWhiteList = {
 	[SpellName(20549)] = true,	-- War Stomp
 }
 
+for _, spell in pairs(C.nameplate.debuffs_list) do
+	T.DebuffWhiteList[SpellName(spell)] = true
+end
+
 T.DebuffBlackList = {
 	-- [SpellName(spellID)] = true,	-- Spell Name
 }
@@ -399,6 +403,10 @@ T.BuffWhiteList = {
 	[SpellName(20594)] = true,	-- Stoneform
 	[SpellName(7744)] = true,	-- Will of the Forsaken
 }
+
+for _, spell in pairs(C.nameplate.buffs_list) do
+	T.BuffWhiteList[SpellName(spell)] = true
+end
 
 T.BuffBlackList = {
 	-- [SpellName(spellID)] = true,	-- Spell Name

@@ -134,7 +134,7 @@ local OnEnter = function(self)
 	GameTooltip:Show()
 end
 
-local OnLeave = function(self)
+local OnLeave = function()
 	GameTooltip:Hide()
 end
 
@@ -235,9 +235,9 @@ local StartTimer = function(name, spellId)
 		end
 	else
 		bar.startTime = GetTime()
-		bar.endTime = GetTime() + T.raid_spells[spellId]
+		bar.endTime = GetTime() + T.RaidSpells[spellId]
 		bar.left:SetText(format("%s - %s", name:gsub("%-[^|]+", ""), spell))
-		bar.right:SetText(FormatTime(T.raid_spells[spellId]))
+		bar.right:SetText(FormatTime(T.RaidSpells[spellId]))
 		bar.isResses = false
 		bar.name = name
 		bar.spell = spell
@@ -247,6 +247,7 @@ local StartTimer = function(name, spellId)
 			bar.icon:GetNormalTexture():SetTexCoord(0.1, 0.9, 0.1, 0.9)
 		end
 		bar:Show()
+		if spellId == 264667 then color = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)["HUNTER"] end -- Change color for Hunter's pet
 		if color then
 			bar:SetStatusBarColor(color.r, color.g, color.b)
 			bar.bg:SetVertexColor(color.r, color.g, color.b, 0.2)
@@ -296,20 +297,19 @@ local OnEvent = function(self, event)
 		end
 	end
 	if event == "COMBAT_LOG_EVENT_UNFILTERED" then
-		local _, eventType, _, _, sourceName, sourceFlags = CombatLogGetCurrentEventInfo()
+		local _, eventType, _, _, sourceName, sourceFlags, _, _, _, _, _, spellId, spellName = CombatLogGetCurrentEventInfo()
 		if band(sourceFlags, filter) == 0 then return end
 		if eventType == "SPELL_RESURRECT" or eventType == "SPELL_CAST_SUCCESS" or eventType == "SPELL_AURA_APPLIED" then
-			local spellId, spellName = select(12, CombatLogGetCurrentEventInfo())
 			if sourceName then
 				sourceName = sourceName:gsub("-.+", "")
 			else
 				return
 			end
-			if T.classic then
-				spellId = T.GetSpellID(spellName)
-			end
-			if T.raid_spells[spellId] and show[select(2, IsInInstance())] and IsInGroup() then
+			if T.RaidSpells[spellId] and show[select(2, IsInInstance())] and IsInGroup() then
 				if (sourceName == T.name and C.raidcooldown.show_self == true) or sourceName ~= T.name then
+					if T.classic then
+						spellID = T.GetSpellID(spellName)
+					end
 					StartTimer(sourceName, spellId)
 				end
 			end
@@ -328,7 +328,7 @@ local OnEvent = function(self, event)
 	end
 end
 
-for spell in pairs(T.raid_spells) do
+for spell in pairs(T.RaidSpells) do
 	local name = GetSpellInfo(spell)
 	if not name then
 		if not T.classic then

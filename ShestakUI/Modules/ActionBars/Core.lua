@@ -10,16 +10,18 @@ frame:SetScript("OnEvent", function()
 	MainMenuBar:SetScale(0.00001)
 	MainMenuBar:EnableMouse(false)
 	PetActionBarFrame:EnableMouse(false)
-	StanceBarFrame:EnableMouse(false)
 	if not T.classic then
+		StanceBarFrame:EnableMouse(false)
 		OverrideActionBar:SetScale(0.00001)
 		OverrideActionBar:EnableMouse(false)
 		MicroButtonAndBagsBar:SetScale(0.00001)
 		MicroButtonAndBagsBar:EnableMouse(false)
+		MicroButtonAndBagsBar:SetPoint("BOTTOMRIGHT", 0, -99) -- Prevent scaling for right panels
 	end
 
 	local elements = {
-		MainMenuBar, MainMenuBarArtFrame, OverrideActionBar, PossessBarFrame, PetActionBarFrame, StanceBarFrame
+		MainMenuBar, MainMenuBarArtFrame, OverrideActionBar, PossessBarFrame, PetActionBarFrame, StanceBarFrame,
+		MultiBarBottomLeft.QuickKeybindGlow, MultiBarLeft.QuickKeybindGlow, MultiBarBottomRight.QuickKeybindGlow, MultiBarRight.QuickKeybindGlow
 	}
 
 	if not T.classic then
@@ -38,12 +40,13 @@ frame:SetScript("OnEvent", function()
 		end
 		element:SetAlpha(0)
 	end
-	elements = nil
 
 	if not T.classic then
 		for i = 1, 6 do
 			local b = _G["OverrideActionBarButton"..i]
-			b:SetAttribute("statehidden", 1)
+			b:UnregisterAllEvents()
+			b:SetAttribute("statehidden", true)
+			b:SetAttribute("showgrid", 1)
 		end
 	end
 
@@ -56,29 +59,13 @@ frame:SetScript("OnEvent", function()
 	end)
 end)
 
-do
-	local uiManagedFrames = {
-		"MultiBarLeft",
-		"MultiBarRight",
-		"MultiBarBottomLeft",
-		"MultiBarBottomRight",
-		"StanceBarFrame",
-		"PossessBarFrame",
-		"ExtraActionBarFrame"
-	}
-	for _, frame in pairs(uiManagedFrames) do
-		UIPARENT_MANAGED_FRAME_POSITIONS[frame] = nil
-	end
-	uiManagedFrames = nil
-end
-
 ----------------------------------------------------------------------------------------
 --	Set mouseover for bars
 ----------------------------------------------------------------------------------------
 function RightBarMouseOver(alpha)
 	RightActionBarAnchor:SetAlpha(alpha)
 	PetActionBarAnchor:SetAlpha(alpha)
-	ShapeShiftBarAnchor:SetAlpha(alpha)
+	StanceBarAnchor:SetAlpha(alpha)
 
 	if MultiBarLeft:IsShown() then
 		for i = 1, 12 do
@@ -125,14 +112,14 @@ function RightBarMouseOver(alpha)
 	end
 
 	if C.actionbar.stancebar_horizontal == false and C.actionbar.stancebar_hide == false then
-		if ShiftHolder:IsShown() then
+		if StanceHolder:IsShown() then
 			for i = 1, NUM_STANCE_SLOTS do
 				local pb = _G["StanceButton"..i]
 				pb:SetAlpha(alpha)
 				local f = _G["StanceButton"..i.."Cooldown"]
 				T.HideSpiral(f, alpha)
 			end
-			ShiftHolder:SetAlpha(alpha)
+			StanceHolder:SetAlpha(alpha)
 		end
 	end
 end
@@ -144,7 +131,7 @@ function StanceBarMouseOver(alpha)
 		local f = _G["StanceButton"..i.."Cooldown"]
 		T.HideSpiral(f, alpha)
 	end
-	ShapeShiftBarAnchor:SetAlpha(alpha)
+	StanceHolder:SetAlpha(alpha)
 end
 
 function PetBarMouseOver(alpha)
@@ -161,6 +148,62 @@ if C.actionbar.rightbars_mouseover == true then
 	RightActionBarAnchor:SetAlpha(0)
 	RightActionBarAnchor:SetScript("OnEnter", function() RightBarMouseOver(1) end)
 	RightActionBarAnchor:SetScript("OnLeave", function() if not HoverBind.enabled then RightBarMouseOver(0) end end)
+end
+
+function BottomBarMouseOver(alpha)
+	for i = 1, 12 do
+		local b = _G["ActionButton"..i]
+		b:SetAlpha(alpha)
+		local c = _G["ActionButton"..i.."Cooldown"]
+		T.HideSpiral(c, alpha)
+	end
+
+	if C.actionbar.bottombars > 1 and MultiBarBottomLeft:IsShown() then
+		for i = 1, 12 do
+			local b = _G["MultiBarBottomLeftButton"..i]
+			b:SetAlpha(alpha)
+			local c = _G["MultiBarBottomLeftButton"..i.."Cooldown"]
+			T.HideSpiral(c, alpha)
+		end
+	end
+
+	if C.actionbar.rightbars < 3 and MultiBarBottomRight:IsShown() then
+		if C.actionbar.toggle_mode == true and ShestakUISettingsPerChar.BottomBars == 1 then
+			for i = 4, 6 do
+				local b = _G["MultiBarBottomRightButton"..i]
+				b:SetAlpha(alpha)
+				local c = _G["MultiBarBottomRightButton"..i.."Cooldown"]
+				T.HideSpiral(c, alpha)
+			end
+
+			for i = 10, 12 do
+				local b = _G["MultiBarBottomRightButton"..i]
+				b:SetAlpha(alpha)
+				local c = _G["MultiBarBottomRightButton"..i.."Cooldown"]
+				T.HideSpiral(c, alpha)
+			end
+		else
+			for i = 1, 12 do
+				local b = _G["MultiBarBottomRightButton"..i]
+				b:SetAlpha(alpha)
+				local c = _G["MultiBarBottomRightButton"..i.."Cooldown"]
+				T.HideSpiral(c, alpha)
+			end
+		end
+	end
+end
+
+if C.actionbar.bottombars_mouseover then
+	ActionBarAnchor:SetScript("OnEnter", function() BottomBarMouseOver(1) end)
+	ActionBarAnchor:SetScript("OnLeave", function() if not HoverBind.enabled then BottomBarMouseOver(0) end end)
+
+	if C.actionbar.split_bars == true then
+		SplitBarLeft:SetScript("OnEnter", function() BottomBarMouseOver(1) end)
+		SplitBarLeft:SetScript("OnLeave", function() if not HoverBind.enabled then BottomBarMouseOver(0) end end)
+
+		SplitBarRight:SetScript("OnEnter", function() BottomBarMouseOver(1) end)
+		SplitBarRight:SetScript("OnLeave", function() if not HoverBind.enabled then BottomBarMouseOver(0) end end)
+	end
 end
 
 ----------------------------------------------------------------------------------------
@@ -185,6 +228,10 @@ EventSpiral:SetScript("OnEvent", function()
 	if C.actionbar.stancebar_mouseover == true and C.actionbar.stancebar_horizontal == true then
 		StanceBarMouseOver(0)
 	end
+
+	if C.actionbar.bottombars_mouseover then
+		BottomBarMouseOver(0)
+	end
 end)
 
 if (C.actionbar.rightbars_mouseover == true and C.actionbar.petbar_horizontal == false and C.actionbar.petbar_hide == false) or (C.actionbar.petbar_mouseover == true and C.actionbar.petbar_horizontal == true and C.actionbar.petbar_hide == false) then
@@ -204,7 +251,7 @@ end
 ----------------------------------------------------------------------------------------
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("PLAYER_ENTERING_WORLD")
-frame:SetScript("OnEvent", function(self, event)
+frame:SetScript("OnEvent", function(self)
 	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 	SetActionBarToggles(1, 1, 1, 1, 0)
 	if C.actionbar.show_grid == true then
@@ -214,27 +261,39 @@ frame:SetScript("OnEvent", function(self, event)
 			local button = _G[format("ActionButton%d", i)]
 			button.noGrid = nil
 			button:SetAttribute("showgrid", 1)
-			ActionButton_ShowGrid(button, reason)
+			button:ShowGrid(reason)
+			button:SetAttribute("statehidden", true)
 
 			button = _G[format("MultiBarRightButton%d", i)]
 			button.noGrid = nil
 			button:SetAttribute("showgrid", 1)
-			ActionButton_ShowGrid(button, reason)
+			button:ShowGrid(reason)
+			button:SetAttribute("statehidden", true)
 
 			button = _G[format("MultiBarBottomRightButton%d", i)]
 			button.noGrid = nil
 			button:SetAttribute("showgrid", 1)
-			ActionButton_ShowGrid(button, reason)
+			button:ShowGrid(reason)
+			button:SetAttribute("statehidden", true)
 
 			button = _G[format("MultiBarLeftButton%d", i)]
 			button.noGrid = nil
 			button:SetAttribute("showgrid", 1)
-			ActionButton_ShowGrid(button, reason)
+			button:ShowGrid(reason)
+			button:SetAttribute("statehidden", true)
 
 			button = _G[format("MultiBarBottomLeftButton%d", i)]
 			button.noGrid = nil
 			button:SetAttribute("showgrid", 1)
-			ActionButton_ShowGrid(button, reason)
+			button:ShowGrid(reason)
+			button:SetAttribute("statehidden", true)
+
+			if _G["VehicleMenuBarActionButton"..i] then
+				_G["VehicleMenuBarActionButton"..i]:SetAttribute("statehidden", true)
+			end
+
+			_G["MultiCastActionButton"..i]:SetAttribute("showgrid", 1)
+			_G["MultiCastActionButton"..i]:SetAttribute("statehidden", true)
 		end
 	else
 		SetCVar("alwaysShowActionBars", 0)
@@ -282,7 +341,7 @@ T.ShiftBarUpdate = function()
 	end
 end
 
-T.PetBarUpdate = function(self, event)
+T.PetBarUpdate = function()
 	local petActionButton, petActionIcon, petAutoCastableTexture, petAutoCastShine
 	for i = 1, NUM_PET_ACTION_SLOTS, 1 do
 		local buttonName = "PetActionButton"..i

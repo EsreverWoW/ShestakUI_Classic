@@ -21,7 +21,6 @@ L_ANNOUNCE_PC_MSG = "Pulling %s in %s.." -- Needs review
 L_ANNOUNCE_PC_ABORTED = "Pull ABORTED!" -- Needs review
 
 -- Announce feasts and portals
-L_ANNOUNCE_FP_STAT = "%s has prepared a %s - [%s]." -- Needs review
 L_ANNOUNCE_FP_PRE = "%s has prepared a %s." -- Needs review
 L_ANNOUNCE_FP_PUT = "%s has put down a %s." -- Needs review
 L_ANNOUNCE_FP_CAST = "%s is casting %s." -- Needs review
@@ -47,9 +46,6 @@ L_TOOLTIP_INSPECT_OPEN = "Inspect Frame is open" -- Needs review
 L_MISC_UNDRESS = "Desvestir"
 L_MISC_DRINKING = " esta bebiendo."
 L_MISC_BUY_STACK = "Alt-Click para comprar un lote"
-L_MISC_ONECLICK_BUYOUT = "Shift-Right-Click para comprar el objeto seleccionado sin confirmacion" -- Needs review
-L_MISC_ONECLICK_BID = "Shift-Right-Click para pujar por el objeto seleccionado sin confirmacion" -- Needs review
-L_MISC_ONECLICK_CANCEL = "Shift-Right-Click to cancel on the selected item without confirmation" -- Needs review
 L_MISC_UI_OUTDATED = "Tu versión de ShestakUI no está actualizada. Puedes descargar la última versión de www.shestak.org"
 L_MISC_HEADER_MARK = "Mouseover Raid Icons" -- Needs review
 L_MISC_BINDER_OPEN = "Mouse Bindings" -- Needs review
@@ -59,8 +55,6 @@ L_MISC_SCROLL = "Pergamino"
 L_RAID_UTIL_DISBAND = "Disolver grupo"
 
 -- Zone name
-L_ZONE_ARATHIBASIN = "Cuenca de Arathi"
-L_ZONE_GILNEAS = "La Batalla por Gilneas"
 L_ZONE_ANCIENTDALARAN = "Cráter de Dalaran"
 
 -- WatchFrame Wowhead link
@@ -93,6 +87,8 @@ L_MINIMAP_CALENDAR = "Calendario"
 L_MINIMAP_HEAL_LAYOUT = "Left-Click - Heal Layout" -- Needs review
 L_MINIMAP_DPS_LAYOUT = "Right-Click - DPS Layout" -- Needs review
 L_MINIMAP_BLIZZ_LAYOUT = "Middle-Click - Blizzard Layout" -- Needs review
+L_MINIMAP_FARM = "Minimap size" -- Need review
+L_MINIMAP_TOGGLE = "Toggle action bars" -- Need review
 
 -- Chat
 L_CHAT_WHISPER = "De"
@@ -150,10 +146,6 @@ L_COOLDOWNS_COMBATRESS = "CombatRess" -- Needs review
 L_COOLDOWNS_COMBATRESS_REMAINDER = "Combat resurrect: " -- Needs review
 L_COOLDOWNS_NEXTTIME = "Next time: " -- Needs review
 
--- Autoinvite
-L_INVITE_ENABLE = "Auto Invitar ON: "
-L_INVITE_DISABLE = "Auto Invitar OFF"
-
 -- Bind key
 L_BIND_SAVED = "La configuración de las teclas ha sido guardada."
 L_BIND_DISCARD = "Se han descartado los cambios en la configuración de las teclas."
@@ -197,12 +189,9 @@ L_WELCOME_LINE_2_2 = "para más información."
 
 -- Combat text
 L_COMBATTEXT_KILLING_BLOW = "Golpe de gracia"
-L_COMBATTEXT_ALREADY_UNLOCKED = "Texto de combate desbloqueado."
-L_COMBATTEXT_ALREADY_LOCKED = "Texto de combate bloqueado."
 L_COMBATTEXT_TEST_DISABLED = "Modo Texto de combate deshabilitado."
 L_COMBATTEXT_TEST_ENABLED = "Modo Texto de combate habilitado."
-L_COMBATTEXT_TEST_USE_UNLOCK = "Escribe /xct unlock para mover y cambiar el tamaño del marco de texto de combate."
-L_COMBATTEXT_TEST_USE_LOCK = "Escribe /xct lock para bloquear el marco de texto de combate."
+L_COMBATTEXT_TEST_USE_MOVE = "Escribe /xct move para mover y cambiar el tamaño del marco de texto de combate."
 L_COMBATTEXT_TEST_USE_TEST = "Escribe /xct test para probar el modo Texto de combate."
 L_COMBATTEXT_TEST_USE_RESET = "Type /xct reset to restore default positions." -- Need review
 L_COMBATTEXT_POPUP = "Para guardar la posición de la ventana de texto de combate necesitas recargar tu UI."
@@ -291,25 +280,23 @@ L_SLASHCMD_HELP = {
 	"/rd - Rompe el grupo o la banda.",
 	"/toraid - Convierte el grupo a bandaConvert to party or raid.",
 	"/teleport - Teleportarse desde una mazmorra aleatoria.",
-	"/spec, /ss - Cambia entre especializaciones de talentos.",
+	"/ss - Cambia entre especializaciones de talentos.",
+	"/tt - Susurrar objetivo.",
 	"/heal - Cambia a la apariencia de 'Curación'.",
 	"/dps - Cambia a la apariencia de 'Daño'.",
-	"/frame - La descripción aun no está lista.",
 	"/farmmode - Incrementa el tamaño del minimapa.",
-	"/moveui - Permite mover los elementos de la interfaz.", -- Need review
 	"/resetui - Reinicia la configuración general a la por defecto.",
 	"/resetuf - Reinicia los marcos de unidades a su posición por defecto.",
 	"/resetconfig - Reinicia la configuración de ShestakUI_Config.",
 	"/resetstats - Reinicia las estadísticas de oro y tiempo empleado.",
-	"/settings ADDON_NAME - Aplica la configuración a msbt, dbm, skada, o a todos los addons (con 'all').",
-	"/ls, /litestats - Ayuda para LiteStats.",
+	"/settings - Aplica la configuración a msbt, dbm, skada, o a todos los addons (con 'all').",
+	"/ls - Ayuda para LiteStats.",
 	"/xct - Gestiona el texto de combate.",
 	"/raidcd - Prueba de los enfriamientos de la banda.",
 	"/enemycd - Prueba de los enfriamientos del enemigo.",
 	"/pulsecd - Prueba de tus propios enfriamientos.",
 	"/threat - Prueba del medidor de amenaza.",
-	"/tt - Susurrar objetivo.",
-	"/ainv - Activa la invitación automática.",
 	"/testuf - Prueba de los marcos de unidades.",
+	"/moveui - Permite mover los elementos de la interfaz.", -- Need review
 	"/cfg - Abre la configuración de la interfaz.",
 }

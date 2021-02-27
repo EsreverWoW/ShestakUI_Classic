@@ -13,6 +13,7 @@ MinimapAnchor:CreatePanel("ClassColor", C.minimap.size, C.minimap.size, unpack(C
 -- Disable Minimap Cluster
 MinimapCluster:EnableMouse(false)
 if T.classic then
+	MinimapCluster:SetPoint("TOPRIGHT", 0, 100) -- Prevent scaling for right panels
 	MinimapCluster:Kill()
 end
 
@@ -27,6 +28,10 @@ MinimapBackdrop:ClearAllPoints()
 MinimapBackdrop:SetPoint("TOPLEFT", MinimapAnchor, "TOPLEFT", 2, -2)
 MinimapBackdrop:SetPoint("BOTTOMRIGHT", MinimapAnchor, "BOTTOMRIGHT", -2, 2)
 MinimapBackdrop:SetSize(MinimapAnchor:GetWidth(), MinimapAnchor:GetWidth())
+
+-- Adjusting for patch 9.0.1 Minimap.xml
+Minimap:SetFrameStrata("LOW")
+Minimap:SetFrameLevel(2)
 
 -- Hide Border
 MinimapBorder:Hide()
@@ -51,7 +56,7 @@ MinimapZoneTextButton:Hide()
 -- Hide Game Time
 GameTimeFrame:Hide()
 
--- Hide Mail Button
+-- Move Mail icon
 MiniMapMailFrame:ClearAllPoints()
 MiniMapMailFrame:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMRIGHT", 8, -10)
 MiniMapMailBorder:Hide()
@@ -74,9 +79,11 @@ MiniMapWorldMapButton:Hide()
 -- Garrison icon
 if not T.classic then
 	if C.minimap.garrison_icon == true then
-		GarrisonLandingPageMinimapButton:ClearAllPoints()
-		GarrisonLandingPageMinimapButton:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 0, 2)
-		GarrisonLandingPageMinimapButton:SetSize(32, 32)
+		GarrisonLandingPageMinimapButton:SetScale(0.75)
+		hooksecurefunc("GarrisonLandingPageMinimapButton_UpdateIcon", function(self)
+			self:ClearAllPoints()
+			self:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 0, 2)
+		end)
 	else
 		GarrisonLandingPageMinimapButton:SetScale(0.0001)
 		GarrisonLandingPageMinimapButton:SetAlpha(0)
@@ -134,17 +141,19 @@ if StreamingIcon then
 end
 
 -- Ticket icon
-HelpOpenTicketButton:SetParent(Minimap)
-HelpOpenTicketButton:CreateBackdrop("ClassColor")
-HelpOpenTicketButton:SetFrameLevel(4)
-HelpOpenTicketButton:ClearAllPoints()
-HelpOpenTicketButton:SetPoint("BOTTOM", Minimap, "BOTTOM", 0, 2)
-HelpOpenTicketButton:SetHighlightTexture(nil)
-HelpOpenTicketButton:SetPushedTexture("Interface\\Icons\\inv_misc_note_03")
-HelpOpenTicketButton:SetNormalTexture("Interface\\Icons\\inv_misc_note_03")
-HelpOpenTicketButton:GetNormalTexture():SetTexCoord(0.1, 0.9, 0.1, 0.9)
-HelpOpenTicketButton:GetPushedTexture():SetTexCoord(0.1, 0.9, 0.1, 0.9)
-HelpOpenTicketButton:SetSize(16, 16)
+if T.classic then
+	HelpOpenTicketButton:SetParent(Minimap)
+	HelpOpenTicketButton:CreateBackdrop("ClassColor")
+	HelpOpenTicketButton:SetFrameLevel(4)
+	HelpOpenTicketButton:ClearAllPoints()
+	HelpOpenTicketButton:SetPoint("BOTTOM", Minimap, "BOTTOM", 0, 2)
+	HelpOpenTicketButton:SetHighlightTexture(nil)
+	HelpOpenTicketButton:SetPushedTexture("Interface\\Icons\\inv_misc_note_03")
+	HelpOpenTicketButton:SetNormalTexture("Interface\\Icons\\inv_misc_note_03")
+	HelpOpenTicketButton:GetNormalTexture():SetTexCoord(0.1, 0.9, 0.1, 0.9)
+	HelpOpenTicketButton:GetPushedTexture():SetTexCoord(0.1, 0.9, 0.1, 0.9)
+	HelpOpenTicketButton:SetSize(16, 16)
+end
 
 -- GhostFrame
 if not T.classic then
@@ -154,7 +163,7 @@ if not T.classic then
 	GhostFrame:ClearAllPoints()
 	GhostFrame:SetPoint(unpack(C.position.ghost))
 	GhostFrameContentsFrameIcon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-	GhostFrameContentsFrameIcon:SetSize(34, 34)
+	GhostFrameContentsFrameIcon:SetSize(32, 32)
 	GhostFrameContentsFrame:SetFrameLevel(GhostFrameContentsFrame:GetFrameLevel() + 2)
 	GhostFrameContentsFrame:CreateBackdrop("Overlay")
 	GhostFrameContentsFrame.backdrop:SetPoint("TOPLEFT", GhostFrameContentsFrameIcon, -2, 2)
@@ -163,7 +172,7 @@ end
 
 -- Enable mouse scrolling
 Minimap:EnableMouseWheel(true)
-Minimap:SetScript("OnMouseWheel", function(self, d)
+Minimap:SetScript("OnMouseWheel", function(_, d)
 	if d > 0 then
 		_G.MinimapZoomIn:Click()
 	elseif d < 0 then
@@ -174,9 +183,15 @@ end)
 -- Hide Game Time
 MinimapAnchor:RegisterEvent("PLAYER_LOGIN")
 MinimapAnchor:RegisterEvent("ADDON_LOADED")
-MinimapAnchor:SetScript("OnEvent", function(self, event, addon)
+MinimapAnchor:SetScript("OnEvent", function(_, _, addon)
 	if addon == "Blizzard_TimeManager" then
 		TimeManagerClockButton:Kill()
+	elseif addon == "Blizzard_HybridMinimap" then
+		HybridMinimap:SetFrameStrata("BACKGROUND")
+		HybridMinimap:SetFrameLevel(100)
+		HybridMinimap.MapCanvas:SetUseMaskTexture(false)
+		HybridMinimap.CircleMask:SetTexture("Interface\\BUTTONS\\WHITE8X8")
+		HybridMinimap.MapCanvas:SetUseMaskTexture(true)
 	end
 end)
 
@@ -185,6 +200,7 @@ end)
 ----------------------------------------------------------------------------------------
 local menuFrame = CreateFrame("Frame", "MinimapRightClickMenu", UIParent, "UIDropDownMenuTemplate")
 local guildText = IsInGuild() and ACHIEVEMENTS_GUILD_TAB or LOOKINGFORGUILD
+local journalText = T.client == "ruRU" and ENCOUNTER_JOURNAL or ADVENTURE_JOURNAL
 local micromenu = {
 	{text = CHARACTER_BUTTON, notCheckable = 1, func = function()
 		ToggleCharacter("PaperDollFrame")
@@ -199,17 +215,17 @@ local micromenu = {
 		if not PlayerTalentFrame then
 			TalentFrame_LoadUI()
 		end
-		if T.level >= SHOW_SPEC_LEVEL then
+		if T.level >= 10 then
 			if not T.classic then
 				ShowUIPanel(PlayerTalentFrame)
 			else
 				ToggleTalentFrame()
 			end
 		else
-			if C.error.white == false then
-				UIErrorsFrame:AddMessage(format(FEATURE_BECOMES_AVAILABLE_AT_LEVEL, SHOW_SPEC_LEVEL), 1, 0.1, 0.1)
+			if C.general.error_filter ~= "WHITELIST" then
+				UIErrorsFrame:AddMessage(format(FEATURE_BECOMES_AVAILABLE_AT_LEVEL, 10), 1, 0.1, 0.1)
 			else
-				print("|cffffff00"..format(FEATURE_BECOMES_AVAILABLE_AT_LEVEL, SHOW_SPEC_LEVEL).."|r")
+				print("|cffffff00"..format(FEATURE_BECOMES_AVAILABLE_AT_LEVEL, 10).."|r")
 			end
 		end
 	end},
@@ -233,32 +249,32 @@ local micromenu = {
 		ToggleChannelFrame()
 	end},
 	{text = PLAYER_V_PLAYER, notCheckable = 1, func = function()
-		if T.level >= SHOW_PVP_LEVEL then
+		if T.level >= 10 then
 			TogglePVPUI()
 		else
-			if C.error.white == false then
-				UIErrorsFrame:AddMessage(format(FEATURE_BECOMES_AVAILABLE_AT_LEVEL, SHOW_PVP_LEVEL), 1, 0.1, 0.1)
+			if C.general.error_filter ~= "WHITELIST" then
+				UIErrorsFrame:AddMessage(format(FEATURE_BECOMES_AVAILABLE_AT_LEVEL, 10), 1, 0.1, 0.1)
 			else
-				print("|cffffff00"..format(FEATURE_BECOMES_AVAILABLE_AT_LEVEL, SHOW_PVP_LEVEL).."|r")
+				print("|cffffff00"..format(FEATURE_BECOMES_AVAILABLE_AT_LEVEL, 10).."|r")
 			end
 		end
 	end},
-	{text = DUNGEONS_BUTTON, notCheckable = 1, func = function()
-		if T.level >= SHOW_LFD_LEVEL then
+	{text = GROUP_FINDER, notCheckable = 1, func = function()
+		if T.level >= 10 then
 			PVEFrame_ToggleFrame("GroupFinderFrame", nil)
 		else
-			if C.error.white == false then
-				UIErrorsFrame:AddMessage(format(FEATURE_BECOMES_AVAILABLE_AT_LEVEL, SHOW_LFD_LEVEL), 1, 0.1, 0.1)
+			if C.general.error_filter ~= "WHITELIST" then
+				UIErrorsFrame:AddMessage(format(FEATURE_BECOMES_AVAILABLE_AT_LEVEL, 10), 1, 0.1, 0.1)
 			else
-				print("|cffffff00"..format(FEATURE_BECOMES_AVAILABLE_AT_LEVEL, SHOW_LFD_LEVEL).."|r")
+				print("|cffffff00"..format(FEATURE_BECOMES_AVAILABLE_AT_LEVEL, 10).."|r")
 			end
 		end
 	end},
-	{text = ADVENTURE_JOURNAL, notCheckable = 1, func = function()
+	{text = journalText, notCheckable = 1, func = function()
 		if C_AdventureJournal.CanBeShown() then
 			ToggleEncounterJournal()
 		else
-			if C.error.white == false then
+			if C.general.error_filter ~= "WHITELIST" then
 				UIErrorsFrame:AddMessage(FEATURE_NOT_YET_AVAILABLE, 1, 0.1, 0.1)
 			else
 				print("|cffffff00"..FEATURE_NOT_YET_AVAILABLE.."|r")
@@ -298,10 +314,36 @@ if not T.classic and not IsTrialAccount() and not C_StorePublic.IsDisabledByPare
 	tinsert(micromenu, {text = BLIZZARD_STORE, notCheckable = 1, func = function() StoreMicroButton:Click() end})
 end
 
-if T.level > 99 then
-	tinsert(micromenu, {text = ORDER_HALL_LANDING_PAGE_TITLE, notCheckable = 1, func = function() GarrisonLandingPage_Toggle() end})
-elseif T.level > 89 then
-	tinsert(micromenu, {text = GARRISON_LANDING_PAGE_TITLE, notCheckable = 1, func = function() GarrisonLandingPage_Toggle() end})
+if not T.classic and T.level == MAX_PLAYER_LEVEL then
+	tinsert(micromenu, {text = RATED_PVP_WEEKLY_VAULT, notCheckable = 1, func = function()
+		if not WeeklyRewardsFrame then
+			WeeklyRewards_LoadUI()
+		end
+		ToggleFrame(WeeklyRewardsFrame)
+	end})
+end
+
+if not T.classic then
+	local frame = CreateFrame("Frame")
+	frame:RegisterEvent("GARRISON_SHOW_LANDING_PAGE")
+	frame:SetScript("OnEvent", function()
+		local textTitle
+		local garrisonType = C_Garrison.GetLandingPageGarrisonType()
+		if garrisonType == Enum.GarrisonType.Type_6_0 then
+			textTitle = GARRISON_LANDING_PAGE_TITLE
+		elseif garrisonType == Enum.GarrisonType.Type_7_0 then
+			textTitle = ORDER_HALL_LANDING_PAGE_TITLE
+		elseif garrisonType == Enum.GarrisonType.Type_8_0 then
+			textTitle = GARRISON_TYPE_8_0_LANDING_PAGE_TITLE
+		elseif garrisonType == Enum.GarrisonType.Type_9_0 then
+			textTitle = GARRISON_TYPE_9_0_LANDING_PAGE_TITLE
+		end
+
+		if textTitle then
+			tinsert(micromenu, {text = textTitle, notCheckable = 1, func = function() GarrisonLandingPage_Toggle() end})
+		end
+		frame:UnregisterAllEvents()
+	end)
 end
 
 Minimap:SetScript("OnMouseUp", function(self, button)
@@ -355,7 +397,7 @@ if not T.classic then
 	if C.minimap.tracking_icon then
 		MiniMapTrackingBackground:Hide()
 		MiniMapTracking:ClearAllPoints()
-		MiniMapTracking:SetPoint("BOTTOMLEFT", MinimapAnchor, "BOTTOMLEFT", 0, -5)
+		MiniMapTracking:SetPoint("BOTTOMLEFT", MinimapAnchor, "BOTTOMLEFT", 0, -4)
 		MiniMapTrackingButton:SetHighlightTexture(nil)
 		MiniMapTrackingButtonBorder:Hide()
 		MiniMapTrackingIcon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
