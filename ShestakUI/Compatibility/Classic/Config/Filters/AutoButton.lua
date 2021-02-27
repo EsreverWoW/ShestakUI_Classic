@@ -8,6 +8,3 @@ if not T.classic or C.misc.quest_auto_button ~= true then return end
 ----------------------------------------------------------------------------------------
 T.ABItems = {
 }
-
-T.ABEquipedItems = {
-}

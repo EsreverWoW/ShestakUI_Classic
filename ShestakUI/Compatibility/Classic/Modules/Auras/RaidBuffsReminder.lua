@@ -36,9 +36,9 @@ local function CheckElixir()
 	FlaskFrame.t:SetTexture("")
 
 	if requireFlask then
-		if flaskBuffs and flaskBuffs[1] then
-			for i, flaskBuffs in pairs(flaskBuffs) do
-				local name, _, icon = GetSpellInfo(flaskBuffs)
+		if #flaskBuffs > 0 then
+			for i = 1, #flaskBuffs do
+				local name, icon = unpack(flaskBuffs[i])
 				if i == 1 then
 					FlaskFrame.t:SetTexture(icon)
 				end
@@ -64,16 +64,14 @@ local function CheckElixir()
 	end
 
 	if otherBuffsRequired > 0 then
-		if otherBuffs then
-			for k, _ in pairs(otherBuffs) do
-				for _, v in pairs(otherBuffs[k]) do
-					local name = GetSpellInfo(v)
-					if T.CheckPlayerBuff(name) then
-						otherBuffsCount = otherBuffsCount + 1
-						if otherBuffsCount >= otherBuffsRequired then
-							meetsRequirements = true
-							break
-						end
+		if #otherBuffs > 0 then
+			for i = 1, #otherBuffs do
+				local name = unpack(otherBuffs[i])
+				if T.CheckPlayerBuff(name) then
+					otherBuffsCount = otherBuffsCount + 1
+					if otherBuffsCount >= otherBuffsRequired then
+						meetsRequirements = true
+						break
 					end
 				end
 			end
@@ -94,9 +92,9 @@ local function CheckElixir()
 end
 
 local function CheckBuff(list, frame, n)
-	if list and list[1] then
-		for i, list in pairs(list) do
-			local name, _, icon = GetSpellInfo(list)
+	if list and #list > 0 then
+		for i = 1, #list do
+			local name, icon = unpack(list[i])
 			if i == 1 then
 				frame.t:SetTexture(icon)
 			end
@@ -113,7 +111,7 @@ local function CheckBuff(list, frame, n)
 end
 
 -- Main Script
-local function OnAuraChange(self, event, unit)
+local function OnAuraChange(_, event, unit)
 	if event == "UNIT_AURA" and unit ~= "player" then return end
 
 	-- If We're a caster we may want to see different buffs
@@ -137,7 +135,7 @@ local function OnAuraChange(self, event, unit)
 	CheckBuff(spell6Buffs, Spell6Frame, "spell6")
 	CheckBuff(spell7Buffs, Spell7Frame, "spell7")
 
-	if customBuffs and customBuffs[1] then
+	if customBuffs and #customBuffs > 0 then
 		CheckBuff(customBuffs, CustomFrame, "custom")
 	else
 		CustomFrame:Hide()

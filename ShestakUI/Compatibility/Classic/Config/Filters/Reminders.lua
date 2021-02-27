@@ -6,140 +6,150 @@ if not T.classic then return end
 --	Example: Well Fed -> http://www.wowhead.com/spell=104280
 --	Take the number ID at the end of the URL, and add it to the list
 ----------------------------------------------------------------------------------------
+local function SpellName(id)
+	local name, _, icon = GetSpellInfo(id)
+	if name then
+		return {name, icon}
+	else
+		print("|cffff0000WARNING: spell ID ["..tostring(id).."] no longer exists! Report this to EsreverWoW.|r")
+		return {"Empty", ""}
+	end
+end
+
 if C.reminder.raid_buffs_enable == true or C.announcements.flask_food == true then
 	T.ReminderBuffs = {
 		Flask = {
-			17628,	-- Flask of Supreme Power (+150 Spell Damage)
-			17627,	-- Flask of Distilled Wisdom (+2000 Mana)
-			17629,	-- Flask of Chromatic Resistance (+25 Magic Resistance)
-			17626,	-- Flask of the Titans (+400 Health)
+			SpellName(17628),	-- Flask of Supreme Power (+150 Spell Damage)
+			SpellName(17627),	-- Flask of Distilled Wisdom (+2000 Mana)
+			SpellName(17629),	-- Flask of Chromatic Resistance (+25 Magic Resistance)
+			SpellName(17626),	-- Flask of the Titans (+400 Health)
 		},
 		Other = {
 			Agility = {
-				11334,	-- Elixir of Greater Agility (+25 Agility)
-				17538,	-- Elixir of the Mongoose (+25 Agility / +2% Crit Chance)
+				SpellName(11334),	-- Elixir of Greater Agility (+25 Agility)
+				SpellName(17538),	-- Elixir of the Mongoose (+25 Agility / +2% Crit Chance)
 			},
 			Alcohol = {
-				25804,	-- Rumsey Rum Black Label (+15 Stamina)
-				22789,	-- Gordok Green Grog (+10 Stamina)
-				22790,	-- Kreeg's Stout Beatdown (+25 Spirit / -5 Intellect)
+				SpellName(25804),	-- Rumsey Rum Black Label (+15 Stamina)
+				SpellName(22789),	-- Gordok Green Grog (+10 Stamina)
+				SpellName(22790),	-- Kreeg's Stout Beatdown (+25 Spirit / -5 Intellect)
 			},
 			AP = {
-				16329,	-- Juju Might (+40 Attack Power)
-				17038,	-- Winterfall Firewater (+35 Attack Power)
+				SpellName(16329),	-- Juju Might (+40 Attack Power)
+				SpellName(17038),	-- Winterfall Firewater (+35 Attack Power)
 			},
 			BlastedLands = {
-				10667,	-- R.O.I.D.S. (+25 Strength)
-				10668,	-- Lung Juice Cocktail (+25 Stamina)
-				10669,	-- Ground Scorpok Assay (+25 Agility)
-				10692,	-- Cerebral Cortex Compound (+25 Intellect)
-				10693,	-- Gizzard Gum (+25 Spirit)
+				SpellName(10667),	-- R.O.I.D.S. (+25 Strength)
+				SpellName(10668),	-- Lung Juice Cocktail (+25 Stamina)
+				SpellName(10669),	-- Ground Scorpok Assay (+25 Agility)
+				SpellName(10692),	-- Cerebral Cortex Compound (+25 Intellect)
+				SpellName(10693),	-- Gizzard Gum (+25 Spirit)
 			},
 			SpellDamage = {
-				17539,	-- Greater Arcane Elixir (+35 Spell Damage)
-				11474,	-- Elixir of Shadow Power (+40 Shadow Spell Damage)
-				26276,	-- Elixir of Greater Firepower (+40 Fire Spell Damage)
-				21920,	-- Elixir of Frost Power (+15 Frost Spell Damage)
+				SpellName(17539),	-- Greater Arcane Elixir (+35 Spell Damage)
+				SpellName(11474),	-- Elixir of Shadow Power (+40 Shadow Spell Damage)
+				SpellName(26276),	-- Elixir of Greater Firepower (+40 Fire Spell Damage)
+				SpellName(21920),	-- Elixir of Frost Power (+15 Frost Spell Damage)
 			},
 			Strength = {
-				16323,	-- Juju Power (+30 Strength)
-				11405,	-- Elixir of Giants (+25 Strength)
+				SpellName(16323),	-- Juju Power (+30 Strength)
+				SpellName(11405),	-- Elixir of Giants (+25 Strength)
 			},
 			Tanking = {
 				-- Armor
-				11348,	-- Elixir of Superior Defense (+450 Armor)
-				11349,	-- Elixir of Greater Defense (+250 Armor)
+				SpellName(11348),	-- Elixir of Superior Defense (+450 Armor)
+				SpellName(11349),	-- Elixir of Greater Defense (+250 Armor)
 
 				-- Gift of Arthas
-				11371,	-- Gift of Arthas (+10 Shadow Resistance / Disease Proc)
+				SpellName(11371),	-- Gift of Arthas (+10 Shadow Resistance / Disease Proc)
 
 				-- Health
-				3593,	-- Elixir of Fortitude (+120 Health)
+				SpellName(3593),	-- Elixir of Fortitude (+120 Health)
 
 				-- Health Regeneration
-				-- 24361,	-- Major Troll's Blood Potion (+20 Hp5)
-				-- 3223,	-- Mighty Troll's Blood Potion (+12 Hp5)
+				-- SpellName(24361),	-- Major Troll's Blood Potion (+20 Hp5)
+				-- SpellName(3223),	-- Mighty Troll's Blood Potion (+12 Hp5)
 			},
 			Zanzas = {
-				24382,	-- Spirit of Zanza (+50 Spirit / +50 Stamina)
-				24383,	-- Swiftness of Zanza (+20% Run Speed)
-				24417,	-- Sheen of Zanza (+3% Spell Reflect Chance)
+				SpellName(24382),	-- Spirit of Zanza (+50 Spirit / +50 Stamina)
+				SpellName(24383),	-- Swiftness of Zanza (+20% Run Speed)
+				SpellName(24417),	-- Sheen of Zanza (+3% Spell Reflect Chance)
 			},
 			Resistance = {
-				16325,	-- Juju Chill
-				16326,	-- Juju Ember
+				SpellName(16325),	-- Juju Chill
+				SpellName(16326),	-- Juju Ember
 			},
 			Misc = {
 				-- Demonslaying
-				11406,	-- Elixir of Demonslaying (+265 Attack Power to Demons)
+				SpellName(11406),	-- Elixir of Demonslaying (+265 Attack Power to Demons)
 
 				-- Mana Regeneration
-				24363,	-- Mageblood Potion (+12 Mp5)
+				SpellName(24363),	-- Mageblood Potion (+12 Mp5)
 			},
 		},
 		Food = {
-			24799,	-- Well Fed (+20 Strength) [Smoked Desert Dumplings]
-			-- 18194,	-- Mana Regeneration (+8 Mp5) [Nightfin Soup]
-			15852,	-- Dragonbreath Chili (Special) [Dragonbreath Chili]
-			18125,	-- Blessed Sunfruit (+10 Strength) [Blessed Sunfruit]
-			18192,	-- Increased Agility (+10 Agility) [Grilled Squid]
-			18141,	-- Blessed Sunfruit Juice (+10 Spirit) [Blessed Sunfruit Juice]
-			22730,	-- Increased Intellect (+10 Intellect) [Runn Tum Tuber Surprise]
-			25661,	-- Increased Stamina (+25 Stamina) [Dirge's Kickin' Chimaerok Chops]
+			SpellName(24799),	-- Well Fed (+20 Strength) [Smoked Desert Dumplings]
+			-- SpellName(18194),	-- Mana Regeneration (+8 Mp5) [Nightfin Soup]
+			SpellName(15852),	-- Dragonbreath Chili (Special) [Dragonbreath Chili]
+			SpellName(18125),	-- Blessed Sunfruit (+10 Strength) [Blessed Sunfruit]
+			SpellName(18192),	-- Increased Agility (+10 Agility) [Grilled Squid]
+			SpellName(18141),	-- Blessed Sunfruit Juice (+10 Spirit) [Blessed Sunfruit Juice]
+			SpellName(22730),	-- Increased Intellect (+10 Intellect) [Runn Tum Tuber Surprise]
+			SpellName(25661),	-- Increased Stamina (+25 Stamina) [Dirge's Kickin' Chimaerok Chops]
 		},
 		Alliance = {
 			Mp5 = {
-				25894,	-- Greater Blessing of Wisdom
-				19742,	-- Blessing of Wisdom
+				SpellName(25894),	-- Greater Blessing of Wisdom
+				SpellName(19742),	-- Blessing of Wisdom
 			},
 			Physical = {
-				25782,	-- Greater Blessing of Might
-				19740,	-- Blessing of Might
+				SpellName(25782),	-- Greater Blessing of Might
+				SpellName(19740),	-- Blessing of Might
 			},
 			Threat = {
-				25895,	-- Greater Blessing of Salvation
-				1038,	-- Blessing of Salvation
+				SpellName(25895),	-- Greater Blessing of Salvation
+				SpellName(1038),	-- Blessing of Salvation
 			},
 		},
 		Horde = {
 			Mp5 = {
-				5677,	-- Mana Spring
+				SpellName(5677),	-- Mana Spring
 			},
 			Physical = {
-				8076,	-- Strength of Earth
-				8072,	-- Stoneskin
-				8836,	-- Grace of Air
+				SpellName(8076),	-- Strength of Earth
+				SpellName(8072),	-- Stoneskin
+				SpellName(8836),	-- Grace of Air
 			},
 			
 			Threat = {
-				25909	-- Tranquil Air
+				SpellName(25909)	-- Tranquil Air
 			},
 		},
 		AP = {
-			6673,	-- Battle Shout
+			SpellName(6673),	-- Battle Shout
 		},
 		Intellect = {
-			23028,	-- Arcane Brilliance
-			1459,	-- Arcane Intellect
+			SpellName(23028),	-- Arcane Brilliance
+			SpellName(1459),	-- Arcane Intellect
 		},
 		Kings = {
-			25898,	-- Greater Blessing of Kings
-			20217,	-- Blessing of Kings
+			SpellName(25898),	-- Greater Blessing of Kings
+			SpellName(20217),	-- Blessing of Kings
 		},
 		Mark = {
-			21849,	-- Gift of the Wild
-			1126,	-- Mark of the Wild
+			SpellName(21849),	-- Gift of the Wild
+			SpellName(1126),	-- Mark of the Wild
 		},
 		Spirit = {
-			27681,	-- Prayer of Spirit
-			14752,	-- Divine Spirit
+			SpellName(27681),	-- Prayer of Spirit
+			SpellName(14752),	-- Divine Spirit
 		},
 		Stamina = {
-			21562,	-- Prayer of Fortitude
-			1243,	-- Power Word: Fortitude
+			SpellName(21562),	-- Prayer of Fortitude
+			SpellName(1243),	-- Power Word: Fortitude
 		},
 		Custom = {
-			-- spellID,	-- Spell name
+			-- SpellName(spellID),	-- Spell name
 		},
 	}
 
@@ -206,8 +216,8 @@ if C.reminder.solo_buffs_enable == true then
 		ROGUE = {
 			[1] = {	-- Lethal Poisons group
 				["spells"] = {
-					2823,	-- Deadly Poison
-					8679,	-- Wound Poison
+					SpellName(2823),	-- Deadly Poison
+					SpellName(8679),	-- Wound Poison
 				},
 				["spec"] = 1,		-- Only Assassination have poisen now
 				["combat"] = true,
@@ -216,8 +226,8 @@ if C.reminder.solo_buffs_enable == true then
 			},
 			[2] = {	-- Non-Lethal Poisons group
 				["spells"] = {
-					3408,	-- Crippling Poison
-					108211,	-- Leeching Poison
+					SpellName(3408),	-- Crippling Poison
+					SpellName(108211),	-- Leeching Poison
 				},
 				["spec"] = 1,		-- Only Assassination have poisen now
 				["combat"] = true,
@@ -229,15 +239,15 @@ if C.reminder.solo_buffs_enable == true then
 		DRUID = {
 			[1] = {	-- Mark of the Wild group
 				["spells"] = {
-					1126,	-- Mark of the Wild
-					21849,	-- Gift of the Wild
+					SpellName(1126),	-- Mark of the Wild
+					SpellName(21849),	-- Gift of the Wild
 				},
 				["combat"] = true,
 				["instance"] = true,
 			},
 			[2] = {	-- Omen of Clarity group
 				["spells"] = {
-					16864,	-- Omen of Clarity
+					SpellName(16864),	-- Omen of Clarity
 				},
 				["combat"] = true,
 				["instance"] = true,
@@ -246,12 +256,12 @@ if C.reminder.solo_buffs_enable == true then
 		HUNTER = {
 			[1] = {	-- Aspects group
 				["spells"] = {
-					13165,	-- Aspect of the Hawk
-					13161,	-- Aspect of the Beast
-					5118,	-- Aspect of the Cheetah
-					13163,	-- Aspect of the Monkey
-					13159,	-- Aspect of the Pack
-					20043,	-- Aspect of the Wild
+					SpellName(13165),	-- Aspect of the Hawk
+					SpellName(13161),	-- Aspect of the Beast
+					SpellName(5118),	-- Aspect of the Cheetah
+					SpellName(13163),	-- Aspect of the Monkey
+					SpellName(13159),	-- Aspect of the Pack
+					SpellName(20043),	-- Aspect of the Wild
 				},
 				["combat"] = true,
 				["instance"] = true,
@@ -260,7 +270,7 @@ if C.reminder.solo_buffs_enable == true then
 			},
 			[2] = {	-- Trueshot group
 				["spells"] = {
-					19506,	-- Trueshot Aura
+					SpellName(19506),	-- Trueshot Aura
 				},
 				["combat"] = true,
 				["instance"] = true,
@@ -270,9 +280,9 @@ if C.reminder.solo_buffs_enable == true then
 		MAGE = {
 			[1] = {	-- Armors group
 				["spells"] = {
-					168,	-- Frost Armor
-					6117,	-- Mage Armor
-					7302,	-- Ice Armor
+					SpellName(168),	-- Frost Armor
+					SpellName(6117),	-- Mage Armor
+					SpellName(7302),	-- Ice Armor
 				},
 				["combat"] = true,
 				["instance"] = true,
@@ -280,8 +290,8 @@ if C.reminder.solo_buffs_enable == true then
 			},
 			[2] = {	-- Intellect group
 				["spells"] = {
-					1459,	-- Arcane Intellect
-					23028,	-- Arcane Brilliance
+					SpellName(1459),	-- Arcane Intellect
+					SpellName(23028),	-- Arcane Brilliance
 				},
 				["combat"] = true,
 				["instance"] = true,
@@ -290,7 +300,7 @@ if C.reminder.solo_buffs_enable == true then
 		PALADIN = {
 			[1] = {	-- Righteous Fury group
 				["spells"] = {
-					25780,	-- Righteous Fury
+					SpellName(25780),	-- Righteous Fury
 				},
 				["role"] = "Tank",
 				["instance"] = true,
@@ -301,13 +311,13 @@ if C.reminder.solo_buffs_enable == true then
 			},
 			[2] = {	-- Auras group
 				["spells"] = {
-					465,	-- Devotion Aura
-					7294,	-- Retribution Aura
-					20218,	-- Sanctity Aura
-					19746,	-- Concentration Aura
-					19891,	-- Fire Resistance Aura
-					19888,	-- Frost Resistance Aura
-					19876,	-- Shadow Resistance Aura
+					SpellName(465),	-- Devotion Aura
+					SpellName(7294),	-- Retribution Aura
+					SpellName(20218),	-- Sanctity Aura
+					SpellName(19746),	-- Concentration Aura
+					SpellName(19891),	-- Fire Resistance Aura
+					SpellName(19888),	-- Frost Resistance Aura
+					SpellName(19876),	-- Shadow Resistance Aura
 				},
 				["combat"] = true,
 				["instance"] = true,
@@ -316,12 +326,12 @@ if C.reminder.solo_buffs_enable == true then
 			--[[
 			[3] = {	-- Seals group
 				["spells"] = {
-					21084,	-- Seal of Righteousness
-					20375,	-- Seal of Command
-					20164,	-- Seal of Justice
-					20165,	-- Seal of Light
-					20166,	-- Seal of Wisdom
-					21082,	-- Seal of the Crusader
+					SpellName(21084),	-- Seal of Righteousness
+					SpellName(20375),	-- Seal of Command
+					SpellName(20164),	-- Seal of Justice
+					SpellName(20165),	-- Seal of Light
+					SpellName(20166),	-- Seal of Wisdom
+					SpellName(21082),	-- Seal of the Crusader
 				},
 				["combat"] = true,
 				["instance"] = true,
@@ -332,7 +342,7 @@ if C.reminder.solo_buffs_enable == true then
 		PRIEST = {
 			[1] = {	-- Inner Fire/Will group
 				["spells"] = {
-					588,	-- Inner Fire
+					SpellName(588),	-- Inner Fire
 				},
 				["combat"] = true,
 				["instance"] = true,
@@ -341,16 +351,16 @@ if C.reminder.solo_buffs_enable == true then
 			},
 			[2] = {	-- Stamina Group
 				["spells"] = {
-					1243,	-- Power Word: Fortitude
-					21562,	-- Prayer of Fortitude
+					SpellName(1243),	-- Power Word: Fortitude
+					SpellName(21562),	-- Prayer of Fortitude
 				},
 				["combat"] = true,
 				["instance"] = true,
 			},
 			[3] = {	-- Spirit
 				["spells"] = {
-					14752,	-- Divine Spirit
-					27681,	-- Prayer of Spirit
+					SpellName(14752),	-- Divine Spirit
+					SpellName(27681),	-- Prayer of Spirit
 				},
 				["combat"] = true,
 				["instance"] = true,
@@ -358,8 +368,8 @@ if C.reminder.solo_buffs_enable == true then
 			},
 			[4] = {	-- Shadow Resistance group
 				["spells"] = {
-					976,	-- Shadow Protection
-					27683,	-- Prayer of Shadow Protection
+					SpellName(976),	-- Shadow Protection
+					SpellName(27683),	-- Prayer of Shadow Protection
 				},
 				["combat"] = true,
 				["instance"] = true,
@@ -368,7 +378,7 @@ if C.reminder.solo_buffs_enable == true then
 			--[[
 			[5] = {	-- Shadowform group
 				["spells"] = {
-					15473,	-- Shadowform
+					SpellName(15473),	-- Shadowform
 				},
 				["combat"] = true,
 				["instance"] = true,
@@ -396,8 +406,8 @@ if C.reminder.solo_buffs_enable == true then
 		WARLOCK = {
 			[1] = {	-- Armors group
 				["spells"] = {
-					706,	-- Demon Armor
-					687,	-- Demon Skin
+					SpellName(706),	-- Demon Armor
+					SpellName(687),	-- Demon Skin
 				},
 				["combat"] = true,
 				["instance"] = true,
@@ -407,7 +417,7 @@ if C.reminder.solo_buffs_enable == true then
 		WARRIOR = {
 			[1] = {	-- Battle Shout group
 				["spells"] = {
-					6673,	-- Battle Shout
+					SpellName(6673),	-- Battle Shout
 				},
 				["combat"] = true,
 				["instance"] = true,
@@ -416,9 +426,9 @@ if C.reminder.solo_buffs_enable == true then
 			--[[
 			[2] = {	-- Stance group
 				["spells"] = {
-					2457,	-- Battle Stance
-					2458,	-- Berserker Stance
-					71,		-- Defensive Stance
+					SpellName(2457),	-- Battle Stance
+					SpellName(2458),	-- Berserker Stance
+					SpellName(71),		-- Defensive Stance
 				},
 				["combat"] = true,
 				["instance"] = true,
