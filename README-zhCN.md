@@ -14,9 +14,6 @@ ShestakUI是一款模块化、轻量级、一体式的魔兽世界界面UI插件
 <img src="https://i.imgur.com/uvnad8c.jpg" align="right" width="48.5%">
 <img src="https://i.imgur.com/qD4KSGP.jpg" width="48.5%">
 
-## Third-Party AddOn Support:
- - [RealMobHealth](https://www.wowinterface.com/downloads/info24924-RealMobHealth.html)
-
 ## 命令:
 **主要命令**
 ```
