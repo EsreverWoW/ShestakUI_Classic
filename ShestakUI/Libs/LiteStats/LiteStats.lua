@@ -913,6 +913,7 @@ if friends.enabled then
 								if T.classic then
 									_, characterName, client, realmName, _, _, _, class, _, areaName, level = BNGetGameAccountInfo(toonID)
 								else
+									presenceName = accountInfo.accountName
 									characterName = accountInfo.gameAccountInfo.characterName
 									realmName = accountInfo.gameAccountInfo.realmName
 									class = accountInfo.gameAccountInfo.className
@@ -929,10 +930,10 @@ if friends.enabled then
 									classc = {r = 1, g = 1, b = 1}
 								end
 								if UnitInParty(characterName) or UnitInRaid(characterName) then grouped = " |cffaaaaaa*|r" else grouped = "" end
-								if accountInfo.gameAccountInfo.factionName ~= UnitFactionGroup("player") then
+								if not T.classic and accountInfo.gameAccountInfo.factionName ~= UnitFactionGroup("player") then
 									grouped = " |cffff0000*|r"
 								end
-								GameTooltip:AddDoubleLine(format("%s (|cff%02x%02x%02x%d|r |cff%02x%02x%02x%s|r%s) |cff%02x%02x%02x%s|r", client, levelc.r * 255, levelc.g * 255, levelc.b * 255, level, classc.r * 255, classc.g * 255, classc.b * 255, characterName, grouped, 255, 0, 0, status), accountInfo.accountName, 238, 238, 238, 238, 238, 238)
+								GameTooltip:AddDoubleLine(format("%s (|cff%02x%02x%02x%d|r |cff%02x%02x%02x%s|r%s) |cff%02x%02x%02x%s|r", client, levelc.r * 255, levelc.g * 255, levelc.b * 255, level, classc.r * 255, classc.g * 255, classc.b * 255, characterName, grouped, 255, 0, 0, status), presenceName, 238, 238, 238, 238, 238, 238)
 								if self.altdown then
 									if GetRealZoneText() == areaName then zone_r, zone_g, zone_b = 0.3, 1.0, 0.3 else zone_r, zone_g, zone_b = 0.65, 0.65, 0.65 end
 									if GetRealmName() == realmName then realm_r, realm_g, realm_b = 0.3, 1.0, 0.3 else realm_r, realm_g, realm_b = 0.65, 0.65, 0.65 end
@@ -943,10 +944,10 @@ if friends.enabled then
 								if T.classic then
 									gameText, _, _, _, _, _, isGameAFK, isGameBusy = select(12, BNGetGameAccountInfo(toonID))
 								else
+									presenceName = accountInfo.accountName
 									gameText = accountInfo.gameAccountInfo.richPresence
 									isGameAFK = accountInfo.gameAccountInfo.isGameAFK
 									isGameBusy = accountInfo.gameAccountInfo.isGameBusy
-									presenceName = accountInfo.accountName
 								end
 								if client == "App" then
 									client = gameText
