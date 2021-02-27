@@ -203,7 +203,7 @@ local function Shared(self, unit)
 	end
 
 	-- Phase icons
-	if C.raidframe.icons_phase == true and not (suffix == "target") then
+	if not T.classic and C.raidframe.icons_phase == true and not (suffix == "target") then
 		self.PhaseIndicator = self.Health:CreateTexture(nil, "OVERLAY")
 		self.PhaseIndicator:SetSize(18, 18)
 		self.PhaseIndicator:SetPoint("BOTTOMLEFT", self.Health, -5, -10)
