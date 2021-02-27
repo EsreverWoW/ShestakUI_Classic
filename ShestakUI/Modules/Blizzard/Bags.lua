@@ -221,11 +221,11 @@ function Stuffing:SlotUpdate(b)
 			else
 				if wandSpeed < 1.5 then wandSpeed = 1.5 end
 				if duration and duration > wandSpeed then
-					return CooldownFrame_Set(b.cooldown, start, duration, enable)
+					CooldownFrame_Set(b.cooldown, start, duration, enable)
 				end
 			end
 		else
-			return CooldownFrame_Set(b.cooldown, start, duration, enable)
+			CooldownFrame_Set(b.cooldown, start, duration, enable)
 		end
 	end
 
