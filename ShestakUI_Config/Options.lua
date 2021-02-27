@@ -248,7 +248,7 @@ SpellList.makeSpellsList = function(_, db, double)
 			if not isFilger or isFilger and spell[2] == T.class then
 				local sp = (double or ShestakUIOptionsPanelfilger:IsShown()) and spell[1] or spell
 				local name, _, icon = GetSpellInfo(sp)
-				local bf = _G["SpellList"..i.."_cbs"] or CreateFrame("Button", "SpellList"..i.."_cbs", scroll, "BackdropTemplate")
+				local bf = _G["SpellList"..i.."_cbs"] or CreateFrame("Button", "SpellList"..i.."_cbs", scroll, not IsClassicBuild() and "BackdropTemplate" or nil)
 
 				if i == 1 then
 					bf:SetPoint("TOPLEFT", scroll, "TOPLEFT", 10, -5)
@@ -680,6 +680,7 @@ do
 
 	if IsClassicBuild() then
 		HideOptions(classic)
+		move_blizzard:SetPoint("TOPLEFT", vehicle_mouseover, "BOTTOMLEFT", 16, 0)
 	end
 end
 
@@ -1099,7 +1100,7 @@ do
 	show_focus:SetPoint("TOPLEFT", show_pet, "BOTTOMLEFT", 0, 0)
 
 	local show_target_target = ns.CreateCheckBox(parent, "show_target_target", L_GUI_UF_SHOW_TOT)
-	show_target_target:SetPoint("LEFT", IsClassicBuild() and show_pet or show_focus, "RIGHT", 248, 0)
+	show_target_target:SetPoint("LEFT", show_focus, "RIGHT", 248, 0)
 
 	local show_boss = ns.CreateCheckBox(parent, "show_boss", L_GUI_UF_SHOW_BOSS)
 	show_boss:SetPoint("TOPLEFT", show_focus, "BOTTOMLEFT", 0, 0)
@@ -1245,6 +1246,7 @@ do
 
 	if IsClassicBuild() then
 		HideOptions(classic)
+		show_target_target:SetPoint("LEFT", show_pet, "RIGHT", 248, 0)
 	else
 		HideOptions(retail)
 	end
@@ -1284,7 +1286,7 @@ do
 	rune:SetPoint("TOPLEFT", shard, "BOTTOMLEFT", 0, 0)
 
 	local totem = ns.CreateCheckBox(parent, "totem", L_GUI_UF_PLUGINS_TOTEM_BAR)
-	totem:SetPoint("TOPLEFT", rune, "BOTTOMLEFT", IsClassicBuild() and -20 or 0, 0)
+	totem:SetPoint("TOPLEFT", rune, "BOTTOMLEFT", 0, 0)
 
 	local classic = {
 		arcane,
@@ -1297,6 +1299,7 @@ do
 
 	if IsClassicBuild() then
 		HideOptions(classic)
+		totem:SetPoint("TOPLEFT", rune, "BOTTOMLEFT", -20, 0)
 	end
 end
 
@@ -1369,7 +1372,7 @@ do
 	icons_raid_mark:SetPoint("LEFT", icons_role, "RIGHT", 248, 0)
 
 	local icons_ready_check = ns.CreateCheckBox(parent, "icons_ready_check", L_GUI_UF_ICONS_READY_CHECK)
-	icons_ready_check:SetPoint("TOPLEFT", icons_role, "BOTTOMLEFT", IsClassicBuild() and -8 or 0, 0)
+	icons_ready_check:SetPoint("TOPLEFT", icons_role, "BOTTOMLEFT", 0, 0)
 
 	local icons_leader = ns.CreateCheckBox(parent, "icons_leader", L_GUI_UF_ICONS_LEADER)
 	icons_leader:SetPoint("LEFT", icons_ready_check, "RIGHT", 248, 0)
@@ -1475,12 +1478,18 @@ do
 	local classic = {
 		by_role,
 		icons_role,
-		icons_sumon
+		icons_phase
 	}
 
 	if IsClassicBuild() then
 		HideOptions(classic)
-		icons_raid_mark:SetPoint("TOPLEFT", icons_ready_check, "BOTTOMLEFT", 0, 0)
+		icons_raid_mark:SetPoint("TOPLEFT", icons_role, "BOTTOMLEFT", 0, -8)
+		icons_ready_check:ClearAllPoints()
+		icons_ready_check:SetPoint("LEFT", icons_raid_mark, "RIGHT", 248, 0)
+		icons_leader:SetPoint("TOPLEFT", icons_raid_mark, "BOTTOMLEFT", 0, 0)
+		icons_sumon:ClearAllPoints()
+		icons_sumon:SetPoint("LEFT", icons_leader, "RIGHT", 248, 0)
+		icons_phase:SetPoint("TOPLEFT", icons_leader, "BOTTOMLEFT", 0, 0)
 	end
 end
 
@@ -1780,7 +1789,7 @@ do
 	item_count:SetPoint("TOPLEFT", spell_id, "BOTTOMLEFT", 0, 0)
 
 	local vendor_price = ns.CreateCheckBox(parent, "vendor_price")
-	vendor_price:SetPoint("TOPLEFT", item_count, "BOTTOMLEFT", 0, -8)
+	vendor_price:SetPoint("TOPLEFT", item_count, "BOTTOMLEFT", 0, 0)
 
 	local achievements = ns.CreateCheckBox(parent, "achievements")
 	achievements:SetPoint("TOPLEFT", vendor_price, "BOTTOMLEFT", 0, 0)
@@ -1793,8 +1802,10 @@ do
 
 	local classic = {
 		talents,
+		show_shift,
+		unit_role,
 		achievements,
-		unit_role
+		mount
 	}
 
 	local retail = {
@@ -1803,6 +1814,8 @@ do
 
 	if IsClassicBuild() then
 		HideOptions(classic)
+		average_lvl:SetPoint("TOPLEFT", show_shift, "BOTTOMLEFT", 0, 0)
+		raid_icon:SetPoint("TOPLEFT", average_lvl, "BOTTOMLEFT", 0, -24)
 	else
 		HideOptions(retail)
 	end
