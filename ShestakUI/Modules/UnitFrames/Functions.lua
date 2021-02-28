@@ -674,21 +674,7 @@ T.CreateAuraTimer = function(self, elapsed)
 	end
 end
 
-local LibClassicDurations = T.classic and LibStub("LibClassicDurations")
-
-T.PostUpdateIcon = function(_, unit, button, index, _, duration, expiration, debuffType, isStealable)
-	local name, durationTime, expirationTime, caster, spellID
-
-	if T.classic and LibClassicDurations and button.filter == "HELPFUL" then
-		name, _, _, debuffType, durationTime, expirationTime, caster, isStealable, _, spellID = LibClassicDurations:UnitAura(unit, index, button.filter)
-	end
-
-	if T.classic and LibClassicDurations and durationTime == 0 and expirationTime == 0 then
-		durationTime, expirationTime = LibClassicDurations:GetAuraDurationByUnit(unit, spellID, caster, name)
-
-		button.isLibClassicDuration = true
-	end
-
+T.PostUpdateIcon = function(_, unit, button, _, _, duration, expiration, debuffType, isStealable)
 	local playerUnits = {
 		player = true,
 		pet = true,
@@ -719,26 +705,14 @@ T.PostUpdateIcon = function(_, unit, button, index, _, duration, expiration, deb
 		button.icon:SetDesaturated(false)
 	end
 
-	if T.classic and button.remaining then
-		if durationTime and durationTime > 0 and C.aura.show_timer == true then
-			button.remaining:Show()
-			button.timeLeft = expirationTime
-			button:SetScript("OnUpdate", CreateAuraTimer)
-		else
-			button.remaining:Hide()
-			button.timeLeft = math.huge
-			button:SetScript("OnUpdate", nil)
-		end
+	if duration and duration > 0 and C.aura.show_timer == true then
+		button.remaining:Show()
+		button.timeLeft = expiration
+		button:SetScript("OnUpdate", T.CreateAuraTimer)
 	else
-		if duration and duration > 0 and C.aura.show_timer == true then
-			button.remaining:Show()
-			button.timeLeft = expiration
-			button:SetScript("OnUpdate", T.CreateAuraTimer)
-		else
-			button.remaining:Hide()
-			button.timeLeft = math.huge
-			button:SetScript("OnUpdate", nil)
-		end
+		button.remaining:Hide()
+		button.timeLeft = math.huge
+		button:SetScript("OnUpdate", nil)
 	end
 
 	button.first = true

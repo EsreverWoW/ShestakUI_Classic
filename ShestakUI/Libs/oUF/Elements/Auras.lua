@@ -119,6 +119,12 @@ local function updateIcon(element, unit, index, offset, filter, isDebuff, visibl
 			element.createdIcons = element.createdIcons + 1
 		end
 
+		if(LibClassicDurations and duration == 0 and expiration == 0) then
+			duration, expiration = LibClassicDurations:GetAuraDurationByUnit(unit, spellID, caster, name)
+
+			button.isLibClassicDuration = true
+		end
+
 		button.caster = caster
 		button.filter = filter
 		button.isDebuff = isDebuff
