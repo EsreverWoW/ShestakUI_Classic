@@ -1315,11 +1315,11 @@ function Stuffing:ADDON_LOADED(addon)
 	self:RegisterEvent("ITEM_LOCK_CHANGED")
 	self:RegisterEvent("BANKFRAME_OPENED")
 	self:RegisterEvent("BANKFRAME_CLOSED")
+	self:RegisterEvent("PLAYERBANKSLOTS_CHANGED")
+	self:RegisterEvent("PLAYERBANKBAGSLOTS_CHANGED")
 	if not T.classic then
 		self:RegisterEvent("GUILDBANKFRAME_OPENED")
 		self:RegisterEvent("GUILDBANKFRAME_CLOSED")
-		self:RegisterEvent("PLAYERBANKSLOTS_CHANGED")
-		self:RegisterEvent("PLAYERBANKBAGSLOTS_CHANGED")
 		self:RegisterEvent("PLAYERREAGENTBANKSLOTS_CHANGED")
 		self:RegisterEvent("SCRAPPING_MACHINE_SHOW")
 	end
