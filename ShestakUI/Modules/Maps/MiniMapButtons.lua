@@ -70,6 +70,7 @@ end)
 ----------------------------------------------------------------------------------------
 local show = false
 SlashCmdList.FARMMODE = function()
+	if InCombatLockdown() then return end
 	if show == false then
 		MinimapAnchor:SetSize(C.minimap.size * 1.65, C.minimap.size * 1.65)
 		Minimap:SetSize(MinimapAnchor:GetWidth(), MinimapAnchor:GetWidth())

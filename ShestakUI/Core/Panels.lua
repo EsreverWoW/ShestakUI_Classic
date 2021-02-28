@@ -98,7 +98,7 @@ StanceAnchor:RegisterEvent("UPDATE_SHAPESHIFT_FORMS")
 StanceAnchor:RegisterEvent("UPDATE_SHAPESHIFT_FORM")
 StanceAnchor:SetScript("OnEvent", function()
 	local forms = GetNumShapeshiftForms()
-	if forms > 0 then
+	if forms > 0 and not InCombatLockdown() then
 		if C.actionbar.stancebar_horizontal == true then
 			StanceAnchor:SetWidth((C.actionbar.button_size * forms) + (C.actionbar.button_space * (forms - 1)))
 		else
