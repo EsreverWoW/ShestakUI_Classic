@@ -105,7 +105,9 @@ StanceAnchor:SetScript("OnEvent", function()
 			StanceAnchor:SetHeight((C.actionbar.button_size * forms) + (C.actionbar.button_space * (forms - 1)))
 		end
 	end
-	RegisterStateDriver(StanceAnchor, "visibility", GetNumShapeshiftForms() == 0 and "hide" or "show")
+	if not T.classic then
+		RegisterStateDriver(StanceAnchor, "visibility", GetNumShapeshiftForms() == 0 and "hide" or "show")
+	end
 end)
 
 ----------------------------------------------------------------------------------------
