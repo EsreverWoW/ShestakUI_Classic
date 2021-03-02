@@ -9,11 +9,16 @@ local hasShown = false
 local PvPMessage = CreateFrame("Frame")
 PvPMessage:RegisterEvent("UPDATE_BATTLEFIELD_STATUS")
 PvPMessage:SetScript("OnEvent", function()
-	if not hasShown and StaticPopup_Visible("CONFIRM_BATTLEFIELD_ENTRY") then
-		hasShown = true
-		print("|cffffff00".."There is an issue with entering BGs from the StaticPopupDialog. Please enter by right clicking the minimap icon.".."|r")
-	else
-		hasShown = false
+	for i = 1, MAX_BATTLEFIELD_QUEUES do
+		local status = GetBattlefieldStatus(i)
+		if status == "confirm" then
+			if not hasShown and StaticPopup_Visible("CONFIRM_BATTLEFIELD_ENTRY") then
+				hasShown = true
+				print("|cffffff00".."There is an issue with entering BGs from the StaticPopupDialog in WoW Classic. Please enter by right clicking the minimap icon.".."|r")
+			else
+				hasShown = false
+			end
+		end
 	end
 end)
 
