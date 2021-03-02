@@ -2019,7 +2019,12 @@ if stats.enabled then
 			local RangedBase, RangedPosBuff, RangedNegBuff = UnitRangedAttackPower("player")
 			local range = RangedBase + RangedPosBuff + RangedNegBuff
 			local heal = GetSpellBonusHealing()
-			local spell = GetSpellBonusDamage(7)
+			local spell = 0
+			if T.classic then
+				for i = 1, 7 do spell = max(spell, GetSpellBonusDamage(i)) end
+			else
+				spell = GetSpellBonusDamage(7)
+			end
 			local attack = Effective
 			if heal > spell then
 				power = heal
@@ -2036,20 +2041,84 @@ if stats.enabled then
 			string, percent = value
 		elseif sub == "mastery" then
 			string = GetMasteryEffect()
+		elseif sub == "expertise" then
+			-- string = GetExpertise()
+			string = GetExpertisePercent()
+		elseif sub == "hit" then
+			local hit
+			local melee, ranged, spell = GetHitModifier(), GetCombatRatingBonus(7), GetSpellHitModifier()
+			if melee > spell and T.class ~= "HUNTER" then
+				hit = melee
+			elseif T.class == "HUNTER" then
+				hit = ranged
+			else
+				hit = spell
+			end
+			if T.class == "Draenei" then
+				hit = hit + 1
+			end
+			string = hit
 		elseif sub == "haste" then
-			string = GetHaste()
+			if T.classic then
+				local haste
+				local melee, ranged, spell = GetMeleeHaste(), GetRangedHaste(), GetHaste()
+				if melee > spell and T.class ~= "HUNTER" then
+					haste = melee
+				elseif T.class == "HUNTER" then
+					haste = ranged
+				else
+					haste = spell
+				end
+			else
+				string = GetHaste()
+			end
 		elseif sub == "resilience" then
-			string, percent = GetCombatRating(16)
+			if T.classic then
+				string, percent = GetCombatRating(15)
+			else
+				string, percent = GetCombatRating(16)
+			end
 		elseif sub == "crit" then
-			string = GetCritChance()
+			if T.classic then
+				local melee, range, spell = GetCritChance(), GetRangedCritChance(), 0
+				for i = 1, 7 do spell = max(spell, GetSpellCritChance(i)) end
+				if melee > spell and T.class ~= "HUNTER" then
+					string = melee
+				elseif T.class == "HUNTER" then
+					string = range
+				else
+					string = spell
+				end
+			else
+				string = GetCritChance()
+			end
+		elseif sub == "pen" then
+			string = max(GetArmorPenetration(), GetSpellPenetration())
 		elseif sub == "dodge" then
 			string = GetDodgeChance()
 		elseif sub == "parry" then
 			string = GetParryChance()
 		elseif sub == "block" then
 			string = GetBlockChance()
+		elseif sub == "defense" then
+			local baseDefense, armorDefense = UnitDefense("player")
+			string = baseDefense + armorDefense
 		elseif sub == "avoidance" then
-			string = GetDodgeChance() + GetParryChance()
+			if T.classic then
+				if T.race == "NightElf" then
+					string = GetDodgeChance() + GetParryChance() + 1
+				else
+					string = GetDodgeChance() + GetParryChance()
+				end
+			else
+				string = GetDodgeChance() + GetParryChance()
+			end
+		elseif sub == "blockcap" then -- CTC
+			if T.race == "NightElf" then
+				string = GetDodgeChance() + GetParryChance() + GetBlockChance() + 6 + (GetCombatRatingBonus(2) + 20) * 0.04
+			else
+				string = GetDodgeChance() + GetParryChance() + GetBlockChance() + 5 + (GetCombatRatingBonus(2) + 20) * 0.04
+			end
 		elseif sub == "manaregen" then
 			local I5SR = true
 			if T.class == "ROGUE" or T.class == "WARRIOR" or T.class == "DEATHKNIGHT" then
