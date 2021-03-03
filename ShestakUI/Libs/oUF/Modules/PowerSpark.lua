@@ -8,6 +8,22 @@ local tickValue = 2
 local currentValue = UnitPower('player')
 local lastValue = currentValue
 local allowPowerEvent = true
+local ignoredSpells = {
+	[75]	= true,	-- Auto Shot
+	[5019]	= true,	-- Shoot
+
+	[1454]	= true,	-- Life Tap r1
+	[1455]	= true,	-- Life Tap r2
+	[1456]	= true,	-- Life Tap r3
+	[11687]	= true,	-- Life Tap r4
+	[11688]	= true,	-- Life Tap r5
+	[11689]	= true,	-- Life Tap r6
+
+	[12051]	= true,	-- Evocation
+
+	[18182]	= true,	-- Improved Life Tap r1
+	[18183]	= true,	-- Improved Life Tap r2
+}
 
 local Update = function(self, elapsed)
 	local element = self.PowerSpark
@@ -17,17 +33,23 @@ local Update = function(self, elapsed)
 	if(element.sinceLastUpdate > 0.01) then
 		local powerType = UnitPowerType('player')
 
-		element:SetValue(0)
-		element.Spark:Hide()
-
 		if(powerType ~= Enum.PowerType.Energy and powerType ~= Enum.PowerType.Mana) then
+			element.Spark:Hide()
 			return
 		end
 
 		currentValue = UnitPower('player', powerType)
 
-		-- element.disableMax to overide energy ticker when at max energy
+		-- element.disableMax to override energy ticker when at max energy
 		if(not currentValue or (currentValue >= UnitPowerMax('player', powerType) and (powerType ~= Enum.PowerType.Energy or element.disableMax))) then
+			element:SetValue(0)
+			element.Spark:Hide()
+			return
+		end
+
+		if powerType == Enum.PowerType.Mana and (not currentValue or currentValue >= UnitPowerMax('player', Enum.PowerType.Mana)) then
+			element:SetValue(0)
+			element.Spark:Hide()
 			return
 		end
 
@@ -35,42 +57,58 @@ local Update = function(self, elapsed)
 		if(not (now == nil)) then
 			local timer = now - lastTickTime
 
-			if((currentValue > lastValue) or (now >= lastTickTime + tickValue)) then
+			if((currentValue > lastValue) or powerType == Enum.PowerType.Energy and (now >= lastTickTime + 2)) then
 				lastTickTime = now
 			end
 
-			if(timer > 0) then
+			if(timer > 0) then -- Energy
 				element.Spark:Show()
+				element:SetMinMaxValues(0, 2)
+				element.Spark:SetVertexColor(1, 1, 1, 1)
 				element:SetValue(timer)
 				allowPowerEvent = true
+
+				lastValue = currentValue
+			elseif timer < 0 then -- Mana
+				element.Spark:Show()
+				element:SetMinMaxValues(0, 5)
+				element.Spark:SetVertexColor(1, 1, 0, 1)
+				element:SetValue(math.abs(timer))
 			end
 
-			lastValue = currentValue
 			element.sinceLastUpdate = 0
 		end
 	end
 end
 
-local EventHandler = function(self, event, _, _, spellID)
+local EventHandler = function(_, event, _, _, spellID)
 	local powerType = UnitPowerType('player')
 
 	if(powerType ~= Enum.PowerType.Mana) then
 		return
 	end
 
-	if(event == 'PLAYER_REGEN_ENABLED') then
-		tickValue = 2
-	elseif(event == 'PLAYER_REGEN_DISABLED') then
-		tickValue = 5
-	end
-
 	if(event == 'UNIT_POWER_UPDATE' and allowPowerEvent) then
-		lastTickTime = GetTime()
+		local time = GetTime()
+
+		tickValue = time - lastTickTime
+
+		if tickValue > 5 then
+			if powerType == Enum.PowerType.Mana and InCombatLockdown() then
+				tickValue = 5
+			else
+				tickValue = 2
+			end
+		end
+
+		lastTickTime = time
 	end
 
 	if(event == 'UNIT_SPELLCAST_SUCCEEDED') then
-		-- prevent ranged weapon from triggering
-		if(spellID == 75 or spellID == 5019) then
+		local powerCost = GetSpellPowerCost(spellID)
+		local cost = powerCost[1] and powerCost[1].cost
+
+		if (not cost or ignoredSpells[spellID]) then
 			return
 		end
 
@@ -87,8 +125,9 @@ local Enable = function(self, unit)
 	local element = self.PowerSpark
 	local power = self.Power
 
-	if((unit == 'player') and element and power) then
+	if((unit == 'player') and element and power and T.class ~= 'WARRIOR') then
 		element.__owner = self
+		element.sparksize = element.sparksize or 20
 
 		if(element:IsObjectType('StatusBar')) then
 			element:SetStatusBarTexture([[Interface\Buttons\WHITE8X8]])
@@ -98,10 +137,13 @@ local Enable = function(self, unit)
 
 		local spark = element.Spark
 		if(spark and spark:IsObjectType('Texture')) then
+			local orientation = element:GetOrientation()
+			local relativePoint = orientation == 'VERTICAL' and 'TOP' or 'RIGHT'
+
 			spark:SetTexture([[Interface\CastingBar\UI-CastingBar-Spark]])
-			spark:SetSize(20, 20)
+			spark:SetSize(element.sparksize, element.sparksize)
 			spark:SetBlendMode('ADD')
-			spark:SetPoint('CENTER', element:GetStatusBarTexture(), 'RIGHT')
+			spark:SetPoint('CENTER', element:GetStatusBarTexture(), relativePoint)
 		end
 
 		self:RegisterEvent('PLAYER_REGEN_ENABLED', EventHandler, true)
@@ -125,6 +167,7 @@ local Disable = function(self)
 		self:UnregisterEvent('UNIT_SPELLCAST_SUCCEEDED', EventHandler)
 		self:UnregisterEvent('UNIT_POWER_UPDATE', EventHandler)
 
+		element.Spark:Hide()
 		element:SetScript('OnUpdate', nil)
 
 		return false
