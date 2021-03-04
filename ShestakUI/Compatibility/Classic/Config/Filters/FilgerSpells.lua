@@ -1128,6 +1128,10 @@ C["filger_spells"] = {
 			{spellID = 20052, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Vengeance r3
 			{spellID = 20053, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Vengeance r4
+			{spellID = 20054, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Vengeance r5
+			{spellID = 20055, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 		},
 		{
 			Name = "P_PROC_ICON",
