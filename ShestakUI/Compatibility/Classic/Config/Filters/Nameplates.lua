@@ -35,6 +35,7 @@ T.DebuffWhiteList = {
 	[SpellName(9005)] = true,	-- Pounce
 	[SpellName(9007)] = true,	-- Pounce Bleed
 	[SpellName(1822)] = true,	-- Rake
+	[SpellName(1079)] = true,	-- Rip
 	[SpellName(2908)] = true,	-- Soothe Animal
 
 	-- Hunter
