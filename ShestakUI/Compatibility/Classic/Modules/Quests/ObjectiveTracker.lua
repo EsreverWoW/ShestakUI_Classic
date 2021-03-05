@@ -274,7 +274,7 @@ end
 --	Move QuestTimerFrame
 ----------------------------------------------------------------------------------------
 local ObjectiveTimer = CreateFrame("Frame", "ObjectiveTimerAnchor", UIParent)
-ObjectiveTimer:SetPoint("BOTTOM", Minimap, "TOP", 0, 64)
+ObjectiveTimer:SetPoint(unpack(C.position.quest_timer))
 ObjectiveTimer:SetHeight(80)
 ObjectiveTimer:SetWidth(120)
 
