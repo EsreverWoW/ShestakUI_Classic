@@ -217,7 +217,7 @@ function Stuffing:SlotUpdate(b)
 			local wandID = GetInventoryItemID("player", 18)
 			local wandSpeed = GetItemCooldown(wandID)
 			if wandSpeed == 0 then
-				return CooldownFrame_Set(b.cooldown, start, duration, enable)
+				CooldownFrame_Set(b.cooldown, start, duration, enable)
 			else
 				if wandSpeed < 1.5 then wandSpeed = 1.5 end
 				if duration and duration > wandSpeed then
@@ -361,15 +361,15 @@ function Stuffing:UpdateCooldowns(b)
 			local wandID = GetInventoryItemID("player", 18)
 			local wandSpeed = GetItemCooldown(wandID)
 			if wandSpeed == 0 then
-				return CooldownFrame_Set(b.cooldown, start, duration, enable)
+				CooldownFrame_Set(b.cooldown, start, duration, enable)
 			else
 				if wandSpeed < 1.5 then wandSpeed = 1.5 end
 				if duration and duration > wandSpeed then
-					return CooldownFrame_Set(b.cooldown, start, duration, enable)
+					CooldownFrame_Set(b.cooldown, start, duration, enable)
 				end
 			end
 		else
-			return CooldownFrame_Set(b.cooldown, start, duration, enable)
+			CooldownFrame_Set(b.cooldown, start, duration, enable)
 		end
 	end
 end
@@ -1838,7 +1838,7 @@ function Stuffing.Menu(self, level)
 			if InCombatLockdown() then
 				print("|cffffff00"..ERR_NOT_IN_COMBAT.."|r") return
 			end
-			old_ToggleBag(KEYRING_CONTAINER)
+			Stuffing_ToggleBag(-2)
 		end
 		UIDropDownMenu_AddButton(info, level)
 	end
