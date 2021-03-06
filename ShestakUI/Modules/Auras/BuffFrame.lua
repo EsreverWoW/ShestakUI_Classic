@@ -178,27 +178,36 @@ function AuraButton_UpdateDuration(buff, timeLeft)
 	if not strmatch(name, "TempEnchant") or (T.classic and name == "TempEnchant3") then return end
 
 	buff.timeLeft = timeLeft
-	if not buff.timerEnchant then
-		buff.timerEnchant = buff:CreateAnimationGroup()
-		buff.timerAnim = buff.timerEnchant:CreateAnimation()
-		buff.timerAnim:SetDuration(0.1)
+	if not T.classic then
+		if not buff.timerEnchant then
+			buff.timerEnchant = buff:CreateAnimationGroup()
+			buff.timerAnim = buff.timerEnchant:CreateAnimation()
+			buff.timerAnim:SetDuration(0.1)
 
-		buff.timerEnchant:SetScript("OnFinished", function(self, requested)
-			if not requested then
-				if buff.timeLeft and C.aura.show_timer == true then
-					buff.duration:SetFormattedText(GetFormattedTime(buff.timeLeft))
-					buff.duration:SetVertexColor(1, 1, 1)
-					buff.duration:Show()
-				else
-					self:Stop()
+			buff.timerEnchant:SetScript("OnFinished", function(self, requested)
+				if not requested then
+					if buff.timeLeft and C.aura.show_timer == true then
+						buff.duration:SetFormattedText(GetFormattedTime(buff.timeLeft))
+						buff.duration:SetVertexColor(1, 1, 1)
+						buff.duration:Show()
+					else
+						self:Stop()
+					end
+					self:Play()
 				end
-				self:Play()
-			end
-		end)
-		buff.timerEnchant:Play()
-	end
+			end)
+			buff.timerEnchant:Play()
+		end
+	else
+		local duration = buff.duration
+		if buff.timeLeft and C.aura.show_timer == true then
+			duration:SetFormattedText(GetFormattedTime(buff.timeLeft))
+			duration:SetVertexColor(1, 1, 1)
+			duration:Show()
+		else
+			duration:Hide()
+		end
 
-	if T.classic then
 		local hasMainHandEnchant, _, mainHandCharges, _, hasOffHandEnchant, _, offHandCharges = GetWeaponEnchantInfo()
 		local index = 1
 
