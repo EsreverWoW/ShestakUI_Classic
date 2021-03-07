@@ -29,4 +29,16 @@ frame:SetScript("OnEvent", function()
 	PostalSelectOpenButton:SkinButton()
 	PostalSelectReturnButton:SkinButton()
 	PostalOpenAllButton:SkinButton()
+
+	if T.classic then
+		for i = 1, INBOXITEMS_TO_DISPLAY do
+			local button = _G["MailItem"..i]
+			local expireTime = _G["MailItem"..i.."ExpireTime"]
+
+			button:SetWidth(290)
+
+			expireTime:ClearAllPoints()
+			expireTime:SetPoint("TOPRIGHT", button, "TOPRIGHT", 0, -4)
+		end
+	end
 end)

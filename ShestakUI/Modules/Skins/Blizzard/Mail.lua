@@ -44,6 +44,16 @@ local function LoadSkin()
 	T.SkinTab(MailFrameTab1)
 	T.SkinTab(MailFrameTab2)
 
+	if T.classic then
+		InboxPrevPageButton:ClearAllPoints()
+		InboxPrevPageButton:SetPoint("CENTER", InboxFrame, "BOTTOMLEFT", 28, 114)
+		InboxNextPageButton:ClearAllPoints()
+		InboxNextPageButton:SetPoint("CENTER", InboxFrame, "BOTTOMLEFT", 304, 114)
+
+		MailFrameTab1:ClearAllPoints()
+		MailFrameTab1:SetPoint("BOTTOMLEFT", 14, -34)
+	end
+
 	-- Send mail
 	SendMailFrame:StripTextures()
 
