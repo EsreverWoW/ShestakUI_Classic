@@ -19,7 +19,7 @@ local sittingMessages = {
 	[SPELL_FAILED_NOT_STANDING]					= true,
 }
 
-local function CheckErrorMessage(self, event, messageType, msg)
+local function CheckErrorMessage(_, _, _, msg)
 	if mountedMessages[msg] then
 		if not IsMounted() then return end
 		Dismount()

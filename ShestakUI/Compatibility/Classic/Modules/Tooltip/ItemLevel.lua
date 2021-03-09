@@ -77,3 +77,18 @@ GameTooltip:HookScript("OnTooltipSetUnit", function(self, ...)
 		end
 	end
 end)
+
+local inspectErrors = {
+	[ERR_UNIT_NOT_FOUND]						= true,
+	[ERR_INVALID_INSPECT_TARGET]				= true,
+}
+
+local function CheckErrorMessage(_, _, _, msg)
+	if inspectErrors[msg] then
+		UIErrorsFrame:Clear()
+	end
+end
+
+local f = CreateFrame("Frame")
+f:RegisterEvent("UI_ERROR_MESSAGE")
+f:SetScript("OnEvent", CheckErrorMessage)

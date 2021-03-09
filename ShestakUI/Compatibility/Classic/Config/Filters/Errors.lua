@@ -52,7 +52,6 @@ T.black_list = {
 	[ERR_OUT_OF_RANGE] = true,
 	[ERR_BADATTACKPOS] = true,
 	[ERR_INVALID_ATTACK_TARGET] = true,
-	[ERR_INVALID_INSPECT_TARGET] = true,
 	[ERR_NOEMOTEWHILERUNNING] = true,
 	[ERR_NOT_EQUIPPABLE] = true,
 	[ERR_NOT_IN_COMBAT] = true,
@@ -65,5 +64,4 @@ T.black_list = {
 	[OUT_OF_RAGE] = true,
 	[ERR_SPELL_OUT_OF_RANGE] = true,
 	[ERR_TOO_FAR_TO_INTERACT] = true,
-	[ERR_UNIT_NOT_FOUND] = true,
 }
