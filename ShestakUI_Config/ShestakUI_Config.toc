@@ -2,7 +2,7 @@
 ## Title: ShestakUI (Classic) Config
 ## Notes: In-game configuration for ShestakUI
 ## Author: Shestak
-## Version: 1.03
+## Version: 1.04
 ## RequiredDeps: ShestakUI
 ## SavedVariables: ShestakUIOptionsGlobal, ShestakUIOptions
 ## SavedVariablesPerCharacter: ShestakUIOptionsPerChar
