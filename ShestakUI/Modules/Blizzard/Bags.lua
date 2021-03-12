@@ -1832,7 +1832,7 @@ function Stuffing.Menu(self, level)
 
 	if T.classic then
 		wipe(info)
-		info.text = "Show Keyring" --TODO: L_BAG_SHOW_KEYRING
+		info.text = L_BAG_SHOW_KEYRING
 		info.notCheckable = 1
 		info.func = function()
 			if InCombatLockdown() then

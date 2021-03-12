@@ -110,6 +110,7 @@ L_ERRORFRAME_L = "Click to view errors."
 
 -- Bags
 L_BAG_SHOW_BAGS = "Show Bags"
+L_BAG_SHOW_KEYRING = "Show Keyring"
 L_BAG_RIGHT_CLICK_SEARCH = "Right-click to search"
 L_BAG_STACK_MENU = "Stack"
 L_BAG_RIGHT_CLICK_CLOSE = "Right-click to open menu"

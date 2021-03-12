@@ -114,6 +114,7 @@ L_ERRORFRAME_L = "点击查看错误"
 
 -- Bags
 L_BAG_SHOW_BAGS = "显示背包"
+L_BAG_SHOW_KEYRING = "Show Keyring" -- Needs review
 L_BAG_RIGHT_CLICK_SEARCH = "右键搜寻物品"
 L_BAG_STACK_MENU = "堆叠"
 L_BAG_RIGHT_CLICK_CLOSE = "右键开启菜单"

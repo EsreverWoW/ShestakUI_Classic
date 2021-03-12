@@ -4,7 +4,7 @@
 	<Script file="Character.lua"/>
 	<Script file="ChatConfig.lua"/>
 	<Script file="Communities.lua"/>
-	<Script file="Container.lua"/>			<!-- TODO -->
+	<Script file="Container.lua"/>
 	<Script file="DressUp.lua"/>
 	<Script file="Friends.lua"/>
 	<Script file="Gossip.lua"/>

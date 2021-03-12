@@ -114,6 +114,7 @@ L_ERRORFRAME_L = "Clicca per vedere gli errori."
 
 -- Bags
 L_BAG_SHOW_BAGS = "Mostra le sacche"
+L_BAG_SHOW_KEYRING = "Show Keyring" -- Needs review
 L_BAG_RIGHT_CLICK_SEARCH = "Clicca col destro per cercare"
 L_BAG_STACK_MENU = "Impila oggetti identici"
 L_BAG_RIGHT_CLICK_CLOSE = "Clicca col destro per aprire il menu"
