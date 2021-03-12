@@ -201,45 +201,41 @@ local function LoadSkin()
 		if i == 1 then
 			bar:SetPoint("TOPLEFT", 190, -86)
 		end
-		
-		name:SetPoint("LEFT", bar, "LEFT", -150, 0)
-		name:SetWidth(140)
 
-		header:StripTextures(true)
-		header:SetNormalTexture(nil)
+		name:SetWidth(140)
+		name:SetPoint("LEFT", bar, "LEFT", -150, 0)
+		name.SetWidth = T.dummy
+
+		header:SetSize(14, 14)
+		header:SetHighlightTexture(nil)
 		header:SetPoint("TOPLEFT", bar, "TOPLEFT", -170, 0)
-		
-		header.Text = header:CreateFontString(nil, "OVERLAY")
-		header.Text:SetFont(C.media.pixel_font, C.media.pixel_font_size, C.media.pixel_font_style)
-		header.Text:SetPoint("LEFT", header, "LEFT", 10, 1)
-		header.Text:SetText("-")
 
 		war:StripTextures()
-		war:SetPoint("LEFT", bar, "RIGHT", 0, 0)
+		war:SetPoint("LEFT", bar, "RIGHT", -2, 0)
 
 		war.icon = war:CreateTexture(nil, "OVERLAY")
-		war.icon:SetPoint("LEFT", 3, -6)
+		war.icon:SetPoint("LEFT", 6, -8)
+		war.icon:SetSize(32, 32)
 		war.icon:SetTexture("Interface\\Buttons\\UI-CheckBox-SwordCheck")
 	end
 
-	local function UpdateFaction()
+	hooksecurefunc('ReputationFrame_Update', function()
 		local numFactions = GetNumFactions()
+		local index, header, text
 		local offset = FauxScrollFrame_GetOffset(ReputationListScrollFrame)
-		local index, header
 
 		for i = 1, NUM_FACTIONS_DISPLAYED, 1 do
 			header = _G["ReputationHeader"..i]
+			text = _G["ReputationHeader"..i.."NormalText"]
 			index = offset + i
 
 			if index <= numFactions then
-				header:SetSize(16, 16)
+				header:SetSize(14, 14)
 				header:StripTextures()
 				header:SetTemplate("Overlay")
-				header:SetPoint("CENTER")
-				header:SetHitRectInsets(1, 1, 1, 1)
 
-				header.Text:ClearAllPoints()
-				header.Text:SetPoint("LEFT", header, "RIGHT", 8, 0)
+				text:ClearAllPoints()
+				text:SetPoint("LEFT", header, "RIGHT", 6, -1)
 
 				header.minus = header:CreateTexture(nil, "OVERLAY")
 				header.minus:SetSize(7, 1)
@@ -254,24 +250,19 @@ local function LoadSkin()
 				end
 			end
 		end
-	end
-	hooksecurefunc("ReputationFrame_Update", UpdateFaction)
-
-	ReputationFrameStandingLabel:SetPoint("TOPLEFT", 223, -59)
-	ReputationFrameFactionLabel:SetPoint("TOPLEFT", 55, -59)
+	end)
 
 	ReputationListScrollFrame:StripTextures()
 	T.SkinScrollBar(ReputationListScrollFrameScrollBar)
 
 	ReputationDetailFrame:StripTextures()
 	ReputationDetailFrame:SetTemplate("Transparent")
-	ReputationDetailFrame:SetPoint("TOPLEFT", ReputationFrame, "TOPRIGHT", -32, -12)
+	ReputationDetailFrame:SetPoint("TOPLEFT", ReputationFrame, "TOPRIGHT", -31, -12)
 
 	T.SkinCloseButton(ReputationDetailCloseButton)
 	ReputationDetailCloseButton:SetPoint("TOPRIGHT", -4, -4)
 
 	T.SkinCheckBox(ReputationDetailAtWarCheckBox)
-	ReputationDetailAtWarCheckBox:SetCheckedTexture("Interface\\Buttons\\UI-CheckBox-SwordCheck")
 	T.SkinCheckBox(ReputationDetailInactiveCheckBox)
 	T.SkinCheckBox(ReputationDetailMainScreenCheckBox)
 
@@ -279,14 +270,13 @@ local function LoadSkin()
 	SkillFrame:StripTextures()
 
 	SkillFrameExpandButtonFrame:DisableDrawLayer("BACKGROUND")
-	SkillFrameCollapseAllButton:SetPoint("LEFT", SkillFrameExpandTabLeft, "RIGHT", -60, -3)
-
-	SkillFrameCollapseAllButtonText:ClearAllPoints()
-	SkillFrameCollapseAllButtonText:SetPoint("LEFT", SkillFrameCollapseAllButton, "RIGHT", 6, 0)
 
 	SkillFrameCollapseAllButton:SetSize(14, 14)
-	SkillFrameCollapseAllButton:SetPoint("CENTER")
-	SkillFrameCollapseAllButton:SetHitRectInsets(1, 1, 1, 1)
+	SkillFrameCollapseAllButton:SetHighlightTexture(nil)
+	SkillFrameCollapseAllButton:SetPoint("LEFT", SkillFrameExpandTabLeft, "RIGHT", -58, -3)
+
+	SkillFrameCollapseAllButtonText:ClearAllPoints()
+	SkillFrameCollapseAllButtonText:SetPoint("LEFT", SkillFrameCollapseAllButton, "RIGHT", 6, -1)
 
 	hooksecurefunc(SkillFrameCollapseAllButton, "SetNormalTexture", function(self, texture)
 		self:StripTextures()
@@ -320,12 +310,11 @@ local function LoadSkin()
 		border:StripTextures()
 		background:SetTexture(nil)
 
-		label:SetPoint("TOPLEFT", bar, "TOPLEFT", -20, 0)
 		label:SetSize(14, 14)
-		label:SetPoint("CENTER")
-		label:SetHitRectInsets(1, 1, 1, 1)
+		label:SetHighlightTexture(nil)
+		label:SetPoint("TOPLEFT", bar, "TOPLEFT", -18, 0)
 
-		text:SetPoint("LEFT", label, "RIGHT", 6, 0)
+		text:SetPoint("LEFT", label, "RIGHT", 6, -1)
 
 		hooksecurefunc(label, "SetNormalTexture", function(self, texture)
 			self:StripTextures()
@@ -352,12 +341,13 @@ local function LoadSkin()
 	T.SkinScrollBar(SkillDetailScrollFrameScrollBar)
 
 	SkillDetailStatusBar:StripTextures()
-	SkillDetailStatusBar:CreateBackdrop("Default")
 	SkillDetailStatusBar:SetParent(SkillDetailScrollFrame)
+	SkillDetailStatusBar:CreateBackdrop("Default")
 	SkillDetailStatusBar:SetStatusBarTexture(C.media.blank)
 
-	T.SkinNextPrevButton(SkillDetailStatusBarUnlearnButton)
+	T.SkinCloseButton(SkillDetailStatusBarUnlearnButton)
 	SkillDetailStatusBarUnlearnButton:SetSize(24, 24)
+	SkillDetailStatusBarUnlearnButton:ClearAllPoints()
 	SkillDetailStatusBarUnlearnButton:SetPoint("LEFT", SkillDetailStatusBarBorder, "RIGHT", 5, 0)
 	SkillDetailStatusBarUnlearnButton:SetHitRectInsets(0, 0, 0, 0)
 
