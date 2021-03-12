@@ -1,5 +1,6 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
 	<Script file="Others.lua"/>
+	<Script file="AddonList.lua"/>
 	<Script file="Auction.lua"/>
 	<Script file="Character.lua"/>
 	<Script file="ChatConfig.lua"/>
