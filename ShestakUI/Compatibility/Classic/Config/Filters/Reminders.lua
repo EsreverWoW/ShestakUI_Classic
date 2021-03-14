@@ -311,7 +311,7 @@ if C.reminder.solo_buffs_enable == true then
 			},
 			[2] = {	-- Auras group
 				["spells"] = {
-					SpellName(465),	-- Devotion Aura
+					SpellName(465),		-- Devotion Aura
 					SpellName(7294),	-- Retribution Aura
 					SpellName(20218),	-- Sanctity Aura
 					SpellName(19746),	-- Concentration Aura
@@ -323,8 +323,30 @@ if C.reminder.solo_buffs_enable == true then
 				["instance"] = true,
 				["pvp"] = true,
 			},
+			[3] = {	-- Blessings group
+				["spells"] = {
+					SpellName(1044),	-- Blessing of Freedom
+					SpellName(20217),	-- Blessing of Kings
+					SpellName(19977),	-- Blessing of Light
+					SpellName(19740),	-- Blessing of Might
+					SpellName(1022),	-- Blessing of Protection
+					SpellName(6940),	-- Blessing of Sacrifice
+					SpellName(1038),	-- Blessing of Salvation
+					SpellName(20911),	-- Blessing of Sanctuary
+					SpellName(19742),	-- Blessing of Wisdom
+					SpellName(25898),	-- Greater Blessing of Kings
+					SpellName(25890),	-- Greater Blessing of Light
+					SpellName(25782),	-- Greater Blessing of Might
+					SpellName(25895),	-- Greater Blessing of Salvation
+					SpellName(25899),	-- Greater Blessing of Sanctuary
+					SpellName(25894),	-- Greater Blessing of Wisdom
+				},
+				["combat"] = true,
+				["instance"] = true,
+				["pvp"] = true,
+			},
 			--[[
-			[3] = {	-- Seals group
+			[4] = {	-- Seals group
 				["spells"] = {
 					SpellName(21084),	-- Seal of Righteousness
 					SpellName(20375),	-- Seal of Command
