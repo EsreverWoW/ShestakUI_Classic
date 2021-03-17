@@ -85,6 +85,15 @@ frame:SetScript("OnEvent", function(_, _, addon)
 		end
 		SetInsertItemsLeftToRight(false)
 	end
+
+	if C.combattext.enable then
+		InterfaceOptionsCombatPanelEnableFloatingCombatText:Hide()
+		if C.combattext.incoming then
+			SetCVar("enableFloatingCombatText", 1)
+		else
+			SetCVar("enableFloatingCombatText", 0)
+		end
+	end
 end)
 
 if not T.classic then
