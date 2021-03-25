@@ -6,7 +6,7 @@
 ## SavedVariables: ShestakUISettings, ShestakUIStats, ShestakUIBindings, ShestakUICurrency, ShestakUIPositions
 ## SavedVariablesPerCharacter: ShestakUISettingsPerChar, ShestakUIChatHistory
 
-## OptionalDeps: Blizzard_CombatText, ShestakUI_Config, LibStub, CallbackHandler-1.0, LibClassicCasterino, LibClassicDurations, Aptechka, AtlasLoot, cargBags, Clique, epgp, Grid, Grid2, _NPCScan.Overlay, ls_Toasts, LunaUnitFrames, Mapster, Omen, OPie, oUF_Freebgrid, PitBull4, Postal, Prat-3.0, Quartz, Recount, Rematch, ShadowedUnitFrames, Stuf, TidyPlates, TipTac, TipTacTalents, TradeSkillMaster_Mailing, tullaCC, VuhDo, WeakAuras, ShestakUI_Profile
+## OptionalDeps: Blizzard_CombatText, ShestakUI_Config, ShestakUI_Profile, LibStub, CallbackHandler-1.0, LibClassicCasterino, LibClassicDurations, Aptechka, AtlasLoot, cargBags, Clique, epgp, Grid, Grid2, ls_Toasts, LunaUnitFrames, Mapster, Omen, OPie, PitBull4, Postal, Prat-3.0, Quartz, Recount, Rematch, ShadowedUnitFrames, TidyPlates, TipTac, TipTacTalents, tullaCC, VuhDo, WeakAuras
 ## X-Embeds: LibStub, CallbackHandler-1.0, LibClassicCasterino, LibClassicDurations, LibRangeCheck-2.0, ChatThrottleLib, LibHealComm-4.0, LibTotemInfo
 ## X-oUF: oUFShestakUI
 
