@@ -34,6 +34,7 @@ local AddOnFrames = {
 	["Blizzard_ArchaeologyUI"] = {"ArchaeologyFrame"},
 	["Blizzard_ArtifactUI"] = {"ArtifactRelicForgeFrame"},
 	["Blizzard_AuctionUI"] = {"AuctionFrame"},
+	["Blizzard_AuctionHouseUI"] = {"AuctionHouseFrame"},
 	["Blizzard_BarberShopUI"] = {"BarberShopFrame"},
 	["Blizzard_BindingUI"] = {"KeyBindingFrame"},
 	["Blizzard_BlackMarketUI"] = {"BlackMarketFrame"},
