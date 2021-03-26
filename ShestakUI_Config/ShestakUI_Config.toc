@@ -3,6 +3,8 @@
 ## Notes: In-game configuration for ShestakUI
 ## Author: Shestak
 ## Version: 1.05
+## X-Curse-Project-ID:
+## X-WoWI-ID: 25916
 ## RequiredDeps: ShestakUI
 ## SavedVariables: ShestakUIOptionsGlobal, ShestakUIOptions
 ## SavedVariablesPerCharacter: ShestakUIOptionsPerChar
