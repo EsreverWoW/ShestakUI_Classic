@@ -529,6 +529,14 @@ local function castColor(self)
 	else
 		self:SetStatusBarColor(1, 0.8, 0)
 		self.bg:SetColorTexture(1, 0.8, 0, 0.2)
+	if C.nameplate.cast_color then
+		if T.InterruptCast[self.spellID] then
+			SetColorBorder(self, 1, 0.8, 0)
+		elseif T.ImportantCast[self.spellID] then
+			SetColorBorder(self, 1, 0, 0)
+		else
+			SetColorBorder(self, unpack(C.media.border_color))
+		end
 	end
 end
 
@@ -688,7 +696,7 @@ local function style(self, unit)
 	self.Health.bg:SetTexture(C.media.texture)
 	self.Health.bg.multiplier = 0.2
 
-	-- Create Health Text
+	-- Health Text
 	if C.nameplate.health_value == true then
 		self.Health.value = self.Health:CreateFontString(nil, "OVERLAY")
 		self.Health.value:SetFont(C.font.nameplates_font, C.font.nameplates_font_size * T.noscalemult, C.font.nameplates_font_style)
@@ -697,7 +705,7 @@ local function style(self, unit)
 		self:Tag(self.Health.value, "[NameplateHealth]")
 	end
 
-	-- Create Player Power bar
+	-- Player Power Bar
 	self.Power = CreateFrame("StatusBar", nil, self)
 	self.Power:SetStatusBarTexture(C.media.texture)
 	self.Power:SetPoint("TOPLEFT", self.Health, "BOTTOMLEFT", 0, -6)
@@ -725,7 +733,7 @@ local function style(self, unit)
 		end)
 	end
 
-	-- Create Name Text
+	-- Name Text
 	self.Name = self:CreateFontString(nil, "OVERLAY")
 	self.Name:SetFont(C.font.nameplates_font, C.font.nameplates_font_size * T.noscalemult, C.font.nameplates_font_style)
 	self.Name:SetShadowOffset(C.font.nameplates_font_shadow and 1 or 0, C.font.nameplates_font_shadow and -1 or 0)
@@ -750,14 +758,14 @@ local function style(self, unit)
 		self.Glow:Hide()
 	end
 
-	-- Create Level
-	self.Level = self:CreateFontString(nil, "OVERLAY")
+	-- Level Text
+	self.Level = self:CreateFontString(nil, "ARTWORK")
 	self.Level:SetFont(C.font.nameplates_font, C.font.nameplates_font_size * T.noscalemult, C.font.nameplates_font_style)
 	self.Level:SetShadowOffset(C.font.nameplates_font_shadow and 1 or 0, C.font.nameplates_font_shadow and -1 or 0)
 	self.Level:SetPoint("RIGHT", self.Health, "LEFT", -2, 0)
 	self:Tag(self.Level, "[DiffColor][NameplateLevel][shortclassification]")
 
-	-- Create Cast Bar
+	-- Cast Bar
 	self.Castbar = CreateFrame("StatusBar", nil, self)
 	self.Castbar:SetFrameLevel(3)
 	self.Castbar:SetStatusBarTexture(C.media.texture)
@@ -774,7 +782,7 @@ local function style(self, unit)
 	self.Castbar.PostCastStart = castColor
 	self.Castbar.PostCastInterruptible = castColor
 
-	-- Create Cast Time Text
+	-- Cast Time Text
 	self.Castbar.Time = self.Castbar:CreateFontString(nil, "ARTWORK")
 	self.Castbar.Time:SetPoint("RIGHT", self.Castbar, "RIGHT", 0, 0)
 	self.Castbar.Time:SetFont(C.font.nameplates_font, C.font.nameplates_font_size * T.noscalemult, C.font.nameplates_font_style)
@@ -784,7 +792,7 @@ local function style(self, unit)
 		self.Time:SetText(("%.1f"):format(self.channeling and duration or self.max - duration))
 	end
 
-	-- Create Cast Name Text
+	-- Cast Name Text
 	if C.nameplate.show_castbar_name == true then
 		self.Castbar.Text = self.Castbar:CreateFontString(nil, "OVERLAY")
 		self.Castbar.Text:SetPoint("LEFT", self.Castbar, "LEFT", 3, 0)
@@ -795,20 +803,21 @@ local function style(self, unit)
 		self.Castbar.Text:SetJustifyH("LEFT")
 	end
 
-	-- Create CastBar Icon
-	self.Castbar.Icon = self.Castbar:CreateTexture(nil, "OVERLAY")
+	-- Cast Bar Icon
+	self.CastbarIcon = CreateFrame("Frame", nil, self.Castbar)
+	self.Castbar.Icon = self.CastbarIcon:CreateTexture(nil, "OVERLAY")
 	self.Castbar.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 	self.Castbar.Icon:SetDrawLayer("ARTWORK")
 	self.Castbar.Icon:SetSize((C.nameplate.height * 2 * T.noscalemult) + 8, (C.nameplate.height * 2 * T.noscalemult) + 8)
 	self.Castbar.Icon:SetPoint("TOPLEFT", self.Health, "TOPRIGHT", 8, 0)
-	CreateBorderFrame(self.Castbar, self.Castbar.Icon)
+	CreateBorderFrame(self.CastbarIcon, self.Castbar.Icon)
 
 	-- Raid Icon
 	self.RaidTargetIndicator = self:CreateTexture(nil, "OVERLAY", nil, 7)
 	self.RaidTargetIndicator:SetSize((C.nameplate.height * 2 * T.noscalemult) + 8, (C.nameplate.height * 2 * T.noscalemult) + 8)
 	self.RaidTargetIndicator:SetPoint("BOTTOM", self.Health, "TOP", 0, C.nameplate.track_debuffs == true and 38 or 16)
 
-	-- Create Class Icon
+	-- Class Icon
 	if C.nameplate.class_icons == true then
 		self.Class = CreateFrame("Frame", nil, self)
 		self.Class.Icon = self.Class:CreateTexture(nil, "OVERLAY")
@@ -819,7 +828,7 @@ local function style(self, unit)
 		CreateBorderFrame(self.Class, self.Class.Icon)
 	end
 
-	-- Create Totem Icon
+	-- Totem Icon
 	if C.nameplate.totem_icons == true then
 		self.Totem = CreateFrame("Frame", nil, self)
 		self.Totem.Icon = self.Totem:CreateTexture(nil, "OVERLAY")
@@ -829,12 +838,29 @@ local function style(self, unit)
 		CreateBorderFrame(self.Totem, self.Totem.Icon)
 	end
 
-	-- Create Healer Icon
+	-- Healer Icon
 	if C.nameplate.healer_icon == true then
 		self.HPHeal = self.Health:CreateFontString(nil, "OVERLAY")
 		self.HPHeal:SetFont(C.font.nameplates_font, 32, C.font.nameplates_font_style)
 		self.HPHeal:SetText("|cFFD53333+|r")
 		self.HPHeal:SetPoint("BOTTOM", self.Name, "TOP", 0, C.nameplate.track_debuffs == true and 13 or 0)
+	end
+
+	-- Quest Icon
+	if C.nameplate.quests then
+		self.QuestIcon = self:CreateTexture(nil, "OVERLAY", nil, 7)
+		self.QuestIcon:SetSize((C.nameplate.height * 2 * T.noscalemult), (C.nameplate.height * 2 * T.noscalemult))
+		self.QuestIcon:SetPoint("RIGHT", self.Health, "LEFT", -5, 0)
+
+		self.QuestIcon.Text = self:CreateFontString(nil, "OVERLAY")
+		self.QuestIcon.Text:SetPoint("RIGHT", self.QuestIcon, "LEFT", -1, 0)
+		self.QuestIcon.Text:SetFont(C.font.nameplates_font, C.font.nameplates_font_size * T.noscalemult * 2, C.font.nameplates_font_style)
+		self.QuestIcon.Text:SetShadowOffset(C.font.nameplates_font_shadow and 1 or 0, C.font.nameplates_font_shadow and -1 or 0)
+
+		self.QuestIcon.Item = self:CreateTexture(nil, "OVERLAY")
+		self.QuestIcon.Item:SetSize((C.nameplate.height * 2 * T.noscalemult) - 2, (C.nameplate.height * 2 * T.noscalemult) - 2)
+		self.QuestIcon.Item:SetPoint("RIGHT", self.QuestIcon.Text, "LEFT", -2, 0)
+		self.QuestIcon.Item:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 	end
 
 	-- Aura tracking
@@ -856,6 +882,7 @@ local function style(self, unit)
 		self.Auras.PostUpdateIcon = AurasPostUpdateIcon
 	end
 
+	-- Health color
 	self.Health:RegisterEvent("PLAYER_REGEN_DISABLED")
 	self.Health:RegisterEvent("PLAYER_REGEN_ENABLED")
 	self.Health:RegisterEvent("UNIT_THREAT_SITUATION_UPDATE")
