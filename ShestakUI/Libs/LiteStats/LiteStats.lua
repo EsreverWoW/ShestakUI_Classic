@@ -127,19 +127,19 @@ local function formatgold(style, amount)
 	local gold, silver, copper = floor(amount * 0.0001), floor(mod(amount * 0.01, 100)), floor(mod(amount, 100))
 	if style == 1 then
 		return (gold > 0 and format("%s|cffffd700%s|r ", comma_value(gold), GOLD_AMOUNT_SYMBOL) or "")
-				.. (silver > 0 and format("%s|cffc7c7cf%s|r ", silver, SILVER_AMOUNT_SYMBOL) or "")
-				.. ((copper > 0 or (gold == 0 and silver == 0)) and format("%s|cffeda55f%s|r", copper, COPPER_AMOUNT_SYMBOL) or "")
+		.. (silver > 0 and format("%s|cffc7c7cf%s|r ", silver, SILVER_AMOUNT_SYMBOL) or "")
+		.. ((copper > 0 or (gold == 0 and silver == 0)) and format("%s|cffeda55f%s|r", copper, COPPER_AMOUNT_SYMBOL) or "")
 	elseif style == 2 or not style then
 		return format("%.1f|cffffd700%s|r", amount * 0.0001, GOLD_AMOUNT_SYMBOL)
 	elseif style == 3 then
 		return format("|cffffd700%s|r.|cffc7c7cf%s|r.|cffeda55f%s|r", gold, silver, copper)
 	elseif style == 4 then
 		return (gold > 0 and format(GOLD_AMOUNT_TEXTURE, gold, 12, 12) or "") .. (silver > 0 and format(SILVER_AMOUNT_TEXTURE, silver, 12, 12) or "")
-				.. ((copper > 0 or (gold == 0 and silver == 0)) and format(COPPER_AMOUNT_TEXTURE, copper, 12, 12) or "") .. " "
+		.. ((copper > 0 or (gold == 0 and silver == 0)) and format(COPPER_AMOUNT_TEXTURE, copper, 12, 12) or "") .. " "
 	elseif style == 5 then
 		return (gold > 0 and format("%s|cffffd700%s|r ", comma_value(gold), GOLD_AMOUNT_SYMBOL) or "")
-				.. (format("%.2d|cffc7c7cf%s|r ", silver, SILVER_AMOUNT_SYMBOL))
-				.. (format("%.2d|cffeda55f%s|r", copper, COPPER_AMOUNT_SYMBOL))
+		.. (format("%.2d|cffc7c7cf%s|r ", silver, SILVER_AMOUNT_SYMBOL))
+		.. (format("%.2d|cffeda55f%s|r", copper, COPPER_AMOUNT_SYMBOL))
 	end
 end
 
@@ -349,7 +349,9 @@ if clock.enabled then
 						end
 						GameTooltip:AddDoubleLine(name, fmttime(reset), 1, 1, 1, 1, 1, 1)
 					end
+
 				end
+
 
 				-- Torghast
 				if not TorghastInfo then
@@ -374,8 +376,10 @@ if clock.enabled then
 							end
 							GameTooltip:AddDoubleLine(nameText, levelText)
 						end
+
 					end
 				end
+
 
 				-- In 9.0 seals not available
 				-- if T.level == MAX_PLAYER_LEVEL then
@@ -509,8 +513,8 @@ if fps.enabled then
 			local totalMemory = UpdateMemory()
 			local totalCPU = isCPU and UpdateCPU()
 			GameTooltip:AddDoubleLine(
-					format("|cffffffff%s|r %s, %s%s|r %s", floor(GetFramerate()), FPS_ABBR, gradient(1 - lat / r), lat, MILLISECONDS_ABBR),
-					format("%s: |cffffffff%s", ADDONS, formatmem(totalMemory)), tthead.r, tthead.g, tthead.b, tthead.r, tthead.g, tthead.b)
+			format("|cffffffff%s|r %s, %s%s|r %s", floor(GetFramerate()), FPS_ABBR, gradient(1 - lat / r), lat, MILLISECONDS_ABBR),
+			format("%s: |cffffffff%s", ADDONS, formatmem(totalMemory)), tthead.r, tthead.g, tthead.b, tthead.r, tthead.g, tthead.b)
 			GameTooltip:AddLine(" ")
 			if fps.max_addons ~= 0 or IsAltKeyDown() then
 				local ctable
@@ -525,12 +529,12 @@ if fps.enabled then
 						exmem = exmem + t[2]
 					else
 						local color = t[2] <= 102.4 and {0,1} -- 0 - 100
-								or t[2] <= 512 and {0.5,1} -- 100 - 512
-								or t[2] <= 1024 and {0.75,1} -- 512 - 1mb
-								or t[2] <= 2560 and {1,1} -- 1mb - 2.5mb
-								or t[2] <= 5120 and {1,0.75} -- 2.5mb - 5mb
-								or t[2] <= 8192 and {1,0.5} -- 5mb - 8mb
-								or {1,0.1} -- 8mb +
+						or t[2] <= 512 and {0.5,1} -- 100 - 512
+						or t[2] <= 1024 and {0.75,1} -- 512 - 1mb
+						or t[2] <= 2560 and {1,1} -- 1mb - 2.5mb
+						or t[2] <= 5120 and {1,0.75} -- 2.5mb - 5mb
+						or t[2] <= 8192 and {1,0.5} -- 5mb - 8mb
+						or {1,0.1} -- 8mb +
 						if isCPU and not IsControlKeyDown() then
 							GameTooltip:AddDoubleLine(t[1], format("%d ms (%.2f) | %.2f", t[2], t[3], t[4]), 1, 1, 1, color[1], color[2], 0)
 						else
@@ -650,6 +654,7 @@ if friends.enabled then
 	end
 	local clientTags = {
 		[BNET_CLIENT_D3] = "Diablo 3",
+		[BNET_CLIENT_D2] = "Diablo 2: Resurrected",
 		[BNET_CLIENT_WTCG] = "Hearthstone",
 		[BNET_CLIENT_HEROES] = "Heroes of the Storm",
 		[BNET_CLIENT_OVERWATCH] = "Overwatch",
@@ -657,7 +662,14 @@ if friends.enabled then
 		[BNET_CLIENT_SC2] = "StarCraft 2",
 		[BNET_CLIENT_DESTINY2] = "Destiny 2",
 		[BNET_CLIENT_COD] = "Call of Duty: Black Ops 4",
-		["BSAp"] = COMMUNITIES_PRESENCE_MOBILE_CHAT or "Mobile"
+		[BNET_CLIENT_WC3] = "Warcraft 3: Reforged",
+		[BNET_CLIENT_ARCADE] = "Arcade Collection",
+		[BNET_CLIENT_CRASH4] = "Crash Bandicoot 4",
+		[BNET_CLIENT_COD] = "COD: Black Ops 4",
+		[BNET_CLIENT_COD_MW] = "COD: Modern Warfare",
+		[BNET_CLIENT_COD_MW2] = "COD: Modern Warfare 2",
+		[BNET_CLIENT_COD_BOCW] = "COD: Cold War",
+		["BSAp"] = COMMUNITIES_PRESENCE_MOBILE_CHAT
 	}
 	Inject("Friends", {
 		OnLoad = function(self) RegEvents(self, "PLAYER_LOGIN PLAYER_ENTERING_WORLD GROUP_ROSTER_UPDATE FRIENDLIST_UPDATE BN_FRIEND_LIST_SIZE_CHANGED BN_FRIEND_ACCOUNT_ONLINE BN_FRIEND_ACCOUNT_OFFLINE BN_FRIEND_INFO_CHANGED BN_FRIEND_ACCOUNT_ONLINE BN_FRIEND_ACCOUNT_OFFLINE BN_FRIEND_INFO_CHANGED") end,
@@ -1237,6 +1249,9 @@ if durability.enabled then
 				elseif button == "LeftButton" then
 					ToggleCharacter("PaperDollFrame")
 				end
+
+
+
 			end
 		end
 	})
@@ -1280,33 +1295,33 @@ if experience.enabled then
 		local t = experience
 		-- exp tags
 		return sub == "level" and UnitLevel(P)
-				or sub == "curxp" and short(UnitXP(P),tt)
-				or sub == "remainingxp" and short(UnitXPMax(P) - UnitXP(P), tt)
-				or sub == "totalxp" and short(UnitXPMax(P), tt)
-				or sub == "cur%" and (UnitXPMax(P) > 0 and floor(UnitXP(P) / UnitXPMax(P) * 100) or 0)
-				or sub == "remaining%" and 100 - floor(UnitXP(P) / UnitXPMax(P) * 100)
-				or sub == "restxp" and short(GetXPExhaustion() or 0,tt)
-				or sub == "rest%" and min(150, floor((GetXPExhaustion() or 0) / UnitXPMax(P) * 100))
-				or sub == "sessiongained" and short(gained,tt)
-				or sub == "sessionrate" and short(gained / (GetTime() - playedmsg) * 3600, tt)
-				or sub == "levelrate" and short(UnitXP(P) / (playedlevel + GetTime() - playedmsg) * 3600, tt)
-				or sub == "sessionttl" and (gained ~= 0 and fmttime((UnitXPMax(P) - UnitXP(P)) / (gained / (GetTime() - playedmsg)), t) or L_STATS_INF)
-				or sub == "levelttl" and (UnitXP(P) ~= 0 and fmttime((UnitXPMax(P) - UnitXP(P)) / (UnitXP(P) / (playedlevel + GetTime() - playedmsg)), t) or L_STATS_INF)
-				or sub == "questsleft" and (lastquest and ceil((UnitXPMax(P) - UnitXP(P)) / tonumber(lastquest)) or "??")
-				or sub == "killsleft" and (lastkill and ceil((UnitXPMax(P) - UnitXP(P)) / tonumber(lastkill)) or "??")
-				-- time played tags
-				or sub == "playedtotal" and fmttime(playedtotal + GetTime() - playedmsg, t)
-				or sub == "playedlevel" and fmttime(playedlevel + GetTime() - playedmsg, t)
-				or sub == "playedsession" and fmttime(GetTime() - logintime,t)
-				-- rep tags
-				or sub == "repname" and (t.faction_subs[repname] or repname)
-				or sub == "repcolor" and "|cff"..repcolor
-				or sub == "standing" and standingname
-				or sub == "currep" and (currep ~= maxrep and abs(currep - minrep) or currep > 0 and 1 or 0)
-				or sub == "repleft" and abs(maxrep - currep)
-				or sub == "maxrep" and (currep ~= maxrep and abs(maxrep - minrep) or maxrep > 0 and 1 or 0)
-				or sub == "rep%" and (currep ~= 0 and floor(abs(currep - minrep) / abs(maxrep - minrep) * 100) or 0)
-				or format("[%s]", sub)
+		or sub == "curxp" and short(UnitXP(P),tt)
+		or sub == "remainingxp" and short(UnitXPMax(P) - UnitXP(P), tt)
+		or sub == "totalxp" and short(UnitXPMax(P), tt)
+		or sub == "cur%" and (UnitXPMax(P) > 0 and floor(UnitXP(P) / UnitXPMax(P) * 100) or 0)
+		or sub == "remaining%" and 100 - floor(UnitXP(P) / UnitXPMax(P) * 100)
+		or sub == "restxp" and short(GetXPExhaustion() or 0,tt)
+		or sub == "rest%" and min(150, floor((GetXPExhaustion() or 0) / UnitXPMax(P) * 100))
+		or sub == "sessiongained" and short(gained,tt)
+		or sub == "sessionrate" and short(gained / (GetTime() - playedmsg) * 3600, tt)
+		or sub == "levelrate" and short(UnitXP(P) / (playedlevel + GetTime() - playedmsg) * 3600, tt)
+		or sub == "sessionttl" and (gained ~= 0 and fmttime((UnitXPMax(P) - UnitXP(P)) / (gained / (GetTime() - playedmsg)), t) or L_STATS_INF)
+		or sub == "levelttl" and (UnitXP(P) ~= 0 and fmttime((UnitXPMax(P) - UnitXP(P)) / (UnitXP(P) / (playedlevel + GetTime() - playedmsg)), t) or L_STATS_INF)
+		or sub == "questsleft" and (lastquest and ceil((UnitXPMax(P) - UnitXP(P)) / tonumber(lastquest)) or "??")
+		or sub == "killsleft" and (lastkill and ceil((UnitXPMax(P) - UnitXP(P)) / tonumber(lastkill)) or "??")
+		-- time played tags
+		or sub == "playedtotal" and fmttime(playedtotal + GetTime() - playedmsg, t)
+		or sub == "playedlevel" and fmttime(playedlevel + GetTime() - playedmsg, t)
+		or sub == "playedsession" and fmttime(GetTime() - logintime,t)
+		-- rep tags
+		or sub == "repname" and (t.faction_subs[repname] or repname)
+		or sub == "repcolor" and "|cff"..repcolor
+		or sub == "standing" and standingname
+		or sub == "currep" and (currep ~= maxrep and abs(currep - minrep) or currep > 0 and 1 or 0)
+		or sub == "repleft" and abs(maxrep - currep)
+		or sub == "maxrep" and (currep ~= maxrep and abs(maxrep - minrep) or maxrep > 0 and 1 or 0)
+		or sub == "rep%" and (currep ~= 0 and floor(abs(currep - minrep) / abs(maxrep - minrep) * 100) or 0)
+		or format("[%s]", sub)
 	end
 	Inject("Experience", {
 		text = {
@@ -1453,9 +1468,9 @@ if experience.enabled then
 		OnClick = function(self, button)
 			if button == "RightButton" then
 				conf.ExpMode = conf.ExpMode == "xp" and "played"
-						or conf.ExpMode == "played" and "rep"
-						or (conf.ExpMode == "rep" and UnitLevel(P) ~= MAX_PLAYER_LEVEL) and "xp"
-						or conf.ExpMode == "rep" and "played"
+				or conf.ExpMode == "played" and "rep"
+				or (conf.ExpMode == "rep" and UnitLevel(P) ~= MAX_PLAYER_LEVEL) and "xp"
+				or conf.ExpMode == "rep" and "played"
 				if conf.ExpMode == "rep" then
 					self:GetScript("OnEvent")(self, "UPDATE_FACTION")
 				else
@@ -1888,6 +1903,7 @@ if gold.enabled then
 				end
 
 				-- if C.stats.currency_raid and T.level == MAX_PLAYER_LEVEL then
+
 				-- titleName = L_STATS_CURRENCY_RAID
 				-- Currency(1580, false, true)	-- Seal of Wartorn Fate
 				-- end
