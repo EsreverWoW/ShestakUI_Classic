@@ -252,7 +252,7 @@ SlashCmdList.MOUSEOVERBIND = function()
 		function bind:Deactivate(save)
 			local which = GetCurrentBindingSet()
 			if save then
-				if T.classic then
+				if T.classic and not T.BCC then
 					AttemptToSaveBindings(which)
 				else
 					SaveBindings(which)
@@ -330,7 +330,9 @@ SlashCmdList.MOUSEOVERBIND = function()
 			b:HookScript("OnEnter", function(self) bind:Update(self, "SPELL") end)
 		end
 
-		ExtraActionButton1:HookScript("OnEnter", function(self) bind:Update(self) end)
+		if not T.classic then
+			ExtraActionButton1:HookScript("OnEnter", function(self) bind:Update(self) end)
+		end
 
 		local function registermacro()
 			for i = 1, MAX_ACCOUNT_MACROS do
