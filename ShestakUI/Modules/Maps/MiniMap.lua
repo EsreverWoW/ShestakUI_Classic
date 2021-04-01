@@ -305,7 +305,7 @@ if T.classic then
 	tremove(micromenu, 12)
 	tremove(micromenu, 11)
 	tremove(micromenu, 10)
-	tremove(micromenu, 9) -- remove once PvP is added in?
+	tremove(micromenu, 9)
 	tremove(micromenu, 6)
 	tremove(micromenu, 4)
 end
@@ -354,7 +354,7 @@ Minimap:SetScript("OnMouseUp", function(self, button)
 		else
 			EasyMenu(micromenu, menuFrame, "cursor", -160, 0, "MENU")
 		end
-	elseif not T.classic and button == "MiddleButton" then
+	elseif (not T.classic or T.BCC) and button == "MiddleButton" then
 		if position:match("LEFT") then
 			ToggleDropDownMenu(nil, nil, MiniMapTrackingDropDown, "cursor", 0, 0, "MENU", 2)
 		else
