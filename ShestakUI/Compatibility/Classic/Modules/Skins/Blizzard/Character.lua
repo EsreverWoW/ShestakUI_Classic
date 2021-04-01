@@ -64,6 +64,14 @@ local function LoadSkin()
 
 	HandleResistanceFrame("MagicResFrame")
 
+	if T.BCC then
+		T.SkinDropDownBox(PlayerStatFrameLeftDropDown, 140)
+		T.SkinDropDownBox(PlayerStatFrameRightDropDown, 140)
+		PlayerStatFrameLeftDropDownButton:SetNormalTexture("Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Up")
+		PlayerStatFrameLeftDropDownButton:SetPushedTexture("Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Down")
+		PlayerStatFrameLeftDropDownButton:SetDisabledTexture("Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Disabled")
+	end
+
 	local slots = {
 		"HeadSlot",
 		"NeckSlot",
