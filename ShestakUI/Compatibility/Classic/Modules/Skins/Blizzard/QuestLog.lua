@@ -177,10 +177,6 @@ local function LoadSkin()
 		local titleTextColor = {1, 0.80, 0.10}
 		local textColor = {1, 1, 1}
 
-		QuestTitleFont:SetTextColor(unpack(titleTextColor))
-		QuestFont:SetTextColor(unpack(textColor))
-		QuestFontNormalSmall:SetTextColor(unpack(textColor))
-
 		QuestLogDescriptionTitle:SetTextColor(unpack(titleTextColor))
 		QuestLogQuestTitle:SetTextColor(unpack(titleTextColor))
 		QuestLogRewardTitleText:SetTextColor(unpack(titleTextColor))
