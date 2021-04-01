@@ -54,12 +54,16 @@ local function LoadSkin()
 
 	local QuestStrip = {
 		"QuestLogFrame",
+		"QuestLogCount",
 		"QuestLogQuestCount",
 		"EmptyQuestLogFrame"
 	}
 
-	for _, object in pairs(QuestStrip) do
-		_G[object]:StripTextures(true)
+	for i = 1, getn(QuestStrip) do
+		local object = _G[QuestStrip[i]]
+		if object then
+			object:StripTextures(true)
+		end
 	end
 
 	QuestLogQuestCount:ClearAllPoints()
@@ -71,81 +75,41 @@ local function LoadSkin()
 		"QuestFramePushQuestButton",
 	}
 
-	for _, button in pairs(QuestButtons) do
-		_G[button]:StripTextures()
-		_G[button]:SkinButton()
-	end
-
-	local questItems = {
-		"QuestLogItem",
-		-- "QuestDetailItem",
-		-- "QuestRewardItem"
-	}
-
-	for _, frame in pairs(questItems) do
-		for i = 1, MAX_NUM_ITEMS do
-			local item = _G[frame..i]
-			local icon = _G[frame..i.."IconTexture"]
-			local count = _G[frame..i.."Count"]
-
-			item:StripTextures()
-			item:SetTemplate("Default")
-			item:StyleButton()
-			item:SetSize(143, 40)
-			item:SetFrameLevel(item:GetFrameLevel() + 2)
-
-			icon:SetSize(32, 32)
-			icon:SetDrawLayer("OVERLAY")
-			icon:SetPoint("TOPLEFT", 4, -4)
-			icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-
-			-- count:SetParent(item.backdrop)
-			count:SetDrawLayer("OVERLAY")
+	for i = 1, getn(QuestButtons) do
+		local object = _G[QuestButtons[i]]
+		if object then
+			object:StripTextures()
+			object:SkinButton()
 		end
 	end
 
-	local questHonorFrames = {
-		-- "QuestLogHonorFrame",
-		-- "QuestDetailHonorFrame",
-		-- "QuestRewardHonorFrame"
-	}
+	for i = 1, MAX_NUM_ITEMS do
+		local item = _G["QuestLogItem"..i]
+		local icon = _G["QuestLogItem"..i.."IconTexture"]
+		local count = _G["QuestLogItem"..i.."Count"]
 
-	for _, frame in pairs(questHonorFrames) do
-		local honor = _G[frame]
-		local icon = _G[frame.."Icon"]
-		local points = _G[frame.."Points"]
-		local text = _G[frame.."HonorReceiveText"]
+		item:StripTextures()
+		item:SetTemplate("Default")
+		item:StyleButton()
+		item:SetSize(143, 40)
+		item:SetFrameLevel(item:GetFrameLevel() + 2)
 
-		honor:SetTemplate("Default")
-		honor:SetSize(143, 40)
-
-		icon.backdrop = CreateFrame("Frame", nil, honor)
-		icon.backdrop:SetFrameLevel(honor:GetFrameLevel() - 1)
-		icon.backdrop:SetTemplate("Default")
-		icon.backdrop:SetOutside(icon)
-
-		icon:SetTexture("Interface\\PVPFrame\\PVP-Currency-"..T.faction)
-		icon.SetTexture = T.dummy
-		icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+		icon:SetSize(32, 32)
 		icon:SetDrawLayer("OVERLAY")
-		icon:SetSize(38, 38)
-		icon:ClearAllPoints()
-		icon:SetPoint("TOPLEFT", 1, -1)
-		icon:SetParent(icon.backdrop)
+		icon:SetPoint("TOPLEFT", 4, -4)
+		icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 
-		points:ClearAllPoints()
-		points:SetPoint("BOTTOMRIGHT", icon, "BOTTOMRIGHT", -2, 2)
-		points:SetParent(icon.backdrop)
-		points:SetDrawLayer("OVERLAY")
-		-- points:FontTemplate(nil, nil, "OUTLINE")
-
-		text:SetPoint("LEFT", honor, "LEFT", 44, 0)
-		text:SetText(HONOR_POINTS)
+		-- count:SetParent(item.backdrop)
+		count:SetDrawLayer("OVERLAY")
 	end
 
 	local function QuestQualityColors(frame, text, quality, link)
 		if link and not quality then
 			quality = select(3, GetItemInfo(link))
+		end
+
+		if T.BCC and frame then
+			Mixin(frame, BackdropTemplateMixin) -- 9.0 to set backdrop
 		end
 
 		if quality then
