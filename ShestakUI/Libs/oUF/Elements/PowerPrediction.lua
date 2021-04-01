@@ -24,11 +24,16 @@ local function Update(self, event, unit)
 		element:PreUpdate(unit)
 	end
 
-	local _, _, _, startTime, endTime, _, _, _, spellID = UnitCastingInfo(unit)
+	local _, _, _, startTime, endTime, _, _, notInterruptible, spellID = UnitCastingInfo(unit)
 	local mainPowerType = UnitPowerType(unit)
 	local hasAltManaBar = (not oUF:IsClassic() and ALT_MANA_BAR_PAIR_DISPLAY_INFO[playerClass]
 	and ALT_MANA_BAR_PAIR_DISPLAY_INFO[playerClass][mainPowerType])
 	local mainCost, altCost = 0, 0
+
+	if(oUF:IsBCC()) then
+		spellID = notInterruptible -- there is no notInterruptible return in Burning Crusade Classic
+		notInterruptible = false
+	end
 
 	if(event == 'UNIT_SPELLCAST_START' and startTime ~= endTime) then
 		local costTable = GetSpellPowerCost(spellID)
