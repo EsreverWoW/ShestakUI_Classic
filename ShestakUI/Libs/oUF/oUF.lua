@@ -378,12 +378,21 @@ local function walkObject(object, unit)
 end
 
 --[[ oUF:IsClassic()
-Used to determine if runninig retail or classic.
+Used to determine if running retail or classic.
 
 * self - the global oUF object
 --]]
 function oUF:IsClassic()
 	return _G.WOW_PROJECT_ID == _G.WOW_PROJECT_CLASSIC
+end
+
+--[[ oUF:IsBCC()
+Used to determine if running Burning Crusade Classic.
+
+* self - the global oUF object
+--]]
+function oUF:IsBCC()
+	return oUF:IsClassic() and select(4, GetBuildInfo()) > 20500
 end
 
 --[[ oUF:RegisterInitCallback(func)

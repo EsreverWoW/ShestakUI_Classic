@@ -1,5 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
-if not T.classic or T.BCC or C.unitframe.enable ~= true or C.unitframe.show_arena ~= true then return end
+if not T.BCC or C.unitframe.enable ~= true or C.unitframe.show_arena ~= true then return end
 
 ----------------------------------------------------------------------------------------
 --	The best way to add or delete spell is to go at www.wowhead.com, search for a spell.
@@ -130,7 +130,7 @@ T.ArenaControl = {
 	[SpellName(20554)] = 1,		-- Berserking (Mana)
 	-- [SpellName(26296)] = 1,		-- Berserking (Rage)
 	-- [SpellName(26297)] = 1,		-- Berserking (Energy)
-	[SpellName(23234)] = 1,		-- Blood Fury
+	-- [SpellName(23234)] = 1,		-- Blood Fury
 	[SpellName(20600)] = 1,		-- Perception
 	[SpellName(20594)] = 1,		-- Stoneform
 	[SpellName(7744)] = 1,		-- Will of the Forsaken

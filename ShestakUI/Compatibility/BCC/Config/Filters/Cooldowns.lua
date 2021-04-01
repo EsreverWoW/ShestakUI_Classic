@@ -1,5 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
-if not T.classic or T.BCC then return end
+if not T.BCC then return end
 
 ----------------------------------------------------------------------------------------
 --	The best way to add or delete spell is to go at www.wowhead.com, search for a spell.
@@ -97,7 +97,7 @@ if C.enemycooldown.enable == true then
 		{5579, 300},	-- PvP Trinket (Hunter/Shaman/Warrior)
 		{23274, 300},	-- PvP Trinket (Mage)
 		{23276, 300},	-- PvP Trinket (Paladin/Priest)
-		{23273, 300},	-- PvP Trinket (Rogue/Warlock)
+		-- {23273, 300},	-- PvP Trinket (Rogue/Warlock)
 	}
 
 	if #C.enemycooldown.spells_list > 0 then

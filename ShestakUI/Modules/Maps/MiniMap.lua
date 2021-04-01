@@ -393,13 +393,18 @@ end
 ----------------------------------------------------------------------------------------
 --	Tracking icon
 ----------------------------------------------------------------------------------------
-if not T.classic then
+if not T.classic or T.BCC then
 	if C.minimap.tracking_icon then
 		MiniMapTrackingBackground:Hide()
 		MiniMapTracking:ClearAllPoints()
-		MiniMapTracking:SetPoint("BOTTOMLEFT", MinimapAnchor, "BOTTOMLEFT", 0, -4)
-		MiniMapTrackingButton:SetHighlightTexture(nil)
-		MiniMapTrackingButtonBorder:Hide()
+		if not T.BCC then
+			MiniMapTracking:SetPoint("BOTTOMLEFT", MinimapAnchor, "BOTTOMLEFT", 0, -4)
+			MiniMapTrackingButton:SetHighlightTexture(nil)
+			MiniMapTrackingButtonBorder:Hide()
+		else
+			MiniMapTracking:SetPoint("BOTTOMLEFT", MinimapAnchor, "BOTTOMLEFT", -4, 0)
+			MiniMapTrackingBorder:Hide()
+		end
 		MiniMapTrackingIcon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 		MiniMapTrackingIcon:SetSize(16, 16)
 		MiniMapTrackingIcon.SetPoint = T.dummy

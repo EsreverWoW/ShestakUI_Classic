@@ -16,4 +16,5 @@ T.screenWidth, T.screenHeight = GetPhysicalScreenSize()
 T.wowBuild = select(2, GetBuildInfo()); T.wowBuild = tonumber(T.wowBuild)
 T.beta = select(4, GetBuildInfo())
 T.classic = _G.WOW_PROJECT_ID == _G.WOW_PROJECT_CLASSIC
+T.BCC = T.classic and select(4, GetBuildInfo()) > 20500
 T.HiDPI = T.classic and (GetScreenHeight() / T.screenHeight < 0.75)

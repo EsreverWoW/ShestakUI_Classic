@@ -1,5 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
-if not T.classic or T.BCC or (C.general.error_filter ~= "WHITELIST" and C.general.error_filter ~= "BLACKLIST") then return end
+if not T.BCC or (C.general.error_filter ~= "WHITELIST" and C.general.error_filter ~= "BLACKLIST") then return end
 
 ----------------------------------------------------------------------------------------
 --	All errors on http://wowwiki.wikia.com/wiki/WoW_Constants/Errors

@@ -30,16 +30,20 @@ UnitInVehicle = _G.UnitInVehicle or T.dummy
 ----------------------------------------------------------------------------------------
 --	LibClassicDurations (by d87)
 ----------------------------------------------------------------------------------------
-local LibClassicDurations = LibStub("LibClassicDurations")
-LibClassicDurations:Register("ShestakUI")
+if not T.BCC then
+	local LibClassicDurations = LibStub("LibClassicDurations")
+	LibClassicDurations:Register("ShestakUI")
+end
 
 ----------------------------------------------------------------------------------------
 --	TBC+ Shaman Coloring (config option later)
 ----------------------------------------------------------------------------------------
-RAID_CLASS_COLORS.SHAMAN.r = 0
-RAID_CLASS_COLORS.SHAMAN.g = 0.44
-RAID_CLASS_COLORS.SHAMAN.b = 0.87
-RAID_CLASS_COLORS.SHAMAN.colorStr = "ff0070de"
+if not T.BCC then
+	RAID_CLASS_COLORS.SHAMAN.r = 0
+	RAID_CLASS_COLORS.SHAMAN.g = 0.44
+	RAID_CLASS_COLORS.SHAMAN.b = 0.87
+	RAID_CLASS_COLORS.SHAMAN.colorStr = "ff0070de"
+end
 
 ----------------------------------------------------------------------------------------
 --	Specialization Functions
@@ -161,7 +165,9 @@ local spellLookupLocalized = {}
 for i = 1, #spellLookup do
 	local name = GetSpellInfo(spellLookup[i])
 	if not name then
-		print("|cffff0000WARNING: spell ID ["..tostring(spellLookup[i]).."] no longer exists! Report this to EsreverWoW.|r")
+		if not T.BCC or spellLookup[i] ~= 26545 then -- Lightning Shield spellID is not in Burning Crusade Classic
+			print("|cffff0000WARNING: spell ID ["..tostring(spellLookup[i]).."] no longer exists! Report this to EsreverWoW.|r")
+		end
 	else
 		spellLookupLocalized[name] = spellLookup[i]
 	end

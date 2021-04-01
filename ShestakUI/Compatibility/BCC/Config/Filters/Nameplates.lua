@@ -1,5 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
-if not T.classic or T.BCC or C.nameplate.enable ~= true then return end
+if not T.BCC or C.nameplate.enable ~= true then return end
 
 ----------------------------------------------------------------------------------------
 --	The best way to add or delete spell is to go at www.wowhead.com, search for a spell.
@@ -397,7 +397,7 @@ T.BuffWhiteList = {
 	[SpellName(20554)] = true,	-- Berserking (Mana)
 	-- [SpellName(26296)] = true,	-- Berserking (Rage)
 	-- [SpellName(26297)] = true,	-- Berserking (Energy)
-	[SpellName(23234)] = true,	-- Blood Fury
+	-- [SpellName(23234)] = true,	-- Blood Fury
 	-- [SpellName(2481)] = true,	-- Find Treasure
 	[SpellName(20600)] = true,	-- Perception
 	-- [SpellName(20580)] = true,	-- Shadowmeld

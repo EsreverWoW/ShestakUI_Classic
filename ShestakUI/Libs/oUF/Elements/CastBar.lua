@@ -5,7 +5,7 @@ local UnitCastingInfo = UnitCastingInfo or CastingInfo
 local UnitChannelInfo = UnitChannelInfo or ChannelInfo
 local FALLBACK_ICON = 136243 -- Interface\ICONS\Trade_Engineering
 
-local LibClassicCasterino = oUF:IsClassic() and LibStub('LibClassicCasterino', true)
+local LibClassicCasterino = (oUF:IsClassic() and not oUF:IsBCC()) and LibStub('LibClassicCasterino', true)
 if(LibClassicCasterino) then
 	UnitCastingInfo = function(unit)
 		return LibClassicCasterino:UnitCastingInfo(unit)
@@ -35,6 +35,11 @@ local function CastStart(self, event, unit)
 	if(not name) then
 		name, _, texture, startTime, endTime, isTradeSkill, notInterruptible, spellID = UnitChannelInfo(unit)
 		event = 'UNIT_SPELLCAST_CHANNEL_START'
+	end
+
+	if(oUF:IsBCC()) then
+		spellID = notInterruptible -- there is no notInterruptible return in Burning Crusade Classic
+		notInterruptible = false
 	end
 
 	if(not name or (isTradeSkill and element.hideTradeSkills)) then
@@ -310,7 +315,7 @@ local function Enable(self, unit)
 		element.__owner = self
 		element.ForceUpdate = ForceUpdate
 
-		if(not oUF:IsClassic() or self.unit == 'player') then
+		if((not oUF:IsClassic() or oUF:IsBCC()) or self.unit == 'player') then
 			self:RegisterEvent('UNIT_SPELLCAST_START', CastStart)
 			self:RegisterEvent('UNIT_SPELLCAST_CHANNEL_START', CastStart)
 			self:RegisterEvent('UNIT_SPELLCAST_STOP', CastStop)

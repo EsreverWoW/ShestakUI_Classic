@@ -35,7 +35,7 @@ if not T.classic then
 	SpellActivationOverlayFrame:SetFrameStrata("BACKGROUND")
 end
 
-local LibClassicDurations = T.classic and LibStub("LibClassicDurations")
+local LibClassicDurations = (T.classic and not T.BCC) and LibStub("LibClassicDurations")
 
 local Filger = {}
 local MyUnits = {player = true, vehicle = true, pet = true}

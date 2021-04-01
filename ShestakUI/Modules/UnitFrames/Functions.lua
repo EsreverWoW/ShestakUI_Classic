@@ -489,7 +489,7 @@ T.PostCastStart = function(Castbar, unit)
 		if Castbar.casting then
 			setBarTicks(Castbar, 0)
 		else
-			local spell = T.classic and ChannelInfo() or UnitChannelInfo(unit)
+			local spell = (T.classic and not T.BCC) and ChannelInfo() or UnitChannelInfo(unit)
 			Castbar.channelingTicks = T.CastBarTicks[spell] or 0
 			setBarTicks(Castbar, Castbar.channelingTicks)
 		end
@@ -542,7 +542,7 @@ T.PostCastStart = function(Castbar, unit)
 		Castbar.Overlay:SetBackdropBorderColor(unpack(C.media.border_color))
 		if C.unitframe.castbar_icon == true and (unit == "target" or unit == "focus") then
 			-- FIXME
-			if not T.classic then
+			if not T.classic or T.BCC then
 				Castbar.Button:SetBackdropBorderColor(unpack(C.media.border_color))
 			end
 		end

@@ -293,6 +293,11 @@ if clock.enabled then
 				weekday = CALENDAR_WEEKDAY_NAMES[currentCalendarTime.weekday]
 				month = CALENDAR_MONTH_NAMES[currentCalendarTime.month]
 				fullDate = format(FULLDATE, weekday, month, currentCalendarTime.monthDay, currentCalendarTime.year, currentCalendarTime.month)
+			elseif T.BCC then
+				currentCalendarTime = C_DateAndTime.GetTodaysDate()
+				weekday = CALENDAR_WEEKDAY_NAMES[currentCalendarTime.weekday]
+				month = CALENDAR_FULLDATE_MONTH_NAMES[currentCalendarTime.month]
+				fullDate = format(FULLDATE, weekday, month, currentCalendarTime.day, currentCalendarTime.year, currentCalendarTime.month)
 			else
 				currentCalendarTime = C_DateAndTime.GetTodaysDate()
 				weekday = CALENDAR_WEEKDAY_NAMES[currentCalendarTime.weekDay]

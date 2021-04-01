@@ -1,4 +1,4 @@
-## Interface: 11306
+## Interface: 20501
 ## Title: ShestakUI (Classic)
 ## Notes: A total UI overhaul for World of Warcraft
 ## Author: Shestak

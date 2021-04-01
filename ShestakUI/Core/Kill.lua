@@ -40,7 +40,9 @@ frame:SetScript("OnEvent", function(_, _, addon)
 	end
 	SetCVarBitfield("closedInfoFrames", LE_FRAME_TUTORIAL_WORLD_MAP_FRAME, true)
 	SetCVarBitfield("closedInfoFrames", LE_FRAME_TUTORIAL_PET_JOURNAL, true)
-	SetCVarBitfield("closedInfoFrames", LE_FRAME_TUTORIAL_GARRISON_BUILDING, true)
+	if not T.BCC then
+		SetCVarBitfield("closedInfoFrames", LE_FRAME_TUTORIAL_GARRISON_BUILDING, true)
+	end
 
 	SetCVar("countdownForCooldowns", 0)
 	InterfaceOptionsActionBarsPanelCountdownCooldowns:Hide()

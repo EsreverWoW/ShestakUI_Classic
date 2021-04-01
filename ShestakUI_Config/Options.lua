@@ -10,6 +10,10 @@ local function IsClassicBuild()
 	return _G.WOW_PROJECT_ID == _G.WOW_PROJECT_CLASSIC
 end
 
+local function IsBCCBuild()
+	return IsClassicBuild() and select(4, GetBuildInfo() > 20500)
+end
+
 local function HideOptions(list)
 	for i = 1, #list do
 		local frame = list[i]
@@ -248,7 +252,7 @@ SpellList.makeSpellsList = function(_, db, double)
 			if not isFilger or isFilger and spell[2] == T.class then
 				local sp = (double or ShestakUIOptionsPanelfilger:IsShown()) and spell[1] or spell
 				local name, _, icon = GetSpellInfo(sp)
-				local bf = _G["SpellList"..i.."_cbs"] or CreateFrame("Button", "SpellList"..i.."_cbs", scroll, not IsClassicBuild() and "BackdropTemplate" or nil)
+				local bf = _G["SpellList"..i.."_cbs"] or CreateFrame("Button", "SpellList"..i.."_cbs", scroll, (not IsClassicBuild() or IsBCCBuild()) and "BackdropTemplate" or nil)
 
 				if i == 1 then
 					bf:SetPoint("TOPLEFT", scroll, "TOPLEFT", 10, -5)

@@ -1,4 +1,4 @@
-## Interface: 11306
+## Interface: 20501
 ## Title: ShestakUI (Classic) Config
 ## Notes: In-game configuration for ShestakUI
 ## Author: Shestak

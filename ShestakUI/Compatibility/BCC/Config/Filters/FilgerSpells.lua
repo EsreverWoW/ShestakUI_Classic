@@ -1,5 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
-if not T.classic or T.BCC or C.unitframe.enable ~= true or C.filger.enable ~= true then return end
+if not T.BCC or C.unitframe.enable ~= true or C.filger.enable ~= true then return end
 
 ----------------------------------------------------------------------------------------
 --	The best way to add or delete spell is to go at www.wowhead.com, search for a spell.
@@ -701,7 +701,7 @@ C["filger_spells"] = {
 			-- Berserking (Mana)
 			{spellID = 20554, filter = "CD", absID = true},
 			-- Blood Fury
-			{spellID = 23234, filter = "CD", absID = true},
+			-- {spellID = 23234, filter = "CD", absID = true},
 			-- Shadowmeld (Night Elf)
 			{spellID = 20580, filter = "CD"},
 			-- Stoneform (Dwarf)
@@ -1900,7 +1900,7 @@ C["filger_spells"] = {
 			-- Berserking (Energy)
 			{spellID = 26297, filter = "CD", absID = true},
 			-- Blood Fury
-			{spellID = 23234, filter = "CD", absID = true},
+			-- {spellID = 23234, filter = "CD", absID = true},
 			-- Cannibalize (Forsaken)
 			{spellID = 20577, filter = "CD"},
 			-- Escape Artist (Gnome)
@@ -2240,7 +2240,7 @@ C["filger_spells"] = {
 			-- Berserking (Mana)
 			{spellID = 20554, filter = "CD", absID = true},
 			-- Blood Fury
-			{spellID = 23234, filter = "CD", absID = true},
+			-- {spellID = 23234, filter = "CD", absID = true},
 			-- War Stomp (Tauren)
 			{spellID = 20600, filter = "CD", absID = true},
 
@@ -2544,7 +2544,7 @@ C["filger_spells"] = {
 
 			-- Racial
 			-- Blood Fury
-			{spellID = 23234, filter = "CD", absID = true},
+			-- {spellID = 23234, filter = "CD", absID = true},
 			-- Cannibalize (Forsaken)
 			{spellID = 20577, filter = "CD"},
 			-- Escape Artist (Gnome)
@@ -2857,7 +2857,7 @@ C["filger_spells"] = {
 			-- Berserking (Rage)
 			{spellID = 26296, filter = "CD", absID = true},
 			-- Blood Fury
-			{spellID = 23234, filter = "CD", absID = true},
+			-- {spellID = 23234, filter = "CD", absID = true},
 			-- Cannibalize (Forsaken)
 			{spellID = 20577, filter = "CD"},
 			-- Escape Artist (Gnome)
@@ -2956,7 +2956,7 @@ C["filger_spells"] = {
 			-- Berserking (Energy)
 			{spellID = 26297, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Blood Fury
-			{spellID = 23234, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- {spellID = 23234, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Perception (Human)
 			{spellID = 20600, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Shadowmeld (Night Elf)

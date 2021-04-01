@@ -81,6 +81,22 @@
 	<Script file="Compatibility\Classic\Config\Filters\RaidAuraWatch.lua"/>
 	<Script file="Compatibility\Classic\Config\Filters\Reminders.lua"/>
 
+	<Script file="Compatibility\BCC\Config\Filters\Announcements.lua"/>
+	<Script file="Compatibility\BCC\Config\Filters\ArenaControl.lua"/>
+	<Script file="Compatibility\BCC\Config\Filters\AutoButton.lua"/>
+	<Script file="Compatibility\BCC\Config\Filters\BadBuffs.lua"/>
+	<Script file="Compatibility\BCC\Config\Filters\ChannelingTicks.lua"/>
+	<Script file="Compatibility\BCC\Config\Filters\ChatSpam.lua"/>
+	<Script file="Compatibility\BCC\Config\Filters\CombatText.lua"/>
+	<Script file="Compatibility\BCC\Config\Filters\Cooldowns.lua"/>
+	<Script file="Compatibility\BCC\Config\Filters\Diminishing.lua"/>
+	<Script file="Compatibility\BCC\Config\Filters\Errors.lua"/>
+	<Script file="Compatibility\BCC\Config\Filters\FilgerSpells.lua"/>
+	<Script file="Compatibility\BCC\Config\Filters\Nameplates.lua"/>
+	<Script file="Compatibility\BCC\Config\Filters\OpenItems.lua"/>
+	<Script file="Compatibility\BCC\Config\Filters\RaidAuraWatch.lua"/>
+	<Script file="Compatibility\BCC\Config\Filters\Reminders.lua"/>
+
 	<Script file="Core\API.lua"/>
 	<Script file="Core\Functions.lua"/>
 	<Script file="Core\Launch.lua"/>

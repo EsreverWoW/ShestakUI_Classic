@@ -38,13 +38,13 @@ local function LoadSkin()
 		-- "LFRQueueFrameListInset",
 		-- "LFRQueueFrameRoleInset",
 		-- "LFRQueueFrameCommentInset",
-		"ScrollOfResurrectionSelectionFrame",
-		"ScrollOfResurrectionSelectionFrameList",
-		"ScrollOfResurrectionFrame",
-		"ScrollOfResurrectionFrameNoteFrame",
+		-- "ScrollOfResurrectionSelectionFrame",
+		-- "ScrollOfResurrectionSelectionFrameList",
+		-- "ScrollOfResurrectionFrame",
+		-- "ScrollOfResurrectionFrameNoteFrame",
 		"FriendsFrameBattlenetFrame",
 		"BattleTagInviteFrame",
-		"RecruitAFriendNoteFrame",
+		-- "RecruitAFriendNoteFrame",
 		-- "QuickJoinScrollFrame",
 		-- "QuickJoinRoleSelectionFrame",
 	}
@@ -82,11 +82,11 @@ local function LoadSkin()
 		"GuildFrameControlButton",
 		"GuildMemberRemoveButton",
 		"GuildMemberGroupInviteButton",
-		"ScrollOfResurrectionSelectionFrameAcceptButton",
-		"ScrollOfResurrectionSelectionFrameCancelButton",
-		"ScrollOfResurrectionFrameAcceptButton",
-		"ScrollOfResurrectionFrameCancelButton",
-		"RecruitAFriendFrameSendButton",
+		-- "ScrollOfResurrectionSelectionFrameAcceptButton",
+		-- "ScrollOfResurrectionSelectionFrameCancelButton",
+		-- "ScrollOfResurrectionFrameAcceptButton",
+		-- "ScrollOfResurrectionFrameCancelButton",
+		-- "RecruitAFriendFrameSendButton",
 	}
 
 	for _, button in pairs(buttons) do
@@ -217,6 +217,7 @@ local function LoadSkin()
 
 	FriendsFrame:SetTemplate("Transparent")
 
+	--[[
 	ScrollOfResurrectionSelectionFrame:SetTemplate("Transparent")
 	ScrollOfResurrectionSelectionFrameList:SetTemplate("Overlay")
 	T.SkinEditBox(ScrollOfResurrectionSelectionFrameTargetEditBox, nil, ScrollOfResurrectionSelectionFrameTargetEditBox:GetHeight() - 5)
@@ -252,6 +253,7 @@ local function LoadSkin()
 	FriendsTabHeaderRecruitAFriendButtonIcon:ClearAllPoints()
 	FriendsTabHeaderRecruitAFriendButtonIcon:SetPoint("TOPLEFT", 2, -2)
 	FriendsTabHeaderRecruitAFriendButtonIcon:SetPoint("BOTTOMRIGHT", -2, 2)
+	--]]
 
 	T.SkinCloseButton(FriendsFrameCloseButton)
 	T.SkinDropDownBox(WhoFrameDropDown, 150)

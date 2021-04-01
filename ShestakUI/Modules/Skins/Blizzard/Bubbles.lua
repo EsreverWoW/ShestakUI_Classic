@@ -7,9 +7,9 @@ if C.skins.bubbles ~= true then return end
 local function styleBubble(bubble)
 	if bubble:IsForbidden() then return end
 
-	local frame = T.classic and bubble or bubble:GetChildren(1)
+	local frame = (T.classic and not T.BCC) and bubble or bubble:GetChildren(1)
 
-	if T.classic then
+	if T.classic and not T.BCC then
 		for i = 1, frame:GetNumRegions() do
 			local region = select(i, frame:GetRegions())
 			if region:IsObjectType("Texture") then

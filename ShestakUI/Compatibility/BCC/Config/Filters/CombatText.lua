@@ -1,5 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
-if not T.classic or T.BCC or C.combattext.enable ~= true then return end
+if not T.BCC or C.combattext.enable ~= true then return end
 
 ----------------------------------------------------------------------------------------
 --	The best way to add or delete spell is to go at www.wowhead.com, search for a spell.
@@ -97,7 +97,7 @@ elseif T.class == "SHAMAN" then
 		T.aoespam[5672] = 5			-- Healing Stream Totem
 		T.aoespam[1064] = 3			-- Chain Heal
 		-- Damaging spells
-		T.aoespam[26545] = 3		-- Lightning Shield
+		-- T.aoespam[26545] = 3		-- Lightning Shield
 		T.aoespam[421] = 1			-- Chain Lightning
 		T.aoespam[8349] = 0			-- Fire Nova
 		T.aoespam[8187] = 3			-- Magma Totem
