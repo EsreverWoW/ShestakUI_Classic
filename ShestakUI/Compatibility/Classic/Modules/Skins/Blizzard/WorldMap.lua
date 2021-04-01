@@ -15,6 +15,10 @@ local function LoadSkin()
 	T.SkinDropDownBox(WorldMapContinentDropDown)
 	T.SkinDropDownBox(WorldMapZoneDropDown)
 
+	if T.BCC then
+		T.SkinDropDownBox(WorldMapZoneMinimapDropDown)
+	end
+
 	WorldMapZoneDropDown:SetPoint("LEFT", WorldMapContinentDropDown, "RIGHT", -24, 0)
 	WorldMapZoomOutButton:SetPoint("LEFT", WorldMapZoneDropDown, "RIGHT", -4, 3)
 

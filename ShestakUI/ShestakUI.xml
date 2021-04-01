@@ -248,6 +248,8 @@
 	<Script file="Modules\Maps\WorldMap.lua"/>
 
 	<Script file="Compatibility\Classic\Modules\Maps\FogOfWar.lua"/>
+	<Script file="Compatibility\BCC\Modules\Maps\FogOfWar.lua"/>
+
 	<Script file="Compatibility\Classic\Modules\Maps\WorldMap.lua"/>
 
 	<Script file="Compatibility\Classic\Modules\Quests\ObjectiveTracker.lua"/>
