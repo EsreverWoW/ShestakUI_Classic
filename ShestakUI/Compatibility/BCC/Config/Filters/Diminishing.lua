@@ -13,6 +13,7 @@ T.DiminishingSpells = {
 	[24394] = {"stun"},				-- Intimidation
 	[853] = {"stun"},				-- Hammer of Justice
 	[1833] = {"stun"},				-- Cheap Shot
+	[30283] = {"stun"},				-- Shadowfury
 	[7922] = {"stun"},				-- Charge Stun
 	[12809] = {"stun"},				-- Concussion Blow
 	[20253] = {"stun"},				-- Intercept Stun
@@ -25,13 +26,14 @@ T.DiminishingSpells = {
 	[12355] = {"stunproc"},			-- Impact
 	[15269] = {"stunproc"},			-- Blackout
 	[20170] = {"stunproc"},			-- Seal of Justice
+	[39796] = {"stunproc"},			-- Stoneclaw Totem
 	-- [18093] = {"stunproc"},			-- Pyroclasm
 	[12798] = {"stunproc"},			-- Revenge Stun
 	[5530] = {"stunproc"},			-- Mace Specialization
 	--]]
 
 	-- Disorients
-	[22570] = {"disorient"},		-- Mangle
+	[22570] = {"disorient"},		-- Maim
 	[118] = {"disorient"},			-- Polymorph
 	[28272] = {"disorient"},		-- Polymorph: Pig
 	[28271] = {"disorient"},		-- Polymorph: Turtle
@@ -56,14 +58,16 @@ T.DiminishingSpells = {
 	[6789] = {"horror"},			-- Death Coil
 
 	-- Roots
-	-- [19675] = {"root"},				-- Feral Charge Effect
+	-- [45334] = {"root"},				-- Feral Charge Effect
 	[339] = {"root"},				-- Entangling Roots
 	[19975] = {"root"},				-- Entangling Roots (Nature's Grasp)
 	-- [19306] = {"root"},				-- Counterattack
 	[19185] = {"root"},				-- Entrapment
 	-- [19229] = {"root"},				-- Improved Wing Clip
+	[33395] = {"root"},				-- Freeze (Water Elemental)
 	[122] = {"root"},				-- Frost Nova
 	-- [12494] = {"root"},				-- Frostbite
+	[44041] = {"root"},				-- Chastise
 	-- [23694] = {"root"},				-- Improved Hamstring
 
 	--[[
@@ -74,15 +78,23 @@ T.DiminishingSpells = {
 
 	--[[
 	-- Silences
+	[34490] = {"silence"},			-- Silencing Shot
 	[18469] = {"silence"},			-- Counterspell - Silenced
 	[15487] = {"silence"},			-- Silence
+	[1330] = {"silence"},			-- Garrote - Silence
 	[18425] = {"silence"},			-- Kick - Silenced
 	[24259] = {"silence"},			-- Spell Lock (Felhunter)
+	-- [31117] = {"silence"},			-- Unstable Affliction (Silence)
 	[18498] = {"silence"},			-- Shield Bash - Silenced
+	[28730] = {"silence"},			-- Arcane Torrent (Mana)
+	[25046] = {"silence"},			-- Arcane Torrent (Energy)
+	-- [44835] = {"silence"},			-- Maim Interrupt (incorrect spellID)
+	[32747] = {"silence"},			-- Deadly Throw Interrupt
 	--]]
 
-	-- Blind
-	[2094] = {"blind"},				-- Blind
+	-- Cyclone / Blind
+	[33786] = {"cycloneblind"},		-- Cyclone
+	[2094] = {"cycloneblind"},		-- Blind
 
 	-- Freezing Trap
 	[3355] = {"freezingtrap"},		-- Freezing Trap
@@ -90,12 +102,16 @@ T.DiminishingSpells = {
 	-- Scatter Shot
 	[19503] = {"scattershot"},		-- Scatter Shot
 
+	-- Dragon's Breath
+	[31661] = {"dragonsbreath"},	-- Dragon's Breath
+
 	-- Repentence
 	[20066] = {"repentance"},		-- Repentance
 
 	--[[
-	-- Turn Undead
-	[2878] = {"turned"},			-- Turn Undead
+	-- Turn Evil / Turn Undead
+	[10326] = {"turned"},			-- Turn Evil
+	[19725] = {"turned"},			-- Turn Undead
 	--]]
 
 	--[[
@@ -123,11 +139,12 @@ T.DiminishingIcons = {
 	["root"] = GetIcon(339),
 	-- ["disarm"] = GetIcon(676),
 	-- ["silence"] = GetIcon(15487),
-	["blind"] = GetIcon(2094),
+	["cycloneblind"] = GetIcon(33786),
 	["freezingtrap"] = GetIcon(3355),
 	["scattershot"] = GetIcon(19503),
+	["dragonsbreath"] = GetIcon(31661),
 	["repentance"] = GetIcon(20066),
-	-- ["turned"] = GetIcon(2878),
+	-- ["turned"] = GetIcon(10326),
 	-- ["shackle"] = GetIcon(9484),
 	["kidneyshot"] = GetIcon(408),
 }

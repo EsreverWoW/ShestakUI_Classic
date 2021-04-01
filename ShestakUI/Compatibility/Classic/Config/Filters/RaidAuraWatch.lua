@@ -36,8 +36,6 @@ T.RaidBuffs = {
 		{6788, "TOPRIGHT", {1, 0, 0}, true},				-- Weakened Soul
 		{10060, "RIGHT", {0.89, 0.1, 0.1}},					-- Power Infusion
 	},
-	ROGUE = {
-	},
 	SHAMAN = {
 		-- {974, "BOTTOMLEFT", {0.2, 0.7, 0.2}, true},			-- Earth Shield
 		{29203, "BOTTOMRIGHT", {0.7, 0.4, 0}},				-- Healing Way (Change Color?)

@@ -280,7 +280,7 @@ if C.reminder.solo_buffs_enable == true then
 		MAGE = {
 			[1] = {	-- Armors group
 				["spells"] = {
-					SpellName(168),	-- Frost Armor
+					SpellName(168),		-- Frost Armor
 					SpellName(6117),	-- Mage Armor
 					SpellName(7302),	-- Ice Armor
 				},
@@ -348,12 +348,12 @@ if C.reminder.solo_buffs_enable == true then
 			--[[
 			[4] = {	-- Seals group
 				["spells"] = {
-					SpellName(21084),	-- Seal of Righteousness
-					SpellName(20375),	-- Seal of Command
-					SpellName(20164),	-- Seal of Justice
-					SpellName(20165),	-- Seal of Light
-					SpellName(20166),	-- Seal of Wisdom
-					SpellName(21082),	-- Seal of the Crusader
+					SpellName(21084),		-- Seal of Righteousness
+					SpellName(20375),		-- Seal of Command
+					SpellName(20164),		-- Seal of Justice
+					SpellName(20165),		-- Seal of Light
+					SpellName(20166),		-- Seal of Wisdom
+					SpellName(21082),		-- Seal of the Crusader
 				},
 				["combat"] = true,
 				["instance"] = true,
@@ -364,7 +364,7 @@ if C.reminder.solo_buffs_enable == true then
 		PRIEST = {
 			[1] = {	-- Inner Fire/Will group
 				["spells"] = {
-					SpellName(588),	-- Inner Fire
+					SpellName(588),		-- Inner Fire
 				},
 				["combat"] = true,
 				["instance"] = true,
@@ -390,7 +390,7 @@ if C.reminder.solo_buffs_enable == true then
 			},
 			[4] = {	-- Shadow Resistance group
 				["spells"] = {
-					SpellName(976),	-- Shadow Protection
+					SpellName(976),		-- Shadow Protection
 					SpellName(27683),	-- Prayer of Shadow Protection
 				},
 				["combat"] = true,
@@ -400,7 +400,7 @@ if C.reminder.solo_buffs_enable == true then
 			--[[
 			[5] = {	-- Shadowform group
 				["spells"] = {
-					SpellName(15473),	-- Shadowform
+					SpellName(15473),		-- Shadowform
 				},
 				["combat"] = true,
 				["instance"] = true,
@@ -428,8 +428,8 @@ if C.reminder.solo_buffs_enable == true then
 		WARLOCK = {
 			[1] = {	-- Armors group
 				["spells"] = {
-					SpellName(706),	-- Demon Armor
-					SpellName(687),	-- Demon Skin
+					SpellName(706),		-- Demon Armor
+					SpellName(687),		-- Demon Skin
 				},
 				["combat"] = true,
 				["instance"] = true,
@@ -448,9 +448,9 @@ if C.reminder.solo_buffs_enable == true then
 			--[[
 			[2] = {	-- Stance group
 				["spells"] = {
-					SpellName(2457),	-- Battle Stance
-					SpellName(2458),	-- Berserker Stance
-					SpellName(71),		-- Defensive Stance
+					SpellName(2457),		-- Battle Stance
+					SpellName(2458),		-- Berserker Stance
+					SpellName(71),			-- Defensive Stance
 				},
 				["combat"] = true,
 				["instance"] = true,

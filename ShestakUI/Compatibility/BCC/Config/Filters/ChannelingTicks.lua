@@ -18,12 +18,13 @@ end
 
 T.CastBarTicks = {
 	-- Druid
-	[SpellName(740)] = 5,		-- Tranquility
+	[SpellName(740)] = 4,		-- Tranquility
 	[SpellName(16914)] = 10,	-- Hurricane
 	-- Hunter
 	[SpellName(1510)] = 6,		-- Volley
 	-- Mage
-	-- [SpellName(5143)] = 5,		-- Arcane Missiles (accurate for r8 - lower ranks have less ticks)
+	-- [SpellName(5143)] = 5,		-- Arcane Missiles (accurate for r11 - lower ranks have less ticks)
+	[SpellName(12051)] = 4,		-- Evocation
 	[SpellName(10)] = 8,		-- Blizzard
 	-- Priest
 	[SpellName(15407)] = 3,		-- Mind Flay

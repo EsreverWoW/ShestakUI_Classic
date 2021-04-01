@@ -120,7 +120,7 @@ if C.reminder.raid_buffs_enable == true or C.announcements.flask_food == true th
 				SpellName(8072),	-- Stoneskin
 				SpellName(8836),	-- Grace of Air
 			},
-			
+
 			Threat = {
 				SpellName(25909)	-- Tranquil Air
 			},
@@ -261,6 +261,7 @@ if C.reminder.solo_buffs_enable == true then
 					SpellName(5118),	-- Aspect of the Cheetah
 					SpellName(13163),	-- Aspect of the Monkey
 					SpellName(13159),	-- Aspect of the Pack
+					SpellName(34074),	-- Aspect of the Viper
 					SpellName(20043),	-- Aspect of the Wild
 				},
 				["combat"] = true,
@@ -280,7 +281,8 @@ if C.reminder.solo_buffs_enable == true then
 		MAGE = {
 			[1] = {	-- Armors group
 				["spells"] = {
-					SpellName(168),	-- Frost Armor
+					SpellName(30482),	-- Molten Armor
+					SpellName(168),		-- Frost Armor
 					SpellName(6117),	-- Mage Armor
 					SpellName(7302),	-- Ice Armor
 				},
@@ -348,12 +350,14 @@ if C.reminder.solo_buffs_enable == true then
 			--[[
 			[4] = {	-- Seals group
 				["spells"] = {
-					SpellName(21084),	-- Seal of Righteousness
-					SpellName(20375),	-- Seal of Command
-					SpellName(20164),	-- Seal of Justice
-					SpellName(20165),	-- Seal of Light
-					SpellName(20166),	-- Seal of Wisdom
-					SpellName(21082),	-- Seal of the Crusader
+					SpellName(21084),		-- Seal of Righteousness
+					SpellName(31892),		-- Seal of Blood
+					SpellName(27170),		-- Seal of Command
+					SpellName(20164),		-- Seal of Justice
+					SpellName(20165),		-- Seal of Light
+					SpellName(31801),		-- Seal of Vengeance
+					SpellName(20166),		-- Seal of Wisdom
+					SpellName(21082),		-- Seal of the Crusader
 				},
 				["combat"] = true,
 				["instance"] = true,
@@ -364,7 +368,7 @@ if C.reminder.solo_buffs_enable == true then
 		PRIEST = {
 			[1] = {	-- Inner Fire/Will group
 				["spells"] = {
-					SpellName(588),	-- Inner Fire
+					SpellName(588),		-- Inner Fire
 				},
 				["combat"] = true,
 				["instance"] = true,
@@ -390,7 +394,7 @@ if C.reminder.solo_buffs_enable == true then
 			},
 			[4] = {	-- Shadow Resistance group
 				["spells"] = {
-					SpellName(976),	-- Shadow Protection
+					SpellName(976),		-- Shadow Protection
 					SpellName(27683),	-- Prayer of Shadow Protection
 				},
 				["combat"] = true,
@@ -400,7 +404,7 @@ if C.reminder.solo_buffs_enable == true then
 			--[[
 			[5] = {	-- Shadowform group
 				["spells"] = {
-					SpellName(15473),	-- Shadowform
+					SpellName(15473),		-- Shadowform
 				},
 				["combat"] = true,
 				["instance"] = true,
@@ -418,7 +422,18 @@ if C.reminder.solo_buffs_enable == true then
 			},
 		},
 		SHAMAN = {
-			[1] = {	-- Weapons enchants group
+			[1] = {	-- Shields group
+				["spells"] = {
+					SpellName(24398),	-- Water Shield
+					SpellName(324),		-- Lightning Shield
+					SpellName(974),		-- Earth Shield
+				},
+				["combat"] = true,
+				["instance"] = true,
+				["pvp"] = true,
+				-- ["level"] = 8,
+			},
+			[2] = {	-- Weapons enchants group
 				["weapon"] = true,
 				["combat"] = true,
 				["instance"] = true,
@@ -428,8 +443,9 @@ if C.reminder.solo_buffs_enable == true then
 		WARLOCK = {
 			[1] = {	-- Armors group
 				["spells"] = {
-					SpellName(706),	-- Demon Armor
-					SpellName(687),	-- Demon Skin
+					SpellName(28176),	-- Fel Armor
+					SpellName(706),		-- Demon Armor
+					SpellName(687),		-- Demon Skin
 				},
 				["combat"] = true,
 				["instance"] = true,
@@ -437,20 +453,35 @@ if C.reminder.solo_buffs_enable == true then
 			},
 		},
 		WARRIOR = {
-			[1] = {	-- Battle Shout group
+			[1] = {	-- Commanding Shout group
 				["spells"] = {
+					SpellName(469),	-- Commanding Shout
+				},
+				["negate_spells"] = {
 					SpellName(6673),	-- Battle Shout
 				},
 				["combat"] = true,
+				["role"] = "Tank",
+				-- ["level"] = 68,
+			},
+			[2] = {	-- Battle Shout group
+				["spells"] = {
+					SpellName(6673),	-- Battle Shout
+				},
+				["negate_spells"] = {
+					SpellName(469),	-- Commanding Shout
+				},
+				["combat"] = true,
+				["role"] = "Melee",
 				["instance"] = true,
 				["pvp"] = true,
 			},
 			--[[
-			[2] = {	-- Stance group
+			[3] = {	-- Stance group
 				["spells"] = {
-					SpellName(2457),	-- Battle Stance
-					SpellName(2458),	-- Berserker Stance
-					SpellName(71),		-- Defensive Stance
+					SpellName(2457),		-- Battle Stance
+					SpellName(2458),		-- Berserker Stance
+					SpellName(71),			-- Defensive Stance
 				},
 				["combat"] = true,
 				["instance"] = true,

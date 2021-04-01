@@ -17,6 +17,7 @@ local function SpellName(id)
 end
 
 T.BadBuffs = {
+	[SpellName(44212)] = true,	-- Jack-o'-Lanterned!
 	[SpellName(24732)] = true,	-- Bat Costume
 	[SpellName(24735)] = true,	-- Ghost Costume
 	[SpellName(24712)] = true,	-- Leper Gnome Costume
