@@ -1,5 +1,7 @@
 if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then return end
 
+local isBCC = select(4, GetBuildInfo()) > 20500
+
 local major = "LibHealComm-4.0"
 local minor = 92
 assert(LibStub, format("%s requires LibStub.", major))
@@ -769,9 +771,9 @@ if( playerClass == "DRUID" ) then
 		local Regrowth = GetSpellInfo(8936)
 		local Rejuvenation = GetSpellInfo(774)
 		local Tranquility = GetSpellInfo(740)
-		local Lifebloom = GetSpellInfo(33763)
-		local EmpoweredRejuv = GetSpellInfo(33886)
-		local EmpoweredTouch = GetSpellInfo(33879)
+		local Lifebloom = isBCC and GetSpellInfo(33763) or "Lifebloom"
+		local EmpoweredRejuv = isBCC and GetSpellInfo(33886) or "Empowered Rejuvenation"
+		local EmpoweredTouch = isBCC and GetSpellInfo(33879) or "Empowered Touch"
 
 		hotData[Regrowth] = { interval = 3, ticks = 7, coeff = 0.5, levels = { 12, 18, 24, 30, 36, 42, 48, 54, 60, 65 }, averages = { 98, 175, 259, 343, 427, 546, 686, 861, 1064, 1274 }}
 		hotData[Rejuvenation] = { interval = 3, levels = { 4, 10, 16, 22, 28, 34, 40, 46, 52, 58, 60, 63, 69 }, averages = { 32, 56, 116, 180, 244, 304, 388, 488, 608, 756, 888, 932, 1060 }}
@@ -1097,9 +1099,9 @@ if( playerClass == "PRIEST" ) then
 		local ImprovedRenew = GetSpellInfo(14908)
 		local GreaterHealHot = GetSpellInfo(22009)
 		local CureDisease = GetSpellInfo(528)
-		local BindingHeal = GetSpellInfo(32546)
-		local EmpoweredHealing = GetSpellInfo(33158)
-		local Renewal = GetSpellInfo(37563) -- T4 bonus
+		local BindingHeal = isBCC and GetSpellInfo(32546) or "Binding Heal"
+		local EmpoweredHealing = isBCC and GetSpellInfo(33158) or "Empowered Healing"
+		local Renewal = isBCC and GetSpellInfo(37563) or "Renewal" -- T4 bonus
 
 		hotData[Renew] = {coeff = 1, interval = 3, ticks = 5, levels = {8, 14, 20, 26, 32, 38, 44, 50, 56, 60, 65, 70}, averages = {
 			45, 100, 175, 245, 315, 400, 510, 650, 810, 970, 1010, 1110 }}
