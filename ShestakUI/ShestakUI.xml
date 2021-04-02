@@ -37,7 +37,6 @@
 	<Script file="Compatibility\Classic\Libs\LibRangeCheck-2.0\LibRangeCheck-2.0.lua"/>
 	<Script file="Compatibility\Classic\Libs\LibHealComm-4.0\ChatThrottleLib.lua"/>
 	<Script file="Compatibility\Classic\Libs\LibHealComm-4.0\LibHealComm-4.0.lua"/>
-	<Script file="Compatibility\Classic\Libs\LibTotemInfo\GetTotemInfo.lua"/>
 	<Script file="Compatibility\Classic.lua"/>
 
 	<Include file="Libs\oUF\oUF.xml"/>
