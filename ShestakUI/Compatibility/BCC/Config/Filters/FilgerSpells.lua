@@ -974,12 +974,20 @@ C["filger_spells"] = {
 			{spellID = 24586, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
 			-- Scorpid Poison r4 (Scorpid)
 			{spellID = 24587, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
+			-- Scorpid Poison r5 (Scorpid)
+			{spellID = 27060, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
 			-- Scorpid Sting
 			{spellID = 3043, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Screech r1 (Bat / Bird of Prey / Carrion Bird)
 			{spellID = 24423, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
 			-- Screech r2 (Bat / Bird of Prey / Carrion Bird)
 			{spellID = 24577, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
+			-- Screech r3 (Bat / Bird of Prey / Carrion Bird)
+			{spellID = 24578, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
+			-- Screech r4 (Bat / Bird of Prey / Carrion Bird)
+			{spellID = 24579, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
+			-- Screech r5 (Bat / Bird of Prey / Carrion Bird)
+			{spellID = 27051, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
 			-- Serpent Sting
 			{spellID = 1978, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Silencing Shot
