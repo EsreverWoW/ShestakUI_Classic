@@ -227,7 +227,7 @@ C["filger_spells"] = {
 			{spellID = 26166, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Pagle's Broken Reel (Spell Hit, Use) [Nat Pagle's Broken Reel]
 			{spellID = 24610, unitID = "player", caster = "player", filter = "BUFF"},
-			--The Eye of Diminution (Special, Use) [Eye of Diminution]
+			-- The Eye of Diminution (Special, Use) [Eye of Diminution]
 			{spellID = 28862, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Unstable Power (Spell Power, Use) [Zandalarian Hero Charm]
 			{spellID = 24659, unitID = "player", caster = "player", filter = "BUFF"},
@@ -434,10 +434,6 @@ C["filger_spells"] = {
 			-- {spellID = 20043, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Bestial Wrath
 			{spellID = 19574, unitID = "pet", caster = "player", filter = "BUFF"},
-			-- Quick Shots
-			{spellID = 6150, unitID = "pet", caster = "player", filter = "BUFF"},
-			-- Trueshot Aura
-			{spellID = 20905, unitID = "pet", caster = "player", filter = "BUFF"},
 			-- Cobra Reflexes
 			{spellID = 25077, unitID = "pet", caster = "all", filter = "BUFF"},
 			-- Dash (Boar / Cat / Hyena / Raptor / Tallstrider / Wolf)
@@ -460,6 +456,8 @@ C["filger_spells"] = {
 			{spellID = 136, unitID = "pet", caster = "player", filter = "BUFF"},
 			-- Prowl (Cat)
 			-- {spellID = 24450, unitID = "pet", caster = "all", filter = "BUFF"},
+			-- Quick Shots
+			{spellID = 6150, unitID = "pet", caster = "player", filter = "BUFF"},
 			-- Rapid Fire
 			{spellID = 3045, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Shell Shield (Turtle)
@@ -468,6 +466,8 @@ C["filger_spells"] = {
 			-- {spellID = 19579, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Tame Beast
 			-- {spellID = 1515, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Trueshot Aura
+			{spellID = 20905, unitID = "pet", caster = "player", filter = "BUFF"},
 		},
 		{
 			Name = "P_PROC_ICON",
@@ -510,6 +510,8 @@ C["filger_spells"] = {
 			{spellID = 18946, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Damage [Physical]
+			-- Devilsaur Fury (Attack Power, Use) [Devilsaur Eye]
+			{spellID = 24352, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Earthstrike (Attack Power, Use) [Earthstrike]
 			{spellID = 25891, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Insight of the Qiraji (Armor Penetration, Use) [Badge of the Swarmguard]
@@ -522,8 +524,6 @@ C["filger_spells"] = {
 			{spellID = 24662, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Slayer's Crest (Attack Power, Use) [Slayer's Crest]
 			{spellID = 28777, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Devilsaur Fury (Attack Power, Use) [Devilsaur Eye]
-			{spellID = 24352, unitID = "player", caster = "player", filter = "BUFF"},
 		},
 		{
 			Name = "T_DEBUFF_ICON",
@@ -858,7 +858,7 @@ C["filger_spells"] = {
 			{spellID = 26166, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Pagle's Broken Reel (Spell Hit, Use) [Nat Pagle's Broken Reel]
 			{spellID = 24610, unitID = "player", caster = "player", filter = "BUFF"},
-			--The Eye of Diminution (Special, Use) [Eye of Diminution]
+			-- The Eye of Diminution (Special, Use) [Eye of Diminution]
 			{spellID = 28862, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Unstable Power (Spell Power, Use) [Zandalarian Hero Charm]
 			{spellID = 24659, unitID = "player", caster = "player", filter = "BUFF"},
@@ -1218,7 +1218,7 @@ C["filger_spells"] = {
 			{spellID = 26166, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Pagle's Broken Reel (Spell Hit, Use) [Nat Pagle's Broken Reel]
 			{spellID = 24610, unitID = "player", caster = "player", filter = "BUFF"},
-			--The Eye of Diminution (Special, Use) [Eye of Diminution]
+			-- The Eye of Diminution (Special, Use) [Eye of Diminution]
 			{spellID = 28862, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Unstable Power (Spell Power, Use) [Zandalarian Hero Charm]
 			{spellID = 24659, unitID = "player", caster = "player", filter = "BUFF"},
@@ -1490,7 +1490,7 @@ C["filger_spells"] = {
 			{spellID = 26166, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Pagle's Broken Reel (Spell Hit, Use) [Nat Pagle's Broken Reel]
 			{spellID = 24610, unitID = "player", caster = "player", filter = "BUFF"},
-			--The Eye of Diminution (Special, Use) [Eye of Diminution]
+			-- The Eye of Diminution (Special, Use) [Eye of Diminution]
 			{spellID = 28862, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Unstable Power (Spell Power, Use) [Zandalarian Hero Charm]
 			{spellID = 24659, unitID = "player", caster = "player", filter = "BUFF"},
@@ -2097,7 +2097,7 @@ C["filger_spells"] = {
 			{spellID = 26166, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Pagle's Broken Reel (Spell Hit, Use) [Nat Pagle's Broken Reel]
 			{spellID = 24610, unitID = "player", caster = "player", filter = "BUFF"},
-			--The Eye of Diminution (Special, Use) [Eye of Diminution]
+			-- The Eye of Diminution (Special, Use) [Eye of Diminution]
 			{spellID = 28862, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Unstable Power (Spell Power, Use) [Zandalarian Hero Charm]
 			{spellID = 24659, unitID = "player", caster = "player", filter = "BUFF"},
@@ -2373,7 +2373,7 @@ C["filger_spells"] = {
 			{spellID = 26166, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Pagle's Broken Reel (Spell Hit, Use) [Nat Pagle's Broken Reel]
 			{spellID = 24610, unitID = "player", caster = "player", filter = "BUFF"},
-			--The Eye of Diminution (Special, Use) [Eye of Diminution]
+			-- The Eye of Diminution (Special, Use) [Eye of Diminution]
 			{spellID = 28862, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Unstable Power (Spell Power, Use) [Zandalarian Hero Charm]
 			{spellID = 24659, unitID = "player", caster = "player", filter = "BUFF"},
