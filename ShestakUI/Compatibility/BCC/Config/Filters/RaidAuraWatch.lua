@@ -661,11 +661,12 @@ if C.raidframe.plugins_pvp_debuffs == true then
 		-- Druid
 		[SpellName(5211)] = 3,		-- Bash
 		[SpellName(16922)] = 3,		-- Celestial Focus
+		[SpellName(33786)] = 3,		-- Cyclone
 		[SpellName(339)] = 2,		-- Entangling Roots
 		[SpellName(19975)] = 2,		-- Entangling Roots (Nature's Grasp)
-		[SpellName(19675)] = 2,		-- Feral Charge Effect
+		[SpellName(45334)] = 2,		-- Feral Charge Effect
 		[SpellName(2637)] = 3,		-- Hibernate
-		[SpellName(22570)] = 3,		-- Mangle
+		[SpellName(22570)] = 3,		-- Maim
 		[SpellName(9005)] = 3,		-- Pounce
 		-- Hunter
 		[SpellName(19306)] = 2,		-- Counterattack
@@ -676,8 +677,12 @@ if C.raidframe.plugins_pvp_debuffs == true then
 		[SpellName(19229)] = 2,		-- Improved Wing Clip
 		[SpellName(24394)] = 3,		-- Intimidation
 		[SpellName(19503)] = 3,		-- Scatter Shot
+		[SpellName(34490)] = 3,		-- Silencing Shot
+		[SpellName(4167)] = 2,		-- Web (Pet)
 		[SpellName(19386)] = 3,		-- Wyvern Sting
 		-- Mage
+		[SpellName(31661)] = 3,		-- Dragon's Breath
+		[SpellName(33395)] = 2,		-- Freeze (Water Elemental)
 		[SpellName(12494)] = 2,		-- Frostbite
 		[SpellName(122)] = 2,		-- Frost Nova
 		[SpellName(12355)] = 3,		-- Impact
@@ -689,9 +694,11 @@ if C.raidframe.plugins_pvp_debuffs == true then
 		[SpellName(853)] = 3,		-- Hammer of Justice
 		[SpellName(20066)] = 3,		-- Repentance
 		[SpellName(20170)] = 3,		-- Stun (Seal of Justice Proc)
-		[SpellName(2878)] = 3,		-- Turn Undead
+		[SpellName(10326)] = 3,		-- Turn Evil
+		[SpellName(19725)] = 3,		-- Turn Undead
 		-- Priest
 		[SpellName(15269)] = 3,		-- Blackout
+		[SpellName(44041)] = 3,		-- Chastise
 		[SpellName(605)] = 3,		-- Mind Control
 		[SpellName(8122)] = 3,		-- Psychic Scream
 		[SpellName(9484)] = 3,		-- Shackle Undead
@@ -699,6 +706,8 @@ if C.raidframe.plugins_pvp_debuffs == true then
 		-- Rogue
 		[SpellName(2094)] = 3,		-- Blind
 		[SpellName(1833)] = 3,		-- Cheap Shot
+		[SpellName(32747)] = 3,		-- Deadly Throw Interrupt
+		[SpellName(1330)] = 3,		-- Garrote - Silence
 		[SpellName(1776)] = 3,		-- Gouge
 		[SpellName(408)] = 3,		-- Kidney Shot
 		[SpellName(14251)] = 3,		-- Riposte
@@ -708,8 +717,10 @@ if C.raidframe.plugins_pvp_debuffs == true then
 		[SpellName(6789)] = 3,		-- Death Coil
 		[SpellName(5782)] = 3,		-- Fear
 		[SpellName(5484)] = 3,		-- Howl of Terror
+		[SpellName(30153)] = 3,		-- Intercept Stun (Felguard)
 		[SpellName(18093)] = 3,		-- Pyroclasm
 		[SpellName(6358)] = 3,		-- Seduction (Succubus)
+		[SpellName(30283)] = 3,		-- Shadowfury
 		[SpellName(24259)] = 3,		-- Spell Lock (Felhunter)
 		-- Warrior
 		[SpellName(7922)] = 3,		-- Charge Stun
@@ -721,6 +732,7 @@ if C.raidframe.plugins_pvp_debuffs == true then
 		[SpellName(12798)] = 3,		-- Revenge Stun
 		[SpellName(18498)] = 3,		-- Shield Bash - Silenced
 		-- Racial
+		[SpellName(28730)] = 3,		-- Arcane Torrent
 		[SpellName(20549)] = 3,		-- War Stomp
 		-- Other
 		[SpellName(5530)] = 3,		-- Mace Specialization
