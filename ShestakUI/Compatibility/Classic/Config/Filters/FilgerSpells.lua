@@ -2739,6 +2739,8 @@ C["filger_spells"] = {
 			{spellID = 11572, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
 			-- Rend r6
 			{spellID = 11573, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Rend r7
+			{spellID = 11574, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
 			-- Revenge Stun
 			{spellID = 11574, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Shield Bash - Silenced
