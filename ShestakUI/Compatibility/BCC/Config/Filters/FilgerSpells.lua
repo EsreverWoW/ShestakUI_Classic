@@ -3772,6 +3772,8 @@ C["filger_spells"] = {
 			{spellID = 11770, unitID = "player", caster = "all", filter = "BUFF", absID = true},
 			-- Fire Shield r5 (Imp)
 			{spellID = 11771, unitID = "player", caster = "all", filter = "BUFF", absID = true},
+			-- Fire Shield r6 (Imp)
+			{spellID = 27269, unitID = "player", caster = "all", filter = "BUFF", absID = true},
 			-- Health Funnel
 			-- {spellID = 755, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Hellfire
@@ -3785,6 +3787,8 @@ C["filger_spells"] = {
 			{spellID = 23761, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Master Demonologist (Felhunter - Increased Resistance)
 			{spellID = 23762, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Master Demonologist (Felguard - Increased Damage/Resistance)
+			{spellID = 35702, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			--]]
 			-- Paranoia (Felhunter)
 			-- {spellID = 19480, unitID = "player", caster = "all", filter = "BUFF", absID = true},
@@ -3809,8 +3813,22 @@ C["filger_spells"] = {
 			Position = {"TOP", P_PROC_ICON_Anchor},
 
 			-- Buffs
+			-- Backlash
+			{spellID = 34936, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Nether Protection
+			{spellID = 30300, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Shadow Trance
 			{spellID = 17941, unitID = "player", caster = "player", filter = "BUFF"},
+
+			-- Item Sets
+			-- Flameshadow (Spell Power, Proc) [Voidheart Raiment]
+			{spellID = 37379, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Insight (Spell Power, Proc) [Mana-Etched Regalia]
+			{spellID = 37620, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Lesser Spell Blasting (Spell Power, Proc) [Spellstrike Infusion]
+			{spellID = 32108, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Shadowflame (Spell Power, Proc) [Voidheart Raiment]
+			{spellID = 37378, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 
 			-- Trinkets
 			-- Class
@@ -3818,16 +3836,42 @@ C["filger_spells"] = {
 			{spellID = 23720, unitID = "pet", caster = "player", filter = "BUFF"},
 			-- Massive Destruction (Spell Critical Strike, Use) [Hazza'rah's Charm of Destruction]
 			{spellID = 24543, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Power of the Ashtongue (Spell Power, Proc) [Ashtongue Talisman of Shadows]
+			{spellID = 40480, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Darkmoon Cards
 			-- Aura of the Blue Dragon (Special, Proc) [Darkmoon Card: Blue Dragon]
 			{spellID = 23684, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Aura of the Crusader (Spell Power, Proc) [Darkmoon Card: Crusade]
+			{spellID = 39441, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Aura of Wrath (Critical Strike, Proc) [Darkmoon Card: Wrath]
+			{spellID = 39443, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Dementia (Special Power, Proc) [Darkmoon Card: Madness] - Druid, Shaman, Priest, Warlock, Mage, Paladin
+			{spellID = 41404, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Dementia +5% (Special Power, Proc) [Darkmoon Card: Madness] - Druid, Shaman, Priest, Warlock, Mage, Paladin
+			{spellID = 41406, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Dementia -5% (Special Power, Proc) [Darkmoon Card: Madness] - Druid, Shaman, Priest, Warlock, Mage, Paladin
+			{spellID = 41409, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Manic (Haste, Proc) [Darkmoon Card: Madness] - All classes except Hunter
+			{spellID = 41005, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Martyr Complex (Stamina, Proc) [Darkmoon Card: Madness] - All classes
+			{spellID = 41011, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Megalomania (Spell Power, Proc) [Darkmoon Card: Madness] - Druid, Shaman, Priest, Warlock, Mage, Paladin
+			{spellID = 40999, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Narcissism (Intellect, Proc) [Darkmoon Card: Madness] - Druid, Shaman, Priest, Warlock, Mage, Paladin, Hunter
+			{spellID = 41009, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Paranoia (Critical Strike, Proc) [Darkmoon Card: Madness] - All classes except Hunter
+			{spellID = 41002, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 
 			-- PvP Trinkets
 			-- Aura of Protection (Absorb, Use) [Arena Grand Master]
 			{spellID = 23506, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Damage Absorb (Absorb, Use) [Arathi Basin Trinket]
 			{spellID = 25750, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Tremendous Fortitude (Health, Use) [Battlemaster]
+			{spellID = 44055, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Shell of Deterrence (Absorb, Use) [Runed Fungalcap]
+			{spellID = 31771, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Universal
 			-- Arcane Shroud (Threat Reduction, Use) [Fetish of the Sand Reaver]
@@ -3846,20 +3890,90 @@ C["filger_spells"] = {
 			{spellID = 18946, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Damage [Magic]
+			-- Arcane Energy (Healing Power, Use) Ancient Draenei Arcane Relic / [Vengeance of the Illidari]
+			{spellID = 33662, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Ascendance (Spell Power, Use) [Talisman of Ascendance]
 			{spellID = 28204, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Blessing of the Silver Crescent (Spell Power, Use) [Icon of the Silver Crescent]
+			{spellID = 35163, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Call of the Nexus (Spell Power, Proc) [Shiffar's Nexus-Horn]
+			{spellID = 34321, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Combat Gallantry (Spell Power, Proc) [Airman's Ribbon of Gallantry]
+			{spellID = 41263, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Consume Essence (Special, Use) [Oculus of the Hidden Eye]
+			{spellID = 33013, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Crimson Serpent (Spell Power, Use) [Figurine - Crimson Serpent]
+			{spellID = 46783, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Dark Iron Pipeweed (Spell Power, Use) [Dark Iron Smoking Pipe]
+			{spellID = 51953, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Electrical Charge (Special, Proc) [The Lightning Capacitor]
+			{spellID = 37658, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Enlightenment (Mana Regeneration, Use) [Pendant of the Violet Eye]
+			{spellID = 35095, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Ephemeral Power (Spell Power, Use) [Talisman of Ephemeral Power]
 			{spellID = 23271, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Essence of Sapphiron (Spell Power, Use) [The Restrained Essence of Sapphiron]
 			{spellID = 28779, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Fel Infusion (Spell Haste, Use) [The Skull of Gul'dan]
+			{spellID = 40396, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Focused Power (Spell Power, Use) [Ancient Crystal Talisman / Glowing Crystal Insignia]
+			{spellID = 32355, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Living Ruby Serpent (Spell Power, Use) [Figurine - Living Ruby Serpent]
+			{spellID = 31040, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Mojo Madness (Spell Power, Use) [Hex Shrunken Head]
+			{spellID = 43712, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Obsidian Insight (Spell Power, Special, Use) [Eye of Moam]
 			{spellID = 26166, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Pagle's Broken Reel (Spell Hit, Use) [Nat Pagle's Broken Reel]
 			{spellID = 24610, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Power Circle (Spell Power, Use) [Shifting Naaru Sliver]
+			{spellID = 45043, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Recurring Power (Spell Power, Proc) [Eye of Magtheridon]
+			{spellID = 34747, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Spell Haste (Spell Haste, Proc) [Quagmirran's Eye]
+			{spellID = 33370, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Spell Power (Spell Power, Use) [Scryer's Bloodgem / Xi'ri's Gift]
+			{spellID = 35337, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			--[[
+			-- Spell Power (Spell Power, Use) [Starkiller's Bauble]
+			{spellID = 36432, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Spell Power (Spell Power, Use) [Terokkar Tablet of Vim]
+			{spellID = 39201, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			--]]
+			-- The Arcanist's Stone (Spell Power, Use) [Arcanist's Stone]
+			{spellID = 34000, unitID = "player", caster = "player", filter = "BUFF"},
 			-- The Eye of Diminution (Special, Use) [Eye of Diminution]
 			{spellID = 28862, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Unstable Currents (Spell Power, Proc) [Sextant of Unstable Currents]
+			{spellID = 38348, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Unstable Power (Spell Power, Use) [Zandalarian Hero Charm]
 			{spellID = 24659, unitID = "player", caster = "player", filter = "BUFF"},
+
+			-- Helms
+			-- Arcane Might (Spell Power, Proc) [Circlet of Arcane Might]
+			{spellID = 31037, unitID = "player", caster = "player", filter = "BUFF"},
+
+			-- Necks
+			-- Light's Wrath (Spell Power, Proc) [Shattered Sun Pendant of Acumen - Aldor]
+			{spellID = 45479, unitID = "player", caster = "player", filter = "BUFF"},
+
+			-- Rings
+			-- Band of the Eternal Sage (Spell Power, Proc) [Band of the Eternal Sage]
+			{spellID = 35084, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Spell Blasting (Spell Power, Proc) [Wrath of Cenarius]
+			{spellID = 25906, unitID = "player", caster = "player", filter = "BUFF"},
+
+			-- Weapons
+			-- Mental Protection Field (Immunity, Use) [Staff of Disintegration]
+			{spellID = 36480, unitID = "player", caster = "all", filter = "BUFF"},
+
+			-- Meta Gems
+			-- Focus (Spell Haste, Proc) [Mystical Skyfire Diamond]
+			{spellID = 39530, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+
+			-- Enchants
+			-- Spellsurge (Mana Regeneration to Party) [Enchant Weapon - Spellsurge]
+			{spellID = 27996, unitID = "player", caster = "all", filter = "BUFF"},
 		},
 		{
 			Name = "T_DEBUFF_ICON",
@@ -3886,6 +4000,8 @@ C["filger_spells"] = {
 			{spellID = 11672, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
 			-- Corruption r7
 			{spellID = 25311, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Corruption r8
+			{spellID = 27216, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
 			-- Cripple (Doomguard)
 			{spellID = 20812, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
 			-- Curse of Agony
@@ -3912,6 +4028,10 @@ C["filger_spells"] = {
 			{spellID = 11707, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
 			-- Curse of Weakness r6
 			{spellID = 11708, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
+			-- Curse of Weakness r7
+			{spellID = 27224, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
+			-- Curse of Weakness r8
+			{spellID = 30909, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
 			-- Curse of the Elements
 			{spellID = 1490, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Death Coil
@@ -3928,12 +4048,22 @@ C["filger_spells"] = {
 			{spellID = 5484, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Immolate
 			{spellID = 348, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Intercept Stun (Felguard)
+			{spellID = 30153, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
 			-- Pyroclasm
 			{spellID = 18093, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Rain of Fire
 			-- {spellID = 5740, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Seed of Corruption
+			{spellID = 27243, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Seduction (Succubus)
 			{spellID = 6358, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
+			-- Shadowburn
+			-- {spellID = 29341, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Shadowfury
+			{spellID = 30283, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Shadow Embrace
+			{spellID = 32386, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Shadow Vulnerability r1 (Improved Shadow Bolt)
 			{spellID = 17794, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
 			-- Shadow Vulnerability r2 (Improved Shadow Bolt)
@@ -3952,6 +4082,14 @@ C["filger_spells"] = {
 			{spellID = 21949, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
 			-- Tainted Blood Effect (Felhunter)
 			{spellID = 19479, unitID = "target", caster = "all", filter = "DEBUFF"},
+			-- Unstable Affliction
+			{spellID = 30108, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Unstable Affliction (Silence)
+			{spellID = 31117, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+
+			-- Item Sets
+			-- Corrupted Fear (Special, Proc) [Dreadmist Raiment / Deathmist Raiment]
+			{spellID = 32108, unitID = "target", caster = "player", filter = "DEBUFF"},
 
 			-- Trinket Effects
 		},
@@ -4014,10 +4152,16 @@ C["filger_spells"] = {
 			{spellID = 6229, filter = "CD"},
 			-- Shadowburn
 			{spellID = 17877, filter = "CD"},
+			-- Shadowfury
+			{spellID = 30283, filter = "CD"},
 			-- Soul Fire
 			{spellID = 6353, filter = "CD"},
+			-- Soulshatter
+			{spellID = 29858, filter = "CD"},
 
 			-- Pets
+			-- Intercept (Felguard)
+			{spellID = 30151, filter = "CD"},
 			-- Rain of Fire (Doomguard)
 			{spellID = 4629, filter = "CD", absID = true},
 			-- Spell Lock (Felhunter)
@@ -4026,8 +4170,12 @@ C["filger_spells"] = {
 			{spellID = 17735, filter = "CD"},
 
 			-- Racial
-			-- Blood Fury
-			-- {spellID = 23234, filter = "CD", absID = true},
+			-- Arcane Torrent (Mana)
+			{spellID = 28730, filter = "CD", absID = true},
+			-- Blood Fury (Both)
+			{spellID = 33697, filter = "CD", absID = true},
+			-- Blood Fury (Spell)
+			-- {spellID = 33702, filter = "CD", absID = true},
 			-- Cannibalize (Forsaken)
 			{spellID = 20577, filter = "CD"},
 			-- Escape Artist (Gnome)
