@@ -4,7 +4,12 @@ Author: d87
 --]================]
 if WOW_PROJECT_ID ~= WOW_PROJECT_CLASSIC or (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC and select(4, GetBuildInfo()) > 20500) then return end
 
-local MAJOR, MINOR = "LibClassicCasterino", 36
+local apiLevel = math.floor(select(4,GetBuildInfo())/10000)
+local isClassic = apiLevel <= 2
+local isVanilla = apiLevel == 1
+local isBC = apiLevel == 2
+
+local MAJOR, MINOR = "LibClassicCasterino", 37
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
@@ -207,48 +212,48 @@ function f:COMBAT_LOG_EVENT_UNFILTERED(event)
         end
     elseif eventType == "SPELL_CAST_FAILED" then
 
-            CastStop(srcGUID, "CAST", "INTERRUPTED", "STOP")
+        CastStop(srcGUID, "CAST", "INTERRUPTED", "STOP")
 
     elseif eventType == "SPELL_CAST_SUCCESS" then
-            if isSrcPlayer then
-                if classChannelsByAura[spellID] then
-                    -- SPELL_CAST_SUCCESS can come right after AURA_APPLIED, so ignoring it
-                    return
-                elseif classChannelsByCast[spellID] then
-                    -- Channels fire SPELL_CAST_SUCCESS at their start
-                    local isChanneling = classChannelsByCast[spellID]
-                    if isChanneling then
-                        local isSrcFriendlyPlayer = bit_band(srcFlags, COMBATLOG_OBJECT_REACTION_FRIENDLY) > 0
-                        CastStart(srcGUID, "CHANNEL", spellName, spellID, nil, not isSrcFriendlyPlayer)
+        if isSrcPlayer then
+            if classChannelsByAura[spellID] then
+                -- SPELL_CAST_SUCCESS can come right after AURA_APPLIED, so ignoring it
+                return
+            elseif classChannelsByCast[spellID] then
+                -- Channels fire SPELL_CAST_SUCCESS at their start
+                local isChanneling = classChannelsByCast[spellID]
+                if isChanneling then
+                    local isSrcFriendlyPlayer = bit_band(srcFlags, COMBATLOG_OBJECT_REACTION_FRIENDLY) > 0
+                    CastStart(srcGUID, "CHANNEL", spellName, spellID, nil, not isSrcFriendlyPlayer)
+                end
+                return
+            end
+        end
+        if not isSrcPlayer then
+            local castUID = makeCastUID(srcGUID, spellName)
+            local cachedTime = castTimeCache[castUID]
+            if not cachedTime then
+                local restoredStartTime = castTimeCacheStartTimes[srcGUID..castUID]
+                if restoredStartTime then
+                    local now = GetTime()
+                    local castTime = now - restoredStartTime
+                    if castTime < 10 then
+                        castTimeCache[castUID] = castTime
                     end
-                    return
                 end
             end
-            if not isSrcPlayer then
-                local castUID = makeCastUID(srcGUID, spellName)
-                local cachedTime = castTimeCache[castUID]
-                if not cachedTime then
-                    local restoredStartTime = castTimeCacheStartTimes[srcGUID..castUID]
-                    if restoredStartTime then
-                        local now = GetTime()
-                        local castTime = now - restoredStartTime
-                        if castTime < 10 then
-                            castTimeCache[castUID] = castTime
-                        end
-                    end
-                end
-            end
-            CastStop(srcGUID, nil, "SUCCEEDED", "STOP")
+        end
+        CastStop(srcGUID, nil, "SUCCEEDED", "STOP")
 
     elseif eventType == "SPELL_INTERRUPT" then
 
-            CastStop(dstGUID, nil, "INTERRUPTED", "STOP")
+        CastStop(dstGUID, nil, "INTERRUPTED", "STOP")
     elseif eventType == "UNIT_DIED" then
-            CastStop(dstGUID, nil, "INTERRUPTED", "STOP")
+        CastStop(dstGUID, nil, "INTERRUPTED", "STOP")
 
     elseif  eventType == "SPELL_AURA_APPLIED" or
-            eventType == "SPELL_AURA_REFRESH" or
-            eventType == "SPELL_AURA_APPLIED_DOSE"
+    eventType == "SPELL_AURA_REFRESH" or
+    eventType == "SPELL_AURA_APPLIED_DOSE"
     then
         if isSrcPlayer then
             if crowdControlAuras[spellName] then
@@ -271,9 +276,9 @@ function f:COMBAT_LOG_EVENT_UNFILTERED(event)
         end
     elseif castingAimedShot and dstGUID == UnitGUID("player") then
         if eventType == "SWING_DAMAGE" or
-           eventType == "ENVIRONMENTAL_DAMAGE" or
-           eventType == "RANGE_DAMAGE" or
-           eventType == "SPELL_DAMAGE"
+        eventType == "ENVIRONMENTAL_DAMAGE" or
+        eventType == "RANGE_DAMAGE" or
+        eventType == "SPELL_DAMAGE"
         then
             if resisted or blocked or absorbed then return end
             local currentCast = casters[UnitGUID("player")]
@@ -381,6 +386,17 @@ local Passthrough = function(self, event, unit, ...)
         callbacks:Fire(event, unit, ...)
     end
 end
+if isBC then
+    Passthrough = function(self, event, unit, ...)
+        callbacks:Fire(event, unit, ...)
+    end
+    lib.UnitChannelInfo = function(self, ...)
+        return _G.UnitChannelInfo(...)
+    end
+    lib.UnitCastingInfo = function(self, ...)
+        return _G.UnitCastingInfo(...)
+    end
+end
 f.UNIT_SPELLCAST_START = Passthrough
 f.UNIT_SPELLCAST_DELAYED = Passthrough
 f.UNIT_SPELLCAST_STOP = Passthrough
@@ -392,7 +408,13 @@ f.UNIT_SPELLCAST_CHANNEL_STOP = Passthrough
 f.UNIT_SPELLCAST_SUCCEEDED = Passthrough
 
 function callbacks.OnUsed()
-    f:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
+    if isVanilla then
+        f:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
+        -- for unit lookup
+        f:RegisterEvent("GROUP_ROSTER_UPDATE")
+        f:RegisterEvent("NAME_PLATE_UNIT_ADDED")
+        f:RegisterEvent("NAME_PLATE_UNIT_REMOVED")
+    end
 
     f:RegisterEvent("UNIT_SPELLCAST_START")
     f:RegisterEvent("UNIT_SPELLCAST_DELAYED")
@@ -403,11 +425,6 @@ function callbacks.OnUsed()
     f:RegisterEvent("UNIT_SPELLCAST_CHANNEL_UPDATE")
     f:RegisterEvent("UNIT_SPELLCAST_CHANNEL_STOP")
     f:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED")
-
-    -- for unit lookup
-    f:RegisterEvent("GROUP_ROSTER_UPDATE")
-    f:RegisterEvent("NAME_PLATE_UNIT_ADDED")
-    f:RegisterEvent("NAME_PLATE_UNIT_REMOVED")
 end
 
 function callbacks.OnUnused()
@@ -498,7 +515,6 @@ classCasts = {
     [10054] = 3, -- Conjure Mana Ruby
     [10140] = 3, -- Conjure Water
     [12826] = 1.5, -- Polymorph
-    [28270] = 1.5, -- Polymorph: Cow
     [25306] = 3.5, -- Fireball
     [10216] = 3, -- Flamestrike
     [10207] = 1.5, -- Scorch
@@ -819,7 +835,10 @@ local function processNPCSpellTable()
     counter = 0
     local index, id = next(NPCSpells, prevID)
     while (id and counter < 150) do
-        NPCspellNameToID[GetSpellInfo(id)] = id
+        local spellName = GetSpellInfo(id)
+        if spellName then
+            NPCspellNameToID[spellName] = id
+        end
 
         counter = counter + 1
         prevID = index
@@ -829,7 +848,9 @@ local function processNPCSpellTable()
         C_Timer.After(1, processNPCSpellTable)
     end
 end
-lib.NPCSpellsTimer = C_Timer.NewTimer(6.5, processNPCSpellTable)
+if isVanilla then
+    lib.NPCSpellsTimer = C_Timer.NewTimer(6.5, processNPCSpellTable)
+end
 
 NPCSpells = {
     10215,
