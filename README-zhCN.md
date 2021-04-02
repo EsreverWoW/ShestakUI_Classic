@@ -1,4 +1,4 @@
-# ShestakUI - WoW Classic (1.13.6) [!["Open Issues"](https://img.shields.io/github/issues-raw/EsreverWoW/ShestakUI_Classic.svg)](https://github.com/EsreverWoW/ShestakUI_Classic/issues) [![Discord](https://img.shields.io/discord/610506253306822663.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/mWGp4ac)
+# ShestakUI (Classic / Burning Crusade Classic) [!["Open Issues"](https://img.shields.io/github/issues-raw/EsreverWoW/ShestakUI_Classic.svg)](https://github.com/EsreverWoW/ShestakUI_Classic/issues) [![Discord](https://img.shields.io/discord/610506253306822663.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/mWGp4ac)
 ShestakUI是一款模块化、轻量级、一体式的魔兽世界界面UI插件。 它的目的是简化和清理界面，消除不必要的虚饰和浪费的空间，并填补在默认用户界面中留下的一些漏洞。
 
 这个版本的ShestakUI是为了为官方怀旧所发布的，同时也提供了兼容性，以便它可以在WoW Classic中运行。
