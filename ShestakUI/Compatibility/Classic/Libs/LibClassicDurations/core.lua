@@ -19,7 +19,17 @@ Usage example 1:
 --]================]
 if WOW_PROJECT_ID ~= WOW_PROJECT_CLASSIC or (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC and select(4, GetBuildInfo()) > 20500) then return end
 
-local MAJOR, MINOR = "LibClassicDurations", 64
+local apiLevel = math.floor(select(4,GetBuildInfo())/10000)
+local isClassic = apiLevel <= 2
+local isBC = apiLevel == 2
+
+if isBC then
+    -- lib.UnitAuraDirect = _G.UnitAura
+    -- lib.UnitAuraWrapper = _G.UnitAura
+    return
+end
+
+local MAJOR, MINOR = "LibClassicDurations", 66
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
@@ -113,6 +123,7 @@ lib.AddAura = function(id, opts)
     end
 
     local spellName = GetSpellInfo(lastRankID)
+    if not spellName then return end
     spellNameToID[spellName] = lastRankID
 
     if type(id) == "table" then
@@ -514,42 +525,42 @@ local function ProcIndirectRefresh(eventType, spellName, srcGUID, srcFlags, dstG
         local targetSpells = indirectRefreshSpells[spellName]
 
         for targetSpellID, refreshTable in pairs(targetSpells) do
-        if refreshTable.events[eventType] then
+            if refreshTable.events[eventType] then
 
 
-            local condition = refreshTable.condition
-            if condition then
-                local isMine = bit_band(srcFlags, COMBATLOG_OBJECT_AFFILIATION_MINE) == COMBATLOG_OBJECT_AFFILIATION_MINE
-                if not condition(isMine, isCrit) then return end
-            end
-
-            if refreshTable.targetResistCheck then
-                local now = GetTime()
-                if lastResistSpellID == targetSpellID and now - lastResistTime < 0.4 then
-                    return
+                local condition = refreshTable.condition
+                if condition then
+                    local isMine = bit_band(srcFlags, COMBATLOG_OBJECT_AFFILIATION_MINE) == COMBATLOG_OBJECT_AFFILIATION_MINE
+                    if not condition(isMine, isCrit) then return end
                 end
-            end
 
-            if refreshTable.applyAura then
-                local opts = spells[targetSpellID]
-                if opts then
-                    local targetAuraType = "DEBUFF"
-                    local targetSpellName = GetSpellInfo(targetSpellID)
-                    SetTimer(srcGUID, dstGUID, dstName, dstFlags, targetSpellID, targetSpellName, opts, targetAuraType)
-                end
-            elseif refreshTable.customAction then
-                refreshTable.customAction(srcGUID, dstGUID, targetSpellID)
-            else
-                local _, oldStartTime = RefreshTimer(srcGUID, dstGUID, targetSpellID)
-
-                if refreshTable.rollbackMisses and oldStartTime then
-                    rollbackTable[srcGUID] = rollbackTable[srcGUID] or {}
-                    rollbackTable[srcGUID][dstGUID] = rollbackTable[srcGUID][dstGUID] or {}
+                if refreshTable.targetResistCheck then
                     local now = GetTime()
-                    rollbackTable[srcGUID][dstGUID][targetSpellID] = {now, oldStartTime}
+                    if lastResistSpellID == targetSpellID and now - lastResistTime < 0.4 then
+                        return
+                    end
+                end
+
+                if refreshTable.applyAura then
+                    local opts = spells[targetSpellID]
+                    if opts then
+                        local targetAuraType = "DEBUFF"
+                        local targetSpellName = GetSpellInfo(targetSpellID)
+                        SetTimer(srcGUID, dstGUID, dstName, dstFlags, targetSpellID, targetSpellName, opts, targetAuraType)
+                    end
+                elseif refreshTable.customAction then
+                    refreshTable.customAction(srcGUID, dstGUID, targetSpellID)
+                else
+                    local _, oldStartTime = RefreshTimer(srcGUID, dstGUID, targetSpellID)
+
+                    if refreshTable.rollbackMisses and oldStartTime then
+                        rollbackTable[srcGUID] = rollbackTable[srcGUID] or {}
+                        rollbackTable[srcGUID][dstGUID] = rollbackTable[srcGUID][dstGUID] or {}
+                        local now = GetTime()
+                        rollbackTable[srcGUID][dstGUID][targetSpellID] = {now, oldStartTime}
+                    end
                 end
             end
-        end
         end
     end
 end
@@ -589,7 +600,7 @@ do
         end
     end
     -- if playerClass ~= "MAGE" then
-        -- f.IgniteHandler = function() end
+    -- f.IgniteHandler = function() end
     -- end
     function lib:GetSpellTable(...)
         return GetSpellTable(...)
@@ -609,7 +620,7 @@ function f:CombatLogHandler(...)
     end
 
     if  eventType == "SPELL_MISSED" and
-        bit_band(srcFlags, COMBATLOG_OBJECT_AFFILIATION_MINE) == COMBATLOG_OBJECT_AFFILIATION_MINE
+    bit_band(srcFlags, COMBATLOG_OBJECT_AFFILIATION_MINE) == COMBATLOG_OBJECT_AFFILIATION_MINE
     then
         local missType = auraType
         -- ABSORB BLOCK DEFLECT DODGE EVADE IMMUNE MISS PARRY REFLECT RESIST
@@ -665,7 +676,7 @@ function f:CombatLogHandler(...)
             local npcDurationForSpellName = npc_spells[spellID]
             if npcDurationForSpellName then
                 opts = { duration = npcDurationForSpellName }
-            -- elseif enableEnemyBuffTracking and not isDstFriendly and auraType == "BUFF" then
+                -- elseif enableEnemyBuffTracking and not isDstFriendly and auraType == "BUFF" then
                 -- opts = { duration = 0 } -- it'll be accepted but as an indefinite aura
             end
         end
@@ -679,18 +690,18 @@ function f:CombatLogHandler(...)
                 -- 1571716930.161 ID: 21562 SPELL_AURA_APPLIED/REFRESH to everyone else
 
                 -- For spells that have cast filter enabled:
-                    -- First APPLIED event gets snapshotted and otherwise ignored
-                    -- CAST event effectively sets castEventPass to true
-                    -- Snapshotted event now gets handled with cast pass
-                    -- All the following APPLIED events are accepted while cast pass is valid
-                    -- (Unconfirmed whether timestamp is the same even for a 40m raid)
+                -- First APPLIED event gets snapshotted and otherwise ignored
+                -- CAST event effectively sets castEventPass to true
+                -- Snapshotted event now gets handled with cast pass
+                -- All the following APPLIED events are accepted while cast pass is valid
+                -- (Unconfirmed whether timestamp is the same even for a 40m raid)
                 local now = GetTime()
                 castEventPass = castLog:IsCurrent(srcGUID, spellID, now, 0.8)
                 if not castEventPass and (eventType == "SPELL_AURA_REFRESH" or eventType == "SPELL_AURA_APPLIED") then
                     eventSnapshot = { timestamp, eventType, hideCaster,
-                    srcGUID, srcName, srcFlags, srcFlags2,
-                    dstGUID, dstName, dstFlags, dstFlags2,
-                    spellID, spellName, spellSchool, auraType }
+                                      srcGUID, srcName, srcFlags, srcFlags2,
+                                      dstGUID, dstName, dstFlags, dstFlags2,
+                                      spellID, spellName, spellSchool, auraType }
                     return
                 end
 
@@ -708,18 +719,18 @@ function f:CombatLogHandler(...)
             local isEnemyBuff = not isDstFriendly and auraType == "BUFF"
             -- print(eventType, srcGUID, "=>", dstName, spellID, spellName, auraType )
             if  eventType == "SPELL_AURA_REFRESH" or
-                eventType == "SPELL_AURA_APPLIED" or
-                eventType == "SPELL_AURA_APPLIED_DOSE"
+            eventType == "SPELL_AURA_APPLIED" or
+            eventType == "SPELL_AURA_APPLIED_DOSE"
             then
                 if  not opts.castFilter or
-                    castEventPass or
-                    isEnemyBuff
+                castEventPass or
+                isEnemyBuff
                 then
                     SetTimer(srcGUID, dstGUID, dstName, dstFlags, spellID, spellName, opts, auraType)
                 end
             elseif eventType == "SPELL_AURA_REMOVED" then
                 SetTimer(srcGUID, dstGUID, dstName, dstFlags, spellID, spellName, opts, auraType, true)
-            -- elseif eventType == "SPELL_AURA_REMOVED_DOSE" then
+                -- elseif eventType == "SPELL_AURA_REMOVED_DOSE" then
                 -- self:RemoveDose(srcGUID, dstGUID, spellID, spellName, auraType, amount)
             end
             if enableEnemyBuffTracking and isEnemyBuff then
@@ -728,8 +739,8 @@ function f:CombatLogHandler(...)
 
                 FireToUnits("UNIT_BUFF", dstGUID)
                 if  eventType == "SPELL_AURA_REFRESH" or
-                    eventType == "SPELL_AURA_APPLIED" or
-                    eventType == "SPELL_AURA_APPLIED_DOSE"
+                eventType == "SPELL_AURA_APPLIED" or
+                eventType == "SPELL_AURA_APPLIED_DOSE"
                 then
                     FireToUnits("UNIT_BUFF_GAINED", dstGUID, spellID)
                 end
@@ -939,7 +950,7 @@ if playerClass == "MAGE" then
 
         -- Overriding spellName for Improved blizzard's spellIDs
         if spellName == Chilled and
-            spellID == 12486 or spellID == 12484 or spellID == 12485
+        spellID == 12486 or spellID == 12484 or spellID == 12485
         then
             spellName = "ImpBlizzard"
         end
