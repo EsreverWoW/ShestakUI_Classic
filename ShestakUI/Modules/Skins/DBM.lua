@@ -48,7 +48,7 @@ DBMSkin:SetScript("OnEvent", function()
 							icon2.overlay:SetTemplate("Transparent")
 						end
 
-						if not T.classic then
+						if not T.classic or T.BCC then
 							Mixin(tbar, BackdropTemplateMixin)
 						end
 						if bar.color then
