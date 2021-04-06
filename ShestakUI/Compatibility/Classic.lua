@@ -28,22 +28,137 @@ end)
 UnitInVehicle = _G.UnitInVehicle or T.dummy
 
 ----------------------------------------------------------------------------------------
+--	Specialization Functions
+----------------------------------------------------------------------------------------
+function T.GetSpecialization(...)
+	local current = {}
+	local primaryTree = 1
+	for i = 1, 3 do
+		_, _, current[i] = GetTalentTabInfo(i, "player", nil)
+		if current[i] > current[primaryTree] then
+			primaryTree = i
+		end
+	end
+	return primaryTree
+end
+
+local isCaster = {
+	DRUID = {true},					-- Balance
+	HUNTER = {nil, nil, nil},
+	MAGE = {true, true, true},
+	PALADIN = {nil, nil, nil},
+	PRIEST = {nil, nil, true},		-- Shadow
+	ROGUE = {nil, nil, nil},
+	SHAMAN = {true},				-- Elemental
+	WARLOCK = {true, true, true},
+	WARRIOR = {nil, nil, nil}
+}
+
+function T.GetSpecializationRole()
+	local tree = T.GetSpecialization()
+	-- eventually check for tank stats in case a tanking in a non-traditional spec (mostly for warriors)
+	if (T.class == "PALADIN" and tree == 2) or (T.class == "WARRIOR" and tree == 3) or (T.class == "DRUID" and tree == 2 and GetBonusBarOffset() == 3) then
+		return "TANK"
+	elseif (T.class == "PALADIN" and tree == 1) or (T.class == "DRUID" and tree == 3) or (T.class == "SHAMAN" and tree == 3) or (T.class == "PRIEST" and tree ~= 3) then
+		return "HEALER"
+	else
+		local base, posBuff, negBuff = UnitAttackPower("player")
+
+		local current = {}
+		local best = 1
+		for i = 1, 7 do
+			current[i] = GetSpellBonusDamage(i)
+			if current[i] > current[best] then
+				best = i
+			end
+		end
+
+		local ap = base + posBuff + negBuff
+		local spell = GetSpellBonusDamage(best)
+		local heal = GetSpellBonusHealing()
+
+		if T.class ~= "HUNTER" and heal >= ap and heal >= spell then
+			return "HEALER" -- healing gear without having the majority of talents in a healing tree
+		elseif T.class ~= "HUNTER" and (isCaster[T.class][tree] or spell >= ap) then
+			return "CASTER" -- ordinarily "DAMAGER"
+		else
+			return "MELEE" -- ordinarily "DAMAGER"
+		end
+	end
+end
+
+UnitGroupRolesAssigned = _G.UnitGroupRolesAssigned or function(unit) -- Needs work
+	if unit == "player" then
+		local role = T.GetSpecializationRole()
+		if role == "MELEE" or role == "CASTER" then
+			role = "DAMAGER"
+		else
+			role = role or ""
+		end
+		return role
+	end
+end
+
+-- Add later
+GetAverageItemLevel = _G.GetAverageItemLevel or function()
+	local slotName = {
+		"HeadSlot", "NeckSlot", "ShoulderSlot", "BackSlot", "ChestSlot", "WristSlot",
+		"HandsSlot", "WaistSlot", "LegsSlot", "FeetSlot", "Finger0Slot", "Finger1Slot",
+		"Trinket0Slot", "Trinket1Slot", "MainHandSlot", "SecondaryHandSlot", "RangedSlot", "AmmoSlot"
+	}
+
+	local i, total, slot, itn, level = 0, 0, nil, 0
+
+	for i in pairs(slotName) do
+		slot = GetInventoryItemLink("player", GetInventorySlotInfo(slotName[i]))
+		if slot ~= nil then
+			itn = itn + 1
+			level = select(4, GetItemInfo(slot))
+			total = total + level
+		end
+	end
+
+	if total < 1 or itn < 1 then return 0 end
+
+	return floor(total / itn), floor(total / itn)
+end
+
+----------------------------------------------------------------------------------------
+--	Threat Functions
+----------------------------------------------------------------------------------------
+local threatColors = {
+	[0] = {0.69, 0.69, 0.69},
+	[1] = {1, 1, 0.47},
+	[2] = {1, 0.6, 0},
+	[3] = {1, 0, 0}
+}
+
+GetThreatStatusColor = _G.GetThreatStatusColor or function(statusIndex)
+	if not (type(statusIndex) == "number" and statusIndex >= 0 and statusIndex < 4) then
+		statusIndex = 0
+	end
+
+	return threatColors[statusIndex][1], threatColors[statusIndex][2], threatColors[statusIndex][3]
+end
+
+----------------------------------------------------------------------------------------
+--	Check if Classic or Burning Crusade Classic
+----------------------------------------------------------------------------------------
+if T.BCC then return end
+
+----------------------------------------------------------------------------------------
 --	LibClassicDurations (by d87)
 ----------------------------------------------------------------------------------------
-if not T.BCC then
-	local LibClassicDurations = LibStub("LibClassicDurations")
-	LibClassicDurations:Register("ShestakUI")
-end
+local LibClassicDurations = LibStub("LibClassicDurations")
+LibClassicDurations:Register("ShestakUI")
 
 ----------------------------------------------------------------------------------------
 --	TBC+ Shaman Coloring (config option later)
 ----------------------------------------------------------------------------------------
-if not T.BCC then
-	RAID_CLASS_COLORS.SHAMAN.r = 0
-	RAID_CLASS_COLORS.SHAMAN.g = 0.44
-	RAID_CLASS_COLORS.SHAMAN.b = 0.87
-	RAID_CLASS_COLORS.SHAMAN.colorStr = "ff0070de"
-end
+RAID_CLASS_COLORS.SHAMAN.r = 0
+RAID_CLASS_COLORS.SHAMAN.g = 0.44
+RAID_CLASS_COLORS.SHAMAN.b = 0.87
+RAID_CLASS_COLORS.SHAMAN.colorStr = "ff0070de"
 
 ----------------------------------------------------------------------------------------
 --	Specialization Functions
@@ -165,9 +280,7 @@ local spellLookupLocalized = {}
 for i = 1, #spellLookup do
 	local name = GetSpellInfo(spellLookup[i])
 	if not name then
-		if not T.BCC or spellLookup[i] ~= 26545 then -- Lightning Shield spellID is not in Burning Crusade Classic
-			print("|cffff0000WARNING: spell ID ["..tostring(spellLookup[i]).."] no longer exists! Report this to EsreverWoW.|r")
-		end
+		print("|cffff0000WARNING: spell ID ["..tostring(spellLookup[i]).."] no longer exists! Report this to EsreverWoW.|r")
 	else
 		spellLookupLocalized[name] = spellLookup[i]
 	end
@@ -196,118 +309,4 @@ function T.GetSpellID(spellName, unit, auraType)
 
 		return spellID or 0
 	end
-end
-
-----------------------------------------------------------------------------------------
---	Specialization Functions
-----------------------------------------------------------------------------------------
-function T.GetSpecialization(...)
-	local current = {}
-	local primaryTree = 1
-	for i = 1, 3 do
-		_, _, current[i] = GetTalentTabInfo(i, "player", nil)
-		if current[i] > current[primaryTree] then
-			primaryTree = i
-		end
-	end
-	return primaryTree
-end
-
-local isCaster = {
-	DRUID = {true},					-- Balance
-	HUNTER = {nil, nil, nil},
-	MAGE = {true, true, true},
-	PALADIN = {nil, nil, nil},
-	PRIEST = {nil, nil, true},		-- Shadow
-	ROGUE = {nil, nil, nil},
-	SHAMAN = {true},				-- Elemental
-	WARLOCK = {true, true, true},
-	WARRIOR = {nil, nil, nil}
-}
-
-function T.GetSpecializationRole()
-	local tree = T.GetSpecialization()
-	-- eventually check for tank stats in case a tanking in a non-traditional spec (mostly for warriors)
-	if (T.class == "PALADIN" and tree == 2) or (T.class == "WARRIOR" and tree == 3) or (T.class == "DRUID" and tree == 2 and GetBonusBarOffset() == 3) then
-		return "TANK"
-	elseif (T.class == "PALADIN" and tree == 1) or (T.class == "DRUID" and tree == 3) or (T.class == "SHAMAN" and tree == 3) or (T.class == "PRIEST" and tree ~= 3) then
-		return "HEALER"
-	else
-		local base, posBuff, negBuff = UnitAttackPower("player")
-
-		local current = {}
-		local best = 1
-		for i = 1, 7 do
-			 current[i] = GetSpellBonusDamage(i)
-			 if current[i] > current[best] then
-				best = i
-			end
-		end
-
-		local ap = base + posBuff + negBuff
-		local spell = GetSpellBonusDamage(best)
-		local heal = GetSpellBonusHealing()
-
-		if T.class ~= "HUNTER" and heal >= ap and heal >= spell then
-			return "HEALER" -- healing gear without having the majority of talents in a healing tree
-		elseif T.class ~= "HUNTER" and (isCaster[T.class][tree] or spell >= ap) then
-			return "CASTER" -- ordinarily "DAMAGER"
-		else
-			return "MELEE" -- ordinarily "DAMAGER"
-		end
-	end
-end
-
-UnitGroupRolesAssigned = _G.UnitGroupRolesAssigned or function(unit) -- Needs work
-	if unit == "player" then
-		local role = T.GetSpecializationRole()
-		if role == "MELEE" or role == "CASTER" then
-			role = "DAMAGER"
-		else
-			role = role or ""
-		end
-		return role
-	end
-end
-
--- Add later
-GetAverageItemLevel = _G.GetAverageItemLevel or function()
-	local slotName = {
-		"HeadSlot", "NeckSlot", "ShoulderSlot", "BackSlot", "ChestSlot", "WristSlot",
-		"HandsSlot", "WaistSlot", "LegsSlot", "FeetSlot", "Finger0Slot", "Finger1Slot",
-		"Trinket0Slot", "Trinket1Slot", "MainHandSlot", "SecondaryHandSlot", "RangedSlot", "AmmoSlot"
-	}
-
-	local i, total, slot, itn, level = 0, 0, nil, 0
-
-	for i in pairs(slotName) do
-		slot = GetInventoryItemLink("player", GetInventorySlotInfo(slotName[i]))
-		if slot ~= nil then
-			itn = itn + 1
-			level = select(4, GetItemInfo(slot))
-			total = total + level
-		end
-	end
-
-	if total < 1 or itn < 1 then return 0 end
-
-	return floor(total / itn), floor(total / itn)
-end
-
-----------------------------------------------------------------------------------------
---	Threat Functions
-----------------------------------------------------------------------------------------
-local threatColors = {
-	[0] = {0.69, 0.69, 0.69},
-	[1] = {1, 1, 0.47},
-	[2] = {1, 0.6, 0},
-	[3] = {1, 0, 0}
-}
-
-GetThreatStatusColor = _G.GetThreatStatusColor or function(statusIndex)
-	if not (type(statusIndex) == "number" and statusIndex >= 0 and statusIndex < 4) then
-		statusIndex = 0
-	end
-
-	return threatColors[statusIndex][1], threatColors[statusIndex][2], threatColors[statusIndex][3]
 end

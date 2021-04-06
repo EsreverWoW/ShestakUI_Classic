@@ -9,7 +9,7 @@ frame:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 frame:SetScript("OnEvent", function()
 	if not IsInGroup() or InCombatLockdown() then return end
 	local _, subEvent, _, _, srcName, _, _, _, destName, _, _, spellID, spellName = CombatLogGetCurrentEventInfo()
-	if T.classic then
+	if T.classic and not T.BCC then
 		spellID = T.GetSpellID(spellName)
 	end
 	if not subEvent or not spellID or not srcName then return end

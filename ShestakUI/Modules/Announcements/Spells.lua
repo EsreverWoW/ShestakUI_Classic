@@ -8,7 +8,7 @@ local frame = CreateFrame("Frame")
 frame:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 frame:SetScript("OnEvent", function()
 	local _, event, _, sourceGUID, sourceName, _, _, _, destName, _, _, spellID, spellName = CombatLogGetCurrentEventInfo()
-	if T.classic then
+	if T.classic and not T.BCC then
 		spellID = T.GetSpellID(spellID)
 	end
 	local _, _, difficultyID = GetInstanceInfo()

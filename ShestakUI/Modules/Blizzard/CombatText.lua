@@ -832,7 +832,7 @@ if C.combattext.damage then
 			elseif eventType == "RANGE_DAMAGE" then
 				local spellId, spellName, _, amount, _, _, _, _, _, critical = select(12, CombatLogGetCurrentEventInfo())
 				if amount >= C.combattext.treshold then
-					if T.classic then
+					if T.classic and not T.BCC then
 						spellId = T.GetSpellID(spellName)
 					end
 					local rawamount = amount
@@ -873,7 +873,7 @@ if C.combattext.damage then
 			elseif eventType == "SPELL_DAMAGE" or (eventType == "SPELL_PERIODIC_DAMAGE" and C.combattext.dot_damage) then
 				local spellId, spellName, spellSchool, amount, _, _, _, _, _, critical = select(12, CombatLogGetCurrentEventInfo())
 				if amount >= C.combattext.treshold then
-					if T.classic then
+					if T.classic and not T.BCC then
 						spellId = T.GetSpellID(spellName)
 					end
 					local color = {}
@@ -944,7 +944,7 @@ if C.combattext.damage then
 				xCT4:AddMessage(missType)
 			elseif eventType == "SPELL_MISSED" or eventType == "RANGE_MISSED" then
 				local spellId, spellName, _, missType = select(12, CombatLogGetCurrentEventInfo())
-				if T.classic then
+				if T.classic and not T.BCC then
 					spellId = T.GetSpellID(spellName)
 				end
 				if missType == "IMMUNE" and spellId == 204242 then return end -- Consecration slow
@@ -961,7 +961,7 @@ if C.combattext.damage then
 				xCT4:AddMessage(missType)
 			elseif eventType == "SPELL_DISPEL" and C.combattext.dispel then
 				local id, effect, _, etype = select(15, CombatLogGetCurrentEventInfo())
-				if T.classic then
+				if T.classic and not T.BCC then
 					id = T.GetSpellID(effect)
 				end
 				local color
@@ -985,7 +985,7 @@ if C.combattext.damage then
 				xCT3:AddMessage(ACTION_SPELL_DISPEL..": "..effect..msg, unpack(color))
 			elseif eventType == "SPELL_STOLEN" and C.combattext.dispel then
 				local id, effect = select(15, CombatLogGetCurrentEventInfo())
-				if T.classic then
+				if T.classic and not T.BCC then
 					id = T.GetSpellID(effect)
 				end
 				local color = {1, 0.5, 0}
@@ -1004,7 +1004,7 @@ if C.combattext.damage then
 				xCT3:AddMessage(ACTION_SPELL_STOLEN..": "..effect..msg, unpack(color))
 			elseif eventType == "SPELL_INTERRUPT" and C.combattext.interrupt then
 				local id, effect = select(15, CombatLogGetCurrentEventInfo())
-				if T.classic then
+				if T.classic and not T.BCC then
 					id = T.GetSpellID(effect)
 				end
 				local color = {1, 0.5, 0}
@@ -1047,7 +1047,7 @@ if C.combattext.healing then
 			if eventType == "SPELL_HEAL" or (eventType == "SPELL_PERIODIC_HEAL" and C.combattext.show_hots) then
 				if C.combattext.healing then
 					local spellId, spellName, _, amount, overhealing, _, critical = select(12, CombatLogGetCurrentEventInfo())
-					if T.classic then
+					if T.classic and not T.BCC then
 						spellId = T.GetSpellID(spellName)
 					end
 					if T.healfilter[spellId] then
