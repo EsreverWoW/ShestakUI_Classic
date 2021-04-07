@@ -332,9 +332,9 @@ local OnTooltipSetUnit = function(self)
 		if GetCVar("colorblindMode") == "1" then
 			n = n + 1
 			local class = UnitClass(unit)
-			_G["GameTooltipTextLeft"..n]:SetFormattedText("|cff%02x%02x%02x%s|r %s %s", levelColor.r * 255, levelColor.g * 255, levelColor.b * 255, level, race or UNKNOWN, class or "")
+			_G["GameTooltipTextLeft"..n]:SetFormattedText("|cff%02x%02x%02x%s|r |cffffffff%s %s|r", levelColor.r * 255, levelColor.g * 255, levelColor.b * 255, level, race or UNKNOWN, class or "")
 		else
-			_G["GameTooltipTextLeft"..n]:SetFormattedText("|cff%02x%02x%02x%s|r %s", levelColor.r * 255, levelColor.g * 255, levelColor.b * 255, level, race or UNKNOWN)
+			_G["GameTooltipTextLeft"..n]:SetFormattedText("|cff%02x%02x%02x%s|r |cffffffff%s|r", levelColor.r * 255, levelColor.g * 255, levelColor.b * 255, level, race or UNKNOWN)
 		end
 
 		for i = n + 1, lines do
@@ -344,6 +344,10 @@ local OnTooltipSetUnit = function(self)
 				line:SetText()
 				break
 			end
+		end
+
+		if T.classic and guildName and C.tooltip.rank then -- Rank line gets cuts in Classic and needs to be re-added
+			self:AddLine(RANK..": |cffffffff"..guildRank.."|r")
 		end
 	else
 		for i = 2, lines do
