@@ -1325,14 +1325,24 @@ do
 		plugins_absorbs
 	}
 
+	local bcc = {
+		show_arena,
+		arena_on_right,
+		plugins_enemy_spec,
+		plugins_diminishing,
+		plugins_absorbs
+	}
+
 	local retail = {
 		bar_color_happiness,
 		plugins_power_spark
 	}
 
-	if IsClassicBuild() then
+	if IsClassicBuild() and not IsBCCBuild() then
 		HideOptions(classic)
 		show_target_target:SetPoint("LEFT", show_pet, "RIGHT", 248, 0)
+	elseif IsBCCBuild() then
+		HideOptions(bcc)
 	else
 		HideOptions(retail)
 	end
@@ -1639,7 +1649,7 @@ do
 		fot_debuffs
 	}
 
-	if IsClassicBuild() then
+	if IsClassicBuild() and not IsBCCBuild() then
 		HideOptions(classic)
 	end
 end
