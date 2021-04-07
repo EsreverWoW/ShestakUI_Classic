@@ -109,9 +109,9 @@ local function LoadSkin()
 
 		slot:SetFrameLevel(PaperDollFrame:GetFrameLevel() + 2)
 
-		if(cooldown and C.unitframe.enable) then
-			T.CreateAuraWatch(cooldown)
-		end
+		-- if(cooldown and C.unitframe.enable) then
+			-- T.CreateAuraWatch(cooldown)
+		-- end
 	end
 
 	local function ColorItemBorder()
