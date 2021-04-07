@@ -5,7 +5,35 @@ if T.class ~= "MAGE" or T.level < 11 then return end
 --	Mage portals menu(by Foof and Tohveli)
 ----------------------------------------------------------------------------------------
 local spells
-if not T.classic then
+if T.classic then
+	if not T.BCC then
+		spells = (UnitFactionGroup("player") == "Horde") and {
+			[1] = {3567,11417},			-- Orgrimmar
+			[2] = {3563,11418},			-- Undercity
+			[3] = {3566,11420},			-- Thunder Bluff
+		} or { -- Alliance
+			[1] = {3561,10059},			-- Stormwind
+			[2] = {3562,11416},			-- Ironforge
+			[3] = {3565,11419},			-- Darnassus
+		}
+	else
+		spells = (UnitFactionGroup("player") == "Horde") and {
+			[1] = {3567,11417},			-- Orgrimmar
+			[2] = {3563,11418},			-- Undercity
+			[3] = {3566,11420},			-- Thunder Bluff
+			[4] = {32272,32267},		-- Silvermoon
+			[5] = {49358,49361},		-- Stonard
+			[6] = {35715,35717},		-- Shattrath
+		} or { -- Alliance
+			[1] = {3561,10059},			-- Stormwind
+			[2] = {3562,11416},			-- Ironforge
+			[3] = {3565,11419},			-- Darnassus
+			[4] = {32271,32266},		-- Exodar
+			[5] = {49359,49360},		-- Theramore
+			[6] = {33690,33691},		-- Shattrath
+		}
+	end
+else
 	spells = (UnitFactionGroup("player") == "Horde") and {
 		[1] = {3567,11417},			-- Orgrimmar
 		[2] = {3563,11418},			-- Undercity
@@ -38,16 +66,6 @@ if not T.classic then
 		[13] = {224869, 224871}, 	-- Dalaran, Broken Isles
 		[14] = {281403, 281400}, 	-- Boralus
 		[15] = {344587, 344597}, 	-- Oribos
-	}
-else
-	spells = (UnitFactionGroup("player") == "Horde") and {
-		[1] = {3567,11417},			-- Orgrimmar
-		[2] = {3563,11418},			-- Undercity
-		[3] = {3566,11420},			-- Thunder Bluff
-	} or { -- Alliance
-		[1] = {3561,10059},			-- Stormwind
-		[2] = {3562,11416},			-- Ironforge
-		[3] = {3565,11419},			-- Darnassus
 	}
 end
 
