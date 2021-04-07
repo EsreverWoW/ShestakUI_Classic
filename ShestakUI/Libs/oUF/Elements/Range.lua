@@ -5,7 +5,7 @@ local _FRAMES = {}
 local OnRangeFrame
 
 local UnitInRange, UnitIsConnected = UnitInRange, UnitIsConnected
-local rc = LibStub("LibRangeCheck-2.0")
+local LibRangeCheck = (oUF:IsClassic() and not oUF:IsBCC()) and LibStub("LibRangeCheck-2.0")
 
 local function Update(self, event)
 	local element = self.Range
@@ -26,7 +26,7 @@ local function Update(self, event)
 		if(not oUF:IsClassic()) then
 			inRange, checkedRange = UnitInRange(unit)
 		else
-			_, inRange = rc:GetRange(unit, true)
+			_, inRange = LibRangeCheck:GetRange(unit, true)
 		end
 		if((not oUF:IsClassic() and checkedRange and not inRange) or (not inRange)) then
 			self:SetAlpha(element.outsideAlpha)
