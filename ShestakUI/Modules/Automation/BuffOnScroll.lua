@@ -67,7 +67,7 @@ btn:SetAttribute("unit", "player")
 
 -- Main function for changing keybinding to mousewheel when a buff is needed
 function CheckBuffs()
-	if (not T.classic and IsFlying()) or IsMounted() or UnitIsDeadOrGhost("Player") or InCombatLockdown() then return end
+	if IsFlying() or IsMounted() or UnitIsDeadOrGhost("Player") or InCombatLockdown() then return end
 	ClearOverrideBindings(btn)
 	btn:SetAttribute("spell", nil)
 	if specSpells then
