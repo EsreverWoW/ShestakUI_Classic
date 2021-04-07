@@ -11,7 +11,7 @@ local function IsClassicBuild()
 end
 
 local function IsBCCBuild()
-	return IsClassicBuild() and select(4, GetBuildInfo() > 20500)
+	return IsClassicBuild() and select(4, GetBuildInfo()) > 20500
 end
 
 local function HideOptions(list)
