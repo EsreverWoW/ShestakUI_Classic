@@ -145,8 +145,10 @@ end
 
 local function registerStyle(myProfile)
 	if not BigWigs then return end
-	if not T.classic then
-		BigWigsAPI:RegisterBarStyle("ShestakUI", {
+	if T.classic then
+		local bars = BigWigs:GetPlugin("Bars", true)
+		if not bars then return end
+		bars:RegisterBarStyle("ShestakUI", {
 			apiVersion = 1,
 			version = 1,
 			GetSpacing = function() return T.Scale(13) end,
@@ -155,9 +157,7 @@ local function registerStyle(myProfile)
 			GetStyleName = function() return "ShestakUI" end,
 		})
 	else
-		local bars = BigWigs:GetPlugin("Bars", true)
-		if not bars then return end
-		bars:RegisterBarStyle("ShestakUI", {
+		BigWigsAPI:RegisterBarStyle("ShestakUI", {
 			apiVersion = 1,
 			version = 1,
 			GetSpacing = function() return T.Scale(13) end,
@@ -256,10 +256,10 @@ function T.UploadBW()
 		prox.db.profile.fontName = "Calibri"
 		prox.db.profile.objects.ability = false
 	end
-	if not T.classic then
-		BigWigsIconDB.hide = true
-	else
+	if T.classic then
 		BigWigsIconClassicDB.hide = true
+	else
+		BigWigsIconDB.hide = true
 	end
 	BigWigs:GetPlugin("Super Emphasize").db.profile.fontName = "Calibri"
 	BigWigs:GetPlugin("Alt Power").db.profile.fontName = "Calibri"

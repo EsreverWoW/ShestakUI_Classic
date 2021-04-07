@@ -20,11 +20,11 @@ BGFrame:SetScript("OnEnter", function(self)
 
 	for i = 1, GetNumBattlefieldScores() do
 		local name, honorableKills, deaths, damageDone, healingDone, rank
-		if not T.classic then
-			name, _, honorableKills, deaths, _, _, _, _, _, damageDone, healingDone = GetBattlefieldScore(i)
-		else
+		if T.classic then
 			-- build 30786 changed returns, removing dmg/heals/spec and adding rank
 			name, _, honorableKills, deaths, _, _, rank = GetBattlefieldScore(i)
+		else
+			name, _, honorableKills, deaths, _, _, _, _, _, damageDone, healingDone = GetBattlefieldScore(i)
 		end
 		if name and name == T.name then
 			GameTooltip:SetOwner(self, "ANCHOR_TOPLEFT", 0, T.Scale(4))
@@ -35,22 +35,15 @@ BGFrame:SetScript("OnEnter", function(self)
 			GameTooltip:AddLine(" ")
 			GameTooltip:AddDoubleLine(HONORABLE_KILLS..":", honorableKills, 1, 1, 1)
 			GameTooltip:AddDoubleLine(DEATHS..":", deaths, 1, 1, 1)
-			if not T.classic then
+			if T.classic then
+				GameTooltip:AddDoubleLine(RANK..":", rank, 1, 1, 1)
+			else
 				GameTooltip:AddDoubleLine(DAMAGE..":", T.ShortValue(damageDone), 1, 1, 1)
 				GameTooltip:AddDoubleLine(SHOW_COMBAT_HEALING..":", T.ShortValue(healingDone), 1, 1, 1)
-			else
-				GameTooltip:AddDoubleLine(RANK..":", rank, 1, 1, 1)
 			end
 
 			-- Add extra statistics depending on what BG you are
-			if not T.classic and columns then
-				for j, stat in ipairs(columns) do
-					local name = stat.name
-					if name and strlen(name) > 0 then
-						GameTooltip:AddDoubleLine(name, GetBattlefieldStatData(i, j), 1, 1, 1)
-					end
-				end
-			elseif T.classic then
+			if T.classic then
 				local areaID = C_Map.GetBestMapForUnit("player") or 0
 				if areaID == WSG then
 					GameTooltip:AddDoubleLine(GetBattlefieldStatInfo(1)..":", GetBattlefieldStatData(i, 1), 1, 1, 1)
@@ -63,6 +56,13 @@ BGFrame:SetScript("OnEnter", function(self)
 					GameTooltip:AddDoubleLine(GetBattlefieldStatInfo(3)..":", GetBattlefieldStatData(i, 3), 1, 1, 1)
 					GameTooltip:AddDoubleLine(GetBattlefieldStatInfo(4)..":", GetBattlefieldStatData(i, 4), 1, 1, 1)
 				end
+			elseif not T.classic and columns then
+				for j, stat in ipairs(columns) do
+					local name = stat.name
+					if name and strlen(name) > 0 then
+						GameTooltip:AddDoubleLine(name, GetBattlefieldStatData(i, j), 1, 1, 1)
+					end
+				end
 			end
 
 			break
@@ -73,20 +73,20 @@ end)
 
 BGFrame:SetScript("OnLeave", function() GameTooltip:Hide() end)
 BGFrame:SetScript("OnMouseUp", function(_, button)
-	if not T.classic then
-		if QueueStatusMinimapButton:IsShown() then
-			if button == "RightButton" then
-				ToggleBattlefieldMap()
-			else
-				TogglePVPScoreboardOrResults()
-			end
-		end
-	else
+	if T.classic then
 		if MiniMapBattlefieldFrame:IsShown() then
 			if button == "RightButton" then
 				ToggleBattlefieldMap()
 			else
 				ToggleWorldStateScoreFrame()
+			end
+		end
+	else
+		if QueueStatusMinimapButton:IsShown() then
+			if button == "RightButton" then
+				ToggleBattlefieldMap()
+			else
+				TogglePVPScoreboardOrResults()
 			end
 		end
 	end
@@ -121,21 +121,21 @@ local function Update(_, t)
 		RequestBattlefieldScoreData()
 		for i = 1, GetNumBattlefieldScores() do
 			local name, killingBlows, honorableKills, damageDone, healingDone, rank
-			if not T.classic then
-				name, killingBlows, _, _, honorGained, _, _, _, _, damageDone, healingDone = GetBattlefieldScore(i)
-			else
+			if T.classic then
 				-- build 30786 changed returns, removing dmg/heals/spec and adding rank
 				name, killingBlows, _, _, honorGained, _, rank = GetBattlefieldScore(i)
+			else
+				name, killingBlows, _, _, honorGained, _, _, _, _, damageDone, healingDone = GetBattlefieldScore(i)
 			end
 			if name and name == T.name then
-				if not T.classic then
+				if T.classic then
+					ranktxt = (classcolor..RANK.." :|r "..rank)
+				else
 					if healingDone > damageDone then
 						dmgtxt = (classcolor..SHOW_COMBAT_HEALING.." :|r "..T.ShortValue(healingDone))
 					else
 						dmgtxt = (classcolor..DAMAGE.." :|r "..T.ShortValue(damageDone))
 					end
-				else
-					ranktxt = (classcolor..RANK.." :|r "..rank)
 				end
 				Text1:SetText(T.classic and ranktxt or dmgtxt)
 				Text2:SetText(classcolor..COMBAT_HONOR_GAIN.." :|r "..format("%d", honorGained))

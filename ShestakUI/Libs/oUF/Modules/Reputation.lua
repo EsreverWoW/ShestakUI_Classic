@@ -30,7 +30,7 @@ local function GetReputation()
 
 	local friendID, standingText, nextThreshold
 	if(not oUF:IsClassic()) then
-		friendID, _, _, _, _, _, standingText, _, nextThreshold = not T.classic and GetFriendshipReputation(factionID)
+		friendID, _, _, _, _, _, standingText, _, nextThreshold = GetFriendshipReputation(factionID)
 		if(friendID) then
 			if(not nextThreshold) then
 				min, max, cur = 0, 1, 1 -- force a full bar when maxed out

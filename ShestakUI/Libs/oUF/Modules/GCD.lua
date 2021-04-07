@@ -12,7 +12,19 @@ local GetTime = GetTime
 
 local spells
 
-if not T.classic then
+if T.classic then
+	spells = {
+		["DRUID"] = 1126,
+		["HUNTER"] = 1978,
+		["MAGE"] = 168,
+		["PALADIN"] = 20154,
+		["PRIEST"] = 1243,
+		["ROGUE"] = 1752,
+		["SHAMAN"] = 403,
+		["WARLOCK"] = 687,
+		["WARRIOR"] = 6673,
+	}
+else
 	spells = {
 		["DEATHKNIGHT"] = 61304,
 		["DEMONHUNTER"] = 61304,
@@ -26,18 +38,6 @@ if not T.classic then
 		["SHAMAN"] = 61304,
 		["WARLOCK"] = 61304,
 		["WARRIOR"] = 61304,
-	}
-else
-	spells = {
-		["DRUID"] = 1126,
-		["HUNTER"] = 1978,
-		["MAGE"] = 168,
-		["PALADIN"] = 20154,
-		["PRIEST"] = 1243,
-		["ROGUE"] = 1752,
-		["SHAMAN"] = 403,
-		["WARLOCK"] = 687,
-		["WARRIOR"] = 6673,
 	}
 end
 

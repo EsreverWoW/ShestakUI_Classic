@@ -288,16 +288,16 @@ if clock.enabled then
 		OnEnter = function(self)
 			if not self.hovered then RequestRaidInfo() self.hovered = true end
 			local currentCalendarTime, weekday, month, fullDate
-			if not T.classic or T.BCC then
-				currentCalendarTime = C_DateAndTime.GetCurrentCalendarTime()
-				weekday = CALENDAR_WEEKDAY_NAMES[currentCalendarTime.weekday]
-				month = CALENDAR_MONTH_NAMES[currentCalendarTime.month]
-				fullDate = format(FULLDATE, weekday, month, currentCalendarTime.monthDay, currentCalendarTime.year, currentCalendarTime.month)
-			else
+			if T.classic and not T.BCC then
 				currentCalendarTime = C_DateAndTime.GetTodaysDate()
 				weekday = CALENDAR_WEEKDAY_NAMES[currentCalendarTime.weekDay]
 				month = CALENDAR_MONTH_NAMES[currentCalendarTime.month]
 				fullDate = format(FULLDATE, weekday, month, currentCalendarTime.day, currentCalendarTime.year, currentCalendarTime.month)
+			else
+				currentCalendarTime = C_DateAndTime.GetCurrentCalendarTime()
+				weekday = CALENDAR_WEEKDAY_NAMES[currentCalendarTime.weekday]
+				month = CALENDAR_MONTH_NAMES[currentCalendarTime.month]
+				fullDate = format(FULLDATE, weekday, month, currentCalendarTime.monthDay, currentCalendarTime.year, currentCalendarTime.month)
 			end
 			GameTooltip:SetOwner(self, "ANCHOR_NONE")
 			GameTooltip:ClearAllPoints()
@@ -400,10 +400,10 @@ if clock.enabled then
 			GameTooltip:Show()
 		end,
 		OnClick = function(_, b)
-			if not T.classic then
-				(b == "RightButton" and ToggleTimeManager or ToggleCalendar)()
-			else
+			if T.classic then
 				TimeManager_Toggle()
+			else
+				(b == "RightButton" and ToggleTimeManager or ToggleCalendar)()
 			end
 		end
 	})
@@ -424,10 +424,10 @@ if latency.enabled then
 		OnEnter = function(self)
 			local _, _, latencyHome, latencyWorld = GetNetStats()
 			local latency
-			if not T.classic then
-				latency = format(MAINMENUBAR_LATENCY_LABEL, latencyHome, latencyWorld)
-			else
+			if T.classic then
 				latency = format("Latency:\n%.0f ms (home)\n%.0f ms (world)", latencyHome, latencyWorld)
+			else
+				latency = format(MAINMENUBAR_LATENCY_LABEL, latencyHome, latencyWorld)
 			end
 			GameTooltip:SetOwner(self, "ANCHOR_NONE")
 			GameTooltip:ClearAllPoints()
@@ -700,11 +700,7 @@ if friends.enabled then
 			if b == "MiddleButton" then
 				ToggleIgnorePanel()
 			elseif b == "LeftButton" then
-				if T.classic then
-					ToggleFrame(FriendsFrame)
-				else
-					ToggleFriendsFrame(1)
-				end
+				ToggleFriendsFrame(1)
 			elseif b == "RightButton" then
 				HideTT(self)
 
@@ -1006,10 +1002,10 @@ if guild.enabled then
 			end, update = 5
 		},
 		OnLoad = function(self)
-			if not T.classic then
-				C_GuildInfo.GuildRoster()
-			else
+			if T.classic then
 				GuildRoster()
+			else
+				C_GuildInfo.GuildRoster()
 			end
 			SortGuildRoster(guild.sorting == "note" and "rank" or "note")
 			SortGuildRoster(guild.sorting)
@@ -1028,7 +1024,7 @@ if guild.enabled then
 			if IsInGuild() then
 				AltUpdate(self)
 				if not self.gmotd then
-					if self.elapsed > 1 then if not T.classic then C_GuildInfo.GuildRoster() else GuildRoster() end; self.elapsed = 0 end
+					if self.elapsed > 1 then if T.classic then GuildRoster() else C_GuildInfo.GuildRoster() end; self.elapsed = 0 end
 					if GetGuildRosterMOTD() ~= "" then self.gmotd = true; if self.hovered then self:GetScript("OnEnter")(self) end end
 					self.elapsed = self.elapsed + u
 				end
@@ -1090,10 +1086,10 @@ if guild.enabled then
 		OnEnter = function(self)
 			if IsInGuild() then
 				self.hovered = true
-				if not T.classic then
-					C_GuildInfo.GuildRoster()
-				else
+				if T.classic then
 					GuildRoster()
+				else
+					C_GuildInfo.GuildRoster()
 				end
 				local name, rank, level, zone, note, officernote, connected, status, class, isMobile, zone_r, zone_g, zone_b, classc, levelc, grouped
 				local total, _, online = GetNumGuildMembers()
@@ -1209,10 +1205,10 @@ if durability.enabled then
 				local avgItemLevel, avgItemLevelEquipped = GetAverageItemLevel()
 				avgItemLevel = floor(avgItemLevel)
 				avgItemLevelEquipped = floor(avgItemLevelEquipped)
-				if not T.classic then
-					GameTooltip:AddDoubleLine(DURABILITY, STAT_AVERAGE_ITEM_LEVEL..": "..avgItemLevelEquipped.." / "..avgItemLevel, tthead.r, tthead.g, tthead.b, tthead.r, tthead.g, tthead.b)
-				else
+				if T.classic then
 					GameTooltip:AddDoubleLine(DURABILITY, STAT_AVERAGE_ITEM_LEVEL..": "..avgItemLevelEquipped, tthead.r, tthead.g, tthead.b, tthead.r, tthead.g, tthead.b)
+				else
+					GameTooltip:AddDoubleLine(DURABILITY, STAT_AVERAGE_ITEM_LEVEL..": "..avgItemLevelEquipped.." / "..avgItemLevel, tthead.r, tthead.g, tthead.b, tthead.r, tthead.g, tthead.b)
 				end
 			else
 				GameTooltip:AddLine(DURABILITY, tthead.r, tthead.g, tthead.b)
@@ -1245,7 +1241,17 @@ if durability.enabled then
 			GameTooltip:Show()
 		end,
 		OnClick = function(self, button)
-			if not T.classic then
+			if T.classic then
+				if button == "RightButton" then
+					conf.AutoRepair = not conf.AutoRepair
+					self:GetScript("OnEnter")(self)
+				elseif button == "MiddleButton" then
+					conf.AutoGuildRepair = not conf.AutoGuildRepair
+					self:GetScript("OnEnter")(self)
+				elseif button == "LeftButton" then
+					ToggleCharacter("PaperDollFrame")
+				end
+			else
 				if button == "RightButton" then
 					conf.AutoRepair = not conf.AutoRepair
 					self:GetScript("OnEnter")(self)
@@ -1264,16 +1270,6 @@ if durability.enabled then
 						end
 					end
 					EasyMenu(menulist, LSMenus, "cursor", 0, 0, "MENU")
-				elseif button == "LeftButton" then
-					ToggleCharacter("PaperDollFrame")
-				end
-			else
-				if button == "RightButton" then
-					conf.AutoRepair = not conf.AutoRepair
-					self:GetScript("OnEnter")(self)
-				elseif button == "MiddleButton" then
-					conf.AutoGuildRepair = not conf.AutoGuildRepair
-					self:GetScript("OnEnter")(self)
 				elseif button == "LeftButton" then
 					ToggleCharacter("PaperDollFrame")
 				end
@@ -2148,10 +2144,10 @@ if stats.enabled then
 		OnUpdate = function(self, u)
 			self.elapsed = self.elapsed + u
 			if self.fired and self.elapsed > 2.5 then
-				if not T.classic then
-					self.text:SetText(gsub(stats[format("spec%dfmt", GetSpecialization() and GetSpecialization() or 1)], "%[(%w-)%]", tags))
-				else
+				if T.classic then
 					self.text:SetText(gsub(stats[format("spec%dfmt", T.GetSpecialization() and T.GetSpecialization() or 1)], "%[(%w-)%]", tags))
+				else
+					self.text:SetText(gsub(stats[format("spec%dfmt", GetSpecialization() and GetSpecialization() or 1)], "%[(%w-)%]", tags))
 				end
 				self.elapsed, self.fired = 0, false
 			end

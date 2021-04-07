@@ -914,10 +914,10 @@ function Stuffing:CreateBagFrame(w)
 		-- Buy button
 		f.b_purchase = CreateFrame("Button", "StuffingPurchaseButton"..w, f)
 		f.b_purchase:SetSize(80, 20)
-		if not T.classic then
-			f.b_purchase:SetPoint("TOPLEFT", f.b_reagent, "TOPRIGHT", 3, 0)
-		else
+		if T.classic then
 			f.b_purchase:SetPoint("TOPLEFT", 10, -4)
+		else
+			f.b_purchase:SetPoint("TOPLEFT", f.b_reagent, "TOPRIGHT", 3, 0)
 		end
 		f.b_purchase:RegisterForClicks("AnyUp")
 		f.b_purchase:SkinButton()

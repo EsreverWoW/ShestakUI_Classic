@@ -103,7 +103,7 @@ end
 local function whoFrame()
 	local scrollFrame = WhoListScrollFrame
 	local offset = T.classic and FauxScrollFrame_GetOffset(WhoListScrollFrame) or HybridScrollFrame_GetOffset(scrollFrame)
-	local buttons = not T.classic and scrollFrame.buttons or 0
+	local buttons = T.classic and 0 or scrollFrame.buttons
 	local numWhos = C_FriendList.GetNumWhoResults()
 
 	local playerZone = GetRealZoneText()

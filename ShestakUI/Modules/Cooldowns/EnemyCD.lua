@@ -182,10 +182,10 @@ end
 for spell in pairs(T.EnemySpells) do
 	local name = GetSpellInfo(spell)
 	if not name then
-		if not T.classic then
-			print("|cffff0000WARNING: spell ID ["..tostring(spell).."] no longer exists! Report this to Shestak.|r")
-		else
+		if T.classic then
 			print("|cffff0000WARNING: spell ID ["..tostring(spell).."] no longer exists! Report this to EsreverWoW.|r")
+		else
+			print("|cffff0000WARNING: spell ID ["..tostring(spell).."] no longer exists! Report this to Shestak.|r")
 		end
 	end
 end
@@ -196,16 +196,16 @@ addon:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 addon:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 
 SlashCmdList.EnemyCD = function()
-	if not T.classic then
-		StartTimer(UnitGUID(T.name), 47528)
-		StartTimer(UnitGUID(T.name), 19647)
-		StartTimer(UnitGUID(T.name), 47476)
-		StartTimer(UnitGUID(T.name), 51514)
-	else
+	if T.classic then
 		StartTimer(UnitGUID(T.name), 6552)
 		StartTimer(UnitGUID(T.name), 19244)
 		StartTimer(UnitGUID(T.name), 15487)
 		StartTimer(UnitGUID(T.name), 1499)
+	else
+		StartTimer(UnitGUID(T.name), 47528)
+		StartTimer(UnitGUID(T.name), 19647)
+		StartTimer(UnitGUID(T.name), 47476)
+		StartTimer(UnitGUID(T.name), 51514)
 	end
 end
 SLASH_EnemyCD1 = "/enemycd"

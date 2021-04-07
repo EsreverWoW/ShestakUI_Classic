@@ -73,17 +73,17 @@ RaidUtilityDisbandButton:SetScript("OnMouseUp", function() StaticPopup_Show("DIS
 CreateButton("RaidUtilityConvertButton", RaidUtilityPanel, "UIPanelButtonTemplate", RaidUtilityPanel:GetWidth() * 0.8, 18, "TOP", RaidUtilityDisbandButton, "BOTTOM", 0, -5, UnitInRaid("player") and CONVERT_TO_PARTY or CONVERT_TO_RAID)
 RaidUtilityConvertButton:SetScript("OnMouseUp", function()
 	if UnitInRaid("player") then
-		if not T.classic then
-			C_PartyInfo.ConvertToParty()
-		else
+		if T.classic then
 			ConvertToParty()
+		else
+			C_PartyInfo.ConvertToParty()
 		end
 		RaidUtilityConvertButton.t:SetText(CONVERT_TO_RAID)
 	elseif UnitInParty("player") then
-		if not T.classic then
-			C_PartyInfo.ConvertToRaid()
-		else
+		if T.classic then
 			ConvertToRaid()
+		else
+			C_PartyInfo.ConvertToRaid()
 		end
 		RaidUtilityConvertButton.t:SetText(CONVERT_TO_PARTY)
 	end
@@ -128,11 +128,7 @@ end
 -- Raid Control Panel
 CreateButton("RaidUtilityRaidControlButton", RaidUtilityPanel, "UIPanelButtonTemplate", (RaidUtilityPanel:GetWidth() * 0.8), 18, "TOPLEFT", RaidUtilityReadyCheckButton, "BOTTOMLEFT", 0, -5, RAID_CONTROL)
 RaidUtilityRaidControlButton:SetScript("OnMouseUp", function()
-	if T.classic then
-		ToggleRaidFrame()
-	else
-		ToggleFriendsFrame(4)
-	end
+	ToggleFriendsFrame(4)
 end)
 
 local function ToggleRaidUtil(self, event)

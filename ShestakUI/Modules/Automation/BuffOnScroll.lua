@@ -15,14 +15,14 @@ local function SpellName(id)
 end
 
 local spells = {}
-if not T.classic then
+if T.classic then
 	spells = {
 		MAGE = {
 			[SpellName(1459)] = true,	-- Arcane Intellect
 		},
 
 		PRIEST = {
-			[SpellName(21562)] = true,	-- Power Word: Fortitude
+			[SpellName(1243)] = true,	-- Power Word: Fortitude
 		},
 
 		WARRIOR = {
@@ -36,7 +36,7 @@ else
 		},
 
 		PRIEST = {
-			[SpellName(1243)] = true,	-- Power Word: Fortitude
+			[SpellName(21562)] = true,	-- Power Word: Fortitude
 		},
 
 		WARRIOR = {

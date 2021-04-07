@@ -140,16 +140,16 @@ if T.classic then
 			self:ClearAllPoints()
 			self:SetPoint("TOP", SideDressUpModelResetButton, "BOTTOM", 0, -3)
 			self.model = SideDressUpModel
-		elseif not T.classic and self.model ~= DressUpModel then
-			self:SetParent(DressUpModel)
-			self:ClearAllPoints()
-			self:SetPoint("RIGHT", DressUpFrameResetButton, "LEFT", -2, 0)
-			self.model = DressUpModel
 		elseif T.classic and self.model ~= DressUpModelFrame then
 			self:SetParent(DressUpModelFrame)
 			self:ClearAllPoints()
 			self:SetPoint("RIGHT", DressUpFrameResetButton, "LEFT", -2, 0)
 			self.model = DressUpModelFrame
+		elseif not T.classic and self.model ~= DressUpModel then
+			self:SetParent(DressUpModel)
+			self:ClearAllPoints()
+			self:SetPoint("RIGHT", DressUpFrameResetButton, "LEFT", -2, 0)
+			self.model = DressUpModel
 		end
 	end)
 end

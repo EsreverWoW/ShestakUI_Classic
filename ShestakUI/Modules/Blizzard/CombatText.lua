@@ -20,7 +20,7 @@ else
 	numf = 3
 end
 
--- WoW Classic requies combat text be enabled to display incoming damage
+-- WoW Classic requires combat text be enabled to display incoming damage
 if T.classic then
 	SetCVar("enableFloatingCombatText", 1)
 end
@@ -1117,10 +1117,10 @@ if C.combattext.merge_aoe_spam then
 	for spell in pairs(T.aoespam) do
 		local name = GetSpellInfo(spell)
 		if not name then
-			if not T.classic then
-				print("|cffff0000WARNING: spell ID ["..tostring(spell).."] no longer exists! Report this to Shestak.|r")
-			else
+			if T.classic then
 				print("|cffff0000WARNING: spell ID ["..tostring(spell).."] no longer exists! Report this to EsreverWoW.|r")
+			else
+				print("|cffff0000WARNING: spell ID ["..tostring(spell).."] no longer exists! Report this to Shestak.|r")
 			end
 		end
 	end
@@ -1128,10 +1128,10 @@ if C.combattext.merge_aoe_spam then
 	for spell in pairs(T.merge) do
 		local name = GetSpellInfo(spell)
 		if not name then
-			if not T.classic then
-				print("|cffff0000WARNING: spell ID ["..tostring(spell).."] no longer exists! Report this to Shestak.|r")
-			else
+			if T.classic then
 				print("|cffff0000WARNING: spell ID ["..tostring(spell).."] no longer exists! Report this to EsreverWoW.|r")
+			else
+				print("|cffff0000WARNING: spell ID ["..tostring(spell).."] no longer exists! Report this to Shestak.|r")
 			end
 		end
 	end
@@ -1141,10 +1141,10 @@ if C.combattext.healing then
 	for spell in pairs(T.healfilter) do
 		local name = GetSpellInfo(spell)
 		if not name then
-			if not T.classic then
-				print("|cffff0000WARNING: spell ID ["..tostring(spell).."] no longer exists! Report this to Shestak.|r")
-			else
+			if T.classic then
 				print("|cffff0000WARNING: spell ID ["..tostring(spell).."] no longer exists! Report this to EsreverWoW.|r")
+			else
+				print("|cffff0000WARNING: spell ID ["..tostring(spell).."] no longer exists! Report this to Shestak.|r")
 			end
 		end
 	end

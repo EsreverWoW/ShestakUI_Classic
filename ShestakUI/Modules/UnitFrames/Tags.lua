@@ -51,10 +51,10 @@ oUF.Tags.Methods["PetNameColor"] = function()
 		return string.format("|cff%02x%02x%02x", T.color.r * 255, T.color.g * 255, T.color.b * 255)
 	end
 end
-if not T.classic then
-	oUF.Tags.Events["PetNameColor"] = "UNIT_POWER_UPDATE"
-else
+if T.classic then
 	oUF.Tags.Events["PetNameColor"] = "UNIT_POWER_UPDATE UNIT_HAPPINESS"
+else
+	oUF.Tags.Events["PetNameColor"] = "UNIT_POWER_UPDATE"
 end
 
 oUF.Tags.Methods["GetNameColor"] = function(unit)
@@ -172,10 +172,10 @@ oUF.Tags.Methods["NameplateHealth"] = function(unit)
 		return ("%s - %d%%"):format(T.ShortValue(hp), hp / maxhp * 100 + 0.5)
 	end
 end
-if not T.classic then
-	oUF.Tags.Events["NameplateHealth"] = "UNIT_HEALTH UNIT_MAXHEALTH NAME_PLATE_UNIT_ADDED"
-else
+if T.classic then
 	oUF.Tags.Events["NameplateHealth"] = "UNIT_HEALTH_FREQUENT UNIT_MAXHEALTH NAME_PLATE_UNIT_ADDED"
+else
+	oUF.Tags.Events["NameplateHealth"] = "UNIT_HEALTH UNIT_MAXHEALTH NAME_PLATE_UNIT_ADDED"
 end
 
 oUF.Tags.Methods["Absorbs"] = function(unit)

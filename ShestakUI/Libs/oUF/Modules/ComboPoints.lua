@@ -11,7 +11,10 @@ local function Update(self, _, unit, powerType)
 	local element = self.ComboPoints
 	local cur, max
 
-	if(not oUF:IsClassic()) then
+	if(oUF:IsClassic()) then
+		cur = UnitPower("player", 14)
+		max = UnitPowerMax("player", 14)
+	else
 		if UnitHasVehicleUI("player") then
 			cur = UnitPower("vehicle", 4)
 			max = UnitPowerMax("vehicle", 4)
@@ -19,9 +22,6 @@ local function Update(self, _, unit, powerType)
 			cur = UnitPower("player", 4)
 			max = UnitPowerMax("player", 4)
 		end
-	else
-		cur = UnitPower("player", 14)
-		max = UnitPowerMax("player", 14)
 	end
 
 	if max == 0 or max > 6 then
@@ -33,7 +33,7 @@ local function Update(self, _, unit, powerType)
 	local s = 0
 
 	if element.max ~= max then
-		local maxPoints = not oUF:IsClassic() and 6 or 5
+		local maxPoints = oUF:IsClassic() and 5 or 6
 		if max == maxPoints then
 			element[maxPoints]:Show()
 		else
@@ -105,8 +105,8 @@ local function Visibility(self)
 	local element = self.ComboPoints
 	local form = GetShapeshiftFormID()
 
-	if(not oUF:IsClassic()) then
-		if form == CAT_FORM or (UnitHasVehicleUI("player") and UnitPower("vehicle", 4) > 0) then
+	if(oUF:IsClassic()) then
+		if form == CAT_FORM then
 			element:Show()
 			if self.Debuffs then self.Debuffs:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 2, 19) end
 		else
@@ -114,7 +114,7 @@ local function Visibility(self)
 			if self.Debuffs then self.Debuffs:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 2, 5) end
 		end
 	else
-		if form == CAT_FORM then
+		if form == CAT_FORM or (UnitHasVehicleUI("player") and UnitPower("vehicle", 4) > 0) then
 			element:Show()
 			if self.Debuffs then self.Debuffs:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 2, 19) end
 		else

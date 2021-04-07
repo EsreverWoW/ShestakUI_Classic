@@ -331,10 +331,10 @@ end
 for spell in pairs(T.RaidSpells) do
 	local name = GetSpellInfo(spell)
 	if not name then
-		if not T.classic then
-			print("|cffff0000WARNING: spell ID ["..tostring(spell).."] no longer exists! Report this to Shestak.|r")
-		else
+		if T.classic then
 			print("|cffff0000WARNING: spell ID ["..tostring(spell).."] no longer exists! Report this to EsreverWoW.|r")
+		else
+			print("|cffff0000WARNING: spell ID ["..tostring(spell).."] no longer exists! Report this to Shestak.|r")
 		end
 	end
 end
@@ -347,14 +347,14 @@ f:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 f:RegisterEvent("ENCOUNTER_END")
 
 SlashCmdList.RaidCD = function()
-	if not T.classic then
-		StartTimer(UnitName("player"), 20484)	-- Rebirth
-		StartTimer(UnitName("player"), 20707)	-- Soulstone
-		StartTimer(UnitName("player"), 108280)	-- Healing Tide Totem
-	else
+	if T.classic then
 		StartTimer(UnitName("player"), 20484)	-- Rebirth
 		StartTimer(UnitName("player"), 871)		-- Shield Wall
 		StartTimer(UnitName("player"), 29166)	-- Innervate
+	else
+		StartTimer(UnitName("player"), 20484)	-- Rebirth
+		StartTimer(UnitName("player"), 20707)	-- Soulstone
+		StartTimer(UnitName("player"), 108280)	-- Healing Tide Totem
 	end
 end
 SLASH_RaidCD1 = "/raidcd"

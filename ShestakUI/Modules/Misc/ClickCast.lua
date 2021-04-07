@@ -5,10 +5,10 @@ if C.misc.click_cast ~= true then return end
 --	Simple click2cast spell binder(sBinder by Fernir)
 ----------------------------------------------------------------------------------------
 local SpellBinder = CreateFrame("Frame", "SpellBinder", SpellBookFrame, "ButtonFrameTemplate")
-if not T.classic then
-	SpellBinder:SetPoint("TOPLEFT", SpellBookFrame, "TOPRIGHT", 100, -1)
-else
+if T.classic then
 	SpellBinder:SetPoint("TOPLEFT", SpellBookFrame, "TOPRIGHT", 32, -12)
+else
+	SpellBinder:SetPoint("TOPLEFT", SpellBookFrame, "TOPRIGHT", 100, -1)
 end
 SpellBinder:SetSize(300, 400)
 SpellBinder:Hide()
@@ -205,10 +205,10 @@ end
 hooksecurefunc("SpellBookFrame_Update", function() if SpellBinder.sbOpen then SpellBinder:ToggleButtons() end end)
 
 SpellBinder.OpenButton = CreateFrame("CheckButton", "SpellBinderOpenButton", _G["SpellBookSkillLineTab1"], "SpellBookSkillLineTabTemplate")
-if not T.classic then
-	SpellBinder.OpenButton:SetNormalTexture("Interface\\ICONS\\Achievement_Guild_Doctorisin")
-else
+if T.classic then
 	SpellBinder.OpenButton:SetNormalTexture("Interface\\ICONS\\INV_Mushroom_08")
+else
+	SpellBinder.OpenButton:SetNormalTexture("Interface\\ICONS\\Achievement_Guild_Doctorisin")
 end
 
 SpellBinder.OpenButton:SetScript("OnShow", function(self)
@@ -383,10 +383,10 @@ if IsAddOnLoaded("Aurora") then
 	SpellBinderInset:StripTextures()
 
 	SpellBinder.OpenButton:StripTextures()
-	if not T.classic then
-		SpellBinder.OpenButton:SetNormalTexture("Interface\\ICONS\\Achievement_Guild_Doctorisin")
-	else
+	if T.classic then
 		SpellBinder.OpenButton:SetNormalTexture("Interface\\ICONS\\INV_Mushroom_08")
+	else
+		SpellBinder.OpenButton:SetNormalTexture("Interface\\ICONS\\Achievement_Guild_Doctorisin")
 	end
 	SpellBinder.OpenButton:GetNormalTexture():SetTexCoord(0.1, 0.9, 0.1, 0.9)
 
@@ -405,10 +405,10 @@ elseif C.skins.blizzard_frames == true then
 	SpellBinder.backdrop:SetPoint("BOTTOMRIGHT", 0, 9)
 
 	SpellBinder.OpenButton:StripTextures()
-	if not T.classic then
-		SpellBinder.OpenButton:SetNormalTexture("Interface\\ICONS\\Achievement_Guild_Doctorisin")
-	else
+	if T.classic then
 		SpellBinder.OpenButton:SetNormalTexture("Interface\\ICONS\\INV_Mushroom_08")
+	else
+		SpellBinder.OpenButton:SetNormalTexture("Interface\\ICONS\\Achievement_Guild_Doctorisin")
 	end
 	SpellBinder.OpenButton:GetNormalTexture():ClearAllPoints()
 	SpellBinder.OpenButton:GetNormalTexture():SetPoint("TOPLEFT", 2, -2)

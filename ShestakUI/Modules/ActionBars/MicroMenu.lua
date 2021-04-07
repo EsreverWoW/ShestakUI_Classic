@@ -61,37 +61,32 @@ for _, button in pairs(MICRO_BUTTONS) do
 	f:SetFrameStrata("BACKGROUND")
 	f:SetPoint("BOTTOMLEFT", m, "BOTTOMLEFT", 2, 0)
 	f:SetPoint("TOPRIGHT", m, "TOPRIGHT", -2, T.classic and -28 or -6)
-	if not T.classic then
-		f:SetPoint("TOPRIGHT", m, "TOPRIGHT", -2, -6)
-	else
-		f:SetPoint("TOPRIGHT", m, "TOPRIGHT", -2, -28)
-	end
 	f:SetTemplate("Default")
 	m.frame = f
 
-	if not T.classic then
-		pushed:SetTexCoord(0.22, 0.81, 0.26, 0.82)
-	else
+	if T.classic then
 		pushed:SetTexCoord(0.17, 0.87, 0.5, 0.908)
+	else
+		pushed:SetTexCoord(0.22, 0.81, 0.26, 0.82)
 	end
 	pushed:ClearAllPoints()
 	pushed:SetPoint("TOPLEFT", m.frame, "TOPLEFT", 2, -2)
 	pushed:SetPoint("BOTTOMRIGHT", m.frame, "BOTTOMRIGHT", -2, 2)
 
-	if not T.classic then
-		normal:SetTexCoord(0.22, 0.81, 0.26, 0.82)
-	else
+	if T.classic then
 		normal:SetTexCoord(0.17, 0.87, 0.5, 0.908)
+	else
+		normal:SetTexCoord(0.22, 0.81, 0.26, 0.82)
 	end
 	normal:ClearAllPoints()
 	normal:SetPoint("TOPLEFT", m.frame, "TOPLEFT", 2, -2)
 	normal:SetPoint("BOTTOMRIGHT", m.frame, "BOTTOMRIGHT", -2, 2)
 
 	if disabled then
-		if not T.classic then
-			disabled:SetTexCoord(0.22, 0.81, 0.26, 0.82)
-		else
+		if T.classic then
 			disabled:SetTexCoord(0.17, 0.87, 0.5, 0.908)
+		else
+			disabled:SetTexCoord(0.22, 0.81, 0.26, 0.82)
 		end
 		disabled:ClearAllPoints()
 		disabled:SetPoint("TOPLEFT", m.frame, "TOPLEFT", 2, -2)

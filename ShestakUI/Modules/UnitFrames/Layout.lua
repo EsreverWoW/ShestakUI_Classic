@@ -1122,7 +1122,13 @@ local function Shared(self, unit)
 
 	-- Incoming heal text/bar
 	if C.raidframe.plugins_healcomm == true then
-		if not T.classic then
+		if T.classic then
+			local healBar = CreateFrame("StatusBar", nil, self)
+			healBar:SetAllPoints(self.Health)
+			healBar:SetStatusBarTexture(C.media.texture)
+			healBar:SetStatusBarColor(0, 1, 0, 0.2)
+			self.HealPrediction = healBar
+		else
 			local mhpb = self.Health:CreateTexture(nil, "ARTWORK")
 			mhpb:SetTexture(C.media.texture)
 			mhpb:SetVertexColor(0, 1, 0.5, 0.2)
@@ -1145,12 +1151,6 @@ local function Shared(self, unit)
 				absorbBar = ahpb,
 				healAbsorbBar = hab
 			}
-		else
-			local healBar = CreateFrame("StatusBar", nil, self)
-			healBar:SetAllPoints(self.Health)
-			healBar:SetStatusBarTexture(C.media.texture)
-			healBar:SetStatusBarColor(0, 1, 0, 0.2)
-			self.HealPrediction = healBar
 		end
 	end
 
@@ -1362,15 +1362,15 @@ local moving = false
 SlashCmdList.TEST_UF = function()
 	if InCombatLockdown() then print("|cffffff00"..ERR_NOT_IN_COMBAT.."|r") return end
 	if not moving then
-		if not T.classic or T.BCC then
-			for _, frames in pairs({"oUF_Target", "oUF_TargetTarget", "oUF_Pet", "oUF_Focus", "oUF_FocusTarget"}) do
+		if T.classic and not T.BCC then
+			for _, frames in pairs({"oUF_Target", "oUF_TargetTarget", "oUF_Pet"}) do
 				if _G[frames] then
 					_G[frames].oldunit = _G[frames].unit
 					_G[frames]:SetAttribute("unit", "player")
 				end
 			end
 		else
-			for _, frames in pairs({"oUF_Target", "oUF_TargetTarget", "oUF_Pet"}) do
+			for _, frames in pairs({"oUF_Target", "oUF_TargetTarget", "oUF_Pet", "oUF_Focus", "oUF_FocusTarget"}) do
 				if _G[frames] then
 					_G[frames].oldunit = _G[frames].unit
 					_G[frames]:SetAttribute("unit", "player")
@@ -1406,14 +1406,14 @@ SlashCmdList.TEST_UF = function()
 		end
 		moving = true
 	else
-		if not T.classic or T.BCC then
-			for _, frames in pairs({"oUF_Target", "oUF_TargetTarget", "oUF_Pet", "oUF_Focus", "oUF_FocusTarget"}) do
+		if T.classic and not T.BCC then
+			for _, frames in pairs({"oUF_Target", "oUF_TargetTarget", "oUF_Pet"}) do
 				if _G[frames] then
 					_G[frames]:SetAttribute("unit", _G[frames].oldunit)
 				end
 			end
 		else
-			for _, frames in pairs({"oUF_Target", "oUF_TargetTarget", "oUF_Pet"}) do
+			for _, frames in pairs({"oUF_Target", "oUF_TargetTarget", "oUF_Pet", "oUF_Focus", "oUF_FocusTarget"}) do
 				if _G[frames] then
 					_G[frames]:SetAttribute("unit", _G[frames].oldunit)
 				end

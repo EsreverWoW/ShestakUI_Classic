@@ -109,10 +109,10 @@ function Butsu:LOOT_OPENED(_, ...)
 
 		slot.name:SetText(EMPTY)
 		slot.name:SetTextColor(color.r, color.g, color.b)
-		if not T.classic then
-			slot.icon:SetTexture("Interface\\Icons\\INV_Misc_Herb_AncientLichen")
-		else
+		if T.classic then
 			slot.icon:SetTexture("Interface\\Icons\\Inv_misc_questionmark")
+		else
+			slot.icon:SetTexture("Interface\\Icons\\INV_Misc_Herb_AncientLichen")
 		end
 
 		slot.count:Hide()

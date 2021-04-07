@@ -9,7 +9,22 @@ local oUF = ns.oUF
 
 local classList
 
-if not T.classic then
+if T.classic then
+	classList = {
+		["DRUID"] = {
+			combat = GetSpellInfo(20484),	-- Rebirth
+		},
+		["PALADIN"] = {
+			ooc = GetSpellInfo(7328),		-- Redemption
+		},
+		["PRIEST"] = {
+			ooc = GetSpellInfo(2006),		-- Resurrection
+		},
+		["SHAMAN"] = {
+			ooc = GetSpellInfo(2008),		-- Ancestral Spirit
+		}
+	}
+else
 	classList = {
 		["DEATHKNIGHT"] = {
 			combat = GetSpellInfo(61999),	-- Raise Ally
@@ -33,21 +48,6 @@ if not T.classic then
 		["WARLOCK"] = {
 			combat = GetSpellInfo(6203),	-- Soulstone
 			ooc = GetSpellInfo(6203),		-- Soulstone
-		}
-	}
-else
-	classList = {
-		["DRUID"] = {
-			combat = GetSpellInfo(20484),	-- Rebirth
-		},
-		["PALADIN"] = {
-			ooc = GetSpellInfo(7328),		-- Redemption
-		},
-		["PRIEST"] = {
-			ooc = GetSpellInfo(2006),		-- Resurrection
-		},
-		["SHAMAN"] = {
-			ooc = GetSpellInfo(2008),		-- Ancestral Spirit
 		}
 	}
 end

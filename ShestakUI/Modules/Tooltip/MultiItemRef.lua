@@ -71,21 +71,7 @@ local ShowTip = function(tip, link)
 	shown = nil
 end
 
-if not T.classic then
-	local SetHyperlink = _G.ItemRefTooltip.SetHyperlink
-	function _G.ItemRefTooltip:SetHyperlink(link, ...)
-		local handled = strsplit(":", link)
-		if not IsModifiedClick() and handled and types[handled] and not shown then
-			local tip = CreateTip(link)
-			if tip then
-				ShowTip(tip, link)
-			end
-			return
-		end
-
-		SetHyperlink(self, link, ...)
-	end
-else
+if T.classic then
 	local _SetItemRef = SetItemRef
 	function SetItemRef(...)
 		local link = ...
@@ -98,5 +84,19 @@ else
 		else
 			return _SetItemRef(...)
 		end
+	end
+else
+	local SetHyperlink = _G.ItemRefTooltip.SetHyperlink
+	function _G.ItemRefTooltip:SetHyperlink(link, ...)
+		local handled = strsplit(":", link)
+		if not IsModifiedClick() and handled and types[handled] and not shown then
+			local tip = CreateTip(link)
+			if tip then
+				ShowTip(tip, link)
+			end
+			return
+		end
+
+		SetHyperlink(self, link, ...)
 	end
 end

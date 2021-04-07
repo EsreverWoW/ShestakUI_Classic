@@ -51,10 +51,10 @@ frame:SetScript("OnEvent", function()
 	end
 
 	hooksecurefunc("TalentFrame_LoadUI", function()
-		if not T.classic then
-			PlayerTalentFrame:UnregisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
-		else
+		if T.classic then
 			TalentFrame:UnregisterEvent("CHARACTER_POINTS_CHANGED")
+		else
+			PlayerTalentFrame:UnregisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
 		end
 	end)
 end)
@@ -325,7 +325,51 @@ end
 ----------------------------------------------------------------------------------------
 --	Show grid function
 ----------------------------------------------------------------------------------------
-if not T.classic then
+if T.classic then
+	local frame = CreateFrame("Frame")
+	frame:RegisterEvent("PLAYER_ENTERING_WORLD")
+	frame:SetScript("OnEvent", function(self)
+		self:UnregisterEvent("PLAYER_ENTERING_WORLD")
+		SetActionBarToggles(1, 1, 1, 1, 0)
+		if C.actionbar.show_grid == true then
+			SetCVar("alwaysShowActionBars", 1)
+			for i = 1, 12 do
+				local reason = ACTION_BUTTON_SHOW_GRID_REASON_EVENT or 2
+				local button = _G[format("ActionButton%d", i)]
+				button.noGrid = nil
+				button:SetAttribute("showgrid", 1)
+				ActionButton_ShowGrid(button, reason)
+				button:SetAttribute("statehidden", true)
+
+				button = _G[format("MultiBarRightButton%d", i)]
+				button.noGrid = nil
+				button:SetAttribute("showgrid", 1)
+				ActionButton_ShowGrid(button, reason)
+				button:SetAttribute("statehidden", true)
+
+				button = _G[format("MultiBarBottomRightButton%d", i)]
+				button.noGrid = nil
+				button:SetAttribute("showgrid", 1)
+				ActionButton_ShowGrid(button, reason)
+				button:SetAttribute("statehidden", true)
+
+				button = _G[format("MultiBarLeftButton%d", i)]
+				button.noGrid = nil
+				button:SetAttribute("showgrid", 1)
+				ActionButton_ShowGrid(button, reason)
+				button:SetAttribute("statehidden", true)
+
+				button = _G[format("MultiBarBottomLeftButton%d", i)]
+				button.noGrid = nil
+				button:SetAttribute("showgrid", 1)
+				ActionButton_ShowGrid(button, reason)
+				button:SetAttribute("statehidden", true)
+			end
+		else
+			SetCVar("alwaysShowActionBars", 0)
+		end
+	end)
+else
 	local frame = CreateFrame("Frame")
 	frame:RegisterEvent("PLAYER_ENTERING_WORLD")
 	frame:SetScript("OnEvent", function(self)
@@ -371,50 +415,6 @@ if not T.classic then
 
 				_G["MultiCastActionButton"..i]:SetAttribute("showgrid", 1)
 				_G["MultiCastActionButton"..i]:SetAttribute("statehidden", true)
-			end
-		else
-			SetCVar("alwaysShowActionBars", 0)
-		end
-	end)
-else
-	local frame = CreateFrame("Frame")
-	frame:RegisterEvent("PLAYER_ENTERING_WORLD")
-	frame:SetScript("OnEvent", function(self)
-		self:UnregisterEvent("PLAYER_ENTERING_WORLD")
-		SetActionBarToggles(1, 1, 1, 1, 0)
-		if C.actionbar.show_grid == true then
-			SetCVar("alwaysShowActionBars", 1)
-			for i = 1, 12 do
-				local reason = ACTION_BUTTON_SHOW_GRID_REASON_EVENT or 2
-				local button = _G[format("ActionButton%d", i)]
-				button.noGrid = nil
-				button:SetAttribute("showgrid", 1)
-				ActionButton_ShowGrid(button, reason)
-				button:SetAttribute("statehidden", true)
-
-				button = _G[format("MultiBarRightButton%d", i)]
-				button.noGrid = nil
-				button:SetAttribute("showgrid", 1)
-				ActionButton_ShowGrid(button, reason)
-				button:SetAttribute("statehidden", true)
-
-				button = _G[format("MultiBarBottomRightButton%d", i)]
-				button.noGrid = nil
-				button:SetAttribute("showgrid", 1)
-				ActionButton_ShowGrid(button, reason)
-				button:SetAttribute("statehidden", true)
-
-				button = _G[format("MultiBarLeftButton%d", i)]
-				button.noGrid = nil
-				button:SetAttribute("showgrid", 1)
-				ActionButton_ShowGrid(button, reason)
-				button:SetAttribute("statehidden", true)
-
-				button = _G[format("MultiBarBottomLeftButton%d", i)]
-				button.noGrid = nil
-				button:SetAttribute("showgrid", 1)
-				ActionButton_ShowGrid(button, reason)
-				button:SetAttribute("statehidden", true)
 			end
 		else
 			SetCVar("alwaysShowActionBars", 0)

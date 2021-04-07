@@ -108,14 +108,7 @@ if C.nameplate.healer_icon == true then
 			lastCheck = 0
 			healList = {}
 			for i = 1, GetNumBattlefieldScores() do
-				if not T.classic then
-					local name, _, _, _, _, faction, _, _, _, _, _, _, _, _, _, talentSpec = GetBattlefieldScore(i)
-
-					if name and healerSpecs[talentSpec] and t.factions[UnitFactionGroup("player")] == faction then
-						name = name:match("(.+)%-.+") or name
-						healList[name] = talentSpec
-					end
-				else
+				if T.classic then
 					--[[
 					-- build 30786 changed returns, removing dmg/heals/spec and adding rank
 					local name, _, _, _, _, faction, _, _, _, classToken = GetBattlefieldScore(i)
@@ -126,6 +119,13 @@ if C.nameplate.healer_icon == true then
 						healList[name] = true
 					end
 					--]]
+				else
+					local name, _, _, _, _, faction, _, _, _, _, _, _, _, _, _, talentSpec = GetBattlefieldScore(i)
+
+					if name and healerSpecs[talentSpec] and t.factions[UnitFactionGroup("player")] == faction then
+						name = name:match("(.+)%-.+") or name
+						healList[name] = talentSpec
+					end
 				end
 			end
 		end
@@ -168,25 +168,7 @@ if C.nameplate.healer_icon == true then
 end
 
 local totemData = {}
-if not T.classic then
-	totemData = {
-		[GetSpellInfo(192058)] = 136013,	-- Capacitor Totem
-		[GetSpellInfo(98008)]  = 237586,	-- Spirit Link Totem
-		[GetSpellInfo(192077)] = 538576,	-- Wind Rush Totem
-		[GetSpellInfo(204331)] = 511726,	-- Counterstrike Totem
-		[GetSpellInfo(204332)] = 136114,	-- Windfury Totem
-		[GetSpellInfo(204336)] = 136039,	-- Grounding Totem
-		[GetSpellInfo(157153)] = 971076,	-- Cloudburst Totem
-		[GetSpellInfo(5394)]   = 135127,	-- Healing Stream Totem
-		[GetSpellInfo(108280)] = 538569,	-- Healing Tide Totem
-		[GetSpellInfo(207399)] = 136080,	-- Ancestral Protection Totem
-		[GetSpellInfo(198838)] = 136098,	-- Earthen Wall Totem
-		[GetSpellInfo(51485)]  = 136100,	-- Earthgrab Totem
-		[GetSpellInfo(196932)] = 136232,	-- Voodoo Totem
-		[GetSpellInfo(192222)] = 971079,	-- Liquid Magma Totem
-		[GetSpellInfo(204330)] = 135829,	-- Skyfury Totem
-	}
-else
+if T.classic then
 	totemData = {
 		-- Earth
 		[GetSpellInfo(2484)]   = "Interface\\Icons\\Spell_nature_strengthofearthtotem02",	-- Earthbind Totem
@@ -215,6 +197,24 @@ else
 		[GetSpellInfo(10595)]  = "Interface\\Icons\\Spell_nature_natureresistancetotem",	-- Nature Resistance Totem
 		[GetSpellInfo(15107)]  = "Interface\\Icons\\Spell_nature_earthbind",				-- Windwall Totem
 		[GetSpellInfo(25908)]  = "Interface\\Icons\\Spell_nature_brilliance",				-- Tranquil Air Totem
+	}
+else
+	totemData = {
+		[GetSpellInfo(192058)] = 136013,	-- Capacitor Totem
+		[GetSpellInfo(98008)]  = 237586,	-- Spirit Link Totem
+		[GetSpellInfo(192077)] = 538576,	-- Wind Rush Totem
+		[GetSpellInfo(204331)] = 511726,	-- Counterstrike Totem
+		[GetSpellInfo(204332)] = 136114,	-- Windfury Totem
+		[GetSpellInfo(204336)] = 136039,	-- Grounding Totem
+		[GetSpellInfo(157153)] = 971076,	-- Cloudburst Totem
+		[GetSpellInfo(5394)]   = 135127,	-- Healing Stream Totem
+		[GetSpellInfo(108280)] = 538569,	-- Healing Tide Totem
+		[GetSpellInfo(207399)] = 136080,	-- Ancestral Protection Totem
+		[GetSpellInfo(198838)] = 136098,	-- Earthen Wall Totem
+		[GetSpellInfo(51485)]  = 136100,	-- Earthgrab Totem
+		[GetSpellInfo(196932)] = 136232,	-- Voodoo Totem
+		[GetSpellInfo(192222)] = 971079,	-- Liquid Magma Totem
+		[GetSpellInfo(204330)] = 135829,	-- Skyfury Totem
 	}
 end
 
@@ -391,8 +391,8 @@ local function threatColor(self, forced)
 					local offTank = false
 					if IsInRaid() then
 						for i = 1, GetNumGroupMembers() do
-							if not T.classic then
-								if UnitExists("raid"..i) and not UnitIsUnit("raid"..i, "player") and UnitGroupRolesAssigned("raid"..i) == "TANK" then
+							if T.classic then
+								if UnitExists("raid"..i) and not UnitIsUnit("raid"..i, "player") and T.Role == "Tank" then
 									local isTanking = UnitDetailedThreatSituation("raid"..i, self.unit)
 									if isTanking then
 										offTank = true
@@ -400,7 +400,7 @@ local function threatColor(self, forced)
 									end
 								end
 							else
-								if UnitExists("raid"..i) and not UnitIsUnit("raid"..i, "player") and T.Role == "Tank" then
+								if UnitExists("raid"..i) and not UnitIsUnit("raid"..i, "player") and UnitGroupRolesAssigned("raid"..i) == "TANK" then
 									local isTanking = UnitDetailedThreatSituation("raid"..i, self.unit)
 									if isTanking then
 										offTank = true
@@ -596,7 +596,12 @@ local function callback(self, event, unit)
 			self.Castbar:SetAlpha(1)
 			self.RaidTargetIndicator:SetAlpha(1)
 
-			if not T.classic then
+			if T.classic then
+				self.Health:SetAlpha(1)
+				self.Level:SetAlpha(1)
+				self.Name:SetAlpha(1)
+				self.Castbar:SetAlpha(1)
+			else
 				if self.widgetsOnly or (UnitWidgetSet(unit) and UnitIsOwnerOrControllerOfUnit("player", unit)) then
 					self.Health:SetAlpha(0)
 					self.Level:SetAlpha(0)
@@ -608,11 +613,6 @@ local function callback(self, event, unit)
 					self.Name:SetAlpha(1)
 					self.Castbar:SetAlpha(1)
 				end
-			else
-				self.Health:SetAlpha(1)
-				self.Level:SetAlpha(1)
-				self.Name:SetAlpha(1)
-				self.Castbar:SetAlpha(1)
 			end
 
 			local nameplate = C_NamePlate.GetNamePlateForUnit(unit)

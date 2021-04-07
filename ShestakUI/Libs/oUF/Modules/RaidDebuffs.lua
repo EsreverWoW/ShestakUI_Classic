@@ -72,7 +72,19 @@ do
 end
 
 local function CheckSpec()
-	if not oUF:IsClassic() then
+	if oUF:IsClassic() then
+		if T.class == "PALADIN" then
+			DispellFilter.Magic = true
+		elseif T.class == "PRIEST" then
+			DispellFilter.Magic = true
+		elseif T.class == "SHAMAN" then
+			DispellFilter.Curse = false
+			DispellFilter.Poison = true
+			DispellFilter.Disease = true
+		elseif T.class == "WARLOCK" then
+			DispellFilter.Magic = true
+		end
+	else
 		local spec = GetSpecialization()
 		if T.class == "DRUID" then
 			if spec == 4 then
@@ -104,18 +116,6 @@ local function CheckSpec()
 			else
 				DispellFilter.Magic = false
 			end
-		end
-	else
-		if T.class == "PALADIN" then
-			DispellFilter.Magic = true
-		elseif T.class == "PRIEST" then
-			DispellFilter.Magic = true
-		elseif T.class == "SHAMAN" then
-			DispellFilter.Curse = false
-			DispellFilter.Poison = true
-			DispellFilter.Disease = true
-		elseif T.class == "WARLOCK" then
-			DispellFilter.Magic = true
 		end
 	end
 end
@@ -284,10 +284,10 @@ local Enable = function(self)
 		rd.__owner = self
 		return true
 	end
-	if not oUF:IsClassic() then
-		self:RegisterEvent("PLAYER_TALENT_UPDATE", CheckSpec, true)
-	else
+	if oUF:IsClassic() then
 		self:RegisterEvent("CHARACTER_POINTS_CHANGED", CheckSpec, true)
+	else
+		self:RegisterEvent("PLAYER_TALENT_UPDATE", CheckSpec, true)
 	end
 	CheckSpec()
 end
@@ -298,10 +298,10 @@ local Disable = function(self)
 		self.RaidDebuffs:Hide()
 		self.RaidDebuffs.__owner = nil
 	end
-	if not oUF:IsClassic() then
-		self:UnregisterEvent("PLAYER_TALENT_UPDATE", CheckSpec)
-	else
+	if oUF:IsClassic() then
 		self:UnregisterEvent("CHARACTER_POINTS_CHANGED", CheckSpec)
+	else
+		self:UnregisterEvent("PLAYER_TALENT_UPDATE", CheckSpec)
 	end
 end
 

@@ -242,7 +242,13 @@ local function Shared(self, unit)
 
 	-- Incoming heal text/bar
 	if C.raidframe.plugins_healcomm == true then
-		if not T.classic then
+		if T.classic then
+			local healBar = CreateFrame("StatusBar", nil, self)
+			healBar:SetAllPoints(self.Health)
+			healBar:SetStatusBarTexture(C.media.texture)
+			healBar:SetStatusBarColor(0, 1, 0, 0.2)
+			self.HealPrediction = healBar
+		else
 			local mhpb = self.Health:CreateTexture(nil, "ARTWORK")
 			mhpb:SetTexture(C.media.texture)
 			mhpb:SetVertexColor(0, 1, 0.5, 0.2)
@@ -265,12 +271,6 @@ local function Shared(self, unit)
 				absorbBar = ahpb,
 				healAbsorbBar = hab
 			}
-		else
-			local healBar = CreateFrame("StatusBar", nil, self)
-			healBar:SetAllPoints(self.Health)
-			healBar:SetStatusBarTexture(C.media.texture)
-			healBar:SetStatusBarColor(0, 1, 0, 0.2)
-			self.HealPrediction = healBar
 		end
 	end
 

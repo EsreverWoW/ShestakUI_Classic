@@ -35,7 +35,19 @@ local function GetDebuffType(unit, filter)
 end
 
 local function CheckSpec()
-	if not oUF:IsClassic() then
+	if T.classic then
+		if T.class == "PALADIN" then
+			dispellist.Magic = true
+		elseif T.class == "PRIEST" then
+			dispellist.Magic = true
+		elseif T.class == "SHAMAN" then
+			dispellist.Curse = false
+			dispellist.Poison = true
+			dispellist.Disease = true
+		elseif T.class == "WARLOCK" then
+			dispellist.Magic = true
+		end
+	else
 		local spec = GetSpecialization()
 
 		if T.class == "DRUID" then
@@ -68,18 +80,6 @@ local function CheckSpec()
 			else
 				dispellist.Magic = false
 			end
-		end
-	else
-		if T.class == "PALADIN" then
-			dispellist.Magic = true
-		elseif T.class == "PRIEST" then
-			dispellist.Magic = true
-		elseif T.class == "SHAMAN" then
-			dispellist.Curse = false
-			dispellist.Poison = true
-			dispellist.Disease = true
-		elseif T.class == "WARLOCK" then
-			dispellist.Magic = true
 		end
 	end
 end
@@ -133,10 +133,10 @@ local function Enable(object)
 
 	-- Make sure aura scanning is active for this object
 	object:RegisterEvent("UNIT_AURA", Update)
-	if not oUF:IsClassic() then
-		object:RegisterEvent("PLAYER_TALENT_UPDATE", CheckSpec, true)
-	else
+	if oUF:IsClassic() then
 		object:RegisterEvent("CHARACTER_POINTS_CHANGED", CheckSpec, true)
+	else
+		object:RegisterEvent("PLAYER_TALENT_UPDATE", CheckSpec, true)
 	end
 	CheckSpec()
 
@@ -156,10 +156,10 @@ end
 local function Disable(object)
 	if object.DebuffHighlightBackdrop or object.DebuffHighlightBackdropBorder or object.DebuffHighlight then
 		object:UnregisterEvent("UNIT_AURA", Update)
-		if not oUF:IsClassic() then
-			object:UnregisterEvent("PLAYER_TALENT_UPDATE", CheckSpec)
-		else
+		if oUF:IsClassic() then
 			object:UnregisterEvent("CHARACTER_POINTS_CHANGED", CheckSpec)
+		else
+			object:UnregisterEvent("PLAYER_TALENT_UPDATE", CheckSpec)
 		end
 	end
 end
