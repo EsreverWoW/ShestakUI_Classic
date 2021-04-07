@@ -656,8 +656,7 @@ T.RaidDebuffs = {
 -- PvP
 -----------------------------------------------------------------
 if C.raidframe.plugins_pvp_debuffs == true then
-	T.PvPDebuffs = {
-		--[[
+	local PvPDebuffs = {
 		-- Druid
 		[SpellName(5211)] = 3,		-- Bash
 		[SpellName(16922)] = 3,		-- Celestial Focus
@@ -736,7 +735,6 @@ if C.raidframe.plugins_pvp_debuffs == true then
 		[SpellName(20549)] = 3,		-- War Stomp
 		-- Other
 		[SpellName(5530)] = 3,		-- Mace Specialization
-		--]]
 	}
 
 	for spell, prio in pairs(PvPDebuffs) do
