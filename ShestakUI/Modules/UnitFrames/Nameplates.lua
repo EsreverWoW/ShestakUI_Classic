@@ -725,7 +725,7 @@ local function style(self, unit)
 
 	-- Target Glow
 	if C.nameplate.target_glow then
-		self.Glow = CreateFrame("Frame", nil, self, (not T.classic or T.BCC) and "BackdropTemplate" or nil)
+		self.Glow = CreateFrame("Frame", nil, self, BackdropTemplateMixin and "BackdropTemplate" or nil)
 		self.Glow:SetBackdrop({edgeFile = [[Interface\AddOns\ShestakUI\Media\Textures\Glow.tga]], edgeSize = 4 * T.noscalemult})
 		self.Glow:SetPoint("TOPLEFT", -7 * T.noscalemult, 7 * T.noscalemult)
 		self.Glow:SetPoint("BOTTOMRIGHT", 7 * T.noscalemult, -7 * T.noscalemult)

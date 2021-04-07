@@ -85,7 +85,7 @@ local function SkinStatusBar(widget)
 		bar.Spark:SetAlpha(0)
 		local parent = widget:GetParent():GetParent()
 		if parent.castBar or parent.UnitFrame then -- nameplate
-			if not T.classic or T.BCC then
+			if BackdropTemplateMixin then
 				Mixin(bar, BackdropTemplateMixin)
 			end
 			bar:SetBackdrop({

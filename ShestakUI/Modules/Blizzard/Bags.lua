@@ -528,7 +528,7 @@ function Stuffing:BagFrameSlotNew(p, slot)
 		ret.slot = slot
 		slot = slot - 4
 		ret.frame = CreateFrame(T.classic and "CheckButton" or "ItemButton", "StuffingBBag"..slot.."Slot", p, "BankItemButtonBagTemplate")
-		if not T.classic or T.BCC then
+		if BackdropTemplateMixin then
 			Mixin(ret.frame, BackdropTemplateMixin)
 		end
 		ret.frame:StripTextures()
@@ -560,7 +560,7 @@ function Stuffing:BagFrameSlotNew(p, slot)
 		end
 	else
 		ret.frame = CreateFrame(T.classic and "CheckButton" or "ItemButton", "StuffingFBag"..slot.."Slot", p, "BagSlotButtonTemplate")
-		if not T.classic or T.BCC then
+		if BackdropTemplateMixin then
 			Mixin(ret.frame, BackdropTemplateMixin)
 		end
 		hooksecurefunc(ret.frame.IconBorder, "SetVertexColor", function(self, r, g, b)

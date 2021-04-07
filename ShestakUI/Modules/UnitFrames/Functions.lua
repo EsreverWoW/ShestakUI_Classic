@@ -542,7 +542,7 @@ T.PostCastStart = function(Castbar, unit)
 		Castbar.Overlay:SetBackdropBorderColor(unpack(C.media.border_color))
 		if C.unitframe.castbar_icon == true and (unit == "target" or unit == "focus") then
 			-- FIXME
-			if not T.classic or T.BCC then
+			if BackdropTemplateMixin then
 				Castbar.Button:SetBackdropBorderColor(unpack(C.media.border_color))
 			end
 		end

@@ -252,7 +252,7 @@ SpellList.makeSpellsList = function(_, db, double)
 			if not isFilger or isFilger and spell[2] == T.class then
 				local sp = (double or ShestakUIOptionsPanelfilger:IsShown()) and spell[1] or spell
 				local name, _, icon = GetSpellInfo(sp)
-				local bf = _G["SpellList"..i.."_cbs"] or CreateFrame("Button", "SpellList"..i.."_cbs", scroll, (not IsClassicBuild() or IsBCCBuild()) and "BackdropTemplate" or nil)
+				local bf = _G["SpellList"..i.."_cbs"] or CreateFrame("Button", "SpellList"..i.."_cbs", scroll, BackdropTemplateMixin and "BackdropTemplate" or nil)
 
 				if i == 1 then
 					bf:SetPoint("TOPLEFT", scroll, "TOPLEFT", 10, -5)
