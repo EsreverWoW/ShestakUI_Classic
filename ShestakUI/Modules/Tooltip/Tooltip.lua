@@ -346,7 +346,7 @@ local OnTooltipSetUnit = function(self)
 			end
 		end
 
-		if T.classic and guildName and C.tooltip.rank then -- Rank line gets cuts in Classic and needs to be re-added
+		if T.classic and guildName and C.tooltip.rank then -- Rank line gets cut in Classic and needs to be re-added
 			self:AddLine(RANK..": |cffffffff"..guildRank.."|r")
 		end
 	else
