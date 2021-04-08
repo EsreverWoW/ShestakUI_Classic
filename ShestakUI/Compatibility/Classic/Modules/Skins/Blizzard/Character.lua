@@ -97,7 +97,7 @@ local function LoadSkin()
 
 	for _, slot in pairs(slots) do
 		local icon = _G["Character"..slot.."IconTexture"]
-		local cooldown = _G["Character"..slot.."Cooldown"]
+		-- local cooldown = _G["Character"..slot.."Cooldown"]
 
 		slot = _G["Character"..slot]
 		slot:StripTextures()
