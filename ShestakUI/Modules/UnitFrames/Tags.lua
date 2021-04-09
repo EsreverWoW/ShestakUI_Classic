@@ -79,7 +79,11 @@ oUF.Tags.Events["NameArena"] = "UNIT_NAME_UPDATE"
 
 oUF.Tags.Methods["NameShort"] = function(unit)
 	local name = UnitName(unit)
-	return T.UTF(name, 8, false)
+	if string.len(name) > 12 then -- CJK fullwidth character support
+		return T.UTF(name, 5, false)
+	else
+		return T.UTF(name, 8, false)
+	end
 end
 oUF.Tags.Events["NameShort"] = "UNIT_NAME_UPDATE"
 
