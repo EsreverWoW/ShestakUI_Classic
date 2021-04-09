@@ -631,7 +631,7 @@ end
 
 function T.SkinDropDownBox(frame, width, pos)
 	local frameName = frame.GetName and frame:GetName()
-	local button = frame.Button or frameName and (_G[frameName.."Button"] or _G[frameName.."_Button"])
+	local button = frame.Button or frame.MenuButton or frameName and (_G[frameName.."Button"] or _G[frameName.."_Button"])
 	local text = frameName and _G[frameName.."Text"] or frame.Text
 	if not width then width = 155 end
 
