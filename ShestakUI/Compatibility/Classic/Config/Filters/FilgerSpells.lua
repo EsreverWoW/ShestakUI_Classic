@@ -261,8 +261,12 @@ C["filger_spells"] = {
 			IconSize = C.filger.buffs_size,
 			Position = {"TOP", T_DEBUFF_ICON_Anchor},
 
-			-- Bash
-			{spellID = 5211, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Bash r1
+			{spellID = 5211, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Bash r2
+			{spellID = 6798, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Bash r3
+			{spellID = 8983, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
 			-- Celestial Focus (Starfire Stun)
 			{spellID = 16922, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Challenging Roar
@@ -283,8 +287,12 @@ C["filger_spells"] = {
 			{spellID = 22570, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Moonfire
 			{spellID = 8921, unitID = "target", caster = "player", filter = "DEBUFF"},
-			-- Pounce
-			{spellID = 9005, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Pounce r1
+			{spellID = 9005, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Pounce r2
+			{spellID = 9823, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Pounce r3
+			{spellID = 9827, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
 			-- Pounce Bleed
 			{spellID = 9007, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Rake
@@ -329,10 +337,30 @@ C["filger_spells"] = {
 			BarWidth = 189,
 			Position = {"LEFT", PVE_PVP_CC_Anchor},
 
-			-- Entangling Roots
-			{spellID = 339, unitID = "focus", caster = "all", filter = "DEBUFF"},
-			-- Entangling Roots (Nature's Grasp)
-			-- {spellID = 19975, unitID = "focus", caster = "all", filter = "DEBUFF"},
+			-- Entangling Roots r1
+			{spellID = 339, unitID = "focus", caster = "all", filter = "DEBUFF", absID = true},
+			-- Entangling Roots r2
+			{spellID = 1062, unitID = "focus", caster = "all", filter = "DEBUFF", absID = true},
+			-- Entangling Roots r3
+			{spellID = 5195, unitID = "focus", caster = "all", filter = "DEBUFF", absID = true},
+			-- Entangling Roots r4
+			{spellID = 5196, unitID = "focus", caster = "all", filter = "DEBUFF", absID = true},
+			-- Entangling Roots r5
+			{spellID = 9852, unitID = "focus", caster = "all", filter = "DEBUFF", absID = true},
+			-- Entangling Roots r6
+			{spellID = 9853, unitID = "focus", caster = "all", filter = "DEBUFF", absID = true},
+			-- Entangling Roots r1 (Nature's Grasp)
+			{spellID = 19975, unitID = "focus", caster = "all", filter = "DEBUFF", absID = true},
+			-- Entangling Roots r2 (Nature's Grasp)
+			{spellID = 19974, unitID = "focus", caster = "all", filter = "DEBUFF", absID = true},
+			-- Entangling Roots r3 (Nature's Grasp)
+			{spellID = 19973, unitID = "focus", caster = "all", filter = "DEBUFF", absID = true},
+			-- Entangling Roots r4 (Nature's Grasp)
+			{spellID = 19972, unitID = "focus", caster = "all", filter = "DEBUFF", absID = true},
+			-- Entangling Roots r5 (Nature's Grasp)
+			{spellID = 19971, unitID = "focus", caster = "all", filter = "DEBUFF", absID = true},
+			-- Entangling Roots r6 (Nature's Grasp)
+			{spellID = 19970, unitID = "focus", caster = "all", filter = "DEBUFF", absID = true},
 			-- Hibernate
 			{spellID = 2637, unitID = "focus", caster = "all", filter = "DEBUFF"},
 		},
@@ -999,8 +1027,18 @@ C["filger_spells"] = {
 			BarWidth = 189,
 			Position = {"LEFT", PVE_PVP_CC_Anchor},
 
-			-- Polymorph
-			{spellID = 118, unitID = "focus", caster = "all", filter = "DEBUFF"},
+			-- Polymorph r1
+			{spellID = 118, unitID = "focus", caster = "all", filter = "DEBUFF", absID = true},
+			-- Polymorph r2
+			{spellID = 12824, unitID = "focus", caster = "all", filter = "DEBUFF", absID = true},
+			-- Polymorph r3
+			{spellID = 12825, unitID = "focus", caster = "all", filter = "DEBUFF", absID = true},
+			-- Polymorph r4
+			{spellID = 12826, unitID = "focus", caster = "all", filter = "DEBUFF", absID = true},
+			-- Polymorph: Turtle
+			{spellID = 28271, unitID = "focus", caster = "all", filter = "DEBUFF", absID = true},
+			-- Polymorph: Pig
+			{spellID = 28272, unitID = "focus", caster = "all", filter = "DEBUFF", absID = true},
 		},
 		{
 			Name = "COOLDOWN",
@@ -3203,8 +3241,6 @@ C["filger_spells"] = {
 			{spellID = 18498, unitID = "player", caster = "all", filter = "DEBUFF"},
 
 			-- Roots
-			-- Feral Charge Effect
-			{spellID = 19675, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Entangling Roots r1
 			{spellID = 339, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
 			-- Entangling Roots r2
@@ -3229,6 +3265,8 @@ C["filger_spells"] = {
 			{spellID = 19971, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
 			-- Entangling Roots r6 (Nature's Grasp)
 			{spellID = 19970, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
+			-- Feral Charge Effect
+			{spellID = 19675, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Counterattack
 			{spellID = 19306, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Entrapment
