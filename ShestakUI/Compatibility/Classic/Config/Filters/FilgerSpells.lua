@@ -959,7 +959,7 @@ C["filger_spells"] = {
 			-- Frostbolt r11
 			{spellID = 25304, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
 			-- Ignite
-			{spellID = 12654, unitID = "target", caster = "player", filter = "DEBUFF"},
+			{spellID = 12654, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Impact
 			{spellID = 12355, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Pyroblast
