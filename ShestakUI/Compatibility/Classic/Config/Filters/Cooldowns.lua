@@ -80,7 +80,7 @@ if C.enemycooldown.enable == true then
 		{6346, 30},		-- Fear Ward
 		{5277, 210},	-- Evasion (-90sec from talents)
 		{1856, 210},	-- Vanish (300sec base / -90sec from talents)
-		-- {8178, 13,	-- Grounding Totem (15sec base / -2sec from talents)
+		-- {8178, 13},	-- Grounding Totem (15sec base / -2sec from talents)
 		{18499, 30},	-- Berserker Rage
 		{20600, 180},	-- Perception
 		{20594, 180},	-- Stoneform

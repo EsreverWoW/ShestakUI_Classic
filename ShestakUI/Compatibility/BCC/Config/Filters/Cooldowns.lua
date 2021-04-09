@@ -94,7 +94,7 @@ if C.enemycooldown.enable == true then
 		{31224, 60},	-- Cloak of Shadows
 		{5277, 210},	-- Evasion (-90sec from talents)
 		{1856, 210},	-- Vanish (300sec base / -90sec from talents)
-		-- {8178, 11,	-- Grounding Totem (15sec base / -2sec from talents / -1.5sec from 4pc PvP)
+		-- {8178, 11},	-- Grounding Totem (15sec base / -2sec from talents / -1.5sec from 4pc PvP)
 		{18499, 30},	-- Berserker Rage
 		-- {23920, 10},		-- Spell Reflection
 		{20600, 180},	-- Perception
