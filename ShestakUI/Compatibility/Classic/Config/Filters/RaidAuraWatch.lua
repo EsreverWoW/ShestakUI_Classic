@@ -84,15 +84,14 @@ T.RaidDebuffs = {
 	-- Magmadar
 	-- Gehennas
 	-- Garr
-	-- Baron
-	-- Geddon
 	-- Shazzrah
-	-- Sulfuron
+	-- Baron Geddon
 	-- Golemagg
+	-- Sulfuron
 	-- Majordomo
 	-- Ragnaros
 
--- Onyxia's Lair
+-- Onyxia's Lair (40)
 	-- Onyxia
 
 -- Blackwing Lair (40)
@@ -139,7 +138,7 @@ T.RaidDebuffs = {
 	-- Ouro
 	-- C'Thun
 
--- Naxxramas
+-- Naxxramas (40)
 	-- Trash
 	-- Anub'Rekhan
 	-- Faerlina
