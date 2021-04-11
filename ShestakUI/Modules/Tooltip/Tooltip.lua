@@ -347,7 +347,9 @@ local OnTooltipSetUnit = function(self)
 		end
 
 		if T.classic and guildName and C.tooltip.rank then -- Rank line gets cut in Classic and needs to be re-added
-			self:AddLine(RANK..": |cffffffff"..guildRank.."|r")
+			if not UnitIsDead(unit) then -- only need to add line for players who are alive
+				self:AddLine(RANK..": |cffffffff"..guildRank.."|r")
+			end
 		end
 	else
 		for i = 2, lines do
