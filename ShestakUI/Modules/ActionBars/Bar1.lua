@@ -82,7 +82,7 @@ if not T.classic then
 end
 bar:SetScript("OnEvent", function(self, event)
 	if event == "PLAYER_LOGIN" then
-		if T.BCC then return end -- FrameXML\RestrictedExecution.lua:473: Cannot call restricted closure from insecure code
+		if T.BCC and T.wowBuild <= 38225 then return end -- FrameXML\RestrictedExecution.lua:473: Cannot call restricted closure from insecure code
 
 		for i = 1, NUM_ACTIONBAR_BUTTONS do
 			local button = _G["ActionButton"..i]

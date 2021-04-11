@@ -307,7 +307,7 @@ end
 ----------------------------------------------------------------------------------------
 --	Default position of ShestakUI unitframes
 ----------------------------------------------------------------------------------------
-if T.BCC then return end -- FrameXML\RestrictedExecution.lua:473: Cannot call restricted closure from insecure code
+if T.BCC and T.wowBuild <= 38225 then return end -- FrameXML\RestrictedExecution.lua:473: Cannot call restricted closure from insecure code
 
 oUF:Factory(function(self)
 	if ShestakUISettings == nil or ShestakUISettings.RaidLayout ~= "HEAL" then return end
