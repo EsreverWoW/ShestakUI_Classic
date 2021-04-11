@@ -111,7 +111,7 @@ T.DiminishingSpells = {
 	--[[
 	-- Turn Evil / Turn Undead
 	[10326] = {"turned"},			-- Turn Evil
-	[19725] = {"turned"},			-- Turn Undead
+	[2878] = {"turned"},			-- Turn Undead
 	--]]
 
 	--[[

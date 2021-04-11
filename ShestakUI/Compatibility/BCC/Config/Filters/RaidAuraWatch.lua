@@ -694,7 +694,7 @@ if C.raidframe.plugins_pvp_debuffs == true then
 		[SpellName(20066)] = 3,		-- Repentance
 		[SpellName(20170)] = 3,		-- Stun (Seal of Justice Proc)
 		[SpellName(10326)] = 3,		-- Turn Evil
-		[SpellName(19725)] = 3,		-- Turn Undead
+		[SpellName(2878)] = 3,		-- Turn Undead
 		-- Priest
 		[SpellName(15269)] = 3,		-- Blackout
 		[SpellName(44041)] = 3,		-- Chastise
