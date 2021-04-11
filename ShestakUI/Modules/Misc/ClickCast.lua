@@ -278,7 +278,7 @@ end
 local addSpell = function(self, button)
 	if SpellBinder.sbOpen then
 		local slot = SpellBook_GetSpellBookSlot(self:GetParent())
-		local spellname = GetSpellBookItemName(slot, SpellBookFrame.bookType)
+		local spellname, spellrank = GetSpellBookItemName(slot, SpellBookFrame.bookType)
 		local texture = GetSpellBookItemTexture(slot, SpellBookFrame.bookType)
 
 		if spellname ~= 0 and ((SpellBookFrame.bookType == BOOKTYPE_PET) or (SpellBookFrame.selectedSkillLine > 1)) then
@@ -294,6 +294,10 @@ local addSpell = function(self, button)
 				originalbutton = "|cffff2222(harm)|r "..originalbutton
 			else
 				button = SecureButton_GetButtonSuffix(button)
+			end
+
+			if T.classic and strlen(spellrank) > 0 then
+				spellname = spellname.."("..spellrank..")"
 			end
 
 			for _, v in pairs(DB.spells) do if v.spell == spellname then return end end
