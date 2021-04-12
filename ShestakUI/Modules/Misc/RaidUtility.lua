@@ -1,6 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
 if C.misc.raid_tools ~= true then return end
-if T.BCC and T.wowBuild <= 38225 then return end -- FrameXML\RestrictedExecution.lua:473: Cannot call restricted closure from insecure code
 
 ----------------------------------------------------------------------------------------
 --	Raid Utility(by Elv22)

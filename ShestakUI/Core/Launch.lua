@@ -279,9 +279,4 @@ OnLogon:SetScript("OnEvent", function(self)
 		print("|cffffff00"..L_WELCOME_LINE_1..T.version.." "..T.client..", "..T.name..".|r")
 		print("|cffffff00"..L_WELCOME_LINE_2_1.." |cffffff00"..L_WELCOME_LINE_2_2.."|r")
 	end
-
-	-- Temporary message
-	if T.BCC and T.wowBuild <= 38225 then -- FrameXML\RestrictedExecution.lua:473: Cannot call restricted closure from insecure code
-		print("ShestakUI: |cffffff00Please note that action bar paging, party frames, and raid frames are currently disabled in this build due to a Blizzard bug. Using default party & raid frames for now.|r")
-	end
 end)
