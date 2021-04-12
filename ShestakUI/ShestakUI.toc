@@ -4,7 +4,7 @@
 ## Author: Shestak
 ## X-Curse-Project-ID:
 ## X-WoWI-ID: 25916
-## Version: 1.07
+## Version: 1.08
 ## SavedVariables: ShestakUISettings, ShestakUIStats, ShestakUIBindings, ShestakUICurrency, ShestakUIPositions
 ## SavedVariablesPerCharacter: ShestakUISettingsPerChar, ShestakUIChatHistory
 
