@@ -43,4 +43,3 @@ local function LoadSkin()
 end
 
 T.SkinFuncs["Blizzard_ItemSocketingUI"] = LoadSkin
-LoadAddOn("Blizzard_ItemSocketingUI");ItemSocketingFrame:Show()
