@@ -23,10 +23,10 @@ local function Update(self, event)
 	local inRange, checkedRange
 	local connected = UnitIsConnected(unit)
 	if(connected) then
-		if(not oUF:IsClassic()) then
-			inRange, checkedRange = UnitInRange(unit)
-		else
+		if(oUF:IsClassic() and not oUF:IsBCC()) then
 			_, inRange = LibRangeCheck:GetRange(unit, true)
+		else
+			inRange, checkedRange = UnitInRange(unit)
 		end
 		if((not oUF:IsClassic() and checkedRange and not inRange) or (not inRange)) then
 			self:SetAlpha(element.outsideAlpha)
