@@ -10,7 +10,7 @@ local function LoadSkin()
     ItemSocketingFrame:StripTextures(true)
     ItemSocketingFrame:CreateBackdrop("Transparent")
     ItemSocketingFrame.backdrop:SetPoint("TOPLEFT", 10, -12)
-    ItemSocketingFrame.backdrop:SetPoint("BOTTOMRIGHT", -32, 76)
+    ItemSocketingFrame.backdrop:SetPoint("BOTTOMRIGHT", -2, 31)
 
     T.SkinCloseButton(ItemSocketingCloseButton, ItemSocketingFrame.backdrop)
 
@@ -29,14 +29,18 @@ local function LoadSkin()
     for i = 1, MAX_NUM_SOCKETS  do
         local socket = _G["ItemSocketingSocket"..i]
         local icon = _G["ItemSocketingSocket"..i.."IconTexture"]
+
         socket:StripTextures()
-        icon:SkinButton()
+        socket:StyleButton()
+
+        icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+        icon:ClearAllPoints()
+        icon:SetPoint("TOPLEFT", 2, -2)
+        icon:SetPoint("BOTTOMRIGHT", -2, 2)
     end
 
-   local orig = ItemSocketingSocket1.SetPoint
-    ItemSocketingSocket1.SetPoint = function(self, a, b, c, x, y)
-        orig(self, a, b, c, x - 10, y + 15)
-    end
+    ItemSocketingSocketButton:SkinButton()
 end
 
 T.SkinFuncs["Blizzard_ItemSocketingUI"] = LoadSkin
+LoadAddOn("Blizzard_ItemSocketingUI");ItemSocketingFrame:Show()
