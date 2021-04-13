@@ -39,6 +39,13 @@ local function LoadSkin()
         icon:SetPoint("BOTTOMRIGHT", -2, 2)
     end
 
+
+    local orig = ItemSocketingSocket1.SetPoint
+    ItemSocketingSocket1.SetPoint = function(self, a, b, c, x, y)
+        orig(self, a, b, c, x - 4, y + 10)
+    end
+
+    ItemSocketingSocketButton:SetPoint("BOTTOMRIGHT", ItemSocketingFrame, "BOTTOMRIGHT", -6, 35)
     ItemSocketingSocketButton:SkinButton()
 end
 
