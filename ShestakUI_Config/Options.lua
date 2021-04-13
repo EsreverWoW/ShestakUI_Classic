@@ -2475,8 +2475,11 @@ do
 	local toys = ns.CreateCheckBox(parent, "toys", L_GUI_ANNOUNCEMENTS_TOY_TRAIN)
 	toys:SetPoint("TOPLEFT", spells_from_all, "BOTTOMLEFT", -20, 0)
 
+	local says_thanks = ns.CreateCheckBox(parent, "says_thanks", L_GUI_ANNOUNCEMENTS_SAYS_THANKS)
+	says_thanks:SetPoint("TOPLEFT", toys, "BOTTOMLEFT", 0, 0)
+
 	local pull_countdown = ns.CreateCheckBox(parent, "pull_countdown", L_GUI_ANNOUNCEMENTS_PULL_COUNTDOWN)
-	pull_countdown:SetPoint("TOPLEFT", toys, "BOTTOMLEFT", 0, 0)
+	pull_countdown:SetPoint("TOPLEFT", says_thanks, "BOTTOMLEFT", 0, 0)
 
 	local flask_food = ns.CreateCheckBox(parent, "flask_food", L_GUI_ANNOUNCEMENTS_FLASK_FOOD)
 	flask_food:SetPoint("TOPLEFT", pull_countdown, "BOTTOMLEFT", 0, 0)

@@ -459,6 +459,7 @@ L_GUI_ANNOUNCEMENTS_INTERRUPTS = "当你打断成功时在队伍/团队中进行
 L_GUI_ANNOUNCEMENTS_SPELLS = "当你施放指定法术时在队伍/团队中进行通告"
 L_GUI_ANNOUNCEMENTS_SPELLS_FROM_ALL = "包括所有队员"
 L_GUI_ANNOUNCEMENTS_TOY_TRAIN = "使用玩具火车/烈酒的遥控器时进行通告"
+L_GUI_ANNOUNCEMENTS_SAYS_THANKS = "Says thanks for some spells (resurrection, from the list)" -- Needs review
 L_GUI_ANNOUNCEMENTS_PULL_COUNTDOWN = "倒计时通告(/pc #)"
 L_GUI_ANNOUNCEMENTS_FLASK_FOOD = "通告食物和合剂的使用情況(/ffcheck)"
 L_GUI_ANNOUNCEMENTS_FLASK_FOOD_RAID = "在团队频道通告"

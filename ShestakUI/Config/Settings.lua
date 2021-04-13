@@ -539,6 +539,7 @@ C["announcements"] = {
 	["spells"] = false,							-- Announce when you cast some spell (from the list)
 	["spells_from_all"] = false,				-- Check spells cast from all members
 	["toys"] = false,							-- Announce some annoying toys
+	["says_thanks"] = false,					-- Says thanks for some spells (resurrection, from the list)
 	["pull_countdown"] = true,					-- Pull countdown announce (/pc #)
 	["flask_food"] = false,						-- Announce the usage of flasks and food (/ffcheck)
 	["flask_food_raid"] = false,				-- Announce to raid channel

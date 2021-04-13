@@ -459,6 +459,7 @@ L_GUI_ANNOUNCEMENTS_INTERRUPTS = "Sage deine Unterbrechungen im Raid oder Schlac
 L_GUI_ANNOUNCEMENTS_SPELLS = "Sage im Raid/Schachtzugschat an, wenn du den selben Zauber castest"
 L_GUI_ANNOUNCEMENTS_SPELLS_FROM_ALL = "Prüfe Zauber von allen Spielern"
 L_GUI_ANNOUNCEMENTS_TOY_TRAIN = "Benachrichtigung über Spielzeugzug oder Düsterbräu's Fernbedienung"
+L_GUI_ANNOUNCEMENTS_SAYS_THANKS = "Bedanke dich für einige Zauber"
 L_GUI_ANNOUNCEMENTS_PULL_COUNTDOWN = "Pull cuntdown Benachrichtigung '/pc #'"
 L_GUI_ANNOUNCEMENTS_FLASK_FOOD = "Benachrichtigung über Fläschchen und Bufffood (/ffcheck)"
 L_GUI_ANNOUNCEMENTS_FLASK_FOOD_RAID = "Benachrichtigung in den Raid Channel"
