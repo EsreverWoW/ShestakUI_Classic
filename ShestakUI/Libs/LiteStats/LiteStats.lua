@@ -1319,7 +1319,7 @@ if experience.enabled then
 				or sub == "curxp" and short(UnitXP(P),tt)
 				or sub == "remainingxp" and short(UnitXPMax(P) - UnitXP(P), tt)
 				or sub == "totalxp" and short(UnitXPMax(P), tt)
-				or sub == "cur%" and floor(UnitXP(P) / UnitXPMax(P) * 100)
+				or sub == "cur%" and (UnitXPMax(P) > 0 and floor(UnitXP(P) / UnitXPMax(P) * 100) or 0)
 				or sub == "remaining%" and 100 - floor(UnitXP(P) / UnitXPMax(P) * 100)
 				or sub == "restxp" and short(GetXPExhaustion() or 0,tt)
 				or sub == "rest%" and min(150, floor((GetXPExhaustion() or 0) / UnitXPMax(P) * 100))
