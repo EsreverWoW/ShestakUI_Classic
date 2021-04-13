@@ -14,15 +14,23 @@ local function LoadSkin()
 	}
 
 	for _, v in pairs(buttons) do
-		KeyBindingFrame[v]:SkinButton(true)
+		if KeyBindingFrame[v] then
+			KeyBindingFrame[v]:SkinButton(true)
+		end
 	end
 
 	KeyBindingFrame:StripTextures()
 	KeyBindingFrame:SetTemplate("Transparent")
 
-	KeyBindingFrame.Header:StripTextures()
-	KeyBindingFrame.Header:ClearAllPoints()
-	KeyBindingFrame.Header:SetPoint("TOP", KeyBindingFrame, "TOP", 0, -4)
+	if not T.BCC then
+		KeyBindingFrame.Header:StripTextures()
+		KeyBindingFrame.Header:ClearAllPoints()
+		KeyBindingFrame.Header:SetPoint("TOP", KeyBindingFrame, "TOP", 0, -4)
+	else
+		KeyBindingFrame.header:StripTextures()
+		KeyBindingFrame.header:ClearAllPoints()
+		KeyBindingFrame.header:SetPoint("TOP", KeyBindingFrame, "TOP", 0, -4)
+	end
 
 	KeyBindingFrame.bindingsContainer:StripTextures()
 	KeyBindingFrame.bindingsContainer:SetTemplate("Overlay")
@@ -69,23 +77,25 @@ local function LoadSkin()
 	end)
 
 	-- QuickKeybind
-	QuickKeybindFrame:StripTextures()
-	QuickKeybindFrame.Header:StripTextures()
-	QuickKeybindFrame:SetTemplate("Transparent")
+	if not T.BCC then
+		QuickKeybindFrame:StripTextures()
+		QuickKeybindFrame.Header:StripTextures()
+		QuickKeybindFrame:SetTemplate("Transparent")
 
-	local buttons = {
-		"okayButton",
-		"defaultsButton",
-		"cancelButton"
-	}
+		local buttons = {
+			"okayButton",
+			"defaultsButton",
+			"cancelButton"
+		}
 
-	for _, v in pairs(buttons) do
-		QuickKeybindFrame[v]:SkinButton(true)
+		for _, v in pairs(buttons) do
+			QuickKeybindFrame[v]:SkinButton(true)
+		end
+
+		T.SkinCheckBox(QuickKeybindFrame.characterSpecificButton)
+
+		QuickKeybindFrame.phantomExtraActionButton:SetAllPoints(ExtraActionButton1)
 	end
-
-	T.SkinCheckBox(QuickKeybindFrame.characterSpecificButton)
-
-	QuickKeybindFrame.phantomExtraActionButton:SetAllPoints(ExtraActionButton1)
 end
 
 T.SkinFuncs["Blizzard_BindingUI"] = LoadSkin
