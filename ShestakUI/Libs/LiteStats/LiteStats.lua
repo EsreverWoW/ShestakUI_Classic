@@ -2042,7 +2042,7 @@ if stats.enabled then
 			string = GetExpertisePercent()
 		elseif sub == "hit" then
 			local hit
-			local melee, ranged, spell = GetHitModifier(), GetCombatRatingBonus(7), GetSpellHitModifier()
+			local melee, ranged, spell = GetCombatRatingBonus(6), GetCombatRatingBonus(7), GetCombatRatingBonus(8)
 			if melee > spell and T.class ~= "HUNTER" then
 				hit = melee
 			elseif T.class == "HUNTER" then
