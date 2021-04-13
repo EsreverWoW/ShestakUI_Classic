@@ -401,7 +401,7 @@ if clock.enabled then
 		end,
 		OnClick = function(_, b)
 			if T.classic then
-				TimeManager_Toggle()
+				(b == "RightButton" and TimeManager_Toggle or Stopwatch_Toggle)()
 			else
 				(b == "RightButton" and ToggleTimeManager or ToggleCalendar)()
 			end
