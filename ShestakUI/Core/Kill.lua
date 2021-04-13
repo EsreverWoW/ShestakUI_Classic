@@ -13,22 +13,19 @@ frame:SetScript("OnEvent", function(_, _, addon)
 	end
 
 	if C.unitframe.enable and (ShestakUISettings and (ShestakUISettings.RaidLayout == "HEAL" or ShestakUISettings.RaidLayout == "DPS")) then
-		-- Temporarily permit Blizzard CRFM since oUF is presently not able to spawn correctly due to secure group headers not being available in the Burning Crusade Classic beta.
-		if not T.BCC then
-			InterfaceOptionsFrameCategoriesButton10:SetScale(0.00001)
-			InterfaceOptionsFrameCategoriesButton10:SetAlpha(0)
-			if not InCombatLockdown() then
-				if C.raidframe.show_raid or not IsAddOnLoaded("Grid2") then -- may need to add more addons here
-					CompactRaidFrameManager:Kill()
-					CompactRaidFrameContainer:Kill()
-				end
+		InterfaceOptionsFrameCategoriesButton10:SetScale(0.00001)
+		InterfaceOptionsFrameCategoriesButton10:SetAlpha(0)
+		if not InCombatLockdown() then
+			if C.raidframe.show_raid or not IsAddOnLoaded("Grid2") then -- may need to add more addons here
+				CompactRaidFrameManager:Kill()
+				CompactRaidFrameContainer:Kill()
 			end
-			ShowPartyFrame = T.dummy
-			HidePartyFrame = T.dummy
-			CompactUnitFrameProfiles_ApplyProfile = T.dummy
-			CompactRaidFrameManager_UpdateShown = T.dummy
-			CompactRaidFrameManager_UpdateOptionsFlowContainer = T.dummy
 		end
+		ShowPartyFrame = T.dummy
+		HidePartyFrame = T.dummy
+		CompactUnitFrameProfiles_ApplyProfile = T.dummy
+		CompactRaidFrameManager_UpdateShown = T.dummy
+		CompactRaidFrameManager_UpdateOptionsFlowContainer = T.dummy
 	end
 
 	if T.classic then
