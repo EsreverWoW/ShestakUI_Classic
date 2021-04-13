@@ -17,7 +17,7 @@ local function LoadSkin()
 
 	InspectFrameTab1:ClearAllPoints()
 	InspectFrameTab1:SetPoint("TOPLEFT", InspectFrame.backdrop, "BOTTOMLEFT", 2, -2)
-	for i = 1, 2 do
+	for i = 1, T.BCC and 3 or 2 do
 		T.SkinTab(_G["InspectFrameTab"..i])
 	end
 
@@ -72,13 +72,71 @@ local function LoadSkin()
 		end)
 	end
 
-	InspectHonorFrame:StripTextures(true)
+	-- Honor Frame
+	if InspectHonorFrame then
+		InspectHonorFrame:StripTextures(true)
 
-	InspectHonorFrameProgressBar:ClearAllPoints()
-	InspectHonorFrameProgressBar:SetPoint("TOP", InspectFrame.backdrop, "TOP", 1, -65)
-	
-	InspectHonorFrameProgressBar:CreateBackdrop("Default")
-	InspectHonorFrameProgressBar:SetHeight(24)
+		InspectHonorFrameProgressBar:ClearAllPoints()
+		InspectHonorFrameProgressBar:SetPoint("TOP", InspectFrame.backdrop, "TOP", 1, -65)
+
+		InspectHonorFrameProgressBar:CreateBackdrop("Default")
+		InspectHonorFrameProgressBar:SetHeight(24)
+	end
+
+	-- PVP Frame
+	if InspectPVPFrame then
+		InspectPVPFrame:StripTextures(true)
+	end
+
+	-- Talent Frame
+	if InspectTalentFrame then
+		InspectTalentFrameCancelButton:Kill()
+		InspectTalentFrameCloseButton:Kill()
+
+		InspectTalentFrame:StripTextures(true)
+
+		T.SkinCloseButton(InspectTalentFrameCloseButton, InspectFrame.backdrop)
+
+		for i = 1, 3 do
+			local tab = _G["InspectTalentFrameTab"..i]
+			local lastTab = _G["InspectTalentFrameTab"..i-1]
+			tab:ClearAllPoints()
+			if lastTab then
+				tab:SetPoint("LEFT", lastTab, "RIGHT", 4, 0)
+			else
+				tab:SetPoint("TOPLEFT", 70, -48)
+			end
+			T.SkinTab(tab)
+		end
+
+		InspectTalentFrameScrollFrame:StripTextures()
+		InspectTalentFrameScrollFrame:CreateBackdrop("Default")
+		InspectTalentFrameScrollFrame.backdrop:SetPoint("TOPLEFT", -1, 1)
+		InspectTalentFrameScrollFrame.backdrop:SetPoint("BOTTOMRIGHT", 6, -1)
+
+		T.SkinScrollBar(InspectTalentFrameScrollFrameScrollBar)
+		InspectTalentFrameScrollFrameScrollBar:SetPoint("TOPLEFT", InspectTalentFrameScrollFrame, "TOPRIGHT", 10, -16)
+		
+		InspectTalentFrameSpentPoints:SetPoint("BOTTOMLEFT", InspectTalentFrame, "BOTTOMLEFT", 8, 84)
+
+		for i = 1, MAX_NUM_TALENTS do
+			local talent = _G["InspectTalentFrameTalent"..i]
+			local icon = _G["InspectTalentFrameTalent"..i.."IconTexture"]
+			local rank = _G["InspectTalentFrameTalent"..i.."Rank"]
+
+			if talent then
+				talent:StripTextures()
+				talent:SetTemplate("Default")
+				talent:StyleButton()
+
+				icon:SetInside()
+				icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+				icon:SetDrawLayer("ARTWORK")
+
+				rank:SetFont(C.media.pixel_font, C.media.pixel_font_size, C.media.pixel_font_style)
+			end
+		end
+	end
 end
 
 T.SkinFuncs["Blizzard_InspectUI"] = LoadSkin
