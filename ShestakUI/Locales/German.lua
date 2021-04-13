@@ -114,7 +114,7 @@ L_ERRORFRAME_L = "Klick um Fehler anzuzeigen."
 
 -- Bags
 L_BAG_SHOW_BAGS = "Zeige Taschen"
-L_BAG_SHOW_KEYRING = "Show Keyring" -- Needs review
+L_BAG_SHOW_KEYRING = "Toggle Keyring" -- Needs review
 L_BAG_RIGHT_CLICK_SEARCH = "Rechtsklick um zu suchen"
 L_BAG_STACK_MENU = "Stapeln"
 L_BAG_RIGHT_CLICK_CLOSE = "Rechtsklick öffnet Menü"
