@@ -9,7 +9,7 @@ frame:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 frame:SetScript("OnEvent", function()
 	local _, event, _, sourceGUID, sourceName, _, _, _, destName, _, _, spellID, spellName = CombatLogGetCurrentEventInfo()
 	if T.classic and not T.BCC then
-		spellID = T.GetSpellID(spellID)
+		spellID = T.GetSpellID(spellName)
 	end
 	local _, _, difficultyID = GetInstanceInfo()
 	if difficultyID == 0 or event ~= "SPELL_CAST_SUCCESS" then return end
