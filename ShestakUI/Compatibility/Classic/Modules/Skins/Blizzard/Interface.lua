@@ -50,6 +50,7 @@ local function LoadSkin()
 	local checkboxes = {
 		-- Controls
 		"ControlsPanelStickyTargeting",
+		"ControlsPanelAutoDismount",
 		"ControlsPanelAutoClearAFK",
 		"ControlsPanelLootAtMouse",
 		"ControlsPanelAutoLootCorpse",
@@ -109,6 +110,7 @@ local function LoadSkin()
 		"ActionBarsPanelCountdownCooldowns",
 		-- Names
 		"NamesPanelMyName",
+		"NamesPanelGuildNames",
 		"NamesPanelFriendlyPlayerNames",
 		"NamesPanelNonCombatCreature",
 		"NamesPanelEnemyPlayerNames",
@@ -180,6 +182,7 @@ local function LoadSkin()
 	local dropdown = {
 		"ControlsPanelAutoLootKeyDropDown",
 		"CombatPanelCombatTextFloatModeDropDown",
+		"CombatPanelFocusCastKeyDropDown",
 		"CombatPanelSelfCastKeyDropDown",
 		"SocialPanelWhisperMode",
 		"SocialPanelTimestamps",
