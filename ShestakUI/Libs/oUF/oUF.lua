@@ -392,7 +392,7 @@ Used to determine if running Burning Crusade Classic.
 * self - the global oUF object
 --]]
 function oUF:IsBCC()
-	return oUF:IsClassic() and select(4, GetBuildInfo()) > 20500
+	return _G.WOW_PROJECT_ID == _G.WOW_PROJECT_BURNING_CRUSADE_CLASSIC
 end
 
 --[[ oUF:RegisterInitCallback(func)
