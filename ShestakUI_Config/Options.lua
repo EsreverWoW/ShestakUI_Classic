@@ -7,11 +7,11 @@ local L = ns
 ----------------------------------------------------------------------------------------
 -- Temporary Function
 local function IsClassicBuild()
-	return _G.WOW_PROJECT_ID == _G.WOW_PROJECT_CLASSIC
+	return _G.WOW_PROJECT_ID == _G.WOW_PROJECT_CLASSIC or _G.WOW_PROJECT_ID == _G.WOW_PROJECT_BURNING_CRUSADE_CLASSIC
 end
 
 local function IsBCCBuild()
-	return IsClassicBuild() and select(4, GetBuildInfo()) > 20500
+	return _G.WOW_PROJECT_ID == _G.WOW_PROJECT_BURNING_CRUSADE_CLASSIC
 end
 
 local function HideOptions(list)

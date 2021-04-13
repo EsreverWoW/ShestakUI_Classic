@@ -42,7 +42,7 @@ if (_G.UIDROPDOWNMENU_VALUE_PATCH_VERSION or 0) < 2 then
 	end)
 end
 
-if _G.WOW_PROJECT_ID == _G.WOW_PROJECT_CLASSIC then return end
+if _G.WOW_PROJECT_ID == _G.WOW_PROJECT_CLASSIC or _G.WOW_PROJECT_ID == _G.WOW_PROJECT_BURNING_CRUSADE_CLASSIC then return end
 
 --CommunitiesUI taint workaround
 --credit: https://www.townlong-yak.com/bugs/Kjq4hm-DisplayModeTaint
