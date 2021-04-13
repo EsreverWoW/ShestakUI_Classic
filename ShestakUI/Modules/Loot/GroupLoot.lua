@@ -284,7 +284,11 @@ local function START_LOOT_ROLL(rollID, time)
 	f.status:SetMinMaxValues(0, time)
 	f.status:SetValue(time)
 
-	f:SetPoint("CENTER", WorldFrame, "CENTER")
+	if T.BCC then
+		f:SetPoint("CENTER", UIParent, "CENTER")
+	else
+		f:SetPoint("CENTER", WorldFrame, "CENTER")
+	end
 	f:Show()
 end
 
