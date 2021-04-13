@@ -51,8 +51,10 @@ frame:SetScript("OnEvent", function()
 	end
 
 	hooksecurefunc("TalentFrame_LoadUI", function()
-		if T.classic then
+		if T.classic and not T.BCC then
 			TalentFrame:UnregisterEvent("CHARACTER_POINTS_CHANGED")
+		elseif T.BCC then
+			PlayerTalentFrame:UnregisterEvent("CHARACTER_POINTS_CHANGED")
 		else
 			PlayerTalentFrame:UnregisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
 		end
