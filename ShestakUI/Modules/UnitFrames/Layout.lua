@@ -473,7 +473,7 @@ local function Shared(self, unit)
 			self.TotemBar:CreateBackdrop("Default")
 			self.TotemBar:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, 7)
 			self.TotemBar:SetSize(player_width, 7)
-			self.TotemBar.Destroy = not T.classic and true or false
+			self.TotemBar.Destroy = (T.BCC or not T.classic) and true or false
 
 			for i = 1, 4 do
 				self.TotemBar[i] = CreateFrame("StatusBar", self:GetName().."_Totem"..i, self.TotemBar)
