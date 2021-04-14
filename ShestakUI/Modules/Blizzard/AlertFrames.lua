@@ -1,5 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
-if IsAddOnLoaded("MoveAnything") then return end
+if T.classic or IsAddOnLoaded("MoveAnything") then return end
 
 ----------------------------------------------------------------------------------------
 --	AlertFrameMove(by Gethe)
