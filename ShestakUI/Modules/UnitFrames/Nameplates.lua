@@ -299,10 +299,12 @@ if T.screenHeight > 1200 then
 	Mult = T.mult
 end
 
+local auraFontHeight = (T.BCC and T.HiDPI) and (C.font.auras_font_size * T.noscalemult * (2/3) / Mult) or (C.font.auras_font_size * T.noscalemult / Mult)
+
 local AurasPostCreateIcon = function(element, button)
 	CreateBorderFrame(button)
 
-	button.remaining = T.SetFontString(button, C.font.auras_font, C.font.auras_font_size * T.noscalemult / Mult, C.font.auras_font_style)
+	button.remaining = T.SetFontString(button, C.font.auras_font, auraFontHeight, C.font.auras_font_style)
 	button.remaining:SetShadowOffset(C.font.auras_font_shadow and 1 or 0, C.font.auras_font_shadow and -1 or 0)
 	button.remaining:SetPoint("CENTER", button, "CENTER", 1, 0)
 	button.remaining:SetJustifyH("CENTER")
@@ -313,7 +315,7 @@ local AurasPostCreateIcon = function(element, button)
 
 	button.count:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", 1, 0)
 	button.count:SetJustifyH("RIGHT")
-	button.count:SetFont(C.font.auras_font, C.font.auras_font_size * T.noscalemult / Mult, C.font.auras_font_style)
+	button.count:SetFont(C.font.auras_font, auraFontHeight, C.font.auras_font_style)
 	button.count:SetShadowOffset(C.font.auras_font_shadow and 1 or 0, C.font.auras_font_shadow and -1 or 0)
 
 	if C.aura.show_spiral == true then
