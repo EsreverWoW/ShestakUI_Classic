@@ -306,14 +306,14 @@ local AurasPostCreateIcon = function(element, button)
 
 	button.remaining = T.SetFontString(button, C.font.auras_font, auraFontHeight, C.font.auras_font_style)
 	button.remaining:SetShadowOffset(C.font.auras_font_shadow and 1 or 0, C.font.auras_font_shadow and -1 or 0)
-	button.remaining:SetPoint("CENTER", button, "CENTER", 1, 0)
+	button.remaining:SetPoint("CENTER", button, "CENTER", T.BCC and 0 or 1, 0)
 	button.remaining:SetJustifyH("CENTER")
 
 	button.cd.noCooldownCount = true
 
 	button.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 
-	button.count:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", 1, 0)
+	button.count:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", T.BCC and 2 or 1, T.BCC and -6 or 0)
 	button.count:SetJustifyH("RIGHT")
 	button.count:SetFont(C.font.auras_font, auraFontHeight, C.font.auras_font_style)
 	button.count:SetShadowOffset(C.font.auras_font_shadow and 1 or 0, C.font.auras_font_shadow and -1 or 0)
