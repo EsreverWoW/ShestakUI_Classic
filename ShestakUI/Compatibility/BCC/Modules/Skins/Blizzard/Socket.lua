@@ -5,8 +5,6 @@ if not T.BCC or C.skins.blizzard_frames ~= true then return end
 --	Socket skin
 ----------------------------------------------------------------------------------------
 local function LoadSkin()
-    -- /run LoadAddOn("Blizzard_ItemSocketingUI");ItemSocketingFrame:Show()
-
     ItemSocketingFrame:StripTextures(true)
     ItemSocketingFrame:CreateBackdrop("Transparent")
     ItemSocketingFrame.backdrop:SetPoint("TOPLEFT", 10, -12)
@@ -38,7 +36,6 @@ local function LoadSkin()
         icon:SetPoint("TOPLEFT", 2, -2)
         icon:SetPoint("BOTTOMRIGHT", -2, 2)
     end
-
 
     local orig = ItemSocketingSocket1.SetPoint
     ItemSocketingSocket1.SetPoint = function(self, a, b, c, x, y)
