@@ -248,10 +248,6 @@ if C.misc.max_camera_distance == true then
 	local OnLogon = CreateFrame("Frame")
 	OnLogon:RegisterEvent("PLAYER_ENTERING_WORLD")
 	OnLogon:SetScript("OnEvent", function()
-		if T.classic then
-			SetCVar("cameraDistanceMaxZoomFactor", 3.4)
-		else
-			SetCVar("cameraDistanceMaxZoomFactor", 2.6)
-		end
+		SetCVar("cameraDistanceMaxZoomFactor", T.classic and 3.4 or 2.6)
 	end)
 end
