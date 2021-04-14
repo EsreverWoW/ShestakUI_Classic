@@ -61,11 +61,9 @@ local function LoadSkin()
 	local f = CreateFrame("Frame")
 	f:RegisterEvent("CHARACTER_POINTS_CHANGED")
 	f:SetScript("OnEvent", function()
-		if TalentFrame_Update then
+		if not T.BCC then
 			TalentFrame_Update()
-		end
-
-		if PlayerTalentFrame_Update then
+		else
 			PlayerTalentFrame_Update()
 		end
 	end)
