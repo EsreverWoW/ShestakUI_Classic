@@ -2657,8 +2657,12 @@ C["filger_spells"] = {
 			{spellID = 2943, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Vampiric Embrace
 			{spellID = 15286, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
-			-- Vampiric Touch
+			-- Vampiric Touch r1
 			{spellID = 34914, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Vampiric Touch r2
+			{spellID = 34916, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Vampiric Touch r3
+			{spellID = 34917, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
 
 			-- Trinket Effects
 		},
