@@ -56,6 +56,7 @@ T.black_list = {
 	[ERR_NOT_EQUIPPABLE] = true,
 	[ERR_NOT_IN_COMBAT] = true,
 	[ERR_MAIL_DATABASE_ERROR] = true,
+	[ERR_UNIT_NOT_FOUND] = true,
 	[OUT_OF_POWER_DISPLAY] = true,
 	[OUT_OF_ENERGY] = true,
 	[OUT_OF_FOCUS] = true,
