@@ -148,6 +148,7 @@ T.DebuffWhiteList = {
 	[SpellName(18223)] = true,	-- Curse of Exhaustion
 	[SpellName(1010)] = true,	-- Curse of Idiocy
 	[SpellName(704)] = true,	-- Curse of Recklessness
+	[SpellName(17862)] = true,	-- Curse of Shadow
 	[SpellName(1714)] = true,	-- Curse of Tongues
 	[SpellName(702)] = true,	-- Curse of Weakness
 	[SpellName(1490)] = true,	-- Curse of the Elements

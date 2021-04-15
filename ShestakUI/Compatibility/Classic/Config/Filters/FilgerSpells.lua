@@ -2453,6 +2453,8 @@ C["filger_spells"] = {
 			{spellID = 1010, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Curse of Recklessness
 			{spellID = 704, unitID = "target", caster = "all", filter = "DEBUFF"},
+			-- Curse of Shadow
+			{spellID = 17862, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Curse of Tongues
 			{spellID = 1714, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Curse of Weakness r1
