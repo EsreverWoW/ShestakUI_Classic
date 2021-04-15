@@ -775,9 +775,9 @@ if( playerClass == "DRUID" ) then
 		local EmpoweredRejuv = GetSpellInfo(33886) or "EmpoweredRejuv"
 		local EmpoweredTouch = GetSpellInfo(33879) or "EmpoweredTouch"
 
-		hotData[Regrowth] = { interval = 3, ticks = 7, coeff = 0.5, levels = { 12, 18, 24, 30, 36, 42, 48, 54, 60, 65 }, averages = { 98, 175, 259, 343, 427, 546, 686, 861, 1064, 1274 }}
+		hotData[Regrowth] = { interval = 3, ticks = 7, coeff = isTBC and 0.7 or 0.5, levels = { 12, 18, 24, 30, 36, 42, 48, 54, 60, 65 }, averages = { 98, 175, 259, 343, 427, 546, 686, 861, 1064, 1274 }}
 		hotData[Rejuvenation] = { interval = 3, levels = { 4, 10, 16, 22, 28, 34, 40, 46, 52, 58, 60, 63, 69 }, averages = { 32, 56, 116, 180, 244, 304, 388, 488, 608, 756, 888, 932, 1060 }}
-		hotData[Lifebloom] = {interval = 1, ticks = 7, coeff = 0.66626, dhCoeff = 0.34324 * 0.8, levels = {64}, averages = {273}, bomb = {600}}
+		hotData[Lifebloom] = {interval = 1, ticks = 7, coeff = 0.52, dhCoeff = 0.34335, levels = {64}, averages = {273}, bomb = {600}}
 
 		spellData[HealingTouch] = { levels = {1, 8, 14, 20, 26, 32, 38, 44, 50, 56, 60, 62, 69}, averages = {
 			{avg(37, 51), avg(37, 52), avg(38, 53), avg(39, 54), avg(40, 55)},
@@ -805,12 +805,12 @@ if( playerClass == "DRUID" ) then
 			{avg(1003, 1119), avg(1009, 1126), avg(1016, 1133), avg(1023, 1140), avg(1030, 1147), avg(1037, 1153)},
 			{avg(1215, 1355), avg(1222, 1363), avg(1230, 1371), avg(1238, 1379), avg(1245, 1386), avg(1253, 1394)} }}
 		if isTBC then
-			spellData[Tranquility] = {coeff = 1/3, ticks = 4, interval = 2, levels = {30, 40, 50, 60, 70}, averages = {
-				{351 * 5, 354 * 5, 356 * 5, 358 * 5, 360 * 5, 362 * 5, 365 * 5},
-				{515 * 5, 518 * 5, 521 * 5, 523 * 5, 526 * 5, 528 * 5, 531 * 5},
-				{765 * 5, 769 * 5, 772 * 5, 776 * 5, 779 * 5, 782 * 5, 786 * 5},
-				{1097 * 5, 1101 * 5, 1105 * 5, 1109 * 5, 1112 * 5, 1116 * 5, 1120 * 5},
-				{1518 * 5} }}
+			spellData[Tranquility] = {coeff = 1.145, ticks = 4, interval = 2, levels = {30, 40, 50, 60, 70}, averages = {
+				{351 * 4, 354 * 4, 356 * 4, 358 * 4, 360 * 4, 362 * 4, 365 * 4},
+				{515 * 4, 518 * 4, 521 * 4, 523 * 4, 526 * 4, 528 * 4, 531 * 4},
+				{765 * 4, 769 * 4, 772 * 4, 776 * 4, 779 * 4, 782 * 4, 786 * 4},
+				{1097 * 4, 1101 * 4, 1105 * 4, 1109 * 4, 1112 * 4, 1116 * 4, 1120 * 4},
+				{1518 * 4} }}
 		else
 			spellData[Tranquility] = {coeff = 1/3, ticks = 5, interval = 2, levels = {30, 40, 50, 60}, averages = {
 				{94 * 5, 95 * 5, 96 * 5, 96 * 5, 97 * 5, 97 * 5, 98 * 5},
@@ -858,11 +858,22 @@ if( playerClass == "DRUID" ) then
 			local spModifier = 1
 			local bombAmount, totalTicks
 
-			healAmount = healAmount * (1 + talentData[GiftofNature].current)
+			-- Gift of Nature
+			if isTBC then
+				healModifier = healModifier * (1 + talentData[GiftofNature].current)
+			else
+				-- Gift of Nature does only apply to base values in classic
+				healAmount = healAmount * (1 + talentData[GiftofNature].current)
+			end
 
 			-- Rejuvenation
 			if( spellName == Rejuvenation ) then
-				healAmount = healAmount * (1 + talentData[ImprovedRejuv].current)
+				if isTBC then
+					healModifier = healModifier * (1 + talentData[ImprovedRejuv].current)
+				else
+					-- Improved Rejuvenation only applies to base values in classic
+					healAmount = healAmount * (1 + talentData[ImprovedRejuv].current)
+				end
 
 				if( playerCurrentRelic and rejuIdols[playerCurrentRelic] ) then
 					spellPower = spellPower + rejuIdols[playerCurrentRelic]
@@ -879,14 +890,14 @@ if( playerClass == "DRUID" ) then
 
 				totalTicks = ticks
 
-				spellPower = spellPower * (duration / 15)
+				spellPower = spellPower * (duration / 15) * (1 + talentData[EmpoweredRejuv].current)
 				spellPower = spellPower / ticks
 				healAmount = healAmount / ticks
 				if( playerCurrentRelic == 186054 ) then
 					healAmount = healAmount + 15
 				end
 			elseif( spellName == Regrowth ) then
-				spellPower = spellPower * hotData[spellName].coeff
+				spellPower = spellPower * hotData[spellName].coeff * (1 + talentData[EmpoweredRejuv].current)
 				spellPower = spellPower / hotData[spellName].ticks
 				healAmount = healAmount / hotData[spellName].ticks
 
@@ -901,20 +912,22 @@ if( playerClass == "DRUID" ) then
 					bombSpellPower = bombSpellPower + bloomBombIdols[playerCurrentRelic]
 				end
 
-				local bombSpell = bombSpellPower * (hotData[spellName].dhCoeff * 1.88)
-				bombAmount = math.ceil(calculateGeneralAmount(hotData[spellName].levels[rank], hotData[spellName].bomb[rank], bombSpell, spModifier, healModifier + talentData[GiftofNature].current))
+				local bombSpell = bombSpellPower * hotData[spellName].dhCoeff * (1 + talentData[EmpoweredRejuv].current)
+				bombAmount = math.ceil(calculateGeneralAmount(hotData[spellName].levels[spellRank], hotData[spellName].bomb[spellRank], bombSpell, spModifier, healModifier))
 
 				-- Figure out the hot tick healing
 				spellPower = spellPower * (hotData[spellName].coeff * (1 + talentData[EmpoweredRejuv].current))
-				spellPower = spellPower / hotData[spellName].ticks
-				healAmount = healAmount / hotData[spellName].ticks
-				-- Figure out total ticks
-				totalTicks = 7
 
 				-- Idol of the Emerald Queen, +47 SP per tick
 				if( playerCurrentRelic == 27886 ) then
 					spellPower = spellPower + 47
 				end
+
+				spellPower = spellPower / hotData[spellName].ticks
+				healAmount = healAmount / hotData[spellName].ticks
+				-- Figure out total ticks
+				totalTicks = 7
+
 			end
 
 			healAmount = calculateGeneralAmount(hotData[spellName].levels[spellRank], healAmount, spellPower, spModifier, healModifier)
@@ -931,17 +944,23 @@ if( playerClass == "DRUID" ) then
 			local spModifier = 1
 
 			-- Gift of Nature
-			healAmount = healAmount * (1 + talentData[GiftofNature].current)
+			if isTBC then
+				healModifier = healModifier * (1 + talentData[GiftofNature].current)
+			else
+				-- Gift of Nature does only apply to base values in classic
+				healAmount = healAmount * (1 + talentData[GiftofNature].current)
+			end
 
 			-- Regrowth
 			if( spellName == Regrowth ) then
 				spellPower = spellPower * spellData[spellName].coeff
 				-- Healing Touch
 			elseif( spellName == HealingTouch ) then
+
+				healAmount = healAmount + (spellPower * talentData[EmpoweredTouch].current)
+
 				local castTime = spellRank >= 5 and 3.5 or (spellRank == 4 and 3 or (spellRank == 3 and 2.5 or (spellRank == 2 and 2 or 1.5)))
 				spellPower = spellPower * (castTime / 3.5)
-
-				spellPower = spellPower * (1 + talentData[EmpoweredTouch].current)
 
 				if( playerCurrentRelic == 22399 ) then
 					healAmount = healAmount + 100
@@ -955,7 +974,7 @@ if( playerClass == "DRUID" ) then
 
 				-- Tranquility
 			elseif( spellName == Tranquility ) then
-				spellPower = spellPower * spellData[spellName].coeff
+				spellPower = spellPower * spellData[spellName].coeff * (1 + talentData[EmpoweredRejuv].current)
 				spellPower = spellPower / spellData[spellName].ticks
 				healAmount = healAmount / spellData[spellName].ticks
 			end
@@ -1143,7 +1162,7 @@ if( playerClass == "PRIEST" ) then
 			{avg(46, 56), avg(46, 57), avg(47, 58)},
 			{avg(71, 85), avg(72, 87), avg(73, 88), avg(74, 89), avg(75, 90), avg(76, 91)},
 			{avg(135, 157), avg(136, 159), avg(138, 161), avg(139, 162), avg(141, 164), avg(143, 165)} }}
-		spellData[PrayerofHealing] = {coeff = 3/3.5/3, levels = {30, 40, 50, 60, 60, 68}, averages = {
+		spellData[PrayerofHealing] = {coeff = isTBC and 0.431596 or (3/3.5/3), levels = {30, 40, 50, 60, 60, 68}, averages = {
 			{avg(301, 321), avg(302, 323), avg(303, 324), avg(304, 325), avg(306, 327), avg(307, 328), avg(308, 329), avg(310, 331), avg(311, 332), avg(312, 333)},
 			{avg(444, 472), avg(445, 474), avg(447, 476), avg(448, 477), avg(450, 479), avg(452, 480), avg(453, 482), avg(455, 484), avg(456, 485), avg(458, 487)},
 			{avg(657, 695), avg(659, 697), avg(661, 699), avg(663, 701), avg(665, 703), avg(667, 705), avg(669, 707), avg(671, 709), avg(673, 711), avg(675, 713)},
@@ -1164,7 +1183,11 @@ if( playerClass == "PRIEST" ) then
 		GetHealTargets = function(bitType, guid, healAmount, spellID)
 			local spellName = GetSpellInfo(spellID)
 			if( spellName == BindingHeal ) then
-				return string.format("%s,%s", compressGUID[guid], compressGUID[playerGUID]), healAmount
+				if guid == playerGUID then
+					return string.format("%s", compressGUID[playerGUID]), healAmount
+				else
+					return string.format("%s,%s", compressGUID[guid], compressGUID[playerGUID]), healAmount
+				end
 			elseif( spellName == PrayerofHealing ) then
 				guid = UnitGUID("player")
 				local targets = compressGUID[guid]
@@ -1191,13 +1214,23 @@ if( playerClass == "PRIEST" ) then
 			local spModifier = 1
 			local totalTicks
 
-			healAmount = healAmount * (1 + talentData[SpiritualHealing].current)
+			if isTBC then
+				healModifier = healModifier * (1 + talentData[SpiritualHealing].current)
+			else
+				-- Spiritual Healing only applies to base values
+				healAmount = healAmount * (1 + talentData[SpiritualHealing].current)
+			end
 
 			if( spellName == Renew or spellName == GreaterHealHot ) then
-				healAmount = healAmount * (1 + talentData[ImprovedRenew].current)
+				if isTBC then
+					healModifier = healModifier * (1 + talentData[ImprovedRenew].current)
+				else
+					-- Improved Renew only applies to the base value in classic
+					healAmount = healAmount * (1 + talentData[ImprovedRenew].current)
+				end
 
 				local duration = 15
-				local ticks = duration / hotData[spellName].interval
+				local ticks = hotData[spellName].ticks
 
 				if( equippedSetCache["Oracle"] >= 5 or equippedSetCache["Avatar"] >= 4 ) then
 					healAmount = healAmount + (healAmount / ticks) -- Add Tick Amount Gained by Set.
@@ -1207,7 +1240,6 @@ if( playerClass == "PRIEST" ) then
 
 				totalTicks = ticks
 
-				spellPower = spellPower * (duration / 15)
 				spellPower = spellPower / ticks
 				healAmount = healAmount / ticks
 			end
@@ -1224,18 +1256,25 @@ if( playerClass == "PRIEST" ) then
 			local healModifier = HealComm:GetHealModifier(guid) * playerHealModifier
 			local spModifier = 1
 
-			healAmount = healAmount * (1 + talentData[SpiritualHealing].current)
+			if isTBC then
+				healModifier = healModifier * (1 + talentData[SpiritualHealing].current)
+			else
+				healAmount = healAmount * (1 + talentData[SpiritualHealing].current)
+			end
 
 			-- Greater Heal
 			if( spellName == GreaterHeal ) then
-				if( equippedSetCache["Absolution"] >= 4 ) then healModifier = healModifier + 0.05 end
-				spellPower = spellPower * spellData[spellName].coeff * (1 + (talentData[EmpoweredHealing].current * 2))
+				if( equippedSetCache["Absolution"] >= 4 ) then healModifier = healModifier * 1.05 end
+				healAmount = healAmount + (spellPower * (talentData[EmpoweredHealing].current * 2))
+				spellPower = spellPower * spellData[spellName].coeff
 				-- Flash Heal
 			elseif( spellName == FlashHeal ) then
-				spellPower = spellPower * spellData[spellName].coeff * (1 + talentData[EmpoweredHealing].current)
+				healAmount = healAmount + (spellPower * talentData[EmpoweredHealing].current)
+				spellPower = spellPower * spellData[spellName].coeff
 				-- Binding Heal
 			elseif( spellName == BindingHeal ) then
-				spellPower = spellPower * spellData[spellName].coeff * (1 + talentData[EmpoweredHealing].current)
+				healAmount = healAmount + (spellPower * talentData[EmpoweredHealing].current)
+				spellPower = spellPower * spellData[spellName].coeff
 				-- Prayer of Healing
 			elseif( spellName == PrayerofHealing ) then
 				spellPower = spellPower * spellData[spellName].coeff
@@ -1318,16 +1357,22 @@ if( playerClass == "SHAMAN" ) then
 			local healModifier = HealComm:GetHealModifier(guid) * playerHealModifier
 			local spModifier = 1
 
-			healAmount = healAmount * (1 + talentData[Purification].current)
+			if isTBC then
+				healModifier = healModifier * (1 + talentData[Purification].current)
+			else
+				-- Purification only applies to base values in classic
+				healAmount = healAmount * (1 + talentData[Purification].current)
+			end
 
 			-- Chain Heal
 			if( spellName == ChainHeal ) then
-				healAmount = healAmount * (1 + talentData[ImpChainHeal].current)
 				spellPower = spellPower * spellData[spellName].coeff
 
 				if( equippedSetCache["Skyshatter"] >= 4 ) then
-					healModifier = healModifier + 0.05
+					healModifier = healModifier * 1.05
 				end
+
+				healModifier = healModifier * (1 + talentData[ImpChainHeal].current)
 
 				if playerCurrentRelic == 28523 then healAmount = healAmount + 87 end
 				-- Heaing Wave
@@ -1577,7 +1622,7 @@ function HealComm:PLAYER_LEVEL_UP(level)
 end
 
 -- Cache player talent data for spells we need
-function HealComm:PLAYER_TALENT_UPDATE()
+function HealComm:CHARACTER_POINTS_CHANGED()
 	for tabIndex=1, GetNumTalentTabs() do
 		for i=1, GetNumTalents(tabIndex) do
 			local name, _, _, _, spent = GetTalentInfo(tabIndex, i)
@@ -1789,17 +1834,18 @@ local function parseHotBomb(casterGUID, wasUpdated, spellID, amount, ...)
 	if( not amount or not spellName or select("#", ...) == 0 ) then return end
 
 	-- If we don't have a pending hot then there is no bomb as far as were concerned
-	local hotPending = pendingHeals[casterGUID] and pendingHeals[casterGUID][spellID]
+	local hotPending = pendingHots[casterGUID] and pendingHots[casterGUID][spellName]
 	if( not hotPending or not hotPending.bitType ) then return end
 	hotPending.hasBomb = true
 
+	pendingHeals[casterGUID] = pendingHeals[casterGUID] or {}
 	pendingHeals[casterGUID][spellName] = pendingHeals[casterGUID][spellName] or {}
 
 	local pending = pendingHeals[casterGUID][spellName]
 	pending.endTime = hotPending.endTime
 	pending.spellID = spellID
 	pending.bitType = BOMB_HEALS
-	pending.stack = hotPending.stack
+	pending.stack = 1 -- TBC Lifebloom bomb heal does not stack
 
 	loadHealList(pending, amount, pending.stack, pending.endTime, nil, ...)
 
@@ -2006,7 +2052,6 @@ local eventRegistered = {
 
 function HealComm:COMBAT_LOG_EVENT_UNFILTERED(...)
 	local timestamp, eventType, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlags, destGUID, destName, destFlags, destRaidFlags = ...
-
 	if( not eventRegistered[eventType] ) then return end
 
 	local _, spellName = select(12, ...)
@@ -2053,7 +2098,6 @@ function HealComm:COMBAT_LOG_EVENT_UNFILTERED(...)
 				local targets, amt = GetHealTargets(type, destGUID, max(amount, 0), spellID)
 				if targets then
 					parseHotHeal(sourceGUID, false, spellID, amt, totalTicks, tickInterval, strsplit(",", targets))
-					sendMessage(format("H:%d:%d:%d::%d:%s", totalTicks, spellID, amount, tickInterval, targets))
 
 					-- Hot with a bomb!
 					if( bombAmount ) then
@@ -2188,6 +2232,10 @@ function HealComm:UNIT_SPELLCAST_START(unit, cast, spellID)
 
 	local castGUID = castGUIDs[spellID]
 	local castUnit = guidToUnit[castGUID]
+	if isTBC and not castUnit and spellID == 32546 and castGUID == UnitGUID("target") then
+		castGUID = UnitGUID("player")
+		castUnit = "player"
+	end
 	if( not castGUID or not castUnit ) then
 		return
 	end
@@ -2532,7 +2580,7 @@ end
 
 -- PLAYER_ALIVE = got talent data
 function HealComm:PLAYER_ALIVE()
-	self:PLAYER_TALENT_UPDATE()
+	self:CHARACTER_POINTS_CHANGED()
 	self.eventFrame:UnregisterEvent("PLAYER_ALIVE")
 end
 
@@ -2597,7 +2645,7 @@ function HealComm:OnInitialize()
 	if( GetNumTalentTabs() == 0 ) then
 		self.eventFrame:RegisterEvent("PLAYER_ALIVE")
 	else
-		self:PLAYER_TALENT_UPDATE()
+		self:CHARACTER_POINTS_CHANGED()
 	end
 
 	if( ResetChargeData ) then
@@ -2618,6 +2666,7 @@ function HealComm:OnInitialize()
 	self.eventFrame:RegisterEvent("PLAYER_TARGET_CHANGED")
 	self.eventFrame:RegisterEvent("UPDATE_MOUSEOVER_UNIT")
 	self.eventFrame:RegisterEvent("PLAYER_LEVEL_UP")
+	self.eventFrame:RegisterEvent("CHARACTER_POINTS_CHANGED")
 	self.eventFrame:RegisterEvent("UNIT_AURA")
 
 	if( self.initialized ) then return end
