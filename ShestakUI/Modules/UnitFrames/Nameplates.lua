@@ -669,6 +669,10 @@ local function style(self, unit)
 	self.Health.colorHealth = true
 	CreateBorderFrame(self.Health)
 
+	if T.classic then
+		self.Health.frequentUpdates = true
+	end
+
 	self.Health.bg = self.Health:CreateTexture(nil, "BORDER")
 	self.Health.bg:SetAllPoints()
 	self.Health.bg:SetTexture(C.media.texture)
