@@ -1075,7 +1075,11 @@ if( playerClass == "PALADIN" ) then
 			local healModifier = HealComm:GetHealModifier(guid) * playerHealModifier
 			local spModifier = 1
 
-			healAmount = healAmount * (1 + talentData[HealingLight].current)
+			if isTBC then
+				healModifier = healModifier * (1 + talentData[HealingLight].current)
+			else
+				healAmount = healAmount * (1 + talentData[HealingLight].current)
+			end
 
 			if playerCurrentRelic then
 				if spellName == FlashofLight and flashLibrams[playerCurrentRelic] then
