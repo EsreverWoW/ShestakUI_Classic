@@ -12,10 +12,10 @@ local function LoadSkin()
 	ItemTextFrame.backdrop:SetPoint("BOTTOMRIGHT", -32, 76)
 
 	ItemTextTitleText:ClearAllPoints()
-	ItemTextTitleText:SetPoint("TOP", GossipFrame.backdrop, "TOP", 0, -6)
+	ItemTextTitleText:SetPoint("TOP", ItemTextFrame.backdrop, "TOP", 0, -6)
 
 	ItemTextCurrentPage:ClearAllPoints()
-	ItemTextCurrentPage:SetPoint("TOP", GossipFrame.backdrop, "TOP", 0, -44)
+	ItemTextCurrentPage:SetPoint("TOP", ItemTextFrame.backdrop, "TOP", 0, -44)
 
 	T.SkinCloseButton(ItemTextCloseButton, ItemTextFrame.backdrop)
 
