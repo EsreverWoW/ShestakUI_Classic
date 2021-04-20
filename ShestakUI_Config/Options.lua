@@ -2509,8 +2509,14 @@ do
 		safari_hat
 	}
 
-	if IsClassicBuild() then
+	local bcc = {
+		safari_hat
+	}
+
+	if IsClassicBuild() and not IsBCCBuild() then
 		HideOptions(classic)
+	elseif IsBCCBuild() then
+		HideOptions(bcc)
 	end
 end
 
@@ -2584,12 +2590,21 @@ do
 		auto_role
 	}
 
+	local bcc = {
+		dismount_stand,
+		screenshot,
+		solve_artifact,
+		auto_role
+	}
+
 	local retail = {
 		dismount_stand,
 	}
 
-	if IsClassicBuild() then
+	if IsClassicBuild() and not IsBCCBuild() then
 		HideOptions(classic)
+	elseif IsBCCBuild() then
+		HideOptions(bcc)
 	else
 		HideOptions(retail)
 	end
@@ -2688,7 +2703,7 @@ do
 		show_inarena
 	}
 
-	if IsClassicBuild() then
+	if IsClassicBuild() and not IsBCCBuild() then
 		HideOptions(classic)
 	end
 end
@@ -2750,7 +2765,7 @@ do
 		show_inarena
 	}
 
-	if IsClassicBuild() then
+	if IsClassicBuild() and not IsBCCBuild() then
 		HideOptions(classic)
 	end
 end
