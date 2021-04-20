@@ -73,11 +73,11 @@ if IsAddOnLoaded("TipTac") or IsAddOnLoaded("FreebTip") or IsAddOnLoaded("bToolt
 	C.tooltip.enable = false
 end
 
-if IsAddOnLoaded("Gladius") or IsAddOnLoaded("GladiusEx") then
+if IsAddOnLoaded("Gladius") or IsAddOnLoaded("GladiusEx") or IsAddOnLoaded("Gladdy") then
 	C.unitframe.show_arena = false
 end
 
-if IsAddOnLoaded("Omen") or IsAddOnLoaded("rThreat") or IsAddOnLoaded("ClassicThreatMeter") then
+if IsAddOnLoaded("Omen") or IsAddOnLoaded("rThreat") or IsAddOnLoaded("ClassicThreatMeter") or IsAddOnLoaded("ThreatClassic2") then
 	C.threat.enable = false
 end
 
