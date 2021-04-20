@@ -31,8 +31,10 @@ frame:SetScript("OnEvent", function(_, _, addon)
 	if T.classic then
 		Advanced_UseUIScale:Kill()
 		Advanced_UIScaleSlider:Kill()
-		HelpOpenTicketButtonTutorial:Kill()
 		BagHelpBox:Kill()
+		if not T.BCC then
+			HelpOpenTicketButtonTutorial:Kill()
+		end
 	else
 		Display_UseUIScale:Kill()
 		Display_UIScaleSlider:Kill()

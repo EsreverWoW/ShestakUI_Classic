@@ -141,7 +141,7 @@ if StreamingIcon then
 end
 
 -- Ticket icon
-if T.classic then
+if T.classic and not T.BCC then
 	HelpOpenTicketButton:SetParent(Minimap)
 	HelpOpenTicketButton:CreateBackdrop("ClassColor")
 	HelpOpenTicketButton:SetFrameLevel(4)
