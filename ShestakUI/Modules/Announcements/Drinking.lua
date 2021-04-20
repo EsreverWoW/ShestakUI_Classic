@@ -1,5 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
-if C.announcements.drinking ~= true then return end
+if (T.classic and not T.BCC) or C.announcements.drinking ~= true then return end
 
 ----------------------------------------------------------------------------------------
 --	Announce enemy drinking in arena(by Duffed)

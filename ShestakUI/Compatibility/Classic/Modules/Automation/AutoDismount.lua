@@ -1,5 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
-if not T.classic or C.automation.dismount_stand ~= true then return end
+if not T.classic or T.BCC or C.automation.dismount_stand ~= true then return end
 
 ----------------------------------------------------------------------------------------
 --	ClassicAutoDismount (by EsreverWoW)

@@ -608,7 +608,7 @@ local function Shared(self, unit)
 		end
 
 		-- Absorbs value
-		if C.unitframe.plugins_absorbs == true then
+		if not T.classic and C.unitframe.plugins_absorbs == true then
 			self.Absorbs = T.SetFontString(self.Health, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
 			self.Absorbs:SetPoint("LEFT", self.Health, "LEFT", 4, 0)
 			self:Tag(self.Absorbs, "[Absorbs]")

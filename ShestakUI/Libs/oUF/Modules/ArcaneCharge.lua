@@ -3,6 +3,8 @@ if(select(2, UnitClass("player")) ~= "MAGE") then return end
 local _, ns = ...
 local oUF = ns.oUF
 
+if(oUF:IsClassic()) then return end
+
 local SPELL_POWER_ARCANE_CHARGES = Enum.PowerType.ArcaneCharges or 16
 
 local function Update(self, _, unit, powerType)

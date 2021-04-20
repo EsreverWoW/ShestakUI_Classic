@@ -3,7 +3,7 @@ if(select(2, UnitClass('player')) ~= 'MONK') then return end
 local _, ns = ...
 local oUF = ns.oUF
 
-if(not oUF:IsClassic()) then return end
+if(oUF:IsClassic()) then return end
 
 -- sourced from FrameXML/Constants.lua
 local SPEC_MONK_BREWMASTER = SPEC_MONK_BREWMASTER or 1

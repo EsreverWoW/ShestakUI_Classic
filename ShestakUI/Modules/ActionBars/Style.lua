@@ -326,6 +326,6 @@ if C.actionbar.hotkey == true then
 		end
 	end)
 end
-if C.actionbar.hide_highlight == true then
+if not T.classic and C.actionbar.hide_highlight == true then
 	hooksecurefunc("ActionButton_ShowOverlayGlow", HideHighlightButton)
 end

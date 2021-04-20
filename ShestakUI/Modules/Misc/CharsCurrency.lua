@@ -1,5 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
-if C.misc.chars_currency ~= true then return end
+if T.classic or C.misc.chars_currency ~= true then return end
 
 ----------------------------------------------------------------------------------------
 --	Tracks your currency tokens across multiple characters(Exonumist by Phanx)

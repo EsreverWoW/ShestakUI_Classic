@@ -155,7 +155,7 @@ local function Shared(self, unit)
 	if suffix == "pet" or (suffix == "target" and unit ~= "tank") then
 		self:Tag(self.Info, "[GetNameColor][NameArena]")
 	else
-		if unit == "party" and C.raidframe.icons_role ~= true then
+		if not T.classic and unit == "party" and C.raidframe.icons_role ~= true then
 			self:Tag(self.Info, "[LFD] [GetNameColor][NameShort]")
 		else
 			self:Tag(self.Info, "[GetNameColor][NameShort]")
@@ -163,7 +163,7 @@ local function Shared(self, unit)
 	end
 
 	-- LFD role icons
-	if C.raidframe.icons_role == true and not (suffix == "pet" or suffix == "target") then
+	if not T.classic and C.raidframe.icons_role == true and not (suffix == "pet" or suffix == "target") then
 		self.GroupRoleIndicator = self.Health:CreateTexture(nil, "OVERLAY")
 		self.GroupRoleIndicator:SetSize(12, 12)
 		self.GroupRoleIndicator:SetPoint("TOPRIGHT", self.Health, 2, 5)
@@ -314,9 +314,9 @@ oUF:Factory(function(self)
 		"initial-height", T.Scale(party_height),
 		"showSolo", C.raidframe.solo_mode,
 		"showPlayer", C.raidframe.player_in_party,
-		"groupBy", C.raidframe.by_role and "ASSIGNEDROLE",
-		"groupingOrder", C.raidframe.by_role and "TANK,HEALER,DAMAGER,NONE",
-		"sortMethod", C.raidframe.by_role and "NAME",
+		"groupBy", (not T.classic and C.raidframe.by_role) and "ASSIGNEDROLE",
+		"groupingOrder", (not T.classic and C.raidframe.by_role) and "TANK,HEALER,DAMAGER,NONE",
+		"sortMethod", (not T.classic and C.raidframe.by_role) and "NAME",
 		"showParty", true,
 		"showRaid", true,
 		"yOffset", T.Scale(28),
@@ -337,9 +337,9 @@ oUF:Factory(function(self)
 			"initial-height", T.Scale(partytarget_height),
 			"showSolo", C.raidframe.solo_mode,
 			"showPlayer", C.raidframe.player_in_party,
-			"groupBy", C.raidframe.by_role and "ASSIGNEDROLE",
-			"groupingOrder", C.raidframe.by_role and "TANK,HEALER,DAMAGER,NONE",
-			"sortMethod", C.raidframe.by_role and "NAME",
+			"groupBy", (not T.classic and C.raidframe.by_role) and "ASSIGNEDROLE",
+			"groupingOrder", (not T.classic and C.raidframe.by_role) and "TANK,HEALER,DAMAGER,NONE",
+			"sortMethod", (not T.classic and C.raidframe.by_role) and "NAME",
 			"showParty", true,
 			"showRaid", true,
 			"yOffset", T.Scale(28),
@@ -362,9 +362,9 @@ oUF:Factory(function(self)
 			"initial-height", T.Scale(partytarget_height),
 			"showSolo", C.raidframe.solo_mode,
 			"showPlayer", C.raidframe.player_in_party,
-			"groupBy", C.raidframe.by_role and "ASSIGNEDROLE",
-			"groupingOrder", C.raidframe.by_role and "TANK,HEALER,DAMAGER,NONE",
-			"sortMethod", C.raidframe.by_role and "NAME",
+			"groupBy", (not T.classic and C.raidframe.by_role) and "ASSIGNEDROLE",
+			"groupingOrder", (not T.classic and C.raidframe.by_role) and "TANK,HEALER,DAMAGER,NONE",
+			"sortMethod", (not T.classic and C.raidframe.by_role) and "NAME",
 			"showParty", true,
 			"showRaid", true,
 			"yOffset", T.Scale(28),
@@ -390,9 +390,9 @@ oUF:Factory(function(self)
 			"yOffset", T.Scale(-7),
 			"point", "TOPLEFT",
 			"groupFilter", tostring(i),
-			"groupBy", C.raidframe.by_role and "ASSIGNEDROLE",
-			"groupingOrder", C.raidframe.by_role and "TANK,HEALER,DAMAGER,NONE",
-			"sortMethod", C.raidframe.by_role and "NAME",
+			"groupBy", (not T.classic and C.raidframe.by_role) and "ASSIGNEDROLE",
+			"groupingOrder", (not T.classic and C.raidframe.by_role) and "TANK,HEALER,DAMAGER,NONE",
+			"sortMethod", (not T.classic and C.raidframe.by_role) and "NAME",
 			"maxColumns", 5,
 			"unitsPerColumn", 1,
 			"columnSpacing", T.Scale(7),

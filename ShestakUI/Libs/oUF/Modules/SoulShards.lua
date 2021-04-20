@@ -3,6 +3,8 @@ if(select(2, UnitClass("player")) ~= "WARLOCK") then return end
 local _, ns = ...
 local oUF = ns.oUF
 
+if(oUF:IsClassic()) then return end
+
 local SPELL_POWER_SOUL_SHARDS = Enum.PowerType.SoulShards or 7
 
 local function Update(self, _, unit, powerType)
