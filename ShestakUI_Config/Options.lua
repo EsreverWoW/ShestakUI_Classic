@@ -1326,8 +1326,6 @@ do
 	}
 
 	local bcc = {
-		show_arena,
-		arena_on_right,
 		plugins_enemy_spec,
 		plugins_diminishing,
 		plugins_absorbs
