@@ -33,7 +33,7 @@ local function Shared(self, unit)
 			or (unit and unit:find("boss%d")) and "boss" or unit
 
 	-- Menu
-	if (not T.classic and (unit == "arena" and C.unitframe.show_arena == true and unit ~= "arenatarget")) or (unit == "boss" and C.unitframe.show_boss == true) then
+	if ((not T.classic or T.BCC) and (unit == "arena" and C.unitframe.show_arena == true and unit ~= "arenatarget")) or (unit == "boss" and C.unitframe.show_boss == true) then
 		self:SetAttribute("type2", "focus")
 		self:SetAttribute("type3", "macro")
 		self:SetAttribute("macrotext3", "/clearfocus")
@@ -1244,7 +1244,7 @@ if C.unitframe.show_boss == true then
 	end
 end
 
-if not T.classic and C.unitframe.show_arena == true then
+if (not T.classic or T.BCC) and C.unitframe.show_arena == true then
 	local arena = {}
 	for i = 1, 5 do
 		arena[i] = oUF:Spawn("arena"..i, "oUF_Arena"..i)

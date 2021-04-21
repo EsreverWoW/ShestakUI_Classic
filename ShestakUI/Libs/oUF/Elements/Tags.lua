@@ -261,7 +261,7 @@ local tagStrings = {
 		local _, class = UnitClass(u)
 		if(class) then
 			return Hex(_COLORS.class[class])
-		else
+		elseif(_G.WOW_PROJECT_ID ~= _G.WOW_PROJECT_CLASSIC and _G.WOW_PROJECT_ID ~= _G.WOW_PROJECT_BURNING_CRUSADE_CLASSIC) then
 			local id = u:match('arena(%d)$')
 			if(id) then
 				local specID = GetArenaOpponentSpec(tonumber(id))

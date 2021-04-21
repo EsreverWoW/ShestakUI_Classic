@@ -132,17 +132,19 @@ if C.nameplate.healer_icon == true then
 	end
 
 	local function CheckArenaHealers(_, elapsed)
-		lastCheck = lastCheck + elapsed
-		if lastCheck > 10 then
-			lastCheck = 0
-			healList = {}
-			for i = 1, 5 do
-				local specID = GetArenaOpponentSpec(i)
-				if specID and specID > 0 then
-					local name = UnitName(format("arena%d", i))
-					local _, talentSpec = GetSpecializationInfoByID(specID)
-					if name and healerSpecs[talentSpec] then
-						healList[name] = talentSpec
+		if not T.classic then
+			lastCheck = lastCheck + elapsed
+			if lastCheck > 10 then
+				lastCheck = 0
+				healList = {}
+				for i = 1, 5 do
+					local specID = GetArenaOpponentSpec(i)
+					if specID and specID > 0 then
+						local name = UnitName(format("arena%d", i))
+						local _, talentSpec = GetSpecializationInfoByID(specID)
+						if name and healerSpecs[talentSpec] then
+							healList[name] = talentSpec
+						end
 					end
 				end
 			end
