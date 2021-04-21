@@ -20,9 +20,11 @@ BGFrame:SetScript("OnEnter", function(self)
 
 	for i = 1, GetNumBattlefieldScores() do
 		local name, honorableKills, deaths, damageDone, healingDone, rank
-		if T.classic then
+		if T.classic and not T.BCC then
 			-- build 30786 changed returns, removing dmg/heals/spec and adding rank
 			name, _, honorableKills, deaths, _, _, rank = GetBattlefieldScore(i)
+		elseif T.BCC then
+			name, _, honorableKills, deaths, _, _, _, _, _, _, damageDone, healingDone = GetBattlefieldScore(i)
 		else
 			name, _, honorableKills, deaths, _, _, _, _, _, damageDone, healingDone = GetBattlefieldScore(i)
 		end
@@ -35,7 +37,7 @@ BGFrame:SetScript("OnEnter", function(self)
 			GameTooltip:AddLine(" ")
 			GameTooltip:AddDoubleLine(HONORABLE_KILLS..":", honorableKills, 1, 1, 1)
 			GameTooltip:AddDoubleLine(DEATHS..":", deaths, 1, 1, 1)
-			if T.classic then
+			if T.classic and not T.BCC then
 				GameTooltip:AddDoubleLine(RANK..":", rank, 1, 1, 1)
 			else
 				GameTooltip:AddDoubleLine(DAMAGE..":", T.ShortValue(damageDone), 1, 1, 1)
@@ -120,15 +122,17 @@ local function Update(_, t)
 		local dmgtxt, ranktxt
 		RequestBattlefieldScoreData()
 		for i = 1, GetNumBattlefieldScores() do
-			local name, killingBlows, honorableKills, damageDone, healingDone, rank
-			if T.classic then
+			local name, killingBlows, honorGained, damageDone, healingDone, rank
+			if T.classic and not T.BCC then
 				-- build 30786 changed returns, removing dmg/heals/spec and adding rank
 				name, killingBlows, _, _, honorGained, _, rank = GetBattlefieldScore(i)
+			elseif T.BCC then
+				name, killingBlows, _, _, honorGained, _, _, _, _, _, damageDone, healingDone = GetBattlefieldScore(i)
 			else
 				name, killingBlows, _, _, honorGained, _, _, _, _, damageDone, healingDone = GetBattlefieldScore(i)
 			end
 			if name and name == T.name then
-				if T.classic then
+				if T.classic and not T.BCC then
 					ranktxt = (classcolor..RANK.." :|r "..rank)
 				else
 					if healingDone > damageDone then

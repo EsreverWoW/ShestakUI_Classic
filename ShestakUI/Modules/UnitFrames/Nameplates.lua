@@ -108,7 +108,7 @@ if C.nameplate.healer_icon == true then
 			lastCheck = 0
 			healList = {}
 			for i = 1, GetNumBattlefieldScores() do
-				if T.classic then
+				if T.classic and not T.BCC then
 					--[[
 					-- build 30786 changed returns, removing dmg/heals/spec and adding rank
 					local name, _, _, _, _, faction, _, _, _, classToken = GetBattlefieldScore(i)
@@ -119,6 +119,14 @@ if C.nameplate.healer_icon == true then
 						healList[name] = true
 					end
 					--]]
+				elseif T.BCC then
+					local name, _, _, _, _, faction, _, _, _, classToken = GetBattlefieldScore(i)
+
+					-- todo: build CLEU based heal tracking from spellID lookup table
+					if name and healerClassTokens[classToken] and t.factions[UnitFactionGroup("player")] == faction then
+						name = name:match("(.+)%-.+") or name
+						healList[name] = true
+					end
 				else
 					local name, _, _, _, _, faction, _, _, _, _, _, _, _, _, _, talentSpec = GetBattlefieldScore(i)
 
