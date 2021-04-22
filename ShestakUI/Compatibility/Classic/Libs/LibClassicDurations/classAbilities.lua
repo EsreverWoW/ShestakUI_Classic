@@ -1,7 +1,7 @@
 local lib = LibStub and LibStub("LibClassicDurations", true)
 if not lib then return end
 
-local Type, Version = "SpellTable", 67
+local Type, Version = "SpellTable", 70
 if lib:GetDataVersion(Type) >= Version then return end  -- older versions didn't have that function
 
 local Spell = lib.AddAura
@@ -338,25 +338,25 @@ Spell({ 8122, 8124, 10888, 10890 }, {
     end
 }) -- Psychic Scream
 Spell({ 589, 594, 970, 992, 2767, 10892, 10893, 10894 }, { stacking = true,
-    duration = function(spellID, isSrcPlayer)
-        -- Improved SWP, 2 ranks: Increases the duration of your Shadow Word: Pain spell by 3 sec.
-        local talents = isSrcPlayer and 3*Talent(15275, 15317) or 0
-        return 18 + talents
-    end
+                                                           duration = function(spellID, isSrcPlayer)
+                                                               -- Improved SWP, 2 ranks: Increases the duration of your Shadow Word: Pain spell by 3 sec.
+                                                               local talents = isSrcPlayer and 3*Talent(15275, 15317) or 0
+                                                               return 18 + talents
+                                                           end
 }) -- SW:P
 Spell( 15269 ,{ duration = 3 }) -- Blackout
 
 if class == "PRIEST" then
-Spell( 15258 ,{
-    duration = function(spellID, isSrcPlayer)
-        -- Only SP himself can see the timer
-        if Talent(15257, 15331, 15332, 15333, 15334) > 0 then
-            return 15
-        else
-            return nil
+    Spell( 15258 ,{
+        duration = function(spellID, isSrcPlayer)
+            -- Only SP himself can see the timer
+            if Talent(15257, 15331, 15332, 15333, 15334) > 0 then
+                return 15
+            else
+                return nil
+            end
         end
-    end
-}) -- Shadow Weaving
+    }) -- Shadow Weaving
 end
 
 Spell( 15286 ,{ duration = 60 }) -- Vampiric Embrace
@@ -414,12 +414,12 @@ Spell({ 2637, 18657, 18658 }, {
 }) -- Hibernate
 Spell({ 99, 1735, 9490, 9747, 9898 }, { duration = 30 }) -- Demoralizing Roar
 Spell({ 5211, 6798, 8983 }, { stacking = true, -- stacking?
-    duration = function(spellID)
-        local brutal_impact = Talent(16940, 16941)*0.5
-        if spellID == 5211 then return 2+brutal_impact
-        elseif spellID == 6798 then return 3+brutal_impact
-        else return 4+brutal_impact end
-    end
+                              duration = function(spellID)
+                                  local brutal_impact = Talent(16940, 16941)*0.5
+                                  if spellID == 5211 then return 2+brutal_impact
+                                  elseif spellID == 6798 then return 3+brutal_impact
+                                  else return 4+brutal_impact end
+                              end
 }) -- Bash
 Spell( 5209, { duration = 6 }) -- Challenging Roar
 Spell( 6795, { duration = 3, stacking = true }) -- Taunt
@@ -437,10 +437,10 @@ Spell({ 9005, 9823, 9827 }, { -- Pounce stun doesn't create a debuff icon, so th
 }) -- Pounce
 Spell({ 9007, 9824, 9826 }, { duration = 18, stacking = true, }) -- Pounce Bleed
 Spell({ 8921, 8924, 8925, 8926, 8927, 8928, 8929, 9833, 9834, 9835 }, { stacking = true,
-    duration = function(spellID)
-        if spellID == 8921 then return 9
-        else return 12 end
-    end
+                                                                        duration = function(spellID)
+                                                                            if spellID == 8921 then return 9
+                                                                            else return 12 end
+                                                                        end
 }) -- Moonfire
 Spell({ 1822, 1823, 1824, 9904 }, { duration = 9, stacking = true }) -- Rake
 Spell({ 1079, 9492, 9493, 9752, 9894, 9896 }, { duration = 12, stacking = true }) -- Rip
@@ -485,16 +485,16 @@ Spell( 871, { type = "BUFF", duration = 10 }) -- Shield wall, varies
 Spell( 12976, { duration = 20, type = "BUFF" }) -- Last Stand
 Spell( 12328, { duration = 30 }) -- Death Wish
 Spell({ 772, 6546, 6547, 6548, 11572, 11573, 11574 }, { stacking = true,
-    duration = function(spellID)
-        if spellID == 772 then return 9
-        elseif spellID == 6546 then return 12
-        elseif spellID == 6547 then return 15
-        elseif spellID == 6548 then return 18
-        else return 21 end
-    end
+                                                        duration = function(spellID)
+                                                            if spellID == 772 then return 9
+                                                            elseif spellID == 6546 then return 12
+                                                            elseif spellID == 6547 then return 15
+                                                            elseif spellID == 6548 then return 18
+                                                            else return 21 end
+                                                        end
 }) -- Rend
 if locale ~= "ruRU" or class ~= "DRUID" then
-Spell( 12721, { duration = 12, stacking = true }) -- Deep Wounds
+    Spell( 12721, { duration = 12, stacking = true }) -- Deep Wounds
 end
 
 Spell({ 1715, 7372, 7373 }, { duration = 15 }) -- Hamstring
@@ -513,10 +513,10 @@ Spell({ 694, 7400, 7402, 20559, 20560 }, { duration = 6 }) -- Mocking Blow
 Spell( 1161 ,{ duration = 6 }) -- Challenging Shout
 Spell( 355 ,{ duration = 3, stacking = true }) -- Taunt
 Spell({ 5242, 6192, 6673, 11549, 11550, 11551, 25289 }, { type = "BUFF",
-    duration = function(spellID, isSrcPlayer)
-        local talents = isSrcPlayer and Talent(12321, 12835, 12836, 12837, 12838) or 0
-        return 120 * (1 + 0.1 * talents)
-    end
+                                                          duration = function(spellID, isSrcPlayer)
+                                                              local talents = isSrcPlayer and Talent(12321, 12835, 12836, 12837, 12838) or 0
+                                                              return 120 * (1 + 0.1 * talents)
+                                                          end
 }) -- Battle Shout
 Spell({ 1160, 6190, 11554, 11555, 11556 }, {
     duration = function(spellID, isSrcPlayer)
@@ -600,13 +600,13 @@ Spell({ 408, 8643 }, {
 }) -- Kidney Shot
 
 Spell({ 1943, 8639, 8640, 11273, 11274, 11275 }, { stacking = true,
-    duration = function(spellID, isSrcPlayer, comboPoints)
-        if isSrcPlayer then
-            return (6 + comboPoints*2)
-        else
-            return 16
-        end
-    end
+                                                   duration = function(spellID, isSrcPlayer, comboPoints)
+                                                       if isSrcPlayer then
+                                                           return (6 + comboPoints*2)
+                                                       else
+                                                           return 16
+                                                       end
+                                                   end
 }) -- Rupture
 
 Spell({ 5171, 6774 }, { duration = nil, type = "BUFF" }) -- SnD, to prevent fallback to incorrect db values
@@ -692,19 +692,19 @@ Spell({ 23829 }, { duration = INFINITY, type = "BUFF" }) -- Master Demonologist
 Spell({ 18265, 18879, 18880, 18881}, { duration = 30, stacking = true }) -- Siphon Life
 
 if locale ~= "zhCN" or class ~= "MAGE" then
-Spell({ 980, 1014, 6217, 11711, 11712, 11713 }, { duration = 24, stacking = true }) -- Curse of Agony
+    Spell({ 980, 1014, 6217, 11711, 11712, 11713 }, { duration = 24, stacking = true }) -- Curse of Agony
 end
 
 Spell({ 172, 6222, 6223, 7648, 11671, 11672, 25311 }, { stacking = true,
-    duration = function(spellID)
-        if spellID == 172 then
-            return 12
-        elseif spellID == 6222 then
-            return 15
-        else
-            return 18
-        end
-    end
+                                                        duration = function(spellID)
+                                                            if spellID == 172 then
+                                                                return 12
+                                                            elseif spellID == 6222 then
+                                                                return 15
+                                                            else
+                                                                return 18
+                                                            end
+                                                        end
 })
 Spell({ 348, 707, 1094, 2941, 11665, 11667, 11668, 25309 },{ duration = 15, stacking = true }) -- Immolate
 
@@ -797,23 +797,23 @@ Spell( 1044, {
     end, type = "BUFF", buffType = "Magic" }) -- Blessing of Freedom
 Spell({ 6940, 20729 }, { duration = 30, type = "BUFF", buffType = "Magic" }) -- Blessing of Sacrifice
 Spell({ 1022, 5599, 10278 }, { type = "BUFF",
-    buffType = "Magic",
-    duration = function(spellID)
-        if spellID == 1022 then return 6
-        elseif spellID == 5599 then return 8
-        else return 10 end
-    end
+                               buffType = "Magic",
+                               duration = function(spellID)
+                                   if spellID == 1022 then return 6
+                                   elseif spellID == 5599 then return 8
+                                   else return 10 end
+                               end
 }) -- Blessing of Protection
 Spell(25771, { duration = 60 }) -- Forbearance
 Spell({ 498, 5573 }, { type = "BUFF",
-    duration = function(spellID)
-        return spellID == 498 and 6 or 8
-    end
+                       duration = function(spellID)
+                           return spellID == 498 and 6 or 8
+                       end
 }) -- Divine Protection
 Spell({ 642, 1020 }, { type = "BUFF",
-    duration = function(spellID)
-        return spellID == 642 and 10 or 12
-    end
+                       duration = function(spellID)
+                           return spellID == 642 and 10 or 12
+                       end
 }) -- Divine Shield
 Spell({ 20375, 20915, 20918, 20919, 20920 }, { duration = 30, type = "BUFF", buffType = "Magic" }) -- Seal of Command
 Spell({ 21084, 20287, 20288, 20289, 20290, 20291, 20292, 20293 }, { duration = 30, type = "BUFF", buffType = "Magic" }) -- Seal of Righteousness
@@ -972,25 +972,25 @@ lib.spellNameToID[GetSpellInfo(12654)] = 12654
 -- Spell(12654, { duration = 4 }) -- Ignite
 
 if class == "MAGE" then
-Spell(22959, {
-    duration = function(spellID, isSrcPlayer)
-        if Talent(11095, 12872, 12873) > 0 then
-            return 30
-        else
-            return nil
-        end
-    end }) -- Fire Vulnerability
+    Spell(22959, {
+        duration = function(spellID, isSrcPlayer)
+            if Talent(11095, 12872, 12873) > 0 then
+                return 30
+            else
+                return nil
+            end
+        end }) -- Fire Vulnerability
 end
 
 if class == "MAGE" then
-Spell(12579, {
-    duration = function(spellID, isSrcPlayer)
-        if Talent(11180, 28592, 28593, 28594, 28595) > 0 then
-            return 15
-        else
-            return nil
-        end
-    end }) -- Winter's Chill
+    Spell(12579, {
+        duration = function(spellID, isSrcPlayer)
+            if Talent(11180, 28592, 28593, 28594, 28595) > 0 then
+                return 15
+            else
+                return nil
+            end
+        end }) -- Winter's Chill
 end
 
 Spell({ 11113, 13018, 13019, 13020, 13021 }, { duration = 6 }) -- Blast Wave
@@ -1006,22 +1006,22 @@ Spell({ 120, 8492, 10159, 10160, 10161 }, {
 
 
 if class == "MAGE" then
--- Chilled from Imp Blizzard
-Spell({ 12484, 12485, 12486 }, {
-    duration = function(spellID, isSrcPlayer)
-        if Talent(11185, 12487, 12488) > 0 then -- Don't show anything if mage doesn't have imp blizzard talent
-            local permafrost = Talent(11175, 12569, 12571) -- Always count player's permafost, even source isn't player.
-            return 1.5 + permafrost + 0.5
-            -- 0.5 compensates for delay between damage event and slow application
-        else
-            return nil
+    -- Chilled from Imp Blizzard
+    Spell({ 12484, 12485, 12486 }, {
+        duration = function(spellID, isSrcPlayer)
+            if Talent(11185, 12487, 12488) > 0 then -- Don't show anything if mage doesn't have imp blizzard talent
+                local permafrost = Talent(11175, 12569, 12571) -- Always count player's permafost, even source isn't player.
+                return 1.5 + permafrost + 0.5
+                -- 0.5 compensates for delay between damage event and slow application
+            else
+                return nil
+            end
         end
-    end
-}) -- Improved Blizzard (Chilled)
+    }) -- Improved Blizzard (Chilled)
 
--- Manually setting a custom spellname for ImpBlizzard's "Chilled" aura
-lib.spellNameToID["ImpBlizzard"] = 12486
--- Frost Armor will overwrite Chilled to 7321 right after
+    -- Manually setting a custom spellname for ImpBlizzard's "Chilled" aura
+    lib.spellNameToID["ImpBlizzard"] = 12486
+    -- Frost Armor will overwrite Chilled to 7321 right after
 end
 
 Spell({6136, 7321}, {

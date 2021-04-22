@@ -19,17 +19,7 @@ Usage example 1:
 --]================]
 if WOW_PROJECT_ID ~= WOW_PROJECT_CLASSIC then return end
 
-local apiLevel = math.floor(select(4,GetBuildInfo())/10000)
-local isClassic = apiLevel <= 2
-local isBC = apiLevel == 2
-
-if isBC then
-    -- lib.UnitAuraDirect = _G.UnitAura
-    -- lib.UnitAuraWrapper = _G.UnitAura
-    return
-end
-
-local MAJOR, MINOR = "LibClassicDurations", 66
+local MAJOR, MINOR = "LibClassicDurations", 69
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
@@ -85,7 +75,6 @@ local GetSpellInfo = GetSpellInfo
 local GetTime = GetTime
 local tinsert = table.insert
 local unpack = unpack
-local GetAuraDurationByUnitDirect
 local GetGUIDAuraTime
 local time = time
 
@@ -123,7 +112,10 @@ lib.AddAura = function(id, opts)
     end
 
     local spellName = GetSpellInfo(lastRankID)
-    if not spellName then return end
+    if not spellName then
+        -- print(MINOR, lastRankID, spellName)
+        return
+    end
     spellNameToID[spellName] = lastRankID
 
     if type(id) == "table" then
@@ -152,7 +144,10 @@ local function processNPCSpellTable()
     counter = 0
     local id = next(dataTable, prevID)
     while (id and counter < 300) do
-        NPCspellNameToID[GetSpellInfo(id)] = id
+        local spellName = GetSpellInfo(id)
+        if spellName then
+            NPCspellNameToID[GetSpellInfo(id)] = id
+        end
 
         counter = counter + 1
         prevID = id
@@ -223,16 +218,16 @@ function f:PLAYER_LOGIN()
     if LCD_Data and LCD_GUIDAccess then
         purgeOldGUIDsArgs(LCD_Data, LCD_GUIDAccess)
 
-        local function MergeTable(t1, t2)
+        local function MergeTableNoOverwrite(t1, t2)
             if not t2 then return false end
             for k,v in pairs(t2) do
                 if type(v) == "table" then
                     if t1[k] == nil then
                         t1[k] = CopyTable(v)
                     else
-                        MergeTable(t1[k], v)
+                        MergeTableNoOverwrite(t1[k], v)
                     end
-                else
+                elseif t1[k] == nil then
                     t1[k] = v
                 end
             end
@@ -240,14 +235,12 @@ function f:PLAYER_LOGIN()
         end
 
         local curSessionData = lib.guids
-        lib.guids = LCD_Data
-        guids = lib.guids -- update upvalue
-        MergeTable(guids, curSessionData)
+        local restoredSessionData = LCD_Data
+        MergeTableNoOverwrite(curSessionData, restoredSessionData)
 
         local curSessionAccessTimes = lib.guidAccessTimes
-        lib.guidAccessTimes = LCD_GUIDAccess
-        guidAccessTimes = lib.guidAccessTimes -- update upvalue
-        MergeTable(guidAccessTimes, curSessionAccessTimes)
+        local restoredSessionAccessTimes = LCD_GUIDAccess
+        MergeTableNoOverwrite(curSessionAccessTimes, restoredSessionAccessTimes)
     end
 
     f:RegisterEvent("PLAYER_LOGOUT")
@@ -833,7 +826,7 @@ end
 
 local FillInDuration = function(unit, buffName, icon, count, debuffType, duration, expirationTime, caster, canStealOrPurge, nps, spellId, ...)
     if buffName then
-        local durationNew, expirationTimeNew = GetAuraDurationByUnitDirect(unit, spellId, caster, buffName)
+        local durationNew, expirationTimeNew = lib.GetAuraDurationByUnitDirect(unit, spellId, caster, buffName)
         if duration == 0 and durationNew then
             duration = durationNew
             expirationTime = expirationTimeNew
@@ -841,6 +834,7 @@ local FillInDuration = function(unit, buffName, icon, count, debuffType, duratio
         return buffName, icon, count, debuffType, duration, expirationTime, caster, canStealOrPurge, nps, spellId, ...
     end
 end
+lib.FillInDuration = FillInDuration
 
 function lib.UnitAuraDirect(unit, index, filter)
     if enableEnemyBuffTracking and filter == "HELPFUL" and not UnitIsFriend("player", unit) and not UnitAura(unit, 1, filter) then
@@ -862,10 +856,13 @@ function lib.UnitAuraDirect(unit, index, filter)
         return FillInDuration(unit, UnitAura(unit, index, filter))
     end
 end
-lib.UnitAuraWithBuffs = lib.UnitAuraDirect
+
+function lib.UnitAuraWithBuffs(...)
+    return lib.UnitAuraDirect(...)
+end
 
 function lib.UnitAuraWrapper(unit, ...)
-    return FillInDuration(unit, UnitAura(unit, ...))
+    return lib.FillInDuration(unit, UnitAura(unit, ...))
 end
 
 function lib:UnitAura(...)
@@ -974,7 +971,6 @@ function lib.GetAuraDurationByUnitDirect(unit, spellID, casterUnit, spellName)
     if not spellName then spellName = GetSpellInfo(spellID) end
     return GetGUIDAuraTime(dstGUID, spellName, spellID, srcGUID, isStacking, npcDurationById)
 end
-GetAuraDurationByUnitDirect = lib.GetAuraDurationByUnitDirect
 
 function lib:GetAuraDurationByUnit(...)
     return self.GetAuraDurationByUnitDirect(...)
