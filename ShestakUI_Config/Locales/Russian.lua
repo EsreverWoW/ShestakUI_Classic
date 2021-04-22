@@ -182,6 +182,7 @@ L_GUI_UF_PLAYER_PARTY = "Отображать рамку игрока в гру�
 L_GUI_UF_SHOW_TANK = "Рамки танков рейда"
 L_GUI_UF_SHOW_TANK_TT = "Рамки целей цели танков"
 L_GUI_UF_RAID_GROUP = "Количество групп в рейде"
+L_GUI_UF_RAID_PETS = "Show pets in raid (Only for heal layout)" -- Needs review
 L.raidframe_party_vertical = "Расположить рамки группы вертикально"
 L.raidframe_raid_groups_vertical = "Расположить рамки рейда вертикально"
 L.raidframe_raid_groups_vertical_desc = "Только для раскладки 'Лекарь'"

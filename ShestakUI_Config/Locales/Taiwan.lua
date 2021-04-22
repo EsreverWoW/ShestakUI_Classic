@@ -182,6 +182,7 @@ L_GUI_UF_PLAYER_PARTY = "隊伍中顯示玩家框架"
 L_GUI_UF_SHOW_TANK = "團隊主坦克框架"
 L_GUI_UF_SHOW_TANK_TT = "坦克目標的目標"
 L_GUI_UF_RAID_GROUP = "小隊數目"
+L_GUI_UF_RAID_PETS = "Show pets in raid (Only for heal layout)" -- Needs review
 L.raidframe_party_vertical  = "竪向排列隊伍"
 L.raidframe_raid_groups_vertical = "竪向排列團隊隊伍"
 L.raidframe_raid_groups_vertical_desc = "僅在HPS佈局中生效"

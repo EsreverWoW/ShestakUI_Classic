@@ -182,6 +182,7 @@ L_GUI_UF_PLAYER_PARTY = "Mostrar marco del jugador en grupo"
 L_GUI_UF_SHOW_TANK = "Mostrar tanques de la banda"
 L_GUI_UF_SHOW_TANK_TT = "Mostrar el objetivo del objetivo de los tanques de la banda"
 L_GUI_UF_RAID_GROUP = "Número de grupos en la banda"
+L_GUI_UF_RAID_PETS = "Show pets in raid (Only for heal layout)" -- Needs review
 L.raidframe_party_vertical = "Vertical party frames" -- Needs review
 L.raidframe_raid_groups_vertical = "Grupos de la banda en vertical" -- Needs review
 L.raidframe_raid_groups_vertical_desc = "Only for heal layout" -- Needs review

@@ -496,6 +496,42 @@ oUF:Factory(function(self)
 				end
 				raid[i] = raidgroup
 			end
+
+			-- Raid pets
+			if C.raidframe.raid_pets == true then
+				local raidpet = {}
+				for i = 1, C.raidframe.raid_groups do
+					local petgroup = self:SpawnHeader("oUF_RaidPet"..i, nil, "custom [@raid6,exists] show;hide",
+					"oUF-initialConfigFunction", [[
+							local header = self:GetParent()
+							self:SetWidth(header:GetAttribute("initial-width"))
+							self:SetHeight(header:GetAttribute("initial-height"))
+							self:SetAttribute("useOwnerUnit", "true")
+							self:SetAttribute("filterOnPet", "true")
+							self:SetAttribute("unitsuffix", "pet")
+						]],
+					"initial-width", unit_width,
+					"initial-height", T.Scale(unit_height / 2),
+					"showRaid", true,
+					"yOffset", T.Scale(-5),
+					"point", "TOPLEFT",
+					"groupFilter", tostring(i),
+					"groupBy", (not T.classic and C.raidframe.by_role) and "ASSIGNEDROLE" or nil,
+					"groupingOrder", (not T.classic and C.raidframe.by_role) and "TANK,HEALER,DAMAGER,NONE" or "1,2,3,4,5,6,7,8",
+					"sortMethod", (not T.classic and C.raidframe.by_role) and "NAME" or "NAME",
+					"maxColumns", 5,
+					"unitsPerColumn", 1,
+					"columnSpacing", T.Scale(7),
+					"columnAnchorPoint", "TOP"
+					)
+					if i == 1 then
+						petgroup:SetPoint(unpack(C.position.unitframes.raid_pets))
+					else
+						petgroup:SetPoint("TOPLEFT", raidpet[i-1], "TOPRIGHT", 7, 0)
+					end
+					raidpet[i] = petgroup
+				end
+			end
 		else
 			-- Raid horizontal
 			local raid = {}
@@ -525,6 +561,41 @@ oUF:Factory(function(self)
 					raidgroup:SetPoint("TOPLEFT", raid[i-1], "BOTTOMLEFT", 0, -7)
 				end
 				raid[i] = raidgroup
+			end
+
+			-- Raid pets
+			if C.raidframe.raid_pets == true then
+				local raidpet = {}
+				for i = 1, C.raidframe.raid_groups do
+					local petgroup = self:SpawnHeader("oUF_RaidPet"..i, nil, "custom [@raid6,exists] show;hide",
+					"oUF-initialConfigFunction", [[
+							local header = self:GetParent()
+							self:SetWidth(header:GetAttribute("initial-width"))
+							self:SetHeight(header:GetAttribute("initial-height"))
+							self:SetAttribute("useOwnerUnit", "true")
+							self:SetAttribute("filterOnPet", "true")
+							self:SetAttribute("unitsuffix", "pet")
+						]],
+					"initial-width", unit_width,
+					"initial-height", T.Scale(unit_height / 2),
+					"showRaid", true,
+					"groupFilter", tostring(i),
+					"groupBy", (not T.classic and C.raidframe.by_role) and "ASSIGNEDROLE" or nil,
+					"groupingOrder", (not T.classic and C.raidframe.by_role) and "TANK,HEALER,DAMAGER,NONE" or "1,2,3,4,5,6,7,8",
+					"sortMethod", (not T.classic and C.raidframe.by_role) and "NAME" or "NAME",
+					"point", "LEFT",
+					"maxColumns", 5,
+					"unitsPerColumn", 1,
+					"columnSpacing", T.Scale(7),
+					"columnAnchorPoint", "LEFT"
+					)
+					if i == 1 then
+						petgroup:SetPoint(unpack(C.position.unitframes.raid_pets))
+					else
+						petgroup:SetPoint("TOPLEFT", raidpet[i-1], "BOTTOMLEFT", 0, -7)
+					end
+					raidpet[i] = petgroup
+				end
 			end
 		end
 

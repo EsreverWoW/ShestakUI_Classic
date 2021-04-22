@@ -182,6 +182,7 @@ L_GUI_UF_PLAYER_PARTY = "Afficher la barre du joueur en groupe"
 L_GUI_UF_SHOW_TANK = "Afficher les tanks de raid"
 L_GUI_UF_SHOW_TANK_TT = "Afficher la cible de la cible des tanks"
 L_GUI_UF_RAID_GROUP = "Nombre de groupe dans le raid"
+L_GUI_UF_RAID_PETS = "Show pets in raid (Only for heal layout)" -- Needs review
 L.raidframe_party_vertical = "Vertical party frames" -- Needs review
 L.raidframe_raid_groups_vertical = "Groupe de raid verticaux" -- Needs review
 L.raidframe_raid_groups_vertical_desc = "Groupe de raid verticaux(pour l'interface Heal)" -- Needs review

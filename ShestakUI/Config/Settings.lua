@@ -183,6 +183,7 @@ C["raidframe"] = {
 	["show_pet"] = true,						-- Show pet frames
 	["solo_mode"] = false,						-- Show player frame always
 	["player_in_party"] = true,					-- Show player frame in party
+	["raid_pets"] = false,						-- Show raid pets
 	["raid_tanks"] = true,						-- Show raid tanks
 	["raid_tanks_tt"] = false,					-- Show raid tanks target target
 	["raid_groups"] = 5,						-- Number of groups in raid

@@ -1425,8 +1425,11 @@ do
 	local player_in_party = ns.CreateCheckBox(parent, "player_in_party", L_GUI_UF_PLAYER_PARTY)
 	player_in_party:SetPoint("LEFT", solo_mode, "RIGHT", 248, 0)
 
+	local raid_pets = ns.CreateCheckBox(parent, "raid_pets", L_GUI_UF_RAID_PETS)
+	raid_pets:SetPoint("TOPLEFT", solo_mode, "BOTTOMLEFT", 0, 0)
+
 	local raid_groups = ns.CreateNumberSlider(parent, "raid_groups", nil, nil, 1, 8, 1, true, L_GUI_UF_RAID_GROUP)
-	raid_groups:SetPoint("TOPLEFT", solo_mode, "BOTTOMLEFT", 0, -20)
+	raid_groups:SetPoint("TOPLEFT", raid_pets, "BOTTOMLEFT", 0, -20)
 
 	local auto_position = ns.CreateDropDown(parent, "auto_position", true, L.raidframe_auto_position, {"DYNAMIC", "STATIC", "NONE"})
 	auto_position:SetPoint("TOPLEFT", raid_groups, "BOTTOMLEFT", -16, -10)

@@ -181,6 +181,7 @@ L_GUI_UF_PLAYER_PARTY = "Mostra il riquadro del giocatore in gruppo"
 L_GUI_UF_SHOW_TANK = "Mostra i difensori dell'incursione"
 L_GUI_UF_SHOW_TANK_TT = "Mostra il bersaglio del bersaglio dei difensori dell'incursione"
 L_GUI_UF_RAID_GROUP = "Numero dei gruppi nell'incursione"
+L_GUI_UF_RAID_PETS = "Show pets in raid (Only for heal layout)" -- Needs review
 L.raidframe_party_vertical = "Vertical party frames" -- Needs review
 L.raidframe_raid_groups_vertical = "Gruppi dell'incursione verticali" -- Needs review
 L.raidframe_raid_groups_vertical_desc = "Gruppi dell'incursione verticali (solo per la Disposizione da Guaritore)" -- Needs review
