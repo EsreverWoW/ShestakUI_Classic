@@ -13,10 +13,25 @@ T.DiminishingSpells = {
 	[24394] = {"stun"},				-- Intimidation
 	[853] = {"stun"},				-- Hammer of Justice
 	[1833] = {"stun"},				-- Cheap Shot
+	[22703] = {"stun"},				-- Inferno Effect
 	[7922] = {"stun"},				-- Charge Stun
 	[12809] = {"stun"},				-- Concussion Blow
 	[20253] = {"stun"},				-- Intercept Stun
 	[20549] = {"stun"},				-- War Stomp (Racial)
+	[835] = {"stun"},				-- Tidal Charm
+	[4064] = {"stun"},				-- Rough Copper Bomb
+	[4065] = {"stun"},				-- Large Copper Bomb
+	[4066] = {"stun"},				-- Small Bronze Bomb
+	[4067] = {"stun"},				-- Big Bronze Bomb
+	[4068] = {"stun"},				-- Iron Grenade
+	[4069] = {"stun"},				-- Big Iron Bomb
+	[12421] = {"stun"},				-- Mithril Frag Bomb
+	[12543] = {"stun"},				-- Hi-Explosive Bomb
+	[12562] = {"stun"},				-- The Big One
+	[13237] = {"stun"},				-- Goblin Mortar
+	[13808] = {"stun"},				-- M73 Frag Grenade
+	[19769] = {"stun"},				-- Thorium Grenade
+	[19784] = {"stun"},				-- Dark Iron Bomb
 
 	--[[
 	-- Stun Procs
@@ -28,6 +43,9 @@ T.DiminishingSpells = {
 	-- [18093] = {"stunproc"},			-- Pyroclasm
 	[12798] = {"stunproc"},			-- Revenge Stun
 	[5530] = {"stunproc"},			-- Mace Specialization
+	[56] = {"stunproc"},			-- Stun (The Chief's Enforcer / Bludgeon of the Grinning Dog / The Judge's Gavel / Hammer of the Titans)
+	[15283] = {"stunproc"},			-- Stunning Blow (Dark Iron Pulverizer)
+	[21152] = {"stunproc"},			-- Earthshaker (Earthshaker)
 	--]]
 
 	-- Disorients
@@ -37,6 +55,8 @@ T.DiminishingSpells = {
 	[28271] = {"disorient"},		-- Polymorph: Turtle
 	[1776] = {"disorient"},			-- Gouge
 	[6770] = {"disorient"},			-- Sap
+	[13327] = {"disorient"},		-- Reckless Charge (Horned Viking Helmet / Goblin Rocket Helmet)
+	[26108] = {"disorient"},		-- Glimpse of Madness (Dark Edge of Insanity)
 
 	-- Sleeps
 	[2637] = {"sleep"},				-- Hibernate
@@ -46,11 +66,13 @@ T.DiminishingSpells = {
 	[605] = {"charm"},				-- Mind Control
 
 	-- Fears
+	[1513] = {"fear"},				-- Scare Beast
 	[8122] = {"fear"},				-- Psychic Scream
 	[5782] = {"fear"},				-- Fear
 	[5484] = {"fear"},				-- Howl of Terror
 	[6358] = {"fear"},				-- Seduction (Succubus)
 	[5246] = {"fear"},				-- Intimidating Shout
+	[5134] = {"fear"},				-- Flash Bomb (Flash Bomb)
 
 	-- Horrors
 	[6789] = {"horror"},			-- Death Coil
@@ -59,12 +81,13 @@ T.DiminishingSpells = {
 	-- [19675] = {"root"},				-- Feral Charge Effect
 	[339] = {"root"},				-- Entangling Roots
 	[19975] = {"root"},				-- Entangling Roots (Nature's Grasp)
-	-- [19306] = {"root"},				-- Counterattack
+	[19306] = {"root"},				-- Counterattack
 	[19185] = {"root"},				-- Entrapment
 	-- [19229] = {"root"},				-- Improved Wing Clip
 	[122] = {"root"},				-- Frost Nova
 	-- [12494] = {"root"},				-- Frostbite
 	-- [23694] = {"root"},				-- Improved Hamstring
+	-- [27868] = {"root"},				-- Freeze (Magister's Regalia / Sorcerer's Regalia / Deadman's Hand)
 
 	--[[
 	-- Disarms
@@ -80,6 +103,10 @@ T.DiminishingSpells = {
 	[24259] = {"silence"},			-- Spell Lock (Felhunter)
 	[18498] = {"silence"},			-- Shield Bash - Silenced
 	--]]
+
+	-- Mind Control
+	[605] = {"mindcontrol"},		-- Mind Control
+	[13181] = {"mindcontrol"},		-- Gnomish Mind Control Cap
 
 	-- Blind
 	[2094] = {"blind"},				-- Blind
@@ -105,6 +132,9 @@ T.DiminishingSpells = {
 
 	-- Kidney Shot
 	[408] = {"kidneyshot"},			-- Kidney Shot
+
+	-- Frost Shock
+	[8056] = {"frostshock"},		-- Frost Shock
 }
 
 local function GetIcon(id)
@@ -123,6 +153,7 @@ T.DiminishingIcons = {
 	["root"] = GetIcon(339),
 	-- ["disarm"] = GetIcon(676),
 	-- ["silence"] = GetIcon(15487),
+	["mindcontrol"] = GetIcon(605),
 	["blind"] = GetIcon(2094),
 	["freezingtrap"] = GetIcon(3355),
 	["scattershot"] = GetIcon(19503),
@@ -130,4 +161,5 @@ T.DiminishingIcons = {
 	-- ["turned"] = GetIcon(2878),
 	-- ["shackle"] = GetIcon(9484),
 	["kidneyshot"] = GetIcon(408),
+	["frostshock"] = GetIcon(8056),
 }

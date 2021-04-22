@@ -1327,7 +1327,6 @@ do
 
 	local bcc = {
 		plugins_enemy_spec,
-		plugins_diminishing,
 		plugins_absorbs
 	}
 
