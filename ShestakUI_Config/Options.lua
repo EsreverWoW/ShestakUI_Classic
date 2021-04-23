@@ -2524,7 +2524,7 @@ end
 do
 	local parent = ShestakUIOptionsPanel.automation
 
-	local dismount_stand = ns.CreateCheckBox(parent, "release", L_GUI_AUTOMATION_DISMOUNT_STAND)
+	local dismount_stand = ns.CreateCheckBox(parent, "dismount_stand", L_GUI_AUTOMATION_DISMOUNT_STAND)
 	dismount_stand:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
 
 	local release = ns.CreateCheckBox(parent, "release")
