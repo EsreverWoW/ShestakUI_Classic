@@ -104,14 +104,17 @@ SkinBlizzUI:SetScript("OnEvent", function(self, event, addon)
 		_G["PetBattleQueueReadyFrame"].DeclineButton:SkinButton()
 
 		-- Reskin Dropdown menu
-		if not T.BCC then
-			hooksecurefunc("UIDropDownMenu_InitializeHelper", function(frame)
-				for i = 1, UIDROPDOWNMENU_MAXLEVELS do
+		hooksecurefunc("UIDropDownMenu_InitializeHelper", function(frame)
+			for i = 1, UIDROPDOWNMENU_MAXLEVELS do
+				if T.BCC then
+					_G["DropDownList"..i.."Backdrop"]:SetTemplate("Transparent", nil, true)
+					_G["DropDownList"..i.."MenuBackdrop"]:SetTemplate("Transparent", nil, true)
+				else
 					_G["DropDownList"..i.."Backdrop"]:SetTemplate("Transparent")
 					_G["DropDownList"..i.."MenuBackdrop"]:SetTemplate("Transparent")
 				end
-			end)
-		end
+			end
+		end)
 
 		-- Reskin menu
 		local ChatMenus = {

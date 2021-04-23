@@ -64,6 +64,7 @@ T.DiminishingSpells = {
 
 	-- Charms
 	[605] = {"charm"},				-- Mind Control
+	[13181] = {"charm"},			-- Gnomish Mind Control Cap
 
 	-- Fears
 	[1513] = {"fear"},				-- Scare Beast
@@ -103,10 +104,6 @@ T.DiminishingSpells = {
 	[24259] = {"silence"},			-- Spell Lock (Felhunter)
 	[18498] = {"silence"},			-- Shield Bash - Silenced
 	--]]
-
-	-- Mind Control
-	[605] = {"mindcontrol"},		-- Mind Control
-	[13181] = {"mindcontrol"},		-- Gnomish Mind Control Cap
 
 	-- Blind
 	[2094] = {"blind"},				-- Blind
@@ -153,7 +150,6 @@ T.DiminishingIcons = {
 	["root"] = GetIcon(339),
 	-- ["disarm"] = GetIcon(676),
 	-- ["silence"] = GetIcon(15487),
-	["mindcontrol"] = GetIcon(605),
 	["blind"] = GetIcon(2094),
 	["freezingtrap"] = GetIcon(3355),
 	["scattershot"] = GetIcon(19503),
