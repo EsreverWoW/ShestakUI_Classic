@@ -22,7 +22,7 @@ local function LoadSkin()
 	KeyBindingFrame:StripTextures()
 	KeyBindingFrame:SetTemplate("Transparent")
 
-	if not T.BCC then
+	if not T.classic then
 		KeyBindingFrame.Header:StripTextures()
 		KeyBindingFrame.Header:ClearAllPoints()
 		KeyBindingFrame.Header:SetPoint("TOP", KeyBindingFrame, "TOP", 0, -4)
