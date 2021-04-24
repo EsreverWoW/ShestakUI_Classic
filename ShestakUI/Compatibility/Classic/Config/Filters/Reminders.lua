@@ -418,8 +418,28 @@ if C.reminder.solo_buffs_enable == true then
 			},
 		},
 		SHAMAN = {
-			[1] = {	-- Weapons enchants group
-				["weapon"] = true,
+			[1] = {	-- Main Hand Weapon Enchant group
+				["spells"] = {
+					SpellName(8017),	-- Rockbiter Weapon
+					SpellName(8024),	-- Flametongue Weapon
+					SpellName(8033),	-- Frostbrand Weapon
+					SpellName(8024),	-- Flametongue Weapon
+					SpellName(8232),	-- Windfury Weapon
+				},
+				["mainhand"] = true,
+				["combat"] = true,
+				["instance"] = true,
+				["pvp"] = true,
+			},
+			[2] = {	-- Off-Hand Weapon Enchant group
+				["spells"] = {
+					SpellName(8017),	-- Rockbiter Weapon
+					SpellName(8024),	-- Flametongue Weapon
+					SpellName(8033),	-- Frostbrand Weapon
+					SpellName(8024),	-- Flametongue Weapon
+					SpellName(8232),	-- Windfury Weapon
+				},
+				["offhand"] = true,
 				["combat"] = true,
 				["instance"] = true,
 				["pvp"] = true,
