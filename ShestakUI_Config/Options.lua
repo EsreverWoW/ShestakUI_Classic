@@ -1011,6 +1011,7 @@ do
 		local npcscan = ns.CreateCheckBox(parent, "npcscan", L_GUI_SKINS_NPCSCAN)
 		npcscan:SetPoint("TOPLEFT", mage_nuggets, "BOTTOMLEFT", 0, 0)
 
+
 		local nug_running = ns.CreateCheckBox(parent, "nug_running", L_GUI_SKINS_NUG_RUNNING)
 		nug_running:SetPoint("LEFT", npcscan, "RIGHT", 320, 0)
 
@@ -1087,6 +1088,7 @@ do
 		dbm_movable:SetPoint("TOPLEFT", dbm, "BOTTOMLEFT", 20, 0)
 
 		dbm.children = {dbm_movable}
+
 
 		local details = ns.CreateCheckBox(parent, "details", L_GUI_SKINS_DETAILS)
 		details:SetPoint("TOPLEFT", dbm_movable, "BOTTOMLEFT", -20, 0)
@@ -2139,6 +2141,12 @@ do
 
 	local extra_color = ns.CreateColourPicker(parent, "extra_color", true)
 	extra_color:SetPoint("TOPLEFT", offtank_color, "BOTTOMLEFT", 0, -8)
+
+	local mob_color_enable = ns.CreateCheckBox(parent, "mob_color_enable")
+	mob_color_enable:SetPoint("TOPLEFT", extra_color, "BOTTOMLEFT", -24, -8)
+
+	local mob_color = ns.CreateColourPicker(parent, "mob_color", true)
+	mob_color:SetPoint("TOPLEFT", mob_color_enable, "BOTTOMLEFT", 24, -4)
 
 	local classic = {
 		distance, -- broken in Classic
