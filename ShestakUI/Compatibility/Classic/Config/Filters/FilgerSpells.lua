@@ -2622,7 +2622,7 @@ C["filger_spells"] = {
 			Position = {"TOP", P_BUFF_ICON_Anchor},
 
 			-- Battle Shout
-			{spellID = 6673, unitID = "player", caster = "player", filter = "BUFF"},
+			{spellID = 6673, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Berserker Rage
 			{spellID = 18499, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Bloodrage

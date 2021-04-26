@@ -4261,7 +4261,7 @@ C["filger_spells"] = {
 			Position = {"TOP", P_BUFF_ICON_Anchor},
 
 			-- Battle Shout
-			{spellID = 6673, unitID = "player", caster = "player", filter = "BUFF"},
+			{spellID = 6673, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Berserker Rage
 			{spellID = 18499, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Bloodrage
@@ -4269,7 +4269,7 @@ C["filger_spells"] = {
 			-- Bloodthirst
 			{spellID = 23885, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Commanding Shout
-			{spellID = 469, unitID = "player", caster = "player", filter = "BUFF"},
+			{spellID = 469, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Death Wish
 			{spellID = 12292, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Flurry
