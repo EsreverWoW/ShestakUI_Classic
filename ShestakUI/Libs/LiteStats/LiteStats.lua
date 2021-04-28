@@ -592,35 +592,21 @@ if friends.enabled then
 		totalFriendsOnline = 0
 		wipe(friendTable)
 
-		if T.classic then
-			for i = 1, total do
-				local name, level, class, area, connected, status, note = C_FriendList.GetFriendInfo(i)
+		for i = 1, total do
+			local info = C_FriendList.GetFriendInfoByIndex(i)
+			if info and info.connected then
+				local class = info.className
+				local status = ""
+				if info.dnd then
+					status = CHAT_FLAG_DND
+				elseif info.afk then
+					status = CHAT_FLAG_AFK
+				end
 				for k, v in pairs(LOCALIZED_CLASS_NAMES_MALE) do if class == v then class = k end end
 				if GetLocale() ~= "enUS" then
 					for k, v in pairs(LOCALIZED_CLASS_NAMES_FEMALE) do if class == v then class = k end end
 				end
-				friendTable[i] = {name, level, class, area, connected, status, note}
-				if connected then
-					totalFriendsOnline = totalFriendsOnline + 1
-				end
-			end
-		else
-			for i = 1, total do
-				local info = C_FriendList.GetFriendInfoByIndex(i)
-				if info and info.connected then
-					local class = info.className
-					local status = ""
-					if info.dnd then
-						status = CHAT_FLAG_DND
-					elseif info.afk then
-						status = CHAT_FLAG_AFK
-					end
-					for k, v in pairs(LOCALIZED_CLASS_NAMES_MALE) do if class == v then class = k end end
-					if GetLocale() ~= "enUS" then
-						for k, v in pairs(LOCALIZED_CLASS_NAMES_FEMALE) do if class == v then class = k end end
-					end
-					friendTable[i] = {info.name, info.level, class,  info.area, info.connected, status, info.notes}
-				end
+				friendTable[i] = {info.name, info.level, class,  info.area, info.connected, status, info.notes}
 			end
 		end
 
@@ -678,17 +664,7 @@ if friends.enabled then
 		OnEvent = function(self, event)
 			if event ~= "GROUP_ROSTER_UPDATE" then
 				local numBNetTotal, numBNetOnline = BNGetNumFriends()
-				local numOnline, numTotal
-				if T.classic then
-					numOnline, numTotal = 0, C_FriendList.GetNumFriends()
-					for i = 0, numTotal do
-						if select(5, C_FriendList.GetFriendInfo(i)) then
-							numOnline = numOnline + 1
-						end
-					end
-				else
-					numOnline, numTotal = C_FriendList.GetNumOnlineFriends(), C_FriendList.GetNumFriends()
-				end
+				local numOnline, numTotal = C_FriendList.GetNumOnlineFriends(), C_FriendList.GetNumFriends()
 				local online = numOnline + numBNetOnline
 				local total = numTotal + numBNetTotal
 				self.text:SetText(format(friends.fmt, online, total))
