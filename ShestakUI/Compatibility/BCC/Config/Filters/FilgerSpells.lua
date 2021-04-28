@@ -3233,7 +3233,7 @@ C["filger_spells"] = {
 			-- Grace of Air
 			-- {spellID = 8836, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Grounding Totem Effect
-			{spellID = 8178, unitID = "player", caster = "player", filter = "BUFF"},
+			-- {spellID = 8178, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Healing Stream
 			-- {spellID = 5672, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Lightning Shield r1
