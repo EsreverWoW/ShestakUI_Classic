@@ -783,20 +783,8 @@ if friends.enabled then
 		OnEnter = function(self)
 			C_FriendList.ShowFriends()
 			self.hovered = true
-			local online, total
-			if T.classic then
-				online, total = 0, C_FriendList.GetNumFriends()
-			else
-				online, total = C_FriendList.GetNumOnlineFriends(), C_FriendList.GetNumFriends()
-			end
+			local online, total = C_FriendList.GetNumOnlineFriends(), C_FriendList.GetNumFriends()
 			local status, classc, levelc, zone_r, zone_g, zone_b, grouped, realm_r, realm_g, realm_b
-			if T.classic then
-				for i = 0, total do
-					if select(5, C_FriendList.GetFriendInfo(i)) then
-						online = online + 1
-					end
-				end
-			end
 			local BNonline, BNtotal = 0, BNGetNumFriends()
 			wipe(BNTableEnter)
 			if BNtotal > 0 then
