@@ -60,12 +60,14 @@ local function LoadSkin()
 	ArenaFrameCancelButton:SetPoint("BOTTOMRIGHT", ArenaFrame.backdrop, "BOTTOMRIGHT", -4, 4)
 	ArenaFrameGroupJoinButton:SetPoint("RIGHT", ArenaFrameJoinButton, "LEFT", -2, 0)
 
-	ArenaFrame:HookScript("OnShow", function() if InCombatLockdown() then return end GossipFrame:Hide() BattlefieldFrame:Hide() end)
+	ArenaFrame:HookScript("OnShow", function() if InCombatLockdown() or not BattlefieldFrame:IsShown() then return end ToggleFrame(BattlefieldFrame) end)
 	FriendsFrame:HookScript("OnShow", function() if InCombatLockdown() or not ArenaFrame:IsShown() then return end ArenaFrame:Hide() UpdateUIPanelPositions() end)
 
 	if ArenaFrame:GetAttribute("UIPanelLayout-allowOtherPanels") ~= true then
 		SetUIPanelAttribute(ArenaFrame, "allowOtherPanels", true)
 	end
+
+	table.insert(UISpecialFrames, ArenaFrame:GetName())
 end
 
 table.insert(T.SkinFuncs["ShestakUI"], LoadSkin)
