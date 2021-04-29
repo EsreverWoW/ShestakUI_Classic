@@ -15,7 +15,7 @@ local frames = {
 	"StaticPopup2", "ScrollOfResurrectionSelectionFrame",
 
 	"PVPFrame", "QuestLogFrame", "QuestLogDetailFrame", "PVPBannerFrame", "PetStableFrame",
-	"WorldStateScoreFrame", "BankFrame", "MacOptionsFrame", "MissingLootFrame"
+	"WorldStateScoreFrame", "BankFrame", "MacOptionsFrame", "MissingLootFrame", "ArenaRegistrarFrame"
 }
 
 for _, v in pairs(frames) do
