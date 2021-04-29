@@ -15,6 +15,8 @@ local function LoadSkin()
 	WorldStateScoreFrameLabel:ClearAllPoints()
 	WorldStateScoreFrameLabel:SetPoint("TOP", WorldStateScoreFrame.backdrop, "TOP", 0, -6)
 
+	WorldStateScoreWinnerFrame:HookScript("OnShow", function() if InCombatLockdown() then return end WorldStateScoreFrameLabel:Hide() end)
+
 	T.SkinCloseButton(WorldStateScoreFrameCloseButton, WorldStateScoreFrame.backdrop)
 
 	WorldStateScoreFrameLeaveButton:SkinButton()
