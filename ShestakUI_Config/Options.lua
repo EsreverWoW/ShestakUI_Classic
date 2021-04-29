@@ -1995,6 +1995,14 @@ do
 
 	local time_color = ns.CreateColourPicker(parent, "time_color", true)
 	time_color:SetPoint("TOPLEFT", custom_time_color, "BOTTOMLEFT", 24, -4)
+
+	local classic = {
+		role_icons,
+	}
+
+	if IsClassicBuild() then
+		HideOptions(classic)
+	end
 end
 
 -- Nameplate

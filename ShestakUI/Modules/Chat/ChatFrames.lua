@@ -416,7 +416,7 @@ hooksecurefunc("ChatEdit_CustomTabPressed", UpdateTabChannelSwitch)
 ----------------------------------------------------------------------------------------
 --	Role icons
 ----------------------------------------------------------------------------------------
-if C.chat.role_icons == true then
+if not T.classic and C.chat.role_icons == true then
 	local chats = {
 		CHAT_MSG_SAY = 1, CHAT_MSG_YELL = 1,
 		CHAT_MSG_WHISPER = 1, CHAT_MSG_WHISPER_INFORM = 1,
