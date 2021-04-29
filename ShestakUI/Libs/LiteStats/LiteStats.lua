@@ -1249,9 +1249,6 @@ if durability.enabled then
 				elseif button == "LeftButton" then
 					ToggleCharacter("PaperDollFrame")
 				end
-
-
-
 			end
 		end
 	})

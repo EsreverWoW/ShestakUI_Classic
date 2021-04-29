@@ -185,6 +185,10 @@ local CollapseTable = {
 	"NONE",
 }
 
+if IsClassicBuild() then
+	tremove(CollapseTable, 3)
+end
+
 local TextureTable
 if LSM then
 	TextureTable = LSM:HashTable("statusbar")
@@ -1011,10 +1015,6 @@ do
 		local npcscan = ns.CreateCheckBox(parent, "npcscan", L_GUI_SKINS_NPCSCAN)
 		npcscan:SetPoint("TOPLEFT", mage_nuggets, "BOTTOMLEFT", 0, 0)
 
-
-
-
-
 		local nug_running = ns.CreateCheckBox(parent, "nug_running", L_GUI_SKINS_NUG_RUNNING)
 		nug_running:SetPoint("LEFT", npcscan, "RIGHT", 320, 0)
 
@@ -1091,10 +1091,6 @@ do
 		dbm_movable:SetPoint("TOPLEFT", dbm, "BOTTOMLEFT", 20, 0)
 
 		dbm.children = {dbm_movable}
-
-
-
-
 
 		local details = ns.CreateCheckBox(parent, "details", L_GUI_SKINS_DETAILS)
 		details:SetPoint("TOPLEFT", dbm_movable, "BOTTOMLEFT", -20, 0)
@@ -2159,7 +2155,8 @@ do
 
 	local classic = {
 		distance, -- broken in Classic
-		healer_icon -- needs fixing since build 30786
+		healer_icon, -- needs fixing since build 30786
+		quests,
 	}
 
 	if IsClassicBuild() then

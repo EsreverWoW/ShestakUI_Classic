@@ -440,30 +440,52 @@ end
 
 local kickID = 0
 if C.nameplate.kick_color then
-	if T.class == "DEATHKNIGHT" then
-		kickID = 47528
-	elseif T.class == "DEMONHUNTER" then
-		kickID = 183752
-	elseif T.class == "DRUID" then
-		kickID = 106839
-	elseif T.class == "HUNTER" then
-		kickID = GetSpecialization() == 3 and 187707 or 147362
-	elseif T.class == "MAGE" then
-		kickID = 2139
-	elseif T.class == "MONK" then
-		kickID = 116705
-	elseif T.class == "PALADIN" then
-		kickID = 96231
-	elseif T.class == "PRIEST" then
-		kickID = 15487
-	elseif T.class == "ROGUE" then
-		kickID = 1766
-	elseif T.class == "SHAMAN" then
-		kickID = 57994
-	elseif T.class == "WARLOCK" then
-		kickID = 119910
-	elseif T.class == "WARRIOR" then
-		kickID = 6552
+	if T.classic then
+		if T.class == "DRUID" then
+			kickID = 0 -- TODO: Check for S3/S4 Arena Gloves which give Maim an Interrupt
+		elseif T.class == "HUNTER" then
+			kickID = 34490
+		elseif T.class == "MAGE" then
+			kickID = 2139
+		elseif T.class == "PALADIN" and T.race == "BloodElf" then
+			kickID = 28730 -- Arcane Torrent
+		elseif T.class == "PRIEST" then
+			kickID = 15487
+		elseif T.class == "ROGUE" then
+			kickID = 1766
+		elseif T.class == "SHAMAN" then
+			kickID = 8042
+		elseif T.class == "WARLOCK" then
+			kickID = 24259 -- Spell Lock (Felhunter)
+		elseif T.class == "WARRIOR" then -- TODO: Check for Improved Shield Bash in Protection
+			kickID = 6552
+		end
+	else
+		if T.class == "DEATHKNIGHT" then
+			kickID = 47528
+		elseif T.class == "DEMONHUNTER" then
+			kickID = 183752
+		elseif T.class == "DRUID" then
+			kickID = 106839
+		elseif T.class == "HUNTER" then
+			kickID = GetSpecialization() == 3 and 187707 or 147362
+		elseif T.class == "MAGE" then
+			kickID = 2139
+		elseif T.class == "MONK" then
+			kickID = 116705
+		elseif T.class == "PALADIN" then
+			kickID = 96231
+		elseif T.class == "PRIEST" then
+			kickID = 15487
+		elseif T.class == "ROGUE" then
+			kickID = 1766
+		elseif T.class == "SHAMAN" then
+			kickID = 57994
+		elseif T.class == "WARLOCK" then
+			kickID = 119910
+		elseif T.class == "WARRIOR" then
+			kickID = 6552
+		end
 	end
 end
 
@@ -673,11 +695,6 @@ local function callback(self, event, unit)
 			self.RaidTargetIndicator:SetAlpha(1)
 
 			if T.classic then
-
-
-
-
-
 				self.Health:SetAlpha(1)
 				self.Level:SetAlpha(1)
 				self.Name:SetAlpha(1)
@@ -908,7 +925,7 @@ local function style(self, unit)
 	end
 
 	-- Quest Icon
-	if C.nameplate.quests then
+	if not T.classic and C.nameplate.quests then
 		self.QuestIcon = self:CreateTexture(nil, "OVERLAY", nil, 7)
 		self.QuestIcon:SetSize((C.nameplate.height * 2 * T.noscalemult), (C.nameplate.height * 2 * T.noscalemult))
 		self.QuestIcon:SetPoint("RIGHT", self.Health, "LEFT", -5, 0)

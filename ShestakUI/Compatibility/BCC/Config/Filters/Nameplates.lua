@@ -497,9 +497,23 @@ T.BuffBlackList = {
 
 T.PlateBlacklist = {
 	-- Hunter Trap
-	["Venomous Snake"] = true,
-	["Ядовитая змея"] = true,
-	["Viper"] = true,
-	["Гадюка"] = true,
+	["19833"] = true,		-- Venomous Snake
+	["19921"] = true,		-- Viper
+	-- Raid
+}
+
+T.InterruptCast = {
+	-- [SpellID] = true,	-- Spell Name
+}
+
+T.ImportantCast = {
+	-- [SpellID] = true,	-- Spell Name
+}
+
+local color = C.nameplate.mob_color
+local color2 = {0, 0.7, 0.6}
+T.ColorPlate = {
+	-- PvP
+	["5925"] = color,		-- Grounding Totem
 	-- Raid
 }
