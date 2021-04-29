@@ -2157,6 +2157,8 @@ do
 		distance, -- broken in Classic
 		healer_icon, -- needs fixing since build 30786
 		quests,
+		offtank_color,
+		extra_color,
 	}
 
 	if IsClassicBuild() then
