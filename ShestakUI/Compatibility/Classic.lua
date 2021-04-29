@@ -31,16 +31,20 @@ UnitInVehicle = _G.UnitInVehicle or T.dummy
 ----------------------------------------------------------------------------------------
 --	Specialization Functions
 ----------------------------------------------------------------------------------------
-function T.GetSpecialization(...)
-	local current = {}
-	local primaryTree = 1
-	for i = 1, 3 do
-		_, _, current[i] = GetTalentTabInfo(i, "player", nil)
-		if current[i] > current[primaryTree] then
-			primaryTree = i
+function T.GetSpecialization(isInspect, isPet, specGroup)
+	if (isInspect or isPet) then
+		return
+	end
+	local specIndex
+	local max = 0
+	for tabIndex = 1, GetNumTalentTabs() do
+		local spent = select(3, GetTalentTabInfo(tabIndex, "player", nil))
+		if spent > max then
+			specIndex = tabIndex
+			max = spent
 		end
 	end
-	return primaryTree
+	return specIndex
 end
 
 local isCaster = {
@@ -90,13 +94,11 @@ end
 
 UnitGroupRolesAssigned = _G.UnitGroupRolesAssigned or function(unit) -- Needs work
 	if unit == "player" then
-		local role = T.GetSpecializationRole()
-		if role == "MELEE" or role == "CASTER" then
-			role = "DAMAGER"
-		else
-			role = role or ""
-		end
+		local role = T.GetSpecializationRole() or "NONE"
+		if role == "CASTER" or role == "MELEE" then role = "DAMAGER" end
 		return role
+	else
+		return "NONE"
 	end
 end
 
@@ -108,7 +110,7 @@ GetAverageItemLevel = _G.GetAverageItemLevel or function()
 		"Trinket0Slot", "Trinket1Slot", "MainHandSlot", "SecondaryHandSlot", "RangedSlot", "AmmoSlot"
 	}
 
-	local i, total, slot, itn, level = 0, 0, nil, 0
+	local total, slot, itn, level = 0, 0, nil, 0
 
 	for i in pairs(slotName) do
 		slot = GetInventoryItemLink("player", GetInventorySlotInfo(slotName[i]))
