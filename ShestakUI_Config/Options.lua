@@ -2349,6 +2349,7 @@ do
 	local faster_loot = ns.CreateCheckBox(parent, "faster_loot")
 	faster_loot:SetPoint("TOPLEFT", width, "BOTTOMLEFT", 0, -10)
 
+	-- NOTE: Group loot is no longer used by Blizzard, but these are still used in Classic
 	local rolllootframe = ns.CreateCheckBox(parent, "rolllootframe", L_GUI_LOOT_ROLL_ENABLE)
 	rolllootframe:SetPoint("TOPLEFT", faster_loot, "BOTTOMLEFT", 0, 0)
 
@@ -2357,6 +2358,16 @@ do
 
 	local auto_confirm_de = ns.CreateCheckBox(parent, "auto_confirm_de", L_GUI_LOOT_AUTODE)
 	auto_confirm_de:SetPoint("TOPLEFT", auto_greed, "BOTTOMLEFT", 0, 0)
+
+	local retail = {
+		rolllootframe,
+		auto_greed,
+		auto_confirm_de,
+	}
+
+	if not IsClassicBuild() then
+		HideOptions(retail)
+	end
 end
 
 -- Filger
