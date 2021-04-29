@@ -360,13 +360,64 @@ local function LoadSkin()
 	SkillDetailStatusBarUnlearnButton:SetHitRectInsets(0, 0, 0, 0)
 
 	-- Honor Frame
-	HonorFrame:StripTextures(true)
+	if not T.BCC then
+		HonorFrame:StripTextures(true)
 
-	HonorFrameProgressBar:ClearAllPoints()
-	HonorFrameProgressBar:SetPoint("TOP", CharacterFrame.backdrop, "TOP", 1, -65)
-	
-	HonorFrameProgressBar:CreateBackdrop("Default")
-	HonorFrameProgressBar:SetHeight(24)
+		HonorFrameProgressBar:ClearAllPoints()
+		HonorFrameProgressBar:SetPoint("TOP", CharacterFrame.backdrop, "TOP", 1, -65)
+
+		HonorFrameProgressBar:CreateBackdrop("Default")
+		HonorFrameProgressBar:SetHeight(24)
+	end
+
+	-- PVP Frame
+	if T.BCC then
+		PVPFrame:StripTextures(true)
+
+		for i = 1, MAX_ARENA_TEAMS do
+			local pvpTeam = _G["PVPTeam"..i]
+
+			pvpTeam:StripTextures()
+			pvpTeam:CreateBackdrop("Default")
+			pvpTeam.backdrop:SetPoint("TOPLEFT", 9, -4)
+			pvpTeam.backdrop:SetPoint("BOTTOMRIGHT", -24, 3)
+
+			Mixin(pvpTeam, BackdropTemplateMixin) -- 9.0 to set backdrop
+
+			pvpTeam:HookScript("OnEnter", T.SetModifiedBackdrop)
+			pvpTeam:HookScript("OnLeave", T.SetOriginalBackdrop)
+
+			_G["PVPTeam"..i.."Highlight"]:Kill()
+		end
+
+		PVPTeamDetails:StripTextures()
+		PVPTeamDetails:SetTemplate("Transparent")
+		PVPTeamDetails:SetPoint("TOPLEFT", PVPFrame, "TOPRIGHT", -30, -12)
+
+		T.SkinNextPrevButton(PVPFrameToggleButton)
+		PVPFrameToggleButton:SetPoint("BOTTOMRIGHT", PVPFrame, "BOTTOMRIGHT", -48, 81)
+		PVPFrameToggleButton:SetSize(14, 14)
+
+		for i = 1, 5 do
+			local header = _G["PVPTeamDetailsFrameColumnHeader"..i]
+
+			header:StripTextures()
+			header:StyleButton()
+		end
+
+		for i = 1, 10 do
+			local button = _G["PVPTeamDetailsButton"..i]
+
+			button:SetWidth(335)
+			-- button:SetColorTexture(1, 1, 1, 0.3)
+		end
+
+		PVPTeamDetailsAddTeamMember:SkinButton()
+
+		T.SkinNextPrevButton(PVPTeamDetailsToggleButton)
+
+		T.SkinCloseButton(PVPTeamDetailsCloseButton)
+	end
 end
 
 table.insert(T.SkinFuncs["ShestakUI"], LoadSkin)
