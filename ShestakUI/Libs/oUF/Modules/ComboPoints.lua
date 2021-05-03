@@ -103,10 +103,9 @@ end
 
 local function Visibility(self)
 	local element = self.ComboPoints
-	local form = GetShapeshiftFormID()
 
 	if(oUF:IsClassic()) then
-		if form == CAT_FORM then
+		if GetBonusBarOffset() == 1 then
 			element:Show()
 			if self.Debuffs then self.Debuffs:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 2, 19) end
 		else
@@ -114,6 +113,8 @@ local function Visibility(self)
 			if self.Debuffs then self.Debuffs:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 2, 5) end
 		end
 	else
+		local form = GetShapeshiftFormID()
+
 		if form == CAT_FORM or (UnitHasVehicleUI("player") and UnitPower("vehicle", 4) > 0) then
 			element:Show()
 			if self.Debuffs then self.Debuffs:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 2, 19) end
@@ -149,10 +150,10 @@ local Enable = function(self)
 		self:RegisterEvent("PLAYER_TARGET_CHANGED", Path, true)
 
 		if T.class == "DRUID" and C.unitframe_class_bar.combo_always ~= true and C.unitframe_class_bar.combo_old ~= true then
-			element.hadler = CreateFrame("Frame", nil, element)
-			element.hadler:RegisterEvent("UPDATE_SHAPESHIFT_FORM")
-			element.hadler:RegisterEvent("PLAYER_ENTERING_WORLD")
-			element.hadler:SetScript("OnEvent", function() Visibility(self) end)
+			element.handler = CreateFrame("Frame", nil, element)
+			element.handler:RegisterEvent("UPDATE_SHAPESHIFT_FORM")
+			element.handler:RegisterEvent("PLAYER_ENTERING_WORLD")
+			element.handler:SetScript("OnEvent", function() Visibility(self) end)
 		end
 
 		for i = 1, oUF:IsClassic() and 5 or 6 do
@@ -169,8 +170,8 @@ local Disable = function(self)
 		self:UnregisterEvent("UNIT_POWER_UPDATE", Path)
 		self:UnregisterEvent("UNIT_MAXPOWER", Path)
 		self:UnregisterEvent("PLAYER_TARGET_CHANGED", Path)
-		element.hadler:UnregisterEvent("UPDATE_SHAPESHIFT_FORM")
-		element.hadler:UnregisterEvent("PLAYER_ENTERING_WORLD")
+		element.handler:UnregisterEvent("UPDATE_SHAPESHIFT_FORM")
+		element.handler:UnregisterEvent("PLAYER_ENTERING_WORLD")
 	end
 end
 
