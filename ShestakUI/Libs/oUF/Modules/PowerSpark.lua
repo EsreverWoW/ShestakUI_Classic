@@ -18,11 +18,22 @@ local ignoredSpells = {
 	[11687]	= true,	-- Life Tap r4
 	[11688]	= true,	-- Life Tap r5
 	[11689]	= true,	-- Life Tap r6
+	[27222]	= true,	-- Life Tap r7
 
 	[12051]	= true,	-- Evocation
 
 	[18182]	= true,	-- Improved Life Tap r1
 	[18183]	= true,	-- Improved Life Tap r2
+
+	[31818]	= true,	-- Life Tap (Mana Return Effect)
+	[32553]	= true,	-- Life Tap (Mana Return Effect)
+
+	[5677]	= true,	-- Mana Spring r1
+	[10491]	= true,	-- Mana Spring r2
+	[10493]	= true,	-- Mana Spring r3
+	[10494]	= true,	-- Mana Spring r4
+	[25569]	= true,	-- Mana Spring r5
+	[24853]	= true,	-- Mana Spring ??
 }
 
 local Update = function(self, elapsed)
