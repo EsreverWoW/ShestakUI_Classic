@@ -435,11 +435,17 @@ if C.reminder.solo_buffs_enable == true then
 			},
 			[2] = {	-- Main Hand Weapon Enchant group
 				["spells"] = {
+					SpellName(8232),	-- Windfury Weapon
 					SpellName(8017),	-- Rockbiter Weapon
 					SpellName(8024),	-- Flametongue Weapon
 					SpellName(8033),	-- Frostbrand Weapon
 					SpellName(8024),	-- Flametongue Weapon
-					SpellName(8232),	-- Windfury Weapon
+					SpellName(28013),	-- Superior Mana Oil
+					SpellName(25123),	-- Brilliant Mana Oil
+					SpellName(28017),	-- Superior Wizard Oil
+					SpellName(25122),	-- Brilliant Wizard Oil
+					SpellName(28898),	-- Blessed Wizard Oil
+					SpellName(25121),	-- Wizard Oil
 				},
 				["mainhand"] = true,
 				["combat"] = true,
@@ -448,11 +454,11 @@ if C.reminder.solo_buffs_enable == true then
 			},
 			[3] = {	-- Off-Hand Weapon Enchant group
 				["spells"] = {
+					SpellName(8232),	-- Windfury Weapon
 					SpellName(8017),	-- Rockbiter Weapon
 					SpellName(8024),	-- Flametongue Weapon
 					SpellName(8033),	-- Frostbrand Weapon
 					SpellName(8024),	-- Flametongue Weapon
-					SpellName(8232),	-- Windfury Weapon
 				},
 				["offhand"] = true,
 				["combat"] = true,
