@@ -553,6 +553,7 @@ C["announcements"] = {
 	["pull_countdown"] = true,					-- Pull countdown announce (/pc #)
 	["bad_gear"] = false,						-- Check your bad gear in instance (fishing pole, from the list)
 	["safari_hat"] = true,						-- Check Safari Hat when starting Pet Battle
+	["says_thanks"] = false,					-- Says thanks for some spells (resurrection, from the list)
 }
 
 ----------------------------------------------------------------------------------------

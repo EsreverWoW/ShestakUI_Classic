@@ -2557,6 +2557,8 @@ do
 
 	if IsClassicBuild() and not IsBCCBuild() then
 		HideOptions(classic)
+		pull_countdown:ClearAllPoints()
+		pull_countdown:SetPoint("TOPLEFT", flask_food_auto, "BOTTOMLEFT", -20, 0)
 	elseif IsBCCBuild() then
 		HideOptions(bcc)
 	end
