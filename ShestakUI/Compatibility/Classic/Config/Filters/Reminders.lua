@@ -24,6 +24,12 @@ if C.reminder.raid_buffs_enable == true or C.announcements.flask_food == true th
 			SpellName(17629),	-- Flask of Chromatic Resistance (+25 Magic Resistance)
 			SpellName(17626),	-- Flask of the Titans (+400 Health)
 		},
+		BattleElixir = {
+			-- SpellName(spellID),	-- Spell name
+		},
+		GuardianElixir = {
+			-- SpellName(spellID),	-- Spell name
+		},
 		Other = {
 			Agility = {
 				SpellName(11334),	-- Elixir of Greater Agility (+25 Agility)
@@ -120,7 +126,6 @@ if C.reminder.raid_buffs_enable == true or C.announcements.flask_food == true th
 				SpellName(8072),	-- Stoneskin
 				SpellName(8836),	-- Grace of Air
 			},
-			
 			Threat = {
 				SpellName(25909)	-- Tranquil Air
 			},

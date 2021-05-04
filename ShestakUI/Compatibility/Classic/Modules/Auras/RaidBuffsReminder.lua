@@ -6,6 +6,8 @@ if not T.classic or C.reminder.raid_buffs_enable ~= true then return end
 ----------------------------------------------------------------------------------------
 -- Locals
 local flaskBuffs = T.ReminderBuffs["Flask"]
+local battleElixirBuffs = T.ReminderBuffs["BattleElixir"]
+local guardianElixirBuffs = T.ReminderBuffs["GuardianElixir"]
 local otherBuffs = T.ReminderBuffs["Other"]
 local foodBuffs = T.ReminderBuffs["Food"]
 local spell3Buffs = T.ReminderBuffs["Spell3Buff"]
@@ -19,6 +21,8 @@ local visible
 
 local isPresent = {
 	flask = false,
+	battleElixir = false,
+	guardianElixir = false,
 	food = false,
 	spell3 = false,
 	spell4 = false,
@@ -91,20 +95,70 @@ local function CheckElixir()
 	end
 end
 
-local function CheckBuff(list, frame, n)
-	if list and #list > 0 then
-		for i = 1, #list do
-			local name, icon = unpack(list[i])
-			if i == 1 then
-				frame.t:SetTexture(icon)
-			end
+local function CheckBCCElixir()
+	if #battleElixirBuffs > 0 then
+		for i = 1, #battleElixirBuffs do
+			local name, icon = unpack(battleElixirBuffs[i])
 			if T.CheckPlayerBuff(name) then
-				frame:SetAlpha(C.reminder.raid_buffs_alpha)
-				isPresent[n] = true
+				FlaskFrame.t:SetTexture(icon)
+				isPresent.battleElixir = true
 				break
 			else
-				frame:SetAlpha(1)
-				isPresent[n] = false
+				isPresent.battleElixir = false
+			end
+		end
+	end
+
+	if #guardianElixirBuffs > 0 then
+		for i = 1, #guardianElixirBuffs do
+			local name, icon = unpack(guardianElixirBuffs[i])
+			if T.CheckPlayerBuff(name) then
+				isPresent.guardianElixir = true
+				if not isPresent.battleElixir then
+					FlaskFrame.t:SetTexture(icon)
+				end
+				break
+			else
+				isPresent.guardianElixir = true
+			end
+		end
+	end
+
+	if FlaskFrame.t:GetTexture() == "" then
+		FlaskFrame.t:SetTexture(134821)
+	end
+
+	if isPresent.guardianElixir == true and isPresent.battleElixir == true then
+		FlaskFrame:SetAlpha(C.reminder.raid_buffs_alpha)
+		isPresent.flask = true
+		return
+	else
+		FlaskFrame:SetAlpha(1)
+		isPresent.flask = false
+		return
+	end
+end
+
+local function CheckBuff(list, frame, n)
+	if not T.BCC and list == flaskBuffs then
+		CheckElixir()
+	else
+		if list and #list > 0 then
+			for i = 1, #list do
+				local name, icon = unpack(list[i])
+				if i == 1 then
+					frame.t:SetTexture(icon)
+				end
+				if T.CheckPlayerBuff(name) then
+					frame:SetAlpha(C.reminder.raid_buffs_alpha)
+					isPresent[n] = true
+					break
+				elseif list == flaskBuffs then
+					CheckBCCElixir()
+				else
+					frame:SetAlpha(1)
+					isPresent[n] = false
+				end
 			end
 		end
 	end
@@ -126,7 +180,7 @@ local function OnAuraChange(_, event, unit)
 	spell6Buffs = T.ReminderBuffs["Spell6Buff"]
 
 	-- Start checking buffs to see if we can find a match from the list
-	CheckElixir()
+	CheckBuff(flaskBuffs, FlaskFrame, "flask")
 
 	CheckBuff(foodBuffs, FoodFrame, "food")
 	CheckBuff(spell3Buffs, Spell3Frame, "spell3")
