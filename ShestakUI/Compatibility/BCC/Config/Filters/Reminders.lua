@@ -446,6 +446,7 @@ if C.reminder.solo_buffs_enable == true then
 					SpellName(25122),	-- Brilliant Wizard Oil
 					SpellName(28898),	-- Blessed Wizard Oil
 					SpellName(25121),	-- Wizard Oil
+					SpellName(45395),	-- Blessed Weapon Coating
 				},
 				["mainhand"] = true,
 				["combat"] = true,
