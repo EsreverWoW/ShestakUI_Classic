@@ -12,8 +12,8 @@ if T.classic then
 	swingResets = {
 		[GetSpellInfo(6807)]	= true, -- Maul
 		[GetSpellInfo(2973)] 	= true, -- Raptor Strike
-		[GetSpellInfo(845)]		= true, -- Cleave
-		[GetSpellInfo(78)]		= true, -- Heroic Strike
+		[GetSpellInfo(845)]	= true, -- Cleave
+		[GetSpellInfo(78)]	= true, -- Heroic Strike
 		[GetSpellInfo(1464)]	= true, -- Slam
 	}
 end
