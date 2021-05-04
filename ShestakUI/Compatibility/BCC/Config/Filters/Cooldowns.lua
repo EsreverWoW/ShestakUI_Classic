@@ -9,8 +9,18 @@ if not T.BCC then return end
 if C.raidcooldown.enable == true then
 	T.raid_spells = {
 		-- Battle resurrection
-		{20484, 1200},	-- Rebirth
-		{20707, 1800},	-- Soulstone Resurrection
+		{20484, 1200},	-- Rebirth r1
+		{20739, 1200},	-- Rebirth r2
+		{20742, 1200},	-- Rebirth r3
+		{20747, 1200},	-- Rebirth r4
+		{20748, 1200},	-- Rebirth r5
+		{26994, 1200},	-- Rebirth r6
+		{20707, 1800},	-- Soulstone Resurrection r1
+		{20762, 1800},	-- Soulstone Resurrection r2
+		{20763, 1800},	-- Soulstone Resurrection r3
+		{20764, 1800},	-- Soulstone Resurrection r4
+		{20765, 1800},	-- Soulstone Resurrection r5
+		{27239, 1800},	-- Soulstone Resurrection r6
 		{27740, 3600},	-- Reincarnation (3600sec base / -1200sec from talents / -600sec for Totem)
 		-- Jumper Cables
 		-- {8342, 1800},	-- Goblin Jumper Cables
@@ -19,19 +29,39 @@ if C.raidcooldown.enable == true then
 		{2825, 600},	-- Bloodlust
 		{32182, 600},	-- Heroism
 		-- Healing
-		{740, 600},		-- Tranquility
-		{724, 360},		-- Lightwell
+		{740, 600},		-- Tranquility r1
+		{8918, 600},	-- Tranquility r2
+		{9862, 600},	-- Tranquility r3
+		{9863, 600},	-- Tranquility r4
+		{26983, 600},	-- Tranquility r5
+		{724, 360},		-- Lightwell r1
+		{27870, 360},	-- Lightwell r2
+		{27871, 360},	-- Lightwell r3
+		{28275, 360},	-- Lightwell r4
 		-- Defense
-		{1022, 300},	-- Blessing of Protection (300sec base / -120sec from talents)
-		-- {6940, 30},		-- Blessing of Sacrifice
-		{633, 3600},	-- Lay on Hands (3600sec base / -1200sec from talents)
+		{1022, 300},	-- Blessing of Protection r1 (300sec base / -120sec from talents)
+		{5599, 300},	-- Blessing of Protection r2 (300sec base / -120sec from talents)
+		{10278, 300},	-- Blessing of Protection r3 (300sec base / -120sec from talents)
+		-- {6940, 30},		-- Blessing of Sacrifice r1
+		-- {20729, 30},		-- Blessing of Sacrifice r2
+		-- {27147, 30},		-- Blessing of Sacrifice r3
+		-- {27148, 30},		-- Blessing of Sacrifice r4
+		{633, 3600},	-- Lay on Hands r1 (3600sec base / -1200sec from talents)
+		{2800, 3600},	-- Lay on Hands r2 (3600sec base / -1200sec from talents)
+		{10310, 3600},	-- Lay on Hands r3 (3600sec base / -1200sec from talents)
+		{27154, 3600},	-- Lay on Hands r4 (3600sec base / -1200sec from talents)
 		{33206, 120},	-- Pain Suppression
 		{871, 1800},	-- Shield Wall
 		{12975, 480},	-- Last Stand
 		-- Taunts
 		{5209, 600},	-- Challenging Roar
 		{1161, 600},	-- Challenging Shout
-		{694, 120},		-- Mocking Blow
+		{694, 120},		-- Mocking Blow r1
+		{7400, 120},	-- Mocking Blow r2
+		{7402, 120},	-- Mocking Blow r3
+		{20559, 120},	-- Mocking Blow r4
+		{20560, 120},	-- Mocking Blow r5
+		{25266, 120},	-- Mocking Blow r6
 		-- Mana Regeneration
 		{29166, 360},	-- Innervate (360sec base / -48sec from 4pc T4)
 		{16190, 300},	-- Mana Tide Totem
