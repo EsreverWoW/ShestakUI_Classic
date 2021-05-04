@@ -16,8 +16,14 @@ frame:SetScript("OnEvent", function()
 		OverrideActionBar:EnableMouse(false)
 		MicroButtonAndBagsBar:SetScale(0.00001)
 		MicroButtonAndBagsBar:EnableMouse(false)
-		MicroButtonAndBagsBar:SetPoint("BOTTOMRIGHT", 0, -99) -- Prevent scaling for right panels
+		MicroButtonAndBagsBar:ClearAllPoints()
+		MicroButtonAndBagsBar:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", 0, -99) -- Prevent scaling for right panels
 	end
+
+	MainMenuBar:SetMovable(true)
+	MainMenuBar:SetUserPlaced(true)
+	MainMenuBar.ignoreFramePositionManager = true
+	MainMenuBar:SetAttribute("ignoreFramePositionManager", true)
 
 	local elements = {
 		MainMenuBar, MainMenuBarArtFrame, OverrideActionBar, PossessBarFrame, PetActionBarFrame, StanceBarFrame,
@@ -31,7 +37,7 @@ frame:SetScript("OnEvent", function()
 	end
 
 	for _, element in pairs(elements) do
-		if element:GetObjectType() == "Frame" then
+		if element.UnregisterAllEvents then
 			element:UnregisterAllEvents()
 		end
 
