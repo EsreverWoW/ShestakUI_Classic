@@ -305,11 +305,13 @@ local OnEvent = function(self, event)
 			else
 				return
 			end
+
+			if T.classic and not T.BCC then
+				spellId = T.GetSpellID(spellName)
+			end
+
 			if T.RaidSpells[spellId] and show[select(2, IsInInstance())] and IsInGroup() then
 				if (sourceName == T.name and C.raidcooldown.show_self == true) or sourceName ~= T.name then
-					if T.classic and not T.BCC then
-						spellId = T.GetSpellID(spellName)
-					end
 					StartTimer(sourceName, spellId)
 				end
 			end
