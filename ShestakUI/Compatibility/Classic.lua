@@ -110,11 +110,11 @@ GetAverageItemLevel = _G.GetAverageItemLevel or function()
 		"Trinket0Slot", "Trinket1Slot", "MainHandSlot", "SecondaryHandSlot", "RangedSlot", "AmmoSlot"
 	}
 
-	local total, slot, itn, level = 0, 0, nil, 0
+	local total, slot, itn, level = 0, 0, 0, 0
 
 	for i in pairs(slotName) do
 		slot = GetInventoryItemLink("player", GetInventorySlotInfo(slotName[i]))
-		if slot ~= nil then
+		if slot then
 			itn = itn + 1
 			level = select(4, GetItemInfo(slot))
 			total = total + level
