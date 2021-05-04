@@ -212,30 +212,6 @@ end
 ]]--------------------------------------------------------------------------------------
 if C.reminder.solo_buffs_enable == true then
 	T.ReminderSelfBuffs = {
-		--[[
-		ROGUE = {
-			[1] = {	-- Lethal Poisons group
-				["spells"] = {
-					SpellName(2823),	-- Deadly Poison
-					SpellName(8679),	-- Wound Poison
-				},
-				["spec"] = 1,		-- Only Assassination have poisen now
-				["combat"] = true,
-				["instance"] = true,
-				["pvp"] = true,
-			},
-			[2] = {	-- Non-Lethal Poisons group
-				["spells"] = {
-					SpellName(3408),	-- Crippling Poison
-					SpellName(108211),	-- Leeching Poison
-				},
-				["spec"] = 1,		-- Only Assassination have poisen now
-				["combat"] = true,
-				["instance"] = true,
-				["pvp"] = true,
-			},
-		},
-		--]]
 		DRUID = {
 			[1] = {	-- Mark of the Wild group
 				["spells"] = {
@@ -413,12 +389,33 @@ if C.reminder.solo_buffs_enable == true then
 			--]]
 		},
 		ROGUE = {
-			[1] = {	-- Weapon enchants group
-				["weapon"] = true,
+			[1] = {	-- Main Hand Weapon Enchant group
+				["spells"] = {
+					SpellName(8679),	-- Instant Poison
+					SpellName(2823),	-- Deadly Poison
+					SpellName(3408),	-- Crippling Poison
+					SpellName(5761),	-- Mind-numbing Poison
+					SpellName(13219),	-- Wound Poison
+				},
+				["mainhand"] = true,
 				["combat"] = true,
 				["instance"] = true,
 				["pvp"] = true,
-				-- ["level"] = 20,
+				["level"] = 20,
+			},
+			[2] = {	-- Off-Hand Weapon Enchant group
+				["spells"] = {
+					SpellName(8679),	-- Instant Poison
+					SpellName(2823),	-- Deadly Poison
+					SpellName(3408),	-- Crippling Poison
+					SpellName(5761),	-- Mind-numbing Poison
+					SpellName(13219),	-- Wound Poison
+				},
+				["offhand"] = true,
+				["combat"] = true,
+				["instance"] = true,
+				["pvp"] = true,
+				["level"] = 20,
 			},
 		},
 		SHAMAN = {
