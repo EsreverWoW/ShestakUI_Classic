@@ -1,4 +1,4 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
 	<Script file="Arena.lua"/>
-	<Script file="Socket.lua"/>
+	<Script file="ItemSocketing.lua"/>
 </Ui>
