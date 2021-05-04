@@ -354,6 +354,10 @@ if C.reminder.solo_buffs_enable == true then
 					SpellName(20165),		-- Seal of Light
 					SpellName(20166),		-- Seal of Wisdom
 					SpellName(21082),		-- Seal of the Crusader
+					SpellName(31801),		-- Seal of Vengeance
+					SpellName(31892),		-- Seal of Blood
+					SpellName(348700),		-- Seal of the Martyr
+					SpellName(348704),		-- Seal of Corruption
 				},
 				["combat"] = true,
 				["instance"] = true,
