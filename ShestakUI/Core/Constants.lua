@@ -17,4 +17,4 @@ T.wowBuild = select(2, GetBuildInfo()); T.wowBuild = tonumber(T.wowBuild)
 T.beta = select(4, GetBuildInfo())
 T.classic = _G.WOW_PROJECT_ID == _G.WOW_PROJECT_CLASSIC or _G.WOW_PROJECT_ID == _G.WOW_PROJECT_BURNING_CRUSADE_CLASSIC
 T.BCC = _G.WOW_PROJECT_ID == _G.WOW_PROJECT_BURNING_CRUSADE_CLASSIC
-T.HiDPI = T.classic and (GetScreenHeight() / T.screenHeight < 0.75)
+T.HiDPI = GetScreenHeight() / T.screenHeight < 0.75
