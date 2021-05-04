@@ -73,6 +73,10 @@ local function LoadSkin()
 	T.SkinEditBox(SendMailMoneySilver)
 	T.SkinEditBox(SendMailMoneyCopper)
 
+	if T.classic then
+		SendMailMoneyGold.texture:SetDrawLayer("ARTWORK")
+	end
+
 	SendMailNameEditBox.backdrop:SetPoint("TOPLEFT", -3, -2)
 	SendMailNameEditBox.backdrop:SetPoint("BOTTOMRIGHT", 2, 3)
 	SendMailSubjectEditBox.backdrop:SetPoint("TOPLEFT", -3, 0)
