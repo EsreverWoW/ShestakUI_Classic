@@ -25,9 +25,12 @@ local function LoadSkin()
 	InspectPaperDollFrame:StripTextures()
 
 	InspectModelFrame:StripTextures()
-	InspectModelFrame:CreateBackdrop("Default")
-	InspectModelFrame.backdrop:SetPoint("TOPLEFT", -3, 4)
-	InspectModelFrame.backdrop:SetPoint("BOTTOMRIGHT", 4, 0)
+
+	T.SkinRotateButton(InspectModelFrameRotateLeftButton)
+	InspectModelFrameRotateLeftButton:SetPoint("TOPLEFT", 2, 2)
+
+	T.SkinRotateButton(InspectModelFrameRotateRightButton)
+	InspectModelFrameRotateRightButton:SetPoint("TOPLEFT", InspectModelFrameRotateLeftButton, "TOPRIGHT", 3, 0)
 
 	local slots = {
 		"HeadSlot",
