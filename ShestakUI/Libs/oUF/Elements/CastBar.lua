@@ -1,9 +1,10 @@
 local _, ns = ...
 local oUF = ns.oUF
 
+local FALLBACK_ICON = 136243 -- Interface\ICONS\Trade_Engineering
 local UnitCastingInfo = UnitCastingInfo or CastingInfo
 local UnitChannelInfo = UnitChannelInfo or ChannelInfo
-local FALLBACK_ICON = 136243 -- Interface\ICONS\Trade_Engineering
+local EventFunctions = {}
 
 local LibClassicCasterino = (oUF:IsClassic() and not oUF:IsBCC()) and LibStub('LibClassicCasterino', true)
 if(LibClassicCasterino) then
@@ -15,7 +16,6 @@ if(LibClassicCasterino) then
 		return LibClassicCasterino:UnitChannelInfo(unit)
 	end
 end
-local EventFunctions = {}
 
 local function resetAttributes(self)
 	self.castID = nil
@@ -120,8 +120,14 @@ local function CastUpdate(self, event, unit, castID, spellID)
 	if(self.unit ~= unit) then return end
 
 	local element = self.Castbar
-	if(not element:IsShown() or element.castID ~= castID or element.spellID ~= spellID) then
-		return
+	if unit == 'player' then
+		if(not element:IsShown() or element.castID ~= castID or element.spellID ~= spellID) then
+			return
+		end
+	else
+		if(not element:IsShown()) then
+			return
+		end
 	end
 
 	local name, startTime, endTime, _
@@ -173,8 +179,14 @@ local function CastStop(self, event, unit, castID, spellID)
 	if(self.unit ~= unit) then return end
 
 	local element = self.Castbar
-	if(not element:IsShown() or element.castID ~= castID or element.spellID ~= spellID) then
-		return
+	if unit == 'player' then
+		if(not element:IsShown() or element.castID ~= castID or element.spellID ~= spellID) then
+			return
+		end
+	else
+		if(not element:IsShown()) then
+			return
+		end
 	end
 
 	resetAttributes(element)
@@ -195,8 +207,14 @@ local function CastFail(self, event, unit, castID, spellID)
 	if(self.unit ~= unit) then return end
 
 	local element = self.Castbar
-	if(not element:IsShown() or element.castID ~= castID or element.spellID ~= spellID) then
-		return
+	if unit == 'player' then
+		if(not element:IsShown() or element.castID ~= castID or element.spellID ~= spellID) then
+			return
+		end
+	else
+		if(not element:IsShown()) then
+			return
+		end
 	end
 
 	if(element.Text) then
