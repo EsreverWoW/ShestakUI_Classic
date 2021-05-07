@@ -414,7 +414,7 @@ if not T.classic or T.BCC then
 else
 	if C.minimap.tracking_icon then
 		MiniMapTrackingFrame:ClearAllPoints()
-		MiniMapTrackingFrame:SetPoint("BOTTOMLEFT", MinimapAnchor, "BOTTOMLEFT", 0, -5)
+		MiniMapTrackingFrame:SetPoint("BOTTOMLEFT", MinimapAnchor, "BOTTOMLEFT", -1, -5)
 		MiniMapTrackingBorder:Hide()
 		MiniMapTrackingFrame:SetFrameStrata("HIGH")
 		MiniMapTrackingIcon:SetTexCoord(0.1, 0.9, 0.1, 0.9)

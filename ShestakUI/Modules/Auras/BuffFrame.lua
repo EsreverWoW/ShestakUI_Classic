@@ -51,13 +51,13 @@ for i = 1, NUM_TEMP_ENCHANT_FRAMES do
 	icon:SetDrawLayer("BORDER")
 
 	duration:ClearAllPoints()
-	duration:SetPoint("CENTER", 2, 1)
+	duration:SetPoint("CENTER", 1, 1)
 	duration:SetDrawLayer("ARTWORK")
 	duration:SetFont(C.font.auras_font, C.font.auras_font_size, C.font.auras_font_style)
 	duration:SetShadowOffset(C.font.auras_font_shadow and 1 or 0, C.font.auras_font_shadow and -1 or 0)
 
 	charges:ClearAllPoints()
-	charges:SetPoint("BOTTOMLEFT", 2, 0)
+	charges:SetPoint("BOTTOMLEFT", 1, 0)
 	charges:SetFont(C.font.auras_font, C.font.auras_font_size, C.font.auras_font_style)
 	charges:SetShadowOffset(C.font.auras_font_shadow and 1 or 0, C.font.auras_font_shadow and -1 or 0)
 	charges:Hide()
@@ -88,7 +88,7 @@ local function StyleBuffs(buttonName, index)
 		icon:SetDrawLayer("BORDER")
 
 		duration:ClearAllPoints()
-		duration:SetPoint("CENTER", 2, 1)
+		duration:SetPoint("CENTER", 1, 1)
 		duration:SetDrawLayer("ARTWORK")
 		duration:SetFont(C.font.auras_font, C.font.auras_font_size, C.font.auras_font_style)
 		duration:SetShadowOffset(C.font.auras_font_shadow and 1 or 0, C.font.auras_font_shadow and -1 or 0)
@@ -113,7 +113,7 @@ local function StyleBuffs(buttonName, index)
 		end
 
 		count:ClearAllPoints()
-		count:SetPoint("BOTTOMRIGHT", 2, 0)
+		count:SetPoint("BOTTOMRIGHT", 1, 0)
 		count:SetDrawLayer("ARTWORK")
 		count:SetFont(C.font.auras_font, C.font.auras_font_size, C.font.auras_font_style)
 		count:SetShadowOffset(C.font.auras_font_shadow and 1 or 0, C.font.auras_font_shadow and -1 or 0)
