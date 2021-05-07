@@ -1,6 +1,6 @@
 --[[
 Name: LibRangeCheck-2.0
-Revision: $Revision: 204 $
+Revision: $Revision: 205 $
 Author(s): mitch0
 Website: http://www.wowace.com/projects/librangecheck-2-0/
 Description: A range checking library based on interact distances and spell ranges
@@ -14,9 +14,9 @@ License: Public Domain
 -- A callback is provided for those interested in checker changes.
 -- @usage
 -- local rc = LibStub("LibRangeCheck-2.0")
--- 
+--
 -- rc.RegisterCallback(self, rc.CHECKERS_CHANGED, function() print("need to refresh my stored checkers") end)
--- 
+--
 -- local minRange, maxRange = rc:GetRange('target')
 -- if not minRange then
 --     print("cannot get range estimate for target")
@@ -25,7 +25,7 @@ License: Public Domain
 -- else
 --     print("target is between " .. minRange .. " and " .. maxRange .. " yards")
 -- end
--- 
+--
 -- local meleeChecker = rc:GetFriendMaxChecker(rc.MeleeRange) or rc:GetFriendMinChecker(rc.MeleeRange) -- use the closest checker (MinChecker) if no valid Melee checker is found
 -- for i = 1, 4 do
 --     -- TODO: check if unit is valid, etc
@@ -41,14 +41,15 @@ License: Public Domain
 -- @class file
 -- @name LibRangeCheck-2.0
 local MAJOR_VERSION = "LibRangeCheck-2.0"
-local MINOR_VERSION = tonumber(("$Revision: 204 $"):match("%d+")) + 100000
+local MINOR_VERSION = tonumber(("$Revision: 205 $"):match("%d+")) + 100000
 
 local lib, oldminor = LibStub:NewLibrary(MAJOR_VERSION, MINOR_VERSION)
 if not lib then
     return
 end
 
-local IsClassic = (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC or WOW_PROJECT_ID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC)
+local IsClassic = (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC)
+local IsTBC = (WOW_PROJECT_ID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC)
 
 -- << STATIC CONFIG
 
@@ -58,7 +59,7 @@ local ItemRequestTimeout = 10.0
 -- interact distance based checks. ranges are based on my own measurements (thanks for all the folks who helped me with this)
 local DefaultInteractList = {
     [3] = 8,
---    [2] = 9,
+    --    [2] = 9,
     [4] = 28,
 }
 
@@ -66,12 +67,12 @@ local DefaultInteractList = {
 local InteractLists = {
     ["Tauren"] = {
         [3] = 6,
---        [2] = 7,
+        --        [2] = 7,
         [4] = 25,
     },
     ["Scourge"] = {
         [3] = 7,
---        [2] = 8,
+        --        [2] = 8,
         [4] = 27,
     },
 }
@@ -80,7 +81,7 @@ local MeleeRange = 2
 
 -- list of friendly spells that have different ranges
 local FriendSpells = {}
--- list of harmful spells that have different ranges 
+-- list of harmful spells that have different ranges
 local HarmSpells = {}
 
 FriendSpells["DEATHKNIGHT"] = {
@@ -137,7 +138,7 @@ HarmSpells["PALADIN"] = {
     20271, -- ["Judgement"], -- 30
     853, -- ["Hammer of Justice"], -- 10
     35395, -- ["Crusader Strike"], -- Melee
-} 
+}
 
 FriendSpells["PRIEST"] = {
     527, -- ["Purify"], -- 40
@@ -208,6 +209,7 @@ local FriendItems  = {
     },
     [10] = {
         32321, -- Sparrowhawk Net
+        17626, -- Frostwolf Muzzle
     },
     [15] = {
         1251, -- Linen Bandage
@@ -224,14 +226,15 @@ local FriendItems  = {
         21991, -- Heavy Netherweave Bandage
         34721, -- Frostweave Bandage
         34722, -- Heavy Frostweave Bandage
---        38643, -- Thick Frostweave Bandage
---        38640, -- Dense Frostweave Bandage
+        --        38643, -- Thick Frostweave Bandage
+        --        38640, -- Dense Frostweave Bandage
     },
     [20] = {
         21519, -- Mistletoe
     },
     [25] = {
         31463, -- Zezzak's Shard
+        13289, -- Egan's Blaster
     },
     [30] = {
         1180, -- Scroll of Stamina
@@ -310,6 +313,7 @@ local HarmItems = {
     },
     [10] = {
         32321, -- Sparrowhawk Net
+        17626, -- Frostwolf Muzzle
     },
     [15] = {
         33069, -- Sturdy Rope
@@ -321,6 +325,7 @@ local HarmItems = {
         24268, -- Netherweave Net
         41509, -- Frostweave Net
         31463, -- Zezzak's Shard
+        13289, -- Egan's Blaster
     },
     [30] = {
         835, -- Large Rope Net
@@ -338,7 +343,7 @@ local HarmItems = {
         28767, -- The Decapitator
     },
     [45] = {
---        32698, -- Wrangling Rope
+        --        32698, -- Wrangling Rope
         23836, -- Goblin Rocket Launcher
     },
     [50] = {
@@ -431,7 +436,7 @@ local checkers_Spell = setmetatable({}, {
     __index = function(t, spellIdx)
         local func = function(unit)
             if IsSpellInRange(spellIdx, BOOKTYPE_SPELL, unit) == 1 then
-                 return true
+                return true
             end
         end
         t[spellIdx] = func
@@ -464,7 +469,7 @@ local checkers_Interact = setmetatable({}, {
     __index = function(t, index)
         local func = function(unit)
             if CheckInteractDistance(unit, index) then
-                 return true
+                return true
             end
         end
         t[index] = func
@@ -539,7 +544,7 @@ local function createCheckerList(spellList, itemList, interactList)
             end
         end
     end
-    
+
     if spellList then
         for i = 1, #spellList do
             local sid = spellList[i]
@@ -563,7 +568,7 @@ local function createCheckerList(spellList, itemList, interactList)
             end
         end
     end
-    
+
     if interactList and not next(res) then
         for index, range in pairs(interactList) do
             addChecker(res, range, nil,  checkers_Interact[index], "interact:" .. index)
@@ -614,7 +619,7 @@ local function rcIterator(checkerList)
     return function()
         local rc = checkerList[curr]
         if not rc then
-             return nil
+            return nil
         end
         curr = curr - 1
         return rc.range, rc.checker
@@ -875,9 +880,9 @@ end
 -- @return **checker** function.
 function lib:GetSmartMinChecker(range)
     return createSmartChecker(
-        getMinChecker(self.friendRC, range),
-        getMinChecker(self.harmRC, range),
-        getMinChecker(self.miscRC, range))
+    getMinChecker(self.friendRC, range),
+    getMinChecker(self.harmRC, range),
+    getMinChecker(self.miscRC, range))
 end
 
 --- Return a checker suitable for in-range checking that checks the unit type and calls the appropriate checker (friend/harm/misc).
@@ -885,9 +890,9 @@ end
 -- @return **checker** function.
 function lib:GetSmartMaxChecker(range)
     return createSmartChecker(
-        getMaxChecker(self.friendRC, range),
-        getMaxChecker(self.harmRC, range),
-        getMaxChecker(self.miscRC, range))
+    getMaxChecker(self.friendRC, range),
+    getMaxChecker(self.harmRC, range),
+    getMaxChecker(self.miscRC, range))
 end
 
 --- Return a checker for the given range that checks the unit type and calls the appropriate checker (friend/harm/misc).
@@ -896,9 +901,9 @@ end
 -- @return **checker** function.
 function lib:GetSmartChecker(range, fallback)
     return createSmartChecker(
-        getChecker(self.friendRC, range) or fallback,
-        getChecker(self.harmRC, range) or fallback,
-        getChecker(self.miscRC, range) or fallback)
+    getChecker(self.friendRC, range) or fallback,
+    getChecker(self.harmRC, range) or fallback,
+    getChecker(self.miscRC, range) or fallback)
 end
 
 --- Get a range estimate as **minRange**, **maxRange**.
@@ -1005,7 +1010,7 @@ function lib:processItemRequests(itemRequests)
                     itemRequests[range] = nil
                     break
                 end
-                tremove(items, i)   
+                tremove(items, i)
             elseif not itemRequestTimeoutAt then
                 -- print("### processItemRequests: waiting: " .. tostring(item))
                 itemRequestTimeoutAt = GetTime() + ItemRequestTimeout
@@ -1064,7 +1069,7 @@ function lib:scheduleAuraCheck()
 end
 
 
--- << load-time initialization 
+-- << load-time initialization
 
 function lib:activate()
     if not self.frame then
@@ -1072,7 +1077,7 @@ function lib:activate()
         self.frame = frame
         frame:RegisterEvent("LEARNED_SPELL_IN_TAB")
         frame:RegisterEvent("CHARACTER_POINTS_CHANGED")
-        if not IsClassic then
+        if not IsClassic and not IsTBC then
             frame:RegisterEvent("PLAYER_TALENT_UPDATE")
         end
         frame:RegisterEvent("SPELLS_CHANGED")
