@@ -22,7 +22,7 @@ oUF.colors.honor = {
 local function IsPlayerMaxLevel()
 	local maxLevel = GetRestrictedAccountData()
 	if(maxLevel == 0) then
-		maxLevel = T.classic and MAX_PLAYER_LEVEL_TABLE[GetExpansionLevel()] or GetMaxLevelForPlayerExpansion()
+		maxLevel = T.classic and GetMaxPlayerLevel() or GetMaxLevelForPlayerExpansion()
 	end
 
 	return maxLevel == UnitLevel('player')
@@ -225,6 +225,10 @@ local function Enable(self, unit)
 		self:RegisterEvent('ENABLE_XP_GAIN', VisibilityPath, true)
 		self:RegisterEvent('UPDATE_EXPANSION_LEVEL', VisibilityPath, true)
 
+		if(oUF:IsBCC()) then
+			self:RegisterEvent('PLAYER_MAX_LEVEL_UPDATE', VisibilityPath, true)
+		end
+
 		if(not oUF:IsClassic()) then
 			self:RegisterEvent('HONOR_LEVEL_UPDATE', VisibilityPath, true)
 
@@ -278,12 +282,17 @@ local function Disable(self)
 	local element = self.Experience
 	if(element) then
 		self:UnregisterEvent('PLAYER_LEVEL_UP', VisibilityPath)
-		if(not oUF:IsClassic()) then
-			self:UnregisterEvent('HONOR_LEVEL_UPDATE', VisibilityPath)
-		end
 		self:UnregisterEvent('DISABLE_XP_GAIN', VisibilityPath)
 		self:UnregisterEvent('ENABLE_XP_GAIN', VisibilityPath)
 		self:UnregisterEvent('UPDATE_EXPANSION_LEVEL', VisibilityPath)
+
+		if(oUF:IsBCC()) then
+			self:UnregisterEvent('PLAYER_MAX_LEVEL_UPDATE', VisibilityPath)
+		end
+
+		if(not oUF:IsClassic()) then
+			self:UnregisterEvent('HONOR_LEVEL_UPDATE', VisibilityPath)
+		end
 
 		ElementDisable(self)
 	end

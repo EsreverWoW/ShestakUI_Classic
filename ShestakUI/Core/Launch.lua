@@ -93,7 +93,7 @@ local function InstallUI()
 	ShestakUISettingsPerChar.BottomBars = C.actionbar.bottombars
 
 	if T.classic then
-		if T.level < (T.classic and MAX_PLAYER_LEVEL_TABLE[GetExpansionLevel()] or GetMaxLevelForPlayerExpansion()) then
+		if T.level < (T.classic and GetMaxPlayerLevel() or GetMaxLevelForPlayerExpansion()) then
 			ShestakUISettings.Experience = true
 		end
 
