@@ -39,6 +39,7 @@ local ChannelInfo = ChannelInfo
 local CreateFrame = CreateFrame
 local GetInventoryItemLink = GetInventoryItemLink
 local GetInventorySlotInfo = GetInventorySlotInfo
+local GetLocale = GetLocale
 local GetNumGroupMembers = GetNumGroupMembers
 local GetNumTalents = GetNumTalents
 local GetNumTalentTabs = GetNumTalentTabs
@@ -81,8 +82,8 @@ local spellRankTableData = {
 	[4] = { 2090, 8940, 5188, 9863, 1026, 19941, 6076, 10965, 10961, 9474, 6064, 913, 10466, 3662, 3700, 7651, 3268, 25422 },
 	[5] = { 2091, 8941, 5189, 1042, 19942, 6077, 22009, 25314, 25316, 10915, 939, 10467, 13542, 11693, 11699, 7926, 25423, 26983 },
 	[6] = { 3627, 9750, 6778, 3472, 19943, 6078, 10916, 959, 10468, 13543, 11694, 11700, 7927, 23569, 24412, 25210, 25308 },
-	[7] = { 8910, 9856, 8903, 10328, 10927, 10917, 8005, 13544, 11695, 10838, 27137, 25213, 25420 },
-	[8] = { 9839, 9857, 9758, 10329, 10928, 10395, 10839, 23568, 24413, 25233 },
+	[7] = { 8910, 9856, 8903, 10328, 10927, 10917, 8005, 13544, 11695, 10838, 27137, 25213, 25420, 27219 },
+	[8] = { 9839, 9857, 9758, 10329, 10928, 10395, 10839, 23568, 24413, 25233, 27259, 27220 },
 	[9] = { 9840, 9858, 9888, 25292, 10929, 10396, 18608, 25235 },
 	[10] = { 9841, 9889, 25315, 25357, 18610, 23567, 24414, 26980, 27135 },
 	[11] = { 25299, 25297, 30020, 27136, 25221, 25391 },
@@ -1132,7 +1133,7 @@ if( playerClass == "PRIEST" ) then
 		local CureDisease = GetSpellInfo(528)
 		local BindingHeal = GetSpellInfo(32546) or "Binding Heal"
 		local EmpoweredHealing = GetSpellInfo(33158) or "Empowered Healing"
-		local Renewal = GetSpellInfo(37563) or "Renewal" -- T4 bonus
+		local Renewal = GetLocale() ~= "ruRU" and GetSpellInfo(37563) or "Renewal" -- T4 bonus
 
 		hotData[Renew] = {coeff = 1, interval = 3, ticks = 5, levels = {8, 14, 20, 26, 32, 38, 44, 50, 56, 60, 65, 70}, averages = {
 			45, 100, 175, 245, 315, 400, 510, 650, 810, 970, 1010, 1110 }}
@@ -1212,6 +1213,11 @@ if( playerClass == "PRIEST" ) then
 
 		CalculateHotHealing = function(guid, spellID)
 			local spellName, spellRank = GetSpellInfo(spellID), SpellIDToRank[spellID]
+
+			if( GetLocale == "ruRU" and spellID == 37563 ) then
+				spellName = Renewal
+			end
+
 			local healAmount = getBaseHealAmount(hotData, spellName, spellRank)
 			local spellPower = GetSpellBonusHealing()
 			local healModifier = HealComm:GetHealModifier(guid) * playerHealModifier
@@ -1438,11 +1444,11 @@ end
 if( playerClass == "WARLOCK" ) then
 	LoadClassData = function()
 		local HealthFunnel = GetSpellInfo(755)
-		--local DrainLife = GetSpellInfo(689)
+		local DrainLife = GetSpellInfo(689)
 		local ImpHealthFunnel = GetSpellInfo(18703)
 
-		spellData[HealthFunnel] = { interval = 1, levels = { 12, 20, 28, 36, 44, 52, 60 }, ticks = 10, averages = { 120, 240, 430, 640, 890, 1190, 1530 } }
-		--spellData[DrainLife] = { interval = 1, levels = { 14, 22, 30, 38, 46, 54 }, ticks = 5, averages = { 10 * 5, 17 * 5, 29 * 5, 41 * 5, 55 * 5, 71 * 5 } }
+		spellData[HealthFunnel] = { interval = 1, levels = { 12, 20, 28, 36, 44, 52, 60, 68 }, ticks = 10, averages = { 120, 240, 430, 640, 890, 1190, 1530, 1880 } }
+		spellData[DrainLife] = { interval = 1, levels = { 14, 22, 30, 38, 46, 54, 62, 69 }, ticks = 5, averages = { 10 * 5, 17 * 5, 29 * 5, 41 * 5, 55 * 5, 71 * 5, 87 * 5, 108 * 5 } }
 
 		talentData[ImpHealthFunnel] = { mod = 0.1, current = 0 }
 
