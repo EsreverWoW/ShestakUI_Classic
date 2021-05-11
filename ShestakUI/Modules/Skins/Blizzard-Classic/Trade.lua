@@ -29,9 +29,7 @@ local function LoadSkin()
 	T.SkinEditBox(TradePlayerInputMoneyFrameSilver)
 	T.SkinEditBox(TradePlayerInputMoneyFrameCopper)
 
-	if T.classic then
-		TradePlayerInputMoneyFrameGold.texture:SetDrawLayer("ARTWORK")
-	end
+	TradePlayerInputMoneyFrameGold.texture:SetDrawLayer("ARTWORK")
 
 	for i = 1, MAX_TRADE_ITEMS do
 		local player = _G["TradePlayerItem"..i]
