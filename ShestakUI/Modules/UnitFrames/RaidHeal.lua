@@ -49,7 +49,7 @@ local function Shared(self, unit)
 	end
 
 	self.Health.PostUpdate = function(health, unit)
-		if not UnitIsConnected(unit) or UnitIsDead(unit) or UnitIsGhost(unit) then
+		if not UnitIsConnected(unit) or (UnitIsDeadOrGhost(unit) and not UnitIsFeignDeath(unit)) then
 			health:SetValue(0)
 		end
 	end
@@ -110,7 +110,7 @@ local function Shared(self, unit)
 		self.Power:SetStatusBarTexture(C.media.texture)
 
 		self.Power.PostUpdate = function(power, unit)
-			if not UnitIsConnected(unit) or UnitIsDeadOrGhost(unit) then
+			if not UnitIsConnected(unit) or (UnitIsDeadOrGhost(unit) and not UnitIsFeignDeath(unit)) then
 				power:SetValue(0)
 			end
 		end

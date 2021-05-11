@@ -23,7 +23,7 @@ end
 
 T.PostUpdateHealth = function(health, unit, min, max)
 	if unit and unit:find("arena%dtarget") then return end
-	if not UnitIsConnected(unit) or UnitIsDead(unit) or UnitIsGhost(unit) then
+	if not UnitIsConnected(unit) or (UnitIsDeadOrGhost(unit) and not UnitIsFeignDeath(unit)) then
 		health:SetValue(0)
 		if not UnitIsConnected(unit) then
 			health.value:SetText("|cffD7BEA5"..L_UF_OFFLINE.."|r")
@@ -139,7 +139,7 @@ T.PostUpdateRaidHealth = function(health, unit, min, max)
 	local self = health:GetParent()
 	local power = self.Power
 	local border = self.backdrop
-	if not UnitIsConnected(unit) or UnitIsDead(unit) or UnitIsGhost(unit) then
+	if not UnitIsConnected(unit) or (UnitIsDeadOrGhost(unit) and not UnitIsFeignDeath(unit)) then
 		health:SetValue(0)
 		if not UnitIsConnected(unit) then
 			health.value:SetText("|cffD7BEA5"..L_UF_OFFLINE.."|r")
@@ -236,7 +236,7 @@ T.PostUpdatePower = function(power, unit, cur, _, max)
 		power.value:SetTextColor(color[1], color[2], color[3])
 	end
 
-	if not UnitIsConnected(unit) or UnitIsDead(unit) or UnitIsGhost(unit) then
+	if not UnitIsConnected(unit) or (UnitIsDeadOrGhost(unit) and not UnitIsFeignDeath(unit)) then
 		power:SetValue(0)
 	end
 
@@ -244,7 +244,7 @@ T.PostUpdatePower = function(power, unit, cur, _, max)
 
 	if not UnitIsConnected(unit) then
 		power.value:SetText()
-	elseif UnitIsDead(unit) or UnitIsGhost(unit) or max == 0 then
+	elseif (UnitIsDeadOrGhost(unit) and not UnitIsFeignDeath(unit)) or max == 0 then
 		power.value:SetText()
 	else
 		if cur ~= max then

@@ -57,7 +57,7 @@ local function Shared(self, unit)
 	self.Health:SetStatusBarTexture(C.media.texture)
 
 	self.Health.PostUpdate = function(health, unit)
-		if not UnitIsConnected(unit) or UnitIsDeadOrGhost(unit) then
+		if not UnitIsConnected(unit) or UnitIsDead(UnitIsDeadOrGhost(unit) and not UnitIsFeignDeath(unit)) then
 			health:SetValue(0)
 		end
 	end

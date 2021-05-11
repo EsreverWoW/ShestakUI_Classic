@@ -95,7 +95,7 @@ local tagStrings = {
 	end]],
 
 	['dead'] = [[function(u)
-		if(UnitIsDead(u)) then
+		if(UnitIsDead(u) and not UnitIsFeignDeath(u)) then
 			return 'Dead'
 		elseif(UnitIsGhost(u)) then
 			return 'Ghost'
@@ -354,7 +354,7 @@ local tagStrings = {
 	end]],
 
 	['status'] = [[function(u)
-		if(UnitIsDead(u)) then
+		if(UnitIsDead(u) and not UnitIsFeignDeath(u)) then
 			return 'Dead'
 		elseif(UnitIsGhost(u)) then
 			return 'Ghost'
