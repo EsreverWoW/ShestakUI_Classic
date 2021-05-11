@@ -1,6 +1,7 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
 	<Script file="Others.lua"/>
 
+	<Script file="..\Blizzard\AddonList.lua"/>
 	<Script file="..\Blizzard\Binding.lua"/>
 	<Script file="..\Blizzard\Bubbles.lua"/>
 	<Script file="..\Blizzard\Channels.lua"/>
@@ -17,8 +18,6 @@
 	<Script file="..\Blizzard\TimeManager.lua"/>
 	<Script file="..\Blizzard\Trade.lua"/>
 
-	<Script file="Others.lua"/>
-	<Script file="AddonList.lua"/>
 	<Script file="Auction.lua"/>
 	<Script file="Character.lua"/>
 	<Script file="ChatConfig.lua"/>
