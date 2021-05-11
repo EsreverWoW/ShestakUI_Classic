@@ -1,5 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
-if T.classic or C.tooltip.enable ~= true or C.tooltip.unit_role ~= true then return end
+if C.tooltip.enable ~= true or C.tooltip.unit_role ~= true then return end
 
 ----------------------------------------------------------------------------------------
 --	Displays a players LFD/LFR role(gTooltipRoles by g0st)

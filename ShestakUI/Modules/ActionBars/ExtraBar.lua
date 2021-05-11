@@ -1,5 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
-if T.classic or C.actionbar.enable ~= true then return end
+if C.actionbar.enable ~= true then return end
 
 ------------------------------------------------------------------------------------------
 --	Make ExtraActionBarFrame movable (use macro /click ExtraActionButton1)

@@ -1,5 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
-if T.classic or C.reminder.raid_buffs_enable ~= true then return end
+if C.reminder.raid_buffs_enable ~= true then return end
 
 ----------------------------------------------------------------------------------------
 --	Raid buffs on player(by Elv22)

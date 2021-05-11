@@ -1,5 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
-if (T.classic and not T.BCC) or C.unitframe.enable ~= true or C.unitframe.show_arena ~= true or C.unitframe.plugins_diminishing ~= true then return end
+if C.unitframe.enable ~= true or C.unitframe.show_arena ~= true or C.unitframe.plugins_diminishing ~= true then return end
 
 ----------------------------------------------------------------------------------------
 --	Based on Tukui_DrTracker(by Ildyria)

@@ -1,0 +1,6 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+	<Include file="..\Blizzard-Classic\LoadFrames.xml"/>
+
+	<Script file="Arena.lua"/>
+	<Script file="ItemSocketing.lua"/>
+</Ui>

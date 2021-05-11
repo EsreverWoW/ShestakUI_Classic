@@ -1,11 +1,11 @@
 local T, C, L, _ = unpack(select(2, ...))
-if (T.classic and not T.BCC) or C.announcements.drinking ~= true then return end
+if C.announcements.drinking ~= true then return end
 
 ----------------------------------------------------------------------------------------
 --	Announce enemy drinking in arena(by Duffed)
 ----------------------------------------------------------------------------------------
 local drinkSpell = {}
-if T.classic then
+if T.BCC then
 	drinkSpell = {
 		[GetSpellInfo(18071)] = true,	-- Enriched Manna Biscuit
 		[GetSpellInfo(18140)] = true,	-- Blessed Sunfruit Juice

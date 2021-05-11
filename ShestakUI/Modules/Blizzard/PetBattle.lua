@@ -1,5 +1,4 @@
 local T, C, L, _ = unpack(select(2, ...))
-if T.classic then return end
 
 ----------------------------------------------------------------------------------------
 --	Pet Battles UI

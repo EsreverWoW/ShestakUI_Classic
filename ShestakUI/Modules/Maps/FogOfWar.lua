@@ -1,5 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
-if T.classic or C.minimap.fog_of_war ~= true then return end
+if C.minimap.fog_of_war ~= true then return end
 
 ----------------------------------------------------------------------------------------
 --	Fog of war on World Map(Leatrix_Maps by Leatrix)

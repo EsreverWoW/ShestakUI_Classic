@@ -1,5 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
-if T.classic or C.automation.accept_quest ~= true then return end
+if C.automation.accept_quest ~= true then return end
 
 ----------------------------------------------------------------------------------------
 --	Quest automation(QuickQuest by p3lim)
