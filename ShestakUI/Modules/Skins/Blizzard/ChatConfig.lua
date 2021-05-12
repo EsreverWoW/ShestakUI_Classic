@@ -8,9 +8,10 @@ local function LoadSkin()
 	ChatConfigFrame:StripTextures()
 	ChatConfigFrame:SetTemplate("Transparent")
 
-	ChatConfigFrame.Header:StripTextures()
-	ChatConfigFrame.Header:ClearAllPoints()
-	ChatConfigFrame.Header:SetPoint("TOP", ChatConfigFrame, 0, 7)
+	local ChatConfigFrameHeader = T.classic and ChatConfigFrameHeader or ChatConfigFrame.Header
+	ChatConfigFrameHeader:StripTextures()
+	ChatConfigFrameHeader:ClearAllPoints()
+	ChatConfigFrameHeader:SetPoint("TOP", ChatConfigFrame, 0, 7)
 
 	local frames = {
 		"ChatConfigCategoryFrame",
@@ -102,8 +103,13 @@ local function LoadSkin()
 	}
 
 	for i = 1, getn(checkboxes) do
-		T.SkinCheckBox(_G[checkboxes[i]])
+		local checkbox = _G[checkboxes[i]]
+		if checkbox then
+			T.SkinCheckBox(checkbox)
+		end
 	end
+
+	-- TODO: Skin Available Channels
 
 	local ReskinColourSwatch = function(f)
 		if f.InnerBorder then
@@ -112,7 +118,11 @@ local function LoadSkin()
 		end
 		f:CreateBackdrop("Overlay")
 		f:SetFrameLevel(f:GetFrameLevel() + 2)
-		f.backdrop:SetOutside(f.Color, 2, 2)
+		if T.classic then
+			f.backdrop:SetOutside(f.Color, 0, 0)
+		else
+			f.backdrop:SetOutside(f.Color, 2, 2)
+		end
 	end
 
 	hooksecurefunc("ChatConfig_CreateCheckboxes", function(frame, checkBoxTable, checkBoxTemplate)
@@ -186,7 +196,7 @@ local function LoadSkin()
 		ReskinColourSwatch(CombatConfigColorsColorizeSpellNamesColorSwatch)
 		ReskinColourSwatch(CombatConfigColorsColorizeDamageNumberColorSwatch)
 
-		for i = 1, 4 do
+		for i = 1, T.classic and 5 or 4 do
 			for j = 1, 4 do
 				if _G["CombatConfigMessageTypesLeftCheckBox"..i] and _G["CombatConfigMessageTypesLeftCheckBox"..i.."_"..j] then
 					T.SkinCheckBox(_G["CombatConfigMessageTypesLeftCheckBox"..i])

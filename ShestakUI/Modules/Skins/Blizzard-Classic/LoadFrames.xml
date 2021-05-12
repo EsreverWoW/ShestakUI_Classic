@@ -5,6 +5,7 @@
 	<Script file="..\Blizzard\Binding.lua"/>
 	<Script file="..\Blizzard\Bubbles.lua"/>
 	<Script file="..\Blizzard\Channels.lua"/>
+	<Script file="..\Blizzard\ChatConfig.lua"/>
 	<Script file="..\Blizzard\DebugTools.lua"/>
 	<Script file="..\Blizzard\DeathRecap.lua"/>
 	<Script file="..\Blizzard\Help.lua"/>
@@ -20,7 +21,6 @@
 
 	<Script file="Auction.lua"/>
 	<Script file="Character.lua"/>
-	<Script file="ChatConfig.lua"/>
 	<Script file="Communities.lua"/>
 	<Script file="Container.lua"/>
 	<Script file="DressUp.lua"/>
