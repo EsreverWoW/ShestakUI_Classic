@@ -8,6 +8,7 @@
 	<Script file="..\Blizzard\ChatConfig.lua"/>
 	<Script file="..\Blizzard\DebugTools.lua"/>
 	<Script file="..\Blizzard\DeathRecap.lua"/>
+	<Script file="..\Blizzard\GuildRegistrar.lua"/>
 	<Script file="..\Blizzard\Help.lua"/>
 	<Script file="..\Blizzard\Interface.lua"/>
 	<Script file="..\Blizzard\Loot.lua"/>
@@ -30,7 +31,6 @@
 	<Script file="Friends.lua"/>
 	<Script file="GMSurvey.lua"/>
 	<Script file="Gossip.lua"/>				<!-- TODO -->
-	<Script file="GuildRegistrar.lua"/>
 	<Script file="Inspect.lua"/>
 	<Script file="ItemText.lua"/>
 	<Script file="PetStable.lua"/>
