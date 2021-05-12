@@ -1385,7 +1385,7 @@ SlashCmdList.TEST_UF = function()
 		-- _G["oUF_Arena"..i].Trinket.Icon:SetTexture("Interface\\Icons\\INV_Jewelry_Necklace_37")
 		-- _G["oUF_Arena"..i]:SetAttribute("unit", "player")
 
-		-- _G["oUF_Arena"..i.."Target"].oldunit = 	_G["oUF_Arena"..i.."Target"].unit
+		-- _G["oUF_Arena"..i.."Target"].oldunit = _G["oUF_Arena"..i.."Target"].unit
 		-- _G["oUF_Arena"..i.."Target"]:SetAttribute("unit", "player")
 
 		-- if C.unitframe.plugins_enemy_spec == true then
@@ -1409,13 +1409,15 @@ SlashCmdList.TEST_UF = function()
 		if T.classic and not T.BCC then
 			for _, frames in pairs({"oUF_Target", "oUF_TargetTarget", "oUF_Pet"}) do
 				if _G[frames] then
-					_G[frames]:SetAttribute("unit", _G[frames].oldunit)
+					_G[frames].unit = _G[frames].oldunit
+					_G[frames]:SetAttribute("unit", _G[frames].unit)
 				end
 			end
 		else
 			for _, frames in pairs({"oUF_Target", "oUF_TargetTarget", "oUF_Pet", "oUF_Focus", "oUF_FocusTarget"}) do
 				if _G[frames] then
-					_G[frames]:SetAttribute("unit", _G[frames].oldunit)
+					_G[frames].unit = _G[frames].oldunit
+					_G[frames]:SetAttribute("unit", _G[frames].unit)
 				end
 			end
 		end
@@ -1430,7 +1432,8 @@ SlashCmdList.TEST_UF = function()
 
 		if C.unitframe.show_boss == true then
 			for i = 1, MAX_BOSS_FRAMES do
-				_G["oUF_Boss"..i]:SetAttribute("unit", _G["oUF_Boss"..i].oldunit)
+				_G["oUF_Boss"..i].unit = _G["oUF_Boss"..i].oldunit
+				_G["oUF_Boss"..i]:SetAttribute("unit", _G["oUF_Boss"..i].unit)
 			end
 		end
 		moving = false
