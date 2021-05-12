@@ -86,7 +86,6 @@
 	<Script file="Modules\Misc\MagePortals.lua"/>
 	<Script file="Modules\Misc\Marking.lua"/>
 	<Script file="Modules\Misc\Misc.lua"/>
-	<Script file="Modules\Misc\PvPQueueTimer.lua"/>
 	<Script file="Modules\Misc\RaidUtility.lua"/>
 	<Script file="Modules\Misc\SlotItemLevel-Classic.lua"/>
 	<Script file="Modules\Misc\Threat.lua"/>
