@@ -8,9 +8,10 @@ local function LoadSkin()
 	VideoOptionsFrame:StripTextures()
 	VideoOptionsFrame:SetTemplate("Transparent")
 
-	VideoOptionsFrame.Header:StripTextures()
-	VideoOptionsFrame.Header:ClearAllPoints()
-	VideoOptionsFrame.Header:SetPoint("TOP", VideoOptionsFrame, 0, 0)
+	local VideoOptionsFrameHeader = T.classic and VideoOptionsFrameHeader or VideoOptionsFrame.Header
+	VideoOptionsFrameHeader:StripTextures()
+	VideoOptionsFrameHeader:ClearAllPoints()
+	VideoOptionsFrameHeader:SetPoint("TOP", VideoOptionsFrame, 0, 0)
 
 	local frames = {
 		"VideoOptionsFrameCategoryFrame",
@@ -226,6 +227,11 @@ local function LoadSkin()
 	_G["VideoOptionsFrameOkay"]:SetPoint("RIGHT", _G["VideoOptionsFrameCancel"], "LEFT", -4, 0)
 	_G["VideoOptionsFrameApply"]:ClearAllPoints()
 	_G["VideoOptionsFrameApply"]:SetPoint("RIGHT", _G["VideoOptionsFrameOkay"], "LEFT", -4, 0)
+
+	if T.classic then
+		_G["VideoOptionsFrameClassic"]:ClearAllPoints()
+		_G["VideoOptionsFrameClassic"]:SetPoint("LEFT", _G["VideoOptionsFrameDefaults"], "RIGHT", 4, 0)
+	end
 
 	GraphicsButton:SetPoint("BOTTOMLEFT", "Graphics_", "TOPLEFT", 0, 3)
 	GraphicsButton:SkinButton(true)
