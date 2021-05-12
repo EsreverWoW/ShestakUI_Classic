@@ -23,7 +23,10 @@ local function InstallUI()
 	SetCVar("taintLog", 0)
 	SetCVar("buffDurations", 1)
 	SetCVar("autoOpenLootHistory", 0)
-	if not T.classic then
+	if T.classic then
+		SetCVar("chatClassColorOverride", 0)
+		SetCVar("colorChatNamesByClass", 1)
+	else
 		SetCVar("lossOfControl", 0)
 		SetCVar("nameplateShowSelf", 0)
 	end
