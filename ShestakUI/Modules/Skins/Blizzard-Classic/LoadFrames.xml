@@ -9,6 +9,7 @@
 	<Script file="..\Blizzard\DebugTools.lua"/>
 	<Script file="..\Blizzard\DeathRecap.lua"/>
 	<Script file="..\Blizzard\Help.lua"/>
+	<Script file="..\Blizzard\Interface.lua"/>
 	<Script file="..\Blizzard\Loot.lua"/>
 	<Script file="..\Blizzard\MacClient.lua"/>
 	<Script file="..\Blizzard\Macro.lua"/>
@@ -30,7 +31,6 @@
 	<Script file="Gossip.lua"/>				<!-- TODO -->
 	<Script file="GuildRegistrar.lua"/>
 	<Script file="Inspect.lua"/>
-	<Script file="Interface.lua"/>
 	<Script file="ItemText.lua"/>
 	<Script file="Petition.lua"/>
 	<Script file="PetStable.lua"/>
