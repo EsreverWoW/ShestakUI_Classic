@@ -7,8 +7,8 @@ if C.skins.blizzard_frames ~= true then return end
 local function LoadSkin()
 	ArenaFrame:StripTextures(true)
 	ArenaFrame:CreateBackdrop("Transparent")
-	ArenaFrame.backdrop:SetPoint("TOPLEFT", 0, 0)
-	ArenaFrame.backdrop:SetPoint("BOTTOMRIGHT", -44, 88)
+	ArenaFrame.backdrop:SetPoint("TOPLEFT", 10, -12)
+	ArenaFrame.backdrop:SetPoint("BOTTOMRIGHT", -32, 76)
 
 	T.SkinCloseButton(ArenaFrameCloseButton, ArenaFrame.backdrop)
 
@@ -21,7 +21,7 @@ local function LoadSkin()
 	ArenaFrame.zones_bg:CreateBackdrop("Transparent")
 	ArenaFrame.zones_bg:SetWidth(324)
 	ArenaFrame.zones_bg:SetHeight(204)
-	ArenaFrame.zones_bg:SetPoint("TOPLEFT", ArenaFrame.backdrop, "TOPLEFT", 8, -62)
+	ArenaFrame.zones_bg:SetPoint("TOPLEFT", ArenaFrame.backdrop, "TOPLEFT", 9, -62)
 
 	ArenaFrame.tex1 = ArenaFrame.backdrop:CreateTexture("ArenaFrameWorldMap1", "ARTWORK")
 	ArenaFrame.tex1:SetTexture("Interface\\BattlefieldFrame\\UI-Battlefield-WorldMap1")
@@ -33,12 +33,12 @@ local function LoadSkin()
 	ArenaFrame.tex2:SetHeight(240)
 
 	ArenaFrameNameHeader:ClearAllPoints()
-	ArenaFrameNameHeader:SetPoint("BOTTOMLEFT", ArenaFrameDivider, "TOPLEFT", 3, 60)
+	ArenaFrameNameHeader:SetPoint("BOTTOMLEFT", ArenaFrameDivider, "TOPLEFT", 14, 60)
 	ArenaZone1:ClearAllPoints()
-	ArenaZone1:SetPoint("TOPLEFT", ArenaFrame, "TOPLEFT", 12, -107)
+	ArenaZone1:SetPoint("TOPLEFT", ArenaFrame, "TOPLEFT", 23, -107)
 
 	ArenaFrameNameHeader2:ClearAllPoints()
-	ArenaFrameNameHeader2:SetPoint("BOTTOMLEFT", ArenaFrameDivider, "TOPLEFT", 3, -28)
+	ArenaFrameNameHeader2:SetPoint("BOTTOMLEFT", ArenaFrameDivider, "TOPLEFT", 14, -28)
 	ArenaZone4:ClearAllPoints()
 	ArenaZone4:SetPoint("TOPLEFT", ArenaZone3, "TOPLEFT", 0, -57)
 
@@ -59,20 +59,6 @@ local function LoadSkin()
 
 	ArenaFrameCancelButton:SetPoint("BOTTOMRIGHT", ArenaFrame.backdrop, "BOTTOMRIGHT", -4, 4)
 	ArenaFrameGroupJoinButton:SetPoint("RIGHT", ArenaFrameJoinButton, "LEFT", -2, 0)
-
-	ArenaFrame:SetAttribute("UIPanelLayout-defined", true)
-	ArenaFrame:SetAttribute("UIPanelLayout-enabled", true)
-	ArenaFrame:SetAttribute("UIPanelLayout-area", "left")
-	ArenaFrame:SetAttribute("UIPanelLayout-pushable", 0)
-	ArenaFrame:SetAttribute("UIPanelLayout-width", T.Scale(338))
-
-	if ArenaFrame:GetAttribute("UIPanelLayout-allowOtherPanels") ~= true then
-		SetUIPanelAttribute(ArenaFrame, "allowOtherPanels", true)
-	end
-
-	table.insert(UISpecialFrames, ArenaFrame:GetName())
-
-	ArenaFrame:HookScript("OnShow", function() if InCombatLockdown() or not BattlefieldFrame:IsShown() then return end ToggleFrame(BattlefieldFrame) end)
 end
 
 table.insert(T.SkinFuncs["ShestakUI"], LoadSkin)
