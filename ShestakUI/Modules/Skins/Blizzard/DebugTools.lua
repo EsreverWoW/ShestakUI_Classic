@@ -5,7 +5,7 @@ if C.skins.blizzard_frames ~= true then return end
 --	DebugTools skin
 ----------------------------------------------------------------------------------------
 local function LoadSkin()
-	if not T.BCC then
+	if not T.classic then
 		EventTraceFrame:StripTextures()
 		EventTraceFrame:SetTemplate("Transparent")
 		T.SkinCloseButton(EventTraceFrameCloseButton)
