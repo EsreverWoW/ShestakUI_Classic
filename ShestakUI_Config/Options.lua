@@ -2014,7 +2014,7 @@ do
 	local enable = ns.CreateCheckBox(parent, "enable", L_GUI_NAMEPLATE_ENABLE)
 	enable:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
 
-	local distance = ns.CreateNumberSlider(parent, "distance", nil, nil, 0, 200, 1, true, L_GUI_NAMEPLATE_DISTANCE)
+	local distance = ns.CreateNumberSlider(parent, "distance", nil, nil, 0, IsClassicBuild() and 41 or 200, 1, true, L_GUI_NAMEPLATE_DISTANCE)
 	distance:SetPoint("TOPLEFT", enable, "BOTTOMLEFT", 0, -20)
 
 	local width = ns.CreateNumberSlider(parent, "width", nil, nil, 0, 150 / multScale, 1, true, L_GUI_NAMEPLATE_WIDTH)
@@ -2169,8 +2169,17 @@ do
 		extra_color,
 	}
 
-	if IsClassicBuild() then
+	local bcc = {
+		healer_icon, -- needs fixing since build 30786
+		quests,
+		offtank_color,
+		extra_color,
+	}
+
+	if IsClassicBuild() and not IsBCCBuild() then
 		HideOptions(classic)
+	elseif IsBCCBuild() then
+		HideOptions(bcc)
 	end
 end
 
