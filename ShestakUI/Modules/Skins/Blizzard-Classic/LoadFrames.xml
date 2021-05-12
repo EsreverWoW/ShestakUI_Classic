@@ -1,5 +1,5 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
-	<Script file="Others.lua"/>
+	<Script file="..\Blizzard\Others.lua"/>
 
 	<Script file="..\Blizzard\AddonList.lua"/>
 	<Script file="..\Blizzard\Binding.lua"/>

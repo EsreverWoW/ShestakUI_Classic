@@ -18,7 +18,10 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 		}
 
 		for _, object in pairs(checkButtons) do
-			T.SkinCheckBox(_G[object].checkButton)
+			local checkButton = _G[object] and _G[object].checkButton
+			if checkButton then
+				T.SkinCheckBox(_G[object].checkButton)
+			end
 		end
 
 		-- Blizzard Frame reskin
@@ -40,12 +43,14 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 			"BasicScriptErrors"
 		}
 
-		QueueStatusFrame:StripTextures()
 		GameMenuFrame:StripTextures()
-		LFDRoleCheckPopup:StripTextures()
-		RolePollPopup:StripTextures()
-		OpacityFrame:StripTextures()
-		ColorPickerFrame.Border:Hide()
+		if not T.classic then
+			QueueStatusFrame:StripTextures()
+			LFDRoleCheckPopup:StripTextures()
+			RolePollPopup:StripTextures()
+			OpacityFrame:StripTextures()
+			ColorPickerFrame.Border:Hide()
+		end
 
 		for i = 1, getn(bgskins) do
 			local frame = _G[bgskins[i]]
@@ -72,7 +77,6 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 				_G["StaticPopup"..i.."Button"..j]:SkinButton()
 			end
 			_G["StaticPopup"..i]:StripTextures()
-			_G["StaticPopup"..i].Border:StripTextures()
 			_G["StaticPopup"..i]:CreateBackdrop("Transparent")
 			_G["StaticPopup"..i].backdrop:SetPoint("TOPLEFT", 2, -2)
 			_G["StaticPopup"..i].backdrop:SetPoint("BOTTOMRIGHT", -2, 2)
@@ -99,10 +103,16 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 			_G["StaticPopup"..i.."CloseButton"]:SetPushedTexture("")
 			_G["StaticPopup"..i.."CloseButton"].SetPushedTexture = T.dummy
 			T.SkinCloseButton(_G["StaticPopup"..i.."CloseButton"])
+
+			if not T.classic then
+				_G["StaticPopup"..i].Border:StripTextures()
+			end
 		end
 		_G["StaticPopup1ExtraButton"]:SkinButton()
 
-		T.SkinCloseButton(_G["RolePollPopupCloseButton"])
+		if not T.classic then
+			T.SkinCloseButton(_G["RolePollPopupCloseButton"])
+		end
 
 		-- Cinematic popup
 		_G["CinematicFrameCloseDialog"]:SetScale(C.general.uiscale)
@@ -126,16 +136,21 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 		_G["PetBattleQueueReadyFrame"].DeclineButton:SkinButton()
 
 		-- Reskin Dropdown menu
-		hooksecurefunc("UIDropDownMenu_InitializeHelper", function()
-			for i = 1, UIDROPDOWNMENU_MAXLEVELS do
-				_G["DropDownList"..i]["Border"]:StripTextures()
-				_G["DropDownList"..i.."Backdrop"]:SetTemplate("Transparent")
-				_G["DropDownList"..i.."MenuBackdrop"]:SetTemplate("Transparent")
-			end
-		end)
+		if not T.BCC then -- TODO: See if there are still problems in BC Classic
+			hooksecurefunc("UIDropDownMenu_InitializeHelper", function()
+				for i = 1, UIDROPDOWNMENU_MAXLEVELS do
+					if not T.classic then
+						_G["DropDownList"..i]["Border"]:StripTextures()
+					end
 
-		if RaiderIO_CustomDropDownListMenuBackdrop then
-			RaiderIO_CustomDropDownListMenuBackdrop:StripTextures()
+					_G["DropDownList"..i.."Backdrop"]:SetTemplate("Transparent")
+					_G["DropDownList"..i.."MenuBackdrop"]:SetTemplate("Transparent")
+				end
+			end)
+
+			if RaiderIO_CustomDropDownListMenuBackdrop then
+				RaiderIO_CustomDropDownListMenuBackdrop:StripTextures()
+			end
 		end
 
 		-- Reskin menu
@@ -162,12 +177,12 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 
 		-- Hide header textures and move text/buttons
 		local BlizzardHeader = {
-			GameMenuFrame,
-			ColorPickerFrame
+			"GameMenuFrame",
+			"ColorPickerFrame"
 		}
 
 		for _, frame in pairs(BlizzardHeader) do
-			local title = frame.Header
+			local title = T.classic and _G[frame.."Header"] or _G[frame] and _G[frame].Header
 			if title then
 				title:StripTextures()
 				title:ClearAllPoints()
@@ -227,8 +242,10 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 				buttons:SkinButton()
 			end
 		end
-		LFDReadyCheckPopup.YesButton:SkinButton(true)
-		LFDReadyCheckPopup.NoButton:SkinButton(true)
+		if not T.classic then
+			LFDReadyCheckPopup.YesButton:SkinButton(true)
+			LFDReadyCheckPopup.NoButton:SkinButton(true)
+		end
 
 		-- Reskin scrollbars
 		local scrollbars = {
@@ -259,8 +276,10 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 		_G["ReadyCheckFrameText"]:SetPoint("TOP", 0, -12)
 
 		-- Others
-		for i = 1, 10 do
-			select(i, GuildInviteFrame:GetRegions()):Hide()
+		if not T.classic then
+			for i = 1, 10 do
+				select(i, GuildInviteFrame:GetRegions()):Hide()
+			end
 		end
 		_G["GeneralDockManagerOverflowButtonList"]:SetFrameStrata("HIGH")
 		_G["ReadyCheckListenerFrame"]:SetAlpha(0)
@@ -272,8 +291,13 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 		StackSplitFrame:CreateBackdrop("Transparent")
 		StackSplitFrame.backdrop:SetPoint("TOPLEFT", 5, -5)
 		StackSplitFrame.backdrop:SetPoint("BOTTOMRIGHT", -5, 10)
-		StackSplitFrame.OkayButton:SkinButton()
-		StackSplitFrame.CancelButton:SkinButton()
+		if T.classic then
+			StackSplitOkayButton:SkinButton()
+			StackSplitCancelButton:SkinButton()
+		else
+			StackSplitFrame.OkayButton:SkinButton()
+			StackSplitFrame.CancelButton:SkinButton()
+		end
 
 		if C.skins.blizzard_frames == true then
 			-- Social Browser frame
@@ -283,9 +307,11 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 			SocialBrowserFrame.CloseButton:SetSize(16, 16)
 
 			-- What's new frame
-			SplashFrame:CreateBackdrop("Transparent")
-			SplashFrame.BottomCloseButton:SkinButton()
-			T.SkinCloseButton(SplashFrame.TopCloseButton)
+			if not T.classic then
+				SplashFrame:CreateBackdrop("Transparent")
+				SplashFrame.BottomCloseButton:SkinButton()
+				T.SkinCloseButton(SplashFrame.TopCloseButton)
+			end
 
 			-- NavBar Buttons (Used in EncounterJournal and HelpFrame)
 			local function SkinNavBarButtons(self)
@@ -357,13 +383,15 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 				SkinIconArray(baseName, numIcons)
 			end)
 
-			hooksecurefunc(HelpTipTemplateMixin, "ApplyText", function(self)
-				T.SkinHelpBox(self)
-			end)
+			if not T.classic then
+				hooksecurefunc(HelpTipTemplateMixin, "ApplyText", function(self)
+					T.SkinHelpBox(self)
+				end)
+			end
 		end
 	end
 
-	if addon == "Blizzard_GuildUI" and T.client == "ruRU" then
+	if addon == "Blizzard_GuildUI" and T.client == "ruRU" and not T.classic then
 		_G["GuildFrameTab1"]:ClearAllPoints()
 		_G["GuildFrameTab1"]:SetPoint("TOPLEFT", _G["GuildFrame"], "BOTTOMLEFT", -4, 2)
 	end
