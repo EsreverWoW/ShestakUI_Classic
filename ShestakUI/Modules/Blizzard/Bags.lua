@@ -5,7 +5,7 @@ if C.bag.enable ~= true then return end
 --	Based on Stuffing(by Hungtar, editor Tukz)
 ----------------------------------------------------------------------------------------
 local BAGS_BACKPACK = {0, 1, 2, 3, 4}
-local BAGS_BANK = T.classic and {-1, 5, 6, 7, 8, 9, 10} or {-1, 5, 6, 7, 8, 9, 10, 11}
+local BAGS_BANK = (T.classic and not T.BCC) and {-1, 5, 6, 7, 8, 9, 10} or {-1, 5, 6, 7, 8, 9, 10, 11}
 local ST_NORMAL = 1
 local ST_FISHBAG = 2
 local ST_SPECIAL = 3
