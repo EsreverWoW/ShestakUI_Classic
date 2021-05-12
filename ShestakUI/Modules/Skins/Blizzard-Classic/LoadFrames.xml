@@ -16,6 +16,7 @@
 	<Script file="..\Blizzard\Mail.lua"/>
 	<Script file="..\Blizzard\Merchant.lua"/>
 	<Script file="..\Blizzard\Options.lua"/>
+	<Script file="..\Blizzard\Petition.lua"/>
 	<Script file="..\Blizzard\Raid.lua"/>
 	<Script file="..\Blizzard\RaidInfo.lua"/>
 	<Script file="..\Blizzard\TimeManager.lua"/>
@@ -32,7 +33,6 @@
 	<Script file="GuildRegistrar.lua"/>
 	<Script file="Inspect.lua"/>
 	<Script file="ItemText.lua"/>
-	<Script file="Petition.lua"/>
 	<Script file="PetStable.lua"/>
 	<Script file="Quest.lua"/>				<!-- TODO -->
 	<Script file="QuestLog.lua"/>
