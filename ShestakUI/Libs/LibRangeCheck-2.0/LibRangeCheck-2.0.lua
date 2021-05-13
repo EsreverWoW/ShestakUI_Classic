@@ -1,6 +1,6 @@
 --[[
 Name: LibRangeCheck-2.0
-Revision: $Revision: 205 $
+Revision: $Revision: 206 $
 Author(s): mitch0
 Website: http://www.wowace.com/projects/librangecheck-2-0/
 Description: A range checking library based on interact distances and spell ranges
@@ -41,7 +41,7 @@ License: Public Domain
 -- @class file
 -- @name LibRangeCheck-2.0
 local MAJOR_VERSION = "LibRangeCheck-2.0"
-local MINOR_VERSION = tonumber(("$Revision: 205 $"):match("%d+")) + 100000
+local MINOR_VERSION = tonumber(("$Revision: 206 $"):match("%d+")) + 100000
 
 local lib, oldminor = LibStub:NewLibrary(MAJOR_VERSION, MINOR_VERSION)
 if not lib then
@@ -83,101 +83,171 @@ local MeleeRange = 2
 local FriendSpells = {}
 -- list of harmful spells that have different ranges
 local HarmSpells = {}
+-- list of resurrect spells that have different ranges
+local ResSpells = {}
+-- list of pet spells that have different ranges
+local PetSpells = {}
 
-FriendSpells["DEATHKNIGHT"] = {
-}
+-- Death Knights
+FriendSpells["DEATHKNIGHT"] = {}
 HarmSpells["DEATHKNIGHT"] = {
-    49576, -- ["Death Grip"], -- 30
+    49576, -- Death Grip (30 yards)
+    47541, -- Death Coil (30 yards)
 }
+ResSpells["DEATHKNIGHT"] = {
+    46619, -- Raise Ally (30 yards, level 72)
+}
+PetSpells["DEATHKNIGHT"] = {}
 
-FriendSpells["DEMONHUNTER"] = {
-}
-HarmSpells["DEMONHUNTER"] = {
-    185123, -- ["Throw Glaive"], -- 30
-}
-
+-- Druids
 FriendSpells["DRUID"] = {
-    774, -- ["Rejuvenation"], -- 40
-    2782, -- ["Remove Corruption"], -- 40
+    774,  -- Rejuvenation (40 yards, level 4)
+    2782, -- Remove Curse (40 yards, level 24)
+    8936, -- Regrowth (40 yards, level 12)
+    5185, -- Healing Touch (40 yards)
 }
 HarmSpells["DRUID"] = {
-    5176, -- ["Wrath"], -- 40
-    339, -- ["Entangling Roots"], -- 35
-    6795, -- ["Growl"], -- 30
-    33786, -- ["Cyclone"], -- 20
-    22568, -- ["Ferocious Bite"], -- Melee
+    5176,  -- Wrath (30 yards, 33 yards, 36 yards)
+    339,   -- Entangling Roots (30 yards, 33 yards, 36 yards, level 8)
+    6795,  -- Growl (Melee Range, level 10) -- 30 yards in WotLK
+    33786, -- Cyclone (20 yards, level 70)
+    22568, -- Ferocious Bite (Melee Range, level 32)
+    8921,  -- Moonfire (30 yards, 33 yards, 36 yards, level 4)
 }
+ResSpells["DRUID"] = {
+    50769, -- Revive (30 yards, level 12)
+    20484, -- Rebirth (30 yards, level 20)
+}
+PetSpells["DRUID"] = {}
 
+-- Hunters
 FriendSpells["HUNTER"] = {}
 HarmSpells["HUNTER"] = {
-    75, -- ["Auto Shot"], -- 40
+    75, -- Auto Shot (35 yards, 37 yards, 39 yards, 41 yards)
+}
+ResSpells["HUNTER"] = {}
+PetSpells["HUNTER"] = {
+    136, -- Mend Pet (45 yards, 68 yards, level 12)
 }
 
+-- Mages
 FriendSpells["MAGE"] = {
+    -- 130, -- Slow Fall (30 yards, level 12) -- Self buff in Classic/BC
+    1459, -- Arcane Intellect (30 yards)
 }
 HarmSpells["MAGE"] = {
-    44614, --["Frostfire Bolt"], -- 40
-    5019, -- ["Shoot"], -- 30
+    44614, -- Frostfire Bolt (40 yards, level 75)
+    5019,  -- Shoot (30 yards)
+    118,   -- Polymorph (30 yards, level 8)
+    116,   -- Frostbolt (30 yards, 33 yards, 36 yards, level 4)
+    133,   -- Fireball (35 yards, 38 yards, 41 yards)
+    44425, -- Arcane Barrage (30 yards, level 60)
 }
-
-FriendSpells["MONK"] = {
-    115450, -- ["Detox"], -- 40
-    115546, -- ["Provoke"], -- 30
-}
-HarmSpells["MONK"] = {
-    115546, -- ["Provoke"], -- 30
-    115078, -- ["Paralysis"], -- 20
-    100780, -- ["Tiger Palm"], -- Melee
-}
+ResSpells["MAGE"] = {}
+PetSpells["MAGE"] = {}
 
 FriendSpells["PALADIN"] = {
-    19750, -- ["Flash of Light"], -- 40
+    19750, -- Flash of Light (40 yards, level 20)
+    4987, -- Cleanse (40 yards, level 42)
+    635, -- Holy Light (40 yards)
 }
 HarmSpells["PALADIN"] = {
-    62124, -- ["Reckoning"], -- 30
-    20271, -- ["Judgement"], -- 30
-    853, -- ["Hammer of Justice"], -- 10
-    35395, -- ["Crusader Strike"], -- Melee
+    853,    -- Hammer of Justice (10 yards, level 8)
+    35395,  -- Crusader Strike (Retribution) (Melee Range, level 50)
+    62124,  -- Hand of Reckoning (30 yards, level 16)
+    20271,  -- Judgement (10 yards, level 4)
+    20473,  -- Holy Shock (20 yards, level 40)
 }
+ResSpells["PALADIN"] = {
+    7328, -- Redemption (30 yards, level 12)
+}
+PetSpells["PALADIN"] = {}
 
+-- Priests
 FriendSpells["PRIEST"] = {
-    527, -- ["Purify"], -- 40
-    17, -- ["Power Word: Shield"], -- 40
+    527,  -- Purify (30 yards, level 18)
+    2061, -- Flash Heal (40 yards, level 20)
+    17,   -- Power Word: Shield (40 yards, level 6)
+    -- 1706, -- Levitate (30 yards, level 34) -- Self buff in Classic/BC
+    2050, -- Lesser Heal (40 yards)
 }
 HarmSpells["PRIEST"] = {
-    589, -- ["Shadow Word: Pain"], -- 40
-    5019, -- ["Shoot"], -- 30
+    589,  -- Shadow Word: Pain (30 yards, 33 yards, 36 yards, level 4)
+    585,  -- Smite (30 yards, 33 yards, 36 yards)
+    5019, -- Shoot (30 yards)
+    8092, -- Mind Blast (30 yards, 33 yards, 36 yards, level 10)
 }
+ResSpells["PRIEST"] = {
+    2006, -- Resurrection (30 yards, level 10)
+}
+PetSpells["PRIEST"] = {}
 
-FriendSpells["ROGUE"] = {}
+-- Rogues
+FriendSpells["ROGUE"] = {
+    57934, -- Tricks of the Trade (20 yards, level 75)
+}
 HarmSpells["ROGUE"] = {
-    2764, -- ["Throw"], -- 30
-    2094, -- ["Blind"], -- 15
+    2764,   -- Throw (5-30 yards)
+    3018,   -- Shoot (5-30 yards)
+    2094,   -- Blind (10 yards, level 34)
 }
+ResSpells["ROGUE"] = {}
+PetSpells["ROGUE"] = {}
 
+-- Shamans
 FriendSpells["SHAMAN"] = {
-    8004, -- ["Healing Surge"], -- 40
-    546, -- ["Water Walking"], -- 30
+    8004,   -- Lesser Healing Wave (40 yards, level 20)
+    546,    -- Water Walking (30 yards, level 28)
+    526,    -- Cure Poison (40 yards, level 16)
+    2870,   -- Cure Disease (40 yards, level 22)
+    331,    -- Healing Wave (40 yards)
 }
 HarmSpells["SHAMAN"] = {
-    403, -- ["Lightning Bolt"], -- 40
-    370, -- ["Purge"], -- 30
-    73899, -- ["Primal Strike"],. -- Melee
+    370,    -- Purge (30 yards, level 12)
+    403,    -- Lightning Bolt (30 yards)
+    17364,  -- Stormstrike (Enhancement) (Melee Range, level 40)
+    403,    -- Lightning Bolt (30 yards)
+    421,    -- Chain Lightning (30 yards, level 32)
+    8042,   -- Earth Shock (20 yards, level 4)
 }
+ResSpells["SHAMAN"] = {
+    2008, -- Ancestral Spirit (30 yards, level 12)
+}
+PetSpells["SHAMAN"] = {}
 
+-- Warriors
 FriendSpells["WARRIOR"] = {}
 HarmSpells["WARRIOR"] = {
-    355, -- ["Taunt"], -- 30
-    100, -- ["Charge"], -- 8-25
-    5246, -- ["Intimidating Shout"], -- 8
+    355,  -- Taunt (Melee Range, level 10) -- 30 yards in WotLK
+    5246, -- Intimidating Shout (10 yards, level 22)
+    100,  -- Charge (8-25 yards, level 4)
+    3018, -- Shoot (5-30 yards)
+    2764, -- Throw (5-30 yards)
 }
+ResSpells["WARRIOR"] = {}
+PetSpells["WARRIOR"] = {}
 
+-- Warlocks
 FriendSpells["WARLOCK"] = {
-    5697, -- ["Unending Breath"], -- 30
+    5697,  -- Unending Breath (30 yards, level 16)
+    20707, -- Soulstone Resurrection (30 yards, level 18) -- this can be precast, so leave it in friendly as well as res
+    132,   -- Detect Invisibility (30 yards, level 26)
 }
 HarmSpells["WARLOCK"] = {
-    686, -- ["Shadow Bolt"], -- 40
-    5019, -- ["Shoot"], -- 30
+    5019,   -- Shoot (30 yards)
+    234153, -- Drain Life (40 yards, level 9)
+    198590, -- Drain Soul (40 yards, level 15)
+    686,    -- Shadow Bolt (Demonology / Affliction) (40 yards)
+    232670, -- Shadow Bolt (40 yards)
+    5782,   -- Fear (30 yards)
+    172,    -- Corruption (30 yards)
+    348,    -- Immolate (30 yards)
+}
+ResSpells["WARLOCK"] = {
+    -- 20707, -- Soulstone Resurrection (30 yards, level 18) -- this is a Cataclysm thing
+}
+PetSpells["WARLOCK"] = {
+    755, -- Health Funnel (20 yards, level 12) -- 45 yards in WotLK
 }
 
 -- Items [Special thanks to Maldivia for the nice list]
@@ -376,17 +446,9 @@ local HarmItems = {
     },
 }
 
--- This could've been done by checking player race as well and creating tables for those, but it's easier like this
-for k, v in pairs(FriendSpells) do
-    tinsert(v, 28880) -- ["Gift of the Naaru"]
-end
-
--- >> END OF STATIC CONFIG
-
 -- cache
-
+-- GLOBALS: LibStub, CreateFrame
 local setmetatable = setmetatable
-local tonumber = tonumber
 local pairs = pairs
 local tostring = tostring
 local print = print
@@ -401,10 +463,10 @@ local GetSpellBookItemName = GetSpellBookItemName
 local GetNumSpellTabs = GetNumSpellTabs
 local GetSpellTabInfo = GetSpellTabInfo
 local GetItemInfo = GetItemInfo
-local UnitAura = UnitAura
 local UnitCanAttack = UnitCanAttack
 local UnitCanAssist = UnitCanAssist
 local UnitExists = UnitExists
+local UnitIsUnit = UnitIsUnit
 local UnitIsDeadOrGhost = UnitIsDeadOrGhost
 local CheckInteractDistance = CheckInteractDistance
 local IsSpellInRange = IsSpellInRange
@@ -412,12 +474,17 @@ local IsItemInRange = IsItemInRange
 local UnitClass = UnitClass
 local UnitRace = UnitRace
 local GetInventoryItemLink = GetInventoryItemLink
-local GetSpecialization = GetSpecialization
-local GetSpecializationInfo = GetSpecializationInfo
 local GetTime = GetTime
 local HandSlotId = GetInventorySlotInfo("HandsSlot")
 local math_floor = math.floor
 local UnitIsVisible = UnitIsVisible
+
+-- This could've been done by checking player race as well and creating tables for those, but it's easier like this
+for _, v in pairs(FriendSpells) do
+    tinsert(v, 28880) -- Gift of the Naaru (40 yards)
+end
+
+-- >> END OF STATIC CONFIG
 
 -- temporary stuff
 
@@ -691,11 +758,14 @@ lib.checkerCache_Item = lib.checkerCache_Item or {}
 lib.miscRC = createCheckerList(nil, nil, DefaultInteractList)
 lib.friendRC = createCheckerList(nil, nil, DefaultInteractList)
 lib.harmRC = createCheckerList(nil, nil, DefaultInteractList)
+lib.resRC = createCheckerList(nil, nil, DefaultInteractList)
+lib.petRC = createCheckerList(nil, nil, DefaultInteractList)
+lib.friendNoItemsRC = createCheckerList(nil, nil, DefaultInteractList)
+lib.harmNoItemsRC = createCheckerList(nil, nil, DefaultInteractList)
 
 lib.failedItemRequests = {}
 
 -- << Public API
-
 
 --- The callback name that is fired when checkers are changed.
 -- @field
@@ -789,7 +859,19 @@ function lib:init(forced)
     if updateCheckers(self.harmRC, createCheckerList(HarmSpells[playerClass], HarmItems, interactList)) then
         changed = true
     end
+    if updateCheckers(self.friendNoItemsRC, createCheckerList(FriendSpells[playerClass], nil, interactList)) then
+        changed = true
+    end
+    if updateCheckers(self.harmNoItemsRC, createCheckerList(HarmSpells[playerClass], nil, interactList)) then
+        changed = true
+    end
     if updateCheckers(self.miscRC, createCheckerList(nil, nil, interactList)) then
+        changed = true
+    end
+    if updateCheckers(self.resRC, createCheckerList(ResSpells[playerClass], nil, interactList)) then
+        changed = true
+    end
+    if updateCheckers(self.petRC, createCheckerList(PetSpells[playerClass], nil, interactList)) then
         changed = true
     end
     if changed and self.callbacks then
@@ -915,20 +997,35 @@ end
 -- local rc = LibStub("LibRangeCheck-2.0")
 -- local minRange, maxRange = rc:GetRange('target')
 -- local minRangeIfVisible, maxRangeIfVisible = rc:GetRange('target', true)
-function lib:GetRange(unit, checkVisible)
+function lib:GetRange(unit, checkVisible, noItems)
     if not UnitExists(unit) then
         return nil
     end
+
     if checkVisible and not UnitIsVisible(unit) then
         return nil
     end
+
+    local canAssist = UnitCanAssist("player", unit)
     if UnitIsDeadOrGhost(unit) then
-        return getRange(unit, self.miscRC)
+        if canAssist then
+            return getRange(unit, self.resRC)
+        else
+            return getRange(unit, self.miscRC)
+        end
     end
+
     if UnitCanAttack("player", unit) then
-        return getRange(unit, self.harmRC)
-    elseif UnitCanAssist("player", unit) then
-        return getRange(unit, self.friendRC)
+        return getRange(unit, noItems and self.harmNoItemsRC or self.harmRC)
+    elseif UnitIsUnit("pet", unit) then
+        local minRange, maxRange = getRange(unit, noItems and self.friendNoItemsRC or self.friendRC)
+        if minRange or maxRange then
+            return minRange, maxRange
+        else
+            return getRange(unit, self.petRC)
+        end
+    elseif canAssist then
+        return getRange(unit, noItems and self.friendNoItemsRC or self.friendRC)
     else
         return getRange(unit, self.miscRC)
     end
@@ -1068,7 +1165,6 @@ function lib:scheduleAuraCheck()
     self.frame:Show()
 end
 
-
 -- << load-time initialization
 
 function lib:activate()
@@ -1088,8 +1184,8 @@ function lib:activate()
         end
     end
     initItemRequests()
-    self.frame:SetScript("OnEvent", function(frame, ...) self:OnEvent(...) end)
-    self.frame:SetScript("OnUpdate", function(frame, elapsed)
+    self.frame:SetScript("OnEvent", function(_, ...) self:OnEvent(...) end)
+    self.frame:SetScript("OnUpdate", function(_, elapsed)
         lastUpdate = lastUpdate + elapsed
         if lastUpdate < UpdateDelay then
             return
