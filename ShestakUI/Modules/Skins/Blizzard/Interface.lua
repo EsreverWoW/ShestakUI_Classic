@@ -75,7 +75,6 @@ local function LoadSkin()
 		"CombatPanelCombatTextComboPoints",
 		"CombatPanelCombatTextEnergyGains",
 		"CombatPanelCombatTextHonorGains",
-		"CombatPanelEnableCombatDamageText",
 		"CombatPanelEnablePeriodicDamage",
 		"CombatPanelEnablePetDamage",
 		-- Display
@@ -152,6 +151,12 @@ local function LoadSkin()
 		"AccessibilityPanelColorblindMode",
 		"AccessibilityPanelOverrideFadeOut"
 	}
+
+	if not T.BCC then
+		-- FIXME -- BCC: attempt to call method 'SetNormalTexture' (a nil value)
+		tinsert(checkboxes, "CombatPanelEnableCombatDamageText")
+		tinsert(checkboxes, "CombatPanelEnableCombatHealingText")
+	end
 
 	for i = 1, getn(checkboxes) do
 		local checkbox = _G["InterfaceOptions"..checkboxes[i]]
