@@ -299,6 +299,14 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 			StackSplitFrame.CancelButton:SkinButton()
 		end
 
+		if T.classic then
+			_G["StaticPopup1CloseButton"]:HookScript("OnShow", function(self)
+				self:StripTextures(true)
+				T.SkinCloseButton(self, nil, "-")
+			end)
+			T.SkinCloseButton(_G["ItemRefCloseButton"])
+		end
+
 		if C.skins.blizzard_frames == true then
 			-- Social Browser frame
 			SocialBrowserFrame:StripTextures()
