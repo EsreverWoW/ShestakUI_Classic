@@ -11,15 +11,6 @@
 	<Script file="Locales\Spanish.lua"/>
 	<Script file="Locales\Taiwan.lua"/>
 
-	<Script file="Locales\Classic\English.lua"/>
-	<Script file="Locales\Classic\Chinese.lua"/>
-	<Script file="Locales\Classic\French.lua"/>
-	<Script file="Locales\Classic\German.lua"/>
-	<Script file="Locales\Classic\Italian.lua"/>
-	<Script file="Locales\Classic\Russian.lua"/>
-	<Script file="Locales\Classic\Spanish.lua"/>
-	<Script file="Locales\Classic\Taiwan.lua"/>
-
 	<Script file="Config\Settings.lua"/>
 	<Script file="Config\Positions.lua"/>
 	<Script file="Config\Fonts.lua"/>

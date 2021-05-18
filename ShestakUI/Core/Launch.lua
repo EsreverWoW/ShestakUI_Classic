@@ -279,7 +279,12 @@ OnLogon:SetScript("OnEvent", function(self)
 
 	-- Welcome message
 	if C.general.welcome_message == true then
-		print("|cffffff00"..L_WELCOME_LINE_1..T.version.." "..T.client..", "..T.name..".|r")
-		print("|cffffff00"..L_WELCOME_LINE_2_1.." |cffffff00"..L_WELCOME_LINE_2_2.."|r")
+		if T.classic then
+			print("|cffffff00"..L_WELCOME_LINE_1_CLASSIC..T.version.." "..T.client..", "..T.name..".|r")
+			print("|cffffff00"..L_WELCOME_LINE_2_1_CLASSIC.." |cffffff00"..L_WELCOME_LINE_2_2_CLASSIC.."|r")
+		else
+			print("|cffffff00"..L_WELCOME_LINE_1..T.version.." "..T.client..", "..T.name..".|r")
+			print("|cffffff00"..L_WELCOME_LINE_2_1.." |cffffff00"..L_WELCOME_LINE_2_2.."|r")
+		end
 	end
 end)

@@ -7,7 +7,11 @@ local check = function(self, event, prefix, message, _, sender)
 	if event == "CHAT_MSG_ADDON" then
 		if prefix ~= "ShestakUIVersion" or sender == T.name then return end
 		if tonumber(message) ~= nil and tonumber(message) > tonumber(T.version) then
-			print("|cffff0000"..L_MISC_UI_OUTDATED.."|r")
+			if T.classic then
+				print("|cffff0000"..L_MISC_UI_OUTDATED_CLASSIC.."|r")
+			else
+				print("|cffff0000"..L_MISC_UI_OUTDATED.."|r")
+			end
 			self:UnregisterEvent("CHAT_MSG_ADDON")
 		end
 	else
