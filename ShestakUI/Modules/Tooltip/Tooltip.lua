@@ -322,7 +322,7 @@ local OnTooltipSetUnit = function(self)
 			else
 				_G["GameTooltipTextLeft2"]:SetTextColor(0, 1, 1)
 			end
-			if C.tooltip.rank then
+			if (not T.classic or T.BCC) and C.tooltip.rank then
 				self:AddLine(RANK..": |cffffffff"..guildRank.."|r")
 			end
 		end
@@ -346,10 +346,8 @@ local OnTooltipSetUnit = function(self)
 			end
 		end
 
-		if T.classic and guildName and C.tooltip.rank then -- Rank line gets cut in Classic and needs to be re-added
-			if not UnitIsDead(unit) or UnitIsFeignDeath(unit) then -- only need to add line for players who are alive
-				self:AddLine(RANK..": |cffffffff"..guildRank.."|r")
-			end
+		if T.classic and not T.BCC and guildName and C.tooltip.rank then -- Rank line needs to come later for Classic 1.13.* clients
+			self:AddLine(RANK..": |cffffffff"..guildRank.."|r")
 		end
 	else
 		for i = 2, lines do
