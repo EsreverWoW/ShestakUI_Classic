@@ -33,7 +33,7 @@ local AddUnit = function(unit)
 	end
 
 	if T.classic then
-		threatval = math.floor(threatValue / 100)
+		threatval = threatval and math.floor(threatval / 100)
 	end
 
 	local guid = UnitGUID(unit)
