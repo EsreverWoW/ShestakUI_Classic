@@ -444,6 +444,11 @@ if T.classic then
 	BattlegroundShine:Hide()
 
 	MiniMapBattlefieldFrame:CreateBackdrop("ClassColor")
-	MiniMapBattlefieldFrame.backdrop:SetPoint("TOPLEFT", MiniMapBattlefieldIcon, -2, 2)
-	MiniMapBattlefieldFrame.backdrop:SetPoint("BOTTOMRIGHT", MiniMapBattlefieldIcon, 2, -2)
+	if T.BCC then
+		MiniMapBattlefieldFrame.backdrop:SetPoint("TOPLEFT", MiniMapBattlefieldIcon, 4, -4)
+		MiniMapBattlefieldFrame.backdrop:SetPoint("BOTTOMRIGHT", MiniMapBattlefieldIcon, -4, 4)
+	else
+		MiniMapBattlefieldFrame.backdrop:SetPoint("TOPLEFT", MiniMapBattlefieldIcon, -2, 2)
+		MiniMapBattlefieldFrame.backdrop:SetPoint("BOTTOMRIGHT", MiniMapBattlefieldIcon, 2, -2)
+	end
 end
