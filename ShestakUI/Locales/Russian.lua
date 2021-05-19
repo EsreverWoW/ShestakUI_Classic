@@ -115,7 +115,6 @@ L_ERRORFRAME_L = "Щелкните, чтобы посмотреть ошибки
 
 -- Bags
 L_BAG_SHOW_BAGS = "Показать сумки"
-L_BAG_SHOW_KEYRING = "Toggle Keyring" -- Needs review
 L_BAG_RIGHT_CLICK_SEARCH = "ПКМ для поиска"
 L_BAG_STACK_MENU = "Сложить"
 L_BAG_RIGHT_CLICK_CLOSE = "ПКМ, чтобы открыть меню"
