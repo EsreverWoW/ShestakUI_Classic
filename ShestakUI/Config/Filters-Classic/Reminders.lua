@@ -286,8 +286,8 @@ if C.reminder.solo_buffs_enable == true then
 				["role"] = "Tank",
 				["instance"] = true,
 				["reversecheck"] = true,
-				-- ["negate_reversecheck"] = 1,	-- Holy paladins use RF sometimes
-				["negate_reversecheck"] = "Healer",	-- Holy paladins use RF sometimes
+				["negate_reversecheck"] = 1,	-- Holy paladins use RF sometimes
+				-- ["negate_reversecheck"] = "Healer",	-- Holy paladins use RF sometimes
 				-- ["level"] = 16,
 			},
 			[2] = {	-- Auras group
