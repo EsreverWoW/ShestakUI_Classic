@@ -67,7 +67,7 @@ local function LoadSkin()
 	end
 
 	QuestLogQuestCount:ClearAllPoints()
-	QuestLogQuestCount:SetPoint("TOPRIGHT", QuestLogFrame.backdrop, "TOPRIGHT", -32, -40)
+	QuestLogQuestCount:SetPoint("TOPRIGHT", QuestLogFrame.backdrop, "TOPRIGHT", -32, -30)
 
 	local QuestButtons = {
 		"QuestLogFrameAbandonButton",
