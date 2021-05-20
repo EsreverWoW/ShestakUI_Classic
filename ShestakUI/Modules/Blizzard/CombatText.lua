@@ -319,7 +319,7 @@ local function OnEvent(_, event, subevent, powerType)
 	elseif event == "UNIT_POWER_UPDATE" and COMBAT_TEXT_SHOW_ENERGIZE == "1" then
 		if subevent == ct.unit then
 			if powerType and powerType ~= 'COMBO_POINTS' then return end
-			local cp = UnitPower(ct.unit, 4)
+			local cp = UnitPower(ct.unit, Enum.PowerType.ComboPoints)
 			if cp > 0 then
 				r, g, b = 1, 0.82, 0
 				if cp == MAX_COMBO_POINTS then
