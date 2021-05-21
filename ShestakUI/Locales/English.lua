@@ -81,9 +81,6 @@ L_MAP_COORDS = "Coordinates"
 
 -- Minimap
 L_MINIMAP_CALENDAR = "Calendar"
-L_MINIMAP_HEAL_LAYOUT = "Left-Click - Heal Layout"
-L_MINIMAP_DPS_LAYOUT = "Right-Click - DPS Layout"
-L_MINIMAP_BLIZZ_LAYOUT = "Middle-Click - Blizzard Layout"
 L_MINIMAP_FARM = "Minimap size"
 L_MINIMAP_TOGGLE = "Toggle action bars"
 
@@ -171,7 +168,6 @@ L_INFO_SKIN_DISABLED2 = " is disabled."
 L_POPUP_INSTALLUI = "First time on ShestakUI with this Character. You must reload UI to configure it."
 L_POPUP_RESETUI = "Are you sure you want to reset all settings for ShestakUI?"
 L_POPUP_RESETSTATS = "Are you sure you want to reset statistics for time spent in game and gold."
-L_POPUP_SWITCH_RAID = "Select Raid layout."
 L_POPUP_DISBAND_RAID = "Are you sure you want to disband the group?"
 L_POPUP_DISABLEUI = "ShestakUI doesn't work for this resolution, do you want to disable ShestakUI? (Cancel if you want to try another resolution)"
 L_POPUP_SETTINGS_ALL = "Apply settings for all modifications? (DBM, BigWigs, Skada and MSBT)"
@@ -282,8 +278,6 @@ L_SLASHCMD_HELP = {
 	"/teleport - Teleportation from random dungeon.",
 	"/ss - Switches between talent spec's.",
 	"/tt - Whisper target.",
-	"/heal - Switches to 'Heal' layout.",
-	"/dps - Switches to 'DPS' layout.",
 	"/farmmode - Increase the size of the minimap.",
 	"/resetui - Resets general settings to default.",
 	"/resetuf - Resets the unit frames to their default position.",

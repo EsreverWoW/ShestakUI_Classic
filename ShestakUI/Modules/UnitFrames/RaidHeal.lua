@@ -308,122 +308,80 @@ end
 --	Default position of ShestakUI unitframes
 ----------------------------------------------------------------------------------------
 oUF:Factory(function(self)
-	if ShestakUISettings == nil or ShestakUISettings.RaidLayout ~= "HEAL" then return end
+	if C.raidframe.layout ~= "HEAL" and C.raidframe.layout ~= "AUTO" then return end
 
 	oUF:RegisterStyle("ShestakHeal", Shared)
 	oUF:SetActiveStyle("ShestakHeal")
 	if C.raidframe.show_party == true then
+		local party = self:SpawnHeader("oUF_Party", nil, "custom [@raid6,exists] hide;show",
+			"oUF-initialConfigFunction", [[
+				local header = self:GetParent()
+				self:SetWidth(header:GetAttribute("initial-width"))
+				self:SetHeight(header:GetAttribute("initial-height"))
+			]],
+			"initial-width", unit_width,
+			"initial-height", T.Scale(unit_height),
+			"showSolo", C.raidframe.solo_mode,
+			"showPlayer", C.raidframe.player_in_party,
+			"groupBy", (not T.classic and C.raidframe.by_role) and "ASSIGNEDROLE",
+			"groupingOrder", (not T.classic and C.raidframe.by_role) and "TANK,HEALER,DAMAGER,NONE",
+			"sortMethod", (not T.classic and C.raidframe.by_role) and "NAME",
+			"showParty", true,
+			"showRaid", true,
+			"xOffset", not C.raidframe.party_vertical and T.Scale(7),
+			"yOffset", C.raidframe.party_vertical and T.Scale(-7),
+			"point", C.raidframe.party_vertical and "TOP" or "LEFT"
+		)
+		party:SetPoint("TOPLEFT", _G["PartyAnchor"])
 		if C.raidframe.party_vertical then
-			-- Party vertical
-			local party = self:SpawnHeader("oUF_Party", nil, "custom [@raid6,exists] hide;show",
-			"oUF-initialConfigFunction", [[
-					local header = self:GetParent()
-					self:SetWidth(header:GetAttribute("initial-width"))
-					self:SetHeight(header:GetAttribute("initial-height"))
-				]],
-			"initial-width", unit_width,
-			"initial-height", T.Scale(unit_height),
-			"showSolo", C.raidframe.solo_mode,
-			"showPlayer", C.raidframe.player_in_party,
-			"groupBy", (not T.classic and C.raidframe.by_role) and "ASSIGNEDROLE",
-			"groupingOrder", (not T.classic and C.raidframe.by_role) and "TANK,HEALER,DAMAGER,NONE",
-			"sortMethod", (not T.classic and C.raidframe.by_role) and "NAME",
-			"showParty", true,
-			"showRaid", true,
-			"yOffset", T.Scale(-7),
-			"point", "TOP"
-			)
-			if C.raidframe.player_in_party == true then
-				party:SetPoint(unpack(C.position.unitframes.party_heal))
-			else
-				party:SetPoint(C.position.unitframes.party_heal[1], C.position.unitframes.party_heal[2], C.position.unitframes.party_heal[3], C.position.unitframes.party_heal[4] + 32, C.position.unitframes.party_heal[5])
-			end
-
-			-- Party targets
-			if C.raidframe.show_target then
-				local partytarget = self:SpawnHeader("oUF_PartyTarget", nil, "custom [@raid6,exists] hide;show",
-				"oUF-initialConfigFunction", [[
-						local header = self:GetParent()
-						self:SetWidth(header:GetAttribute("initial-width"))
-						self:SetHeight(header:GetAttribute("initial-height"))
-						self:SetAttribute("unitsuffix", "target")
-					]],
-				"initial-width", T.Scale(unit_height),
-				"initial-height", T.Scale(unit_height),
-				"showSolo", C.raidframe.solo_mode,
-				"showPlayer", C.raidframe.player_in_party,
-				"groupBy", (not T.classic and C.raidframe.by_role) and "ASSIGNEDROLE",
-				"groupingOrder", (not T.classic and C.raidframe.by_role) and "TANK,HEALER,DAMAGER,NONE",
-				"sortMethod", (not T.classic and C.raidframe.by_role) and "NAME",
-				"showParty", true,
-				"showRaid", true,
-				"yOffset", T.Scale(-7),
-				"point", "TOP"
-				)
-				partytarget:SetPoint("BOTTOMLEFT", party, "BOTTOMRIGHT", 7, 0)
-			end
-
-			-- Party pets
-			if C.raidframe.show_pet then
-				local partypet = self:SpawnHeader("oUF_PartyPet", nil, "custom [@raid6,exists] hide;show",
-				"oUF-initialConfigFunction", [[
-						local header = self:GetParent()
-						self:SetWidth(header:GetAttribute("initial-width"))
-						self:SetHeight(header:GetAttribute("initial-height"))
-						self:SetAttribute("useOwnerUnit", "true")
-						self:SetAttribute("unitsuffix", "pet")
-					]],
-				"initial-width", T.Scale(unit_height),
-				"initial-height", T.Scale(unit_height),
-				"showSolo", C.raidframe.solo_mode,
-				"showPlayer", C.raidframe.player_in_party,
-				"groupBy", (not T.classic and C.raidframe.by_role) and "ASSIGNEDROLE",
-				"groupingOrder", (not T.classic and C.raidframe.by_role) and "TANK,HEALER,DAMAGER,NONE",
-				"sortMethod", (not T.classic and C.raidframe.by_role) and "NAME",
-				"showParty", true,
-				"showRaid", true,
-				"yOffset", T.Scale(-7),
-				"point", "TOP"
-				)
-				partypet:SetPoint("LEFT", party, "RIGHT", T.Scale(unit_height) + 14.5, 0)
-			end
+			_G["PartyAnchor"]:SetSize(unit_width, unit_height * 5 + T.Scale(7) * 4)
 		else
-			-- Party horizontal
-			local party = self:SpawnHeader("oUF_Party", nil, "custom [@raid6,exists] hide;show",
-			"oUF-initialConfigFunction", [[
+			_G["PartyAnchor"]:SetSize(unit_width * 5 + T.Scale(7) * 4, unit_height)
+		end
+
+		-- Party targets
+		if C.raidframe.show_target then
+			local partytarget = self:SpawnHeader("oUF_PartyTarget", nil, "custom [@raid6,exists] hide;show",
+				"oUF-initialConfigFunction", [[
 					local header = self:GetParent()
 					self:SetWidth(header:GetAttribute("initial-width"))
 					self:SetHeight(header:GetAttribute("initial-height"))
+					self:SetAttribute("unitsuffix", "target")
 				]],
-			"initial-width", unit_width,
-			"initial-height", T.Scale(unit_height),
-			"showSolo", C.raidframe.solo_mode,
-			"showPlayer", C.raidframe.player_in_party,
-			"groupBy", (not T.classic and C.raidframe.by_role) and "ASSIGNEDROLE",
-			"groupingOrder", (not T.classic and C.raidframe.by_role) and "TANK,HEALER,DAMAGER,NONE",
-			"sortMethod", (not T.classic and C.raidframe.by_role) and "NAME",
-			"showParty", true,
-			"showRaid", true,
-			"xOffset", T.Scale(7),
-			"point", "LEFT"
+				"initial-width", C.raidframe.party_vertical and T.Scale(unit_height) or unit_width,
+				"initial-height", C.raidframe.party_vertical and T.Scale(unit_height) or T.Scale(unit_height / 2),
+				"showSolo", C.raidframe.solo_mode,
+				"showPlayer", C.raidframe.player_in_party,
+				"groupBy", (not T.classic and C.raidframe.by_role) and "ASSIGNEDROLE",
+				"groupingOrder", (not T.classic and C.raidframe.by_role) and "TANK,HEALER,DAMAGER,NONE",
+				"sortMethod", (not T.classic and C.raidframe.by_role) and "NAME",
+				"showParty", true,
+				"showRaid", true,
+				"xOffset", not C.raidframe.party_vertical and T.Scale(7),
+				"yOffset", C.raidframe.party_vertical and T.Scale(-7),
+				"point", C.raidframe.party_vertical and "TOP" or "LEFT"
 			)
-			if C.raidframe.player_in_party == true then
-				party:SetPoint(unpack(C.position.unitframes.party_heal))
+			partytarget:SetPoint("TOPLEFT", _G["PartyTargetAnchor"])
+			if C.raidframe.party_vertical then
+				_G["PartyTargetAnchor"]:SetSize(T.Scale(unit_height), T.Scale(unit_height) * 5 + T.Scale(7) * 4)
+				_G["PartyTargetAnchor"]:SetPoint("TOPLEFT", party, "TOPRIGHT", 7, 0)
 			else
-				party:SetPoint(C.position.unitframes.party_heal[1], C.position.unitframes.party_heal[2], C.position.unitframes.party_heal[3], C.position.unitframes.party_heal[4] + 32, C.position.unitframes.party_heal[5])
+				_G["PartyTargetAnchor"]:SetSize(unit_width * 5 + T.Scale(7) * 4, T.Scale(unit_height / 2))
 			end
+		end
 
-			-- Party targets
-			if C.raidframe.show_target then
-				local partytarget = self:SpawnHeader("oUF_PartyTarget", nil, "custom [@raid6,exists] hide;show",
+		-- Party pets
+		if C.raidframe.show_pet then
+			local partypet = self:SpawnHeader("oUF_PartyPet", nil, "custom [@raid6,exists] hide;show",
 				"oUF-initialConfigFunction", [[
-						local header = self:GetParent()
-						self:SetWidth(header:GetAttribute("initial-width"))
-						self:SetHeight(header:GetAttribute("initial-height"))
-						self:SetAttribute("unitsuffix", "target")
-					]],
-				"initial-width", unit_width,
-				"initial-height", T.Scale(unit_height / 2),
+					local header = self:GetParent()
+					self:SetWidth(header:GetAttribute("initial-width"))
+					self:SetHeight(header:GetAttribute("initial-height"))
+					self:SetAttribute("useOwnerUnit", "true")
+					self:SetAttribute("unitsuffix", "pet")
+				]],
+				"initial-width", C.raidframe.party_vertical and T.Scale(unit_height) or unit_width,
+				"initial-height", C.raidframe.party_vertical and T.Scale(unit_height) or T.Scale(unit_height / 2),
 				"showSolo", C.raidframe.solo_mode,
 				"showPlayer", C.raidframe.player_in_party,
 				"groupBy", (not T.classic and C.raidframe.by_role) and "ASSIGNEDROLE",
@@ -431,117 +389,30 @@ oUF:Factory(function(self)
 				"sortMethod", (not T.classic and C.raidframe.by_role) and "NAME",
 				"showParty", true,
 				"showRaid", true,
-				"xOffset", T.Scale(7),
-				"point", "LEFT"
-				)
-				partytarget:SetPoint("TOPLEFT", party, "BOTTOMLEFT", 0, -7)
-			end
-
-			-- Party pets
-			if C.raidframe.show_pet then
-				local partypet = self:SpawnHeader("oUF_PartyPet", nil, "custom [@raid6,exists] hide;show",
-				"oUF-initialConfigFunction", [[
-						local header = self:GetParent()
-						self:SetWidth(header:GetAttribute("initial-width"))
-						self:SetHeight(header:GetAttribute("initial-height"))
-						self:SetAttribute("useOwnerUnit", "true")
-						self:SetAttribute("unitsuffix", "pet")
-					]],
-				"initial-width", unit_width,
-				"initial-height", T.Scale(unit_height / 2),
-				"showSolo", C.raidframe.solo_mode,
-				"showPlayer", C.raidframe.player_in_party,
-				"groupBy", (not T.classic and C.raidframe.by_role) and "ASSIGNEDROLE",
-				"groupingOrder", (not T.classic and C.raidframe.by_role) and "TANK,HEALER,DAMAGER,NONE",
-				"sortMethod", (not T.classic and C.raidframe.by_role) and "NAME",
-				"showParty", true,
-				"showRaid", true,
-				"xOffset", T.Scale(7),
-				"point", "LEFT"
-				)
-				partypet:SetPoint("TOPLEFT", party, "BOTTOMLEFT", 0, -((unit_height / 2) + 14.5))
+				"xOffset", not C.raidframe.party_vertical and T.Scale(7),
+				"yOffset", C.raidframe.party_vertical and T.Scale(-7),
+				"point", C.raidframe.party_vertical and "TOP" or "LEFT"
+			)
+			partypet:SetPoint("TOPLEFT", _G["PartyPetAnchor"])
+			if C.raidframe.party_vertical then
+				_G["PartyPetAnchor"]:SetSize(T.Scale(unit_height), T.Scale(unit_height) * 5 + T.Scale(7) * 4)
+				_G["PartyPetAnchor"]:SetPoint("TOPLEFT", party, "TOPRIGHT", T.Scale(unit_height) + 14.5, 0)
+			else
+				_G["PartyPetAnchor"]:SetSize(unit_width * 5 + T.Scale(7) * 4, T.Scale(unit_height / 2))
 			end
 		end
 	end
 
 	if C.raidframe.show_raid == true then
-		if C.raidframe.raid_groups_vertical then
-			-- Raid vertical
-			local raid = {}
-			for i = 1, C.raidframe.raid_groups do
-				local raidgroup = self:SpawnHeader("oUF_RaidHeal"..i, nil, "custom [@raid6,exists] show;hide",
+		-- Raid
+		local raid = {}
+		for i = 1, C.raidframe.raid_groups do
+			local raidgroup = self:SpawnHeader("oUF_RaidHeal"..i, nil, "custom [@raid6,exists] show;hide",
 				"oUF-initialConfigFunction", [[
-						local header = self:GetParent()
-						self:SetWidth(header:GetAttribute("initial-width"))
-						self:SetHeight(header:GetAttribute("initial-height"))
-					]],
-				"initial-width", unit_width,
-				"initial-height", T.Scale(unit_height),
-				"showRaid", true,
-				"yOffset", T.Scale(-5),
-				"point", "TOPLEFT",
-				"groupFilter", tostring(i),
-				"groupBy", (not T.classic and C.raidframe.by_role) and "ASSIGNEDROLE",
-				"groupingOrder", (not T.classic and C.raidframe.by_role) and "TANK,HEALER,DAMAGER,NONE",
-				"sortMethod", (not T.classic and C.raidframe.by_role) and "NAME",
-				"maxColumns", 5,
-				"unitsPerColumn", 1,
-				"columnSpacing", T.Scale(7),
-				"columnAnchorPoint", "TOP"
-				)
-				if i == 1 then
-					raidgroup:SetPoint(unpack(C.position.unitframes.raid_heal))
-				else
-					raidgroup:SetPoint("TOPLEFT", raid[i-1], "TOPRIGHT", 7, 0)
-				end
-				raid[i] = raidgroup
-			end
-
-			-- Raid pets
-			if C.raidframe.raid_pets == true then
-				local raidpet = {}
-				for i = 1, C.raidframe.raid_groups do
-					local petgroup = self:SpawnHeader("oUF_RaidPet"..i, nil, "custom [@raid6,exists] show;hide",
-					"oUF-initialConfigFunction", [[
-							local header = self:GetParent()
-							self:SetWidth(header:GetAttribute("initial-width"))
-							self:SetHeight(header:GetAttribute("initial-height"))
-							self:SetAttribute("useOwnerUnit", "true")
-							self:SetAttribute("filterOnPet", "true")
-							self:SetAttribute("unitsuffix", "pet")
-						]],
-					"initial-width", unit_width,
-					"initial-height", T.Scale(unit_height / 2),
-					"showRaid", true,
-					"yOffset", T.Scale(-5),
-					"point", "TOPLEFT",
-					"groupFilter", tostring(i),
-					"groupBy", (not T.classic and C.raidframe.by_role) and "ASSIGNEDROLE" or nil,
-					"groupingOrder", (not T.classic and C.raidframe.by_role) and "TANK,HEALER,DAMAGER,NONE" or "1,2,3,4,5,6,7,8",
-					"sortMethod", (not T.classic and C.raidframe.by_role) and "NAME" or "NAME",
-					"maxColumns", 5,
-					"unitsPerColumn", 1,
-					"columnSpacing", T.Scale(7),
-					"columnAnchorPoint", "TOP"
-					)
-					if i == 1 then
-						petgroup:SetPoint(unpack(C.position.unitframes.raid_pets))
-					else
-						petgroup:SetPoint("TOPLEFT", raidpet[i-1], "TOPRIGHT", 7, 0)
-					end
-					raidpet[i] = petgroup
-				end
-			end
-		else
-			-- Raid horizontal
-			local raid = {}
-			for i = 1, C.raidframe.raid_groups do
-				local raidgroup = self:SpawnHeader("oUF_RaidHeal"..i, nil, "custom [@raid6,exists] show;hide",
-				"oUF-initialConfigFunction", [[
-						local header = self:GetParent()
-						self:SetWidth(header:GetAttribute("initial-width"))
-						self:SetHeight(header:GetAttribute("initial-height"))
-					]],
+					local header = self:GetParent()
+					self:SetWidth(header:GetAttribute("initial-width"))
+					self:SetHeight(header:GetAttribute("initial-height"))
+				]],
 				"initial-width", unit_width,
 				"initial-height", T.Scale(unit_height),
 				"showRaid", true,
@@ -549,73 +420,222 @@ oUF:Factory(function(self)
 				"groupBy", (not T.classic and C.raidframe.by_role) and "ASSIGNEDROLE",
 				"groupingOrder", (not T.classic and C.raidframe.by_role) and "TANK,HEALER,DAMAGER,NONE",
 				"sortMethod", (not T.classic and C.raidframe.by_role) and "NAME",
-				"point", "LEFT",
 				"maxColumns", 5,
 				"unitsPerColumn", 1,
 				"columnSpacing", T.Scale(7),
-				"columnAnchorPoint", "LEFT"
-				)
+				"yOffset", C.raidframe.raid_groups_vertical and T.Scale(-5),
+				"point", C.raidframe.raid_groups_vertical and "TOPLEFT" or "LEFT",
+				"columnAnchorPoint", C.raidframe.raid_groups_vertical and "TOP" or "LEFT"
+			)
+			raidgroup:SetPoint("TOPLEFT", _G["RaidAnchor"..i])
+			if C.raidframe.raid_groups_vertical then
+				_G["RaidAnchor"..i]:SetSize(unit_width, T.Scale(unit_height) * 5 + T.Scale(7) * 4)
 				if i == 1 then
-					raidgroup:SetPoint(unpack(C.position.unitframes.raid_heal))
+					_G["RaidAnchor"..i]:SetPoint(unpack(C.position.unitframes.raid_heal))
 				else
-					raidgroup:SetPoint("TOPLEFT", raid[i-1], "BOTTOMLEFT", 0, -7)
+					_G["RaidAnchor"..i]:SetPoint("TOPLEFT", _G["RaidAnchor"..i-1], "TOPRIGHT", 7, 0)
 				end
-				raid[i] = raidgroup
+			else
+				_G["RaidAnchor"..i]:SetSize(unit_width * 5 + T.Scale(7) * 4, T.Scale(unit_height))
+				if i == 1 then
+					_G["RaidAnchor"..i]:SetPoint(unpack(C.position.unitframes.raid_heal))
+				else
+					_G["RaidAnchor"..i]:SetPoint("TOPLEFT", _G["RaidAnchor"..i-1], "BOTTOMLEFT", 0, -7)
+				end
 			end
+			raid[i] = raidgroup
+		end
 
-			-- Raid pets
-			if C.raidframe.raid_pets == true then
-				local raidpet = {}
-				for i = 1, C.raidframe.raid_groups do
-					local petgroup = self:SpawnHeader("oUF_RaidPet"..i, nil, "custom [@raid6,exists] show;hide",
+		-- Raid pets
+		if C.raidframe.raid_pets == true then
+			local raidpet = {}
+			for i = 1, C.raidframe.raid_groups do
+				local petgroup = self:SpawnHeader("oUF_RaidPet"..i, nil, "custom [@raid6,exists] show;hide",
 					"oUF-initialConfigFunction", [[
-							local header = self:GetParent()
-							self:SetWidth(header:GetAttribute("initial-width"))
-							self:SetHeight(header:GetAttribute("initial-height"))
-							self:SetAttribute("useOwnerUnit", "true")
-							self:SetAttribute("filterOnPet", "true")
-							self:SetAttribute("unitsuffix", "pet")
-						]],
-					"initial-width", unit_width,
-					"initial-height", T.Scale(unit_height / 2),
+						local header = self:GetParent()
+						self:SetWidth(header:GetAttribute("initial-width"))
+						self:SetHeight(header:GetAttribute("initial-height"))
+						self:SetAttribute("useOwnerUnit", "true")
+						self:SetAttribute("filterOnPet", "true")
+						self:SetAttribute("unitsuffix", "pet")
+					]],
+					"initial-width", C.raidframe.party_vertical and T.Scale(unit_height) or unit_width,
+					"initial-height", C.raidframe.party_vertical and T.Scale(unit_height) or T.Scale(unit_height / 2),
 					"showRaid", true,
 					"groupFilter", tostring(i),
-					"groupBy", (not T.classic and C.raidframe.by_role) and "ASSIGNEDROLE" or nil,
+					"groupBy", (not T.classic and C.raidframe.by_role) and "ASSIGNEDROLE",
 					"groupingOrder", (not T.classic and C.raidframe.by_role) and "TANK,HEALER,DAMAGER,NONE" or "1,2,3,4,5,6,7,8",
-					"sortMethod", (not T.classic and C.raidframe.by_role) and "NAME" or "NAME",
-					"point", "LEFT",
+					"sortMethod", (not T.classic and C.raidframe.by_role) and "NAME",
 					"maxColumns", 5,
 					"unitsPerColumn", 1,
 					"columnSpacing", T.Scale(7),
-					"columnAnchorPoint", "LEFT"
-					)
+					"yOffset", C.raidframe.raid_groups_vertical and T.Scale(-5),
+					"point", C.raidframe.raid_groups_vertical and "TOPLEFT" or "LEFT",
+					"columnAnchorPoint", C.raidframe.raid_groups_vertical and "TOP" or "LEFT"
+				)
+				petgroup:SetPoint("TOPLEFT", _G["RaidPetAnchor"..i])
+				if C.raidframe.raid_groups_vertical then
+					_G["RaidPetAnchor"..i]:SetSize(unit_width, T.Scale(unit_height) * 5 + T.Scale(7) * 4)
 					if i == 1 then
-						petgroup:SetPoint(unpack(C.position.unitframes.raid_pets))
+						_G["RaidPetAnchor"..i]:SetPoint(unpack(C.position.unitframes.raid_pets))
 					else
-						petgroup:SetPoint("TOPLEFT", raidpet[i-1], "BOTTOMLEFT", 0, -7)
+						_G["RaidPetAnchor"..i]:SetPoint("TOPLEFT", _G["RaidPetAnchor"..i-1], "TOPRIGHT", 7, 0)
 					end
-					raidpet[i] = petgroup
+				else
+					_G["RaidPetAnchor"..i]:SetSize(unit_width * 5 + T.Scale(7) * 4, T.Scale(unit_height / 2))
+					if i == 1 then
+						_G["RaidPetAnchor"..i]:SetPoint(unpack(C.position.unitframes.raid_pets))
+					else
+						_G["RaidPetAnchor"..i]:SetPoint("TOPLEFT", _G["RaidPetAnchor"..i-1], "BOTTOMLEFT", 0, -7)
+					end
 				end
+				raidpet[i] = petgroup
 			end
 		end
 
 		if C.raidframe.raid_tanks == true then
 			-- Tanks
 			local raidtank = self:SpawnHeader("oUF_MainTank", nil, "raid",
-			"oUF-initialConfigFunction", ([[
+				"oUF-initialConfigFunction", ([[
 					self:SetWidth(%d)
 					self:SetHeight(%d)
 				]]):format(unit_width, unit_height),
-			"showRaid", true,
-			"yOffset", T.Scale(-7),
-			"groupFilter", "MAINTANK",
-			"template", C.raidframe.raid_tanks_tt and "oUF_MainTankTT" or "oUF_MainTank"
+				"showRaid", true,
+				"yOffset", T.Scale(-7),
+				"groupFilter", "MAINTANK",
+				"template", C.raidframe.raid_tanks_tt and "oUF_MainTankTT" or "oUF_MainTank"
 			)
-			if C.actionbar.split_bars then
-				raidtank:SetPoint(C.position.unitframes.tank[1], SplitBarRight, C.position.unitframes.tank[3], C.position.unitframes.tank[4], C.position.unitframes.tank[5])
-			else
-				raidtank:SetPoint(unpack(C.position.unitframes.tank))
-			end
+			_G["RaidTankAnchor"]:SetSize(unit_width, unit_height)
+			raidtank:SetPoint("TOPLEFT", _G["RaidTankAnchor"])
 		end
 	end
 end)
+
+-- Create anchors
+for i = 1, C.raidframe.raid_groups do
+	local raid = CreateFrame("Frame", "RaidAnchor"..i, UIParent)
+	local raid_pet = CreateFrame("Frame", "RaidPetAnchor"..i, UIParent)
+end
+
+local party = CreateFrame("Frame", "PartyAnchor", UIParent)
+if C.raidframe.player_in_party == true then
+	party:SetPoint(unpack(C.position.unitframes.party_heal))
+else
+	party:SetPoint(C.position.unitframes.party_heal[1], C.position.unitframes.party_heal[2], C.position.unitframes.party_heal[3], C.position.unitframes.party_heal[4] + 32, C.position.unitframes.party_heal[5])
+end
+
+local party_target = CreateFrame("Frame", "PartyTargetAnchor", UIParent)
+party_target:SetPoint("TOPLEFT", party, "BOTTOMLEFT", 0, -7)
+
+local party_pet = CreateFrame("Frame", "PartyPetAnchor", UIParent)
+party_pet:SetPoint("TOPLEFT", party, "BOTTOMLEFT", 0, -((unit_height / 2) + 14.5))
+
+local raidtank = CreateFrame("Frame", "RaidTankAnchor", UIParent)
+if C.actionbar.split_bars then
+	raidtank:SetPoint(C.position.unitframes.tank[1], SplitBarRight, C.position.unitframes.tank[3], C.position.unitframes.tank[4], C.position.unitframes.tank[5])
+else
+	raidtank:SetPoint(unpack(C.position.unitframes.tank))
+end
+
+----------------------------------------------------------------------------------------
+--	Test RaidFrames
+----------------------------------------------------------------------------------------
+do
+	local frames = {}
+	local moving = false
+	SlashCmdList.TEST_RAID = function()
+		if InCombatLockdown() then print("|cffffff00"..ERR_NOT_IN_COMBAT.."|r") return end
+		if not moving then
+			oUF_RaidHeal1:Show()
+			local raid = {}
+			local raid_j = {}
+			if #frames == 0 then
+				for j = 1, C.raidframe.raid_groups do
+					for i = 1, 5 do
+						local frame = CreateFrame("Frame", nil, UIParent)
+						frame:SetSize(unit_width, unit_height)
+						if j == 1 then
+							if i == 1 then
+								frame:SetPoint("TOPLEFT", oUF_RaidHeal1, "TOPLEFT", 0, 0)
+								raid_j[j] = frame
+							else
+								frame:SetPoint("TOPLEFT", raid[i-1], "TOPRIGHT", 7, 0)
+							end
+						else
+							if i == 1 then
+								frame:SetPoint("TOPLEFT", raid_j[j-1], "TOPLEFT", 0, -unit_height - 7)
+								raid_j[j] = frame
+							else
+								frame:SetPoint("TOPLEFT", raid[i-1], "TOPRIGHT", 7, 0)
+							end
+						end
+						frame:CreateBackdrop("Overlay")
+						frame.backdrop.overlay:SetVertexColor(0.1, 0.9 - (j * 0.08) , 0.1)
+						raid[i] = frame
+						table.insert(frames, frame)
+					end
+				end
+			else
+				for _, frame in pairs(frames) do
+					frame:Show()
+				end
+			end
+			moving = true
+		else
+			for _, frame in pairs(frames) do
+				frame:Hide()
+			end
+			moving = false
+		end
+	end
+	SLASH_TEST_RAID1 = "/testraid"
+	SLASH_TEST_RAID2 = "/еуыекфшв"
+	SLASH_TEST_RAID3 = "/raidtest"
+	SLASH_TEST_RAID4 = "/кфшвеуые"
+end
+
+do
+	local frames = {}
+	local moving = false
+	SlashCmdList.TEST_PARTY = function()
+		if InCombatLockdown() then print("|cffffff00"..ERR_NOT_IN_COMBAT.."|r") return end
+		if not moving then
+			oUF_PartyUnitButton1:Show()
+			local raid = {}
+			local raid_j = {}
+			if #frames == 0 then
+				for i = 1, 5 do
+					local frame = CreateFrame("Frame", nil, UIParent)
+					frame:SetSize(unit_width, unit_height)
+					if i == 1 then
+						frame:SetPoint("TOPLEFT", oUF_PartyUnitButton1, "TOPLEFT", 0, 0)
+					else
+						if C.raidframe.party_vertical then
+							frame:SetPoint("TOP", raid[i-1], "BOTTOM", 0, -7)
+						else
+							frame:SetPoint("TOPLEFT", raid[i-1], "TOPRIGHT", 7, 0)
+						end
+					end
+					frame:CreateBackdrop("Overlay")
+					frame.backdrop.overlay:SetVertexColor(random(255) / 255, random(255) / 255, random(255) / 255)
+					raid[i] = frame
+					table.insert(frames, frame)
+				end
+			else
+				for _, frame in pairs(frames) do
+					frame:Show()
+				end
+			end
+			moving = true
+		else
+			for _, frame in pairs(frames) do
+				frame:Hide()
+			end
+			moving = false
+		end
+	end
+	SLASH_TEST_PARTY1 = "/testparty"
+	SLASH_TEST_PARTY2 = "/еуыезфкен"
+	SLASH_TEST_PARTY3 = "/partytest"
+	SLASH_TEST_PARTY4 = "/зфкенеуые"
+end

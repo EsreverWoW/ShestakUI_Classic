@@ -29,10 +29,6 @@ T.MoverFrames = {
 	AutoButtonAnchor,
 	TooltipAnchor,
 	ChatBar,
-	oUF_Player_Castbar,
-	oUF_Target_Castbar,
-	oUF_Player_Portrait,
-	oUF_Target_Portrait,
 	P_BUFF_ICON_Anchor,
 	P_PROC_ICON_Anchor,
 	SPECIAL_P_BUFF_ICON_Anchor,
@@ -45,6 +41,39 @@ T.MoverFrames = {
 	SplitBarLeft,
 	SplitBarRight
 }
+
+local unitFrames = {
+	oUF_Player,
+	oUF_Target,
+	oUF_Pet,
+	oUF_Focus,
+	oUF_FocusTarget,
+	oUF_TargetTarget,
+	oUF_Player_Castbar,
+	oUF_Target_Castbar,
+	oUF_Player_Portrait,
+	oUF_Target_Portrait,
+	PartyAnchor,
+	PartyTargetAnchor,
+	PartyPetAnchor,
+	RaidTankAnchor,
+	PartyDPSAnchor,
+	PartyTargetDPSAnchor,
+	PartyPetDPSAnchor,
+	RaidTankDPSAnchor
+}
+
+for i = 1, 5 do
+	tinsert(unitFrames,_G["oUF_Boss"..i])
+	tinsert(unitFrames,_G["oUF_Arena"..i])
+	tinsert(unitFrames,_G["oUF_Arena"..i.."Target"])
+end
+
+for i = 1, C.raidframe.raid_groups do
+	tinsert(unitFrames, _G["RaidAnchor"..i])
+	tinsert(unitFrames, _G["RaidPetAnchor"..i])
+	tinsert(unitFrames, _G["RaidDPSAnchor"..i])
+end
 
 if C.actionbar.editor then
 	tinsert(T.MoverFrames, Bar1Holder)
@@ -256,10 +285,16 @@ local RestoreDefaults = function(self, button)
 	end
 end
 
-local CreateMover = function(frame)
+local CreateMover = function(frame, unit)
 	local mover = CreateFrame("Frame", nil, UIParent)
-	mover:SetTemplate("Transparent")
-	mover:SetBackdropBorderColor(1, 0, 0)
+	if unit then
+		mover:CreateBackdrop("Transparent")
+		mover.backdrop:SetBackdropBorderColor(1, 0, 0)
+	else
+		mover:SetTemplate("Transparent")
+		mover:SetBackdropBorderColor(1, 0, 0)
+	end
+	mover.backdrop = mover.backdrop or mover
 	mover:SetAllPoints(frame)
 	mover:SetFrameStrata("TOOLTIP")
 	mover:EnableMouse(true)
@@ -268,8 +303,8 @@ local CreateMover = function(frame)
 	mover:RegisterForDrag("LeftButton")
 	mover:SetScript("OnDragStart", OnDragStart)
 	mover:SetScript("OnDragStop", OnDragStop)
-	mover:SetScript("OnEnter", function(self) self:SetBackdropBorderColor(unpack(C.media.classborder_color)) ShowControls(self) end)
-	mover:SetScript("OnLeave", function(self) self:SetBackdropBorderColor(1, 0, 0) if not MouseIsOver(controls) then controls:Hide() end end)
+	mover:SetScript("OnEnter", function(self) self.backdrop:SetBackdropBorderColor(unpack(C.media.classborder_color)) ShowControls(self) end)
+	mover:SetScript("OnLeave", function(self) self.backdrop:SetBackdropBorderColor(1, 0, 0) if not MouseIsOver(controls) then controls:Hide() end end)
 	mover:SetScript("OnMouseUp", RestoreDefaults)
 	mover.frame = frame
 
@@ -280,12 +315,13 @@ local CreateMover = function(frame)
 	local text = frame:GetName()
 	text = text:gsub("_Anchor", "")
 	text = text:gsub("Anchor", "")
+	text = text:gsub("oUF_", "")
 	mover.name:SetText(text)
 	mover.name:SetWidth(frame:GetWidth() - 4)
 	movers[frame:GetName()] = mover
 end
 
-local GetMover = function(frame)
+local GetMover = function(frame, unit)
 	if movers[frame:GetName()] then
 		return movers[frame:GetName()]
 	else
@@ -310,6 +346,10 @@ local InitMove = function(msg)
 			local mover = GetMover(v)
 			if mover then mover:Show() end
 		end
+		for _, v in pairs(unitFrames) do
+			local mover = GetMover(v, true)
+			if mover then mover:Show() end
+		end
 		moving = true
 		SlashCmdList.GRIDONSCREEN()
 	else
@@ -320,7 +360,6 @@ local InitMove = function(msg)
 		SlashCmdList.GRIDONSCREEN("hide")
 		controls:Hide()
 	end
-	if T.MoveUnitFrames then T.MoveUnitFrames() end
 end
 
 local RestoreUI = function(self)
@@ -335,6 +374,25 @@ local RestoreUI = function(self)
 		return
 	end
 	if ShestakUIPositions then
+		-- TODO: delete after while
+		if ShestakUIPositions.UnitFrame then
+			for frame_name, point in pairs(ShestakUIPositions.UnitFrame) do
+				if _G[frame_name] then
+					for _, frame in pairs(unitFrames) do
+						print(frame:GetName(), _G[frame_name]:GetName())
+						if frame:GetName() and frame:GetName() == _G[frame_name]:GetName() then
+							_G[frame_name]:ClearAllPoints()
+							_G[frame_name]:SetPoint(unpack(point))
+							ShestakUIPositions[frame_name] = point
+						end
+					end
+				end
+			end
+			ShestakUIPositions.UnitFrame = nil
+			ShestakUIPositions.UFPos = nil
+		end
+		-- End of block to delete
+
 		for frame_name, point in pairs(ShestakUIPositions) do
 			if _G[frame_name] then
 				_G[frame_name]:ClearAllPoints()
@@ -356,3 +414,25 @@ SLASH_MOVING1 = "/moveui"
 SLASH_MOVING2 = "/ьщмугш"
 SLASH_MOVING3 = "/ui"
 SLASH_MOVING4 = "/гш"
+
+StaticPopupDialogs.RESET_UF = {
+	text = L_POPUP_RESETUI,
+	button1 = ACCEPT,
+	button2 = CANCEL,
+	OnAccept = function() if InCombatLockdown() then print("|cffffff00"..ERR_NOT_IN_COMBAT.."|r") else
+		for _, frame in pairs(unitFrames) do
+			if frame:GetName() then
+				ShestakUIPositions[frame:GetName()] = nil
+			end
+		end
+		ReloadUI()
+	end
+	end,
+	timeout = 0,
+	whileDead = 1,
+	hideOnEscape = true,
+	preferredIndex = 5,
+}
+
+SlashCmdList.RESETUF = function() StaticPopup_Show("RESET_UF") end
+SLASH_RESETUF1 = "/resetuf"
