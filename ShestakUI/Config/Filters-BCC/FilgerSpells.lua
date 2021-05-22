@@ -4277,9 +4277,9 @@ C["filger_spells"] = {
 			-- Last Stand
 			{spellID = 12975, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Rampage (Base)
-			{spellID = 29801, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- {spellID = 29801, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Rampage (Stack)
-			-- {spellID = 30029, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			{spellID = 30029, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Recklessness
 			{spellID = 1719, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Retaliation
