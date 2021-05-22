@@ -474,7 +474,7 @@ local function LoadSkin()
 	Atr_FullScanFrame:SetTemplate("Overlay")
 
 	Atr_FullScanResults:CreateBorder(true, true)
-	local border = CreateFrame("Frame", "Atr_FullScanResultsBorder", Atr_FullScanResults)
+	local border = CreateFrame("Frame", "Atr_FullScanResultsBorder", Atr_FullScanResults, BackdropTemplateMixin and "BackdropTemplate")
 	border:SetPoint("TOPLEFT")
 	border:SetPoint("BOTTOMRIGHT")
 	border:SetBackdrop({
