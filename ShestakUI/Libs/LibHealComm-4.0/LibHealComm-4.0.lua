@@ -698,6 +698,10 @@ end
 
 local function calculateGeneralAmount(level, amount, spellPower, spModifier, healModifier)
 	local penalty = level > 20 and 1 or (1 - ((20 - level) * 0.0375))
+	if isTBC then
+		-- TBC added another downrank penalty
+		penalty = penalty * min(1, (level + 11) / playerLevel)
+	end
 
 	spellPower = spellPower * penalty
 
