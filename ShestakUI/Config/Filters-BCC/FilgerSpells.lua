@@ -4278,8 +4278,12 @@ C["filger_spells"] = {
 			{spellID = 12975, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Rampage (Base)
 			-- {spellID = 29801, unitID = "player", caster = "player", filter = "BUFF", absID = true},
-			-- Rampage (Stack)
+			-- Rampage (Stack) r1
 			{spellID = 30029, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Rampage (Stack) r2
+			{spellID = 30030, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Rampage (Stack) r3
+			{spellID = 30031, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Recklessness
 			{spellID = 1719, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Retaliation
