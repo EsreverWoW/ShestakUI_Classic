@@ -5,7 +5,7 @@ local _FRAMES = {}
 local OnRangeFrame
 
 local UnitInRange, UnitIsConnected = UnitInRange, UnitIsConnected
-local LibRangeCheck = (oUF:IsClassic() and not oUF:IsBCC()) and LibStub("LibRangeCheck-2.0")
+local LibRangeCheck = oUF:IsClassic() and LibStub("LibRangeCheck-2.0")
 
 local function Update(self, event)
 	local element = self.Range
@@ -23,7 +23,7 @@ local function Update(self, event)
 	local inRange, checkedRange
 	local connected = UnitIsConnected(unit)
 	if(connected) then
-		if(oUF:IsClassic() and not oUF:IsBCC()) then
+		if(oUF:IsClassic()) then
 			_, inRange = LibRangeCheck:GetRange(unit, true)
 		else
 			inRange, checkedRange = UnitInRange(unit)
