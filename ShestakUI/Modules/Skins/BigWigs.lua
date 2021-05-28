@@ -271,7 +271,9 @@ function T.UploadBW()
 		BigWigsIconDB.hide = true
 	end
 	BigWigs:GetPlugin("Super Emphasize").db.profile.fontName = "Calibri"
-	BigWigs:GetPlugin("Alt Power").db.profile.fontName = "Calibri"
+	if not T.classic then
+		BigWigs:GetPlugin("Alt Power").db.profile.fontName = "Calibri"
+	end
 	if InCombatLockdown() then
 		print("|cffffff00"..ERR_NOT_IN_COMBAT.."|r")
 		print("|cffffff00Reload your UI to apply skin.|r")
