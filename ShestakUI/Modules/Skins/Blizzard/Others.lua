@@ -136,21 +136,19 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 		_G["PetBattleQueueReadyFrame"].DeclineButton:SkinButton()
 
 		-- Reskin Dropdown menu
-		if not T.BCC then -- TODO: See if there are still problems in BC Classic
-			hooksecurefunc("UIDropDownMenu_InitializeHelper", function()
-				for i = 1, UIDROPDOWNMENU_MAXLEVELS do
-					if not T.classic then
-						_G["DropDownList"..i]["Border"]:StripTextures()
-					end
-
-					_G["DropDownList"..i.."Backdrop"]:SetTemplate("Transparent")
-					_G["DropDownList"..i.."MenuBackdrop"]:SetTemplate("Transparent")
+		hooksecurefunc("UIDropDownMenu_InitializeHelper", function()
+			for i = 1, UIDROPDOWNMENU_MAXLEVELS do
+				if not T.classic then
+					_G["DropDownList"..i]["Border"]:StripTextures()
 				end
-			end)
 
-			if RaiderIO_CustomDropDownListMenuBackdrop then
-				RaiderIO_CustomDropDownListMenuBackdrop:StripTextures()
+				_G["DropDownList"..i.."Backdrop"]:SetTemplate("Transparent")
+				_G["DropDownList"..i.."MenuBackdrop"]:SetTemplate("Transparent")
 			end
+		end)
+
+		if RaiderIO_CustomDropDownListMenuBackdrop then
+			RaiderIO_CustomDropDownListMenuBackdrop:StripTextures()
 		end
 
 		-- Reskin menu
