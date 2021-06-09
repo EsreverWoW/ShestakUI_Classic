@@ -4620,6 +4620,8 @@ C["filger_spells"] = {
 			{spellID = 11580, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
 			-- Thunder Clap r6
 			{spellID = 11581, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
+			-- Thunder Clap r7
+			{spellID = 25264, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
 
 			-- Mace Specialization
 			-- Mace Stun Effect
