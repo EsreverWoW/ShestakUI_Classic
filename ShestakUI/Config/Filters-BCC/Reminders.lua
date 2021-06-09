@@ -450,31 +450,17 @@ if C.reminder.solo_buffs_enable == true then
 			},
 		},
 		WARRIOR = {
-			[1] = {	-- Commanding Shout group
-				["spells"] = {
-					SpellName(469),	-- Commanding Shout
-				},
-				["negate_spells"] = {
-					SpellName(6673),	-- Battle Shout
-				},
-				["combat"] = true,
-				["role"] = "Tank",
-				-- ["level"] = 68,
-			},
-			[2] = {	-- Battle Shout group
+			[1] = {	-- Shout group
 				["spells"] = {
 					SpellName(6673),	-- Battle Shout
-				},
-				["negate_spells"] = {
-					SpellName(469),	-- Commanding Shout
+					SpellName(469),		-- Commanding Shout
 				},
 				["combat"] = true,
-				["role"] = "Melee",
 				["instance"] = true,
 				["pvp"] = true,
 			},
 			--[[
-			[3] = {	-- Stance group
+			[2] = {	-- Stance group
 				["spells"] = {
 					SpellName(2457),		-- Battle Stance
 					SpellName(2458),		-- Berserker Stance
