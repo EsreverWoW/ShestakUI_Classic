@@ -1964,7 +1964,7 @@ end
 function HealComm:CHAT_MSG_ADDON(prefix, message, channel, sender)
 	if( prefix ~= COMM_PREFIX or channel ~= distribution ) then return end
 
-	local commType, extraArg, spellID, arg1, arg2, arg3, arg4 = strsplit(":", message)
+	local commType, extraArg, spellID, arg1, arg2, arg3, arg4, arg5, arg6 = strsplit(":", message)
 	local casterGUID = UnitGUID(Ambiguate(sender, "none"))
 	spellID = tonumber(spellID)
 
@@ -1987,7 +1987,7 @@ function HealComm:CHAT_MSG_ADDON(prefix, message, channel, sender)
 	elseif( commType == "U" and arg1 and arg3 ) then
 		parseHotHeal(casterGUID, true, spellID, tonumber(arg1), tonumber(extraArg), tonumber(arg2), strsplit(",", arg3))
 		-- New updated bomb hot - UB:<totalTicks>:<spellID>:<bombAmount>:target1,target2:<amount>:<tickInterval>:target1,target2...
-	elseif( commtype == "UB" and arg1 and arg5 ) then
+	elseif( commType == "UB" and arg1 and arg5 ) then
 		parseHotHeal(casterGUID, true, spellID, tonumber(arg3), tonumber(extraArg), tonumber(arg4), string.split(",", arg5))
 		parseHotBomb(casterGUID, true, spellID, tonumber(arg1), string.split(",", arg2))
 		-- Heal stopped - S:<extra>:<spellID>:<ended early: 0/1>:target1,target2...
