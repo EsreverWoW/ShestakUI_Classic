@@ -3288,8 +3288,10 @@ C["filger_spells"] = {
 			-- {spellID = 8076, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Totem of Wrath
 			-- {spellID = 30708, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Water Shield
+			-- Water Shield r1
 			{spellID = 24398, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Water Shield r2
+			{spellID = 33736, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Windwall Totem
 			-- {spellID = 15108, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Wrath of Air Totem
