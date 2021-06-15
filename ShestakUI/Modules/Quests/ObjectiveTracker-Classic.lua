@@ -247,11 +247,11 @@ end)
 ----------------------------------------------------------------------------------------
 --	Auto collapse QuestWatchFrame
 ----------------------------------------------------------------------------------------
-if C.automation.auto_collapse or C.automation.auto_collapse_reload then
+if C.automation.auto_collapse ~= "NONE" then
 	local collapse = CreateFrame("Frame")
 	collapse:RegisterEvent("PLAYER_ENTERING_WORLD")
 	collapse:SetScript("OnEvent", function()
-		if C.automation.auto_collapse and not C.automation.auto_collapse_reload then
+		if C.automation.auto_collapse == "RAID" then
 			if IsInInstance() then
 				C_Timer.After(2, QuestWatchCollapse)
 				ExpandButton.plus:Show()
@@ -261,7 +261,7 @@ if C.automation.auto_collapse or C.automation.auto_collapse_reload then
 				ExpandButton.plus:Hide()
 				expanded = true
 			end
-		elseif C.automation.auto_collapse_reload then
+		elseif C.automation.auto_collapse == "RELOAD" then
 			C_Timer.After(2, QuestWatchCollapse)
 			ExpandButton.plus:Show()
 			expanded = false
