@@ -113,6 +113,12 @@ Text3:SetShadowOffset(C.font.stats_font_shadow and 1 or 0, C.font.stats_font_sha
 Text3:SetPoint("LEFT", Text2, "RIGHT", 5, 0)
 Text3:SetHeight(C.font.stats_font_size)
 
+local Text4 = InfoBattleGround:CreateFontString(nil, "OVERLAY")
+Text4:SetFont(C.font.stats_font, C.font.stats_font_size, C.font.stats_font_style)
+Text4:SetShadowOffset(C.font.stats_font_shadow and 1 or 0, C.font.stats_font_shadow and -1 or 0)
+Text4:SetPoint("LEFT", Text3, "RIGHT", 5, 0)
+Text4:SetHeight(C.font.stats_font_size)
+
 local int = 2
 local function Update(_, t)
 	int = int - t
@@ -120,14 +126,11 @@ local function Update(_, t)
 		local dmgtxt, ranktxt
 		RequestBattlefieldScoreData()
 		for i = 1, GetNumBattlefieldScores() do
-			local name, killingBlows, honorGained, damageDone, healingDone, rank
-			if T.classic and not T.BCC then
-				-- build 30786 changed returns, removing dmg/heals/spec and adding rank
-				name, killingBlows, _, _, honorGained, _, rank = GetBattlefieldScore(i)
-			elseif T.BCC then
-				name, killingBlows, _, _, honorGained, _, _, _, _, _, damageDone, healingDone = GetBattlefieldScore(i)
+			local name, killingBlows, honorableKills, honorGained, damageDone, healingDone, rank
+			if T.classic then
+				name, killingBlows, honorableKills, _, honorGained, _, rank, _, _, _, damageDone, healingDone = GetBattlefieldScore(i)
 			else
-				name, killingBlows, _, _, honorGained, _, _, _, _, damageDone, healingDone = GetBattlefieldScore(i)
+				name, killingBlows, honorableKills, _, honorGained, _, _, _, _, damageDone, healingDone = GetBattlefieldScore(i)
 			end
 			if name and name == T.name then
 				if T.classic and not T.BCC then
@@ -139,9 +142,10 @@ local function Update(_, t)
 						dmgtxt = (classcolor..DAMAGE.." :|r "..T.ShortValue(damageDone))
 					end
 				end
-				Text1:SetText(T.classic and ranktxt or dmgtxt)
+				Text1:SetText((T.classic and not T.BCC) and ranktxt or dmgtxt)
 				Text2:SetText(classcolor..COMBAT_HONOR_GAIN.." :|r "..format("%d", honorGained))
 				Text3:SetText(classcolor..KILLING_BLOWS.." :|r "..killingBlows)
+				Text4:SetText(classcolor..HONORABLE_KILLS.." :|r "..honorableKills)
 			end
 		end
 		int = 2
@@ -158,6 +162,7 @@ local function OnEvent(_, event)
 			Text1:SetText("")
 			Text2:SetText("")
 			Text3:SetText("")
+			Text4:SetText("")
 			BGFrame:Hide()
 		end
 	end
