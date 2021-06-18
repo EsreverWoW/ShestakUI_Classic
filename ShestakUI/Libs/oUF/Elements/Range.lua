@@ -24,7 +24,7 @@ local function Update(self, event)
 	local connected = UnitIsConnected(unit)
 	if(connected) then
 		if(oUF:IsClassic()) then
-			_, inRange = LibRangeCheck:GetRange(unit, true)
+			_, inRange = LibRangeCheck:GetRange(unit, true, true)
 		else
 			inRange, checkedRange = UnitInRange(unit)
 		end
