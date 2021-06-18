@@ -134,6 +134,7 @@ PetSpells["HUNTER"] = {
 FriendSpells["MAGE"] = {
     -- 130, -- Slow Fall (30 yards, level 12) -- Self buff in Classic/BC
     1459, -- Arcane Intellect (30 yards)
+    475, -- Remove Lesser Curse (40 yards, level 18)
 }
 HarmSpells["MAGE"] = {
     44614, -- Frostfire Bolt (40 yards, level 75)
