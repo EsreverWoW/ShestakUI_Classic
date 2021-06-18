@@ -163,32 +163,32 @@ local totemData = {}
 if T.classic then
 	totemData = {
 		-- Earth
-		[GetSpellInfo(2484)]   = "Interface\\Icons\\Spell_nature_strengthofearthtotem02",	-- Earthbind Totem
-		[GetSpellInfo(5730)]   = "Interface\\Icons\\Spell_nature_stoneclawtotem",			-- Stoneclaw Totem
-		[GetSpellInfo(8071)]   = "Interface\\Icons\\Spell_nature_stoneskintotem",			-- Stoneskin Totem
-		[GetSpellInfo(8075)]   = "Interface\\Icons\\Spell_nature_earthbindtotem",			-- Strength of Earth Totem
-		[GetSpellInfo(8143)]   = "Interface\\Icons\\Spell_nature_tremortotem",				-- Tremor Totem
-		[GetSpellInfo(8177)]   = "Interface\\Icons\\Spell_nature_groundingtotem",			-- Grounding Totem
+		[GetSpellInfo(2484)]   = 136102,	-- Earthbind Totem
+		[GetSpellInfo(5730)]   = 136097,	-- Stoneclaw Totem
+		[GetSpellInfo(8071)]   = 136098,	-- Stoneskin Totem
+		[GetSpellInfo(8075)]   = 136023,	-- Strength of Earth Totem
+		[GetSpellInfo(8143)]   = 136108,	-- Tremor Totem
+		[GetSpellInfo(8177)]   = 136039,	-- Grounding Totem
 		-- Fire
-		[GetSpellInfo(1535)]   = "Interface\\Icons\\Spell_fire_sealoffire",					-- Fire Nova Totem
-		[GetSpellInfo(3599)]   = "Interface\\Icons\\Spell_fire_searingtotem",				-- Searing Totem
-		[GetSpellInfo(8181)]   = "Interface\\Icons\\Spell_frostresistancetotem_01",			-- Frost Resistance Totem
-		[GetSpellInfo(8190)]   = "Interface\\Icons\\Spell_fire_selfdestruct",				-- Magma Totem
-		[GetSpellInfo(8227)]   = "Interface\\Icons\\Spell_nature_guardianward",				-- Flametongue Totem
+		[GetSpellInfo(1535)]   = 135824,	-- Fire Nova Totem
+		[GetSpellInfo(3599)]   = 135825,	-- Searing Totem
+		[GetSpellInfo(8181)]   = 135866,	-- Frost Resistance Totem
+		[GetSpellInfo(8190)]   = 135826,	-- Magma Totem
+		[GetSpellInfo(8227)]   = 136040,	-- Flametongue Totem
 		-- Water
-		[GetSpellInfo(5394)]   = "Interface\\Icons\\Inv_spear_04",							-- Healing Stream Totem
-		[GetSpellInfo(5675)]   = "Interface\\Icons\\Spell_nature_manaregentotem",			-- Mana Spring Totem
-		[GetSpellInfo(8166)]   = "Interface\\Icons\\Spell_nature_poisoncleansingtotem",		-- Poison Cleansing Totem
-		[GetSpellInfo(8170)]   = "Interface\\Icons\\Spell_nature_diseasecleansingtotem",	-- Disease Cleansing Totem
-		[GetSpellInfo(8184)]   = "Interface\\Icons\\Spell_fireresistancetotem_01",			-- Fire Resistance Totem
-		[GetSpellInfo(16190)]  = "Interface\\Icons\\Spell_frost_summonwaterelemental",		-- Mana Tide Totem
+		[GetSpellInfo(5394)]   = 135127,	-- Healing Stream Totem
+		[GetSpellInfo(5675)]   = 136053,	-- Mana Spring Totem
+		[GetSpellInfo(8166)]   = 136070,	-- Poison Cleansing Totem
+		[GetSpellInfo(8170)]   = 136019,	-- Disease Cleansing Totem
+		[GetSpellInfo(8184)]   = 135832,	-- Fire Resistance Totem
+		[GetSpellInfo(16190)]  = 135861,	-- Mana Tide Totem
 		-- Air
-		[GetSpellInfo(6495)]   = "Interface\\Icons\\Spell_nature_removecurse",				-- Sentry Totem
-		[GetSpellInfo(8512)]   = "Interface\\Icons\\Spell_nature_windfury",					-- Windfury Totem
-		[GetSpellInfo(8835)]   = "Interface\\Icons\\Spell_nature_invisibilitytotem",		-- Grace of Air Totem
-		[GetSpellInfo(10595)]  = "Interface\\Icons\\Spell_nature_natureresistancetotem",	-- Nature Resistance Totem
-		[GetSpellInfo(15107)]  = "Interface\\Icons\\Spell_nature_earthbind",				-- Windwall Totem
-		[GetSpellInfo(25908)]  = "Interface\\Icons\\Spell_nature_brilliance",				-- Tranquil Air Totem
+		[GetSpellInfo(6495)]   = 136082,	-- Sentry Totem
+		[GetSpellInfo(8512)]   = 136114,	-- Windfury Totem
+		[GetSpellInfo(8835)]   = 136046,	-- Grace of Air Totem
+		[GetSpellInfo(10595)]  = 136061,	-- Nature Resistance Totem
+		[GetSpellInfo(15107)]  = 136022,	-- Windwall Totem
+		[GetSpellInfo(25908)]  = 136013,	-- Tranquil Air Totem
 	}
 else
 	totemData = {
