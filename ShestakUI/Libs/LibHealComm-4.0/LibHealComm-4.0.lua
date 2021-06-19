@@ -1,7 +1,7 @@
 if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then return end
 
 local major = "LibHealComm-4.0"
-local minor = 92
+local minor = 93
 assert(LibStub, format("%s requires LibStub.", major))
 
 local HealComm = LibStub:NewLibrary(major, minor)
@@ -1480,6 +1480,8 @@ HealComm.currentModifiers = HealComm.currentModifiers or {}
 -- The only spell in the game with a name conflict is Ray of Pain from the Nagrand Void Walkers
 HealComm.healingModifiers = HealComm.healingModifiers or {
 	[28776] = 0.10, -- Necrotic Poison
+	[36693] = 0.55, -- Necrotic Poison
+	[46296] = 0.25, -- Necrotic Poison
 	[19716] = 0.25, -- Gehennas' Curse
 	[13737] = 0.50, -- Mortal Strike
 	[15708] = 0.50, -- Mortal Strike
@@ -1487,12 +1489,58 @@ HealComm.healingModifiers = HealComm.healingModifiers or {
 	[17547] = 0.50, -- Mortal Strike
 	[19643] = 0.50, -- Mortal Strike
 	[24573] = 0.50, -- Mortal Strike
+	[27580] = 0.50, -- Mortal Strike
+	[29572] = 0.50, -- Mortal Strike
+	[31911] = 0.50, -- Mortal Strike
+	[32736] = 0.50, -- Mortal Strike
+	[35054] = 0.50, -- Mortal Strike
+	[37335] = 0.50, -- Mortal Strike
+	[39171] = 0.50, -- Mortal Strike
+	[40220] = 0.50, -- Mortal Strike
+	[44268] = 0.50, -- Mortal Strike
 	[12294] = 0.50, -- Mortal Strike (Rank 1)
 	[21551] = 0.50, -- Mortal Strike (Rank 2)
 	[21552] = 0.50, -- Mortal Strike (Rank 3)
 	[21553] = 0.50, -- Mortal Strike (Rank 4)
+	[25248] = 0.50, -- Mortal Strike (Rank 5)
+	[30330] = 0.50, -- Mortal Strike (Rank 6)
+	[43441] = 0.50, -- Mortal Strike
+	[30843] = 0.00, -- Enfeeble
+	[19434] = 0.50, -- Aimed Shot (Rank 1)
+	[20900] = 0.50, -- Aimed Shot (Rank 2)
+	[20901] = 0.50, -- Aimed Shot (Rank 3)
+	[20902] = 0.50, -- Aimed Shot (Rank 4)
+	[20903] = 0.50, -- Aimed Shot (Rank 5)
+	[20904] = 0.50, -- Aimed Shot (Rank 6)
+	[27065] = 0.50, -- Aimed Shot (Rank 7)
+	[34625] = 0.25, -- Demolish
+	[35189] = 0.50, -- Solar Strike
+	[32315] = 0.50, -- Soul Strike
+	[32378] = 0.50, -- Filet
+	[36917] = 0.50, -- Magma-Thrower's Curse
+	[44534] = 0.50, -- Wretched Strike
+	[34366] = 0.75, -- Ebon Poison
+	[36023] = 0.50, -- Deathblow
+	[36054] = 0.50, -- Deathblow
+	[45885] = 0.50, -- Shadow Spike
+	[41292] = 0.00, -- Aura of Suffering
+	[40599] = 0.50, -- Arcing Smash
+	[9035] = 0.80, -- Hex of Weakness (Rank 1)
+	[19281] = 0.80, -- Hex of Weakness (Rank 2)
+	[19282] = 0.80, -- Hex of Weakness (Rank 3)
+	[19283] = 0.80, -- Hex of Weakness (Rank 4)
+	[19284] = 0.80, -- Hex of Weakness (Rank 5)
+	[25470] = 0.80, -- Hex of Weakness (Rank 6)
+	[34073] = 0.85, -- Curse of the Bleeding Hollow
+	[31306] = 0.25, -- Carrion Swarm
+	[44475] = 0.25, -- Magic Dampening Field
 	[23169] = 0.50, -- Brood Affliction: Green
 	[22859] = 0.50, -- Mortal Cleave
+	[38572] = 0.50, -- Mortal Cleave
+	[39595] = 0.50, -- Mortal Cleave
+	[45996] = 0.00, -- Darkness
+	[41350] = 2.00, -- Aura of Desire
+	[28176] = 1.20, -- Fel Armor
 	[7068] = 0.25, -- Veil of Shadow
 	[17820] = 0.25, -- Veil of Shadow
 	[22687] = 0.25, -- Veil of Shadow
@@ -1507,7 +1555,25 @@ HealComm.healingStackMods = HealComm.healingStackMods or {
 	-- Mortal Wound
 	[25646] = function(stacks) return 1 - stacks * 0.10 end,
 	[28467] = function(stacks) return 1 - stacks * 0.10 end,
+	[30641] = function(stacks) return 1 - stacks * 0.05 end,
+	[31464] = function(stacks) return 1 - stacks * 0.10 end,
+	[36814] = function(stacks) return 1 - stacks * 0.10 end,
+	[38770] = function(stacks) return 1 - stacks * 0.05 end,
+	-- Dark Touched
+	[45347] = function(stacks) return 1 - stacks * 0.05 end,
+	-- Nether Portal - Dominance
+	[30423] = function(stacks) return 1 - stacks * 0.01 end,
+	-- Focused Will
+	[45242] = function(stacks) return 1 + stacks * 0.10 end,
 }
+
+if isTBC then
+	HealComm.healingStackMods[13218] = function(stacks) return 1 - stacks * 0.10 end -- Wound Poison (Rank 1)
+	HealComm.healingStackMods[13222] = function(stacks) return 1 - stacks * 0.10 end -- Wound Poison (Rank 2)
+	HealComm.healingStackMods[13223] = function(stacks) return 1 - stacks * 0.10 end -- Wound Poison (Rank 3)
+	HealComm.healingStackMods[13224] = function(stacks) return 1 - stacks * 0.10 end -- Wound Poison (Rank 4)
+	HealComm.healingStackMods[27189] = function(stacks) return 1 - stacks * 0.10 end -- Wound Poison (Rank 5)
+end
 
 local healingStackMods = HealComm.healingStackMods
 local healingModifiers, currentModifiers = HealComm.healingModifiers, HealComm.currentModifiers
@@ -1618,6 +1684,35 @@ function HealComm:UNIT_AURA(unit)
 	if( unit == "player" ) then
 		if unitHasAura("player", 10060) then -- Power Infusion
 			playerIncrease = playerIncrease * 1.20
+		end
+
+		local npsStacks = select(3, unitHasAura("player", 30422)) -- Nether Portal - Serenity
+		if npsStacks then
+			playerIncrease = playerIncrease * (1 + npsStacks * 0.05)
+		end
+
+		if unitHasAura("player", 41406) then -- Dementia: +5%
+			playerIncrease = playerIncrease * 1.05
+		end
+
+		if unitHasAura("player", 41409) then -- Dementia: -5%
+			playerDecrease = playerDecrease * 0.95
+		end
+
+		if unitHasAura("player", 32346) then -- Stolen Soul
+			playerDecrease = playerDecrease * 0.50
+		end
+
+		if unitHasAura("player", 40099) then -- Vile Slime
+			playerDecrease = playerDecrease * 0.50
+		end
+
+		if unitHasAura("player", 38246) then -- Vile Sludge
+			playerDecrease = playerDecrease * 0.50
+		end
+
+		if unitHasAura("player", 45573) then -- Vile Sludge
+			playerDecrease = playerDecrease * 0.50
 		end
 
 		playerHealModifier = playerIncrease * playerDecrease
