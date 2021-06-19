@@ -87,10 +87,10 @@ if C.nameplate.healer_icon == true then
 		264,	-- Shaman Restoration
 	}
 	local healerClassTokens = {
-		"DRUID",
-		"PALADIN",
-		"PRIEST",
-		"SHAMAN",
+		["DRUID"] = true,
+		["PALADIN"] = true,
+		["PRIEST"] = true,
+		["SHAMAN"] = true,
 	}
 	if not T.classic then
 		for _, specID in pairs(healerSpecIDs) do
