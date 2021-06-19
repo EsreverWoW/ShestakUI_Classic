@@ -86,6 +86,12 @@ if C.nameplate.healer_icon == true then
 		257,	-- Priest Holy
 		264,	-- Shaman Restoration
 	}
+	local healerClassTokens = {
+		"DRUID",
+		"PALADIN",
+		"PRIEST",
+		"SHAMAN",
+	}
 	if not T.classic then
 		for _, specID in pairs(healerSpecIDs) do
 			local _, name = GetSpecializationInfoByID(specID)
@@ -105,7 +111,7 @@ if C.nameplate.healer_icon == true then
 				if T.classic then
 					local name, _, _, _, _, faction, _, _, _, classToken, damageDone, healingDone = GetBattlefieldScore(i)
 
-					if name and (healingDone > damageDone * 1.2) and t.factions[UnitFactionGroup("player")] == faction then
+					if name and healerClassTokens[classToken] and (healingDone > damageDone * 1.2) and t.factions[UnitFactionGroup("player")] == faction then
 						name = name:match("(.+)%-.+") or name
 						healList[name] = true
 					end
