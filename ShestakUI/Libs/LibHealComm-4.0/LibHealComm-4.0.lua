@@ -1549,6 +1549,7 @@ HealComm.healingModifiers = HealComm.healingModifiers or {
 	[28440] = 0.25, -- Veil of Shadow
 	[13583] = 0.50, -- Curse of the Deadwood
 	[23230] = 0.50, -- Blood Fury
+	[31977] = 1.50, -- Curse of Infinity
 }
 
 HealComm.healingStackMods = HealComm.healingStackMods or {
