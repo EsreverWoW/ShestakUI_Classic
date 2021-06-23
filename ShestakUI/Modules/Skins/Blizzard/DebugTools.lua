@@ -5,7 +5,7 @@ if C.skins.blizzard_frames ~= true then return end
 --	DebugTools skin
 ----------------------------------------------------------------------------------------
 local function LoadSkin()
-	if not T.classic then
+	if EventTraceFrame then
 		EventTraceFrame:StripTextures()
 		EventTraceFrame:SetTemplate("Transparent")
 		T.SkinCloseButton(EventTraceFrameCloseButton)
@@ -21,6 +21,9 @@ local function LoadSkin()
 		EventTraceTooltip:HookScript("OnShow", function(self)
 			self:SetTemplate("Transparent")
 		end)
+	else
+		-- TODO: add new skin
+		-- EventTrace
 	end
 
 	FrameStackTooltip:HookScript("OnShow", function(self)

@@ -94,7 +94,9 @@ local function LoadSkin()
 
 		T.SkinCheckBox(QuickKeybindFrame.characterSpecificButton)
 
-		QuickKeybindFrame.phantomExtraActionButton:SetAllPoints(ExtraActionButton1)
+		if QuickKeybindFrame.phantomExtraActionButton then -- TODO: detele after 9.1
+			QuickKeybindFrame.phantomExtraActionButton:SetAllPoints(ExtraActionButton1)
+		end
 	end
 end
 
