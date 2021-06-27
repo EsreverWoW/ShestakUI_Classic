@@ -323,7 +323,7 @@ local OnEvent = function(self, event)
 		for _, v in pairs(bars) do
 			v.endTime = 0
 		end
-	elseif event == "ENCOUNTER_END" and select(2, IsInInstance()) == "raid" then
+	elseif event == "ENCOUNTER_END" and select(2, IsInInstance()) == "raid" and not T.classic then
 		for _, v in pairs(bars) do
 			v.endTime = 0
 		end
