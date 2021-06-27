@@ -252,10 +252,9 @@ if C.reminder.solo_buffs_enable == true then
 					SpellName(25780),	-- Righteous Fury
 				},
 				["role"] = "Tank",
+				["combat"] = true,
 				["instance"] = true,
-				["reversecheck"] = true,
-				["negate_reversecheck"] = 1,	-- Holy paladins use RF sometimes
-				-- ["negate_reversecheck"] = "Healer",	-- Holy paladins use RF sometimes
+				["pvp"] = true,
 				-- ["level"] = 16,
 			},
 			[2] = {	-- Auras group
