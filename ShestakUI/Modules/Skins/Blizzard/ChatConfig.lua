@@ -18,6 +18,7 @@ local function LoadSkin()
 		"ChatConfigBackgroundFrame",
 		"ChatConfigChatSettingsClassColorLegend",
 		"ChatConfigChatSettingsLeft",
+		"ChatConfigChannelSettingsAvailable",
 		"ChatConfigChannelSettingsLeft",
 		"ChatConfigChannelSettingsClassColorLegend",
 		"ChatConfigOtherSettingsCombat",
@@ -109,8 +110,6 @@ local function LoadSkin()
 		end
 	end
 
-	-- TODO: Skin Available Channels
-
 	local ReskinColourSwatch = function(f)
 		if f.InnerBorder then
 			f.InnerBorder:SetAlpha(0)
@@ -125,43 +124,70 @@ local function LoadSkin()
 		end
 	end
 
-	hooksecurefunc("ChatConfig_CreateCheckboxes", function(frame, checkBoxTable, checkBoxTemplate)
+	if T.classic then
+		hooksecurefunc("ChatConfig_CreateBoxes", function(frame, boxTable, boxTemplate)
 			if frame.styled then return end
 
-			local checkBoxNameString = frame:GetName().."CheckBox"
+			local boxNameString = frame:GetName().."Box"
 
-			if checkBoxTemplate == "ChatConfigCheckBoxTemplate" then
-				for index in ipairs(checkBoxTable) do
-					local checkBoxName = checkBoxNameString..index
-					local checkbox = _G[checkBoxName]
+			if boxTemplate == "ChatConfigTextBoxTemplateWithButton" then
+				for index in ipairs(boxTable) do
+					local boxName = boxNameString..index
+					local box = _G[boxName]
 
-					local bg = CreateFrame("Frame", nil, checkbox)
+					box:StripTextures()
+					local bg = CreateFrame("Frame", nil, box)
 					bg:SetPoint("TOPLEFT", 2, -1)
 					bg:SetPoint("BOTTOMRIGHT", -2, 1)
 					bg:SetTemplate("Overlay")
 
-					T.SkinCheckBox(_G[checkBoxName.."Check"])
-				end
-			elseif checkBoxTemplate == "ChatConfigCheckBoxWithSwatchTemplate" or checkBoxTemplate == "ChatConfigWideCheckBoxWithSwatchTemplate" or checkBoxTemplate == "MovableChatConfigWideCheckBoxWithSwatchTemplate" then
-				for index in ipairs(checkBoxTable) do
-					local checkBoxName = checkBoxNameString..index
-					local checkbox = _G[checkBoxName]
+					bg:SetFrameLevel(bg:GetFrameLevel() - 1)
 
-					checkbox:StripTextures()
-					local bg = CreateFrame("Frame", nil, checkbox)
-					bg:SetPoint("TOPLEFT", 2, -1)
-					bg:SetPoint("BOTTOMRIGHT", -2, 1)
-					bg:CreateBackdrop("Overlay")
-					bg.backdrop:SetAllPoints(bg)
-
-					ReskinColourSwatch(_G[checkBoxName.."ColorSwatch"])
-
-					T.SkinCheckBox(_G[checkBoxName.."Check"])
+					_G[boxName.."Button"]:SkinButton()
 				end
 			end
 
 			frame.styled = true
 		end)
+	end
+
+	hooksecurefunc("ChatConfig_CreateCheckboxes", function(frame, checkBoxTable, checkBoxTemplate)
+		if frame.styled then return end
+
+		local checkBoxNameString = frame:GetName().."CheckBox"
+
+		if checkBoxTemplate == "ChatConfigCheckBoxTemplate" then
+			for index in ipairs(checkBoxTable) do
+				local checkBoxName = checkBoxNameString..index
+				local checkbox = _G[checkBoxName]
+
+				local bg = CreateFrame("Frame", nil, checkbox)
+				bg:SetPoint("TOPLEFT", 2, -1)
+				bg:SetPoint("BOTTOMRIGHT", -2, 1)
+				bg:SetTemplate("Overlay")
+
+				T.SkinCheckBox(_G[checkBoxName.."Check"])
+			end
+		elseif checkBoxTemplate == "ChatConfigCheckBoxWithSwatchTemplate" or checkBoxTemplate == "ChatConfigWideCheckBoxWithSwatchTemplate" or checkBoxTemplate == "MovableChatConfigWideCheckBoxWithSwatchTemplate" then
+			for index in ipairs(checkBoxTable) do
+				local checkBoxName = checkBoxNameString..index
+				local checkbox = _G[checkBoxName]
+
+				checkbox:StripTextures()
+				local bg = CreateFrame("Frame", nil, checkbox)
+				bg:SetPoint("TOPLEFT", 2, -1)
+				bg:SetPoint("BOTTOMRIGHT", -2, 1)
+				bg:CreateBackdrop("Overlay")
+				bg.backdrop:SetAllPoints(bg)
+
+				ReskinColourSwatch(_G[checkBoxName.."ColorSwatch"])
+
+				T.SkinCheckBox(_G[checkBoxName.."Check"])
+			end
+		end
+
+		frame.styled = true
+	end)
 
 	hooksecurefunc("ChatConfig_CreateColorSwatches", function(frame, swatchTable)
 		if frame.styled then return end
@@ -197,13 +223,11 @@ local function LoadSkin()
 		ReskinColourSwatch(CombatConfigColorsColorizeDamageNumberColorSwatch)
 
 		for i = 1, T.classic and 5 or 4 do
-			for j = 1, 4 do
+			for j = 1, MAX_WOW_CHAT_CHANNELS or 20 do
 				if _G["CombatConfigMessageTypesLeftCheckBox"..i] and _G["CombatConfigMessageTypesLeftCheckBox"..i.."_"..j] then
 					T.SkinCheckBox(_G["CombatConfigMessageTypesLeftCheckBox"..i])
 					T.SkinCheckBox(_G["CombatConfigMessageTypesLeftCheckBox"..i.."_"..j])
 				end
-			end
-			for j = 1, 10 do
 				if _G["CombatConfigMessageTypesRightCheckBox"..i] and _G["CombatConfigMessageTypesRightCheckBox"..i.."_"..j] then
 					T.SkinCheckBox(_G["CombatConfigMessageTypesRightCheckBox"..i])
 					T.SkinCheckBox(_G["CombatConfigMessageTypesRightCheckBox"..i.."_"..j])

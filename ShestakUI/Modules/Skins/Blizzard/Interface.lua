@@ -62,6 +62,7 @@ local function LoadSkin()
 		"CombatPanelTargetOfTarget",
 		"CombatPanelLossOfControl",
 		"CombatPanelFlashLowHealthWarning",
+		"CombatPanelAutoRange",
 		"CombatPanelEnableFloatingCombatText",
 		"CombatPanelCombatTextLowManaHealth",
 		"CombatPanelCombatTextAuras",

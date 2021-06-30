@@ -57,6 +57,7 @@ local function LoadSkin()
 		"VideoOptionsFrameOkay",
 		"VideoOptionsFrameCancel",
 		"VideoOptionsFrameDefaults",
+		"VideoOptionsFrameClassic",
 		"VideoOptionsFrameApply",
 		"RecordLoopbackSoundButton",
 		"PlayLoopbackSoundButton"
