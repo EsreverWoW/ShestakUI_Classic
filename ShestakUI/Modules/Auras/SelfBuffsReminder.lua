@@ -12,7 +12,7 @@ local function OnEvent(self, event, arg1)
 	local group = tab[self.id]
 	if not group.spells then return end
 	if (T.classic and not T.GetSpecialization()) or (not T.classic and not GetSpecialization()) then return end
-	if event == "UNIT_AURA" and arg1 ~= "player" then return end
+	if (event == "UNIT_AURA" or event == "UNIT_INVENTORY_CHANGED") and arg1 ~= "player" then return end
 	if group.level and T.level < group.level then return end
 
 	self:Hide()
