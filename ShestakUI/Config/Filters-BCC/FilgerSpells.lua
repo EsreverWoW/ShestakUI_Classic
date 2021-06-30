@@ -1163,9 +1163,9 @@ C["filger_spells"] = {
 			-- Blood Fury (Physical)
 			{spellID = 20572, filter = "CD", absID = true},
 			-- Blood Fury (Both)
-			-- {spellID = 33697, filter = "CD", absID = true},
+			{spellID = 33697, filter = "CD", absID = true},
 			-- Blood Fury (Spell)
-			-- {spellID = 33702, filter = "CD", absID = true},
+			{spellID = 33702, filter = "CD", absID = true},
 			-- Gift of the Naaru (Draenei)
 			{spellID = 28880, filter = "CD"},
 			-- Shadowmeld (Night Elf)
@@ -3159,7 +3159,7 @@ C["filger_spells"] = {
 			-- Blood Fury (Physical)
 			{spellID = 20572, filter = "CD", absID = true},
 			-- Blood Fury (Both)
-			-- {spellID = 33697, filter = "CD", absID = true},
+			{spellID = 33697, filter = "CD", absID = true},
 			-- Cannibalize (Forsaken)
 			{spellID = 20577, filter = "CD"},
 			-- Escape Artist (Gnome)
@@ -3769,9 +3769,9 @@ C["filger_spells"] = {
 			-- Blood Fury (Physical)
 			{spellID = 20572, filter = "CD", absID = true},
 			-- Blood Fury (Both)
-			-- {spellID = 33697, filter = "CD", absID = true},
+			{spellID = 33697, filter = "CD", absID = true},
 			-- Blood Fury (Spell)
-			-- {spellID = 33702, filter = "CD", absID = true},
+			{spellID = 33702, filter = "CD", absID = true},
 			-- Gift of the Naaru (Draenei)
 			{spellID = 28880, filter = "CD"},
 			-- War Stomp (Tauren)
@@ -4229,7 +4229,7 @@ C["filger_spells"] = {
 			-- Blood Fury (Both)
 			{spellID = 33697, filter = "CD", absID = true},
 			-- Blood Fury (Spell)
-			-- {spellID = 33702, filter = "CD", absID = true},
+			{spellID = 33702, filter = "CD", absID = true},
 			-- Cannibalize (Forsaken)
 			{spellID = 20577, filter = "CD"},
 			-- Escape Artist (Gnome)
@@ -4734,7 +4734,7 @@ C["filger_spells"] = {
 			-- Blood Fury (Physical)
 			{spellID = 20572, filter = "CD", absID = true},
 			-- Blood Fury (Both)
-			-- {spellID = 33697, filter = "CD", absID = true},
+			{spellID = 33697, filter = "CD", absID = true},
 			-- Cannibalize (Forsaken)
 			{spellID = 20577, filter = "CD"},
 			-- Escape Artist (Gnome)
@@ -4901,9 +4901,9 @@ C["filger_spells"] = {
 			-- Blood Fury (Physical)
 			{spellID = 20572, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Blood Fury (Both)
-			-- {spellID = 33697, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			{spellID = 33697, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Blood Fury (Spell)
-			-- {spellID = 33702, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			{spellID = 33702, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Gift of the Naaru (Draenei)
 			{spellID = 28880, unitID = "player", caster = "all", filter = "BUFF"},-- Perception (Human)
 			{spellID = 20600, unitID = "player", caster = "player", filter = "BUFF"},
