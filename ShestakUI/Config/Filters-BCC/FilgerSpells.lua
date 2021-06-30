@@ -4132,8 +4132,12 @@ C["filger_spells"] = {
 			{spellID = 21949, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
 			-- Tainted Blood Effect (Felhunter)
 			{spellID = 19479, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Unstable Affliction
+			-- Unstable Affliction r1
 			{spellID = 30108, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Unstable Affliction r2
+			{spellID = 30404, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Unstable Affliction r3
+			{spellID = 30405, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
 			-- Unstable Affliction (Silence)
 			{spellID = 31117, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
 
