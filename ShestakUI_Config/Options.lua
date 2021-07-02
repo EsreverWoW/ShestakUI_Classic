@@ -2649,7 +2649,6 @@ do
 	}
 
 	local bcc = {
-		dismount_stand,
 		screenshot,
 		solve_artifact,
 		auto_role

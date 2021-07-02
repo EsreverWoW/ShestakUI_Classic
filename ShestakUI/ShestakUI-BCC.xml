@@ -117,6 +117,7 @@
 	<Script file="Modules\Auras\SelfBuffsReminder.lua"/>
 	<Script file="Modules\Auras\RaidBuffsReminder-Classic.lua"/>
 
+	<Script file="Modules\Automation\AutoDismount.lua"/>
 	<Script file="Modules\Automation\AutoInvite.lua"/>
 	<Script file="Modules\Automation\AutoOpens.lua"/>
 	<Script file="Modules\Automation\AutoRelease.lua"/>
