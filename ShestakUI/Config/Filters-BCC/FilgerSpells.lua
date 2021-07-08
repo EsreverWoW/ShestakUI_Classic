@@ -1736,6 +1736,8 @@ C["filger_spells"] = {
 			{spellID = 31892, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Seal of Command
 			{spellID = 27170, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Seal of Corruption
+			{spellID = 348704, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Seal of Justice
 			{spellID = 20164, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Seal of Light
@@ -1748,6 +1750,8 @@ C["filger_spells"] = {
 			{spellID = 20166, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Seal of the Crusader
 			{spellID = 21082, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Seal of the Martyr
+			{spellID = 348700, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Shadow Resistance Aura
 			-- {spellID = 19876, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Vengeance r1

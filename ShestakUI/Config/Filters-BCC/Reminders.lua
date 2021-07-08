@@ -299,11 +299,13 @@ if C.reminder.solo_buffs_enable == true then
 					SpellName(21084),		-- Seal of Righteousness
 					SpellName(31892),		-- Seal of Blood
 					SpellName(27170),		-- Seal of Command
+					SpellName(348704),		-- Seal of Corruption
 					SpellName(20164),		-- Seal of Justice
 					SpellName(20165),		-- Seal of Light
 					SpellName(31801),		-- Seal of Vengeance
 					SpellName(20166),		-- Seal of Wisdom
 					SpellName(21082),		-- Seal of the Crusader
+					SpellName(348700),		-- Seal of the Martyr
 				},
 				["combat"] = true,
 				["instance"] = true,
