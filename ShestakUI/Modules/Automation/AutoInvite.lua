@@ -94,7 +94,11 @@ autoinvite:SetScript("OnEvent", function(_, event, arg1, arg2, ...)
 			for word in pairs(list_keyword) do
 				if arg1:lower():match(word) then
 					if event == "CHAT_MSG_WHISPER" then
-						C_PartyInfo.InviteUnit(arg2)
+						if T.classic then
+							InviteUnit(arg2)
+						else
+							C_PartyInfo.InviteUnit(arg2)
+						end
 					elseif event == "CHAT_MSG_BN_WHISPER" then
 						local bnetIDAccount = select(11, ...)
 						local accountInfo = C_BattleNet.GetAccountInfoByID(bnetIDAccount)

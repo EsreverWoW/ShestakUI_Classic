@@ -1038,7 +1038,11 @@ if guild.enabled then
 									notCheckable = true,
 									func = function(_, arg1)
 										menuFrame:Hide()
-										C_PartyInfo.InviteUnit(arg1)
+										if T.classic then
+											InviteUnit(arg1)
+										else
+											C_PartyInfo.InviteUnit(arg1)
+										end
 									end
 								}
 							end
@@ -1486,7 +1490,7 @@ end
 ----------------------------------------------------------------------------------------
 --	Talents
 ----------------------------------------------------------------------------------------
-if talents.enabled then
+if not T.classic and talents.enabled then
 	local lootSpecName, specName
 	local specList = {
 		{text = SPECIALIZATION, isTitle = true, notCheckable = true},
