@@ -2,6 +2,7 @@ local _, ns = ...
 local oUF = ns.oUF
 
 local FALLBACK_ICON = 136243 -- Interface\ICONS\Trade_Engineering
+
 local UnitCastingInfo = UnitCastingInfo or CastingInfo
 local UnitChannelInfo = UnitChannelInfo or ChannelInfo
 local EventFunctions = {}
@@ -16,6 +17,18 @@ if(LibClassicCasterino) then
 		return LibClassicCasterino:UnitChannelInfo(unit)
 	end
 end
+
+-- Tradeskill block
+local tradeskillCurrent, tradeskillTotal, mergeTradeskill = 0, 0, false
+local UNIT_SPELLCAST_SENT = function (self, event, unit, target, castID, spellID)
+	local castbar = self.Castbar
+	castbar.curTarget = (target and target ~= '') and target or nil
+
+	if castbar.isTradeSkill then
+		castbar.tradeSkillCastId = castID
+	end
+end
+-- end block
 
 local function resetAttributes(self)
 	self.castID = nil
@@ -67,6 +80,18 @@ local function CastStart(self, event, unit)
 	else
 		element.duration = endTime - GetTime()
 	end
+
+	-- Tradeskill block
+	if(mergeTradeskill and isTradeSkill and UnitIsUnit(unit, 'player')) then
+		element.duration = element.duration + (element.max * tradeskillCurrent);
+		element.max = element.max * tradeskillTotal;
+		element.holdTime = 1
+
+		if(unit == 'player') then
+			tradeskillCurrent = tradeskillCurrent + 1;
+		end
+	end
+	-- end block
 
 	element:SetMinMaxValues(0, element.max)
 	element:SetValue(element.duration)
@@ -189,6 +214,15 @@ local function CastStop(self, event, unit, castID, spellID)
 		end
 	end
 
+	-- Tradeskill block
+	if mergeTradeskill and UnitIsUnit(unit, 'player') then
+		if tradeskillCurrent == tradeskillTotal then
+			mergeTradeskill = false
+		end
+	end
+	-- end block
+
+
 	resetAttributes(element)
 
 	--[[ Callback: Castbar:PostCastStop(unit, spellID)
@@ -224,6 +258,14 @@ local function CastFail(self, event, unit, castID, spellID)
 	if(element.Spark) then element.Spark:Hide() end
 
 	element.holdTime = element.timeToHold or 0
+
+	-- Tradeskill block
+	if mergeTradeskill and UnitIsUnit(unit, 'player') then
+		mergeTradeskill = false
+		element.tradeSkillCastId = nil
+	end
+	-- end block
+
 
 	resetAttributes(element)
 	element:SetValue(element.max)
@@ -360,6 +402,10 @@ local function Enable(self, unit)
 			LibClassicCasterino.RegisterCallback(self, 'UNIT_SPELLCAST_INTERRUPTED', CastbarEventHandler)
 		end
 
+		-- Tradeskill block
+		self:RegisterEvent('UNIT_SPELLCAST_SENT', UNIT_SPELLCAST_SENT, true)
+		-- end block
+
 		element.holdTime = 0
 
 		element:SetScript('OnUpdate', element.OnUpdate or onUpdate)
@@ -440,5 +486,21 @@ if(LibClassicCasterino) then
 	EventFunctions['UNIT_SPELLCAST_FAILED'] = CastFail
 	EventFunctions['UNIT_SPELLCAST_INTERRUPTED'] = CastFail
 end
+
+-- Tradeskill block
+if(oUF:IsClassic()) then
+	hooksecurefunc('DoTradeSkill', function(_, num)
+		tradeskillCurrent = 0
+		tradeskillTotal = num or 1
+		mergeTradeskill = true
+	end)
+else
+	hooksecurefunc(C_TradeSkillUI, 'CraftRecipe', function(_, num)
+		tradeskillCurrent = 0
+		tradeskillTotal = num or 1
+		mergeTradeskill = true
+	end)
+end
+-- end block
 
 oUF:AddElement('Castbar', Update, Enable, Disable)
