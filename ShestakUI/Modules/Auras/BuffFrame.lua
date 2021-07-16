@@ -21,7 +21,6 @@ local BuffsAnchor = CreateFrame("Frame", "BuffsAnchor", UIParent)
 BuffsAnchor:SetPoint(unpack(C.position.player_buffs))
 BuffsAnchor:SetSize((15 * C.aura.player_buff_size) + 42, (C.aura.player_buff_size * 2) + 3)
 
-TemporaryEnchantFrame:ClearAllPoints()
 TemporaryEnchantFrame:SetPoint("TOPRIGHT", BuffsAnchor, "TOPRIGHT", 0, 0)
 
 _G["TempEnchant2"]:ClearAllPoints()
@@ -73,11 +72,9 @@ local function StyleBuffs(buttonName, index)
 	if border then border:Hide() end
 
 	if icon and not buff.isSkinned then
-		if not T.classic or (buttonName ~= "TempEnchant" or (buttonName == "TempEnchant" and index ~= 3)) then
-			buff:SetTemplate("Default")
-			if C.aura.classcolor_border == true then
-				buff:SetBackdropBorderColor(unpack(C.media.classborder_color))
-			end
+		buff:SetTemplate("Default")
+		if C.aura.classcolor_border == true then
+			buff:SetBackdropBorderColor(unpack(C.media.classborder_color))
 		end
 
 		buff:SetSize(C.aura.player_buff_size, C.aura.player_buff_size)
@@ -93,7 +90,7 @@ local function StyleBuffs(buttonName, index)
 		duration:SetFont(C.font.auras_font, C.font.auras_font_size, C.font.auras_font_style)
 		duration:SetShadowOffset(C.font.auras_font_shadow and 1 or 0, C.font.auras_font_shadow and -1 or 0)
 
-		if not buff.timer then
+		if not T.classic and not buff.timer then
 			buff.timer = buff:CreateAnimationGroup()
 			buff.timerAnim = buff.timer:CreateAnimation()
 			buff.timerAnim:SetDuration(0.1)
@@ -128,12 +125,6 @@ local function UpdateBuffAnchors()
 	local numBuffs = 0
 	local slack = BuffFrame.numEnchants
 	local mainhand, _, _, _, offhand = GetWeaponEnchantInfo()
-
-	if T.classic then
-		for index = 1, NUM_TEMP_ENCHANT_FRAMES do
-			StyleBuffs("TempEnchant", index)
-		end
-	end
 
 	for index = 1, BUFF_ACTUAL_DISPLAY do
 		StyleBuffs(buttonName, index)
@@ -173,62 +164,54 @@ end
 hooksecurefunc("BuffFrame_UpdateAllBuffAnchors", UpdateBuffAnchors)
 hooksecurefunc("DebuffButton_UpdateAnchors", UpdateDebuffAnchors)
 
-function AuraButton_UpdateDuration(buff, timeLeft)
-	local name = buff:GetName()
-	if not strmatch(name, "TempEnchant") or (T.classic and name == "TempEnchant3") then return end
-
-	buff.timeLeft = timeLeft
-	if T.classic then
+if T.classic then
+	local function UpdateDuration(buff, timeLeft)
 		local duration = buff.duration
-		if buff.timeLeft and C.aura.show_timer == true then
-			duration:SetFormattedText(GetFormattedTime(buff.timeLeft))
+		if timeLeft and C.aura.show_timer == true then
+			duration:SetFormattedText(GetFormattedTime(timeLeft))
 			duration:SetVertexColor(1, 1, 1)
 			duration:Show()
 		else
 			duration:Hide()
 		end
 
+		-- Temporary Weapon Enchants
+		local name = buff:GetName()
+		if not strmatch(name, "TempEnchant") or name == "TempEnchant3" then return end
+
+		local index = strmatch (name, "%d+")
 		local hasMainHandEnchant, _, mainHandCharges, _, hasOffHandEnchant, _, offHandCharges = GetWeaponEnchantInfo()
-		local index = 1
+		local slotIndex = 16
+		local chargeCount = mainHandCharges
 
-		if hasOffHandEnchant then
-			local charges = _G["TempEnchant" .. index .. "Charges"]
-			charges:SetText(offHandCharges)
-
-			if offHandCharges > 0 then
-				charges:Show()
-			else
-				charges:Hide()
-			end
-
-			local quality = GetInventoryItemQuality("player", 17)
-
-			if quality then
-				buff:SetBackdropBorderColor(GetItemQualityColor(quality))
-			end
-
-			index = index + 1
+		if index == "1" and (hasMainHandEnchant and hasOffHandEnchant) or (not hasMainHandEnchant and hasOffHandEnchant) then
+			slotIndex = 17
+			chargeCount = offHandCharges
 		end
 
-		if hasMainHandEnchant then
-			local charges = _G["TempEnchant" .. index .. "Charges"]
-			charges:SetText(mainHandCharges)
+		local charges = _G["TempEnchant" .. index .. "Charges"]
+		charges:SetText(chargeCount)
 
-			if mainHandCharges > 0 then
-				charges:Show()
-			else
-				charges:Hide()
-			end
-
-			local quality = GetInventoryItemQuality("player", 16)
-
-			if quality then
-				buff:SetBackdropBorderColor(GetItemQualityColor(quality))
-			end
-
-			index = index + 1
+		if chargeCount > 0 then
+			charges:Show()
+		else
+			charges:Hide()
 		end
-	else
+
+		local quality = GetInventoryItemQuality("player", slotIndex)
+
+		if quality then
+			buff:SetBackdropBorderColor(GetItemQualityColor(quality))
+		end
+	end
+
+	hooksecurefunc("AuraButton_UpdateDuration", UpdateDuration)
+else
+	function AuraButton_UpdateDuration(buff, timeLeft)
+		local name = buff:GetName()
+		if not strmatch(name, "TempEnchant") then return end
+
+		buff.timeLeft = timeLeft
 		if not buff.timerEnchant then
 			buff.timerEnchant = buff:CreateAnimationGroup()
 			buff.timerAnim = buff.timerEnchant:CreateAnimation()
