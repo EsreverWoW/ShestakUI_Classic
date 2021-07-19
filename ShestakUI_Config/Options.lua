@@ -702,7 +702,8 @@ do
 	local classic = {
 		vehicle_mouseover,
 		hide_banner,
-		hide_talking_head
+		hide_talking_head,
+		hide_maw_buffs
 	}
 
 	if IsClassicBuild() then
