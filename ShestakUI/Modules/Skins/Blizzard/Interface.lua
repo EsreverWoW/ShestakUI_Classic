@@ -216,6 +216,7 @@ local function LoadSkin()
 		"AccessibilityPanelShakeIntensityDropdown",
 		"ActionBarsPanelPickupActionKeyDropDown",
 		"CameraPanelStyleDropDown",
+		"CombatPanelCombatTextFloatModeDropDown",
 		"CombatPanelFocusCastKeyDropDown",
 		"CombatPanelSelfCastKeyDropDown",
 		"ControlsPanelAutoLootKeyDropDown",
