@@ -4,17 +4,17 @@ if C.minimap.enable ~= true then return end
 ----------------------------------------------------------------------------------------
 --	Farm mode for minimap(by Elv22)
 ----------------------------------------------------------------------------------------
-local show = false
+T.FarmMode = false
 SlashCmdList.FARMMODE = function()
 	if InCombatLockdown() then print("|cffffff00"..ERR_NOT_IN_COMBAT.."|r") return end
-	if show == false then
+	if T.FarmMode == false then
 		MinimapAnchor:SetSize(C.minimap.size * 1.65, C.minimap.size * 1.65)
 		Minimap:SetSize(MinimapAnchor:GetWidth(), MinimapAnchor:GetWidth())
-		show = true
+		T.FarmMode = true
 	else
 		MinimapAnchor:SetSize(C.minimap.size, C.minimap.size)
 		Minimap:SetSize(MinimapAnchor:GetWidth(), MinimapAnchor:GetWidth())
-		show = false
+		T.FarmMode = false
 	end
 end
 SLASH_FARMMODE1 = "/farmmode"
