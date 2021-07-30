@@ -3,7 +3,8 @@ local T, C, L, _ = unpack(select(2, ...))
 ----------------------------------------------------------------------------------------
 --	Temporary stuff
 ----------------------------------------------------------------------------------------
-if T.BCC and select(4, GetBuildInfo()) > 20501 then -- 2.5.2 PTR is missing these from the 9.1 changes in Blizzard_Deprecated
+-- 2.5.2 PTR is missing these from the 9.1 changes in Blizzard_Deprecated
+if T.BCC and select(4, GetBuildInfo()) > 20501 then
     -- Item class/subclass enum conversions
     do
         LE_ITEM_CLASS_CONSUMABLE = Enum.ItemClass.Consumable;
