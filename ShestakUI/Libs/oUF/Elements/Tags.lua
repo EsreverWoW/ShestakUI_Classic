@@ -4,6 +4,7 @@ local _, ns = ...
 local oUF = ns.oUF
 local Private = oUF.Private
 
+local xpcall = Private.xpcall
 local unitExists = Private.unitExists
 
 local _PATTERN = '%[..-%]+'
@@ -492,6 +493,7 @@ local unitlessEvents = {
 	NEUTRAL_FACTION_SELECT_RESULT = true,
 	PARTY_LEADER_CHANGED = true,
 	PLAYER_LEVEL_UP = true,
+	PLAYER_TALENT_UPDATE = true,
 	PLAYER_TARGET_CHANGED = true,
 	PLAYER_UPDATE_RESTING = true,
 	RUNE_POWER_UPDATE = true,
@@ -558,7 +560,7 @@ local function getBracketData(tag)
 	-- full tag syntax: '[prefix$>tag-name<$suffix(a,r,g,s)]'
 	local suffixEnd = (tag:match('()%(') or -1) - 1
 
-	local prefixEnd, prefixOffset = tag:match('()%$>'), 1
+	local prefixEnd, prefixOffset = tag:match('()$>'), 1
 	if(not prefixEnd) then
 		prefixEnd = 1
 	else
@@ -566,7 +568,7 @@ local function getBracketData(tag)
 		prefixOffset = 3
 	end
 
-	local suffixStart, suffixOffset = tag:match('%<$()', prefixEnd), 1
+	local suffixStart, suffixOffset = tag:match('<$()', prefixEnd), 1
 	if(not suffixStart) then
 		suffixStart = suffixEnd + 1
 	else
@@ -620,7 +622,7 @@ local function getTagFunc(tagstr)
 							end
 						end
 					elseif(suffixStart - suffixEnd ~= 1) then
-						local suffix = bracket:sub(suffixStart, -2)
+						local suffix = bracket:sub(suffixStart, suffixEnd)
 
 						tagFunc = function(unit, realUnit)
 							local str
@@ -687,8 +689,10 @@ end
 local function registerEvent(fontstr, event)
 	if(not events[event]) then events[event] = {} end
 
-	eventFrame:RegisterEvent(event)
-	table.insert(events[event], fontstr)
+	local isOK = xpcall(eventFrame.RegisterEvent, eventFrame, event)
+	if(isOK) then
+		table.insert(events[event], fontstr)
+	end
 end
 
 local function registerEvents(fontstr, tagstr)
@@ -705,14 +709,20 @@ end
 
 local function unregisterEvents(fontstr)
 	for event, data in next, events do
-		for i, tagfsstr in next, data do
+		local index = 1
+		local tagfsstr = data[index]
+		while tagfsstr do
 			if(tagfsstr == fontstr) then
 				if(#data == 1) then
 					eventFrame:UnregisterEvent(event)
 				end
 
-				table.remove(data, i)
+				table.remove(data, index)
+			else
+				index = index + 1
 			end
+
+			tagfsstr = data[index]
 		end
 	end
 end
@@ -783,10 +793,16 @@ local function Untag(self, fs)
 
 	unregisterEvents(fs)
 	for _, timers in next, eventlessUnits do
-		for i, fontstr in next, timers do
+		local index = 1
+		local fontstr = timers[index]
+		while fontstr do
 			if(fs == fontstr) then
-				table.remove(timers, i)
+				table.remove(timers, index)
+			else
+				index = index + 1
 			end
+
+			fontstr = timers[index]
 		end
 	end
 
@@ -798,7 +814,7 @@ end
 
 local function strip(tag)
 	-- remove prefix, custom args, and suffix
-	return tag:gsub('%[.-%$>', '['):gsub('%(.-%)%]', ']'):gsub('<$.-%]', ']')
+	return tag:gsub('%[.-$>', '['):gsub('%(.-%)%]', ']'):gsub('<$.-%]', ']')
 end
 
 oUF.Tags = {
