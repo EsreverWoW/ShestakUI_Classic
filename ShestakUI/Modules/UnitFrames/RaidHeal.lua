@@ -7,10 +7,14 @@ if C.unitframe.enable ~= true then return end
 local _, ns = ...
 local oUF = ns.oUF
 
--- Frame size
-local unit_width = C.raidframe.heal_width
-local unit_height = C.raidframe.heal_height
-local power_height = C.raidframe.heal_power_height
+-- Party size
+local party_width = C.raidframe.heal_party_width
+local party_height = C.raidframe.heal_party_height
+local party_power_height = C.raidframe.heal_party_power_height
+-- Raid size
+local raid_width = C.raidframe.heal_raid_width
+local raid_height = C.raidframe.heal_raid_height
+local raid_power_height = C.raidframe.heal_raid_power_height
 
 -- Create layout
 local function Shared(self, unit)
@@ -38,9 +42,12 @@ local function Shared(self, unit)
 	if (suffix == "pet" or suffix == "target") and unit ~= "tank" then
 		self.Health:SetPoint("BOTTOMLEFT", self, "BOTTOMLEFT", 0, 0)
 		self.Health:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", 0, 0)
+	elseif unit == "party" then
+		self.Health:SetPoint("BOTTOMLEFT", self, "BOTTOMLEFT", 0, party_power_height > 0 and party_power_height + 1 or 0)
+		self.Health:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", 0, party_power_height > 0 and party_power_height + 1 or 0)
 	else
-		self.Health:SetPoint("BOTTOMLEFT", self, "BOTTOMLEFT", 0, C.raidframe.heal_power_height > 0 and power_height + 1 or 0)
-		self.Health:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", 0, C.raidframe.heal_power_height > 0 and power_height + 1 or 0)
+		self.Health:SetPoint("BOTTOMLEFT", self, "BOTTOMLEFT", 0, raid_power_height > 0 and raid_power_height + 1 or 0)
+		self.Health:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", 0, raid_power_height > 0 and raid_power_height + 1 or 0)
 	end
 	self.Health:SetStatusBarTexture(C.media.texture)
 
@@ -113,7 +120,7 @@ local function Shared(self, unit)
 		self.Power = CreateFrame("StatusBar", nil, self)
 		self.Power:SetPoint("BOTTOMLEFT", self, "BOTTOMLEFT", 0, 0)
 		self.Power:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", 0, 0)
-		self.Power:SetPoint("TOP", self, "BOTTOM", 0, power_height)
+		self.Power:SetPoint("TOP", self, "BOTTOM", 0, unit == "party" and party_power_height or raid_power_height)
 		self.Power:SetStatusBarTexture(C.media.texture)
 
 		self.Power.PostUpdate = function(power, unit)
@@ -338,8 +345,8 @@ oUF:Factory(function(self)
 				self:SetWidth(header:GetAttribute("initial-width"))
 				self:SetHeight(header:GetAttribute("initial-height"))
 			]],
-			"initial-width", unit_width,
-			"initial-height", T.Scale(unit_height),
+			"initial-width", party_width,
+			"initial-height", T.Scale(party_height),
 			"showSolo", C.raidframe.solo_mode,
 			"showPlayer", C.raidframe.player_in_party,
 			"groupBy", (not T.classic and C.raidframe.by_role) and "ASSIGNEDROLE",
@@ -353,9 +360,9 @@ oUF:Factory(function(self)
 		)
 		party:SetPoint("TOPLEFT", _G["PartyAnchor"])
 		if C.raidframe.party_vertical then
-			_G["PartyAnchor"]:SetSize(unit_width, unit_height * 5 + T.Scale(7) * 4)
+			_G["PartyAnchor"]:SetSize(party_width, party_height * 5 + T.Scale(7) * 4)
 		else
-			_G["PartyAnchor"]:SetSize(unit_width * 5 + T.Scale(7) * 4, unit_height)
+			_G["PartyAnchor"]:SetSize(party_width * 5 + T.Scale(7) * 4, party_height)
 		end
 
 		-- Party targets
@@ -367,8 +374,8 @@ oUF:Factory(function(self)
 					self:SetHeight(header:GetAttribute("initial-height"))
 					self:SetAttribute("unitsuffix", "target")
 				]],
-				"initial-width", C.raidframe.party_vertical and T.Scale(unit_height) or unit_width,
-				"initial-height", C.raidframe.party_vertical and T.Scale(unit_height) or T.Scale(unit_height / 2),
+				"initial-width", C.raidframe.party_vertical and T.Scale(party_height) or party_width,
+				"initial-height", C.raidframe.party_vertical and T.Scale(party_height) or T.Scale(party_height / 2),
 				"showSolo", C.raidframe.solo_mode,
 				"showPlayer", C.raidframe.player_in_party,
 				"groupBy", (not T.classic and C.raidframe.by_role) and "ASSIGNEDROLE",
@@ -382,10 +389,10 @@ oUF:Factory(function(self)
 			)
 			partytarget:SetPoint("TOPLEFT", _G["PartyTargetAnchor"])
 			if C.raidframe.party_vertical then
-				_G["PartyTargetAnchor"]:SetSize(T.Scale(unit_height), T.Scale(unit_height) * 5 + T.Scale(7) * 4)
+				_G["PartyTargetAnchor"]:SetSize(T.Scale(party_height), T.Scale(party_height) * 5 + T.Scale(7) * 4)
 				_G["PartyTargetAnchor"]:SetPoint("TOPLEFT", party, "TOPRIGHT", 7, 0)
 			else
-				_G["PartyTargetAnchor"]:SetSize(unit_width * 5 + T.Scale(7) * 4, T.Scale(unit_height / 2))
+				_G["PartyTargetAnchor"]:SetSize(party_width * 5 + T.Scale(7) * 4, T.Scale(party_height / 2))
 			end
 		end
 
@@ -399,8 +406,8 @@ oUF:Factory(function(self)
 					self:SetAttribute("useOwnerUnit", "true")
 					self:SetAttribute("unitsuffix", "pet")
 				]],
-				"initial-width", C.raidframe.party_vertical and T.Scale(unit_height) or unit_width,
-				"initial-height", C.raidframe.party_vertical and T.Scale(unit_height) or T.Scale(unit_height / 2),
+				"initial-width", C.raidframe.party_vertical and T.Scale(party_height) or party_width,
+				"initial-height", C.raidframe.party_vertical and T.Scale(party_height) or T.Scale(party_height / 2),
 				"showSolo", C.raidframe.solo_mode,
 				"showPlayer", C.raidframe.player_in_party,
 				"groupBy", (not T.classic and C.raidframe.by_role) and "ASSIGNEDROLE",
@@ -414,10 +421,10 @@ oUF:Factory(function(self)
 			)
 			partypet:SetPoint("TOPLEFT", _G["PartyPetAnchor"])
 			if C.raidframe.party_vertical then
-				_G["PartyPetAnchor"]:SetSize(T.Scale(unit_height), T.Scale(unit_height) * 5 + T.Scale(7) * 4)
-				_G["PartyPetAnchor"]:SetPoint("TOPLEFT", party, "TOPRIGHT", T.Scale(unit_height) + 14.5, 0)
+				_G["PartyPetAnchor"]:SetSize(T.Scale(party_height), T.Scale(party_height) * 5 + T.Scale(7) * 4)
+				_G["PartyPetAnchor"]:SetPoint("TOPLEFT", party, "TOPRIGHT", T.Scale(party_height) + 14.5, 0)
 			else
-				_G["PartyPetAnchor"]:SetSize(unit_width * 5 + T.Scale(7) * 4, T.Scale(unit_height / 2))
+				_G["PartyPetAnchor"]:SetSize(party_width * 5 + T.Scale(7) * 4, T.Scale(party_height / 2))
 			end
 		end
 	end
@@ -432,8 +439,8 @@ oUF:Factory(function(self)
 					self:SetWidth(header:GetAttribute("initial-width"))
 					self:SetHeight(header:GetAttribute("initial-height"))
 				]],
-				"initial-width", unit_width,
-				"initial-height", T.Scale(unit_height),
+				"initial-width", raid_width,
+				"initial-height", T.Scale(raid_height),
 				"showRaid", true,
 				"groupFilter", tostring(i),
 				"groupBy", (not T.classic and C.raidframe.by_role) and "ASSIGNEDROLE",
@@ -448,14 +455,14 @@ oUF:Factory(function(self)
 			)
 			raidgroup:SetPoint("TOPLEFT", _G["RaidAnchor"..i])
 			if C.raidframe.raid_groups_vertical then
-				_G["RaidAnchor"..i]:SetSize(unit_width, T.Scale(unit_height) * 5 + T.Scale(7) * 4)
+				_G["RaidAnchor"..i]:SetSize(raid_width, T.Scale(raid_height) * 5 + T.Scale(7) * 4)
 				if i == 1 then
 					_G["RaidAnchor"..i]:SetPoint(unpack(C.position.unitframes.raid_heal))
 				else
 					_G["RaidAnchor"..i]:SetPoint("TOPLEFT", _G["RaidAnchor"..i-1], "TOPRIGHT", 7, 0)
 				end
 			else
-				_G["RaidAnchor"..i]:SetSize(unit_width * 5 + T.Scale(7) * 4, T.Scale(unit_height))
+				_G["RaidAnchor"..i]:SetSize(raid_width * 5 + T.Scale(7) * 4, T.Scale(raid_height))
 				if i == 1 then
 					_G["RaidAnchor"..i]:SetPoint(unpack(C.position.unitframes.raid_heal))
 				else
@@ -478,8 +485,8 @@ oUF:Factory(function(self)
 						self:SetAttribute("filterOnPet", "true")
 						self:SetAttribute("unitsuffix", "pet")
 					]],
-					"initial-width", C.raidframe.party_vertical and T.Scale(unit_height) or unit_width,
-					"initial-height", C.raidframe.party_vertical and T.Scale(unit_height) or T.Scale(unit_height / 2),
+					"initial-width", C.raidframe.party_vertical and T.Scale(raid_height) or raid_width,
+					"initial-height", C.raidframe.party_vertical and T.Scale(raid_height) or T.Scale(raid_height / 2),
 					"showRaid", true,
 					"groupFilter", tostring(i),
 					"groupBy", "CLASS",
@@ -493,14 +500,14 @@ oUF:Factory(function(self)
 				)
 				petgroup:SetPoint("TOPLEFT", _G["RaidPetAnchor"..i])
 				if C.raidframe.raid_groups_vertical then
-					_G["RaidPetAnchor"..i]:SetSize(unit_width, T.Scale(unit_height) * 5 + T.Scale(7) * 4)
+					_G["RaidPetAnchor"..i]:SetSize(raid_width, T.Scale(raid_height) * 5 + T.Scale(7) * 4)
 					if i == 1 then
 						_G["RaidPetAnchor"..i]:SetPoint(unpack(C.position.unitframes.raid_pets))
 					else
 						_G["RaidPetAnchor"..i]:SetPoint("TOPLEFT", _G["RaidPetAnchor"..i-1], "TOPRIGHT", 7, 0)
 					end
 				else
-					_G["RaidPetAnchor"..i]:SetSize(unit_width * 5 + T.Scale(7) * 4, T.Scale(unit_height / 2))
+					_G["RaidPetAnchor"..i]:SetSize(raid_width * 5 + T.Scale(7) * 4, T.Scale(raid_height / 2))
 					if i == 1 then
 						_G["RaidPetAnchor"..i]:SetPoint(unpack(C.position.unitframes.raid_pets))
 					else
@@ -517,13 +524,13 @@ oUF:Factory(function(self)
 				"oUF-initialConfigFunction", ([[
 					self:SetWidth(%d)
 					self:SetHeight(%d)
-				]]):format(unit_width, unit_height),
+				]]):format(raid_width, raid_height),
 				"showRaid", true,
 				"yOffset", T.Scale(-7),
 				"groupFilter", "MAINTANK",
 				"template", C.raidframe.raid_tanks_tt and "oUF_MainTankTT" or "oUF_MainTank"
 			)
-			_G["RaidTankAnchor"]:SetSize(unit_width, unit_height)
+			_G["RaidTankAnchor"]:SetSize(raid_width, raid_height)
 			raidtank:SetPoint("BOTTOMLEFT", _G["RaidTankAnchor"])
 		end
 	end
@@ -546,7 +553,7 @@ local party_target = CreateFrame("Frame", "PartyTargetAnchor", UIParent)
 party_target:SetPoint("TOPLEFT", party, "BOTTOMLEFT", 0, -7)
 
 local party_pet = CreateFrame("Frame", "PartyPetAnchor", UIParent)
-party_pet:SetPoint("TOPLEFT", party, "BOTTOMLEFT", 0, -((unit_height / 2) + 14.5))
+party_pet:SetPoint("TOPLEFT", party, "BOTTOMLEFT", 0, -((party_height / 2) + 14.5))
 
 local raidtank = CreateFrame("Frame", "RaidTankAnchor", UIParent)
 if C.actionbar.split_bars then
@@ -571,7 +578,7 @@ do
 				for j = 1, C.raidframe.raid_groups do
 					for i = 1, 5 do
 						local frame = CreateFrame("Frame", nil, UIParent)
-						frame:SetSize(unit_width, unit_height)
+						frame:SetSize(raid_width, raid_height)
 						if j == 1 then
 							if i == 1 then
 								frame:SetPoint("TOPLEFT", oUF_RaidHeal1, "TOPLEFT", 0, 0)
@@ -581,7 +588,7 @@ do
 							end
 						else
 							if i == 1 then
-								frame:SetPoint("TOPLEFT", raid_j[j-1], "TOPLEFT", 0, -unit_height - 7)
+								frame:SetPoint("TOPLEFT", raid_j[j-1], "TOPLEFT", 0, -raid_height - 7)
 								raid_j[j] = frame
 							else
 								frame:SetPoint("TOPLEFT", raid[i-1], "TOPRIGHT", 7, 0)
@@ -623,7 +630,7 @@ do
 			if #frames == 0 then
 				for i = 1, 5 do
 					local frame = CreateFrame("Frame", nil, UIParent)
-					frame:SetSize(unit_width, unit_height)
+					frame:SetSize(party_width, party_height)
 					if i == 1 then
 						frame:SetPoint("TOPLEFT", oUF_PartyUnitButton1, "TOPLEFT", 0, 0)
 					else
