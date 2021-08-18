@@ -23,185 +23,111 @@ end
 
 T.PostUpdateHealthColor = function(health, unit, r, g, b)
 	if unit and unit:find("arena%dtarget") then return end
-	if not UnitIsConnected(unit) or (UnitIsDeadOrGhost(unit) and not UnitIsFeignDeath(unit)) then return end
-	if (C.unitframe.own_color ~= true and C.unitframe.enemy_health_color and unit == "target" and UnitIsEnemy(unit, "player") and UnitIsPlayer(unit)) or (C.unitframe.own_color ~= true and unit == "target" and not UnitIsPlayer(unit) and UnitIsFriend(unit, "player")) then
-		local c = T.oUF_colors.reaction[UnitReaction(unit, "player")]
-		if c then
-			r, g, b = c[1], c[2], c[3]
-			health:SetStatusBarColor(r, g, b)
-		else
-			r, g, b = 0.3, 0.7, 0.3
-			health:SetStatusBarColor(r, g, b)
+	if not UnitIsConnected(unit) or (UnitIsDeadOrGhost(unit) and not UnitIsFeignDeath(unit)) then
+		health:SetValue(0)
+		if not UnitIsConnected(unit) then
+			health.value:SetText("|cffD7BEA5"..L_UF_OFFLINE.."|r")
+		elseif UnitIsDead(unit) then
+			health.value:SetText("|cffD7BEA5"..L_UF_DEAD.."|r")
+		elseif UnitIsGhost(unit) then
+			health.value:SetText("|cffD7BEA5"..L_UF_GHOST.."|r")
 		end
-	end
-	if unit == "pet" then
-		local _, class = UnitClass("player")
-		local r, g, b = unpack(T.oUF_colors.class[class])
-		if C.unitframe.own_color == true then
-			health:SetStatusBarColor(unpack(C.unitframe.uf_color))
-			health.bg:SetVertexColor(0.1, 0.1, 0.1)
-		else
-			if b then
+	else
+		if (C.unitframe.own_color ~= true and C.unitframe.enemy_health_color and unit == "target" and UnitIsEnemy(unit, "player") and UnitIsPlayer(unit)) or (C.unitframe.own_color ~= true and unit == "target" and not UnitIsPlayer(unit) and UnitIsFriend(unit, "player")) then
+			local c = T.oUF_colors.reaction[UnitReaction(unit, "player")]
+			if c then
+				r, g, b = c[1], c[2], c[3]
 				health:SetStatusBarColor(r, g, b)
-				if health.bg and health.bg.multiplier then
-					local mu = health.bg.multiplier
-					health.bg:SetVertexColor(r * mu, g * mu, b * mu)
+			else
+				r, g, b = 0.3, 0.7, 0.3
+				health:SetStatusBarColor(r, g, b)
+			end
+		end
+		if unit == "pet" then
+			local _, class = UnitClass("player")
+			local r, g, b = unpack(T.oUF_colors.class[class])
+			if C.unitframe.own_color == true then
+				health:SetStatusBarColor(unpack(C.unitframe.uf_color))
+				health.bg:SetVertexColor(0.1, 0.1, 0.1)
+			else
+				if b then
+					health:SetStatusBarColor(r, g, b)
+					if health.bg and health.bg.multiplier then
+						local mu = health.bg.multiplier
+						health.bg:SetVertexColor(r * mu, g * mu, b * mu)
+					end
 				end
 			end
 		end
-	end
-	if C.unitframe.bar_color_value == true and not UnitIsTapDenied(unit) then
-		if C.unitframe.own_color == true then
-			r, g, b = C.unitframe.uf_color[1], C.unitframe.uf_color[2], C.unitframe.uf_color[3]
-		else
-			r, g, b = health:GetStatusBarColor()
-		end
-		local newr, newg, newb = oUF:ColorGradient(min, max, 1, 0, 0, 1, 1, 0, r, g, b)
+		if C.unitframe.bar_color_value == true and not UnitIsTapDenied(unit) then
+			if C.unitframe.own_color == true then
+				r, g, b = C.unitframe.uf_color[1], C.unitframe.uf_color[2], C.unitframe.uf_color[3]
+			else
+				r, g, b = health:GetStatusBarColor()
+			end
+			local newr, newg, newb = oUF:ColorGradient(min, max, 1, 0, 0, 1, 1, 0, r, g, b)
 
-		health:SetStatusBarColor(newr, newg, newb)
-		if health.bg and health.bg.multiplier then
-			local mu = health.bg.multiplier
-			health.bg:SetVertexColor(newr * mu, newg * mu, newb * mu)
+			health:SetStatusBarColor(newr, newg, newb)
+			if health.bg and health.bg.multiplier then
+				local mu = health.bg.multiplier
+				health.bg:SetVertexColor(newr * mu, newg * mu, newb * mu)
+			end
 		end
 	end
 end
 
 T.PostUpdateHealth = function(health, unit, min, max)
 	if unit and unit:find("arena%dtarget") then return end
-	if not UnitIsConnected(unit) or (UnitIsDeadOrGhost(unit) and not UnitIsFeignDeath(unit)) then
-		health:SetValue(0)
-		if not UnitIsConnected(unit) then
-			health.value:SetText("|cffD7BEA5"..L_UF_OFFLINE.."|r")
-		elseif UnitIsDead(unit) then
-			health.value:SetText("|cffD7BEA5"..L_UF_DEAD.."|r")
-		elseif UnitIsGhost(unit) then
-			health.value:SetText("|cffD7BEA5"..L_UF_GHOST.."|r")
-		end
-	else
-		if min ~= max then
-			local r, g, b = oUF:ColorGradient(min, max, 0.69, 0.31, 0.31, 0.65, 0.63, 0.35, 0.33, 0.59, 0.33)
-			if (T.classic and unit == "player" or (unit == "player" and not UnitHasVehicleUI("player") or unit == "vehicle")) and health:GetAttribute("normalUnit") ~= "pet" then
-				if C.unitframe.show_total_value == true then
-					if C.unitframe.color_value == true then
-						health.value:SetFormattedText("|cff559655%s|r |cffD7BEA5-|r |cff559655%s|r", T.ShortValue(min), T.ShortValue(max))
-					else
-						health.value:SetFormattedText("|cffffffff%s - %s|r", T.ShortValue(min), T.ShortValue(max))
-					end
+	if not UnitIsConnected(unit) or (UnitIsDeadOrGhost(unit) and not UnitIsFeignDeath(unit)) then return end
+	if min ~= max then
+		local r, g, b = oUF:ColorGradient(min, max, 0.69, 0.31, 0.31, 0.65, 0.63, 0.35, 0.33, 0.59, 0.33)
+		if (T.classic and unit == "player" or (unit == "player" and not UnitHasVehicleUI("player") or unit == "vehicle")) and health:GetAttribute("normalUnit") ~= "pet" then
+			if C.unitframe.show_total_value == true then
+				if C.unitframe.color_value == true then
+					health.value:SetFormattedText("|cff559655%s|r |cffD7BEA5-|r |cff559655%s|r", T.ShortValue(min), T.ShortValue(max))
 				else
-					if C.unitframe.color_value == true then
-						health.value:SetFormattedText("|cffAF5050%d|r |cffD7BEA5-|r |cff%02x%02x%02x%d%%|r", min, r * 255, g * 255, b * 255, floor(min / max * 100))
-					else
-						health.value:SetFormattedText("|cffffffff%d - %d%%|r", min, floor(min / max * 100))
-					end
+					health.value:SetFormattedText("|cffffffff%s - %s|r", T.ShortValue(min), T.ShortValue(max))
 				end
-			elseif unit == "target" then
-				if C.unitframe.show_total_value == true then
-					if C.unitframe.color_value == true then
-						health.value:SetFormattedText("|cff559655%s|r |cffD7BEA5-|r |cff559655%s|r", T.ShortValue(min), T.ShortValue(max))
-					else
-						health.value:SetFormattedText("|cffffffff%s - %s|r", T.ShortValue(min), T.ShortValue(max))
-					end
+			else
+				if C.unitframe.color_value == true then
+					health.value:SetFormattedText("|cffAF5050%d|r |cffD7BEA5-|r |cff%02x%02x%02x%d%%|r", min, r * 255, g * 255, b * 255, floor(min / max * 100))
 				else
-					if C.unitframe.color_value == true then
-						health.value:SetFormattedText("|cff%02x%02x%02x%d%%|r |cffD7BEA5-|r |cffAF5050%s|r", r * 255, g * 255, b * 255, floor(min / max * 100), T.ShortValue(min))
-					else
-						health.value:SetFormattedText("|cffffffff%d%% - %s|r", floor(min / max * 100), T.ShortValue(min))
-					end
+					health.value:SetFormattedText("|cffffffff%d - %d%%|r", min, floor(min / max * 100))
 				end
-			elseif unit and unit:find("boss%d") then
+			end
+		elseif unit == "target" then
+			if C.unitframe.show_total_value == true then
+				if C.unitframe.color_value == true then
+					health.value:SetFormattedText("|cff559655%s|r |cffD7BEA5-|r |cff559655%s|r", T.ShortValue(min), T.ShortValue(max))
+				else
+					health.value:SetFormattedText("|cffffffff%s - %s|r", T.ShortValue(min), T.ShortValue(max))
+				end
+			else
 				if C.unitframe.color_value == true then
 					health.value:SetFormattedText("|cff%02x%02x%02x%d%%|r |cffD7BEA5-|r |cffAF5050%s|r", r * 255, g * 255, b * 255, floor(min / max * 100), T.ShortValue(min))
 				else
 					health.value:SetFormattedText("|cffffffff%d%% - %s|r", floor(min / max * 100), T.ShortValue(min))
 				end
+			end
+		elseif unit and unit:find("boss%d") then
+			if C.unitframe.color_value == true then
+				health.value:SetFormattedText("|cff%02x%02x%02x%d%%|r |cffD7BEA5-|r |cffAF5050%s|r", r * 255, g * 255, b * 255, floor(min / max * 100), T.ShortValue(min))
 			else
-				if C.unitframe.color_value == true then
-					health.value:SetFormattedText("|cff%02x%02x%02x%d%%|r", r * 255, g * 255, b * 255, floor(min / max * 100))
-				else
-					health.value:SetFormattedText("|cffffffff%d%%|r", floor(min / max * 100))
-				end
+				health.value:SetFormattedText("|cffffffff%d%% - %s|r", floor(min / max * 100), T.ShortValue(min))
 			end
 		else
-			if (T.classic and unit =="player") or (unit == "player" and not UnitHasVehicleUI("player") or unit == "vehicle") then
-				if C.unitframe.color_value == true then
-					health.value:SetText("|cff559655"..max.."|r")
-				else
-					health.value:SetText("|cffffffff"..max.."|r")
-				end
+			if C.unitframe.color_value == true then
+				health.value:SetFormattedText("|cff%02x%02x%02x%d%%|r", r * 255, g * 255, b * 255, floor(min / max * 100))
 			else
-				if C.unitframe.color_value == true then
-					health.value:SetText("|cff559655"..T.ShortValue(max).."|r")
-				else
-					health.value:SetText("|cffffffff"..T.ShortValue(max).."|r")
-				end
+				health.value:SetFormattedText("|cffffffff%d%%|r", floor(min / max * 100))
 			end
-		end
-	end
-end
-
-T.PostUpdateRaidHealthColor = function(health, unit, r, g, b)
-	if not UnitIsConnected(unit) or (UnitIsDeadOrGhost(unit) and not UnitIsFeignDeath(unit)) then return end
-	if not UnitIsPlayer(unit) and UnitIsFriend(unit, "player") and C.unitframe.own_color ~= true then
-		local c = T.oUF_colors.reaction[5]
-		local r, g, b = c[1], c[2], c[3]
-		health:SetStatusBarColor(r, g, b)
-		if health.bg and health.bg.multiplier then
-			local mu = health.bg.multiplier
-			health.bg:SetVertexColor(r * mu, g * mu, b * mu)
-		end
-	end
-	if C.unitframe.bar_color_value == true and not UnitIsTapDenied(unit) then
-		if C.unitframe.own_color == true then
-			r, g, b = C.unitframe.uf_color[1], C.unitframe.uf_color[2], C.unitframe.uf_color[3]
-		else
-			r, g, b = health:GetStatusBarColor()
-		end
-		local newr, newg, newb = oUF:ColorGradient(min, max, 1, 0, 0, 1, 1, 0, r, g, b)
-
-		health:SetStatusBarColor(newr, newg, newb)
-		if health.bg and health.bg.multiplier then
-			local mu = health.bg.multiplier
-			health.bg:SetVertexColor(newr * mu, newg * mu, newb * mu)
-		end
-	end
-end
-
-T.PostUpdateRaidHealth = function(health, unit, min, max)
-	local self = health:GetParent()
-	local power = self.Power
-	local border = self.backdrop
-	if not UnitIsConnected(unit) or (UnitIsDeadOrGhost(unit) and not UnitIsFeignDeath(unit)) then
-		health:SetValue(0)
-		if not UnitIsConnected(unit) then
-			health.value:SetText("|cffD7BEA5"..L_UF_OFFLINE.."|r")
-		elseif UnitIsDead(unit) then
-			health.value:SetText("|cffD7BEA5"..L_UF_DEAD.."|r")
-		elseif UnitIsGhost(unit) then
-			health.value:SetText("|cffD7BEA5"..L_UF_GHOST.."|r")
 		end
 	else
-		if min ~= max then
-			local r, g, b = oUF:ColorGradient(min, max, 0.69, 0.31, 0.31, 0.65, 0.63, 0.35, 0.33, 0.59, 0.33)
-			if self:GetParent():GetName():match("oUF_PartyDPS") then
-				if C.unitframe.color_value == true then
-					health.value:SetFormattedText("|cffAF5050%s|r |cffD7BEA5-|r |cff%02x%02x%02x%d%%|r", T.ShortValue(min), r * 255, g * 255, b * 255, floor(min / max * 100))
-				else
-					health.value:SetFormattedText("|cffffffff%s - %d%%|r", T.ShortValue(min), floor(min / max * 100))
-				end
+		if (T.classic and unit =="player") or (unit == "player" and not UnitHasVehicleUI("player") or unit == "vehicle") then
+			if C.unitframe.color_value == true then
+				health.value:SetText("|cff559655"..max.."|r")
 			else
-				if C.unitframe.color_value == true then
-					if C.raidframe.deficit_health == true then
-						health.value:SetText("|cffffffff".."-"..T.ShortValue(max - min))
-					else
-						health.value:SetFormattedText("|cff%02x%02x%02x%d%%|r", r * 255, g * 255, b * 255, floor(min / max * 100))
-					end
-				else
-					if C.raidframe.deficit_health == true then
-						health.value:SetText("|cffffffff".."-"..T.ShortValue(max - min))
-					else
-						health.value:SetFormattedText("|cffffffff%d%%|r", floor(min / max * 100))
-					end
-				end
+				health.value:SetText("|cffffffff"..max.."|r")
 			end
 		else
 			if C.unitframe.color_value == true then
@@ -210,16 +136,91 @@ T.PostUpdateRaidHealth = function(health, unit, min, max)
 				health.value:SetText("|cffffffff"..T.ShortValue(max).."|r")
 			end
 		end
-		if C.raidframe.alpha_health == true then
-			if min / max > 0.95 then
-				health:SetAlpha(0.6)
-				power:SetAlpha(0.6)
-				border:SetAlpha(0.6)
-			else
-				health:SetAlpha(1)
-				power:SetAlpha(1)
-				border:SetAlpha(1)
+	end
+end
+
+T.PostUpdateRaidHealthColor = function(health, unit, r, g, b)
+	if not UnitIsConnected(unit) or (UnitIsDeadOrGhost(unit) and not UnitIsFeignDeath(unit)) then
+		health:SetValue(0)
+		if not UnitIsConnected(unit) then
+			health.value:SetText("|cffD7BEA5"..L_UF_OFFLINE.."|r")
+		elseif UnitIsDead(unit) then
+			health.value:SetText("|cffD7BEA5"..L_UF_DEAD.."|r")
+		elseif UnitIsGhost(unit) then
+			health.value:SetText("|cffD7BEA5"..L_UF_GHOST.."|r")
+		end
+	else
+		if not UnitIsPlayer(unit) and UnitIsFriend(unit, "player") and C.unitframe.own_color ~= true then
+			local c = T.oUF_colors.reaction[5]
+			local r, g, b = c[1], c[2], c[3]
+			health:SetStatusBarColor(r, g, b)
+			if health.bg and health.bg.multiplier then
+				local mu = health.bg.multiplier
+				health.bg:SetVertexColor(r * mu, g * mu, b * mu)
 			end
+		end
+		if C.unitframe.bar_color_value == true and not UnitIsTapDenied(unit) then
+			if C.unitframe.own_color == true then
+				r, g, b = C.unitframe.uf_color[1], C.unitframe.uf_color[2], C.unitframe.uf_color[3]
+			else
+				r, g, b = health:GetStatusBarColor()
+			end
+			local newr, newg, newb = oUF:ColorGradient(min, max, 1, 0, 0, 1, 1, 0, r, g, b)
+
+			health:SetStatusBarColor(newr, newg, newb)
+			if health.bg and health.bg.multiplier then
+				local mu = health.bg.multiplier
+				health.bg:SetVertexColor(newr * mu, newg * mu, newb * mu)
+			end
+		end
+	end
+end
+
+T.PostUpdateRaidHealth = function(health, unit, min, max)
+	if not UnitIsConnected(unit) or (UnitIsDeadOrGhost(unit) and not UnitIsFeignDeath(unit)) then return end
+
+	local self = health:GetParent()
+	local power = self.Power
+	local border = self.backdrop
+	if min ~= max then
+		local r, g, b = oUF:ColorGradient(min, max, 0.69, 0.31, 0.31, 0.65, 0.63, 0.35, 0.33, 0.59, 0.33)
+		if self:GetParent():GetName():match("oUF_PartyDPS") then
+			if C.unitframe.color_value == true then
+				health.value:SetFormattedText("|cffAF5050%s|r |cffD7BEA5-|r |cff%02x%02x%02x%d%%|r", T.ShortValue(min), r * 255, g * 255, b * 255, floor(min / max * 100))
+			else
+				health.value:SetFormattedText("|cffffffff%s - %d%%|r", T.ShortValue(min), floor(min / max * 100))
+			end
+		else
+			if C.unitframe.color_value == true then
+				if C.raidframe.deficit_health == true then
+					health.value:SetText("|cffffffff".."-"..T.ShortValue(max - min))
+				else
+					health.value:SetFormattedText("|cff%02x%02x%02x%d%%|r", r * 255, g * 255, b * 255, floor(min / max * 100))
+				end
+			else
+				if C.raidframe.deficit_health == true then
+					health.value:SetText("|cffffffff".."-"..T.ShortValue(max - min))
+				else
+					health.value:SetFormattedText("|cffffffff%d%%|r", floor(min / max * 100))
+				end
+			end
+		end
+	else
+		if C.unitframe.color_value == true then
+			health.value:SetText("|cff559655"..T.ShortValue(max).."|r")
+		else
+			health.value:SetText("|cffffffff"..T.ShortValue(max).."|r")
+		end
+	end
+	if C.raidframe.alpha_health == true then
+		if min / max > 0.95 then
+			health:SetAlpha(0.6)
+			power:SetAlpha(0.6)
+			border:SetAlpha(0.6)
+		else
+			health:SetAlpha(1)
+			power:SetAlpha(1)
+			border:SetAlpha(1)
 		end
 	end
 end
