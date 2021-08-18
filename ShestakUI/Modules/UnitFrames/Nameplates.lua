@@ -602,14 +602,8 @@ local function threatColor(self, forced)
 	end
 end
 
-local function HealthPostUpdate(self, unit, cur, max)
+local function HealthPostUpdateColor(self, unit, r, g, b)
 	local main = self:GetParent()
-	local perc = 0
-	if max and max > 0 then
-		perc = cur / max
-	end
-
-	local r, g, b
 	local mu = self.bg.multiplier
 	local isPlayer = UnitIsPlayer(unit)
 	local unitReaction = UnitReaction(unit, "player")
@@ -633,6 +627,16 @@ local function HealthPostUpdate(self, unit, cur, max)
 		self.bg:SetVertexColor(r * mu, g * mu, b * mu)
 	end
 
+	threatColor(main, true)
+end
+
+local function HealthPostUpdate(self, unit, cur, max)
+	local perc = 0
+	if max and max > 0 then
+		perc = cur / max
+	end
+
+	local isPlayer = UnitIsPlayer(unit)
 	if isPlayer then
 		if perc <= 0.5 and perc >= 0.2 then
 			SetColorBorder(self, 1, 1, 0)
@@ -652,8 +656,6 @@ local function HealthPostUpdate(self, unit, cur, max)
 			SetColorBorder(self, unpack(C.media.border_color))
 		end
 	end
-
-	threatColor(main, true)
 end
 
 local function callback(self, event, unit)
@@ -959,6 +961,7 @@ local function style(self, unit)
 	end)
 
 	self.Health.PostUpdate = HealthPostUpdate
+	self.Health.PostUpdateColor = HealthPostUpdateColor
 
 	-- Absorb
 	if C.raidframe.plugins_healcomm == true then

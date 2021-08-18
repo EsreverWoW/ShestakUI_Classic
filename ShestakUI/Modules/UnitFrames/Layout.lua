@@ -81,6 +81,7 @@ local function Shared(self, unit)
 	end
 
 	self.Health.PostUpdate = T.PostUpdateHealth
+	self.Health.PostUpdateColor = T.PostUpdateHealthColor
 
 	-- Health bar background
 	self.Health.bg = self.Health:CreateTexture(nil, "BORDER")
@@ -146,6 +147,7 @@ local function Shared(self, unit)
 
 	self.Power.PreUpdate = T.PreUpdatePower
 	self.Power.PostUpdate = T.PostUpdatePower
+	self.Power.PostUpdateColor = T.PostUpdatePowerColor
 
 	self.Power.bg = self.Power:CreateTexture(nil, "BORDER")
 	self.Power.bg:SetAllPoints()

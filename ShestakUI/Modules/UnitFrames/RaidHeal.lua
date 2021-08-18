@@ -54,6 +54,12 @@ local function Shared(self, unit)
 		end
 	end
 
+	self.Health.PostUpdateColor = function(health, unit, r, g, b)
+		if not UnitIsConnected(unit) or (UnitIsDeadOrGhost(unit) and not UnitIsFeignDeath(unit)) then
+			health:SetValue(0)
+		end
+	end
+
 	if T.classic then
 		self.Health.frequentUpdates = true
 	end
@@ -101,6 +107,7 @@ local function Shared(self, unit)
 		end
 
 		self.Health.PostUpdate = T.PostUpdateRaidHealth
+		self.Health.PostUpdateColor = T.PostUpdateRaidHealthColor
 
 		-- Power bar
 		self.Power = CreateFrame("StatusBar", nil, self)
@@ -110,6 +117,12 @@ local function Shared(self, unit)
 		self.Power:SetStatusBarTexture(C.media.texture)
 
 		self.Power.PostUpdate = function(power, unit)
+			if not UnitIsConnected(unit) or (UnitIsDeadOrGhost(unit) and not UnitIsFeignDeath(unit)) then
+				power:SetValue(0)
+			end
+		end
+
+		self.Power.PostUpdateColor = function(power, unit, r, g, b)
 			if not UnitIsConnected(unit) or (UnitIsDeadOrGhost(unit) and not UnitIsFeignDeath(unit)) then
 				power:SetValue(0)
 			end
