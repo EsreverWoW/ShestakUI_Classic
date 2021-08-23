@@ -1,6 +1,6 @@
 --[[
 Name: LibRangeCheck-2.0
-Revision: $Revision: 206 $
+Revision: $Revision: 210 $
 Author(s): mitch0
 Website: http://www.wowace.com/projects/librangecheck-2-0/
 Description: A range checking library based on interact distances and spell ranges
@@ -41,15 +41,14 @@ License: Public Domain
 -- @class file
 -- @name LibRangeCheck-2.0
 local MAJOR_VERSION = "LibRangeCheck-2.0-ShestakUI"
-local MINOR_VERSION = tonumber(("$Revision: 206 $"):match("%d+")) + 100000
+local MINOR_VERSION = tonumber(("$Revision: 210 $"):match("%d+")) + 100000
 
 local lib, oldminor = LibStub:NewLibrary(MAJOR_VERSION, MINOR_VERSION)
 if not lib then
     return
 end
 
-local IsClassic = (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC)
-local IsTBC = (WOW_PROJECT_ID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC)
+local IsClassic = (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC) or (WOW_PROJECT_ID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC)
 
 -- << STATIC CONFIG
 
@@ -447,8 +446,15 @@ local HarmItems = {
     },
 }
 
+-- This could've been done by checking player race as well and creating tables for those, but it's easier like this
+for k, v in pairs(FriendSpells) do
+    tinsert(v, 28880) -- ["Gift of the Naaru"]
+end
+
+-- >> END OF STATIC CONFIG
+
 -- cache
--- GLOBALS: LibStub, CreateFrame
+
 local setmetatable = setmetatable
 local pairs = pairs
 local tostring = tostring
@@ -479,13 +485,6 @@ local GetTime = GetTime
 local HandSlotId = GetInventorySlotInfo("HandsSlot")
 local math_floor = math.floor
 local UnitIsVisible = UnitIsVisible
-
--- This could've been done by checking player race as well and creating tables for those, but it's easier like this
-for _, v in pairs(FriendSpells) do
-    tinsert(v, 28880) -- Gift of the Naaru (40 yards)
-end
-
--- >> END OF STATIC CONFIG
 
 -- temporary stuff
 
@@ -768,6 +767,7 @@ lib.failedItemRequests = {}
 
 -- << Public API
 
+
 --- The callback name that is fired when checkers are changed.
 -- @field
 lib.CHECKERS_CHANGED = "CHECKERS_CHANGED"
@@ -1002,11 +1002,9 @@ function lib:GetRange(unit, checkVisible, noItems)
     if not UnitExists(unit) then
         return nil
     end
-
     if checkVisible and not UnitIsVisible(unit) then
         return nil
     end
-
     local canAssist = UnitCanAssist("player", unit)
     if UnitIsDeadOrGhost(unit) then
         if canAssist then
@@ -1015,7 +1013,6 @@ function lib:GetRange(unit, checkVisible, noItems)
             return getRange(unit, self.miscRC)
         end
     end
-
     if UnitCanAttack("player", unit) then
         return getRange(unit, noItems and self.harmNoItemsRC or self.harmRC)
     elseif UnitIsUnit("pet", unit) then
@@ -1166,6 +1163,7 @@ function lib:scheduleAuraCheck()
     self.frame:Show()
 end
 
+
 -- << load-time initialization
 
 function lib:activate()
@@ -1174,7 +1172,7 @@ function lib:activate()
         self.frame = frame
         frame:RegisterEvent("LEARNED_SPELL_IN_TAB")
         frame:RegisterEvent("CHARACTER_POINTS_CHANGED")
-        if not IsClassic and not IsTBC then
+        if not IsClassic then
             frame:RegisterEvent("PLAYER_TALENT_UPDATE")
         end
         frame:RegisterEvent("SPELLS_CHANGED")
@@ -1185,8 +1183,8 @@ function lib:activate()
         end
     end
     initItemRequests()
-    self.frame:SetScript("OnEvent", function(_, ...) self:OnEvent(...) end)
-    self.frame:SetScript("OnUpdate", function(_, elapsed)
+    self.frame:SetScript("OnEvent", function(frame, ...) self:OnEvent(...) end)
+    self.frame:SetScript("OnUpdate", function(frame, elapsed)
         lastUpdate = lastUpdate + elapsed
         if lastUpdate < UpdateDelay then
             return
