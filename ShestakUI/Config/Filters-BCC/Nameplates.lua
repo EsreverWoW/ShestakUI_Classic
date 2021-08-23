@@ -516,6 +516,68 @@ local color = C.nameplate.mob_color
 local color2 = {0, 0.7, 0.6}
 T.ColorPlate = {
 	-- PvP
-	["5925"] = color,		-- Grounding Totem
+		["5925"] = color,		-- Grounding Totem
 	-- Raid
+		-- Karazhan
+		["15547"] = color,		-- Spectral Charger
+		["16461"] = color,		-- Concubine
+		["16471"] = color,		-- Skeletal Usher
+		-- Gruul's Lair
+		["21350"] = color,		-- Gronn-Priest
+		-- Serpentshrine Cavern
+		["22236"] = color,		-- Water Elemental Totem
+		["22091"] = color,		-- Spitfire Totem
+		-- Tempest Keep
+		-- Battle for Mount Hyjal
+		-- Black Temple
+		-- Zul'Aman
+		-- Sunwell
+	-- Dungeons
+		-- Hellfire Ramparts
+		["17478"] = color,		-- Bleeding Hollow Scryer
+		-- The Blood Furnace
+		["17399"] = color,		-- Seductress
+		["17401"] = color,		-- Felhound Manastalker
+		-- The Slave Pens
+		["17957"] = color,		-- Coilfang Champion
+		["17960"] = color,		-- Coilfang Soothsayer
+		["21128"] = color,		-- Coilfang Ray
+		-- The Underbog
+		["17731"] = color,		-- Fen Ray
+		-- Mana-Tombs
+		["18315"] = color,		-- Ethereal Theurgist
+		["18331"] = color,		-- Ethereal Darkcaster
+		-- ["19306"] = color,		-- Mana Leech
+		["19307"] = color,		-- Nexus Terror
+		-- Auchenai Crypts
+		["18503"] = color,		-- Phantasmal Possessor
+		["18506"] = color,		-- Raging Soul
+		-- Sethekk Halls
+		["18325"] = color,		-- Sethekk Prophet
+		["18327"] = color,		-- Time-Lost Controller
+		["20343"] = color2,		-- Charming Totem
+		-- Old Hillsbrad Foothills
+		["17833"] = color,		-- Durnholde Warden
+		["18934"] = color,		-- Durnholde Mage
+		-- The Black Morass
+		["21104"] = color,		-- Rift Keeper
+		["21148"] = color,		-- Rift Keeper
+		-- The Mechanar
+		["20990"] = color,		-- Bloodwarder Physician
+		-- Shadow Labyrinth
+		["18639"] = color,		-- Cabal Spellbinder
+		["18663"] = color,		-- Maiden of Discipline
+		["18796"] = color,		-- Fel Overseer
+		-- The Shattered Halls
+		["17694"] = color,		-- Shadowmoon Darkcaster
+		-- The Steamvault
+		["17801"] = color,		-- Coilfang Siren
+		-- The Arcatraz
+		["20883"] = color,		-- Spiteful Temptress
+		["20897"] = color,		-- Ethereum Wave-Caster
+		-- The Botanica
+		["18419"] = color,		-- Bloodwarder Greenkeeper
+		["19509"] = color,		-- Sunseeker Harvester
+		["19633"] = color,		-- Bloodwarder Mender
+		-- Magisters' Terrace
 }
