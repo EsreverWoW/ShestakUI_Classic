@@ -78,7 +78,6 @@ end
 
 T.PostUpdateHealth = function(health, unit, min, max)
 	if unit and unit:find("arena%dtarget") then return end
-	if not UnitIsConnected(unit) or (UnitIsDeadOrGhost(unit) and not UnitIsFeignDeath(unit)) then return end
 	if min ~= max then
 		local r, g, b = oUF:ColorGradient(min, max, 0.69, 0.31, 0.31, 0.65, 0.63, 0.35, 0.33, 0.59, 0.33)
 		if (T.classic and unit == "player" or (unit == "player" and not UnitHasVehicleUI("player") or unit == "vehicle")) and health:GetAttribute("normalUnit") ~= "pet" then
@@ -177,8 +176,6 @@ T.PostUpdateRaidHealthColor = function(health, unit, r, g, b)
 end
 
 T.PostUpdateRaidHealth = function(health, unit, min, max)
-	if not UnitIsConnected(unit) or (UnitIsDeadOrGhost(unit) and not UnitIsFeignDeath(unit)) then return end
-
 	local self = health:GetParent()
 	local power = self.Power
 	local border = self.backdrop
