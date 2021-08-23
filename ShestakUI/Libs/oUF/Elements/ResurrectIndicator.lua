@@ -15,7 +15,7 @@ local function Update(self, event, unit)
 		element:PreUpdate()
 	end
 
-	local incomingResurrect = UnitHasIncomingResurrection(unit)
+	local incomingResurrect = UnitIsDeadOrGhost(unit) and UnitHasIncomingResurrection(unit) -- 2.5.2 PTR bug can set UnitHasIncomingResurrection as true when alive
 	if(incomingResurrect) then
 		element:Show()
 	else
