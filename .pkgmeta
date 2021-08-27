@@ -1,0 +1,10 @@
+package-as: ShestakUI
+
+enable-nolib-creation: no
+
+ignore:
+  - README.md
+  - README-zhCN.md
+
+move-folders:
+  ShestakUI/ShestakUI_Config: ShestakUI_Config
