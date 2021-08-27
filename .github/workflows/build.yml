@@ -21,7 +21,7 @@ jobs:
 
       - name: Create Classic Package
         uses: BigWigsMods/packager@master
-        if: ${{ success() && github.event_name != 'pull_request' }}
+        if: ${{ success() && github.event_name != 'pull_request' && contains(github.ref, 'tags/') }}
         with:
           args: -g classic -p 468754 -w 25916
         env:
@@ -31,7 +31,7 @@ jobs:
 
       - name: Create BCC Package
         uses: BigWigsMods/packager@master
-        if: ${{ success() && github.event_name != 'pull_request' }}
+        if: ${{ success() && github.event_name != 'pull_request' && contains(github.ref, 'tags/') }}
         with:
           args: -g bcc -p 468754 -w 25934
         env:
