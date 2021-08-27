@@ -1,4 +1,32 @@
-.DS_Store
-.idea
+# Project specifics
+.release/
+release.sh
 ref-classic
 ref-live
+
+# IDE
+.idea
+
+# Ignore OS generated files
+ehthumbs.db
+Thumbs.db
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.lnk
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon\r\r
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
