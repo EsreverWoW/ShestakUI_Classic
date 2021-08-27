@@ -7,4 +7,5 @@ ignore:
   - README-zhCN.md
 
 move-folders:
+  ShestakUI/ShestakUI: ShestakUI
   ShestakUI/ShestakUI_Config: ShestakUI_Config
