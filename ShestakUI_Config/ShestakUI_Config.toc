@@ -1,4 +1,6 @@
-## Interface: 90005
+## Interface: 11307
+## Interface-Classic: 11307
+## Interface-BCC: 20501
 ## Title: ShestakUI (Classic) Config
 ## Notes: In-game configuration for ShestakUI
 ## Author: Shestak
