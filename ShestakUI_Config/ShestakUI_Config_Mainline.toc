@@ -2,8 +2,8 @@
 ## Title: ShestakUI (Classic) Config
 ## Notes: In-game configuration for ShestakUI
 ## Author: Shestak
-## Version: 1.22
-## X-Curse-Project-ID:
+## Version: 1.23
+## X-Curse-Project-ID: 468754
 ## X-WoWI-ID: 25916
 ## RequiredDeps: ShestakUI
 ## SavedVariables: ShestakUIOptionsGlobal, ShestakUIOptions
