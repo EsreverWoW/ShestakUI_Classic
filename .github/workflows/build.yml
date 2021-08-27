@@ -19,11 +19,6 @@ jobs:
         with:
           fetch-depth: 100
 
-      - name: Install and run Luacheck
-        uses: nebularg/actions-luacheck@v1
-        with:
-          args: "--no-color -q"
-
       - name: Create Classic Package
         uses: BigWigsMods/packager@master
         if: ${{ success() && github.event_name != 'pull_request' }}
