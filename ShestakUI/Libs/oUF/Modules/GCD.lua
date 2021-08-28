@@ -41,6 +41,37 @@ else
 	}
 end
 
+local function Init()
+	local isKnown = IsSpellKnown(spells[T.class])
+	if isKnown then
+		spellid = spells[T.class]
+	end
+	if spellid == nil then
+		return
+	end
+	return spellid
+end
+
+local function UpdateGCD(self)
+	local bar = self.GCD
+
+	if spellid == nil then
+		if Init() == nil then
+			return
+		end
+	end
+	local start, dur = GetSpellCooldown(spellid)
+	if dur and dur > 0 and dur <= 2 then
+		usingspell = 1
+		starttime = start
+		duration = dur
+		if bar then bar:Show() end
+		return
+	elseif usingspell == 1 and dur == 0 then
+		if bar then bar:Hide() end
+	end
+end
+
 local Enable = function(self)
 	if not self.GCD then return end
 	local bar = self.GCD
@@ -65,17 +96,6 @@ local Enable = function(self)
 		end
 	end
 
-	local function Init()
-		local isKnown = IsSpellKnown(spells[T.class])
-		if isKnown then
-			spellid = spells[T.class]
-		end
-		if spellid == nil then
-			return
-		end
-		return spellid
-	end
-
 	local function OnHide()
 		bar:SetScript("OnUpdate", nil)
 		usingspell = nil
@@ -85,28 +105,17 @@ local Enable = function(self)
 		bar:SetScript("OnUpdate", OnUpdateSpark)
 	end
 
-	local function UpdateGCD()
-		if spellid == nil then
-			if Init() == nil then
-				return
-			end
-		end
-		local start, dur = GetSpellCooldown(spellid)
-		if dur and dur > 0 and dur <= 2 then
-			usingspell = 1
-			starttime = start
-			duration = dur
-			bar:Show()
-			return
-		elseif usingspell == 1 and dur == 0 then
-			bar:Hide()
-		end
-	end
-
 	bar:SetScript("OnShow", OnShow)
 	bar:SetScript("OnHide", OnHide)
 
 	self:RegisterEvent("ACTIONBAR_UPDATE_COOLDOWN", UpdateGCD, true)
 end
 
-oUF:AddElement("GCD", UpdateGCD, Enable)
+local function Disable(self)
+	local bar = self.GCD
+	if bar then
+		self:UnregisterEvent("ACTIONBAR_UPDATE_COOLDOWN", UpdateGCD, true)
+	end
+end
+
+oUF:AddElement("GCD", UpdateGCD, Enable, Disable)
