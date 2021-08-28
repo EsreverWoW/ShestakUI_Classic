@@ -55,6 +55,7 @@ T.RaidBuffs = {
 		{23335, "LEFT", {0, 0, 1}, true},					-- Warsong flag, Alliance
 		{34976, "LEFT", {1, 0, 0}, true}, 					-- Netherstorm Flag
 		{2893, "RIGHT", {0, 1, 0}, true}, 					-- Abolish Poison
+		{36488, "RIGHT", {0.89, 0.1, 0.1}, true},			-- Infernal Protection [Cosmic Infuser]
 		{26470, "RIGHT", {0.8, 0.2, 0}, true},				-- Persistent Shield [Scarab Brooch]
 	},
 }
