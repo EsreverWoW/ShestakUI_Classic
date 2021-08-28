@@ -520,6 +520,7 @@ L.automation_open_items = "Ouverture automatique des objets dans les sacs"
 L.automation_resurrection = "Confirm resurrection" -- Needs review
 L.automation_summon = "Confirm summon" -- Needs review
 L.automation_whisper_invite = "Auto invite when whisper keyword" -- Needs review
+L.automation_invite_known_only = "Only allow auto invite from friends and guild members" -- Needs review
 L.automation_invite_keyword = "List of keyword (separated by space)" -- Needs review
 L.automation_invite_keyword_desc = "When player whisper you keyword he will be invited in your group" -- Needs review
 

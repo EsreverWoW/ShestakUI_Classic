@@ -75,12 +75,26 @@ autoinvite:RegisterEvent("CHAT_MSG_WHISPER")
 autoinvite:RegisterEvent("CHAT_MSG_BN_WHISPER")
 autoinvite:SetScript("OnEvent", function(_, event, arg1, arg2, ...)
 	if not C.automation.whisper_invite then return end
+
+	local guildName, _, _, realm = GetGuildInfo("player")
+
 	if T.classic then
 		if ((not UnitExists("party1") or UnitIsGroupLeader("player") or UnitIsGroupAssistant("player"))) and not MiniMapBattlefieldFrame:IsShown() then
 			for word in pairs(list_keyword) do
 				if arg1:lower():match(word) then
 					if event == "CHAT_MSG_WHISPER" then
-						InviteUnit(arg2)
+						if not C.automation.invite_known_only or C_FriendList.GetFriendInfo(arg2) then
+							InviteUnit(arg2)
+						else
+							if IsInGuild() then
+								local guid = select(10, ...)
+								for i = 1, GetNumGuildMembers() do
+									if select(17, GetGuildRosterInfo(i)) == guid then
+										InviteUnit(arg2)
+									end
+								end
+							end
+						end
 					elseif event == "CHAT_MSG_BN_WHISPER" then
 						local bnetIDAccount = select(11, ...)
 						local bnetIDGameAccount = select(6, BNGetFriendInfoByID(bnetIDAccount))
@@ -94,10 +108,17 @@ autoinvite:SetScript("OnEvent", function(_, event, arg1, arg2, ...)
 			for word in pairs(list_keyword) do
 				if arg1:lower():match(word) then
 					if event == "CHAT_MSG_WHISPER" then
-						if T.classic then
-							InviteUnit(arg2)
-						else
+						if not C.automation.invite_known_only or C_FriendList.GetFriendInfo(arg2) then
 							C_PartyInfo.InviteUnit(arg2)
+						else
+							if IsInGuild() then
+								local guid = select(10, ...)
+								for i = 1, GetNumGuildMembers() do
+									if select(17, GetGuildRosterInfo(i)) == guid then
+										C_PartyInfo.InviteUnit(arg2)
+									end
+								end
+							end
 						end
 					elseif event == "CHAT_MSG_BN_WHISPER" then
 						local bnetIDAccount = select(11, ...)

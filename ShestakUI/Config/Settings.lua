@@ -581,6 +581,7 @@ C["automation"] = {
 	["resurrection"] = false,					-- Auto confirm resurrection
 	["summon"] = false,							-- Auto confirm summon after 10 sec
 	["whisper_invite"] = false,					-- Auto invite when whisper keyword
+	["invite_known_only"] = false,				-- Only allow auto invite from friend and guild members
 	["invite_keyword"] = "inv +",				-- List of keyword (separated by space)
 }
 

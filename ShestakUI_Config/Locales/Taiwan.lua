@@ -520,6 +520,7 @@ L.automation_open_items = "自動打開背包中的封裝物品"
 L.automation_resurrection = "自動確認復活"
 L.automation_summon = "自動確認召喚"
 L.automation_whisper_invite = "密語自動邀請"
+L.automation_invite_known_only = "Only allow auto invite from friends and guild members" -- Needs review
 L.automation_invite_keyword = "添加關鍵詞(需加空隔鍵)"
 L.automation_invite_keyword_desc = "通過關鍵詞自動邀請對方進組"
 

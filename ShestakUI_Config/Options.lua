@@ -2642,13 +2642,19 @@ do
 	whisper_invite:SetPoint("TOPLEFT", summon, "BOTTOMLEFT", 0, 0)
 	whisper_invite.needsReload = false
 
+	local invite_known_only = ns.CreateCheckBox(parent, "invite_known_only")
+	invite_known_only:SetPoint("TOPLEFT", whisper_invite, "BOTTOMLEFT", 20, 0)
+	invite_known_only.needsReload = false
+
 	local invite_keyword = ns.CreateEditBox(parent, "invite_keyword", true)
-	invite_keyword:SetPoint("TOPLEFT", whisper_invite, "BOTTOMLEFT", 6, -6)
+	invite_keyword:SetPoint("TOPLEFT", invite_known_only, "BOTTOMLEFT", 6, -6)
 	invite_keyword:SetWidth(90)
 	invite_keyword:SetMaxLetters(20)
 
+	whisper_invite.children = {invite_known_only}
+
 	local auto_collapse = ns.CreateDropDown(parent, "auto_collapse", true, false, CollapseTable)
-	auto_collapse:SetPoint("TOPLEFT", invite_keyword, "BOTTOMLEFT", -22, -10)
+	auto_collapse:SetPoint("TOPLEFT", invite_keyword, "BOTTOMLEFT", -42, -10)
 
 	local classic = {
 		screenshot,

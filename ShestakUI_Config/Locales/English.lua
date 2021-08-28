@@ -543,6 +543,7 @@ L.automation_open_items = "Auto opening of items in bag"
 L.automation_resurrection = "Confirm resurrection"
 L.automation_summon = "Confirm summon"
 L.automation_whisper_invite = "Auto invite when whisper keyword"
+L.automation_invite_known_only = "Only allow auto invite from friends and guild members"
 L.automation_invite_keyword = "List of keyword (separated by space)"
 L.automation_invite_keyword_desc = "When player whisper you keyword he will be invited in your group"
 

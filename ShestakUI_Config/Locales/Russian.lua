@@ -521,6 +521,7 @@ L.automation_open_items = "Открывать сундуки и ящики в в
 L.automation_resurrection = "Принятие воскрешений"
 L.automation_summon = "Принятие призыва"
 L.automation_whisper_invite = "Авто приглашение по ключевым словам"
+L.automation_invite_known_only = "Only allow auto invite from friends and guild members" -- Needs review
 L.automation_invite_keyword = "Список слов (через пробел)"
 L.automation_invite_keyword_desc = "Если вам напишут в личку ключевое слово, то сработает приглашение в группу"
 
