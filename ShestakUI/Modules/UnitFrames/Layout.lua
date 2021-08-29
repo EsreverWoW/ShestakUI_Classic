@@ -76,6 +76,13 @@ local function Shared(self, unit)
 		self.Health.colorClass = true
 		self.Health.colorReaction = true
 	end
+
+	if unit == "pet" and C.unitframe.bar_color_happiness == true then
+		self.Health.colorHappiness = true
+	else
+		self.Health.colorHappiness = false
+	end
+
 	if C.unitframe.plugins_smooth_bar == true then
 		self.Health.Smooth = true
 	end
