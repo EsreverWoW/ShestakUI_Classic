@@ -1434,7 +1434,7 @@ if( playerClass == "HUNTER" ) then
 
 		CalculateHotHealing = function(guid, spellID)
 			local spellName, spellRank = GetSpellInfo(spellID), SpellIDToRank[spellID]
-			local amount = getBaseHealAmount(hotData, spellName, spellRank)
+			local amount = getBaseHealAmount(hotData, spellName, spellID, spellRank)
 
 			if( equippedSetCache["Giantstalker"] >= 3 ) then amount = amount * 1.1 end
 
