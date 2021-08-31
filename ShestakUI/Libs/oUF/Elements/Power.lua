@@ -305,6 +305,10 @@ local function Enable(self)
 		self:RegisterEvent('UNIT_POWER_BAR_HIDE', Path)
 		self:RegisterEvent('UNIT_POWER_BAR_SHOW', Path)
 
+		-- Fix disconnected players
+		self:RegisterEvent('PARTY_MEMBER_ENABLE', Path)
+		self:RegisterEvent('PARTY_MEMBER_DISABLE', Path)
+
 		if(element:IsObjectType('StatusBar') and not (element:GetStatusBarTexture() or element:GetStatusBarAtlas())) then
 			element:SetStatusBarTexture([[Interface\TargetingFrame\UI-StatusBar]])
 		end
@@ -334,6 +338,8 @@ local function Disable(self)
 		self:UnregisterEvent('UNIT_FACTION', ColorPath)
 		self:UnregisterEvent('UNIT_FLAGS', ColorPath)
 		self:UnregisterEvent('UNIT_THREAT_LIST_UPDATE', ColorPath)
+		self:UnregisterEvent('PARTY_MEMBER_ENABLE', Path)
+		self:UnregisterEvent('PARTY_MEMBER_DISABLE', Path)
 	end
 end
 
