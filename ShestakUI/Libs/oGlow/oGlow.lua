@@ -23,6 +23,10 @@ function oGlow:IsClassic()
 	return _G.WOW_PROJECT_ID == _G.WOW_PROJECT_CLASSIC or _G.WOW_PROJECT_ID == _G.WOW_PROJECT_BURNING_CRUSADE_CLASSIC
 end
 
+function oGlow:IsBCC()
+	return _G.WOW_PROJECT_ID == _G.WOW_PROJECT_BURNING_CRUSADE_CLASSIC
+end
+
 function oGlow:ADDON_LOADED(event, addon)
 	if addon == "ShestakUI" then
 		for pipe in next, pipesTable do

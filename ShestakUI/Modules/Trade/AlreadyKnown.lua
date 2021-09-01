@@ -226,6 +226,8 @@ local function GuildBankFrame_Update()
 	if GuildBankFrame.mode ~= "bank" then return end
 
 	local tab = GetCurrentGuildBankTab()
+	local MAX_GUILDBANK_SLOTS_PER_TAB = MAX_GUILDBANK_SLOTS_PER_TAB or 98
+	local NUM_SLOTS_PER_GUILDBANK_GROUP = NUM_SLOTS_PER_GUILDBANK_GROUP or 14
 
 	for i = 1, MAX_GUILDBANK_SLOTS_PER_TAB do
 		local index = math.fmod(i, NUM_SLOTS_PER_GUILDBANK_GROUP)
@@ -249,7 +251,11 @@ end
 local isBlizzard_GuildBankUILoaded
 if IsAddOnLoaded("Blizzard_GuildBankUI") then
 	isBlizzard_GuildBankUILoaded = true
-	hooksecurefunc("GuildBankFrame_Update", GuildBankFrame_Update)
+	if T.BCC then
+		hooksecurefunc(GuildBankFrame, "Update", GuildBankFrame_Update)
+	else
+		hooksecurefunc("GuildBankFrame_Update", GuildBankFrame_Update)
+	end
 end
 
 -- Auction frame
@@ -405,7 +411,11 @@ if not (isBlizzard_GuildUILoaded and isBlizzard_GuildBankUILoaded and isBlizzard
 			hooksecurefunc(GuildRewardsContainer, "update", GuildRewards_Update)
 		elseif addon == "Blizzard_GuildBankUI" then
 			isBlizzard_GuildBankUILoaded = true
-			hooksecurefunc("GuildBankFrame_Update", GuildBankFrame_Update)
+			if T.BCC then
+				hooksecurefunc(GuildBankFrame, "Update", GuildBankFrame_Update)
+			else
+				hooksecurefunc("GuildBankFrame_Update", GuildBankFrame_Update)
+			end
 		elseif addon == "Blizzard_AuctionHouseUI" then
 			isBlizzard_AuctionHouseUILoaded = true
 			hooksecurefunc(AuctionHouseFrame.BrowseResultsFrame.ItemList, "RefreshScrollFrame", AuctionHouseFrame_RefreshScrollFrame)

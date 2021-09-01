@@ -2,5 +2,6 @@
 	<Include file="..\Blizzard-Classic\LoadFrames.xml"/>
 
 	<Script file="Arena.lua"/>
+	<Script file="GuildBank.lua"/>
 	<Script file="ItemSocketing.lua"/>
 </Ui>

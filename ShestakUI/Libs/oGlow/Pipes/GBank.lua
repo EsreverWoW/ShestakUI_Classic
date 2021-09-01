@@ -1,25 +1,33 @@
-if oGlow:IsClassic() then return end
+if oGlow:IsClassic() and not oGlow:IsBCC() then return end
 
 local _E
+
+local function GuildBankFrame_Update()
+	local tab = GetCurrentGuildBankTab()
+	for i = 1, MAX_GUILDBANK_SLOTS_PER_TAB or 98 do
+		local index = math.fmod(i, 14)
+		if index == 0 then
+			index = 14
+		end
+		local column = math.ceil((i - 0.5) / 14)
+
+		local slotLink = GetGuildBankItemLink(tab, i)
+		local slotFrame = _G["GuildBankColumn"..column.."Button"..index]
+
+		if slotLink then
+			oGlow:CallFilters("gbank", slotFrame, _E and slotLink)
+		end
+	end
+end
 
 local update = function(self)
 	if not IsAddOnLoaded("Blizzard_GuildBankUI") then return end
 
-	hooksecurefunc("GuildBankFrame_Update", function()
-		local tab = GetCurrentGuildBankTab()
-		for i = 1, MAX_GUILDBANK_SLOTS_PER_TAB or 98 do
-			local index = math.fmod(i, 14)
-			if index == 0 then
-				index = 14
-			end
-			local column = math.ceil((i - 0.5) / 14)
-
-			local slotLink = GetGuildBankItemLink(tab, i)
-			local slotFrame = _G["GuildBankColumn"..column.."Button"..index]
-
-			self:CallFilters("gbank", slotFrame, _E and slotLink)
-		end
-	end)
+	if oGlow:IsBCC() then
+		hooksecurefunc(GuildBankFrame, "Update", GuildBankFrame_Update)
+	else
+		hooksecurefunc("GuildBankFrame_Update", GuildBankFrame_Update)
+	end
 end
 
 local enable = function(self)
