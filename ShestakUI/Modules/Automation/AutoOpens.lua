@@ -22,7 +22,7 @@ frame:Register("BANKFRAME_CLOSED", function()
 	atBank = false
 end)
 
-if not T.classic then
+if not T.classic or T.BCC then
 	frame:Register("GUILDBANKFRAME_OPENED", function()
 		atBank = true
 	end)
