@@ -8,7 +8,6 @@ local function LoadSkin()
 	GuildBankFrame:StripTextures()
 	GuildBankFrame:SetTemplate("Transparent")
 	GuildBankFrame.Emblem:StripTextures(true)
-	-- GuildBankMoneyFrameBackground:StripTextures()
 
 	for i = 1, GuildBankFrame:GetNumChildren() do
 		local child = select(i, GuildBankFrame:GetChildren())
@@ -20,17 +19,11 @@ local function LoadSkin()
 	GuildBankFrame.DepositButton:SkinButton(true)
 	GuildBankFrame.WithdrawButton:SkinButton(true)
 	GuildBankInfoSaveButton:SkinButton(true)
-	if GuildBankFramePurchaseButton then
-		GuildBankFramePurchaseButton:SkinButton(true)
-	end
 
 	GuildBankFrame.WithdrawButton:SetPoint("RIGHT", GuildBankFrameDepositButton, "LEFT", -2, 0)
 
 	GuildBankInfoScrollFrame:StripTextures()
 	GuildBankTransactionsScrollFrame:StripTextures()
-	if GuildBankPopupScrollFrame then
-		T.SkinScrollBar(GuildBankPopupScrollFrame.ScrollBar)
-	end
 	T.SkinScrollBar(GuildBankInfoScrollFrameScrollBar)
 	T.SkinScrollBar(GuildBankTransactionsScrollFrameScrollBar)
 	GuildBankInfoScrollFrame:SetHeight(GuildBankInfoScrollFrame:GetHeight() - 5)
@@ -41,61 +34,52 @@ local function LoadSkin()
 	GuildBankFrame.inset:SetPoint("TOPLEFT", 21, -58)
 	GuildBankFrame.inset:SetPoint("BOTTOMRIGHT", -17, 61)
 
-	--[[
-	GuildItemSearchBox:StripTextures(true)
-	GuildItemSearchBox:CreateBackdrop("Overlay")
-	GuildItemSearchBox.backdrop:SetPoint("TOPLEFT", 13, 0)
-	GuildItemSearchBox.backdrop:SetPoint("BOTTOMRIGHT", -5, 0)
-	--]]
-
 	for i = 1, NUM_GUILDBANK_COLUMNS or 7 do
-		local column = _G["GuildBankColumn"..i]
-		if column then
-			_G["GuildBankColumn"..i]:StripTextures()
+		_G["GuildBankFrame"]["Column"..i]:StripTextures()
 
-			for j = 1, NUM_SLOTS_PER_GUILDBANK_GROUP or 14 do
-				local button = _G["GuildBankColumn"..i.."Button"..j]
-				local icon = _G["GuildBankColumn"..i.."Button"..j.."IconTexture"]
-				local border = _G["GuildBankColumn"..i.."Button"..j].IconBorder
+		for j = 1, NUM_SLOTS_PER_GUILDBANK_GROUP or 14 do
+			local button = _G["GuildBankFrame"]["Column"..i]["Button"..j]
+			-- local icon = _G["GuildBankFrame"]["Column"..i]["Button"..j].IconTexture
+			local border = _G["GuildBankFrame"]["Column"..i]["Button"..j].IconBorder
 
-				border:Kill()
-				button:SetNormalTexture(nil)
-				button:StyleButton()
-				button:SetTemplate("Default")
-
-				icon:ClearAllPoints()
-				icon:SetPoint("TOPLEFT", 2, -2)
-				icon:SetPoint("BOTTOMRIGHT", -2, 2)
-				icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-			end
-		end
-	end
-
-	for i = 1, 8 do
-		local button = _G["GuildBankTab"..i.."Button"]
-
-		if button then
-			local texture = _G["GuildBankTab"..i.."ButtonIconTexture"]
-			_G["GuildBankTab"..i]:StripTextures(true)
-
-			button:StripTextures()
+			border:Kill()
+			button:SetNormalTexture(nil)
 			button:StyleButton()
 			button:SetTemplate("Default")
 
-			-- Reposition tabs
-			button:ClearAllPoints()
-			if i == 1 then
-				button:SetPoint("TOPLEFT", GuildBankFrame, "TOPRIGHT", 1, 0)
-			else
-				local fixpos = i-1
-				button:SetPoint("TOP", _G["GuildBankTab"..fixpos.."Button"], "BOTTOM", 0, -20)
-			end
-
-			texture:ClearAllPoints()
-			texture:SetPoint("TOPLEFT", 2, -2)
-			texture:SetPoint("BOTTOMRIGHT", -2, 2)
-			texture:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+			-- FIXME: This needs looking at for BCC. Need to figure out how to point to the icon texture.
+			--[[
+			icon:ClearAllPoints()
+			icon:SetPoint("TOPLEFT", 2, -2)
+			icon:SetPoint("BOTTOMRIGHT", -2, 2)
+			icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+			--]]
 		end
+	end
+
+	for i = 1, 6 do
+		local button = _G["GuildBankTab"..i].Button
+
+		local texture = _G["GuildBankTab"..i].Button.IconTexture
+		_G["GuildBankTab"..i]:StripTextures(true)
+
+		button:StripTextures()
+		button:StyleButton()
+		button:SetTemplate("Default")
+
+		-- Reposition tabs
+		button:ClearAllPoints()
+		if i == 1 then
+			button:SetPoint("TOPLEFT", GuildBankFrame, "TOPRIGHT", 1, 0)
+		else
+			local fixpos = i-1
+			button:SetPoint("TOP", _G["GuildBankTab"..fixpos].Button, "BOTTOM", 0, -20)
+		end
+
+		texture:ClearAllPoints()
+		texture:SetPoint("TOPLEFT", 2, -2)
+		texture:SetPoint("BOTTOMRIGHT", -2, 2)
+		texture:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 	end
 
 	for i = 1, 4 do
