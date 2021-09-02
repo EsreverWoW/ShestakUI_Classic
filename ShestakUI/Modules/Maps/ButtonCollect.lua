@@ -34,7 +34,9 @@ local function SkinButton(f)
 				region:SetPoint("TOPLEFT", f, "TOPLEFT", 2, -2)
 				region:SetPoint("BOTTOMRIGHT", f, "BOTTOMRIGHT", -2, 2)
 				region:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-				region:SetDrawLayer("ARTWORK")
+				if not T.BCC then
+					region:SetDrawLayer("ARTWORK") -- FIXME: Black Overlay and/or Border Texture in BCC
+				end
 				if f:GetName() == "PS_MinimapButton" then
 					region.SetPoint = T.dummy
 				end
