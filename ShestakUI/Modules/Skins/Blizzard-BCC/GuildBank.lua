@@ -19,6 +19,7 @@ local function LoadSkin()
 	GuildBankFrame.DepositButton:SkinButton(true)
 	GuildBankFrame.WithdrawButton:SkinButton(true)
 	GuildBankInfoSaveButton:SkinButton(true)
+	GuildBankFrame.BuyInfo.PurchaseButton:SkinButton(true)
 
 	GuildBankFrame.WithdrawButton:SetPoint("RIGHT", GuildBankFrameDepositButton, "LEFT", -2, 0)
 
@@ -39,21 +40,12 @@ local function LoadSkin()
 
 		for j = 1, NUM_SLOTS_PER_GUILDBANK_GROUP or 14 do
 			local button = _G["GuildBankFrame"]["Column"..i]["Button"..j]
-			-- local icon = _G["GuildBankFrame"]["Column"..i]["Button"..j].IconTexture
 			local border = _G["GuildBankFrame"]["Column"..i]["Button"..j].IconBorder
 
 			border:Kill()
 			button:SetNormalTexture(nil)
 			button:StyleButton()
-			button:SetTemplate("Default")
-
-			-- FIXME: This needs looking at for BCC. Need to figure out how to point to the icon texture.
-			--[[
-			icon:ClearAllPoints()
-			icon:SetPoint("TOPLEFT", 2, -2)
-			icon:SetPoint("BOTTOMRIGHT", -2, 2)
-			icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-			--]]
+			button:SetTemplate("Transparent")
 		end
 	end
 
