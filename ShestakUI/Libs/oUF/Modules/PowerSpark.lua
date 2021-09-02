@@ -3,15 +3,15 @@ if not T.classic or C.unitframe.enable ~= true or C.unitframe.plugins_power_spar
 
 local _, ns = ...
 local oUF = ns.oUF
+
 local lastTickTime = GetTime()
-local tickValue = 2
+local tickDelay = 2.025 -- Average tick time is slightly over 2 seconds
 local currentValue = UnitPower('player')
 local lastValue = currentValue
-local allowPowerEvent = true
-local ignoredSpells = {
-	[75]	= true,	-- Auto Shot
-	[5019]	= true,	-- Shoot
+local mp5Delay = 5
+local mp5DelayWillEnd = nil
 
+local mp5IgnoredSpells = {
 	[1454]	= true,	-- Life Tap r1
 	[1455]	= true,	-- Life Tap r2
 	[1456]	= true,	-- Life Tap r3
@@ -19,113 +19,101 @@ local ignoredSpells = {
 	[11688]	= true,	-- Life Tap r5
 	[11689]	= true,	-- Life Tap r6
 	[27222]	= true,	-- Life Tap r7
-
-	[12051]	= true,	-- Evocation
-
 	[18182]	= true,	-- Improved Life Tap r1
 	[18183]	= true,	-- Improved Life Tap r2
-
-	[31818]	= true,	-- Life Tap (Mana Return Effect)
-	[32553]	= true,	-- Life Tap (Mana Return Effect)
-
-	[5677]	= true,	-- Mana Spring r1
-	[10491]	= true,	-- Mana Spring r2
-	[10493]	= true,	-- Mana Spring r3
-	[10494]	= true,	-- Mana Spring r4
-	[25569]	= true,	-- Mana Spring r5
-	[24853]	= true,	-- Mana Spring ??
 }
+
+-- Sets tick time to the last possible time based on the last tick
+local UpdateTickTime = function(now)
+	lastTickTime = now - ((now - lastTickTime) % tickDelay)
+end
 
 local Update = function(self, elapsed)
 	local element = self.PowerSpark
-
 	element.sinceLastUpdate = (element.sinceLastUpdate or 0) + (tonumber(elapsed) or 0)
 
 	if(element.sinceLastUpdate > 0.01) then
 		local powerType = UnitPowerType('player')
-
 		if(powerType ~= Enum.PowerType.Energy and powerType ~= Enum.PowerType.Mana) then
 			element.Spark:Hide()
 			return
 		end
 
 		currentValue = UnitPower('player', powerType)
+		local maxPower = UnitPowerMax('player', powerType)
+		local now = GetTime()
 
-		-- element.disableMax to override energy ticker when at max energy
-		if(not currentValue or (currentValue >= UnitPowerMax('player', powerType) and (powerType ~= Enum.PowerType.Energy or element.disableMax))) then
-			element:SetValue(0)
-			element.Spark:Hide()
-			return
-		end
-
-		if powerType == Enum.PowerType.Mana and (not currentValue or currentValue >= UnitPowerMax('player', Enum.PowerType.Mana)) then
-			element:SetValue(0)
-			element.Spark:Hide()
-			return
-		end
-
-		local now = GetTime() or 0
-		if(not (now == nil)) then
-			local timer = now - lastTickTime
-
-			if((currentValue > lastValue) or powerType == Enum.PowerType.Energy and (now >= lastTickTime + 2)) then
-				lastTickTime = now
+		if(powerType == Enum.PowerType.Mana) then
+			if currentValue >= maxPower then
+				element:SetValue(0)
+				element.Spark:Hide()
+				return
 			end
 
-			if(timer > 0) then -- Energy
-				element.Spark:Show()
-				element:SetMinMaxValues(0, 2)
-				element.Spark:SetVertexColor(1, 1, 1, 1)
-				element:SetValue(timer)
-				allowPowerEvent = true
-
-				lastValue = currentValue
-			elseif timer < 0 then -- Mana
-				element.Spark:Show()
-				element:SetMinMaxValues(0, 5)
-				element.Spark:SetVertexColor(1, 1, 0, 1)
-				element:SetValue(math.abs(timer))
+			-- Sync last tick time after 5 seconds are over
+			if mp5DelayWillEnd and mp5DelayWillEnd < now then
+				mp5DelayWillEnd = nil
+				UpdateTickTime(now)
 			end
-
-			element.sinceLastUpdate = 0
+		elseif(powerType == Enum.PowerType.Energy) then
+			-- If energy is not full we just wait for the next tick
+			if now >= lastTickTime + tickDelay and currentValue >= maxPower then
+				UpdateTickTime(now)
+			end
 		end
+
+		if mp5DelayWillEnd and powerType == Enum.PowerType.Mana then
+			-- Show 5 second indicator
+			element.Spark:Show()
+			element:SetMinMaxValues(0, mp5Delay)
+			element.Spark:SetVertexColor(1, 1, 0, 1)
+			element:SetValue(mp5DelayWillEnd - now)
+		else
+			-- Show tick indicator
+			element.Spark:Show()
+			element:SetMinMaxValues(0, tickDelay)
+			element.Spark:SetVertexColor(1, 1, 1, 1)
+			element:SetValue(now - lastTickTime)
+		end
+
+		element.sinceLastUpdate = 0
 	end
 end
 
-local EventHandler = function(_, event, _, _, spellID)
+local OnUnitPowerUpdate = function()
 	local powerType = UnitPowerType('player')
-
-	if(powerType ~= Enum.PowerType.Mana) then
+	if powerType ~= Enum.PowerType.Mana and powerType ~= Enum.PowerType.Energy then
 		return
 	end
 
-	if(event == 'UNIT_POWER_UPDATE' and allowPowerEvent) then
-		local time = GetTime()
+	-- We also register ticks from mp5 gear within the 5-second-rule to get a more accurate sync later.
+	-- Unfortunately this registers a tick when a mana pot or life tab is used.
+	local CurrentValue = UnitPower('player', powerType)
+	if CurrentValue > lastValue then
+		lastTickTime = GetTime()
+	end
+	lastValue = CurrentValue
+end
 
-		tickValue = time - lastTickTime
-
-		if tickValue > 5 then
-			if powerType == Enum.PowerType.Mana and InCombatLockdown() then
-				tickValue = 5
-			else
-				tickValue = 2
-			end
-		end
-
-		lastTickTime = time
+local OnUnitSpellcastSucceeded = function(_, _, _, _, spellID)
+	local powerType = UnitPowerType('player')
+	if powerType ~= Enum.PowerType.Mana then
+		return
 	end
 
-	if(event == 'UNIT_SPELLCAST_SUCCEEDED') then
-		local powerCost = GetSpellPowerCost(spellID)
-		local cost = powerCost[1] and powerCost[1].cost
-
-		if (not cost or ignoredSpells[spellID]) then
-			return
+	local spellCost = false
+	local costTable = GetSpellPowerCost(spellID)
+	for _, costInfo in next, costTable do
+		if costInfo.cost then
+			spellCost = true
 		end
-
-		lastTickTime = GetTime() + 5
-		allowPowerEvent = false
 	end
+
+	if not spellCost or mp5IgnoredSpells[spellID] then
+		return
+	end
+
+	mp5DelayWillEnd = GetTime() + 5
 end
 
 local Path = function(self, ...)
@@ -157,10 +145,8 @@ local Enable = function(self, unit)
 			spark:SetPoint('CENTER', element:GetStatusBarTexture(), relativePoint)
 		end
 
-		self:RegisterEvent('PLAYER_REGEN_ENABLED', EventHandler, true)
-		self:RegisterEvent('PLAYER_REGEN_DISABLED', EventHandler, true)
-		self:RegisterEvent('UNIT_SPELLCAST_SUCCEEDED', EventHandler)
-		self:RegisterEvent('UNIT_POWER_UPDATE', EventHandler)
+		self:RegisterEvent('UNIT_SPELLCAST_SUCCEEDED', OnUnitSpellcastSucceeded)
+		self:RegisterEvent('UNIT_POWER_UPDATE', OnUnitPowerUpdate)
 
 		element:SetScript('OnUpdate', function(_, elapsed) Path(self, elapsed) end)
 
@@ -173,10 +159,8 @@ local Disable = function(self)
 	local power = self.Power
 
 	if((power) and (element)) then
-		self:UnregisterEvent('PLAYER_REGEN_ENABLED', EventHandler, true)
-		self:UnregisterEvent('PLAYER_REGEN_DISABLED', EventHandler, true)
-		self:UnregisterEvent('UNIT_SPELLCAST_SUCCEEDED', EventHandler)
-		self:UnregisterEvent('UNIT_POWER_UPDATE', EventHandler)
+		self:UnregisterEvent('UNIT_SPELLCAST_SUCCEEDED', OnUnitSpellcastSucceeded)
+		self:UnregisterEvent('UNIT_POWER_UPDATE', OnUnitPowerUpdate)
 
 		element.Spark:Hide()
 		element:SetScript('OnUpdate', nil)
