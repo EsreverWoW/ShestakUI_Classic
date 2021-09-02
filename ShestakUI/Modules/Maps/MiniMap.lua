@@ -73,6 +73,17 @@ if not T.classic then
 	QueueStatusMinimapButtonBorder:Hide()
 end
 
+-- Move LFG Eye icon
+if MiniMapLFGFrame then
+	MiniMapLFGFrame:SetClampedToScreen(true)
+	MiniMapLFGFrame:SetFrameStrata("TOOLTIP")
+	MiniMapLFGFrame:ClearAllPoints()
+	MiniMapLFGFrame:SetPoint("TOP", Minimap, "TOP", 1, 6)
+	MiniMapLFGFrame:SetScale(0.8)
+	MiniMapLFGFrame:SetHighlightTexture(nil)
+	MiniMapLFGBorder:Hide()
+end
+
 -- Hide world map button
 MiniMapWorldMapButton:Hide()
 
