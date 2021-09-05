@@ -9,7 +9,7 @@
 ## SavedVariablesPerCharacter: ShestakUISettingsPerChar, ShestakUIChatHistory
 
 ## OptionalDeps: Blizzard_CombatText, ShestakUI_Config, ShestakUI_Profile, LibStub, CallbackHandler-1.0, LibClassicCasterino, LibClassicDurations, Aptechka, AtlasLoot, cargBags, Clique, epgp, Grid, Grid2, ls_Toasts, LunaUnitFrames, Mapster, Omen, OPie, PitBull4, Postal, Prat-3.0, Quartz, Recount, Rematch, ShadowedUnitFrames, TidyPlates, TipTac, TipTacTalents, tullaCC, VuhDo, WeakAuras
-## X-Embeds: LibStub, CallbackHandler-1.0, LibClassicCasterino, LibClassicDurations, LibRangeCheck-2.0, ChatThrottleLib, LibHealComm-4.0, LibTotemInfo
+## X-Embeds: LibStub, CallbackHandler-1.0, LibClassicCasterino, LibClassicDurations, LibRangeCheck-2.0, ChatThrottleLib, LibHealComm-4.0
 ## X-oUF: oUFShestakUI
 
 ## X-Website: https://github.com/EsreverWoW/ShestakUI_Classic
