@@ -965,12 +965,14 @@ local function style(self, unit)
 
 	-- Absorb
 	if C.raidframe.plugins_healcomm == true then
-		local ahpb = self.Health:CreateTexture(nil, "ARTWORK")
-		ahpb:SetTexture(C.media.texture)
-		ahpb:SetVertexColor(1, 1, 0, 1)
-		self.HealthPrediction = {
-			absorbBar = ahpb
-		}
+		if not T.classic then
+			local ahpb = self.Health:CreateTexture(nil, "ARTWORK")
+			ahpb:SetTexture(C.media.texture)
+			ahpb:SetVertexColor(1, 1, 0, 1)
+			self.HealthPrediction = {
+				absorbBar = ahpb
+			}
+		end
 	end
 
 	-- Every event should be register with this

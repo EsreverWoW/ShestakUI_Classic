@@ -3,7 +3,19 @@
 local _, ns = ...
 local oUF = ns.oUF
 
-if(oUF:IsClassic()) then return end
+if(oUF:IsClassic() and not oUF:IsBCC()) then return end
+
+local UnitGetTotalAbsorbs = UnitGetTotalAbsorbs
+local UnitGetTotalHealAbsorbs = UnitGetTotalHealAbsorbs
+
+if(oUF:IsClassic()) then
+	UnitGetTotalAbsorbs = function()
+		return 0
+	end
+	UnitGetTotalHealAbsorbs = function()
+		return 0
+	end
+end
 
 local function UpdateFillBar(frame, previousTexture, bar, amount, maxHealth)
 	if amount == 0 then
@@ -42,6 +54,7 @@ local function Update(self, event, unit)
 	local allIncomingHeal = UnitGetIncomingHeals(unit) or 0
 	local absorb = UnitGetTotalAbsorbs(unit) or 0
 	local healAbsorb = UnitGetTotalHealAbsorbs(unit) or 0
+	local otherIncomingHeal = 0
 	local health, maxHealth = UnitHealth(unit), UnitHealthMax(unit)
 
 	if healAbsorb > allIncomingHeal then
@@ -110,25 +123,52 @@ local function ForceUpdate(element)
 	return Path(element.__owner, 'ForceUpdate', element.__owner.unit)
 end
 
+--[[ HealthPrediction:SetFrequentUpdates(state, isForced)
+Used to toggle frequent updates.
+* self     - the Health element
+* state    - the desired state (boolean)
+* isForced - forces the event update even if the state wasn't changed (boolean)
+--]]
+local function SetFrequentUpdates(element, state, isForced)
+	if(element.frequentUpdates ~= state or isForced) then
+		element.frequentUpdates = state
+		if(state) then
+			element.__owner:UnregisterEvent('UNIT_HEALTH', Path)
+			element.__owner:RegisterEvent('UNIT_HEALTH_FREQUENT', Path)
+		else
+			element.__owner:UnregisterEvent('UNIT_HEALTH_FREQUENT', Path)
+			element.__owner:RegisterEvent('UNIT_HEALTH', Path)
+		end
+	end
+end
+
 local function Enable(self)
 	local element = self.HealthPrediction
 	if(element) then
 		element.__owner = self
 		element.ForceUpdate = ForceUpdate
+		element.SetFrequentUpdates = SetFrequentUpdates
 
-		self:RegisterEvent('UNIT_HEALTH', Path)
+		if(element.frequentUpdates and oUF:IsClassic()) then
+			self:RegisterEvent('UNIT_HEALTH_FREQUENT', Path)
+		else
+			self:RegisterEvent('UNIT_HEALTH', Path)
+		end
+
 		self:RegisterEvent('UNIT_MAXHEALTH', Path)
 
 		if element.myBar or element.otherBar then
 			self:RegisterEvent('UNIT_HEAL_PREDICTION', Path)
 		end
 
-		if element.absorbBar then
-			self:RegisterEvent('UNIT_ABSORB_AMOUNT_CHANGED', Path)
-		end
+		if(not oUF:IsClassic()) then
+			if element.absorbBar then
+				self:RegisterEvent('UNIT_ABSORB_AMOUNT_CHANGED', Path)
+			end
 
-		if element.healAbsorbBar then
-			self:RegisterEvent('UNIT_HEAL_ABSORB_AMOUNT_CHANGED', Path)
+			if element.healAbsorbBar then
+				self:RegisterEvent('UNIT_HEAL_ABSORB_AMOUNT_CHANGED', Path)
+			end
 		end
 
 		return true
@@ -157,8 +197,12 @@ local function Disable(self)
 		self:UnregisterEvent('UNIT_HEALTH', Path)
 		self:UnregisterEvent('UNIT_MAXHEALTH', Path)
 		self:UnregisterEvent('UNIT_HEAL_PREDICTION', Path)
-		self:UnregisterEvent('UNIT_ABSORB_AMOUNT_CHANGED', Path)
-		self:UnregisterEvent('UNIT_HEAL_ABSORB_AMOUNT_CHANGED', Path)
+		if(oUF:IsClassic()) then
+			self:UnregisterEvent('UNIT_HEALTH_FREQUENT', Path)
+		else
+			self:UnregisterEvent('UNIT_ABSORB_AMOUNT_CHANGED', Path)
+			self:UnregisterEvent('UNIT_HEAL_ABSORB_AMOUNT_CHANGED', Path)
+		end
 	end
 end
 
