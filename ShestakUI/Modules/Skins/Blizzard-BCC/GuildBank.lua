@@ -36,16 +36,17 @@ local function LoadSkin()
 	GuildBankFrame.inset:SetPoint("BOTTOMRIGHT", -17, 61)
 
 	for i = 1, NUM_GUILDBANK_COLUMNS or 7 do
-		_G["GuildBankFrame"]["Column"..i]:StripTextures()
+		local column = _G.GuildBankFrame["Column"..i]
+		column:StripTextures()
 
 		for j = 1, NUM_SLOTS_PER_GUILDBANK_GROUP or 14 do
-			local button = _G["GuildBankFrame"]["Column"..i]["Button"..j]
-			local border = _G["GuildBankFrame"]["Column"..i]["Button"..j].IconBorder
+			local button = column["Button"..j]
 
-			border:Kill()
-			button:SetNormalTexture(nil)
-			button:StyleButton()
+			button:StripTextures()
 			button:SetTemplate("Transparent")
+
+			button.icon:SetInside()
+			button.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 		end
 	end
 
@@ -80,7 +81,7 @@ local function LoadSkin()
 
 	-- Reposition tabs
 	GuildBankFrameTab1:ClearAllPoints()
-	GuildBankFrameTab1:SetPoint("TOPLEFT", GuildBankFrame, "BOTTOMLEFT", 0, 2)
+	GuildBankFrameTab1:SetPoint("TOPLEFT", GuildBankFrame, "BOTTOMLEFT", 0, -2)
 
 	-- Popup
 	if NUM_GUILDBANK_ICONS_SHOWN and NUM_GUILDBANK_ICONS_SHOWN > 0 then
