@@ -3,7 +3,7 @@
 local _, ns = ...
 local oUF = ns.oUF
 
-if(oUF:IsClassic() and not oUF:IsBCC()) then return end
+if(oUF:IsClassic()) then return end
 
 local UnitGetTotalAbsorbs = UnitGetTotalAbsorbs
 local UnitGetTotalHealAbsorbs = UnitGetTotalHealAbsorbs

@@ -3,7 +3,7 @@
 local _, ns = ...
 local oUF = ns.oUF
 
-if(not oUF:IsClassic() or oUF:IsBCC()) then return end
+if(not oUF:IsClassic()) then return end
 
 local HealComm = LibStub("LibHealComm-4.0")
 

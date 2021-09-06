@@ -1159,7 +1159,7 @@ local function Shared(self, unit)
 
 	-- Incoming heal text/bar
 	if C.raidframe.plugins_healcomm == true then
-		if T.classic and not T.BCC then
+		if T.classic then
 			local healBar = CreateFrame("StatusBar", nil, self)
 			healBar:SetAllPoints(self.Health)
 			healBar:SetStatusBarTexture(C.media.texture)
