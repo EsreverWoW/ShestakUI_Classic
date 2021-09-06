@@ -1,27 +1,6 @@
 local T, C, L, _ = unpack(select(2, ...))
 
 ----------------------------------------------------------------------------------------
---	Message for BG Queues (temporary)
-----------------------------------------------------------------------------------------
-local hasShown = false
-
-local PvPMessage = CreateFrame("Frame")
-PvPMessage:RegisterEvent("UPDATE_BATTLEFIELD_STATUS")
-PvPMessage:SetScript("OnEvent", function()
-	for i = 1, MAX_BATTLEFIELD_QUEUES do
-		local status = GetBattlefieldStatus(i)
-		if status == "confirm" then
-			if not hasShown and (StaticPopup_Visible("CONFIRM_BATTLEFIELD_ENTRY") or StaticPopup_Visible("CONFIRM_WARGAME_ENTRY")) then
-				hasShown = true
-				print("|cffffff00".."There is an issue with entering BGs from the StaticPopupDialog in WoW Classic. Please enter by right clicking the minimap icon.".."|r")
-			else
-				hasShown = false
-			end
-		end
-	end
-end)
-
-----------------------------------------------------------------------------------------
 --	NOOP / Pass Functions not found in Classic
 ----------------------------------------------------------------------------------------
 IsFlying = _G.IsFlying or T.dummy
