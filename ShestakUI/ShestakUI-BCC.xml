@@ -21,7 +21,6 @@
 
 	<Script file="Libs\LibStub\LibStub.lua"/>
 	<Script file="Libs\CallbackHandler-1.0\CallbackHandler-1.0.lua"/>
-	<Script file="Libs\LibFrameFade\LibFrameFade.lua"/>
 	<Script file="Libs\LibRangeCheck-2.0\LibRangeCheck-2.0.lua"/>
 	<Script file="Libs\LibHealComm-4.0\ChatThrottleLib.lua"/>
 	<Script file="Libs\LibHealComm-4.0\LibHealComm-4.0.lua"/>
