@@ -14,7 +14,7 @@ local function Update(self, event, unit)
 	if(hp.PreUpdate) then hp:PreUpdate(unit) end
 
 	local GUID = UnitGUID(unit)
-	local OverTimeHeals = (HealComm:GetHealAmount(GUID, HealComm.OVERTIME_HEALS) or 0) * (HealComm:GetHealModifier(GUID) or 1)
+	local OverTimeHeals = (HealComm:GetHealAmount(GUID, HealComm.OVERTIME_AND_BOMB_HEALS) or 0) * (HealComm:GetHealModifier(GUID) or 1)
 	local DirectHeals = UnitGetIncomingHeals(unit) or 0
 	local IncomingHeals = DirectHeals >= DirectHeals + OverTimeHeals and DirectHeals or DirectHeals + OverTimeHeals
 	local Health = UnitHealth(unit)
