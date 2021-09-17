@@ -13,7 +13,7 @@ T.realm = GetRealmName()
 T.color = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[T.class]
 T.version = GetAddOnMetadata("ShestakUI", "Version")
 T.screenWidth, T.screenHeight = GetPhysicalScreenSize()
-T.newPatch = select(4, GetBuildInfo()) >= 90100
+T.newPatch = select(4, GetBuildInfo()) >= 90105
 T.classic = _G.WOW_PROJECT_ID == _G.WOW_PROJECT_CLASSIC or _G.WOW_PROJECT_ID == _G.WOW_PROJECT_BURNING_CRUSADE_CLASSIC
 T.BCC = _G.WOW_PROJECT_ID == _G.WOW_PROJECT_BURNING_CRUSADE_CLASSIC
 T.HiDPI = GetScreenHeight() / T.screenHeight < 0.75
