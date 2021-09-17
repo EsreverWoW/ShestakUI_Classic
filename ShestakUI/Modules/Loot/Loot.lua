@@ -155,7 +155,7 @@ Butsu:RegisterEvent("LOOT_CLOSED")
 function Butsu:OPEN_MASTER_LOOT_LIST()
 	if GroupLootDropDown then
 		ToggleDropDownMenu(nil, nil, GroupLootDropDown, LootFrame.selectedLootButton, 0, 0)
-	else
+	elseif LootFrame.selectedLootButton then
 		MasterLooterFrame_Show(LootFrame.selectedLootButton)
 	end
 end
