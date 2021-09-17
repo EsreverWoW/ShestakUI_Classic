@@ -153,12 +153,20 @@ end
 Butsu:RegisterEvent("LOOT_CLOSED")
 
 function Butsu:OPEN_MASTER_LOOT_LIST()
-	ToggleDropDownMenu(nil, nil, GroupLootDropDown, LootFrame.selectedLootButton, 0, 0)
+	if GroupLootDropDown then
+		ToggleDropDownMenu(nil, nil, GroupLootDropDown, LootFrame.selectedLootButton, 0, 0)
+	else
+		MasterLooterFrame_Show(LootFrame.selectedLootButton)
+	end
 end
 Butsu:RegisterEvent("OPEN_MASTER_LOOT_LIST")
 
 function Butsu:UPDATE_MASTER_LOOT_LIST()
-	UIDropDownMenu_Refresh(GroupLootDropDown)
+	if GroupLootDropDown then
+		UIDropDownMenu_Refresh(GroupLootDropDown)
+	else
+		MasterLooterFrame_UpdatePlayers()
+	end
 end
 Butsu:RegisterEvent("UPDATE_MASTER_LOOT_LIST")
 

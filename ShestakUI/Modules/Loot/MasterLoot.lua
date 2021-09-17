@@ -4,6 +4,9 @@ if C.loot.lootframe ~= true then return end
 ----------------------------------------------------------------------------------------
 --	MasterLoot by Ammo
 ----------------------------------------------------------------------------------------
+
+if not GroupLootDropDown then return end -- TODO: See what needs fixing here for builds > 40045 in Classic/BCC
+
 local hexColors = {}
 for k, v in pairs(RAID_CLASS_COLORS) do
 	hexColors[k] = "|c"..v.colorStr
