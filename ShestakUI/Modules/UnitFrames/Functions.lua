@@ -40,7 +40,7 @@ T.PostUpdateHealthColor = function(health, unit, r, g, b)
 		health.cur = min
 		health.max = max
 
-		T.PostUpdateRaidHealth(health, unit, min, max)
+		T.PostUpdateHealth(health, unit, min, max)
 	end
 end
 
@@ -63,7 +63,16 @@ T.PostUpdateHealth = function(health, unit, min, max)
 		if T.classic and T.class == "HUNTER" and C.unitframe.bar_color_happiness then
 			local mood = GetPetHappiness()
 			if mood then
-				r, g, b = unpack(T.oUF_colors.happiness[mood])
+				if mood ~= 3 then
+					r, g, b = unpack(T.oUF_colors.happiness[mood])
+				end
+				if b then
+					health:SetStatusBarColor(r, g, b)
+					if health.bg and health.bg.multiplier then
+						local mu = health.bg.multiplier
+						health.bg:SetVertexColor(r * mu, g * mu, b * mu)
+					end
+				end
 			end
 		elseif C.unitframe.own_color == true then
 			health:SetStatusBarColor(unpack(C.unitframe.uf_color))
