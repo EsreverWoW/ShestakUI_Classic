@@ -30,11 +30,8 @@ local function LoadSkin()
 		Questie_Toggle:SkinButton()
 		Questie_Toggle:ClearAllPoints()
 		Questie_Toggle:SetHeight(22)
-		if T.BCC then
-			Questie_Toggle:SetPoint("RIGHT", WorldMapZoneMinimapDropDown, "LEFT", 17, 3)
-		else
-			Questie_Toggle:SetPoint("RIGHT", WorldMapContinentDropDown, "LEFT", 17, 3)
-		end
+		Questie_Toggle:SetPoint("LEFT", WorldMapZoomOutButton, "RIGHT", 6, 0)
+		Questie_Toggle.SetPoint = T.dummy
 	end
 
 	WorldMapFrame:RegisterEvent("PLAYER_LOGIN")

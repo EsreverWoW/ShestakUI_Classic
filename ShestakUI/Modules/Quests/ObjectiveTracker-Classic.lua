@@ -1,4 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
+if IsAddOnLoaded("Questie") then return end
 
 ----------------------------------------------------------------------------------------
 --	Move QuestWatchFrame (with ModernQuestWatch from Ketho - EU-Boulderfist)
