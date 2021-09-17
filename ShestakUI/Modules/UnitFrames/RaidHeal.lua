@@ -136,6 +136,8 @@ local function Shared(self, unit)
 			self.Power.colorPower = true
 		end
 
+		self.Power.PostUpdateColor = T.PostUpdatePowerColor
+
 		-- Power bar background
 		self.Power.bg = self.Power:CreateTexture(nil, "BORDER")
 		self.Power.bg:SetAllPoints(self.Power)

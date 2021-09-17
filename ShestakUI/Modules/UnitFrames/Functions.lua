@@ -33,58 +33,65 @@ T.PostUpdateHealthColor = function(health, unit, r, g, b)
 			health.value:SetText("|cffD7BEA5"..L_UF_GHOST.."|r")
 		end
 	else
-		if (C.unitframe.own_color ~= true and C.unitframe.enemy_health_color and unit == "target" and UnitIsEnemy(unit, "player") and UnitIsPlayer(unit)) or (C.unitframe.own_color ~= true and unit == "target" and not UnitIsPlayer(unit) and UnitIsFriend(unit, "player")) then
-			local c = T.oUF_colors.reaction[UnitReaction(unit, "player")]
-			if c then
-				r, g, b = c[1], c[2], c[3]
-				health:SetStatusBarColor(r, g, b)
-			else
-				r, g, b = 0.3, 0.7, 0.3
-				health:SetStatusBarColor(r, g, b)
-			end
-		end
-		if unit == "pet" then
-			if T.classic and T.class == "HUNTER" and C.unitframe.bar_color_happiness then
-				local mood = GetPetHappiness()
-				if mood then
-					r, g, b = unpack(T.oUF_colors.happiness[mood])
-				end
-			elseif C.unitframe.own_color == true then
-				health:SetStatusBarColor(unpack(C.unitframe.uf_color))
-				health.bg:SetVertexColor(0.1, 0.1, 0.1)
-			else
-				local _, class = UnitClass("player")
-				r, g, b = unpack(T.oUF_colors.class[class])
-			end
-			if b then
-				health:SetStatusBarColor(r, g, b)
-				if health.bg and health.bg.multiplier then
-					local mu = health.bg.multiplier
-					health.bg:SetVertexColor(r * mu, g * mu, b * mu)
-				end
-			end
-		end
-		if C.unitframe.bar_color_value == true and not UnitIsTapDenied(unit) then
-			if C.unitframe.own_color == true then
-				r, g, b = C.unitframe.uf_color[1], C.unitframe.uf_color[2], C.unitframe.uf_color[3]
-			else
-				r, g, b = health:GetStatusBarColor()
-			end
-			local newr, newg, newb = oUF:ColorGradient(min, max, 1, 0, 0, 1, 1, 0, r, g, b)
+		local min, max = UnitHealth(unit), UnitHealthMax(unit)
 
-			health:SetStatusBarColor(newr, newg, newb)
-			if health.bg and health.bg.multiplier then
-				local mu = health.bg.multiplier
-				health.bg:SetVertexColor(newr * mu, newg * mu, newb * mu)
-			end
-		end
+		health:SetMinMaxValues(0, max)
+		health:SetValue(min)
+		health.cur = min
+		health.max = max
+
+		T.PostUpdateRaidHealth(health, unit, min, max)
 	end
 end
 
 T.PostUpdateHealth = function(health, unit, min, max)
 	if unit and unit:find("arena%dtarget") then return end
+	local r, g, b
+	if (C.unitframe.own_color ~= true and C.unitframe.enemy_health_color and unit == "target" and UnitIsEnemy(unit, "player") and UnitIsPlayer(unit)) or (C.unitframe.own_color ~= true and unit == "target" and not UnitIsPlayer(unit) and UnitIsFriend(unit, "player")) then
+		local c = T.oUF_colors.reaction[UnitReaction(unit, "player")]
+		if c then
+			r, g, b = c[1], c[2], c[3]
+			health:SetStatusBarColor(r, g, b)
+		else
+			r, g, b = 0.3, 0.7, 0.3
+			health:SetStatusBarColor(r, g, b)
+		end
+	end
+	if unit == "pet" then
+		local _, class = UnitClass("player")
+		local r, g, b = unpack(T.oUF_colors.class[class])
+		if T.classic and T.class == "HUNTER" and C.unitframe.bar_color_happiness then
+			local mood = GetPetHappiness()
+			if mood then
+				r, g, b = unpack(T.oUF_colors.happiness[mood])
+			end
+		elseif C.unitframe.own_color == true then
+			health:SetStatusBarColor(unpack(C.unitframe.uf_color))
+			health.bg:SetVertexColor(0.1, 0.1, 0.1)
+		elseif b then
+			health:SetStatusBarColor(r, g, b)
+			if health.bg and health.bg.multiplier then
+				local mu = health.bg.multiplier
+				health.bg:SetVertexColor(r * mu, g * mu, b * mu)
+			end
+		end
+	end
+	if C.unitframe.bar_color_value == true and not UnitIsTapDenied(unit) then
+		if C.unitframe.own_color == true then
+			r, g, b = C.unitframe.uf_color[1], C.unitframe.uf_color[2], C.unitframe.uf_color[3]
+		else
+			r, g, b = health:GetStatusBarColor()
+		end
+		local newr, newg, newb = oUF:ColorGradient(min, max, 1, 0, 0, 1, 1, 0, r, g, b)
+
+		health:SetStatusBarColor(newr, newg, newb)
+		if health.bg and health.bg.multiplier then
+			local mu = health.bg.multiplier
+			health.bg:SetVertexColor(newr * mu, newg * mu, newb * mu)
+		end
+	end
 	if min ~= max then
-		local r, g, b = oUF:ColorGradient(min, max, 0.69, 0.31, 0.31, 0.65, 0.63, 0.35, 0.33, 0.59, 0.33)
+		r, g, b = oUF:ColorGradient(min, max, 0.69, 0.31, 0.31, 0.65, 0.63, 0.35, 0.33, 0.59, 0.33)
 		if (T.classic and unit == "player" or (unit == "player" and not UnitHasVehicleUI("player") or unit == "vehicle")) and health:GetAttribute("normalUnit") ~= "pet" then
 			if C.unitframe.show_total_value == true then
 				if C.unitframe.color_value == true then
@@ -154,29 +161,14 @@ T.PostUpdateRaidHealthColor = function(health, unit, r, g, b)
 			health.value:SetText("|cffD7BEA5"..L_UF_GHOST.."|r")
 		end
 	else
-		if not UnitIsPlayer(unit) and UnitIsFriend(unit, "player") and C.unitframe.own_color ~= true then
-			local c = T.oUF_colors.reaction[5]
-			local r, g, b = c[1], c[2], c[3]
-			health:SetStatusBarColor(r, g, b)
-			if health.bg and health.bg.multiplier then
-				local mu = health.bg.multiplier
-				health.bg:SetVertexColor(r * mu, g * mu, b * mu)
-			end
-		end
-		if C.unitframe.bar_color_value == true and not UnitIsTapDenied(unit) then
-			if C.unitframe.own_color == true then
-				r, g, b = C.unitframe.uf_color[1], C.unitframe.uf_color[2], C.unitframe.uf_color[3]
-			else
-				r, g, b = health:GetStatusBarColor()
-			end
-			local newr, newg, newb = oUF:ColorGradient(min, max, 1, 0, 0, 1, 1, 0, r, g, b)
+		local min, max = UnitHealth(unit), UnitHealthMax(unit)
 
-			health:SetStatusBarColor(newr, newg, newb)
-			if health.bg and health.bg.multiplier then
-				local mu = health.bg.multiplier
-				health.bg:SetVertexColor(newr * mu, newg * mu, newb * mu)
-			end
-		end
+		health:SetMinMaxValues(0, max)
+		health:SetValue(min)
+		health.cur = min
+		health.max = max
+
+		T.PostUpdateRaidHealth(health, unit, min, max)
 	end
 end
 
@@ -184,8 +176,32 @@ T.PostUpdateRaidHealth = function(health, unit, min, max)
 	local self = health:GetParent()
 	local power = self.Power
 	local border = self.backdrop
+	local r, g, b
+	if not UnitIsPlayer(unit) and UnitIsFriend(unit, "player") and C.unitframe.own_color ~= true then
+		local c = T.oUF_colors.reaction[5]
+		local r, g, b = c[1], c[2], c[3]
+		health:SetStatusBarColor(r, g, b)
+		if health.bg and health.bg.multiplier then
+			local mu = health.bg.multiplier
+			health.bg:SetVertexColor(r * mu, g * mu, b * mu)
+		end
+	end
+	if C.unitframe.bar_color_value == true and not UnitIsTapDenied(unit) then
+		if C.unitframe.own_color == true then
+			r, g, b = C.unitframe.uf_color[1], C.unitframe.uf_color[2], C.unitframe.uf_color[3]
+		else
+			r, g, b = health:GetStatusBarColor()
+		end
+		local newr, newg, newb = oUF:ColorGradient(min, max, 1, 0, 0, 1, 1, 0, r, g, b)
+
+		health:SetStatusBarColor(newr, newg, newb)
+		if health.bg and health.bg.multiplier then
+			local mu = health.bg.multiplier
+			health.bg:SetVertexColor(newr * mu, newg * mu, newb * mu)
+		end
+	end
 	if min ~= max then
-		local r, g, b = oUF:ColorGradient(min, max, 0.69, 0.31, 0.31, 0.65, 0.63, 0.35, 0.33, 0.59, 0.33)
+		r, g, b = oUF:ColorGradient(min, max, 0.69, 0.31, 0.31, 0.65, 0.63, 0.35, 0.33, 0.59, 0.33)
 		if self:GetParent():GetName():match("oUF_PartyDPS") then
 			if C.unitframe.color_value == true then
 				health.value:SetFormattedText("|cffAF5050%s|r |cffD7BEA5-|r |cff%02x%02x%02x%d%%|r", T.ShortValue(min), r * 255, g * 255, b * 255, floor(min / max * 100))
@@ -237,11 +253,23 @@ T.PreUpdatePower = function(power, unit)
 end
 
 T.PostUpdatePowerColor = function(power, unit, r, g, b)
-	local _, pToken = UnitPowerType(unit)
+	if unit and unit:find("arena%dtarget") then return end
 
-	local color = T.oUF_colors.power[pToken]
-	if color then
-		power:SetStatusBarColor(color[1], color[2], color[3])
+	if not UnitIsConnected(unit) or (UnitIsDeadOrGhost(unit) and not UnitIsFeignDeath(unit)) then
+		power:SetValue(0)
+	else
+		local displayType, min
+		if power.displayAltPower then
+			displayType, min = power:GetDisplayPower()
+		end
+
+		local cur, max = UnitPower(unit, displayType), UnitPowerMax(unit, displayType)
+		power:SetMinMaxValues(min or 0, max)
+		power:SetValue(cur)
+		power.cur = cur
+		power.min = min
+		power.max = max
+		power.displayType = displayType
 	end
 end
 
@@ -253,10 +281,6 @@ T.PostUpdatePower = function(power, unit, cur, _, max)
 
 	if color then
 		power.value:SetTextColor(color[1], color[2], color[3])
-	end
-
-	if not UnitIsConnected(unit) or (UnitIsDeadOrGhost(unit) and not UnitIsFeignDeath(unit)) then
-		power:SetValue(0)
 	end
 
 	if unit == "focus" or unit == "focustarget" or unit == "targettarget" or (self:GetParent():GetName():match("oUF_RaidDPS")) then return end
@@ -543,6 +567,10 @@ T.PostCastStart = function(Castbar, unit)
 				Castbar:SetStatusBarColor(r, g, b)
 				Castbar.bg:SetVertexColor(r, g, b, 0.2)
 			end
+		end
+		Castbar.Overlay:SetBackdropBorderColor(unpack(C.media.border_color))
+		if C.unitframe.castbar_icon == true and (unit == "target" or unit == "focus") then
+			Castbar.Button:SetBackdropBorderColor(unpack(C.media.border_color))
 		end
 		Castbar.Overlay:SetBackdropBorderColor(unpack(C.media.border_color))
 		if C.unitframe.castbar_icon == true and (unit == "target" or unit == "focus") then
