@@ -278,6 +278,10 @@ local function LoadSkin()
 		ChatConfigFrame.ToggleChatButton:SkinButton()
 		ChatConfigFrame.ToggleChatButton:ClearAllPoints()
 		ChatConfigFrame.ToggleChatButton:SetPoint("LEFT", _G["ChatConfigFrameRedockButton"], "RIGHT", 3, 0)
+
+		if T.newPatch then
+			T.SkinCheckBox(TextToSpeechCharacterSpecificButton, 25)
+		end
 	end
 
 	hooksecurefunc(ChatConfigFrameChatTabManager, "UpdateWidth", function(self)

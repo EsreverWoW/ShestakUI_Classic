@@ -188,6 +188,10 @@ local function LoadSkin()
 		end
 	end
 
+	if T.newPatch then
+		T.SkinSlider(Advanced_ResampleSharpnessSlider)
+	end
+
 	_G["Graphics_Quality"].SetBackdrop = T.dummy
 	_G["RaidGraphics_Quality"].SetBackdrop = T.dummy
 
