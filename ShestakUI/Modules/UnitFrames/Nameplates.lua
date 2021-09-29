@@ -297,14 +297,14 @@ if T.screenHeight > 1200 then
 	Mult = T.mult
 end
 
-local auraFontHeight = (T.BCC and T.HiDPI) and (C.font.auras_font_size * T.noscalemult * (2/3) / Mult) or (C.font.auras_font_size * T.noscalemult / Mult)
+local auraFontHeight = (T.classic and T.HiDPI) and (C.font.auras_font_size * T.noscalemult * (2/3) / Mult) or (C.font.auras_font_size * T.noscalemult / Mult)
 
 local AurasPostCreateIcon = function(element, button)
 	CreateBorderFrame(button)
 
 	button.remaining = T.SetFontString(button, C.font.auras_font, auraFontHeight, C.font.auras_font_style)
 	button.remaining:SetShadowOffset(C.font.auras_font_shadow and 1 or 0, C.font.auras_font_shadow and -1 or 0)
-	button.remaining:SetPoint("CENTER", button, "CENTER", T.BCC and 0 or 1, 0)
+	button.remaining:SetPoint("CENTER", button, "CENTER", T.classic and 0 or 1, 0)
 	button.remaining:SetJustifyH("CENTER")
 
 	button.cd.noCooldownCount = true

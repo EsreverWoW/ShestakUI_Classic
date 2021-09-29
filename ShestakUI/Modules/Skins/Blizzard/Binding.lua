@@ -77,7 +77,7 @@ local function LoadSkin()
 	end)
 
 	-- QuickKeybind
-	if not T.BCC then
+	if not T.classic then
 		QuickKeybindFrame:StripTextures()
 		QuickKeybindFrame.Header:StripTextures()
 		QuickKeybindFrame:SetTemplate("Transparent")

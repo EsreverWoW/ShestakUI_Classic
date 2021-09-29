@@ -35,13 +35,8 @@ local function LoadSkin()
 	end
 
 	GuildRegistrarPurchaseText:SetTextColor(1, 1, 1)
-	if T.BCC then
-		GuildAvailableServicesText:SetTextColor(1, 0.8, 0)
-		GuildAvailableServicesText:SetShadowColor(0, 0, 0)
-	else
-		AvailableServicesText:SetTextColor(1, 0.8, 0)
-		AvailableServicesText:SetShadowColor(0, 0, 0)
-	end
+	GuildAvailableServicesText:SetTextColor(1, 0.8, 0)
+	GuildAvailableServicesText:SetShadowColor(0, 0, 0)
 end
 
 tinsert(T.SkinFuncs["ShestakUI"], LoadSkin)

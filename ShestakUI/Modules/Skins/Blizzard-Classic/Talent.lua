@@ -5,45 +5,43 @@ if C.skins.blizzard_frames ~= true then return end
 --	TalentUI skin
 ----------------------------------------------------------------------------------------
 local function LoadSkin()
-	local TalentFrame = T.BCC and "PlayerTalentFrame" or "TalentFrame"
+	_G["PlayerTalentFrame"]:StripTextures()
+	_G["PlayerTalentFrame"]:CreateBackdrop("Transparent")
+	_G["PlayerTalentFrame"].backdrop:SetPoint("TOPLEFT", 10, -12)
+	_G["PlayerTalentFrame"].backdrop:SetPoint("BOTTOMRIGHT", -32, 76)
 
-	_G[TalentFrame]:StripTextures()
-	_G[TalentFrame]:CreateBackdrop("Transparent")
-	_G[TalentFrame].backdrop:SetPoint("TOPLEFT", 10, -12)
-	_G[TalentFrame].backdrop:SetPoint("BOTTOMRIGHT", -32, 76)
+	_G["PlayerTalentFramePortrait"]:Hide()
 
-	_G[TalentFrame.."Portrait"]:Hide()
+	T.SkinCloseButton(_G["PlayerTalentFrameCloseButton"], _G["PlayerTalentFrame"].backdrop)
 
-	T.SkinCloseButton(_G[TalentFrame.."CloseButton"], _G[TalentFrame].backdrop)
+	_G["PlayerTalentFrameTitleText"]:ClearAllPoints()
+	_G["PlayerTalentFrameTitleText"]:SetPoint("TOP", _G["PlayerTalentFrame"].backdrop, "TOP", 0, -6)
 
-	_G[TalentFrame.."TitleText"]:ClearAllPoints()
-	_G[TalentFrame.."TitleText"]:SetPoint("TOP", _G[TalentFrame].backdrop, "TOP", 0, -6)
+	_G["PlayerTalentFrameSpentPoints"]:ClearAllPoints()
+	_G["PlayerTalentFrameSpentPoints"]:SetPoint("TOP", _G["PlayerTalentFrame"].backdrop, "TOP", 0, -30)
 
-	_G[TalentFrame.."SpentPoints"]:ClearAllPoints()
-	_G[TalentFrame.."SpentPoints"]:SetPoint("TOP", _G[TalentFrame].backdrop, "TOP", 0, -30)
+	_G["PlayerTalentFrameCancelButton"]:Kill()
 
-	_G[TalentFrame.."CancelButton"]:Kill()
-
-	_G[TalentFrame.."Tab1"]:ClearAllPoints()
-	_G[TalentFrame.."Tab1"]:SetPoint("TOPLEFT", _G[TalentFrame].backdrop, "BOTTOMLEFT", 2, -2)
+	_G["PlayerTalentFrameTab1"]:ClearAllPoints()
+	_G["PlayerTalentFrameTab1"]:SetPoint("TOPLEFT", _G["PlayerTalentFrame"].backdrop, "BOTTOMLEFT", 2, -2)
 	for i = 1, 5 do
-		T.SkinTab(_G[TalentFrame.."Tab"..i])
+		T.SkinTab(_G["PlayerTalentFrameTab"..i])
 	end
 
-	_G[TalentFrame.."ScrollFrame"]:StripTextures()
-	_G[TalentFrame.."ScrollFrame"]:CreateBackdrop("Default")
-	_G[TalentFrame.."ScrollFrame"].backdrop:SetPoint("TOPLEFT", -1, 1)
-	_G[TalentFrame.."ScrollFrame"].backdrop:SetPoint("BOTTOMRIGHT", 6, -1)
+	_G["PlayerTalentFrameScrollFrame"]:StripTextures()
+	_G["PlayerTalentFrameScrollFrame"]:CreateBackdrop("Default")
+	_G["PlayerTalentFrameScrollFrame"].backdrop:SetPoint("TOPLEFT", -1, 1)
+	_G["PlayerTalentFrameScrollFrame"].backdrop:SetPoint("BOTTOMRIGHT", 6, -1)
 
-	T.SkinScrollBar(_G[TalentFrame.."ScrollFrameScrollBar"])
-	_G[TalentFrame.."ScrollFrameScrollBar"]:SetPoint("TOPLEFT", _G[TalentFrame.."ScrollFrame"], "TOPRIGHT", 10, -16)
+	T.SkinScrollBar(_G["PlayerTalentFrameScrollFrameScrollBar"])
+	_G["PlayerTalentFrameScrollFrameScrollBar"]:SetPoint("TOPLEFT", _G["PlayerTalentFrameScrollFrame"], "TOPRIGHT", 10, -16)
 
-	_G[TalentFrame.."TalentPointsText"]:SetPoint("BOTTOMRIGHT", TalentFrame, "BOTTOMLEFT", 220, 84)
+	_G["PlayerTalentFrameTalentPointsText"]:SetPoint("BOTTOMRIGHT", PlayerTalentFrame, "BOTTOMLEFT", 220, 84)
 
 	for i = 1, MAX_NUM_TALENTS do
-		local talent = _G[TalentFrame.."Talent"..i]
-		local icon = _G[TalentFrame.."Talent"..i.."IconTexture"]
-		local rank = _G[TalentFrame.."Talent"..i.."Rank"]
+		local talent = _G["PlayerTalentFrameTalent"..i]
+		local icon = _G["PlayerTalentFrameTalent"..i.."IconTexture"]
+		local rank = _G["PlayerTalentFrameTalent"..i.."Rank"]
 
 		if talent then
 			talent:StripTextures()
@@ -61,11 +59,7 @@ local function LoadSkin()
 	local f = CreateFrame("Frame")
 	f:RegisterEvent("CHARACTER_POINTS_CHANGED")
 	f:SetScript("OnEvent", function()
-		if not T.BCC then
-			TalentFrame_Update()
-		else
-			PlayerTalentFrame_Update()
-		end
+		PlayerTalentFrame_Update()
 	end)
 end
 

@@ -151,21 +151,6 @@ if StreamingIcon then
 	StreamingIcon:SetFrameStrata("BACKGROUND")
 end
 
--- Ticket icon
-if T.classic and not T.BCC then
-	HelpOpenTicketButton:SetParent(Minimap)
-	HelpOpenTicketButton:CreateBackdrop("ClassColor")
-	HelpOpenTicketButton:SetFrameLevel(4)
-	HelpOpenTicketButton:ClearAllPoints()
-	HelpOpenTicketButton:SetPoint("BOTTOM", Minimap, "BOTTOM", 0, 2)
-	HelpOpenTicketButton:SetHighlightTexture(nil)
-	HelpOpenTicketButton:SetPushedTexture("Interface\\Icons\\inv_misc_note_03")
-	HelpOpenTicketButton:SetNormalTexture("Interface\\Icons\\inv_misc_note_03")
-	HelpOpenTicketButton:GetNormalTexture():SetTexCoord(0.1, 0.9, 0.1, 0.9)
-	HelpOpenTicketButton:GetPushedTexture():SetTexCoord(0.1, 0.9, 0.1, 0.9)
-	HelpOpenTicketButton:SetSize(16, 16)
-end
-
 -- GhostFrame
 if not T.classic then
 	GhostFrame:StripTextures()
@@ -224,7 +209,11 @@ local micromenu = {
 	end},
 	{text = TALENTS_BUTTON, notCheckable = 1, func = function()
 		if not PlayerTalentFrame then
-			TalentFrame_LoadUI()
+			if T.classic and not T.BCC then
+				PlayerTalentFrame_LoadUI()
+			else
+				TalentFrame_LoadUI()
+			end
 		end
 		if T.level >= 10 then
 			if not T.classic then

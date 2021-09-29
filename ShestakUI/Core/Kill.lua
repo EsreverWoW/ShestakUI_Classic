@@ -32,9 +32,6 @@ frame:SetScript("OnEvent", function(_, _, addon)
 		Advanced_UseUIScale:Kill()
 		Advanced_UIScaleSlider:Kill()
 		BagHelpBox:Kill()
-		if not T.BCC then
-			HelpOpenTicketButtonTutorial:Kill()
-		end
 	else
 		Display_UseUIScale:Kill()
 		Display_UIScaleSlider:Kill()
@@ -42,7 +39,7 @@ frame:SetScript("OnEvent", function(_, _, addon)
 	end
 	SetCVarBitfield("closedInfoFrames", LE_FRAME_TUTORIAL_WORLD_MAP_FRAME, true)
 	SetCVarBitfield("closedInfoFrames", LE_FRAME_TUTORIAL_PET_JOURNAL, true)
-	if not T.BCC then
+	if not T.classic then
 		SetCVarBitfield("closedInfoFrames", LE_FRAME_TUTORIAL_GARRISON_BUILDING, true)
 	end
 
