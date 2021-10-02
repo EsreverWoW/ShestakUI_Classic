@@ -6,9 +6,9 @@ if C.trade.already_known ~= true then return end
 ----------------------------------------------------------------------------------------
 local color = {r = 0.1, g = 1, b = 0.1}
 local knowns, lines = {}, {}
-local recipe = LE_ITEM_CLASS_RECIPE
-local pet = LE_ITEM_MISCELLANEOUS_COMPANION_PET
-local mount = LE_ITEM_MISCELLANEOUS_MOUNT
+local recipe = Enum.ItemClass.Recipe
+local pet = Enum.ItemMiscellaneousSubclass.CompanionPet
+local mount = Enum.ItemMiscellaneousSubclass.Mount
 local knowables = {[recipe] = true, [pet] = true, [mount] = true}
 
 local pattern = ITEM_PET_KNOWN:gsub("%(", "%%(")
