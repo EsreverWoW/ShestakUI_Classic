@@ -541,7 +541,7 @@ T.PostCastStart = function(Castbar, unit)
 		if Castbar.casting then
 			setBarTicks(Castbar, 0)
 		else
-			local spell = (T.classic and not T.BCC) and ChannelInfo() or UnitChannelInfo(unit)
+			local spell = UnitChannelInfo(unit)
 			Castbar.channelingTicks = T.CastBarTicks[spell] or 0
 			setBarTicks(Castbar, Castbar.channelingTicks)
 		end

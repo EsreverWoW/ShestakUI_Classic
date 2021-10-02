@@ -216,10 +216,10 @@ local micromenu = {
 			end
 		end
 		if T.level >= 10 then
-			if not T.classic then
-				ShowUIPanel(PlayerTalentFrame)
-			else
+			if T.classic then
 				ToggleTalentFrame()
+			else
+				ShowUIPanel(PlayerTalentFrame)
 			end
 		else
 			if C.general.error_filter ~= "WHITELIST" then

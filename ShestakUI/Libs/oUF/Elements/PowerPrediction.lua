@@ -1,8 +1,6 @@
 local _, ns = ...
 local oUF = ns.oUF
 
-local UnitCastingInfo = UnitCastingInfo or CastingInfo
-
 -- sourced from FrameXML/AlternatePowerBar.lua
 local ADDITIONAL_POWER_BAR_INDEX = ADDITIONAL_POWER_BAR_INDEX or 0
 local ALT_MANA_BAR_PAIR_DISPLAY_INFO = ALT_MANA_BAR_PAIR_DISPLAY_INFO
@@ -30,8 +28,8 @@ local function Update(self, event, unit)
 	and ALT_MANA_BAR_PAIR_DISPLAY_INFO[playerClass][mainPowerType])
 	local mainCost, altCost = 0, 0
 
-	if(oUF:IsBCC()) then
-		spellID = notInterruptible -- there is no notInterruptible return in Burning Crusade Classic
+	if(oUF:IsClassic()) then
+		spellID = notInterruptible -- there is no notInterruptible return in Classic/BCC
 		notInterruptible = false
 	end
 

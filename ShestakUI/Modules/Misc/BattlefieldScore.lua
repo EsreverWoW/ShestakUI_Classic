@@ -20,10 +20,7 @@ BGFrame:SetScript("OnEnter", function(self)
 
 	for i = 1, GetNumBattlefieldScores() do
 		local name, honorableKills, deaths, damageDone, healingDone, rank
-		if T.classic and not T.BCC then
-			-- build 30786 changed returns, removing dmg/heals/spec and adding rank
-			name, _, honorableKills, deaths, _, _, rank = GetBattlefieldScore(i)
-		elseif T.BCC then
+		if T.classic then
 			name, _, honorableKills, deaths, _, _, _, _, _, _, damageDone, healingDone = GetBattlefieldScore(i)
 		else
 			name, _, honorableKills, deaths, _, _, _, _, _, damageDone, healingDone = GetBattlefieldScore(i)
@@ -37,12 +34,8 @@ BGFrame:SetScript("OnEnter", function(self)
 			GameTooltip:AddLine(" ")
 			GameTooltip:AddDoubleLine(HONORABLE_KILLS..":", honorableKills, 1, 1, 1)
 			GameTooltip:AddDoubleLine(DEATHS..":", deaths, 1, 1, 1)
-			if T.classic and not T.BCC then
-				GameTooltip:AddDoubleLine(RANK..":", rank, 1, 1, 1)
-			else
-				GameTooltip:AddDoubleLine(DAMAGE..":", T.ShortValue(damageDone), 1, 1, 1)
-				GameTooltip:AddDoubleLine(SHOW_COMBAT_HEALING..":", T.ShortValue(healingDone), 1, 1, 1)
-			end
+			GameTooltip:AddDoubleLine(DAMAGE..":", T.ShortValue(damageDone), 1, 1, 1)
+			GameTooltip:AddDoubleLine(SHOW_COMBAT_HEALING..":", T.ShortValue(healingDone), 1, 1, 1)
 
 			-- Add extra statistics depending on what BG you are
 			if T.classic then
@@ -123,7 +116,7 @@ local int = 2
 local function Update(_, t)
 	int = int - t
 	if int < 0 then
-		local dmgtxt, ranktxt
+		local dmgtxt
 		RequestBattlefieldScoreData()
 		for i = 1, GetNumBattlefieldScores() do
 			local name, killingBlows, honorableKills, honorGained, damageDone, healingDone, rank
@@ -133,16 +126,12 @@ local function Update(_, t)
 				name, killingBlows, honorableKills, _, honorGained, _, _, _, _, damageDone, healingDone = GetBattlefieldScore(i)
 			end
 			if name and name == T.name then
-				if T.classic and not T.BCC then
-					ranktxt = (classcolor..RANK.." :|r "..rank)
+				if healingDone > damageDone then
+					dmgtxt = (classcolor..SHOW_COMBAT_HEALING.." :|r "..T.ShortValue(healingDone))
 				else
-					if healingDone > damageDone then
-						dmgtxt = (classcolor..SHOW_COMBAT_HEALING.." :|r "..T.ShortValue(healingDone))
-					else
-						dmgtxt = (classcolor..DAMAGE.." :|r "..T.ShortValue(damageDone))
-					end
+					dmgtxt = (classcolor..DAMAGE.." :|r "..T.ShortValue(damageDone))
 				end
-				Text1:SetText((T.classic and not T.BCC) and ranktxt or dmgtxt)
+				Text1:SetText(dmgtxt)
 				Text2:SetText(classcolor..COMBAT_HONOR_GAIN.." :|r "..format("%d", honorGained))
 				Text3:SetText(classcolor..KILLING_BLOWS.." :|r "..killingBlows)
 				Text4:SetText(classcolor..HONORABLE_KILLS.." :|r "..honorableKills)

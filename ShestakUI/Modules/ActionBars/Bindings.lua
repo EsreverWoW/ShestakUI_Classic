@@ -252,11 +252,7 @@ SlashCmdList.MOUSEOVERBIND = function()
 		function bind:Deactivate(save)
 			local which = GetCurrentBindingSet()
 			if save then
-				if T.classic and not T.BCC then
-					AttemptToSaveBindings(which)
-				else
-					SaveBindings(which)
-				end
+				SaveBindings(which)
 				print("|cffffff00"..L_BIND_SAVED.."|r")
 			else
 				LoadBindings(which)

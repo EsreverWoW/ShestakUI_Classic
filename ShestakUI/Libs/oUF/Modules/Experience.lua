@@ -225,7 +225,7 @@ local function Enable(self, unit)
 		self:RegisterEvent('ENABLE_XP_GAIN', VisibilityPath, true)
 		self:RegisterEvent('UPDATE_EXPANSION_LEVEL', VisibilityPath, true)
 
-		if(oUF:IsBCC()) then
+		if(oUF:IsClassic()) then
 			self:RegisterEvent('PLAYER_MAX_LEVEL_UPDATE', VisibilityPath, true)
 		end
 
@@ -286,7 +286,7 @@ local function Disable(self)
 		self:UnregisterEvent('ENABLE_XP_GAIN', VisibilityPath)
 		self:UnregisterEvent('UPDATE_EXPANSION_LEVEL', VisibilityPath)
 
-		if(oUF:IsBCC()) then
+		if(oUF:IsClassic()) then
 			self:UnregisterEvent('PLAYER_MAX_LEVEL_UPDATE', VisibilityPath)
 		end
 

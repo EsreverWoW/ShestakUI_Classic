@@ -346,7 +346,7 @@ local OnTooltipSetUnit = function(self)
 			end
 		end
 
-		if T.classic and not T.BCC and guildName and C.tooltip.rank then -- Rank line needs to come later for Classic 1.13.* clients
+		if T.classic and not T.BCC and guildName and C.tooltip.rank then -- Rank line needs to come later for Classic 1.13.*/1.14.* clients
 			self:AddLine(RANK..": |cffffffff"..guildRank.."|r")
 		end
 	else

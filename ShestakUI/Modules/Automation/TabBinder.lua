@@ -65,11 +65,7 @@ TabBinder:SetScript("OnEvent", function(_, event, ...)
 					SetBinding(LastTargetKey, "TARGETPREVIOUSENEMYPLAYER")
 				end
 				if Success then
-					if T.classic and not T.BCC then
-						AttemptToSaveBindings(BindSet)
-					else
-						SaveBindings(BindSet)
-					end
+					SaveBindings(BindSet)
 					RTB_Fail = false
 				else
 					RTB_Fail = true
@@ -86,11 +82,7 @@ TabBinder:SetScript("OnEvent", function(_, event, ...)
 					SetBinding(LastTargetKey, "TARGETPREVIOUSENEMY")
 				end
 				if Success then
-					if T.classic and not T.BCC then
-						AttemptToSaveBindings(BindSet)
-					else
-						SaveBindings(BindSet)
-					end
+					SaveBindings(BindSet)
 					RTB_Fail = false
 				else
 					RTB_Fail = true

@@ -287,18 +287,10 @@ if clock.enabled then
 		OnEvent = function(self) if self.hovered then self:GetScript("OnEnter")(self) end end,
 		OnEnter = function(self)
 			if not self.hovered then RequestRaidInfo() self.hovered = true end
-			local currentCalendarTime, weekday, month, fullDate
-			if T.classic and not T.BCC then
-				currentCalendarTime = C_DateAndTime.GetTodaysDate()
-				weekday = CALENDAR_WEEKDAY_NAMES[currentCalendarTime.weekDay]
-				month = CALENDAR_MONTH_NAMES[currentCalendarTime.month]
-				fullDate = format(FULLDATE, weekday, month, currentCalendarTime.day, currentCalendarTime.year, currentCalendarTime.month)
-			else
-				currentCalendarTime = C_DateAndTime.GetCurrentCalendarTime()
-				weekday = CALENDAR_WEEKDAY_NAMES[currentCalendarTime.weekday]
-				month = CALENDAR_MONTH_NAMES[currentCalendarTime.month]
-				fullDate = format(FULLDATE, weekday, month, currentCalendarTime.monthDay, currentCalendarTime.year, currentCalendarTime.month)
-			end
+			local currentCalendarTime = C_DateAndTime.GetCurrentCalendarTime()
+			local weekday = CALENDAR_WEEKDAY_NAMES[currentCalendarTime.weekday]
+			local month = CALENDAR_MONTH_NAMES[currentCalendarTime.month]
+			local fullDate = format(FULLDATE, weekday, month, currentCalendarTime.monthDay, currentCalendarTime.year, currentCalendarTime.month)
 			GameTooltip:SetOwner(self, "ANCHOR_NONE")
 			GameTooltip:ClearAllPoints()
 			GameTooltip:SetPoint(clock.tip_anchor, clock.tip_frame, clock.tip_x, clock.tip_y)

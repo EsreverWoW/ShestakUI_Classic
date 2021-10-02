@@ -3,8 +3,8 @@ local oUF = ns.oUF
 
 local FALLBACK_ICON = 136243 -- Interface\ICONS\Trade_Engineering
 
-local UnitCastingInfo = UnitCastingInfo or CastingInfo
-local UnitChannelInfo = UnitChannelInfo or ChannelInfo
+local UnitCastingInfo = UnitCastingInfo
+local UnitChannelInfo = UnitChannelInfo
 local EventFunctions = {}
 
 local LibClassicCasterino = (oUF:IsClassic() and not oUF:IsBCC()) and LibStub('LibClassicCasterino', true)
@@ -50,8 +50,8 @@ local function CastStart(self, event, unit)
 		event = 'UNIT_SPELLCAST_CHANNEL_START'
 	end
 
-	if(oUF:IsBCC()) then
-		spellID = notInterruptible -- there is no notInterruptible return in Burning Crusade Classic
+	if(oUF:IsClassic()) then
+		spellID = notInterruptible -- there is no notInterruptible return in Classic/BCC
 		notInterruptible = false
 	end
 
