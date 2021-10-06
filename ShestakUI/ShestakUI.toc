@@ -1,5 +1,5 @@
-## Interface: 11307
-## Interface-Classic: 11307
+## Interface: 11400
+## Interface-Classic: 11400
 ## Interface-BCC: 20502
 ## Title: ShestakUI (Classic)
 ## Notes: A total UI overhaul for World of Warcraft
