@@ -21,7 +21,7 @@ local function LoadSkin()
 	GuildBankInfoSaveButton:SkinButton(true)
 	GuildBankFrame.BuyInfo.PurchaseButton:SkinButton(true)
 
-	GuildBankFrame.WithdrawButton:SetPoint("RIGHT", GuildBankFrameDepositButton, "LEFT", -2, 0)
+	GuildBankFrame.WithdrawButton:SetPoint("RIGHT", GuildBankFrame.DepositButton, "LEFT", -2, 0)
 
 	GuildBankInfoScrollFrame:StripTextures()
 	GuildBankTransactionsScrollFrame:StripTextures()
