@@ -61,7 +61,7 @@ local isCaster = {
 function T.GetSpecializationRole()
 	local tree = T.GetSpecialization()
 	-- eventually check for tank stats in case a tanking in a non-traditional spec (mostly for warriors)
-	if (T.class == "PALADIN" and tree == 2) or (T.class == "WARRIOR" and tree == 3) or (T.class == "DRUID" and tree == 2 and GetBonusBarOffset() == 3) then
+	if (T.class == "PALADIN" and tree == 2) or (T.class == "WARRIOR" and (tree == 3 or GetBonusBarOffset() == 2)) or (T.class == "DRUID" and tree == 2 and GetBonusBarOffset() == 3) then
 		return "TANK"
 	elseif (T.class == "PALADIN" and tree == 1) or (T.class == "DRUID" and tree == 3) or (T.class == "SHAMAN" and tree == 3) or (T.class == "PRIEST" and tree ~= 3) then
 		return "HEALER"
