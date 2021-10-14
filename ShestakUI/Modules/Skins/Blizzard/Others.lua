@@ -138,6 +138,10 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 		-- Reskin Dropdown menu
 		hooksecurefunc("UIDropDownMenu_InitializeHelper", function()
 			for i = 1, UIDROPDOWNMENU_MAXLEVELS do
+				if _G["DropDownList"..i.."MenuBackdrop"].NineSlice then
+					_G["DropDownList"..i.."MenuBackdrop"].NineSlice:SetAlpha(0)
+				end
+
 				if not T.classic then
 					_G["DropDownList"..i]["Border"]:StripTextures()
 				end

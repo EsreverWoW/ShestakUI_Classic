@@ -38,10 +38,14 @@ local CreateTip = function(link)
 	tip:SetScript("OnDragStart", function(self) self:StartMoving() end)
 	tip:SetScript("OnDragStop", function(self) self:StopMovingOrSizing() end)
 
-	tip:SetBackdrop(nil)
-	tip.SetBackdrop = T.dummy
-	if tip.BackdropFrame then
-		tip.BackdropFrame:SetBackdrop(nil)
+	if tip.SetBackdrop then
+		tip:SetBackdrop(nil)
+		tip.SetBackdrop = T.dummy
+		if tip.BackdropFrame then
+			tip.BackdropFrame:SetBackdrop(nil)
+		end
+	else
+		tip.NineSlice:SetAlpha(0)
 	end
 	local bg = CreateFrame("Frame", nil, tip)
 	bg:SetPoint("TOPLEFT")
