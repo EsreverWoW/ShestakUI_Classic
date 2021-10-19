@@ -86,6 +86,9 @@ end
 
 -- Hide world map button
 MiniMapWorldMapButton:Hide()
+if T.classic and not T.BCC then
+	MiniMapWorldMapButton.Show = T.dummy
+end
 
 -- Garrison icon
 if not T.classic then
