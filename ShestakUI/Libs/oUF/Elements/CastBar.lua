@@ -50,8 +50,8 @@ local function CastStart(self, event, unit)
 		event = 'UNIT_SPELLCAST_CHANNEL_START'
 	end
 
-	if(oUF:IsClassic()) then
-		spellID = notInterruptible -- there is no notInterruptible return in Classic/BCC
+	if(not spellID and type(notInterruptible) == "number") then
+		spellID = notInterruptible -- there is no notInterruptible return in some builds of Classic/BCC
 		notInterruptible = false
 	end
 

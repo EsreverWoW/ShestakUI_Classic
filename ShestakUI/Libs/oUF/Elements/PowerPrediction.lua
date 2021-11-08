@@ -28,7 +28,7 @@ local function Update(self, event, unit)
 	and ALT_MANA_BAR_PAIR_DISPLAY_INFO[playerClass][mainPowerType])
 	local mainCost, altCost = 0, 0
 
-	if(oUF:IsClassic()) then
+	if(not spellID and type(notInterruptible) == "number") then
 		spellID = notInterruptible -- there is no notInterruptible return in Classic/BCC
 		notInterruptible = false
 	end
