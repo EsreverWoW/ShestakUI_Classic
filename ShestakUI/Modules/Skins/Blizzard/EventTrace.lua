@@ -17,7 +17,7 @@ local function LoadSkin()
 	EventTrace.Log.Events.ScrollBar.Background:Hide()
 
 	EventTraceTooltip:HookScript("OnShow", function(self)
-		if T.newPatch then -- TODO: detete in new patch
+		if self.NineSlice then
 			self.NineSlice:SetTemplate("Transparent")
 		else
 			self:SetTemplate("Transparent")

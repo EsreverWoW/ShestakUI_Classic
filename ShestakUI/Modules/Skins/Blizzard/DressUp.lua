@@ -22,7 +22,7 @@ local function LoadSkin()
 	DressUpFrameResetButton:SetPoint("RIGHT", DressUpFrameCancelButton, "LEFT", -2, 0)
 	DressUpFrameUndressButton:SkinButton()
 
-	if T.newPatch then
+	if not T.classic then
 		local button = DressUpFrame.ToggleOutfitDetailsButton
 		button:SetNormalTexture(134331)
 		button:SetPushedTexture(134331)

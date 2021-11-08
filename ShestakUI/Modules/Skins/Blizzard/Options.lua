@@ -164,6 +164,7 @@ local function LoadSkin()
 		"Advanced_GammaSlider",
 		"Advanced_ContrastSlider",
 		"Advanced_BrightnessSlider",
+		"Advanced_ResampleSharpnessSlider",
 		"AudioOptionsSoundPanelMasterVolume",
 		"AudioOptionsSoundPanelSoundVolume",
 		"AudioOptionsSoundPanelMusicVolume",
@@ -186,10 +187,6 @@ local function LoadSkin()
 			T.SkinSlider(slider)
 			slider:SetFrameLevel(slider:GetFrameLevel() + 2)
 		end
-	end
-
-	if T.newPatch then
-		T.SkinSlider(Advanced_ResampleSharpnessSlider)
 	end
 
 	_G["Graphics_Quality"].SetBackdrop = T.dummy

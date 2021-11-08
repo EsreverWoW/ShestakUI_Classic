@@ -47,8 +47,6 @@ local function LoadSkin()
 				tex:SetColorTexture(0.6, 0.6, 0.6, 0.75)
 			end
 		end)
-	else
-		-- FIXME
 	end
 end
 
