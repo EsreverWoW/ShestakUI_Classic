@@ -115,7 +115,7 @@ GetAverageItemLevel = _G.GetAverageItemLevel or function()
 		slot = GetInventoryItemLink("player", GetInventorySlotInfo(slotName[i]))
 		if slot then
 			itn = itn + 1
-			level = select(4, GetItemInfo(slot))
+			level = select(4, GetItemInfo(slot)) or 0
 			total = total + level
 		end
 	end
