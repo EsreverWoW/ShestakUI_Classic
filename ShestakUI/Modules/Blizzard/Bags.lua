@@ -495,9 +495,7 @@ function Stuffing:CreateReagentContainer()
 			NumButtons = NumButtons + 1
 		end
 
-		icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-		icon:SetPoint("TOPLEFT", 2, -2)
-		icon:SetPoint("BOTTOMRIGHT", -2, 2)
+		icon:CropIcon()
 
 		count:SetFont(C.font.bags_font, C.font.bags_font_size, C.font.bags_font_style)
 		count:SetShadowOffset(C.font.bags_font_shadow and 1 or 0, C.font.bags_font_shadow and -1 or 0)
@@ -586,9 +584,7 @@ function Stuffing:BagFrameSlotNew(p, slot)
 	end
 
 	ret.icon = _G[ret.frame:GetName().."IconTexture"]
-	ret.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-	ret.icon:SetPoint("TOPLEFT", ret.frame, 2, -2)
-	ret.icon:SetPoint("BOTTOMRIGHT", ret.frame, -2, 2)
+	ret.icon:CropIcon()
 
 	return ret
 end
@@ -639,9 +635,7 @@ function Stuffing:SlotNew(bag, slot)
 		ret.frame:SetNormalTexture(nil)
 
 		ret.icon = _G[ret.frame:GetName().."IconTexture"]
-		ret.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-		ret.icon:SetPoint("TOPLEFT", ret.frame, 2, -2)
-		ret.icon:SetPoint("BOTTOMRIGHT", ret.frame, -2, 2)
+		ret.icon:CropIcon()
 
 		ret.count = _G[ret.frame:GetName().."Count"]
 		ret.count:SetFont(C.font.bags_font, C.font.bags_font_size, C.font.bags_font_style)
@@ -853,14 +847,19 @@ function Stuffing:CreateBagFrame(w)
 		if IsAltKeyDown() or IsShiftKeyDown() then
 			self:StartMoving()
 			DragFunction(self, true)
+			f.moved = true
 		end
 	end)
 
 	f:SetScript("OnDragStop", function(self)
-		self:StopMovingOrSizing()
-		DragFunction(self, false)
-		local ap, _, rp, x, y = f:GetPoint()
-		ShestakUIPositions[f:GetName()] = {ap, "UIParent", rp, x, y}
+		if f.moved then	-- prevent false register without modifier key
+			self:StopMovingOrSizing()
+			DragFunction(self, false)
+			local ap, p, rp, x, y = f:GetPoint()
+			if not p then p = UIParent end
+			ShestakUIPositions[f:GetName()] = {ap, p:GetName(), rp, x, y}
+			f.moved = nil
+		end
 	end)
 
 	f:SetScript("OnMouseDown", function(_, button)

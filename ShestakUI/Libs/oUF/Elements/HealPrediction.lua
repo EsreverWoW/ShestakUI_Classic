@@ -17,7 +17,7 @@ if(oUF:IsClassic()) then
 	end
 end
 
-local function UpdateFillBar(frame, previousTexture, bar, amount, maxHealth)
+local function UpdateFillBar(frame, previousTexture, bar, amount, maxHealth, reverse)
 	if amount == 0 then
 		bar:Hide()
 		return previousTexture
@@ -25,13 +25,22 @@ local function UpdateFillBar(frame, previousTexture, bar, amount, maxHealth)
 
 	local totalWidth, totalHeight = frame.Health:GetSize()
 	if frame.Health:GetOrientation() == "VERTICAL" then
-		bar:SetPoint("BOTTOM", previousTexture, "TOP", 0, 0)
+		if reverse then
+			bar:SetPoint("TOP", previousTexture, "TOP", 0, 0)
+		else
+			bar:SetPoint("BOTTOM", previousTexture, "TOP", 0, 0)
+		end
 
 		local barSize = (amount / maxHealth) * totalHeight
 		bar:SetHeight(barSize)
 	else
-		bar:SetPoint('TOPLEFT', previousTexture, 'TOPRIGHT', 0, 0)
-		bar:SetPoint('BOTTOMLEFT', previousTexture, 'BOTTOMRIGHT', 0, 0)
+		if reverse then
+			bar:SetPoint("TOPRIGHT", previousTexture, "TOPRIGHT", 0, 0)
+			bar:SetPoint("BOTTOMRIGHT", previousTexture, "BOTTOMRIGHT", 0, 0)
+		else
+			bar:SetPoint("TOPLEFT", previousTexture, "TOPRIGHT", 0, 0)
+			bar:SetPoint("BOTTOMLEFT", previousTexture, "BOTTOMRIGHT", 0, 0)
+		end
 
 		local barSize = (amount / maxHealth) * totalWidth
 		bar:SetWidth(barSize)
@@ -56,6 +65,7 @@ local function Update(self, event, unit)
 	local healAbsorb = UnitGetTotalHealAbsorbs(unit) or 0
 	local otherIncomingHeal = 0
 	local health, maxHealth = UnitHealth(unit), UnitHealthMax(unit)
+	local overAbsorb = 0
 
 	if healAbsorb > allIncomingHeal then
 		healAbsorb = healAbsorb - allIncomingHeal
@@ -82,7 +92,9 @@ local function Update(self, event, unit)
 		end
 
 		if health + myIncomingHeal + allIncomingHeal + absorb >= maxHealth then
+			overAbsorb = min(maxHealth, absorb)
 			absorb = max(0, maxHealth - (health + myIncomingHeal + allIncomingHeal))
+			overAbsorb = overAbsorb - absorb
 		end
 	end
 
@@ -102,6 +114,10 @@ local function Update(self, event, unit)
 
 	if element.absorbBar then
 		previousTexture = UpdateFillBar(self, previousTexture, element.absorbBar, absorb, maxHealth)
+	end
+
+	if element.overAbsorb then
+		previousTexture = UpdateFillBar(self, self.Health, element.overAbsorb, overAbsorb, maxHealth, true)
 	end
 
 	if(element.PostUpdate) then

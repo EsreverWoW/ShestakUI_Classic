@@ -288,9 +288,7 @@ SpellList.makeSpellsList = function(_, db, double)
 				bf.tex:SetSize(22, 22)
 				bf.tex:SetPoint("LEFT")
 				bf.tex:SetTexture(icon)
-				if IsAddOnLoaded("Aurora") or C.skins.blizzard_frames == true then
-					bf.tex:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-				end
+				bf.tex:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 
 				bf.delete = bf.delete or CreateFrame("Button", "SpellList"..i.."_delete", bf)
 				bf.delete:SetSize(16, 16)
@@ -965,174 +963,96 @@ end
 
 -- Skins
 do
+	local parent = ShestakUIOptionsPanel.skins
+
+	local blizzard_frames = ns.CreateCheckBox(parent, "blizzard_frames", L_GUI_SKINS_BLIZZARD)
+	blizzard_frames:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
+
+	local bubbles = ns.CreateCheckBox(parent, "bubbles", L_GUI_CHAT_SKIN_BUBBLE)
+	bubbles:SetPoint("TOPLEFT", blizzard_frames, "BOTTOMLEFT", 0, 0)
+
+	local minimap_buttons = ns.CreateCheckBox(parent, "minimap_buttons", L_GUI_SKINS_MINIMAP_BUTTONS)
+	minimap_buttons:SetPoint("TOPLEFT", bubbles, "BOTTOMLEFT", 0, 0)
+
+	local minimap_buttons_mouseover = ns.CreateCheckBox(parent, "minimap_buttons_mouseover")
+	minimap_buttons_mouseover:SetPoint("TOPLEFT", minimap_buttons, "BOTTOMLEFT", 20, 0)
+
+	-- Addons
+	local subheader = ns.addSubCategory(parent, L_GUI_SKINS_SUBHEADER)
+	subheader:SetPoint("TOPLEFT", minimap_buttons_mouseover, "BOTTOMLEFT", -20, -16)
+
+	local ace3 = ns.CreateCheckBox(parent, "ace3")
+	ace3:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -8)
+
+	local skinTable
 	if IsClassicBuild() then
-		local parent = ShestakUIOptionsPanel.skins
-
-		local blizzard_frames = ns.CreateCheckBox(parent, "blizzard_frames", L_GUI_SKINS_BLIZZARD)
-		blizzard_frames:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
-
-		local bubbles = ns.CreateCheckBox(parent, "bubbles", L_GUI_CHAT_SKIN_BUBBLE)
-		bubbles:SetPoint("TOPLEFT", blizzard_frames, "BOTTOMLEFT", 0, 0)
-
-		local minimap_buttons = ns.CreateCheckBox(parent, "minimap_buttons", L_GUI_SKINS_MINIMAP_BUTTONS)
-		minimap_buttons:SetPoint("TOPLEFT", bubbles, "BOTTOMLEFT", 0, 0)
-
-		local minimap_buttons_mouseover = ns.CreateCheckBox(parent, "minimap_buttons_mouseover")
-		minimap_buttons_mouseover:SetPoint("TOPLEFT", minimap_buttons, "BOTTOMLEFT", 20, 0)
-
-		-- Addons
-		local subheader = ns.addSubCategory(parent, L_GUI_SKINS_SUBHEADER)
-		subheader:SetPoint("TOPLEFT", minimap_buttons_mouseover, "BOTTOMLEFT", -20, -16)
-
-		local ace3 = ns.CreateCheckBox(parent, "ace3", L_GUI_SKINS_ACE3)
-		ace3:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -8)
-
-		local atlasloot = ns.CreateCheckBox(parent, "atlasloot", L_GUI_SKINS_ATLASLOOT)
-		atlasloot:SetPoint("LEFT", ace3, "RIGHT", 320, 0)
-
-		local bigwigs = ns.CreateCheckBox(parent, "bigwigs", L_GUI_SKINS_BW)
-		bigwigs:SetPoint("TOPLEFT", ace3, "BOTTOMLEFT", 0, 0)
-
-		local capping = ns.CreateCheckBox(parent, "capping", L_GUI_SKINS_CAPPING)
-		capping:SetPoint("LEFT", bigwigs, "RIGHT", 320, 0)
-
-		local clique = ns.CreateCheckBox(parent, "clique", L_GUI_SKINS_CLIQUE)
-		clique:SetPoint("TOPLEFT", bigwigs, "BOTTOMLEFT", 0, 0)
-
-		local cool_line = ns.CreateCheckBox(parent, "cool_line", L_GUI_SKINS_COOL_LINE)
-		cool_line:SetPoint("LEFT", clique, "RIGHT", 320, 0)
-
-		local dbm = ns.CreateCheckBox(parent, "dbm", L_GUI_SKINS_DBM)
-		dbm:SetPoint("TOPLEFT", clique, "BOTTOMLEFT", 0, 0)
-
-		local details = ns.CreateCheckBox(parent, "details", L_GUI_SKINS_DETAILS)
-		details:SetPoint("LEFT", dbm, "RIGHT", 320, 0)
-
-		local dominos = ns.CreateCheckBox(parent, "dominos", L_GUI_SKINS_DOMINOS)
-		dominos:SetPoint("TOPLEFT", dbm, "BOTTOMLEFT", 0, 0)
-
-		local ls_toasts = ns.CreateCheckBox(parent, "ls_toasts", L_GUI_SKINS_LS_TOASTS)
-		ls_toasts:SetPoint("LEFT", dominos, "RIGHT", 320, 0)
-
-		local omen = ns.CreateCheckBox(parent, "omen", L_GUI_SKINS_OMEN)
-		omen:SetPoint("TOPLEFT", dominos, "BOTTOMLEFT", 0, 0)
-
-		local opie = ns.CreateCheckBox(parent, "opie", L_GUI_SKINS_OPIE)
-		opie:SetPoint("LEFT", omen, "RIGHT", 320, 0)
-
-		local postal = ns.CreateCheckBox(parent, "postal", L_GUI_SKINS_POSTAL)
-		postal:SetPoint("TOPLEFT", omen, "BOTTOMLEFT", 0, 0)
-
-		local recount = ns.CreateCheckBox(parent, "recount", L_GUI_SKINS_RECOUNT)
-		recount:SetPoint("LEFT", postal, "RIGHT", 320, 0)
-
-		local skada = ns.CreateCheckBox(parent, "skada", L_GUI_SKINS_SKADA)
-		skada:SetPoint("TOPLEFT", postal, "BOTTOMLEFT", 0, 0)
-
-		local vanaskos = ns.CreateCheckBox(parent, "vanaskos", L_GUI_SKINS_VANASKOS)
-		vanaskos:SetPoint("LEFT", skada, "RIGHT", 320, 0)
-
-		local weak_auras = ns.CreateCheckBox(parent, "weak_auras", L_GUI_SKINS_WEAK_AURAS)
-		weak_auras:SetPoint("TOPLEFT", skada, "BOTTOMLEFT", 0, 0)
-
-		-- Versions of MyRolePlay and NugRunning exist for Classic, but the skins
-		-- presently need some work before being reintroduced.
+		skinTable = {
+			{"atlasloot"},
+			{"bigwigs"},
+			{"capping"},
+			{"clique"},
+			{"cool_line"},
+			{"dbm"},
+			{"details"},
+			{"dominos"},
+			{"ls_toasts"},
+			-- {"my_role_play"}, -- needs work
+			{"npcscan"},
+			-- {"nug_running"}, -- needs work
+			{"omen"},
+			{"opie"},
+			{"postal"},
+			{"recount"},
+			{"skada"},
+			{"vanaskos"},
+			{"weak_auras"},
+		}
 	else
-		local parent = ShestakUIOptionsPanel.skins
+		skinTable = {
+			{"atlasloot"},
+			{"bigwigs"},
+			{"blood_shield_tracker"},
+			{"capping"},
+			{"clique"},
+			{"cool_line"},
+			{"dbm"},
+			{"details"},
+			{"dominos"},
+			{"flyout_button"},
+			{"ls_toasts"},
+			{"mage_nuggets"},
+			{"my_role_play"},
+			{"npcscan"},
+			{"nug_running"},
+			{"omen"},
+			{"opie"},
+			{"ovale"},
+			{"postal"},
+			{"recount"},
+			{"rematch"},
+			{"skada"},
+			{"tiny_dps"},
+			{"vanaskos"},
+			{"weak_auras"},
+		}
+	end
 
-		local blizzard_frames = ns.CreateCheckBox(parent, "blizzard_frames", L_GUI_SKINS_BLIZZARD)
-		blizzard_frames:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
-
-		local bubbles = ns.CreateCheckBox(parent, "bubbles", L_GUI_CHAT_SKIN_BUBBLE)
-		bubbles:SetPoint("TOPLEFT", blizzard_frames, "BOTTOMLEFT", 0, 0)
-
-		local minimap_buttons = ns.CreateCheckBox(parent, "minimap_buttons", L_GUI_SKINS_MINIMAP_BUTTONS)
-		minimap_buttons:SetPoint("TOPLEFT", bubbles, "BOTTOMLEFT", 0, 0)
-
-		local minimap_buttons_mouseover = ns.CreateCheckBox(parent, "minimap_buttons_mouseover")
-		minimap_buttons_mouseover:SetPoint("TOPLEFT", minimap_buttons, "BOTTOMLEFT", 20, 0)
-
-		-- Addons
-		local subheader = ns.addSubCategory(parent, L_GUI_SKINS_SUBHEADER)
-		subheader:SetPoint("TOPLEFT", minimap_buttons_mouseover, "BOTTOMLEFT", -20, -16)
-
-		local ace3 = ns.CreateCheckBox(parent, "ace3", L_GUI_SKINS_ACE3)
-		ace3:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -8)
-
-		local atlasloot = ns.CreateCheckBox(parent, "atlasloot", L_GUI_SKINS_ATLASLOOT)
-		atlasloot:SetPoint("TOPLEFT", ace3, "BOTTOMLEFT", 0, 0)
-
-		local bigwigs = ns.CreateCheckBox(parent, "bigwigs", L_GUI_SKINS_BW)
-		bigwigs:SetPoint("LEFT", atlasloot, "RIGHT", 320, 0)
-
-		local blood_shield_tracker = ns.CreateCheckBox(parent, "blood_shield_tracker", L_GUI_SKINS_BLOOD_SHIELD_TRACKER)
-		blood_shield_tracker:SetPoint("TOPLEFT", atlasloot, "BOTTOMLEFT", 0, 0)
-
-		local capping = ns.CreateCheckBox(parent, "capping", L_GUI_SKINS_CAPPING)
-		capping:SetPoint("LEFT", blood_shield_tracker, "RIGHT", 320, 0)
-
-		local clique = ns.CreateCheckBox(parent, "clique", L_GUI_SKINS_CLIQUE)
-		clique:SetPoint("TOPLEFT", blood_shield_tracker, "BOTTOMLEFT", 0, 0)
-
-		local cool_line = ns.CreateCheckBox(parent, "cool_line", L_GUI_SKINS_COOL_LINE)
-		cool_line:SetPoint("LEFT", clique, "RIGHT", 320, 0)
-
-		local dbm = ns.CreateCheckBox(parent, "dbm", L_GUI_SKINS_DBM)
-		dbm:SetPoint("TOPLEFT", clique, "BOTTOMLEFT", 0, 0)
-
-		local details = ns.CreateCheckBox(parent, "details", L_GUI_SKINS_DETAILS)
-		details:SetPoint("TOPLEFT", dbm, "BOTTOMLEFT", -20, 0)
-
-		local dominos = ns.CreateCheckBox(parent, "dominos", L_GUI_SKINS_DOMINOS)
-		dominos:SetPoint("LEFT", details, "RIGHT", 320, 0)
-
-		local flyout_button = ns.CreateCheckBox(parent, "flyout_button", L_GUI_SKINS_FLYOUT_BUTTON)
-		flyout_button:SetPoint("TOPLEFT", details, "BOTTOMLEFT", 0, 0)
-
-		local ls_toasts = ns.CreateCheckBox(parent, "ls_toasts", L_GUI_SKINS_LS_TOASTS)
-		ls_toasts:SetPoint("LEFT", flyout_button, "RIGHT", 320, 0)
-
-		local mage_nuggets = ns.CreateCheckBox(parent, "mage_nuggets", L_GUI_SKINS_MAGE_NUGGETS)
-		mage_nuggets:SetPoint("TOPLEFT", flyout_button, "BOTTOMLEFT", 0, 0)
-
-		local my_role_play = ns.CreateCheckBox(parent, "my_role_play", L_GUI_SKINS_MY_ROLE_PLAY)
-		my_role_play:SetPoint("LEFT", mage_nuggets, "RIGHT", 320, 0)
-
-		local npcscan = ns.CreateCheckBox(parent, "npcscan", L_GUI_SKINS_NPCSCAN)
-		npcscan:SetPoint("TOPLEFT", mage_nuggets, "BOTTOMLEFT", 0, 0)
-
-		local nug_running = ns.CreateCheckBox(parent, "nug_running", L_GUI_SKINS_NUG_RUNNING)
-		nug_running:SetPoint("LEFT", npcscan, "RIGHT", 320, 0)
-
-		local omen = ns.CreateCheckBox(parent, "omen", L_GUI_SKINS_OMEN)
-		omen:SetPoint("TOPLEFT", npcscan, "BOTTOMLEFT", 0, 0)
-
-		local opie = ns.CreateCheckBox(parent, "opie", L_GUI_SKINS_OPIE)
-		opie:SetPoint("LEFT", omen, "RIGHT", 320, 0)
-
-		local ovale = ns.CreateCheckBox(parent, "ovale", L_GUI_SKINS_OVALE)
-		ovale:SetPoint("TOPLEFT", omen, "BOTTOMLEFT", 0, 0)
-
-		local postal = ns.CreateCheckBox(parent, "postal", L_GUI_SKINS_POSTAL)
-		postal:SetPoint("LEFT", ovale, "RIGHT", 320, 0)
-
-		local recount = ns.CreateCheckBox(parent, "recount", L_GUI_SKINS_RECOUNT)
-		recount:SetPoint("TOPLEFT", ovale, "BOTTOMLEFT", 0, 0)
-
-		local rematch = ns.CreateCheckBox(parent, "rematch", L_GUI_SKINS_REMATCH)
-		rematch:SetPoint("LEFT", recount, "RIGHT", 320, 0)
-
-		local skada = ns.CreateCheckBox(parent, "skada", L_GUI_SKINS_SKADA)
-		skada:SetPoint("TOPLEFT", recount, "BOTTOMLEFT", 0, 0)
-
-		local tiny_dps = ns.CreateCheckBox(parent, "tiny_dps", L_GUI_SKINS_TINY_DPS)
-		tiny_dps:SetPoint("LEFT", skada, "RIGHT", 320, 0)
-
-		local vanaskos = ns.CreateCheckBox(parent, "vanaskos", L_GUI_SKINS_VANASKOS)
-		vanaskos:SetPoint("TOPLEFT", skada, "BOTTOMLEFT", 0, 0)
-
-		local weak_auras = ns.CreateCheckBox(parent, "weak_auras", L_GUI_SKINS_WEAK_AURAS)
-		weak_auras:SetPoint("LEFT", vanaskos, "RIGHT", 320, 0)
+	local last
+	for i = 1, #skinTable do
+		local name = tostring(unpack(skinTable[i]))
+		local addon
+		if i == 1 then
+			addon = ns.CreateCheckBox(parent, name)
+			addon:SetPoint("LEFT", ace3, "RIGHT", 320, 0)
+			last = ace3
+		elseif i % 2 == 0 then
+			addon = ns.CreateCheckBox(parent, name)
+			addon:SetPoint("TOPLEFT", last, "BOTTOMLEFT", 0, 0)
+			last = addon
+		else
+			addon = ns.CreateCheckBox(parent, name)
+			addon:SetPoint("LEFT", last, "RIGHT", 320, 0)
+		end
 	end
 end
 
@@ -1213,12 +1133,6 @@ do
 
 	local arena_on_right = ns.CreateCheckBox(parent, "arena_on_right", L_GUI_UF_ARENA_RIGHT)
 	arena_on_right:SetPoint("LEFT", show_arena, "RIGHT", 248, 0)
-
-	local boss_debuffs = ns.CreateNumberSlider(parent, "boss_debuffs", nil, nil, 0, 5, 1, true, L_GUI_UF_BOSS_DEBUFFS, L_GUI_UF_BOSS_DEBUFFS_DESC)
-	boss_debuffs:SetPoint("TOPLEFT", show_arena, "BOTTOMLEFT", 0, -20)
-
-	local boss_buffs = ns.CreateNumberSlider(parent, "boss_buffs", nil, nil, 0, 3, 1, true, L_GUI_UF_BOSS_BUFFS, L_GUI_UF_BOSS_BUFFS_DESC)
-	boss_buffs:SetPoint("LEFT", boss_debuffs, "RIGHT", 120, 0)
 
 	-- Panel 2
 	local parent = ShestakUIOptionsPanel.unitframe2
@@ -1624,38 +1538,46 @@ end
 do
 	local parent = ShestakUIOptionsPanel.aura
 
-	local player_buff_size = ns.CreateNumberSlider(parent, "player_buff_size", nil, nil, 0, 50, 1, true, L_GUI_AURA_PLAYER_BUFF_SIZE, L_GUI_AURA_PLAYER_BUFF_SIZE_DESC)
-	player_buff_size:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, -20)
-
-	local player_debuff_size = ns.CreateNumberSlider(parent, "player_debuff_size", nil, nil, 0, 50, 1, true)
-	player_debuff_size:SetPoint("LEFT", player_buff_size, "RIGHT", 120, 0)
-
 	local show_spiral = ns.CreateCheckBox(parent, "show_spiral", L_GUI_AURA_SHOW_SPIRAL)
-	show_spiral:SetPoint("TOPLEFT", player_buff_size, "BOTTOMLEFT", 0, -10)
+	show_spiral:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
 
 	local show_timer = ns.CreateCheckBox(parent, "show_timer", L_GUI_AURA_SHOW_TIMER)
 	show_timer:SetPoint("TOPLEFT", show_spiral, "BOTTOMLEFT", 0, 0)
 
+	local cast_by = ns.CreateCheckBox(parent, "cast_by", L_GUI_AURA_CAST_BY)
+	cast_by:SetPoint("TOPLEFT", show_timer, "BOTTOMLEFT", 0, 0)
+
+	-- Buffs
+	local subheader = ns.addSubCategory(parent, L.aura_subheader_buffs)
+	subheader:SetPoint("TOPLEFT", cast_by, "BOTTOMLEFT", 0, -10)
+
 	local player_auras = ns.CreateCheckBox(parent, "player_auras", L_GUI_AURA_PLAYER_AURAS)
-	player_auras:SetPoint("TOPLEFT", show_timer, "BOTTOMLEFT", 0, 0)
+	player_auras:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -10)
+
+	local classcolor_border = ns.CreateCheckBox(parent, "classcolor_border", L_GUI_AURA_CLASSCOLOR_BORDER)
+	classcolor_border:SetPoint("TOPLEFT", player_auras, "BOTTOMLEFT", 0, 0)
+
+	local player_buff_size = ns.CreateNumberSlider(parent, "player_buff_size", nil, nil, 0, 50, 1, true, L_GUI_AURA_PLAYER_BUFF_SIZE, L_GUI_AURA_PLAYER_BUFF_SIZE_DESC)
+	player_buff_size:SetPoint("TOPLEFT", classcolor_border, "BOTTOMLEFT", 0, -20)
+
+	-- Debuffs
+	local subheader = ns.addSubCategory(parent, L.aura_subheader_debuffs)
+	subheader:SetPoint("TOPLEFT", player_buff_size, "BOTTOMLEFT", 0, -10)
 
 	local target_auras = ns.CreateCheckBox(parent, "target_auras", L_GUI_AURA_TARGET_AURAS)
-	target_auras:SetPoint("TOPLEFT", player_auras, "BOTTOMLEFT", 0, 0)
+	target_auras:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -10)
+
+	local tot_debuffs = ns.CreateCheckBox(parent, "tot_debuffs", L_GUI_AURA_TOT_DEBUFFS)
+	tot_debuffs:SetPoint("LEFT", target_auras, "RIGHT", 320, 0)
 
 	local focus_debuffs = ns.CreateCheckBox(parent, "focus_debuffs", L_GUI_AURA_FOCUS_DEBUFFS)
 	focus_debuffs:SetPoint("TOPLEFT", target_auras, "BOTTOMLEFT", 0, 0)
 
 	local fot_debuffs = ns.CreateCheckBox(parent, "fot_debuffs", L_GUI_AURA_FOT_DEBUFFS)
-	fot_debuffs:SetPoint("TOPLEFT", focus_debuffs, "BOTTOMLEFT", 0, 0)
+	fot_debuffs:SetPoint("LEFT", focus_debuffs, "RIGHT", 320, 0)
 
 	local pet_debuffs = ns.CreateCheckBox(parent, "pet_debuffs", L_GUI_AURA_PET_DEBUFFS)
-	pet_debuffs:SetPoint("TOPLEFT", fot_debuffs, "BOTTOMLEFT", 0, 0)
-
-	local tot_debuffs = ns.CreateCheckBox(parent, "tot_debuffs", L_GUI_AURA_TOT_DEBUFFS)
-	tot_debuffs:SetPoint("TOPLEFT", pet_debuffs, "BOTTOMLEFT", 0, 0)
-
-	local boss_buffs = ns.CreateCheckBox(parent, "boss_buffs")
-	boss_buffs:SetPoint("TOPLEFT", tot_debuffs, "BOTTOMLEFT", 0, 0)
+	pet_debuffs:SetPoint("TOPLEFT", focus_debuffs, "BOTTOMLEFT", 0, 0)
 
 	local player_aura_only = ns.CreateCheckBox(parent, "player_aura_only", L_GUI_AURA_PLAYER_AURA_ONLY)
 	player_aura_only:SetPoint("TOPLEFT", boss_buffs, "BOTTOMLEFT", 0, 0)
@@ -1663,11 +1585,21 @@ do
 	local debuff_color_type = ns.CreateCheckBox(parent, "debuff_color_type", L_GUI_AURA_DEBUFF_COLOR_TYPE)
 	debuff_color_type:SetPoint("TOPLEFT", player_aura_only, "BOTTOMLEFT", 0, 0)
 
-	local classcolor_border = ns.CreateCheckBox(parent, "classcolor_border", L_GUI_AURA_CLASSCOLOR_BORDER)
-	classcolor_border:SetPoint("TOPLEFT", debuff_color_type, "BOTTOMLEFT", 0, 0)
+	local debuff_size = ns.CreateNumberSlider(parent, "debuff_size", nil, nil, 0, 50, 1, true)
+	debuff_size:SetPoint("TOPLEFT", debuff_color_type, "BOTTOMLEFT", 0, -20)
 
-	local cast_by = ns.CreateCheckBox(parent, "cast_by", L_GUI_AURA_CAST_BY)
-	cast_by:SetPoint("TOPLEFT", classcolor_border, "BOTTOMLEFT", 0, 0)
+	-- Boss auras
+	local subheader = ns.addSubCategory(parent, L.aura_subheader_boss)
+	subheader:SetPoint("TOPLEFT", debuff_size, "BOTTOMLEFT", 0, -10)
+
+	local boss_auras = ns.CreateCheckBox(parent, "boss_auras", ENABLE)
+	boss_auras:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -10)
+
+	local boss_debuffs = ns.CreateNumberSlider(parent, "boss_debuffs", nil, nil, 0, 5, 1, true, L_GUI_UF_BOSS_DEBUFFS, L_GUI_UF_BOSS_DEBUFFS_DESC)
+	boss_debuffs:SetPoint("TOPLEFT", boss_auras, "BOTTOMLEFT", 0, -20)
+
+	local boss_buffs = ns.CreateNumberSlider(parent, "boss_buffs", nil, nil, 0, 3, 1, true, L_GUI_UF_BOSS_BUFFS, L_GUI_UF_BOSS_BUFFS_DESC)
+	boss_buffs:SetPoint("LEFT", boss_debuffs, "RIGHT", 120, 0)
 
 	local classic = {
 		focus_debuffs,

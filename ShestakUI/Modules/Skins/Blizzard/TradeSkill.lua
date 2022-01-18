@@ -57,10 +57,7 @@ local function LoadSkin()
 		local ResultIcon = TradeSkillFrame.DetailsFrame.Contents.ResultIcon
 		ResultIcon:SetTemplate("Default")
 		if ResultIcon:GetNormalTexture() then
-			ResultIcon:GetNormalTexture():SetTexCoord(0.1, 0.9, 0.1, 0.9)
-			ResultIcon:GetNormalTexture():ClearAllPoints()
-			ResultIcon:GetNormalTexture():SetPoint("TOPLEFT", 2, -2)
-			ResultIcon:GetNormalTexture():SetPoint("BOTTOMRIGHT", -2, 2)
+			ResultIcon:GetNormalTexture():CropIcon()
 		end
 		ResultIcon.ResultBorder:SetTexture(nil)
 		ResultIcon.IconBorder:SetTexture(nil)
@@ -116,8 +113,8 @@ local function LoadSkin()
 			button.SocketGlow:SetInside(icon.backdrop)
 
 			button.SelectedTexture:SetAtlas(nil)
-			button.SelectedTexture:SetColorTexture(0.9, 0.8, 0.1)
-			button.SelectedTexture:SetOutside(icon.backdrop)
+			button.SelectedTexture:SetColorTexture(1, 0.82, 0, 0.3)
+			button.SelectedTexture:SetInside(icon.backdrop)
 
 			button.NameFrame:Kill()
 		end
@@ -197,6 +194,8 @@ local function LoadSkin()
 			button.Icon:SetSize(32, 32)
 			button.Icon:ClearAllPoints()
 			button.Icon:SetPoint("TOPLEFT", button, "TOPLEFT", 3, -3)
+
+			button.IconBorder:SetAlpha(0)
 		end
 	end)
 end
