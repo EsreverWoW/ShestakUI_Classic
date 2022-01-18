@@ -9,6 +9,7 @@
 	<Script file="..\Blizzard\DebugTools.lua"/>
 	<Script file="..\Blizzard\DeathRecap.lua"/>
 	<Script file="..\Blizzard\EventTrace.lua"/>
+	<Script file="..\Blizzard\GuildBank.lua"/>
 	<Script file="..\Blizzard\GuildRegistrar.lua"/>
 	<Script file="..\Blizzard\Help.lua"/>
 	<Script file="..\Blizzard\Interface.lua"/>
