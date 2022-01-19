@@ -86,7 +86,7 @@ end
 
 -- Hide world map button
 MiniMapWorldMapButton:Hide()
-if T.classic and not T.BCC then
+if T.classic then
 	MiniMapWorldMapButton.Show = T.dummy
 end
 
