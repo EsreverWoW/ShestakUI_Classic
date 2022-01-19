@@ -1,10 +1,10 @@
 ## Interface: 11401
 ## Interface-Classic: 11401
-## Interface-BCC: 20502
+## Interface-BCC: 20503
 ## Title: ShestakUI (Classic) Config
 ## Notes: In-game configuration for ShestakUI
 ## Author: Shestak
-## Version: 1.39
+## Version: 1.40
 ## X-Curse-Project-ID: 468754
 ## X-WoWI-ID: 25916
 ## RequiredDeps: ShestakUI
