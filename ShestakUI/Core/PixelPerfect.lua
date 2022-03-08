@@ -25,8 +25,20 @@ if T.HiDPI then
 	T.noscalemult = T.noscalemult * 2
 end
 
+-- Old Scale function
+-- T.Scale = function(x)
+	-- return T.mult * math.floor(x / T.mult + 0.5)
+-- end
+
+-- New Scale function
 T.Scale = function(x)
-	return T.mult * math.floor(x / T.mult + 0.5)
+	local m = T.mult
+	if m == 1 or x == 0 then
+		return x
+	else
+		local y = m > 1 and m or -m
+		return x - x % (x < 0 and y or -y)
+	end
 end
 
 ----------------------------------------------------------------------------------------
