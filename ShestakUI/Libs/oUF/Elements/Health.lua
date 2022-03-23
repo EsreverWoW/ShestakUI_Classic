@@ -209,7 +209,7 @@ local function SetFrequentUpdates(element, state, isForced)
 	end
 end
 
-local function Enable(self, unit)
+local function Enable(self)
 	local element = self.Health
 	if(element) then
 		element.__owner = self
