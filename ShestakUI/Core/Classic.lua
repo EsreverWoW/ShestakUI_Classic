@@ -91,16 +91,6 @@ function T.GetSpecializationRole()
 	end
 end
 
-UnitGroupRolesAssigned = _G.UnitGroupRolesAssigned or function(unit) -- Needs work
-	if unit == "player" then
-		local role = T.GetSpecializationRole() or "NONE"
-		if role == "CASTER" or role == "MELEE" then role = "DAMAGER" end
-		return role
-	else
-		return "NONE"
-	end
-end
-
 -- Add later
 GetAverageItemLevel = _G.GetAverageItemLevel or function()
 	local slotName = {
