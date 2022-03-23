@@ -35,19 +35,6 @@ local function LoadSkin()
 	T.SkinDropDownBox(AddonCharacterDropDown)
 	T.SkinCheckBox(AddonListForceLoad)
 	AddonListForceLoad:SetSize(25, 25)
-
-	if T.classic then
-		hooksecurefunc("TriStateCheckbox_SetState", function(_, checkButton)
-			local tex = checkButton:GetCheckedTexture()
-			tex:SetPoint("TOPLEFT", checkButton, 6, -6)
-			tex:SetPoint("BOTTOMRIGHT", checkButton, -6, 6)
-			if checkButton.state == 2 then
-				tex:SetColorTexture(1, 0.82, 0, 0.8)
-			elseif checkButton.state == 1 then
-				tex:SetColorTexture(0.6, 0.6, 0.6, 0.75)
-			end
-		end)
-	end
 end
 
 tinsert(T.SkinFuncs["ShestakUI"], LoadSkin)

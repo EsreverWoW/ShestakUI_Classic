@@ -57,12 +57,14 @@ local function LoadSkin()
 	-- Send mail
 	SendMailFrame:StripTextures()
 
-	SendMailScrollFrame:StripTextures(true)
-	SendMailScrollFrame:CreateBackdrop("Overlay")
-	SendMailScrollFrame.backdrop:SetPoint("TOPLEFT", 12, 0)
-	SendMailScrollFrame.backdrop:SetPoint("BOTTOMRIGHT", 2, 0)
+	if not T.classic then
+		SendMailScrollFrame:StripTextures(true)
+		SendMailScrollFrame:CreateBackdrop("Overlay")
+		SendMailScrollFrame.backdrop:SetPoint("TOPLEFT", 12, 0)
+		SendMailScrollFrame.backdrop:SetPoint("BOTTOMRIGHT", 2, 0)
 
-	T.SkinScrollBar(SendMailScrollFrameScrollBar)
+		T.SkinScrollBar(SendMailScrollFrameScrollBar)
+	end
 
 	select(3, SendMailNameEditBox:GetRegions()):SetDrawLayer("OVERLAY")
 	select(3, SendMailSubjectEditBox:GetRegions()):SetDrawLayer("OVERLAY")
@@ -138,7 +140,9 @@ local function LoadSkin()
 
 	T.SkinScrollBar(OpenMailScrollFrameScrollBar)
 
-	SendMailBodyEditBox:SetTextColor(1, 1, 1)
+	if not T.classic then
+		SendMailBodyEditBox:SetTextColor(1, 1, 1)
+	end
 	OpenMailBodyText:SetTextColor(1, 1, 1)
 	InvoiceTextFontNormal:SetTextColor(1, 1, 1)
 	OpenMailArithmeticLine:Kill()
