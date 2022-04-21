@@ -118,9 +118,9 @@ GetThreatStatusColor = _G.GetThreatStatusColor or function(statusIndex)
 end
 
 ----------------------------------------------------------------------------------------
---	Check if Classic or Burning Crusade Classic
+--	Check if Classic or Burning Crusade Classic / Wrath of the Lich King Classic
 ----------------------------------------------------------------------------------------
-if T.BCC then return end
+if T.BCC or T.WLKC then return end
 
 ----------------------------------------------------------------------------------------
 --	LibClassicSpellActionCount (by Ennea)
