@@ -352,6 +352,20 @@ if not T.classic then
 	SLASH_TEST_ACHIEVEMENT2 = "/ефср"
 end
 
+if T.WLKC then
+	SlashCmdList.TEST_ACHIEVEMENT = function()
+		PlaySound(SOUNDKIT.LFG_REWARDS)
+		if not AchievementFrame then
+			AchievementFrame_LoadUI()
+		end
+		AchievementAlertSystem:AddAlert(112)
+		MoneyWonAlertSystem:AddAlert(81500)
+		NewRecipeLearnedAlertSystem:AddAlert(204)
+	end
+	SLASH_TEST_ACHIEVEMENT1 = "/tach"
+	SLASH_TEST_ACHIEVEMENT2 = "/ефср"
+end
+
 ----------------------------------------------------------------------------------------
 --	Test Blizzard Extra Action Button
 ----------------------------------------------------------------------------------------
