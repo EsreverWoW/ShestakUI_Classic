@@ -188,6 +188,16 @@ if not T.classic then
 	SLASH_SPEC3 = "/ыы"
 end
 
+if T.WLKC then
+	SlashCmdList.SPEC = function()
+		local spec = GetActiveSpecGroup()
+		if spec == 1 then SetActiveSpecGroup(2) elseif spec == 2 then SetActiveSpecGroup(1) end
+	end
+	SLASH_SPEC1 = "/ss"
+	SLASH_SPEC2 = "/spec"
+	SLASH_SPEC3 = "/ыы"
+end
+
 ----------------------------------------------------------------------------------------
 --	Get target NPC name and ID
 ----------------------------------------------------------------------------------------
