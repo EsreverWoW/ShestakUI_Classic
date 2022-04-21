@@ -1,10 +1,15 @@
 local T, C, L, _ = unpack(select(2, ...))
 
 ----------------------------------------------------------------------------------------
---	NOOP / Pass Functions not found in Classic
+--	NOOP functions not found in some versions of Classic
 ----------------------------------------------------------------------------------------
-IsFlying = _G.IsFlying or T.dummy
-UnitInVehicle = _G.UnitInVehicle or T.dummy
+if not IsFlying then
+	IsFlying = T.dummy
+end
+
+if not UnitInVehicle then
+	UnitInVehicle = T.dummy
+end
 
 ----------------------------------------------------------------------------------------
 --	Specialization Functions
