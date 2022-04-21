@@ -57,7 +57,7 @@ local function LoadSkin()
 		for j = 1, 3 do
 			local c = _G["MerchantItem"..i.."AltCurrencyFrameItem"..j]
 			local ct = _G["MerchantItem"..i.."AltCurrencyFrameItem"..j.."Texture"]
-			if not T.BCC then -- FIXME: Issue with Honor Textures
+			if T.Vanilla then -- FIXME: Issue with Honor Textures in BCC/WLKC
 				c:CreateBackdrop("Default")
 				c.backdrop:SetPoint("TOPLEFT", ct, "TOPLEFT", -2, 2)
 				c.backdrop:SetPoint("BOTTOMRIGHT", ct, "BOTTOMRIGHT", 2, -2)

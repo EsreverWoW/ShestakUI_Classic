@@ -1,5 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
-if T.classic or C.unitframe.enable ~= true or C.unitframe.show_arena ~= true then return end
+if T.Vanilla or C.unitframe.enable ~= true or C.unitframe.show_arena ~= true then return end
 
 ----------------------------------------------------------------------------------------
 --	Based on oUF_PVPSpecIcons

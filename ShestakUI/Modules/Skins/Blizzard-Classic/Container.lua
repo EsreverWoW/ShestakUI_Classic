@@ -66,7 +66,7 @@ local function LoadSkin()
 		icon:SetPoint("BOTTOMRIGHT", -2, 2)
 	end
 
-	for i = 1, T.BCC and 7 or 6 do
+	for i = 1, not T.Vanilla and 7 or 6 do
 		local bag = BankSlotsFrame["Bag"..i]
 		local icon = bag.icon
 

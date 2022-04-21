@@ -4,7 +4,7 @@ if C.skins.details ~= true or not IsAddOnLoaded("Details") then return end
 ----------------------------------------------------------------------------------------
 --	Details skin
 ----------------------------------------------------------------------------------------
-hooksecurefunc(_detalhes.gump, (T.classic and not T.BCC) and "CriaNovaBarra" or "CreateNewLine", function(_, instancia, index)
+hooksecurefunc(_detalhes.gump, T.Vanilla and "CriaNovaBarra" or "CreateNewLine", function(_, instancia, index)
 	local bar = _G["DetailsBarra_"..instancia.meu_id.."_"..index]
 	local icon = _G["DetailsBarra_IconFrame_"..instancia.meu_id.."_"..index]
 

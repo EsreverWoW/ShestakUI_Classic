@@ -151,7 +151,7 @@ local OnEvent = function(_, event)
 		local _, eventType, _, sourceGUID, sourceName, sourceFlags, _, _, _, _, _, spellID, spellName = CombatLogGetCurrentEventInfo()
 
 		if eventType == "SPELL_CAST_SUCCESS" and sourceName ~= T.name then
-			if T.classic and not T.BCC then
+			if T.Vanilla then
 				spellID = T.GetSpellID(spellName)
 			end
 			local _, instanceType = IsInInstance()

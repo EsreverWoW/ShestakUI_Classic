@@ -212,7 +212,7 @@ local micromenu = {
 	end},
 	{text = TALENTS_BUTTON, notCheckable = 1, func = function()
 		if not PlayerTalentFrame then
-			if T.classic and not T.BCC then
+			if T.Vanilla then
 				PlayerTalentFrame_LoadUI()
 			else
 				TalentFrame_LoadUI()
@@ -353,7 +353,7 @@ Minimap:SetScript("OnMouseUp", function(self, button)
 		else
 			EasyMenu(micromenu, menuFrame, "cursor", -160, 0, "MENU")
 		end
-	elseif (not T.classic or T.BCC) and button == "MiddleButton" then
+	elseif not T.Vanilla and button == "MiddleButton" then
 		if position:match("LEFT") then
 			ToggleDropDownMenu(nil, nil, MiniMapTrackingDropDown, "cursor", 0, 0, "MENU", 2)
 		else
@@ -394,11 +394,11 @@ end
 ----------------------------------------------------------------------------------------
 --	Tracking icon
 ----------------------------------------------------------------------------------------
-if not T.classic or T.BCC then
+if not T.Vanilla then
 	if C.minimap.tracking_icon then
 		MiniMapTrackingBackground:Hide()
 		MiniMapTracking:ClearAllPoints()
-		if not T.BCC then
+		if not T.classic then
 			MiniMapTracking:SetPoint("BOTTOMLEFT", MinimapAnchor, "BOTTOMLEFT", 0, -4)
 			MiniMapTrackingButton:SetHighlightTexture(nil)
 			MiniMapTrackingButtonBorder:Hide()
@@ -449,11 +449,11 @@ if T.classic then
 	BattlegroundShine:Hide()
 
 	MiniMapBattlefieldFrame:CreateBackdrop("ClassColor")
-	if T.BCC then
-		MiniMapBattlefieldFrame.backdrop:SetPoint("TOPLEFT", MiniMapBattlefieldIcon, 4, -4)
-		MiniMapBattlefieldFrame.backdrop:SetPoint("BOTTOMRIGHT", MiniMapBattlefieldIcon, -4, 4)
-	else
+	if T.Vanilla then
 		MiniMapBattlefieldFrame.backdrop:SetPoint("TOPLEFT", MiniMapBattlefieldIcon, -2, 2)
 		MiniMapBattlefieldFrame.backdrop:SetPoint("BOTTOMRIGHT", MiniMapBattlefieldIcon, 2, -2)
+	else
+		MiniMapBattlefieldFrame.backdrop:SetPoint("TOPLEFT", MiniMapBattlefieldIcon, 4, -4)
+		MiniMapBattlefieldFrame.backdrop:SetPoint("BOTTOMRIGHT", MiniMapBattlefieldIcon, -4, 4)
 	end
 end

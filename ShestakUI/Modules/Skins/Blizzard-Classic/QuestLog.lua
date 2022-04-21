@@ -108,7 +108,7 @@ local function LoadSkin()
 			quality = select(3, GetItemInfo(link))
 		end
 
-		if T.BCC and frame then
+		if not T.Vanilla and frame then
 			Mixin(frame, BackdropTemplateMixin) -- 9.0 to set backdrop
 		end
 

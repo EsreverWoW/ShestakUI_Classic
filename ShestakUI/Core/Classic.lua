@@ -120,7 +120,7 @@ end
 ----------------------------------------------------------------------------------------
 --	Check if Classic or Burning Crusade Classic / Wrath of the Lich King Classic
 ----------------------------------------------------------------------------------------
-if T.BCC or T.WLKC then return end
+if not T.Vanilla then return end
 
 ----------------------------------------------------------------------------------------
 --	LibClassicSpellActionCount (by Ennea)

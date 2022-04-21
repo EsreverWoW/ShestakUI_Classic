@@ -11,7 +11,7 @@ frame:SetScript("OnEvent", function()
 	local _, event, _, sourceGUID, _, _, _, _, destName, _, _, _, _, _, spellID, spellName = CombatLogGetCurrentEventInfo()
 	if not (event == "SPELL_INTERRUPT" and sourceGUID == UnitGUID("player")) then return end
 
-	if T.classic and not T.BCC then
+	if T.Vanilla then
 		spellID = T.GetSpellID(spellName)
 	end
 

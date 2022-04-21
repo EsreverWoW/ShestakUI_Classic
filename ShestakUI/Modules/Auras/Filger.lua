@@ -35,7 +35,7 @@ if not T.classic then
 	SpellActivationOverlayFrame:SetFrameStrata("BACKGROUND")
 end
 
-local LibClassicDurations = (T.classic and not T.BCC) and LibStub("LibClassicDurations")
+local LibClassicDurations = T.Vanilla and LibStub("LibClassicDurations")
 
 local Filger = {}
 local MyUnits = {player = true, vehicle = true, pet = true}
@@ -649,7 +649,7 @@ if C["filger_spells"] and C["filger_spells"][T.class] then
 					end
 					if data.unitID == "target" then
 						frame:RegisterEvent("PLAYER_TARGET_CHANGED")
-					elseif (not T.classic or T.BCC) and data.unitID == "focus" then
+					elseif not T.Vanilla and data.unitID == "focus" then
 						frame:RegisterEvent("PLAYER_FOCUS_CHANGED")
 					end
 				end

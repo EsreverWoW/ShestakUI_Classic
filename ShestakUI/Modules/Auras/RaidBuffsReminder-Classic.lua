@@ -33,7 +33,7 @@ local isPresent = {
 }
 
 -- Aura Checks
-local function CheckElixir()
+local function CheckVanillaElixir()
 	local requireFlask, otherBuffsRequired = T.ReminderFlaskRequirements()
 	local hasFlask, otherBuffsCount, meetsRequirements = false, 0, false
 
@@ -95,7 +95,7 @@ local function CheckElixir()
 	end
 end
 
-local function CheckBCCElixir()
+local function CheckElixir()
 	if #battleElixirBuffs > 0 then
 		for i = 1, #battleElixirBuffs do
 			local name, icon = unpack(battleElixirBuffs[i])
@@ -140,8 +140,8 @@ local function CheckBCCElixir()
 end
 
 local function CheckBuff(list, frame, n)
-	if not T.BCC and list == flaskBuffs then
-		CheckElixir()
+	if T.Vanilla and list == flaskBuffs then
+		CheckVanillaElixir()
 	else
 		if list and #list > 0 then
 			for i = 1, #list do
@@ -154,7 +154,7 @@ local function CheckBuff(list, frame, n)
 					isPresent[n] = true
 					break
 				elseif list == flaskBuffs then
-					CheckBCCElixir()
+					CheckElixir()
 				else
 					frame:SetAlpha(1)
 					isPresent[n] = false

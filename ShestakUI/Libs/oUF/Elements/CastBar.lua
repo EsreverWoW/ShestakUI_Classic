@@ -9,7 +9,7 @@ local UnitCastingInfo = UnitCastingInfo
 local UnitChannelInfo = UnitChannelInfo
 local EventFunctions = {}
 
-local LibClassicCasterino = (oUF:IsClassic() and not oUF:IsBCC()) and LibStub('LibClassicCasterino', true)
+local LibClassicCasterino = (oUF:IsVanilla() and LibStub('LibClassicCasterino', true)
 if(LibClassicCasterino) then
 	UnitCastingInfo = function(unit)
 		return LibClassicCasterino:UnitCastingInfo(unit)
@@ -377,7 +377,7 @@ local function Enable(self, unit)
 		element.__owner = self
 		element.ForceUpdate = ForceUpdate
 
-		if((not oUF:IsClassic() or oUF:IsBCC()) or self.unit == 'player') then
+		if(not oUF:IsVanilla() or self.unit == 'player') then
 			self:RegisterEvent('UNIT_SPELLCAST_START', CastStart)
 			self:RegisterEvent('UNIT_SPELLCAST_CHANNEL_START', CastStart)
 			self:RegisterEvent('UNIT_SPELLCAST_STOP', CastStop)
@@ -386,7 +386,7 @@ local function Enable(self, unit)
 			self:RegisterEvent('UNIT_SPELLCAST_CHANNEL_UPDATE', CastUpdate)
 			self:RegisterEvent('UNIT_SPELLCAST_FAILED', CastFail)
 			self:RegisterEvent('UNIT_SPELLCAST_INTERRUPTED', CastFail)
-			if(not oUF:IsClassic()) then
+			if(not oUF:IsClassic() or oUF:IsWLKC()) then
 				self:RegisterEvent('UNIT_SPELLCAST_INTERRUPTIBLE', CastInterruptible)
 				self:RegisterEvent('UNIT_SPELLCAST_NOT_INTERRUPTIBLE', CastInterruptible)
 			end

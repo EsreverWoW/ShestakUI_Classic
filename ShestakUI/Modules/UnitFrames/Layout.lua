@@ -33,7 +33,7 @@ local function Shared(self, unit)
 			or (unit and unit:find("boss%d")) and "boss" or unit
 
 	-- Menu
-	if ((not T.classic or T.BCC) and (unit == "arena" and C.unitframe.show_arena == true and unit ~= "arenatarget")) or (unit == "boss" and C.unitframe.show_boss == true) then
+	if (not T.Vanilla and (unit == "arena" and C.unitframe.show_arena == true and unit ~= "arenatarget")) or (unit == "boss" and C.unitframe.show_boss == true) then
 		self:SetAttribute("type2", "focus")
 		self:SetAttribute("type3", "macro")
 		self:SetAttribute("macrotext3", "/clearfocus")
@@ -482,7 +482,7 @@ local function Shared(self, unit)
 			self.TotemBar:CreateBackdrop("Default")
 			self.TotemBar:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, 7)
 			self.TotemBar:SetSize(player_width, 7)
-			self.TotemBar.Destroy = (not T.classic or T.BCC) and true
+			self.TotemBar.Destroy = not T.Vanilla and true
 
 			for i = 1, 4 do
 				self.TotemBar[i] = CreateFrame("StatusBar", self:GetName().."_Totem"..i, self.TotemBar)
@@ -1263,7 +1263,7 @@ if C.unitframe.show_pet == true then
 	pet:SetSize(pet_width, 16 + (C.unitframe.extra_health_height / 2))
 end
 
-if (not T.classic or T.BCC) and C.unitframe.show_focus == true then
+if not T.Vanilla and C.unitframe.show_focus == true then
 	local focus = oUF:Spawn("focus", "oUF_Focus")
 	focus:SetPoint(unpack(C.position.unitframes.focus))
 	focus:SetSize(pet_width, 16 + (C.unitframe.extra_health_height / 2))
@@ -1296,7 +1296,7 @@ if C.unitframe.show_boss == true then
 	end
 end
 
-if (not T.classic or T.BCC) and C.unitframe.show_arena == true then
+if not T.Vanilla and C.unitframe.show_arena == true then
 	local arena = {}
 	for i = 1, 5 do
 		arena[i] = oUF:Spawn("arena"..i, "oUF_Arena"..i)
@@ -1414,7 +1414,7 @@ local moving = false
 SlashCmdList.TEST_UF = function()
 	if InCombatLockdown() then print("|cffffff00"..ERR_NOT_IN_COMBAT.."|r") return end
 	if not moving then
-		if T.classic and not T.BCC then
+		if T.Vanilla then
 			for _, frames in pairs({"oUF_Target", "oUF_TargetTarget", "oUF_Pet"}) do
 				if _G[frames] then
 					_G[frames].oldunit = _G[frames].unit
@@ -1458,7 +1458,7 @@ SlashCmdList.TEST_UF = function()
 		end
 		moving = true
 	else
-		if T.classic and not T.BCC then
+		if T.Vanilla then
 			for _, frames in pairs({"oUF_Target", "oUF_TargetTarget", "oUF_Pet"}) do
 				if _G[frames] then
 					_G[frames].unit = _G[frames].oldunit

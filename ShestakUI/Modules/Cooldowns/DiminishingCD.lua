@@ -121,7 +121,7 @@ local function CombatLogCheck(self)
 	if not eventRegistered[eventType] then return end
 	if destGUID ~= UnitGUID(self.target) then return end
 
-	if T.classic and not T.BCC then
+	if T.Vanilla  then
 		spellID = T.GetSpellID(spellName)
 	end
 

@@ -5,7 +5,7 @@ if C.bag.enable ~= true then return end
 --	Based on Stuffing(by Hungtar, editor Tukz)
 ----------------------------------------------------------------------------------------
 local BAGS_BACKPACK = {0, 1, 2, 3, 4}
-local BAGS_BANK = (T.classic and not T.BCC) and {-1, 5, 6, 7, 8, 9, 10} or {-1, 5, 6, 7, 8, 9, 10, 11}
+local BAGS_BANK = T.Vanilla and {-1, 5, 6, 7, 8, 9, 10} or {-1, 5, 6, 7, 8, 9, 10, 11}
 local ST_NORMAL = 1
 local ST_FISHBAG = 2
 local ST_SPECIAL = 3
@@ -1567,7 +1567,7 @@ function Stuffing:SortBags()
 	if _G["StuffingFrameReagent"] and _G["StuffingFrameReagent"]:IsShown() then
 		bagList = {-3}
 	elseif Stuffing.bankFrame and Stuffing.bankFrame:IsShown() then
-		bagList = (T.classic and not T.BCC) and {10, 9, 8, 7, 6, 5, -1} or {11, 10, 9, 8, 7, 6, 5, -1}
+		bagList = T.Vanilla and {10, 9, 8, 7, 6, 5, -1} or {11, 10, 9, 8, 7, 6, 5, -1}
 	else
 		bagList = {4, 3, 2, 1, 0}
 	end

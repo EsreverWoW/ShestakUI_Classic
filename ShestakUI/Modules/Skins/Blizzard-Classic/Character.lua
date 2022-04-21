@@ -64,7 +64,7 @@ local function LoadSkin()
 
 	HandleResistanceFrame("MagicResFrame")
 
-	if T.BCC then
+	if not T.Vanilla then
 		T.SkinDropDownBox(PlayerStatFrameLeftDropDown, 140)
 		T.SkinDropDownBox(PlayerStatFrameRightDropDown, 140)
 		PlayerStatFrameLeftDropDownButton:SetNormalTexture("Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Up")
@@ -360,7 +360,7 @@ local function LoadSkin()
 	SkillDetailStatusBarUnlearnButton:SetHitRectInsets(0, 0, 0, 0)
 
 	-- Honor Frame
-	if not T.BCC then
+	if T.Vanilla then
 		HonorFrame:StripTextures(true)
 
 		HonorFrameProgressBar:ClearAllPoints()
@@ -371,7 +371,7 @@ local function LoadSkin()
 	end
 
 	-- PVP Frame
-	if T.BCC then
+	if not T.Vanilla then
 		PVPFrame:StripTextures(true)
 
 		for i = 1, MAX_ARENA_TEAMS do

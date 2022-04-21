@@ -17,7 +17,7 @@ local function LoadSkin()
 
 	InspectFrameTab1:ClearAllPoints()
 	InspectFrameTab1:SetPoint("TOPLEFT", InspectFrame.backdrop, "BOTTOMLEFT", 2, -2)
-	for i = 1, T.BCC and 3 or 2 do
+	for i = 1, not T.Vanilla and 3 or 2 do
 		T.SkinTab(_G["InspectFrameTab"..i])
 	end
 

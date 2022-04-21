@@ -20,11 +20,19 @@ local event_metatable = {
 local oGlow = CreateFrame("Frame", "oGlow")
 
 function oGlow:IsClassic()
-	return _G.WOW_PROJECT_ID == _G.WOW_PROJECT_CLASSIC or _G.WOW_PROJECT_ID == _G.WOW_PROJECT_BURNING_CRUSADE_CLASSIC
+	return _G.WOW_PROJECT_ID == _G.WOW_PROJECT_CLASSIC or _G.WOW_PROJECT_ID == _G.WOW_PROJECT_BURNING_CRUSADE_CLASSIC -- TODO: Add WotLK: Classic when there is a project ID
+end
+
+function oGlow:IsVanilla()
+	return _G.WOW_PROJECT_ID == _G.WOW_PROJECT_CLASSIC
 end
 
 function oGlow:IsBCC()
 	return _G.WOW_PROJECT_ID == _G.WOW_PROJECT_BURNING_CRUSADE_CLASSIC
+end
+
+function oGlow:IsWLKC()
+	return false -- TODO: Change when there is a project ID
 end
 
 function oGlow:ADDON_LOADED(event, addon)

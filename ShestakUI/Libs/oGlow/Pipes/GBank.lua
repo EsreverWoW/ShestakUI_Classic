@@ -1,4 +1,4 @@
-if oGlow:IsClassic() and not oGlow:IsBCC() then return end
+if oGlow:IsVanilla() then return end
 
 local _E
 
