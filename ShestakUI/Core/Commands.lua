@@ -32,14 +32,6 @@ SlashCmdList.CLEARCOMBAT = function() CombatLogClearEntries() end
 SLASH_CLEARCOMBAT1 = "/clc"
 SLASH_CLEARCOMBAT2 = "/сдс"
 
-if T.classic then
-	hooksecurefunc("UIParentLoadAddOn", function(name)
-		if name == "Blizzard_TimeManager" and not SlashCmdList.STOPWATCH then
-			SlashCmdList.STOPWATCH = Stopwatch_Toggle
-		end
-	end)
-end
-
 ----------------------------------------------------------------------------------------
 --	Description of the slash commands
 ----------------------------------------------------------------------------------------
