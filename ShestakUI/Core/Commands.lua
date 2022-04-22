@@ -174,7 +174,7 @@ end
 ----------------------------------------------------------------------------------------
 if T.Mainline then
 	SlashCmdList.SPEC = function(spec)
-		local canUse, failureReason = C_SpecializationInfo.CanPlayerUseTalentSpecUI()()
+		local canUse, failureReason = C_SpecializationInfo.CanPlayerUseTalentSpecUI()
 		if canUse then
 			if GetSpecialization() ~= tonumber(spec) then
 				SetSpecialization(spec)
