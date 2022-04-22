@@ -1894,12 +1894,23 @@ do
 		mount
 	}
 
+	local wotlk = {
+		talents,
+		show_shift,
+		unit_role,
+		mount
+	}
+
 	local retail = {
 		vendor_price
 	}
 
-	if IsClassicBuild() then
+	if IsVanillaBuild() or IsTBCBuild() then
 		HideOptions(classic)
+		average_lvl:SetPoint("TOPLEFT", show_shift, "BOTTOMLEFT", 0, 0)
+		raid_icon:SetPoint("TOPLEFT", average_lvl, "BOTTOMLEFT", 0, -24)
+	elseif IsWOTLKBuild() then
+		HideOptions(wotlk)
 		average_lvl:SetPoint("TOPLEFT", show_shift, "BOTTOMLEFT", 0, 0)
 		raid_icon:SetPoint("TOPLEFT", average_lvl, "BOTTOMLEFT", 0, -24)
 	else

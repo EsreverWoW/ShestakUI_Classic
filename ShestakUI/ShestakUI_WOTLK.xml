@@ -131,6 +131,7 @@
 	<Script file="Modules\Automation\TabBinder.lua"/>
 
 	<Include file="Modules\Blizzard\TaintLess.xml"/>
+	<Script file="Modules\Blizzard\AlertFrames.lua"/>
 	<Script file="Modules\Blizzard\Bags.lua"/>
 	<Script file="Modules\Blizzard\ColorPicker.lua"/>
 	<Script file="Modules\Blizzard\CombatText.lua"/>
@@ -215,6 +216,7 @@
 
 	<Script file="Modules\Tooltip\Tooltip.lua"/>
 	<Script file="Modules\Tooltip\HyperLink.lua"/>
+	<Script file="Modules\Tooltip\Achievement.lua"/>
 	<Script file="Modules\Tooltip\ItemIcons.lua"/>
 	<Script file="Modules\Tooltip\ItemLevel_Vanilla.lua"/>
 	<Script file="Modules\Tooltip\ItemPrice.lua"/>

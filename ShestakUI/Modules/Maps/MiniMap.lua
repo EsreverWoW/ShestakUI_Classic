@@ -308,7 +308,9 @@ if T.Classic then
 	tremove(micromenu, 10)
 	tremove(micromenu, 9)
 	tremove(micromenu, 6)
-	tremove(micromenu, 4)
+	if T.Vanilla or T.TBC then
+		tremove(micromenu, 4)
+	end
 end
 
 if T.Mainline and not IsTrialAccount() and not C_StorePublic.IsDisabledByParentalControls() then
