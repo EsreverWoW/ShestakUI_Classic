@@ -397,7 +397,7 @@ if clock.enabled then
 			GameTooltip:Show()
 		end,
 		OnClick = function(_, b)
-			if T.Classic then
+			if T.Vanilla or T.TBC then
 				(b == "RightButton" and TimeManager_Toggle or Stopwatch_Toggle)()
 			else
 				(b == "RightButton" and ToggleTimeManager or ToggleCalendar)()

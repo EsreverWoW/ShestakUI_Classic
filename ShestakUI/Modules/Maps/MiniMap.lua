@@ -300,7 +300,9 @@ local micromenu = {
 	end},
 }
 if T.Classic then
-	tremove(micromenu, 14)
+	if T.Vanilla or T.TBC then
+		tremove(micromenu, 14)
+	end
 	tremove(micromenu, 12)
 	tremove(micromenu, 11)
 	tremove(micromenu, 10)
