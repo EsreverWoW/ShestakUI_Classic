@@ -1,4 +1,4 @@
-## Interface: 11402
+## Interface: 11403
 ## Title: ShestakUI (Classic)
 ## Notes: A total UI overhaul for World of Warcraft
 ## Author: Shestak
@@ -17,4 +17,4 @@
 ## X-Translation: Aelb, AlbertDuval, Alwa, Baine, Chubidu, Cranan, eXecrate, F5Hellbound, Ianchan, Joe, Leg883, Mania, Nanjiqq, Oz, Puree, Sakaras, Seal, Sinaris, Skyzo-be, Spacedragon, Tat2dawn, Tibles, Vienchen, Wetxius
 ## X-Thanks: Akimba, Antthemage, Crunching, Dandruff, DesFolk, Elfrey, Ente, Erratic, Falchior, Gromcha, Halogen, Homicidal Retribution, ILF7, Illusion, Ipton, k07n, Kazarl, Lanseb, Leots, m2jest1c, MoLLIa, Nefrit, Noobolov, Obakol, Oz, PterOs, Sart, Scorpions, Sitatunga, Sw2rT1, Tryllemann, Wetxius, Yakodzuna, UI Users and Russian Community
 
-ShestakUI-Classic.xml
+ShestakUI_Vanilla.xml

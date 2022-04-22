@@ -14,13 +14,16 @@
 	<Script file="Config\Settings.lua"/>
 	<Script file="Config\Positions.lua"/>
 	<Script file="Config\Fonts.lua"/>
-	<Script file="Config\Profiles-BCC.lua"/>
+	<Script file="Config\Profiles_Vanilla.lua"/>
 
 	<Script file="Core\GUI.lua"/>
 	<Script file="Core\PixelPerfect.lua"/>
 
 	<Script file="Libs\LibStub\LibStub.lua"/>
 	<Script file="Libs\CallbackHandler-1.0\CallbackHandler-1.0.lua"/>
+	<Script file="Libs\LibClassicCasterino\LibClassicCasterino.lua"/>
+	<Include file="Libs\LibClassicDurations\LibClassicDurations.xml"/>
+	<Script file="Libs\LibClassicSpellActionCount-1.0\LibClassicSpellActionCount-1.0.lua"/>
 	<Script file="Libs\LibRangeCheck-2.0\LibRangeCheck-2.0.lua"/>
 	<Script file="Libs\LibHealComm-4.0\ChatThrottleLib.lua"/>
 	<Script file="Libs\LibHealComm-4.0\LibHealComm-4.0.lua"/>
@@ -31,25 +34,25 @@
 	<Include file="Libs\oGlow\oGlow.xml"/>
 	<Script file="Libs\LitePanels\LitePanels.lua"/>
 	<Script file="Libs\LitePanels\Layout.lua"/>
-	<Script file="Config\DataText-BCC.lua"/>
+	<Script file="Config\DataText_TBC.lua"/>
 	<Script file="Libs\LiteStats\LiteStats.lua"/>
 	<Script file="Modules\UnitFrames\Colors.lua"/>
 
-	<Script file="Config\Filters-BCC\Announcements.lua"/>
-	<Script file="Config\Filters-BCC\ArenaControl.lua"/>
-	<Script file="Config\Filters-BCC\AutoButton.lua"/>
-	<Script file="Config\Filters-BCC\BadBuffs.lua"/>
-	<Script file="Config\Filters-BCC\ChannelingTicks.lua"/>
-	<Script file="Config\Filters-BCC\ChatSpam.lua"/>
-	<Script file="Config\Filters-BCC\CombatText.lua"/>
-	<Script file="Config\Filters-BCC\Cooldowns.lua"/>
-	<Script file="Config\Filters-BCC\Diminishing.lua"/>
-	<Script file="Config\Filters-BCC\Errors.lua"/>
-	<Script file="Config\Filters-BCC\FilgerSpells.lua"/>
-	<Script file="Config\Filters-BCC\Nameplates.lua"/>
-	<Script file="Config\Filters-BCC\OpenItems.lua"/>
-	<Script file="Config\Filters-BCC\RaidAuraWatch.lua"/>
-	<Script file="Config\Filters-BCC\Reminders.lua"/>
+	<Script file="Config\Filters_Vanilla\Announcements.lua"/>
+	<Script file="Config\Filters_Vanilla\ArenaControl.lua"/>
+	<Script file="Config\Filters_Vanilla\AutoButton.lua"/>
+	<Script file="Config\Filters_Vanilla\BadBuffs.lua"/>
+	<Script file="Config\Filters_Vanilla\ChannelingTicks.lua"/>
+	<Script file="Config\Filters_Vanilla\ChatSpam.lua"/>
+	<Script file="Config\Filters_Vanilla\CombatText.lua"/>
+	<Script file="Config\Filters_Vanilla\Cooldowns.lua"/>
+	<Script file="Config\Filters_Vanilla\Diminishing.lua"/>
+	<Script file="Config\Filters_Vanilla\Errors.lua"/>
+	<Script file="Config\Filters_Vanilla\FilgerSpells.lua"/>
+	<Script file="Config\Filters_Vanilla\Nameplates.lua"/>
+	<Script file="Config\Filters_Vanilla\OpenItems.lua"/>
+	<Script file="Config\Filters_Vanilla\RaidAuraWatch.lua"/>
+	<Script file="Config\Filters_Vanilla\Reminders.lua"/>
 
 	<Script file="Core\API.lua"/>
 	<Script file="Core\Functions.lua"/>
@@ -75,7 +78,7 @@
 	<Script file="Modules\Misc\Marking.lua"/>
 	<Script file="Modules\Misc\Misc.lua"/>
 	<Script file="Modules\Misc\RaidUtility.lua"/>
-	<Script file="Modules\Misc\SlotItemLevel-Classic.lua"/>
+	<Script file="Modules\Misc\SlotItemLevel_Vanilla.lua"/>
 	<Script file="Modules\Misc\Threat.lua"/>
 
 	<Script file="Modules\Trade\AlreadyKnown.lua"/>
@@ -103,7 +106,6 @@
 	<Script file="Modules\ActionBars\MicroMenu.lua"/>
 
 	<Script file="Modules\Announcements\BadGear.lua"/>
-	<Script file="Modules\Announcements\Drinking.lua"/>
 	<Script file="Modules\Announcements\FeastsAndPortals.lua"/>
 	<Script file="Modules\Announcements\FlaskAndFood.lua"/>
 	<Script file="Modules\Announcements\Interrupts.lua"/>
@@ -115,7 +117,7 @@
 	<Script file="Modules\Auras\BuffFrame.lua"/>
 	<Script file="Modules\Auras\Filger.lua"/>
 	<Script file="Modules\Auras\SelfBuffsReminder.lua"/>
-	<Script file="Modules\Auras\RaidBuffsReminder-Classic.lua"/>
+	<Script file="Modules\Auras\RaidBuffsReminder_Vanilla.lua"/>
 
 	<Script file="Modules\Automation\AutoDismount.lua"/>
 	<Script file="Modules\Automation\AutoInvite.lua"/>
@@ -159,7 +161,6 @@
 	<Script file="Modules\Chat\SpamageMeters.lua"/>
 	<Script file="Modules\Chat\ChatBind.lua"/>
 
-	<Script file="Modules\Cooldowns\DiminishingCD.lua"/>
 	<Script file="Modules\Cooldowns\EnemyCD.lua"/>
 	<Script file="Modules\Cooldowns\PulseCD.lua"/>
 	<Script file="Modules\Cooldowns\RaidCD.lua"/>
@@ -173,17 +174,17 @@
 
 	<Script file="Modules\Maps\BattlefieldMap.lua"/>
 	<Script file="Modules\Maps\ButtonCollect.lua"/>
-	<Script file="Modules\Maps\FogOfWar-BCC.lua"/>
+	<Script file="Modules\Maps\FogOfWar_Vanilla.lua"/>
 	<Script file="Modules\Maps\MiniMap.lua"/>
 	<Script file="Modules\Maps\MiniMapButtons.lua"/>
 	<Script file="Modules\Maps\ToggleMenu.lua"/>
-	<Script file="Modules\Maps\WorldMap-Classic.lua"/>
+	<Script file="Modules\Maps\WorldMap_Vanilla.lua"/>
 
-	<Script file="Modules\Quests\AutoAccept-Classic.lua"/>
+	<Script file="Modules\Quests\AutoAccept_Vanilla.lua"/>
 	<Script file="Modules\Quests\AutoButton.lua"/>
-	<Script file="Modules\Quests\ObjectiveTracker-Classic.lua"/>
+	<Script file="Modules\Quests\ObjectiveTracker_Vanilla.lua"/>
 
-	<Include file="Modules\Skins\Blizzard-BCC\LoadFrames.xml"/>
+	<Include file="Modules\Skins\Blizzard_Vanilla\LoadFrames.xml"/>
 	<Script file="Modules\Skins\Ace3.lua"/>
 	<Script file="Modules\Skins\AtlasLoot.lua"/>
 	<Script file="Modules\Skins\Aurora.lua"/>
@@ -215,7 +216,7 @@
 	<Script file="Modules\Tooltip\Tooltip.lua"/>
 	<Script file="Modules\Tooltip\HyperLink.lua"/>
 	<Script file="Modules\Tooltip\ItemIcons.lua"/>
-	<Script file="Modules\Tooltip\ItemLevel-Classic.lua"/>
+	<Script file="Modules\Tooltip\ItemLevel_Vanilla.lua"/>
 	<Script file="Modules\Tooltip\ItemPrice.lua"/>
 	<Script file="Modules\Tooltip\MultiItemRef.lua"/>
 	<Script file="Modules\Tooltip\RuFix.lua"/>
