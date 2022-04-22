@@ -322,7 +322,9 @@ SpellBinder:RegisterEvent("PLAYER_ENTERING_WORLD")
 SpellBinder:RegisterEvent("GROUP_ROSTER_UPDATE")
 SpellBinder:RegisterEvent("ZONE_CHANGED")
 SpellBinder:RegisterEvent("ZONE_CHANGED_NEW_AREA")
-if not T.classic then
+if T.classic then
+	SpellBinder:RegisterEvent("CHARACTER_POINTS_CHANGED")
+else
 	SpellBinder:RegisterEvent("PLAYER_TALENT_UPDATE")
 end
 SpellBinder:SetScript("OnEvent", function(self, event)
@@ -354,7 +356,7 @@ SpellBinder:SetScript("OnEvent", function(self, event)
 	elseif event == "PLAYER_REGEN_ENABLED" then
 		SpellBinder.UpdateAll()
 		self:UnregisterEvent("PLAYER_REGEN_ENABLED")
-	elseif event == "PLAYER_TALENT_UPDATE" then
+	elseif event == "CHARACTER_POINTS_CHANGED" or event == "PLAYER_TALENT_UPDATE" then
 		if DB then
 			for _, spell in ipairs(DB.spells) do
 				for frame in pairs(ClickCastFrames) do

@@ -490,6 +490,7 @@ local tagEvents = {
 
 local unitlessEvents = {
 	ARENA_PREP_OPPONENT_SPECIALIZATIONS = true,
+	CHARACTER_POINTS_CHANGED = true,
 	GROUP_ROSTER_UPDATE = true,
 	NEUTRAL_FACTION_SELECT_RESULT = true,
 	PARTY_LEADER_CHANGED = true,
