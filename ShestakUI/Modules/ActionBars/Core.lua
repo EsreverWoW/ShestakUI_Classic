@@ -379,6 +379,12 @@ if T.Classic then
 				button:SetAttribute("showgrid", 1)
 				ActionButton_ShowGrid(button, reason)
 				button:SetAttribute("statehidden", true)
+
+				if T.WOTLK then
+					if _G["VehicleMenuBarActionButton"..i] then
+						_G["VehicleMenuBarActionButton"..i]:SetAttribute("statehidden", true)
+					end
+				end
 			end
 		else
 			SetCVar("alwaysShowActionBars", 0)

@@ -26,7 +26,7 @@ vehicle:RegisterForClicks("AnyUp")
 vehicle:SetFrameLevel(3)
 
 hooksecurefunc("MainMenuBarVehicleLeaveButton_Update", function()
-	if T.Classic then
+	if T.Vanilla or T.TBC then
 		if UnitOnTaxi("player") then
 			vehicle:Show()
 			vehicle:SetScript("OnClick", function(self)

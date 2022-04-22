@@ -183,9 +183,15 @@ local function Visibility(self, event, unit)
 	local element = self.Experience
 	local shouldEnable
 
-	if(oUF:IsClassic()) then
+	if(oUF:IsClassic() or oUF:IsTBC()) then
 		if(UnitLevel('player') ~= element.__accountMaxLevel) then
 			shouldEnable = true
+		end
+	elseif(oUF:IsWOTLK()) then
+		if(not UnitHasVehicleUI('player')) then
+			if(UnitLevel('player') ~= element.__accountMaxLevel) then
+				shouldEnable = true
+			end
 		end
 	else
 		if(not UnitHasVehicleUI('player')) then

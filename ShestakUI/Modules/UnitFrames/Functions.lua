@@ -101,7 +101,7 @@ T.PostUpdateHealth = function(health, unit, min, max)
 	end
 	if min ~= max then
 		r, g, b = oUF:ColorGradient(min, max, 0.69, 0.31, 0.31, 0.65, 0.63, 0.35, 0.33, 0.59, 0.33)
-		if (T.Classic and unit == "player" or (unit == "player" and not UnitHasVehicleUI("player") or unit == "vehicle")) and health:GetAttribute("normalUnit") ~= "pet" then
+		if ((T.Vanilla or T.TBC) and unit == "player" or (unit == "player" and not UnitHasVehicleUI("player") or unit == "vehicle")) and health:GetAttribute("normalUnit") ~= "pet" then
 			if C.unitframe.show_total_value == true then
 				if C.unitframe.color_value == true then
 					health.value:SetFormattedText("|cff559655%s|r |cffD7BEA5-|r |cff559655%s|r", T.ShortValue(min), T.ShortValue(max))
@@ -143,7 +143,7 @@ T.PostUpdateHealth = function(health, unit, min, max)
 			end
 		end
 	else
-		if (T.Classic and unit =="player") or (unit == "player" and not UnitHasVehicleUI("player") or unit == "vehicle") then
+		if ((T.Vanilla or T.TBC) and unit =="player") or (unit == "player" and not UnitHasVehicleUI("player") or unit == "vehicle") then
 			if C.unitframe.color_value == true then
 				health.value:SetText("|cff559655"..max.."|r")
 			else

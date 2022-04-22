@@ -11,7 +11,7 @@ local function Update(self, _, unit, powerType)
 	local element = self.ComboPoints
 	local cur, max
 
-	if(oUF:IsClassic()) then
+	if(oUF:IsVanilla() or oUF:IsTBC()) then
 		cur = UnitPower("player", 14)
 		max = UnitPowerMax("player", 14)
 	else

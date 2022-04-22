@@ -295,7 +295,7 @@ local function initObject(unit, style, styleFunc, header, ...)
 		end
 
 		if(not (suffix == 'target' or objectUnit and objectUnit:match('target'))) then
-			if(not oUF:IsClassic()) then
+			if(oUF:IsMainline() or oUF:IsWOTLK()) then
 				object:RegisterEvent('UNIT_ENTERED_VEHICLE', updateActiveUnit)
 				object:RegisterEvent('UNIT_EXITED_VEHICLE', updateActiveUnit)
 			end
@@ -388,8 +388,17 @@ local function walkObject(object, unit)
 	return initObject(unit, style, styleFunc, header, object, object:GetChildren())
 end
 
+--[[ oUF:IsMainline()
+Used to determine if running retail.
+
+* self - the global oUF object
+--]]
+function oUF:IsMainline()
+	return _G.WOW_PROJECT_ID == _G.WOW_PROJECT_MAINLINE
+end
+
 --[[ oUF:IsClassic()
-Used to determine if running retail or classic.
+Used to determine if running any version of classic.
 
 * self - the global oUF object
 --]]

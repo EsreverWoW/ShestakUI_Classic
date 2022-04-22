@@ -27,7 +27,7 @@ end
 
 -- Detect vehicle
 local function SetUnit()
-	if T.Classic then
+	if T.Vanilla or T.TBC then
 		ct.unit = "player"
 	else
 		if UnitHasVehicleUI("player") then
