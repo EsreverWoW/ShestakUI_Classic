@@ -61,9 +61,9 @@ else
 	PetBarAnchor:CreatePanel("Invisible", (C.actionbar.button_size + C.actionbar.button_space), (C.actionbar.button_size * 10) + (C.actionbar.button_space * 9), unpack(C.position.right_bars))
 end
 PetBarAnchor:SetFrameStrata("LOW")
-if T.Vanilla or T.BCC then
+if T.Vanilla or T.TBC then
 	RegisterStateDriver(PetBarAnchor, "visibility", "[pet,nooverridebar,nopossessbar] show; hide")
-elseif T.WLKC then
+elseif T.WOTLK then
 	RegisterStateDriver(PetBarAnchor, "visibility", "[pet,nooverridebar,novehicleui,nopossessbar] show; hide")
 else
 	RegisterStateDriver(PetBarAnchor, "visibility", "[pet,novehicleui,nopossessbar,nopetbattle] show; hide")
@@ -107,7 +107,7 @@ StanceAnchor:SetScript("OnEvent", function()
 			StanceAnchor:SetHeight((C.actionbar.button_size * forms) + (C.actionbar.button_space * (forms - 1)))
 		end
 	end
-	if not T.classic then
+	if T.Mainline then
 		RegisterStateDriver(StanceAnchor, "visibility", GetNumShapeshiftForms() == 0 and "hide" or "show")
 	end
 end)

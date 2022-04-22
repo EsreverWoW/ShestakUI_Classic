@@ -102,20 +102,20 @@ end
 -- WhoList
 local function whoFrame()
 	local scrollFrame = WhoListScrollFrame
-	local offset = T.classic and FauxScrollFrame_GetOffset(WhoListScrollFrame) or HybridScrollFrame_GetOffset(scrollFrame)
-	local buttons = T.classic and 0 or scrollFrame.buttons
+	local offset = T.Classic and FauxScrollFrame_GetOffset(WhoListScrollFrame) or HybridScrollFrame_GetOffset(scrollFrame)
+	local buttons = T.Classic and 0 or scrollFrame.buttons
 	local numWhos = C_FriendList.GetNumWhoResults()
 
 	local playerZone = GetRealZoneText()
 	local playerGuild = GetGuildInfo("player")
 	local playerRace = UnitRace("player")
 
-	for i = 1, T.classic and WHOS_TO_DISPLAY or #buttons do
-		local button = not T.classic and buttons[i]
+	for i = 1, T.Classic and WHOS_TO_DISPLAY or #buttons do
+		local button = T.Mainline and buttons[i]
 		local index = offset + i
 		if index <= numWhos then
 			local nameText, levelText, variableText
-			if T.classic then
+			if T.Classic then
 				nameText = _G["WhoFrameButton"..i.."Name"]
 				levelText = _G["WhoFrameButton"..i.."Level"]
 				variableText = _G["WhoFrameButton"..i.."Variable"]
@@ -154,12 +154,12 @@ local function whoFrame()
 end
 
 hooksecurefunc("WhoList_Update", whoFrame)
-if not T.classic then
+if T.Mainline then
 	hooksecurefunc(WhoListScrollFrame, "update", whoFrame)
 end
 
 -- LFRBrowseList
-if not T.classic then
+if T.Mainline then
 	hooksecurefunc("LFRBrowseFrameListButton_SetData", function(button, index)
 		local name, level, _, className, _, _, _, class = SearchLFGGetResults(index)
 
@@ -173,7 +173,7 @@ if not T.classic then
 end
 
 -- WorldStateScoreList
-if T.classic then
+if T.Classic then
 	hooksecurefunc("WorldStateScoreFrame_Update", function()
 		local offset = FauxScrollFrame_GetOffset(WorldStateScoreScrollFrame)
 
@@ -209,7 +209,7 @@ if T.classic then
 end
 
 -- PVPMatchResults
-if not T.classic then
+if T.Mainline then
 	hooksecurefunc(PVPCellNameMixin, "Populate", function(self, rowData)
 		local name = rowData.name
 		local className = rowData.className or ""
@@ -319,7 +319,7 @@ local function update()
 	end
 end
 
-if not T.classic then
+if T.Mainline then
 	local loaded = false
 	hooksecurefunc("GuildFrame_LoadUI", function()
 		if loaded then
@@ -342,7 +342,7 @@ local function RefreshList(self)
 
 	local displayingProfessions
 
-	if not T.classic then
+	if T.Mainline then
 		displayingProfessions = self:IsDisplayingProfessions()
 	end
 
@@ -383,7 +383,7 @@ end)
 local FRIENDS_LEVEL_TEMPLATE = FRIENDS_LEVEL_TEMPLATE:gsub("%%d", "%%s")
 FRIENDS_LEVEL_TEMPLATE = FRIENDS_LEVEL_TEMPLATE:gsub("%$d", "%$s")
 local function friendsFrame()
-	local scrollFrame = T.classic and FriendsFrameFriendsScrollFrame or FriendsListFrameScrollFrame
+	local scrollFrame = T.Classic and FriendsFrameFriendsScrollFrame or FriendsListFrameScrollFrame
 	local buttons = scrollFrame.buttons
 
 	local playerArea = GetRealZoneText()
@@ -393,7 +393,7 @@ local function friendsFrame()
 		local button = buttons[i]
 		if button:IsShown() then
 			if button.buttonType == FRIENDS_BUTTON_TYPE_WOW then
-				if T.classic then
+				if T.Classic then
 					local name, level, class, area, connected = C_FriendList.GetFriendInfo(button.id)
 					if connected then
 						nameText = classColor[class]..name.."|r, "..format(FRIENDS_LEVEL_TEMPLATE, diffColor[level]..level.."|r", class)
@@ -411,7 +411,7 @@ local function friendsFrame()
 					end
 				end
 			elseif button.buttonType == FRIENDS_BUTTON_TYPE_BNET then
-				if T.classic then
+				if T.Classic then
 					local _, presenceName, _, _, _, toonID, client, isOnline = BNGetFriendInfo(button.id)
 					if isOnline and client == BNET_CLIENT_WOW then
 						local _, toonName, _, _, _, _, _, class, _, zoneName = BNGetGameAccountInfo(toonID)
@@ -448,7 +448,7 @@ local function friendsFrame()
 		end
 	end
 end
-if T.classic then
+if T.Classic then
 	hooksecurefunc(FriendsFrameFriendsScrollFrame, "update", friendsFrame)
 else
 	hooksecurefunc(FriendsListFrameScrollFrame, "update", friendsFrame)

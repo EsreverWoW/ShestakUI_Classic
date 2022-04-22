@@ -6,7 +6,7 @@ if C.tooltip.enable ~= true then return end
 ----------------------------------------------------------------------------------------
 local StoryTooltip, CampaignTooltip
 
-if not T.classic then
+if T.Mainline then
 	StoryTooltip = QuestScrollFrame.StoryTooltip
 	StoryTooltip:SetFrameLevel(4)
 
@@ -355,7 +355,7 @@ local OnTooltipSetUnit = function(self)
 	else
 		for i = 2, lines do
 			local line = _G["GameTooltipTextLeft"..i]
-			if not line or not line:GetText() or (not T.classic and UnitIsBattlePetCompanion(unit)) then return end
+			if not line or not line:GetText() or (T.Mainline and UnitIsBattlePetCompanion(unit)) then return end
 			if (level and line:GetText():find("^"..LEVEL)) or (creatureType and line:GetText():find("^"..creatureType)) then
 				line:SetFormattedText("|cff%02x%02x%02x%s%s|r %s", levelColor.r * 255, levelColor.g * 255, levelColor.b * 255, level, classification, creatureType or "")
 				break
@@ -416,7 +416,7 @@ end
 ----------------------------------------------------------------------------------------
 --	Fix compare tooltips(by Blizzard)(../FrameXML/GameTooltip.lua)
 ----------------------------------------------------------------------------------------
-if T.classic then
+if T.Classic then
 	hooksecurefunc("GameTooltip_ShowCompareItem", function(self, anchorFrame)
 		if not self then
 			self = GameTooltip
@@ -544,7 +544,7 @@ end
 ----------------------------------------------------------------------------------------
 --	Fix GameTooltipMoneyFrame font size
 ----------------------------------------------------------------------------------------
-if T.classic then
+if T.Classic then
 	local function FixFont()
 		for i = 1, 2 do
 			if _G["GameTooltipMoneyFrame"..i] then
@@ -594,7 +594,7 @@ end
 ----------------------------------------------------------------------------------------
 --	Skin GameTooltip.ItemTooltip and EmbeddedItemTooltip
 ----------------------------------------------------------------------------------------
-if not T.classic then
+if T.Mainline then
 	GameTooltip.ItemTooltip.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 	hooksecurefunc(GameTooltip.ItemTooltip.IconBorder, "SetVertexColor", function(self, r, g, b)
 		if r ~= 0.65882 and g ~= 0.65882 and b ~= 0.65882 then

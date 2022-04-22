@@ -35,7 +35,7 @@ local function GetDebuffType(unit, filter)
 end
 
 local function CheckSpec()
-	if T.classic then
+	if T.Classic then
 		if T.class == "PALADIN" then
 			dispellist.Magic = true
 		elseif T.class == "PRIEST" then

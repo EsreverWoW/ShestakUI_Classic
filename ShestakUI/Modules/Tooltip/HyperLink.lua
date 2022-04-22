@@ -24,7 +24,7 @@ local function OnHyperlinkEnter(frame, link, ...)
 end
 
 local function OnHyperlinkLeave(frame, link, ...)
-	if T.classic then
+	if T.Classic then
 		GameTooltip:Hide()
 	else
 		if BattlePetTooltip:IsShown() then

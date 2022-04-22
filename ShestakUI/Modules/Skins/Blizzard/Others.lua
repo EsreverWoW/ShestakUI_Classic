@@ -44,7 +44,7 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 		}
 
 		GameMenuFrame:StripTextures()
-		if not T.classic then
+		if T.Mainline then
 			QueueStatusFrame:StripTextures()
 			LFDRoleCheckPopup:StripTextures()
 			RolePollPopup:StripTextures()
@@ -104,13 +104,13 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 			_G["StaticPopup"..i.."CloseButton"].SetPushedTexture = T.dummy
 			T.SkinCloseButton(_G["StaticPopup"..i.."CloseButton"])
 
-			if not T.classic then
+			if T.Mainline then
 				_G["StaticPopup"..i].Border:StripTextures()
 			end
 		end
 		_G["StaticPopup1ExtraButton"]:SkinButton()
 
-		if not T.classic then
+		if T.Mainline then
 			T.SkinCloseButton(_G["RolePollPopupCloseButton"])
 		end
 
@@ -142,7 +142,7 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 					_G["DropDownList"..i.."MenuBackdrop"].NineSlice:SetAlpha(0)
 				end
 
-				if not T.classic then
+				if T.Mainline then
 					_G["DropDownList"..i]["Border"]:StripTextures()
 				end
 
@@ -184,7 +184,7 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 		}
 
 		for _, frame in pairs(BlizzardHeader) do
-			local title = T.classic and _G[frame.."Header"] or _G[frame] and _G[frame].Header
+			local title = T.Classic and _G[frame.."Header"] or _G[frame] and _G[frame].Header
 			if title then
 				title:StripTextures()
 				title:ClearAllPoints()
@@ -244,7 +244,7 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 				buttons:SkinButton()
 			end
 		end
-		if not T.classic then
+		if T.Mainline then
 			LFDReadyCheckPopup.YesButton:SkinButton(true)
 			LFDReadyCheckPopup.NoButton:SkinButton(true)
 		end
@@ -278,7 +278,7 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 		_G["ReadyCheckFrameText"]:SetPoint("TOP", 0, -12)
 
 		-- Others
-		if not T.classic then
+		if T.Mainline then
 			for i = 1, 10 do
 				select(i, GuildInviteFrame:GetRegions()):Hide()
 			end
@@ -293,7 +293,7 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 		StackSplitFrame:CreateBackdrop("Transparent")
 		StackSplitFrame.backdrop:SetPoint("TOPLEFT", 5, -5)
 		StackSplitFrame.backdrop:SetPoint("BOTTOMRIGHT", -5, 10)
-		if T.classic then
+		if T.Classic then
 			StackSplitOkayButton:SkinButton()
 			StackSplitCancelButton:SkinButton()
 		else
@@ -301,7 +301,7 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 			StackSplitFrame.CancelButton:SkinButton()
 		end
 
-		if T.classic then
+		if T.Classic then
 			_G["StaticPopup1CloseButton"]:HookScript("OnShow", function(self)
 				self:StripTextures(true)
 				T.SkinCloseButton(self, nil, "-")
@@ -317,7 +317,7 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 			SocialBrowserFrame.CloseButton:SetSize(16, 16)
 
 			-- What's new frame
-			if not T.classic then
+			if T.Mainline then
 				SplashFrame:CreateBackdrop("Transparent")
 				SplashFrame.BottomCloseButton:SkinButton()
 				T.SkinCloseButton(SplashFrame.TopCloseButton)
@@ -393,7 +393,7 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 				SkinIconArray(baseName, numIcons)
 			end)
 
-			if not T.classic then
+			if T.Mainline then
 				hooksecurefunc(HelpTipTemplateMixin, "ApplyText", function(self)
 					T.SkinHelpBox(self)
 				end)
@@ -401,7 +401,7 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 		end
 	end
 
-	if addon == "Blizzard_GuildUI" and T.client == "ruRU" and not T.classic then
+	if addon == "Blizzard_GuildUI" and T.client == "ruRU" and T.Mainline then
 		_G["GuildFrameTab1"]:ClearAllPoints()
 		_G["GuildFrameTab1"]:SetPoint("TOPLEFT", _G["GuildFrame"], "BOTTOMLEFT", -4, 2)
 	end

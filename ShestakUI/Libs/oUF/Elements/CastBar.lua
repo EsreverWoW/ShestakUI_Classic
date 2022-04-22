@@ -53,7 +53,7 @@ local function CastStart(self, event, unit)
 	end
 
 	if(not spellID and type(notInterruptible) == "number") then
-		spellID = notInterruptible -- there is no notInterruptible return in some builds of Classic/BCC
+		spellID = notInterruptible -- there is no notInterruptible return in some builds of Classic/TBC Classic
 		notInterruptible = false
 	end
 
@@ -386,7 +386,7 @@ local function Enable(self, unit)
 			self:RegisterEvent('UNIT_SPELLCAST_CHANNEL_UPDATE', CastUpdate)
 			self:RegisterEvent('UNIT_SPELLCAST_FAILED', CastFail)
 			self:RegisterEvent('UNIT_SPELLCAST_INTERRUPTED', CastFail)
-			if(not oUF:IsClassic() or oUF:IsWLKC()) then
+			if(not oUF:IsClassic() or oUF:IsWOTLK()) then
 				self:RegisterEvent('UNIT_SPELLCAST_INTERRUPTIBLE', CastInterruptible)
 				self:RegisterEvent('UNIT_SPELLCAST_NOT_INTERRUPTIBLE', CastInterruptible)
 			end

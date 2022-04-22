@@ -406,21 +406,21 @@ function oUF:IsVanilla()
 	return _G.WOW_PROJECT_ID == _G.WOW_PROJECT_CLASSIC
 end
 
---[[ oUF:IsBCC()
+--[[ oUF:IsTBC()
 Used to determine if running Burning Crusade Classic.
 
 * self - the global oUF object
 --]]
-function oUF:IsBCC()
+function oUF:IsTBC()
 	return _G.WOW_PROJECT_ID == _G.WOW_PROJECT_BURNING_CRUSADE_CLASSIC
 end
 
---[[ oUF:IsWLKC()
+--[[ oUF:IsWOTLK()
 Used to determine if running Wrath of the Lich King Classic.
 
 * self - the global oUF object
 --]]
-function oUF:IsWLKC()
+function oUF:IsWOTLK()
     return false -- TODO: Change when there is a project ID
 end
 

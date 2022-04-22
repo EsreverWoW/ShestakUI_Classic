@@ -28,7 +28,7 @@ frame:SetScript("OnEvent", function(_, _, addon)
 		CompactRaidFrameManager_UpdateOptionsFlowContainer = T.dummy
 	end
 
-	if T.classic then
+	if T.Classic then
 		Advanced_UseUIScale:Kill()
 		Advanced_UIScaleSlider:Kill()
 		BagHelpBox:Kill()
@@ -39,7 +39,7 @@ frame:SetScript("OnEvent", function(_, _, addon)
 	end
 	SetCVarBitfield("closedInfoFrames", LE_FRAME_TUTORIAL_WORLD_MAP_FRAME, true)
 	SetCVarBitfield("closedInfoFrames", LE_FRAME_TUTORIAL_PET_JOURNAL, true)
-	if not T.classic then
+	if T.Mainline then
 		SetCVarBitfield("closedInfoFrames", LE_FRAME_TUTORIAL_GARRISON_BUILDING, true)
 	end
 
@@ -81,7 +81,7 @@ frame:SetScript("OnEvent", function(_, _, addon)
 	end
 
 	if C.bag.enable then
-		if not T.classic then
+		if T.Mainline then
 			SetSortBagsRightToLeft(true)
 		end
 		SetInsertItemsLeftToRight(false)
@@ -97,7 +97,7 @@ frame:SetScript("OnEvent", function(_, _, addon)
 	end
 end)
 
-if not T.classic then
+if T.Mainline then
 	local function AcknowledgeTips()
 		if InCombatLockdown() then return end
 

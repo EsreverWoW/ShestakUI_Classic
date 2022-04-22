@@ -18,7 +18,7 @@ SLASH_TICKET1 = "/gm"
 SLASH_TICKET2 = "/гм"
 SLASH_TICKET3 = "/пь"
 
-if not T.classic then
+if T.Mainline then
 	SlashCmdList.JOURNAL = function() ToggleEncounterJournal() end
 	SLASH_JOURNAL1 = "/ej"
 	SLASH_JOURNAL2 = "/уо"
@@ -102,7 +102,7 @@ local function DisbandRaidGroup()
 			end
 		end
 	end
-	if T.classic then
+	if T.Classic then
 		LeaveParty()
 	else
 		C_PartyInfo.LeaveParty()
@@ -132,13 +132,13 @@ SLASH_GROUPDISBAND2 = "/кв"
 SlashCmdList.PARTYTORAID = function()
 	if GetNumGroupMembers() > 0 then
 		if UnitInRaid("player") and (UnitIsGroupLeader("player")) then
-			if T.classic then
+			if T.Classic then
 				ConvertToParty()
 			else
 				C_PartyInfo.ConvertToParty()
 			end
 		elseif UnitInParty("player") and (UnitIsGroupLeader("player")) then
-			if T.classic then
+			if T.Classic then
 				ConvertToRaid()
 			else
 				C_PartyInfo.ConvertToRaid()
@@ -156,7 +156,7 @@ SLASH_PARTYTORAID4 = "/сщтмуке"
 ----------------------------------------------------------------------------------------
 --	Instance teleport
 ----------------------------------------------------------------------------------------
-if not T.classic then
+if T.Mainline then
 	SlashCmdList.INSTTELEPORT = function()
 		local inInstance = IsInInstance()
 		if inInstance then
@@ -172,7 +172,7 @@ end
 ----------------------------------------------------------------------------------------
 --	Spec switching(by Monolit)
 ----------------------------------------------------------------------------------------
-if not T.classic then
+if T.Mainline then
 	SlashCmdList.SPEC = function(spec)
 		local canUse, failureReason = C_SpecializationInfo.CanPlayerUseTalentSpecUI()()
 		if canUse then
@@ -188,7 +188,7 @@ if not T.classic then
 	SLASH_SPEC3 = "/ыы"
 end
 
-if T.WLKC then
+if T.WOTLK then
 	SlashCmdList.SPEC = function()
 		local spec = GetActiveSpecGroup()
 		if spec == 1 then SetActiveSpecGroup(2) elseif spec == 2 then SetActiveSpecGroup(1) end
@@ -322,7 +322,7 @@ SLASH_CLEAR_CHAT2 = "/сдуфк"
 ----------------------------------------------------------------------------------------
 --	Test Blizzard Alerts
 ----------------------------------------------------------------------------------------
-if not T.classic then
+if T.Mainline then
 	SlashCmdList.TEST_ACHIEVEMENT = function()
 		PlaySound(SOUNDKIT.LFG_REWARDS)
 		if not AchievementFrame then
@@ -352,7 +352,7 @@ if not T.classic then
 	SLASH_TEST_ACHIEVEMENT2 = "/ефср"
 end
 
-if T.WLKC then
+if T.WOTLK then
 	SlashCmdList.TEST_ACHIEVEMENT = function()
 		PlaySound(SOUNDKIT.LFG_REWARDS)
 		if not AchievementFrame then
@@ -369,7 +369,7 @@ end
 ----------------------------------------------------------------------------------------
 --	Test Blizzard Extra Action Button
 ----------------------------------------------------------------------------------------
-if not T.classic then
+if T.Mainline then
 	SlashCmdList.TEST_EXTRABUTTON = function()
 		if ExtraActionBarFrame:IsShown() then
 			ExtraActionBarFrame:Hide()

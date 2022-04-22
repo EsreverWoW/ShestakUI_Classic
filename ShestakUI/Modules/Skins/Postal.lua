@@ -30,7 +30,7 @@ frame:SetScript("OnEvent", function()
 	PostalSelectReturnButton:SkinButton()
 	PostalOpenAllButton:SkinButton()
 
-	if T.classic then
+	if T.Classic then
 		for i = 1, INBOXITEMS_TO_DISPLAY do
 			local button = _G["MailItem"..i]
 			local expireTime = _G["MailItem"..i.."ExpireTime"]

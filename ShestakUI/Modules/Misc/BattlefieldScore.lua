@@ -16,11 +16,11 @@ local BGFrame = CreateFrame("Frame", "InfoBattleGround", UIParent)
 BGFrame:CreatePanel("Invisible", 300, C.font.stats_font_size, unpack(C.position.bg_score))
 BGFrame:EnableMouse(true)
 BGFrame:SetScript("OnEnter", function(self)
-	local columns = not T.classic and C_PvP.GetMatchPVPStatColumns()
+	local columns = T.Mainline and C_PvP.GetMatchPVPStatColumns()
 
 	for i = 1, GetNumBattlefieldScores() do
 		local name, honorableKills, deaths, damageDone, healingDone, rank
-		if T.classic then
+		if T.Classic then
 			name, _, honorableKills, deaths, _, _, _, _, _, _, damageDone, healingDone = GetBattlefieldScore(i)
 		else
 			name, _, honorableKills, deaths, _, _, _, _, _, damageDone, healingDone = GetBattlefieldScore(i)
@@ -38,7 +38,7 @@ BGFrame:SetScript("OnEnter", function(self)
 			GameTooltip:AddDoubleLine(SHOW_COMBAT_HEALING..":", T.ShortValue(healingDone), 1, 1, 1)
 
 			-- Add extra statistics depending on what BG you are
-			if T.classic then
+			if T.Classic then
 				local areaID = C_Map.GetBestMapForUnit("player") or 0
 				if areaID == WSG then
 					GameTooltip:AddDoubleLine(GetBattlefieldStatInfo(1)..":", GetBattlefieldStatData(i, 1), 1, 1, 1)
@@ -51,7 +51,7 @@ BGFrame:SetScript("OnEnter", function(self)
 					GameTooltip:AddDoubleLine(GetBattlefieldStatInfo(3)..":", GetBattlefieldStatData(i, 3), 1, 1, 1)
 					GameTooltip:AddDoubleLine(GetBattlefieldStatInfo(4)..":", GetBattlefieldStatData(i, 4), 1, 1, 1)
 				end
-			elseif not T.classic and columns then
+			elseif T.Mainline and columns then
 				for j, stat in ipairs(columns) do
 					local name = stat.name
 					if name and strlen(name) > 0 then
@@ -66,7 +66,7 @@ end)
 
 BGFrame:SetScript("OnLeave", function() GameTooltip:Hide() end)
 BGFrame:SetScript("OnMouseUp", function(_, button)
-	if T.classic then
+	if T.Classic then
 		if MiniMapBattlefieldFrame:IsShown() then
 			if button == "RightButton" then
 				ToggleBattlefieldMap()
@@ -120,7 +120,7 @@ local function Update(_, t)
 		RequestBattlefieldScoreData()
 		for i = 1, GetNumBattlefieldScores() do
 			local name, killingBlows, honorableKills, honorGained, damageDone, healingDone, rank
-			if T.classic then
+			if T.Classic then
 				name, killingBlows, honorableKills, _, honorGained, _, rank, _, _, _, damageDone, healingDone = GetBattlefieldScore(i)
 			else
 				name, killingBlows, honorableKills, _, honorGained, _, _, _, _, damageDone, healingDone = GetBattlefieldScore(i)

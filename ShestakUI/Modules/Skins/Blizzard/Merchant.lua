@@ -14,7 +14,7 @@ local function LoadSkin()
 	MerchantFrameInset:StripTextures()
 	MerchantMoneyBg:StripTextures()
 	MerchantMoneyInset:StripTextures()
-	if not T.classic then
+	if T.Mainline then
 		MerchantExtraCurrencyBg:StripTextures()
 		MerchantExtraCurrencyInset:StripTextures()
 	end
@@ -57,7 +57,7 @@ local function LoadSkin()
 		for j = 1, 3 do
 			local c = _G["MerchantItem"..i.."AltCurrencyFrameItem"..j]
 			local ct = _G["MerchantItem"..i.."AltCurrencyFrameItem"..j.."Texture"]
-			if T.Vanilla then -- FIXME: Issue with Honor Textures in BCC/WLKC
+			if T.Vanilla then -- FIXME: Issue with Honor Textures in TBC/WOTLK
 				c:CreateBackdrop("Default")
 				c.backdrop:SetPoint("TOPLEFT", ct, "TOPLEFT", -2, 2)
 				c.backdrop:SetPoint("BOTTOMRIGHT", ct, "BOTTOMRIGHT", 2, -2)
@@ -110,7 +110,7 @@ local function LoadSkin()
 	T.SkinCloseButton(MerchantFrameCloseButton, MerchantFrame.backdrop)
 	T.SkinNextPrevButton(MerchantNextPageButton)
 	T.SkinNextPrevButton(MerchantPrevPageButton)
-	if not T.classic then
+	if T.Mainline then
 		T.SkinDropDownBox(MerchantFrameLootFilter)
 	end
 

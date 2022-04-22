@@ -292,12 +292,12 @@ do
 		StyleNormalButton(_G["MultiBarBottomRightButton"..i], C.actionbar.editor and C.actionbar.bar5_size)
 	end
 
-	if not T.classic then
+	if T.Mainline then
 		StyleNormalButton(ExtraActionButton1)
 	end
 end
 
-if not T.classic then
+if T.Mainline then
 	hooksecurefunc("ActionButton_UpdateFlyout", StyleFlyoutButton)
 	hooksecurefunc("SpellButton_OnClick", StyleFlyoutButton)
 end
@@ -318,11 +318,11 @@ if C.actionbar.hotkey == true then
 			UpdateHotkey(_G["StanceButton"..i])
 			UpdateHotkey(_G["PetActionButton"..i])
 		end
-		if not T.classic then
+		if T.Mainline then
 			UpdateHotkey(ExtraActionButton1)
 		end
 	end)
 end
-if not T.classic and C.actionbar.hide_highlight == true then
+if T.Mainline and C.actionbar.hide_highlight == true then
 	hooksecurefunc("ActionButton_ShowOverlayGlow", HideHighlightButton)
 end

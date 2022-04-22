@@ -1,5 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
-if not T.classic or C.unitframe.enable ~= true or C.unitframe.plugins_power_spark ~= true then return end
+if T.Mainline or C.unitframe.enable ~= true or C.unitframe.plugins_power_spark ~= true then return end
 
 local _, ns = ...
 local oUF = ns.oUF

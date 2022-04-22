@@ -5,7 +5,7 @@ if T.class ~= "MAGE" or T.level < 11 then return end
 --	Mage portals menu(by Foof and Tohveli)
 ----------------------------------------------------------------------------------------
 local spells
-if T.classic then
+if T.Classic then
 	if T.Vanilla then
 		spells = (UnitFactionGroup("player") == "Horde") and {
 			[1] = {3567,11417},			-- Orgrimmar
@@ -16,7 +16,7 @@ if T.classic then
 			[2] = {3562,11416},			-- Ironforge
 			[3] = {3565,11419},			-- Darnassus
 		}
-	elseif T.BCC then
+	elseif T.TBC then
 		spells = (UnitFactionGroup("player") == "Horde") and {
 			[1] = {3567,11417},			-- Orgrimmar
 			[2] = {3563,11418},			-- Undercity

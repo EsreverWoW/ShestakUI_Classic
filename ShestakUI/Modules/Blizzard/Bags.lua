@@ -173,7 +173,7 @@ end
 
 local old_ToggleBag = ToggleBag
 local function Stuffing_ToggleBag(id)
-	if T.classic and id == -2 then
+	if T.Classic and id == -2 then
 		old_ToggleBag(KEYRING_CONTAINER)
 		return
 	end
@@ -199,7 +199,7 @@ function Stuffing:SlotUpdate(b)
 	local clink = GetContainerItemLink(b.bag, b.slot)
 	local isQuestItem, questId, isActiveQuest
 	local itemIsUpgrade
-	if T.classic then
+	if T.Classic then
 		-- isQuestItem, questId, isActiveQuest
 		if b.itemClassID == Enum.ItemClass.Questitem then isQuestItem = true end
 	else
@@ -213,7 +213,7 @@ function Stuffing:SlotUpdate(b)
 
 	if b.cooldown and StuffingFrameBags and StuffingFrameBags:IsShown() then
 		local start, duration, enable = GetContainerItemCooldown(b.bag, b.slot)
-		if T.classic and HasWandEquipped() then
+		if T.Classic and HasWandEquipped() then
 			local wandID = GetInventoryItemID("player", 18)
 			local wandSpeed = GetItemCooldown(wandID)
 			if wandSpeed == 0 then
@@ -233,7 +233,7 @@ function Stuffing:SlotUpdate(b)
 		b.frame.text:SetText("")
 	end
 
-	if not T.classic then
+	if T.Mainline then
 		b.frame.Azerite:Hide()
 		b.frame.Conduit:Hide()
 		b.frame.Conduit2:Hide()
@@ -244,12 +244,10 @@ function Stuffing:SlotUpdate(b)
 	if b.frame.UpgradeIcon then
 		b.frame.UpgradeIcon:SetPoint("TOPLEFT", C.bag.button_size/2.7, -C.bag.button_size/2.7)
 		b.frame.UpgradeIcon:SetSize(C.bag.button_size/1.7, C.bag.button_size/1.7)
-		if not T.classic then
-			if IsAddOnLoaded("Pawn") then
-				itemIsUpgrade = PawnIsContainerItemAnUpgrade(b.frame:GetParent():GetID(), b.frame:GetID())
-			else
-				itemIsUpgrade = IsContainerItemAnUpgrade(b.frame:GetParent():GetID(), b.frame:GetID())
-			end
+		if IsAddOnLoaded("Pawn") then
+			itemIsUpgrade = PawnIsContainerItemAnUpgrade(b.frame:GetParent():GetID(), b.frame:GetID())
+		elseif T.Mainline then
+			itemIsUpgrade = IsContainerItemAnUpgrade(b.frame:GetParent():GetID(), b.frame:GetID())
 		end
 		if itemIsUpgrade and itemIsUpgrade == true then
 			b.frame.UpgradeIcon:SetShown(true)
@@ -274,7 +272,7 @@ function Stuffing:SlotUpdate(b)
 			b.frame.text:SetText(b.itemlevel)
 		end
 
-		if not T.classic then
+		if T.Mainline then
 			if C_AzeriteEmpoweredItem.IsAzeriteEmpoweredItemByID(clink) then
 				b.frame.Azerite:SetAtlas("AzeriteIconFrame")
 				b.frame.Azerite:Show()
@@ -357,7 +355,7 @@ end
 function Stuffing:UpdateCooldowns(b)
 	if b.cooldown and StuffingFrameBags and StuffingFrameBags:IsShown() then
 		local start, duration, enable = GetContainerItemCooldown(b.bag, b.slot)
-		if T.classic and HasWandEquipped() then
+		if T.Classic and HasWandEquipped() then
 			local wandID = GetInventoryItemID("player", 18)
 			local wandSpeed = GetItemCooldown(wandID)
 			if wandSpeed == 0 then
@@ -525,7 +523,7 @@ function Stuffing:BagFrameSlotNew(p, slot)
 	if slot > 3 then
 		ret.slot = slot
 		slot = slot - 4
-		ret.frame = CreateFrame(T.classic and "CheckButton" or "ItemButton", "StuffingBBag"..slot.."Slot", p, "BankItemButtonBagTemplate")
+		ret.frame = CreateFrame(T.Classic and "CheckButton" or "ItemButton", "StuffingBBag"..slot.."Slot", p, "BankItemButtonBagTemplate")
 		if BackdropTemplateMixin then
 			Mixin(ret.frame, BackdropTemplateMixin)
 		end
@@ -557,7 +555,7 @@ function Stuffing:BagFrameSlotNew(p, slot)
 			SetItemButtonTextureVertexColor(ret.frame, 1.0, 1.0, 1.0)
 		end
 	else
-		ret.frame = CreateFrame(T.classic and "CheckButton" or "ItemButton", "StuffingFBag"..slot.."Slot", p, "BagSlotButtonTemplate")
+		ret.frame = CreateFrame(T.Classic and "CheckButton" or "ItemButton", "StuffingFBag"..slot.."Slot", p, "BagSlotButtonTemplate")
 		if BackdropTemplateMixin then
 			Mixin(ret.frame, BackdropTemplateMixin)
 		end
@@ -579,7 +577,7 @@ function Stuffing:BagFrameSlotNew(p, slot)
 	ret.frame:StyleButton()
 	ret.frame:SetTemplate("Default")
 	ret.frame:SetNormalTexture(nil)
-	if T.classic then
+	if T.Classic then
 		ret.frame:SetCheckedTexture(nil)
 	end
 
@@ -629,7 +627,7 @@ function Stuffing:SlotNew(bag, slot)
 	end
 
 	if not ret.frame then
-		ret.frame = CreateFrame(T.classic and "Button" or "ItemButton", "StuffingBag"..bag.."_"..slot, self.bags[bag], tpl)
+		ret.frame = CreateFrame(T.Classic and "Button" or "ItemButton", "StuffingBag"..bag.."_"..slot, self.bags[bag], tpl)
 		ret.frame:StyleButton()
 		ret.frame:SetTemplate("Default")
 		ret.frame:SetNormalTexture(nil)
@@ -756,7 +754,7 @@ function Stuffing:SearchUpdate(str)
 		if b.name then
 			local ilink = GetContainerItemLink(b.bag, b.slot)
 			if ilink then
-				local _, setName = not T.classic and GetContainerItemEquipmentSetInfo(b.bag, b.slot)
+				local _, setName = T.Mainline and GetContainerItemEquipmentSetInfo(b.bag, b.slot)
 				setName = setName or ""
 				local _, _, _, _, minLevel, class, subclass, _, equipSlot, _, _, _, _, bindType = GetItemInfo(ilink)
 				if bindType == 2 then
@@ -886,7 +884,7 @@ function Stuffing:CreateBagFrame(w)
 	end
 
 	if w == "Bank" then
-		if not T.classic then
+		if T.Mainline then
 			-- Reagent button
 			f.b_reagent = CreateFrame("Button", "StuffingReagentButton"..w, f)
 			f.b_reagent:SetSize(105, 20)
@@ -913,7 +911,7 @@ function Stuffing:CreateBagFrame(w)
 		-- Buy button
 		f.b_purchase = CreateFrame("Button", "StuffingPurchaseButton"..w, f)
 		f.b_purchase:SetSize(80, 20)
-		if T.classic then
+		if T.Classic then
 			f.b_purchase:SetPoint("TOPLEFT", 10, -4)
 		else
 			f.b_purchase:SetPoint("TOPLEFT", f.b_reagent, "TOPRIGHT", 3, 0)
@@ -1316,11 +1314,13 @@ function Stuffing:ADDON_LOADED(addon)
 	self:RegisterEvent("BANKFRAME_CLOSED")
 	self:RegisterEvent("PLAYERBANKSLOTS_CHANGED")
 	self:RegisterEvent("PLAYERBANKBAGSLOTS_CHANGED")
-	if not T.classic then
+	if not T.Vanilla then
 		self:RegisterEvent("GUILDBANKFRAME_OPENED")
 		self:RegisterEvent("GUILDBANKFRAME_CLOSED")
-		self:RegisterEvent("PLAYERREAGENTBANKSLOTS_CHANGED")
-		self:RegisterEvent("SCRAPPING_MACHINE_SHOW")
+		if T.Mainline then
+			self:RegisterEvent("PLAYERREAGENTBANKSLOTS_CHANGED")
+			self:RegisterEvent("SCRAPPING_MACHINE_SHOW")
+		end
 	end
 	self:RegisterEvent("BAG_CLOSED")
 	self:RegisterEvent("BAG_UPDATE_COOLDOWN")
@@ -1772,7 +1772,7 @@ function Stuffing.Menu(self, level)
 
 	if level ~= 1 then return end
 
-	if not T.classic then
+	if T.Mainline then
 		wipe(info)
 		info.text = BAG_FILTER_CLEANUP.." Blizzard"
 		info.notCheckable = 1
@@ -1830,7 +1830,7 @@ function Stuffing.Menu(self, level)
 	end
 	UIDropDownMenu_AddButton(info, level)
 
-	if T.classic then
+	if T.Classic then
 		wipe(info)
 		info.text = BINDING_NAME_TOGGLEKEYRING
 		info.notCheckable = 1

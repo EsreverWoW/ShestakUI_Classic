@@ -10,7 +10,7 @@ hooksecurefunc("SetItemRef", function(link) -- Secure hook to avoid taint
 		local player = link:match("^player:([^:]+)")
 		local bplayer = link:match("^BNplayer:([^:]+)")
 		if player then
-			if T.classic then
+			if T.Classic then
 				InviteUnit(player)
 			else
 				C_PartyInfo.InviteUnit(player)

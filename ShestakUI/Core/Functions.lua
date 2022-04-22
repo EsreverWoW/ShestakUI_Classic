@@ -79,7 +79,7 @@ local isCaster = {
 
 local function CheckRole()
 	local spec, role
-	if T.classic then
+	if T.Classic then
 		spec = T.GetSpecialization()
 		role = spec and T.GetSpecializationRole(spec)
 	else
@@ -106,7 +106,7 @@ local function CheckRole()
 end
 local RoleUpdater = CreateFrame("Frame")
 RoleUpdater:RegisterEvent("PLAYER_ENTERING_WORLD")
-if T.classic then
+if T.Classic then
 	RoleUpdater:RegisterEvent("CHARACTER_POINTS_CHANGED")
 	RoleUpdater:RegisterEvent("UNIT_INVENTORY_CHANGED")
 	RoleUpdater:RegisterEvent("UPDATE_BONUS_ACTIONBAR")
@@ -142,7 +142,7 @@ LevelUpdater:SetScript("OnEvent", CheckLevel)
 ----------------------------------------------------------------------------------------
 --	Pet Battle Hider
 ----------------------------------------------------------------------------------------
-if not T.classic then
+if T.Mainline then
 	T_PetBattleFrameHider = CreateFrame("Frame", "ShestakUI_PetBattleFrameHider", UIParent, "SecureHandlerStateTemplate")
 	T_PetBattleFrameHider:SetAllPoints()
 	T_PetBattleFrameHider:SetFrameStrata("LOW")

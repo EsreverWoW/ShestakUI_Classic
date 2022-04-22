@@ -145,7 +145,7 @@ end
 
 local function registerStyle(myProfile)
 	if not BigWigs then return end
-	if T.classic then
+	if T.Classic then
 		local bars = BigWigs:GetPlugin("Bars", true)
 		if not bars then return end
 		bars:RegisterBarStyle("ShestakUI", {
@@ -265,13 +265,13 @@ function T.UploadBW()
 		prox.db.profile.fontName = "Calibri"
 		prox.db.profile.objects.ability = false
 	end
-	if T.classic then
+	if T.Classic then
 		BigWigsIconClassicDB.hide = true
 	else
 		BigWigsIconDB.hide = true
 	end
 	BigWigs:GetPlugin("Super Emphasize").db.profile.fontName = "Calibri"
-	if not T.classic then
+	if T.Mainline then
 		BigWigs:GetPlugin("Alt Power").db.profile.fontName = "Calibri"
 	end
 	if InCombatLockdown() then

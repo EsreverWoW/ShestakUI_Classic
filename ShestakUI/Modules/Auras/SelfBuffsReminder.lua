@@ -11,7 +11,7 @@ local playerBuff = {}
 local function OnEvent(self, event, arg1)
 	local group = tab[self.id]
 	if not group.spells then return end
-	if (T.classic and not T.GetSpecialization()) or (not T.classic and not GetSpecialization()) then return end
+	if (T.Classic and not T.GetSpecialization()) or (T.Mainline and not GetSpecialization()) then return end
 	if (event == "UNIT_AURA" or event == "UNIT_INVENTORY_CHANGED") and arg1 ~= "player" then return end
 	if group.level and T.level < group.level then return end
 
@@ -39,7 +39,7 @@ local function OnEvent(self, event, arg1)
 	if event == "LEARNED_SPELL_IN_TAB" and self.icon:GetTexture() then
 		self:UnregisterAllEvents()
 		self:RegisterEvent("UNIT_AURA")
-		if not T.classic then
+		if T.Mainline or T.WOTLK then
 			self:RegisterEvent("UNIT_ENTERED_VEHICLE")
 			self:RegisterEvent("UNIT_EXITED_VEHICLE")
 		end
@@ -149,7 +149,7 @@ for i = 1, #tab do
 	frame:RegisterEvent("PLAYER_REGEN_ENABLED")
 	frame:RegisterEvent("PLAYER_REGEN_DISABLED")
 	frame:RegisterEvent("ZONE_CHANGED_NEW_AREA")
-	if not T.classic then
+	if T.Mainline or T.WOTLK then
 		frame:RegisterEvent("UNIT_ENTERED_VEHICLE")
 		frame:RegisterEvent("UNIT_EXITED_VEHICLE")
 	end

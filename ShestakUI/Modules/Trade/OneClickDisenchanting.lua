@@ -148,7 +148,7 @@ function button:PLAYER_LOGIN()
 	end
 
 	if IsSpellKnown(1804) then
-		if T.classic then
+		if T.Classic then
 			rogue = ITEM_MIN_SKILL:gsub("%%s", (T.client == "ruRU" and "Взлом замков" or GetSpellInfo(1804))):gsub("%%d", "%(.*%)")
 		else
 			rogue = ITEM_MIN_SKILL:gsub("%%s", (T.client == "ruRU" and "Взлом замков" or GetSpellInfo(1809))):gsub("%%d", "%(.*%)")
@@ -160,7 +160,7 @@ function button:PLAYER_LOGIN()
 
 		local auctionFrame
 
-		if T.classic then
+		if T.Classic then
 			auctionFrame = AuctionFrame
 		else
 			auctionFrame = AuctionHouseFrame

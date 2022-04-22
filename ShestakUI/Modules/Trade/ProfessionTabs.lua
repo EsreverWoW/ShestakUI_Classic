@@ -153,7 +153,7 @@ local function HandleProfession(object, professionID, hat)
 			end
 		end
 
-		if not T.classic then
+		if T.Mainline then
 			if hat and PlayerHasToy(134020) and C_ToyBox.IsToyUsable(134020) then
 				UpdateTab(object, GetSpellInfo(67556), nil, 236571, true)
 			end
@@ -168,7 +168,7 @@ local function HandleTabs(object)
 	if InCombatLockdown() then
 		handler:RegisterEvent("PLAYER_REGEN_ENABLED")
 	else
-		local firstProfession, secondProfession, archaeology, fishing, cooking, firstAid = not T.classic and GetProfessions()
+		local firstProfession, secondProfession, archaeology, fishing, cooking, firstAid = (T.Mainline or T.WOTLK) and GetProfessions()
 
 		ResetTabs(object)
 

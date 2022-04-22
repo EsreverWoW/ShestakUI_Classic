@@ -1,5 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
-if T.classic or C.skins.blood_shield_tracker ~= true or T.class ~= "DEATHKNIGHT" then return end
+if T.Classic or C.skins.blood_shield_tracker ~= true or T.class ~= "DEATHKNIGHT" then return end
 
 ----------------------------------------------------------------------------------------
 --	BloodShieldTracker skin

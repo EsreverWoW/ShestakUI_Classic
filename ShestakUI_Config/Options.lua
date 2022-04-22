@@ -14,11 +14,11 @@ local function IsVanillaBuild()
 	return _G.WOW_PROJECT_ID == _G.WOW_PROJECT_CLASSIC
 end
 
-local function IsBCCBuild()
+local function IsTBCBuild()
 	return _G.WOW_PROJECT_ID == _G.WOW_PROJECT_BURNING_CRUSADE_CLASSIC
 end
 
-local function IsWLKCBuild()
+local function IsWOTLKBuild()
 	return false -- TODO: Add project ID once available
 end
 
@@ -718,10 +718,10 @@ do
 		hide_maw_buffs
 	}
 
-	if IsClassicBuild() and not IsWLKCBuild() then
+	if IsClassicBuild() and not IsWOTLKBuild() then
 		HideOptions(classic)
 		move_blizzard:SetPoint("TOPLEFT", vehicle_mouseover, "BOTTOMLEFT", 16, 0)
-	elseif IsWLKCBuild() then
+	elseif IsWOTLKBuild() then
 		HideOptions(wotlk)
 	end
 end
@@ -1285,7 +1285,7 @@ do
 	if IsVanillaBuild() then
 		HideOptions(vanilla)
 		show_target_target:SetPoint("LEFT", show_pet, "RIGHT", 248, 0)
-	elseif IsBCCBuild() or IsWLKCBuild() then
+	elseif IsTBCBuild() or IsWOTLKBuild() then
 		HideOptions(classic)
 	else
 		HideOptions(retail)
@@ -1352,10 +1352,10 @@ do
 		totem_other
 	}
 
-	if IsClassicBuild() and not IsWLKCBuild() then
+	if IsClassicBuild() and not IsWOTLKBuild() then
 		HideOptions(classic)
 		totem:SetPoint("TOPLEFT", rune, "BOTTOMLEFT", -20, 0)
-	elseif IsWLKCBuild() then
+	elseif IsWOTLKBuild() then
 		HideOptions(wotlk)
 	end
 end
@@ -2260,7 +2260,7 @@ do
 		dk_runes
 	}
 
-	if IsClassicBuild() and not IsWLKCBuild() then
+	if IsClassicBuild() and not IsWOTLKBuild() then
 		HideOptions(classic)
 	end
 end
@@ -2953,9 +2953,9 @@ do
 		currency_archaeology
 	}
 
-	if IsClassicBuild() and not IsWLKCBuild() then
+	if IsClassicBuild() and not IsWOTLKBuild() then
 		HideOptions(classic)
-	elseif IsWLKCBuild() then
+	elseif IsWOTLKBuild() then
 		HideOptions(wotlk)
 	end
 end
@@ -2996,9 +2996,9 @@ do
 		archaeology
 	}
 
-	if IsClassicBuild() and not IsWLKCBuild() then
+	if IsClassicBuild() and not IsWOTLKBuild() then
 		HideOptions(classic)
-	elseif IsWLKCBuild() then
+	elseif IsWOTLKBuild() then
 		HideOptions(wotlk)
 	end
 end
@@ -3043,7 +3043,7 @@ do
 		chars_currency
 	}
 
-	if IsClassicBuild() and not IsWLKCBuild() then
+	if IsClassicBuild() and not IsWOTLKBuild() then
 		HideOptions(classic)
 	end
 end

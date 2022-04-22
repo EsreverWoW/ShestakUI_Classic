@@ -1,5 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
-if T.classic or C.skins.ovale ~= true then return end
+if T.Classic or C.skins.ovale ~= true then return end
 
 ----------------------------------------------------------------------------------------
 --	OvaleSpellPriority skin

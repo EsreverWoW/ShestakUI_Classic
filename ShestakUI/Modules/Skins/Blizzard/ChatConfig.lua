@@ -8,7 +8,7 @@ local function LoadSkin()
 	ChatConfigFrame:StripTextures()
 	ChatConfigFrame:SetTemplate("Transparent")
 
-	local ChatConfigFrameHeader = T.classic and ChatConfigFrameHeader or ChatConfigFrame.Header
+	local ChatConfigFrameHeader = T.Classic and ChatConfigFrameHeader or ChatConfigFrame.Header
 	ChatConfigFrameHeader:StripTextures()
 	ChatConfigFrameHeader:ClearAllPoints()
 	ChatConfigFrameHeader:SetPoint("TOP", ChatConfigFrame, 0, 7)
@@ -118,14 +118,14 @@ local function LoadSkin()
 		end
 		f:CreateBackdrop("Overlay")
 		f:SetFrameLevel(f:GetFrameLevel() + 2)
-		if T.classic then
+		if T.Classic then
 			f.backdrop:SetOutside(f.Color, 0, 0)
 		else
 			f.backdrop:SetOutside(f.Color, 2, 2)
 		end
 	end
 
-	if T.classic then
+	if T.Classic then
 		hooksecurefunc("ChatConfig_CreateBoxes", function(frame, boxTable, boxTemplate)
 			if frame.styled then return end
 
@@ -227,7 +227,7 @@ local function LoadSkin()
 		ReskinColourSwatch(CombatConfigColorsColorizeSpellNamesColorSwatch)
 		ReskinColourSwatch(CombatConfigColorsColorizeDamageNumberColorSwatch)
 
-		for i = 1, T.classic and 5 or 4 do
+		for i = 1, T.Classic and 5 or 4 do
 			for j = 1, MAX_WOW_CHAT_CHANNELS or 20 do
 				if _G["CombatConfigMessageTypesLeftCheckBox"..i] and _G["CombatConfigMessageTypesLeftCheckBox"..i.."_"..j] then
 					T.SkinCheckBox(_G["CombatConfigMessageTypesLeftCheckBox"..i])
@@ -295,7 +295,7 @@ local function LoadSkin()
 	end)
 
 	-- TextToSpeech
-	if not T.classic then
+	if T.Mainline then
 		local checkBoxes = {
 			TextToSpeechFramePanelContainer.PlaySoundSeparatingChatLinesCheckButton,
 			TextToSpeechFramePanelContainer.AddCharacterNameToSpeechCheckButton,

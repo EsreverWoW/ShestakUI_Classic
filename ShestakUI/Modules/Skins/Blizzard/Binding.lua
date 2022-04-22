@@ -22,7 +22,7 @@ local function LoadSkin()
 	KeyBindingFrame:StripTextures()
 	KeyBindingFrame:SetTemplate("Transparent")
 
-	if T.classic then
+	if T.Classic then
 		KeyBindingFrame.header:StripTextures()
 		KeyBindingFrame.header:ClearAllPoints()
 		KeyBindingFrame.header:SetPoint("TOP", KeyBindingFrame, "TOP", 0, -4)
@@ -77,7 +77,7 @@ local function LoadSkin()
 	end)
 
 	-- QuickKeybind
-	if not T.classic then
+	if T.Mainline then
 		QuickKeybindFrame:StripTextures()
 		QuickKeybindFrame.Header:StripTextures()
 		QuickKeybindFrame:SetTemplate("Transparent")

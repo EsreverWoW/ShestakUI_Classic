@@ -86,7 +86,7 @@ local function StyleBuffs(buttonName, index)
 		duration:SetFont(C.font.auras_font, C.font.auras_font_size, C.font.auras_font_style)
 		duration:SetShadowOffset(C.font.auras_font_shadow and 1 or 0, C.font.auras_font_shadow and -1 or 0)
 
-		if not T.classic and not buff.timer then
+		if T.Mainline and not buff.timer then
 			buff.timer = buff:CreateAnimationGroup()
 			buff.timerAnim = buff.timer:CreateAnimation()
 			buff.timerAnim:SetDuration(0.1)
@@ -136,10 +136,10 @@ local function UpdateBuffAnchors()
 			aboveBuff = buff
 		else
 			if numBuffs == 1 then
-				if mainhand and offhand and (T.classic or not UnitHasVehicleUI("player")) then
+				if mainhand and offhand and (T.Classic or not UnitHasVehicleUI("player")) then
 					buff:SetPoint("RIGHT", TempEnchant2, "LEFT", -3, 0)
 					aboveBuff = TempEnchant1
-				elseif ((mainhand and not offhand) or (offhand and not mainhand)) and (T.classic or not UnitHasVehicleUI("player")) then
+				elseif ((mainhand and not offhand) or (offhand and not mainhand)) and (T.Classic or not UnitHasVehicleUI("player")) then
 					buff:SetPoint("RIGHT", TempEnchant1, "LEFT", -3, 0)
 					aboveBuff = TempEnchant1
 				else
@@ -160,7 +160,7 @@ end
 hooksecurefunc("BuffFrame_UpdateAllBuffAnchors", UpdateBuffAnchors)
 hooksecurefunc("DebuffButton_UpdateAnchors", UpdateDebuffAnchors)
 
-if T.classic then
+if T.Classic then
 	local function UpdateDuration(buff, timeLeft)
 		local duration = buff.duration
 		if timeLeft and C.aura.show_timer == true then

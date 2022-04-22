@@ -24,7 +24,7 @@ local function LoadSkin()
 		_G["RaidGroupButton"..i]:SkinButton(true)
 	end
 
-	if T.classic then
+	if T.Classic then
 		_G["RaidFrameReadyCheckButton"]:SkinButton()
 	end
 

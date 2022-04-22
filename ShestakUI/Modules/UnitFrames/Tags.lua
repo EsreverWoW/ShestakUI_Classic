@@ -28,7 +28,7 @@ oUF.Tags.Methods["DiffColor"] = function(unit)
 			r, g, b = 0.71, 0.43, 0.27
 		elseif DiffColor >= -2 then
 			r, g, b = 0.84, 0.75, 0.65
-		elseif (T.classic and -DiffColor <= GetQuestGreenRange()) or -DiffColor <= 5 then
+		elseif (T.Classic and -DiffColor <= GetQuestGreenRange()) or -DiffColor <= 5 then
 			r, g, b = 0.33, 0.59, 0.33
 		else
 			r, g, b = 0.55, 0.57, 0.61
@@ -39,7 +39,7 @@ end
 oUF.Tags.Events["DiffColor"] = "UNIT_LEVEL"
 
 oUF.Tags.Methods["PetNameColor"] = function()
-	if T.classic and T.class == "HUNTER" and C.unitframe.bar_color_happiness then
+	if T.Classic and T.class == "HUNTER" and C.unitframe.bar_color_happiness then
 		local mood = GetPetHappiness()
 		if mood then
 			local r, g, b = unpack(T.oUF_colors.happiness[mood])
@@ -51,7 +51,7 @@ oUF.Tags.Methods["PetNameColor"] = function()
 		return string.format("|cff%02x%02x%02x", T.color.r * 255, T.color.g * 255, T.color.b * 255)
 	end
 end
-if T.classic then
+if T.Classic then
 	oUF.Tags.Events["PetNameColor"] = "UNIT_POWER_UPDATE UNIT_HAPPINESS"
 else
 	oUF.Tags.Events["PetNameColor"] = "UNIT_POWER_UPDATE"
@@ -130,7 +130,7 @@ oUF.Tags.Events["AltPower"] = "UNIT_POWER_UPDATE"
 oUF.Tags.Methods["NameplateLevel"] = function(unit)
 	local level = UnitLevel(unit)
 	local c = UnitClassification(unit)
-	if not T.classic then
+	if T.Mainline then
 		if UnitIsWildBattlePet(unit) or UnitIsBattlePetCompanion(unit) then
 			level = UnitBattlePetLevel(unit)
 		end
@@ -176,7 +176,7 @@ oUF.Tags.Methods["NameplateHealth"] = function(unit)
 		return ("%s - %d%%"):format(T.ShortValue(hp), hp / maxhp * 100 + 0.5)
 	end
 end
-if T.classic then
+if T.Classic then
 	oUF.Tags.Events["NameplateHealth"] = "UNIT_HEALTH_FREQUENT UNIT_MAXHEALTH NAME_PLATE_UNIT_ADDED"
 else
 	oUF.Tags.Events["NameplateHealth"] = "UNIT_HEALTH UNIT_MAXHEALTH NAME_PLATE_UNIT_ADDED"

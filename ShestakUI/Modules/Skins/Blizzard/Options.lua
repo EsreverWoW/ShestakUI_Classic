@@ -8,7 +8,7 @@ local function LoadSkin()
 	VideoOptionsFrame:StripTextures()
 	VideoOptionsFrame:SetTemplate("Transparent")
 
-	local VideoOptionsFrameHeader = T.classic and VideoOptionsFrameHeader or VideoOptionsFrame.Header
+	local VideoOptionsFrameHeader = T.Classic and VideoOptionsFrameHeader or VideoOptionsFrame.Header
 	VideoOptionsFrameHeader:StripTextures()
 	VideoOptionsFrameHeader:ClearAllPoints()
 	VideoOptionsFrameHeader:SetPoint("TOP", VideoOptionsFrame, 0, 0)
@@ -209,7 +209,7 @@ local function LoadSkin()
 	_G["VideoOptionsFrameApply"]:ClearAllPoints()
 	_G["VideoOptionsFrameApply"]:SetPoint("RIGHT", _G["VideoOptionsFrameOkay"], "LEFT", -4, 0)
 
-	if T.classic then
+	if T.Classic then
 		_G["VideoOptionsFrameClassic"]:ClearAllPoints()
 		_G["VideoOptionsFrameClassic"]:SetPoint("LEFT", _G["VideoOptionsFrameDefaults"], "RIGHT", 4, 0)
 	end

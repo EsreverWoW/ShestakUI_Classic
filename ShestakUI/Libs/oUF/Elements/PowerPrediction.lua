@@ -29,7 +29,7 @@ local function Update(self, event, unit)
 	local mainCost, altCost = 0, 0
 
 	if(not spellID and type(notInterruptible) == "number") then
-		spellID = notInterruptible -- there is no notInterruptible return in Classic/BCC
+		spellID = notInterruptible -- there is no notInterruptible return in Classic/TBC Classic
 		notInterruptible = false
 	end
 

@@ -1,5 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
-if T.classic or  C.actionbar.enable ~= true or C.skins.flyout_button ~= true then return end
+if T.Classic or  C.actionbar.enable ~= true or C.skins.flyout_button ~= true then return end
 
 ----------------------------------------------------------------------------------------
 --	FlyoutButtonCustom skin

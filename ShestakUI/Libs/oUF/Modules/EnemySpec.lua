@@ -1,5 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
-if T.classic or C.unitframe.enable ~= true or C.unitframe.plugins_enemy_spec ~= true then return end
+if T.Classic or C.unitframe.enable ~= true or C.unitframe.plugins_enemy_spec ~= true then return end
 
 ----------------------------------------------------------------------------------------
 --	Based on oUF_Talents(by Fernir)

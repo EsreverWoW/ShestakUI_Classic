@@ -21,13 +21,13 @@ else
 end
 
 -- WoW Classic requires combat text be enabled to display incoming damage
-if T.classic then
+if T.Classic then
 	SetCVar("enableFloatingCombatText", 1)
 end
 
 -- Detect vehicle
 local function SetUnit()
-	if T.classic then
+	if T.Classic then
 		ct.unit = "player"
 	else
 		if UnitHasVehicleUI("player") then
@@ -368,9 +368,7 @@ local frame = CreateFrame("Frame")
 frame:RegisterEvent("PLAYER_LOGOUT")
 frame:SetScript("OnEvent", function(_, event)
 	if event == "PLAYER_LOGOUT" then
-		if not T.classic then
-			SetCVar("floatingCombatTextCombatHealing", 1)
-		end
+		SetCVar("floatingCombatTextCombatHealing", 1)
 		SetCVar("floatingCombatTextCombatDamage", 1)
 	end
 end)
@@ -441,7 +439,7 @@ xCT:RegisterEvent("UNIT_POWER_UPDATE")
 if C.combattext.dk_runes and T.class == "DEATHKNIGHT" then
 	xCT:RegisterEvent("RUNE_POWER_UPDATE")
 end
-if not T.classic then
+if T.Mainline or T.WOTLK then
 	xCT:RegisterEvent("UNIT_ENTERED_VEHICLE")
 	xCT:RegisterEvent("UNIT_EXITING_VEHICLE")
 end
@@ -1113,7 +1111,7 @@ if C.combattext.merge_aoe_spam then
 	for spell in pairs(T.aoespam) do
 		local name = GetSpellInfo(spell)
 		if not name then
-			if T.classic then
+			if T.Classic then
 				print("|cffff0000WARNING: spell ID ["..tostring(spell).."] no longer exists! Report this to EsreverWoW.|r")
 			else
 				print("|cffff0000WARNING: spell ID ["..tostring(spell).."] no longer exists! Report this to Shestak.|r")
@@ -1124,7 +1122,7 @@ if C.combattext.merge_aoe_spam then
 	for spell in pairs(T.merge) do
 		local name = GetSpellInfo(spell)
 		if not name then
-			if T.classic then
+			if T.Classic then
 				print("|cffff0000WARNING: spell ID ["..tostring(spell).."] no longer exists! Report this to EsreverWoW.|r")
 			else
 				print("|cffff0000WARNING: spell ID ["..tostring(spell).."] no longer exists! Report this to Shestak.|r")
@@ -1137,7 +1135,7 @@ if C.combattext.healing then
 	for spell in pairs(T.healfilter) do
 		local name = GetSpellInfo(spell)
 		if not name then
-			if T.classic then
+			if T.Classic then
 				print("|cffff0000WARNING: spell ID ["..tostring(spell).."] no longer exists! Report this to EsreverWoW.|r")
 			else
 				print("|cffff0000WARNING: spell ID ["..tostring(spell).."] no longer exists! Report this to Shestak.|r")

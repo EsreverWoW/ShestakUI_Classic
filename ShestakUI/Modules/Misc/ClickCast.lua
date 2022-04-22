@@ -5,7 +5,7 @@ if C.misc.click_cast ~= true then return end
 --	Simple click2cast spell binder(sBinder by Fernir)
 ----------------------------------------------------------------------------------------
 local SpellBinder = CreateFrame("Frame", "SpellBinder", SpellBookFrame, "ButtonFrameTemplate")
-if T.classic then
+if T.Classic then
 	SpellBinder:SetPoint("TOPLEFT", SpellBookFrame, "TOPRIGHT", 32, -12)
 else
 	SpellBinder:SetPoint("TOPLEFT", SpellBookFrame, "TOPRIGHT", 100, -1)
@@ -205,7 +205,7 @@ end
 hooksecurefunc("SpellBookFrame_Update", function() if SpellBinder.sbOpen then SpellBinder:ToggleButtons() end end)
 
 SpellBinder.OpenButton = CreateFrame("CheckButton", "SpellBinderOpenButton", _G["SpellBookSkillLineTab1"], "SpellBookSkillLineTabTemplate")
-if T.classic then
+if T.Classic then
 	SpellBinder.OpenButton:SetNormalTexture("Interface\\ICONS\\INV_Mushroom_08")
 else
 	SpellBinder.OpenButton:SetNormalTexture("Interface\\ICONS\\Achievement_Guild_Doctorisin")
@@ -296,7 +296,7 @@ local addSpell = function(self, button)
 				button = SecureButton_GetButtonSuffix(button)
 			end
 
-			if T.classic and strlen(spellrank) > 0 then
+			if T.Classic and strlen(spellrank) > 0 then
 				spellname = spellname.."("..spellrank..")"
 			end
 
@@ -322,7 +322,7 @@ SpellBinder:RegisterEvent("PLAYER_ENTERING_WORLD")
 SpellBinder:RegisterEvent("GROUP_ROSTER_UPDATE")
 SpellBinder:RegisterEvent("ZONE_CHANGED")
 SpellBinder:RegisterEvent("ZONE_CHANGED_NEW_AREA")
-if T.classic then
+if T.Classic then
 	SpellBinder:RegisterEvent("CHARACTER_POINTS_CHANGED")
 else
 	SpellBinder:RegisterEvent("PLAYER_TALENT_UPDATE")
@@ -389,7 +389,7 @@ if IsAddOnLoaded("Aurora") then
 	SpellBinderInset:StripTextures()
 
 	SpellBinder.OpenButton:StripTextures()
-	if T.classic then
+	if T.Classic then
 		SpellBinder.OpenButton:SetNormalTexture("Interface\\ICONS\\INV_Mushroom_08")
 	else
 		SpellBinder.OpenButton:SetNormalTexture("Interface\\ICONS\\Achievement_Guild_Doctorisin")
@@ -411,7 +411,7 @@ elseif C.skins.blizzard_frames == true then
 	SpellBinder.backdrop:SetPoint("BOTTOMRIGHT", 0, 9)
 
 	SpellBinder.OpenButton:StripTextures()
-	if T.classic then
+	if T.Classic then
 		SpellBinder.OpenButton:SetNormalTexture("Interface\\ICONS\\INV_Mushroom_08")
 	else
 		SpellBinder.OpenButton:SetNormalTexture("Interface\\ICONS\\Achievement_Guild_Doctorisin")

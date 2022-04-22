@@ -101,7 +101,7 @@ QuickQuest:Register("QUEST_GREETING", function()
 	if(available > 0) then
 		for index = 1, available do
 			local isTrivial, isIgnored
-			if T.classic then
+			if T.Classic then
 				isTrivial = IsActiveQuestTrivial(index)
 			else
 				isTrivial, _, _, _, isIgnored = GetAvailableQuestInfo(index)

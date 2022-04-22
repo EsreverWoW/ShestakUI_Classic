@@ -212,7 +212,7 @@ end
 for spell in pairs(T.DiminishingSpells) do
 	local name = GetSpellInfo(spell)
 	if not name then
-		if T.classic then
+		if T.Classic then
 			print("|cffff0000WARNING: spell ID ["..tostring(spell).."] no longer exists! Report this to EsreverWoW.|r")
 		else
 			print("|cffff0000WARNING: spell ID ["..tostring(spell).."] no longer exists! Report this to Shestak.|r")

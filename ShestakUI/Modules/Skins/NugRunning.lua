@@ -1,5 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
-if T.classic or C.skins.nug_running ~= true then return end -- FIXME for Classic
+if T.Classic or C.skins.nug_running ~= true then return end -- FIXME for Classic
 
 ----------------------------------------------------------------------------------------
 --	NugRunning skin(by MrRuben5)

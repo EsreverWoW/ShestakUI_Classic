@@ -49,7 +49,7 @@ RaidUtilityShowButton:SetScript("OnMouseUp", function(_, button)
 		if CheckRaidStatus() then
 			DoReadyCheck()
 		end
-	elseif not T.classic and button == "MiddleButton" then
+	elseif T.Mainline and button == "MiddleButton" then
 		if CheckRaidStatus() then
 			InitiateRolePoll()
 		end
@@ -72,14 +72,14 @@ RaidUtilityDisbandButton:SetScript("OnMouseUp", function() StaticPopup_Show("DIS
 CreateButton("RaidUtilityConvertButton", RaidUtilityPanel, "UIPanelButtonTemplate", RaidUtilityPanel:GetWidth() * 0.8, 18, "TOP", RaidUtilityDisbandButton, "BOTTOM", 0, -5, UnitInRaid("player") and CONVERT_TO_PARTY or CONVERT_TO_RAID)
 RaidUtilityConvertButton:SetScript("OnMouseUp", function()
 	if UnitInRaid("player") then
-		if T.classic then
+		if T.Classic then
 			ConvertToParty()
 		else
 			C_PartyInfo.ConvertToParty()
 		end
 		RaidUtilityConvertButton.t:SetText(CONVERT_TO_RAID)
 	elseif UnitInParty("player") then
-		if T.classic then
+		if T.Classic then
 			ConvertToRaid()
 		else
 			C_PartyInfo.ConvertToRaid()
@@ -89,7 +89,7 @@ RaidUtilityConvertButton:SetScript("OnMouseUp", function()
 end)
 
 -- Role Check button
-if not T.classic then
+if T.Mainline then
 	CreateButton("RaidUtilityRoleButton", RaidUtilityPanel, "UIPanelButtonTemplate", RaidUtilityPanel:GetWidth() * 0.8, 18, "TOP", RaidUtilityConvertButton, "BOTTOM", 0, -5, ROLE_POLL)
 	RaidUtilityRoleButton:SetScript("OnMouseUp", function() InitiateRolePoll() end)
 end
@@ -111,7 +111,7 @@ CreateButton("RaidUtilityReadyCheckButton", RaidUtilityPanel, "UIPanelButtonTemp
 RaidUtilityReadyCheckButton:SetScript("OnMouseUp", function() DoReadyCheck() end)
 
 -- World Marker button
-if not T.classic then
+if T.Mainline or T.WOTLK then
 	CompactRaidFrameManagerDisplayFrameLeaderOptionsRaidWorldMarkerButton:ClearAllPoints()
 	CompactRaidFrameManagerDisplayFrameLeaderOptionsRaidWorldMarkerButton:SetPoint("TOPRIGHT", RaidUtilityMainAssistButton, "BOTTOMRIGHT", 0, -5)
 	CompactRaidFrameManagerDisplayFrameLeaderOptionsRaidWorldMarkerButton:SetParent("RaidUtilityPanel")

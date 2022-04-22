@@ -15,7 +15,7 @@ local function SpellName(id)
 end
 
 local spells = {}
-if T.classic then
+if T.Classic then
 	spells = {
 		MAGE = {
 			[SpellName(1459)] = true,	-- Arcane Intellect
@@ -94,7 +94,7 @@ frame:RegisterEvent("SPELL_UPDATE_USABLE")
 frame:RegisterEvent("SPELL_UPDATE_COOLDOWN")
 frame:RegisterEvent("PLAYER_LEAVE_COMBAT")
 frame:RegisterEvent("READY_CHECK")
-if not T.classic then
+if T.Mainline or T.WOTLK then
 	frame:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
 end
 frame:SetScript("OnEvent", CheckBuffs)

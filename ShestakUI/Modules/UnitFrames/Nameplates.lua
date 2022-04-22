@@ -33,7 +33,7 @@ end
 
 frame:RegisterEvent("PLAYER_LOGIN")
 function frame:PLAYER_LOGIN()
-	if not T.classic and C.nameplate.enhance_threat == true then
+	if T.Mainline and C.nameplate.enhance_threat == true then
 		SetCVar("threatWarning", 3)
 	end
 	SetCVar("nameplateGlobalScale", 1)
@@ -92,7 +92,7 @@ if C.nameplate.healer_icon == true then
 		["PRIEST"] = true,
 		["SHAMAN"] = true,
 	}
-	if not T.classic then
+	if T.Mainline then
 		for _, specID in pairs(healerSpecIDs) do
 			local _, name = GetSpecializationInfoByID(specID)
 			if name and not healerSpecs[name] then
@@ -108,7 +108,7 @@ if C.nameplate.healer_icon == true then
 			lastCheck = 0
 			healList = {}
 			for i = 1, GetNumBattlefieldScores() do
-				if T.classic then
+				if T.Classic then
 					local name, _, _, _, _, faction, _, _, _, classToken, damageDone, healingDone = GetBattlefieldScore(i)
 
 					if name and healerClassTokens[classToken] and (healingDone > damageDone * 1.2) and t.factions[UnitFactionGroup("player")] == faction then
@@ -128,7 +128,7 @@ if C.nameplate.healer_icon == true then
 	end
 
 	local function CheckArenaHealers(_, elapsed)
-		if not T.classic then
+		if T.Mainline then
 			lastCheck = lastCheck + elapsed
 			if lastCheck > 10 then
 				lastCheck = 0
@@ -166,7 +166,7 @@ if C.nameplate.healer_icon == true then
 end
 
 local totemData = {}
-if T.classic then
+if T.Classic then
 	totemData = {
 		-- Earth
 		[GetSpellInfo(2484)]   = 136102,	-- Earthbind Totem
@@ -297,21 +297,21 @@ if T.screenHeight > 1200 then
 	Mult = T.mult
 end
 
-local auraFontHeight = (T.classic and T.HiDPI) and (C.font.auras_font_size * T.noscalemult * (2/3) / Mult) or (C.font.auras_font_size * T.noscalemult / Mult)
+local auraFontHeight = (T.Classic and T.HiDPI) and (C.font.auras_font_size * T.noscalemult * (2/3) / Mult) or (C.font.auras_font_size * T.noscalemult / Mult)
 
 local AurasPostCreateIcon = function(element, button)
 	CreateBorderFrame(button)
 
 	button.remaining = T.SetFontString(button, C.font.auras_font, auraFontHeight, C.font.auras_font_style)
 	button.remaining:SetShadowOffset(C.font.auras_font_shadow and 1 or 0, C.font.auras_font_shadow and -1 or 0)
-	button.remaining:SetPoint("CENTER", button, "CENTER", T.classic and 0 or 1, 0)
+	button.remaining:SetPoint("CENTER", button, "CENTER", T.Classic and 0 or 1, 0)
 	button.remaining:SetJustifyH("CENTER")
 
 	button.cd.noCooldownCount = true
 
 	button.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 
-	button.count:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", T.classic and 2 or 1, T.classic and -6 or 0)
+	button.count:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", T.Classic and 2 or 1, T.Classic and -6 or 0)
 	button.count:SetJustifyH("RIGHT")
 	button.count:SetFont(C.font.auras_font, auraFontHeight, C.font.auras_font_style)
 	button.count:SetShadowOffset(C.font.auras_font_shadow and 1 or 0, C.font.auras_font_shadow and -1 or 0)
@@ -428,7 +428,7 @@ end
 
 local kickID = 0
 if C.nameplate.kick_color then
-	if T.classic then
+	if T.Classic then
 		if T.class == "DRUID" then
 			kickID = 0 -- TODO: Check for S3/S4 Arena Gloves which give Maim an Interrupt
 		elseif T.class == "HUNTER" then
@@ -564,7 +564,7 @@ local function threatColor(self, forced)
 					local offTank = false
 					if IsInRaid() then
 						for i = 1, GetNumGroupMembers() do
-							if T.classic then
+							if T.Classic then
 								if UnitExists("raid"..i) and not UnitIsUnit("raid"..i, "player") and T.Role == "TANK" then
 									local isTanking = UnitDetailedThreatSituation("raid"..i, self.unit)
 									if isTanking then
@@ -664,7 +664,7 @@ local function callback(self, event, unit)
 		local unitGUID = UnitGUID(unit)
 		self.npcID = unitGUID and select(6, strsplit('-', unitGUID))
 		self.unitName = UnitName(unit)
-		if not T.classic then
+		if T.Mainline then
 			self.widgetsOnly = UnitNameplateShowsWidgetsOnly(unit)
 		end
 		if self.npcID and T.PlateBlacklist[self.npcID] then
@@ -684,7 +684,7 @@ local function callback(self, event, unit)
 			self.Castbar:SetAlpha(1)
 			self.RaidTargetIndicator:SetAlpha(1)
 
-			if T.classic then
+			if T.Classic then
 				self.Health:SetAlpha(1)
 				self.Level:SetAlpha(1)
 				self.Name:SetAlpha(1)
@@ -755,7 +755,7 @@ local function style(self, unit)
 	self.Health.colorHealth = true
 	CreateBorderFrame(self.Health)
 
-	if T.classic then
+	if T.Classic then
 		self.Health.frequentUpdates = true
 	end
 
@@ -789,7 +789,7 @@ local function style(self, unit)
 	self.Power.bg.multiplier = 0.2
 
 	-- Hide Blizzard Power Bar
-	if not T.classic then
+	if T.Mainline then
 		hooksecurefunc(_G.NamePlateDriverFrame, "SetupClassNameplateBars", function(frame)
 			if not frame or frame:IsForbidden() then
 				return
@@ -915,7 +915,7 @@ local function style(self, unit)
 	end
 
 	-- Quest Icon
-	if not T.classic and C.nameplate.quests then
+	if T.Mainline and C.nameplate.quests then
 		self.QuestIcon = self:CreateTexture(nil, "OVERLAY", nil, 7)
 		self.QuestIcon:SetSize((C.nameplate.height * 2 * T.noscalemult), (C.nameplate.height * 2 * T.noscalemult))
 		self.QuestIcon:SetPoint("RIGHT", self.Health, "LEFT", -5, 0)
@@ -965,7 +965,7 @@ local function style(self, unit)
 
 	-- Absorb
 	if C.raidframe.plugins_healcomm == true then
-		if not T.classic then
+		if T.Mainline then
 			local ahpb = self.Health:CreateTexture(nil, "ARTWORK")
 			ahpb:SetTexture(C.media.texture)
 			ahpb:SetVertexColor(1, 1, 0, 1)

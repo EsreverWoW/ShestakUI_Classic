@@ -67,7 +67,7 @@ local function Shared(self, unit)
 		end
 	end
 
-	if T.classic then
+	if T.Classic then
 		self.Health.frequentUpdates = true
 	end
 
@@ -182,7 +182,7 @@ local function Shared(self, unit)
 	end
 
 	-- LFD role icons
-	if not T.classic and C.raidframe.icons_role == true and not (suffix == "target") then
+	if T.Mainline and C.raidframe.icons_role == true and not (suffix == "target") then
 		self.GroupRoleIndicator = self.Health:CreateTexture(nil, "OVERLAY")
 		self.GroupRoleIndicator:SetSize(10, 10)
 		self.GroupRoleIndicator:SetPoint("TOP", self.Health, 0, 6)
@@ -196,14 +196,14 @@ local function Shared(self, unit)
 	end
 
 	-- Summon icons
-	if not T.classic and C.raidframe.icons_sumon == true and not (suffix == "target" or suffix == "targettarget") then
+	if T.Mainline and C.raidframe.icons_sumon == true and not (suffix == "target" or suffix == "targettarget") then
 		self.SummonIndicator = self.Health:CreateTexture(nil, "OVERLAY")
 		self.SummonIndicator:SetSize(24, 24)
 		self.SummonIndicator:SetPoint("BOTTOMRIGHT", self.Health, 7, -11)
 	end
 
 	-- Phase icons
-	if not T.classic and C.raidframe.icons_phase == true and not (suffix == "target" or suffix == "targettarget") then
+	if T.Mainline and C.raidframe.icons_phase == true and not (suffix == "target" or suffix == "targettarget") then
 		self.PhaseIndicator = self.Health:CreateTexture(nil, "OVERLAY")
 		self.PhaseIndicator:SetSize(20, 20)
 		self.PhaseIndicator:SetPoint("TOPRIGHT", self.Health, 5, 5)
@@ -242,7 +242,7 @@ local function Shared(self, unit)
 
 	-- Incoming heal text/bar
 	if C.raidframe.plugins_healcomm == true then
-		if T.classic then
+		if T.Classic then
 			local healBar = CreateFrame("StatusBar", nil, self)
 			healBar:SetAllPoints(self.Health)
 			healBar:SetStatusBarTexture(C.media.texture)
@@ -281,7 +281,7 @@ local function Shared(self, unit)
 				overAbsorb = oa
 			}
 
-			if T.classic then
+			if T.Classic then
 				self.HealthPrediction.frequentUpdates = true
 			end
 		end
@@ -373,9 +373,9 @@ oUF:Factory(function(self)
 			"initial-height", T.Scale(party_height),
 			"showSolo", C.raidframe.solo_mode,
 			"showPlayer", C.raidframe.player_in_party,
-			"groupBy", (not T.classic and C.raidframe.by_role) and "ASSIGNEDROLE",
-			"groupingOrder", (not T.classic and C.raidframe.by_role) and "TANK,HEALER,DAMAGER,NONE",
-			"sortMethod", (not T.classic and C.raidframe.by_role) and "NAME",
+			"groupBy", (T.Mainline and C.raidframe.by_role) and "ASSIGNEDROLE",
+			"groupingOrder", (T.Mainline and C.raidframe.by_role) and "TANK,HEALER,DAMAGER,NONE",
+			"sortMethod", (T.Mainline and C.raidframe.by_role) and "NAME",
 			"showParty", true,
 			"showRaid", true,
 			"xOffset", not C.raidframe.party_vertical and T.Scale(7),
@@ -402,9 +402,9 @@ oUF:Factory(function(self)
 				"initial-height", C.raidframe.party_vertical and T.Scale(party_height) or T.Scale(party_height / 2),
 				"showSolo", C.raidframe.solo_mode,
 				"showPlayer", C.raidframe.player_in_party,
-				"groupBy", (not T.classic and C.raidframe.by_role) and "ASSIGNEDROLE",
-				"groupingOrder", (not T.classic and C.raidframe.by_role) and "TANK,HEALER,DAMAGER,NONE",
-				"sortMethod", (not T.classic and C.raidframe.by_role) and "NAME",
+				"groupBy", (T.Mainline and C.raidframe.by_role) and "ASSIGNEDROLE",
+				"groupingOrder", (T.Mainline and C.raidframe.by_role) and "TANK,HEALER,DAMAGER,NONE",
+				"sortMethod", (T.Mainline and C.raidframe.by_role) and "NAME",
 				"showParty", true,
 				"showRaid", true,
 				"xOffset", not C.raidframe.party_vertical and T.Scale(7),
@@ -434,9 +434,9 @@ oUF:Factory(function(self)
 				"initial-height", C.raidframe.party_vertical and T.Scale(party_height) or T.Scale(party_height / 2),
 				"showSolo", C.raidframe.solo_mode,
 				"showPlayer", C.raidframe.player_in_party,
-				"groupBy", (not T.classic and C.raidframe.by_role) and "ASSIGNEDROLE",
-				"groupingOrder", (not T.classic and C.raidframe.by_role) and "TANK,HEALER,DAMAGER,NONE",
-				"sortMethod", (not T.classic and C.raidframe.by_role) and "NAME",
+				"groupBy", (T.Mainline and C.raidframe.by_role) and "ASSIGNEDROLE",
+				"groupingOrder", (T.Mainline and C.raidframe.by_role) and "TANK,HEALER,DAMAGER,NONE",
+				"sortMethod", (T.Mainline and C.raidframe.by_role) and "NAME",
 				"showParty", true,
 				"showRaid", true,
 				"xOffset", not C.raidframe.party_vertical and T.Scale(7),
@@ -467,9 +467,9 @@ oUF:Factory(function(self)
 				"initial-height", T.Scale(raid_height),
 				"showRaid", true,
 				"groupFilter", tostring(i),
-				"groupBy", (not T.classic and C.raidframe.by_role) and "ASSIGNEDROLE",
-				"groupingOrder", (not T.classic and C.raidframe.by_role) and "TANK,HEALER,DAMAGER,NONE",
-				"sortMethod", (not T.classic and C.raidframe.by_role) and "NAME",
+				"groupBy", (T.Mainline and C.raidframe.by_role) and "ASSIGNEDROLE",
+				"groupingOrder", (T.Mainline and C.raidframe.by_role) and "TANK,HEALER,DAMAGER,NONE",
+				"sortMethod", (T.Mainline and C.raidframe.by_role) and "NAME",
 				"maxColumns", 5,
 				"unitsPerColumn", 1,
 				"columnSpacing", T.Scale(7),
@@ -514,7 +514,7 @@ oUF:Factory(function(self)
 					"showRaid", true,
 					"groupFilter", tostring(i),
 					"groupBy", "CLASS",
-					"groupingOrder", T.classic and "HUNTER,WARLOCK" or "DEATHKNIGHT,HUNTER,MAGE,WARLOCK",
+					"groupingOrder", T.Classic and "HUNTER,WARLOCK" or "DEATHKNIGHT,HUNTER,MAGE,WARLOCK",
 					"maxColumns", 5,
 					"unitsPerColumn", 1,
 					"columnSpacing", T.Scale(7),

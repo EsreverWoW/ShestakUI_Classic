@@ -8,7 +8,7 @@ local function LoadSkin()
 	GuildBankFrame:StripTextures()
 	GuildBankFrame:SetTemplate("Transparent")
 	GuildBankFrame.Emblem:StripTextures(true)
-	if not T.classic then
+	if T.Mainline then
 		GuildBankFrame.MoneyFrameBG:StripTextures()
 	end
 
@@ -39,7 +39,7 @@ local function LoadSkin()
 	GuildBankFrame.inset:SetPoint("TOPLEFT", 21, -58)
 	GuildBankFrame.inset:SetPoint("BOTTOMRIGHT", -17, 61)
 
-	if not T.classic then
+	if T.Mainline then
 		GuildItemSearchBox:StripTextures(true)
 		GuildItemSearchBox:CreateBackdrop("Overlay")
 		GuildItemSearchBox.backdrop:SetPoint("TOPLEFT", 13, 0)
@@ -101,7 +101,7 @@ local function LoadSkin()
 	GuildBankFrameTab1:SetPoint("TOPLEFT", GuildBankFrame, "BOTTOMLEFT", 0, 2)
 
 	-- Popup
-	if not T.classic then
+	if T.Mainline then
 		T.SkinIconSelectionFrame(GuildBankPopupFrame, 90, nil, "GuildBankPopup")
 	end
 end

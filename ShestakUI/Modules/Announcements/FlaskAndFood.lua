@@ -130,7 +130,7 @@ if C.misc.raid_tools == true then
 	RaidUtilityPanel:SetHeight(168)
 
 	local button = CreateFrame("Button", "FoodFlaskCheckButton", RaidUtilityPanel, "UIPanelButtonTemplate")
-	if T.classic then
+	if T.Classic then
 		button:SetWidth(RaidUtilityPanel:GetWidth() * 0.8)
 	else
 		button:SetWidth(RaidUtilityRoleButton:GetWidth())

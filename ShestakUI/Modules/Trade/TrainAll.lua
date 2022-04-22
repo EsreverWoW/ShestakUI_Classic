@@ -26,7 +26,7 @@ frame:SetScript("OnEvent", function(_, _, addon)
 		end)
 		button:SetScript("OnClick", function()
 			for i = 1, GetNumTrainerServices() do
-				if select(T.classic and 3 or 2, GetTrainerServiceInfo(i)) == "available" then
+				if select(T.Classic and 3 or 2, GetTrainerServiceInfo(i)) == "available" then
 					BuyTrainerService(i)
 				end
 			end
@@ -34,14 +34,14 @@ frame:SetScript("OnEvent", function(_, _, addon)
 		hooksecurefunc("ClassTrainerFrame_Update", function()
 			num, cost = 0, 0
 			for i = 1, GetNumTrainerServices() do
-				if select(T.classic and 3 or 2, GetTrainerServiceInfo(i)) == "available" then
+				if select(T.Classic and 3 or 2, GetTrainerServiceInfo(i)) == "available" then
 					num = num + 1
 					cost = cost + GetTrainerServiceCost(i)
 				end
 			end
 			button:SetEnabled(num > 0)
 		end)
-		if T.classic then
+		if T.Classic then
 			ClassTrainerMoneyFrame:ClearAllPoints()
 			ClassTrainerMoneyFrame:SetPoint("BOTTOMLEFT", ClassTrainerFrame, "BOTTOMLEFT", 28, 85)
 		end

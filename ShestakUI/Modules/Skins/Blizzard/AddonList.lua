@@ -25,7 +25,7 @@ local function LoadSkin()
 	AddonListInset:SetPoint("BOTTOMRIGHT", -6, 29)
 
 	for i = 1, MAX_ADDONS_DISPLAYED do
-		T.SkinCheckBox(_G["AddonListEntry"..i.."Enabled"], nil, T.classic and true)
+		T.SkinCheckBox(_G["AddonListEntry"..i.."Enabled"], nil, T.Classic and true)
 		_G["AddonListEntry"..i.."Load"]:SkinButton()
 	end
 

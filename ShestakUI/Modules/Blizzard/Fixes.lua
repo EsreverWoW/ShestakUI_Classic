@@ -34,7 +34,7 @@ end)
 ----------------------------------------------------------------------------------------
 --	Fix RemoveTalent() taint
 ----------------------------------------------------------------------------------------
-if not T.classic then
+if T.Mainline then
 	FCF_StartAlertFlash = T.dummy
 end
 
@@ -48,7 +48,7 @@ end
 ----------------------------------------------------------------------------------------
 --	Fix SearchLFGLeave() taint
 ----------------------------------------------------------------------------------------
-if not T.classic then
+if T.Mainline then
 	local TaintFix = CreateFrame("Frame")
 	TaintFix:SetScript("OnUpdate", function()
 		if LFRBrowseFrame.timeToClear then

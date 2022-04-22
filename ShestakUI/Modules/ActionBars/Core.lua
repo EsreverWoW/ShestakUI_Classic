@@ -11,7 +11,7 @@ frame:SetScript("OnEvent", function()
 	MainMenuBar:EnableMouse(false)
 	PetActionBarFrame:EnableMouse(false)
 	StanceBarFrame:EnableMouse(false)
-	if not T.classic then
+	if T.Mainline then
 		OverrideActionBar:SetScale(0.00001)
 		OverrideActionBar:EnableMouse(false)
 		MicroButtonAndBagsBar:SetScale(0.00001)
@@ -30,7 +30,7 @@ frame:SetScript("OnEvent", function()
 		MultiBarBottomLeft.QuickKeybindGlow, MultiBarLeft.QuickKeybindGlow, MultiBarBottomRight.QuickKeybindGlow, MultiBarRight.QuickKeybindGlow
 	}
 
-	if not T.classic then
+	if T.Mainline then
 		if not C_ClassTrial.IsClassTrialCharacter() then
 			tinsert(elements, IconIntroTracker)
 		end
@@ -47,7 +47,7 @@ frame:SetScript("OnEvent", function()
 		element:SetAlpha(0)
 	end
 
-	if not T.classic then
+	if T.Mainline then
 		for i = 1, 6 do
 			local b = _G["OverrideActionBarButton"..i]
 			b:UnregisterAllEvents()
@@ -62,8 +62,11 @@ frame:SetScript("OnEvent", function()
 		end)
 	else
 		hooksecurefunc("TalentFrame_LoadUI", function()
-			if T.classic then
+			if T.Classic then
 				PlayerTalentFrame:UnregisterEvent("CHARACTER_POINTS_CHANGED")
+				if T.WOTLK then
+					PlayerTalentFrame:UnregisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
+				end
 			else
 				PlayerTalentFrame:UnregisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
 			end
@@ -337,7 +340,7 @@ end
 ----------------------------------------------------------------------------------------
 --	Show grid function
 ----------------------------------------------------------------------------------------
-if T.classic then
+if T.Classic then
 	local frame = CreateFrame("Frame")
 	frame:RegisterEvent("PLAYER_ENTERING_WORLD")
 	frame:SetScript("OnEvent", function(self)

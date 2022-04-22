@@ -32,7 +32,7 @@ local AddUnit = function(unit)
 		threatval = threatval + 410065408
 	end
 
-	if T.classic then
+	if T.Classic then
 		threatval = threatval and math.floor(threatval / 100)
 	end
 

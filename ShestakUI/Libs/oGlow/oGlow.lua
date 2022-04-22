@@ -27,11 +27,11 @@ function oGlow:IsVanilla()
 	return _G.WOW_PROJECT_ID == _G.WOW_PROJECT_CLASSIC
 end
 
-function oGlow:IsBCC()
+function oGlow:IsTBC()
 	return _G.WOW_PROJECT_ID == _G.WOW_PROJECT_BURNING_CRUSADE_CLASSIC
 end
 
-function oGlow:IsWLKC()
+function oGlow:IsWOTLK()
 	return false -- TODO: Change when there is a project ID
 end
 

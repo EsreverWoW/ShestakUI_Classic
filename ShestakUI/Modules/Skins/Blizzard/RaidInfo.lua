@@ -31,7 +31,7 @@ local function LoadSkin()
 		object:StripTextures()
 	end
 
-	if not T.classic then
+	if T.Mainline then
 		for _, texture in pairs(KillTextures) do
 			texture:Kill()
 		end

@@ -8,7 +8,7 @@ local _, ns = ...
 local oUF = ns.oUF
 
 local swingResets = {}
-if T.classic then
+if T.Classic then
 	swingResets = {
 		[GetSpellInfo(6807)]	= true, -- Maul
 		[GetSpellInfo(2973)] 	= true, -- Raptor Strike

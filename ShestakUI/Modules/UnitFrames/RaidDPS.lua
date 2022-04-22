@@ -68,7 +68,7 @@ local function Shared(self, unit)
 		end
 	end
 
-	if T.classic then
+	if T.Classic then
 		self.Health.frequentUpdates = true
 	end
 
@@ -163,7 +163,7 @@ local function Shared(self, unit)
 	if suffix == "pet" or (suffix == "target" and unit ~= "tank") then
 		self:Tag(self.Info, "[GetNameColor][NameArena]")
 	else
-		if not T.classic and unit == "party" and C.raidframe.icons_role ~= true then
+		if T.Mainline and unit == "party" and C.raidframe.icons_role ~= true then
 			self:Tag(self.Info, "[LFD] [GetNameColor][NameShort]")
 		else
 			self:Tag(self.Info, "[GetNameColor][NameShort]")
@@ -171,7 +171,7 @@ local function Shared(self, unit)
 	end
 
 	-- LFD role icons
-	if not T.classic and C.raidframe.icons_role == true and not (suffix == "pet" or suffix == "target") then
+	if T.Mainline and C.raidframe.icons_role == true and not (suffix == "pet" or suffix == "target") then
 		self.GroupRoleIndicator = self.Health:CreateTexture(nil, "OVERLAY")
 		self.GroupRoleIndicator:SetSize(12, 12)
 		self.GroupRoleIndicator:SetPoint("TOPRIGHT", self.Health, 2, 5)
@@ -211,14 +211,14 @@ local function Shared(self, unit)
 	end
 
 	-- Phase icons
-	if not T.classic and C.raidframe.icons_phase == true and not (suffix == "target") then
+	if T.Mainline and C.raidframe.icons_phase == true and not (suffix == "target") then
 		self.PhaseIndicator = self.Health:CreateTexture(nil, "OVERLAY")
 		self.PhaseIndicator:SetSize(18, 18)
 		self.PhaseIndicator:SetPoint("BOTTOMLEFT", self.Health, -5, -10)
 	end
 
 	-- Summon icons
-	if not T.classic and C.raidframe.icons_sumon == true and not (suffix == "target") then
+	if T.Mainline and C.raidframe.icons_sumon == true and not (suffix == "target") then
 		self.SummonIndicator = self.Health:CreateTexture(nil, "OVERLAY")
 		self.SummonIndicator:SetSize(24, 24)
 		self.SummonIndicator:SetPoint("BOTTOMRIGHT", self.Health, 6, -5)
@@ -250,7 +250,7 @@ local function Shared(self, unit)
 
 	-- Incoming heal text/bar
 	if C.raidframe.plugins_healcomm == true then
-		if T.classic then
+		if T.Classic then
 			local healBar = CreateFrame("StatusBar", nil, self)
 			healBar:SetAllPoints(self.Health)
 			healBar:SetStatusBarTexture(C.media.texture)
@@ -289,7 +289,7 @@ local function Shared(self, unit)
 				overAbsorb = oa
 			}
 
-			if T.classic then
+			if T.Classic then
 				self.HealthPrediction.frequentUpdates = true
 			end
 		end
@@ -335,9 +335,9 @@ oUF:Factory(function(self)
 		"initial-height", T.Scale(party_height),
 		"showSolo", C.raidframe.solo_mode,
 		"showPlayer", C.raidframe.player_in_party,
-		"groupBy", (not T.classic and C.raidframe.by_role) and "ASSIGNEDROLE",
-		"groupingOrder", (not T.classic and C.raidframe.by_role) and "TANK,HEALER,DAMAGER,NONE",
-		"sortMethod", (not T.classic and C.raidframe.by_role) and "NAME",
+		"groupBy", (T.Mainline and C.raidframe.by_role) and "ASSIGNEDROLE",
+		"groupingOrder", (T.Mainline and C.raidframe.by_role) and "TANK,HEALER,DAMAGER,NONE",
+		"sortMethod", (T.Mainline and C.raidframe.by_role) and "NAME",
 		"showParty", true,
 		"showRaid", true,
 		"yOffset", T.Scale(28),
@@ -359,9 +359,9 @@ oUF:Factory(function(self)
 			"initial-height", T.Scale(partytarget_height),
 			"showSolo", C.raidframe.solo_mode,
 			"showPlayer", C.raidframe.player_in_party,
-			"groupBy", (not T.classic and C.raidframe.by_role) and "ASSIGNEDROLE",
-			"groupingOrder", (not T.classic and C.raidframe.by_role) and "TANK,HEALER,DAMAGER,NONE",
-			"sortMethod", (not T.classic and C.raidframe.by_role) and "NAME",
+			"groupBy", (T.Mainline and C.raidframe.by_role) and "ASSIGNEDROLE",
+			"groupingOrder", (T.Mainline and C.raidframe.by_role) and "TANK,HEALER,DAMAGER,NONE",
+			"sortMethod", (T.Mainline and C.raidframe.by_role) and "NAME",
 			"showParty", true,
 			"showRaid", true,
 			"yOffset", T.Scale(28),
@@ -385,9 +385,9 @@ oUF:Factory(function(self)
 			"initial-height", T.Scale(partytarget_height),
 			"showSolo", C.raidframe.solo_mode,
 			"showPlayer", C.raidframe.player_in_party,
-			"groupBy", (not T.classic and C.raidframe.by_role) and "ASSIGNEDROLE",
-			"groupingOrder", (not T.classic and C.raidframe.by_role) and "TANK,HEALER,DAMAGER,NONE",
-			"sortMethod", (not T.classic and C.raidframe.by_role) and "NAME",
+			"groupBy", (T.Mainline and C.raidframe.by_role) and "ASSIGNEDROLE",
+			"groupingOrder", (T.Mainline and C.raidframe.by_role) and "TANK,HEALER,DAMAGER,NONE",
+			"sortMethod", (T.Mainline and C.raidframe.by_role) and "NAME",
 			"showParty", true,
 			"showRaid", true,
 			"yOffset", T.Scale(28),
@@ -413,9 +413,9 @@ oUF:Factory(function(self)
 			"yOffset", T.Scale(-7),
 			"point", "TOPLEFT",
 			"groupFilter", tostring(i),
-			"groupBy", (not T.classic and C.raidframe.by_role) and "ASSIGNEDROLE",
-			"groupingOrder", (not T.classic and C.raidframe.by_role) and "TANK,HEALER,DAMAGER,NONE",
-			"sortMethod", (not T.classic and C.raidframe.by_role) and "NAME",
+			"groupBy", (T.Mainline and C.raidframe.by_role) and "ASSIGNEDROLE",
+			"groupingOrder", (T.Mainline and C.raidframe.by_role) and "TANK,HEALER,DAMAGER,NONE",
+			"sortMethod", (T.Mainline and C.raidframe.by_role) and "NAME",
 			"maxColumns", 5,
 			"unitsPerColumn", 1,
 			"columnSpacing", T.Scale(7),
@@ -478,7 +478,7 @@ end
 --	Auto change raid frame layout
 ----------------------------------------------------------------------------------------
 if C.raidframe.layout == "AUTO" then
-	if T.classic then
+	if T.Classic then
 		C.raidframe.layout = "HEAL"
 	else
 		local function CheckSpec(self, event, unit)

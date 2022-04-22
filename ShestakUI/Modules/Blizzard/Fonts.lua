@@ -97,7 +97,7 @@ frame:SetScript("OnEvent", function(_, _, addon)
 	SetFont(Game12Font_o1, NORMAL, 12, nil, nil, nil, nil, 0, 0, 0, 1, -1)
 	SetFont(Game13Font_o1, NORMAL, 13, nil, nil, nil, nil, 0, 0, 0, 1, -1)
 
-	if T.classic then
+	if T.Classic then
 		SetFont(SystemFont_Shadow_Outline_Huge2, NORMAL, 22, "OUTLINE")
 		SetFont(GameTooltipTextSmall, NORMAL, GetLocale() == "zhTW" and 12 or 11, nil, nil, nil, nil, 0, 0, 0, 1, -1)
 		SetFont(TextStatusBarTextLarge, NORMAL, 13, "OUTLINE")
@@ -118,7 +118,7 @@ frame:SetScript("OnEvent", function(_, _, addon)
 	SetFont(NumberFontNormalSmall, NORMAL, 11, "OUTLINE")
 
 	-- Player title
-	if not T.classic then
+	if T.Mainline then
 		for _, butt in pairs(PaperDollTitlesPane.buttons) do butt.text:SetFontObject(GameFontHighlightSmallLeft) end
 	end
 end)

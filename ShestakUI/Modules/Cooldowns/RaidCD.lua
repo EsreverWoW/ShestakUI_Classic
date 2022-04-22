@@ -325,7 +325,7 @@ local OnEvent = function(self, event)
 		for _, v in pairs(bars) do
 			v.endTime = 0
 		end
-	elseif event == "ENCOUNTER_END" and select(2, IsInInstance()) == "raid" and not T.classic then
+	elseif event == "ENCOUNTER_END" and select(2, IsInInstance()) == "raid" and T.Mainline then
 		for _, v in pairs(bars) do
 			v.endTime = 0
 		end
@@ -335,7 +335,7 @@ end
 for spell in pairs(T.RaidSpells) do
 	local name = GetSpellInfo(spell)
 	if not name then
-		if T.classic then
+		if T.Classic then
 			print("|cffff0000WARNING: spell ID ["..tostring(spell).."] no longer exists! Report this to EsreverWoW.|r")
 		else
 			print("|cffff0000WARNING: spell ID ["..tostring(spell).."] no longer exists! Report this to Shestak.|r")
@@ -351,7 +351,7 @@ f:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 f:RegisterEvent("ENCOUNTER_END")
 
 SlashCmdList.RaidCD = function()
-	if T.classic then
+	if T.Classic then
 		StartTimer(UnitName("player"), 20484)	-- Rebirth
 		StartTimer(UnitName("player"), 871)		-- Shield Wall
 		StartTimer(UnitName("player"), 29166)	-- Innervate

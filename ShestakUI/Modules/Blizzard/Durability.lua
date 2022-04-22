@@ -4,7 +4,7 @@ local T, C, L, _ = unpack(select(2, ...))
 --	Durability value on slot buttons in CharacterFrame(tekability by Tekkub)
 ----------------------------------------------------------------------------------------
 local SLOTIDS = {}
-if T.classic then
+if T.Classic then
 	for _, slot in pairs({"Head", "Shoulder", "Chest", "Waist", "Legs", "Feet", "Wrist", "Hands", "MainHand", "SecondaryHand", "Ranged"}) do
 		SLOTIDS[slot] = GetInventorySlotInfo(slot.."Slot")
 	end

@@ -1,5 +1,5 @@
 local T, C, L = unpack(select(2, ...))
-if T.classic or C.nameplate.enable ~= true or C.nameplate.quests ~= true then return end
+if T.Classic or C.nameplate.enable ~= true or C.nameplate.quests ~= true then return end
 
 ----------------------------------------------------------------------------------------
 --	Show quest icon on nameplates (based on code from ElvUI)

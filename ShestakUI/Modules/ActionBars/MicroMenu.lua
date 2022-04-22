@@ -6,7 +6,7 @@ if C.actionbar.enable ~= true or C.actionbar.micromenu ~= true then return end
 ----------------------------------------------------------------------------------------
 local frame = CreateFrame("Frame", "MicroAnchor", T_PetBattleFrameHider or UIParent)
 frame:SetPoint(unpack(C.position.micro_menu))
-frame:SetSize(T.classic and 208 or 284, 30)
+frame:SetSize(T.Classic and 208 or 284, 30)
 
 UpdateMicroButtonsParent(frame)
 if C.actionbar.micromenu_mouseover == true then frame:SetAlpha(0) end
@@ -27,11 +27,11 @@ for _, button in pairs(MICRO_BUTTONS) do
 	f:SetFrameLevel(1)
 	f:SetFrameStrata("BACKGROUND")
 	f:SetPoint("BOTTOMLEFT", bu, "BOTTOMLEFT", 2, 0)
-	f:SetPoint("TOPRIGHT", bu, "TOPRIGHT", -2, T.classic and -28 or -6)
+	f:SetPoint("TOPRIGHT", bu, "TOPRIGHT", -2, T.Classic and -28 or -6)
 	f:SetTemplate("Default")
 	bu.frame = f
 
-	if T.classic then
+	if T.Classic then
 		normal:SetTexCoord(0.17, 0.87, 0.5, 0.908)
 	else
 		normal:SetTexCoord(0.22, 0.81, 0.26, 0.82)
@@ -40,7 +40,7 @@ for _, button in pairs(MICRO_BUTTONS) do
 	normal:SetPoint("TOPLEFT", f, "TOPLEFT", 2, -2)
 	normal:SetPoint("BOTTOMRIGHT", f, "BOTTOMRIGHT", -2, 2)
 
-	if T.classic then
+	if T.Classic then
 		pushed:SetTexCoord(0.17, 0.87, 0.5, 0.908)
 	else
 		pushed:SetTexCoord(0.22, 0.81, 0.26, 0.82)
@@ -50,7 +50,7 @@ for _, button in pairs(MICRO_BUTTONS) do
 	pushed:SetPoint("BOTTOMRIGHT", f, "BOTTOMRIGHT", -2, 2)
 
 	if disabled then
-		if T.classic then
+		if T.Classic then
 			disabled:SetTexCoord(0.17, 0.87, 0.5, 0.908)
 		else
 			disabled:SetTexCoord(0.22, 0.81, 0.26, 0.82)
@@ -83,7 +83,7 @@ hooksecurefunc("UpdateMicroButtons", function()
 	CharacterMicroButton:ClearAllPoints()
 	CharacterMicroButton:SetPoint("BOTTOMLEFT", frame, "BOTTOMLEFT", -2, 0)
 
-	if not T.classic then
+	if T.Mainline then
 		GuildMicroButtonTabard:ClearAllPoints()
 		GuildMicroButtonTabard:SetPoint("TOP", GuildMicroButton.frame, "TOP", 0, 25)
 	end

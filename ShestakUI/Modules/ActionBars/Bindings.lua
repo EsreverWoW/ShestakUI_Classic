@@ -322,7 +322,7 @@ SlashCmdList.MOUSEOVERBIND = function()
 			b:HookScript("OnEnter", function(self) bind:Update(self, "SPELL") end)
 		end
 
-		if not T.classic then
+		if T.Mainline then
 			ExtraActionButton1:HookScript("OnEnter", function(self) bind:Update(self) end)
 		end
 

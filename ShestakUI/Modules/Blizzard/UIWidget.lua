@@ -37,7 +37,7 @@ hooksecurefunc(below, "SetPoint", function(self, _, anchor)
 end)
 
 -- Maw Buff Widget
-if not T.classic then
+if T.Mainline then
 	local mawAnchor = CreateFrame("Frame", "UIWidgetMawAnchor", UIParent)
 	mawAnchor:SetSize(210, 30)
 	mawAnchor:SetPoint("TOPRIGHT", BuffsAnchor, "BOTTOMRIGHT", 0, -3)
@@ -163,7 +163,7 @@ local function SkinCaptureBar(widget)
 	end
 end
 
-if not T.classic then
+if T.Mainline then
 	local frame = CreateFrame("Frame")
 	frame:RegisterEvent("UPDATE_UI_WIDGET")
 	frame:RegisterEvent("UPDATE_ALL_UI_WIDGETS")
@@ -197,7 +197,7 @@ hooksecurefunc(UIWidgetTemplateStatusBarMixin, "Setup", function(widget)
 end)
 
 -- Maw Buffs skin
-if not T.classic then
+if T.Mainline then
 	maw:SetSize(210, 40)
 	maw.Container:SkinButton()
 	maw.Container:SetSize(200, 30)

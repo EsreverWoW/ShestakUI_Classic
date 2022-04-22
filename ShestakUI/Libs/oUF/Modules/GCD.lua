@@ -12,7 +12,7 @@ local GetTime = GetTime
 
 local spells
 
-if T.classic then
+if T.Classic then
 	spells = {
 		["DEATHKNIGHT"] = 45902,
 		["DRUID"] = 1126,

@@ -38,7 +38,7 @@ local function MerchantItemlevel()
 		if button and button:IsShown() then
 			if not button.text then
 				button.text = button:CreateFontString(nil, "OVERLAY", "SystemFont_Outline_Small")
-				if T.classic then
+				if T.Classic then
 					button.text:SetPoint("BOTTOMRIGHT", 0, 0)
 				else
 					button.text:SetPoint("TOPLEFT", 1, -1)

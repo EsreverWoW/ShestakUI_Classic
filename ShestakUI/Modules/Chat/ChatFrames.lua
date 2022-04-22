@@ -46,16 +46,16 @@ _G.ERR_FRIEND_OFFLINE_S = "[%s] "..L_CHAT_GONE_OFFLINE
 ChatFrameMenuButton:Kill()
 
 -- Kill channel and voice buttons
-if not T.classic then
-	ChatFrameChannelButton:Kill()
-	ChatFrameToggleVoiceDeafenButton:Kill()
-	ChatFrameToggleVoiceMuteButton:Kill()
-else
+if T.Classic then
 	ChatFrameChannelButton:Kill()
 	-- ChatFrameChannelButton:SetSize(20, 20)
 	-- ChatFrameChannelButton:SkinButton()
 	-- ChatFrameChannelButton:ClearAllPoints()
 	-- ChatFrameChannelButton:SetPoint("TOPLEFT", ChatFrame1, "TOPLEFT", -24, 24)
+else
+	ChatFrameChannelButton:Kill()
+	ChatFrameToggleVoiceDeafenButton:Kill()
+	ChatFrameToggleVoiceMuteButton:Kill()
 end
 
 -- Set chat style
@@ -110,13 +110,13 @@ local function SetChatStyle(frame)
 	_G[format("ChatFrame%sTabGlow", id)]:Kill()
 
 	-- Kill scroll bar
-	if not T.classic then
+	if T.Mainline then
 		frame.ScrollBar:Kill()
 	end
 	frame.ScrollToBottomButton:Kill()
 
 	-- Kill off editbox artwork
-	if not T.classic then
+	if T.Mainline then
 		local a, b, c = select(6, _G[chat.."EditBox"]:GetRegions())
 		a:Kill() b:Kill() c:Kill()
 	end
@@ -270,7 +270,7 @@ local function SetupChatPosAndFont()
 	end
 
 	-- Reposition Quick Join Toast and battle.net popup
-	if not T.classic then
+	if T.Mainline then
 		QuickJoinToastButton:ClearAllPoints()
 		QuickJoinToastButton:SetPoint("TOPLEFT", 0, 90)
 		QuickJoinToastButton.ClearAllPoints = T.dummy
@@ -389,7 +389,7 @@ local cycles = {
 	{chatType = "SAY", use = function() return 1 end},
 	{chatType = "PARTY", use = function() return not IsInRaid() and IsInGroup(LE_PARTY_CATEGORY_HOME) end},
 	{chatType = "RAID", use = function() return IsInRaid(LE_PARTY_CATEGORY_HOME) end},
-	{chatType = "INSTANCE_CHAT", use = function() return not T.classic and IsPartyLFG() end},
+	{chatType = "INSTANCE_CHAT", use = function() return T.Mainline and IsPartyLFG() end},
 	{chatType = "GUILD", use = function() return IsInGuild() end},
 	{chatType = "SAY", use = function() return 1 end},
 }
@@ -416,7 +416,7 @@ hooksecurefunc("ChatEdit_CustomTabPressed", UpdateTabChannelSwitch)
 ----------------------------------------------------------------------------------------
 --	Role icons
 ----------------------------------------------------------------------------------------
-if not T.classic and C.chat.role_icons == true then
+if T.Mainline and C.chat.role_icons == true then
 	local chats = {
 		CHAT_MSG_SAY = 1, CHAT_MSG_YELL = 1,
 		CHAT_MSG_WHISPER = 1, CHAT_MSG_WHISPER_INFORM = 1,

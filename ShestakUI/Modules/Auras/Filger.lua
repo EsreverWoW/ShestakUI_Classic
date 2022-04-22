@@ -31,7 +31,7 @@ COOLDOWN_Anchor:SetSize(C.filger.cooldown_size, C.filger.cooldown_size)
 T_DE_BUFF_BAR_Anchor:SetPoint(C.position.filger.target_bar[1], C.unitframe.portrait_enable and "oUF_Target_Portrait" or C.position.filger.target_bar[2], C.position.filger.target_bar[3], C.unitframe.portrait_enable and C.position.filger.target_bar[4] - 3 or C.position.filger.target_bar[4], C.unitframe.portrait_enable and C.position.filger.target_bar[5] + 38 or C.position.filger.target_bar[5])
 T_DE_BUFF_BAR_Anchor:SetSize(218, 25)
 
-if not T.classic then
+if T.Mainline then
 	SpellActivationOverlayFrame:SetFrameStrata("BACKGROUND")
 end
 
@@ -318,7 +318,7 @@ local function FindAuras(self, unit)
 
 			local data = SpellGroups[self.Id].spells[name] or SpellGroups[self.Id].spells[spid]
 			if data and (data.caster ~= 1 and (caster == data.caster or data.caster == "all") or MyUnits[caster]) and (not data.unitID or data.unitID == unit) and (not data.absID or spid == data.spellID) then
-				local isTalent = not T.classic and data.talentID and select(10, GetTalentInfoByID(data.talentID))
+				local isTalent = T.Mainline and data.talentID and select(10, GetTalentInfoByID(data.talentID))
 				if ((data.filter == "BUFF" and filter == "HELPFUL") or (data.filter == "DEBUFF" and filter == "HARMFUL")) and (not data.spec or data.spec == T.Spec) and (not data.talentID or isTalent) then
 					if not data.count or count >= data.count then
 						if LibClassicDurations then
@@ -440,7 +440,7 @@ function Filger:OnEvent(event, unit, _, castID)
 						start, duration = GetInventoryItemCooldown("player", data.slotID)
 					end
 				end
-				if T.classic and HasWandEquipped() then
+				if T.Classic and HasWandEquipped() then
 					local wandID = GetInventoryItemID("player", 18)
 					local wandSpeed = select(2, GetItemCooldown(wandID)) or 0
 					if wandSpeed < 1.5 then wandSpeed = 1.5 end
@@ -559,7 +559,7 @@ if C["filger_spells"] and C["filger_spells"][T.class] then
 				group.spells[id] = data[j]
 			end
 			if not name and not data[j].slotID then
-				if T.classic then
+				if T.Classic then
 					print("|cffff0000WARNING: spell/slot ID ["..(data[j].spellID or data[j].slotID or "UNKNOWN").."] no longer exists! Report this to EsreverWoW.|r")
 				else
 					print("|cffff0000WARNING: spell/slot ID ["..(data[j].spellID or data[j].slotID or "UNKNOWN").."] no longer exists! Report this to Shestak.|r")
@@ -579,7 +579,7 @@ if C["filger_spells"] and C["filger_spells"][T.class] then
 		table.insert(SpellGroups, i, group)
 
 		if #data == 0 then
-			if T.classic then
+			if T.Classic then
 				print("|cffff0000WARNING: section ["..data.Name.."] is empty! Report this to EsreverWoW.|r")
 			else
 				print("|cffff0000WARNING: section ["..data.Name.."] is empty! Report this to Shestak.|r")

@@ -26,7 +26,7 @@ vehicle:RegisterForClicks("AnyUp")
 vehicle:SetFrameLevel(3)
 
 hooksecurefunc("MainMenuBarVehicleLeaveButton_Update", function()
-	if T.classic then
+	if T.Classic then
 		if UnitOnTaxi("player") then
 			vehicle:Show()
 			vehicle:SetScript("OnClick", function(self)
@@ -56,7 +56,7 @@ hooksecurefunc("MainMenuBarVehicleLeaveButton_Update", function()
 	end
 end)
 
-if not T.classic then
+if T.Mainline or T.WOTLK then
 	hooksecurefunc("PossessBar_UpdateState", function()
 		for i = 1, NUM_POSSESS_SLOTS do
 			local _, _, enabled = GetPossessInfo(i)
@@ -79,7 +79,7 @@ vehicle:SetScript("OnEnter", function(self)
 		GameTooltip:SetText(TAXI_CANCEL, 1, 1, 1)
 		GameTooltip:AddLine(TAXI_CANCEL_DESCRIPTION, 1, 0.8, 0, true)
 		GameTooltip:Show()
-	elseif not T.classic then
+	elseif T.Mainline or T.WOTLK then
 		if IsPossessBarVisible() then
 			GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
 			GameTooltip_SetTitle(GameTooltip, CANCEL)

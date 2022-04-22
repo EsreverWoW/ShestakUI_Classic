@@ -15,7 +15,7 @@ hooksecurefunc("ShowReadyCheck", ShowReadyCheckHook)
 ----------------------------------------------------------------------------------------
 local ForceWarning = CreateFrame("Frame")
 ForceWarning:RegisterEvent("UPDATE_BATTLEFIELD_STATUS")
-if not T.classic then
+if T.Mainline then
 	ForceWarning:RegisterEvent("PET_BATTLE_QUEUE_PROPOSE_MATCH")
 	ForceWarning:RegisterEvent("LFG_PROPOSAL_SHOW")
 end
@@ -49,7 +49,7 @@ StaticPopupDialogs.CONFIRM_SUMMON.hideOnEscape = nil
 StaticPopupDialogs.ADDON_ACTION_FORBIDDEN.button1 = nil
 StaticPopupDialogs.TOO_MANY_LUA_ERRORS.button1 = nil
 PetBattleQueueReadyFrame.hideOnEscape = nil
-if not T.classic then
+if T.Mainline then
 	PVPReadyDialog.leaveButton:Hide()
 	PVPReadyDialog.enterButton:ClearAllPoints()
 	PVPReadyDialog.enterButton:SetPoint("BOTTOM", PVPReadyDialog, "BOTTOM", 0, 25)
@@ -93,7 +93,7 @@ end
 ----------------------------------------------------------------------------------------
 --	Auto select current event boss from LFD tool(EventBossAutoSelect by Nathanyel)
 ----------------------------------------------------------------------------------------
-if not T.classic then
+if T.Mainline then
 	local firstLFD
 	LFDParentFrame:HookScript("OnShow", function()
 		if not firstLFD then
@@ -116,12 +116,12 @@ local strip = CreateFrame("Button", "DressUpFrameUndressButton", DressUpFrame, "
 strip:SetText(L_MISC_UNDRESS)
 strip:SetWidth(strip:GetTextWidth() + 40)
 strip:SetPoint("RIGHT", DressUpFrameResetButton, "LEFT", -2, 0)
-if T.classic then
+if T.Classic then
 	strip:SetFrameLevel(DressUpModelFrame:GetFrameLevel() + 2)
 end
 strip:RegisterForClicks("AnyUp")
 strip:SetScript("OnClick", function(self, button)
-	local actor = T.classic and self.model or not T.classic and DressUpFrame.ModelScene:GetPlayerActor()
+	local actor = T.Classic and self.model or T.Mainline and DressUpFrame.ModelScene:GetPlayerActor()
 	if not actor then return end
 	if button == "RightButton" then
 		actor:UndressSlot(19)
@@ -131,7 +131,7 @@ strip:SetScript("OnClick", function(self, button)
 	PlaySound(SOUNDKIT.GS_TITLE_OPTION_OK)
 end)
 
-if T.classic then
+if T.Classic then
 	strip:RegisterEvent("AUCTION_HOUSE_SHOW")
 	strip:RegisterEvent("AUCTION_HOUSE_CLOSED")
 	strip:SetScript("OnEvent", function(self)
@@ -140,12 +140,12 @@ if T.classic then
 			self:ClearAllPoints()
 			self:SetPoint("TOP", SideDressUpModelResetButton, "BOTTOM", 0, -3)
 			self.model = SideDressUpModel
-		elseif T.classic and self.model ~= DressUpModelFrame then
+		elseif T.Classic and self.model ~= DressUpModelFrame then
 			self:SetParent(DressUpModelFrame)
 			self:ClearAllPoints()
 			self:SetPoint("RIGHT", DressUpFrameResetButton, "LEFT", -2, 0)
 			self.model = DressUpModelFrame
-		elseif not T.classic and self.model ~= DressUpModel then
+		elseif T.Mainline and self.model ~= DressUpModel then
 			self:SetParent(DressUpModel)
 			self:ClearAllPoints()
 			self:SetPoint("RIGHT", DressUpFrameResetButton, "LEFT", -2, 0)
@@ -157,7 +157,7 @@ end
 ----------------------------------------------------------------------------------------
 --	Boss Banner Hider
 ----------------------------------------------------------------------------------------
-if not T.classic then
+if T.Mainline then
 	if C.general.hide_banner == true then
 		BossBanner.PlayBanner = function() end
 	end
@@ -248,6 +248,6 @@ if C.misc.max_camera_distance == true then
 	local OnLogon = CreateFrame("Frame")
 	OnLogon:RegisterEvent("PLAYER_ENTERING_WORLD")
 	OnLogon:SetScript("OnEvent", function()
-		SetCVar("cameraDistanceMaxZoomFactor", T.classic and 3.4 or 2.6)
+		SetCVar("cameraDistanceMaxZoomFactor", T.Classic and 3.4 or 2.6)
 	end)
 end

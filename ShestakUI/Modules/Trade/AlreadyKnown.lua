@@ -41,7 +41,7 @@ local function IsKnown(itemLink)
 	if not itemID then return end
 	if knowns[itemID] then return true end
 
-	if not T.classic then
+	if T.Mainline then
 		if PlayerHasToy(itemID) then
 			knowns[itemID] = true
 			return true
@@ -139,7 +139,7 @@ hooksecurefunc("MerchantFrame_UpdateBuybackInfo", MerchantFrame_UpdateBuybackInf
 local function QuestInfo_ShowRewards()
 	local numQuestRewards, numQuestChoices
 	if QuestInfoFrame.questLog then
-		numQuestRewards, numQuestChoices = GetNumQuestLogRewards(), T.classic and GetNumQuestLogChoices() or GetNumQuestLogChoices(C_QuestLog.GetSelectedQuest(), true)
+		numQuestRewards, numQuestChoices = GetNumQuestLogRewards(), T.Classic and GetNumQuestLogChoices() or GetNumQuestLogChoices(C_QuestLog.GetSelectedQuest(), true)
 	else
 		numQuestRewards, numQuestChoices = GetNumQuestRewards(), GetNumQuestChoices()
 	end
