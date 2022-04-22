@@ -143,7 +143,7 @@ C["unitframe"] = {
 	["castbar_height"] = 16,					-- Player and Target castbar height
 }
 
-if T.classic then
+if T.Classic then
 	C["unitframe"]["castbar_ticks"] = true
 	C["unitframe"]["plugins_swing"] = true
 	C["unitframe"]["plugins_experience_bar"] = true
@@ -168,7 +168,7 @@ C["unitframe_class_bar"] = {
 	["totem_other"] = true,						-- Totem bar for other classes
 }
 
-if T.classic then
+if T.Classic then
 	C["unitframe_class_bar"]["combo_old"] = true
 end
 
@@ -229,7 +229,7 @@ C["raidframe"] = {
 	["dps_raid_power_height"] = 1,				-- Raid power height
 }
 
-if T.classic then
+if T.Classic then
 	C["raidframe"]["raid_groups"] = 8
 end
 
@@ -317,7 +317,7 @@ C["actionbar"] = {
 	["bar5_mouseover"] = false,					-- Bar on mouseover
 }
 
-if T.classic then
+if T.Classic then
 	C["actionbar"]["rightbars_mouseover"] = false
 	C["actionbar"]["stancebar_mouseover"] = false
 end
@@ -352,7 +352,7 @@ C["tooltip"] = {
 	["mount"] = false,							-- Show source of mount
 }
 
-if T.classic then
+if T.Classic then
 	C["tooltip"]["realm"] = false
 	C["tooltip"]["item_count"] = true
 	C["tooltip"]["vendor_price"] = true
@@ -424,7 +424,7 @@ C["nameplate"] = {
 	["mob_color"] = {0, 0.5, 0.8},				-- Color for mobs
 }
 
-if T.classic then
+if T.Classic then
 	C["nameplate"]["health_value"] = true
 	C["nameplate"]["show_castbar_name"] = true
 	C["nameplate"]["track_debuffs"] = true
@@ -492,7 +492,7 @@ C["minimap"] = {
 	["fog_of_war"] = false,						-- Remove fog of war on World Map
 }
 
-if T.classic then
+if T.Classic then
 	C["minimap"]["tracking_icon"] = true
 	C["minimap"]["fog_of_war"] = true
 end
@@ -510,7 +510,7 @@ C["loot"] = {
 	["faster_loot"] = false,					-- Faster auto looting
 }
 
-if T.classic then
+if T.Classic then
 	C["loot"]["auto_greed"] = false
 	C["loot"]["auto_confirm_de"] = false
 end
@@ -589,7 +589,7 @@ C["automation"] = {
 	["invite_keyword"] = "inv +",				-- List of keyword (separated by space)
 }
 
-if not T.classic then
+if T.Mainline then
 	C["automation"]["dismount_stand"] = false
 end
 
@@ -608,7 +608,7 @@ C["reminder"] = {
 	["raid_buffs_alpha"] = 0,					-- Transparent icons when the buff is present
 }
 
-if T.classic then
+if T.Classic then
 	C["reminder"]["raid_buffs_size"] = 16
 end
 
@@ -698,7 +698,7 @@ C["stats"] = {
 	["currency_misc"] = true,					-- BfA Currency
 }
 
-if T.classic then
+if T.Classic then
 	C["stats"]["talents"] = false
 end
 

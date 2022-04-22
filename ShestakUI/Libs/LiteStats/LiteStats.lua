@@ -232,7 +232,7 @@ function SlashCmdList.LSTATS()
 	if experience.enabled then
 		slprint(format("%s/%s/%s", COMBAT_XP_GAIN, TIME_PLAYED_MSG, FACTION), L_STATS_RC_EXPERIENCE, L_STATS_WATCH_FACTIONS, L_STATS_TOOLTIP_EXPERIENCE, L_STATS_TOOLTIP_TIME_PLAYED)
 	end
-	if not T.classic and talents.enabled then
+	if (T.Mainline or T.WOTLK) and talents.enabled then
 		slprint(TALENTS, L_STATS_OPEN_TALENT, L_STATS_RC_TALENT)
 	end
 	if location.enabled or coords.enabled then
@@ -314,7 +314,7 @@ if clock.enabled then
 					if extended then tr, tg, tb = 0.3, 1, 0.3 else tr, tg, tb = 1, 1, 1 end
 
 					local isHeroic, displayHeroic, displayMythic
-					if not T.classic then
+					if T.Mainline or T.WOTLK then
 						_, _, isHeroic, _, displayHeroic, displayMythic = GetDifficultyInfo(difficulty)
 						if displayMythic then
 							diff = "M"
@@ -330,7 +330,7 @@ if clock.enabled then
 					end
 				end
 			end
-			if not T.classic then
+			if T.Mainline then
 				local addedLine
 				for i = 1, GetNumSavedWorldBosses() do
 					local name, _, reset = GetSavedWorldBossInfo(i)
@@ -397,7 +397,7 @@ if clock.enabled then
 			GameTooltip:Show()
 		end,
 		OnClick = function(_, b)
-			if T.classic then
+			if T.Classic then
 				(b == "RightButton" and TimeManager_Toggle or Stopwatch_Toggle)()
 			else
 				(b == "RightButton" and ToggleTimeManager or ToggleCalendar)()
@@ -421,7 +421,7 @@ if latency.enabled then
 		OnEnter = function(self)
 			local _, _, latencyHome, latencyWorld = GetNetStats()
 			local latency
-			if T.classic then
+			if T.Classic then
 				latency = format("Latency:\n%.0f ms (home)\n%.0f ms (world)", latencyHome, latencyWorld)
 			else
 				latency = format(MAINMENUBAR_LATENCY_LABEL, latencyHome, latencyWorld)
@@ -617,7 +617,7 @@ if friends.enabled then
 		totalBattleNetOnline = 0
 		wipe(BNTable)
 
-		if T.classic then
+		if T.Classic then
 			for i = 1, total do
 				local presenceID, presenceName, battleTag, _, toonName, toonID, client, isOnline, _, isAFK, isDND, _, noteText = BNGetFriendInfo(i)
 				local _, _, _, realmName, _, faction, race, class, _, zoneName, level = BNGetGameAccountInfo(toonID or presenceID)
@@ -729,7 +729,7 @@ if friends.enabled then
 								notCheckable = true,
 								func = function(_, arg1)
 									menuFrame:Hide()
-									if T.classic then
+									if T.Classic then
 										InviteUnit(arg1)
 									else
 										C_PartyInfo.InviteUnit(arg1)
@@ -794,7 +794,7 @@ if friends.enabled then
 			wipe(BNTableEnter)
 			if BNtotal > 0 then
 				for i = 1, BNtotal do
-					if T.classic then
+					if T.Classic then
 						if select(8, BNGetFriendInfo(i)) then
 							BNonline = BNonline + 1
 						end
@@ -850,9 +850,9 @@ if friends.enabled then
 				if BNonline > 0 then
 					GameTooltip:AddLine(" ")
 					GameTooltip:AddLine(BATTLENET_FRIEND)
-					for i = 1, T.classic and BNtotal or #BNTableEnter do
+					for i = 1, T.Classic and BNtotal or #BNTableEnter do
 						local accountInfo, presenceName, battleTag, toonName, toonID, client, isOnline, isAFK, isDND
-						if T.classic then
+						if T.Classic then
 							_, presenceName, battleTag, _, toonName, toonID, client, isOnline, _, isAFK, isDND = BNGetFriendInfo(i)
 							toonName = BNet_GetValidatedCharacterName(toonName, battleTag, client) or ""
 						else
@@ -875,7 +875,7 @@ if friends.enabled then
 								end
 
 								local characterName, realmName, class, areaName, level
-								if T.classic then
+								if T.Classic then
 									_, characterName, client, realmName, _, _, _, class, _, areaName, level = BNGetGameAccountInfo(toonID)
 								else
 									presenceName = accountInfo.accountName
@@ -895,7 +895,7 @@ if friends.enabled then
 									classc = {r = 1, g = 1, b = 1}
 								end
 								if UnitInParty(characterName) or UnitInRaid(characterName) then grouped = " |cffaaaaaa*|r" else grouped = "" end
-								if not T.classic and accountInfo.gameAccountInfo.factionName ~= UnitFactionGroup("player") then
+								if T.Mainline and accountInfo.gameAccountInfo.factionName ~= UnitFactionGroup("player") then
 									grouped = " |cffff0000*|r"
 								end
 								GameTooltip:AddDoubleLine(format("%s (|cff%02x%02x%02x%d|r |cff%02x%02x%02x%s|r%s) |cff%02x%02x%02x%s|r", client, levelc.r * 255, levelc.g * 255, levelc.b * 255, level, classc.r * 255, classc.g * 255, classc.b * 255, characterName, grouped, 255, 0, 0, status), presenceName, 238, 238, 238, 238, 238, 238)
@@ -906,7 +906,7 @@ if friends.enabled then
 								end
 							else
 								local gameText, isGameAFK, isGameBusy
-								if T.classic then
+								if T.Classic then
 									gameText, _, _, _, _, _, isGameAFK, isGameBusy = select(12, BNGetGameAccountInfo(toonID))
 								else
 									presenceName = accountInfo.accountName
@@ -967,11 +967,11 @@ if guild.enabled then
 				if IsInGuild() then
 					local total, _, online = GetNumGuildMembers()
 					return format(guild.fmt, online, total)
-				else return T.classic and L_STATS_NO_GUILD or LOOKINGFORGUILD end
+				else return T.Classic and L_STATS_NO_GUILD or LOOKINGFORGUILD end
 			end, update = 5
 		},
 		OnLoad = function(self)
-			if T.classic then
+			if T.Classic then
 				GuildRoster()
 			else
 				C_GuildInfo.GuildRoster()
@@ -994,7 +994,7 @@ if guild.enabled then
 			if IsInGuild() then
 				AltUpdate(self)
 				if not self.gmotd then
-					if self.elapsed > 1 then if T.classic then GuildRoster() else C_GuildInfo.GuildRoster() end; self.elapsed = 0 end
+					if self.elapsed > 1 then if T.Classic then GuildRoster() else C_GuildInfo.GuildRoster() end; self.elapsed = 0 end
 					if GetGuildRosterMOTD() ~= "" then self.gmotd = true; if self.hovered then self:GetScript("OnEnter")(self) end end
 					self.elapsed = self.elapsed + u
 				end
@@ -1040,7 +1040,7 @@ if guild.enabled then
 									notCheckable = true,
 									func = function(_, arg1)
 										menuFrame:Hide()
-										if T.classic then
+										if T.Classic then
 											InviteUnit(arg1)
 										else
 											C_PartyInfo.InviteUnit(arg1)
@@ -1068,7 +1068,7 @@ if guild.enabled then
 		OnEnter = function(self)
 			if IsInGuild() then
 				self.hovered = true
-				if T.classic then
+				if T.Classic then
 					GuildRoster()
 				else
 					C_GuildInfo.GuildRoster()
@@ -1187,7 +1187,7 @@ if durability.enabled then
 				local avgItemLevel, avgItemLevelEquipped = GetAverageItemLevel()
 				avgItemLevel = floor(avgItemLevel)
 				avgItemLevelEquipped = floor(avgItemLevelEquipped)
-				if T.classic then
+				if T.Classic then
 					GameTooltip:AddDoubleLine(DURABILITY, STAT_AVERAGE_ITEM_LEVEL..": "..avgItemLevelEquipped, tthead.r, tthead.g, tthead.b, tthead.r, tthead.g, tthead.b)
 				else
 					GameTooltip:AddDoubleLine(DURABILITY, STAT_AVERAGE_ITEM_LEVEL..": "..avgItemLevelEquipped.." / "..avgItemLevel, tthead.r, tthead.g, tthead.b, tthead.r, tthead.g, tthead.b)
@@ -1198,7 +1198,7 @@ if durability.enabled then
 			GameTooltip:AddLine(" ")
 			local nodur, totalcost = true, 0
 			local slotString = "1HEAD3SHOULDER5CHEST6WAIST7LEGS8FEET9WRIST10HANDS16MAINHAND17SECONDARYHAND"
-			if T.classic then slotString = slotString .. "18RANGED" end
+			if T.Classic then slotString = slotString .. "18RANGED" end
 			for slot, string in gmatch(slotString, "(%d+)([^%d]+)") do
 				local dur, dmax = GetInventoryItemDurability(slot)
 				local string = _G[string.."SLOT"]
@@ -1223,7 +1223,7 @@ if durability.enabled then
 			GameTooltip:Show()
 		end,
 		OnClick = function(self, button)
-			if T.classic then
+			if T.Classic then
 				if button == "RightButton" then
 					conf.AutoRepair = not conf.AutoRepair
 					self:GetScript("OnEnter")(self)
@@ -1267,7 +1267,7 @@ if experience.enabled then
 	local logintime, playedtotal, playedlevel, playedmsg, gained, lastkill, lastquest = GetTime(), 0, 0, 0, 0
 	local repname, repcolor, standingname, currep, minrep, maxrep
 	local mobxp = gsub(COMBATLOG_XPGAIN_FIRSTPERSON, "%%[sd]", "(.*)")
-	if T.classic and T.client == "deDE" then
+	if T.Classic and T.client == "deDE" then
 		mobxp = gsub(COMBATLOG_XPGAIN_FIRSTPERSON, "%%[0-9]$[sd]", "(.*)")
 	end
 	local questxp = gsub(COMBATLOG_XPGAIN_FIRSTPERSON_UNNAMED, "%%[sd]", "(.*)")
@@ -1368,8 +1368,8 @@ if experience.enabled then
 			elseif (event == "UPDATE_FACTION" or event == "PLAYER_LOGIN") and conf.ExpMode == "rep" then
 				local standing, factionID
 				repname, standing, minrep, maxrep, currep, factionID = GetWatchedFactionInfo()
-				local friendID, _, _, _, _, _, standingText, _, nextThreshold = not T.classic and GetFriendshipReputation(factionID)
-				if not T.classic then
+				local friendID, _, _, _, _, _, standingText, _, nextThreshold = T.Mainline and GetFriendshipReputation(factionID)
+				if T.Mainline then
 					if friendID then
 						if not nextThreshold then
 							minrep, maxrep, currep = 0, 1, 1
@@ -1492,7 +1492,7 @@ end
 ----------------------------------------------------------------------------------------
 --	Talents
 ----------------------------------------------------------------------------------------
-if not T.classic and talents.enabled then
+if (T.Mainline or T.WOTLK) and talents.enabled then
 	local lootSpecName, specName
 	local specList = {
 		{text = SPECIALIZATION, isTitle = true, notCheckable = true},
@@ -1539,7 +1539,11 @@ if not T.classic and talents.enabled then
 				self:GetScript("OnMouseUp")(self, b)
 			end)
 
-			RegEvents(self, "PLAYER_ENTERING_WORLD PLAYER_TALENT_UPDATE PLAYER_LOOT_SPEC_UPDATED")
+			if T.Mainline then
+				RegEvents(self, "PLAYER_ENTERING_WORLD PLAYER_TALENT_UPDATE PLAYER_LOOT_SPEC_UPDATED")
+			else
+				RegEvents(self, "PLAYER_ENTERING_WORLD CHARACTER_POINTS_CHANGED PLAYER_LOOT_SPEC_UPDATED")
+			end
 		end,
 		OnEvent = function(self)
 			if UnitLevel(P) < 10 then
@@ -1825,7 +1829,7 @@ if gold.enabled then
 		end,
 		OnEnter = function(self)
 			local curgold = GetMoney()
-			local _, _, archaeology, _, cooking = not T.classic and GetProfessions()
+			local _, _, archaeology, _, cooking = (T.Mainline or T.WOTLK) and GetProfessions()
 			conf.Gold = curgold
 			GameTooltip:SetOwner(self, "ANCHOR_NONE")
 			GameTooltip:ClearAllPoints()
@@ -1863,7 +1867,7 @@ if gold.enabled then
 			GameTooltip:AddDoubleLine(TOTAL, formatgold(5, total), ttsubh.r, ttsubh.g, ttsubh.b, 1, 1, 1)
 			GameTooltip:AddLine(" ")
 
-			if not T.classic then
+			if T.Mainline or T.WOTLK then
 				local currencies = 0
 				for i = 1, C_CurrencyInfo.GetCurrencyListSize() do
 					local info = C_CurrencyInfo.GetCurrencyListInfo(i)
@@ -1875,7 +1879,7 @@ if gold.enabled then
 						currencies = currencies + 1
 					end
 				end
-				if archaeology and C.stats.currency_archaeology then
+				if T.Mainline and archaeology and C.stats.currency_archaeology then
 					titleName = PROFESSIONS_ARCHAEOLOGY
 					Currency(384)	-- Dwarf Archaeology Fragment
 					Currency(385)	-- Troll
@@ -1900,9 +1904,14 @@ if gold.enabled then
 				end
 
 				if cooking and C.stats.currency_cooking then
-					titleName = PROFESSIONS_COOKING
-					Currency(81)	-- Epicurean's Award
-					Currency(402)	-- Ironpaw Token
+					if T.Mainline then
+						titleName = PROFESSIONS_COOKING
+						Currency(81)	-- Epicurean's Award
+						Currency(402)	-- Ironpaw Token
+					else
+						titleName = PROFESSIONS_COOKING
+						Currency(81)	-- Dalaran Cooking Award
+					end
 				end
 
 				-- if C.stats.currency_raid and T.level == MAX_PLAYER_LEVEL then
@@ -1911,11 +1920,39 @@ if gold.enabled then
 				-- Currency(1580, false, true)	-- Seal of Wartorn Fate
 				-- end
 
+				if T.WOTLK and C.stats.currency_raid and T.level == MAX_PLAYER_LEVEL then
+					titleName = L_STATS_CURRENCY_RAID
+					Currency(101, false, false)	-- Emblem of Heroism
+					Currency(102, false, false)	-- Emblem of Valor
+					Currency(221, false, false)	-- Emblem of Conquest
+					Currency(301, false, false)	-- Emblem of Triumph
+					Currency(341, false, false)	-- Emblem of Frost
+				end
+
 				if C.stats.currency_misc then
-					titleName = EXPANSION_NAME8
-					Currency(1813)	-- Reservoir Anima
-					Currency(1828)	-- Soul Ash
-					Currency(1767)	-- Stygia
+					if T.Mainline then
+						titleName = EXPANSION_NAME8
+						Currency(1813)	-- Reservoir Anima
+						Currency(1828)	-- Soul Ash
+						Currency(1767)	-- Stygia
+					else
+						titleName = EXPANSION_NAME1
+						Currency(42)	-- Badge of Justice
+						titleName = EXPANSION_NAME2
+						Currency(61)	-- Dalaran Jewelcrafter's Token
+						Currency(241)	-- Champion's Seal
+						titleName = PVP
+						Currency(103, true, true)	-- Arena Points
+						Currency(104, false, true)	-- Honor Points
+						Currency(201, false, false)	-- Venture Coin
+						Currency(126, false, true)	-- Wintergrasp Mark of Honor
+						Currency(126, false, false)	-- Stone Keeper's Shard
+						Currency(121, false, true)	-- Alterac Valley Mark of Honor
+						Currency(122, false, true)	-- Arathi Basin Mark of Honor
+						Currency(125, false, true)	-- Warsong Gulch Mark of Honor
+						Currency(123, false, true)	-- Eye of the Storm Mark of Honor
+						Currency(321, false, true)	-- Isle of Conquest Mark of Honor
+					end
 				end
 			end
 
@@ -1999,7 +2036,7 @@ if stats.enabled then
 			local range = RangedBase + RangedPosBuff + RangedNegBuff
 			local heal = GetSpellBonusHealing()
 			local spell = 0
-			if T.classic then
+			if T.Classic then
 				for i = 1, 7 do spell = max(spell, GetSpellBonusDamage(i)) end
 			else
 				spell = GetSpellBonusDamage(7)
@@ -2038,7 +2075,7 @@ if stats.enabled then
 			end
 			string = hit
 		elseif sub == "haste" then
-			if T.classic then
+			if T.Classic then
 				local haste
 				local melee, ranged, spell = GetMeleeHaste(), GetRangedHaste(), GetHaste()
 				if melee > spell and T.class ~= "HUNTER" then
@@ -2052,13 +2089,13 @@ if stats.enabled then
 				string = GetHaste()
 			end
 		elseif sub == "resilience" then
-			if T.classic then
+			if T.Classic then
 				string, percent = GetCombatRating(15)
 			else
 				string, percent = GetCombatRating(16)
 			end
 		elseif sub == "crit" then
-			if T.classic then
+			if T.Classic then
 				local melee, range, spell = GetCritChance(), GetRangedCritChance(), 0
 				for i = 1, 7 do spell = max(spell, GetSpellCritChance(i)) end
 				if melee > spell and T.class ~= "HUNTER" then
@@ -2083,7 +2120,7 @@ if stats.enabled then
 			local baseDefense, armorDefense = UnitDefense("player")
 			string = baseDefense + armorDefense
 		elseif sub == "avoidance" then
-			if T.classic then
+			if T.Classic then
 				if T.race == "NightElf" then
 					string = GetDodgeChance() + GetParryChance() + 1
 				else
@@ -2129,7 +2166,7 @@ if stats.enabled then
 		OnUpdate = function(self, u)
 			self.elapsed = self.elapsed + u
 			if self.fired and self.elapsed > 2.5 then
-				if T.classic then
+				if T.Classic then
 					self.text:SetText(gsub(stats[format("spec%dfmt", T.GetSpecialization() and T.GetSpecialization() or 1)], "%[(%w-)%]", tags))
 				else
 					self.text:SetText(gsub(stats.fmt, "%[(%w-)%]", tags))
@@ -2141,14 +2178,14 @@ if stats.enabled then
 		end,
 		OnClick = function() ToggleCharacter("PaperDollFrame") end,
 		OnEnter = function(self)
-			if T.classic then return end
+			if T.Classic then return end
 			self.hovered = true
 			GameTooltip:SetOwner(self, "ANCHOR_BOTTOMLEFT", -3, 26)
 			GameTooltip:ClearLines()
 			GameTooltip:AddLine(PAPERDOLL_SIDEBAR_STATS, tthead.r, tthead.g, tthead.b)
 			GameTooltip:AddLine(" ")
-			local spec = T.classic and T.GetSpecialization() or GetSpecialization()
-			if spec and not T.classic then
+			local spec = T.Classic and T.GetSpecialization() or GetSpecialization()
+			if spec and (T.Mainline or T.WOTLK) then
 				local primaryStat = select(6, GetSpecializationInfo(spec, nil, nil, nil, UnitSex("player")))
 				local value = UnitStat("player", primaryStat)
 				local statName = _G["SPELL_STAT"..primaryStat.."_NAME"]
@@ -2182,7 +2219,7 @@ if stats.enabled then
 		end,
 	})
 
-	if not T.classic then
+	if T.Mainline or T.WOTLK then
 		Inject("Stat", {
 			OnClick = function() ToggleCharacter("PaperDollFrame") end,
 			OnEnter = function() GameTooltip:SetOwner(self, "ANCHOR_BOTTOMLEFT", -3, 26)LP_Stats:GetScript("OnEnter")(LP_Stats) end,
