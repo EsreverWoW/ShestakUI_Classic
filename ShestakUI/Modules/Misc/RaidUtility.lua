@@ -111,7 +111,7 @@ CreateButton("RaidUtilityReadyCheckButton", RaidUtilityPanel, "UIPanelButtonTemp
 RaidUtilityReadyCheckButton:SetScript("OnMouseUp", function() DoReadyCheck() end)
 
 -- World Marker button
-if T.Mainline or T.WOTLK then
+if T.Mainline then
 	CompactRaidFrameManagerDisplayFrameLeaderOptionsRaidWorldMarkerButton:ClearAllPoints()
 	CompactRaidFrameManagerDisplayFrameLeaderOptionsRaidWorldMarkerButton:SetPoint("TOPRIGHT", RaidUtilityMainAssistButton, "BOTTOMRIGHT", 0, -5)
 	CompactRaidFrameManagerDisplayFrameLeaderOptionsRaidWorldMarkerButton:SetParent("RaidUtilityPanel")
