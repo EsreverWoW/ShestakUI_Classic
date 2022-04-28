@@ -76,27 +76,29 @@ function T.GetSpecializationRole()
 end
 
 -- Add later
-GetAverageItemLevel = _G.GetAverageItemLevel or function()
-	local slotName = {
-		"HeadSlot", "NeckSlot", "ShoulderSlot", "BackSlot", "ChestSlot", "WristSlot",
-		"HandsSlot", "WaistSlot", "LegsSlot", "FeetSlot", "Finger0Slot", "Finger1Slot",
-		"Trinket0Slot", "Trinket1Slot", "MainHandSlot", "SecondaryHandSlot", "RangedSlot", "AmmoSlot"
-	}
+if not GetAverageItemLevel then
+	GetAverageItemLevel = function()
+		local slotName = {
+			"HeadSlot", "NeckSlot", "ShoulderSlot", "BackSlot", "ChestSlot", "WristSlot",
+			"HandsSlot", "WaistSlot", "LegsSlot", "FeetSlot", "Finger0Slot", "Finger1Slot",
+			"Trinket0Slot", "Trinket1Slot", "MainHandSlot", "SecondaryHandSlot", "RangedSlot", "AmmoSlot"
+		}
 
-	local total, slot, itn, level = 0, 0, 0, 0
+		local total, slot, itn, level = 0, 0, 0, 0
 
-	for i in pairs(slotName) do
-		slot = GetInventoryItemLink("player", GetInventorySlotInfo(slotName[i]))
-		if slot then
-			itn = itn + 1
-			level = select(4, GetItemInfo(slot)) or 0
-			total = total + level
+		for i in pairs(slotName) do
+			slot = GetInventoryItemLink("player", GetInventorySlotInfo(slotName[i]))
+			if slot then
+				itn = itn + 1
+				level = select(4, GetItemInfo(slot)) or 0
+				total = total + level
+			end
 		end
+
+		if total < 1 or itn < 1 then return 0 end
+
+		return floor(total / itn), floor(total / itn)
 	end
-
-	if total < 1 or itn < 1 then return 0 end
-
-	return floor(total / itn), floor(total / itn)
 end
 
 ----------------------------------------------------------------------------------------
@@ -109,12 +111,14 @@ local threatColors = {
 	[3] = {1, 0, 0}
 }
 
-GetThreatStatusColor = _G.GetThreatStatusColor or function(statusIndex)
-	if not (type(statusIndex) == "number" and statusIndex >= 0 and statusIndex < 4) then
-		statusIndex = 0
-	end
+if not GetThreatStatusColor then
+	GetThreatStatusColor = _G.GetThreatStatusColor or function(statusIndex)
+		if not (type(statusIndex) == "number" and statusIndex >= 0 and statusIndex < 4) then
+			statusIndex = 0
+		end
 
-	return threatColors[statusIndex][1], threatColors[statusIndex][2], threatColors[statusIndex][3]
+		return threatColors[statusIndex][1], threatColors[statusIndex][2], threatColors[statusIndex][3]
+	end
 end
 
 ----------------------------------------------------------------------------------------
