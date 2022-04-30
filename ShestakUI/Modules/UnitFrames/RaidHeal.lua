@@ -514,7 +514,7 @@ oUF:Factory(function(self)
 					"showRaid", true,
 					"groupFilter", tostring(i),
 					"groupBy", "CLASS",
-					"groupingOrder", (T.Classic or T.TBC) and "HUNTER,WARLOCK" or T.WOTLK and "DEATHKNIGHT,HUNTER,WARLOCK" or "DEATHKNIGHT,HUNTER,MAGE,WARLOCK",
+					"groupingOrder", (T.Classic or T.TBC) and "HUNTER,WARLOCK" or "DEATHKNIGHT,HUNTER,MAGE,WARLOCK",
 					"maxColumns", 5,
 					"unitsPerColumn", 1,
 					"columnSpacing", T.Scale(7),
