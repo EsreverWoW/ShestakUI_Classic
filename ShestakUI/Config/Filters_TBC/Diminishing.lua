@@ -22,6 +22,7 @@ T.DiminishingSpells = {
 	[10308] = {"stun"},				-- Hammer of Justice r4
 	[1833] = {"stun"},				-- Cheap Shot
 	[22703] = {"stun"},				-- Inferno Effect
+	[30153] = {"stun"},				-- Intercept Stun (Felguard)
 	[30283] = {"stun"},				-- Shadowfury r1
 	[30413] = {"stun"},				-- Shadowfury r2
 	[30414] = {"stun"},				-- Shadowfury r3
@@ -149,7 +150,7 @@ T.DiminishingSpells = {
 	[19306] = {"root"},				-- Counterattack r2
 	[20909] = {"root"},				-- Counterattack r3
 	[20910] = {"root"},				-- Counterattack r4
-	[27067] = {"root"},				-- Entrapment
+	[19185] = {"root"},				-- Entrapment
 	-- [19229] = {"root"},				-- Improved Wing Clip
 	[33395] = {"root"},				-- Freeze (Water Elemental)
 	[122] = {"root"},				-- Frost Nova r1
@@ -207,7 +208,7 @@ T.DiminishingSpells = {
 	[33042] = {"dragonsbreath"},	-- Dragon's Breath r3
 	[33043] = {"dragonsbreath"},	-- Dragon's Breath r4
 
-	-- Repentence
+	-- Repentance
 	[20066] = {"repentance"},		-- Repentance
 
 	--[[
@@ -226,7 +227,7 @@ T.DiminishingSpells = {
 
 	-- Kidney Shot
 	[408] = {"kidneyshot"},			-- Kidney Shot r1
-	[8643] = {"kidneyshot"},		-- Kidney Shot r1
+	[8643] = {"kidneyshot"},		-- Kidney Shot r2
 
 	-- Frost Shock
 	[8056] = {"frostshock"},		-- Frost Shock r1

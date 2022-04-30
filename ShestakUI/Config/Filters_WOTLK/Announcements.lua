@@ -7,10 +7,14 @@ local T, C, L, _ = unpack(select(2, ...))
 ----------------------------------------------------------------------------------------
 if C.announcements.spells == true then
 	T.announce_spells = {
+		61999,	-- Raise Ally
 		20484,	-- Rebirth
 		20707,	-- Soulstone
+		31821,	-- Aura Mastery
+		64205,	-- Divine Sacrifice
 		633,	-- Lay on Hands
 		34477,	-- Misdirection
+		57934,	-- Tricks of the Trade
 		19801,	-- Tranquilizing Shot
 	}
 
@@ -29,16 +33,24 @@ end
 
 if C.announcements.toys == true then
 	T.AnnounceToys = {
+		[61031] = true,		-- Toy Train Set
 		[49844] = true,		-- Direbrew's Remote
 	}
 end
 
 if C.announcements.feasts == true then
 	T.AnnounceFeast = {
+		[57301] = true,	-- Great Feast
+		[57426] = true,	-- Fish Feast
+		[58465] = true,	-- Gigantic Feast
+		[58474] = true,	-- Small Feast
+		[66476] = true,	-- Bountiful Feast
 	}
 	T.AnnounceBots = {
 		[22700] = true,		-- Field Repair Bot 74A
 		[44389] = true,		-- Field Repair Bot 110G
+		[54711] = true,		-- Scrapbot
+		[67826] = true,		-- Jeeves
 	}
 end
 
@@ -60,6 +72,7 @@ if C.announcements.portals == true then
 		[35717] = true,		-- Shattrath
 		-- Alliance/Horde
 		[28148] = true,		-- Karazhan
+		[53142] = true,		-- Dalaran
 	}
 end
 
@@ -77,10 +90,15 @@ if C.announcements.bad_gear == true then
 		},
 		-- Feet
 		[8] = {
+			50287,	-- Boots of the Bay
 			19969,	-- Nat Pagle's Extreme Anglin' Boots
 		},
 		-- Main-Hand
 		[16] = {
+			44050,	-- Mastercraft Kalu'ak Fishing Pole
+			45992,	-- Jeweled Fishing Pole
+			45991,	-- Bone Fishing Pole
+			45858,	-- Nat's Lucky Fishing Pole
 			19970,	-- Arcanite Fishing Pole
 			19022,	-- Nat Pagle's Extreme Angler FC-5000
 			25978,	-- Seth's Graphite Fishing Pole

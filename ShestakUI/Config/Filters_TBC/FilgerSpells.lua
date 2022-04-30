@@ -169,7 +169,7 @@ C["filger_spells"] = {
 
 			-- Item Sets
 			-- Heroic Resolution (Attack Power, Proc) [Desolation Battlegear / Doomplate Battlegear / Wastewalker Armor]
-			{spellID = 37482, unitID = "player", caster = "player", filter = "BUFF"},
+			{spellID = 37612, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Insight (Spell Power, Proc) [Mana-Etched Regalia]
 			{spellID = 37620, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Lesser Spell Blasting (Spell Power, Proc) [Spellstrike Infusion]
@@ -504,11 +504,15 @@ C["filger_spells"] = {
 
 			-- Meta Gems
 			-- Focus (Spell Haste, Proc) [Mystical Skyfire Diamond]
-			{spellID = 39530, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			{spellID = 18803, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Skyfire Swiftness (Physical Haste, Proc) [Thundering Skyfire Diamond]
 			{spellID = 39959, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Skyflare Swiftness (Physical Haste, Proc) [Thundering Skyflare Diamond]
+			{spellID = 55379, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Enchants
+			-- Executioner [Enchant Weapon - Executioner]
+			{spellID = 42976, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Holy Strength (Strength) [Enchant Weapon - Crusader]
 			{spellID = 20007, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Lightning Speed (Agility and Physical Attack Speed) [Enchant Weapon - Mongoose]
@@ -572,9 +576,13 @@ C["filger_spells"] = {
 			-- Rip
 			{spellID = 1079, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Soothe Animal
-			-- {spellID = 2908, unitID = "target", caster = "player", filter = "DEBUFF"},
+			{spellID = 2908, unitID = "target", caster = "player", filter = "DEBUFF"},
 
 			-- Trinket Effects
+
+			-- Enchants
+			-- Deathfrost [Enchant Weapon - Deathfrost]
+			{spellID = 46629, unitID = "target", caster = "player", filter = "DEBUFF"},
 		},
 		{
 			Name = "T_DE/BUFF_BAR",
@@ -762,6 +770,8 @@ C["filger_spells"] = {
 			{spellID = 19263, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Dive (Bat / Bird of Prey / Carrion Bird / Dragonhawk / Nether Ray / Wind Serpent)
 			-- {spellID = 23145, unitID = "pet", caster = "all", filter = "BUFF"},
+			-- Eagle Eye
+			-- {spellID = 6197, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Eyes of the Beast
 			-- {spellID = 1002, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Feed Pet Effect
@@ -779,9 +789,7 @@ C["filger_spells"] = {
 			-- Misdirection
 			{spellID = 34477, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Prowl (Cat)
-			-- {spellID = 24450, unitID = "pet", caster = "all", filter = "BUFF"},
-			-- Quick Shots
-			{spellID = 6150, unitID = "pet", caster = "player", filter = "BUFF"},
+			-- {spellID = 24450, unitID = "pet", caster = "all", filter = "BUFF"}
 			-- Rapid Fire
 			{spellID = 3045, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Rapid Killing
@@ -811,12 +819,14 @@ C["filger_spells"] = {
 			-- Buffs
 			-- Ferocious Inspiration
 			{spellID = 34456, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Quick Shots
+			{spellID = 6150, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Item Sets
 			-- Exploited Weakness (Armor Penetration, Proc) [Beast Lord Armor]
 			{spellID = 37482, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Heroic Resolution (Attack Power, Proc) [Desolation Battlegear / Doomplate Battlegear / Wastewalker Armor]
-			{spellID = 37482, unitID = "player", caster = "player", filter = "BUFF"},
+			{spellID = 37612, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Ranged
 			-- Santos' Blessing (Attack Power, Proc) [Don Santos' Famous Hunting Rifle]
@@ -950,6 +960,8 @@ C["filger_spells"] = {
 			-- Meta Gems
 			-- Skyfire Swiftness (Physical Haste, Proc) [Thundering Skyfire Diamond]
 			{spellID = 39959, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Skyflare Swiftness (Physical Haste, Proc) [Thundering Skyflare Diamond]
+			{spellID = 55379, unitID = "player", caster = "player", filter = "BUFF"},
 		},
 		{
 			Name = "T_DEBUFF_ICON",
@@ -1036,6 +1048,10 @@ C["filger_spells"] = {
 			{spellID = 23577, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
 
 			-- Trinket Effects
+
+			-- Enchants
+			-- Deathfrost [Enchant Weapon - Deathfrost]
+			{spellID = 46629, unitID = "target", caster = "player", filter = "DEBUFF"},
 		},
 		--[[
 		{
@@ -1441,7 +1457,7 @@ C["filger_spells"] = {
 
 			-- Meta Gems
 			-- Focus (Spell Haste, Proc) [Mystical Skyfire Diamond]
-			{spellID = 39530, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			{spellID = 18803, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 
 			-- Enchants
 			-- Spellsurge (Mana Regeneration to Party) [Enchant Weapon - Spellsurge]
@@ -1482,6 +1498,8 @@ C["filger_spells"] = {
 			{spellID = 10160, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
 			-- Cone of Cold r5
 			{spellID = 10161, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Cone of Cold r6
+			{spellID = 27087, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
 			-- Counterspell - Silenced
 			{spellID = 18469, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Dragon's Breath
@@ -1568,6 +1586,10 @@ C["filger_spells"] = {
 			{spellID = 27868, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
 
 			-- Trinket Effects
+
+			-- Enchants
+			-- Deathfrost [Enchant Weapon - Deathfrost]
+			{spellID = 46629, unitID = "target", caster = "player", filter = "DEBUFF"},
 		},
 		--[[
 		{
@@ -1601,10 +1623,10 @@ C["filger_spells"] = {
 			{spellID = 12825, unitID = "focus", caster = "all", filter = "DEBUFF", absID = true},
 			-- Polymorph r4
 			{spellID = 12826, unitID = "focus", caster = "all", filter = "DEBUFF", absID = true},
-			-- Polymorph: Turtle
-			{spellID = 28271, unitID = "focus", caster = "all", filter = "DEBUFF", absID = true},
 			-- Polymorph: Pig
 			{spellID = 28272, unitID = "focus", caster = "all", filter = "DEBUFF", absID = true},
+			-- Polymorph: Turtle
+			{spellID = 28271, unitID = "focus", caster = "all", filter = "DEBUFF", absID = true},
 		},
 		{
 			Name = "COOLDOWN",
@@ -1716,6 +1738,8 @@ C["filger_spells"] = {
 			{spellID = 642, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Fire Resistance Aura
 			-- {spellID = 19891, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Forbearance
+			{spellID = 25771, unitID = "player", caster = "player", filter = "DEBUFF"},
 			-- Frost Resistance Aura
 			-- {spellID = 19888, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Holy Shield r1
@@ -1735,7 +1759,7 @@ C["filger_spells"] = {
 			-- Seal of Blood
 			{spellID = 31892, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Seal of Command
-			{spellID = 27170, unitID = "player", caster = "player", filter = "BUFF"},
+			{spellID = 20375, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Seal of Corruption
 			{spellID = 348704, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Seal of Justice
@@ -1786,7 +1810,7 @@ C["filger_spells"] = {
 			-- Enlightenment (Special, Proc) [Crystalforge Raiment]
 			-- {spellID = 43837, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Heroic Resolution (Attack Power, Proc) [Desolation Battlegear / Doomplate Battlegear / Wastewalker Armor]
-			{spellID = 37482, unitID = "player", caster = "player", filter = "BUFF"},
+			{spellID = 37612, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Infused Shield (Special, Proc) [Crystalforge Armor]
 			{spellID = 37193, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Insight (Spell Power, Proc) [Mana-Etched Regalia]
@@ -2131,11 +2155,15 @@ C["filger_spells"] = {
 
 			-- Meta Gems
 			-- Focus (Spell Haste, Proc) [Mystical Skyfire Diamond]
-			{spellID = 39530, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			{spellID = 18803, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Skyfire Swiftness (Physical Haste, Proc) [Thundering Skyfire Diamond]
 			{spellID = 39959, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Skyflare Swiftness (Physical Haste, Proc) [Thundering Skyflare Diamond]
+			{spellID = 55379, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Enchants
+			-- Executioner [Enchant Weapon - Executioner]
+			{spellID = 42976, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Holy Strength (Strength) [Enchant Weapon - Crusader]
 			{spellID = 20007, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Lightning Speed (Agility and Physical Attack Speed) [Enchant Weapon - Mongoose]
@@ -2178,6 +2206,18 @@ C["filger_spells"] = {
 			-- Trinket Effects
 			-- Enduring Judgement (DoT, Proc) [Ashtongue Talisman of Zeal]
 			{spellID = 40471, unitID = "target", caster = "player", filter = "DEBUFF"},
+
+			-- Enchants
+			-- Chilled [Enchant Weapon - Icy Chill]
+			{spellID = 20005, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Deathfrost [Enchant Weapon - Deathfrost]
+			{spellID = 46629, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Smite Demon [Enchant Weapon - Demonslaying]
+			{spellID = 13907, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Unholy Curse [Enchant Weapon - Unholy Weapon]
+			{spellID = 20006, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Venomhide Poison
+			{spellID = 14795, unitID = "target", caster = "player", filter = "DEBUFF"},
 		},
 		{
 			Name = "T_DE/BUFF_BAR",
@@ -2230,8 +2270,10 @@ C["filger_spells"] = {
 
 			-- Turn Evil
 			{spellID = 10326, unitID = "focus", caster = "all", filter = "DEBUFF"},
-			-- Turn Undead
-			{spellID = 2878, unitID = "focus", caster = "all", filter = "DEBUFF"},
+			-- Turn Undead r1
+			{spellID = 2878, unitID = "focus", caster = "all", filter = "DEBUFF", absID = true},
+			-- Turn Undead r2
+			{spellID = 5627, unitID = "focus", caster = "all", filter = "DEBUFF", absID = true},
 		},
 		{
 			Name = "COOLDOWN",
@@ -2387,7 +2429,7 @@ C["filger_spells"] = {
 			-- Spirit Tap
 			{spellID = 15271, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Surge of Light
-			{spellID = 33150, unitID = "player", caster = "player", filter = "BUFF"},
+			{spellID = 33151, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Item Sets
 			-- Divine Protection (Absorb, Proc) [Vestments of the Devout / Vestments of the Virtuous]
@@ -2600,7 +2642,7 @@ C["filger_spells"] = {
 
 			-- Meta Gems
 			-- Focus (Spell Haste, Proc) [Mystical Skyfire Diamond]
-			{spellID = 39530, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			{spellID = 18803, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 
 			-- Enchants
 			-- Spellsurge (Mana Regeneration to Party) [Enchant Weapon - Spellsurge]
@@ -2669,6 +2711,10 @@ C["filger_spells"] = {
 			{spellID = 34917, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
 
 			-- Trinket Effects
+
+			-- Enchants
+			-- Deathfrost [Enchant Weapon - Deathfrost]
+			{spellID = 46629, unitID = "target", caster = "player", filter = "DEBUFF"},
 		},
 		{
 			Name = "T_DE/BUFF_BAR",
@@ -2836,6 +2882,8 @@ C["filger_spells"] = {
 			{spellID = 31234, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Ghostly Strike
 			{spellID = 14278, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Shadowstep
+			{spellID = 36563, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Slice and Dice
 			{spellID = 5171, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Sprint
@@ -2844,8 +2892,6 @@ C["filger_spells"] = {
 			-- {spellID = 1784, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Stealth (Vanish)
 			-- {spellID = 31621, unitID = "player", caster = "player", filter = "BUFF", absID = true},
-			-- Shadowstep
-			{spellID = 36563, unitID = "player", caster = "player", filter = "BUFF"},
 		},
 		{
 			Name = "P_PROC_ICON",
@@ -2868,7 +2914,7 @@ C["filger_spells"] = {
 			-- Haste (Physical Haste, Proc) [Assassination Armor]
 			-- {spellID = 37163, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Heroic Resolution (Attack Power, Proc) [Desolation Battlegear / Doomplate Battlegear / Wastewalker Armor]
-			{spellID = 37482, unitID = "player", caster = "player", filter = "BUFF"},
+			{spellID = 37612, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Revealed Flaw (Speecial, Proc) [Bonescythe Armor]
 			{spellID = 28815, unitID = "player", caster = "player", filter = "BUFF"},
 
@@ -3018,8 +3064,12 @@ C["filger_spells"] = {
 			-- Meta Gems
 			-- Skyfire Swiftness (Physical Haste, Proc) [Thundering Skyfire Diamond]
 			{spellID = 39959, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Skyflare Swiftness (Physical Haste, Proc) [Thundering Skyflare Diamond]
+			{spellID = 55379, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Enchants
+			-- Executioner [Enchant Weapon - Executioner]
+			{spellID = 42976, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Holy Strength (Strength) [Enchant Weapon - Crusader]
 			{spellID = 20007, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Lightning Speed (Agility and Physical Attack Speed) [Enchant Weapon - Mongoose]
@@ -3076,6 +3126,18 @@ C["filger_spells"] = {
 			{spellID = 5530, unitID = "target", caster = "player", filter = "DEBUFF"},
 
 			-- Trinket Effects
+
+			-- Enchants
+			-- Chilled [Enchant Weapon - Icy Chill]
+			{spellID = 20005, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Deathfrost [Enchant Weapon - Deathfrost]
+			{spellID = 46629, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Smite Demon [Enchant Weapon - Demonslaying]
+			{spellID = 13907, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Unholy Curse [Enchant Weapon - Unholy Weapon]
+			{spellID = 20006, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Venomhide Poison
+			{spellID = 14795, unitID = "target", caster = "player", filter = "DEBUFF"},
 		},
 		--[[
 		{
@@ -3208,6 +3270,8 @@ C["filger_spells"] = {
 			{spellID = 30165, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Elemental Mastery
 			{spellID = 16166, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Far Sight
+			-- {spellID = 6196, unitID = "player", caster = "player", filter = "BUFF"},
 			--[[
 			-- Fire Resistance Totem r1
 			{spellID = 8185, unitID = "player", caster = "player", filter = "BUFF", absID = true},
@@ -3322,7 +3386,7 @@ C["filger_spells"] = {
 			-- Energized (Special, Proc) [Cyclone Regalia]
 			{spellID = 37214, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Heroic Resolution (Attack Power, Proc) [Desolation Battlegear / Doomplate Battlegear / Wastewalker Armor]
-			{spellID = 37482, unitID = "player", caster = "player", filter = "BUFF"},
+			{spellID = 37612, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Insight (Spell Power, Proc) [Mana-Etched Regalia]
 			{spellID = 37620, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Invigorated (Special, Proc) [Cataclysm Harness]
@@ -3621,11 +3685,15 @@ C["filger_spells"] = {
 
 			-- Meta Gems
 			-- Focus (Spell Haste, Proc) [Mystical Skyfire Diamond]
-			{spellID = 39530, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			{spellID = 18803, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Skyfire Swiftness (Physical Haste, Proc) [Thundering Skyfire Diamond]
 			{spellID = 39959, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Skyflare Swiftness (Physical Haste, Proc) [Thundering Skyflare Diamond]
+			{spellID = 55379, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Enchants
+			-- Executioner [Enchant Weapon - Executioner]
+			{spellID = 42976, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Holy Strength (Strength) [Enchant Weapon - Crusader]
 			{spellID = 20007, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Lightning Speed (Agility and Physical Attack Speed) [Enchant Weapon - Mongoose]
@@ -3664,6 +3732,18 @@ C["filger_spells"] = {
 			{spellID = 17364, unitID = "target", caster = "all", filter = "DEBUFF"},
 
 			-- Trinket Effects
+
+			-- Enchants
+			-- Chilled [Enchant Weapon - Icy Chill]
+			{spellID = 20005, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Deathfrost [Enchant Weapon - Deathfrost]
+			{spellID = 46629, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Smite Demon [Enchant Weapon - Demonslaying]
+			{spellID = 13907, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Unholy Curse [Enchant Weapon - Unholy Weapon]
+			{spellID = 20006, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Venomhide Poison
+			{spellID = 14795, unitID = "target", caster = "player", filter = "DEBUFF"},
 		},
 		{
 			Name = "T_DE/BUFF_BAR",
@@ -3814,8 +3894,11 @@ C["filger_spells"] = {
 			-- {spellID = 6307, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Consume Shadows (Voidwalker)
 			-- {spellID = 17767, unitID = "pet", caster = "all", filter = "BUFF"},
+			-- Demonic Circle: Summon
+			-- {spellID = 48018, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Eye of Kilrogg
 			-- {spellID = 126, unitID = "player", caster = "player", filter = "BUFF"},
+			--[[
 			-- Fire Shield r1 (Imp)
 			{spellID = 2947, unitID = "player", caster = "all", filter = "BUFF", absID = true},
 			-- Fire Shield r2 (Imp)
@@ -3828,6 +3911,7 @@ C["filger_spells"] = {
 			{spellID = 11771, unitID = "player", caster = "all", filter = "BUFF", absID = true},
 			-- Fire Shield r6 (Imp)
 			{spellID = 27269, unitID = "player", caster = "all", filter = "BUFF", absID = true},
+			--]]
 			-- Health Funnel
 			-- {spellID = 755, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Hellfire
@@ -4023,7 +4107,7 @@ C["filger_spells"] = {
 
 			-- Meta Gems
 			-- Focus (Spell Haste, Proc) [Mystical Skyfire Diamond]
-			{spellID = 39530, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			{spellID = 18803, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 
 			-- Enchants
 			-- Spellsurge (Mana Regeneration to Party) [Enchant Weapon - Spellsurge]
@@ -4150,6 +4234,10 @@ C["filger_spells"] = {
 			{spellID = 32108, unitID = "target", caster = "player", filter = "DEBUFF"},
 
 			-- Trinket Effects
+
+			-- Enchants
+			-- Deathfrost [Enchant Weapon - Deathfrost]
+			{spellID = 46629, unitID = "target", caster = "player", filter = "DEBUFF"},
 		},
 		--[[
 		{
@@ -4206,6 +4294,8 @@ C["filger_spells"] = {
 			{spellID = 1122, filter = "CD", absID = true},
 			-- Ritual of Doom
 			{spellID = 18540, filter = "CD"},
+			-- Ritual of Souls
+			{spellID = 29893, filter = "CD"},
 			-- Shadow Ward
 			{spellID = 6229, filter = "CD"},
 			-- Shadowburn
@@ -4330,7 +4420,7 @@ C["filger_spells"] = {
 			-- Cheat Death (Special, Proc) [Dreadnaught's Battlegear]
 			{spellID = 28846, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Heroic Resolution (Attack Power, Proc) [Desolation Battlegear / Doomplate Battlegear / Wastewalker Armor]
-			{spellID = 37482, unitID = "player", caster = "player", filter = "BUFF"},
+			{spellID = 37612, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Overpower (Special, Proc) [Destroyer Battlegear]
 			{spellID = 37529, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Parry (Parry, Proc) [Battlegear of Wrath]
@@ -4339,6 +4429,8 @@ C["filger_spells"] = {
 			{spellID = 37523, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Revenge (Special, Proc) [Warbringer Armor]
 			{spellID = 37517, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Spirits of the Lost (Special, Proc) [Dreadnaught Battlegear]
+			{spellID = 61571, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Warrior's Wrath (Special, Proc) [Battlegear of Wrath]
 			{spellID = 21887, unitID = "player", caster = "player", filter = "BUFF"},
 
@@ -4546,8 +4638,12 @@ C["filger_spells"] = {
 			-- Meta Gems
 			-- Skyfire Swiftness (Physical Haste, Proc) [Thundering Skyfire Diamond]
 			{spellID = 39959, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Skyflare Swiftness (Physical Haste, Proc) [Thundering Skyflare Diamond]
+			{spellID = 55379, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Enchants
+			-- Executioner [Enchant Weapon - Executioner]
+			{spellID = 42976, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Holy Strength (Strength) [Enchant Weapon - Crusader]
 			{spellID = 20007, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Lightning Speed (Agility and Physical Attack Speed) [Enchant Weapon - Mongoose]
@@ -4638,6 +4734,18 @@ C["filger_spells"] = {
 			{spellID = 5530, unitID = "target", caster = "player", filter = "DEBUFF"},
 
 			-- Trinket Effects
+
+			-- Enchants
+			-- Chilled [Enchant Weapon - Icy Chill]
+			{spellID = 20005, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Deathfrost [Enchant Weapon - Deathfrost]
+			{spellID = 46629, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Smite Demon [Enchant Weapon - Demonslaying]
+			{spellID = 13907, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Unholy Curse [Enchant Weapon - Unholy Weapon]
+			{spellID = 20006, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Venomhide Poison
+			{spellID = 14795, unitID = "target", caster = "player", filter = "DEBUFF"},
 		},
 		--[[
 		{
@@ -4858,6 +4966,8 @@ C["filger_spells"] = {
 			{spellID = 29674, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 
 			-- Miscellaneous
+			-- Nightmare Seed
+			{spellID = 28726, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Oil of Immolation
 			{spellID = 11350, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 
@@ -4880,6 +4990,10 @@ C["filger_spells"] = {
 			{spellID = 35476, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Drums of War
 			{spellID = 35475, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Greater Drums of Battle
+			{spellID = 351355, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Greater Drums of War
+			{spellID = 351360, unitID = "player", caster = "all", filter = "BUFF"},
 
 			-- Professions
 			-- Fel Blossom
@@ -4888,12 +5002,12 @@ C["filger_spells"] = {
 			{spellID = 8892, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Gnomish Rocket Boots
 			{spellID = 13141, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Rocket Boots Xtreme / Rocket Boots Xtreme Lite
-			{spellID = 30452, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Parachute
-			{spellID = 12438, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Hyper-Vision Goggles
 			{spellID = 30249, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Parachute
+			{spellID = 12438, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Rocket Boots Xtreme / Rocket Boots Xtreme Lite
+			{spellID = 30452, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Racial
 			-- Berserking (Mana)
@@ -4909,7 +5023,8 @@ C["filger_spells"] = {
 			-- Blood Fury (Spell)
 			{spellID = 33702, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Gift of the Naaru (Draenei)
-			{spellID = 28880, unitID = "player", caster = "all", filter = "BUFF"},-- Perception (Human)
+			{spellID = 28880, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Perception (Human)
 			{spellID = 20600, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Shadowmeld (Night Elf)
 			{spellID = 20580, unitID = "player", caster = "player", filter = "BUFF"},
@@ -4973,6 +5088,10 @@ C["filger_spells"] = {
 			{spellID = 35478, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Drums of Speed
 			{spellID = 35477, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Greater Drums of Restoration
+			{spellID = 351358, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Greater Drums of Speed
+			{spellID = 351359, unitID = "player", caster = "all", filter = "BUFF"},
 
 			-- Trinket Effects
 			-- Fecundity (Special, Use) [Ribbon of Sacrifice]
@@ -5039,10 +5158,10 @@ C["filger_spells"] = {
 			{spellID = 12825, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
 			-- Polymorph r4
 			{spellID = 12826, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
-			-- Polymorph: Turtle
-			{spellID = 28271, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
 			-- Polymorph: Pig
 			{spellID = 28272, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
+			-- Polymorph: Turtle
+			{spellID = 28271, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
 
 			-- Paladin
 			-- Hammer of Justice r1

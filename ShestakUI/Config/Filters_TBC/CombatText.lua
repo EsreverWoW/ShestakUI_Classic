@@ -52,6 +52,7 @@ elseif T.class == "MAGE" then
 	if C.combattext.merge_aoe_spam then
 		T.aoespam[2120] = 0			-- Flamestrike
 		T.aoespam[12654] = 3		-- Ignite
+		T.aoespam[31661] = 0		-- Dragon's Breath
 		T.aoespam[10] = 3			-- Blizzard
 		T.aoespam[122] = 0			-- Frost Nova
 		T.aoespam[1449] = 0			-- Arcane Explosion
@@ -71,13 +72,16 @@ elseif T.class == "PALADIN" then
 elseif T.class == "PRIEST" then
 	if C.combattext.merge_aoe_spam then
 		-- Healing spells
+		T.aoespam[34861] = 1		-- Circle of Healing
 		T.aoespam[15290] = 4		-- Vampiric Embrace
 		T.aoespam[23455] = 0		-- Holy Nova
 		T.aoespam[139] = 3			-- Renew
+		T.aoespam[32546] = 3		-- Binding Heal
 		T.aoespam[596] = 0			-- Prayer of Healing
 		-- Damaging spells
 		T.aoespam[15237] = 0		-- Holy Nova
 		T.aoespam[589] = 4			-- Shadow Word: Pain
+		T.aoespam[15407] = 3		-- Mind Flay
 		T.aoespam[14914] = 3		-- Holy Fire
 	end
 	if C.combattext.healing then
@@ -89,7 +93,9 @@ elseif T.class == "ROGUE" then
 		T.aoespam[703] = 5			-- Garrote
 		T.aoespam[8680] = 3			-- Wound Poison
 		T.aoespam[22482] = 3		-- Blade Flurry
+		T.aoespam[5374] = 0			-- Mutilate
 		T.aoespam[1943] = 5			-- Rupture
+		T.merge[27576] = 5374		-- Mutilate Off-Hand
 	end
 elseif T.class == "SHAMAN" then
 	if C.combattext.merge_aoe_spam then
@@ -104,6 +110,8 @@ elseif T.class == "SHAMAN" then
 		T.aoespam[8050] = 4			-- Flame Shock
 		T.aoespam[10444] = 3		-- Flametongue Attack
 		T.aoespam[3606] = 3			-- Searing Bolt
+		T.aoespam[32175] = 0		-- Stormstrike
+		T.merge[32176] = 32175		-- Stormstrike Off-Hand
 	end
 elseif T.class == "WARLOCK" then
 	if C.combattext.merge_aoe_spam then
@@ -113,7 +121,7 @@ elseif T.class == "WARLOCK" then
 		T.aoespam[18265] = 3		-- Siphon Life
 		T.aoespam[5740] = 3			-- Rain of Fire
 		T.aoespam[1949] = 3			-- Hellfire
-		T.aoespam[20153] = 3		-- Immolation (Infrenal)
+		T.aoespam[20153] = 3		-- Immolation (Infernal)
 		T.aoespam[22703] = 0		-- Infernal Awakening
 	end
 	if C.combattext.healing then

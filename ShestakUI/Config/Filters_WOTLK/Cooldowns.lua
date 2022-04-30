@@ -8,67 +8,80 @@ local T, C, L, _ = unpack(select(2, ...))
 if C.raidcooldown.enable == true then
 	T.raid_spells = {
 		-- Battle resurrection
-		{20484, 1200},	-- Rebirth r1
-		{20739, 1200},	-- Rebirth r2
-		{20742, 1200},	-- Rebirth r3
-		{20747, 1200},	-- Rebirth r4
-		{20748, 1200},	-- Rebirth r5
-		{26994, 1200},	-- Rebirth r6
-		{20707, 1800},	-- Soulstone Resurrection r1
-		{20762, 1800},	-- Soulstone Resurrection r2
-		{20763, 1800},	-- Soulstone Resurrection r3
-		{20764, 1800},	-- Soulstone Resurrection r4
-		{20765, 1800},	-- Soulstone Resurrection r5
-		{27239, 1800},	-- Soulstone Resurrection r6
-		{27740, 3600},	-- Reincarnation (3600sec base / -1200sec from talents / -600sec for Totem)
+		{20484, 600},	-- Rebirth r1 (600sec base / -300sec from 5pc AQ Set)
+		{20739, 600},	-- Rebirth r2 (600sec base / -300sec from 5pc AQ Set)
+		{20742, 600},	-- Rebirth r3 (600sec base / -300sec from 5pc AQ Set)
+		{20747, 600},	-- Rebirth r4 (600sec base / -300sec from 5pc AQ Set)
+		{20748, 600},	-- Rebirth r5 (600sec base / -300sec from 5pc AQ Set)
+		{26994, 600},	-- Rebirth r6 (600sec base / -300sec from 5pc AQ Set)
+		{48477, 600},	-- Rebirth r7 (600sec base / -300sec from 5pc AQ Set)
+		{20707, 900},	-- Soulstone Resurrection r1
+		{20762, 900},	-- Soulstone Resurrection r2
+		{20763, 900},	-- Soulstone Resurrection r3
+		{20764, 900},	-- Soulstone Resurrection r4
+		{20765, 900},	-- Soulstone Resurrection r5
+		{27239, 900},	-- Soulstone Resurrection r6
+		{47883, 900},	-- Soulstone Resurrection r7
+		{27740, 3600},	-- Reincarnation (3600sec base / -900sec from talents / -300sec for Totem)
 		-- Jumper Cables
 		-- {8342, 1800},	-- Goblin Jumper Cables
 		-- {22999, 1800},	-- Goblin Jumper Cables XL
+		-- {54732, 1800},	-- Gnomish Army Knife
 		-- Heroism
-		{2825, 600},	-- Bloodlust
-		{32182, 600},	-- Heroism
+		{2825, 300},	-- Bloodlust
+		{32182, 300},	-- Heroism
 		-- Healing
-		{740, 600},		-- Tranquility r1
-		{8918, 600},	-- Tranquility r2
-		{9862, 600},	-- Tranquility r3
-		{9863, 600},	-- Tranquility r4
-		{26983, 600},	-- Tranquility r5
-		{724, 360},		-- Lightwell r1
-		{27870, 360},	-- Lightwell r2
-		{27871, 360},	-- Lightwell r3
-		{28275, 360},	-- Lightwell r4
+		{740, 480},		-- Tranquility r1 (480sec base / -288sec from talents / -240sec from 8pc T1)
+		{8918, 480},	-- Tranquility r2 (480sec base / -288sec from talents / -240sec from 8pc T1)
+		{9862, 480},	-- Tranquility r3 (480sec base / -288sec from talents / -240sec from 8pc T1)
+		{9863, 480},	-- Tranquility r4 (480sec base / -288sec from talents / -240sec from 8pc T1)
+		{26983, 480},	-- Tranquility r5 (480sec base / -288sec from talents / -240sec from 8pc T1)
+		{48446, 480},	-- Tranquility r6 (480sec base / -288sec from talents / -240sec from 8pc T1)
+		{48447, 480},	-- Tranquility r7 (480sec base / -288sec from talents / -240sec from 8pc T1)
+		{64843, 480},	-- Hymn of Hope
+		{724, 180},		-- Lightwell r1
+		{27870, 180},	-- Lightwell r2
+		{27871, 180},	-- Lightwell r3
+		{28275, 180},	-- Lightwell r4
+		{48086, 180},	-- Lightwell r5
+		{48087, 180},	-- Lightwell r6
 		-- Defense
-		{1022, 300},	-- Blessing of Protection r1 (300sec base / -120sec from talents)
-		{5599, 300},	-- Blessing of Protection r2 (300sec base / -120sec from talents)
-		{10278, 300},	-- Blessing of Protection r3 (300sec base / -120sec from talents)
-		-- {6940, 30},		-- Blessing of Sacrifice r1
-		-- {20729, 30},		-- Blessing of Sacrifice r2
-		-- {27147, 30},		-- Blessing of Sacrifice r3
-		-- {27148, 30},		-- Blessing of Sacrifice r4
-		{633, 3600},	-- Lay on Hands r1 (3600sec base / -1200sec from talents)
-		{2800, 3600},	-- Lay on Hands r2 (3600sec base / -1200sec from talents)
-		{10310, 3600},	-- Lay on Hands r3 (3600sec base / -1200sec from talents)
-		{27154, 3600},	-- Lay on Hands r4 (3600sec base / -1200sec from talents)
-		{33206, 120},	-- Pain Suppression
-		{871, 1800},	-- Shield Wall
-		{12975, 480},	-- Last Stand
+		{61336, 180},	-- Survival Instincts
+		{31821, 120},	-- Aura Mastery
+		{64205, 120},	-- Divine Sacrifice
+		{1022, 300},	-- Hand of Protection r1 (300sec base / -120sec from talents)
+		{5599, 300},	-- Hand of Protection r2 (300sec base / -120sec from talents)
+		{10278, 300},	-- Hand of Protection r3 (300sec base / -120sec from talents)
+		{6940, 120},	-- Hand of Sacrifice
+		{633, 1200},	-- Lay on Hands r1 (1200sec base / -240sec from talents / -300sec from glyph / -240sec from 4pc T3)
+		{2800, 1200},	-- Lay on Hands r2 (1200sec base / -240sec from talents / -300sec from glyph / -240sec from 4pc T3)
+		{10310, 1200},	-- Lay on Hands r3 (1200sec base / -240sec from talents / -300sec from glyph / -240sec from 4pc T3)
+		{27154, 1200},	-- Lay on Hands r4 (1200sec base / -240sec from talents / -300sec from glyph / -240sec from 4pc T3)
+		{48788, 1200},	-- Lay on Hands r5 (1200sec base / -240sec from talents / -300sec from glyph / -240sec from 4pc T3)
+		{47788, 180},	-- Guardian Spirit
+		{33206, 180},	-- Pain Suppression (180sec base / -36sec from talents)
+		{12975, 180},	-- Last Stand (180sec base / -60sec from glyph)
+		{2565, 60},		-- Shield Block (60sec base / -20sec from talents / -10sec from 4pc T9)
+		{871, 300},		-- Shield Wall (300sec base / -60sec from talents / -120sec from glyph)
 		-- Taunts
-		{5209, 600},	-- Challenging Roar
-		{1161, 600},	-- Challenging Shout
+		{5209, 180},	-- Challenging Roar (180sec base / -30sec from glyph)
+		{1161, 180},	-- Challenging Shout
 		{694, 120},		-- Mocking Blow r1
 		{7400, 120},	-- Mocking Blow r2
 		{7402, 120},	-- Mocking Blow r3
 		{20559, 120},	-- Mocking Blow r4
 		{20560, 120},	-- Mocking Blow r5
 		{25266, 120},	-- Mocking Blow r6
+		{47504, 120},	-- Mocking Blow r7
 		-- Mana Regeneration
-		{29166, 360},	-- Innervate (360sec base / -48sec from 4pc T4)
+		{29166, 180},	-- Innervate (180sec base / -48sec from 4pc T4)
 		{16190, 300},	-- Mana Tide Totem
 		-- Other
-		{34477, 120},	-- Misdirection
-		{6346, 30},		-- Fear Ward
-		{10060, 180},	-- Power Infusion
-		-- {29858, 300},	-- Soulshatter
+		{34477, 30},	-- Misdirection
+		{6346, 180},	-- Fear Ward (180sec base / -60sec from glyph)
+		{10060, 120},	-- Power Infusion (120sec base / -24sec from talents)
+		{57934, 30},	-- Tricks of the Trade (30sec base / -10sec from talents)
+		-- {29858, 180},	-- Soulshatter
 	}
 
 	if #C.raidcooldown.spells_list > 0 then
@@ -87,56 +100,69 @@ end
 if C.enemycooldown.enable == true then
 	T.enemy_spells = {
 		-- Interrupts and Silences
+		{49913, 100},	-- Strangulate (120sec base / -20sec from glyph)
 		{34490, 20},	-- Silencing Shot
-		{2139, 24},		-- Counterspell
+		{2139, 24},		-- Counterspell (24sec base / -2sec from ZG neck)
+		{63529, 30},	-- Silenced - Shield of the Templar
 		{15487, 45},	-- Silence
-		{1766, 10},		-- Kick
-		{8042, 5},		-- Earth Shock (5sec base / -1sec from talents)
+		{1766, 10},		-- Kick (10sec base / -0.5sec from ZG neck)
+		{57994, 5},		-- Wind Shear (6sec base / -1sec from talents)
 		{19244, 24},	-- Spell Lock (Felhunter)
 		{6552, 10},		-- Pummel
 		-- Crowd Controls
-		{1499, 24},		-- Freezing Trap (30sec base / -6sec from talents / -4sec from 2pc D3)
+		{60192, 22},	-- Freezing Arrow (30sec base / -6sec from talents / -4sec from 2pc D3 / -2sec from 4pc PvP)
+		{1499, 22},		-- Freezing Trap (30sec base / -6sec from talents / -4sec from 2pc D3 / -2sec from 4pc PvP)
 		{19503, 30},	-- Scatter Shot
-		{19386, 180},	-- Wyvern Sting
-		{11113, 20},	-- Dragon's Breath
-		{11113, 45},	-- Blast Wave
-		{853, 50},		-- Hammer of Justice (60sec base / -10sec from 4pc PvP / -15sec from talents)
+		{19386, 54},	-- Wyvern Sting (60sec base / -6sec from glyph)
+		{31661, 20},	-- Dragon's Breath
+		{11113, 30},	-- Blast Wave (30sec base / -4sec from 4pc T4)
+		{853, 40},		-- Hammer of Justice (60sec base / -20sec from talents / -10sec from talents / -0.5sec from ZG neck)
 		{20066, 60},	-- Repentance
-		{6789, 120},	-- Death Coil (120sec base / -18sec from ZG Set)
-		{8122, 23},		-- Psychic Scream (30sec base / -3sec from gloves / -4sec from talents)
+		{6789, 120},	-- Death Coil (120sec base / -18sec from 5pc ZG Set)
+		{64044, 120},	-- Psychic Horror
+		{8122, 23},		-- Psychic Scream (30sec base / -3sec from gloves / -4sec from talents / +8sec from glyph)
 		{2094, 90},		-- Blind (180sec base / -90sec from talents)
-		{5484, 40},		-- Howl of Terror
+		{5484, 32},		-- Howl of Terror (40sec base / -8sec from glyph)
 		{30283, 20},	-- Shadowfury
-		{12809, 45},	-- Concussion Blow
+		{12809, 30},	-- Concussion Blow
+		{46968, 17},	-- Shockwave (20sec base / -3sec from glyph)
 		-- Defense abilities
-		{22812, 60},	-- Barkskin
-		{19263, 300},	-- Deterrence
-		{11958, 240},	-- Ice Block (300sec base / -60sec from talents / -40sec from 4pc T4)
-		{66, 300},		-- Invisibility
-		{1044, 25},		-- Blessing of Freedom
-		-- {6940, 30},		-- Blessing of Sacrifice
-		{1022, 180},	-- Blessing of Protection (300sec base / -120sec from talents)
-		{498, 300},		-- Divine Protection
-		{642, 300},		-- Divine Shield
-		{6346, 180},	-- Fear Ward
-		{33206, 120},	-- Pain Suppression
-		{31224, 60},	-- Cloak of Shadows
-		{5277, 210},	-- Evasion (-90sec from talents)
-		{1856, 210},	-- Vanish (300sec base / -90sec from talents)
+		{22812, 60},	-- Barkskin (60sec base / -12sec from 4pc T9)
+		{19263, 50},	-- Deterrence (60sec base / -10sec from glyph)
+		{45438, 240},	-- Ice Block (300sec base / -60sec from talents / -40sec from 4pc T4)
+		{66, 60},		-- Invisibility (180sec base / -120sec from talents)
+		{1044, 25},		-- Hand of Freedom (25sec base / -4sec from talents)
+		{6940, 120},	-- Hand of Sacrifice
+		{1022, 180},	-- Hand of Protection (300sec base / -120sec from talents)
+		{498, 180},		-- Divine Protection (180sec base / -60sec from talents / -30sec from 4pc T9)
+		{642, 300},		-- Divine Shield (300sec base / -60sec from talents)
+		{6346, 120},	-- Fear Ward (180sec base / -60sec from glyph)
+		{47585, 75},	-- Dispersion (120sec base / -45sec from glyph)
+		{47788, 144},	-- Guardian Spirit
+		{33206, 144},	-- Pain Suppression (180sec base / -36sec from talents)
+		{31224, 30},	-- Cloak of Shadows (60sec base / -30sec from talents)
+		{5277, 120},	-- Evasion (180sec base / -60sec from talents / -60sec from 3pc AQ Set)
+		{1856, 120},	-- Vanish (180sec base / -60sec from talents / -30sec from 3pc T1)
 		-- {8178, 11},	-- Grounding Totem (15sec base / -2sec from talents / -1.5sec from 4pc PvP)
-		{18499, 30},	-- Berserker Rage
-		-- {23920, 10},		-- Spell Reflection
-		{20600, 180},	-- Perception
-		{20594, 180},	-- Stoneform
+		{18499, 20},	-- Berserker Rage (30sec base / -10sec from talents)
+		{46924, 45},	-- Bladestorm (60sec base / -15sec from glyph)
+		{12975, 120},	-- Last Stand (180sec base / -60sec from glyph)
+		{2565, 40},		-- Shield Block (60sec base / -20sec from talents / -10sec from 4pc T9)
+		{871, 180},		-- Shield Wall (300sec base / -60sec from talents / -120sec from glyph)
+		-- {23920, 9},		-- Spell Reflection (10sec base / -1sec from glyph)
+		{59752, 120},	-- Every Man for Himself / Will to Survive
+		{65116, 120},	-- Stoneform
 		{7744, 120},	-- Will of the Forsaken
 		-- Heals
 		-- {28880, 180},	-- Gift of the Naaru
 		-- Disarms
-		-- {14251, 6},		-- Riposte
-		{676, 60},		-- Disarm
+		{53359, 60},	-- Chimera Shot - Scorpid
+		{64346, 60},	-- Fiery Payback
+		{51722, 60},	-- Dismantle
+		{676, 40},		-- Disarm (60sec base / -20sec from talents)
 		-- Mana Regeneration
-		{29166, 360},	-- Innervate (360sec base / -48sec from 4pc T4)
-		{32548, 300},	-- Symbol of Hope
+		{29166, 180},	-- Innervate (180sec base / -48sec from 4pc T4)
+		{64901, 360},	-- Hymn of Hope
 		{16190, 300},	-- Mana Tide Totem
 		-- Trinket (TEMPORARY)
 		{42292, 120},	-- PvP Trinket

@@ -202,7 +202,7 @@ if C.raidframe.plugins_pvp_debuffs == true then
 		-- Hunter
 		[SpellName(19306)] = 2,		-- Counterattack
 		[SpellName(19185)] = 2,		-- Entrapment
-		[SpellName(3355)] = 3,		-- Freezing Trap
+		[SpellName(3355)] = 3,		-- Freezing Trap Effect
 		[SpellName(2637)] = 3,		-- Hibernate
 		[SpellName(19410)] = 3,		-- Improved Concussive Shot
 		[SpellName(19229)] = 2,		-- Improved Wing Clip

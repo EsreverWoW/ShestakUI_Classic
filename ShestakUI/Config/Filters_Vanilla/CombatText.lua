@@ -78,6 +78,7 @@ elseif T.class == "PRIEST" then
 		-- Damaging spells
 		T.aoespam[15237] = 0		-- Holy Nova
 		T.aoespam[589] = 4			-- Shadow Word: Pain
+		T.aoespam[15407] = 3		-- Mind Flay
 		T.aoespam[14914] = 3		-- Holy Fire
 	end
 	if C.combattext.healing then
@@ -113,7 +114,7 @@ elseif T.class == "WARLOCK" then
 		T.aoespam[18265] = 3		-- Siphon Life
 		T.aoespam[5740] = 3			-- Rain of Fire
 		T.aoespam[1949] = 3			-- Hellfire
-		T.aoespam[20153] = 3		-- Immolation (Infrenal)
+		T.aoespam[20153] = 3		-- Immolation (Infernal)
 		T.aoespam[22703] = 0		-- Infernal Awakening
 	end
 	if C.combattext.healing then

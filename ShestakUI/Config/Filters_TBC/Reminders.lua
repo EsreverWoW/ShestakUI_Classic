@@ -20,7 +20,7 @@ if C.reminder.raid_buffs_enable == true or C.announcements.flask_food == true th
 		Flask = {
 			-- SpellName(17624),	-- Flask of Petrification (Immunity)
 			SpellName(17628),	-- Flask of Supreme Power (+70 Spell Damage)
-			SpellName(17627),	-- Flask of Distilled Wisdom (+2000 Mana)
+			SpellName(17627),	-- Flask of Distilled Wisdom (+65 Intellect)
 			SpellName(17629),	-- Flask of Chromatic Resistance (+25 Magic Resistance)
 			SpellName(17626),	-- Flask of the Titans (+400 Health)
 			SpellName(28518),	-- Flask of Fortification (+500 Health / +10 Defense)
@@ -44,7 +44,7 @@ if C.reminder.raid_buffs_enable == true or C.announcements.flask_food == true th
 		},
 		BattleElixir = {
 			SpellName(11406),	-- Elixir of Demonslaying (+265 Attack Power to Demons)
-			SpellName(17539),	-- Greater Arcane Elixir (+35 Arcane Spell Power)
+			SpellName(17539),	-- Greater Arcane Elixir (+35 Spell Power)
 			SpellName(28490),	-- Elixir of Major Strength (+35 Strength)
 			SpellName(28491),	-- Elixir of Healing Power (+50 Healing Power)
 			SpellName(28493),	-- Elixir of Major Frost Power (+55 Frost Spell Power)
@@ -298,7 +298,7 @@ if C.reminder.solo_buffs_enable == true then
 				["spells"] = {
 					SpellName(21084),		-- Seal of Righteousness
 					SpellName(31892),		-- Seal of Blood
-					SpellName(27170),		-- Seal of Command
+					SpellName(20375),		-- Seal of Command
 					SpellName(348704),		-- Seal of Corruption
 					SpellName(20164),		-- Seal of Justice
 					SpellName(20165),		-- Seal of Light
@@ -368,7 +368,7 @@ if C.reminder.solo_buffs_enable == true then
 					SpellName(3408),	-- Crippling Poison
 					SpellName(5761),	-- Mind-numbing Poison
 					SpellName(13219),	-- Wound Poison
-					SpellName(21835),	-- Anesthetic Poison
+					SpellName(26785),	-- Anesthetic Poison
 				},
 				["mainhand"] = true,
 				["combat"] = true,
@@ -383,7 +383,7 @@ if C.reminder.solo_buffs_enable == true then
 					SpellName(3408),	-- Crippling Poison
 					SpellName(5761),	-- Mind-numbing Poison
 					SpellName(13219),	-- Wound Poison
-					SpellName(21835),	-- Anesthetic Poison
+					SpellName(26785),	-- Anesthetic Poison
 				},
 				["offhand"] = true,
 				["combat"] = true,
@@ -410,7 +410,6 @@ if C.reminder.solo_buffs_enable == true then
 					SpellName(8017),	-- Rockbiter Weapon
 					SpellName(8024),	-- Flametongue Weapon
 					SpellName(8033),	-- Frostbrand Weapon
-					SpellName(8024),	-- Flametongue Weapon
 					SpellName(28013),	-- Superior Mana Oil
 					SpellName(25123),	-- Brilliant Mana Oil
 					SpellName(28017),	-- Superior Wizard Oil
@@ -430,7 +429,6 @@ if C.reminder.solo_buffs_enable == true then
 					SpellName(8017),	-- Rockbiter Weapon
 					SpellName(8024),	-- Flametongue Weapon
 					SpellName(8033),	-- Frostbrand Weapon
-					SpellName(8024),	-- Flametongue Weapon
 				},
 				["offhand"] = true,
 				["combat"] = true,

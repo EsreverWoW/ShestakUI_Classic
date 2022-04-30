@@ -115,7 +115,7 @@
 	<Script file="Modules\Auras\BuffFrame.lua"/>
 	<Script file="Modules\Auras\Filger.lua"/>
 	<Script file="Modules\Auras\SelfBuffsReminder.lua"/>
-	<Script file="Modules\Auras\RaidBuffsReminder_Vanilla.lua"/>
+	<Script file="Modules\Auras\RaidBuffsReminder_WOTLK.lua"/>
 
 	<Script file="Modules\Automation\AutoDismount.lua"/>
 	<Script file="Modules\Automation\AutoInvite.lua"/>

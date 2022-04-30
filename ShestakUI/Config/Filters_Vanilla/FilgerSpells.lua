@@ -300,7 +300,7 @@ C["filger_spells"] = {
 			-- Rip
 			{spellID = 1079, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Soothe Animal
-			-- {spellID = 2908, unitID = "target", caster = "player", filter = "DEBUFF"},
+			{spellID = 2908, unitID = "target", caster = "player", filter = "DEBUFF"},
 
 			-- Trinket Effects
 		},
@@ -470,6 +470,8 @@ C["filger_spells"] = {
 			{spellID = 19263, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Dive (Bat / Bird of Prey / Carrion Bird / Wind Serpent)
 			-- {spellID = 23145, unitID = "pet", caster = "all", filter = "BUFF"},
+			-- Eagle Eye
+			-- {spellID = 6197, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Eyes of the Beast
 			-- {spellID = 1002, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Feed Pet Effect
@@ -484,8 +486,6 @@ C["filger_spells"] = {
 			{spellID = 136, unitID = "pet", caster = "player", filter = "BUFF"},
 			-- Prowl (Cat)
 			-- {spellID = 24450, unitID = "pet", caster = "all", filter = "BUFF"},
-			-- Quick Shots
-			{spellID = 6150, unitID = "pet", caster = "player", filter = "BUFF"},
 			-- Rapid Fire
 			{spellID = 3045, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Shell Shield (Turtle)
@@ -505,6 +505,10 @@ C["filger_spells"] = {
 			Alpha = 1,
 			IconSize = C.filger.buffs_size,
 			Position = {"TOP", P_PROC_ICON_Anchor},
+
+			-- Buffs
+			-- Quick Shots
+			{spellID = 6150, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Trinkets
 			-- Class
@@ -794,8 +798,6 @@ C["filger_spells"] = {
 			{spellID = 11426, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Ice Block
 			{spellID = 11958, unitID = "player", caster = "player", filter = "BUFF", absID = true},
-			-- Icy Veins
-			{spellID = 12472, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Mana Shield r1
 			{spellID = 1463, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Mana Shield r2
@@ -1035,10 +1037,10 @@ C["filger_spells"] = {
 			{spellID = 12825, unitID = "focus", caster = "all", filter = "DEBUFF", absID = true},
 			-- Polymorph r4
 			{spellID = 12826, unitID = "focus", caster = "all", filter = "DEBUFF", absID = true},
-			-- Polymorph: Turtle
-			{spellID = 28271, unitID = "focus", caster = "all", filter = "DEBUFF", absID = true},
 			-- Polymorph: Pig
 			{spellID = 28272, unitID = "focus", caster = "all", filter = "DEBUFF", absID = true},
+			-- Polymorph: Turtle
+			{spellID = 28271, unitID = "focus", caster = "all", filter = "DEBUFF", absID = true},
 		},
 		{
 			Name = "COOLDOWN",
@@ -1057,7 +1059,7 @@ C["filger_spells"] = {
 			-- Blink
 			{spellID = 1953, filter = "CD"},
 			-- Cold Snap
-			{spellID = 11958, filter = "CD"},
+			{spellID = 12472, filter = "CD"},
 			-- Combustion
 			{spellID = 11129, filter = "CD"},
 			-- Cone of Cold
@@ -1076,8 +1078,6 @@ C["filger_spells"] = {
 			{spellID = 11426, filter = "CD"},
 			-- Ice Block
 			{spellID = 11958, filter = "CD"},
-			-- Icy Veins
-			{spellID = 12472, filter = "CD"},
 			-- Presence of Mind
 			{spellID = 12043, filter = "CD"},
 
@@ -1134,6 +1134,8 @@ C["filger_spells"] = {
 			{spellID = 642, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Fire Resistance Aura
 			-- {spellID = 19891, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Forbearance
+			{spellID = 25771, unitID = "player", caster = "player", filter = "DEBUFF"},
 			-- Frost Resistance Aura
 			-- {spellID = 19888, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Holy Shield r1
@@ -1318,6 +1320,16 @@ C["filger_spells"] = {
 			{spellID = 67, unitID = "target", caster = "all", filter = "DEBUFF"},
 
 			-- Trinket Effects
+
+			-- Enchants
+			-- Chilled [Enchant Weapon - Icy Chill]
+			{spellID = 20005, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Smite Demon [Enchant Weapon - Demonslaying]
+			{spellID = 13907, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Unholy Curse [Enchant Weapon - Unholy Weapon]
+			{spellID = 20006, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Venomhide Poison
+			{spellID = 14795, unitID = "target", caster = "player", filter = "DEBUFF"},
 		},
 		--[[
 		{
@@ -1343,8 +1355,12 @@ C["filger_spells"] = {
 			BarWidth = 189,
 			Position = {"LEFT", PVE_PVP_CC_Anchor},
 
-			-- Turn Undead
-			{spellID = 2878, unitID = "focus", caster = "all", filter = "DEBUFF"},
+			-- Turn Undead r1
+			{spellID = 2878, unitID = "focus", caster = "all", filter = "DEBUFF", absID = true},
+			-- Turn Undead r2
+			{spellID = 5627, unitID = "focus", caster = "all", filter = "DEBUFF", absID = true},
+			-- Turn Undead r3
+			{spellID = 10326, unitID = "focus", caster = "all", filter = "DEBUFF", absID = true},
 		},
 		{
 			Name = "COOLDOWN",
@@ -1859,6 +1875,16 @@ C["filger_spells"] = {
 			{spellID = 5530, unitID = "target", caster = "player", filter = "DEBUFF"},
 
 			-- Trinket Effects
+
+			-- Enchants
+			-- Chilled [Enchant Weapon - Icy Chill]
+			{spellID = 20005, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Smite Demon [Enchant Weapon - Demonslaying]
+			{spellID = 13907, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Unholy Curse [Enchant Weapon - Unholy Weapon]
+			{spellID = 20006, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Venomhide Poison
+			{spellID = 14795, unitID = "target", caster = "player", filter = "DEBUFF"},
 		},
 		--[[
 		{
@@ -1983,6 +2009,8 @@ C["filger_spells"] = {
 			{spellID = 30165, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Elemental Mastery
 			{spellID = 16166, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Far Sight
+			-- {spellID = 6196, unitID = "player", caster = "player", filter = "BUFF"},
 			--[[
 			-- Fire Resistance Totem r1
 			{spellID = 8185, unitID = "player", caster = "player", filter = "BUFF", absID = true},
@@ -2193,6 +2221,16 @@ C["filger_spells"] = {
 			{spellID = 17364, unitID = "target", caster = "all", filter = "DEBUFF"},
 
 			-- Trinket Effects
+
+			-- Enchants
+			-- Chilled [Enchant Weapon - Icy Chill]
+			{spellID = 20005, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Smite Demon [Enchant Weapon - Demonslaying]
+			{spellID = 13907, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Unholy Curse [Enchant Weapon - Unholy Weapon]
+			{spellID = 20006, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Venomhide Poison
+			{spellID = 14795, unitID = "target", caster = "player", filter = "DEBUFF"},
 		},
 		{
 			Name = "T_DE/BUFF_BAR",
@@ -2317,6 +2355,7 @@ C["filger_spells"] = {
 			-- {spellID = 17767, unitID = "pet", caster = "all", filter = "BUFF"},
 			-- Eye of Kilrogg
 			-- {spellID = 126, unitID = "player", caster = "player", filter = "BUFF"},
+			--[[
 			-- Fire Shield r1 (Imp)
 			{spellID = 2947, unitID = "player", caster = "all", filter = "BUFF", absID = true},
 			-- Fire Shield r2 (Imp)
@@ -2327,6 +2366,7 @@ C["filger_spells"] = {
 			{spellID = 11770, unitID = "player", caster = "all", filter = "BUFF", absID = true},
 			-- Fire Shield r5 (Imp)
 			{spellID = 11771, unitID = "player", caster = "all", filter = "BUFF", absID = true},
+			--]]
 			-- Health Funnel
 			-- {spellID = 755, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Hellfire
@@ -2805,6 +2845,16 @@ C["filger_spells"] = {
 			{spellID = 5530, unitID = "target", caster = "player", filter = "DEBUFF"},
 
 			-- Trinket Effects
+
+			-- Enchants
+			-- Chilled [Enchant Weapon - Icy Chill]
+			{spellID = 20005, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Smite Demon [Enchant Weapon - Demonslaying]
+			{spellID = 13907, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Unholy Curse [Enchant Weapon - Unholy Weapon]
+			{spellID = 20006, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Venomhide Poison
+			{spellID = 14795, unitID = "target", caster = "player", filter = "DEBUFF"},
 		},
 		--[[
 		{
@@ -3107,10 +3157,10 @@ C["filger_spells"] = {
 			{spellID = 12825, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
 			-- Polymorph r4
 			{spellID = 12826, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
-			-- Polymorph: Turtle
-			{spellID = 28271, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
 			-- Polymorph: Pig
 			{spellID = 28272, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
+			-- Polymorph: Turtle
+			{spellID = 28271, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
 
 			-- Paladin
 			-- Hammer of Justice r1

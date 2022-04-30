@@ -35,5 +35,5 @@ T.CastBarTicks = {
 	[SpellName(689)] = 5,		-- Drain Life
 	[SpellName(5138)] = 5,		-- Drain Mana
 	[SpellName(1949)] = 15,		-- Hellfire
-	[SpellName(5740)] = 8,		-- Rain of Fire
+	[SpellName(5740)] = 4,		-- Rain of Fire
 }

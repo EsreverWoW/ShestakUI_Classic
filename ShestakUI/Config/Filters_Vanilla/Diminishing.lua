@@ -114,7 +114,7 @@ T.DiminishingSpells = {
 	-- Scatter Shot
 	[19503] = {"scattershot"},		-- Scatter Shot
 
-	-- Repentence
+	-- Repentance
 	[20066] = {"repentance"},		-- Repentance
 
 	--[[

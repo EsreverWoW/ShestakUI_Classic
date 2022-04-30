@@ -142,7 +142,6 @@ T.ArenaControl = {
 	-- Warrior
 	[SpellName(18499)] = 1,		-- Berserker Rage
 	[SpellName(12292)] = 1,		-- Death Wish
-	[SpellName(12976)] = 1,		-- Last Stand
 	-- Racial
 	[SpellName(20554)] = 1,		-- Berserking (Mana)
 	-- [SpellName(26296)] = 1,		-- Berserking (Rage)
@@ -163,5 +162,6 @@ T.ArenaControl = {
 	[SpellName(5277)] = 1,		-- Evasion
 	[SpellName(1856)] = 1,		-- Vanish
 	[SpellName(30823)] = 1,		-- Shamanistic Rage
+	[SpellName(12976)] = 1,		-- Last Stand
 	[SpellName(23920)] = 1,		-- Spell Reflection
 }

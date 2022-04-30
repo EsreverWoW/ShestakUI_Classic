@@ -519,19 +519,20 @@ T.RaidDebuffs = {
 		-- Sathrovarr the Corruptor
 			[SpellName(45032)] = 3,		-- Curse of Boundless Agony
 	-- Brutallus
-		[SpellName(46394)] = 3,		-- Burn
+		[SpellName(46394)] = 4,		-- Burn
 		[SpellName(45150)] = 3,		-- Meteor Slash
+		[SpellName(45185)] = 5,		-- Stomp
 	-- Felmyst
 		-- Unyielding Dead
 		-- Felmyst
 			[SpellName(45855)] = 3,		-- Gas Nova
-			[SpellName(45662)] = 3,		-- Encapsulate (No Combat Log Event)
+			[SpellName(45662)] = 5,		-- Encapsulate (No Combat Log Event)
 			[SpellName(45402)] = 3,		-- Demonic Vapor
-			[SpellName(45717)] = 3,		-- Fog of Corruption (Unit is Hostile in Combat Log Event)
+			[SpellName(45717)] = 4,		-- Fog of Corruption (Unit is Hostile in Combat Log Event)
 	-- Eredar Twins
-		[SpellName(45256)] = 3,		-- Confounding Blow
-		[SpellName(45333)] = 3,		-- Conflagration
-		[SpellName(46771)] = 3,		-- Flame Sear
+		[SpellName(45256)] = 4,		-- Confounding Blow
+		[SpellName(45333)] = 4,		-- Conflagration
+		[SpellName(46771)] = 4,		-- Flame Sear
 		[SpellName(45270)] = 3,		-- Shadowfury
 		[SpellName(45347)] = 3,		-- Dark Touched
 		[SpellName(45348)] = 3,		-- Fire Touched
@@ -543,7 +544,7 @@ T.RaidDebuffs = {
 		-- Entropius
 	-- Kil'jaeden
 		[SpellName(45442)] = 3,		-- Soul Flay
-		[SpellName(45641)] = 3,		-- Fire Bloom
+		[SpellName(45641)] = 4,		-- Fire Bloom
 		[SpellName(45885)] = 3,		-- Shadow Spike
 		[SpellName(45737)] = 3,		-- Flame Dart
 
@@ -671,7 +672,7 @@ if C.raidframe.plugins_pvp_debuffs == true then
 		-- Hunter
 		[SpellName(19306)] = 2,		-- Counterattack
 		[SpellName(19185)] = 2,		-- Entrapment
-		[SpellName(3355)] = 3,		-- Freezing Trap
+		[SpellName(3355)] = 3,		-- Freezing Trap Effect
 		[SpellName(2637)] = 3,		-- Hibernate
 		[SpellName(19410)] = 3,		-- Improved Concussive Shot
 		[SpellName(19229)] = 2,		-- Improved Wing Clip
@@ -713,6 +714,8 @@ if C.raidframe.plugins_pvp_debuffs == true then
 		[SpellName(14251)] = 3,		-- Riposte
 		[SpellName(6770)] = 3,		-- Sap
 		[SpellName(18425)] = 3,		-- Silenced - Improved Kick
+		-- Shaman
+		[SpellName(39796)] = 3,		-- Stoneclaw Totem
 		-- Warlock
 		[SpellName(6789)] = 3,		-- Death Coil
 		[SpellName(5782)] = 3,		-- Fear

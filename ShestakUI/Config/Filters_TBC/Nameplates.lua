@@ -17,7 +17,7 @@ local function SpellName(id)
 end
 
 T.DebuffWhiteList = {
--- Druid
+	-- Druid
 	[SpellName(5211)] = true,	-- Bash
 	[SpellName(16922)] = true,	-- Celestial Focus (Starfire Stun)
 	[SpellName(5209)] = true,	-- Challenging Roar
@@ -63,6 +63,7 @@ T.DebuffWhiteList = {
 	[SpellName(19229)] = true,	-- Improved Wing Clip
 	[SpellName(24394)] = true,	-- Intimidation
 	[SpellName(35387)] = true,	-- Poison Spit (Serpent)
+	[SpellName(6150)] = true,	-- Quick Shots
 	[SpellName(1513)] = true,	-- Scare Beast
 	[SpellName(19503)] = true,	-- Scatter Shot
 	[SpellName(24640)] = true,	-- Scorpid Poison (Scorpid)
@@ -267,10 +268,11 @@ T.BuffWhiteList = {
 	[SpellName(34074)] = true,	-- Aspect of the Viper
 	-- [SpellName(20043)] = true,	-- Aspect of the Wild
 	[SpellName(19574)] = true,	-- Bestial Wrath
-	[SpellName(25077)] = true,	-- Cobra Reflexes
+	[SpellName(25077)] = true,	-- Cobra Reflexes (Pet)
 	[SpellName(23099)] = true,	-- Dash (Pet)
 	[SpellName(19263)] = true,	-- Deterrence
 	[SpellName(23145)] = true,	-- Dive (Pet)
+	[SpellName(6197)] = true,	-- Eagle Eye
 	[SpellName(1002)] = true,	-- Eyes of the Beast
 	-- [SpellName(1539)] = true,	-- Feed Pet Effect
 	[SpellName(5384)] = true,	-- Feign Death
@@ -295,7 +297,7 @@ T.BuffWhiteList = {
 	-- [SpellName(19883)] = true,	-- Track Humanoids
 	-- [SpellName(19884)] = true,	-- Track Undead
 	-- [SpellName(19506)] = true,	-- Trueshot Aura
-	[SpellName(35346)] = true,	-- Warp (Pet)
+	[SpellName(35346)] = true,	-- Warp (Warp Stalker)
 
 	-- Mage
 	-- [SpellName(12536)] = true,	-- Arcane Concentration (Clearcasting)
@@ -305,7 +307,7 @@ T.BuffWhiteList = {
 	[SpellName(543)] = true,	-- Fire Ward
 	[SpellName(6143)] = true,	-- Frost Ward
 	[SpellName(11426)] = true,	-- Ice Barrier
-	[SpellName(11958)] = true,	-- Ice Block
+	[SpellName(45438)] = true,	-- Ice Block
 	[SpellName(12472)] = true,	-- Icy Veins
 	[SpellName(47000)] = true,	-- Improved Blink
 	-- [SpellName(66)] = true,		-- Invisibility
@@ -336,7 +338,7 @@ T.BuffWhiteList = {
 	-- [SpellName(7294)] = true,	-- Retribution Aura
 	-- [SpellName(20218)] = true,	-- Sanctity Aura
 	[SpellName(31892)] = true,	-- Seal of Blood
-	[SpellName(27170)] = true,	-- Seal of Command
+	[SpellName(20375)] = true,	-- Seal of Command
 	[SpellName(348704)] = true,	-- Seal of Corruption
 	[SpellName(20164)] = true,	-- Seal of Justice
 	[SpellName(20165)] = true,	-- Seal of Light
@@ -354,7 +356,7 @@ T.BuffWhiteList = {
 	[SpellName(27813)] = true,	-- Blessed Recovery
 	[SpellName(33143)] = true,	-- Blessed Resilience
 	[SpellName(2651)] = true,	-- Elune's Grace
-	-- [SpellName(586)] = true,	-- Fade
+	-- [SpellName(586)] = true,		-- Fade
 	[SpellName(6346)] = true,	-- Fear Ward
 	[SpellName(13896)] = true,	-- Feedback
 	-- [SpellName(45237)] = true,	-- Focused Will
@@ -374,7 +376,7 @@ T.BuffWhiteList = {
 	[SpellName(18137)] = true,	-- Shadowguard
 	[SpellName(27827)] = true,	-- Spirit of Redemption
 	[SpellName(15271)] = true,	-- Spirit Tap
-	-- [SpellName(33150)] = true,	-- Surge of Light
+	-- [SpellName(33151)] = true,	-- Surge of Light
 	[SpellName(32548)] = true,	-- Symbol of Hope
 	[SpellName(2652)] = true,	-- Touch of Weakness
 	-- [SpellName(15290)] = true,	-- Vampiric Embrace
@@ -388,12 +390,12 @@ T.BuffWhiteList = {
 	[SpellName(5277)] = true,	-- Evasion
 	[SpellName(31234)] = true,	-- Find Weakness
 	[SpellName(14278)] = true,	-- Ghostly Strike
+	[SpellName(14143)] = true,	-- Remorseless Attacks
+	[SpellName(36563)] = true,	-- Shadowstep
 	[SpellName(5171)] = true,	-- Slice and Dice
 	[SpellName(2983)] = true,	-- Sprint
 	-- [SpellName(1784)] = true,	-- Stealth
 	-- [SpellName(31621)] = true,	-- Stealth (Vanish)
-	[SpellName(14143)] = true,	-- Remorseless Attacks
-	[SpellName(36563)] = true,	-- Shadowstep
 
 	-- Shaman
 	[SpellName(2825)] = true,	-- Bloodlust
@@ -402,6 +404,7 @@ T.BuffWhiteList = {
 	-- [SpellName(16246)] = true,	-- Elemental Focus (Clearcasting)
 	[SpellName(16166)] = true,	-- Elemental Mastery
 	-- [SpellName(29063)] = true,	-- Eye of the Storm (Focused Casting)
+	[SpellName(6196)] = true,	-- Far Sight
 	-- [SpellName(8185)] = true,	-- Fire Resistance Totem
 	[SpellName(16257)] = true,	-- Flurry
 	-- [SpellName(8182)] = true,	-- Frost Resistance Totem
@@ -432,6 +435,7 @@ T.BuffWhiteList = {
 	[SpellName(34936)] = true,	-- Backlash
 	-- [SpellName(6307)] = true,	-- Blood Pact (Imp)
 	[SpellName(17767)] = true,	-- Consume Shadows (Voidwalker)
+	-- [SpellName(48018)] = true,	-- Demonic Circle: Summon
 	[SpellName(126)] = true,	-- Eye of Kilrogg
 	[SpellName(2947)] = true,	-- Fire Shield (Imp)
 	[SpellName(755)] = true,	-- Health Funnel
@@ -530,8 +534,11 @@ T.ColorPlate = {
 		-- Tempest Keep
 		-- Battle for Mount Hyjal
 		-- Black Temple
+		["22894"] = color,		-- Cyclone Totem
 		-- Zul'Aman
 		-- Sunwell
+		["25772"] = color,		-- Void Sentinel
+		["25370"] = color,		-- Sunblade Dusk Priest
 	-- Dungeons
 		-- Hellfire Ramparts
 		["17478"] = color,		-- Bleeding Hollow Scryer

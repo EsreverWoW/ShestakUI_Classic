@@ -105,7 +105,6 @@ T.ArenaControl = {
 	--Mage
 	[SpellName(12042)] = 1,		-- Arcane Power
 	[SpellName(28682)] = 1,		-- Combustion
-	[SpellName(12472)] = 1,		-- Icy Veins
 	[SpellName(12043)] = 1,		-- Presence of Mind
 	-- Paladin
 	[SpellName(1044)] = 1,		-- Blessing of Freedom
@@ -125,7 +124,6 @@ T.ArenaControl = {
 	-- Warrior
 	[SpellName(18499)] = 1,		-- Berserker Rage
 	[SpellName(12292)] = 1,		-- Death Wish
-	[SpellName(12976)] = 1,		-- Last Stand
 	-- Racial
 	[SpellName(20554)] = 1,		-- Berserking (Mana)
 	-- [SpellName(26296)] = 1,		-- Berserking (Rage)
@@ -140,5 +138,6 @@ T.ArenaControl = {
 	[SpellName(19263)] = 1,		-- Deterrence
 	[SpellName(5277)] = 1,		-- Evasion
 	[SpellName(1856)] = 1,		-- Vanish
+	[SpellName(12976)] = 1,		-- Last Stand
 	[SpellName(23920)] = 1,		-- Spell Reflection
 }

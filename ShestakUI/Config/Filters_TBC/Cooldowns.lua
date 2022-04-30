@@ -8,12 +8,12 @@ local T, C, L, _ = unpack(select(2, ...))
 if C.raidcooldown.enable == true then
 	T.raid_spells = {
 		-- Battle resurrection
-		{20484, 1200},	-- Rebirth r1
-		{20739, 1200},	-- Rebirth r2
-		{20742, 1200},	-- Rebirth r3
-		{20747, 1200},	-- Rebirth r4
-		{20748, 1200},	-- Rebirth r5
-		{26994, 1200},	-- Rebirth r6
+		{20484, 1200},	-- Rebirth r1 (1200sec base / -300sec from 5pc AQ Set)
+		{20739, 1200},	-- Rebirth r2 (1200sec base / -300sec from 5pc AQ Set)
+		{20742, 1200},	-- Rebirth r3 (1200sec base / -300sec from 5pc AQ Set)
+		{20747, 1200},	-- Rebirth r4 (1200sec base / -300sec from 5pc AQ Set)
+		{20748, 1200},	-- Rebirth r5 (1200sec base / -300sec from 5pc AQ Set)
+		{26994, 1200},	-- Rebirth r6 (1200sec base / -300sec from 5pc AQ Set)
 		{20707, 1800},	-- Soulstone Resurrection r1
 		{20762, 1800},	-- Soulstone Resurrection r2
 		{20763, 1800},	-- Soulstone Resurrection r3
@@ -28,11 +28,11 @@ if C.raidcooldown.enable == true then
 		{2825, 600},	-- Bloodlust
 		{32182, 600},	-- Heroism
 		-- Healing
-		{740, 600},		-- Tranquility r1
-		{8918, 600},	-- Tranquility r2
-		{9862, 600},	-- Tranquility r3
-		{9863, 600},	-- Tranquility r4
-		{26983, 600},	-- Tranquility r5
+		{740, 600},		-- Tranquility r1 (600sec base / -300sec from 8pc T1)
+		{8918, 600},	-- Tranquility r2 (600sec base / -300sec from 8pc T1)
+		{9862, 600},	-- Tranquility r3 (600sec base / -300sec from 8pc T1)
+		{9863, 600},	-- Tranquility r4 (600sec base / -300sec from 8pc T1)
+		{26983, 600},	-- Tranquility r5 (600sec base / -300sec from 8pc T1)
 		{724, 360},		-- Lightwell r1
 		{27870, 360},	-- Lightwell r2
 		{27871, 360},	-- Lightwell r3
@@ -45,12 +45,12 @@ if C.raidcooldown.enable == true then
 		-- {20729, 30},		-- Blessing of Sacrifice r2
 		-- {27147, 30},		-- Blessing of Sacrifice r3
 		-- {27148, 30},		-- Blessing of Sacrifice r4
-		{633, 3600},	-- Lay on Hands r1 (3600sec base / -1200sec from talents)
-		{2800, 3600},	-- Lay on Hands r2 (3600sec base / -1200sec from talents)
-		{10310, 3600},	-- Lay on Hands r3 (3600sec base / -1200sec from talents)
-		{27154, 3600},	-- Lay on Hands r4 (3600sec base / -1200sec from talents)
+		{633, 3600},	-- Lay on Hands r1 (3600sec base / -1200sec from talents / -720sec from 4pc T3)
+		{2800, 3600},	-- Lay on Hands r2 (3600sec base / -1200sec from talents / -720sec from 4pc T3)
+		{10310, 3600},	-- Lay on Hands r3 (3600sec base / -1200sec from talents / -720sec from 4pc T3)
+		{27154, 3600},	-- Lay on Hands r4 (3600sec base / -1200sec from talents / -720sec from 4pc T3)
 		{33206, 120},	-- Pain Suppression
-		{871, 1800},	-- Shield Wall
+		{871, 1800},	-- Shield Wall (1800sec base / -600sec from talents)
 		{12975, 480},	-- Last Stand
 		-- Taunts
 		{5209, 600},	-- Challenging Roar
@@ -88,21 +88,21 @@ if C.enemycooldown.enable == true then
 	T.enemy_spells = {
 		-- Interrupts and Silences
 		{34490, 20},	-- Silencing Shot
-		{2139, 24},		-- Counterspell
+		{2139, 24},		-- Counterspell (24sec base / -2sec from ZG neck)
 		{15487, 45},	-- Silence
-		{1766, 10},		-- Kick
-		{8042, 5},		-- Earth Shock (5sec base / -1sec from talents)
+		{1766, 10},		-- Kick (10sec base / -0.5sec from ZG neck)
+		{8042, 5},		-- Earth Shock (6sec base / -1sec from talents)
 		{19244, 24},	-- Spell Lock (Felhunter)
 		{6552, 10},		-- Pummel
 		-- Crowd Controls
 		{1499, 24},		-- Freezing Trap (30sec base / -6sec from talents / -4sec from 2pc D3)
 		{19503, 30},	-- Scatter Shot
-		{19386, 180},	-- Wyvern Sting
-		{11113, 20},	-- Dragon's Breath
-		{11113, 45},	-- Blast Wave
-		{853, 50},		-- Hammer of Justice (60sec base / -10sec from 4pc PvP / -15sec from talents)
+		{19386, 120},	-- Wyvern Sting
+		{31661, 20},	-- Dragon's Breath
+		{11113, 30},	-- Blast Wave (30sec base / -4sec from 4pc T4)
+		{853, 35},		-- Hammer of Justice (60sec base / -10sec from 4pc PvP / -15sec from talents / -0.5sec from ZG neck)
 		{20066, 60},	-- Repentance
-		{6789, 120},	-- Death Coil (120sec base / -18sec from ZG Set)
+		{6789, 120},	-- Death Coil (120sec base / -18sec from 5pc ZG Set)
 		{8122, 23},		-- Psychic Scream (30sec base / -3sec from gloves / -4sec from talents)
 		{2094, 90},		-- Blind (180sec base / -90sec from talents)
 		{5484, 40},		-- Howl of Terror
@@ -111,9 +111,9 @@ if C.enemycooldown.enable == true then
 		-- Defense abilities
 		{22812, 60},	-- Barkskin
 		{19263, 300},	-- Deterrence
-		{11958, 240},	-- Ice Block (300sec base / -60sec from talents / -40sec from 4pc T4)
+		{45438, 240},	-- Ice Block (300sec base / -60sec from talents / -40sec from 4pc T4)
 		{66, 300},		-- Invisibility
-		{1044, 25},		-- Blessing of Freedom
+		{1044, 21},		-- Blessing of Freedom (25sec base / -4sec from talents)
 		-- {6940, 30},		-- Blessing of Sacrifice
 		{1022, 180},	-- Blessing of Protection (300sec base / -120sec from talents)
 		{498, 300},		-- Divine Protection
@@ -121,8 +121,8 @@ if C.enemycooldown.enable == true then
 		{6346, 180},	-- Fear Ward
 		{33206, 120},	-- Pain Suppression
 		{31224, 60},	-- Cloak of Shadows
-		{5277, 210},	-- Evasion (-90sec from talents)
-		{1856, 210},	-- Vanish (300sec base / -90sec from talents)
+		{5277, 210},	-- Evasion (300sec base / -90sec from talents / -60sec from 3pc AQ Set)
+		{1856, 210},	-- Vanish (300sec base / -90sec from talents / -30sec from 3pc T1)
 		-- {8178, 11},	-- Grounding Totem (15sec base / -2sec from talents / -1.5sec from 4pc PvP)
 		{18499, 30},	-- Berserker Rage
 		-- {23920, 10},		-- Spell Reflection

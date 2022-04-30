@@ -13,7 +13,7 @@ T.RaidBuffs = {
 		{774, "TOPRIGHT", {0.8, 0.4, 0.8}},					-- Rejuvenation
 		{8936, "BOTTOMLEFT", {0.2, 0.8, 0.2}},				-- Regrowth
 		{33763, "TOPLEFT", {0.4, 0.8, 0.2}},				-- Lifebloom
-		-- {48438, "BOTTOMRIGHT", {0.8, 0.4, 0}},				-- Wild Growth
+		{48438, "BOTTOMRIGHT", {0.8, 0.4, 0}},				-- Wild Growth
 		-- {102342, "LEFT", {0.45, 0.3, 0.2}, true},			-- Ironbark
 		-- {155777, "RIGHT", {0.4, 0.9, 0.4}},					-- Rejuvenation (Germination)
 	},
@@ -21,17 +21,19 @@ T.RaidBuffs = {
 		{34477, "TOPRIGHT", {0.2, 0.2, 1}},					-- Misdirection
 	},
 	PALADIN = {
-															-- Lay on Hands (Armor Bonus)
-		-- {53563, "TOPRIGHT", {0.7, 0.3, 0.7}},				-- Beacon of Light
+															-- Lay on Hands (Physical Damage Reduction)
+		{53563, "TOPRIGHT", {0.7, 0.3, 0.7}},				-- Beacon of Light
 		-- {114163, "BOTTOMLEFT", {0.9, 0.6, 0.4}},			-- Eternal Flame
-		{1022, "BOTTOMRIGHT", {0.2, 0.2, 1}, true},			-- Blessing of Protection
-		{1044, "BOTTOMRIGHT", {0.89, 0.45, 0}, true},		-- Blessing of Freedom
-		{6940, "BOTTOMRIGHT", {0.89, 0.1, 0.1}, true},		-- Blessing of Sacrifice
-		-- {53601, "TOPLEFT", {0.4, 0.7, 0.2}, true},			-- Sacred Shield
+		{1022, "BOTTOMRIGHT", {0.2, 0.2, 1}, true},			-- Hand of Protection
+		{1044, "BOTTOMRIGHT", {0.89, 0.45, 0}, true},		-- Hand of Freedom
+		{6940, "BOTTOMRIGHT", {0.89, 0.1, 0.1}, true},		-- Hand of Sacrifice
+		{1038, "BOTTOMRIGHT", {0.93, 0.75, 0}, true},		-- Hand of Salvation
+		{53601, "TOPLEFT", {0.4, 0.7, 0.2}, true},			-- Sacred Shield
 	},
 	PRIEST = {
 															-- Abolish Disease (move to all?)
 															-- Fear Ward
+															-- Guardian Spirit
 		{41635, "BOTTOMRIGHT", {0.2, 0.7, 0.2}},			-- Prayer of Mending
 		{139, "BOTTOMLEFT", {0.4, 0.7, 0.2}}, 				-- Renew
 		{17, "TOPLEFT", {0.81, 0.85, 0.1}, true},			-- Power Word: Shield
@@ -40,12 +42,24 @@ T.RaidBuffs = {
 		{10060, "RIGHT", {0.89, 0.1, 0.1}},					-- Power Infusion
 	},
 	SHAMAN = {
+		{61295, "TOPRIGHT", {0.7, 0.3, 0.7}, true},			-- Riptide
 		{974, "BOTTOMLEFT", {0.2, 0.7, 0.2}, true},			-- Earth Shield
-		{29203, "BOTTOMRIGHT", {0.7, 0.4, 0}},				-- Healing Way (Change Color?)
 		{16177, "TOPLEFT", {0.4, 0.7, 0.2}},				-- Ancestral Fortitude
+		{51945, "BOTTOMRIGHT", {0.7, 0.4, 0}},				-- Earthliving
+	},
+	ROGUE = {
+		{57933, "TOPRIGHT", {0.89, 0.1, 0.1}},				-- Tricks of the Trade
+	},
+	DEATHKNIGHT = {
+		{49016, "TOPRIGHT", {0.89, 0.89, 0.1}},				-- Hysteria
+	},
+	MAGE = {
+															-- Curse Immunity
+		{54646, "TOPRIGHT", {0.2, 0.2, 0.1}},				-- Focus Magic
 	},
 	WARRIOR = {
 		{3411, "TOPRIGHT", {0.89, 0.1, 0.1}},				-- Intervene
+		{59665, "TOPLEFT", {0.2, 0.2, 0.1}},				-- Vigilance
 	},
 	WARLOCK = {
 		{20707, "TOPRIGHT", {0.7, 0.32, 0.75}},				-- Soulstone
@@ -57,6 +71,7 @@ T.RaidBuffs = {
 		{2893, "RIGHT", {0, 1, 0}, true}, 					-- Abolish Poison
 		{36488, "RIGHT", {0.89, 0.1, 0.1}, true},			-- Infernal Protection [Cosmic Infuser]
 		{26470, "RIGHT", {0.8, 0.2, 0}, true},				-- Persistent Shield [Scarab Brooch]
+		{64413, "RIGHT", {0.8, 0.2, 0}, true},				-- Protection of Ancient Kings [Val'anyr, Hammer of Ancient Kings]
 	},
 }
 
@@ -519,19 +534,20 @@ T.RaidDebuffs = {
 		-- Sathrovarr the Corruptor
 			[SpellName(45032)] = 3,		-- Curse of Boundless Agony
 	-- Brutallus
-		[SpellName(46394)] = 3,		-- Burn
+		[SpellName(46394)] = 4,		-- Burn
 		[SpellName(45150)] = 3,		-- Meteor Slash
+		[SpellName(45185)] = 5,		-- Stomp
 	-- Felmyst
 		-- Unyielding Dead
 		-- Felmyst
 			[SpellName(45855)] = 3,		-- Gas Nova
-			[SpellName(45662)] = 3,		-- Encapsulate (No Combat Log Event)
+			[SpellName(45662)] = 5,		-- Encapsulate (No Combat Log Event)
 			[SpellName(45402)] = 3,		-- Demonic Vapor
-			[SpellName(45717)] = 3,		-- Fog of Corruption (Unit is Hostile in Combat Log Event)
+			[SpellName(45717)] = 4,		-- Fog of Corruption (Unit is Hostile in Combat Log Event)
 	-- Eredar Twins
-		[SpellName(45256)] = 3,		-- Confounding Blow
-		[SpellName(45333)] = 3,		-- Conflagration
-		[SpellName(46771)] = 3,		-- Flame Sear
+		[SpellName(45256)] = 4,		-- Confounding Blow
+		[SpellName(45333)] = 4,		-- Conflagration
+		[SpellName(46771)] = 4,		-- Flame Sear
 		[SpellName(45270)] = 3,		-- Shadowfury
 		[SpellName(45347)] = 3,		-- Dark Touched
 		[SpellName(45348)] = 3,		-- Fire Touched
@@ -543,7 +559,7 @@ T.RaidDebuffs = {
 		-- Entropius
 	-- Kil'jaeden
 		[SpellName(45442)] = 3,		-- Soul Flay
-		[SpellName(45641)] = 3,		-- Fire Bloom
+		[SpellName(45641)] = 4,		-- Fire Bloom
 		[SpellName(45885)] = 3,		-- Shadow Spike
 		[SpellName(45737)] = 3,		-- Flame Dart
 
@@ -658,23 +674,28 @@ T.RaidDebuffs = {
 -----------------------------------------------------------------
 if C.raidframe.plugins_pvp_debuffs == true then
 	local PvPDebuffs = {
+		-- Death Knight
+		[SpellName(47481)] = 3,		-- Gnaw (Ghoul)
+		[SpellName(49203)] = 3,		-- Hungering Cold
+		[SpellName(49913)] = 3,		-- Strangulate
 		-- Druid
 		[SpellName(5211)] = 3,		-- Bash
 		[SpellName(16922)] = 3,		-- Celestial Focus
 		[SpellName(33786)] = 3,		-- Cyclone
 		[SpellName(339)] = 2,		-- Entangling Roots
 		[SpellName(19975)] = 2,		-- Entangling Roots (Nature's Grasp)
-		[SpellName(45334)] = 2,		-- Feral Charge Effect
+		[SpellName(16979)] = 2,		-- Feral Charge - Bear
 		[SpellName(2637)] = 3,		-- Hibernate
 		[SpellName(22570)] = 3,		-- Maim
 		[SpellName(9005)] = 3,		-- Pounce
 		-- Hunter
+		[SpellName(53359)] = 2,		-- Chimera Shot - Scorpid
 		[SpellName(19306)] = 2,		-- Counterattack
 		[SpellName(19185)] = 2,		-- Entrapment
-		[SpellName(3355)] = 3,		-- Freezing Trap
+		[SpellName(60210)] = 3,		-- Freezing Arrow Effect
+		[SpellName(3355)] = 3,		-- Freezing Trap Effect
 		[SpellName(2637)] = 3,		-- Hibernate
 		[SpellName(19410)] = 3,		-- Improved Concussive Shot
-		[SpellName(19229)] = 2,		-- Improved Wing Clip
 		[SpellName(24394)] = 3,		-- Intimidation
 		[SpellName(19503)] = 3,		-- Scatter Shot
 		[SpellName(34490)] = 3,		-- Silencing Shot
@@ -682,24 +703,31 @@ if C.raidframe.plugins_pvp_debuffs == true then
 		[SpellName(19386)] = 3,		-- Wyvern Sting
 		-- Mage
 		[SpellName(31661)] = 3,		-- Dragon's Breath
+		[SpellName(64346)] = 3,		-- Fiery Payback
 		[SpellName(33395)] = 2,		-- Freeze (Water Elemental)
 		[SpellName(12494)] = 2,		-- Frostbite
 		[SpellName(122)] = 2,		-- Frost Nova
 		[SpellName(12355)] = 3,		-- Impact
 		[SpellName(118)] = 3,		-- Polymorph
+		[SpellName(61305)] = 3,		-- Polymorph: Black Cat
 		[SpellName(28272)] = 3,		-- Polymorph: Pig
+		[SpellName(61721)] = 3,		-- Polymorph: Rabbit
+		[SpellName(61025)] = 3,		-- Polymorph: Serpent
+		[SpellName(61780)] = 3,		-- Polymorph: Turkey
 		[SpellName(28271)] = 3,		-- Polymorph: Turtle
+		[SpellName(59634)] = 3,		-- Polymorph - Penguin
 		[SpellName(18469)] = 3,		-- Silenced - Improved Counterspell
 		-- Paladin
 		[SpellName(853)] = 3,		-- Hammer of Justice
 		[SpellName(20066)] = 3,		-- Repentance
+		[SpellName(63529)] = 3,		-- Silenced - Shield of the Templar
 		[SpellName(20170)] = 3,		-- Stun (Seal of Justice Proc)
 		[SpellName(10326)] = 3,		-- Turn Evil
 		[SpellName(2878)] = 3,		-- Turn Undead
 		-- Priest
 		[SpellName(15269)] = 3,		-- Blackout
-		[SpellName(44041)] = 3,		-- Chastise
 		[SpellName(605)] = 3,		-- Mind Control
+		[SpellName(64044] = 3,		-- Psychic Horror
 		[SpellName(8122)] = 3,		-- Psychic Scream
 		[SpellName(9484)] = 3,		-- Shackle Undead
 		[SpellName(15487)] = 3,		-- Silence
@@ -707,18 +735,22 @@ if C.raidframe.plugins_pvp_debuffs == true then
 		[SpellName(2094)] = 3,		-- Blind
 		[SpellName(1833)] = 3,		-- Cheap Shot
 		[SpellName(32747)] = 3,		-- Deadly Throw Interrupt
+		[SpellName(51722)] = 3,		-- Dismantle
 		[SpellName(1330)] = 3,		-- Garrote - Silence
 		[SpellName(1776)] = 3,		-- Gouge
 		[SpellName(408)] = 3,		-- Kidney Shot
-		[SpellName(14251)] = 3,		-- Riposte
 		[SpellName(6770)] = 3,		-- Sap
 		[SpellName(18425)] = 3,		-- Silenced - Improved Kick
+		-- Shaman
+		[SpellName(58861)] = 3,		-- Bash (Spirit Wolf)
+		[SpellName(51514)] = 3,		-- Hex
+		[SpellName(39796)] = 3,		-- Stoneclaw Totem
 		-- Warlock
 		[SpellName(6789)] = 3,		-- Death Coil
+		[SpellName(60995)] = 3,		-- Demon Charge (Metamorphosis)
 		[SpellName(5782)] = 3,		-- Fear
 		[SpellName(5484)] = 3,		-- Howl of Terror
 		[SpellName(30153)] = 3,		-- Intercept Stun (Felguard)
-		[SpellName(18093)] = 3,		-- Pyroclasm
 		[SpellName(6358)] = 3,		-- Seduction (Succubus)
 		[SpellName(30283)] = 3,		-- Shadowfury
 		[SpellName(24259)] = 3,		-- Spell Lock (Felhunter)
@@ -726,16 +758,16 @@ if C.raidframe.plugins_pvp_debuffs == true then
 		[SpellName(7922)] = 3,		-- Charge Stun
 		[SpellName(12809)] = 3,		-- Concussion Blow
 		[SpellName(676)] = 3,		-- Disarm
+		[SpellName(58373)] = 2,		-- Glyph of Hamstring
 		[SpellName(23694)] = 2,		-- Improved Hamstring
 		[SpellName(5246)] = 3,		-- Intimidating Shout
 		[SpellName(20253)] = 3,		-- Intercept Stun
 		[SpellName(12798)] = 3,		-- Revenge Stun
-		[SpellName(18498)] = 3,		-- Shield Bash - Silenced
+		[SpellName(46968)] = 3,		-- Shockwave
+		[SpellName(18498)] = 3,		-- Silenced - Gag Order
 		-- Racial
 		[SpellName(28730)] = 3,		-- Arcane Torrent
 		[SpellName(20549)] = 3,		-- War Stomp
-		-- Other
-		[SpellName(5530)] = 3,		-- Mace Specialization
 	}
 
 	for spell, prio in pairs(PvPDebuffs) do

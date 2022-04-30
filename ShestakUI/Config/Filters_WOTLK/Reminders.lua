@@ -18,105 +18,95 @@ end
 if C.reminder.raid_buffs_enable == true or C.announcements.flask_food == true then
 	T.ReminderBuffs = {
 		Flask = {
-			-- SpellName(17624),	-- Flask of Petrification (Immunity)
-			SpellName(17628),	-- Flask of Supreme Power (+70 Spell Damage)
-			SpellName(17627),	-- Flask of Distilled Wisdom (+2000 Mana)
-			SpellName(17629),	-- Flask of Chromatic Resistance (+25 Magic Resistance)
-			SpellName(17626),	-- Flask of the Titans (+400 Health)
+			SpellName(67019),	-- Flask of the North (+47 Spell Power OR +80 Attack Power OR +40 Strength)
+			SpellName(17627),	-- Flask of Distilled Wisdom (+65 Intellect)
 			SpellName(28518),	-- Flask of Fortification (+500 Health / +10 Defense)
-			SpellName(28519),	-- Flask of Mighty Restoration (+25 Mp5)
-			SpellName(28520),	-- Flask of Relentless Assault (+120 Attack Power)
-			SpellName(28521),	-- Flask of Blinding Light (+80 Arcane/Holy/Nature Spell Power)
-			SpellName(28540),	-- Flask of Pure Death (+80 Shadow/Fire/Frost Spell Power)
-			SpellName(40567),	-- Unstable Flask of the Bandit (+20 Agility / +40 Attack Power / +30 Stamina)
-			SpellName(40568),	-- Unstable Flask of the Elder (+20 Intellect / +30 Stamina / +8 Mp5)
-			SpellName(40572),	-- Unstable Flask of the Beast (+20 Agility / +20 Strength / +30 Stamina)
-			SpellName(40573),	-- Unstable Flask of the Physician (+20 Intellect / +30 Stamina / +44 Healing Power)
-			SpellName(40575),	-- Unstable Flask of the Soldier (+20 Critical Strike / +20 Strength / +30 Stamina)
-			SpellName(40576),	-- Unstable Flask of the Sorcerer (+20 Intellect / +30 Stamina / +23 Spell Power)
-			SpellName(41608),	-- Shattrath Flask of Relentless Assault (+120 Attack Power)
 			SpellName(41609),	-- Shattrath Flask of Fortification (+500 Health / +10 Defense)
-			SpellName(41610),	-- Shattrath Flask of Mighty Restoration (+25 Mp5)
-			SpellName(41611),	-- Shattrath Flask of Supreme Power (+70 Spell Power)
 			SpellName(42735),	-- Flask of Chromatic Wonder (+35 Magic Resistance / +18 Stats)
-			SpellName(46837),	-- Shattrath Flask of Pure Death (+80 Shadow/Fire/Frost Spell Power)
-			SpellName(46839),	-- Shattrath Flask of Blinding Light (+80 Arcane/Holy/Nature Spell Power)
+			SpellName(53752),	-- Lesser Flask of Toughness (+50 Resilience Rating)
+			SpellName(53755),	-- Flask of the Frost Wyrm (+125 Spell Power)
+			SpellName(53758),	-- Flask of Stoneblood (+1300 Health)
+			SpellName(53760),	-- Flask of Endless Rage (+180 Attack Power)
+			SpellName(54212),	-- Flask of Pure Mojo (+45 Mp5)
+			SpellName(62380),	-- Lesser Flask of Resistance (+50 Magic Resistance)
 		},
 		BattleElixir = {
-			SpellName(11406),	-- Elixir of Demonslaying (+265 Attack Power to Demons)
-			SpellName(17539),	-- Greater Arcane Elixir (+35 Arcane Spell Power)
-			SpellName(28490),	-- Elixir of Major Strength (+35 Strength)
-			SpellName(28491),	-- Elixir of Healing Power (+50 Healing Power)
-			SpellName(28493),	-- Elixir of Major Frost Power (+55 Frost Spell Power)
-			SpellName(28497),	-- Elixir of Major Agility (+35 Agility / +20 Critical Strike)
-			SpellName(28501),	-- Elixir of Major Firepower (+55 Fire Spell Power)
-			SpellName(28503),	-- Elixir of Major Shadow Power (+55 Shadow Spell Power)
-			SpellName(33720),	-- Onslaught Elixir (+60 Attack Power)
-			SpellName(33721),	-- Adept's Elixir (+24 Spell Power / +24 Critical Strike)
-			SpellName(33726),	-- Elixir of Mastery (+15 Stats)
-			SpellName(38954),	-- Fel Strength Elixir (+90 Attack Power / -10 Stamina)
-			SpellName(45373),	-- Bloodberry Elixir (+15 Stats)
+			SpellName(33721),	-- Spellpower Elixir (+58 Spell Power)
+			SpellName(11406),	-- Elixir of Demonslaying (+105 Attack Power to Demons)
+			SpellName(28497),	-- Elixir of Mighty Agility (+45 Agility)
+			SpellName(53746),	-- Wrath Elixir (+90 Attack Power)
+			SpellName(53748),	-- Elixir of Mighty Strength (+50 Strength)
+			SpellName(53749),	-- Guru's Elixir (+20 Stats)
+			SpellName(54452),	-- Adept's Elixir (+24 Spell Power / +24 Critical Rating)
+			SpellName(60340),	-- Elixir of Accuracy (+45 Hit Rating)
+			SpellName(60341),	-- Elixir of Deadly Strikes (+45 Critical Rating)
+			SpellName(60344),	-- Elixir of Expertise (+45 Expertise Rating)
+			SpellName(60345),	-- Elixir of Armor Piercing (+45 Armor Penetration Rating)
+			SpellName(60346),	-- Elixir of Lightning Speed (+45 Haste Rating)
 		},
 		GuardianElixir = {
-			SpellName(28502),	-- Elixir of Major Defense (+550 Armor)
-			SpellName(28509),	-- Elixir of Major Mageblood (+16 Mp5)
+			SpellName(60347),	-- Elixir of Mighty Thoughts (+45 Intellect)
 			SpellName(28514),	-- Elixir of Empowerment (+30 Spell Penetration)
-			SpellName(39625),	-- Elixir of Major Fortitude (+250 Health / 10 Hp5)
 			SpellName(39626),	-- Earthen Elixir (+20 Damage Reduction)
 			SpellName(39627),	-- Elixir of Draenic Wisdom (+30 Intellect / +30 Spirit)
 			SpellName(39628),	-- Elixir of Ironskin (+30 Resilience Rating)
+			SpellName(53747),	-- Elixir of Spirit (+50 Spirit)
+			SpellName(53751),	-- Elixir of Mighty Fortitude (+350 Health / +20 Hp5)
+			SpellName(53763),	-- Elixir of Protection (+800 Armor)
+			SpellName(53764),	-- Elixir of Mighty Mana Regeneration (+30 Mp5)
+			SpellName(60343),	-- Elixir of Mighty Defense (+45 Defense Rating)
 		},
 		Other = {
 			-- SpellName(spellID),	-- Spell name
 		},
 		Food = {
-			SpellName(33257),	-- Well Fed (+30 Stamina / +20 Spirit) [Fisherman's Feast / Spicy Crawdad]
+			SpellName(57399),	-- Well Fed (+40 Attack Power / 46 Spell Power / +40 Stamina) [Fish Feast]
 			SpellName(15852),	-- Dragonbreath Chili (Special) [Dragonbreath Chili]
 			SpellName(22730),	-- Increased Intellect (+10 Intellect) [Runn Tum Tuber Surprise]
-			SpellName(24799),	-- Well Fed (+20 Strength) [Helboar Bacon / Smoked Desert Dumplings]
-			SpellName(25661),	-- Increased Stamina (+25 Stamina) [Dirge's Kickin' Chimaerok Chops]
-			-- SpellName(33254),	-- Well Fed (+20 Stamina / +20 Spirit) [Buzzard Bites / Clam Bar / Feltail Delight]
-			SpellName(33256),	-- Well Fed (+20 Strength / +20 Spirit) [Roasted Clefthoof]
-			SpellName(33259),	-- Well Fed (+40 Attack Power / +20 Spirit) [Ravager Dog]
-			SpellName(33261),	-- Well Fed (+20 Agility / +20 Spirit) [Grilled Mudfish / Warp Burger]
 			SpellName(33263),	-- Well Fed (+23 Spell Power / +20 Spirit) [Blackened Basilisk / Crunchy Serpent / Poached Bluefish]
-			SpellName(33265),	-- Well Fed (+20 Stamina / +8 Mp5) [Blackened Sporefish]
-			SpellName(33268),	-- Well Fed (+44 Healing Power / +20 Spirit) [Golden Fish Sticks]
-			-- SpellName(35272),	-- Well Fed (+20 Stamina / +20 Spirit) [Mok'Nathal Shortribs / Talbuk Steak]
+			SpellName(33268),	-- Well Fed (+23 Spell Power / +20 Spirit) [Golden Fish Sticks]
 			SpellName(43722),	-- Enlightened (+20 Spell Critical Strike / +20 Spirit) [Skullfish Soup]
 			SpellName(43730),	-- Electrified (Special) [Stormchops]
-			SpellName(43764),	-- Well Fed (+20 Physical Hit Rating / +20 Spirit) [Spicy Hot Talbuk]
-			-- SpellName(44104),	-- "Well Fed" (+20 Stamina / +20 Spirit) [Brewfest]
-			-- SpellName(44105),	-- "Well Fed" (+20 Stamina / +20 Spirit) [Brewfest]
-			SpellName(44106),	-- "Well Fed" (+20 Strength / +20 Spirit) [Brewfest]
-			-- SpellName(45245),	-- Well Fed (+20 Stamina / +20 Spirit) [Hot Apple Cider]
 			SpellName(45619),	-- Well Fed (+8 Magic Resistance) [Broiled Bloodfin]
+			SpellName(57325),	-- Well Fed (+80 Attack Power / +40 Stamina) [Poached Northern Sculpin / Mega Mammoth Meal]
+			SpellName(57327),	-- Well Fed (+46 Spell Power / +40 Stamina) [Firecracker Salmon / Tender Shoveltusk Steak]
+			SpellName(57329),	-- Well Fed (+40 Critial Rating / +40 Stamina) [Spicy Blue Nettlefish / Spiced Worm Burger]
+			SpellName(57332),	-- Well Fed (+40 Haste Rating / +40 Stamina) [Imperial Manta Steak / Very Burnt Worg]
+			SpellName(57334),	-- Well Fed (+20 Mp5 / +40 Stamina) [Spicy Fried Herring / Mighty Rhino Dogs]
+			SpellName(57356),	-- Well Fed (+40 Expertise Rating / +40 Stamina) [Rhinolicious Wormsteak]
+			SpellName(57358),	-- Well Fed (+40 Armor Penetration Rating / +40 Stamina) [Hearty Rhino]
+			SpellName(57360),	-- Well Fed (+40 Hit Rating / +40 Stamina) [Snapper Extreme / Worg Tartare]
+			SpellName(57365),	-- Well Fed (+40 Spirit / +40 Stamina) [Cuttlesteak]
+			SpellName(57367),	-- Well Fed (+40 Agility / +40 Stamina) [Blackened Dragonfin]
+			SpellName(57371),	-- Well Fed (+40 Strength / +40 Stamina) [Dragonfin Filet]
+			SpellName(66623),	-- Well Fed (+40 Attack Power / 47 Spell Power / +40 Stamina) [Bountiful Feast]
 		},
 		Mp5 = {
 			SpellName(25894),	-- Greater Blessing of Wisdom
 			SpellName(19742),	-- Blessing of Wisdom
 			SpellName(5677),	-- Mana Spring
 		},
-		Might = {
+		AP = {
 			SpellName(25782),	-- Greater Blessing of Might
 			SpellName(19740),	-- Blessing of Might
-		},
-		Threat = {
-			SpellName(25895),	-- Greater Blessing of Salvation
-			SpellName(1038),	-- Blessing of Salvation
-			SpellName(25909)	-- Tranquil Air
+			SpellName(6673),	-- Battle Shout
 		},
 		Intellect = {
 			SpellName(23028),	-- Arcane Brilliance
 			SpellName(1459),	-- Arcane Intellect
+			SpellName(61316),	-- Dalaran Brilliance
+			SpellName(61024),	-- Dalaran Intellect
+			SpellName(8096),	-- Intellect [Scroll of Intellect]
 		},
 		Kings = {
 			SpellName(25898),	-- Greater Blessing of Kings
 			SpellName(20217),	-- Blessing of Kings
+			SpellName(69378),	-- Blessing of Forgotten Kings [Drums of Forgotten Kings]
 		},
 		Mark = {
 			SpellName(21849),	-- Gift of the Wild
 			SpellName(1126),	-- Mark of the Wild
+			SpellName(69381),	-- Gift of the Wild [Drums of the Wild]
 		},
 		Spirit = {
 			SpellName(27681),	-- Prayer of Spirit
@@ -125,6 +115,7 @@ if C.reminder.raid_buffs_enable == true or C.announcements.flask_food == true th
 		Stamina = {
 			SpellName(21562),	-- Prayer of Fortitude
 			SpellName(1243),	-- Power Word: Fortitude
+			SpellName(69377),	-- Fortitude [Runescroll of Fortitude]
 		},
 		Custom = {
 			-- SpellName(spellID),	-- Spell name
@@ -133,7 +124,6 @@ if C.reminder.raid_buffs_enable == true or C.announcements.flask_food == true th
 
 	T.ReminderBuffs.Spell3Buff = T.ReminderBuffs["Kings"]
 	T.ReminderBuffs.Spell4Buff = T.ReminderBuffs["Mark"]
-	T.ReminderBuffs.Spell7Buff = T.ReminderBuffs["Threat"]
 
 	-- Amount of "other" buffs to consider a fulfillment of the Flask reminder
 	function T.ReminderFlaskRequirements()
@@ -152,7 +142,7 @@ if C.reminder.raid_buffs_enable == true or C.announcements.flask_food == true th
 	-- Physical buffs
 	function T.ReminderPhysicalBuffs()
 		T.ReminderBuffs.Spell5Buff = T.ReminderBuffs["Stamina"]
-		T.ReminderBuffs.Spell6Buff = T.ReminderBuffs["Might"]
+		T.ReminderBuffs.Spell6Buff = T.ReminderBuffs["AP"]
 	end
 end
 
@@ -183,6 +173,17 @@ end
 ]]--------------------------------------------------------------------------------------
 if C.reminder.solo_buffs_enable == true then
 	T.ReminderSelfBuffs = {
+		DEATHKNIGHT = {
+			[1] = {	-- Horn of Winter group
+				["spells"] = {
+					SpellName(57330),	-- Horn of Winter
+					SpellName(8076),	-- Strength of Earth
+				},
+				["combat"] = true,
+				["instance"] = true,
+				["pvp"] = true,
+			},
+		},
 		DRUID = {
 			[1] = {	-- Mark of the Wild group
 				["spells"] = {
@@ -203,6 +204,7 @@ if C.reminder.solo_buffs_enable == true then
 		HUNTER = {
 			[1] = {	-- Aspects group
 				["spells"] = {
+					SpellName(61846),	-- Aspect of the Dragonhawk
 					SpellName(13165),	-- Aspect of the Hawk
 					SpellName(13161),	-- Aspect of the Beast
 					SpellName(5118),	-- Aspect of the Cheetah
@@ -241,6 +243,8 @@ if C.reminder.solo_buffs_enable == true then
 				["spells"] = {
 					SpellName(1459),	-- Arcane Intellect
 					SpellName(23028),	-- Arcane Brilliance
+					SpellName(61316),	-- Dalaran Brilliance
+					SpellName(61024),	-- Dalaran Intellect
 				},
 				["combat"] = true,
 				["instance"] = true,
@@ -261,7 +265,6 @@ if C.reminder.solo_buffs_enable == true then
 				["spells"] = {
 					SpellName(465),		-- Devotion Aura
 					SpellName(7294),	-- Retribution Aura
-					SpellName(20218),	-- Sanctity Aura
 					SpellName(19746),	-- Concentration Aura
 					SpellName(19891),	-- Fire Resistance Aura
 					SpellName(19888),	-- Frost Resistance Aura
@@ -273,19 +276,12 @@ if C.reminder.solo_buffs_enable == true then
 			},
 			[3] = {	-- Blessings group
 				["spells"] = {
-					SpellName(1044),	-- Blessing of Freedom
 					SpellName(20217),	-- Blessing of Kings
-					SpellName(19977),	-- Blessing of Light
 					SpellName(19740),	-- Blessing of Might
-					SpellName(1022),	-- Blessing of Protection
-					SpellName(6940),	-- Blessing of Sacrifice
-					SpellName(1038),	-- Blessing of Salvation
 					SpellName(20911),	-- Blessing of Sanctuary
 					SpellName(19742),	-- Blessing of Wisdom
 					SpellName(25898),	-- Greater Blessing of Kings
-					SpellName(25890),	-- Greater Blessing of Light
 					SpellName(25782),	-- Greater Blessing of Might
-					SpellName(25895),	-- Greater Blessing of Salvation
 					SpellName(25899),	-- Greater Blessing of Sanctuary
 					SpellName(25894),	-- Greater Blessing of Wisdom
 				},
@@ -293,25 +289,22 @@ if C.reminder.solo_buffs_enable == true then
 				["instance"] = true,
 				["pvp"] = true,
 			},
-			--[[
 			[4] = {	-- Seals group
 				["spells"] = {
 					SpellName(21084),		-- Seal of Righteousness
 					SpellName(31892),		-- Seal of Blood
-					SpellName(27170),		-- Seal of Command
+					SpellName(20375),		-- Seal of Command
 					SpellName(348704),		-- Seal of Corruption
 					SpellName(20164),		-- Seal of Justice
 					SpellName(20165),		-- Seal of Light
 					SpellName(31801),		-- Seal of Vengeance
 					SpellName(20166),		-- Seal of Wisdom
-					SpellName(21082),		-- Seal of the Crusader
 					SpellName(348700),		-- Seal of the Martyr
 				},
 				["combat"] = true,
 				["instance"] = true,
 				["pvp"] = true,
 			},
-			--]]
 		},
 		PRIEST = {
 			[1] = {	-- Inner Fire/Will group
@@ -368,7 +361,7 @@ if C.reminder.solo_buffs_enable == true then
 					SpellName(3408),	-- Crippling Poison
 					SpellName(5761),	-- Mind-numbing Poison
 					SpellName(13219),	-- Wound Poison
-					SpellName(21835),	-- Anesthetic Poison
+					SpellName(26785),	-- Anesthetic Poison
 				},
 				["mainhand"] = true,
 				["combat"] = true,
@@ -383,7 +376,7 @@ if C.reminder.solo_buffs_enable == true then
 					SpellName(3408),	-- Crippling Poison
 					SpellName(5761),	-- Mind-numbing Poison
 					SpellName(13219),	-- Wound Poison
-					SpellName(21835),	-- Anesthetic Poison
+					SpellName(26785),	-- Anesthetic Poison
 				},
 				["offhand"] = true,
 				["combat"] = true,
@@ -395,7 +388,7 @@ if C.reminder.solo_buffs_enable == true then
 		SHAMAN = {
 			[1] = {	-- Shields group
 				["spells"] = {
-					SpellName(24398),	-- Water Shield
+					SpellName(52127),	-- Water Shield
 					SpellName(324),		-- Lightning Shield
 					SpellName(974),		-- Earth Shield
 				},
@@ -410,14 +403,7 @@ if C.reminder.solo_buffs_enable == true then
 					SpellName(8017),	-- Rockbiter Weapon
 					SpellName(8024),	-- Flametongue Weapon
 					SpellName(8033),	-- Frostbrand Weapon
-					SpellName(8024),	-- Flametongue Weapon
-					SpellName(28013),	-- Superior Mana Oil
-					SpellName(25123),	-- Brilliant Mana Oil
-					SpellName(28017),	-- Superior Wizard Oil
-					SpellName(25122),	-- Brilliant Wizard Oil
-					SpellName(28898),	-- Blessed Wizard Oil
-					SpellName(25121),	-- Wizard Oil
-					SpellName(45395),	-- Blessed Weapon Coating
+					SpellName(51730),	-- Earthliving Weapon
 				},
 				["mainhand"] = true,
 				["combat"] = true,
@@ -430,7 +416,7 @@ if C.reminder.solo_buffs_enable == true then
 					SpellName(8017),	-- Rockbiter Weapon
 					SpellName(8024),	-- Flametongue Weapon
 					SpellName(8033),	-- Frostbrand Weapon
-					SpellName(8024),	-- Flametongue Weapon
+					SpellName(51730),	-- Earthliving Weapon
 				},
 				["offhand"] = true,
 				["combat"] = true,
@@ -444,6 +430,14 @@ if C.reminder.solo_buffs_enable == true then
 					SpellName(28176),	-- Fel Armor
 					SpellName(706),		-- Demon Armor
 					SpellName(687),		-- Demon Skin
+				},
+				["combat"] = true,
+				["instance"] = true,
+				["pvp"] = true,
+			},
+			[2] = {	-- Amplify Curse group
+				["spells"] = {
+					SpellName(18288),	-- Amplify Curse
 				},
 				["combat"] = true,
 				["instance"] = true,

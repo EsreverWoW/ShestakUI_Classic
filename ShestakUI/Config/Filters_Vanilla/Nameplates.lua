@@ -17,7 +17,7 @@ local function SpellName(id)
 end
 
 T.DebuffWhiteList = {
--- Druid
+	-- Druid
 	[SpellName(5211)] = true,	-- Bash
 	[SpellName(16922)] = true,	-- Celestial Focus (Starfire Stun)
 	[SpellName(5209)] = true,	-- Challenging Roar
@@ -54,6 +54,7 @@ T.DebuffWhiteList = {
 	[SpellName(19410)] = true,	-- Improved Concussive Shot
 	[SpellName(19229)] = true,	-- Improved Wing Clip
 	[SpellName(24394)] = true,	-- Intimidation
+	[SpellName(6150)] = true,	-- Quick Shots
 	[SpellName(1513)] = true,	-- Scare Beast
 	[SpellName(19503)] = true,	-- Scatter Shot
 	[SpellName(24640)] = true,	-- Scorpid Poison (Scorpid)
@@ -232,9 +233,11 @@ T.BuffWhiteList = {
 	[SpellName(13159)] = true,	-- Aspect of the Pack
 	-- [SpellName(20043)] = true,	-- Aspect of the Wild
 	[SpellName(19574)] = true,	-- Bestial Wrath
+	[SpellName(25077)] = true,	-- Cobra Reflexes (Pet)
 	[SpellName(23099)] = true,	-- Dash (Pet)
 	[SpellName(19263)] = true,	-- Deterrence
 	[SpellName(23145)] = true,	-- Dive (Pet)
+	[SpellName(6197)] = true,	-- Eagle Eye
 	[SpellName(1002)] = true,	-- Eyes of the Beast
 	-- [SpellName(1539)] = true,	-- Feed Pet Effect
 	[SpellName(5384)] = true,	-- Feign Death
@@ -264,7 +267,6 @@ T.BuffWhiteList = {
 	[SpellName(6143)] = true,	-- Frost Ward
 	[SpellName(11426)] = true,	-- Ice Barrier
 	[SpellName(11958)] = true,	-- Ice Block
-	[SpellName(12472)] = true,	-- Icy Veins
 	[SpellName(1463)] = true,	-- Mana Shield
 	[SpellName(130)] = true,	-- Slow Fall
 	[SpellName(12043)] = true,	-- Presence of Mind
@@ -301,7 +303,7 @@ T.BuffWhiteList = {
 	[SpellName(552)] = true,	-- Abolish Disease
 	[SpellName(27813)] = true,	-- Blessed Recovery
 	[SpellName(2651)] = true,	-- Elune's Grace
-	-- [SpellName(586)] = true,	-- Fade
+	-- [SpellName(586)] = true,		-- Fade
 	[SpellName(6346)] = true,	-- Fear Ward
 	[SpellName(13896)] = true,	-- Feedback
 	[SpellName(588)] = true,	-- Inner Fire
@@ -336,6 +338,7 @@ T.BuffWhiteList = {
 	-- [SpellName(16246)] = true,	-- Elemental Focus (Clearcasting)
 	[SpellName(16166)] = true,	-- Elemental Mastery
 	-- [SpellName(29063)] = true,	-- Eye of the Storm (Focused Casting)
+	[SpellName(6196)] = true,	-- Far Sight
 	-- [SpellName(8185)] = true,	-- Fire Resistance Totem
 	[SpellName(16257)] = true,	-- Flurry
 	-- [SpellName(8182)] = true,	-- Frost Resistance Totem
