@@ -367,7 +367,7 @@ C["filger_spells"] = {
 			{spellID = 40724, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 
 			-- Damage [Magic]
-			-- Arcane Energy (Healing Power, Use) Ancient Draenei Arcane Relic / [Vengeance of the Illidari]
+			-- Arcane Energy (Healing Power, Use) [Ancient Draenei Arcane Relic / Vengeance of the Illidari]
 			{spellID = 33662, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Ascendance (Spell Power, Use) [Talisman of Ascendance]
 			{spellID = 28204, unitID = "player", caster = "player", filter = "BUFF", absID = true},
@@ -431,6 +431,8 @@ C["filger_spells"] = {
 			{spellID = 33400, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Blessing of Faith (Special, Use) [Lower City Prayerbook]
 			{spellID = 37877, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Blessing of Life (Special, Use) [Ribbon of Sacrifice]
+			{spellID = 38332, unitID = "target", caster = "player", filter = "BUFF"},
 			-- Chromatic Infusion (Healing Power, Use) [Draconic Infused Emblem]
 			{spellID = 27675, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Deep Meditation (Spirit, Use) [Earring of Soulful Meditation]
@@ -840,6 +842,8 @@ C["filger_spells"] = {
 			{spellID = 23721, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Deadly Aim (Attack Power, Proc) [Ashtongue Talisman of Swiftness]
 			{spellID = 40487, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Devilsaur Fury (Attack Power, Use) [Devilsaur Eye]
+			{spellID = 24352, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Shot Power (Special, Proc) [Talon of Al'ar]
 			{spellID = 37508, unitID = "player", caster = "player", filter = "BUFF"},
 
@@ -900,8 +904,6 @@ C["filger_spells"] = {
 			{spellID = 41261, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Consume Life (Special, Use) [Fetish of the Fallen]
 			{spellID = 33015, unitID = "player", caster = "player", filter = "BUFF", absID = true},
-			-- Devilsaur Fury (Attack Power, Use) [Devilsaur Eye]
-			{spellID = 24352, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Dire Drunkard (Attack Power, Use) [Empty Mug of Direbrew]
 			{spellID = 51955, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Disdain (Attack Power, Proc) [Shard of Contempt]
@@ -1380,7 +1382,7 @@ C["filger_spells"] = {
 			{spellID = 18946, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Damage [Magic]
-			-- Arcane Energy (Healing Power, Use) Ancient Draenei Arcane Relic / [Vengeance of the Illidari]
+			-- Arcane Energy (Healing Power, Use) [Ancient Draenei Arcane Relic / Vengeance of the Illidari]
 			{spellID = 33662, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Ascendance (Spell Power, Use) [Talisman of Ascendance]
 			{spellID = 28204, unitID = "player", caster = "player", filter = "BUFF", absID = true},
@@ -2002,7 +2004,7 @@ C["filger_spells"] = {
 			{spellID = 40724, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 
 			-- Damage [Magic]
-			-- Arcane Energy (Healing Power, Use) Ancient Draenei Arcane Relic / [Vengeance of the Illidari]
+			-- Arcane Energy (Healing Power, Use) [Ancient Draenei Arcane Relic / Vengeance of the Illidari]
 			{spellID = 33662, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Ascendance (Spell Power, Use) [Talisman of Ascendance]
 			{spellID = 28204, unitID = "player", caster = "player", filter = "BUFF", absID = true},
@@ -2066,6 +2068,8 @@ C["filger_spells"] = {
 			{spellID = 33400, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Blessing of Faith (Special, Use) [Lower City Prayerbook]
 			{spellID = 37877, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Blessing of Life (Special, Use) [Ribbon of Sacrifice]
+			{spellID = 38332, unitID = "target", caster = "player", filter = "BUFF"},
 			-- Chromatic Infusion (Healing Power, Use) [Draconic Infused Emblem]
 			{spellID = 27675, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Deep Meditation (Spirit, Use) [Earring of Soulful Meditation]
@@ -2446,7 +2450,7 @@ C["filger_spells"] = {
 			{spellID = 32108, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Reactive Fade (Special, Proc) [Vestments of Transcendence]
 			{spellID = 21976, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Relentlessness (Speecial, Proc) [Avatar Regalia]
+			-- Relentlessness (Special, Proc) [Avatar Regalia]
 			{spellID = 37601, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Sadist (Spell Power, Proc) [Avatar Regalia]
 			{spellID = 37604, unitID = "player", caster = "player", filter = "BUFF"},
@@ -2515,7 +2519,7 @@ C["filger_spells"] = {
 			{spellID = 18946, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Damage [Magic]
-			-- Arcane Energy (Healing Power, Use) Ancient Draenei Arcane Relic / [Vengeance of the Illidari]
+			-- Arcane Energy (Healing Power, Use) [Ancient Draenei Arcane Relic / Vengeance of the Illidari]
 			{spellID = 33662, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Ascendance (Spell Power, Use) [Talisman of Ascendance]
 			{spellID = 28204, unitID = "player", caster = "player", filter = "BUFF", absID = true},
@@ -2579,6 +2583,8 @@ C["filger_spells"] = {
 			{spellID = 33400, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Blessing of Faith (Special, Use) [Lower City Prayerbook]
 			{spellID = 37877, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Blessing of Life (Special, Use) [Ribbon of Sacrifice]
+			{spellID = 38332, unitID = "target", caster = "player", filter = "BUFF"},
 			-- Chromatic Infusion (Healing Power, Use) [Draconic Infused Emblem]
 			{spellID = 27675, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Deep Meditation (Spirit, Use) [Earring of Soulful Meditation]
@@ -2917,7 +2923,7 @@ C["filger_spells"] = {
 			-- {spellID = 37163, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Heroic Resolution (Attack Power, Proc) [Desolation Battlegear / Doomplate Battlegear / Wastewalker Armor]
 			{spellID = 37612, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Revealed Flaw (Speecial, Proc) [Bonescythe Armor]
+			-- Revealed Flaw (Special, Proc) [Bonescythe Armor]
 			{spellID = 28815, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Ranged
@@ -3538,7 +3544,7 @@ C["filger_spells"] = {
 			{spellID = 40724, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 
 			-- Damage [Magic]
-			-- Arcane Energy (Healing Power, Use) Ancient Draenei Arcane Relic / [Vengeance of the Illidari]
+			-- Arcane Energy (Healing Power, Use) [Ancient Draenei Arcane Relic / Vengeance of the Illidari]
 			{spellID = 33662, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Ascendance (Spell Power, Use) [Talisman of Ascendance]
 			{spellID = 28204, unitID = "player", caster = "player", filter = "BUFF", absID = true},
@@ -3602,6 +3608,8 @@ C["filger_spells"] = {
 			{spellID = 33400, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Blessing of Faith (Special, Use) [Lower City Prayerbook]
 			{spellID = 37877, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Blessing of Life (Special, Use) [Ribbon of Sacrifice]
+			{spellID = 38332, unitID = "target", caster = "player", filter = "BUFF"},
 			-- Chromatic Infusion (Healing Power, Use) [Draconic Infused Emblem]
 			{spellID = 27675, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Deep Meditation (Spirit, Use) [Earring of Soulful Meditation]
@@ -4030,7 +4038,7 @@ C["filger_spells"] = {
 			{spellID = 18946, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Damage [Magic]
-			-- Arcane Energy (Healing Power, Use) Ancient Draenei Arcane Relic / [Vengeance of the Illidari]
+			-- Arcane Energy (Healing Power, Use) [Ancient Draenei Arcane Relic / Vengeance of the Illidari]
 			{spellID = 33662, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Ascendance (Spell Power, Use) [Talisman of Ascendance]
 			{spellID = 28204, unitID = "player", caster = "player", filter = "BUFF", absID = true},

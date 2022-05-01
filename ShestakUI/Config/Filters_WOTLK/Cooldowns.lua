@@ -166,6 +166,7 @@ if C.enemycooldown.enable == true then
 		{16190, 300},	-- Mana Tide Totem
 		-- Trinket (TEMPORARY)
 		{42292, 120},	-- PvP Trinket
+		{65547, 120},	-- PvP Trinket
 	}
 
 	if #C.enemycooldown.spells_list > 0 then

@@ -514,6 +514,8 @@ C["filger_spells"] = {
 			-- Class
 			-- Arcane Infused (Special, Use) [Arcane Infused Gem]
 			{spellID = 23721, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Devilsaur Fury (Attack Power, Use) [Devilsaur Eye]
+			{spellID = 24352, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Darkmoon Cards
 			-- Aura of the Blue Dragon (Special, Proc) [Darkmoon Card: Blue Dragon]
@@ -542,8 +544,6 @@ C["filger_spells"] = {
 			{spellID = 18946, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Damage [Physical]
-			-- Devilsaur Fury (Attack Power, Use) [Devilsaur Eye]
-			{spellID = 24352, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Earthstrike (Attack Power, Use) [Earthstrike]
 			{spellID = 25891, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Insight of the Qiraji (Armor Penetration, Use) [Badge of the Swarmguard]
@@ -1778,7 +1778,7 @@ C["filger_spells"] = {
 			-- Item Sets
 			-- Bloodfang (HoT, Proc) [Bloodfang Armor]
 			{spellID = 23580, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Revealed Flaw (Speecial, Proc) [Bonescythe Armor]
+			-- Revealed Flaw (Special, Proc) [Bonescythe Armor]
 			{spellID = 28815, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Trinkets
