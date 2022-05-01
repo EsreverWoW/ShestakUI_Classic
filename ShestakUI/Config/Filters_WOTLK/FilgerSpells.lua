@@ -206,12 +206,60 @@ C["filger_spells"] = {
 			{spellID = 46833, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Idols
+			-- Agile (Agility, Mangle/Shred) [Idol of Mutilation]
+			{spellID = 67355, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Agile (Agility, Lacerate/Rake) [Idol of the Crying Moon]
+			{spellID = 71175, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Blessing of the Moon Goddess (Critical Strike, Proc) [Idol of Lunar Fury]
+			{spellID = 67360, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Evasion (Dodge, Lacerate/Swipe) [Idol of Mutilation]
+			{spellID = 67354, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Lunar Grace (Spell Power, Proc) [Idol of the Unseen Moon]
 			{spellID = 43740, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Mark of the White Stag (Attack Power, Mangle) [Idol of the White Stag]
 			{spellID = 41038, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Primal Fury (Agility, Mangle) [Idol of the Plainstalker]
+			{spellID = 48834, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Primal Instinct (Agility, Mangle) [Idol of Terror]
 			{spellID = 43738, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Primal Wrath (Agility, Mangle) [Idol of the Corruptor]
+			{spellID = 64951, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Rejuvenating (Spell Power, Proc) [Idol of Flaring Growth]
+			{spellID = 67358, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Resilient (Resilience, Moonfire/Mangle) [Idol of Resolve / Idol of Steadfastness]
+			{spellID = 43839, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Snap and Snarl (Strength, Shred/Swipe) [Idol of the Wastes]
+			{spellID = 52021, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Soothing (Spell Power, Rejuvenation) [Idol of the Black Willow]
+			{spellID = 71184, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Venture Might (Spirit, Moonfire) [Idol of Arcane Terror]
+			{spellID = 57909, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Vicious (Critical Strike, Proc) [Idol of the Lunar Eclipse]
+			{spellID = 71177, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Savage Aggression (Attack Power, Mangle) [Savage Gladiator's Idol of Resolve]
+			{spellID = 60544, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Savage Magic (Spell Power, Moonfire) [Savage Gladiator's Idol of Steadfastness]
+			{spellID = 60565, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Hateful Aggression (Attack Power, Mangle) [Hateful Gladiator's Idol of Resolve]
+			{spellID = 60547, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Hateful Magic (Spell Power, Moonfire) [Hateful Gladiator's Idol of Steadfastness]
+			{spellID = 60566, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Deadly Aggression (Attack Power, Mangle) [Deadly Gladiator's Idol of Resolve]
+			{spellID = 60549, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Deadly Magic (Spell Power, Moonfire) [Deadly Gladiator's Idol of Steadfastness]
+			{spellID = 60567, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Furious Gladiator's Libram of Fortitude (Attack Power, Mangle) [Furious Gladiator's Idol of Resolve]
+			{spellID = 60551, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Furious Gladiator's Idol of Steadfastness (Spell Power, Moonfire) [Furious Gladiator's Idol of Steadfastness]
+			{spellID = 60568, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Relentless Aggression (Attack Power, Mangle) [Relentless Gladiator's Idol of Resolve]
+			{spellID = 60553, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Relentless Survival (Spell Power, Moonfire) [Relentless Gladiator's Idol of Steadfastness]
+			{spellID = 60569, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Fury of the Gladiator (Attack Power, Mangle) [Wrathful Gladiator's Idol of Resolve]
+			{spellID = 60555, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Intuition of the Gladiator (Spell Power, Moonfire) [Wrathful Gladiator's Idol of Steadfastness]
+			{spellID = 60570, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Trinkets
 			-- Class
@@ -542,7 +590,7 @@ C["filger_spells"] = {
 			-- Executioner [Enchant Weapon - Executioner]
 			{spellID = 42976, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Holy Strength (Strength) [Enchant Weapon - Crusader]
-			{spellID = 20007, unitID = "player", caster = "player", filter = "BUFF"},
+			{spellID = 20007, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Lightning Speed (Agility and Physical Attack Speed) [Enchant Weapon - Mongoose]
 			{spellID = 28093, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Lightweave [Lightweave Embroidery]
@@ -1408,7 +1456,7 @@ C["filger_spells"] = {
 			{spellID = 12043, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Item Sets
-			-- Quad Core (Increase Damage) [Bloodmage's Regalia]
+			-- Quad Core (Increase Damage, Mirror Image) [Bloodmage's Regalia]
 			{spellID = 70747, unitID = "player", caster = "player", filter = "BUFF"},
 		},
 		{
@@ -1989,11 +2037,11 @@ C["filger_spells"] = {
 			{spellID = 20053, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 
 			-- Item Sets
-			-- Aegis (Block Value) [Aegis Plate]
+			-- Aegis (Block Value, Shield of Righteousness) [Aegis Plate]
 			{spellID = 64883, unitID = "player", caster = "player", filter = "BUFF", absID = true},
-			-- Deliverance (Dodge) [Lightsworn Plate]
+			-- Deliverance (Dodge, Divine Plea) [Lightsworn Plate]
 			{spellID = 70760, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Holiness (Special) [Lightsworn Garb]
+			-- Holiness (Special, Holy Shock) [Lightsworn Garb]
 			{spellID = 70757, unitID = "player", caster = "player", filter = "BUFF"},
 		},
 		{
@@ -2028,16 +2076,48 @@ C["filger_spells"] = {
 			{spellID = 32108, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Librams
+			-- Blessed (Spell Power, Holy Shock) [Libram of Blinding Light]
+			{spellID = 71192, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Bulwark of the Lightbringer (Block Value, Judgement) [Tome of the Lightbringer]
 			{spellID = 41043, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Crusader's Command (Attack Power, Judgement of Command) [Libram of Divine Judgement]
 			{spellID = 43747, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Evasion (Dodge, Hammer of The Righteous) [Libram of Defiance]
+			{spellID = 67378, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Evasive (Dodge, Shield of Righteousness) [Libram of the Eternal Tower]
+			{spellID = 71197, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Formidable (Strength, Crusader Strike) [Libram of Three Truths]
+			{spellID = 71187, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Grace of the Naaru (Mp5, Holy Light) [Libram of Mending]
 			{spellID = 43742, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Justice (Critical Strike, JoC/JoR/JoB/JoV) [Libram of Avengement]
+			-- Holy Judgement (Spell Power, Holy Light) [Libram of Veracity]
+			{spellID = 67364, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Holy Strength (Strength, Seal of Vengeance/Seal of Corruption) [Libram of Valiance]
+			{spellID = 67371, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Increased Block (Block Value, Holy Shield) [Libram of the Sacred Shield]
+			{spellID = 65182, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Justice (Critical Strike, Judgement) [Libram of Avengement]
 			{spellID = 34260, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Libram of Obstruction (Block Value, Judgement) [Libram of Obstruction]
+			{spellID = 60795, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Libram of Reciprocation (Critical Strike, Judgement of Command) [Libram of Reciprocation]
+			{spellID = 60819, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Resilient (Resilience, Judgement/Holy Shield) [Libram of Fortitude / Libram of Vengeance]
 			{spellID = 43839, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Vengeful Justice (Critical Strike, Judgement) [Libram of Furious Blows]
+			{spellID = 48836, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Savage Aggression (Attack Power, Crusader Strike) [Savage Gladiator's Libram of Fortitude]
+			{spellID = 60544, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Hateful Aggression (Attack Power, Crusader Strike) [Hateful Gladiator's Libram of Fortitude]
+			{spellID = 60547, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Deadly Aggression (Attack Power, Crusader Strike) [Deadly Gladiator's Libram of Fortitude]
+			{spellID = 60549, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Furious Gladiator's Libram of Fortitude (Attack Power, Crusader Strike) [Furious Gladiator's Libram of Fortitude]
+			{spellID = 60551, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Relentless Aggression (Attack Power, Crusader Strike) [Relentless Gladiator's Libram of Fortitude]
+			{spellID = 60553, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Fury of the Gladiator (Attack Power, Crusader Strike) [Wrathful Gladiator's Libram of Fortitude]
+			{spellID = 60555, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Trinkets
 			-- Class
@@ -2380,7 +2460,7 @@ C["filger_spells"] = {
 			-- Executioner [Enchant Weapon - Executioner]
 			{spellID = 42976, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Holy Strength (Strength) [Enchant Weapon - Crusader]
-			{spellID = 20007, unitID = "player", caster = "player", filter = "BUFF"},
+			{spellID = 20007, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Lightning Speed (Agility and Physical Attack Speed) [Enchant Weapon - Mongoose]
 			{spellID = 28093, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Lightweave [Lightweave Embroidery]
@@ -2657,9 +2737,9 @@ C["filger_spells"] = {
 			-- {spellID = 34919, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Item Sets
-			-- Devious Mind (Haste) [Sanctification Garb]
+			-- Devious Mind (Haste, Mind Blast) [Sanctification Garb]
 			{spellID = 64907, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Disciplined Power (Spell Power) [Sanctification Regalia]
+			-- Disciplined Power (Spell Power, Power Word: Shield) [Sanctification Regalia]
 			{spellID = 64911, unitID = "player", caster = "player", filter = "BUFF"},
 		},
 		{
@@ -3381,7 +3461,7 @@ C["filger_spells"] = {
 			-- Executioner [Enchant Weapon - Executioner]
 			{spellID = 42976, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Holy Strength (Strength) [Enchant Weapon - Crusader]
-			{spellID = 20007, unitID = "player", caster = "player", filter = "BUFF"},
+			{spellID = 20007, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Lightning Speed (Agility and Physical Attack Speed) [Enchant Weapon - Mongoose]
 			{spellID = 28093, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Swordguard Embroidery [Swordguard Embroidery]
@@ -3732,9 +3812,9 @@ C["filger_spells"] = {
 			-- {spellID = 2895, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Item Sets
-			-- Elemental Rage (Increased Damage, Proc) [Frost Witch's Battlegear]
+			-- Elemental Rage (Increased Damage, Shamanistic Rage) [Frost Witch's Battlegear]
 			{spellID = 70829, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Rapid Currents (Spell Haste) [Frost Witch's Garb]
+			-- Rapid Currents (Spell Haste, Riptide) [Frost Witch's Garb]
 			{spellID = 70806, unitID = "player", caster = "player", filter = "BUFF"},
 		},
 		{
@@ -3789,10 +3869,52 @@ C["filger_spells"] = {
 			-- Totems
 			-- Elemental Strength (Attack Power, Shocks) [Stonebreaker's Totem]
 			{spellID = 43749, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Elemental Tenacity (Attack Power, Shocks) [Totem of the Tundra]
+			{spellID = 48838, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Energized (Haste, Lightning Bolt) [Skycall Totem]
 			{spellID = 43751, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Energized (Haste, Lightning Bolt) [Totem of Electrifying Wind]
+			{spellID = 67385, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Energized (Spell Power, Riptide) [Totem of the Surging Sea]
+			{spellID = 71220, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Enraged (Attack Power, Stormstrike) [Totem of the Avalanche]
+			{spellID = 71216, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Essence of the Storm (Haste, Stormstrike) [Totem of Dueling]
+			{spellID = 60766, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Furious (Haste, Flame Shock) [Bizuri's Totem of Shattered Ice]
+			{spellID = 71199, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Resilient (Resilience, Stormstrike/Shocks) [Totem of Indomitability / Totem of Survival]
 			{spellID = 43839, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Spiritual Trance (Spell Power, Chain Heal) [Totem of Calming Tides]
+			{spellID = 67388, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Totem of the Elemental Plane (Haste, Lightning Bolt) [Totem of the Elemental Plane]
+			{spellID = 60771, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Volcanic Fury (Attack Power, Lava Lash) [Totem of Quaking Earth]
+			{spellID = 67391, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Savage Aggression (Attack Power, Lava Lash) [Savage Gladiator's Totem of Indomitability]
+			{spellID = 60544, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Savage Magic (Spell Power, Shocks) [Savage Gladiator's Totem of Survival]
+			{spellID = 60565, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Hateful Aggression (Attack Power, Lava Lash) [Hateful Gladiator's Totem of Indomitability]
+			{spellID = 60547, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Hateful Magic (Spell Power, Shocks) [Hateful Gladiator's Totem of Survival]
+			{spellID = 60566, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Deadly Aggression (Attack Power, Lava Lash) [Deadly Gladiator's Totem of Indomitability]
+			{spellID = 60549, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Deadly Magic (Spell Power, Shocks) [Deadly Gladiator's Totem of Survival]
+			{spellID = 60567, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Furious Gladiator's Libram of Fortitude (Attack Power, Lava Lash) [Furious Gladiator's Totem of Indomitability]
+			{spellID = 60551, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Furious Gladiator's Idol of Steadfastness (Spell Power, Shocks) [Furious Gladiator's Totem of Survival]
+			{spellID = 60568, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Relentless Aggression (Attack Power, Lava Lash) [Relentless Gladiator's Totem of Indomitability]
+			{spellID = 60553, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Relentless Survival (Spell Power, Shocks) [Relentless Gladiator's Totem of Survival]
+			{spellID = 60569, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Fury of the Gladiator (Attack Power, Lava Lash) [Wrathful Gladiator's Totem of Indomitability]
+			{spellID = 60555, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Intuition of the Gladiator (Spell Power, Shocks) [Wrathful Gladiator's Totem of Survival]
+			{spellID = 60570, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Trinkets
 			-- Class
@@ -4077,7 +4199,7 @@ C["filger_spells"] = {
 			-- Executioner [Enchant Weapon - Executioner]
 			{spellID = 42976, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Holy Strength (Strength) [Enchant Weapon - Crusader]
-			{spellID = 20007, unitID = "player", caster = "player", filter = "BUFF"},
+			{spellID = 20007, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Lightning Speed (Agility and Physical Attack Speed) [Enchant Weapon - Mongoose]
 			{spellID = 28093, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Lightweave [Lightweave Embroidery]
@@ -4162,12 +4284,8 @@ C["filger_spells"] = {
 			{spellID = 51945, unitID = "target", caster = "player", filter = "BUFF"},
 			-- Earth Shield
 			{spellID = 974, unitID = "target", caster = "player", filter = "BUFF"},
-			-- Gladiator's Totem of the Third Wind
-			{spellID = 34132, unitID = "target", caster = "player", filter = "BUFF"},
 			-- Lightning Shield (Special, Proc) [The Ten Storms]
 			-- {spellID = 23552, unitID = "target", caster = "player", filter = "BUFF", absID = true},
-			-- Merciless Totem of the Third Wind
-			{spellID = 42371, unitID = "target", caster = "player", filter = "BUFF"},
 			-- Riptide
 			{spellID = 61295, unitID = "target", caster = "player", filter = "BUFF"},
 			-- Totemic Power (Armor, Proc) [The Earthshatterer]
@@ -4178,6 +4296,10 @@ C["filger_spells"] = {
 			{spellID = 28824, unitID = "target", caster = "player", filter = "BUFF", absID = true},
 			-- Totemic Power (Spell Power, Proc) [The Earthshatterer]
 			{spellID = 28825, unitID = "target", caster = "player", filter = "BUFF", absID = true},
+			-- Gladiator's Totem of the Third Wind
+			{spellID = 34132, unitID = "target", caster = "player", filter = "BUFF"},
+			-- Merciless Totem of the Third Wind
+			{spellID = 42371, unitID = "target", caster = "player", filter = "BUFF"},
 			-- Vengeful Totem of the Third Wind
 			{spellID = 43729, unitID = "target", caster = "player", filter = "BUFF"},
 			-- Brutal Totem of the Third Wind
@@ -4901,7 +5023,7 @@ C["filger_spells"] = {
 			{spellID = 12328, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Item Sets
-			-- Stoicism (Absorb) [Ymirjar Lord's Plate]
+			-- Stoicism (Absorb, Bloodrage) [Ymirjar Lord's Plate]
 			{spellID = 70845, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 		},
 		{
@@ -5172,7 +5294,7 @@ C["filger_spells"] = {
 			-- Executioner [Enchant Weapon - Executioner]
 			{spellID = 42976, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Holy Strength (Strength) [Enchant Weapon - Crusader]
-			{spellID = 20007, unitID = "player", caster = "player", filter = "BUFF"},
+			{spellID = 20007, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Lightning Speed (Agility and Physical Attack Speed) [Enchant Weapon - Mongoose]
 			{spellID = 28093, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Swordguard Embroidery [Swordguard Embroidery]

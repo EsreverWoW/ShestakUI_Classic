@@ -188,6 +188,8 @@ C["filger_spells"] = {
 			{spellID = 41038, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Primal Instinct (Agility, Mangle) [Idol of Terror]
 			{spellID = 43738, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Resilient (Resilience, Moonfire/Mangle) [Idol of Resolve / Idol of Steadfastness]
+			{spellID = 43839, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Trinkets
 			-- Class
@@ -3762,12 +3764,8 @@ C["filger_spells"] = {
 			{spellID = 974, unitID = "target", caster = "player", filter = "BUFF"},
 			-- Healing Way
 			{spellID = 29203, unitID = "target", caster = "player", filter = "BUFF"},
-			-- Gladiator's Totem of the Third Wind
-			{spellID = 34132, unitID = "target", caster = "player", filter = "BUFF"},
 			-- Lightning Shield (Special, Proc) [The Ten Storms]
 			-- {spellID = 23552, unitID = "target", caster = "player", filter = "BUFF", absID = true},
-			-- Merciless Totem of the Third Wind
-			{spellID = 42371, unitID = "target", caster = "player", filter = "BUFF"},
 			-- Totemic Power (Armor, Proc) [The Earthshatterer]
 			{spellID = 28827, unitID = "target", caster = "player", filter = "BUFF", absID = true},
 			-- Totemic Power (Attack Power, Proc) [The Earthshatterer]
@@ -3776,6 +3774,10 @@ C["filger_spells"] = {
 			{spellID = 28824, unitID = "target", caster = "player", filter = "BUFF", absID = true},
 			-- Totemic Power (Spell Power, Proc) [The Earthshatterer]
 			{spellID = 28825, unitID = "target", caster = "player", filter = "BUFF", absID = true},
+			-- Gladiator's Totem of the Third Wind
+			{spellID = 34132, unitID = "target", caster = "player", filter = "BUFF"},
+			-- Merciless Totem of the Third Wind
+			{spellID = 42371, unitID = "target", caster = "player", filter = "BUFF"},
 			-- Vengeful Totem of the Third Wind
 			{spellID = 43729, unitID = "target", caster = "player", filter = "BUFF"},
 			-- Brutal Totem of the Third Wind
