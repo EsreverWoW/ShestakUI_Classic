@@ -1641,6 +1641,52 @@ C["filger_spells"] = {
 			-- Unstable Power (Spell Power, Use) [Zandalarian Hero Charm]
 			{spellID = 24659, unitID = "player", caster = "player", filter = "BUFF"},
 
+			-- Healing
+			-- Accelerated Mending (Spell Power, Use) [Warp-Scarab Brooch]
+			{spellID = 33400, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Blessing of Faith (Special, Use) [Lower City Prayerbook]
+			{spellID = 37877, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Chromatic Infusion (Spell Power, Use) [Draconic Infused Emblem]
+			{spellID = 27675, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Deep Meditation (Spirit, Use) [Earring of Soulful Meditation]
+			{spellID = 40402, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Diabolic Remedy (Spell Power, Use) [Tome of Diabolic Remedy]
+			{spellID = 43710, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Endless Blessings (Spirit, Use) [Bangle of Endless Blessings]
+			{spellID = 34210, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Essence of the Martyr (Spell Power, Use) [Essence of the Martyr]
+			{spellID = 35165, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Evocation (Mana Regeneration, Use) [Glimmering Naaru Sliver]
+			{spellID = 45052, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Focused Mind (Special, Use) [Auslese's Light Channeler]
+			{spellID = 31794, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Healing of the Ages (Spell Power, Use) [Hibernation Crystal]
+			{spellID = 24998, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Healing Power (Spell Power, Use) [Heavenly Inspiration]
+			{spellID = 36347, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Holy Energy (Special, Use) [Vial of the Sunwell]
+			{spellID = 45062, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Hopped Up (Spell Power, Use) [Direbrew Hops]
+			{spellID = 51954, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Mar'li's Brain Boost (Mp5, Use) [Mar'li's Eye]
+			{spellID = 24268, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Meditation (Special, Proc) [Bangle of Endless Blessings]
+			{spellID = 38346, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Persistent Shield (Absorb, Use) [Scarab Brooch]
+			{spellID = 26467, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Power of Prayer (Spell Power, Use) [Oshu'gun Relic]
+			{spellID = 32367, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Seaspray Albatross (Mana Regeneration, Use) [Figurine - Seaspray Albatross]
+			{spellID = 46785, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Spell Haste (Haste, Proc) [Scarab of the Infinite Cycle]
+			-- {spellID = 33370, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Talasite Owl (Mana Regeneration, Use) [Figurine - Talasite Owl]
+			{spellID = 31045, unitID = "player", caster = "player", filter = "BUFF"},
+			-- The Eye of the Dead (Special, Use) [Eye of the Dead]
+			{spellID = 28780, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Wisdom (Mana Regeneration, Proc) [Memento of Tyrande]
+			{spellID = 37656, unitID = "player", caster = "player", filter = "BUFF"},
+
 			-- Helms
 			-- Arcane Might (Spell Power, Proc) [Circlet of Arcane Might]
 			{spellID = 31037, unitID = "player", caster = "player", filter = "BUFF"},
@@ -4661,6 +4707,52 @@ C["filger_spells"] = {
 			{spellID = 38348, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Unstable Power (Spell Power, Use) [Zandalarian Hero Charm]
 			{spellID = 24659, unitID = "player", caster = "player", filter = "BUFF"},
+
+			-- Healing
+			-- Accelerated Mending (Spell Power, Use) [Warp-Scarab Brooch]
+			{spellID = 33400, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Blessing of Faith (Special, Use) [Lower City Prayerbook]
+			{spellID = 37877, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Chromatic Infusion (Spell Power, Use) [Draconic Infused Emblem]
+			{spellID = 27675, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Deep Meditation (Spirit, Use) [Earring of Soulful Meditation]
+			{spellID = 40402, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Diabolic Remedy (Spell Power, Use) [Tome of Diabolic Remedy]
+			{spellID = 43710, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Endless Blessings (Spirit, Use) [Bangle of Endless Blessings]
+			{spellID = 34210, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Essence of the Martyr (Spell Power, Use) [Essence of the Martyr]
+			{spellID = 35165, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Evocation (Mana Regeneration, Use) [Glimmering Naaru Sliver]
+			{spellID = 45052, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Focused Mind (Special, Use) [Auslese's Light Channeler]
+			{spellID = 31794, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Healing of the Ages (Spell Power, Use) [Hibernation Crystal]
+			{spellID = 24998, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Healing Power (Spell Power, Use) [Heavenly Inspiration]
+			{spellID = 36347, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Holy Energy (Special, Use) [Vial of the Sunwell]
+			{spellID = 45062, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Hopped Up (Spell Power, Use) [Direbrew Hops]
+			{spellID = 51954, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Mar'li's Brain Boost (Mp5, Use) [Mar'li's Eye]
+			{spellID = 24268, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Meditation (Special, Proc) [Bangle of Endless Blessings]
+			{spellID = 38346, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Persistent Shield (Absorb, Use) [Scarab Brooch]
+			{spellID = 26467, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Power of Prayer (Spell Power, Use) [Oshu'gun Relic]
+			{spellID = 32367, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Seaspray Albatross (Mana Regeneration, Use) [Figurine - Seaspray Albatross]
+			{spellID = 46785, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Spell Haste (Haste, Proc) [Scarab of the Infinite Cycle]
+			-- {spellID = 33370, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Talasite Owl (Mana Regeneration, Use) [Figurine - Talasite Owl]
+			{spellID = 31045, unitID = "player", caster = "player", filter = "BUFF"},
+			-- The Eye of the Dead (Special, Use) [Eye of the Dead]
+			{spellID = 28780, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Wisdom (Mana Regeneration, Proc) [Memento of Tyrande]
+			{spellID = 37656, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Helms
 			-- Arcane Might (Spell Power, Proc) [Circlet of Arcane Might]
