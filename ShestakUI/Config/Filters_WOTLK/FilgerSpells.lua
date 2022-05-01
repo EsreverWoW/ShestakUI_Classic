@@ -334,7 +334,11 @@ C["filger_spells"] = {
 			-- Damage Absorb (Absorb, Use) [Arathi Basin Trinket]
 			{spellID = 25750, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Tremendous Fortitude (Health, Use) [Battlemaster]
-			{spellID = 44055, unitID = "player", caster = "player", filter = "BUFF"},
+			{spellID = 44055, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Tremendous Fortitude (Health, Use) [Battlemaster]
+			{spellID = 55915, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Tremendous Fortitude (Health, Use) [Battlemaster]
+			{spellID = 67596, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Shell of Deterrence (Absorb, Use) [Runed Fungalcap]
 			{spellID = 31771, unitID = "player", caster = "player", filter = "BUFF"},
 
@@ -357,6 +361,8 @@ C["filger_spells"] = {
 			{spellID = 28778, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Mercurial Shield (Magic Resistance, Use) [Petrified Scarab]
 			{spellID = 26464, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Platinum Disks of Swiftness (Haste, Use) [Platinum Disks of Swiftness]
+			{spellID = 64527, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Ruby Hare (Movement Speed, Use) [Figurine - Ruby Hare]
 			{spellID = 56121, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Skycaller's Swiftness (Haste, Use) [Fury of the Crimson Drake]
@@ -379,6 +385,8 @@ C["filger_spells"] = {
 			{spellID = 24575, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Dawnstone Crab (Dodge, Use) [Figurine - Dawnstone Crab]
 			{spellID = 31039, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Defender's Code (Dodge, Use) [Defender's Code]
+			{spellID = 60286, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Displacement (Defense Rating, Use) [Scarab of Displacement]
 			{spellID = 38351, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Drunken Evasiveness (Dodge, Use) [Brawler's Souvenir]
@@ -457,6 +465,10 @@ C["filger_spells"] = {
 			{spellID = 67671, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Fury of the Crashing Waves (Attack Power, Proc) [Tsunami Talisman]
 			{spellID = 42084, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Fury of the Five Flights (Attack Power, Proc) [Fury of the Five Flights]
+			{spellID = 60314, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Grim Toll (Armor Penetration, Proc) [Grim Toll]
+			{spellID = 60437, unitID = "player", caster = "player", filter = "BUFF"},
 			--[[
 			-- Haste (Haste, Use) [Abacus of Violent Odds]
 			{spellID = 33807, unitID = "player", caster = "player", filter = "BUFF", absID = true},
@@ -489,6 +501,8 @@ C["filger_spells"] = {
 			{spellID = 31047, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Oozing Wound (Critical Strike, Proc) [Death Knight's Anguish]
 			{spellID = 54697, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Platinum Disks of Battle (Attack Power, Use) [Platinum Disks of Battle]
+			{spellID = 64524, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Precise Strikes (Attack Power, Use) [Talisman of the Tundra]
 			{spellID = 48847, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Rage of the Unraveller (Attack Power, Proc) [Hourglass of the Unraveller]
@@ -535,6 +549,8 @@ C["filger_spells"] = {
 			{spellID = 46783, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Dark Iron Pipeweed (Spell Power, Use) [Dark Iron Smoking Pipe]
 			{spellID = 51953, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Dying Curse (Spell Power, Proc) [Dying Curse]
+			{spellID = 60494, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Electrical Charge (Special, Proc) [The Lightning Capacitor]
 			{spellID = 37658, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Elusive Power (Spell Power, Proc) [Abyssal Rune]
@@ -555,6 +571,8 @@ C["filger_spells"] = {
 			{spellID = 32355, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Forge Ember (Spell Power, Proc) [Forge Ember]
 			{spellID = 60479, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Illustration of the Dragon Soul (Spell Power, Proc) [Illustration of the Dragon Soul]
+			{spellID = 60486, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Infiltrator's Guile (Spell Power, Use) [Badge of the Infiltrator]
 			{spellID = 62088, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Infinite Power (Spell Power, Use) [Rune of Infinite Power]
@@ -571,6 +589,8 @@ C["filger_spells"] = {
 			{spellID = 26166, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Pagle's Broken Reel (Spell Hit, Use) [Nat Pagle's Broken Reel]
 			{spellID = 24610, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Platinum Disks of Sorcery (Spell Power, Use) [Platinum Disks of Sorcery]
+			{spellID = 64525, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Power Circle (Spell Power, Use) [Shifting Naaru Sliver]
 			{spellID = 45043, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Recurring Power (Spell Power, Proc) [Eye of Magtheridon]
@@ -855,6 +875,8 @@ C["filger_spells"] = {
 			-- Trinket Effects
 			-- Fecundity (Special, Use) [Ribbon of Sacrifice]
 			{spellID = 38333, unitID = "target", caster = "player", filter = "BUFF"},
+			-- Forethought Talisman (HoT, Proc) [Forethought Talisman]
+			{spellID = 60530, unitID = "target", caster = "player", filter = "BUFF"},
 			-- Persistent Shield (Absorb, Use) [Scarab Brooch]
 			{spellID = 26470, unitID = "target", caster = "player", filter = "BUFF", absID = true},
 			-- Regeneration (HoT, Proc) [Fel Reaver's Piston]
@@ -1165,7 +1187,11 @@ C["filger_spells"] = {
 			-- Damage Absorb (Absorb, Use) [Arathi Basin Trinket]
 			{spellID = 25750, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Tremendous Fortitude (Health, Use) [Battlemaster]
-			{spellID = 44055, unitID = "player", caster = "player", filter = "BUFF"},
+			{spellID = 44055, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Tremendous Fortitude (Health, Use) [Battlemaster]
+			{spellID = 55915, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Tremendous Fortitude (Health, Use) [Battlemaster]
+			{spellID = 67596, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Shell of Deterrence (Absorb, Use) [Runed Fungalcap]
 			{spellID = 31771, unitID = "player", caster = "player", filter = "BUFF"},
 
@@ -1188,6 +1214,8 @@ C["filger_spells"] = {
 			{spellID = 28778, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Mercurial Shield (Magic Resistance, Use) [Petrified Scarab]
 			{spellID = 26464, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Platinum Disks of Swiftness (Haste, Use) [Platinum Disks of Swiftness]
+			{spellID = 64527, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Ruby Hare (Movement Speed, Use) [Figurine - Ruby Hare]
 			{spellID = 56121, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Skycaller's Swiftness (Haste, Use) [Fury of the Crimson Drake]
@@ -1238,6 +1266,10 @@ C["filger_spells"] = {
 			{spellID = 67671, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Fury of the Crashing Waves (Attack Power, Proc) [Tsunami Talisman]
 			{spellID = 42084, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Fury of the Five Flights (Attack Power, Proc) [Fury of the Five Flights]
+			{spellID = 60314, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Grim Toll (Armor Penetration, Proc) [Grim Toll]
+			{spellID = 60437, unitID = "player", caster = "player", filter = "BUFF"},
 			--[[
 			-- Haste (Haste, Use) [Abacus of Violent Odds]
 			{spellID = 33807, unitID = "player", caster = "player", filter = "BUFF", absID = true},
@@ -1270,6 +1302,8 @@ C["filger_spells"] = {
 			{spellID = 31047, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Oozing Wound (Critical Strike, Proc) [Death Knight's Anguish]
 			{spellID = 54697, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Platinum Disks of Battle (Attack Power, Use) [Platinum Disks of Battle]
+			{spellID = 64524, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Precise Strikes (Attack Power, Use) [Talisman of the Tundra]
 			{spellID = 48847, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Rage of the Unraveller (Attack Power, Proc) [Hourglass of the Unraveller]
@@ -1789,7 +1823,11 @@ C["filger_spells"] = {
 			-- Damage Absorb (Absorb, Use) [Arathi Basin Trinket]
 			{spellID = 25750, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Tremendous Fortitude (Health, Use) [Battlemaster]
-			{spellID = 44055, unitID = "player", caster = "player", filter = "BUFF"},
+			{spellID = 44055, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Tremendous Fortitude (Health, Use) [Battlemaster]
+			{spellID = 55915, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Tremendous Fortitude (Health, Use) [Battlemaster]
+			{spellID = 67596, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Shell of Deterrence (Absorb, Use) [Runed Fungalcap]
 			{spellID = 31771, unitID = "player", caster = "player", filter = "BUFF"},
 
@@ -1812,6 +1850,8 @@ C["filger_spells"] = {
 			{spellID = 28778, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Mercurial Shield (Magic Resistance, Use) [Petrified Scarab]
 			{spellID = 26464, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Platinum Disks of Swiftness (Haste, Use) [Platinum Disks of Swiftness]
+			{spellID = 64527, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Ruby Hare (Movement Speed, Use) [Figurine - Ruby Hare]
 			{spellID = 56121, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Skycaller's Swiftness (Haste, Use) [Fury of the Crimson Drake]
@@ -1840,6 +1880,8 @@ C["filger_spells"] = {
 			{spellID = 46783, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Dark Iron Pipeweed (Spell Power, Use) [Dark Iron Smoking Pipe]
 			{spellID = 51953, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Dying Curse (Spell Power, Proc) [Dying Curse]
+			{spellID = 60494, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Electrical Charge (Special, Proc) [The Lightning Capacitor]
 			{spellID = 37658, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Elusive Power (Spell Power, Proc) [Abyssal Rune]
@@ -1860,6 +1902,8 @@ C["filger_spells"] = {
 			{spellID = 32355, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Forge Ember (Spell Power, Proc) [Forge Ember]
 			{spellID = 60479, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Illustration of the Dragon Soul (Spell Power, Proc) [Illustration of the Dragon Soul]
+			{spellID = 60486, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Infiltrator's Guile (Spell Power, Use) [Badge of the Infiltrator]
 			{spellID = 62088, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Infinite Power (Spell Power, Use) [Rune of Infinite Power]
@@ -1876,6 +1920,8 @@ C["filger_spells"] = {
 			{spellID = 26166, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Pagle's Broken Reel (Spell Hit, Use) [Nat Pagle's Broken Reel]
 			{spellID = 24610, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Platinum Disks of Sorcery (Spell Power, Use) [Platinum Disks of Sorcery]
+			{spellID = 64525, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Power Circle (Spell Power, Use) [Shifting Naaru Sliver]
 			{spellID = 45043, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Recurring Power (Spell Power, Proc) [Eye of Magtheridon]
@@ -2530,7 +2576,11 @@ C["filger_spells"] = {
 			-- Damage Absorb (Absorb, Use) [Arathi Basin Trinket]
 			{spellID = 25750, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Tremendous Fortitude (Health, Use) [Battlemaster]
-			{spellID = 44055, unitID = "player", caster = "player", filter = "BUFF"},
+			{spellID = 44055, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Tremendous Fortitude (Health, Use) [Battlemaster]
+			{spellID = 55915, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Tremendous Fortitude (Health, Use) [Battlemaster]
+			{spellID = 67596, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Shell of Deterrence (Absorb, Use) [Runed Fungalcap]
 			{spellID = 31771, unitID = "player", caster = "player", filter = "BUFF"},
 
@@ -2553,6 +2603,8 @@ C["filger_spells"] = {
 			{spellID = 28778, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Mercurial Shield (Magic Resistance, Use) [Petrified Scarab]
 			{spellID = 26464, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Platinum Disks of Swiftness (Haste, Use) [Platinum Disks of Swiftness]
+			{spellID = 64527, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Ruby Hare (Movement Speed, Use) [Figurine - Ruby Hare]
 			{spellID = 56121, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Skycaller's Swiftness (Haste, Use) [Fury of the Crimson Drake]
@@ -2577,6 +2629,8 @@ C["filger_spells"] = {
 			{spellID = 51952, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Dawnstone Crab (Dodge, Use) [Figurine - Dawnstone Crab]
 			{spellID = 31039, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Defender's Code (Dodge, Use) [Defender's Code]
+			{spellID = 60286, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Displacement (Defense Rating, Use) [Scarab of Displacement]
 			{spellID = 38351, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Drunken Evasiveness (Dodge, Use) [Brawler's Souvenir]
@@ -2607,6 +2661,8 @@ C["filger_spells"] = {
 			-- {spellID = 38325, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Resolute (Health, Use) [Offering of Sacrifice / Repelling Charge]
 			{spellID = 60180, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Rune of Repulsion (Parry, Use) [Rune of Repulsion]
+			{spellID = 60258, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Seal of the Pantheon (Armor, Use) [Seal of the Pantheon]
 			{spellID = 60214, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Tenacity (Health, Use) [Brooch of the Immortal King]
@@ -2663,6 +2719,10 @@ C["filger_spells"] = {
 			{spellID = 67671, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Fury of the Crashing Waves (Attack Power, Proc) [Tsunami Talisman]
 			{spellID = 42084, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Fury of the Five Flights (Attack Power, Proc) [Fury of the Five Flights]
+			{spellID = 60314, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Grim Toll (Armor Penetration, Proc) [Grim Toll]
+			{spellID = 60437, unitID = "player", caster = "player", filter = "BUFF"},
 			--[[
 			-- Haste (Haste, Use) [Abacus of Violent Odds]
 			{spellID = 33807, unitID = "player", caster = "player", filter = "BUFF", absID = true},
@@ -2695,6 +2755,8 @@ C["filger_spells"] = {
 			{spellID = 31047, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Oozing Wound (Critical Strike, Proc) [Death Knight's Anguish]
 			{spellID = 54697, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Platinum Disks of Battle (Attack Power, Use) [Platinum Disks of Battle]
+			{spellID = 64524, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Precise Strikes (Attack Power, Use) [Talisman of the Tundra]
 			{spellID = 48847, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Rage of the Unraveller (Attack Power, Proc) [Hourglass of the Unraveller]
@@ -2741,6 +2803,8 @@ C["filger_spells"] = {
 			{spellID = 46783, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Dark Iron Pipeweed (Spell Power, Use) [Dark Iron Smoking Pipe]
 			{spellID = 51953, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Dying Curse (Spell Power, Proc) [Dying Curse]
+			{spellID = 60494, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Electrical Charge (Special, Proc) [The Lightning Capacitor]
 			{spellID = 37658, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Elusive Power (Spell Power, Proc) [Abyssal Rune]
@@ -2761,6 +2825,8 @@ C["filger_spells"] = {
 			{spellID = 32355, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Forge Ember (Spell Power, Proc) [Forge Ember]
 			{spellID = 60479, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Illustration of the Dragon Soul (Spell Power, Proc) [Illustration of the Dragon Soul]
+			{spellID = 60486, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Infiltrator's Guile (Spell Power, Use) [Badge of the Infiltrator]
 			{spellID = 62088, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Infinite Power (Spell Power, Use) [Rune of Infinite Power]
@@ -2777,6 +2843,8 @@ C["filger_spells"] = {
 			{spellID = 26166, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Pagle's Broken Reel (Spell Hit, Use) [Nat Pagle's Broken Reel]
 			{spellID = 24610, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Platinum Disks of Sorcery (Spell Power, Use) [Platinum Disks of Sorcery]
+			{spellID = 64525, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Power Circle (Spell Power, Use) [Shifting Naaru Sliver]
 			{spellID = 45043, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Recurring Power (Spell Power, Proc) [Eye of Magtheridon]
@@ -3077,6 +3145,8 @@ C["filger_spells"] = {
 			-- Trinket Effects
 			-- Fecundity (Special, Use) [Ribbon of Sacrifice]
 			{spellID = 38333, unitID = "target", caster = "player", filter = "BUFF"},
+			-- Forethought Talisman (HoT, Proc) [Forethought Talisman]
+			{spellID = 60530, unitID = "target", caster = "player", filter = "BUFF"},
 			-- Persistent Shield (Absorb, Use) [Scarab Brooch]
 			{spellID = 26470, unitID = "target", caster = "player", filter = "BUFF", absID = true},
 			-- Regeneration (HoT, Proc) [Fel Reaver's Piston]
@@ -3344,7 +3414,11 @@ C["filger_spells"] = {
 			-- Damage Absorb (Absorb, Use) [Arathi Basin Trinket]
 			{spellID = 25750, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Tremendous Fortitude (Health, Use) [Battlemaster]
-			{spellID = 44055, unitID = "player", caster = "player", filter = "BUFF"},
+			{spellID = 44055, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Tremendous Fortitude (Health, Use) [Battlemaster]
+			{spellID = 55915, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Tremendous Fortitude (Health, Use) [Battlemaster]
+			{spellID = 67596, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Shell of Deterrence (Absorb, Use) [Runed Fungalcap]
 			{spellID = 31771, unitID = "player", caster = "player", filter = "BUFF"},
 
@@ -3367,6 +3441,8 @@ C["filger_spells"] = {
 			{spellID = 28778, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Mercurial Shield (Magic Resistance, Use) [Petrified Scarab]
 			{spellID = 26464, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Platinum Disks of Swiftness (Haste, Use) [Platinum Disks of Swiftness]
+			{spellID = 64527, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Ruby Hare (Movement Speed, Use) [Figurine - Ruby Hare]
 			{spellID = 56121, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Skycaller's Swiftness (Haste, Use) [Fury of the Crimson Drake]
@@ -3395,6 +3471,8 @@ C["filger_spells"] = {
 			{spellID = 46783, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Dark Iron Pipeweed (Spell Power, Use) [Dark Iron Smoking Pipe]
 			{spellID = 51953, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Dying Curse (Spell Power, Proc) [Dying Curse]
+			{spellID = 60494, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Electrical Charge (Special, Proc) [The Lightning Capacitor]
 			{spellID = 37658, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Elusive Power (Spell Power, Proc) [Abyssal Rune]
@@ -3415,6 +3493,8 @@ C["filger_spells"] = {
 			{spellID = 32355, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Forge Ember (Spell Power, Proc) [Forge Ember]
 			{spellID = 60479, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Illustration of the Dragon Soul (Spell Power, Proc) [Illustration of the Dragon Soul]
+			{spellID = 60486, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Infiltrator's Guile (Spell Power, Use) [Badge of the Infiltrator]
 			{spellID = 62088, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Infinite Power (Spell Power, Use) [Rune of Infinite Power]
@@ -3431,6 +3511,8 @@ C["filger_spells"] = {
 			{spellID = 26166, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Pagle's Broken Reel (Spell Hit, Use) [Nat Pagle's Broken Reel]
 			{spellID = 24610, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Platinum Disks of Sorcery (Spell Power, Use) [Platinum Disks of Sorcery]
+			{spellID = 64525, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Power Circle (Spell Power, Use) [Shifting Naaru Sliver]
 			{spellID = 45043, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Recurring Power (Spell Power, Proc) [Eye of Magtheridon]
@@ -3709,6 +3791,8 @@ C["filger_spells"] = {
 			-- Trinket Effects
 			-- Fecundity (Special, Use) [Ribbon of Sacrifice]
 			{spellID = 38333, unitID = "target", caster = "player", filter = "BUFF"},
+			-- Forethought Talisman (HoT, Proc) [Forethought Talisman]
+			{spellID = 60530, unitID = "target", caster = "player", filter = "BUFF"},
 			-- Persistent Shield (Absorb, Use) [Scarab Brooch]
 			{spellID = 26470, unitID = "target", caster = "player", filter = "BUFF", absID = true},
 			-- Regeneration (HoT, Proc) [Fel Reaver's Piston]
@@ -3951,7 +4035,11 @@ C["filger_spells"] = {
 			-- Damage Absorb (Absorb, Use) [Arathi Basin Trinket]
 			{spellID = 25750, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Tremendous Fortitude (Health, Use) [Battlemaster]
-			{spellID = 44055, unitID = "player", caster = "player", filter = "BUFF"},
+			{spellID = 44055, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Tremendous Fortitude (Health, Use) [Battlemaster]
+			{spellID = 55915, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Tremendous Fortitude (Health, Use) [Battlemaster]
+			{spellID = 67596, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Shell of Deterrence (Absorb, Use) [Runed Fungalcap]
 			{spellID = 31771, unitID = "player", caster = "player", filter = "BUFF"},
 
@@ -3974,6 +4062,8 @@ C["filger_spells"] = {
 			{spellID = 28778, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Mercurial Shield (Magic Resistance, Use) [Petrified Scarab]
 			{spellID = 26464, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Platinum Disks of Swiftness (Haste, Use) [Platinum Disks of Swiftness]
+			{spellID = 64527, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Ruby Hare (Movement Speed, Use) [Figurine - Ruby Hare]
 			{spellID = 56121, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Skycaller's Swiftness (Haste, Use) [Fury of the Crimson Drake]
@@ -4024,6 +4114,10 @@ C["filger_spells"] = {
 			{spellID = 67671, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Fury of the Crashing Waves (Attack Power, Proc) [Tsunami Talisman]
 			{spellID = 42084, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Fury of the Five Flights (Attack Power, Proc) [Fury of the Five Flights]
+			{spellID = 60314, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Grim Toll (Armor Penetration, Proc) [Grim Toll]
+			{spellID = 60437, unitID = "player", caster = "player", filter = "BUFF"},
 			--[[
 			-- Haste (Haste, Use) [Abacus of Violent Odds]
 			{spellID = 33807, unitID = "player", caster = "player", filter = "BUFF", absID = true},
@@ -4056,6 +4150,8 @@ C["filger_spells"] = {
 			{spellID = 31047, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Oozing Wound (Critical Strike, Proc) [Death Knight's Anguish]
 			{spellID = 54697, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Platinum Disks of Battle (Attack Power, Use) [Platinum Disks of Battle]
+			{spellID = 64524, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Precise Strikes (Attack Power, Use) [Talisman of the Tundra]
 			{spellID = 48847, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Rage of the Unraveller (Attack Power, Proc) [Hourglass of the Unraveller]
@@ -4629,7 +4725,11 @@ C["filger_spells"] = {
 			-- Damage Absorb (Absorb, Use) [Arathi Basin Trinket]
 			{spellID = 25750, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Tremendous Fortitude (Health, Use) [Battlemaster]
-			{spellID = 44055, unitID = "player", caster = "player", filter = "BUFF"},
+			{spellID = 44055, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Tremendous Fortitude (Health, Use) [Battlemaster]
+			{spellID = 55915, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Tremendous Fortitude (Health, Use) [Battlemaster]
+			{spellID = 67596, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Shell of Deterrence (Absorb, Use) [Runed Fungalcap]
 			{spellID = 31771, unitID = "player", caster = "player", filter = "BUFF"},
 
@@ -4652,6 +4752,8 @@ C["filger_spells"] = {
 			{spellID = 28778, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Mercurial Shield (Magic Resistance, Use) [Petrified Scarab]
 			{spellID = 26464, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Platinum Disks of Swiftness (Haste, Use) [Platinum Disks of Swiftness]
+			{spellID = 64527, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Ruby Hare (Movement Speed, Use) [Figurine - Ruby Hare]
 			{spellID = 56121, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Skycaller's Swiftness (Haste, Use) [Fury of the Crimson Drake]
@@ -4702,6 +4804,10 @@ C["filger_spells"] = {
 			{spellID = 67671, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Fury of the Crashing Waves (Attack Power, Proc) [Tsunami Talisman]
 			{spellID = 42084, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Fury of the Five Flights (Attack Power, Proc) [Fury of the Five Flights]
+			{spellID = 60314, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Grim Toll (Armor Penetration, Proc) [Grim Toll]
+			{spellID = 60437, unitID = "player", caster = "player", filter = "BUFF"},
 			--[[
 			-- Haste (Haste, Use) [Abacus of Violent Odds]
 			{spellID = 33807, unitID = "player", caster = "player", filter = "BUFF", absID = true},
@@ -4734,6 +4840,8 @@ C["filger_spells"] = {
 			{spellID = 31047, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Oozing Wound (Critical Strike, Proc) [Death Knight's Anguish]
 			{spellID = 54697, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Platinum Disks of Battle (Attack Power, Use) [Platinum Disks of Battle]
+			{spellID = 64524, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Precise Strikes (Attack Power, Use) [Talisman of the Tundra]
 			{spellID = 48847, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Rage of the Unraveller (Attack Power, Proc) [Hourglass of the Unraveller]
@@ -4780,6 +4888,8 @@ C["filger_spells"] = {
 			{spellID = 46783, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Dark Iron Pipeweed (Spell Power, Use) [Dark Iron Smoking Pipe]
 			{spellID = 51953, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Dying Curse (Spell Power, Proc) [Dying Curse]
+			{spellID = 60494, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Electrical Charge (Special, Proc) [The Lightning Capacitor]
 			{spellID = 37658, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Elusive Power (Spell Power, Proc) [Abyssal Rune]
@@ -4800,6 +4910,8 @@ C["filger_spells"] = {
 			{spellID = 32355, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Forge Ember (Spell Power, Proc) [Forge Ember]
 			{spellID = 60479, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Illustration of the Dragon Soul (Spell Power, Proc) [Illustration of the Dragon Soul]
+			{spellID = 60486, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Infiltrator's Guile (Spell Power, Use) [Badge of the Infiltrator]
 			{spellID = 62088, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Infinite Power (Spell Power, Use) [Rune of Infinite Power]
@@ -4816,6 +4928,8 @@ C["filger_spells"] = {
 			{spellID = 26166, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Pagle's Broken Reel (Spell Hit, Use) [Nat Pagle's Broken Reel]
 			{spellID = 24610, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Platinum Disks of Sorcery (Spell Power, Use) [Platinum Disks of Sorcery]
+			{spellID = 64525, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Power Circle (Spell Power, Use) [Shifting Naaru Sliver]
 			{spellID = 45043, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Recurring Power (Spell Power, Proc) [Eye of Magtheridon]
@@ -5098,6 +5212,8 @@ C["filger_spells"] = {
 			-- Trinket Effects
 			-- Fecundity (Special, Use) [Ribbon of Sacrifice]
 			{spellID = 38333, unitID = "target", caster = "player", filter = "BUFF"},
+			-- Forethought Talisman (HoT, Proc) [Forethought Talisman]
+			{spellID = 60530, unitID = "target", caster = "player", filter = "BUFF"},
 			-- Persistent Shield (Absorb, Use) [Scarab Brooch]
 			{spellID = 26470, unitID = "target", caster = "player", filter = "BUFF", absID = true},
 			-- Regeneration (HoT, Proc) [Fel Reaver's Piston]
@@ -5386,7 +5502,11 @@ C["filger_spells"] = {
 			-- Damage Absorb (Absorb, Use) [Arathi Basin Trinket]
 			{spellID = 25750, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Tremendous Fortitude (Health, Use) [Battlemaster]
-			{spellID = 44055, unitID = "player", caster = "player", filter = "BUFF"},
+			{spellID = 44055, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Tremendous Fortitude (Health, Use) [Battlemaster]
+			{spellID = 55915, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Tremendous Fortitude (Health, Use) [Battlemaster]
+			{spellID = 67596, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Shell of Deterrence (Absorb, Use) [Runed Fungalcap]
 			{spellID = 31771, unitID = "player", caster = "player", filter = "BUFF"},
 
@@ -5409,6 +5529,8 @@ C["filger_spells"] = {
 			{spellID = 28778, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Mercurial Shield (Magic Resistance, Use) [Petrified Scarab]
 			{spellID = 26464, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Platinum Disks of Swiftness (Haste, Use) [Platinum Disks of Swiftness]
+			{spellID = 64527, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Ruby Hare (Movement Speed, Use) [Figurine - Ruby Hare]
 			{spellID = 56121, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Skycaller's Swiftness (Haste, Use) [Fury of the Crimson Drake]
@@ -5437,6 +5559,8 @@ C["filger_spells"] = {
 			{spellID = 46783, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Dark Iron Pipeweed (Spell Power, Use) [Dark Iron Smoking Pipe]
 			{spellID = 51953, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Dying Curse (Spell Power, Proc) [Dying Curse]
+			{spellID = 60494, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Electrical Charge (Special, Proc) [The Lightning Capacitor]
 			{spellID = 37658, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Elusive Power (Spell Power, Proc) [Abyssal Rune]
@@ -5457,6 +5581,8 @@ C["filger_spells"] = {
 			{spellID = 32355, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Forge Ember (Spell Power, Proc) [Forge Ember]
 			{spellID = 60479, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Illustration of the Dragon Soul (Spell Power, Proc) [Illustration of the Dragon Soul]
+			{spellID = 60486, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Infiltrator's Guile (Spell Power, Use) [Badge of the Infiltrator]
 			{spellID = 62088, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Infinite Power (Spell Power, Use) [Rune of Infinite Power]
@@ -5473,6 +5599,8 @@ C["filger_spells"] = {
 			{spellID = 26166, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Pagle's Broken Reel (Spell Hit, Use) [Nat Pagle's Broken Reel]
 			{spellID = 24610, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Platinum Disks of Sorcery (Spell Power, Use) [Platinum Disks of Sorcery]
+			{spellID = 64525, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Power Circle (Spell Power, Use) [Shifting Naaru Sliver]
 			{spellID = 45043, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Recurring Power (Spell Power, Proc) [Eye of Magtheridon]
@@ -6054,7 +6182,11 @@ C["filger_spells"] = {
 			-- Damage Absorb (Absorb, Use) [Arathi Basin Trinket]
 			{spellID = 25750, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Tremendous Fortitude (Health, Use) [Battlemaster]
-			{spellID = 44055, unitID = "player", caster = "player", filter = "BUFF"},
+			{spellID = 44055, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Tremendous Fortitude (Health, Use) [Battlemaster]
+			{spellID = 55915, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Tremendous Fortitude (Health, Use) [Battlemaster]
+			{spellID = 67596, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Shell of Deterrence (Absorb, Use) [Runed Fungalcap]
 			{spellID = 31771, unitID = "player", caster = "player", filter = "BUFF"},
 
@@ -6077,6 +6209,8 @@ C["filger_spells"] = {
 			{spellID = 28778, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Mercurial Shield (Magic Resistance, Use) [Petrified Scarab]
 			{spellID = 26464, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Platinum Disks of Swiftness (Haste, Use) [Platinum Disks of Swiftness]
+			{spellID = 64527, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Ruby Hare (Movement Speed, Use) [Figurine - Ruby Hare]
 			{spellID = 56121, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Skycaller's Swiftness (Haste, Use) [Fury of the Crimson Drake]
@@ -6101,6 +6235,8 @@ C["filger_spells"] = {
 			{spellID = 51952, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Dawnstone Crab (Dodge, Use) [Figurine - Dawnstone Crab]
 			{spellID = 31039, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Defender's Code (Dodge, Use) [Defender's Code]
+			{spellID = 60286, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Displacement (Defense Rating, Use) [Scarab of Displacement]
 			{spellID = 38351, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Drunken Evasiveness (Dodge, Use) [Brawler's Souvenir]
@@ -6131,6 +6267,8 @@ C["filger_spells"] = {
 			-- {spellID = 38325, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Resolute (Health, Use) [Offering of Sacrifice / Repelling Charge]
 			{spellID = 60180, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Rune of Repulsion (Parry, Use) [Rune of Repulsion]
+			{spellID = 60258, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Seal of the Pantheon (Armor, Use) [Seal of the Pantheon]
 			{spellID = 60214, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Tenacity (Health, Use) [Brooch of the Immortal King]
@@ -6187,6 +6325,10 @@ C["filger_spells"] = {
 			{spellID = 67671, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Fury of the Crashing Waves (Attack Power, Proc) [Tsunami Talisman]
 			{spellID = 42084, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Fury of the Five Flights (Attack Power, Proc) [Fury of the Five Flights]
+			{spellID = 60314, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Grim Toll (Armor Penetration, Proc) [Grim Toll]
+			{spellID = 60437, unitID = "player", caster = "player", filter = "BUFF"},
 			--[[
 			-- Haste (Haste, Use) [Abacus of Violent Odds]
 			{spellID = 33807, unitID = "player", caster = "player", filter = "BUFF", absID = true},
@@ -6219,6 +6361,8 @@ C["filger_spells"] = {
 			{spellID = 31047, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Oozing Wound (Critical Strike, Proc) [Death Knight's Anguish]
 			{spellID = 54697, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Platinum Disks of Battle (Attack Power, Use) [Platinum Disks of Battle]
+			{spellID = 64524, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Precise Strikes (Attack Power, Use) [Talisman of the Tundra]
 			{spellID = 48847, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Rage of the Unraveller (Attack Power, Proc) [Hourglass of the Unraveller]
