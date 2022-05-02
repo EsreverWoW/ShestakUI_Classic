@@ -155,7 +155,8 @@ T.ArenaControl = {
 	[SpellName(31884)] = 1,		-- Avenging Wrath
 	[SpellName(1044)] = 1,		-- Hand of Freedom
 	[SpellName(1022)] = 1,		-- Hand of Protection
-	[SpellName(6940)] = 1,		-- Hand of Sacrifice
+	[SpellName(1038)] = 1,		-- Hand of Sacrifice
+	[SpellName(6940)] = 1,		-- Hand of Salvation
 	[SpellName(20216)] = 1,		-- Divine Favor
 	[SpellName(31842)] = 1,		-- Divine Illumination
 	-- Priest

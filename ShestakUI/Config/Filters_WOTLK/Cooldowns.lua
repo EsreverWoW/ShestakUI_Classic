@@ -83,6 +83,7 @@ if C.raidcooldown.enable == true then
 		{16190, 300},	-- Mana Tide Totem
 		-- Other
 		{34477, 30},	-- Misdirection
+		{1038, 120},	-- Hand of Salvation
 		{6346, 180},	-- Fear Ward (180sec base / -60sec from glyph)
 		{10060, 120},	-- Power Infusion (120sec base / -24sec from talents)
 		{57934, 30},	-- Tricks of the Trade (30sec base / -10sec from talents)
@@ -144,6 +145,7 @@ if C.enemycooldown.enable == true then
 		{66, 60},		-- Invisibility (180sec base / -120sec from talents)
 		{1044, 25},		-- Hand of Freedom (25sec base / -4sec from talents)
 		{6940, 120},	-- Hand of Sacrifice
+		{1038, 120},	-- Hand of Salvation
 		{1022, 180},	-- Hand of Protection (300sec base / -120sec from talents)
 		{498, 180},		-- Divine Protection (180sec base / -60sec from talents / -30sec from 4pc T9)
 		{642, 300},		-- Divine Shield (300sec base / -60sec from talents)

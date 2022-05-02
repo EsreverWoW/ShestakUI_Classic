@@ -4476,6 +4476,8 @@ C["filger_spells"] = {
 			{spellID = 62124, filter = "CD"},
 			-- Hand of Sacrifice
 			{spellID = 6940, filter = "CD"},
+			-- Hand of Salvation
+			{spellID = 1038, filter = "CD"},
 			-- Hammer of Justice
 			{spellID = 853, filter = "CD"},
 			-- Hammer of the Righteous
@@ -8805,6 +8807,8 @@ C["filger_spells"] = {
 			{spellID = 46946, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Vigilance
 			{spellID = 50720, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Hand of Salvation
+			{spellID = 1038, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Drums of Restoration
 			{spellID = 35478, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Drums of Speed

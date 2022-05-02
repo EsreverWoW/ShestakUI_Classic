@@ -439,6 +439,7 @@ T.BuffWhiteList = {
 	[SpellName(1044)] = true,	-- Hand of Freedom
 	[SpellName(1022)] = true,	-- Hand of Protection
 	[SpellName(6940)] = true,	-- Hand of Sacrifice
+	[SpellName(1038)] = true,	-- Hand of Salvation
 	[SpellName(64891)] = true,	-- Holy Mending
 	[SpellName(20925)] = true,	-- Holy Shield
 	-- [SpellName(53672)] = true,	-- Infusion of Light
