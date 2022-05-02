@@ -18,9 +18,23 @@ end
 
 T.DebuffWhiteList = {
 	-- Death Knight
+	[SpellName(55078)] = true,	-- Blood Plague
+	[SpellName(53534)] = true,	-- Chains of Ice
+	[SpellName(50508)] = true,	-- Crypt Fever
+	[SpellName(56222)] = true,	-- Dark Command
+	[SpellName(43265)] = true,	-- Death and Decay
+	[SpellName(57603)] = true,	-- Death Grip
+	[SpellName(55741)] = true,	-- Desecration
+	[SpellName(51726)] = true,	-- Ebon Plague
+	[SpellName(55095)] = true,	-- Frost Fever
 	[SpellName(47481)] = true,	-- Gnaw (Ghoul)
 	[SpellName(49203)] = true,	-- Hungering Cold
-	[SpellName(49913)] = true,	-- Strangulate
+	[SpellName(50434)] = true,	-- Icy Clutch (Chilblains)
+	[SpellName(49005)] = true,	-- Mark of Blood
+	[SpellName(47476)] = true,	-- Strangulate
+	[SpellName(49206)] = true,	-- Summon Gargoyle
+	[SpellName(50536)] = true,	-- Unholy Blight
+	[SpellName(3439)] = true,	-- Wandering Plague
 	-- Druid
 	[SpellName(5211)] = true,	-- Bash
 	[SpellName(16922)] = true,	-- Celestial Focus (Starfire Stun)
@@ -284,6 +298,29 @@ T.DebuffBlackList = {
 }
 
 T.BuffWhiteList = {
+	-- Death Knight
+	-- [SpellName(53137)] = true,	-- Abomination's Might
+	[SpellName(48707)] = true,	-- Anti-Magic Shell
+	[SpellName(50461)] = true,	-- Anti-Magic Zone
+	[SpellName(42650)] = true,	-- Army of the Dead
+	-- [SpellName(51789)] = true,	-- Blade Barrier
+	[SpellName(50447)] = true,	-- Bloody Vengeance
+	[SpellName(49222)] = true,	-- Bone Shield
+	[SpellName(49028)] = true,	-- Dancing Rune Weapon
+	[SpellName(49796)] = true,	-- Deathchill
+	[SpellName(63583)] = true,	-- Desolation
+	[SpellName(59052)] = true,	-- Freezing Fog (Rime)
+	[SpellName(63560)] = true,	-- Ghoul Frenzy (Ghoul)
+	[SpellName(48792)] = true,	-- Icebound Fortitude
+	-- [SpellName(50882)] = true,	-- Icy Talons
+	-- [SpellName(55610)] = true,	-- Improved Icy Talons
+	[SpellName(51124)] = true,	-- Killing Machine
+	[SpellName(49039)] = true,	-- Lichborne
+	[SpellName(50421)] = true,	-- Scent of Blood
+	[SpellName(61777)] = true,	-- Summon Gargoyle
+	[SpellName(51271)] = true,	-- Unbreakable Armor
+	[SpellName(55233)] = true,	-- Vampiric Blood
+
 	-- Druid
 	[SpellName(2893)] = true,	-- Abolish Poison
 	[SpellName(22812)] = true,	-- Barkskin

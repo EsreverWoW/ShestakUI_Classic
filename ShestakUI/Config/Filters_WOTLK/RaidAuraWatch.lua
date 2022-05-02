@@ -675,9 +675,10 @@ T.RaidDebuffs = {
 if C.raidframe.plugins_pvp_debuffs == true then
 	local PvPDebuffs = {
 		-- Death Knight
+		[SpellName(53534)] = 2,		-- Chains of Ice
 		[SpellName(47481)] = 3,		-- Gnaw (Ghoul)
 		[SpellName(49203)] = 3,		-- Hungering Cold
-		[SpellName(49913)] = 3,		-- Strangulate
+		[SpellName(47476)] = 3,		-- Strangulate
 		-- Druid
 		[SpellName(5211)] = 3,		-- Bash
 		[SpellName(16922)] = 3,		-- Celestial Focus

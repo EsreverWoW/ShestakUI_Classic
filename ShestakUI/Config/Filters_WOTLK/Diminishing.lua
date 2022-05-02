@@ -151,6 +151,7 @@ T.DiminishingSpells = {
 	[31117] = {"ua"},				-- Unstable Affliction (Silence)
 
 	-- Roots
+	[53534] = {"root"},				-- Chains of Ice
 	-- [16979] = {"root"},				-- Feral Charge - Bear
 	[339] = {"root"},				-- Entangling Roots r1
 	[1062] = {"root"},				-- Entangling Roots r2
@@ -199,7 +200,7 @@ T.DiminishingSpells = {
 
 	--[[
 	-- Silences
-	[49913] = {"silence"},			-- Strangulate
+	[47476] = {"silence"},			-- Strangulate
 	[34490] = {"silence"},			-- Silencing Shot
 	[18469] = {"silence"},			-- Counterspell - Silenced
 	[63529] = {"silence"},			-- Silenced - Shield of the Templar

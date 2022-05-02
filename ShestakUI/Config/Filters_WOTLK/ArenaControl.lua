@@ -86,7 +86,7 @@ T.ArenaControl = {
 	[SpellName(20549)] = 5,		-- War Stomp
 
 	-- Silences
-	[SpellName(49913)] = 4,		-- Strangulate
+	[SpellName(47476)] = 4,		-- Strangulate
 	[SpellName(34490)] = 4,		-- Silencing Shot
 	[SpellName(18469)] = 4,		-- Counterspell - Silenced
 	[SpellName(63529)] = 4,		-- Silenced - Shield of the Templar
@@ -102,6 +102,7 @@ T.ArenaControl = {
 	[SpellName(32747)] = 4,		-- Deadly Throw Interrupt
 
 	-- Roots
+	[SpellName(53534)] = 3,		-- Chains of Ice
 	[SpellName(16979)] = 3,		-- Feral Charge - Bear
 	[SpellName(25999)] = 3,		-- Charge (Boar)
 	[SpellName(339)] = 3,		-- Entangling Roots
@@ -125,6 +126,13 @@ T.ArenaControl = {
 	[SpellName(642)] = 2,		-- Divine Shield
 
 	-- Buffs
+	-- Death Knight
+	[SpellName(49028)] = 1,		-- Dancing Rune Weapon
+	[SpellName(49796)] = 1,		-- Deathchill
+	[SpellName(63560)] = 1,		-- Ghoul Frenzy (Ghoul)
+	[SpellName(49039)] = 1,		-- Lichborne
+	[SpellName(61777)] = 1,		-- Summon Gargoyle
+	[SpellName(51271)] = 1,		-- Unbreakable Armor
 	-- Druid
 	[SpellName(50334)] = 1,		-- Berserk
 	[SpellName(29166)] = 1,		-- Innervate
@@ -186,6 +194,11 @@ T.ArenaControl = {
 	[SpellName(7744)] = 1,		-- Will of the Forsaken
 
 	-- Defense abilities
+	[SpellName(48707)] = 1,		-- Anti-Magic Shell
+	[SpellName(51052)] = 1,		-- Anti-Magic Zone
+	[SpellName(49222)] = 1,		-- Bone Shield
+	[SpellName(48792)] = 1,		-- Icebound Fortitude
+	[SpellName(55233)] = 1,		-- Vampiric Blood
 	[SpellName(22812)] = 1,		-- Barkskin
 	[SpellName(19263)] = 1,		-- Deterrence
 	[SpellName(66)] = 1,		-- Invisibility

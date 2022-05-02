@@ -46,6 +46,11 @@ if C.raidcooldown.enable == true then
 		{48086, 180},	-- Lightwell r5
 		{48087, 180},	-- Lightwell r6
 		-- Defense
+		{48707, 45},	-- Anti-Magic Shell
+		{51052, 180},	-- Anti-Magic Zone
+		{42650, 600},	-- Army of the Dead
+		{49222, 60},	-- Bone Shield (60sec base / -10sec from 4pc T9)
+		{48792, 120},	-- Icebound Fortitude
 		{61336, 180},	-- Survival Instincts
 		{31821, 120},	-- Aura Mastery
 		{64205, 120},	-- Divine Sacrifice
@@ -100,7 +105,7 @@ end
 if C.enemycooldown.enable == true then
 	T.enemy_spells = {
 		-- Interrupts and Silences
-		{49913, 100},	-- Strangulate (120sec base / -20sec from glyph)
+		{47476, 100},	-- Strangulate (120sec base / -20sec from glyph)
 		{34490, 20},	-- Silencing Shot
 		{2139, 24},		-- Counterspell (24sec base / -2sec from ZG neck)
 		{63529, 30},	-- Silenced - Shield of the Templar
@@ -127,6 +132,12 @@ if C.enemycooldown.enable == true then
 		{12809, 30},	-- Concussion Blow
 		{46968, 17},	-- Shockwave (20sec base / -3sec from glyph)
 		-- Defense abilities
+		{48707, 45},	-- Anti-Magic Shell
+		{51052, 180},	-- Anti-Magic Zone
+		{49222, 60},	-- Bone Shield (60sec base / -10sec from 4pc T9)
+		{48792, 120},	-- Icebound Fortitude
+		{51271, 60},	-- Unbreakable Armor (60sec base / -10sec from 4pc T9)
+		{55233, 60},	-- Vampiric Blood (60sec base / -10sec from 4pc T9)
 		{22812, 60},	-- Barkskin (60sec base / -12sec from 4pc T9)
 		{19263, 50},	-- Deterrence (60sec base / -10sec from glyph)
 		{45438, 240},	-- Ice Block (300sec base / -60sec from talents / -40sec from 4pc T4)

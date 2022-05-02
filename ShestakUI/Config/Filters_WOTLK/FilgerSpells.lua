@@ -134,6 +134,37 @@ C["filger_spells"] = {
 			Alpha = 1,
 			IconSize = C.filger.buffs_size,
 			Position = {"TOP", P_BUFF_ICON_Anchor},
+
+			-- Abomination's Might
+			-- {spellID = 53137, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Anti-Magic Shell
+			{spellID = 48707, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Bloody Vengeance
+			{spellID = 50447, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Bone Shield
+			{spellID = 49222, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Dancing Rune Weapon
+			{spellID = 49028, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Deathchill
+			{spellID = 49796, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Desolation
+			{spellID = 63583, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Ghoul Frenzy
+			{spellID = 63560, unitID = "pet", caster = "player", filter = "BUFF"},
+			-- Icebound Fortitude
+			{spellID = 48792, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Icy Talons
+			-- {spellID = 50882, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Improved Icy Talons
+			-- {spellID = 55610, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Lichborne
+			{spellID = 49039, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Summon Gargoyle
+			{spellID = 61777, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Unbreakable Armor
+			{spellID = 51271, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Vampiric Blood
+			{spellID = 55233, unitID = "player", caster = "player", filter = "BUFF"},
 		},
 		{
 			Name = "P_PROC_ICON",
@@ -145,6 +176,26 @@ C["filger_spells"] = {
 			Position = {"TOP", P_PROC_ICON_Anchor},
 
 			-- Buffs
+			-- Acclimation (Arcane)
+			{spellID = 50486, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Acclimation (Fire)
+			{spellID = 50362, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Acclimation (Frost)
+			{spellID = 50485, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Acclimation (Nature)
+			{spellID = 50488, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Acclimation (Shadow)
+			{spellID = 50489, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Acclimation (Holy)
+			{spellID = 50490, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Blade Barrier
+			{spellID = 51789, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Freezing Fog (Rime)
+			{spellID = 59052, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Killing Machine
+			{spellID = 51124, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Scent of Blood
+			{spellID = 50421, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Item Sets
 			-- Heroic Resolution (Attack Power, Proc) [Desolation Battlegear / Doomplate Battlegear / Wastewalker Armor]
@@ -580,6 +631,39 @@ C["filger_spells"] = {
 			IconSize = C.filger.buffs_size,
 			Position = {"TOP", T_DEBUFF_ICON_Anchor},
 
+			-- Blood Plague
+			{spellID = 55078, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Crypt Fever
+			{spellID = 50508, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Chains of Ice
+			{spellID = 53534, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Dark Command
+			{spellID = 56222, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Death and Decay
+			{spellID = 43265, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Death Grip
+			{spellID = 57603, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Desecration
+			{spellID = 55741, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Ebon Plague
+			{spellID = 51726, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Frost Fever
+			{spellID = 55095, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Gnaw (Ghoul)
+			{spellID = 47481, unitID = "target", caster = "all", filter = "DEBUFF"},
+			-- Hungering Cold
+			{spellID = 49203, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Icy Clutch (Chilblains)
+			{spellID = 50434, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Mark of Blood
+			{spellID = 49005, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Strangulate
+			{spellID = 47476, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Summon Gargoyle
+			{spellID = 49206, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Unholy Blight
+			{spellID = 50536, unitID = "target", caster = "player", filter = "DEBUFF"},
+
 			-- Trinket Effects
 			-- Searing Flames (DoT, Proc) [Purified Shard of the Gods / Shiny Shard of the Gods]
 			{spellID = 69729, unitID = "target", caster = "player", filter = "DEBUFF"},
@@ -632,6 +716,54 @@ C["filger_spells"] = {
 			Position = {"TOP", COOLDOWN_Anchor},
 
 			-- Self
+			-- Anti-Magic Shell
+			{spellID = 51052, filter = "CD"},
+			-- Anti-Magic Zone
+			{spellID = 51052, filter = "CD"},
+			-- Army of the Dead
+			{spellID = 42650, filter = "CD"},
+			-- Bone Shield
+			{spellID = 49222, filter = "CD"},
+			-- Corpse Explosion
+			{spellID = 49158, filter = "CD"},
+			-- Dancing Rune Weapon
+			{spellID = 49028, filter = "CD"},
+			-- Dark Command
+			{spellID = 56222, filter = "CD"},
+			-- Death and Decay
+			{spellID = 43265, filter = "CD"},
+			-- Death Grip
+			{spellID = 57602, filter = "CD"},
+			-- Deathchill
+			{spellID = 49796, filter = "CD"},
+			-- Ghoul Frenzy
+			{spellID = 63560, filter = "CD"},
+			-- Horn of Winter
+			{spellID = 57330, filter = "CD"},
+			-- Howling Blast
+			{spellID = 49184, filter = "CD"},
+			-- Hungering Cold
+			{spellID = 49203, filter = "CD"},
+			-- Hysteria
+			{spellID = 49016, filter = "CD"},
+			-- Icebound Fortitude
+			{spellID = 48792, filter = "CD"},
+			-- Lichborne
+			{spellID = 49039, filter = "CD"},
+			-- Mark of Blood
+			{spellID = 49005, filter = "CD"},
+			-- Raise Ally
+			{spellID = 61999, filter = "CD"},
+			-- Raise Dead
+			{spellID = 46584, filter = "CD"},
+			-- Rune Tap
+			{spellID = 48982, filter = "CD"},
+			-- Summon Gargoyle
+			{spellID = 49206, filter = "CD"},
+			-- Unbreakable Armor
+			{spellID = 51271, filter = "CD"},
+			-- Vampiric Blood
+			{spellID = 55233, filter = "CD"},
 
 			-- Racial
 			-- Arcane Torrent (Runic Power)
@@ -8599,6 +8731,8 @@ C["filger_spells"] = {
 			{spellID = 23538, unitID = "player", caster = "all", filter = "BUFF", absID = true},
 
 			-- Damage Reduction
+			-- Anti-Magic Zone
+			{spellID = 50461, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Aura Mastery
 			{spellID = 31821, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Divine Guardian
@@ -8629,6 +8763,8 @@ C["filger_spells"] = {
 			{spellID = 8178, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Divine Intervention
 			{spellID = 19752, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Hysteria
+			{spellID = 49016, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Focus Magic
 			-- {spellID = 54646, unitID = "player", caster = "all", filter = "BUFF", absID = true},
 			-- Slow Fall
@@ -8933,6 +9069,8 @@ C["filger_spells"] = {
 			{spellID = 32747, unitID = "player", caster = "all", filter = "DEBUFF"},
 
 			-- Roots
+			-- Chains of Ice
+			{spellID = 53534, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Entangling Roots r1
 			{spellID = 339, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
 			-- Entangling Roots r2
@@ -8991,6 +9129,10 @@ C["filger_spells"] = {
 			{spellID = 23694, unitID = "player", caster = "all", filter = "DEBUFF"},
 
 			-- Slows
+			-- Desecration
+			{spellID = 55741, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- Icy Clutch (Chilblains)
+			{spellID = 50434, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Concussive Barrage
 			{spellID = 35101, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Concussive Shot
