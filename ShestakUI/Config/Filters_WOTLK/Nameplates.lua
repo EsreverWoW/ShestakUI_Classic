@@ -311,6 +311,7 @@ T.BuffWhiteList = {
 	[SpellName(63583)] = true,	-- Desolation
 	[SpellName(59052)] = true,	-- Freezing Fog (Rime)
 	[SpellName(63560)] = true,	-- Ghoul Frenzy (Ghoul)
+	[SpellName(57330)] = true,	-- Horn of Winter
 	[SpellName(48792)] = true,	-- Icebound Fortitude
 	-- [SpellName(50882)] = true,	-- Icy Talons
 	-- [SpellName(55610)] = true,	-- Improved Icy Talons

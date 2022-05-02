@@ -768,6 +768,8 @@ C["filger_spells"] = {
 			{spellID = 46584, filter = "CD"},
 			-- Rune Tap
 			{spellID = 48982, filter = "CD"},
+			-- Strangulate
+			{spellID = 47476, filter = "CD"},
 			-- Summon Gargoyle
 			{spellID = 49206, filter = "CD"},
 			-- Unbreakable Armor
@@ -8846,6 +8848,12 @@ C["filger_spells"] = {
 			Position = {"TOP", PVE_PVP_DEBUFF_Anchor},
 
 			-- Crowd Controls
+			-- Death Knight
+			-- Gnaw (Ghoul)
+			{spellID = 47481, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- Hungering Cold
+			{spellID = 49203, unitID = "player", caster = "all", filter = "DEBUFF"},
+
 			-- Druid
 			-- Bash r1
 			{spellID = 5211, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
@@ -9051,6 +9059,8 @@ C["filger_spells"] = {
 			{spellID = 20549, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
 
 			-- Silences
+			-- Strangulate
+			{spellID = 47476, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Silencing Shot
 			{spellID = 34490, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
 			-- Counterspell - Silenced
