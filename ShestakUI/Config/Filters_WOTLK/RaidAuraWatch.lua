@@ -777,23 +777,151 @@ T.RaidDebuffs = {
 
 -- Ulduar
 	-- Trash
+		[SpellName(64638)] = 3,		-- Acidic Bite
+		-- [SpellName(64663)] = 3,		-- Arcane Burst
+		[SpellName(64653)] = 3,		-- Blizzard
+		[SpellName(65105)] = 4,		-- Compacted
+		[SpellName(64781)] = 4,		-- Charged Leap
+		-- [SpellName(64655)] = 3,		-- Cone of Cold
+		[SpellName(65104)] = 3,		-- Cut Scrap Metal
+		[SpellName(63755)] = 3,		-- Deadly Poison
+		[SpellName(64942)] = 4,		-- Devastating Leap
+		[SpellName(63713)] = 4,		-- Dominate Mind
+		[SpellName(64160)] = 3,		-- Drain Life
+		-- [SpellName(64697)] = 3,		-- Earthquake
+		[SpellName(64740)] = 3,		-- Energy Sap
+		[SpellName(63775)] = 3,		-- Flamestrike
+		[SpellName(64649)] = 3,		-- Freezing Breath
+		-- [SpellName(63913)] = 3,		-- Frostbolt
+		-- [SpellName(63758)] = 3,		-- Frostbolt Volley
+		[SpellName(63912)] = 3,		-- Frost Nova
+		[SpellName(63550)] = 3,		-- Guardian's Lash
+		-- [SpellName(62845)] = 3,		-- Hamstring
+		[SpellName(63272)] = 3,		-- Hurricane
+		[SpellName(63673)] = 4,		-- Lightning Brand
+		[SpellName(63568)] = 3,		-- Living Tsunami
+		[SpellName(64699)] = 3,		-- Magma Splash
+		[SpellName(63551)] = 3,		-- Poison Breath
+		[SpellName(13704)] = 3,		-- Psychic Scream
+		[SpellName(63615)] = 4,		-- Ravage Armor
+		-- [SpellName(64967)] = 3,		-- Rune Punch
+		[SpellName(64847)] = 3,		-- Runed Flame Jets
+		[SpellName(64988)] = 3,		-- Runed Flame Jets
+		[SpellName(65102)] = 3,		-- Sawblades
+		[SpellName(64654)] = 3,		-- Snow Blindness
+		[SpellName(50370)] = 3,		-- Sunder Armor
+		-- [SpellName(63757)] = 3,		-- Thunderclap
+		[SpellName(64919)] = 3,		-- Ice Nova
+		[SpellName(64698)] = 3,		-- Pyroblast
+		[SpellName(62526)] = 4,		-- Rune Detonation
+		[SpellName(64705)] = 4,		-- Unquenchable Flames
 	-- Flame Leviathon
+		[SpellName(62376)] = 3,		-- Battering Ram
+		[SpellName(62374)] = 4,		-- Pursued
 	-- Ignis the Furnace Master
+		-- [SpellName(62680)] = 3,		-- Flame Jets
+		[SpellName(62717)] = 4,		-- Slag Pot
 	-- Razorscale
+		[SpellName(64016)] = 4,		-- Flame Buffet
+		[SpellName(64771)] = 5,		-- Fuse Armor
+		[SpellName(64757)] = 3,		-- Stormstrike
 	-- XT-002 Deconstructor
+		-- [SpellName(62775)] = 3,		-- Tympanic Tantrum
+		[SpellName(63018)] = 4,		-- Searing Light
+		[SpellName(63024)] = 5,		-- Gravity Bomb
 	-- Assembly of Iron
 		-- Stormcaller Brundir
+			[SpellName(61886)] = 3,		-- Lightning Tendrils
+			[SpellName(61878)] = 4,		-- Overload
 		-- Runemaster Molgeim
+			[SpellName(62269)] = 3,		-- Rune of Death
 		-- Steelbreaker
+			[SpellName(61903)] = 5,		-- Fusion Punch
+			[SpellName(61888)] = 4,		-- Overwhelming Power
+			[SpellName(44008)] = 3,		-- Static Disruption
 	-- Kologarn
+		-- [SpellName(62055)] = 3,		-- Brittle Skin
+		[SpellName(63355)] = 4,		-- Crunch Armor
+		-- [SpellName(62030)] = 3,		-- Petrifying Breath
+		[SpellName(64290)] = 5,		-- Stone Grip
+		[SpellName(63978)] = 3,		-- Stone Nova
 	-- Auriaya
+		[SpellName(64669)] = 5,		-- Feral Pounce
+		[SpellName(64496)] = 3,		-- Feral Rush
+		[SpellName(64396)] = 5,		-- Guardian Swarm
+		[SpellName(64667)] = 3,		-- Rip Flesh
+		[SpellName(64666)] = 4,		-- Savage Pounce
+		[SpellName(64389)] = 3,		-- Sentinel Blast
+		-- [SpellName(64386)] = 4,		-- Terrifying Screech
 	-- Freya
+		-- Elder Brightleaf
+			[SpellName(62243)] = 3,		-- Unstable Sun Beam
+		-- Elder Ironbranch
+			[SpellName(62310)] = 3,		-- Impale
+			[SpellName(62438)] = 4,		-- Iron Roots
+		-- Elder Stonebark
+			[SpellName(62354)] = 4,		-- Broken Bones
+		-- Freya
+			-- [SpellName(62532)] = 3,		-- Conservator's Grip
+			[SpellName(62283)] = 4,		-- Iron Roots
+			[SpellName(63571)] = 3,		-- Nature's Fury
+			-- [SpellName(62619)] = 3,		-- Pheromones
 	-- Hodir
+		[SpellName(62039)] = 3,		-- Biting Cold
+		[SpellName(61969)] = 5,		-- Flash Freeze
+		[SpellName(62469)] = 4,		-- Freeze
 	-- Mimiron
+		-- Leviathon Mk II
+			[SpellName(63666)] = 3,		-- Napalm Shell
+		-- VX-001
+			-- [SpellName(65192)] = 3,		-- Flame Suppressant
+			[SpellName(64533)] = 3,		-- Heat Wave
+		-- Aerial Command Unit
+			[SpellName(64616)] = 3,		-- Deafening Siren
+			[SpellName(64668)] = 4,		-- Magnetic Field
 	-- Thorim
+		[SpellName(62415)] = 3,		-- Acid Breath
+		[SpellName(62318)] = 3,		-- Barbed Shot
+		[SpellName(62576)] = 3,		-- Blizzard
+		[SpellName(32323)] = 3,		-- Charge
+		[SpellName(64971)] = 3,		-- Electro Shock
+		-- [SpellName(62601)] = 3,		-- Frostbolt
+		-- [SpellName(62604)] = 3,		-- Frostbolt Volley
+		[SpellName(62605)] = 3,		-- Frost Nova
+		[SpellName(64970)] = 3,		-- Fuse Lightning
+		-- [SpellName(48639)] = 3,		-- Hamstring
+		[SpellName(62418)] = 5,		-- Impale
+		-- [SpellName(62326)] = 3,		-- Low Blow
+		[SpellName(35054)] = 3,		-- Mortal Strike
+		[SpellName(62420)] = 4,		-- Shield Smash
+		[SpellName(62042)] = 4,		-- Stormhammer
+		[SpellName(57807)] = 3,		-- Sunder Armor
+		[SpellName(62417)] = 3,		-- Sweep
+		[SpellName(62130)] = 5,		-- Unbalancing Strike
+		[SpellName(64151)] = 4,		-- Whirling Trip
+		[SpellName(40652)] = 3,		-- Wing Clip
 	-- General Vezax
+		-- [SpellName(62692)] = 3,		-- Aura of Despair
+		[SpellName(63276)] = 4,		-- Mark of the Faceless
+		[SpellName(63420)] = 3,		-- Profound Darkness
+		-- [SpellName(62661)] = 3,		-- Searing Flames
 	-- Yogg-Saron
+		-- [SpellName(64156)] = 3,		-- Apathy
+		-- [SpellName(64153)] = 3,		-- Black Plague
+		[SpellName(63802)] = 4,		-- Brain Link
+		[SpellName(64157)] = 4,		-- Curse of Doom
+		-- [SpellName(63038)] = 3,		-- Dark Volley
+		-- [SpellName(64189)] = 3,		-- Deafening Roar
+		-- [SpellName(64145)] = 3,		-- Diminish Power
+		-- [SpellName(64152)] = 3,		-- Draining Poison
+		[SpellName(63830)] = 3,		-- Malady of the Mind
+		-- [SpellName(63050)] = 3,		-- Sanity
+		[SpellName(63138)] = 4,		-- Sara's Fervor
+		[SpellName(63134)] = 5,		-- Sara's Blessing
+		[SpellName(64125)] = 5,		-- Squeeze
 	-- Algalon the Observer
+		[SpellName(64412)] = 3,		-- Phase Punch
+		-- [SpellName(64417)] = 3,		-- Phase Punch
 
 -- Trial of the Crusader
 	-- The Northrend Beasts
