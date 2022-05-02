@@ -158,6 +158,7 @@ T.RaidDebuffs = {
 	-- Noth
 	-- Heigan
 	-- Loatheb
+	-- Razuvious
 	-- Gothik
 	-- Four Horsemen
 	-- Sapphiron

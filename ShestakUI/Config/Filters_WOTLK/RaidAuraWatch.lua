@@ -173,6 +173,7 @@ T.RaidDebuffs = {
 	-- Noth
 	-- Heigan
 	-- Loatheb
+	-- Razuvious
 	-- Gothik
 	-- Four Horsemen
 	-- Sapphiron
@@ -662,6 +663,195 @@ T.RaidDebuffs = {
 	-- Apoko
 	-- Zelfan
 	-- Kael'thas Sunstrider
+
+-----------------------------------------------------------------
+-- Wrath of the Lich King Raid
+-----------------------------------------------------------------
+-- Vault of Archavon
+	-- Trash
+	-- Archavon the Stone Watcher
+	-- Emalon the Storm Watcher
+	-- Koralon the Flame Watcher
+	-- Toravon the Ice Watcher
+
+-- Naxxramas
+	-- Trash
+	-- Anub'Rekhan
+	-- Faerlina
+	-- Maexxna
+	-- Patchwerk
+	-- Grobbulus
+	-- Gluth
+	-- Thaddius
+	-- Noth
+	-- Heigan
+	-- Loatheb
+	-- Razuvious
+	-- Gothik
+	-- Four Horsemen
+	-- Sapphiron
+	-- Kel'Thuzad
+
+-- The Obsidian Sanctum
+	-- Trash
+	-- Twilight Drakes
+		-- Tenebron
+		-- Shadron
+		-- Vesperon
+	-- Sartharion
+
+-- Eye of Eternity
+	-- Trash
+	-- Malygos
+
+-- Ulduar
+	-- Trash
+	-- Flame Leviathon
+	-- Ignis the Furnace Master
+	-- Razorscale
+	-- XT-002 Deconstructor
+	-- Assembly of Iron
+		-- Stormcaller Brundir
+		-- Runemaster Molgeim
+		-- Steelbreaker
+	-- Kologarn
+	-- Auriaya
+	-- Freya
+	-- Hodir
+	-- Mimiron
+	-- Thorim
+	-- General Vezax
+	-- Yogg-Saron
+	-- Algalon the Observer
+
+-- Trial of the Crusader
+	-- The Northrend Beasts
+	-- Lord Jaraxxus
+	-- Champions of the Alliance
+	-- Champions of the Horde
+	-- Twin Val'kyr
+	-- Anub'arak
+
+-- Icecrown Citadel
+	-- Trash
+	-- Lord Marrowgar
+	-- Lady Deathwhisper
+	-- Gunship Battle
+	-- Deathbringer Saurfang
+	-- Blood Prince Council
+	-- Blood-Queen Lana'thel
+	-- Valithria Dreamwalker
+	-- Sindragosa
+	-- The Lich King
+
+-- The Ruby Sanctum
+	-- Trash
+	-- Halion's Lieutenants
+		-- Baltharus the Warborn
+		-- General Zarithrian
+		-- Saviana Ragefire
+	-- Halion
+
+-----------------------------------------------------------------
+-- Wrath of the Lich King Dungeons
+-----------------------------------------------------------------
+-- Utgarde Keep
+	-- Prince Keleseth
+	-- Skarvald the Constructor / Dalronn the Controller
+	-- Ingvar the Plunderer
+
+-- The Nexus
+	-- Grand Magus Telestra
+	-- Commander Stoutbeard
+	-- Commander Kolurg
+	-- Anomalus
+	-- Ormorok the Tree-Shaper
+	-- Keristrasza
+
+-- Azjol-Nerub
+	-- Krik'thir the Gatewatcher
+	-- Hadronox
+	-- Anub'arak
+
+-- Ahn'kahet: The Old Kingdom
+	-- Elder Nadox
+	-- Prince Taldaram
+	-- Amanitar
+	-- Jedoga Shadowseeker
+	-- Herald Volazj
+
+-- Drak'Tharon Keep
+	-- Trollgore
+	-- Novos the Summoner
+	-- King Dred
+	-- The Prophet Tharon'ja
+
+-- The Violet Hold
+	-- Erekem
+	-- Moragg
+	-- Ichoron
+	-- Xevozz
+	-- Lavanthor
+	-- Zuramat the Obliterator
+	-- Cyanigosa
+
+-- Gundrak
+	-- Slad'ran
+	-- Anzu
+	-- Drakkari Colossus / Drakkari Elemental
+	-- Moorabi
+	-- Eck the Ferocious
+	-- Gal'darah
+
+-- Halls of Stone
+	-- Maiden of Grief
+	-- Krystallus
+	-- Tribunal of the Ages
+	-- Sjonnir The Ironshaper
+
+-- Halls of Lightning
+	-- General Bjarngrim
+	-- Volkhan
+	-- Ionar
+	-- Loken
+
+-- The Culling of Stratholme
+	-- Meathook
+	-- Salramm the Fleshcrafter
+	-- Chrono-Lord Epoch
+	-- Infinite Corruptor
+	-- Mal'Ganis
+
+-- The Oculus
+	-- Drakos the Interrogator
+	-- Varos Cloudstrider
+	-- Mage-Lord Urom
+	-- Ley-Guardian Eregos
+
+-- Utgarde Pinnacle
+	-- Svala Sorrowgrave
+	-- Gortok Palehoof
+	-- Skadi the Ruthless
+	-- King Ymiron
+
+-- Trial of the Champion
+	-- Grand Champions
+	-- Eadric / Paletress
+	-- The Black Knight
+
+-- The Forge of Souls
+	-- Bronjahm
+	-- Devourer of Souls
+
+-- Pit of Saron
+	-- Forgemaster Garfrost
+	-- Ick & Krick
+	-- Scourgelord Tyrannus
+
+-- Halls of Reflection
+	-- Falric
+	-- Marwyn
+	-- Wrath of the Lich King
 
 -----------------------------------------------------------------
 -- Other
