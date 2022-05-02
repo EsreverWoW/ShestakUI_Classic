@@ -669,40 +669,111 @@ T.RaidDebuffs = {
 -----------------------------------------------------------------
 -- Vault of Archavon
 	-- Trash
+		[SpellName(72120)] = 3,		-- Frostbite
+		[SpellName(60919)] = 3,		-- Rock Shower
+		[SpellName(60897)] = 4,		-- Shield Crush
 	-- Archavon the Stone Watcher
+		[SpellName(58965)] = 3,		-- Choking Cloud
+		[SpellName(58663)] = 4,		-- Stomp
 	-- Emalon the Storm Watcher
 	-- Koralon the Flame Watcher
+		[SpellName(66665)] = 3,		-- Burning Breath
+		[SpellName(66684)] = 3,		-- Flaming Cinder
 	-- Toravon the Ice Watcher
+		[SpellName(72004)] = 3,		-- Frostbite
+		[SpellName(72034)] = 4,		-- Whiteout
 
 -- Naxxramas
 	-- Trash
+		[SpellName(29325)] = 3,		-- Acid Volley
+		[SpellName(33661)] = 3,		-- Crush Armor
+		[SpellName(29849)] = 3,		-- Frost Nova
+		[SpellName(30094)] = 3,		-- Frost Nova
+		[SpellName(29407)] = 3,		-- Mind Flay
+		[SpellName(54339)] = 3,		-- Mind Flay
+		[SpellName(16856)] = 3,		-- Mortal Strike
+		[SpellName(28467)] = 3,		-- Mortal Wound
+		[SpellName(55318)] = 3,		-- Pierce Armor
+		[SpellName(29848)] = 3,		-- Polymorph
+		[SpellName(55314)] = 3,		-- Strangulate
+		[SpellName(53803)] = 3,		-- Veil of Shadow
+		[SpellName(27758)] = 3,		-- War Stomp
 	-- Anub'Rekhan
+		[SpellName(54022)] = 3,		-- Locust Swarm
 	-- Faerlina
+		[SpellName(28796)] = 3,		-- Poison Bolt Volley
+		[SpellName(39024)] = 5,		-- Rain of Fire
+		[SpellName(54093)] = 4,		-- Silence
 	-- Maexxna
+		[SpellName(28776)] = 3,		-- Necrotic Poison
+		[SpellName(28622)] = 3,		-- Web Wrap
+		-- [SpellName(29484)] = 3,		-- Web Spray
 	-- Patchwerk
 	-- Grobbulus
+		[SpellName(28169)] = 4,		-- Mutating Injection
+		[SpellName(28137)] = 3,		-- Slime Stream
 	-- Gluth
+		[SpellName(29306)] = 3,		-- Infected Wound
+		[SpellName(54378)] = 4,		-- Mortal Wound
 	-- Thaddius
+		-- [SpellName(28084)] = 3,		-- Negative Charge
+		-- [SpellName(28059)] = 3,		-- Positive Charge
 	-- Noth
+		[SpellName(29212)] = 3,		-- Cripple
+		[SpellName(29213)] = 4,		-- Curse of the Plaguebringer
+		[SpellName(32736)] = 3,		-- Mortal Strike
+		[SpellName(29214)] = 5,		-- Wrath of the Plaguebringer
 	-- Heigan
+		[SpellName(29998)] = 4,		-- Decrepit Fever
+		[SpellName(29310)] = 3,		-- Spell Disruption
 	-- Loatheb
+		[SpellName(29865)] = 3,		-- Deathbloom
+		[SpellName(29204)] = 4,		-- Inevitable Doom
+		-- [SpellName(55593)] = 3,		-- Necrotic Aura
 	-- Razuvious
+		[SpellName(55470)] = 3,		-- Unbalancing Strike
 	-- Gothik
+		[SpellName(27994)] = 4,		-- Drain Life
+		[SpellName(27990)] = 3,		-- Fear
+		-- [SpellName(28679)] = 3,		-- Harvest Soul
+		[SpellName(27825)] = 5,		-- Shadow Mark
 	-- Four Horsemen
+		-- Baron Rivendare
+			-- [SpellName(28834)] = 3,		-- Mark of Rivendare
+			[SpellName(28882)] = 3,		-- Unholy Shadow
+		-- Lady Blaumeux
+			-- [SpellName(28833)] = 3,		-- Mark of Blaumeux
+		-- Sir Zeliek
+			-- [SpellName(28835)] = 3,		-- Mark of Zeliek
+		-- Thane Korth'azz
+			-- [SpellName(28832)] = 3,		-- Mark of Korth'azz
 	-- Sapphiron
+		[SpellName(28522)] = 4,		-- Icebolt
+		[SpellName(28542)] = 3,		-- Life Drain
 	-- Kel'Thuzad
+		[SpellName(28410)] = 3,		-- Chains of Kel'Thuzad
+		[SpellName(27819)] = 3,		-- Detonate Mana
+		[SpellName(27808)] = 4,		-- Frost Blast
 
 -- The Obsidian Sanctum
 	-- Trash
+		[SpellName(58948)] = 5,		-- Curse of Mending
+		[SpellName(60708)] = 3,		-- Fade Armor
+		[SpellName(39529)] = 3,		-- Flame Shock
+		-- [SpellName(57759)] = 3,		-- Hammer Drop
+		[SpellName(13737)] = 4,		-- Mortal Strike
+		[SpellName(57757)] = 5,		-- Rain of Fire
 	-- Twilight Drakes
 		-- Tenebron
 		-- Shadron
 		-- Vesperon
 	-- Sartharion
+		[SpellName(57557)] = 3,		-- Pyrobuffet
+		[SpellName(56910)] = 4,		-- Tail Lash
 
 -- Eye of Eternity
-	-- Trash
 	-- Malygos
+		[SpellName(56272)] = 3,		-- Arcane Breath
 
 -- Ulduar
 	-- Trash
