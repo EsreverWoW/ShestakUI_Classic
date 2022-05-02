@@ -1059,10 +1059,16 @@ C["filger_spells"] = {
 			{spellID = 48438, unitID = "target", caster = "player", filter = "BUFF"},
 
 			-- Trinket Effects
+			-- Blessing of Ancient Kings (Absorb, Proc) [Val'anyr, Hammer of Ancient Kings]
+			{spellID = 64411, unitID = "target", caster = "player", filter = "BUFF"},
 			-- Fecundity (Special, Use) [Ribbon of Sacrifice]
 			{spellID = 38333, unitID = "target", caster = "player", filter = "BUFF"},
 			-- Forethought Talisman (HoT, Proc) [Forethought Talisman]
 			{spellID = 60530, unitID = "target", caster = "player", filter = "BUFF"},
+			-- Fountain of Light (HoT, Proc) [Trauma]
+			{spellID = 71864, unitID = "target", caster = "player", filter = "BUFF", absID = true},
+			-- Fountain of Light - Heroic (HoT, Proc) [Trauma]
+			{spellID = 71866, unitID = "target", caster = "player", filter = "BUFF", absID = true},
 			-- Persistent Shield (Absorb, Use) [Scarab Brooch]
 			{spellID = 26470, unitID = "target", caster = "player", filter = "BUFF", absID = true},
 			-- Regeneration (HoT, Proc) [Fel Reaver's Piston]
@@ -3535,12 +3541,22 @@ C["filger_spells"] = {
 			-- Weapons
 			-- Armor Buff (Armor, Proc) [Greatsword of Forlorn Visions]
 			{spellID = 34199, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Blessing of Light (Special, Proc) [Last Word / Heartpierce]
+			{spellID = 71870, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Blessing of Light - Heroic (Special, Proc) [Last Word / Heartpierce]
+			{spellID = 71872, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Blinding Speed (Haste, Proc) [Blackout Truncheon]
 			{spellID = 33489, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Chaos Bane (Strength, Proc) [Shadowmourne]
+			{spellID = 73422, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Haste (Haste, Proc) [Manual Crowd Pummeler]
 			{spellID = 13494, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Haste (Haste, Proc) [Empyrean Demolisher / Drakefist Hammer / Dragonmaw / Dragonstrike]
 			{spellID = 21165, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Sanctuary (Defense Rating, Armor, Proc) [Gleaming Quel'Serrar / Burnished Quel'Serrar]
+			{spellID = 69207, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Soul Fragment (Strength, Proc) [Shadowmourne]
+			{spellID = 71905, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Speed Infusion (Movement Speed, Physical Attack Speed, Proc) [Devastation / Warp Slicer]
 			{spellID = 36479, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Strength of the Champion (Strength, Proc) [Arcanite Champion / Khorium Champion]
@@ -3683,10 +3699,16 @@ C["filger_spells"] = {
 			{spellID = 46093, unitID = "target", caster = "player", filter = "BUFF"},
 
 			-- Trinket Effects
+			-- Blessing of Ancient Kings (Absorb, Proc) [Val'anyr, Hammer of Ancient Kings]
+			{spellID = 64411, unitID = "target", caster = "player", filter = "BUFF"},
 			-- Fecundity (Special, Use) [Ribbon of Sacrifice]
 			{spellID = 38333, unitID = "target", caster = "player", filter = "BUFF"},
 			-- Forethought Talisman (HoT, Proc) [Forethought Talisman]
 			{spellID = 60530, unitID = "target", caster = "player", filter = "BUFF"},
+			-- Fountain of Light (HoT, Proc) [Trauma]
+			{spellID = 71864, unitID = "target", caster = "player", filter = "BUFF", absID = true},
+			-- Fountain of Light - Heroic (HoT, Proc) [Trauma]
+			{spellID = 71866, unitID = "target", caster = "player", filter = "BUFF", absID = true},
 			-- Persistent Shield (Absorb, Use) [Scarab Brooch]
 			{spellID = 26470, unitID = "target", caster = "player", filter = "BUFF", absID = true},
 			-- Regeneration (HoT, Proc) [Fel Reaver's Piston]
@@ -4415,10 +4437,16 @@ C["filger_spells"] = {
 			{spellID = 6788, unitID = "target", caster = "all", filter = "DEBUFF"},
 
 			-- Trinket Effects
+			-- Blessing of Ancient Kings (Absorb, Proc) [Val'anyr, Hammer of Ancient Kings]
+			{spellID = 64411, unitID = "target", caster = "player", filter = "BUFF"},
 			-- Fecundity (Special, Use) [Ribbon of Sacrifice]
 			{spellID = 38333, unitID = "target", caster = "player", filter = "BUFF"},
 			-- Forethought Talisman (HoT, Proc) [Forethought Talisman]
 			{spellID = 60530, unitID = "target", caster = "player", filter = "BUFF"},
+			-- Fountain of Light (HoT, Proc) [Trauma]
+			{spellID = 71864, unitID = "target", caster = "player", filter = "BUFF", absID = true},
+			-- Fountain of Light - Heroic (HoT, Proc) [Trauma]
+			{spellID = 71866, unitID = "target", caster = "player", filter = "BUFF", absID = true},
 			-- Persistent Shield (Absorb, Use) [Scarab Brooch]
 			{spellID = 26470, unitID = "target", caster = "player", filter = "BUFF", absID = true},
 			-- Regeneration (HoT, Proc) [Fel Reaver's Piston]
@@ -4898,6 +4926,10 @@ C["filger_spells"] = {
 			-- Weapons
 			-- Bladestorm (Haste, Proc) [The Bladefist]
 			{spellID = 35131, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Blessing of Light (Special, Proc) [Last Word / Heartpierce]
+			{spellID = 71870, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Blessing of Light - Heroic (Special, Proc) [Last Word / Heartpierce]
+			{spellID = 71872, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Blinding Speed (Haste, Proc) [Blackout Truncheon]
 			{spellID = 33489, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Haste (Haste, Proc) [Manual Crowd Pummeler]
@@ -4906,8 +4938,14 @@ C["filger_spells"] = {
 			{spellID = 21165, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Heartrazor (Attack Power, Proc) [Heartrazor]
 			{spellID = 36041, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Necrotic Touch (Special, Proc) [Black Bruise]
+			{spellID = 71875, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Necrotic Touch - Heroic (Special, Proc) [Black Bruise]
+			{spellID = 71877, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Speed Infusion (Movement Speed, Physical Attack Speed, Proc) [Devastation / Warp Slicer]
 			{spellID = 36479, unitID = "player", caster = "player", filter = "BUFF"},
+			-- The Darkest Night (Armor Penetration, Proc) [The Dusk Blade]
+			{spellID = 59043, unitID = "player", caster = "player", filter = "BUFF"},
 			-- The Twin Blades of Azzinoth (Physical Haste, Proc) [The Twin Blades of Azzinoth]
 			{spellID = 41435, unitID = "player", caster = "player", filter = "BUFF"},
 
@@ -4980,6 +5018,12 @@ C["filger_spells"] = {
 			-- Trinket Effects
 			-- Searing Flames (DoT, Proc) [Purified Shard of the Gods / Shiny Shard of the Gods]
 			{spellID = 69729, unitID = "target", caster = "player", filter = "DEBUFF"},
+
+			-- Weapons
+			-- Gutgore Ripper (Special, Proc) [Rusted Gutgore Ripper]
+			{spellID = 69180, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Gutgore Ripper (Special, Proc) [Tarnished Gutgore Ripper]
+			{spellID = 69181, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
 
 			-- Enchants
 			-- Chilled [Enchant Weapon - Icy Chill]
@@ -5932,6 +5976,10 @@ C["filger_spells"] = {
 			-- Weapons
 			-- Bladestorm (Haste, Proc) [The Bladefist]
 			{spellID = 35131, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Blessing of Light (Special, Proc) [Last Word / Heartpierce]
+			{spellID = 71870, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Blessing of Light - Heroic (Special, Proc) [Last Word / Heartpierce]
+			{spellID = 71872, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Blinding Speed (Haste, Proc) [Blackout Truncheon]
 			{spellID = 33489, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Haste (Haste, Proc) [Manual Crowd Pummeler]
@@ -5942,6 +5990,10 @@ C["filger_spells"] = {
 			{spellID = 36041, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Mental Protection Field (Immunity, Use) [Staff of Disintegration]
 			{spellID = 36480, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Necrotic Touch (Special, Proc) [Black Bruise]
+			{spellID = 71875, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Necrotic Touch - Heroic (Special, Proc) [Black Bruise]
+			{spellID = 71877, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Speed Infusion (Movement Speed, Physical Attack Speed, Proc) [Devastation / Warp Slicer]
 			{spellID = 36479, unitID = "player", caster = "player", filter = "BUFF"},
 			-- World Breaker (Critical Strike, Proc) [World Breaker]
@@ -5970,6 +6022,8 @@ C["filger_spells"] = {
 			{spellID = 27996, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Swordguard Embroidery [Swordguard Embroidery]
 			{spellID = 55775, unitID = "player", caster = "player", filter = "BUFF"},
+			-- The Darkest Night (Armor Penetration, Proc) [The Dusk Blade]
+			{spellID = 59043, unitID = "player", caster = "player", filter = "BUFF"},
 		},
 		{
 			Name = "T_DEBUFF_ICON",
@@ -6014,6 +6068,12 @@ C["filger_spells"] = {
 			-- Trinket Effects
 			-- Searing Flames (DoT, Proc) [Purified Shard of the Gods / Shiny Shard of the Gods]
 			{spellID = 69729, unitID = "target", caster = "player", filter = "DEBUFF"},
+
+			-- Weapons
+			-- Gutgore Ripper (Special, Proc) [Rusted Gutgore Ripper]
+			{spellID = 69180, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Gutgore Ripper (Special, Proc) [Tarnished Gutgore Ripper]
+			{spellID = 69181, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
 
 			-- Enchants
 			-- Chilled [Enchant Weapon - Icy Chill]
@@ -6070,10 +6130,16 @@ C["filger_spells"] = {
 			{spellID = 46099, unitID = "target", caster = "player", filter = "BUFF"},
 
 			-- Trinket Effects
+			-- Blessing of Ancient Kings (Absorb, Proc) [Val'anyr, Hammer of Ancient Kings]
+			{spellID = 64411, unitID = "target", caster = "player", filter = "BUFF"},
 			-- Fecundity (Special, Use) [Ribbon of Sacrifice]
 			{spellID = 38333, unitID = "target", caster = "player", filter = "BUFF"},
 			-- Forethought Talisman (HoT, Proc) [Forethought Talisman]
 			{spellID = 60530, unitID = "target", caster = "player", filter = "BUFF"},
+			-- Fountain of Light (HoT, Proc) [Trauma]
+			{spellID = 71864, unitID = "target", caster = "player", filter = "BUFF", absID = true},
+			-- Fountain of Light - Heroic (HoT, Proc) [Trauma]
+			{spellID = 71866, unitID = "target", caster = "player", filter = "BUFF", absID = true},
 			-- Persistent Shield (Absorb, Use) [Scarab Brooch]
 			{spellID = 26470, unitID = "target", caster = "player", filter = "BUFF", absID = true},
 			-- Regeneration (HoT, Proc) [Fel Reaver's Piston]
@@ -7473,8 +7539,14 @@ C["filger_spells"] = {
 			{spellID = 34199, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Bladestorm (Haste, Proc) [The Bladefist]
 			{spellID = 35131, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Blessing of Light (Special, Proc) [Last Word / Heartpierce]
+			{spellID = 71870, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Blessing of Light - Heroic (Special, Proc) [Last Word / Heartpierce]
+			{spellID = 71872, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Blinding Speed (Haste, Proc) [Blackout Truncheon]
 			{spellID = 33489, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Chaos Bane (Strength, Proc) [Shadowmourne]
+			{spellID = 73422, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Haste (Haste, Proc) [Manual Crowd Pummeler]
 			{spellID = 13494, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Haste (Haste, Proc) [Empyrean Demolisher / Drakefist Hammer / Dragonmaw / Dragonstrike]
@@ -7483,6 +7555,14 @@ C["filger_spells"] = {
 			{spellID = 36041, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Mental Protection Field (Immunity, Use) [Staff of Disintegration]
 			{spellID = 36480, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Necrotic Touch (Special, Proc) [Black Bruise]
+			{spellID = 71875, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Necrotic Touch - Heroic (Special, Proc) [Black Bruise]
+			{spellID = 71877, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Sanctuary (Defense Rating, Armor, Proc) [Gleaming Quel'Serrar / Burnished Quel'Serrar]
+			{spellID = 69207, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Soul Fragment (Strength, Proc) [Shadowmourne]
+			{spellID = 71905, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Speed Infusion (Movement Speed, Physical Attack Speed, Proc) [Devastation / Warp Slicer]
 			{spellID = 36479, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Strength of the Champion (Strength, Proc) [Arcanite Champion / Khorium Champion]
@@ -7511,6 +7591,8 @@ C["filger_spells"] = {
 			{spellID = 28093, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Swordguard Embroidery [Swordguard Embroidery]
 			{spellID = 55775, unitID = "player", caster = "player", filter = "BUFF"},
+			-- The Darkest Night (Armor Penetration, Proc) [The Dusk Blade]
+			{spellID = 59043, unitID = "player", caster = "player", filter = "BUFF"},
 		},
 		{
 			Name = "T_DEBUFF_ICON",
@@ -7609,6 +7691,12 @@ C["filger_spells"] = {
 			-- Trinket Effects
 			-- Searing Flames (DoT, Proc) [Purified Shard of the Gods / Shiny Shard of the Gods]
 			{spellID = 69729, unitID = "target", caster = "player", filter = "DEBUFF"},
+
+			-- Weapons
+			-- Gutgore Ripper (Special, Proc) [Rusted Gutgore Ripper]
+			{spellID = 69180, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Gutgore Ripper (Special, Proc) [Tarnished Gutgore Ripper]
+			{spellID = 69181, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
 
 			-- Enchants
 			-- Chilled [Enchant Weapon - Icy Chill]
@@ -8030,16 +8118,26 @@ C["filger_spells"] = {
 			-- {spellID = 57669, unitID = "player", caster = "all", filter = "BUFF"},
 
 			-- Trinket Effects
+			-- Blessing of Ancient Kings (Absorb, Proc) [Val'anyr, Hammer of Ancient Kings]
+			-- {spellID = 64411, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Fecundity (Special, Use) [Ribbon of Sacrifice]
 			{spellID = 38333, unitID = "player", caster = "all", filter = "BUFF"},
+			--[[
+			-- Fountain of Light (HoT, Proc) [Trauma]
+			{spellID = 71864, unitID = "player", caster = "all", filter = "BUFF", absID = true},
+			-- Fountain of Light - Heroic (HoT, Proc) [Trauma]
+			{spellID = 71866, unitID = "player", caster = "all", filter = "BUFF", absID = true},
+			--]]
 			-- Persistent Shield (Absorb, Use) [Scarab Brooch]
 			{spellID = 26470, unitID = "player", caster = "all", filter = "BUFF", absID = true},
 			-- Touched by a Troll (Special, Use) [Talisman of Troll Divinity]
-			{spellID = 60518, unitID = "target", caster = "player", filter = "BUFF"},
+			{spellID = 60518, unitID = "player", caster = "all", filter = "BUFF"},
+			--[[
 			-- Twilight Renewal (HoT, Proc) [Glowing Twilight Scale]
-			{spellID = 75493, unitID = "target", caster = "player", filter = "BUFF", absID = true},
+			{spellID = 75493, unitID = "player", caster = "all", filter = "BUFF", absID = true},
 			-- Twilight Renewal - Heroic (HoT, Proc) [Glowing Twilight Scale]
-			{spellID = 75494, unitID = "target", caster = "player", filter = "BUFF", absID = true},
+			{spellID = 75494, unitID = "player", caster = "all", filter = "BUFF", absID = true},
+			--]]
 		},
 		{
 			Name = "PVE/PVP_DEBUFF",
