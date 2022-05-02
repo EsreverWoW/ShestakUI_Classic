@@ -198,8 +198,44 @@ C["filger_spells"] = {
 			{spellID = 50421, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Item Sets
+			-- Advantage (Increased Damage, Proc) [Scourgelord's Battlegear]
+			{spellID = 70657, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Blood Armor (Damage Reduction, Proc) [Scourgelord's Plate]
+			{spellID = 70654, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Heroic Resolution (Attack Power, Proc) [Desolation Battlegear / Doomplate Battlegear / Wastewalker Armor]
 			{spellID = 37612, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Runic Return (Runic Power, Proc) [Gladiator's Desecration]
+			{spellID = 61258, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Unholy Might (Strength, Proc) [Thassarian's Battlegear / Koltira's Battlegear]
+			{spellID = 67117, unitID = "player", caster = "player", filter = "BUFF"},
+
+			-- Sigils
+			-- Evasion (Dodge, Rune Strike) [Sigil of Insolence]
+			{spellID = 67380, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Indomitable (Strength, Obliterate/Scourge Strike/Death Strike) [Sigil of the Hanged Man]
+			{spellID = 71227, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Precognition (Dodge, Rune Strike) [Sigil of the Bone Gryphon]
+			{spellID = 71229, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Shadow of Death (Dodge, Rune Strike) [Sigil of Deflection]
+			{spellID = 64963, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Sigil of Haunted Dreams (Critical Strike, Blood Strike/Heart Strike) [Sigil of Haunted Dreams]
+			{spellID = 60828, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Unflinching Valor (Defense Rating, Icy Touch) [Sigil of the Unfaltering Knight]
+			{spellID = 62146, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Unholy Force (Strength, Obliterate/Scourge Strike/Death Strike) [Sigil of Virulence]
+			{spellID = 67383, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Savage Aggression (Attack Power, Plague Strike) [Savage Gladiator's Sigil of Strife]
+			{spellID = 60544, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Hateful Aggression (Attack Power, Plague Strike) [Hateful Gladiator's Sigil of Strife]
+			{spellID = 60547, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Deadly Aggression (Attack Power, Plague Strike) [Deadly  Gladiator's Sigil of Strife]
+			{spellID = 60549, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Furious Gladiator's Libram of Fortitude (Attack Power, Plague Strike) [Furious Gladiator's Sigil of Strife]
+			{spellID = 60551, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Relentless Aggression (Attack Power, Plague Strike) [Relentless Gladiator's Sigil of Strife]
+			{spellID = 60553, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Fury of the Gladiator (Attack Power, Plague Strike) [Wrathful Gladiator's Sigil of Strife]
+			{spellID = 60555, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Trinkets
 			-- Class
@@ -5286,7 +5322,7 @@ C["filger_spells"] = {
 			-- Cold Blood
 			{spellID = 14177, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Evasion
-			{spellID = 5277, unitID = "player", caster = "player", filter = "BUFF"},
+			{spellID = 5277, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Find Weakness
 			{spellID = 31234, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Ghostly Strike
