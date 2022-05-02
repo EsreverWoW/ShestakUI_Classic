@@ -1004,6 +1004,8 @@ C["filger_spells"] = {
 			{spellID = 37344, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Feline Blessing (Strength, Proc) [Living Root of the Wildheart - Cat]
 			{spellID = 37341, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Healing Trance (Special, Proc) [Soul Preserver]
+			{spellID = 60512, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Lunar Blessing (Spell Power, Proc) [Living Root of the Wildheart - Moonkin]
 			{spellID = 37343, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Slyvan Blessing (Spell Power, Proc) [Living Root of the Wildheart - Tree]
@@ -2752,6 +2754,8 @@ C["filger_spells"] = {
 			{spellID = 37436, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Enigma's Answer (Spell Hit, Proc) [Enigma Vestments]
 			{spellID = 26129, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Arcane Resistance (Arcane Resistance, Proc) [Frostfire Regalia]
+			{spellID = 28770, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Fire Resistance (Fire Resistance, Proc) [Frostfire Regalia]
 			{spellID = 28765, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Frost Resistance (Frost Resistance, Proc) [Frostfire Regalia]
@@ -2760,12 +2764,12 @@ C["filger_spells"] = {
 			{spellID = 28768, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Shadow Resistance (Shadow Resistance, Proc) [Frostfire Regalia]
 			{spellID = 28769, unitID = "player", caster = "player", filter = "BUFF", absID = true},
-			-- Arcane Resistance (Arcane Resistance, Proc) [Frostfire Regalia]
-			{spellID = 28770, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Insight (Spell Power, Proc) [Mana-Etched Regalia]
 			{spellID = 37620, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Lesser Spell Blasting (Spell Power, Proc) [Spellstrike Infusion]
 			{spellID = 32108, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Mana Surges (Spell Power, Proc) [Frostfire Garb]
+			{spellID = 62215, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Netherwind Focus (Special, Proc) [Netherwind Regalia]
 			{spellID = 22008, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Not There (Special, Proc) [Frostfire Regalia]
@@ -2782,7 +2786,7 @@ C["filger_spells"] = {
 			-- Insight of the Ashtongue (Haste, Proc) [Ashtongue Talisman of Insight]
 			{spellID = 40483, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Mana Surge (Spell Power, Proc) [Serpent-Coil Braid]
-			{spellID = 37445, unitID = "player", caster = "player", filter = "BUFF"},
+			{spellID = 37445, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Mind Quickening (Haste, Use) [Mind Quickening Gem]
 			{spellID = 23723, unitID = "player", caster = "player", filter = "BUFF"},
 
@@ -3612,6 +3616,8 @@ C["filger_spells"] = {
 			{spellID = 23733, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Brilliant Light (Critical Strike, Use) [Gri'lek's Charm of Valor]
 			{spellID = 24498, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Healing Trance (Special, Proc) [Soul Preserver]
+			{spellID = 60513, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Darkmoon Cards
 			-- Aura of the Blue Dragon (Special, Proc) [Darkmoon Card: Blue Dragon]
@@ -4668,6 +4674,8 @@ C["filger_spells"] = {
 			{spellID = 40440, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Divine Wrath (Spell Power, Proc) [Ashtongue Talisman of Acumen]
 			{spellID = 40441, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Healing Trance (Special, Proc) [Soul Preserver]
+			{spellID = 60514, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Rapid Healing (Special, Use) [Hazza'rah's Charm of Healing]
 			{spellID = 24546, unitID = "player", caster = "player", filter = "BUFF"},
 
@@ -6159,6 +6167,8 @@ C["filger_spells"] = {
 			-- Class
 			-- Energized Shield (Special, Use) [Wushoolay's Charm of Spirits]
 			{spellID = 24499, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Healing Trance (Special, Proc) [Soul Preserver]
+			{spellID = 60515, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Nature Aligned (Spell Power, Use) [Natural Alignment Crystal]
 			{spellID = 23734, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Power Surge (Attack Power, Proc) [Ashtongue Talisman of Vision]
@@ -6797,6 +6807,10 @@ C["filger_spells"] = {
 			{spellID = 17364, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Twin Howl
 			{spellID = 58857, unitID = "target", caster = "all", filter = "DEBUFF"},
+
+			-- Item Sets
+			-- Lava Burst (DoT, Proc) [Nobundo's Regalia / Thrall's Regalia]
+			{spellID = 71824, unitID = "target", caster = "player", filter = "DEBUFF"},
 
 			-- Trinket Effects
 			-- Searing Flames (DoT, Proc) [Purified Shard of the Gods / Shiny Shard of the Gods]
