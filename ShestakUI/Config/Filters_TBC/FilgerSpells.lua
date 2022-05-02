@@ -4581,7 +4581,7 @@ C["filger_spells"] = {
 			-- Heightened Reflexes (Agility, Use) [Badge of Tenacity]
 			{spellID = 40729, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Heroism (Attack Power, Use) [Terokkar Tablet of Precision]
-			{spellID = 39200, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- {spellID = 39200, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Insight of the Qiraji (Armor Penetration, Use) [Badge of the Swarmguard]
 			{spellID = 26481, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Jom Gabbar (Attack Power, Use) [Jom Gabbar]
