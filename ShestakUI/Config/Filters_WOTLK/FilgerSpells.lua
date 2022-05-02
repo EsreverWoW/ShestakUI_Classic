@@ -621,6 +621,12 @@ C["filger_spells"] = {
 			{spellID = 55775, unitID = "player", caster = "player", filter = "BUFF"},
 			-- The Darkest Night (Armor Penetration, Proc) [The Dusk Blade]
 			{spellID = 59043, unitID = "player", caster = "player", filter = "BUFF"},
+
+			-- Runeforging
+			-- Cinderglacier [Rune of Cinderglacier]
+			{spellID = 53386, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Unholy Strength [Rune of the Fallen Crusader]
+			{spellID = 53365, unitID = "player", caster = "player", filter = "BUFF"},
 		},
 		{
 			Name = "T_DEBUFF_ICON",
@@ -681,6 +687,10 @@ C["filger_spells"] = {
 			{spellID = 20006, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Venomhide Poison
 			{spellID = 14795, unitID = "target", caster = "player", filter = "DEBUFF"},
+
+			-- Runeforging
+			-- Frost Vulnerability [Rune of Razorice]
+			{spellID = 51714, unitID = "target", caster = "player", filter = "DEBUFF"},
 		},
 		{
 			Name = "T_DE/BUFF_BAR",
