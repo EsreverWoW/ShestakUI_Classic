@@ -125,6 +125,557 @@ COOLDOWN_Anchor = CreateFrame("Frame", "COOLDOWN_Anchor", UIParent)
 T_DE_BUFF_BAR_Anchor = CreateFrame("Frame", "T_DE_BUFF_BAR_Anchor", UIParent)
 
 C["filger_spells"] = {
+	["DEATHKNIGHT"] = {
+		{
+			Name = "P_BUFF_ICON",
+			Direction = "LEFT",
+			Mode = "ICON",
+			Interval = C.filger.buffs_space,
+			Alpha = 1,
+			IconSize = C.filger.buffs_size,
+			Position = {"TOP", P_BUFF_ICON_Anchor},
+		},
+		{
+			Name = "P_PROC_ICON",
+			Direction = "RIGHT",
+			Mode = "ICON",
+			Interval = C.filger.buffs_space,
+			Alpha = 1,
+			IconSize = C.filger.buffs_size,
+			Position = {"TOP", P_PROC_ICON_Anchor},
+
+			-- Buffs
+
+			-- Item Sets
+			-- Heroic Resolution (Attack Power, Proc) [Desolation Battlegear / Doomplate Battlegear / Wastewalker Armor]
+			{spellID = 37612, unitID = "player", caster = "player", filter = "BUFF"},
+
+			-- Trinkets
+			-- Class
+			-- Deflection (Parry, Proc) [Soul Harvester's Charm]
+			{spellID = 52419, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Retaliation (Strength, Proc) [Signet of the Dark Brotherhood]
+			{spellID = 52424, unitID = "player", caster = "player", filter = "BUFF"},
+
+			-- Darkmoon Cards
+			-- Aura of the Blue Dragon (Special, Proc) [Darkmoon Card: Blue Dragon]
+			{spellID = 23684, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Aura of the Crusader (Attack Power, Proc) [Darkmoon Card: Crusade]
+			{spellID = 39439, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Aura of Wrath (Critical Strike, Proc) [Darkmoon Card: Wrath]
+			{spellID = 39443, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Berserker! (Critical Strike, Proc) [Darkmoon Card: Berserker!] - All classes
+			{spellID = 60196, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Delusional (Attack Power, Proc) [Darkmoon Card: Madness] - Rogue, Hunter, Paladin, Warrior, Druid, Shaman
+			{spellID = 40997, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Greatness (Strength, Proc) [Darkmoon Card: Greatness] - All classes
+			{spellID = 60229, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Greatness (Agility, Proc) [Darkmoon Card: Greatness] - All classes
+			{spellID = 60233, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Greatness (Intellect, Proc) [Darkmoon Card: Greatness] - All classes
+			{spellID = 60234, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Greatness (Spirit, Proc) [Darkmoon Card: Greatness] - All classes
+			{spellID = 60235, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Kleptomania (Agility, Proc) [Darkmoon Card: Madness] - Warrior, Rogue, Paladin, Hunter, Druid
+			{spellID = 40998, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Manic (Haste, Proc) [Darkmoon Card: Madness] - All classes except Hunter
+			{spellID = 41005, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Martyr Complex (Stamina, Proc) [Darkmoon Card: Madness] - All classes
+			{spellID = 41011, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Paranoia (Critical Strike, Proc) [Darkmoon Card: Madness] - All classes except Hunter
+			{spellID = 41002, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Sociopath (Strength, Proc) [Darkmoon Card: Madness] - Paladin, Rogue, Druid, Warrior
+			{spellID = 39511, unitID = "player", caster = "player", filter = "BUFF"},
+
+			-- PvP Trinkets
+			-- Aura of Protection (Absorb, Use) [Arena Grand Master]
+			{spellID = 23506, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Damage Absorb (Absorb, Use) [Arathi Basin Trinket]
+			{spellID = 25750, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Tremendous Fortitude (Health, Use) [Battlemaster]
+			{spellID = 44055, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Tremendous Fortitude (Health, Use) [Battlemaster]
+			{spellID = 55915, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Tremendous Fortitude (Health, Use) [Battlemaster]
+			{spellID = 67596, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Shell of Deterrence (Absorb, Use) [Runed Fungalcap]
+			{spellID = 31771, unitID = "player", caster = "player", filter = "BUFF"},
+
+			-- Universal
+			-- Arcane Shroud (Threat Reduction, Use) [Fetish of the Sand Reaver]
+			{spellID = 26400, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Aegis of Dalaran (Magic Resistance, Use) [Sindragosa's Flawless Fang]
+			{spellID = 71635, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Aegis of Dalaran - Heroic (Magic Resistance, Use) [Sindragosa's Flawless Fang]
+			{spellID = 71638, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Bleeding Heart (Haste, Use) [Thorny Rose Brooch]
+			{spellID = 61620, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Celerity (Haste, Use) [Shard of the Crystal Heart]
+			{spellID = 67683, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Chitinous Spikes (Special, Use) [Fetish of Chitinous Spikes]
+			{spellID = 26168, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Far-Seeing Eyes (Haste, Use) [Foresight's Anticipation]
+			{spellID = 51985, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Frenzyheart Fury (Critical Strike, Proc) [Frenzyheart Insignia of Fury]
+			{spellID = 59821, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Heart of the Scale (Special, Use) [Heart of the Scale]
+			{spellID = 17275, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Infinite Speed (Haste, Use) [Rune of Finite Variation]
+			{spellID = 61427, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Loatheb's Reflection (Magic Resistance, Use) [Loatheb's Reflection]
+			{spellID = 28778, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Mercurial Shield (Magic Resistance, Use) [Petrified Scarab]
+			{spellID = 26464, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Platinum Disks of Swiftness (Haste, Use) [Platinum Disks of Swiftness]
+			{spellID = 64527, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Ruby Hare (Movement Speed, Use) [Figurine - Ruby Hare]
+			{spellID = 56121, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Skycaller's Swiftness (Haste, Use) [Fury of the Crimson Drake]
+			{spellID = 48868, unitID = "player", caster = "player", filter = "BUFF"},
+			-- The Burrower's Shell (Absorb, Use) [The Burrower's Shell]
+			{spellID = 29506, unitID = "player", caster = "player", filter = "BUFF"},
+			-- The Lion Horn of Stormwind (Special, Proc) [The Lion Horn of Stormwind]
+			{spellID = 18946, unitID = "player", caster = "player", filter = "BUFF"},
+
+			-- Tanking
+			-- Adamantine Shell (Armor, Use) [Adamantine Figurine]
+			{spellID = 33479, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Aegis (Armor, Proc) [The Black Heart]
+			{spellID = 67631, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Argussian Compass (Absorb, Use) [Argussian Compass]
+			{spellID = 39228, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Avoidance (Dodge, Use) [Charm of Alacrity]
+			{spellID = 32600, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Brittle Armor (Special, Use) [Zandalarian Hero Badge]
+			{spellID = 24575, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Dawnstone Crab (Dodge, Use) [Figurine - Dawnstone Crab]
+			{spellID = 31039, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Defender's Code (Dodge, Use) [Defender's Code]
+			{spellID = 60286, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Defensive Tactics (Dodge, Use) [Glyph of Indomitability]
+			{spellID = 67694, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Displacement (Defense Rating, Use) [Scarab of Displacement]
+			{spellID = 38351, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Drunken Evasiveness (Dodge, Use) [Brawler's Souvenir]
+			{spellID = 68443, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Empyrean Tortoise (Dodge, Use) [Figurine - Empyrean Tortoise]
+			{spellID = 46780, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Essence of Gossamer (Absorb, Proc) [Essence of Gossamer]
+			{spellID = 60218, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Evasive Maneuvers (Dodge, Proc) [Commendation of Kael'thas]
+			{spellID = 45058, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Figurine - Monarch Crab (Dodge, Use) [Figurine - Monarch Crab]
+			{spellID = 59757, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Force of Will (Special, Proc) [Force of Will]
+			{spellID = 15595, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Fortitude (Health, Use) [Satrina's Impeding Scarab / Juggernaut's Vitality]
+			{spellID = 67699, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Fortitude - Heroic (Health, Use) [Satrina's Impeding Scarab / Juggernaut's Vitality]
+			{spellID = 67753, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Furnace Stone (Armor, Use) [Furnace Stone]
+			{spellID = 65011, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Hardened (Armor, Use) [Fervor of the Frostborn / Eitrigg's Oath]
+			{spellID = 67727, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Hardened - Heroic (Armor, Use) [Fervor of the Frostborn / Eitrigg's Oath]
+			{spellID = 67741, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Hardened Skin (Armor, Use) [Ancient Aqir Artifact]
+			{spellID = 43713, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Hardened Skin (Absorb, Use) [Corroded Skeleton Key]
+			{spellID = 71586, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Hardening Armor (Armor, Use) [Fervor of the Frostborn / Eitrigg's Oath]
+			{spellID = 67728, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Hardening Armor - Heroic (Armor, Use) [Fervor of the Frostborn / Eitrigg's Oath]
+			{spellID = 67742, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Heart of Iron (Dodge, Use) [Heart of Iron]
+			{spellID = 64763, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Increased Fortitude (Health, Use) [Ick's Rotting Thumb]
+			{spellID = 71569, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Invigorated (Stamina, Proc) [Unidentifiable Organ]
+			{spellID = 71575, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Invigorated - Heroic (Stamina, Proc) [Unidentifiable Organ]
+			{spellID = 71577, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Protector's Vigor (Health, Use) [Shadowmoon Insignia]
+			{spellID = 40464, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Regeneration (HoT, Use) [Spyglass of the Hidden Fleet]
+			-- {spellID = 38325, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Resolute (Health, Use) [Offering of Sacrifice / Repelling Charge]
+			{spellID = 60180, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Scaly Nimbleness (Dodge, Proc) [Petrified Twilight Scale]
+			{spellID = 75477, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Scaly Nimbleness - Heroic (Dodge, Proc) [Petrified Twilight Scale]
+			{spellID = 75480, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Royal Seal of King Llane (Parry, Use) [Royal Seal of King Llane]
+			{spellID = 65012, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Rune of Repulsion (Parry, Use) [Rune of Repulsion]
+			{spellID = 60258, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Seal of the Pantheon (Armor, Use) [Seal of the Pantheon]
+			{spellID = 60214, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Tenacity (Health, Use) [Brooch of the Immortal King]
+			-- {spellID = 40538, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Tenacity (Health, Use) [Regal Protectorate]
+			{spellID = 33668, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Tenacity (Health, Use) [Steely Naaru Sliver]
+			-- {spellID = 45049, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- The General's Heart (Absorb, Proc) [The General's Heart]
+			{spellID = 64765, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Thick Skin (Armor, Proc) [Corpse Tongue Coin]
+			{spellID = 71633, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Thick Skin - Heroic (Armor, Proc) [Corpse Tongue Coin]
+			{spellID = 71639, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Time's Favor (Dodge, Use) [Moroes' Lucky Pocket Watch]
+			{spellID = 34519, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Valor Medal of the First War (Dodge, Use) [Valor Medal of the First War]
+			{spellID = 60054, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Vigilance of the Colossus (Special, Use) [Figurine of the Colossus]
+			{spellID = 33089, unitID = "player", caster = "player", filter = "BUFF"},
+
+			-- Damage [Physical]
+			-- Agility of the Vrykul (Agility, Proc) [Deathbringer's Will]
+			{spellID = 71485, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Agility of the Vrykul - Heroic (Agility, Proc) [Deathbringer's Will]
+			{spellID = 71556, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Aim of the Iron Dwarves (Critical Strike, Proc) [Deathbringer's Will]
+			{spellID = 71491, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Aim of the Iron Dwarves - Heroic (Critical Strike, Proc) [Deathbringer's Will]
+			{spellID = 71559, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Arcane Infusion (Attack Power, Use) [Scarab of Isanoth]
+			{spellID = 51987, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Argent Heroism (Attack Power, Use) [Fezzik's Pocketwatch]
+			{spellID = 59658, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Ancient Power (Attack Power, Use) [Core of Ar'kelos]
+			{spellID = 35733, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Armor Penetration (Armor Penetration, Use) [Icon of Unyielding Courage]
+			{spellID = 34106, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Blood of the Old God (Attack Power, Proc) [Blood of the Old God]
+			{spellID = 64790, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Burning Hatred (Attack Power, Use) [Ogre Mauler's Badge / Uniting Charm]
+			{spellID = 32362, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Call of the Berserker (Attack Power, Use) [Berserker's Call]
+			{spellID = 43716, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Combat Insight (Attack Power, Proc) [Blackened Naaru Sliver]
+			{spellID = 45041, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Combat Valor (Attack Power, Proc) [Skyguard Silver Cross]
+			{spellID = 41261, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Comet's Trail (Haste, Proc) [Comet's Trail]
+			{spellID = 64772, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Consume Life (Special, Use) [Fetish of the Fallen]
+			{spellID = 33015, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Crusader's Glory (Expertise, Proc) [Crusader's Locket]
+			{spellID = 61671, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Dire Drunkard (Attack Power, Use) [Empty Mug of Direbrew]
+			{spellID = 51955, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Disdain (Attack Power, Proc) [Shard of Contempt]
+			{spellID = 45053, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Earthstrike (Attack Power, Use) [Earthstrike]
+			{spellID = 25891, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Emerald Boar (Special, Use) [Figurine - Emerald Boar]
+			{spellID = 56188, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Fatal Flaws (Armor Penetration, Proc) [Needle-Encrusted Scorpion]
+			{spellID = 71403, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Feral Fury (Attack Power, Use) [Warsong's Fervor]
+			{spellID = 48848, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Ferocity (Attack Power, Use) [Ancient Draenei War Talisman / Bladefist's Breadth]
+			{spellID = 33667, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Foaming Rage (Attack Power, Use) [Braxley's Backyard Moonshine]
+			{spellID = 47217, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Forceful Strike (Armor Penetration, Proc) [Madness of the Betrayer]
+			{spellID = 40477, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Fury (Attack Power, Proc) [Banner of Victory]
+			{spellID = 67671, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Fury of the Crashing Waves (Attack Power, Proc) [Tsunami Talisman]
+			{spellID = 42084, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Fury of the Five Flights (Attack Power, Proc) [Fury of the Five Flights]
+			{spellID = 60314, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Grim Toll (Armor Penetration, Proc) [Grim Toll]
+			{spellID = 60437, unitID = "player", caster = "player", filter = "BUFF"},
+			--[[
+			-- Haste (Haste, Use) [Abacus of Violent Odds]
+			{spellID = 33807, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Haste (Haste, Proc) [Dragonspine Trophy]
+			{spellID = 34775, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			--]]
+			-- Heart of a Dragon (Attack Power, Use) [Sphere of Red Dragon's Blood]
+			{spellID = 60305, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Heightened Reflexes (Agility, Use) [Badge of Tenacity]
+			{spellID = 40729, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Heroism (Attack Power, Use) [Terokkar Tablet of Precision]
+			-- {spellID = 39200, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Icy Rage (Attack Power, Proc) [Whispering Fanged Skull]
+			{spellID = 71401, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Icy Rage - Heroic (Attack Power, Proc) [Whispering Fanged Skull]
+			{spellID = 71541, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Implosion (Attack Power, Proc) [Dark Matter]
+			{spellID = 65024, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Incisor Fragment (Armor Penetration, Use) [Incisor Fragment]
+			{spellID = 60299, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Insight of the Qiraji (Armor Penetration, Use) [Badge of the Swarmguard]
+			{spellID = 26481, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Jom Gabbar (Attack Power, Use) [Jom Gabbar]
+			{spellID = 29604, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Jormungar Slime (Attack Power, Use) [Automated Weapon Coater]
+			{spellID = 51978, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Kiss of the Spider (Haste, Use) [Kiss of the Spider]
+			{spellID = 28866, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Loatheb's Shadow (Attack Power, Use) [Loatheb's Shadow]
+			{spellID = 60439, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Lust for Battle (Attack Power, Use) [Bloodlust Brooch]
+			{spellID = 35166, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Mark of Norgannon (Haste, Use) [Mark of Norgannon]
+			{spellID = 60319, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Meteorite Whetstone (Haste, Proc) [Meteorite Whetstone]
+			{spellID = 60302, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Mote of Anger (Special, Proc) [Tiny Abomination in a Jar]
+			{spellID = 71432, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Mjolnir Runestone (Armor Penetration, Proc) [Mjolnir Runestone]
+			{spellID = 65019, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Nightseye Panther (Attack Power, Use) [Figurine - Nightseye Panther]
+			{spellID = 31047, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Oozing Wound (Critical Strike, Proc) [Death Knight's Anguish]
+			{spellID = 54697, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Paragon (Agility, Proc) [Death's Verdict / Death's Choice]
+			{spellID = 67703, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Paragon - Heroic (Agility, Proc) [Death's Verdict / Death's Choice]
+			{spellID = 67772, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Paragon (Strength, Proc) [Death's Verdict / Death's Choice]
+			{spellID = 67708, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Paragon - Heroic (Strength, Proc) [Death's Verdict / Death's Choice]
+			{spellID = 67773, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Piercing Twilight (Attack Power, Proc) [Sharpened Twilight Scale]
+			{spellID = 75458, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Piercing Twilight - Heroic (Attack Power, Proc) [Sharpened Twilight Scale]
+			{spellID = 75456, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Platinum Disks of Battle (Attack Power, Use) [Platinum Disks of Battle]
+			{spellID = 64524, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Power of the Taunka (Attack Power, Proc) [Deathbringer's Will]
+			{spellID = 71486, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Power of the Taunka - Heroic (Attack Power, Proc) [Deathbringer's Will]
+			{spellID = 71558, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Precise Strikes (Attack Power, Use) [Talisman of the Tundra]
+			{spellID = 48847, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Precision of the Iron Dwarves (Armor Penetration, Proc) [Deathbringer's Will]
+			{spellID = 71487, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Precision of the Iron Dwarves - Heroic (Armor Penetration, Proc) [Deathbringer's Will]
+			{spellID = 71557, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Pyrite Infusion (Attack Power, Proc) [Pyrite Infuser]
+			{spellID = 65014, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Rage (Attack Power, Use) [Mark of Supremacy]
+			{spellID = 67695, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Rage of the Fallen (Attack Power, Proc) [Herkuml War Token]
+			{spellID = 71396, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Rage of the Unraveller (Attack Power, Proc) [Hourglass of the Unraveller]
+			{spellID = 33649, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Reflection of Torment (Attack Power, Proc) [Mirror of Truth / Anvil of Titans / Coren's Chromium Coaster]
+			{spellID = 60065, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Restless Strength (Special, Use) [Zandalarian Hero Medallion]
+			{spellID = 24662, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Risen Fury (Special, Use) [Victor's Call / Vengeance of the Forsaken]
+			{spellID = 67737, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Risen Fury - Heroic (Special, Use) [Victor's Call / Vengeance of the Forsaken]
+			{spellID = 67746, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Rising Fury (Special, Use) [Victor's Call / Vengeance of the Forsaken]
+			{spellID = 67738, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Rising Fury - Heroic (Special, Use) [Victor's Call / Vengeance of the Forsaken]
+			{spellID = 67747, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Scything Talons (Attack Power, Use) [Talon of Hatred]
+			{spellID = 61778, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Shadowsong Panther (Attack Power, Use) [Figurine - Shadowsong Panther]
+			{spellID = 46784, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Slayer's Crest (Attack Power, Use) [Slayer's Crest]
+			{spellID = 28777, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Sonic Awareness (Attack Power, Proc) [Sonic Booster]
+			{spellID = 55018, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Speed of the Vrykul (Haste, Proc) [Deathbringer's Will]
+			{spellID = 71492, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Speed of the Vrykul - Heroic (Haste, Proc) [Deathbringer's Will]
+			{spellID = 71560, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Strength of the Taunka (Strength, Proc) [Deathbringer's Will]
+			{spellID = 71484, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Strength of the Taunka - Heroic (Strength, Proc) [Deathbringer's Will]
+			{spellID = 71561, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Tears of Anguish (Haste, Proc) [Tears of Bitter Anguish]
+			{spellID = 58904, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Tentacles (Critical Strike, Proc) [Chuchu's Tiny Box of Horrors]
+			{spellID = 61619, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Towering Rage (Attack Power, Use) [Fury of the Encroaching Storm]
+			{spellID = 47806, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Valor (Attack Power, Use) [Crystalforged Trinket]
+			{spellID = 40724, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Wracking Pains (Special, Proc) [Death Knight's Anguish]
+			{spellID = 54696, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Wrathstone (Attack Power, Use) [Wrathstone]
+			{spellID = 64800, unitID = "player", caster = "player", filter = "BUFF"},
+
+			-- Necks
+			-- Arcane Insight (Expertise, Proc) [Shattered Sun Pendant of Resolve - Scryer]
+			{spellID = 45431, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Light's Strength (Attack Power, Proc) [Shattered Sun Pendant of Might - Aldor]
+			{spellID = 45480, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Light's Ward (Dodge, Proc) [Shattered Sun Pendant of Resolve - Aldor]
+			{spellID = 45432, unitID = "player", caster = "player", filter = "BUFF"},
+
+			-- Chest
+			-- Valor (Health, Strength, Use) [Bulwark of Kings / Bulwark of the Ancient Kings]
+			-- {spellID = 34511, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+
+			-- Rings
+			-- Band of the Eternal Champion (Attack Power, Proc) [Band of the Eternal Champion]
+			{spellID = 35081, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Band of the Eternal Defender (Armor, Proc) [Band of the Eternal Defender]
+			{spellID = 35078, unitID = "player", caster = "player", filter = "BUFF"},
+
+			-- Weapons
+			-- Armor Buff (Armor, Proc) [Greatsword of Forlorn Visions]
+			{spellID = 34199, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Blessing of Light (Special, Proc) [Last Word / Heartpierce]
+			{spellID = 71870, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Blessing of Light - Heroic (Special, Proc) [Last Word / Heartpierce]
+			{spellID = 71872, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Blinding Speed (Haste, Proc) [Blackout Truncheon]
+			{spellID = 33489, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Chaos Bane (Strength, Proc) [Shadowmourne]
+			{spellID = 73422, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Haste (Haste, Proc) [Manual Crowd Pummeler]
+			{spellID = 13494, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Haste (Haste, Proc) [Empyrean Demolisher / Drakefist Hammer / Dragonmaw / Dragonstrike]
+			{spellID = 21165, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Sanctuary (Defense Rating, Armor, Proc) [Gleaming Quel'Serrar / Burnished Quel'Serrar]
+			{spellID = 69207, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Soul Fragment (Strength, Proc) [Shadowmourne]
+			{spellID = 71905, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Speed Infusion (Movement Speed, Physical Attack Speed, Proc) [Devastation / Warp Slicer]
+			{spellID = 36479, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Strength of the Champion (Strength, Proc) [Arcanite Champion / Khorium Champion]
+			{spellID = 16916, unitID = "player", caster = "player", filter = "BUFF"},
+			-- World Breaker (Critical Strike, Proc) [World Breaker]
+			{spellID = 36111, unitID = "player", caster = "player", filter = "BUFF"},
+
+			-- Meta Gems
+			-- Skyfire Swiftness (Physical Haste, Proc) [Thundering Skyfire Diamond]
+			{spellID = 39959, unitID = "player", caster = "player", filter = "BUFF"},
+
+			-- Enchants
+			-- Berserk [Enchant Weapon - Berserking]
+			{spellID = 59620, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Blade Warding [Enchant Weapon - Blade Ward]
+			{spellID = 64440, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Blood Reserve [Enchant Weapon - Blood Draining]
+			{spellID = 64568, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Executioner [Enchant Weapon - Executioner]
+			{spellID = 42976, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Holy Strength (Strength) [Enchant Weapon - Crusader]
+			{spellID = 20007, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Lightning Speed (Agility and Physical Attack Speed) [Enchant Weapon - Mongoose]
+			{spellID = 28093, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Swordguard Embroidery [Swordguard Embroidery]
+			{spellID = 55775, unitID = "player", caster = "player", filter = "BUFF"},
+			-- The Darkest Night (Armor Penetration, Proc) [The Dusk Blade]
+			{spellID = 59043, unitID = "player", caster = "player", filter = "BUFF"},
+		},
+		{
+			Name = "T_DEBUFF_ICON",
+			Direction = "RIGHT",
+			Mode = "ICON",
+			Interval = C.filger.buffs_space,
+			Alpha = 1,
+			IconSize = C.filger.buffs_size,
+			Position = {"TOP", T_DEBUFF_ICON_Anchor},
+
+			-- Trinket Effects
+			-- Searing Flames (DoT, Proc) [Purified Shard of the Gods / Shiny Shard of the Gods]
+			{spellID = 69729, unitID = "target", caster = "player", filter = "DEBUFF"},
+
+			-- Enchants
+			-- Chilled [Enchant Weapon - Icy Chill]
+			{spellID = 20005, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Deathfrost [Enchant Weapon - Deathfrost]
+			{spellID = 46629, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Smite Demon [Enchant Weapon - Demonslaying]
+			{spellID = 13907, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Tendon Rip [Enchant Weapon - Giant Slayer]
+			{spellID = 44622, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Unholy Curse [Enchant Weapon - Unholy Weapon]
+			{spellID = 20006, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Venomhide Poison
+			{spellID = 14795, unitID = "target", caster = "player", filter = "DEBUFF"},
+		},
+		{
+			Name = "T_DE/BUFF_BAR",
+			Direction = "UP",
+			IconSide = "LEFT",
+			Mode = "BAR",
+			Interval = 3,
+			Alpha = 1,
+			IconSize = 25,
+			BarWidth = 186,
+			Position = {"LEFT", T_DE_BUFF_BAR_Anchor},
+		},
+		--[[
+		{
+			Name = "PVE/PVP_CC",
+			Direction = "DOWN",
+			IconSide = "LEFT",
+			Mode = "BAR",
+			Interval = 3,
+			Alpha = 1,
+			IconSize = 25,
+			BarWidth = 189,
+			Position = {"LEFT", PVE_PVP_CC_Anchor},
+		},
+		--]]
+		{
+			Name = "COOLDOWN",
+			Direction = "RIGHT",
+			Mode = "ICON",
+			Interval = C.filger.cooldown_space,
+			Alpha = 1,
+			IconSize = C.filger.cooldown_size,
+			Position = {"TOP", COOLDOWN_Anchor},
+
+			-- Self
+
+			-- Racial
+			-- Arcane Torrent (Runic Power)
+			{spellID = 50613, filter = "CD", absID = true},
+			-- Berserking
+			{spellID = 26297, filter = "CD", absID = true},
+			-- Blood Fury (Physical)
+			{spellID = 20572, filter = "CD", absID = true},
+			-- Blood Fury (Both)
+			{spellID = 33697, filter = "CD", absID = true},
+			-- Cannibalize (Forsaken)
+			{spellID = 20577, filter = "CD"},
+			-- Escape Artist (Gnome)
+			{spellID = 20589, filter = "CD"},
+			-- Every Man for Himself / Will to Survive (Human)
+			{spellID = 59752, filter = "CD"},
+			-- Gift of the Naaru (Draenei)
+			{spellID = 28880, filter = "CD"},
+			-- Shadowmeld (Night Elf)
+			{spellID = 20580, filter = "CD"},
+			-- Stoneform (Dwarf)
+			{spellID = 20594, filter = "CD"},
+			-- War Stomp (Tauren)
+			{spellID = 20600, filter = "CD", absID = true},
+			-- Will of the Forsaken (Forsaken)
+			{spellID = 7744, filter = "CD"},
+
+			-- Items
+			-- Back
+			{slotID = 15, filter = "CD"},
+			-- Belt
+			{slotID = 6, filter = "CD"},
+			-- Gloves
+			{slotID = 10, filter = "CD"},
+			-- Neck
+			{slotID = 2, filter = "CD"},
+			-- Rings
+			{slotID = 11, filter = "CD"},
+			{slotID = 12, filter = "CD"},
+			-- Trinkets
+			{slotID = 13, filter = "CD"},
+			{slotID = 14, filter = "CD"},
+		},
+	},
 	["DRUID"] = {
 		{
 			Name = "P_BUFF_ICON",
