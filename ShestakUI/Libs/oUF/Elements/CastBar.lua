@@ -9,7 +9,7 @@ local UnitCastingInfo = UnitCastingInfo
 local UnitChannelInfo = UnitChannelInfo
 local EventFunctions = {}
 
-local LibClassicCasterino = (oUF:IsVanilla() and LibStub('LibClassicCasterino', true)
+local LibClassicCasterino = (oUF:IsVanilla() and LibStub('LibClassicCasterino', true))
 if(LibClassicCasterino) then
 	UnitCastingInfo = function(unit)
 		return LibClassicCasterino:UnitCastingInfo(unit)
