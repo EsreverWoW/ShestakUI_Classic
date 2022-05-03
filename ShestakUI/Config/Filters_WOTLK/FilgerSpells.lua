@@ -639,6 +639,8 @@ C["filger_spells"] = {
 			-- Meta Gems
 			-- Skyfire Swiftness (Physical Haste, Proc) [Thundering Skyfire Diamond]
 			{spellID = 39959, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Skyflare Swiftness (Physical Haste, Proc) [Thundering Skyflare Diamond]
+			{spellID = 55379, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Enchants
 			-- Berserk [Enchant Weapon - Berserking]
@@ -1664,6 +1666,8 @@ C["filger_spells"] = {
 			{spellID = 18803, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Skyfire Swiftness (Physical Haste, Proc) [Thundering Skyfire Diamond]
 			{spellID = 39959, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Skyflare Swiftness (Physical Haste, Proc) [Thundering Skyflare Diamond]
+			{spellID = 55379, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Enchants
 			-- Berserk [Enchant Weapon - Berserking]
@@ -2353,6 +2357,8 @@ C["filger_spells"] = {
 			-- Meta Gems
 			-- Skyfire Swiftness (Physical Haste, Proc) [Thundering Skyfire Diamond]
 			{spellID = 39959, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Skyflare Swiftness (Physical Haste, Proc) [Thundering Skyflare Diamond]
+			{spellID = 55379, unitID = "player", caster = "player", filter = "BUFF"},
 		},
 		{
 			Name = "T_DEBUFF_ICON",
@@ -4306,6 +4312,8 @@ C["filger_spells"] = {
 			{spellID = 18803, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Skyfire Swiftness (Physical Haste, Proc) [Thundering Skyfire Diamond]
 			{spellID = 39959, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Skyflare Swiftness (Physical Haste, Proc) [Thundering Skyflare Diamond]
+			{spellID = 55379, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Enchants
 			-- Berserk [Enchant Weapon - Berserking]
@@ -5693,6 +5701,8 @@ C["filger_spells"] = {
 			-- Meta Gems
 			-- Skyfire Swiftness (Physical Haste, Proc) [Thundering Skyfire Diamond]
 			{spellID = 39959, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Skyflare Swiftness (Physical Haste, Proc) [Thundering Skyflare Diamond]
+			{spellID = 55379, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Enchants
 			-- Berserk [Enchant Weapon - Berserking]
@@ -6747,6 +6757,8 @@ C["filger_spells"] = {
 			{spellID = 18803, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Skyfire Swiftness (Physical Haste, Proc) [Thundering Skyfire Diamond]
 			{spellID = 39959, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Skyflare Swiftness (Physical Haste, Proc) [Thundering Skyflare Diamond]
+			{spellID = 55379, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Enchants
 			-- Berserk [Enchant Weapon - Berserking]
@@ -8322,6 +8334,8 @@ C["filger_spells"] = {
 			-- Meta Gems
 			-- Skyfire Swiftness (Physical Haste, Proc) [Thundering Skyfire Diamond]
 			{spellID = 39959, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Skyflare Swiftness (Physical Haste, Proc) [Thundering Skyflare Diamond]
+			{spellID = 55379, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Enchants
 			-- Berserk [Enchant Weapon - Berserking]
