@@ -8921,6 +8921,16 @@ C["filger_spells"] = {
 			{spellID = 62807, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Toasty Fire [Hodir]
 			{spellID = 62821, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Surge of Adrenaline [The Northrend Beasts]
+			{spellID = 68667, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Empowered Darkness [Twin Val'kyr]
+			{spellID = 65724, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- Empowered Light [Twin Val'kyr]
+			{spellID = 65748, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- Powering Up [Twin Val'kyr]
+			{spellID = 67590, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- Surge of Speed [Twin Val'kyr]
+			{spellID = 65828, unitID = "player", caster = "all", filter = "BUFF"},
 
 			-- Raids: Burning Crusade Classic
 			-- Breath: Haste [Kil'jaeden]

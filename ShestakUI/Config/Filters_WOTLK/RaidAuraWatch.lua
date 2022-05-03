@@ -925,11 +925,39 @@ T.RaidDebuffs = {
 
 -- Trial of the Crusader
 	-- The Northrend Beasts
+		-- Gormok the Impaler
+			[SpellName(66331)] = 5,		-- Impale
+			[SpellName(66406)] = 4,		-- Snobolled!
+			[SpellName(66407)] = 3,		-- Head Crack
+		-- Acidmaw & Dreadscale
+			[SpellName(66869)] = 3,		-- Burning Bile
+			[SpellName(66823)] = 3,		-- Paralytic Toxin
+		-- Icehowl
+			[SpellName(66689)] = 3,		-- Arctic Breath
+			[SpellName(66770)] = 4,		-- Ferocious Butt
+			-- [SpellName(66683)] = 3,		-- Massive Crash
 	-- Lord Jaraxxus
-	-- Champions of the Alliance
-	-- Champions of the Horde
+		[SpellName(66242)] = 4,		-- Burning Inferno
+		[SpellName(66532)] = 3,		-- Fel Fireball
+		[SpellName(66237)] = 5,		-- Incinerate Flesh
+		[SpellName(66197)] = 3,		-- Legion Flame
+	-- Faction Champions
 	-- Twin Val'kyr
+		-- [SpellName(65724)] = 3,		-- Empowered Darkness
+		-- [SpellName(65748)] = 3,		-- Empowered Light
+		-- [SpellName(67590)] = 3,		-- Powering Up
+		-- [SpellName(66001)] = 4,		-- Touch of Darkness
+		-- [SpellName(65950)] = 4,		-- Touch of Light
+		-- [SpellName(66069)] = 5,		-- Twin Spike (Dark)
+		-- [SpellName(66075)] = 5,		-- Twin Spike (Light)
 	-- Anub'arak
+		[SpellName(65775)] = 3,		-- Acid-Drenched Mandibles
+		[SpellName(67721)] = 4,		-- Expose Weakness
+		[SpellName(66012)] = 5,		-- Freezing Slash
+		-- [SpellName(66118)] = 3,		-- Leeching Swarm
+		-- [SpellName(66013)] = 3,		-- Penetrating Cold
+		-- [SpellName(66193)] = 3,		-- Permafrost
+		[SpellName(67574)] = 6,		-- Pursued by Anub'arak
 
 -- Icecrown Citadel
 	-- Trash
