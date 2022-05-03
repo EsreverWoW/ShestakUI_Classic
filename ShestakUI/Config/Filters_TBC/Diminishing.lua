@@ -101,7 +101,7 @@ T.DiminishingSpells = {
 	[605] = {"charm"},				-- Mind Control r1
 	[10911] = {"charm"},			-- Mind Control r2
 	[10912] = {"charm"},			-- Mind Control r3
-	[13181] = {"charm"},			-- Gnomish Mind Control Cap
+	[13180] = {"charm"},			-- Gnomish Mind Control Cap
 
 	-- Fears
 	[1513] = {"fear"},				-- Scare Beast r1
