@@ -1,8 +1,8 @@
-## Interface: 20503
+## Interface: 20504
 ## Title: ShestakUI (Classic) Config
 ## Notes: In-game configuration for ShestakUI
 ## Author: Shestak
-## Version: 1.42
+## Version: 1.43
 ## X-Curse-Project-ID: 468754
 ## X-WoWI-ID: 25916
 ## RequiredDeps: ShestakUI
