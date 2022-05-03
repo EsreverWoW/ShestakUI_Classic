@@ -3103,6 +3103,8 @@ C["filger_spells"] = {
 			-- Trinket Effects
 			-- Persistent Shield (Absorb, Use) [Scarab Brooch]
 			{spellID = 26470, unitID = "player", caster = "all", filter = "BUFF", absID = true},
+
+			-- Raids: Classic
 		},
 		{
 			Name = "PVE/PVP_DEBUFF",
@@ -3446,9 +3448,7 @@ C["filger_spells"] = {
 			-- Piercing Howl
 			{spellID = 12323, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
 
-			--[[
 			-- Raids: Classic
-			--]]
 
 		},
 		--[[

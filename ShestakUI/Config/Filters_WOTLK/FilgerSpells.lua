@@ -8905,6 +8905,24 @@ C["filger_spells"] = {
 			-- Twilight Renewal - Heroic (HoT, Proc) [Glowing Twilight Scale]
 			{spellID = 75494, unitID = "player", caster = "all", filter = "BUFF", absID = true},
 			--]]
+
+			-- Raids: Wrath of the Lich King Classic
+			-- Power Spark [Malygos]
+			{spellID = 56152, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Slag Imbued [Ignis the Furnace Master]
+			{spellID = 63536, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Rune of Power [The Assembly of Iron]
+			{spellID = 64320, unitID = "player", caster = "all", filter = "BUFF"},
+
+			-- Raids: Burning Crusade Classic
+			-- Breath: Haste [Kil'jaeden]
+			{spellID = 45856, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Breath: Revitalize [Kil'jaeden]
+			{spellID = 45860, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Shield of the Blue [Kil'jaeden]
+			{spellID = 45848, unitID = "player", caster = "all", filter = "BUFF"},
+
+			-- Raids: Classic
 		},
 		{
 			Name = "PVE/PVP_DEBUFF",

@@ -5108,6 +5108,16 @@ C["filger_spells"] = {
 			{spellID = 38333, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Persistent Shield (Absorb, Use) [Scarab Brooch]
 			{spellID = 26470, unitID = "player", caster = "all", filter = "BUFF", absID = true},
+
+			-- Raids: Burning Crusade Classic
+			-- Breath: Haste [Kil'jaeden]
+			{spellID = 45856, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Breath: Revitalize [Kil'jaeden]
+			{spellID = 45860, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Shield of the Blue [Kil'jaeden]
+			{spellID = 45848, unitID = "player", caster = "all", filter = "BUFF"},
+
+			-- Raids: Classic
 		},
 		{
 			Name = "PVE/PVP_DEBUFF",
@@ -5519,13 +5529,9 @@ C["filger_spells"] = {
 			-- Piercing Howl
 			{spellID = 12323, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
 
-			--[[
 			-- Raids: Burning Crusade Classic
-			--]]
 
-			--[[
 			-- Raids: Classic
-			--]]
 
 		},
 		--[[
