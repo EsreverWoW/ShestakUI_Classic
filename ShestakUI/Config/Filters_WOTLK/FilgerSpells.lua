@@ -8913,6 +8913,14 @@ C["filger_spells"] = {
 			{spellID = 63536, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Rune of Power [The Assembly of Iron]
 			{spellID = 64320, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Starlight [Hodir]
+			{spellID = 62807, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Storm Cloud [Hodir]
+			{spellID = 65134, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Storm Power [Hodir]
+			{spellID = 62807, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Toasty Fire [Hodir]
+			{spellID = 62821, unitID = "player", caster = "all", filter = "BUFF"},
 
 			-- Raids: Burning Crusade Classic
 			-- Breath: Haste [Kil'jaeden]
