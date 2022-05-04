@@ -139,6 +139,8 @@ C["filger_spells"] = {
 			-- {spellID = 53137, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Anti-Magic Shell
 			{spellID = 48707, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Blood Tap
+			{spellID = 45529, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Bloody Vengeance
 			{spellID = 50447, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Bone Shield
@@ -770,6 +772,8 @@ C["filger_spells"] = {
 			{spellID = 51052, filter = "CD"},
 			-- Army of the Dead
 			{spellID = 42650, filter = "CD"},
+			-- Blood Tap
+			{spellID = 45529, filter = "CD"},
 			-- Bone Shield
 			{spellID = 49222, filter = "CD"},
 			-- Corpse Explosion
@@ -784,6 +788,8 @@ C["filger_spells"] = {
 			{spellID = 57602, filter = "CD"},
 			-- Deathchill
 			{spellID = 49796, filter = "CD"},
+			-- Empower Rune Weapon
+			{spellID = 47568, filter = "CD"},
 			-- Ghoul Frenzy
 			{spellID = 63560, filter = "CD"},
 			-- Horn of Winter

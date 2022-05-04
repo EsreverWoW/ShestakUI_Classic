@@ -304,6 +304,7 @@ T.BuffWhiteList = {
 	[SpellName(50461)] = true,	-- Anti-Magic Zone
 	[SpellName(42650)] = true,	-- Army of the Dead
 	-- [SpellName(51789)] = true,	-- Blade Barrier
+	[SpellName(45529)] = true,	-- Blood Tap
 	[SpellName(50447)] = true,	-- Bloody Vengeance
 	[SpellName(49222)] = true,	-- Bone Shield
 	[SpellName(49028)] = true,	-- Dancing Rune Weapon
