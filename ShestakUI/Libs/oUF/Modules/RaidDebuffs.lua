@@ -298,7 +298,7 @@ local Disable = function(self)
 		self.RaidDebuffs:Hide()
 		self.RaidDebuffs.__owner = nil
 	end
-	if oUF:IsClassic() then
+	if oUF:IsClassic() and not oUF:IsWOTLK() then
 		self:UnregisterEvent("CHARACTER_POINTS_CHANGED", CheckSpec)
 	else
 		self:UnregisterEvent("PLAYER_TALENT_UPDATE", CheckSpec)

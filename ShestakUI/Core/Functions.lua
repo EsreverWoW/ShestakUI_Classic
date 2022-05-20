@@ -106,8 +106,12 @@ local function CheckRole()
 end
 local RoleUpdater = CreateFrame("Frame")
 RoleUpdater:RegisterEvent("PLAYER_ENTERING_WORLD")
-if T.Classic then
+if T.Classic and not T.WOTLK then
 	RoleUpdater:RegisterEvent("CHARACTER_POINTS_CHANGED")
+	RoleUpdater:RegisterEvent("UNIT_INVENTORY_CHANGED")
+	RoleUpdater:RegisterEvent("UPDATE_BONUS_ACTIONBAR")
+elseif T.WOTLK then
+	RoleUpdater:RegisterEvent("PLAYER_TALENT_UPDATE")
 	RoleUpdater:RegisterEvent("UNIT_INVENTORY_CHANGED")
 	RoleUpdater:RegisterEvent("UPDATE_BONUS_ACTIONBAR")
 else

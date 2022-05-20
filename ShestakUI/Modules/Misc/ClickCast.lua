@@ -322,7 +322,7 @@ SpellBinder:RegisterEvent("PLAYER_ENTERING_WORLD")
 SpellBinder:RegisterEvent("GROUP_ROSTER_UPDATE")
 SpellBinder:RegisterEvent("ZONE_CHANGED")
 SpellBinder:RegisterEvent("ZONE_CHANGED_NEW_AREA")
-if T.Classic then
+if T.Classic and not T.WOTLK then
 	SpellBinder:RegisterEvent("CHARACTER_POINTS_CHANGED")
 else
 	SpellBinder:RegisterEvent("PLAYER_TALENT_UPDATE")

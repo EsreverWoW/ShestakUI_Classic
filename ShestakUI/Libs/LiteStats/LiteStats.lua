@@ -1539,7 +1539,7 @@ if (T.Mainline or T.WOTLK) and talents.enabled then
 				self:GetScript("OnMouseUp")(self, b)
 			end)
 
-			if T.Mainline then
+			if T.Mainline or T.WOTLK then
 				RegEvents(self, "PLAYER_ENTERING_WORLD PLAYER_TALENT_UPDATE PLAYER_LOOT_SPEC_UPDATED")
 			else
 				RegEvents(self, "PLAYER_ENTERING_WORLD CHARACTER_POINTS_CHANGED PLAYER_LOOT_SPEC_UPDATED")
