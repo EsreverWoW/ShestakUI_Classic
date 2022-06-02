@@ -187,7 +187,7 @@ local function Visibility(self, event, unit)
 		if(UnitLevel('player') ~= element.__accountMaxLevel) then
 			shouldEnable = true
 		end
-	elseif(oUF:IsWOTLK()) then
+	elseif(oUF:IsWrath()) then
 		if(not UnitHasVehicleUI('player')) then
 			if(UnitLevel('player') ~= element.__accountMaxLevel) then
 				shouldEnable = true

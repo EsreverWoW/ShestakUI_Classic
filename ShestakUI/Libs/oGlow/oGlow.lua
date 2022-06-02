@@ -31,8 +31,8 @@ function oGlow:IsTBC()
 	return _G.WOW_PROJECT_ID == _G.WOW_PROJECT_BURNING_CRUSADE_CLASSIC
 end
 
-function oGlow:IsWOTLK()
-	return false -- TODO: Change when there is a project ID
+function oGlow:IsWrath()
+	return select(4, GetBuildInfo()) >= 30400 and select(4, GetBuildInfo()) < 40000 -- TODO: Change when there is a project ID
 end
 
 function oGlow:ADDON_LOADED(event, addon)

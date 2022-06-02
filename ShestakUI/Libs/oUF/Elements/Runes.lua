@@ -3,7 +3,7 @@ if(select(2, UnitClass('player')) ~= 'DEATHKNIGHT') then return end
 local _, ns = ...
 local oUF = ns.oUF
 
-if(oUF:IsClassic() and not oUF:IsWOTLK()) then return end
+if(oUF:IsClassic() and not oUF:IsWrath()) then return end
 
 local runemap = {1, 2, 3, 4, 5, 6}
 local hasSortOrder = false

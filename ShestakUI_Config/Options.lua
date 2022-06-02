@@ -18,8 +18,8 @@ local function IsTBCBuild()
 	return _G.WOW_PROJECT_ID == _G.WOW_PROJECT_BURNING_CRUSADE_CLASSIC
 end
 
-local function IsWOTLKBuild()
-	return false -- TODO: Add project ID once available
+local function IsWrathBuild()
+	return select(4, GetBuildInfo()) >= 30400 and select(4, GetBuildInfo()) < 40000 -- TODO: Change when there is a project ID
 end
 
 local function HideOptions(list)
@@ -712,17 +712,17 @@ do
 		hide_maw_buffs
 	}
 
-	local wotlk = {
+	local wrath = {
 		hide_banner,
 		hide_talking_head,
 		hide_maw_buffs
 	}
 
-	if IsClassicBuild() and not IsWOTLKBuild() then
+	if IsClassicBuild() and not IsWrathBuild() then
 		HideOptions(classic)
 		move_blizzard:SetPoint("TOPLEFT", vehicle_mouseover, "BOTTOMLEFT", 16, 0)
-	elseif IsWOTLKBuild() then
-		HideOptions(wotlk)
+	elseif IsWrathBuild() then
+		HideOptions(wrath)
 	end
 end
 
@@ -1285,7 +1285,7 @@ do
 	if IsVanillaBuild() then
 		HideOptions(vanilla)
 		show_target_target:SetPoint("LEFT", show_pet, "RIGHT", 248, 0)
-	elseif IsTBCBuild() or IsWOTLKBuild() then
+	elseif IsTBCBuild() or IsWrathBuild() then
 		HideOptions(classic)
 	else
 		HideOptions(retail)
@@ -1343,7 +1343,7 @@ do
 		totem_other
 	}
 
-	local wotlk = {
+	local wrath = {
 		arcane,
 		chi,
 		stagger,
@@ -1352,11 +1352,11 @@ do
 		totem_other
 	}
 
-	if IsClassicBuild() and not IsWOTLKBuild() then
+	if IsClassicBuild() and not IsWrathBuild() then
 		HideOptions(classic)
 		totem:SetPoint("TOPLEFT", rune, "BOTTOMLEFT", -20, 0)
-	elseif IsWOTLKBuild() then
-		HideOptions(wotlk)
+	elseif IsWrathBuild() then
+		HideOptions(wrath)
 	end
 end
 
@@ -1894,7 +1894,7 @@ do
 		mount
 	}
 
-	local wotlk = {
+	local wrath = {
 		talents,
 		show_shift,
 		unit_role,
@@ -1909,8 +1909,8 @@ do
 		HideOptions(classic)
 		average_lvl:SetPoint("TOPLEFT", show_shift, "BOTTOMLEFT", 0, 0)
 		raid_icon:SetPoint("TOPLEFT", average_lvl, "BOTTOMLEFT", 0, -24)
-	elseif IsWOTLKBuild() then
-		HideOptions(wotlk)
+	elseif IsWrathBuild() then
+		HideOptions(wrath)
 		average_lvl:SetPoint("TOPLEFT", show_shift, "BOTTOMLEFT", 0, 0)
 		raid_icon:SetPoint("TOPLEFT", average_lvl, "BOTTOMLEFT", 0, -24)
 	else
@@ -2271,7 +2271,7 @@ do
 		dk_runes
 	}
 
-	if IsClassicBuild() and not IsWOTLKBuild() then
+	if IsClassicBuild() and not IsWrathBuild() then
 		HideOptions(classic)
 	end
 end
@@ -2960,14 +2960,14 @@ do
 		currency_misc
 	}
 
-	local wotlk = {
+	local wrath = {
 		currency_archaeology
 	}
 
-	if IsClassicBuild() and not IsWOTLKBuild() then
+	if IsClassicBuild() and not IsWrathBuild() then
 		HideOptions(classic)
-	elseif IsWOTLKBuild() then
-		HideOptions(wotlk)
+	elseif IsWrathBuild() then
+		HideOptions(wrath)
 	end
 end
 
@@ -3002,15 +3002,15 @@ do
 		archaeology
 	}
 
-	local wotlk = {
+	local wrath = {
 		profession_tabs, -- TODO: Fix for Classic
 		archaeology
 	}
 
-	if IsClassicBuild() and not IsWOTLKBuild() then
+	if IsClassicBuild() and not IsWrathBuild() then
 		HideOptions(classic)
-	elseif IsWOTLKBuild() then
-		HideOptions(wotlk)
+	elseif IsWrathBuild() then
+		HideOptions(wrath)
 	end
 end
 
@@ -3054,7 +3054,7 @@ do
 		chars_currency
 	}
 
-	if IsClassicBuild() and not IsWOTLKBuild() then
+	if IsClassicBuild() and not IsWrathBuild() then
 		HideOptions(classic)
 	end
 end
