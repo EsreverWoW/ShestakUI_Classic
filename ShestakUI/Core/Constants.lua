@@ -18,5 +18,5 @@ T.Mainline =_G.WOW_PROJECT_ID == _G.WOW_PROJECT_MAINLINE
 T.Classic = _G.WOW_PROJECT_ID == _G.WOW_PROJECT_CLASSIC or _G.WOW_PROJECT_ID == _G.WOW_PROJECT_BURNING_CRUSADE_CLASSIC -- TODO: Add WotLK: Classic when there is a project ID
 T.Vanilla = _G.WOW_PROJECT_ID == _G.WOW_PROJECT_CLASSIC
 T.TBC = _G.WOW_PROJECT_ID == _G.WOW_PROJECT_BURNING_CRUSADE_CLASSIC
-T.WOTLK = false -- TODO: Change when there is a project ID
+T.Wrath = false -- TODO: Change when there is a project ID
 T.HiDPI = GetScreenHeight() / T.screenHeight < 0.75

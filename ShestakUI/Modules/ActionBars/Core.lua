@@ -64,7 +64,7 @@ frame:SetScript("OnEvent", function()
 		hooksecurefunc("TalentFrame_LoadUI", function()
 			if T.Classic then
 				PlayerTalentFrame:UnregisterEvent("CHARACTER_POINTS_CHANGED")
-				if T.WOTLK then
+				if T.Wrath then
 					PlayerTalentFrame:UnregisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
 				end
 			else
@@ -380,7 +380,7 @@ if T.Classic then
 				ActionButton_ShowGrid(button, reason)
 				button:SetAttribute("statehidden", true)
 
-				if T.WOTLK then
+				if T.Wrath then
 					if _G["VehicleMenuBarActionButton"..i] then
 						_G["VehicleMenuBarActionButton"..i]:SetAttribute("statehidden", true)
 					end

@@ -181,7 +181,7 @@ local SplitBars = function()
 			ToggleBar[3]:SetPoint("BOTTOMLEFT", SplitBarRight, "BOTTOMRIGHT", C.actionbar.button_space, 0)
 			ToggleBar[4]:ClearAllPoints()
 			ToggleBar[4]:SetPoint("BOTTOMRIGHT", SplitBarLeft, "BOTTOMLEFT", -C.actionbar.button_space, 0)
-			if T.Mainline or T.WOTLK then
+			if T.Mainline or T.Wrath then
 				VehicleButtonAnchor:ClearAllPoints()
 				VehicleButtonAnchor:SetPoint("BOTTOMRIGHT", SplitBarLeft, "BOTTOMLEFT", -C.actionbar.button_space, 0)
 			end
@@ -200,7 +200,7 @@ local SplitBars = function()
 			ToggleBar[3]:SetPoint("BOTTOMLEFT", ActionBarAnchor, "BOTTOMRIGHT", C.actionbar.button_space, 0)
 			ToggleBar[4]:ClearAllPoints()
 			ToggleBar[4]:SetPoint("BOTTOMRIGHT", ActionBarAnchor, "BOTTOMLEFT", -C.actionbar.button_space, 0)
-			if T.Mainline or T.WOTLK then
+			if T.Mainline or T.Wrath then
 				VehicleButtonAnchor:ClearAllPoints()
 				VehicleButtonAnchor:SetPoint("BOTTOMRIGHT", ActionBarAnchor, "BOTTOMLEFT", -C.actionbar.button_space, 0)
 			end
@@ -363,7 +363,7 @@ for i = 1, 5 do
 				ToggleBar[3]:FadeIn()
 				ToggleBar[4]:FadeIn()
 			end
-			if T.Mainline or T.WOTLK then
+			if T.Mainline or T.Wrath then
 				VehicleButtonAnchor:ClearAllPoints()
 				VehicleButtonAnchor:SetPoint("BOTTOMRIGHT", ToggleBar[4], "BOTTOMLEFT", -C.actionbar.button_space, 0)
 			end
@@ -400,7 +400,7 @@ for i = 1, 5 do
 				ToggleBar[4]:FadeOut()
 			end
 			VehicleButtonAnchor:ClearAllPoints()
-			if T.Mainline or T.WOTLK then
+			if T.Mainline or T.Wrath then
 				if ShestakUISettingsPerChar.SplitBars == true then
 					VehicleButtonAnchor:SetPoint("BOTTOMRIGHT", SplitBarLeft, "BOTTOMLEFT", -C.actionbar.button_space, 0)
 				else

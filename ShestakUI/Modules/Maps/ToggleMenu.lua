@@ -75,7 +75,7 @@ C["togglemainmenu"] = {
 			if T.Mainline then
 				SlashCmdList.TEST_EXTRABUTTON()
 				SlashCmdList.TEST_ACHIEVEMENT()
-			elseif T.WOTLK then
+			elseif T.Wrath then
 				SlashCmdList.TEST_ACHIEVEMENT()
 			end
 			--SlashCmdList.GRIDONSCREEN()

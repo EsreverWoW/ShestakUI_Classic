@@ -439,7 +439,7 @@ xCT:RegisterEvent("UNIT_POWER_UPDATE")
 if C.combattext.dk_runes and T.class == "DEATHKNIGHT" then
 	xCT:RegisterEvent("RUNE_POWER_UPDATE")
 end
-if T.Mainline or T.WOTLK then
+if T.Mainline or T.Wrath then
 	xCT:RegisterEvent("UNIT_ENTERED_VEHICLE")
 	xCT:RegisterEvent("UNIT_EXITING_VEHICLE")
 end

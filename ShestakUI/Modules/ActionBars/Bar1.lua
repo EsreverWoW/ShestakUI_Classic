@@ -79,7 +79,7 @@ bar:RegisterEvent("PLAYER_LOGIN")
 if T.Mainline then
 	bar:RegisterEvent("UPDATE_VEHICLE_ACTIONBAR")
 	bar:RegisterEvent("UPDATE_OVERRIDE_ACTIONBAR")
-elseif T.WOTLK then
+elseif T.Wrath then
 	bar:RegisterEvent("UPDATE_VEHICLE_ACTIONBAR")
 end
 bar:SetScript("OnEvent", function(self, event)

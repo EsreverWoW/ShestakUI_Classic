@@ -232,7 +232,7 @@ function SlashCmdList.LSTATS()
 	if experience.enabled then
 		slprint(format("%s/%s/%s", COMBAT_XP_GAIN, TIME_PLAYED_MSG, FACTION), L_STATS_RC_EXPERIENCE, L_STATS_WATCH_FACTIONS, L_STATS_TOOLTIP_EXPERIENCE, L_STATS_TOOLTIP_TIME_PLAYED)
 	end
-	if (T.Mainline or T.WOTLK) and talents.enabled then
+	if (T.Mainline or T.Wrath) and talents.enabled then
 		slprint(TALENTS, L_STATS_OPEN_TALENT, L_STATS_RC_TALENT)
 	end
 	if location.enabled or coords.enabled then
@@ -314,7 +314,7 @@ if clock.enabled then
 					if extended then tr, tg, tb = 0.3, 1, 0.3 else tr, tg, tb = 1, 1, 1 end
 
 					local isHeroic, displayHeroic, displayMythic
-					if T.Mainline or T.WOTLK then
+					if T.Mainline or T.Wrath then
 						_, _, isHeroic, _, displayHeroic, displayMythic = GetDifficultyInfo(difficulty)
 						if displayMythic then
 							diff = "M"
@@ -1492,7 +1492,7 @@ end
 ----------------------------------------------------------------------------------------
 --	Talents
 ----------------------------------------------------------------------------------------
-if (T.Mainline or T.WOTLK) and talents.enabled then
+if (T.Mainline or T.Wrath) and talents.enabled then
 	local lootSpecName, specName
 	local specList = {
 		{text = SPECIALIZATION, isTitle = true, notCheckable = true},
@@ -1539,7 +1539,7 @@ if (T.Mainline or T.WOTLK) and talents.enabled then
 				self:GetScript("OnMouseUp")(self, b)
 			end)
 
-			if T.Mainline or T.WOTLK then
+			if T.Mainline or T.Wrath then
 				RegEvents(self, "PLAYER_ENTERING_WORLD PLAYER_TALENT_UPDATE PLAYER_LOOT_SPEC_UPDATED")
 			else
 				RegEvents(self, "PLAYER_ENTERING_WORLD CHARACTER_POINTS_CHANGED PLAYER_LOOT_SPEC_UPDATED")
@@ -1829,7 +1829,7 @@ if gold.enabled then
 		end,
 		OnEnter = function(self)
 			local curgold = GetMoney()
-			local _, _, archaeology, _, cooking = (T.Mainline or T.WOTLK) and GetProfessions()
+			local _, _, archaeology, _, cooking = (T.Mainline or T.Wrath) and GetProfessions()
 			conf.Gold = curgold
 			GameTooltip:SetOwner(self, "ANCHOR_NONE")
 			GameTooltip:ClearAllPoints()
@@ -1867,7 +1867,7 @@ if gold.enabled then
 			GameTooltip:AddDoubleLine(TOTAL, formatgold(5, total), ttsubh.r, ttsubh.g, ttsubh.b, 1, 1, 1)
 			GameTooltip:AddLine(" ")
 
-			if T.Mainline or T.WOTLK then
+			if T.Mainline or T.Wrath then
 				local currencies = 0
 				for i = 1, C_CurrencyInfo.GetCurrencyListSize() do
 					local info = C_CurrencyInfo.GetCurrencyListInfo(i)
@@ -1920,7 +1920,7 @@ if gold.enabled then
 				-- Currency(1580, false, true)	-- Seal of Wartorn Fate
 				-- end
 
-				if T.WOTLK and C.stats.currency_raid and T.level == MAX_PLAYER_LEVEL then
+				if T.Wrath and C.stats.currency_raid and T.level == MAX_PLAYER_LEVEL then
 					titleName = L_STATS_CURRENCY_RAID
 					Currency(101, false, false)	-- Emblem of Heroism
 					Currency(102, false, false)	-- Emblem of Valor
@@ -2185,7 +2185,7 @@ if stats.enabled then
 			GameTooltip:AddLine(PAPERDOLL_SIDEBAR_STATS, tthead.r, tthead.g, tthead.b)
 			GameTooltip:AddLine(" ")
 			local spec = T.Classic and T.GetSpecialization() or GetSpecialization()
-			if spec and (T.Mainline or T.WOTLK) then
+			if spec and (T.Mainline or T.Wrath) then
 				local primaryStat = select(6, GetSpecializationInfo(spec, nil, nil, nil, UnitSex("player")))
 				local value = UnitStat("player", primaryStat)
 				local statName = _G["SPELL_STAT"..primaryStat.."_NAME"]
@@ -2219,7 +2219,7 @@ if stats.enabled then
 		end,
 	})
 
-	if T.Mainline or T.WOTLK then
+	if T.Mainline or T.Wrath then
 		Inject("Stat", {
 			OnClick = function() ToggleCharacter("PaperDollFrame") end,
 			OnEnter = function() GameTooltip:SetOwner(self, "ANCHOR_BOTTOMLEFT", -3, 26)LP_Stats:GetScript("OnEnter")(LP_Stats) end,

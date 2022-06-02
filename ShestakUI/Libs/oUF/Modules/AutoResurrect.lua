@@ -24,7 +24,7 @@ if T.Vanilla or T.TBC then
 			ooc = GetSpellInfo(2008),		-- Ancestral Spirit
 		}
 	}
-elseif T.WOTLK then
+elseif T.Wrath then
 	classList = {
 		["DEATHKNIGHT"] = {
 			combat = GetSpellInfo(61999),	-- Raise Ally

@@ -188,7 +188,7 @@ if T.Mainline then
 	SLASH_SPEC3 = "/ыы"
 end
 
-if T.WOTLK then
+if T.Wrath then
 	SlashCmdList.SPEC = function()
 		local spec = GetActiveSpecGroup()
 		if spec == 1 then SetActiveSpecGroup(2) elseif spec == 2 then SetActiveSpecGroup(1) end
@@ -352,7 +352,7 @@ if T.Mainline then
 	SLASH_TEST_ACHIEVEMENT2 = "/ефср"
 end
 
-if T.WOTLK then
+if T.Wrath then
 	SlashCmdList.TEST_ACHIEVEMENT = function()
 		PlaySound(SOUNDKIT.LFG_REWARDS)
 		if not AchievementFrame then

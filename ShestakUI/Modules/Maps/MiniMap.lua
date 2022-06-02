@@ -42,7 +42,7 @@ MinimapZoomIn:Hide()
 MinimapZoomOut:Hide()
 
 -- Hide Blob Ring
-if T.Mainline or T.WOTLK then
+if T.Mainline or T.Wrath then
 	Minimap:SetArchBlobRingScalar(0)
 	Minimap:SetQuestBlobRingScalar(0)
 end
@@ -105,7 +105,7 @@ if T.Mainline then
 end
 
 -- Instance Difficulty icon
-if T.Mainline or T.WOTLK then
+if T.Mainline or T.Wrath then
 	MiniMapInstanceDifficulty:SetParent(Minimap)
 	MiniMapInstanceDifficulty:ClearAllPoints()
 	MiniMapInstanceDifficulty:SetPoint("TOPRIGHT", Minimap, "TOPRIGHT", 3, 2)
@@ -129,7 +129,7 @@ if T.Mainline then
 end
 
 -- Invites icon
-if T.Mainline or T.WOTLK then
+if T.Mainline or T.Wrath then
 	GameTimeCalendarInvitesTexture:ClearAllPoints()
 	GameTimeCalendarInvitesTexture:SetParent(Minimap)
 	GameTimeCalendarInvitesTexture:SetPoint("TOPRIGHT", Minimap, "TOPRIGHT", 0, 0)
@@ -370,7 +370,7 @@ end)
 
 -- Set Square Map Mask
 Minimap:SetMaskTexture(C.media.blank)
-if T.Mainline or T.WOTLK then
+if T.Mainline or T.Wrath then
 	Minimap:SetArchBlobRingAlpha(0)
 	Minimap:SetQuestBlobRingAlpha(0)
 end

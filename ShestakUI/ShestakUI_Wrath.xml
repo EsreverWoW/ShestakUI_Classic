@@ -14,7 +14,7 @@
 	<Script file="Config\Settings.lua"/>
 	<Script file="Config\Positions.lua"/>
 	<Script file="Config\Fonts.lua"/>
-	<Script file="Config\Profiles_WOTLK.lua"/>
+	<Script file="Config\Profiles_Wrath.lua"/>
 
 	<Script file="Core\GUI.lua"/>
 	<Script file="Core\PixelPerfect.lua"/>
@@ -31,25 +31,25 @@
 	<Include file="Libs\oGlow\oGlow.xml"/>
 	<Script file="Libs\LitePanels\LitePanels.lua"/>
 	<Script file="Libs\LitePanels\Layout.lua"/>
-	<Script file="Config\DataText_WOTLK.lua"/>
+	<Script file="Config\DataText_Wrath.lua"/>
 	<Script file="Libs\LiteStats\LiteStats.lua"/>
 	<Script file="Modules\UnitFrames\Colors.lua"/>
 
-	<Script file="Config\Filters_WOTLK\Announcements.lua"/>
-	<Script file="Config\Filters_WOTLK\ArenaControl.lua"/>
-	<Script file="Config\Filters_WOTLK\AutoButton.lua"/>
-	<Script file="Config\Filters_WOTLK\BadBuffs.lua"/>
-	<Script file="Config\Filters_WOTLK\ChannelingTicks.lua"/>
-	<Script file="Config\Filters_WOTLK\ChatSpam.lua"/>
-	<Script file="Config\Filters_WOTLK\CombatText.lua"/>
-	<Script file="Config\Filters_WOTLK\Cooldowns.lua"/>
-	<Script file="Config\Filters_WOTLK\Diminishing.lua"/>
-	<Script file="Config\Filters_WOTLK\Errors.lua"/>
-	<Script file="Config\Filters_WOTLK\FilgerSpells.lua"/>
-	<Script file="Config\Filters_WOTLK\Nameplates.lua"/>
-	<Script file="Config\Filters_WOTLK\OpenItems.lua"/>
-	<Script file="Config\Filters_WOTLK\RaidAuraWatch.lua"/>
-	<Script file="Config\Filters_WOTLK\Reminders.lua"/>
+	<Script file="Config\Filters_Wrath\Announcements.lua"/>
+	<Script file="Config\Filters_Wrath\ArenaControl.lua"/>
+	<Script file="Config\Filters_Wrath\AutoButton.lua"/>
+	<Script file="Config\Filters_Wrath\BadBuffs.lua"/>
+	<Script file="Config\Filters_Wrath\ChannelingTicks.lua"/>
+	<Script file="Config\Filters_Wrath\ChatSpam.lua"/>
+	<Script file="Config\Filters_Wrath\CombatText.lua"/>
+	<Script file="Config\Filters_Wrath\Cooldowns.lua"/>
+	<Script file="Config\Filters_Wrath\Diminishing.lua"/>
+	<Script file="Config\Filters_Wrath\Errors.lua"/>
+	<Script file="Config\Filters_Wrath\FilgerSpells.lua"/>
+	<Script file="Config\Filters_Wrath\Nameplates.lua"/>
+	<Script file="Config\Filters_Wrath\OpenItems.lua"/>
+	<Script file="Config\Filters_Wrath\RaidAuraWatch.lua"/>
+	<Script file="Config\Filters_Wrath\Reminders.lua"/>
 
 	<Script file="Core\API.lua"/>
 	<Script file="Core\Functions.lua"/>
@@ -115,7 +115,7 @@
 	<Script file="Modules\Auras\BuffFrame.lua"/>
 	<Script file="Modules\Auras\Filger.lua"/>
 	<Script file="Modules\Auras\SelfBuffsReminder.lua"/>
-	<Script file="Modules\Auras\RaidBuffsReminder_WOTLK.lua"/>
+	<Script file="Modules\Auras\RaidBuffsReminder_Wrath.lua"/>
 
 	<Script file="Modules\Automation\AutoDismount.lua"/>
 	<Script file="Modules\Automation\AutoInvite.lua"/>
@@ -175,7 +175,7 @@
 
 	<Script file="Modules\Maps\BattlefieldMap.lua"/>
 	<Script file="Modules\Maps\ButtonCollect.lua"/>
-	<Script file="Modules\Maps\FogOfWar_WOTLK.lua"/>
+	<Script file="Modules\Maps\FogOfWar_Wrath.lua"/>
 	<Script file="Modules\Maps\MiniMap.lua"/>
 	<Script file="Modules\Maps\MiniMapButtons.lua"/>
 	<Script file="Modules\Maps\ToggleMenu.lua"/>
@@ -185,7 +185,7 @@
 	<Script file="Modules\Quests\AutoButton.lua"/>
 	<Script file="Modules\Quests\ObjectiveTracker_Vanilla.lua"/>
 
-	<Include file="Modules\Skins\Blizzard_WOTLK\LoadFrames.xml"/>
+	<Include file="Modules\Skins\Blizzard_Wrath\LoadFrames.xml"/>
 	<Script file="Modules\Skins\Ace3.lua"/>
 	<Script file="Modules\Skins\AtlasLoot.lua"/>
 	<Script file="Modules\Skins\Aurora.lua"/>

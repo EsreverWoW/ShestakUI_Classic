@@ -302,7 +302,7 @@ local function Shared(self, unit)
 		end
 
 		-- Rune bar
-		if (T.Mainline or T.WOTLK) and C.unitframe_class_bar.rune == true and T.class == "DEATHKNIGHT" then
+		if (T.Mainline or T.Wrath) and C.unitframe_class_bar.rune == true and T.class == "DEATHKNIGHT" then
 			self.Runes = CreateFrame("Frame", self:GetName().."_RuneBar", self)
 			self.Runes:CreateBackdrop("Default")
 			self.Runes:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, 7)
@@ -747,7 +747,7 @@ local function Shared(self, unit)
 			self.Debuffs.initialAnchor = "BOTTOMRIGHT"
 			self.Debuffs["growth-y"] = "UP"
 			self.Debuffs["growth-x"] = "LEFT"
-			if ((T.Mainline or T.WOTLK) and T.class == "DEATHKNIGHT" and C.unitframe_class_bar.rune == true)
+			if ((T.Mainline or T.Wrath) and T.class == "DEATHKNIGHT" and C.unitframe_class_bar.rune == true)
 			or ((T.class == "DRUID" or T.class == "ROGUE") and C.unitframe_class_bar.combo == true and C.unitframe_class_bar.combo_old ~= true)
 			or (T.class == "SHAMAN" and C.unitframe_class_bar.totem == true)
 			or (T.Mainline and T.class == "WARLOCK" and C.unitframe_class_bar.shard == true) then

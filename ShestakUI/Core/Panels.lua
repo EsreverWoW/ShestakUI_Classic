@@ -63,7 +63,7 @@ end
 PetBarAnchor:SetFrameStrata("LOW")
 if T.Vanilla or T.TBC then
 	RegisterStateDriver(PetBarAnchor, "visibility", "[pet,nooverridebar,nopossessbar] show; hide")
-elseif T.WOTLK then
+elseif T.Wrath then
 	RegisterStateDriver(PetBarAnchor, "visibility", "[pet,nooverridebar,novehicleui,nopossessbar] show; hide")
 else
 	RegisterStateDriver(PetBarAnchor, "visibility", "[pet,novehicleui,nopossessbar,nopetbattle] show; hide")
