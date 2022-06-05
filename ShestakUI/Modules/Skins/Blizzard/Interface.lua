@@ -51,6 +51,10 @@ local function LoadSkin()
 		end
 	end
 
+	if T.Mainline then
+		InterfaceOptionsCombatPanel.clickCastingButton:SkinButton()
+	end
+
 	local checkboxes = {
 		-- Controls
 		"ControlsPanelStickyTargeting",
@@ -66,6 +70,7 @@ local function LoadSkin()
 		"CombatPanelFlashLowHealthWarning",
 		"CombatPanelAutoRange",
 		"CombatPanelEnableFloatingCombatText",
+		"CombatPanelEnableMouseoverCast",
 		"CombatPanelCombatTextLowManaHealth",
 		"CombatPanelCombatTextAuras",
 		"CombatPanelCombatTextAuraFade",
@@ -215,6 +220,7 @@ local function LoadSkin()
 		"CombatPanelCombatTextFloatModeDropDown",
 		"CombatPanelFocusCastKeyDropDown",
 		"CombatPanelSelfCastKeyDropDown",
+		"CombatPanelMouseoverCastKeyDropDown",
 		"ControlsPanelAutoLootKeyDropDown",
 		"DisplayPanelChatBubblesDropDown",
 		"DisplayPanelDisplayDropDown",
