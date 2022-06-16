@@ -94,6 +94,7 @@ if C.reminder.raid_buffs_enable == true or C.announcements.flask_food == true th
 		Intellect = {
 			SpellName(23028),	-- Arcane Brilliance
 			SpellName(1459),	-- Arcane Intellect
+			SpellName(46302),	-- K'iru's Song of Victory
 			SpellName(61316),	-- Dalaran Brilliance
 			SpellName(61024),	-- Dalaran Intellect
 			SpellName(8096),	-- Intellect [Scroll of Intellect]
@@ -115,6 +116,7 @@ if C.reminder.raid_buffs_enable == true or C.announcements.flask_food == true th
 		Stamina = {
 			SpellName(21562),	-- Prayer of Fortitude
 			SpellName(1243),	-- Power Word: Fortitude
+			SpellName(46302),	-- K'iru's Song of Victory
 			SpellName(69377),	-- Fortitude [Runescroll of Fortitude]
 		},
 		Custom = {
@@ -243,6 +245,7 @@ if C.reminder.solo_buffs_enable == true then
 				["spells"] = {
 					SpellName(1459),	-- Arcane Intellect
 					SpellName(23028),	-- Arcane Brilliance
+					SpellName(46302),	-- K'iru's Song of Victory
 					SpellName(61316),	-- Dalaran Brilliance
 					SpellName(61024),	-- Dalaran Intellect
 				},
@@ -320,6 +323,7 @@ if C.reminder.solo_buffs_enable == true then
 				["spells"] = {
 					SpellName(1243),	-- Power Word: Fortitude
 					SpellName(21562),	-- Prayer of Fortitude
+					SpellName(46302),	-- K'iru's Song of Victory
 				},
 				["combat"] = true,
 				["instance"] = true,

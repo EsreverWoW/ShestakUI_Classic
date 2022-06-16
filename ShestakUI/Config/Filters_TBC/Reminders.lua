@@ -109,6 +109,7 @@ if C.reminder.raid_buffs_enable == true or C.announcements.flask_food == true th
 		Intellect = {
 			SpellName(23028),	-- Arcane Brilliance
 			SpellName(1459),	-- Arcane Intellect
+			SpellName(46302),	-- K'iru's Song of Victory
 		},
 		Kings = {
 			SpellName(25898),	-- Greater Blessing of Kings
@@ -125,6 +126,7 @@ if C.reminder.raid_buffs_enable == true or C.announcements.flask_food == true th
 		Stamina = {
 			SpellName(21562),	-- Prayer of Fortitude
 			SpellName(1243),	-- Power Word: Fortitude
+			SpellName(46302),	-- K'iru's Song of Victory
 		},
 		Custom = {
 			-- SpellName(spellID),	-- Spell name
@@ -241,6 +243,7 @@ if C.reminder.solo_buffs_enable == true then
 				["spells"] = {
 					SpellName(1459),	-- Arcane Intellect
 					SpellName(23028),	-- Arcane Brilliance
+					SpellName(46302),	-- K'iru's Song of Victory
 				},
 				["combat"] = true,
 				["instance"] = true,
@@ -327,6 +330,7 @@ if C.reminder.solo_buffs_enable == true then
 				["spells"] = {
 					SpellName(1243),	-- Power Word: Fortitude
 					SpellName(21562),	-- Prayer of Fortitude
+					SpellName(46302),	-- K'iru's Song of Victory
 				},
 				["combat"] = true,
 				["instance"] = true,
