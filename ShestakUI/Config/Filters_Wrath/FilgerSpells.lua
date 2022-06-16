@@ -7723,7 +7723,7 @@ C["filger_spells"] = {
 			-- Death Coil
 			{spellID = 6789, filter = "CD"},
 			-- Demon Charge (Metamorphosis)
-			{spellID = 54785, filter = "CD"}
+			{spellID = 54785, filter = "CD"},
 			-- Demonic Circle: Teleport
 			{spellID = 48020, filter = "CD"},
 			-- Demonic Empowerment
