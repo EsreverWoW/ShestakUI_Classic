@@ -172,7 +172,7 @@ T.ArenaControl = {
 	[SpellName(45182)] = 1,		-- Cheating Death
 	[SpellName(51690)] = 1,		-- Killing Spree
 	[SpellName(51713)] = 1,		-- Shadow Dance
-	[SpellName(57933] = 1,		-- Tricks of the Trade
+	[SpellName(57933)] = 1,		-- Tricks of the Trade
 	-- Shaman
 	[SpellName(8178)] = 1,		-- Grounding Totem
 	[SpellName(16190)] = 1,		-- Mana Tide Totem
