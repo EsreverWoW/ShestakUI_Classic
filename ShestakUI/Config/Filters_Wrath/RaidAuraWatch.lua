@@ -1145,7 +1145,7 @@ if C.raidframe.plugins_pvp_debuffs == true then
 		-- Priest
 		[SpellName(15269)] = 3,		-- Blackout
 		[SpellName(605)] = 3,		-- Mind Control
-		[SpellName(64044] = 3,		-- Psychic Horror
+		[SpellName(64044)] = 3,		-- Psychic Horror
 		[SpellName(8122)] = 3,		-- Psychic Scream
 		[SpellName(9484)] = 3,		-- Shackle Undead
 		[SpellName(15487)] = 3,		-- Silence
