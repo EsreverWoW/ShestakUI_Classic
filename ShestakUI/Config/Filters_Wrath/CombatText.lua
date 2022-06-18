@@ -19,7 +19,29 @@ if C.combattext.merge_aoe_spam then
 end
 
 -- Class config
-if T.class == "DRUID" then
+if T.class == "DEATHKNIGHT" then
+	if C.combattext.merge_aoe_spam then
+		T.aoespam[55095] = 3		-- Frost Fever
+		T.aoespam[55078] = 3		-- Blood Plague
+		T.aoespam[48721] = 0		-- Blood Boil
+		T.aoespam[49184] = 0		-- Howling Blast
+		T.aoespam[52212] = 3		-- Death and Decay
+		T.aoespam[55050] = 0		-- Heart Strike
+		T.aoespam[49217] = 3		-- Wandering Plague
+		-- Merging mh/oh strikes
+		T.aoespam[49020] = 0		-- Obliterate MH
+		-- T.aoespam[66198] = 0		-- Obliterate OH
+		T.aoespam[49998] = 0		-- Death Strike MH
+		-- T.aoespam[66188] = 0		-- Death Strike OH
+		T.aoespam[45462] = 0		-- Plague Strike MH
+		-- T.aoespam[66216] = 0		-- Plague Strike OH
+		T.aoespam[49143] = 0		-- Frost Strike MH
+		-- T.aoespam[66196] = 0		-- Frost Strike OH
+	end
+	if C.combattext.healing then
+		T.healfilter[50475] = true	-- Blood Presence
+	end
+elseif T.class == "DRUID" then
 	if C.combattext.merge_aoe_spam then
 		-- Healing spells
 		T.aoespam[22842] = 3.5		-- Frenzied Regeneration

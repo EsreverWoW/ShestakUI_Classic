@@ -1113,7 +1113,6 @@ if C.raidframe.plugins_pvp_debuffs == true then
 		[SpellName(60210)] = 3,		-- Freezing Arrow Effect
 		[SpellName(3355)] = 3,		-- Freezing Trap Effect
 		[SpellName(2637)] = 3,		-- Hibernate
-		[SpellName(19410)] = 3,		-- Improved Concussive Shot
 		[SpellName(24394)] = 3,		-- Intimidation
 		[SpellName(19503)] = 3,		-- Scatter Shot
 		[SpellName(34490)] = 3,		-- Silencing Shot
@@ -1143,7 +1142,6 @@ if C.raidframe.plugins_pvp_debuffs == true then
 		[SpellName(10326)] = 3,		-- Turn Evil
 		[SpellName(2878)] = 3,		-- Turn Undead
 		-- Priest
-		[SpellName(15269)] = 3,		-- Blackout
 		[SpellName(605)] = 3,		-- Mind Control
 		[SpellName(64044)] = 3,		-- Psychic Horror
 		[SpellName(8122)] = 3,		-- Psychic Scream

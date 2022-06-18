@@ -732,6 +732,7 @@ C["filger_spells"] = {
 			-- Frost Vulnerability [Rune of Razorice]
 			{spellID = 51714, unitID = "target", caster = "player", filter = "DEBUFF"},
 		},
+		--[[
 		{
 			Name = "T_DE/BUFF_BAR",
 			Direction = "UP",
@@ -743,6 +744,7 @@ C["filger_spells"] = {
 			BarWidth = 186,
 			Position = {"LEFT", T_DE_BUFF_BAR_Anchor},
 		},
+		--]]
 		--[[
 		{
 			Name = "PVE/PVP_CC",
@@ -839,7 +841,7 @@ C["filger_spells"] = {
 			-- Gift of the Naaru (Draenei)
 			{spellID = 28880, filter = "CD"},
 			-- Shadowmeld (Night Elf)
-			{spellID = 20580, filter = "CD"},
+			{spellID = 58984, filter = "CD"},
 			-- Stoneform (Dwarf)
 			{spellID = 20594, filter = "CD"},
 			-- War Stomp (Tauren)
@@ -1942,7 +1944,7 @@ C["filger_spells"] = {
 
 			-- Racial
 			-- Shadowmeld (Night Elf)
-			{spellID = 20580, filter = "CD"},
+			{spellID = 58984, filter = "CD"},
 			-- War Stomp (Tauren)
 			{spellID = 20600, filter = "CD", absID = true},
 
@@ -2425,8 +2427,6 @@ C["filger_spells"] = {
 			{spellID = 1130, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Immolation Trap
 			-- {spellID = 13797, unitID = "target", caster = "player", filter = "DEBUFF"},
-			-- Improved Concussive Shot
-			{spellID = 19410, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Intimidation
 			{spellID = 24394, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
 			-- Piercing Shots
@@ -2620,7 +2620,7 @@ C["filger_spells"] = {
 			-- Gift of the Naaru (Draenei)
 			{spellID = 28880, filter = "CD"},
 			-- Shadowmeld (Night Elf)
-			{spellID = 20580, filter = "CD"},
+			{spellID = 58984, filter = "CD"},
 			-- Stoneform (Dwarf)
 			{spellID = 20594, filter = "CD"},
 			-- War Stomp (Tauren)
@@ -5074,8 +5074,6 @@ C["filger_spells"] = {
 			IconSize = C.filger.buffs_size,
 			Position = {"TOP", T_DEBUFF_ICON_Anchor},
 
-			-- Blackout
-			{spellID = 15269, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Devouring Plague
 			{spellID = 2944, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Hex of Weakness
@@ -5300,7 +5298,7 @@ C["filger_spells"] = {
 			-- Gift of the Naaru (Draenei)
 			{spellID = 28880, filter = "CD"},
 			-- Shadowmeld (Night Elf)
-			{spellID = 20580, filter = "CD"},
+			{spellID = 58984, filter = "CD"},
 			-- Stoneform (Dwarf)
 			{spellID = 20594, filter = "CD"},
 			-- Will of the Forsaken (Forsaken)
@@ -5898,7 +5896,7 @@ C["filger_spells"] = {
 			-- Every Man for Himself / Will to Survive (Human)
 			{spellID = 59752, filter = "CD"},
 			-- Shadowmeld (Night Elf)
-			{spellID = 20580, filter = "CD"},
+			{spellID = 58984, filter = "CD"},
 			-- Stoneform (Dwarf)
 			{spellID = 20594, filter = "CD"},
 			-- Will of the Forsaken (Forsaken)
@@ -8603,7 +8601,7 @@ C["filger_spells"] = {
 			-- Gift of the Naaru (Draenei)
 			{spellID = 28880, filter = "CD"},
 			-- Shadowmeld (Night Elf)
-			{spellID = 20580, filter = "CD"},
+			{spellID = 58984, filter = "CD"},
 			-- Stoneform (Dwarf)
 			{spellID = 20594, filter = "CD"},
 			-- War Stomp (Tauren)
@@ -8794,7 +8792,7 @@ C["filger_spells"] = {
 			-- Gift of the Naaru (Draenei)
 			{spellID = 28880, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Shadowmeld (Night Elf)
-			{spellID = 20580, unitID = "player", caster = "player", filter = "BUFF"},
+			{spellID = 58984, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Stoneform (Dwarf)
 			{spellID = 65116, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Will of the Forsaken (Forsaken)
@@ -8999,8 +8997,6 @@ C["filger_spells"] = {
 			{spellID = 60210, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Freezing Trap Effect
 			{spellID = 3355, unitID = "player", caster = "all", filter = "DEBUFF"},
-			-- Improved Concussive Shot
-			{spellID = 19410, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Intimidation
 			{spellID = 24394, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
 			-- Scatter Shot
@@ -9063,8 +9059,6 @@ C["filger_spells"] = {
 			{spellID = 10326, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
 
 			-- Priest
-			-- Blackout
-			{spellID = 15269, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Mind Control
 			{spellID = 605, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
 			-- Psychic Horror (Horror)

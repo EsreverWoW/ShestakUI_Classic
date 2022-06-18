@@ -31,7 +31,6 @@ T.ArenaControl = {
 	-- Hunter
 	[SpellName(60210)] = 5,		-- Freezing Arrow Effect
 	[SpellName(3355)] = 5,		-- Freezing Trap
-	[SpellName(19410)] = 5,		-- Improved Concussive Shot
 	[SpellName(24394)] = 5,		-- Intimidation
 	[SpellName(1513)] = 5,		-- Scare Beast
 	[SpellName(19503)] = 5,		-- Scatter Shot
@@ -54,7 +53,6 @@ T.ArenaControl = {
 	[SpellName(10326)] = 5,		-- Turn Evil
 	[SpellName(2878)] = 5,		-- Turn Undead
 	-- Priest
-	[SpellName(15269)] = 5,		-- Blackout
 	[SpellName(605)] = 5,		-- Mind Control
 	[SpellName(64044)] = 5,		-- Psychic Horror
 	[SpellName(8122)] = 5,		-- Psychic Scream

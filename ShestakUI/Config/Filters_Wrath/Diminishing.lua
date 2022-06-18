@@ -66,9 +66,7 @@ T.DiminishingSpells = {
 	--[[
 	-- Stun Procs
 	[16922] = {"stunproc"},			-- Celestial Focus
-	[19410] = {"stunproc"},			-- Improved Concussive Shot
 	[12355] = {"stunproc"},			-- Impact
-	[15269] = {"stunproc"},			-- Blackout
 	[20170] = {"stunproc"},			-- Seal of Justice
 	[39796] = {"stunproc"},			-- Stoneclaw Totem
 	[12798] = {"stunproc"},			-- Revenge Stun

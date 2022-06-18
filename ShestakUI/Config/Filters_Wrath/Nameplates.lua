@@ -90,7 +90,6 @@ T.DebuffWhiteList = {
 	[SpellName(61394)] = true,	-- Glyph of Freezing Trap
 	[SpellName(1130)] = true,	-- Hunter's Mark
 	[SpellName(13797)] = true,	-- Immolation Trap
-	[SpellName(19410)] = true,	-- Improved Concussive Shot
 	[SpellName(53220)] = true,	-- Improved Steady Shot
 	[SpellName(24394)] = true,	-- Intimidation
 	[SpellName(34833)] = true,	-- Master Tactician
@@ -159,7 +158,6 @@ T.DebuffWhiteList = {
 	[SpellName(67)] = true,		-- Vindication
 
 	-- Priest
-	[SpellName(15269)] = true,	-- Blackout
 	[SpellName(2944)] = true,	-- Devouring Plague
 	[SpellName(9035)] = true,	-- Hex of Weakness
 	[SpellName(14914)] = true,	-- Holy Fire
@@ -651,7 +649,7 @@ T.BuffWhiteList = {
 	-- [SpellName(33702)] = true,	-- Blood Fury (Spell)
 	-- [SpellName(2481)] = true,	-- Find Treasure
 	[SpellName(28880)] = true,	-- Gift of the Naaru
-	-- [SpellName(20580)] = true,	-- Shadowmeld
+	-- [SpellName(58984)] = true,	-- Shadowmeld
 	[SpellName(65116)] = true,	-- Stoneform
 	[SpellName(7744)] = true,	-- Will of the Forsaken
 }
