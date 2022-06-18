@@ -51,7 +51,6 @@ T.ArenaControl = {
 	[SpellName(20066)] = 5,		-- Repentance
 	[SpellName(20170)] = 5,		-- Stun (Seal of Justice Proc)
 	[SpellName(10326)] = 5,		-- Turn Evil
-	[SpellName(2878)] = 5,		-- Turn Undead
 	-- Priest
 	[SpellName(605)] = 5,		-- Mind Control
 	[SpellName(64044)] = 5,		-- Psychic Horror

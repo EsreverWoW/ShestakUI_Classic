@@ -1140,7 +1140,6 @@ if C.raidframe.plugins_pvp_debuffs == true then
 		[SpellName(63529)] = 3,		-- Silenced - Shield of the Templar
 		[SpellName(20170)] = 3,		-- Stun (Seal of Justice Proc)
 		[SpellName(10326)] = 3,		-- Turn Evil
-		[SpellName(2878)] = 3,		-- Turn Undead
 		-- Priest
 		[SpellName(605)] = 3,		-- Mind Control
 		[SpellName(64044)] = 3,		-- Psychic Horror

@@ -154,7 +154,6 @@ T.DebuffWhiteList = {
 	[SpellName(20170)] = true,	-- Seal of Justice (Stun)
 	[SpellName(63529)] = true,	-- Silenced - Shield of the Templar
 	[SpellName(10326)] = true,	-- Turn Evil
-	[SpellName(2878)] = true,	-- Turn Undead
 	[SpellName(67)] = true,		-- Vindication
 
 	-- Priest
