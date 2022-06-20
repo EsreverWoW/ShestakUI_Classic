@@ -23,19 +23,20 @@ if T.class == "DEATHKNIGHT" then
 	if C.combattext.merge_aoe_spam then
 		T.aoespam[55095] = 3		-- Frost Fever
 		T.aoespam[55078] = 3		-- Blood Plague
-		T.aoespam[48721] = 0		-- Blood Boil
-		T.aoespam[49184] = 0		-- Howling Blast
+		T.aoespam[48721] = 3		-- Blood Boil
+		T.aoespam[49184] = 3		-- Howling Blast
 		T.aoespam[52212] = 3		-- Death and Decay
-		T.aoespam[55050] = 0		-- Heart Strike
+		T.aoespam[55050] = 2.5		-- Heart Strike
+		T.aoespam[50401] = 3		-- Razor Frost
 		T.aoespam[49217] = 3		-- Wandering Plague
 		-- Merging mh/oh strikes
-		T.aoespam[49020] = 0		-- Obliterate MH
+		T.aoespam[49020] = 0.5		-- Obliterate MH
 		-- T.aoespam[66198] = 0		-- Obliterate OH
-		T.aoespam[49998] = 0		-- Death Strike MH
+		T.aoespam[49998] = 0.5		-- Death Strike MH
 		-- T.aoespam[66188] = 0		-- Death Strike OH
-		T.aoespam[45462] = 0		-- Plague Strike MH
+		T.aoespam[45462] = 0.5		-- Plague Strike MH
 		-- T.aoespam[66216] = 0		-- Plague Strike OH
-		T.aoespam[49143] = 0		-- Frost Strike MH
+		T.aoespam[49143] = 0.5		-- Frost Strike MH
 		-- T.aoespam[66196] = 0		-- Frost Strike OH
 	end
 	if C.combattext.healing then
@@ -161,7 +162,6 @@ elseif T.class == "WARLOCK" then
 		T.aoespam[172] = 3			-- Corruption
 		T.aoespam[348] = 3			-- Immolate
 		T.aoespam[980] = 3			-- Agony
-		T.aoespam[18265] = 3		-- Siphon Life
 		T.aoespam[5740] = 3			-- Rain of Fire
 		T.aoespam[1949] = 3			-- Hellfire
 		T.aoespam[20153] = 3		-- Immolation (Infernal)
@@ -169,7 +169,7 @@ elseif T.class == "WARLOCK" then
 	end
 	if C.combattext.healing then
 		T.healfilter[689] = true	-- Drain Life
-		T.healfilter[18265] = true	-- Siphon Life
+		T.healfilter[63108] = true	-- Siphon Life
 	end
 elseif T.class == "WARRIOR" then
 	if C.combattext.merge_aoe_spam then

@@ -1996,7 +1996,7 @@ C["filger_spells"] = {
 			-- Cobra Reflexes
 			{spellID = 25077, unitID = "pet", caster = "all", filter = "BUFF"},
 			-- Dash (Boar / Cat / Hyena / Raptor / Tallstrider / Wolf)
-			-- {spellID = 23099, unitID = "pet", caster = "all", filter = "BUFF"},
+			-- {spellID = 61684, unitID = "pet", caster = "all", filter = "BUFF"},
 			-- Deterrence
 			{spellID = 19263, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Dive (Bat / Bird of Prey / Carrion Bird / Dragonhawk / Nether Ray / Wind Serpent)
@@ -2596,7 +2596,7 @@ C["filger_spells"] = {
 			-- Charge (Boar)
 			{spellID = 7371, filter = "CD"},
 			-- Dash (Boar / Cat / Hyena / Raptor / Ravager / Tallstrider / Wolf)
-			{spellID = 23099, filter = "CD"},
+			{spellID = 61684, filter = "CD"},
 			-- Dive (Bat / Bird of Prey / Carrion Bird / Dragonhawk / Nether Ray / Wind Serpent)
 			{spellID = 23145, filter = "CD"},
 			-- Shell Shield (Turtle)
@@ -4602,8 +4602,6 @@ C["filger_spells"] = {
 			{spellID = 47585, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Fade
 			{spellID = 586, unitID = "player", caster = "player", filter = "BUFF", absID = true},
-			-- Feedback
-			{spellID = 13896, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Inner Fire
 			{spellID = 588, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Inner Focus
@@ -4614,14 +4612,10 @@ C["filger_spells"] = {
 			{spellID = 63731, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Shadowform
 			{spellID = 15473, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Shadowguard
-			{spellID = 18137, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Shadowy Insight (Glyph of Shadow)
 			{spellID = 61792, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Spirit of Redemption
 			{spellID = 27827, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Touch of Weakness
-			{spellID = 2652, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Vampiric Embrace
 			-- {spellID = 15290, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Vampiric Touch
@@ -5076,8 +5070,6 @@ C["filger_spells"] = {
 
 			-- Devouring Plague
 			{spellID = 2944, unitID = "target", caster = "player", filter = "DEBUFF"},
-			-- Hex of Weakness
-			{spellID = 9035, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Holy Fire
 			{spellID = 14914, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Mind Control
@@ -5122,10 +5114,6 @@ C["filger_spells"] = {
 			{spellID = 589, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Silence
 			{spellID = 15487, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
-			-- Starshards
-			{spellID = 10797, unitID = "target", caster = "player", filter = "DEBUFF"},
-			-- Touch of Weakness
-			{spellID = 2943, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Vampiric Embrace
 			{spellID = 15286, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
 			-- Vampiric Touch r1
@@ -5251,8 +5239,6 @@ C["filger_spells"] = {
 			{spellID = 586, filter = "CD", absID = true},
 			-- Fear Ward
 			{spellID = 6346, filter = "CD"},
-			-- Feedback
-			{spellID = 13896, filter = "CD"},
 			-- Holy Fire
 			{spellID = 14914, filter = "CD"},
 			-- Inner Focus
@@ -5279,8 +5265,6 @@ C["filger_spells"] = {
 			{spellID = 34433, filter = "CD"},
 			-- Silence
 			{spellID = 15487, filter = "CD", absID = true},
-			-- Starshards
-			{spellID = 10797, filter = "CD"},
 			-- Hymn of Hope
 			{spellID = 64901, filter = "CD"},
 			-- Vampiric Embrace
@@ -7100,8 +7084,6 @@ C["filger_spells"] = {
 			{spellID = 6229, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Soul Link
 			-- {spellID = 25228, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Tainted Blood (Felhunter)
-			-- {spellID = 19478, unitID = "pet", caster = "all", filter = "BUFF"},
 		},
 		{
 			Name = "P_PROC_ICON",
@@ -7566,8 +7548,6 @@ C["filger_spells"] = {
 			{spellID = 18223, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Curse of Idiocy
 			{spellID = 1010, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Curse of Recklessness
-			{spellID = 704, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Curse of Tongues
 			{spellID = 1714, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Curse of Weakness r1
@@ -7638,14 +7618,10 @@ C["filger_spells"] = {
 			{spellID = 17799, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
 			-- Shadow Vulnerability r5 (Improved Shadow Bolt)
 			{spellID = 17800, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
-			-- Siphon Life
-			{spellID = 18265, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Spell Lock (Felhunter)
 			{spellID = 24259, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Rend (Doomguard)
 			{spellID = 21949, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
-			-- Tainted Blood Effect (Felhunter)
-			{spellID = 19479, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Unstable Affliction r1
 			{spellID = 30108, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
 			-- Unstable Affliction r2

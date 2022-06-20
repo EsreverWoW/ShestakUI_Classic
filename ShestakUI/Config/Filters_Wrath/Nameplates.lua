@@ -158,7 +158,6 @@ T.DebuffWhiteList = {
 
 	-- Priest
 	[SpellName(2944)] = true,	-- Devouring Plague
-	[SpellName(9035)] = true,	-- Hex of Weakness
 	[SpellName(14914)] = true,	-- Holy Fire
 	[SpellName(605)] = true,	-- Mind Control
 	[SpellName(15407)] = true,	-- Mind Flay
@@ -172,8 +171,6 @@ T.DebuffWhiteList = {
 	[SpellName(15258)] = true,	-- Shadow Vulnerability (Shadow Weaving)
 	[SpellName(589)] = true,	-- Shadow Word: Pain
 	[SpellName(15487)] = true,	-- Silence
-	[SpellName(10797)] = true,	-- Starshards
-	[SpellName(2943)] = true,	-- Touch of Weakness
 	[SpellName(15286)] = true,	-- Vampiric Embrace
 	[SpellName(34914)] = true,	-- Vampiric Touch
 
@@ -223,7 +220,6 @@ T.DebuffWhiteList = {
 	[SpellName(603)] = true,	-- Curse of Doom
 	[SpellName(18223)] = true,	-- Curse of Exhaustion
 	[SpellName(1010)] = true,	-- Curse of Idiocy
-	[SpellName(704)] = true,	-- Curse of Recklessness
 	[SpellName(1714)] = true,	-- Curse of Tongues
 	[SpellName(702)] = true,	-- Curse of Weakness
 	[SpellName(1490)] = true,	-- Curse of the Elements
@@ -247,10 +243,8 @@ T.DebuffWhiteList = {
 	[SpellName(30283)] = true,	-- Shadowfury
 	[SpellName(32386)] = true,	-- Shadow Embrace
 	[SpellName(17794)] = true,	-- Shadow Vulnerability (Improved Shadow Bolt)
-	[SpellName(18265)] = true,	-- Siphon Life
 	[SpellName(24259)] = true,	-- Spell Lock (Felhunter)
 	[SpellName(21949)] = true,	-- Rend (Doomguard)
-	[SpellName(19479)] = true,	-- Tainted Blood Effect (Felhunter)
 	[SpellName(30108)] = true,	-- Unstable Affliction
 	-- [SpellName(31117)] = true,	-- Unstable Affliction (Silence)
 
@@ -360,7 +354,7 @@ T.BuffWhiteList = {
 	[SpellName(19574)] = true,	-- Bestial Wrath
 	[SpellName(25077)] = true,	-- Cobra Reflexes (Pet)
 	[SpellName(53257)] = true,	-- Cobra Strikes (Pet)
-	[SpellName(23099)] = true,	-- Dash (Pet)
+	[SpellName(61684)] = true,	-- Dash (Pet)
 	[SpellName(19263)] = true,	-- Deterrence
 	[SpellName(23145)] = true,	-- Dive (Pet)
 	[SpellName(6197)] = true,	-- Eagle Eye
@@ -474,7 +468,6 @@ T.BuffWhiteList = {
 	[SpellName(64843)] = true,	-- Divine Hymn
 	-- [SpellName(586)] = true,		-- Fade
 	[SpellName(6346)] = true,	-- Fear Ward
-	[SpellName(13896)] = true,	-- Feedback
 	-- [SpellName(45237)] = true,	-- Focused Will
 	[SpellName(47930)] = true,	-- Grace
 	[SpellName(47788)] = true,	-- Guardian Spirit
@@ -494,13 +487,11 @@ T.BuffWhiteList = {
 	-- [SpellName(63944)] = true,	-- Renewed Hope
 	-- [SpellName(63731)] = true,	-- Serendipity
 	-- [SpellName(15473)] = true,	-- Shadowform
-	[SpellName(18137)] = true,	-- Shadowguard
 	[SpellName(61792)] = true,	-- Shadowy Insight (Glyph of Shadow)
 	[SpellName(27827)] = true,	-- Spirit of Redemption
 	[SpellName(15271)] = true,	-- Spirit Tap
 	-- [SpellName(33151)] = true,	-- Surge of Light
 	[SpellName(64901)] = true,	-- Hymn of Hope
-	[SpellName(2652)] = true,	-- Touch of Weakness
 	-- [SpellName(15290)] = true,	-- Vampiric Embrace
 	-- [SpellName(34919)] = true,	-- Vampiric Touch
 
@@ -605,7 +596,6 @@ T.BuffWhiteList = {
 	[SpellName(6229)] = true,	-- Shadow Ward
 	[SpellName(20707)] = true,	-- Soulstone Resurrection
 	[SpellName(25228)] = true,	-- Soul Link
-	[SpellName(19478)] = true,	-- Tainted Blood (Felhunter)
 
 	-- Warrior
 	[SpellName(6673)] = true,	-- Battle Shout
