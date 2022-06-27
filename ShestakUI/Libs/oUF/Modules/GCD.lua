@@ -10,6 +10,27 @@ local oUF = ns.oUF
 local starttime, duration, usingspell, spellid
 local GetTime = GetTime
 
+local function OnUpdateSpark(self)
+	self.Spark:ClearAllPoints()
+	local elapsed = GetTime() - starttime
+	local perc = elapsed / duration
+	if perc > 1 then
+		self:Hide()
+		return
+	else
+		self.Spark:SetPoint("CENTER", self, "LEFT", self.width * perc, 0)
+	end
+end
+
+local function OnHide(self)
+	self:SetScript("OnUpdate", nil)
+	usingspell = nil
+end
+
+local function OnShow(self)
+	self:SetScript("OnUpdate", OnUpdateSpark)
+end
+
 local spells
 
 if T.Classic then
@@ -53,70 +74,59 @@ local function Init()
 	return spellid
 end
 
-local function UpdateGCD(self)
-	local bar = self.GCD
-
-	if spellid == nil then
-		if Init() == nil then
-			return
+local function Update(self)
+	local element = self.GCD
+	if(element) then
+		if spellid == nil then
+			if Init() == nil then
+				return
+			end
 		end
-	end
-	local start, dur = GetSpellCooldown(spellid)
-	if dur and dur > 0 and dur <= 2 then
-		usingspell = 1
-		starttime = start
-		duration = dur
-		if bar then bar:Show() end
-		return
-	elseif usingspell == 1 and dur == 0 then
-		if bar then bar:Hide() end
+		local start, dur = GetSpellCooldown(spellid)
+		if dur and dur > 0 and dur <= 2 then
+			usingspell = 1
+			starttime = start
+			duration = dur
+			element:Show()
+			return
+		elseif usingspell == 1 and dur == 0 then
+			element:Hide()
+		end
 	end
 end
 
-local Enable = function(self)
-	if not self.GCD then return end
-	local bar = self.GCD
-	local width = bar:GetWidth()
-	bar:Hide()
+local function Enable(self)
+	local element = self.GCD
+	if(element) then
+		element.__owner = self
+		element.ForceUpdate = ForceUpdate
 
-	bar.spark = bar:CreateTexture(nil, "OVERLAY")
-	bar.spark:SetTexture(C.media.blank)
-	bar.spark:SetVertexColor(unpack(bar.Color))
-	bar.spark:SetHeight(bar.Height)
-	bar.spark:SetWidth(bar.Width)
-	bar.spark:SetBlendMode("ADD")
+		element.width = element:GetWidth()
+		element:Hide()
 
-	local function OnUpdateSpark()
-		bar.spark:ClearAllPoints()
-		local elapsed = GetTime() - starttime
-		local perc = elapsed / duration
-		if perc > 1 then
-			return bar:Hide()
-		else
-			bar.spark:SetPoint("CENTER", bar, "LEFT", width * perc, 0)
-		end
+		element.Spark = element:CreateTexture(nil, "OVERLAY")
+		element.Spark:SetTexture(C.media.blank)
+		element.Spark:SetVertexColor(unpack(element.Color))
+		element.Spark:SetHeight(element.Height)
+		element.Spark:SetWidth(element.Width)
+		element.Spark:SetBlendMode("ADD")
+
+		element:SetScript("OnShow", OnShow)
+		element:SetScript("OnHide", OnHide)
+
+		self:RegisterEvent("ACTIONBAR_UPDATE_COOLDOWN", Update, true)
+
+		return true
 	end
-
-	local function OnHide()
-		bar:SetScript("OnUpdate", nil)
-		usingspell = nil
-	end
-
-	local function OnShow()
-		bar:SetScript("OnUpdate", OnUpdateSpark)
-	end
-
-	bar:SetScript("OnShow", OnShow)
-	bar:SetScript("OnHide", OnHide)
-
-	self:RegisterEvent("ACTIONBAR_UPDATE_COOLDOWN", UpdateGCD, true)
 end
 
 local function Disable(self)
-	local bar = self.GCD
-	if bar then
-		self:UnregisterEvent("ACTIONBAR_UPDATE_COOLDOWN", UpdateGCD, true)
+	local element = self.GCD
+	if(element) then
+		element:Hide()
+
+		self:UnregisterEvent("ACTIONBAR_UPDATE_COOLDOWN", Update)
 	end
 end
 
-oUF:AddElement("GCD", UpdateGCD, Enable, Disable)
+oUF:AddElement("GCD", Update, Enable, Disable)
