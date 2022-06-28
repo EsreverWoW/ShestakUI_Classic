@@ -97,6 +97,8 @@ local atlasColors = {
 }
 
 local function SkinStatusBar(widget)
+	if widget:IsForbidden() then return end
+
 	local bar = widget.Bar
 	local atlas = bar:GetStatusBarAtlas()
 	if atlasColors[atlas] then
