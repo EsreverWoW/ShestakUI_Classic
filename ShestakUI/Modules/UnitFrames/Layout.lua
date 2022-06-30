@@ -1253,7 +1253,7 @@ end
 
 if C.unitframe.show_boss == true then
 	local boss = {}
-	for i = 1, MAX_BOSS_FRAMES do
+	for i = 1, 8 do
 		boss[i] = oUF:Spawn("boss"..i, "oUF_Boss"..i)
 		if i == 1 then
 			if C.unitframe.boss_on_right == true then
@@ -1423,7 +1423,7 @@ SlashCmdList.TEST_UF = function()
 		-- end
 
 		if C.unitframe.show_boss == true then
-			for i = 1, MAX_BOSS_FRAMES do
+			for i = 1, 8 do
 				_G["oUF_Boss"..i].oldunit = _G["oUF_Boss"..i].unit
 				_G["oUF_Boss"..i]:SetAttribute("unit", "player")
 			end
@@ -1455,7 +1455,7 @@ SlashCmdList.TEST_UF = function()
 		-- end
 
 		if C.unitframe.show_boss == true then
-			for i = 1, MAX_BOSS_FRAMES do
+			for i = 1, 8 do
 				_G["oUF_Boss"..i].unit = _G["oUF_Boss"..i].oldunit
 				_G["oUF_Boss"..i]:SetAttribute("unit", _G["oUF_Boss"..i].unit)
 			end
