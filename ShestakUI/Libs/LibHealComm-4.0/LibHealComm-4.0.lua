@@ -1143,7 +1143,7 @@ if( playerClass == "PRIEST" ) then
 		hotData[Renew] = {coeff = 1, interval = 3, ticks = 5, levels = {8, 14, 20, 26, 32, 38, 44, 50, 56, 60, 65, 70}, averages = {
 			45, 100, 175, 245, 315, 400, 510, 650, 810, 970, 1010, 1110 }}
 		hotData[GreaterHealHot] = hotData[Renew]
-		if isTBC then -- prevent error on Classic Era realms
+		if Renewal then
 			hotData[Renewal] = {coeff = 0, interval = 3, ticks = 3, levels = {70}, averages = {150}}
 		end
 
