@@ -307,8 +307,10 @@ local function Shared(self, unit)
 			self.Runes:CreateBackdrop("Default")
 			self.Runes:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, 7)
 			self.Runes:SetSize(player_width, 7)
-			self.Runes.colorSpec = true
-			self.Runes.sortOrder = "asc"
+			if T.Mainline then
+				self.Runes.colorSpec = true
+				self.Runes.sortOrder = "asc"
+			end
 
 			for i = 1, 6 do
 				self.Runes[i] = CreateFrame("StatusBar", self:GetName().."_Rune"..i, self.Runes)
