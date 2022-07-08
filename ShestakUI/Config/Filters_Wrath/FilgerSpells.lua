@@ -800,7 +800,7 @@ C["filger_spells"] = {
 			{spellID = 49184, filter = "CD"},
 			-- Hungering Cold
 			{spellID = 49203, filter = "CD"},
-			-- Hysteria
+			-- Hysteria / Unholy Frenzy
 			{spellID = 49016, filter = "CD"},
 			-- Icebound Fortitude
 			{spellID = 48792, filter = "CD"},
@@ -8821,7 +8821,7 @@ C["filger_spells"] = {
 			{spellID = 8178, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Divine Intervention
 			{spellID = 19752, unitID = "player", caster = "all", filter = "BUFF"},
-			-- Hysteria
+			-- Hysteria / Unholy Frenzy
 			{spellID = 49016, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Focus Magic
 			-- {spellID = 54646, unitID = "player", caster = "all", filter = "BUFF", absID = true},

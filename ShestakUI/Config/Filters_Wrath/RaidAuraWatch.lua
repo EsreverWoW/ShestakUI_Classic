@@ -51,7 +51,7 @@ T.RaidBuffs = {
 		{57933, "TOPRIGHT", {0.89, 0.1, 0.1}},				-- Tricks of the Trade
 	},
 	DEATHKNIGHT = {
-		{49016, "TOPRIGHT", {0.89, 0.89, 0.1}},				-- Hysteria
+		{49016, "TOPRIGHT", {0.89, 0.89, 0.1}},				-- Hysteria / Unholy Frenzy
 	},
 	MAGE = {
 															-- Curse Immunity
