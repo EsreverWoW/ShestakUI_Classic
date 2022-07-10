@@ -548,7 +548,7 @@ C["filger"] = {
 	["cooldown_space"] = 3,						-- Cooldowns space
 	-- Testing
 	["test_mode"] = false,						-- Test icon mode
-	["max_test_icon"] = 5,						-- Number of icons to the test
+	["max_test_icon"] = 5,						-- Number of icons in test mode
 }
 
 ----------------------------------------------------------------------------------------
@@ -699,7 +699,7 @@ C["stats"] = {
 	["currency_archaeology"] = false,			-- Archaeology Fragments
 	["currency_cooking"] = true,				-- Cooking Awards
 	["currency_raid"] = true,					-- Raid Seals
-	["currency_misc"] = true,					-- BfA Currency
+	["currency_misc"] = true,					-- Expansion Currency
 }
 
 if T.Classic then

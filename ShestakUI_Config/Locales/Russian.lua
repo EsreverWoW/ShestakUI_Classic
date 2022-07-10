@@ -527,6 +527,7 @@ L.automation_buff_on_scroll_desc = "Если бафф из списка не в�
 L.automation_open_items = "Открывать сундуки и ящики в вашей сумке"
 L.automation_resurrection = "Принятие воскрешений"
 L.automation_summon = "Принятие призыва"
+L.automation_summon_desc = "Суммон от игроков"
 L.automation_whisper_invite = "Авто приглашение по ключевым словам"
 L.automation_invite_known_only = "Only allow auto invite from friends and guild members" -- Needs review
 L.automation_invite_keyword = "Список слов (через пробел)"
