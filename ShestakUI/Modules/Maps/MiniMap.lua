@@ -81,7 +81,9 @@ if MiniMapLFGFrame then
 	MiniMapLFGFrame:SetPoint("TOP", Minimap, "TOP", 1, 6)
 	MiniMapLFGFrame:SetScale(0.8)
 	MiniMapLFGFrame:SetHighlightTexture(nil)
-	MiniMapLFGBorder:Hide()
+	if not T.Wrath then
+		MiniMapLFGBorder:Hide()
+	end
 end
 
 -- Hide world map button
@@ -370,7 +372,7 @@ end)
 
 -- Set Square Map Mask
 Minimap:SetMaskTexture(C.media.blank)
-if T.Mainline or T.Wrath then
+if T.Mainline then
 	Minimap:SetArchBlobRingAlpha(0)
 	Minimap:SetQuestBlobRingAlpha(0)
 end
@@ -404,7 +406,9 @@ if not T.Vanilla then
 		MiniMapTracking:ClearAllPoints()
 		if T.Classic then
 			MiniMapTracking:SetPoint("BOTTOMLEFT", MinimapAnchor, "BOTTOMLEFT", -4, 0)
-			MiniMapTrackingBorder:Hide()
+			if not T.Wrath then
+				MiniMapTrackingBorder:Hide()
+			end
 		else
 			MiniMapTracking:SetPoint("BOTTOMLEFT", MinimapAnchor, "BOTTOMLEFT", 0, -4)
 			MiniMapTrackingButton:SetHighlightTexture(nil)

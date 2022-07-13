@@ -232,7 +232,7 @@ function SlashCmdList.LSTATS()
 	if experience.enabled then
 		slprint(format("%s/%s/%s", COMBAT_XP_GAIN, TIME_PLAYED_MSG, FACTION), L_STATS_RC_EXPERIENCE, L_STATS_WATCH_FACTIONS, L_STATS_TOOLTIP_EXPERIENCE, L_STATS_TOOLTIP_TIME_PLAYED)
 	end
-	if (T.Mainline or T.Wrath) and talents.enabled then
+	if T.Mainline and talents.enabled then
 		slprint(TALENTS, L_STATS_OPEN_TALENT, L_STATS_RC_TALENT)
 	end
 	if location.enabled or coords.enabled then
@@ -1492,7 +1492,7 @@ end
 ----------------------------------------------------------------------------------------
 --	Talents
 ----------------------------------------------------------------------------------------
-if (T.Mainline or T.Wrath) and talents.enabled then
+if T.Mainline and talents.enabled then
 	local lootSpecName, specName
 	local specList = {
 		{text = SPECIALIZATION, isTitle = true, notCheckable = true},
@@ -1539,7 +1539,7 @@ if (T.Mainline or T.Wrath) and talents.enabled then
 				self:GetScript("OnMouseUp")(self, b)
 			end)
 
-			if T.Mainline or T.Wrath then
+			if T.Mainline then
 				RegEvents(self, "PLAYER_ENTERING_WORLD PLAYER_TALENT_UPDATE PLAYER_LOOT_SPEC_UPDATED")
 			else
 				RegEvents(self, "PLAYER_ENTERING_WORLD CHARACTER_POINTS_CHANGED PLAYER_LOOT_SPEC_UPDATED")
@@ -2185,7 +2185,7 @@ if stats.enabled then
 			GameTooltip:AddLine(PAPERDOLL_SIDEBAR_STATS, tthead.r, tthead.g, tthead.b)
 			GameTooltip:AddLine(" ")
 			local spec = T.Classic and T.GetSpecialization() or GetSpecialization()
-			if spec and (T.Mainline or T.Wrath) then
+			if spec and T.Mainline then
 				local primaryStat = select(6, GetSpecializationInfo(spec, nil, nil, nil, UnitSex("player")))
 				local value = UnitStat("player", primaryStat)
 				local statName = _G["SPELL_STAT"..primaryStat.."_NAME"]
@@ -2219,7 +2219,7 @@ if stats.enabled then
 		end,
 	})
 
-	if T.Mainline or T.Wrath then
+	if T.Mainline then
 		Inject("Stat", {
 			OnClick = function() ToggleCharacter("PaperDollFrame") end,
 			OnEnter = function() GameTooltip:SetOwner(self, "ANCHOR_BOTTOMLEFT", -3, 26)LP_Stats:GetScript("OnEnter")(LP_Stats) end,
