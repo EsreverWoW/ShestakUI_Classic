@@ -63,7 +63,7 @@ local function UpdateColor(self, event, runeID, alt)
 			local mu = bg.multiplier or 1
 			bg:SetVertexColor(r * mu, g * mu, b * mu)
 		end
-	elseif(not oUF:IsWrath())
+	elseif(not oUF:IsWrath()) then
 		for index = 1, #element do
 			element[index]:SetStatusBarColor(r, g, b)
 
