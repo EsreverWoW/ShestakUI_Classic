@@ -31,6 +31,7 @@ function T.GetSpecialization(isInspect, isPet, specGroup)
 end
 
 local isCaster = {
+	DEATHKNIGHT = {nil, nil, nil},
 	DRUID = {true},					-- Balance
 	HUNTER = {nil, nil, nil},
 	MAGE = {true, true, true},
