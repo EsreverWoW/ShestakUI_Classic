@@ -42,7 +42,7 @@ local function UpdateColor(self, event, runeID, alt)
 	local element = self.Runes
 
 	local color
-	if(oUF:IsWrath() and (runeID or alt)) then
+	if(oUF:IsWrath() and runeID) then
 		color = self.colors.runes[GetRuneType(runeID) or alt]
 	else
 		local spec = GetSpecialization() or 0
@@ -55,7 +55,7 @@ local function UpdateColor(self, event, runeID, alt)
 
 	local r, g, b = color[1], color[2], color[3]
 
-	if(oUF:IsWrath()) then
+	if(oUF:IsWrath() and runeID) then
 		element[runeID]:SetStatusBarColor(r, g, b)
 
 		local bg = element[runeID].bg
@@ -63,7 +63,7 @@ local function UpdateColor(self, event, runeID, alt)
 			local mu = bg.multiplier or 1
 			bg:SetVertexColor(r * mu, g * mu, b * mu)
 		end
-	else
+	elseif(not oUF:IsWrath())
 		for index = 1, #element do
 			element[index]:SetStatusBarColor(r, g, b)
 

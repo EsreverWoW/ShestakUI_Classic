@@ -56,7 +56,7 @@ hooksecurefunc("MainMenuBarVehicleLeaveButton_Update", function()
 	end
 end)
 
-if T.Mainline or T.Wrath then
+if T.Mainline then
 	hooksecurefunc("PossessBar_UpdateState", function()
 		for i = 1, NUM_POSSESS_SLOTS do
 			local _, _, enabled = GetPossessInfo(i)

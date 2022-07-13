@@ -42,7 +42,7 @@ MinimapZoomIn:Hide()
 MinimapZoomOut:Hide()
 
 -- Hide Blob Ring
-if T.Mainline or T.Wrath then
+if T.Mainline then
 	Minimap:SetArchBlobRingScalar(0)
 	Minimap:SetQuestBlobRingScalar(0)
 end

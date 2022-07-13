@@ -184,7 +184,7 @@ if T.Classic then
 		-- Water
 		[GetSpellInfo(5394)]   = 135127,	-- Healing Stream Totem
 		[GetSpellInfo(5675)]   = 136053,	-- Mana Spring Totem
-		[GetSpellInfo(8166)]   = 136070,	-- Poison Cleansing Totem
+		-- [GetSpellInfo(8166)]   = 136070,	-- Poison Cleansing Totem
 		[GetSpellInfo(8170)]   = 136019,	-- Disease Cleansing Totem
 		[GetSpellInfo(8184)]   = 135832,	-- Fire Resistance Totem
 		[GetSpellInfo(16190)]  = 135861,	-- Mana Tide Totem

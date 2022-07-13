@@ -177,6 +177,16 @@ LPSTAT_CONFIG = {
 }
 
 LPSTAT_PROFILES = {
+	DEATHKNIGHT = {
+		Stats = {
+			-- Arms
+			spec1fmt = class"Power: ".."[power]"..class"  Crit: ".."[crit]%"..class"  Hit: ".."[hit]%",
+			-- Fury
+			spec2fmt = class"Power: ".."[power]"..class"  Crit: ".."[crit]%"..class"  Hit: ".."[hit]%",
+			-- Protection
+			spec3fmt = class"Armor: ".."[armor]"..class"  Avoidance: ".."[avoidance]%"..class"  Power: ".."[power]",
+		}
+	},
 	DRUID = {
 		Stats = {
 			-- Balance
