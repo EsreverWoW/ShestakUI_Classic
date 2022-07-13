@@ -19,7 +19,7 @@ local frame = CreateFrame("Frame")
 frame:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 frame:SetScript("OnEvent", function()
 	local _, subEvent, _, _, buffer, _, _, _, player, _, _, spellID, spellName = CombatLogGetCurrentEventInfo()
-	if T.Vanilla then
+	if T.Classic then
 		spellID = T.GetSpellID(spellName)
 	end
 	for key, value in pairs(spells) do
