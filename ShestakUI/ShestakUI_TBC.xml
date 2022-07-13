@@ -181,7 +181,7 @@
 
 	<Script file="Modules\Quests\AutoAccept_Vanilla.lua"/>
 	<Script file="Modules\Quests\AutoButton.lua"/>
-	<!-- <Script file="Modules\Quests\ObjectiveTracker_Vanilla.lua"/> --> <!-- FIXME: Disabled for now -->
+	<Script file="Modules\Quests\ObjectiveTracker_Vanilla.lua"/>
 
 	<Include file="Modules\Skins\Blizzard_TBC\LoadFrames.xml"/>
 	<Script file="Modules\Skins\Ace3.lua"/>
