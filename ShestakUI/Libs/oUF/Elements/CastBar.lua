@@ -386,7 +386,7 @@ local function Enable(self, unit)
 			self:RegisterEvent('UNIT_SPELLCAST_CHANNEL_UPDATE', CastUpdate)
 			self:RegisterEvent('UNIT_SPELLCAST_FAILED', CastFail)
 			self:RegisterEvent('UNIT_SPELLCAST_INTERRUPTED', CastFail)
-			if(not oUF:IsClassic() or oUF:IsWrath()) then
+			if(not oUF:IsClassic()) then
 				self:RegisterEvent('UNIT_SPELLCAST_INTERRUPTIBLE', CastInterruptible)
 				self:RegisterEvent('UNIT_SPELLCAST_NOT_INTERRUPTIBLE', CastInterruptible)
 			end

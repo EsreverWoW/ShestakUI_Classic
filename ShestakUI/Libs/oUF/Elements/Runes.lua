@@ -42,7 +42,7 @@ local function UpdateColor(self, event, runeID, alt)
 	local element = self.Runes
 
 	local color
-	if(oUF:IsWrath()) then
+	if(oUF:IsWrath() and (runeID or alt)) then
 		color = self.colors.runes[GetRuneType(runeID) or alt]
 	else
 		local spec = GetSpecialization() or 0
