@@ -81,7 +81,9 @@ if MiniMapLFGFrame then
 	MiniMapLFGFrame:SetPoint("TOP", Minimap, "TOP", 1, 6)
 	MiniMapLFGFrame:SetScale(0.8)
 	MiniMapLFGFrame:SetHighlightTexture(nil)
-	if not T.Wrath then
+	if T.Wrath then
+		MiniMapLFGFrameBorder:Hide()
+	else
 		MiniMapLFGBorder:Hide()
 	end
 end
