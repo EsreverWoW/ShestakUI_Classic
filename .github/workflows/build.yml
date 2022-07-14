@@ -23,11 +23,12 @@ jobs:
         uses: BigWigsMods/packager@master
         if: ${{ success() && github.event_name != 'pull_request' && contains(github.ref, 'tags/') }}
         with:
-          args: -g classic -p 468754 -w 25916
+          args: -g classic -p 468754 -w 25934
         env:
           CF_API_KEY: ${{ secrets.CF_API_KEY }}
           GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}
           WOWI_API_TOKEN: ${{ secrets.WOWI_API_TOKEN }}
+          WAGO_API_TOKEN: ${{ secrets.WAGO_API_TOKEN }}
 
       - name: Create BCC Package
         uses: BigWigsMods/packager@master
@@ -38,3 +39,15 @@ jobs:
           CF_API_KEY: ${{ secrets.CF_API_KEY }}
           GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}
           WOWI_API_TOKEN: ${{ secrets.WOWI_API_TOKEN }}
+          WAGO_API_TOKEN: ${{ secrets.WAGO_API_TOKEN }}
+
+      - name: Create Wrath Classic Package
+        uses: BigWigsMods/packager@master
+        if: ${{ success() && github.event_name != 'pull_request' && contains(github.ref, 'tags/') }}
+        with:
+          args: -g wrath -p 468754 -w 25934
+        env:
+          CF_API_KEY: ${{ secrets.CF_API_KEY }}
+          GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}
+          WOWI_API_TOKEN: ${{ secrets.WOWI_API_TOKEN }}
+          WAGO_API_TOKEN: ${{ secrets.WAGO_API_TOKEN }}
