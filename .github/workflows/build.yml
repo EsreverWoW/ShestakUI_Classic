@@ -23,7 +23,7 @@ jobs:
         uses: BigWigsMods/packager@master
         if: ${{ success() && github.event_name != 'pull_request' && contains(github.ref, 'tags/') }}
         with:
-          args: -g wrath -p 468754 -w 25934
+          args: -g wrath -p 468754 -w 25934 -a WqKQbyGx
         env:
           CF_API_KEY: ${{ secrets.CF_API_KEY }}
           GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}
@@ -34,7 +34,7 @@ jobs:
         uses: BigWigsMods/packager@master
         if: ${{ success() && github.event_name != 'pull_request' && contains(github.ref, 'tags/') }}
         with:
-          args: -g bcc -p 468754 -w 25934
+          args: -g bcc -p 468754 -w 25934 -a WqKQbyGx
         env:
           CF_API_KEY: ${{ secrets.CF_API_KEY }}
           GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}
@@ -45,7 +45,7 @@ jobs:
         uses: BigWigsMods/packager@master
         if: ${{ success() && github.event_name != 'pull_request' && contains(github.ref, 'tags/') }}
         with:
-          args: -g classic -p 468754 -w 25934
+          args: -g classic -p 468754 -w 25934 -a WqKQbyGx
         env:
           CF_API_KEY: ${{ secrets.CF_API_KEY }}
           GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}
