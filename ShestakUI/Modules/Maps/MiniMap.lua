@@ -407,8 +407,11 @@ if not T.Vanilla then
 		MiniMapTrackingBackground:Hide()
 		MiniMapTracking:ClearAllPoints()
 		if T.Classic then
-			MiniMapTracking:SetPoint("BOTTOMLEFT", MinimapAnchor, "BOTTOMLEFT", -4, 0)
-			if not T.Wrath then
+			if T.Wrath then
+				MiniMapTracking:SetPoint("BOTTOMLEFT", MinimapAnchor, "BOTTOMLEFT", -1, -5)
+				MiniMapTrackingButtonBorder:Hide()
+			else
+				MiniMapTracking:SetPoint("BOTTOMLEFT", MinimapAnchor, "BOTTOMLEFT", -4, 0)
 				MiniMapTrackingBorder:Hide()
 			end
 		else
