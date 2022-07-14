@@ -128,7 +128,7 @@ local tagStrings = {
 
 	['difficulty'] = [[function(u)
 		if UnitCanAttack('player', u) then
-			local l = (_G.WOW_PROJECT_ID ~= _G.WOW_PROJECT_CLASSIC and _G.WOW_PROJECT_ID ~= _G.WOW_PROJECT_BURNING_CRUSADE_CLASSIC) and UnitEffectiveLevel(u) or UnitLevel(u)
+			local l = _G.WOW_PROJECT_ID == _G.WOW_PROJECT_MAINLINE and UnitEffectiveLevel(u) or UnitLevel(u)
 			return Hex(GetCreatureDifficultyColor((l > 0) and l or 999))
 		end
 	end]],
@@ -170,7 +170,7 @@ local tagStrings = {
 
 	['level'] = [[function(u)
 		local l = _G.WOW_PROJECT_ID ~= _G.WOW_PROJECT_MAINLINE and UnitLevel(u) or UnitEffectiveLevel(u)
-		if((_G.WOW_PROJECT_ID ~= _G.WOW_PROJECT_CLASSIC and _G.WOW_PROJECT_ID ~= _G.WOW_PROJECT_BURNING_CRUSADE_CLASSIC) and (UnitIsWildBattlePet(u) or UnitIsBattlePetCompanion(u))) then
+		if(_G.WOW_PROJECT_ID == _G.WOW_PROJECT_MAINLINE and (UnitIsWildBattlePet(u) or UnitIsBattlePetCompanion(u))) then
 			l = UnitBattlePetLevel(u)
 		end
 
@@ -263,7 +263,7 @@ local tagStrings = {
 		local _, class = UnitClass(u)
 		if(class) then
 			return Hex(_COLORS.class[class])
-		elseif(_G.WOW_PROJECT_ID ~= _G.WOW_PROJECT_CLASSIC and _G.WOW_PROJECT_ID ~= _G.WOW_PROJECT_BURNING_CRUSADE_CLASSIC) then
+		elseif(_G.WOW_PROJECT_ID == _G.WOW_PROJECT_MAINLINE) then
 			local id = u:match('arena(%d)$')
 			if(id) then
 				local specID = GetArenaOpponentSpec(tonumber(id))

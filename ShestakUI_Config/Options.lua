@@ -15,7 +15,7 @@ local function IsVanillaBuild()
 end
 
 local function IsTBCBuild()
-	return _G.WOW_PROJECT_ID == _G.WOW_PROJECT_BURNING_CRUSADE_CLASSIC
+	return _G.WOW_PROJECT_ID == _G.WOW_PROJECT_BURNING_CRUSADE_CLASSIC and select(4, GetBuildInfo()) < 30000 -- TODO: Change later
 end
 
 local function IsWrathBuild()

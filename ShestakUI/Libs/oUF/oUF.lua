@@ -421,7 +421,7 @@ Used to determine if running Burning Crusade Classic.
 * self - the global oUF object
 --]]
 function oUF:IsTBC()
-	return _G.WOW_PROJECT_ID == _G.WOW_PROJECT_BURNING_CRUSADE_CLASSIC
+	return _G.WOW_PROJECT_ID == _G.WOW_PROJECT_BURNING_CRUSADE_CLASSIC and select(4, GetBuildInfo()) < 30000 -- TODO: Change later
 end
 
 --[[ oUF:IsWrath()
