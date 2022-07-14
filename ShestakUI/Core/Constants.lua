@@ -17,6 +17,6 @@ T.newPatch = select(4, GetBuildInfo()) >= 90105
 T.Mainline =_G.WOW_PROJECT_ID == _G.WOW_PROJECT_MAINLINE
 T.Classic = _G.WOW_PROJECT_ID == _G.WOW_PROJECT_CLASSIC or _G.WOW_PROJECT_ID == _G.WOW_PROJECT_BURNING_CRUSADE_CLASSIC -- TODO: Add WotLK: Classic when there is a project ID
 T.Vanilla = _G.WOW_PROJECT_ID == _G.WOW_PROJECT_CLASSIC
-T.TBC = _G.WOW_PROJECT_ID == _G.WOW_PROJECT_BURNING_CRUSADE_CLASSIC
+T.TBC = _G.WOW_PROJECT_ID == _G.WOW_PROJECT_BURNING_CRUSADE_CLASSIC and select(4, GetBuildInfo()) < 30000 -- TODO: Change when there is a separate project ID for BCC / Wrath Classic
 T.Wrath = select(4, GetBuildInfo()) >= 30400 and select(4, GetBuildInfo()) < 40000 -- TODO: Change when there is a project ID
 T.HiDPI = GetScreenHeight() / T.screenHeight < 0.75
