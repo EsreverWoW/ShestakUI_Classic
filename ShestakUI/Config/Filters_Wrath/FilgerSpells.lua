@@ -1724,10 +1724,10 @@ C["filger_spells"] = {
 			{spellID = 770, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Faerie Fire (Feral)
 			{spellID = 16857, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Feral Charge - Bear
-			{spellID = 16979, unitID = "target", caster = "player", filter = "DEBUFF"},
-			-- Feral Charge - Cat
-			{spellID = 49376, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Feral Charge Effect
+			{spellID = 45334, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Feral Charge - Cat / Dazed
+			{spellID = 50259, unitID = "target", caster = "player", filter = "DEBUFF"}, absID = true},
 			-- Glyph of Rake
 			{spellID = 54820, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Growl
@@ -9129,8 +9129,6 @@ C["filger_spells"] = {
 			{spellID = 20511, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
 			-- Intimidating Shout (Fear)
 			{spellID = 5246, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
-			-- Revenge Stun
-			{spellID = 12798, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Shockwave
 			{spellID = 46968, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
 

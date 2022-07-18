@@ -69,7 +69,6 @@ T.DiminishingSpells = {
 	[12355] = {"stunproc"},			-- Impact
 	[20170] = {"stunproc"},			-- Seal of Justice
 	[39796] = {"stunproc"},			-- Stoneclaw Totem
-	[12798] = {"stunproc"},			-- Revenge Stun
 	[56] = {"stunproc"},			-- Stun (The Chief's Enforcer / Bludgeon of the Grinning Dog / The Judge's Gavel / Hammer of the Titans)
 	[15283] = {"stunproc"},			-- Stunning Blow (Dark Iron Pulverizer)
 	[21152] = {"stunproc"},			-- Earthshaker (Earthshaker)
@@ -151,7 +150,7 @@ T.DiminishingSpells = {
 
 	-- Roots
 	[53534] = {"root"},				-- Chains of Ice
-	-- [16979] = {"root"},				-- Feral Charge - Bear
+	-- [45334] = {"root"},				-- Feral Charge Effect
 	[339] = {"root"},				-- Entangling Roots r1
 	[1062] = {"root"},				-- Entangling Roots r2
 	[5195] = {"root"},				-- Entangling Roots r3

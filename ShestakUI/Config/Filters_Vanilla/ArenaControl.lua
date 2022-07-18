@@ -79,9 +79,9 @@ T.ArenaControl = {
 
 	-- Roots
 	[SpellName(19675)] = 3,		-- Feral Charge Effect
-	[SpellName(25999)] = 3,		-- Charge (Boar)
 	[SpellName(339)] = 3,		-- Entangling Roots
 	[SpellName(19975)] = 3,		-- Entangling Roots (Nature's Grasp)
+	[SpellName(25999)] = 3,		-- Charge (Boar)
 	[SpellName(19185)] = 3,		-- Entrapment
 	[SpellName(122)] = 3,		-- Frost Nova
 	[SpellName(12494)] = 3,		-- Frostbite
@@ -123,7 +123,8 @@ T.ArenaControl = {
 	[SpellName(18708)] = 1,		-- Fel Domination
 	-- Warrior
 	[SpellName(18499)] = 1,		-- Berserker Rage
-	[SpellName(12292)] = 1,		-- Death Wish
+	[SpellName(12328)] = 1,		-- Death Wish
+	[SpellName(12292)] = 1,		-- Sweeping Strikes
 	-- Racial
 	[SpellName(20554)] = 1,		-- Berserking (Mana)
 	-- [SpellName(26296)] = 1,		-- Berserking (Rage)

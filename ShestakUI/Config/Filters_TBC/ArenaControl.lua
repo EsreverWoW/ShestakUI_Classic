@@ -90,9 +90,9 @@ T.ArenaControl = {
 
 	-- Roots
 	[SpellName(45334)] = 3,		-- Feral Charge Effect
-	[SpellName(25999)] = 3,		-- Charge (Boar)
 	[SpellName(339)] = 3,		-- Entangling Roots
 	[SpellName(19975)] = 3,		-- Entangling Roots (Nature's Grasp)
+	[SpellName(25999)] = 3,		-- Charge (Boar)
 	[SpellName(19185)] = 3,		-- Entrapment
 	[SpellName(33395)] = 3,		-- Freeze (Water Elemental)
 	[SpellName(122)] = 3,		-- Frost Nova
@@ -104,6 +104,7 @@ T.ArenaControl = {
 	[SpellName(676)] = 1,		-- Disarm
 
 	-- Immunities
+	[SpellName(34471)] = 2,		-- The Beast Within
 	[SpellName(45438)] = 2,		-- Ice Block
 	[SpellName(642)] = 2,		-- Divine Shield
 
@@ -142,6 +143,7 @@ T.ArenaControl = {
 	-- Warrior
 	[SpellName(18499)] = 1,		-- Berserker Rage
 	[SpellName(12292)] = 1,		-- Death Wish
+	[SpellName(12328)] = 1,		-- Sweeping Strikes
 	-- Racial
 	[SpellName(20554)] = 1,		-- Berserking (Mana)
 	-- [SpellName(26296)] = 1,		-- Berserking (Rage)

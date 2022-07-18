@@ -2670,7 +2670,7 @@ C["filger_spells"] = {
 			-- Bloodthirst
 			{spellID = 23885, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Death Wish
-			{spellID = 12292, unitID = "player", caster = "player", filter = "BUFF"},
+			{spellID = 12328, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Flurry
 			{spellID = 12966, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Last Stand
@@ -2682,7 +2682,7 @@ C["filger_spells"] = {
 			-- Shield Wall
 			{spellID = 871, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Sweeping Strikes
-			{spellID = 12328, unitID = "player", caster = "player", filter = "BUFF"},
+			{spellID = 12292, unitID = "player", caster = "player", filter = "BUFF"},
 		},
 		{
 			Name = "P_PROC_ICON",
@@ -2905,7 +2905,7 @@ C["filger_spells"] = {
 			-- Concussion Blow
 			{spellID = 12809, filter = "CD"},
 			-- Death Wish
-			{spellID = 12292, filter = "CD"},
+			{spellID = 12328, filter = "CD"},
 			-- Disarm
 			{spellID = 676, filter = "CD", absID = true},
 			-- Intercept
@@ -2937,7 +2937,7 @@ C["filger_spells"] = {
 			-- Shield Wall
 			{spellID = 871, filter = "CD"},
 			-- Sweeping Strikes
-			{spellID = 12328, filter = "CD"},
+			{spellID = 12292, filter = "CD"},
 			-- Taunt
 			{spellID = 355, filter = "CD"},
 			-- Thunder Clap

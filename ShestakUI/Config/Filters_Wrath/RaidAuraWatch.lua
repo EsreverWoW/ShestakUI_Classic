@@ -1102,7 +1102,7 @@ if C.raidframe.plugins_pvp_debuffs == true then
 		[SpellName(33786)] = 3,		-- Cyclone
 		[SpellName(339)] = 2,		-- Entangling Roots
 		[SpellName(19975)] = 2,		-- Entangling Roots (Nature's Grasp)
-		[SpellName(16979)] = 2,		-- Feral Charge - Bear
+		[SpellName(45334)] = 2,		-- Feral Charge Effect
 		[SpellName(2637)] = 3,		-- Hibernate
 		[SpellName(22570)] = 3,		-- Maim
 		[SpellName(9005)] = 3,		-- Pounce
@@ -1177,7 +1177,6 @@ if C.raidframe.plugins_pvp_debuffs == true then
 		[SpellName(23694)] = 2,		-- Improved Hamstring
 		[SpellName(5246)] = 3,		-- Intimidating Shout
 		[SpellName(20253)] = 3,		-- Intercept Stun
-		[SpellName(12798)] = 3,		-- Revenge Stun
 		[SpellName(46968)] = 3,		-- Shockwave
 		[SpellName(18498)] = 3,		-- Silenced - Gag Order
 		-- Racial
