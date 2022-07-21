@@ -18,16 +18,37 @@ local function SpellName(id)
 	end
 end
 
-local spells = {
-	[SpellName(20484)] = true,		-- Rebirth
-	[SpellName(61999)] = true,		-- Raise Ally
-	[SpellName(20707)] = true,		-- Soulstone
-	[SpellName(50769)] = true,		-- Revive
-	[SpellName(2006)] = true,		-- Resurrection
-	[SpellName(7328)] = true,		-- Redemption
-	[SpellName(2008)] = true,		-- Ancestral Spirit
-	[SpellName(115178)] = true,		-- Resuscitate
-}
+local spells = {}
+if T.Wrath then
+	spells = {
+		[SpellName(20484)] = true,		-- Rebirth
+		[SpellName(61999)] = true,		-- Raise Ally
+		[SpellName(20707)] = true,		-- Soulstone
+		[SpellName(50769)] = true,		-- Revive
+		[SpellName(2006)] = true,		-- Resurrection
+		[SpellName(7328)] = true,		-- Redemption
+		[SpellName(2008)] = true,		-- Ancestral Spirit
+	}
+elseif T.Vanilla or T.TBC then
+	spells = {
+		[SpellName(20484)] = true,		-- Rebirth
+		[SpellName(20707)] = true,		-- Soulstone
+		[SpellName(2006)] = true,		-- Resurrection
+		[SpellName(7328)] = true,		-- Redemption
+		[SpellName(2008)] = true,		-- Ancestral Spirit
+	}
+else
+	spells = {
+		[SpellName(20484)] = true,		-- Rebirth
+		[SpellName(61999)] = true,		-- Raise Ally
+		[SpellName(20707)] = true,		-- Soulstone
+		[SpellName(50769)] = true,		-- Revive
+		[SpellName(2006)] = true,		-- Resurrection
+		[SpellName(7328)] = true,		-- Redemption
+		[SpellName(2008)] = true,		-- Ancestral Spirit
+		[SpellName(115178)] = true,		-- Resuscitate
+	}
+end
 
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
