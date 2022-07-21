@@ -1727,7 +1727,7 @@ C["filger_spells"] = {
 			-- Feral Charge Effect
 			{spellID = 45334, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Feral Charge - Cat / Dazed
-			{spellID = 50259, unitID = "target", caster = "player", filter = "DEBUFF"}, absID = true},
+			{spellID = 50259, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
 			-- Glyph of Rake
 			{spellID = 54820, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Growl
