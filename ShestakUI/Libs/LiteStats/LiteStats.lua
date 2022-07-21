@@ -1829,7 +1829,7 @@ if gold.enabled then
 		end,
 		OnEnter = function(self)
 			local curgold = GetMoney()
-			local _, _, archaeology, _, cooking = (T.Mainline or T.Wrath) and GetProfessions()
+			local _, _, archaeology, _, cooking = T.Mainline and GetProfessions()
 			conf.Gold = curgold
 			GameTooltip:SetOwner(self, "ANCHOR_NONE")
 			GameTooltip:ClearAllPoints()
@@ -1867,7 +1867,7 @@ if gold.enabled then
 			GameTooltip:AddDoubleLine(TOTAL, formatgold(5, total), ttsubh.r, ttsubh.g, ttsubh.b, 1, 1, 1)
 			GameTooltip:AddLine(" ")
 
-			if T.Mainline or T.Wrath then
+			if T.Mainline then
 				local currencies = 0
 				for i = 1, C_CurrencyInfo.GetCurrencyListSize() do
 					local info = C_CurrencyInfo.GetCurrencyListInfo(i)
@@ -1921,12 +1921,14 @@ if gold.enabled then
 				-- end
 
 				if T.Wrath and C.stats.currency_raid and T.level == MAX_PLAYER_LEVEL then
+					--[[
 					titleName = L_STATS_CURRENCY_RAID
 					Currency(101, false, false)	-- Emblem of Heroism
 					Currency(102, false, false)	-- Emblem of Valor
 					Currency(221, false, false)	-- Emblem of Conquest
 					Currency(301, false, false)	-- Emblem of Triumph
 					Currency(341, false, false)	-- Emblem of Frost
+					--]]
 				end
 
 				if C.stats.currency_misc then
