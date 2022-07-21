@@ -190,8 +190,8 @@ end
 
 if T.Wrath then
 	SlashCmdList.SPEC = function()
-		local spec = GetActiveSpecGroup()
-		if spec == 1 then SetActiveSpecGroup(2) elseif spec == 2 then SetActiveSpecGroup(1) end
+		local spec = GetActiveTalentGroup()
+		if spec == 1 then SetActiveTalentGroup(2) elseif spec == 2 then SetActiveTalentGroup(1) end
 	end
 	SLASH_SPEC1 = "/ss"
 	SLASH_SPEC2 = "/spec"
