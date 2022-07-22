@@ -60,7 +60,9 @@ local function GetReputation()
 	return cur, max, name, factionID, standingID, standingText, pendingReward
 end
 
-oUF.colors.reaction[MAX_REPUTATION_REACTION + 1] = {0, 0.5, 0.9} -- paragon color
+if(not oUF:IsClassic()) then
+	oUF.colors.reaction[MAX_REPUTATION_REACTION + 1] = {0, 0.5, 0.9} -- paragon color
+end
 
 -- Changed tooltip for ShestakUI
 local function UpdateTooltip(element)
