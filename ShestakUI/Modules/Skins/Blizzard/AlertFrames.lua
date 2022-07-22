@@ -731,7 +731,10 @@ local function LoadSkin()
 			frame.Icon:SetParent(frame.Icon.b)
 		end
 	end
-	hooksecurefunc(EntitlementDeliveredAlertSystem, "setUpFunction", SkinEntitlementDeliveredAlert)
+
+	if T.Mainline then
+		hooksecurefunc(EntitlementDeliveredAlertSystem, "setUpFunction", SkinEntitlementDeliveredAlert)
+	end
 
 	local function SkinRafRewardDeliveredAlert(frame)
 		frame:SetAlpha(1)
@@ -766,7 +769,9 @@ local function LoadSkin()
 		end
 	end
 
-	hooksecurefunc(RafRewardDeliveredAlertSystem, "setUpFunction", SkinRafRewardDeliveredAlert)
+	if T.Mainline then
+		hooksecurefunc(RafRewardDeliveredAlertSystem, "setUpFunction", SkinRafRewardDeliveredAlert)
+	end
 
 	local function SkinDigsiteCompleteAlert(frame)
 		frame:SetAlpha(1)
@@ -787,7 +792,9 @@ local function LoadSkin()
 		frame.DigsiteTypeTexture:SetPoint("LEFT", -10, -14)
 	end
 
-	hooksecurefunc(DigsiteCompleteAlertSystem, "setUpFunction", SkinDigsiteCompleteAlert)
+	if T.Mainline then
+		hooksecurefunc(DigsiteCompleteAlertSystem, "setUpFunction", SkinDigsiteCompleteAlert)
+	end
 
 	local function SkinNewRecipeLearnedAlert(frame)
 		frame:SetAlpha(1)
@@ -857,8 +864,10 @@ local function LoadSkin()
 	end
 	hooksecurefunc(NewPetAlertSystem, "setUpFunction", SkinNewPetMountAlert)
 	hooksecurefunc(NewMountAlertSystem, "setUpFunction", SkinNewPetMountAlert)
-	hooksecurefunc(NewToyAlertSystem, "setUpFunction", SkinNewPetMountAlert)
-	hooksecurefunc(NewRuneforgePowerAlertSystem, "setUpFunction", SkinNewPetMountAlert)
+	if T.Mainline then
+		hooksecurefunc(NewToyAlertSystem, "setUpFunction", SkinNewPetMountAlert)
+		hooksecurefunc(NewRuneforgePowerAlertSystem, "setUpFunction", SkinNewPetMountAlert)
+	end
 
 	hooksecurefunc("StandardRewardAlertFrame_AdjustRewardAnchors", function(frame)
 		if frame.RewardFrames then
@@ -874,46 +883,48 @@ local function LoadSkin()
 		end
 	end)
 
-	-- Bonus Roll Money
-	local frame = BonusRollMoneyWonFrame
-	frame:SetAlpha(1)
-	hooksecurefunc(frame, "SetAlpha", forceAlpha)
-	frame.Background:Kill()
-	frame.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-	frame.IconBorder:Kill()
-	-- Icon border
-	frame.Icon.b = CreateFrame("Frame", nil, frame)
-	frame.Icon.b:SetTemplate("Default")
-	frame.Icon.b:SetPoint("TOPLEFT", frame.Icon, "TOPLEFT", -2, 2)
-	frame.Icon.b:SetPoint("BOTTOMRIGHT", frame.Icon, "BOTTOMRIGHT", 2, -2)
-	frame.Icon:SetParent(frame.Icon.b)
-	-- Create Backdrop
-	frame:CreateBackdrop("Transparent")
-	frame.backdrop:SetPoint("TOPLEFT", frame, "TOPLEFT", -9, 6)
-	frame.backdrop:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", 5, -6)
+	if T.Mainline then
+		-- Bonus Roll Money
+		local frame = BonusRollMoneyWonFrame
+		frame:SetAlpha(1)
+		hooksecurefunc(frame, "SetAlpha", forceAlpha)
+		frame.Background:Kill()
+		frame.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+		frame.IconBorder:Kill()
+		-- Icon border
+		frame.Icon.b = CreateFrame("Frame", nil, frame)
+		frame.Icon.b:SetTemplate("Default")
+		frame.Icon.b:SetPoint("TOPLEFT", frame.Icon, "TOPLEFT", -2, 2)
+		frame.Icon.b:SetPoint("BOTTOMRIGHT", frame.Icon, "BOTTOMRIGHT", 2, -2)
+		frame.Icon:SetParent(frame.Icon.b)
+		-- Create Backdrop
+		frame:CreateBackdrop("Transparent")
+		frame.backdrop:SetPoint("TOPLEFT", frame, "TOPLEFT", -9, 6)
+		frame.backdrop:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", 5, -6)
 
-	-- Bonus Roll Loot
-	frame = BonusRollLootWonFrame
-	frame:SetAlpha(1)
-	hooksecurefunc(frame, "SetAlpha", forceAlpha)
-	frame.Background:Kill()
-	frame.glow:Kill()
-	frame.shine:Kill()
+		-- Bonus Roll Loot
+		frame = BonusRollLootWonFrame
+		frame:SetAlpha(1)
+		hooksecurefunc(frame, "SetAlpha", forceAlpha)
+		frame.Background:Kill()
+		frame.glow:Kill()
+		frame.shine:Kill()
 
-	local lootItem = frame.lootItem
-	lootItem.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-	lootItem.IconBorder:SetAlpha(0)
-	-- Icon border
-	lootItem.Icon.b = CreateFrame("Frame", nil, frame)
-	lootItem.Icon.b:SetTemplate("Default")
-	lootItem.Icon.b:SetFrameLevel(1)
-	lootItem.Icon.b:SetPoint("TOPLEFT", lootItem.Icon, "TOPLEFT", -2, 2)
-	lootItem.Icon.b:SetPoint("BOTTOMRIGHT", lootItem.Icon, "BOTTOMRIGHT", 2, -2)
-	lootItem.Icon:SetParent(lootItem.Icon.b)
-	-- Create Backdrop
-	frame:CreateBackdrop("Transparent")
-	frame.backdrop:SetPoint("TOPLEFT", frame, "TOPLEFT", -9, 6)
-	frame.backdrop:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", 5, -6)
+		local lootItem = frame.lootItem
+		lootItem.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+		lootItem.IconBorder:SetAlpha(0)
+		-- Icon border
+		lootItem.Icon.b = CreateFrame("Frame", nil, frame)
+		lootItem.Icon.b:SetTemplate("Default")
+		lootItem.Icon.b:SetFrameLevel(1)
+		lootItem.Icon.b:SetPoint("TOPLEFT", lootItem.Icon, "TOPLEFT", -2, 2)
+		lootItem.Icon.b:SetPoint("BOTTOMRIGHT", lootItem.Icon, "BOTTOMRIGHT", 2, -2)
+		lootItem.Icon:SetParent(lootItem.Icon.b)
+		-- Create Backdrop
+		frame:CreateBackdrop("Transparent")
+		frame.backdrop:SetPoint("TOPLEFT", frame, "TOPLEFT", -9, 6)
+		frame.backdrop:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", 5, -6)
+	end
 end
 
 tinsert(T.SkinFuncs["ShestakUI"], LoadSkin)

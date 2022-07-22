@@ -17,6 +17,11 @@ local function LoadSkin()
 
 	T.SkinCloseButton(SpellBookCloseButton, SpellBookFrame.backdrop)
 
+	if T.Wrath then
+		T.SkinCheckBox(ShowAllSpellRanksCheckBox)
+		ShowAllSpellRanksCheckBox:SetPoint("TOPLEFT", _G.SpellButton1, "TOPLEFT", -7, 32)
+	end
+
 	SpellBookTitleText:ClearAllPoints()
 	SpellBookTitleText:SetPoint("TOP", SpellBookFrame.backdrop, "TOP", 0, -6)
 

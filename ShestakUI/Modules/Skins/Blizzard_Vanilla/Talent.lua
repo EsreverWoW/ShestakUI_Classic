@@ -76,13 +76,6 @@ local function LoadSkin()
 		PlayerTalentFrameStatusFrame:SetPoint("TOPLEFT", 57, -40)
 		PlayerTalentFrameActivateButton:SetPoint("TOP", 0, -40)
 
-		PlayerTalentFrameScrollFrame:SetWidth(302)
-		PlayerTalentFrameScrollFrame:SetPoint("TOPRIGHT", PlayerTalentFrame, "TOPRIGHT", -62, -77)
-		PlayerTalentFrameScrollFrame:SetPoint("BOTTOM", PlayerTalentFramePointsBar, "TOP", 0, 0)
-
-		PlayerTalentFrameScrollFrameScrollBar:SetPoint("TOPLEFT", PlayerTalentFrameScrollFrame, "TOPRIGHT", 4, -18)
-		PlayerTalentFrameScrollFrameScrollBar:SetPoint("BOTTOMLEFT", PlayerTalentFrameScrollFrame, "BOTTOMRIGHT", 4, 18)
-
 		PlayerTalentFrameResetButton:SetPoint("RIGHT", -4, 1)
 		PlayerTalentFrameLearnButton:SetPoint("RIGHT", PlayerTalentFrameResetButton, "LEFT", -3, 0)
 
@@ -91,6 +84,8 @@ local function LoadSkin()
 		PlayerSpecTab1.SetPoint = T.dummy
 
 		PlayerTalentFrameTab1:SetPoint("BOTTOMLEFT", 11, 46)
+
+		PlayerTalentFramePointsBar:StripTextures()
 	end
 
 	local f = CreateFrame("Frame")

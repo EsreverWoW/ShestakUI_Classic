@@ -360,7 +360,9 @@ local function LoadSkin()
 		local player = button.player
 		local friend = button.friend
 		player.titleBar:Kill()
-		friend.titleBar:Kill()
+		if friend.titleBar then
+			friend.titleBar:Kill()
+		end
 
 		if not player.bg3 or not friend.bg3 then return end
 
@@ -376,7 +378,7 @@ local function LoadSkin()
 			friend.bg3:SetColorTexture(unpack(C.media.border_color))
 		end
 
-		if not AchievementFrame.searchBox.moved then
+		if T.Mainline and not AchievementFrame.searchBox.moved then
 			AchievementFrame.searchBox:SetPoint("TOPRIGHT", AchievementFrameComparisonHeader, "TOPRIGHT", -172, -19)
 			AchievementFrame.searchBox.moved = true
 		end

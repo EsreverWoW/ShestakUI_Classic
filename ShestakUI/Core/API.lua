@@ -418,12 +418,20 @@ function T.SkinScrollBar(frame)
 	if UpButton and DownButton then
 		if not UpButton.icon then
 			T.SkinNextPrevButton(UpButton, nil, "Up")
-			UpButton:SetSize(UpButton:GetWidth() + 7, UpButton:GetHeight() + 7)
+			if T.Wrath then
+				UpButton:SetSize(UpButton:GetWidth() + 3, UpButton:GetHeight() + 3)
+			else
+				UpButton:SetSize(UpButton:GetWidth() + 7, UpButton:GetHeight() + 7)
+			end
 		end
 
 		if not DownButton.icon then
 			T.SkinNextPrevButton(DownButton, nil, "Down")
-			DownButton:SetSize(DownButton:GetWidth() + 7, DownButton:GetHeight() + 7)
+			if T.Wrath then
+				DownButton:SetSize(DownButton:GetWidth() + 3, DownButton:GetHeight() + 3)
+			else
+				DownButton:SetSize(DownButton:GetWidth() + 7, DownButton:GetHeight() + 7)
+			end
 		end
 
 		if ThumbTexture then
@@ -570,7 +578,11 @@ function T.SkinNextPrevButton(btn, left, scroll)
 	btn:SetDisabledTexture(disabled)
 
 	btn:SetTemplate("Overlay")
-	btn:SetSize(btn:GetWidth() - 7, btn:GetHeight() - 7)
+	if T.Wrath then
+		btn:SetSize(btn:GetWidth() - 3, btn:GetHeight() - 3)
+	else
+		btn:SetSize(btn:GetWidth() - 7, btn:GetHeight() - 7)
+	end
 
 	if normal and pushed and disabled then
 		btn:GetNormalTexture():SetTexCoord(0.3, 0.29, 0.3, 0.81, 0.65, 0.29, 0.65, 0.81)
@@ -597,7 +609,11 @@ end
 
 function T.SkinRotateButton(btn)
 	btn:SetTemplate("Default")
-	btn:SetSize(btn:GetWidth() - 14, btn:GetHeight() - 14)
+	if T.Wrath then
+		btn:SetSize(btn:GetWidth() - 8, btn:GetHeight() - 8)
+	else
+		btn:SetSize(btn:GetWidth() - 14, btn:GetHeight() - 14)
+	end
 
 	btn:GetNormalTexture():SetTexCoord(0.3, 0.29, 0.3, 0.65, 0.69, 0.29, 0.69, 0.65)
 	btn:GetPushedTexture():SetTexCoord(0.3, 0.29, 0.3, 0.65, 0.69, 0.29, 0.69, 0.65)
@@ -651,7 +667,11 @@ function T.SkinDropDownBox(frame, width, pos)
 	else
 		button:SetPoint("RIGHT", frame, "RIGHT", -10, 3)
 	end
-	button.SetPoint = T.dummy
+
+	if not T.Wrath then
+		button.SetPoint = T.dummy
+	end
+
 	T.SkinNextPrevButton(button, nil, "Down")
 
 	frame:CreateBackdrop("Overlay")

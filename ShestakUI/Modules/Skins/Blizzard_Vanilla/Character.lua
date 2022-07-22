@@ -1,5 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
-if C.skins.blizzard_frames ~= true then return else return end -- FIXME
+if C.skins.blizzard_frames ~= true then return end
 
 ----------------------------------------------------------------------------------------
 --	Character skin
@@ -25,6 +25,7 @@ local function LoadSkin()
 
 	CharacterFrameTab1:ClearAllPoints()
 	CharacterFrameTab1:SetPoint("TOPLEFT", CharacterFrame.backdrop, "BOTTOMLEFT", 2, -2)
+
 	for i = 1, #CHARACTERFRAME_SUBFRAMES do
 		local tab = _G["CharacterFrameTab"..i]
 		T.SkinTab(tab)
@@ -70,6 +71,9 @@ local function LoadSkin()
 		PlayerStatFrameLeftDropDownButton:SetNormalTexture("Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Up")
 		PlayerStatFrameLeftDropDownButton:SetPushedTexture("Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Down")
 		PlayerStatFrameLeftDropDownButton:SetDisabledTexture("Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Disabled")
+
+		T.SkinDropDownBox(PlayerTitleDropDown, 200)
+		PlayerTitleDropDown:SetPoint("TOP", -7, -51)
 	end
 
 	local slots = {
@@ -196,65 +200,82 @@ local function LoadSkin()
 	ReputationFrame:StripTextures()
 
 	for i = 1, NUM_FACTIONS_DISPLAYED do
-		local bar = _G["ReputationBar"..i]
-		local header = _G["ReputationHeader"..i]
-		local name = _G["ReputationBar"..i.."FactionName"]
-		local war = _G["ReputationBar"..i.."AtWarCheck"]
+		if T.Wrath then
+			local factionRow = _G["ReputationBar"..i]
+			local factionBar = _G["ReputationBar"..i.."ReputationBar"]
+			local factionButton = _G["ReputationBar"..i.."ExpandOrCollapseButton"]
 
-		bar:StripTextures()
-		bar:CreateBackdrop("Default")
-		bar:SetStatusBarTexture(C.media.blank)
-		bar:SetSize(108, 13)
+			factionRow:StripTextures()
 
-		if i == 1 then
-			bar:SetPoint("TOPLEFT", 190, -86)
+			factionBar:StripTextures()
+			factionBar:SetStatusBarTexture(C.media.blank)
+			factionBar:CreateBackdrop("Default")
+
+			factionButton:SetSize(14, 14)
+			factionButton:SetHighlightTexture(nil)
+			factionButton:SetNormalTexture("")
+			factionButton.SetNormalTexture = T.dummy
+
+			if i == 1 then
+				factionRow:SetPoint("TOPLEFT", 20, -86)
+			end
+		else
+			local bar = _G["ReputationBar"..i]
+			local header = _G["ReputationHeader"..i]
+			local name = _G["ReputationBar"..i.."FactionName"]
+			local war = _G["ReputationBar"..i.."AtWarCheck"]
+
+			bar:StripTextures()
+			bar:CreateBackdrop("Default")
+			bar:SetStatusBarTexture(C.media.blank)
+			bar:SetSize(108, 13)
+
+			if i == 1 then
+				bar:SetPoint("TOPLEFT", 190, -86)
+			end
+
+			name:SetWidth(140)
+			name:SetPoint("LEFT", bar, "LEFT", -150, 0)
+			name.SetWidth = T.dummy
+
+			header:SetSize(14, 14)
+			header:SetHighlightTexture(nil)
+			header:SetPoint("TOPLEFT", bar, "TOPLEFT", -170, 0)
+
+			war:StripTextures()
+			war:SetPoint("LEFT", bar, "RIGHT", -2, 0)
+
+			war.icon = war:CreateTexture(nil, "OVERLAY")
+			war.icon:SetPoint("LEFT", 6, -8)
+			war.icon:SetSize(32, 32)
+			war.icon:SetTexture("Interface\\Buttons\\UI-CheckBox-SwordCheck")
 		end
-
-		name:SetWidth(140)
-		name:SetPoint("LEFT", bar, "LEFT", -150, 0)
-		name.SetWidth = T.dummy
-
-		header:SetSize(14, 14)
-		header:SetHighlightTexture(nil)
-		header:SetPoint("TOPLEFT", bar, "TOPLEFT", -170, 0)
-
-		war:StripTextures()
-		war:SetPoint("LEFT", bar, "RIGHT", -2, 0)
-
-		war.icon = war:CreateTexture(nil, "OVERLAY")
-		war.icon:SetPoint("LEFT", 6, -8)
-		war.icon:SetSize(32, 32)
-		war.icon:SetTexture("Interface\\Buttons\\UI-CheckBox-SwordCheck")
 	end
 
-	hooksecurefunc('ReputationFrame_Update', function()
-		local numFactions = GetNumFactions()
-		local index, header, text
-		local offset = FauxScrollFrame_GetOffset(ReputationListScrollFrame)
+	hooksecurefunc("ReputationFrame_Update", function()
+		if CharacterFrame:IsShown() then
+			local numFactions = GetNumFactions()
+			local index, button
+			local offset = FauxScrollFrame_GetOffset(ReputationListScrollFrame)
 
-		for i = 1, NUM_FACTIONS_DISPLAYED, 1 do
-			header = _G["ReputationHeader"..i]
-			text = _G["ReputationHeader"..i.."NormalText"]
-			index = offset + i
+			for i = 1, NUM_FACTIONS_DISPLAYED, 1 do
+				button = T.Wrath and _G["ReputationBar"..i.."ExpandOrCollapseButton"] or _G["ReputationHeader"..i]
+				index = offset + i
 
-			if index <= numFactions then
-				header:SetSize(14, 14)
-				header:StripTextures()
-				header:SetTemplate("Overlay")
+				if index <= numFactions then
+					button:StripTextures()
 
-				text:ClearAllPoints()
-				text:SetPoint("LEFT", header, "RIGHT", 6, -1)
+					button.minus = button.minus or button:CreateTexture(nil, "OVERLAY")
+					button.minus:SetSize(7, 1)
+					button.minus:SetPoint("CENTER")
+					button.minus:SetTexture(C.media.blank)
 
-				header.minus = header:CreateTexture(nil, "OVERLAY")
-				header.minus:SetSize(7, 1)
-				header.minus:SetPoint("CENTER")
-				header.minus:SetTexture(C.media.blank)
-
-				if header.isCollapsed then
-					header.plus = header:CreateTexture(nil, "OVERLAY")
-					header.plus:SetSize(1, 7)
-					header.plus:SetPoint("CENTER")
-					header.plus:SetTexture(C.media.blank)
+					if button.isCollapsed then
+						button.plus = button.plus or button:CreateTexture(nil, "OVERLAY")
+						button.plus:SetSize(1, 7)
+						button.plus:SetPoint("CENTER")
+						button.plus:SetTexture(C.media.blank)
+					end
 				end
 			end
 		end
@@ -288,15 +309,14 @@ local function LoadSkin()
 
 	hooksecurefunc(SkillFrameCollapseAllButton, "SetNormalTexture", function(self, texture)
 		self:StripTextures()
-		self:SetTemplate("Overlay")
 
-		self.minus = self:CreateTexture(nil, "OVERLAY")
+		self.minus = self.minus or self:CreateTexture(nil, "OVERLAY")
 		self.minus:SetSize(7, 1)
 		self.minus:SetPoint("CENTER")
 		self.minus:SetTexture(C.media.blank)
 
 		if not string.find(texture, "MinusButton") then
-			self.plus = self:CreateTexture(nil, "OVERLAY")
+			self.plus = self.plus or self:CreateTexture(nil, "OVERLAY")
 			self.plus:SetSize(1, 7)
 			self.plus:SetPoint("CENTER")
 			self.plus:SetTexture(C.media.blank)
@@ -326,15 +346,14 @@ local function LoadSkin()
 
 		hooksecurefunc(label, "SetNormalTexture", function(self, texture)
 			self:StripTextures()
-			self:SetTemplate("Overlay")
 
-			self.minus = self:CreateTexture(nil, "OVERLAY")
+			self.minus = self.minus or self:CreateTexture(nil, "OVERLAY")
 			self.minus:SetSize(7, 1)
 			self.minus:SetPoint("CENTER")
 			self.minus:SetTexture(C.media.blank)
 
 			if not string.find(texture, "MinusButton") then
-				self.plus = self:CreateTexture(nil, "OVERLAY")
+				self.plus = self.plus or self:CreateTexture(nil, "OVERLAY")
 				self.plus:SetSize(1, 7)
 				self.plus:SetPoint("CENTER")
 				self.plus:SetTexture(C.media.blank)
@@ -373,6 +392,13 @@ local function LoadSkin()
 	-- PVP Frame
 	if not T.Vanilla then
 		PVPFrame:StripTextures(true)
+
+		if T.Wrath then
+			PVPFrame:CreateBackdrop("Transparent")
+			PVPFrame.backdrop:SetPoint("TOPLEFT", 10, -12)
+			PVPFrame.backdrop:SetPoint("BOTTOMRIGHT", -32, 76)
+			T.SkinCloseButton(PVPParentFrameCloseButton, PVPFrame.backdrop)
+		end
 
 		for i = 1, MAX_ARENA_TEAMS do
 			local pvpTeam = _G["PVPTeam"..i]
@@ -417,6 +443,90 @@ local function LoadSkin()
 		T.SkinNextPrevButton(PVPTeamDetailsToggleButton)
 
 		T.SkinCloseButton(PVPTeamDetailsCloseButton)
+	end
+
+	-- Token Frame
+	if T.Wrath then
+		TokenFrame:StripTextures()
+		TokenFrameCancelButton:SkinButton()
+
+		local function UpdateCurrencySkins()
+			local TokenFramePopup = _G.TokenFramePopup
+
+			if TokenFramePopup then
+				TokenFramePopup:ClearAllPoints()
+				TokenFramePopup:SetPoint("TOPLEFT", _G.TokenFrame, "TOPRIGHT", 4, -28)
+				TokenFramePopup:StripTextures()
+				TokenFramePopup:SetTemplate("Transparent")
+			end
+
+			local TokenFrameContainer = _G.TokenFrameContainer
+			if not TokenFrameContainer.buttons then return end
+
+			local buttons = TokenFrameContainer.buttons
+			local numButtons = #buttons
+
+			for i = 1, numButtons do
+				local button = buttons[i]
+
+				if button then
+					if button.highlight then button.highlight:Kill() end
+					if button.categoryLeft then button.categoryLeft:Kill() end
+					if button.categoryRight then button.categoryRight:Kill() end
+					if button.categoryMiddle then button.categoryMiddle:Kill() end
+
+					if not button.backdrop then
+						button:CreateBackdrop(nil, nil, nil, true)
+					end
+
+					if button.icon then
+						button.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+						button.icon:SetSize(14, 14)
+
+						button.backdrop:SetOutside(button.icon, 1, 1)
+						button.backdrop:Show()
+					else
+						button.backdrop:Hide()
+					end
+
+					if button.expandIcon then
+						if not button.highlightTexture then
+							button.highlightTexture = button:CreateTexture(button:GetName().."HighlightTexture", "HIGHLIGHT")
+							button.highlightTexture:SetTexture([[Interface\Buttons\UI-PlusButton-Hilight]])
+							button.highlightTexture:SetBlendMode("ADD")
+							button.highlightTexture:SetInside(button.expandIcon)
+
+							-- these two only need to be called once
+							-- adding them here will prevent additional calls
+							button.expandIcon:ClearAllPoints()
+							button.expandIcon:SetPoint("LEFT", 4, 0)
+							button.expandIcon:SetSize(12, 12)
+						end
+
+						if button.isHeader then
+							button.backdrop:Hide()
+
+							-- TODO: WotLK Fix some quirks for the header point keeps changing after you click the expandIcon button.
+							for x = 1, button:GetNumRegions() do
+								local region = select(x, button:GetRegions())
+								if region and region:IsObjectType("FontString") and region:GetText() then
+									region:ClearAllPoints()
+									region:SetPoint("LEFT", 25, 0)
+								end
+							end
+
+							button.expandIcon:StripTextures()
+							button.highlightTexture:Show()
+						else
+							button.highlightTexture:Hide()
+						end
+					end
+				end
+			end
+		end
+
+		hooksecurefunc("TokenFrame_Update", UpdateCurrencySkins)
+		hooksecurefunc(_G.TokenFrameContainer, "update", UpdateCurrencySkins)
 	end
 end
 
