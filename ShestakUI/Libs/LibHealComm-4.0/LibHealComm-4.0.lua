@@ -3273,11 +3273,13 @@ function HealComm:OnInitialize()
 	end
 
 	-- Cache glyphs initially
-	for id=1, GetNumGlyphSockets() do
-		local enabled, _, glyphID = GetGlyphSocketInfo(id)
-		if( enabled and glyphID ) then
-			glyphCache[glyphID] = true
-			glyphCache[id] = glyphID
+	if isWrath then
+		for id=1, GetNumGlyphSockets() do
+			local enabled, _, glyphID = GetGlyphSocketInfo(id)
+			if( enabled and glyphID ) then
+				glyphCache[glyphID] = true
+				glyphCache[id] = glyphID
+			end
 		end
 	end
 
