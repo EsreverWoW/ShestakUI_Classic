@@ -34,7 +34,7 @@ local function LoadSkin()
 	for _, frame in pairs(noname_frames) do
 		for i = 1, _G[frame]:GetNumChildren() do
 			local child = select(i, _G[frame]:GetChildren())
-			if child and not child:GetName() then
+			if child and not child:GetName() and child.NineSlice then
 				child.NineSlice:SetAlpha(0)
 			end
 		end
@@ -76,14 +76,16 @@ local function LoadSkin()
 		AchievementFrameFilterDropDown:SetPoint("TOPLEFT", AchievementFrameAchievements, "TOPLEFT", -19, 24)
 	end)
 
-	T.SkinEditBox(AchievementFrame.searchBox)
-	AchievementFrame.searchBox:SetHeight(15)
-	AchievementFrame.searchBox:ClearAllPoints()
-	AchievementFrame.searchBox:SetPoint("TOPRIGHT", AchievementFrame, "TOPRIGHT", -51, 0)
+	if T.Mainline then
+		T.SkinEditBox(AchievementFrame.searchBox)
+		AchievementFrame.searchBox:SetHeight(15)
+		AchievementFrame.searchBox:ClearAllPoints()
+		AchievementFrame.searchBox:SetPoint("TOPRIGHT", AchievementFrame, "TOPRIGHT", -51, 0)
 
-	AchievementFrame.searchResults:StripTextures()
-	AchievementFrame.searchResults:SetTemplate("Transparent")
-	T.SkinCloseButton(AchievementFrame.searchResults.closeButton)
+		AchievementFrame.searchResults:StripTextures()
+		AchievementFrame.searchResults:SetTemplate("Transparent")
+		T.SkinCloseButton(AchievementFrame.searchResults.closeButton)
+	end
 
 	-- ScrollBars
 	T.SkinScrollBar(AchievementFrameCategoriesContainerScrollBar)
@@ -91,12 +93,15 @@ local function LoadSkin()
 	T.SkinScrollBar(AchievementFrameStatsContainerScrollBar)
 	T.SkinScrollBar(AchievementFrameComparisonContainerScrollBar)
 	T.SkinScrollBar(AchievementFrameComparisonStatsContainerScrollBar)
-	T.SkinScrollBar(AchievementFrameScrollFrameScrollBar)
 
-	AchievementFrameScrollFrameScrollBar:SetPoint("TOPLEFT", AchievementFrameScrollFrame, "TOPRIGHT", -3, -16)
+	if T.Mainline then
+		T.SkinScrollBar(AchievementFrameScrollFrameScrollBar)
+
+		AchievementFrameScrollFrameScrollBar:SetPoint("TOPLEFT", AchievementFrameScrollFrame, "TOPRIGHT", -3, -16)
+	end
 
 	-- Tabs
-	for i = 1, 3 do
+	for i = 1, T.Wrath and 2 or 3 do
 		T.SkinTab(_G["AchievementFrameTab"..i])
 		_G["AchievementFrameTab"..i]:SetFrameLevel(_G["AchievementFrameTab"..i]:GetFrameLevel() + 2)
 	end
@@ -127,7 +132,7 @@ local function LoadSkin()
 	AchievementFrameComparisonSummaryFriendStatusBar.text:SetPoint("CENTER")
 	AchievementFrameComparisonHeader:SetPoint("BOTTOMRIGHT", AchievementFrameComparison, "TOPRIGHT", 45, -20)
 
-	for i = 1, 12 do
+	for i = 1, T.Wrath and 8 or 12 do
 		local frame = _G["AchievementFrameSummaryCategoriesCategory"..i]
 		local button = _G["AchievementFrameSummaryCategoriesCategory"..i.."Button"]
 		local highlight = _G["AchievementFrameSummaryCategoriesCategory"..i.."ButtonHighlight"]

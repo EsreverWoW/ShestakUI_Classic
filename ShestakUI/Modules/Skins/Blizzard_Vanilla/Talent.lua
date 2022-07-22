@@ -17,10 +17,15 @@ local function LoadSkin()
 	_G["PlayerTalentFrameTitleText"]:ClearAllPoints()
 	_G["PlayerTalentFrameTitleText"]:SetPoint("TOP", _G["PlayerTalentFrame"].backdrop, "TOP", 0, -6)
 
-	_G["PlayerTalentFrameSpentPoints"]:ClearAllPoints()
-	_G["PlayerTalentFrameSpentPoints"]:SetPoint("TOP", _G["PlayerTalentFrame"].backdrop, "TOP", 0, -30)
+	if T.Wrath then
+		_G["PlayerTalentFrameSpentPointsText"]:ClearAllPoints()
+		_G["PlayerTalentFrameSpentPointsText"]:SetPoint("TOP", _G["PlayerTalentFrame"].backdrop, "TOP", 0, -30)
+	else
+		_G["PlayerTalentFrameSpentPoints"]:ClearAllPoints()
+		_G["PlayerTalentFrameSpentPoints"]:SetPoint("TOP", _G["PlayerTalentFrame"].backdrop, "TOP", 0, -30)
 
-	_G["PlayerTalentFrameCancelButton"]:Kill()
+		_G["PlayerTalentFrameCancelButton"]:Kill()
+	end
 
 	_G["PlayerTalentFrameTab1"]:ClearAllPoints()
 	_G["PlayerTalentFrameTab1"]:SetPoint("TOPLEFT", _G["PlayerTalentFrame"].backdrop, "BOTTOMLEFT", 2, -2)
@@ -54,6 +59,38 @@ local function LoadSkin()
 
 			rank:SetFont(C.media.pixel_font, C.media.pixel_font_size, C.media.pixel_font_style)
 		end
+	end
+
+	if T.Wrath then
+		for i = 1, MAX_TALENT_TABS do
+			local tab = _G["PlayerSpecTab"..i]
+			tab:GetRegions():Hide()
+
+			tab:SetTemplate("Default")
+			tab:StyleButton(true)
+
+			tab:GetNormalTexture():SetInside()
+			tab:GetNormalTexture():SetTexCoord(0.1, 0.9, 0.1, 0.9)
+		end
+
+		PlayerTalentFrameStatusFrame:SetPoint("TOPLEFT", 57, -40)
+		PlayerTalentFrameActivateButton:SetPoint("TOP", 0, -40)
+
+		PlayerTalentFrameScrollFrame:SetWidth(302)
+		PlayerTalentFrameScrollFrame:SetPoint("TOPRIGHT", PlayerTalentFrame, "TOPRIGHT", -62, -77)
+		PlayerTalentFrameScrollFrame:SetPoint("BOTTOM", PlayerTalentFramePointsBar, "TOP", 0, 0)
+
+		PlayerTalentFrameScrollFrameScrollBar:SetPoint("TOPLEFT", PlayerTalentFrameScrollFrame, "TOPRIGHT", 4, -18)
+		PlayerTalentFrameScrollFrameScrollBar:SetPoint("BOTTOMLEFT", PlayerTalentFrameScrollFrame, "BOTTOMRIGHT", 4, 18)
+
+		PlayerTalentFrameResetButton:SetPoint("RIGHT", -4, 1)
+		PlayerTalentFrameLearnButton:SetPoint("RIGHT", PlayerTalentFrameResetButton, "LEFT", -3, 0)
+
+		PlayerSpecTab1:SetPoint("TOPLEFT", PlayerTalentFrame, "TOPRIGHT", -33, -65)
+		PlayerSpecTab1.ClearAllPoints = T.dummy
+		PlayerSpecTab1.SetPoint = T.dummy
+
+		PlayerTalentFrameTab1:SetPoint("BOTTOMLEFT", 11, 46)
 	end
 
 	local f = CreateFrame("Frame")

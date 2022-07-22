@@ -26,7 +26,7 @@
 	<Script file="..\Blizzard\Trade.lua"/>
 
 	<Script file="Auction.lua"/>
-	<Script file="Character.lua"/>
+	<Script file="Character.lua"/>			<!-- TODO -->
 	<Script file="Communities.lua"/>
 	<Script file="Container.lua"/>
 	<Script file="DressUp.lua"/>

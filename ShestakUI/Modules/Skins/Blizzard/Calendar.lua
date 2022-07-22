@@ -131,9 +131,12 @@ local function LoadSkin()
 	-- Texture Picker Frame
 	CalendarTexturePickerFrame:SetTemplate("Transparent")
 
-	T.SkinScrollBar(CalendarTexturePickerScrollBar)
-	T.SkinScrollBar(CalendarViewEventInviteListScrollFrameScrollBar)
-	T.SkinScrollBar(CalendarCreateEventDescriptionScrollFrameScrollBar)
+	if T.Mainline then
+		T.SkinScrollBar(CalendarTexturePickerScrollBar)
+		T.SkinScrollBar(CalendarViewEventInviteListScrollFrameScrollBar)
+		T.SkinScrollBar(CalendarCreateEventDescriptionScrollFrameScrollBar)
+	end
+
 	CalendarTexturePickerAcceptButton:SkinButton(true)
 	CalendarTexturePickerCancelButton:SkinButton(true)
 	CalendarCreateEventRaidInviteButton:SkinButton(true)
@@ -166,7 +169,11 @@ local function LoadSkin()
 	T.SkinCloseButton(CalendarViewEventCloseButton)
 
 	CalendarEventPickerFrame:SetTemplate("Transparent")
-	T.SkinScrollBar(CalendarEventPickerScrollBar)
+
+	if T.Mainline then
+		T.SkinScrollBar(CalendarEventPickerScrollBar)
+	end
+
 	CalendarEventPickerCloseButton:SkinButton(true)
 
 	local buttons = {

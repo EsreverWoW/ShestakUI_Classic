@@ -5,7 +5,9 @@ if C.skins.blizzard_frames ~= true or IsAddOnLoaded("QuestLogEx") then return en
 --	QuestLog skin
 ----------------------------------------------------------------------------------------
 local function LoadSkin()
-	QuestLogTimerText:SetTextColor(1, 1, 1)
+	if not T.Wrath then
+		QuestLogTimerText:SetTextColor(1, 1, 1)
+	end
 
 	QuestLogFrame:SetAttribute("UIPanelLayout-width", T.Scale(685))
 	QuestLogFrame:SetAttribute("UIPanelLayout-height", T.Scale(490))
@@ -45,8 +47,13 @@ local function LoadSkin()
 	QuestFramePushQuestButton:SetWidth(101)
 	QuestFramePushQuestButton:SetText(SHARE_QUEST)
 
-	QuestFrameExitButton:SetPoint("BOTTOMRIGHT", -31, 15)
-	QuestFrameExitButton:SetWidth(100)
+	if T.Wrath then
+		QuestFrameCancelButton:SetPoint("BOTTOMRIGHT", -31, 15)
+		QuestFrameCancelButton:SetWidth(100)
+	else
+		QuestFrameExitButton:SetPoint("BOTTOMRIGHT", -31, 15)
+		QuestFrameExitButton:SetWidth(100)
+	end
 
 	T.SkinScrollBar(QuestLogDetailScrollFrameScrollBar)
 	T.SkinScrollBar(QuestLogListScrollFrameScrollBar)

@@ -1,5 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
-if C.skins.blizzard_frames ~= true then return end
+if C.skins.blizzard_frames ~= true then return else return end -- FIXME
 
 ----------------------------------------------------------------------------------------
 --	Character skin
