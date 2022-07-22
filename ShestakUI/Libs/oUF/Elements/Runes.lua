@@ -5,7 +5,7 @@ local oUF = ns.oUF
 
 if(oUF:IsClassic() and not oUF:IsWrath()) then return end
 
-local runemap = {1, 2, 3, 4, 5, 6}
+local runemap = oUF:IsWrath() and {1, 2, 5, 6, 3, 4} or {1, 2, 3, 4, 5, 6}
 local hasSortOrder = false
 
 local function onUpdate(self, elapsed)
@@ -45,18 +45,6 @@ local function UpdateColor(self, event, runeID, alt)
 
 	local color
 	if(oUF:IsWrath()) then
-		if validRuneType then
-			if runeID == 3 then
-				runeID = 5
-			elseif runeID == 4 then
-				runeID = 6
-			elseif runeID == 5 then
-				runeID = 3
-			elseif runeID == 6 then
-				runeID = 4
-			end
-		end
-
 		local runeType = validRuneType and GetRuneType(runeID) or alt
 		color = runeType and self.colors.runes[runeType] or self.colors.power.RUNES
 	else
