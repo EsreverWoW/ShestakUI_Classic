@@ -45,6 +45,18 @@ local function UpdateColor(self, event, runeID, alt)
 
 	local color
 	if(oUF:IsWrath()) then
+		if validRuneType then
+			if runeID == 3 then
+				runeID = 5
+			elseif runeID == 4 then
+				runeID = 6
+			elseif runeID == 5 then
+				runeID = 3
+			elseif runeID == 6 then
+				runeID = 4
+			end
+		end
+
 		local runeType = validRuneType and GetRuneType(runeID) or alt
 		color = runeType and self.colors.runes[runeType] or self.colors.power.RUNES
 	else
