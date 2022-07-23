@@ -2227,6 +2227,11 @@ function HealComm:CHARACTER_POINTS_CHANGED()
 			end
 		end
 	end
+
+	for k in pairs(talentData) do
+		talentData[k].current = talentData[k].current or 0
+		talentData[k].spent = talentData[k].spent or 0
+	end
 end
 
 -- Save the currently equipped range weapon
