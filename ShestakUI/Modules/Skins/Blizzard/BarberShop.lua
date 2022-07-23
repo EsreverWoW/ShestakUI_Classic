@@ -5,31 +5,35 @@ if C.skins.blizzard_frames ~= true then return end
 --	BarbershopUI skin
 ----------------------------------------------------------------------------------------
 local function LoadSkin()
-	local buttons = {
-		BarberShopFrame.AcceptButton,
-		BarberShopFrame.CancelButton,
-		BarberShopFrame.ResetButton
-	}
+	if T.Wrath then
+		return -- TODO
+	else
+		local buttons = {
+			BarberShopFrame.AcceptButton,
+			BarberShopFrame.CancelButton,
+			BarberShopFrame.ResetButton
+		}
 
-	for i = 1, #buttons do
-		local button = buttons[i]
-		button:SkinButton(true)
-		button:SetScale(UIParent:GetScale())
-	end
+		for i = 1, #buttons do
+			local button = buttons[i]
+			button:SkinButton(true)
+			button:SetScale(UIParent:GetScale())
+		end
 
-	local smallButtons = {
-		CharCustomizeFrame.SmallButtons.ResetCameraButton,
-		CharCustomizeFrame.SmallButtons.ZoomOutButton,
-		CharCustomizeFrame.SmallButtons.ZoomInButton,
-		CharCustomizeFrame.SmallButtons.RotateLeftButton,
-		CharCustomizeFrame.SmallButtons.RotateRightButton,
-	}
+		local smallButtons = {
+			CharCustomizeFrame.SmallButtons.ResetCameraButton,
+			CharCustomizeFrame.SmallButtons.ZoomOutButton,
+			CharCustomizeFrame.SmallButtons.ZoomInButton,
+			CharCustomizeFrame.SmallButtons.RotateLeftButton,
+			CharCustomizeFrame.SmallButtons.RotateRightButton,
+		}
 
-	for i = 1, #smallButtons do
-		local button = smallButtons[i]
-		button:SetNormalTexture("")
-		button:SetPushedTexture("")
-		button:SetHighlightTexture("")
+		for i = 1, #smallButtons do
+			local button = smallButtons[i]
+			button:SetNormalTexture("")
+			button:SetPushedTexture("")
+			button:SetHighlightTexture("")
+		end
 	end
 end
 

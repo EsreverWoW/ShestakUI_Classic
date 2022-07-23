@@ -150,6 +150,13 @@ local function LoadSkin()
 	PetNameText:SetPoint("TOP", CharacterFrame.backdrop, "TOP", 0, -4)
 
 	PetPaperDollFrame:StripTextures()
+
+	for i = 1, 3 do
+		local tab = _G["PetPaperDollFrameTab"..i]
+		if tab then
+			T.SkinTab(tab, true)
+		end
+	end
 	
 	PetPaperDollCloseButton:StripTextures()
 	PetPaperDollCloseButton:SkinButton()
@@ -195,6 +202,61 @@ local function LoadSkin()
 	PetPaperDollPetInfo:RegisterEvent("UNIT_HAPPINESS")
 	PetPaperDollPetInfo:SetScript("OnEvent", updHappiness)
 	PetPaperDollPetInfo:SetScript("OnShow", updHappiness)
+
+	-- Companion / Mount Frame
+	PetPaperDollFrameCompanionFrame:StripTextures()
+
+	CompanionSummonButton:SkinButton()
+
+	T.SkinNextPrevButton(CompanionPrevPageButton)
+	T.SkinNextPrevButton(CompanionNextPageButton)
+
+	CompanionNextPageButton:ClearAllPoints()
+	CompanionNextPageButton:SetPoint("TOPLEFT", CompanionPrevPageButton, "TOPRIGHT", 100, 0)
+
+	T.SkinRotateButton(CompanionModelFrameRotateLeftButton)
+	CompanionModelFrameRotateLeftButton:ClearAllPoints()
+	CompanionModelFrameRotateLeftButton:SetPoint("TOPLEFT", 3, -3)
+	T.SkinRotateButton(CompanionModelFrameRotateRightButton)
+	CompanionModelFrameRotateRightButton:ClearAllPoints()
+	CompanionModelFrameRotateRightButton:SetPoint("TOPLEFT", CompanionModelFrameRotateLeftButton, "TOPRIGHT", 3, 0)
+
+	CompanionPageNumber:ClearAllPoints()
+	CompanionPageNumber:SetPoint("BOTTOM", -5, 90)
+
+	hooksecurefunc("PetPaperDollFrame_UpdateCompanions", function()
+		for i = 1, NUM_COMPANIONS_PER_PAGE do
+			local button = _G["CompanionButton"..i]
+
+			if button.creatureID then
+				local iconNormal = button:GetNormalTexture()
+				iconNormal:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+				iconNormal:SetInside()
+			end
+		end
+	end)
+
+	for i = 1, NUM_COMPANIONS_PER_PAGE do
+		local button = _G["CompanionButton"..i]
+		local iconDisabled = button:GetDisabledTexture()
+		local activeTexture = _G["CompanionButton"..i.."ActiveTexture"]
+
+		button:SkinButton()
+		button:SetTemplate()
+		button:SetCheckedTexture("")
+
+		iconDisabled:SetAlpha(0)
+
+		activeTexture:SetInside(button)
+		activeTexture:SetTexture(1, 1, 1, .15)
+		activeTexture:SetAlpha(.2)
+
+		if i == 7 then
+			button:SetPoint("TOP", CompanionButton1, "BOTTOM", 0, -5)
+		elseif i ~= 1 then
+			button:SetPoint("LEFT", _G["CompanionButton"..i-1], "RIGHT", 5, 0)
+		end
+	end
 
 	-- Reputation Frame
 	ReputationFrame:StripTextures()

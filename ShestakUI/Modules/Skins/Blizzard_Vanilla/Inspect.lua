@@ -122,7 +122,9 @@ local function LoadSkin()
 		T.SkinScrollBar(InspectTalentFrameScrollFrameScrollBar)
 		InspectTalentFrameScrollFrameScrollBar:SetPoint("TOPLEFT", InspectTalentFrameScrollFrame, "TOPRIGHT", 10, -16)
 
-		InspectTalentFrameSpentPoints:SetPoint("BOTTOMLEFT", InspectTalentFrame, "BOTTOMLEFT", 8, 84)
+		if not T.Wrath then
+			InspectTalentFrameSpentPoints:SetPoint("BOTTOMLEFT", InspectTalentFrame, "BOTTOMLEFT", 8, 84)
+		end
 
 		for i = 1, MAX_NUM_TALENTS do
 			local talent = _G["InspectTalentFrameTalent"..i]

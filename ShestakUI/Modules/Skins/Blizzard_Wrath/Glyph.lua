@@ -18,6 +18,20 @@ local function LoadSkin()
 	for i = 1, 6 do
 		_G["GlyphFrameGlyph"..i]:SetFrameLevel(_G["GlyphFrameGlyph"..i]:GetFrameLevel() + 5)
 	end
+
+	_G.GlyphFrame:HookScript("OnShow", function()
+		_G.PlayerTalentFrameTitleText:Hide()
+		_G.PlayerTalentFramePointsBar:Hide()
+		_G.PlayerTalentFrameScrollFrame:Hide()
+		_G.PlayerTalentFrameStatusFrame:Hide()
+		_G.PlayerTalentFrameActivateButton:Hide()
+	end)
+
+	_G.GlyphFrame:HookScript("OnHide", function()
+		_G.PlayerTalentFrameTitleText:Show()
+		_G.PlayerTalentFramePointsBar:Show()
+		_G.PlayerTalentFrameScrollFrame:Show()
+	end)
 end
 
 T.SkinFuncs["Blizzard_GlyphUI"] = LoadSkin
