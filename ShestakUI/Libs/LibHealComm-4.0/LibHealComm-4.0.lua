@@ -71,6 +71,8 @@ local UnitPlayerControlled = UnitPlayerControlled
 local CheckInteractDistance = CheckInteractDistance
 local CombatLogGetCurrentEventInfo = CombatLogGetCurrentEventInfo
 local UnitHasVehicleUI = UnitHasVehicleUI or function() end
+local GetGlyphSocketInfo = GetGlyphSocketInfo or function() end
+local GetNumGlyphSockets = GetNumGlyphSockets or function() return 0 end
 
 local MAX_RAID_MEMBERS = MAX_RAID_MEMBERS
 local MAX_PARTY_MEMBERS = MAX_PARTY_MEMBERS
@@ -2828,11 +2830,13 @@ function HealComm:UNIT_SPELLCAST_SENT(unit, targetName, castGUID, spellID)
 end
 
 local PlayerTargetSpells = {
-	[GetSpellInfo(32546)] = true, -- Binding Heal
 	[GetSpellInfo(689)] = true, -- Drain Life
 	[GetSpellInfo(740)] = true, -- Tranquility
 	[GetSpellInfo(331)] = true, -- Healing Wave
 }
+if isTBC or isWrath then
+	PlayerTargetSpells[GetSpellInfo(32546)] = true -- Binding Heal
+end
 function HealComm:UNIT_SPELLCAST_START(unit, cast, spellID)
 	if( unit ~= "player") then return end
 
@@ -3273,13 +3277,11 @@ function HealComm:OnInitialize()
 	end
 
 	-- Cache glyphs initially
-	if isWrath then
-		for id=1, GetNumGlyphSockets() do
-			local enabled, _, glyphID = GetGlyphSocketInfo(id)
-			if( enabled and glyphID ) then
-				glyphCache[glyphID] = true
-				glyphCache[id] = glyphID
-			end
+	for id=1, GetNumGlyphSockets() do
+		local enabled, _, glyphID = GetGlyphSocketInfo(id)
+		if( enabled and glyphID ) then
+			glyphCache[glyphID] = true
+			glyphCache[id] = glyphID
 		end
 	end
 
