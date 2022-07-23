@@ -2,7 +2,7 @@
 ## Title: ShestakUI (Classic) Config
 ## Notes: In-game configuration for ShestakUI
 ## Author: Shestak
-## Version: 1.59
+## Version: 1.60
 ## X-Curse-Project-ID: 468754
 ## X-WoWI-ID: 25934
 ## X-Wago-ID: WqKQbyGx
