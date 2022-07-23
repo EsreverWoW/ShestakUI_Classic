@@ -114,6 +114,9 @@ elseif T.Wrath then
 	RoleUpdater:RegisterEvent("PLAYER_TALENT_UPDATE")
 	RoleUpdater:RegisterEvent("UNIT_INVENTORY_CHANGED")
 	RoleUpdater:RegisterEvent("UPDATE_BONUS_ACTIONBAR")
+	if T.class == "DEATHKNIGHT" then
+		RoleUpdater:RegisterEvent("UPDATE_SHAPESHIFT_COOLDOWN")
+	end
 else
 	RoleUpdater:RegisterEvent("PLAYER_TALENT_UPDATE")
 end
