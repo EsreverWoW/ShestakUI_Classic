@@ -910,13 +910,13 @@ if( playerClass == "DRUID" ) then
 		end
 		spellData[Nourish] = {coeff = 0.358005, levels = {80}, averages = {avg(1883, 2187)}}
 
-		talentData[GiftofNature] = {mod = 0.02, current = 0}
-		talentData[ImprovedRejuv] = {mod = 0.05, current = 0}
-		talentData[EmpoweredRejuv] = {mod = 0.04, current = 0}
-		talentData[EmpoweredTouch] = {mod = 0.1, current = 0}
-		talentData[Genesis] = {mod = 0.01, current = 0}
-		talentData[NaturesSplendor] = {mod = 1, current = 0}
-		talentData[MasterShapeshifter] = {mod = 0.02, current = 0}
+		talentData[GiftofNature] = {mod = 0.02, current = 0, spent = 0}
+		talentData[ImprovedRejuv] = {mod = 0.05, current = 0, spent = 0}
+		talentData[EmpoweredRejuv] = {mod = 0.04, current = 0, spent = 0}
+		talentData[EmpoweredTouch] = {mod = 0.1, current = 0, spent = 0}
+		talentData[Genesis] = {mod = 0.01, current = 0, spent = 0}
+		talentData[NaturesSplendor] = {mod = 1, current = 0, spent = 0}
+		talentData[MasterShapeshifter] = {mod = 0.02, current = 0, spent = 0}
 
 		itemSetsData["Stormrage"] = {16903, 16898, 16904, 16897, 16900, 16899, 16901, 16902}
 		itemSetsData["Nordrassil"] = {30216, 30217, 30219, 30220, 30221}
@@ -1253,9 +1253,9 @@ if( playerClass == "PALADIN" ) then
 				{avg(448, 502), avg(450, 505), avg(453, 508), avg(455, 510), avg(458, 513)} }}
 		end
 
-		talentData[HealingLight] = { mod = 0.04, current = 0 }
-		talentData[Divinity] = { mod = 0.01, current = 0 }
-		talentData[TouchedbytheLight] = {mod = 0.10, current = 0}
+		talentData[HealingLight] = {mod = 0.04, current = 0, spent = 0}
+		talentData[Divinity] = {mod = 0.01, current = 0, spent = 0}
+		talentData[TouchedbytheLight] = {mod = 0.10, current = 0, spent = 0}
 
 		itemSetsData["Lightbringer"] = {30992, 30983, 30988, 30994, 30996, 34432, 34487, 34559}
 		itemSetsData["Lightsworn"] = {50865, 50866, 50867, 50868, 50869, 51270, 51271, 51272, 51273, 51274, 51165, 51166, 51167, 51168, 51169}
@@ -1448,17 +1448,17 @@ if( playerClass == "PRIEST" ) then
 			{avg(1952, 2508), avg(1955, 2512), avg(1959, 2516)} }}
 		spellData[Penance] = {_isChanneled = true, coeff = 0.857, ticks = 3, levels = {60, 70, 75, 80}, averages = {avg(670, 756), avg(805, 909), avg(1278, 1442), avg(1484, 1676)}}
 
-		talentData[ImprovedRenew] = {mod = 0.05, current = 0}
-		talentData[SpiritualHealing] = {mod = 0.02, current = 0}
-		talentData[EmpoweredHealing] = {mod = 0.02, current = 0}
+		talentData[ImprovedRenew] = {mod = 0.05, current = 0, spent = 0}
+		talentData[SpiritualHealing] = {mod = 0.02, current = 0, spent = 0}
+		talentData[EmpoweredHealing] = {mod = 0.02, current = 0, spent = 0}
 		if isWrath then
 			talentData[EmpoweredHealing][mod] = 0.04
 		end
-		talentData[BlessedResilience] = {mod = 0.01, current = 0}
-		talentData[FocusedPower] = {mod = 0.02, current = 0}
-		talentData[DivineProvidence] = {mod = 0.02, current = 0}
-		talentData[EmpoweredRenew] = {mod = 0.05, current = 0}
-		talentData[TwinDisciplines] = {mod = 0.01, current = 0}
+		talentData[BlessedResilience] = {mod = 0.01, current = 0, spent = 0}
+		talentData[FocusedPower] = {mod = 0.02, current = 0, spent = 0}
+		talentData[DivineProvidence] = {mod = 0.02, current = 0, spent = 0}
+		talentData[EmpoweredRenew] = {mod = 0.05, current = 0, spent = 0}
+		talentData[TwinDisciplines] = {mod = 0.01, current = 0, spent = 0}
 
 		itemSetsData["Oracle"] = {21351, 21349, 21350, 21348, 21352}
 		itemSetsData["Absolution"] = {31068, 31063, 31060, 31069, 31066, 34562, 34527, 34435}
@@ -1682,10 +1682,10 @@ if( playerClass == "SHAMAN" ) then
 			{avg(1382, 1578), avg(1387, 1583), avg(1392, 1588), avg(1397, 1593), avg(1402, 1598)},
 			{avg(1606, 1834), avg(1612, 1840), avg(1618, 1846), avg(1624, 1852)} }}
 
-		talentData[HealingWay] = {mod = (0.25/3), current = 0}
-		talentData[ImpChainHeal] = {mod = 0.10, current = 0}
-		talentData[Purification] = {mod = 0.02, current = 0}
-		talentData[TidalWaves] = {mod = 0.04, current = 0}
+		talentData[HealingWay] = {mod = (0.25/3), current = 0, spent = 0}
+		talentData[ImpChainHeal] = {mod = 0.10, current = 0, spent = 0}
+		talentData[Purification] = {mod = 0.02, current = 0, spent = 0}
+		talentData[TidalWaves] = {mod = 0.04, current = 0, spent = 0}
 
 		itemSetsData["Skyshatter"] = {31016, 31007, 31012, 31019, 31022, 34543, 34438, 34565}
 		itemSetsData["T7 Resto"] = {40508, 40509, 40510, 40512, 40513, 39583, 39588, 39589, 39590, 39591}
@@ -1892,8 +1892,8 @@ if( playerClass == "WARLOCK" ) then
 		spellData[HealthFunnel] = {_isChanneled = true, coeff = 0.548, interval = 1, levels = { 12, 20, 28, 36, 44, 52, 60, 68, 76 }, ticks = 10, averages = { 120, 240, 430, 640, 890, 1190, 1530, 1880, 5200 } }
 		spellData[DrainLife] = {_isChanneled = true, coeff = 0.143, interval = 1, levels = { 14, 22, 30, 38, 46, 54, 62, 69, 78 }, ticks = 5, averages = { 10 * 5, 17 * 5, 29 * 5, 41 * 5, 55 * 5, 71 * 5, 87 * 5, 108 * 5, 133 * 5 } }
 
-		talentData[ImpHealthFunnel] = { mod = 0.1, current = 0 }
-		talentData[ShadowMastery] = { mod = 0.1, current = 0 }
+		talentData[ImpHealthFunnel] = {mod = 0.1, current = 0, spent = 0}
+		talentData[ShadowMastery] = {mod = 0.1, current = 0, spent = 0}
 
 		GetHealTargets = function(bitType, guid, spellID)
 			local spellName = GetSpellInfo(spellID)
@@ -2226,11 +2226,6 @@ function HealComm:CHARACTER_POINTS_CHANGED()
 				talentData[name].spent = spent
 			end
 		end
-	end
-
-	for k in pairs(talentData) do
-		talentData[k].current = talentData[k].current or 0
-		talentData[k].spent = talentData[k].spent or 0
 	end
 end
 
