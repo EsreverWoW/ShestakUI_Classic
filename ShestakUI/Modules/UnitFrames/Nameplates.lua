@@ -409,7 +409,7 @@ local function UpdateTarget(self)
 end
 
 local function UpdateName(self)
-	if C.nameplate.healer_icon == true then
+	if C.nameplate.healer_icon == true and self.HPHeal then
 		local name = self.unitName
 		if name then
 			if testing then
@@ -428,7 +428,7 @@ local function UpdateName(self)
 		end
 	end
 
-	if C.nameplate.class_icons == true then
+	if C.nameplate.class_icons == true and self.Class then
 		local reaction = UnitReaction(self.unit, "player")
 		if UnitIsPlayer(self.unit) and (reaction and reaction <= 4) then
 			local _, class = UnitClass(self.unit)
@@ -443,7 +443,7 @@ local function UpdateName(self)
 		end
 	end
 
-	if C.nameplate.totem_icons == true then
+	if C.nameplate.totem_icons == true and self.Totem then
 		local name = self.unitName
 		if name then
 			if totemData[name] then
