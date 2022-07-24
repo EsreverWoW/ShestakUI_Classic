@@ -51,6 +51,7 @@ local function StyleNormalButton(button, size)
 		local normal = _G[name.."NormalTexture"]
 		local float = _G[name.."FloatingBG"]
 		local highlight = button.SpellHighlightTexture
+		local isMultiCast = name:match("MultiCast")
 		local isExtraAction = name:match("ExtraAction")
 		local isFlyout = name:match("Flyout")
 
@@ -65,7 +66,7 @@ local function StyleNormalButton(button, size)
 			border:SetTexture("")
 		end
 
-		if not isExtraAction then
+		if not isMultiCast and not isExtraAction then
 			count:ClearAllPoints()
 			count:SetPoint("BOTTOMRIGHT", 0, 2)
 			count:SetFont(C.font.action_bars_font, C.font.action_bars_font_size, C.font.action_bars_font_style)
@@ -97,7 +98,7 @@ local function StyleNormalButton(button, size)
 			hotkey:Kill()
 		end
 
-		if not isFlyout and not isExtraAction then
+		if not isFlyout and not isMultiCast and not isExtraAction then
 			button:SetSize(size or C.actionbar.button_size, size or C.actionbar.button_size)
 		end
 		button:SetTemplate("Transparent")
@@ -290,6 +291,9 @@ do
 		StyleNormalButton(_G["MultiBarLeftButton"..i], C.actionbar.editor and C.actionbar.bar3_size)
 		StyleNormalButton(_G["MultiBarRightButton"..i], C.actionbar.editor and C.actionbar.bar4_size)
 		StyleNormalButton(_G["MultiBarBottomRightButton"..i], C.actionbar.editor and C.actionbar.bar5_size)
+		if T.Wrath then
+			StyleNormalButton(_G["MultiCastActionButton"..i])
+		end
 	end
 
 	if T.Mainline then
@@ -313,6 +317,9 @@ if C.actionbar.hotkey == true then
 			UpdateHotkey(_G["MultiBarBottomRightButton"..i])
 			UpdateHotkey(_G["MultiBarLeftButton"..i])
 			UpdateHotkey(_G["MultiBarRightButton"..i])
+			if T.Wrath then
+				UpdateHotkey(_G["MultiCastActionButton"..i])
+			end
 		end
 		for i = 1, 10 do
 			UpdateHotkey(_G["StanceButton"..i])
@@ -323,6 +330,226 @@ if C.actionbar.hotkey == true then
 		end
 	end)
 end
+
 if T.Mainline and C.actionbar.hide_highlight == true then
 	hooksecurefunc("ActionButton_ShowOverlayGlow", HideHighlightButton)
 end
+
+----------------------------------------------------------------------------------------
+--	TotemBar style
+----------------------------------------------------------------------------------------
+if not T.Wrath or T.class ~= "SHAMAN" then return end
+
+local SLOT_EMPTY_TCOORDS = {
+	[EARTH_TOTEM_SLOT] = {
+		left = 66 / 128,
+		right = 96 / 128,
+		top = 3 / 256,
+		bottom = 33 / 256,
+	},
+	[FIRE_TOTEM_SLOT] = {
+		left = 67 / 128,
+		right = 97 / 128,
+		top = 100 / 256,
+		bottom = 130 / 256,
+	},
+	[WATER_TOTEM_SLOT] = {
+		left = 39 / 128,
+		right = 69 / 128,
+		top = 209 / 256,
+		bottom = 239 / 256,
+	},
+	[AIR_TOTEM_SLOT] = {
+		left = 66 / 128,
+		right = 96 / 128,
+		top = 36 / 256,
+		bottom = 66 / 256,
+	},
+}
+
+-- Totem Fly Out
+local function StyleTotemFlyout(flyout)
+	-- Remove blizzard flyout texture
+	flyout.top:SetTexture(nil)
+	flyout.middle:SetTexture(nil)
+
+	-- Buttons
+	local last = nil
+	for _, button in ipairs(flyout.buttons) do
+		button:SetTemplate("Default")
+		local icon = select(1, button:GetRegions())
+		if icon then
+			icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+			icon:SetDrawLayer("ARTWORK")
+			icon:ClearAllPoints()
+			icon:SetPoint("TOPLEFT", button, "TOPLEFT", 2, -2)
+			icon:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", -2, 2)
+		end
+		if not InCombatLockdown() then
+			button:SetSize(C.actionbar.button_size, C.actionbar.button_size)
+			button:ClearAllPoints()
+			button:SetPoint("BOTTOM", last, "TOP", 0, C.actionbar.button_space)
+		end
+		if button:IsVisible() then
+			last = button
+		end
+		button:SetBackdropBorderColor(flyout.parent:GetBackdropBorderColor())
+		button:StyleButton()
+		if C.actionbar.stancebar_mouseover == true then
+			button:HookScript("OnEnter", function() StanceBarMouseOver(1) end)
+			button:HookScript("OnLeave", function() if not HoverBind.enabled then StanceBarMouseOver(0) end end)
+		end
+	end
+
+	flyout.buttons[1]:SetPoint("BOTTOM", flyout, "BOTTOM", 0, 0)
+
+	if flyout.type == "slot" then
+		local tcoords = SLOT_EMPTY_TCOORDS[flyout.parent:GetID()]
+		flyout.buttons[1].icon:SetTexCoord(tcoords.left, tcoords.right, tcoords.top, tcoords.bottom)
+	end
+
+	-- Close Button
+	local close = MultiCastFlyoutFrameCloseButton
+	close:SetTemplate("Default")
+	close:GetHighlightTexture():SetTexture([[Interface\Buttons\ButtonHilight-Square]])
+	close:GetHighlightTexture():SetPoint("TOPLEFT", close, "TOPLEFT", 2, -2)
+	close:GetHighlightTexture():SetPoint("BOTTOMRIGHT", close, "BOTTOMRIGHT", -2, 2)
+	close:GetNormalTexture():SetTexture(nil)
+	close:ClearAllPoints()
+	close:SetPoint("BOTTOMLEFT", last, "TOPLEFT", 0, C.actionbar.button_space)
+	close:SetPoint("BOTTOMRIGHT", last, "TOPRIGHT", 0, C.actionbar.button_space)
+	close:SetHeight(C.actionbar.button_space * 4)
+	close:SetBackdropBorderColor(last:GetBackdropBorderColor())
+
+	flyout:ClearAllPoints()
+	flyout:SetPoint("BOTTOM", flyout.parent, "TOP", 0, C.actionbar.button_space)
+end
+hooksecurefunc("MultiCastFlyoutFrame_ToggleFlyout", function(self) StyleTotemFlyout(self) end)
+
+-- Totem Fly Out Buttons
+local function StyleTotemOpenButton(button, parent)
+	button:GetHighlightTexture():SetTexture(nil)
+	button:GetNormalTexture():SetTexture(nil)
+	button:SetHeight(20)
+	button:ClearAllPoints()
+	button:SetPoint("BOTTOMLEFT", parent, "TOPLEFT", 0, -1)
+	button:SetPoint("BOTTOMRIGHT", parent, "TOPRIGHT", 0, -1)
+	if not button.visibleBut then
+		button.visibleBut = CreateFrame("Frame", nil, button)
+		button.visibleBut:SetHeight(C.actionbar.button_space * 4)
+		button.visibleBut:SetWidth(button:GetWidth())
+		button.visibleBut:SetPoint("CENTER")
+		button.visibleBut.highlight = button.visibleBut:CreateTexture(nil, "HIGHLIGHT")
+		button.visibleBut.highlight:SetTexture([[Interface\Buttons\ButtonHilight-Square]])
+		button.visibleBut.highlight:SetPoint("TOPLEFT", button.visibleBut, "TOPLEFT", 1, -1)
+		button.visibleBut.highlight:SetPoint("BOTTOMRIGHT", button.visibleBut, "BOTTOMRIGHT", -1, 1)
+		button.visibleBut:SetTemplate("Default")
+	end
+
+	button.visibleBut:SetBackdropBorderColor(parent:GetBackdropBorderColor())
+end
+hooksecurefunc("MultiCastFlyoutFrameOpenButton_Show", function(button, _, parent) StyleTotemOpenButton(button, parent) end)
+
+-- Color for borders
+local bordercolors = {
+	{0.23, 0.45, 0.13},		-- Earth
+	{0.58, 0.23, 0.10},		-- Fire
+	{0.19, 0.48, 0.60},		-- Water
+	{0.42, 0.18, 0.74},		-- Air
+}
+
+-- Totem Slot Buttons
+local function StyleTotemSlotButton(button, index)
+	button:SetTemplate("Default")
+	button.overlayTex:SetTexture(nil)
+	button.background:SetDrawLayer("ARTWORK")
+	button.background:ClearAllPoints()
+	button.background:SetPoint("TOPLEFT", button, "TOPLEFT", 2, -2)
+	button.background:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", -2, 2)
+
+	if not InCombatLockdown() then
+		button:SetSize(C.actionbar.button_size, C.actionbar.button_size)
+	end
+
+	button:SetBackdropBorderColor(unpack(bordercolors[((index-1) % 4) + 1]))
+	button:StyleButton()
+end
+hooksecurefunc("MultiCastSlotButton_Update", function(self, slot) StyleTotemSlotButton(self, tonumber(string.match(self:GetName(), "MultiCastSlotButton(%d)"))) end)
+
+-- Skin the actual totem buttons
+local function StyleTotemActionButton(button, index)
+	local name = button:GetName()
+	local icon = select(1, button:GetRegions())
+	local hotkey = _G[name.."HotKey"]
+
+	if C.actionbar.hotkey == true then
+		hotkey:ClearAllPoints()
+		hotkey:SetPoint("TOPRIGHT", 0, 0)
+		hotkey:SetFont(C.font.action_bars_font, C.font.action_bars_font_size, C.font.action_bars_font_style)
+		hotkey:SetShadowOffset(C.font.action_bars_font_shadow and 1 or 0, C.font.action_bars_font_shadow and -1 or 0)
+		hotkey:SetWidth(C.actionbar.button_size - 1)
+	else
+		hotkey:Kill()
+	end
+
+	if icon then
+		icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+		icon:SetDrawLayer("ARTWORK")
+		icon:ClearAllPoints()
+		icon:SetPoint("TOPLEFT", button, "TOPLEFT", 2, -2)
+		icon:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", -2, 2)
+	end
+
+	button.overlayTex:SetTexture(nil)
+	button.overlayTex:Hide()
+	button:GetNormalTexture():SetTexCoord(0, 0, 0, 0)
+
+	if not InCombatLockdown() and button.slotButton then
+		button:ClearAllPoints()
+		button:SetAllPoints(button.slotButton)
+		button:SetFrameLevel(button.slotButton:GetFrameLevel() + 1)
+	end
+
+	button:SetBackdropBorderColor(unpack(bordercolors[((index-1) % 4) + 1]))
+	button:SetBackdropColor(0, 0, 0, 0)
+	button:StyleButton(true)
+end
+hooksecurefunc("MultiCastActionButton_Update", function(actionButton, actionId, actionIndex, slot) StyleTotemActionButton(actionButton, actionIndex) end)
+
+-- Summon and Recall Buttons
+local function StyleTotemSpellButton(button, index)
+	if not button then return end
+	local name = button:GetName()
+	local icon = select(1, button:GetRegions())
+	local hotkey = _G[name.."HotKey"]
+
+	if C.actionbar.hotkey == true then
+		hotkey:ClearAllPoints()
+		hotkey:SetPoint("TOPRIGHT", 0, 0)
+		hotkey:SetFont(C.font.action_bars_font, C.font.action_bars_font_size, C.font.action_bars_font_style)
+		hotkey:SetShadowOffset(C.font.action_bars_font_shadow and 1 or 0, C.font.action_bars_font_shadow and -1 or 0)
+		hotkey:SetWidth(C.actionbar.button_size - 1)
+	else
+		hotkey:Kill()
+	end
+
+	if icon then
+		icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+		icon:SetDrawLayer("ARTWORK")
+		icon:SetPoint("TOPLEFT", button, "TOPLEFT", 2, -2)
+		icon:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", -2, 2)
+	end
+
+	button:SetTemplate("Default")
+	button:GetNormalTexture():SetTexture(nil)
+
+	if not InCombatLockdown() then
+		button:SetSize(C.actionbar.button_size, C.actionbar.button_size)
+	end
+
+	_G[name.."Highlight"]:SetTexture(nil)
+	_G[name.."NormalTexture"]:SetTexture(nil)
+	button:StyleButton(true)
+end
+hooksecurefunc("MultiCastSummonSpellButton_Update", function(self) StyleTotemSpellButton(self, 0) end)
+hooksecurefunc("MultiCastRecallSpellButton_Update", function(self) StyleTotemSpellButton(self, 5) end)

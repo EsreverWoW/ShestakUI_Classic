@@ -65,24 +65,78 @@ end)
 
 -- Mouseover bar
 if C.actionbar.rightbars_mouseover == true and C.actionbar.stancebar_horizontal == false then
-	StanceBarAnchor:SetAlpha(0)
-	StanceBarAnchor:SetScript("OnEnter", function() if StanceButton1:IsShown() then RightBarMouseOver(1) end end)
-	StanceBarAnchor:SetScript("OnLeave", function() if not HoverBind.enabled then RightBarMouseOver(0) end end)
-	for i = 1, NUM_STANCE_SLOTS do
-		local b = _G["StanceButton"..i]
-		b:SetAlpha(0)
-		b:HookScript("OnEnter", function() RightBarMouseOver(1) end)
-		b:HookScript("OnLeave", function() if not HoverBind.enabled then RightBarMouseOver(0) end end)
+	if T.class == "SHAMAN" then
+		MultiCastSummonSpellButton:SetAlpha(0)
+		MultiCastSummonSpellButton:HookScript("OnEnter", function() RightBarMouseOver(1) end)
+		MultiCastSummonSpellButton:HookScript("OnLeave", function() if not HoverBind.enabled then RightBarMouseOver(0) end end)
+		MultiCastRecallSpellButton:SetAlpha(0)
+		MultiCastRecallSpellButton:HookScript("OnEnter", function() RightBarMouseOver(1) end)
+		MultiCastRecallSpellButton:HookScript("OnLeave", function() if not HoverBind.enabled then RightBarMouseOver(0) end end)
+		MultiCastFlyoutFrameOpenButton:HookScript("OnEnter", function() RightBarMouseOver(1) end)
+		MultiCastFlyoutFrameOpenButton:HookScript("OnLeave", function() if not HoverBind.enabled then RightBarMouseOver(0) end end)
+		MultiCastFlyoutFrame:HookScript("OnEnter", function() RightBarMouseOver(1) end)
+		MultiCastFlyoutFrame:HookScript("OnLeave", function() if not HoverBind.enabled then RightBarMouseOver(0) end end)
+		MultiCastActionBarFrame:HookScript("OnEnter", function() RightBarMouseOver(1) end)
+		MultiCastActionBarFrame:HookScript("OnLeave", function() if not HoverBind.enabled then RightBarMouseOver(0) end end)
+		for i = 1, 12 do
+			local b = _G["MultiCastActionButton"..i]
+			b:SetAlpha(0)
+			b:HookScript("OnEnter", function() RightBarMouseOver(1) end)
+			b:HookScript("OnLeave", function() if not HoverBind.enabled then RightBarMouseOver(0) end end)
+		end
+		for i = 1, 4 do
+			local b = _G["MultiCastSlotButton"..i]
+			b:SetAlpha(0)
+			b:HookScript("OnEnter", function() RightBarMouseOver(1) end)
+			b:HookScript("OnLeave", function() if not HoverBind.enabled then RightBarMouseOver(0) end end)
+		end
+	else
+		StanceBarAnchor:SetAlpha(0)
+		StanceBarAnchor:SetScript("OnEnter", function() if StanceButton1:IsShown() then RightBarMouseOver(1) end end)
+		StanceBarAnchor:SetScript("OnLeave", function() if not HoverBind.enabled then RightBarMouseOver(0) end end)
+		for i = 1, NUM_STANCE_SLOTS do
+			local b = _G["StanceButton"..i]
+			b:SetAlpha(0)
+			b:HookScript("OnEnter", function() RightBarMouseOver(1) end)
+			b:HookScript("OnLeave", function() if not HoverBind.enabled then RightBarMouseOver(0) end end)
+		end
 	end
 end
 if C.actionbar.stancebar_mouseover == true and (C.actionbar.stancebar_horizontal == true or C.actionbar.editor) then
-	StanceBarAnchor:SetAlpha(0)
-	StanceBarAnchor:SetScript("OnEnter", function() StanceBarMouseOver(1) end)
-	StanceBarAnchor:SetScript("OnLeave", function() if not HoverBind.enabled then StanceBarMouseOver(0) end end)
-	for i = 1, NUM_STANCE_SLOTS do
-		local b = _G["StanceButton"..i]
-		b:SetAlpha(0)
-		b:HookScript("OnEnter", function() StanceBarMouseOver(1) end)
-		b:HookScript("OnLeave", function() if not HoverBind.enabled then StanceBarMouseOver(0) end end)
+	if T.class == "SHAMAN" then
+		MultiCastSummonSpellButton:SetAlpha(0)
+		MultiCastSummonSpellButton:HookScript("OnEnter", function() StanceBarMouseOver(1) end)
+		MultiCastSummonSpellButton:HookScript("OnLeave", function() if not HoverBind.enabled then StanceBarMouseOver(0) end end)
+		MultiCastRecallSpellButton:SetAlpha(0)
+		MultiCastRecallSpellButton:HookScript("OnEnter", function() StanceBarMouseOver(1) end)
+		MultiCastRecallSpellButton:HookScript("OnLeave", function()  if not HoverBind.enabled then StanceBarMouseOver(0) end end)
+		MultiCastFlyoutFrameOpenButton:HookScript("OnEnter", function() StanceBarMouseOver(1) end)
+		MultiCastFlyoutFrameOpenButton:HookScript("OnLeave", function() if not HoverBind.enabled then StanceBarMouseOver(0) end end)
+		MultiCastFlyoutFrame:HookScript("OnEnter", function() StanceBarMouseOver(1) end)
+		MultiCastFlyoutFrame:HookScript("OnLeave", function() if not HoverBind.enabled then StanceBarMouseOver(0) end end)
+		MultiCastActionBarFrame:HookScript("OnEnter", function() StanceBarMouseOver(1) end)
+		MultiCastActionBarFrame:HookScript("OnLeave", function() if not HoverBind.enabled then StanceBarMouseOver(0) end end)
+		for i = 1, 12 do
+			local b = _G["MultiCastActionButton"..i]
+			b:SetAlpha(0)
+			b:HookScript("OnEnter", function() StanceBarMouseOver(1) end)
+			b:HookScript("OnLeave", function() if not HoverBind.enabled then StanceBarMouseOver(0) end end)
+		end
+		for i = 1, 4 do
+			local b = _G["MultiCastSlotButton"..i]
+			b:SetAlpha(0)
+			b:HookScript("OnEnter", function() StanceBarMouseOver(1) end)
+			b:HookScript("OnLeave", function() if not HoverBind.enabled then StanceBarMouseOver(0) end end)
+		end
+	else
+		StanceBarAnchor:SetAlpha(0)
+		StanceBarAnchor:SetScript("OnEnter", function() StanceBarMouseOver(1) end)
+		StanceBarAnchor:SetScript("OnLeave", function() if not HoverBind.enabled then StanceBarMouseOver(0) end end)
+		for i = 1, NUM_STANCE_SLOTS do
+			local b = _G["StanceButton"..i]
+			b:SetAlpha(0)
+			b:HookScript("OnEnter", function() StanceBarMouseOver(1) end)
+			b:HookScript("OnLeave", function() if not HoverBind.enabled then StanceBarMouseOver(0) end end)
+		end
 	end
 end
