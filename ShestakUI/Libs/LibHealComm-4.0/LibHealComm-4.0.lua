@@ -1,5 +1,5 @@
 local major = "LibHealComm-4.0"
-local minor = 103
+local minor = 104
 assert(LibStub, format("%s requires LibStub.", major))
 
 local HealComm = LibStub:NewLibrary(major, minor)
@@ -1137,7 +1137,7 @@ if( playerClass == "DRUID" ) then
 					healModifier = healModifier * bonus
 				end
 
-				spellPower = spellPower * ((spellData[spellName].coeff * 1.88) + talentData[EmpoweredTouch].spent * 0.10)
+				spellPower = spellPower * ((spellData[spellName].coeff * 1.88) + talentData[EmpoweredTouch].current)
 				-- Healing Touch
 			elseif( spellName == HealingTouch ) then
 
@@ -1452,7 +1452,7 @@ if( playerClass == "PRIEST" ) then
 		talentData[SpiritualHealing] = {mod = 0.02, current = 0, spent = 0}
 		talentData[EmpoweredHealing] = {mod = 0.02, current = 0, spent = 0}
 		if isWrath then
-			talentData[EmpoweredHealing][mod] = 0.04
+			talentData[EmpoweredHealing].mod = 0.04
 		end
 		talentData[BlessedResilience] = {mod = 0.01, current = 0, spent = 0}
 		talentData[FocusedPower] = {mod = 0.02, current = 0, spent = 0}
@@ -1585,11 +1585,11 @@ if( playerClass == "PRIEST" ) then
 				spellPower = spellPower * ((spellData[spellName].coeff * (isWrath and 1.88 or 1)) * (1 + (talentData[EmpoweredHealing].current * 2)))
 				-- Flash Heal
 			elseif( spellName == FlashHeal ) then
-				spellPower = spellPower * ((spellData[spellName].coeff * (isWrath and 1.88 or 1)) * (1 + talentData[EmpoweredHealing].spent))
+				spellPower = spellPower * ((spellData[spellName].coeff * (isWrath and 1.88 or 1)) * (1 + talentData[EmpoweredHealing].current))
 				-- Binding Heal
 			elseif( spellName == BindingHeal ) then
 				healModifier = healModifier + talentData[DivineProvidence].current
-				spellPower = spellPower * ((spellData[spellName].coeff * (isWrath and 1.88 or 1)) * (1 + talentData[EmpoweredHealing].spent))
+				spellPower = spellPower * ((spellData[spellName].coeff * (isWrath and 1.88 or 1)) * (1 + talentData[EmpoweredHealing].current))
 				-- Penance
 			elseif( spellName == Penance ) then
 				spellPower = spellPower * (spellData[spellName].coeff * 1.88)
@@ -1605,7 +1605,7 @@ if( playerClass == "PRIEST" ) then
 				-- Lesser Heal
 			elseif( spellName == LesserHeal ) then
 				local castTime = spellRank >= 3 and 2.5 or spellRank == 2 and 2 or 1.5
-				spellPower = spellPower * (castTime / 3.5) * (isWrath and 1.88 or 1)
+				spellPower = spellPower * ((castTime / 3.5) * (isWrath and 1.88 or 1) + talentData[TidalWaves].current)
 			end
 
 			if( activeGraceGUID == guid ) then
@@ -1827,7 +1827,7 @@ if( playerClass == "SHAMAN" ) then
 				end
 
 				spellPower = spellPower + (playerCurrentRelic and lhwTotems[playerCurrentRelic] or 0)
-				spellPower = spellPower * (spellData[spellName].coeff * (isWrath and 1.88 or 1) + talentData[TidalWaves].spent * 0.02)
+				spellPower = spellPower * (spellData[spellName].coeff * (isWrath and 1.88 or 1) + (talentData[TidalWaves].current / 2))
 			end
 
 			healAmount = calculateGeneralAmount(spellData[spellName].levels[spellRank], healAmount, spellPower, spModifier, healModifier)
@@ -2391,6 +2391,9 @@ local function parseHotHeal(casterGUID, wasUpdated, spellID, tickAmount, totalTi
 	if type(tickAmount) == "table" then
 		tickAmount = table.concat(tickAmount, "@")
 	end
+
+	tickInterval = tickInterval or (spellName == GetSpellInfo(740) and 2 or 1)
+
 	-- Retrieve the hot information
 	local inc = 2
 	local stack, duration, endTime = findAura(casterGUID, spellID, ...)
