@@ -47,7 +47,16 @@ for i = 1, 12 do
 end
 
 local Page = {}
-if T.Classic then
+if T.Wrath then
+	Page = {
+		["DRUID"] = "[bonusbar:1] 7; [bonusbar:2] 8; [bonusbar:3] 9; [bonusbar:4] 10;",
+		["WARRIOR"] = "[bonusbar:1] 7; [bonusbar:2] 8; [bonusbar:3] 9;",
+		["PRIEST"] = "[bonusbar:1] 7;",
+		["ROGUE"] = "[bonusbar:1] 7; [form:3] 7;",
+		["WARLOCK"] = "[form:2] 10;",
+		["DEFAULT"] = "[possessbar] 12; [shapeshift] 13; [overridebar] 14; [vehicleui] 12; [bonusbar:5] 11; [bar:2] 2; [bar:3] 3; [bar:4] 4; [bar:5] 5; [bar:6] 6;",
+	}
+elseif T.Vanilla or T.TBC then
 	Page = {
 		["DRUID"] = "[bonusbar:1] 7; [bonusbar:2] 8; [bonusbar:3] 9; [bonusbar:4] 10;",
 		["WARRIOR"] = "[bonusbar:1] 7; [bonusbar:2] 8; [bonusbar:3] 9;",
@@ -76,11 +85,9 @@ local function GetBar()
 end
 
 bar:RegisterEvent("PLAYER_LOGIN")
-if T.Mainline then
+if T.Mainline or T.Wrath then
 	bar:RegisterEvent("UPDATE_VEHICLE_ACTIONBAR")
 	bar:RegisterEvent("UPDATE_OVERRIDE_ACTIONBAR")
-elseif T.Wrath then
-	bar:RegisterEvent("UPDATE_VEHICLE_ACTIONBAR")
 end
 bar:SetScript("OnEvent", function(self, event)
 	if event == "PLAYER_LOGIN" then

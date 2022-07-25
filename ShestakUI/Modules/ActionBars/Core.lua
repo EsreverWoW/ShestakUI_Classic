@@ -11,9 +11,13 @@ frame:SetScript("OnEvent", function()
 	MainMenuBar:EnableMouse(false)
 	PetActionBarFrame:EnableMouse(false)
 	StanceBarFrame:EnableMouse(false)
-	if T.Mainline then
+
+	if T.Mainline or T.Wrath then
 		OverrideActionBar:SetScale(0.00001)
 		OverrideActionBar:EnableMouse(false)
+	end
+
+	if T.Mainline then
 		MicroButtonAndBagsBar:SetScale(0.00001)
 		MicroButtonAndBagsBar:EnableMouse(false)
 		MicroButtonAndBagsBar:ClearAllPoints()
@@ -47,7 +51,7 @@ frame:SetScript("OnEvent", function()
 		element:SetAlpha(0)
 	end
 
-	if T.Mainline then
+	if T.Mainline or T.Wrath then
 		for i = 1, 6 do
 			local b = _G["OverrideActionBarButton"..i]
 			b:UnregisterAllEvents()
