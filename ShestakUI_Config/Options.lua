@@ -3113,9 +3113,9 @@ do
 		subtitle:SetPoint("TOPLEFT", title, "BOTTOMLEFT", 0, -8)
 		subtitle:SetJustifyH("LEFT")
 		if not IsClassicBuild() then
-			subtitle:SetText("UI Site: |cff298F00http//shestak.org|r\nGitHub: |cff298F00https://github.com/Shestak/ShestakUI|r\nCurse: |cff298F00https://www.curseforge.com/wow/addons/shestakui/|r\nWoWInterface: |cff298F00https://www.wowinterface.com/downloads/info19033-ShestakUI.html|r\nChange Log: |cff298F00https://github.com/Shestak/ShestakUI/commits/master/|r")
+			subtitle:SetText("UI Site: |cff298F00https://web.archive.org/web/20211224222431/http://shestak.org/|r\nGitHub: |cff298F00https://github.com/Shestak/ShestakUI|r\nCurse: |cff298F00https://www.curseforge.com/wow/addons/shestakui/|r\nWoWInterface: |cff298F00https://www.wowinterface.com/downloads/info19033-ShestakUI.html|r\nChange Log: |cff298F00https://github.com/Shestak/ShestakUI/commits/master/|r")
 		else
-			subtitle:SetText("UI Site: |cff298F00http//shestak.org|r\nGitHub: |cff298F00https://github.com/EsreverWoW/ShestakUI_Classic|r\nChange Log: |cff298F00https://github.com/EsreverWoW/ShestakUI_Classic/commits|r")
+			subtitle:SetText("UI Site: |cff298F00https://web.archive.org/web/20211224222431/http://shestak.org/|r\nGitHub: |cff298F00https://github.com/EsreverWoW/ShestakUI_Classic|r\nChange Log: |cff298F00https://github.com/EsreverWoW/ShestakUI_Classic/commits|r")
 		end
 
 		local title2 = self:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")

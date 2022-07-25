@@ -76,11 +76,11 @@ ShestakUI supports and contains language specific code for the following game cl
 - Russian (ruRU)
 
 ## FAQ:
-- [Configuration files and GUI](http://shestak.org/forum/showpost.php?p=415&postcount=2)
-- [ActionBars](http://shestak.org/forum/showpost.php?p=930&postcount=3)
-- [Chat](http://shestak.org/forum/showpost.php?p=931&postcount=4)
-- [Loot](http://shestak.org/forum/showpost.php?p=932&postcount=5)
-- [Raid Frames](http://shestak.org/forum/showpost.php?p=12661&postcount=21)
+- [Configuration files and GUI](https://web.archive.org/web/20201116212307/http://shestak.org/forum/showpost.php?p=415&postcount=2)
+- [ActionBars](https://web.archive.org/web/20201117070900/http://shestak.org/forum/showpost.php?p=930&postcount=3)
+- [Chat](https://web.archive.org/web/20201116170209/http://shestak.org/forum/showpost.php?p=931&postcount=4)
+- [Loot](https://web.archive.org/web/20201117185852/http://shestak.org/forum/showpost.php?p=932&postcount=5)
+- [Raid Frames](https://web.archive.org/web/20201117195736/http://shestak.org/forum/showpost.php?p=12661&postcount=21)
 
 ## Links:
 - [Changelog](https://github.com/EsreverWoW/ShestakUI_Classic/commits)
