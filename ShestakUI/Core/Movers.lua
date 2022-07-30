@@ -39,7 +39,8 @@ T.MoverFrames = {
 	COOLDOWN_Anchor,
 	T_DE_BUFF_BAR_Anchor,
 	SplitBarLeft,
-	SplitBarRight
+	SplitBarRight,
+	CustomBarAnchor
 }
 
 local unitFrames = {

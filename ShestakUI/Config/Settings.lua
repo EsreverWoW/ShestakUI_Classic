@@ -317,11 +317,18 @@ C["actionbar"] = {
 	["bar5_row"] = 1,							-- Buttons per row
 	["bar5_size"] = 25,							-- Buttons size
 	["bar5_mouseover"] = false,					-- Bar on mouseover
+	-- Custom Bar
+	["custom_bar_enable"] = false,				-- Enable custom bar 6
+	["custom_bar_num"] = 12,					-- Number of buttons
+	["custom_bar_row"] = 12,					-- Buttons per row
+	["custom_bar_size"] = 25,					-- Buttons size
+	["custom_bar_mouseover"] = false,			-- Bar on mouseover
 }
 
 if T.Classic then
 	C["actionbar"]["rightbars_mouseover"] = false
 	C["actionbar"]["stancebar_mouseover"] = false
+	C["actionbar"]["custom_bar_enable"] = false
 end
 
 ----------------------------------------------------------------------------------------
