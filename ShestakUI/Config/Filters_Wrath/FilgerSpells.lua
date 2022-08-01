@@ -647,6 +647,8 @@ C["filger_spells"] = {
 			-- Enchants
 			-- Berserk [Enchant Weapon - Berserking]
 			{spellID = 59620, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Black Magic [Enchant Weapon - Black Magic]
+			{spellID = 59626, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Blade Warding [Enchant Weapon - Blade Ward]
 			{spellID = 64440, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Blood Reserve [Enchant Weapon - Blood Draining]
