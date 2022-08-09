@@ -929,6 +929,8 @@ C["filger_spells"] = {
 			{spellID = 48517, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Owlkin Frenzy
 			{spellID = 48391, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Predator's Swiftness
+			{spellID = 69369, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Item Sets
 			-- Elune's Wrath (Special, Proc) [Nightsong Garb]
@@ -5227,8 +5229,6 @@ C["filger_spells"] = {
 			-- Self
 			-- Circle of Healing
 			{spellID = 34861, filter = "CD"},
-			-- Consume Magic
-			{spellID = 32676, filter = "CD"},
 			-- Desperate Prayer
 			{spellID = 13908, filter = "CD"},
 			-- Devouring Plague

@@ -731,6 +731,7 @@ T.RaidDebuffs = {
 		[SpellName(29204)] = 4,		-- Inevitable Doom
 		-- [SpellName(55593)] = 3,		-- Necrotic Aura
 	-- Razuvious
+		[SpellName(55550)] = 4,		-- Jagged Knife
 		[SpellName(55470)] = 3,		-- Unbalancing Strike
 	-- Gothik
 		[SpellName(27994)] = 4,		-- Drain Life

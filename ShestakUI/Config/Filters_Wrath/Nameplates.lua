@@ -323,6 +323,7 @@ T.BuffWhiteList = {
 	[SpellName(16689)] = true,	-- Nature's Grasp
 	[SpellName(17116)] = true,	-- Nature's Swiftness
 	-- [SpellName(16870)] = true,	-- Omen of Clarity / Nightsong Battlegear (Clearcasting)
+	-- [SpellName(69369)] = true,	-- Predator's Swiftness
 	-- [SpellName(48391)] = true,	-- Owlkin Frenzy
 	-- [SpellName(5215)] = true,	-- Prowl
 	[SpellName(8936)] = true,	-- Regrowth
