@@ -238,6 +238,7 @@ local StartTimer = function(name, spellId)
 	else
 		bar.startTime = GetTime()
 		bar.endTime = GetTime() + T.RaidSpells[spellId]
+		bar.duration = T.RaidSpells[spellId]
 		bar.left:SetText(format("%s - %s", name:gsub("%-[^|]+", ""), spell))
 		bar.right:SetText(FormatTime(T.RaidSpells[spellId]))
 		bar.isResses = false
@@ -325,9 +326,11 @@ local OnEvent = function(self, event)
 		for _, v in pairs(bars) do
 			v.endTime = 0
 		end
-	elseif event == "ENCOUNTER_END" and select(2, IsInInstance()) == "raid" and T.Mainline then
+	elseif event == "ENCOUNTER_END" and select(2, IsInInstance()) == "raid" and (T.Mainline or T.Wrath) then
 		for _, v in pairs(bars) do
-			v.endTime = 0
+			if T.Mainline or not v.duration or (T.Wrath and v.duration >= 120 and v.duration < 600) then
+				v.endTime = 0
+			end
 		end
 	end
 end
