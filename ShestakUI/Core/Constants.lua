@@ -13,10 +13,11 @@ T.realm = GetRealmName()
 T.color = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[T.class]
 T.version = GetAddOnMetadata("ShestakUI", "Version")
 T.screenWidth, T.screenHeight = GetPhysicalScreenSize()
-T.newPatch = select(4, GetBuildInfo()) >= 90105
+T.toc = select(4, GetBuildInfo())
+T.newPatch = T.toc >= 90105
 T.Mainline =_G.WOW_PROJECT_ID == _G.WOW_PROJECT_MAINLINE
 T.Classic = _G.WOW_PROJECT_ID == _G.WOW_PROJECT_CLASSIC or _G.WOW_PROJECT_ID == _G.WOW_PROJECT_BURNING_CRUSADE_CLASSIC -- TODO: Add WotLK: Classic when there is a project ID
 T.Vanilla = _G.WOW_PROJECT_ID == _G.WOW_PROJECT_CLASSIC
-T.TBC = _G.WOW_PROJECT_ID == _G.WOW_PROJECT_BURNING_CRUSADE_CLASSIC and select(4, GetBuildInfo()) < 30000 -- TODO: Change when there is a separate project ID for BCC / Wrath Classic
-T.Wrath = select(4, GetBuildInfo()) >= 30400 and select(4, GetBuildInfo()) < 40000 -- TODO: Change when there is a project ID
+T.TBC = _G.WOW_PROJECT_ID == _G.WOW_PROJECT_BURNING_CRUSADE_CLASSIC and T.toc < 30000 -- TODO: Change when there is a separate project ID for BCC / Wrath Classic
+T.Wrath = T.toc >= 30400 and T.toc < 40000 -- TODO: Change when there is a project ID
 T.HiDPI = GetScreenHeight() / T.screenHeight < 0.75
