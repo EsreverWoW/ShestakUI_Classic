@@ -194,6 +194,7 @@ local function Enable(self, unit)
 		end
 		self:RegisterEvent('RUNE_POWER_UPDATE', Path, true)
 		self:RegisterEvent('RUNE_TYPE_UPDATE', ColorPath, true)
+		self:RegisterEvent('PLAYER_ENTERING_WORLD', Path, true)
 
 		return true
 	end
@@ -211,6 +212,7 @@ local function Disable(self)
 		end
 		self:UnregisterEvent('RUNE_POWER_UPDATE', Path)
 		self:UnregisterEvent('RUNE_TYPE_UPDATE', ColorPath)
+		self:UnregisterEvent('PLAYER_ENTERING_WORLD', Path)
 	end
 end
 
