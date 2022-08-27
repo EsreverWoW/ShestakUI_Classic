@@ -24,7 +24,6 @@ local function LoadSkin()
 		_G.PlayerTalentFramePointsBar:Hide()
 		_G.PlayerTalentFrameScrollFrame:Hide()
 		_G.PlayerTalentFrameStatusFrame:Hide()
-		_G.PlayerTalentFrameActivateButton:Hide()
 	end)
 
 	_G.GlyphFrame:HookScript("OnHide", function()
