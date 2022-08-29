@@ -687,6 +687,8 @@ T.ColorPlate = {
 		-- Sunwell
 		["25772"] = color,		-- Void Sentinel
 		["25370"] = color,		-- Sunblade Dusk Priest
+		-- Naxxramas
+		["16385"] = color,		-- Lightning Totem
 	-- Dungeons
 		-- Hellfire Ramparts
 		["17478"] = color,		-- Bleeding Hollow Scryer
