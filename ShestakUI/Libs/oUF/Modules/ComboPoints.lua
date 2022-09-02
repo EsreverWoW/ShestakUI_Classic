@@ -119,7 +119,8 @@ local function Visibility(self)
 	local element = self.ComboPoints
 
 	if(oUF:IsClassic()) then
-		local petID = select(6, strsplit("-", UnitGUID("pet")))
+		local petGUID = UnitGUID("pet")
+		local petID = petGUID and select(6, petGUID)
 		if GetBonusBarOffset() == 1 or (oUF:IsWrath() and ((UnitHasVehicleUI("player") and UnitPower("vehicle", 14) > 0) or ((petID and (petID == "30161" or petID == "32535")) and GetComboPoints("pet", "pettarget") > 0))) then
 			element:Show()
 			if self.Debuffs then self.Debuffs:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 2, 19) end
