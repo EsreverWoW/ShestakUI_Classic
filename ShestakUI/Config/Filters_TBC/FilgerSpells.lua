@@ -220,7 +220,7 @@ C["filger_spells"] = {
 			-- Aura of the Crusader (Attack Power, Proc) [Darkmoon Card: Crusade]
 			{spellID = 39439, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Aura of the Crusader (Spell Power, Proc) [Darkmoon Card: Crusade]
-			-- {spellID = 39441, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			{spellID = 39441, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Aura of Wrath (Critical Strike, Proc) [Darkmoon Card: Wrath]
 			{spellID = 39443, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Delusional (Attack Power, Proc) [Darkmoon Card: Madness] - Rogue, Hunter, Paladin, Warrior, Druid, Shaman
@@ -1845,7 +1845,7 @@ C["filger_spells"] = {
 			-- Aura of the Crusader (Attack Power, Proc) [Darkmoon Card: Crusade]
 			{spellID = 39439, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Aura of the Crusader (Spell Power, Proc) [Darkmoon Card: Crusade]
-			-- {spellID = 39441, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			{spellID = 39441, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Aura of Wrath (Critical Strike, Proc) [Darkmoon Card: Wrath]
 			{spellID = 39443, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Delusional (Attack Power, Proc) [Darkmoon Card: Madness] - Rogue, Hunter, Paladin, Warrior, Druid, Shaman
@@ -3429,7 +3429,7 @@ C["filger_spells"] = {
 			-- Aura of the Crusader (Attack Power, Proc) [Darkmoon Card: Crusade]
 			{spellID = 39439, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Aura of the Crusader (Spell Power, Proc) [Darkmoon Card: Crusade]
-			-- {spellID = 39441, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			{spellID = 39441, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Aura of Wrath (Critical Strike, Proc) [Darkmoon Card: Wrath]
 			{spellID = 39443, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Delusional (Attack Power, Proc) [Darkmoon Card: Madness] - Rogue, Hunter, Paladin, Warrior, Druid, Shaman
