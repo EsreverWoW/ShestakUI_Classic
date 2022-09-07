@@ -300,7 +300,6 @@ if C.reminder.solo_buffs_enable == true then
 				},
 				["combat"] = true,
 				["instance"] = true,
-				["pvp"] = true,
 			},
 			[3] = {	-- Blessings group
 				["spells"] = {
