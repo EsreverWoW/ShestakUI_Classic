@@ -57,25 +57,6 @@ function Filger:TooltipOnLeave()
 	GameTooltip:Hide()
 end
 
-function Filger:UnitAura(unitID, inSpellID, spellName, filter, absID)
-	for i = 1, 40 do
-		local name, icon, count, _, duration, expirationTime, unitCaster, _, _, spellID = UnitAura(unitID, i, filter)
-		if not name then break end
-		if (absID and spellID == inSpellID) or (not absID and name == spellName) then
-			if LibClassicDurations then
-				local durationNew, expirationTimeNew = LibClassicDurations:GetAuraDurationByUnit(unitID, spellID, unitCaster, name)
-
-				if durationNew and durationNew > 0 then
-					duration = durationNew
-					expirationTime = expirationTimeNew
-				end
-			end
-
-			return name, spellID, icon, count, duration, expirationTime, unitCaster
-		end
-	end
-end
-
 function Filger:UpdateCD()
 	local time = self.value.start + self.value.duration - GetTime()
 
