@@ -41,6 +41,8 @@ local Filger = {}
 local MyUnits = {player = true, vehicle = true, pet = true}
 local SpellGroups = {}
 
+_G.Filger = Filger -- Check cpu
+
 function Filger:TooltipOnEnter()
 	if self.spellID > 20 then
 		local str = "spell:%s"
@@ -445,7 +447,9 @@ function Filger:OnEvent(event, unit, _, castID)
 					local wandSpeed = select(2, GetItemCooldown(wandID)) or 0
 					if wandSpeed < 1.5 then wandSpeed = 1.5 end
 					if name and (duration or 0) > wandSpeed then
-						self.actives[spid] = {data = data, name = name, icon = icon, count = nil, start = start, duration = duration, spid = spid, sort = data.sort}
+						if not (T.class == "DEATHKNIGHT" and data.filter == "CD" and duration < 10) then -- Filter rune cd
+							self.actives[spid] = {data = data, name = name, icon = icon, count = nil, start = start, duration = duration, spid = spid, sort = data.sort}
+						end
 					end
 				elseif name and (duration or 0) > 1.5 then
 					if not (T.class == "DEATHKNIGHT" and data.filter == "CD" and duration < 10) then -- Filter rune cd
