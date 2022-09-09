@@ -8622,11 +8622,11 @@ C["filger_spells"] = {
 			-- Mighty Fire Protection Potion
 			{spellID = 53911, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Mighty Frost Protection Potion
-			{spellID = 40215, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			{spellID = 53913, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Mighty Nature Protection Potion
-			{spellID = 40216, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			{spellID = 53914, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Mighty Shadow Protection Potion
-			{spellID = 40217, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			{spellID = 53915, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Potion of Nightmares
 			{spellID = 53753, unitID = "player", caster = "player", filter = "DEBUFF"},
 			-- Potion of Speed
