@@ -41,7 +41,7 @@ local Filger = {}
 local MyUnits = {player = true, vehicle = true, pet = true}
 local SpellGroups = {}
 
-_G.Filger = Filger -- Check cpu
+-- _G.Filger = Filger -- Check cpu
 
 function Filger:TooltipOnEnter()
 	if self.spellID > 20 then
@@ -305,9 +305,9 @@ local function FindAuras(self, unit)
 				if ((data.filter == "BUFF" and filter == "HELPFUL") or (data.filter == "DEBUFF" and filter == "HARMFUL")) and (not data.spec or data.spec == T.Spec) and (not data.talentID or isTalent) then
 					if not data.count or count >= data.count then
 						if LibClassicDurations then
-							local durationNew, expirationTimeNew = LibClassicDurations:GetAuraDurationByUnit(unit, spid, caster, name)
+							local durationNew, expirationTimeNew = LibClassicDurations:GetAuraDurationByUnit(data.unitID, spid, caster, name)
 
-							if duration == 0 and durationNew then
+							if durationNew and durationNew > 0 then
 								duration = durationNew
 								expirationTime = expirationTimeNew
 							end
