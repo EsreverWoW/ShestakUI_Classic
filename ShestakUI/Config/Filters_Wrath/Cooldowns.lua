@@ -38,7 +38,7 @@ if C.raidcooldown.enable == true then
 		{26983, 480},	-- Tranquility r5 (480sec base / -288sec from talents / -240sec from 8pc T1)
 		{48446, 480},	-- Tranquility r6 (480sec base / -288sec from talents / -240sec from 8pc T1)
 		{48447, 480},	-- Tranquility r7 (480sec base / -288sec from talents / -240sec from 8pc T1)
-		{64843, 480},	-- Hymn of Hope
+		{64843, 480},	-- Divine Hymn
 		{724, 180},		-- Lightwell r1
 		{27870, 180},	-- Lightwell r2
 		{27871, 180},	-- Lightwell r3
@@ -80,8 +80,10 @@ if C.raidcooldown.enable == true then
 		{47504, 120},	-- Mocking Blow r7
 		-- Mana Regeneration
 		{29166, 180},	-- Innervate (180sec base / -48sec from 4pc T4)
+		{64901, 360},	-- Hymn of Hope
 		{16190, 300},	-- Mana Tide Totem
 		-- Other
+		{49016, 180},	-- Hysteria / Unholy Frenzy
 		{34477, 30},	-- Misdirection
 		{1038, 120},	-- Hand of Salvation
 		{6346, 180},	-- Fear Ward (180sec base / -60sec from glyph)
