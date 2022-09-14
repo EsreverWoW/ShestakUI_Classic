@@ -1180,7 +1180,7 @@ function lib:activate()
         local _, playerClass = UnitClass("player")
         if playerClass == "MAGE" or playerClass == "SHAMAN" then
             -- Mage and Shaman gladiator gloves modify spell ranges
-            frame:RegisterUnitEvent("UNIT_INVENTORY_CHANGED", "player")
+            frame:RegisterUnitEvent("UNIT_INVENTORY_CHANGED", "player", "")
         end
     end
     initItemRequests()

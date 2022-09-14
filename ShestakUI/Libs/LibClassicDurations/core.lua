@@ -1004,7 +1004,7 @@ function lib:RegisterFrame(frame)
         f:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
         if playerClass == "ROGUE" then
             f:RegisterEvent("PLAYER_TARGET_CHANGED")
-            f:RegisterUnitEvent("UNIT_POWER_UPDATE", "player")
+            f:RegisterUnitEvent("UNIT_POWER_UPDATE", "player", "")
         end
     end
 end
@@ -1132,7 +1132,7 @@ end)
 setwatcher:RegisterEvent("PLAYER_LOGIN")
 function setwatcher:PLAYER_LOGIN()
     if next(itemSets) then
-        self:RegisterUnitEvent("UNIT_INVENTORY_CHANGED", "player")
+        self:RegisterUnitEvent("UNIT_INVENTORY_CHANGED", "player", "")
         self:UNIT_INVENTORY_CHANGED(nil, "player")
     end
 end

@@ -19,9 +19,9 @@ bar:RegisterEvent("PET_BAR_UPDATE")
 bar:RegisterEvent("PET_BAR_UPDATE_USABLE")
 bar:RegisterEvent("PET_BAR_UPDATE_COOLDOWN")
 bar:RegisterEvent("SPELLS_CHANGED")
-bar:RegisterEvent("UNIT_PET")
+bar:RegisterUnitEvent("UNIT_PET", "player", "")
 bar:RegisterEvent("UNIT_FLAGS")
-bar:RegisterEvent("UNIT_AURA")
+bar:RegisterUnitEvent("UNIT_AURA", "pet", "")
 bar:SetScript("OnEvent", function(self, event, arg1)
 	if event == "PLAYER_LOGIN" then
 		T.StylePet()
@@ -58,7 +58,7 @@ bar:SetScript("OnEvent", function(self, event, arg1)
 		end
 		hooksecurefunc("PetActionBar_Update", T.PetBarUpdate)
 	elseif event == "PET_BAR_UPDATE" or event == "PLAYER_CONTROL_LOST" or event == "PLAYER_CONTROL_GAINED" or event == "PLAYER_FARSIGHT_FOCUS_CHANGED"
-	or event == "UNIT_FLAGS" or (event == "UNIT_PET" and arg1 == "player") or (event == "UNIT_AURA" and arg1 == "pet") then
+	or event == "UNIT_FLAGS" or event == "UNIT_PET" or event == "UNIT_AURA" then
 		T.PetBarUpdate()
 	elseif event == "PET_BAR_UPDATE_COOLDOWN" then
 		PetActionBar_UpdateCooldowns()
