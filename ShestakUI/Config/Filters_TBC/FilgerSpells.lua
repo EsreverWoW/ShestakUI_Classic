@@ -313,6 +313,8 @@ C["filger_spells"] = {
 			{spellID = 35733, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Armor Penetration (Armor Penetration, Use) [Icon of Unyielding Courage]
 			{spellID = 34106, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Battle Trance (Attack Power, Proc) [Blackened Naaru Sliver]
+			{spellID = 45040, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Burning Hatred (Attack Power, Use) [Ogre Mauler's Badge / Uniting Charm]
 			{spellID = 32362, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Call of the Berserker (Attack Power, Use) [Berserker's Call]
@@ -892,6 +894,8 @@ C["filger_spells"] = {
 			{spellID = 35733, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Armor Penetration (Armor Penetration, Use) [Icon of Unyielding Courage]
 			{spellID = 34106, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Battle Trance (Attack Power, Proc) [Blackened Naaru Sliver]
+			{spellID = 45040, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Burning Hatred (Attack Power, Use) [Ogre Mauler's Badge / Uniting Charm]
 			{spellID = 32362, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Call of the Berserker (Attack Power, Use) [Berserker's Call]
@@ -1946,6 +1950,8 @@ C["filger_spells"] = {
 			{spellID = 35733, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Armor Penetration (Armor Penetration, Use) [Icon of Unyielding Courage]
 			{spellID = 34106, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Battle Trance (Attack Power, Proc) [Blackened Naaru Sliver]
+			{spellID = 45040, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Burning Hatred (Attack Power, Use) [Ogre Mauler's Badge / Uniting Charm]
 			{spellID = 32362, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Call of the Berserker (Attack Power, Use) [Berserker's Call]
@@ -2984,6 +2990,8 @@ C["filger_spells"] = {
 			{spellID = 35733, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Armor Penetration (Armor Penetration, Use) [Icon of Unyielding Courage]
 			{spellID = 34106, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Battle Trance (Attack Power, Proc) [Blackened Naaru Sliver]
+			{spellID = 45040, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Burning Hatred (Attack Power, Use) [Ogre Mauler's Badge / Uniting Charm]
 			{spellID = 32362, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Call of the Berserker (Attack Power, Use) [Berserker's Call]
@@ -3482,6 +3490,8 @@ C["filger_spells"] = {
 			{spellID = 35733, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Armor Penetration (Armor Penetration, Use) [Icon of Unyielding Courage]
 			{spellID = 34106, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Battle Trance (Attack Power, Proc) [Blackened Naaru Sliver]
+			{spellID = 45040, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Burning Hatred (Attack Power, Use) [Ogre Mauler's Badge / Uniting Charm]
 			{spellID = 32362, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Call of the Berserker (Attack Power, Use) [Berserker's Call]
@@ -4540,6 +4550,8 @@ C["filger_spells"] = {
 			{spellID = 35733, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Armor Penetration (Armor Penetration, Use) [Icon of Unyielding Courage]
 			{spellID = 34106, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Battle Trance (Attack Power, Proc) [Blackened Naaru Sliver]
+			{spellID = 45040, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Burning Hatred (Attack Power, Use) [Ogre Mauler's Badge / Uniting Charm]
 			{spellID = 32362, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Call of the Berserker (Attack Power, Use) [Berserker's Call]
