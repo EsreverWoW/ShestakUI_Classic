@@ -190,16 +190,14 @@ end
 frame:RegisterEvent("SPELL_UPDATE_COOLDOWN")
 
 function frame:UNIT_SPELLCAST_SUCCEEDED(unit, _, spellID)
-	if unit == "player" then
-		local texture = GetSpellTexture(spellID)
-		local t1 = GetInventoryItemTexture("player", 13)
-		local t2 = GetInventoryItemTexture("player", 14)
-		if texture == t1 or texture == t2 then return end -- Fix wrong buff cd for trinket
-		watching[spellID] = {GetTime(), "spell", spellID}
-		self:SetScript("OnUpdate", OnUpdate)
-	end
+	local texture = GetSpellTexture(spellID)
+	local t1 = GetInventoryItemTexture("player", 13)
+	local t2 = GetInventoryItemTexture("player", 14)
+	if texture == t1 or texture == t2 then return end -- Fix wrong buff cd for trinket
+	watching[spellID] = {GetTime(), "spell", spellID}
+	self:SetScript("OnUpdate", OnUpdate)
 end
-frame:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED")
+frame:RegisterUnitEvent("UNIT_SPELLCAST_SUCCEEDED", "player", "")
 
 function frame:COMBAT_LOG_EVENT_UNFILTERED()
 	local _, eventType, _, _, _, sourceFlags, _, _, _, _, _, spellID, spellName = CombatLogGetCurrentEventInfo()
