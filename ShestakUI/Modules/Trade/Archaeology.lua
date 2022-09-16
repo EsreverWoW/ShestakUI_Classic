@@ -573,9 +573,9 @@ text:SetPoint("CENTER")
 local last = 0
 local time = 3
 
-f:RegisterEvent("UNIT_SPELLCAST_STOP")
-f:SetScript("OnEvent", function(_, _, unit, _, _, _, spellid)
-	if not unit == "player" or select(2, UnitRace("player")) == "Dwarf" then return end
+f:RegisterUnitEvent("UNIT_SPELLCAST_STOP", "player", "")
+f:SetScript("OnEvent", function(_, _, _, _, _, _, spellid)
+	if select(2, UnitRace("player")) == "Dwarf" then return end
 	if spellid == 80451 then
 		text:SetText("3")
 		f:SetScript("OnUpdate", function(_, elapsed)

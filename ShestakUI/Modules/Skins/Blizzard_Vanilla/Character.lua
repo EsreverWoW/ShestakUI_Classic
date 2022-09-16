@@ -140,7 +140,7 @@ local function LoadSkin()
 	end
 
 	local CheckItemBorderColor = CreateFrame("Frame")
-	CheckItemBorderColor:RegisterEvent("UNIT_INVENTORY_CHANGED")
+	CheckItemBorderColor:RegisterUnitEvent("UNIT_INVENTORY_CHANGED", "player", "")
 	CheckItemBorderColor:SetScript("OnEvent", ColorItemBorder)
 	CharacterFrame:HookScript("OnShow", ColorItemBorder)
 	ColorItemBorder()
@@ -199,7 +199,7 @@ local function LoadSkin()
 	PetPaperDollPetInfo:SetSize(24, 24)
 
 	updHappiness(PetPaperDollPetInfo)
-	PetPaperDollPetInfo:RegisterEvent("UNIT_HAPPINESS")
+	PetPaperDollPetInfo:RegisterUnitEvent("UNIT_HAPPINESS", "pet", "")
 	PetPaperDollPetInfo:SetScript("OnEvent", updHappiness)
 	PetPaperDollPetInfo:SetScript("OnShow", updHappiness)
 

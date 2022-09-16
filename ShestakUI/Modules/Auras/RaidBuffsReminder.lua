@@ -253,7 +253,7 @@ raidbuff_reminder:RegisterUnitEvent("UNIT_AURA", "player", "")
 raidbuff_reminder:RegisterEvent("PLAYER_ENTERING_WORLD")
 raidbuff_reminder:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
 raidbuff_reminder:RegisterEvent("ZONE_CHANGED_NEW_AREA")
-raidbuff_reminder:RegisterEvent("UNIT_INVENTORY_CHANGED", "player", "")
+raidbuff_reminder:RegisterUnitEvent("UNIT_INVENTORY_CHANGED", "player", "")
 raidbuff_reminder:SetScript("OnEvent", OnAuraChange)
 
 local line = math.ceil(C.minimap.size / (C.reminder.raid_buffs_size + 2))
