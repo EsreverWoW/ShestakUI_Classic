@@ -8,11 +8,10 @@ local tab = T.ReminderSelfBuffs[T.class]
 if not tab then return end
 local playerBuff = {}
 
-local function OnEvent(self, event, arg1)
+local function OnEvent(self, event)
 	local group = tab[self.id]
 	if not group.spells then return end
 	if (T.Classic and not T.GetSpecialization()) or (T.Mainline and not GetSpecialization()) then return end
-	if (event == "UNIT_AURA" or event == "UNIT_INVENTORY_CHANGED") and arg1 ~= "player" then return end
 	if group.level and T.level < group.level then return end
 
 	self:Hide()
@@ -38,7 +37,7 @@ local function OnEvent(self, event, arg1)
 
 	if event == "LEARNED_SPELL_IN_TAB" and self.icon:GetTexture() then
 		self:UnregisterAllEvents()
-		self:RegisterEvent("UNIT_AURA")
+		self:RegisterUnitEvent("UNIT_AURA", "player", "")
 		if T.Mainline or T.Wrath then
 			self:RegisterEvent("UNIT_ENTERED_VEHICLE")
 			self:RegisterEvent("UNIT_EXITED_VEHICLE")
@@ -55,7 +54,7 @@ local function OnEvent(self, event, arg1)
 	end
 
 	if group.mainhand or group.offhand then
-		self:RegisterEvent("UNIT_INVENTORY_CHANGED")
+		self:RegisterUnitEvent("UNIT_INVENTORY_CHANGED", "player", "")
 	end
 
 	local role = group.role
@@ -144,7 +143,7 @@ for i = 1, #tab do
 
 	frame:Hide()
 
-	frame:RegisterEvent("UNIT_AURA")
+	frame:RegisterUnitEvent("UNIT_AURA", "player", "")
 	frame:RegisterEvent("PLAYER_LOGIN")
 	frame:RegisterEvent("PLAYER_REGEN_ENABLED")
 	frame:RegisterEvent("PLAYER_REGEN_DISABLED")

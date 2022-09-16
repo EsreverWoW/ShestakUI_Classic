@@ -112,9 +112,7 @@ local function CheckArmorBuff()
 	end
 end
 
-local function OnAuraChange(_, event, arg1)
-	if (event == "UNIT_AURA" or event == "UNIT_INVENTORY_CHANGED") and arg1 ~= "player" then return end
-
+local function OnAuraChange()
 	wipe(playerBuff)
 	local i = 1
 	while true do
@@ -251,11 +249,11 @@ RaidBuffsAnchor:SetPoint(unpack(C.position.raid_buffs))
 -- Create Main bar
 local raidbuff_reminder = CreateFrame("Frame", "RaidBuffReminder", UIParent)
 raidbuff_reminder:CreatePanel("Invisible", (C.reminder.raid_buffs_size * 6) + 15, C.reminder.raid_buffs_size + 4, "TOPLEFT", RaidBuffsAnchor, "TOPLEFT", 0, 4)
-raidbuff_reminder:RegisterEvent("UNIT_AURA")
+raidbuff_reminder:RegisterUnitEvent("UNIT_AURA", "player", "")
 raidbuff_reminder:RegisterEvent("PLAYER_ENTERING_WORLD")
 raidbuff_reminder:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
 raidbuff_reminder:RegisterEvent("ZONE_CHANGED_NEW_AREA")
-raidbuff_reminder:RegisterEvent("UNIT_INVENTORY_CHANGED")
+raidbuff_reminder:RegisterEvent("UNIT_INVENTORY_CHANGED", "player", "")
 raidbuff_reminder:SetScript("OnEvent", OnAuraChange)
 
 local line = math.ceil(C.minimap.size / (C.reminder.raid_buffs_size + 2))

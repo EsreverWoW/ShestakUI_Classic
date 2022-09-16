@@ -22,7 +22,7 @@ bar:RegisterEvent("SPELLS_CHANGED")
 bar:RegisterUnitEvent("UNIT_PET", "player", "")
 bar:RegisterEvent("UNIT_FLAGS")
 bar:RegisterUnitEvent("UNIT_AURA", "pet", "")
-bar:SetScript("OnEvent", function(self, event, arg1)
+bar:SetScript("OnEvent", function(self, event)
 	if event == "PLAYER_LOGIN" then
 		T.StylePet()
 		PetActionBar_ShowGrid = T.dummy

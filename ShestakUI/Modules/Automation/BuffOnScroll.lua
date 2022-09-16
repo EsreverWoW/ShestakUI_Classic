@@ -93,7 +93,7 @@ end
 
 -- Events that will trigger the Main Function
 frame:RegisterEvent("PLAYER_ENTERING_WORLD")
-frame:RegisterEvent("UNIT_AURA")
+frame:RegisterUnitEvent("UNIT_AURA", "player", "")
 frame:RegisterEvent("SPELL_UPDATE_USABLE")
 frame:RegisterEvent("SPELL_UPDATE_COOLDOWN")
 frame:RegisterEvent("PLAYER_LEAVE_COMBAT")

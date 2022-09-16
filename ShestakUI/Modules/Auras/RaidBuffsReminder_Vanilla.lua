@@ -166,8 +166,6 @@ end
 
 -- Main Script
 local function OnAuraChange(_, event, unit)
-	if event == "UNIT_AURA" and unit ~= "player" then return end
-
 	-- If We're a caster we may want to see different buffs
 	if T.Role == "Caster" or T.Role == "Healer" then
 		T.ReminderCasterBuffs()
@@ -226,7 +224,7 @@ RaidBuffsAnchor:SetPoint(unpack(C.position.raid_buffs))
 -- Create Main bar
 local raidbuff_reminder = CreateFrame("Frame", "RaidBuffReminder", UIParent)
 raidbuff_reminder:CreatePanel("Invisible", (C.reminder.raid_buffs_size * 6) + 15, C.reminder.raid_buffs_size + 4, "TOPLEFT", RaidBuffsAnchor, "TOPLEFT", 0, 4)
-raidbuff_reminder:RegisterEvent("UNIT_AURA")
+raidbuff_reminder:RegisterUnitEvent("UNIT_AURA", "player", "")
 raidbuff_reminder:RegisterEvent("PLAYER_ENTERING_WORLD")
 raidbuff_reminder:RegisterEvent("CHARACTER_POINTS_CHANGED")
 raidbuff_reminder:RegisterEvent("ZONE_CHANGED_NEW_AREA")
