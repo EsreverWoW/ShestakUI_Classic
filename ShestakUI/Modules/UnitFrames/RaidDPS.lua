@@ -481,8 +481,7 @@ if C.raidframe.layout == "AUTO" then
 	if T.Classic then
 		C.raidframe.layout = "HEAL"
 	else
-		local function CheckSpec(self, event, unit)
-			if event == "PLAYER_SPECIALIZATION_CHANGED" and unit ~= "player" then return end
+		local function CheckSpec(self)
 			if (T.class == "DRUID" and GetSpecialization() == 4) or (T.class == "MONK" and GetSpecialization() == 2) or (T.class == "PALADIN" and GetSpecialization() == 1) or (T.class == "PRIEST" and GetSpecialization() ~= 3) or (T.class == "SHAMAN" and GetSpecialization() == 3) then
 				-- Disable DPS
 				for _, party in pairs({oUF_PartyDPS, oUF_PartyTargetDPS, oUF_PartyPetDPS}) do
@@ -557,7 +556,7 @@ if C.raidframe.layout == "AUTO" then
 
 		local frame = CreateFrame("Frame")
 		frame:RegisterEvent("PLAYER_ENTERING_WORLD")
-		frame:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED")
+		frame:RegisterUnitEvent("PLAYER_SPECIALIZATION_CHANGED", "player", "")
 		frame:SetScript("OnEvent", CheckSpec)
 	end
 end

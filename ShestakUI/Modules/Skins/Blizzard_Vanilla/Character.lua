@@ -119,8 +119,6 @@ local function LoadSkin()
 	end
 
 	local function ColorItemBorder()
-		if event == "UNIT_INVENTORY_CHANGED" and unit ~= "player" then return end
-
 		for _, slot in pairs(slots) do
 			local target = _G["Character"..slot]
 			local slotId = GetInventorySlotInfo(slot)
