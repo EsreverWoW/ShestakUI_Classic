@@ -460,6 +460,16 @@ local function LoadSkin()
 			PVPFrame.backdrop:SetPoint("TOPLEFT", 10, -12)
 			PVPFrame.backdrop:SetPoint("BOTTOMRIGHT", -32, 76)
 			T.SkinCloseButton(PVPParentFrameCloseButton, PVPFrame.backdrop)
+
+			for i = 1, 2 do
+				local tab = _G["PVPParentFrameTab"..i]
+				if tab then
+					T.SkinTab(tab)
+					if i == 1 then
+						tab:SetPoint("BOTTOMLEFT", PVPParentFrame, "BOTTOMLEFT", 11, 42)
+					end
+				end
+			end
 		end
 
 		for i = 1, MAX_ARENA_TEAMS do
