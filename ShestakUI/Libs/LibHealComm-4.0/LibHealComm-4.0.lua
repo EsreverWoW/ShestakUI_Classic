@@ -2799,6 +2799,7 @@ local penanceIDs = {
 -- if there are conflicts in names it will pull the one with the least amount of current health
 function HealComm:UNIT_SPELLCAST_SENT(unit, targetName, castGUID, spellID)
 	local spellName = GetSpellInfo(spellID)
+	if(unit ~= "player") then return end
 
 	if hotData[spellName] or spellData[spellName] then
 		targetName = targetName or UnitName("player")
@@ -3297,7 +3298,7 @@ function HealComm:OnInitialize()
 
 	-- Finally, register it all
 	self.eventFrame:RegisterEvent("CHAT_MSG_ADDON")
-	self.eventFrame:RegisterUnitEvent("UNIT_SPELLCAST_SENT", "player", "")
+	self.eventFrame:RegisterEvent("UNIT_SPELLCAST_SENT")
 	self.eventFrame:RegisterUnitEvent("UNIT_SPELLCAST_START", "player", "")
 	self.eventFrame:RegisterUnitEvent("UNIT_SPELLCAST_STOP", "player", "")
 	self.eventFrame:RegisterUnitEvent("UNIT_SPELLCAST_CHANNEL_START", "player", "")
