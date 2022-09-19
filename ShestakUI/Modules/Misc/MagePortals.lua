@@ -91,7 +91,7 @@ local frame = CreateFrame("Frame", "TeleportMenu", UIParent)
 frame:CreatePanel("Invisible", C.minimap.size, (#spells) * 20 + 4, "BOTTOMLEFT", Minimap, "TOPLEFT", -2, 3)
 frame:SetFrameStrata("MEDIUM")
 frame:EnableMouse(true)
-frame:RegisterEvent("UNIT_SPELLCAST_START")
+frame:RegisterUnitEvent("UNIT_SPELLCAST_START", "player", "")
 frame:SetScript("OnEvent", function(self)
 	if self:IsShown() then
 		self:Hide()
