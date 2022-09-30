@@ -5,7 +5,7 @@ if C.automation.cancel_bad_buffs ~= true then return end
 --	Auto cancel various buffs(by Unknown)
 ----------------------------------------------------------------------------------------
 local frame = CreateFrame("Frame")
-self:RegisterUnitEvent("UNIT_AURA", "player", "")
+frame:RegisterUnitEvent("UNIT_AURA", "player", "")
 frame:SetScript("OnEvent", function(_, event, unit)
 	if event == "UNIT_AURA" and not InCombatLockdown() then
 		local i = 1
