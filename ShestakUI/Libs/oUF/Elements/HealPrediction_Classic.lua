@@ -14,9 +14,12 @@ local function Update(self, event, unit)
 	if(hp.PreUpdate) then hp:PreUpdate(unit) end
 
 	local GUID = UnitGUID(unit)
+	--[[
 	local OverTimeHeals = (HealComm:GetHealAmount(GUID, HealComm.OVERTIME_AND_BOMB_HEALS) or 0) * (HealComm:GetHealModifier(GUID) or 1)
 	local DirectHeals = UnitGetIncomingHeals(unit) or 0
 	local IncomingHeals = DirectHeals >= DirectHeals + OverTimeHeals and DirectHeals or DirectHeals + OverTimeHeals
+	--]]
+	local IncomingHeals = (HealComm:GetHealAmount(GUID, HealComm.ALL_HEALS) or 0) * (HealComm:GetHealModifier(GUID) or 1)
 	local Health = UnitHealth(unit)
 	local MaxHealth = UnitHealthMax(unit)
 
@@ -50,7 +53,7 @@ local function Enable(self)
 
 		self:RegisterEvent('UNIT_MAXHEALTH', Path)
 		self:RegisterEvent('UNIT_HEALTH_FREQUENT', Path)
-		self:RegisterEvent('UNIT_HEAL_PREDICTION', Path)
+		-- self:RegisterEvent('UNIT_HEAL_PREDICTION', Path)
 
 		local function HealCommUpdate(...)
 			if self.HealPrediction and self:IsVisible() then
@@ -117,7 +120,7 @@ local function Disable(self)
 
 		self:UnregisterEvent('UNIT_MAXHEALTH', Path)
 		self:UnregisterEvent('UNIT_HEALTH_FREQUENT', Path)
-		self:UnregisterEvent('UNIT_HEAL_PREDICTION', Path)
+		-- self:UnregisterEvent('UNIT_HEAL_PREDICTION', Path)
 	end
 end
 
