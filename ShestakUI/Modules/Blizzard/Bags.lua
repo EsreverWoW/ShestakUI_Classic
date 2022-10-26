@@ -298,7 +298,10 @@ function Stuffing:SlotUpdate(b)
 
 		-- Color slot according to item quality
 		if not b.frame.lock and quality and quality > 1 and not (isQuestItem or questId) then
-			b.frame:SetBackdropBorderColor(GetItemQualityColor(quality))
+			local R, G, B = GetItemQualityColor(quality)
+			if b.frame then
+				b.frame:SetBackdropBorderColor(R, G, B)
+			end
 		elseif questId and not isActiveQuest then
 			b.frame:SetBackdropBorderColor(1, 0.3, 0.3)
 		elseif questId or isQuestItem then
@@ -465,7 +468,7 @@ function Stuffing:CreateReagentContainer()
 
 		button:StyleButton()
 		button:SetTemplate("Default")
-		button:SetNormalTexture(nil)
+		button:SetNormalTexture("")
 		button.IconBorder:SetAlpha(0)
 
 		button:ClearAllPoints()
@@ -557,7 +560,7 @@ function Stuffing:BagFrameSlotNew(p, slot)
 			SetItemButtonTextureVertexColor(ret.frame, 1.0, 1.0, 1.0)
 		end
 	else
-		ret.frame = CreateFrame(T.Classic and "CheckButton" or "ItemButton", "StuffingFBag"..slot.."Slot", p, "BagSlotButtonTemplate")
+		ret.frame = CreateFrame(T.Classic and "CheckButton" or "ItemButton", "StuffingFBag"..slot.."Slot", p, T.Classic and "BagSlotButtonTemplate" or "")
 		if BackdropTemplateMixin then
 			Mixin(ret.frame, BackdropTemplateMixin)
 		end
@@ -578,7 +581,7 @@ function Stuffing:BagFrameSlotNew(p, slot)
 
 	ret.frame:StyleButton()
 	ret.frame:SetTemplate("Default")
-	ret.frame:SetNormalTexture(nil)
+	ret.frame:SetNormalTexture((C.media.empty))
 	if T.Classic then
 		ret.frame:SetCheckedTexture(nil)
 	end
@@ -632,7 +635,7 @@ function Stuffing:SlotNew(bag, slot)
 		ret.frame = CreateFrame(T.Classic and "Button" or "ItemButton", "StuffingBag"..bag.."_"..slot, self.bags[bag], tpl)
 		ret.frame:StyleButton()
 		ret.frame:SetTemplate("Default")
-		ret.frame:SetNormalTexture(nil)
+		ret.frame:SetNormalTexture(C.media.empty)
 
 		ret.icon = _G[ret.frame:GetName().."IconTexture"]
 		ret.icon:CropIcon()
@@ -1106,7 +1109,7 @@ function Stuffing:Layout(isBank)
 		cols = C.bag.bag_columns
 		f = self.frame
 
-		f.editbox:SetFont(C.media.normal_font, C.font.bags_font_size + 3)
+		f.editbox:SetFont(C.media.normal_font, C.font.bags_font_size + 3, "")
 		f.detail:SetFont(C.font.bags_font, C.font.bags_font_size, C.font.bags_font_style)
 		f.detail:SetShadowOffset(C.font.bags_font_shadow and 1 or 0, C.font.bags_font_shadow and -1 or 0)
 
@@ -1321,7 +1324,7 @@ function Stuffing:ADDON_LOADED(addon)
 		self:RegisterEvent("GUILDBANKFRAME_CLOSED")
 		if T.Mainline then
 			self:RegisterEvent("PLAYERREAGENTBANKSLOTS_CHANGED")
-			self:RegisterEvent("SCRAPPING_MACHINE_SHOW")
+			--BETA self:RegisterEvent("SCRAPPING_MACHINE_SHOW")
 		end
 	end
 	self:RegisterEvent("BAG_CLOSED")

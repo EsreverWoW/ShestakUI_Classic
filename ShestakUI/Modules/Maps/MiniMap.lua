@@ -413,7 +413,11 @@ Minimap:SetScript("OnMouseUp", function(self, button)
 			ToggleDropDownMenu(nil, nil, MiniMapTrackingDropDown, "cursor", -160, 0, "MENU", 2)
 		end
 	elseif button == "LeftButton" then
-		Minimap_OnClick(self)
+		if T.Classic then
+			Minimap_OnClick(self)
+		else
+			Minimap.OnClick(self)
+		end
 	end
 end)
 
@@ -447,38 +451,8 @@ end
 ----------------------------------------------------------------------------------------
 --	Tracking icon
 ----------------------------------------------------------------------------------------
-if not T.Vanilla then
-	if C.minimap.tracking_icon then
-		MiniMapTrackingBackground:Hide()
-		MiniMapTracking:ClearAllPoints()
-		if T.Classic then
-			if T.Wrath then
-				MiniMapTracking:SetPoint("BOTTOMLEFT", MinimapAnchor, "BOTTOMLEFT", -1, -5)
-				MiniMapTrackingButtonBorder:Hide()
-			else
-				MiniMapTracking:SetPoint("BOTTOMLEFT", MinimapAnchor, "BOTTOMLEFT", -4, 0)
-				MiniMapTrackingBorder:Hide()
-			end
-		else
-			MiniMapTracking:SetPoint("BOTTOMLEFT", MinimapAnchor, "BOTTOMLEFT", 0, -4)
-			MiniMapTrackingButton:SetHighlightTexture(nil)
-			MiniMapTrackingButtonBorder:Hide()
-		end
-		MiniMapTrackingIcon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-		MiniMapTrackingIcon:SetSize(16, 16)
-		MiniMapTrackingIcon.SetPoint = T.dummy
 
-		MiniMapTracking:CreateBackdrop("ClassColor")
-		MiniMapTracking.backdrop:SetPoint("TOPLEFT", MiniMapTrackingIcon, -2, 2)
-		MiniMapTracking.backdrop:SetPoint("BOTTOMRIGHT", MiniMapTrackingIcon, 2, -2)
-	else
-		if T.Classic then
-			MiniMapTracking:Hide()
-		else
-			MinimapCluster.Tracking:Hide()
-		end
-	end
-else
+if T.Vanilla then
 	if C.minimap.tracking_icon then
 		MiniMapTrackingFrame:ClearAllPoints()
 		MiniMapTrackingFrame:SetPoint("BOTTOMLEFT", MinimapAnchor, "BOTTOMLEFT", -1, -5)
@@ -495,6 +469,41 @@ else
 		MiniMapTrackingFrame:Hide()
 		MiniMapTrackingBorder:Hide()
 		MiniMapTrackingIcon:Hide()
+	end
+elseif T.TBC or T.Wrath then
+	if C.minimap.tracking_icon then
+		MiniMapTrackingBackground:Hide()
+		MiniMapTracking:ClearAllPoints()
+		if T.Wrath then
+			MiniMapTracking:SetPoint("BOTTOMLEFT", MinimapAnchor, "BOTTOMLEFT", -1, -5)
+			MiniMapTrackingButtonBorder:Hide()
+		else
+			MiniMapTracking:SetPoint("BOTTOMLEFT", MinimapAnchor, "BOTTOMLEFT", -4, 0)
+			MiniMapTrackingBorder:Hide()
+		end
+		MiniMapTrackingIcon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+		MiniMapTrackingIcon:SetSize(16, 16)
+		MiniMapTrackingIcon.SetPoint = T.dummy
+
+		MiniMapTracking:CreateBackdrop("ClassColor")
+		MiniMapTracking.backdrop:SetPoint("TOPLEFT", MiniMapTrackingIcon, -2, 2)
+		MiniMapTracking.backdrop:SetPoint("BOTTOMRIGHT", MiniMapTrackingIcon, 2, -2)
+	else
+		MiniMapTracking:Hide()
+	end
+else
+	if C.minimap.tracking_icon then
+		MinimapCluster.Tracking.Background:Hide()
+		MinimapCluster.Tracking:ClearAllPoints()
+		MinimapCluster.Tracking:SetPoint("BOTTOMLEFT", MinimapAnchor, "BOTTOMLEFT", 5, 6)
+		MinimapCluster.Tracking.Button:SetHighlightTexture(0)
+		MinimapCluster.Tracking.Button:SetSize(16, 16)
+
+		MinimapCluster.Tracking:CreateBackdrop("ClassColor")
+		MinimapCluster.Tracking.backdrop:SetPoint("TOPLEFT", MinimapCluster.Tracking.Button, -2, 2)
+		MinimapCluster.Tracking.backdrop:SetPoint("BOTTOMRIGHT", MinimapCluster.Tracking.Button, 2, -2)
+	else
+		MinimapCluster.Tracking:Hide()
 	end
 end
 
