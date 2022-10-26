@@ -27,7 +27,11 @@ bar:SetScript("OnEvent", function(self, event)
 		T.StylePet()
 		PetActionBar_ShowGrid = T.dummy
 		PetActionBar_HideGrid = T.dummy
-		PetActionBarFrame.showgrid = nil
+		if T.Classic then
+			PetActionBarFrame.showgrid = nil
+		else
+			PetActionBar.showgrid = nil
+		end
 		for i = 1, 10 do
 			local button = _G["PetActionButton"..i]
 			button:ClearAllPoints()
@@ -56,7 +60,11 @@ bar:SetScript("OnEvent", function(self, event)
 		else
 			RegisterStateDriver(self, "visibility", "[pet,novehicleui,nopossessbar,nopetbattle] show; hide")
 		end
-		hooksecurefunc("PetActionBar_Update", T.PetBarUpdate)
+		if T.Classic then
+			hooksecurefunc("PetActionBar_Update", T.PetBarUpdate)
+		else
+			hooksecurefunc(PetActionBar, "Update", T.PetBarUpdate)
+		end
 	elseif event == "PET_BAR_UPDATE" or event == "PLAYER_CONTROL_LOST" or event == "PLAYER_CONTROL_GAINED" or event == "PLAYER_FARSIGHT_FOCUS_CHANGED"
 	or event == "UNIT_FLAGS" or event == "UNIT_PET" or event == "UNIT_AURA" then
 		T.PetBarUpdate()

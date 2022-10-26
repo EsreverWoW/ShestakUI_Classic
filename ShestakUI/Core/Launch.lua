@@ -102,6 +102,12 @@ local function InstallUI()
 		ShestakUISettings.Reputation = true
 	end
 
+	if T.Mainline then
+		if C_ClassTrial.IsClassTrialCharacter() and IsWetxius then
+			SlashCmdList.ONLY_UI()
+		end
+	end
+
 	ReloadUI()
 end
 

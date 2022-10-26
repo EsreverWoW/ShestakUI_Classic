@@ -25,8 +25,9 @@ vehicle:StyleButton(true)
 vehicle:RegisterForClicks("AnyUp")
 vehicle:SetFrameLevel(6)
 vehicle:SetFrameStrata("HIGH")
+vehicle:Hide()
 
-hooksecurefunc("MainMenuBarVehicleLeaveButton_Update", function()
+local function MainMenuBarVehicleLeaveButtonUpdateHook()
 	if T.Vanilla or T.TBC then
 		if UnitOnTaxi("player") then
 			vehicle:Show()
@@ -55,7 +56,13 @@ hooksecurefunc("MainMenuBarVehicleLeaveButton_Update", function()
 			vehicle:Hide()
 		end
 	end
-end)
+end
+
+if T.Classic then
+	hooksecurefunc("MainMenuBarVehicleLeaveButton_Update", MainMenuBarVehicleLeaveButtonUpdateHook)
+else
+	hooksecurefunc(MainMenuBarVehicleLeaveButton, "Update", MainMenuBarVehicleLeaveButtonUpdateHook)
+end
 
 if T.Wrath then
 	vehicle:RegisterEvent("PLAYER_ENTERING_WORLD")
@@ -76,20 +83,24 @@ if T.Wrath then
 	end)
 end
 
-if T.Mainline or T.Wrath then
-	hooksecurefunc("PossessBar_UpdateState", function()
-		for i = 1, NUM_POSSESS_SLOTS do
-			local _, _, enabled = GetPossessInfo(i)
-			if enabled then
-				vehicle:SetScript("OnClick", function()
-					CancelPetPossess()
-				end)
-				vehicle:Show()
-			else
-				vehicle:Hide()
-			end
+local function PossessBarUpdateHook()
+	for i = 1, NUM_POSSESS_SLOTS do
+		local _, _, enabled = GetPossessInfo(i)
+		if enabled then
+			vehicle:SetScript("OnClick", function()
+				CancelPetPossess()
+			end)
+			vehicle:Show()
+		else
+			vehicle:Hide()
 		end
-	end)
+	end
+end
+
+if T.Wrath then
+	hooksecurefunc("PossessBar_UpdateState", PossessBarUpdateHook)
+elseif T.Mainline then
+	hooksecurefunc(PossessActionBar, "UpdateState", PossessBarUpdateHook)
 end
 
 -- Set tooltip

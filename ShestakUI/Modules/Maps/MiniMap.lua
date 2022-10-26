@@ -17,25 +17,118 @@ if T.Classic then
 	MinimapCluster:Kill()
 end
 
--- Parent Minimap into our frame
-Minimap:SetParent(MinimapAnchor)
-Minimap:ClearAllPoints()
-Minimap:SetPoint("TOPLEFT", MinimapAnchor, "TOPLEFT", 2, -2)
-Minimap:SetPoint("BOTTOMRIGHT", MinimapAnchor, "BOTTOMRIGHT", -2, 2)
-Minimap:SetSize(MinimapAnchor:GetWidth(), MinimapAnchor:GetWidth())
+local frame = CreateFrame("Frame")
+frame:RegisterEvent("PLAYER_ENTERING_WORLD")
+frame:SetScript("OnEvent", function(self, event)
+	self:UnregisterEvent(event)
+	-- Parent Minimap into our frame
+	Minimap:SetParent(MinimapAnchor)
+	Minimap:ClearAllPoints()
+	Minimap:SetPoint("TOPLEFT", MinimapAnchor, "TOPLEFT", 2, -2)
+	Minimap:SetPoint("BOTTOMRIGHT", MinimapAnchor, "BOTTOMRIGHT", -2, 2)
+	Minimap:SetSize(MinimapAnchor:GetWidth(), MinimapAnchor:GetWidth())
 
-MinimapBackdrop:ClearAllPoints()
-MinimapBackdrop:SetPoint("TOPLEFT", MinimapAnchor, "TOPLEFT", 2, -2)
-MinimapBackdrop:SetPoint("BOTTOMRIGHT", MinimapAnchor, "BOTTOMRIGHT", -2, 2)
-MinimapBackdrop:SetSize(MinimapAnchor:GetWidth(), MinimapAnchor:GetWidth())
+	MinimapBackdrop:ClearAllPoints()
+	MinimapBackdrop:SetPoint("TOPLEFT", MinimapAnchor, "TOPLEFT", 2, -2)
+	MinimapBackdrop:SetPoint("BOTTOMRIGHT", MinimapAnchor, "BOTTOMRIGHT", -2, 2)
+	MinimapBackdrop:SetSize(MinimapAnchor:GetWidth(), MinimapAnchor:GetWidth())
+
+	-- Instance Difficulty icon
+	if T.Wrath then
+		MiniMapInstanceDifficulty:SetParent(Minimap)
+		MiniMapInstanceDifficulty:ClearAllPoints()
+		MiniMapInstanceDifficulty:SetPoint("TOPRIGHT", Minimap, "TOPRIGHT", 3, 2)
+		MiniMapInstanceDifficulty:SetScale(0.75)
+	elseif T.Mainline then
+		MinimapCluster.InstanceDifficulty:SetParent(Minimap)
+		MinimapCluster.InstanceDifficulty:ClearAllPoints()
+		MinimapCluster.InstanceDifficulty:SetPoint("TOPRIGHT", Minimap, "TOPRIGHT", 1, 3)
+		MinimapCluster.InstanceDifficulty.Instance.Border:Hide()
+		MinimapCluster.InstanceDifficulty.Instance.Background:SetSize(28, 28)
+		MinimapCluster.InstanceDifficulty.Instance.Background:SetVertexColor(0.6, 0.3, 0)
+	end
+
+	-- Guild Instance Difficulty icon
+	if T.Mainline then
+		MinimapCluster.InstanceDifficulty.Guild.Border:Hide()
+		MinimapCluster.InstanceDifficulty.Guild.Background:SetSize(28, 28)
+		MinimapCluster.InstanceDifficulty.Guild.Background:ClearAllPoints()
+		MinimapCluster.InstanceDifficulty.Guild.Background:SetPoint("TOPRIGHT", Minimap, "TOPRIGHT", -1, 0)
+	end
+
+	-- Challenge Mode icon
+	if T.Mainline then
+		MinimapCluster.InstanceDifficulty.ChallengeMode.Border:Hide()
+		MinimapCluster.InstanceDifficulty.ChallengeMode.Background:SetSize(28, 28)
+		MinimapCluster.InstanceDifficulty.ChallengeMode.Background:SetVertexColor(0.8, 0.8, 0)
+		MinimapCluster.InstanceDifficulty.ChallengeMode.Background:ClearAllPoints()
+		MinimapCluster.InstanceDifficulty.ChallengeMode.Background:SetPoint("TOPRIGHT", Minimap, "TOPRIGHT", -1, 0)
+	end
+
+	-- Move QueueStatus icon
+	if T.Mainline then
+		QueueStatusFrame:SetClampedToScreen(true)
+		QueueStatusFrame:SetFrameStrata("TOOLTIP")
+		QueueStatusButton:ClearAllPoints()
+		QueueStatusButton:SetPoint("TOP", Minimap, "TOP", 1, -1)
+		QueueStatusButton:SetParent(Minimap)
+		QueueStatusButton:SetScale(0.5)
+	end
+
+	-- Invites icon
+	GameTimeCalendarInvitesTexture:ClearAllPoints()
+	GameTimeCalendarInvitesTexture:SetParent(Minimap)
+	if T.Wrath then
+		GameTimeCalendarInvitesTexture:SetPoint("TOPRIGHT", Minimap, "TOPRIGHT", 0, 0)
+	elseif T.Mainline then
+		GameTimeCalendarInvitesTexture:SetPoint("TOPRIGHT", Minimap, "TOPRIGHT", -1, -4)
+	end
+
+	-- Hide Game Time
+	GameTimeFrame:Hide() -- BETA Need another solution to keep showing calendar invites
+
+	-- Move Mail icon
+	if T.Classic then
+		MiniMapMailFrame:ClearAllPoints()
+		MiniMapMailFrame:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMRIGHT", 8, -10)
+		MiniMapMailBorder:Hide()
+		MiniMapMailIcon:SetTexture("Interface\\AddOns\\ShestakUI\\Media\\Textures\\Mail.tga")
+		MiniMapMailIcon:SetSize(16, 16)
+	else
+		MinimapCluster.MailFrame:ClearAllPoints()
+		MinimapCluster.MailFrame:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMRIGHT", 4, -1)
+		MiniMapMailIcon:SetTexture("Interface\\AddOns\\ShestakUI\\Media\\Textures\\Mail.tga")
+		MiniMapMailIcon:SetSize(16, 16)
+	end
+
+	-- Move LFG Eye icon
+	if MiniMapLFGFrame then
+		MiniMapLFGFrame:SetClampedToScreen(true)
+		MiniMapLFGFrame:SetFrameStrata("TOOLTIP")
+		MiniMapLFGFrame:ClearAllPoints()
+		MiniMapLFGFrame:SetPoint("TOP", Minimap, "TOP", 1, 6)
+		MiniMapLFGFrame:SetScale(0.8)
+		MiniMapLFGFrame:SetHighlightTexture(nil)
+		if T.Wrath then
+			MiniMapLFGFrameBorder:Hide()
+		else
+			MiniMapLFGBorder:Hide()
+		end
+	end
+end)
 
 -- Adjusting for patch 9.0.1 Minimap.xml
 Minimap:SetFrameStrata("LOW")
 Minimap:SetFrameLevel(2)
 
 -- Hide Border
-MinimapBorder:Hide()
-MinimapBorderTop:Hide()
+if T.Classic then
+	MinimapBorder:Hide()
+	MinimapBorderTop:Hide()
+else
+	MinimapCompassTexture:Hide()
+	MinimapCluster.BorderTop:StripTextures()
+end
 
 -- Hide Zoom Buttons
 MinimapZoomIn:Hide()
@@ -48,100 +141,44 @@ if T.Mainline then
 end
 
 -- Hide North texture at top
-MinimapNorthTag:SetTexture(nil)
-
--- Hide Zone Frame
-MinimapZoneTextButton:Hide()
-
--- Hide Game Time
-GameTimeFrame:Hide()
-
--- Move Mail icon
-MiniMapMailFrame:ClearAllPoints()
-MiniMapMailFrame:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMRIGHT", 8, -10)
-MiniMapMailBorder:Hide()
-MiniMapMailIcon:SetTexture("Interface\\AddOns\\ShestakUI\\Media\\Textures\\Mail.tga")
-MiniMapMailIcon:SetSize(16, 16)
-
--- Move QueueStatus icon
-if T.Mainline then
-	QueueStatusFrame:SetClampedToScreen(true)
-	QueueStatusFrame:SetFrameStrata("TOOLTIP")
-	QueueStatusMinimapButton:ClearAllPoints()
-	QueueStatusMinimapButton:SetPoint("TOP", Minimap, "TOP", 1, 6)
-	QueueStatusMinimapButton:SetHighlightTexture(nil)
-	QueueStatusMinimapButtonBorder:Hide()
+if T.Classic then
+	MinimapNorthTag:SetTexture(nil)
 end
 
--- Move LFG Eye icon
-if MiniMapLFGFrame then
-	MiniMapLFGFrame:SetClampedToScreen(true)
-	MiniMapLFGFrame:SetFrameStrata("TOOLTIP")
-	MiniMapLFGFrame:ClearAllPoints()
-	MiniMapLFGFrame:SetPoint("TOP", Minimap, "TOP", 1, 6)
-	MiniMapLFGFrame:SetScale(0.8)
-	MiniMapLFGFrame:SetHighlightTexture(nil)
-	if T.Wrath then
-		MiniMapLFGFrameBorder:Hide()
-	else
-		MiniMapLFGBorder:Hide()
-	end
+-- Hide Zone Frame
+if T.Classic then
+	MinimapZoneTextButton:Hide()
+else
+	MinimapCluster.ZoneTextButton:Hide()
 end
 
 -- Hide world map button
-MiniMapWorldMapButton:Hide()
 if T.Classic then
+	MiniMapWorldMapButton:Hide()
 	MiniMapWorldMapButton.Show = T.dummy
 end
 
 -- Garrison icon
 if T.Mainline then
 	if C.minimap.garrison_icon == true then
-		GarrisonLandingPageMinimapButton:SetScale(0.75)
-		hooksecurefunc("GarrisonLandingPageMinimapButton_UpdateIcon", function(self)
-			self:ClearAllPoints()
-			self:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 0, 2)
+		ExpansionLandingPageMinimapButton:SetScale(0.6)
+		ExpansionLandingPageMinimapButton:ClearAllPoints()
+		ExpansionLandingPageMinimapButton:SetPoint("TOPLEFT", Minimap, "TOPLEFT", -3, 1)
+		hooksecurefunc(ExpansionLandingPageMinimapButton, "UpdateIconForGarrison", function()
+			ExpansionLandingPageMinimapButton:ClearAllPoints()
+			ExpansionLandingPageMinimapButton:SetPoint("TOPLEFT", Minimap, "TOPLEFT", -3, 1)
 		end)
 	else
-		GarrisonLandingPageMinimapButton:SetScale(0.0001)
-		GarrisonLandingPageMinimapButton:SetAlpha(0)
+		ExpansionLandingPageMinimapButton:SetScale(0.0001)
+		ExpansionLandingPageMinimapButton:SetAlpha(0)
 	end
 end
 
--- Instance Difficulty icon
-if T.Mainline or T.Wrath then
-	MiniMapInstanceDifficulty:SetParent(Minimap)
-	MiniMapInstanceDifficulty:ClearAllPoints()
-	MiniMapInstanceDifficulty:SetPoint("TOPRIGHT", Minimap, "TOPRIGHT", 3, 2)
-	MiniMapInstanceDifficulty:SetScale(0.75)
-end
-
--- Guild Instance Difficulty icon
-if T.Mainline then
-	GuildInstanceDifficulty:SetParent(Minimap)
-	GuildInstanceDifficulty:ClearAllPoints()
-	GuildInstanceDifficulty:SetPoint("TOPRIGHT", Minimap, "TOPRIGHT", -2, 2)
-	GuildInstanceDifficulty:SetScale(0.75)
-end
-
--- Challenge Mode icon
-if T.Mainline then
-	MiniMapChallengeMode:SetParent(Minimap)
-	MiniMapChallengeMode:ClearAllPoints()
-	MiniMapChallengeMode:SetPoint("TOPRIGHT", Minimap, "TOPRIGHT", -2, -2)
-	MiniMapChallengeMode:SetScale(0.75)
-end
-
--- Invites icon
-if T.Mainline or T.Wrath then
-	GameTimeCalendarInvitesTexture:ClearAllPoints()
-	GameTimeCalendarInvitesTexture:SetParent(Minimap)
-	GameTimeCalendarInvitesTexture:SetPoint("TOPRIGHT", Minimap, "TOPRIGHT", 0, 0)
-end
-
 -- Default LFG icon
-LFG_EYE_TEXTURES.raid = LFG_EYE_TEXTURES.default
-LFG_EYE_TEXTURES.unknown = LFG_EYE_TEXTURES.default
+if T.Classic then
+	LFG_EYE_TEXTURES.raid = LFG_EYE_TEXTURES.default
+	LFG_EYE_TEXTURES.unknown = LFG_EYE_TEXTURES.default
+end
 
 -- Feedback icon
 if FeedbackUIButton then
@@ -176,10 +213,18 @@ end
 -- Enable mouse scrolling
 Minimap:EnableMouseWheel(true)
 Minimap:SetScript("OnMouseWheel", function(_, d)
-	if d > 0 then
-		_G.MinimapZoomIn:Click()
-	elseif d < 0 then
-		_G.MinimapZoomOut:Click()
+	if T.Classic then
+		if d > 0 then
+			_G.MinimapZoomIn:Click()
+		elseif d < 0 then
+			_G.MinimapZoomOut:Click()
+		end
+	else
+		if d > 0 then
+			_G.Minimap.ZoomIn:Click()
+		elseif d < 0 then
+			_G.Minimap.ZoomOut:Click()
+		end
 	end
 end)
 
@@ -427,7 +472,11 @@ if not T.Vanilla then
 		MiniMapTracking.backdrop:SetPoint("TOPLEFT", MiniMapTrackingIcon, -2, 2)
 		MiniMapTracking.backdrop:SetPoint("BOTTOMRIGHT", MiniMapTrackingIcon, 2, -2)
 	else
-		MiniMapTracking:Hide()
+		if T.Classic then
+			MiniMapTracking:Hide()
+		else
+			MinimapCluster.Tracking:Hide()
+		end
 	end
 else
 	if C.minimap.tracking_icon then

@@ -410,8 +410,12 @@ for i = 1, numf do
 	f:SetPoint("CENTER", 0, 0)
 	f:SetMovable(true)
 	f:SetResizable(true)
-	f:SetMinResize(128, 128)
-	f:SetMaxResize(768, 768)
+	if T.Mainline or T.Wrath341 then
+		f:SetResizeBounds(128, 128, 768, 768)
+	else
+		f:SetMinResize(128, 128)
+		f:SetMaxResize(768, 768)
+	end
 	f:SetClampedToScreen(true)
 	f:SetClampRectInsets(0, 0, C.font.combat_text_font_size, 0)
 	f:SetInsertMode(C.combattext.direction and 2 or 1)

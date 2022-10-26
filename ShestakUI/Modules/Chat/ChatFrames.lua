@@ -82,23 +82,38 @@ local function SetChatStyle(frame)
 	end
 
 	-- Removes Default ChatFrame Tabs texture
-	_G[format("ChatFrame%sTabLeft", id)]:Kill()
-	_G[format("ChatFrame%sTabMiddle", id)]:Kill()
-	_G[format("ChatFrame%sTabRight", id)]:Kill()
+	if T.Classic then
+		_G[format("ChatFrame%sTabLeft", id)]:Kill()
+		_G[format("ChatFrame%sTabMiddle", id)]:Kill()
+		_G[format("ChatFrame%sTabRight", id)]:Kill()
 
-	_G[format("ChatFrame%sTabSelectedLeft", id)]:Kill()
-	_G[format("ChatFrame%sTabSelectedMiddle", id)]:Kill()
-	_G[format("ChatFrame%sTabSelectedRight", id)]:Kill()
+		_G[format("ChatFrame%sTabSelectedLeft", id)]:Kill()
+		_G[format("ChatFrame%sTabSelectedMiddle", id)]:Kill()
+		_G[format("ChatFrame%sTabSelectedRight", id)]:Kill()
 
-	_G[format("ChatFrame%sTabHighlightLeft", id)]:Kill()
-	_G[format("ChatFrame%sTabHighlightMiddle", id)]:Kill()
-	_G[format("ChatFrame%sTabHighlightRight", id)]:Kill()
+		_G[format("ChatFrame%sTabHighlightLeft", id)]:Kill()
+		_G[format("ChatFrame%sTabHighlightMiddle", id)]:Kill()
+		_G[format("ChatFrame%sTabHighlightRight", id)]:Kill()
+	else
+		_G[format("ChatFrame%sTab", id)].Left:Kill()
+		_G[format("ChatFrame%sTab", id)].Middle:Kill()
+		_G[format("ChatFrame%sTab", id)].Right:Kill()
+
+		_G[format("ChatFrame%sTab", id)].ActiveLeft:Kill()
+		_G[format("ChatFrame%sTab", id)].ActiveMiddle:Kill()
+		_G[format("ChatFrame%sTab", id)].ActiveRight:Kill()
+
+		_G[format("ChatFrame%sTab", id)].HighlightLeft:Kill()
+		_G[format("ChatFrame%sTab", id)].HighlightMiddle:Kill()
+		_G[format("ChatFrame%sTab", id)].HighlightRight:Kill()
+	end
 
 	-- Killing off the new chat tab selected feature
-	_G[format("ChatFrame%sTabSelectedLeft", id)]:Kill()
-	_G[format("ChatFrame%sTabSelectedMiddle", id)]:Kill()
-	_G[format("ChatFrame%sTabSelectedRight", id)]:Kill()
-
+	if T.Classic then
+		_G[format("ChatFrame%sTabSelectedLeft", id)]:Kill()
+		_G[format("ChatFrame%sTabSelectedMiddle", id)]:Kill()
+		_G[format("ChatFrame%sTabSelectedRight", id)]:Kill()
+	end
 	_G[format("ChatFrame%sButtonFrameMinimizeButton", id)]:Kill()
 	_G[format("ChatFrame%sButtonFrame", id)]:Kill()
 
@@ -261,7 +276,7 @@ local function SetupChatPosAndFont()
 			if C.chat.combatlog ~= true then
 				FCF_DockFrame(chat)
 				ChatFrame2Tab:EnableMouse(false)
-				ChatFrame2TabText:Hide()
+				ChatFrame2Tab.Text:Hide()
 				ChatFrame2Tab:SetWidth(0.001)
 				ChatFrame2Tab.SetWidth = T.dummy
 				FCF_DockUpdate()

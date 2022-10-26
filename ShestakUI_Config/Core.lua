@@ -5,6 +5,22 @@ local L = ns
 ----------------------------------------------------------------------------------------
 --	GUI for ShestakUI(by Haleth, Solor)
 ----------------------------------------------------------------------------------------
+local function IsClassicBuild()
+	return _G.WOW_PROJECT_ID == _G.WOW_PROJECT_CLASSIC or _G.WOW_PROJECT_ID == _G.WOW_PROJECT_BURNING_CRUSADE_CLASSIC or _G.WOW_PROJECT_ID == _G.WOW_PROJECT_WRATH_CLASSIC
+end
+
+local function IsVanillaBuild()
+	return _G.WOW_PROJECT_ID == _G.WOW_PROJECT_CLASSIC
+end
+
+local function IsTBCBuild()
+	return _G.WOW_PROJECT_ID == _G.WOW_PROJECT_BURNING_CRUSADE_CLASSIC
+end
+
+local function IsWrathBuild()
+	return _G.WOW_PROJECT_ID == _G.WOW_PROJECT_WRATH_CLASSIC
+end
+
 local realm = GetRealmName()
 local name = UnitName("player")
 
@@ -111,7 +127,14 @@ local function toggle(self)
 end
 
 ns.CreateCheckBox = function(parent, option, text, textDesc)
-	local f = CreateFrame("CheckButton", nil, parent, "InterfaceOptionsCheckButtonTemplate")
+	local f = CreateFrame("CheckButton", nil, parent)
+
+	f:SetSize(26, 26)
+
+	f.Text = f:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
+	f.Text:SetJustifyH("LEFT")
+	f.Text:SetTextColor(1, 1, 1)
+	f.Text:SetPoint("LEFT", f, "RIGHT", 3, 0)
 
 	f.group = parent.tag
 	f.option = option
@@ -229,7 +252,9 @@ local function createSlider(parent, option, lowText, highText, low, high, step, 
 	local sliderName = parent:GetName()..option
 	local f = CreateFrame("Slider", sliderName, parent, "OptionsSliderTemplate")
 
-	BlizzardOptionsPanel_Slider_Enable(f)
+	if IsClassicBuild() then
+		BlizzardOptionsPanel_Slider_Enable(f)
+	end
 
 	f.group = parent.tag
 	f.option = option
@@ -503,7 +528,7 @@ ns.CreateDropDown = function(parent, option, needsReload, text, tableValue, LSM,
 
 			if isFont then
 				local fObject = CreateFont(info.text)
-				fObject:SetFont(value, 12)
+				fObject:SetFont(value, 12, "")
 				info.fontObject = fObject
 			end
 
