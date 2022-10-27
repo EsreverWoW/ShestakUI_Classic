@@ -54,7 +54,7 @@ local function resetIcon(icon, count, duration, remaining)
 		end
 	end
 	if icon.count then
-		icon.count:SetText((count > 1 and count))
+		icon.count:SetText((count > 1 and count or ""))
 	end
 	if icon.overlay then
 		icon.overlay:Hide()
@@ -129,7 +129,6 @@ local function setupIcons(self)
 	watch.watched = {}
 
 	for _, icon in pairs(icons) do
-
 		local name, _, image = GetSpellInfo(icon.spellID)
 		if name then
 			icon.name = name
@@ -176,7 +175,7 @@ local function setupIcons(self)
 				watch.watched[name] = icon
 			end
 
-			if watch.PostCreateIcon then watch:PostCreateIcon(icon, icon.spellID, name, self) end
+			if watch.PostCreateButton then watch:PostCreateButton(icon, icon.spellID, name, self) end
 		else
 			if T.Classic then
 				print("|cffff0000WARNING: spell ID ["..tostring(icon.spellID).."] no longer exists! Report this to EsreverWoW.|r")

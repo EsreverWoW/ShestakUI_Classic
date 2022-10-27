@@ -235,8 +235,8 @@ local function Shared(self, unit)
 		self.Debuffs.num = 7
 		self.Debuffs["growth-y"] = "DOWN"
 		self.Debuffs["growth-x"] = "RIGHT"
-		self.Debuffs.PostCreateIcon = T.PostCreateIcon
-		self.Debuffs.PostUpdateIcon = T.PostUpdateIcon
+		self.Debuffs.PostCreateButton = T.PostCreateButton
+		self.Debuffs.PostUpdateButton = T.PostUpdateButton
 	end
 
 	-- Debuff highlight

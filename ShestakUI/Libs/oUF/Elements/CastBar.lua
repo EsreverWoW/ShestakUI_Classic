@@ -4,6 +4,7 @@ local oUF = ns.oUF
 local FALLBACK_ICON = 136243 -- Interface\ICONS\Trade_Engineering
 local FAILED = _G.FAILED or 'Failed'
 local INTERRUPTED = _G.INTERRUPTED or 'Interrupted'
+local CASTBAR_STAGE_DURATION_INVALID = -1 -- defined in FrameXML/CastingBarFrame.lua
 
 local UnitCastingInfo = UnitCastingInfo
 local UnitChannelInfo = UnitChannelInfo
@@ -36,8 +37,80 @@ local function resetAttributes(self)
 	self.castID = nil
 	self.casting = nil
 	self.channeling = nil
+	self.empowering = nil
 	self.notInterruptible = nil
 	self.spellID = nil
+
+	for _, pip in next, self.Pips do
+		pip:Hide()
+	end
+end
+
+local function CreatePip(element)
+	return CreateFrame('Frame', nil, element, 'CastingBarFrameStagePipTemplate')
+end
+
+local function UpdatePips(element, numStages)
+	local stageTotalDuration = 0
+	local stageMaxValue = element.max * 1000
+	local isHoriz = element:GetOrientation() == 'HORIZONTAL'
+	local elementSize = isHoriz and element:GetWidth() or element:GetHeight()
+
+	for stage = 1, numStages do
+		local duration
+		if(stage > numStages) then
+			duration = GetUnitEmpowerHoldAtMaxTime(element.__owner.unit)
+		else
+			duration = GetUnitEmpowerStageDuration(element.__owner.unit, stage - 1)
+		end
+
+		if(duration > CASTBAR_STAGE_DURATION_INVALID) then
+			stageTotalDuration = stageTotalDuration + duration
+
+			local portion = stageTotalDuration / stageMaxValue
+			local offset = elementSize * portion
+
+			local pip = element.Pips[stage]
+			if(not pip) then
+				--[[ Override: Castbar:CreatePip(stage)
+				Creates a "pip" for the given stage, used for empowered casts.
+
+				* self - the Castbar widget
+
+				## Returns
+
+				* pip - a frame used to depict an empowered stage boundary, typically with a line texture (frame)
+				--]]
+				pip = (element.CreatePip or CreatePip) (element, stage)
+				element.Pips[stage] = pip
+			end
+
+			pip:ClearAllPoints()
+			pip:Show()
+
+			if(isHoriz) then
+				pip:RotateTextures(0)
+
+				if(element:GetReverseFill()) then
+					pip:SetPoint('TOP', element, 'TOPRIGHT', -offset, 0)
+					pip:SetPoint('BOTTOM', element, 'BOTTOMRIGHT', -offset, 0)
+				else
+					pip:SetPoint('TOP', element, 'TOPLEFT', offset, 0)
+					pip:SetPoint('BOTTOM', element, 'BOTTOMLEFT', offset, 0)
+				end
+			else
+				pip:RotateTextures(1.5708)
+
+				if(element:GetReverseFill()) then
+					pip:SetPoint('LEFT', element, 'TOPLEFT', 0, -offset)
+					pip:SetPoint('RIGHT', element, 'TOPRIGHT', 0, -offset)
+				else
+					pip:SetPoint('LEFT', element, 'BOTTOMLEFT', 0, offset)
+					pip:SetPoint('RIGHT', element, 'BOTTOMRIGHT', 0, offset)
+				end
+			end
+		end
+	end
 end
 
 local function CastStart(self, event, unit)
@@ -45,11 +118,12 @@ local function CastStart(self, event, unit)
 
 	local element = self.Castbar
 
-	local name, _, texture, startTime, endTime, isTradeSkill, castID, notInterruptible, spellID = UnitCastingInfo(unit)
+	local numStages, _
+	local name, text, texture, startTime, endTime, isTradeSkill, castID, notInterruptible, spellID = UnitCastingInfo(unit)
 	event = 'UNIT_SPELLCAST_START'
 	if(not name) then
-		name, _, texture, startTime, endTime, isTradeSkill, notInterruptible, spellID = UnitChannelInfo(unit)
-		event = 'UNIT_SPELLCAST_CHANNEL_START'
+		name, text, texture, startTime, endTime, isTradeSkill, notInterruptible, spellID, _, numStages = UnitChannelInfo(unit)
+		event = (numStages and numStages > 0) and 'UNIT_SPELLCAST_EMPOWER_START' or 'UNIT_SPELLCAST_CHANNEL_START'
 	end
 
 	if(not spellID and type(notInterruptible) == "number") then
@@ -64,23 +138,29 @@ local function CastStart(self, event, unit)
 		return
 	end
 
+	element.casting = event == 'UNIT_SPELLCAST_START'
+	element.channeling = event == 'UNIT_SPELLCAST_CHANNEL_START'
+	element.empowering = event == 'UNIT_SPELLCAST_EMPOWER_START'
+
+	if(element.empowering) then
+		endTime = endTime + GetUnitEmpowerHoldAtMaxTime(unit)
+	end
+
 	endTime = endTime / 1000
 	startTime = startTime / 1000
 
 	element.max = endTime - startTime
 	element.startTime = startTime
 	element.delay = 0
-	element.casting = event == 'UNIT_SPELLCAST_START'
-	element.channeling = event == 'UNIT_SPELLCAST_CHANNEL_START'
 	element.notInterruptible = notInterruptible
 	element.holdTime = 0
 	element.castID = castID
 	element.spellID = spellID
 
-	if(element.casting) then
-		element.duration = GetTime() - startTime
-	else
+	if(element.channeling) then
 		element.duration = endTime - GetTime()
+	else
+		element.duration = GetTime() - startTime
 	end
 
 	-- Tradeskill block
@@ -105,7 +185,7 @@ local function CastStart(self, event, unit)
 	if(element.Icon) then element.Icon:SetTexture(texture or FALLBACK_ICON) end
 	if(element.Shield) then element.Shield:SetShown(notInterruptible) end
 	if(element.Spark) then element.Spark:Show() end
-	if(element.Text) then element.Text:SetText(name) end
+	if(element.Text) then element.Text:SetText(text) end
 	if(element.Time) then element.Time:SetText() end
 
 	local safeZone = element.SafeZone
@@ -116,10 +196,10 @@ local function CastStart(self, event, unit)
 		safeZone:SetPoint(isHoriz and 'TOP' or 'LEFT')
 		safeZone:SetPoint(isHoriz and 'BOTTOM' or 'RIGHT')
 
-		if(element.casting) then
-			safeZone:SetPoint(element:GetReverseFill() and (isHoriz and 'LEFT' or 'BOTTOM') or (isHoriz and 'RIGHT' or 'TOP'))
-		else
+		if(element.channeling) then
 			safeZone:SetPoint(element:GetReverseFill() and (isHoriz and 'RIGHT' or 'TOP') or (isHoriz and 'LEFT' or 'BOTTOM'))
+		else
+			safeZone:SetPoint(element:GetReverseFill() and (isHoriz and 'LEFT' or 'BOTTOM') or (isHoriz and 'RIGHT' or 'TOP'))
 		end
 
 		local ratio = (select(4, GetNetStats()) / 1000) / element.max
@@ -128,6 +208,16 @@ local function CastStart(self, event, unit)
 		end
 
 		safeZone[isHoriz and 'SetWidth' or 'SetHeight'](safeZone, element[isHoriz and 'GetWidth' or 'GetHeight'](element) * ratio)
+	end
+
+	if(element.empowering) then
+		--[[ Override: Castbar:UpdatePips(numStages)
+		Handles updates for stage separators (pips) in an empowered cast.
+
+		* self      - the Castbar widget
+		* numStages - the number of stages in the current cast (number)
+		--]]
+		(element.UpdatePips or UpdatePips) (element, numStages)
 	end
 
 	--[[ Callback: Castbar:PostCastStart(unit)
@@ -166,18 +256,22 @@ local function CastUpdate(self, event, unit, castID, spellID)
 
 	if(not name) then return end
 
+	if(element.empowering) then
+		endTime = endTime + GetUnitEmpowerHoldAtMaxTime(unit)
+	end
+
 	endTime = endTime / 1000
 	startTime = startTime / 1000
 
 	local delta
-	if(element.casting) then
-		delta = startTime - element.startTime
-
-		element.duration = GetTime() - startTime
-	else
+	if(element.channeling) then
 		delta = element.startTime - startTime
 
 		element.duration = endTime - GetTime()
+	else
+		delta = startTime - element.startTime
+
+		element.duration = GetTime() - startTime
 	end
 
 	if(delta < 0) then
@@ -306,8 +400,8 @@ local function CastInterruptible(self, event, unit)
 end
 
 local function onUpdate(self, elapsed)
-	if(self.casting or self.channeling) then
-		local isCasting = self.casting
+	if(self.casting or self.channeling or self.empowering) then
+		local isCasting = self.casting or self.empowering
 		if(isCasting) then
 			self.duration = self.duration + elapsed
 			if(self.duration >= self.max) then
@@ -387,6 +481,9 @@ local function Enable(self, unit)
 			self:RegisterEvent('UNIT_SPELLCAST_FAILED', CastFail)
 			self:RegisterEvent('UNIT_SPELLCAST_INTERRUPTED', CastFail)
 			if(not oUF:IsClassic()) then
+				self:RegisterEvent('UNIT_SPELLCAST_EMPOWER_START', CastStart)
+				self:RegisterEvent('UNIT_SPELLCAST_EMPOWER_STOP', CastStop)
+				self:RegisterEvent('UNIT_SPELLCAST_EMPOWER_UPDATE', CastUpdate)
 				self:RegisterEvent('UNIT_SPELLCAST_INTERRUPTIBLE', CastInterruptible)
 				self:RegisterEvent('UNIT_SPELLCAST_NOT_INTERRUPTIBLE', CastInterruptible)
 			end
@@ -409,12 +506,19 @@ local function Enable(self, unit)
 		-- end block
 
 		element.holdTime = 0
+		element.Pips = {}
 
 		element:SetScript('OnUpdate', element.OnUpdate or onUpdate)
 
 		if(self.unit == 'player' and not (self.hasChildren or self.isChild or self.isNamePlate)) then
-			CastingBarFrame_SetUnit(CastingBarFrame, nil)
-			CastingBarFrame_SetUnit(PetCastingBarFrame, nil)
+			if(oUF:IsClassic()) then
+				CastingBarFrame_SetUnit(CastingBarFrame, nil)
+				CastingBarFrame_SetUnit(PetCastingBarFrame, nil)
+			else
+				PlayerCastingBarFrame:SetUnit(nil)
+				PetCastingBarFrame:SetUnit(nil)
+				PetCastingBarFrame:UnregisterEvent('UNIT_PET')
+			end
 		end
 
 		if(element:IsObjectType('StatusBar') and not element:GetStatusBarTexture()) then
@@ -449,10 +553,13 @@ local function Disable(self)
 
 		self:UnregisterEvent('UNIT_SPELLCAST_START', CastStart)
 		self:UnregisterEvent('UNIT_SPELLCAST_CHANNEL_START', CastStart)
-		self:UnregisterEvent('UNIT_SPELLCAST_DELAYED', CastUpdate)
-		self:UnregisterEvent('UNIT_SPELLCAST_CHANNEL_UPDATE', CastUpdate)
+		self:UnregisterEvent('UNIT_SPELLCAST_EMPOWER_START', CastStart)
 		self:UnregisterEvent('UNIT_SPELLCAST_STOP', CastStop)
 		self:UnregisterEvent('UNIT_SPELLCAST_CHANNEL_STOP', CastStop)
+		self:UnregisterEvent('UNIT_SPELLCAST_EMPOWER_STOP', CastStop)
+		self:UnregisterEvent('UNIT_SPELLCAST_DELAYED', CastUpdate)
+		self:UnregisterEvent('UNIT_SPELLCAST_CHANNEL_UPDATE', CastUpdate)
+		self:UnregisterEvent('UNIT_SPELLCAST_EMPOWER_UPDATE', CastUpdate)
 		self:UnregisterEvent('UNIT_SPELLCAST_FAILED', CastFail)
 		self:UnregisterEvent('UNIT_SPELLCAST_INTERRUPTED', CastFail)
 		self:UnregisterEvent('UNIT_SPELLCAST_INTERRUPTIBLE', CastInterruptible)
@@ -472,8 +579,13 @@ local function Disable(self)
 		element:SetScript('OnUpdate', nil)
 
 		if(self.unit == 'player' and not (self.hasChildren or self.isChild or self.isNamePlate)) then
-			CastingBarFrame_OnLoad(CastingBarFrame, 'player', true, false)
-			PetCastingBarFrame_OnLoad(PetCastingBarFrame)
+			if(oUF:IsClassic()) then
+				CastingBarFrame_OnLoad(CastingBarFrame, 'player', true, false)
+				PetCastingBarFrame_OnLoad(PetCastingBarFrame)
+			else
+				PlayerCastingBarFrame:OnLoad()
+				PetCastingBarFrame:PetCastingBar_OnLoad()
+			end
 		end
 	end
 end

@@ -668,9 +668,9 @@ local function Shared(self, unit)
 			self.Debuffs.initialAnchor = "TOPLEFT"
 			self.Debuffs["growth-x"] = "RIGHT"
 		end
-		self.Debuffs.PostCreateIcon = T.PostCreateIcon
-		self.Debuffs.PostUpdateIcon = T.PostUpdateIcon
-		self.Debuffs.CustomFilter = T.CustomFilter
+		self.Debuffs.PostCreateButton = T.PostCreateButton
+		self.Debuffs.PostUpdateButton = T.PostUpdateButton
+		self.Debuffs.FilterAura = T.CustomFilter
 
 		if unit == "pet" then
 			self:RegisterEvent("UNIT_PET", T.UpdateAllElements)
@@ -758,8 +758,8 @@ local function Shared(self, unit)
 				self.Debuffs:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 2, 5)
 			end
 
-			self.Debuffs.PostCreateIcon = T.PostCreateIcon
-			self.Debuffs.PostUpdateIcon = T.PostUpdateIcon
+			self.Debuffs.PostCreateButton = T.PostCreateButton
+			self.Debuffs.PostUpdateButton = T.PostUpdateButton
 		end
 
 		if unit == "target" then
@@ -775,9 +775,9 @@ local function Shared(self, unit)
 			self.Auras.spacing = T.Scale(3)
 			self.Auras.size = T.Scale(C.aura.debuff_size)
 			self.Auras.gap = true
-			self.Auras.PostCreateIcon = T.PostCreateIcon
-			self.Auras.PostUpdateIcon = T.PostUpdateIcon
-			self.Auras.CustomFilter = T.CustomFilter
+			self.Auras.PostCreateButton = T.PostCreateButton
+			self.Auras.PostUpdateButton = T.PostUpdateButton
+			self.Auras.FilterAura = T.CustomFilter
 
 			-- Rogue/Druid Combo bar
 			if C.unitframe_class_bar.combo == true and (C.unitframe_class_bar.combo_old == true or (T.class ~= "DRUID" and T.class ~= "ROGUE")) then
@@ -1128,9 +1128,9 @@ local function Shared(self, unit)
 			self.Auras.spacing = T.Scale(3)
 			self.Auras.size = T.Scale(31 + T.extraHeight)
 			self.Auras.gap = true
-			self.Auras.PostCreateIcon = T.PostCreateIcon
-			self.Auras.PostUpdateIcon = T.PostUpdateIcon
-			self.Auras.CustomFilter = T.CustomFilterBoss
+			self.Auras.PostCreateButton = T.PostCreateButton
+			self.Auras.PostUpdateButton = T.PostUpdateButton
+			self.Auras.FilterAura = T.CustomFilterBoss
 		end
 
 		self:HookScript("OnShow", T.UpdateAllElements)

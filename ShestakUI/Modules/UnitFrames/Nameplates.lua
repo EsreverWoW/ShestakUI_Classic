@@ -293,33 +293,61 @@ local function SetColorBorder(frame, r, g, b)
 end
 
 -- Auras functions
-local AurasCustomFilter = function(element, unit, data)
-	local allow = false
+-- TODO: Revisit this when we eventually consolidate oUF's Auras element between Classic and Mainline
+local AurasCustomFilter
+if T.Classic then
+	AurasCustomFilter = function(_, unit, button, name, _, _, _, _, _, _, isStealable, nameplateShowSelf, _, _, _, _, nameplateShowAll)
+		local allow = false
 
-	if not UnitIsFriend("player", unit) then
-		if element.isDebuff then
-			if element.isPlayer or element.caster == "pet" then
-				if ((data.nameplateShowAll or data.nameplateShowSelf) and not T.DebuffBlackList[data.name]) then
-					allow = true
-				elseif T.DebuffWhiteList[data.name] then
-					allow = true
+		if not UnitIsFriend("player", unit) then
+			if button.isHarmful then
+				if button.isPlayer or button.caster == "pet" then
+					if ((nameplateShowAll or nameplateShowSelf) and not T.DebuffBlackList[name]) then
+						allow = true
+					elseif T.DebuffWhiteList[name] then
+						allow = true
+					end
+					if C.nameplate.track_buffs then
+						SetColorBorder(button, unpack(C.media.border_color))
+					end
 				end
-				if C.nameplate.track_buffs then
-					SetColorBorder(element, unpack(C.media.border_color))
+			else
+				if T.BuffWhiteList[name] then
+					allow = true
+					SetColorBorder(button, 0, 0.5, 0)
+				elseif isStealable then
+					allow = true
+					SetColorBorder(button, 1, 0.85, 0)
 				end
-			end
-		else
-			if T.BuffWhiteList[data.name] then
-				allow = true
-				SetColorBorder(element, 0, 0.5, 0)
-			elseif data.isStealable then
-				allow = true
-				SetColorBorder(element, 1, 0.85, 0)
 			end
 		end
-	end
 
-	return allow
+		return allow
+	end
+else
+	AurasCustomFilter = function(element, unit, data)
+		local allow = false
+
+		if not UnitIsFriend("player", unit) then
+			if data.isHarmful then
+				if C.nameplate.track_debuffs and data.isPlayerAura or data.sourceUnit == "pet" then
+					if ((data.nameplateShowAll or data.nameplateShowPersonal) and not T.DebuffBlackList[data.name]) then
+						allow = true
+					elseif T.DebuffWhiteList[data.name] then
+						allow = true
+					end
+				end
+			else
+				if T.BuffWhiteList[data.name] then
+					allow = true
+				elseif data.isStealable then
+					allow = true
+				end
+			end
+		end
+
+		return allow
+	end
 end
 
 local Mult = 1
@@ -329,7 +357,7 @@ end
 
 local auraFontHeight = (T.Classic and T.HiDPI) and (C.font.auras_font_size * T.noscalemult * (2/3) / Mult) or (C.font.auras_font_size * T.noscalemult / Mult)
 
-local AurasPostCreateIcon = function(element, button)
+local AurasPostCreateButton = function(element, button)
 	CreateBorderFrame(button)
 
 	button.remaining = T.SetFontString(button, C.font.auras_font, auraFontHeight, C.font.auras_font_style)
@@ -337,39 +365,69 @@ local AurasPostCreateIcon = function(element, button)
 	button.remaining:SetPoint("CENTER", button, "CENTER", T.Classic and 0 or 1, 0)
 	button.remaining:SetJustifyH("CENTER")
 
-	button.cd.noCooldownCount = true
+	button.Cooldown.noCooldownCount = true
 
-	button.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+	button.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 
-	button.count:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", T.Classic and 2 or 1, T.Classic and -6 or 0)
-	button.count:SetJustifyH("RIGHT")
-	button.count:SetFont(C.font.auras_font, auraFontHeight, C.font.auras_font_style)
-	button.count:SetShadowOffset(C.font.auras_font_shadow and 1 or 0, C.font.auras_font_shadow and -1 or 0)
+	button.Count:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", T.Classic and 2 or 1, T.Classic and -6 or 0)
+	button.Count:SetJustifyH("RIGHT")
+	button.Count:SetFont(C.font.auras_font, auraFontHeight, C.font.auras_font_style)
+	button.Count:SetShadowOffset(C.font.auras_font_shadow and 1 or 0, C.font.auras_font_shadow and -1 or 0)
 
 	if C.aura.show_spiral == true then
 		element.disableCooldown = false
-		button.cd:SetReverse(true)
+		button.Cooldown:SetReverse(true)
 		button.parent = CreateFrame("Frame", nil, button)
-		button.parent:SetFrameLevel(button.cd:GetFrameLevel() + 1)
-		button.count:SetParent(button.parent)
+		button.parent:SetFrameLevel(button.Cooldown:GetFrameLevel() + 1)
+		button.Count:SetParent(button.parent)
 		button.remaining:SetParent(button.parent)
 	else
 		element.disableCooldown = true
 	end
 end
 
-local AurasPostUpdateIcon = function(_, _, icon, _, _, duration, expiration)
-	if T.Classic then
+-- TODO: Revisit this when we eventually consolidate oUF's Auras element between Classic and Mainline
+local AurasPostUpdateButton
+if T.Classic then
+	AurasPostUpdateButton = function(_, unit, button, _, _, duration, expiration)
 		if duration and duration > 0 and C.aura.show_timer == true then
-			icon.remaining:Show()
-			icon.timeLeft = expiration
-			icon:SetScript("OnUpdate", T.CreateAuraTimer)
+			button.remaining:Show()
+			button.timeLeft = expiration
+			button:SetScript("OnUpdate", T.CreateAuraTimer)
 		else
-			icon.remaining:Hide()
-			icon.timeLeft = math.huge
-			icon:SetScript("OnUpdate", nil)
+			button.remaining:Hide()
+			button.timeLeft = math.huge
+			button:SetScript("OnUpdate", nil)
 		end
-		icon.first = true
+		button.first = true
+	end
+else
+	AurasPostUpdateButton = function(_, button, unit, data)
+		if not UnitIsFriend("player", unit) then
+			if data.isHarmful then
+				if C.nameplate.track_debuffs and data.isPlayerAura or data.sourceUnit == "pet" then
+					if C.nameplate.track_buffs then
+						SetColorBorder(button, unpack(C.media.border_color))
+					end
+				end
+			else
+				if T.BuffWhiteList[data.name] then
+					SetColorBorder(button, 0, 0.5, 0)
+				elseif data.isStealable then
+					SetColorBorder(button, 1, 0.85, 0)
+				end
+			end
+		end
+
+		if data.duration and data.duration > 0 and C.aura.show_timer == true then
+			button.remaining:Show()
+			button.timeLeft = data.expirationTime
+			button:SetScript("OnUpdate", T.CreateAuraTimer)
+		else
+			button.remaining:Hide()
+			button.timeLeft = math.huge
+			button:SetScript("OnUpdate", nil)
+		end
 	end
 end
 
@@ -980,8 +1038,8 @@ local function style(self, unit)
 		self.Auras.disableMouse = true
 
 		self.Auras.FilterAura = AurasCustomFilter
-		self.Auras.PostCreateIcon = AurasPostCreateIcon
-		self.Auras.PostUpdateIcon = AurasPostUpdateIcon
+		self.Auras.PostCreateButton = AurasPostCreateButton
+		self.Auras.PostUpdateButton = AurasPostUpdateButton
 	end
 
 	-- Health color
