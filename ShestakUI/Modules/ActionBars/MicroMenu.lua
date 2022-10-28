@@ -11,6 +11,21 @@ frame:SetSize(T.Classic and 208 or 284, 30)
 UpdateMicroButtonsParent(frame)
 if C.actionbar.micromenu_mouseover == true then frame:SetAlpha(0) end
 
+local MICRO_BUTTONS = T.Classic and MICRO_BUTTONS or {
+	"CharacterMicroButton",
+	"SpellbookMicroButton",
+	"TalentMicroButton",
+	"AchievementMicroButton",
+	"QuestLogMicroButton",
+	"GuildMicroButton",
+	"LFDMicroButton",
+	"EJMicroButton",
+	"CollectionsMicroButton",
+	"MainMenuMicroButton",
+	"HelpMicroButton",
+	"StoreMicroButton",
+}
+
 for _, button in pairs(MICRO_BUTTONS) do
 	local bu = _G[button]
 	local normal = bu:GetNormalTexture()
@@ -19,22 +34,34 @@ for _, button in pairs(MICRO_BUTTONS) do
 
 	bu:SetParent(frame)
 	bu.SetParent = T.dummy
-	_G[button.."Flash"]:SetTexture("")
+	if T.Classic then
+		_G[button.."Flash"]:SetTexture("")
+	else
+		if button.Flash then
+			button.Flash:SetInside()
+			button.Flash:SetTexture()
+		end
+	end
 	bu:SetHighlightTexture(T.Classic and "" or C.media.empty)
 	bu.SetHighlightTexture = T.dummy
 
 	local f = CreateFrame("Frame", nil, bu)
 	f:SetFrameLevel(1)
 	f:SetFrameStrata("BACKGROUND")
-	f:SetPoint("BOTTOMLEFT", bu, "BOTTOMLEFT", 2, 0)
-	f:SetPoint("TOPRIGHT", bu, "TOPRIGHT", -2, T.Classic and -28 or -6)
+	if T.Classic then
+		f:SetPoint("BOTTOMLEFT", bu, "BOTTOMLEFT", 2, 0)
+		f:SetPoint("TOPRIGHT", bu, "TOPRIGHT", -2, -28)
+	else
+		f:SetPoint("BOTTOMLEFT", bu, "BOTTOMLEFT", 1, 0)
+		f:SetPoint("TOPRIGHT", bu, "TOPRIGHT", -1, -2)
+	end
 	f:SetTemplate("Default")
 	bu.frame = f
 
 	if T.Classic then
 		normal:SetTexCoord(0.17, 0.87, 0.5, 0.908)
 	else
-		normal:SetTexCoord(0.22, 0.81, 0.26, 0.82)
+		normal:SetTexCoord(0.1, 0.85, 0.12, 0.78)
 	end
 	normal:ClearAllPoints()
 	normal:SetPoint("TOPLEFT", f, "TOPLEFT", 2, -2)
@@ -43,7 +70,7 @@ for _, button in pairs(MICRO_BUTTONS) do
 	if T.Classic then
 		pushed:SetTexCoord(0.17, 0.87, 0.5, 0.908)
 	else
-		pushed:SetTexCoord(0.22, 0.81, 0.26, 0.82)
+		pushed:SetTexCoord(0.1, 0.85, 0.12, 0.78)
 	end
 	pushed:ClearAllPoints()
 	pushed:SetPoint("TOPLEFT", f, "TOPLEFT", 2, -2)
@@ -53,7 +80,7 @@ for _, button in pairs(MICRO_BUTTONS) do
 		if T.Classic then
 			disabled:SetTexCoord(0.17, 0.87, 0.5, 0.908)
 		else
-			disabled:SetTexCoord(0.22, 0.81, 0.26, 0.82)
+			disabled:SetTexCoord(0.1, 0.85, 0.12, 0.78)
 		end
 		disabled:ClearAllPoints()
 		disabled:SetPoint("TOPLEFT", f, "TOPLEFT", 2, -2)
@@ -76,17 +103,23 @@ end
 
 -- Fix textures for buttons
 hooksecurefunc("UpdateMicroButtons", function()
-	MicroButtonPortrait:ClearAllPoints()
-	MicroButtonPortrait:SetPoint("TOPLEFT", CharacterMicroButton.frame, "TOPLEFT", 2, -2)
-	MicroButtonPortrait:SetPoint("BOTTOMRIGHT", CharacterMicroButton.frame, "BOTTOMRIGHT", -2, 2)
+	if T.Classic then
+		MicroButtonPortrait:ClearAllPoints()
+		MicroButtonPortrait:SetPoint("TOPLEFT", CharacterMicroButton.frame, "TOPLEFT", 2, -2)
+		MicroButtonPortrait:SetPoint("BOTTOMRIGHT", CharacterMicroButton.frame, "BOTTOMRIGHT", -2, 2)
+	end
 
 	CharacterMicroButton:ClearAllPoints()
 	CharacterMicroButton:SetPoint("BOTTOMLEFT", frame, "BOTTOMLEFT", -2, 0)
 
 	if T.Mainline then
-		GuildMicroButtonTabard:ClearAllPoints()
-		GuildMicroButtonTabard:SetPoint("TOP", GuildMicroButton.frame, "TOP", 0, 25)
+		-- GuildMicroButtonTabard:ClearAllPoints()
+		-- GuildMicroButtonTabard:SetPoint("TOP", GuildMicroButton.frame, "TOP", 0, 25)
 	end
 
-	MainMenuBarPerformanceBar:SetPoint("BOTTOM", MainMenuMicroButton, "BOTTOM", 0, 0)
+	if T.Classic then
+		MainMenuBarPerformanceBar:SetPoint("BOTTOM", MainMenuMicroButton, "BOTTOM", 0, 0)
+	else
+		MainMenuMicroButton.MainMenuBarPerformanceBar:SetPoint("BOTTOM", MainMenuMicroButton, "BOTTOM", 0, 0)
+	end
 end)
