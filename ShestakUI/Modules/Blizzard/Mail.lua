@@ -27,7 +27,15 @@ end
 
 function openMail(index)
 	if not InboxFrame:IsVisible() then return stopOpening(L_MAIL_NEED) end
-	if index == 0 then MiniMapMailFrame:Hide() return stopOpening(L_MAIL_COMPLETE) end
+	if index == 0 then
+		if T.Classic then
+			MiniMapMailFrame:Hide()
+		else
+			MinimapCluster.MailFrame:Hide()
+		end
+		return stopOpening(L_MAIL_COMPLETE)
+	end
+
 	local _, _, _, _, money, COD, _, numItems = GetInboxHeaderInfo(index)
 	if money > 0 then
 		TakeInboxMoney(index)
@@ -45,7 +53,11 @@ function openMail(index)
 		button:SetScript("OnUpdate", waitForMail)
 	else
 		stopOpening(L_MAIL_COMPLETE)
-		MiniMapMailFrame:Hide()
+		if T.Classic then
+			MiniMapMailFrame:Hide()
+		else
+			MinimapCluster.MailFrame:Hide()
+		end
 	end
 end
 
