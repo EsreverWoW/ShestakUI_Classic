@@ -69,7 +69,9 @@ bar:SetScript("OnEvent", function(self, event)
 	or event == "UNIT_FLAGS" or event == "UNIT_PET" or event == "UNIT_AURA" then
 		T.PetBarUpdate()
 	elseif event == "PET_BAR_UPDATE_COOLDOWN" then
-		PetActionBar_UpdateCooldowns()
+		if T.Classic then
+			PetActionBar_UpdateCooldowns()
+		end
 	end
 end)
 

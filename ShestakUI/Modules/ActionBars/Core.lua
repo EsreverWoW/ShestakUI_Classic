@@ -39,7 +39,7 @@ frame:SetScript("OnEvent", function()
 	MainMenuBar:SetAttribute("ignoreFramePositionManager", true)
 
 	local elements = {
-		MainMenuBar, MainMenuBarArtFrame, OverrideActionBar, PossessBarFrame, PetActionBarFrame, StanceBarFrame,
+		MainMenuBar, MainMenuBarArtFrame, OverrideActionBar, PossessBarFrame, PetActionBarFrame, PetActionBar, StanceBarFrame, StanceBar,
 		MultiBarBottomLeft.QuickKeybindGlow, MultiBarLeft.QuickKeybindGlow, MultiBarBottomRight.QuickKeybindGlow, MultiBarRight.QuickKeybindGlow,
 		StatusTrackingBarManager
 	}
@@ -534,12 +534,20 @@ T.PetBarUpdate = function()
 		if isActive and name ~= "PET_ACTION_FOLLOW" then
 			petActionButton:SetChecked(true)
 			if IsPetAttackAction(i) then
-				PetActionButton_StartFlash(petActionButton)
+				if T.Classic then
+					PetActionButton_StartFlash(petActionButton)
+				else
+					petActionButton:StartFlash()
+				end
 			end
 		else
 			petActionButton:SetChecked(false)
 			if IsPetAttackAction(i) then
-				PetActionButton_StopFlash(petActionButton)
+				if T.Classic then
+					PetActionButton_StopFlash(petActionButton)
+				else
+					petActionButton:StopFlash()
+				end
 			end
 		end
 
@@ -577,7 +585,11 @@ T.PetBarUpdate = function()
 		end
 
 		if not PetHasActionBar() and texture and name ~= "PET_ACTION_FOLLOW" then
-			PetActionButton_StopFlash(petActionButton)
+			if T.Classic then
+				PetActionButton_StopFlash(petActionButton)
+			else
+				petActionButton:StopFlash()
+			end
 			SetDesaturation(petActionIcon, 1)
 			petActionButton:SetChecked(false)
 		end
