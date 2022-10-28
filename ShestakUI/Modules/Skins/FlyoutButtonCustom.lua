@@ -27,7 +27,7 @@ frame:SetScript("OnEvent", function()
 		local normal = _G[name.."NormalTexture"]
 
 		button:StyleButton()
-		button:SetNormalTexture("")
+		button:SetNormalTexture(T.Classic and "" or C.media.empty)
 
 		if border then
 			border:Hide()

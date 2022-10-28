@@ -20,7 +20,7 @@ for _, button in pairs(MICRO_BUTTONS) do
 	bu:SetParent(frame)
 	bu.SetParent = T.dummy
 	_G[button.."Flash"]:SetTexture("")
-	bu:SetHighlightTexture("")
+	bu:SetHighlightTexture(T.Classic and "" or C.media.empty)
 	bu.SetHighlightTexture = T.dummy
 
 	local f = CreateFrame("Frame", nil, bu)

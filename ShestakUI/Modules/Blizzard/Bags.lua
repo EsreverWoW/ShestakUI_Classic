@@ -468,7 +468,7 @@ function Stuffing:CreateReagentContainer()
 
 		button:StyleButton()
 		button:SetTemplate("Default")
-		button:SetNormalTexture("")
+		button:SetNormalTexture(T.Classic and "" or C.media.empty)
 		button.IconBorder:SetAlpha(0)
 
 		button:ClearAllPoints()
@@ -581,7 +581,7 @@ function Stuffing:BagFrameSlotNew(p, slot)
 
 	ret.frame:StyleButton()
 	ret.frame:SetTemplate("Default")
-	ret.frame:SetNormalTexture((C.media.empty))
+	ret.frame:SetNormalTexture((T.Classic and "" or C.media.empty))
 	if T.Classic then
 		ret.frame:SetCheckedTexture(nil)
 	end
@@ -600,7 +600,8 @@ function Stuffing:SlotNew(bag, slot)
 		end
 	end
 
-	local tpl = "ContainerFrameItemButtonTemplate"
+	-- local tpl = "ContainerFrameItemButtonTemplate"
+	local tpl = T.Classic and "ContainerFrameItemButtonTemplate" or "BankItemButtonGenericTemplate"
 
 	if bag == -1 then
 		tpl = "BankItemButtonGenericTemplate"
@@ -635,7 +636,7 @@ function Stuffing:SlotNew(bag, slot)
 		ret.frame = CreateFrame(T.Classic and "Button" or "ItemButton", "StuffingBag"..bag.."_"..slot, self.bags[bag], tpl)
 		ret.frame:StyleButton()
 		ret.frame:SetTemplate("Default")
-		ret.frame:SetNormalTexture(C.media.empty)
+		ret.frame:SetNormalTexture(T.Classic and "" or C.media.empty)
 
 		ret.icon = _G[ret.frame:GetName().."IconTexture"]
 		ret.icon:CropIcon()

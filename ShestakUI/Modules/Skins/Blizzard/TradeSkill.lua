@@ -148,7 +148,7 @@ local function LoadSkin()
 				T.SkinExpandOrCollapse(tradeSkillButton)
 				tradeSkillButton._auroraSkinned = true
 			end
-			tradeSkillButton:SetHighlightTexture("")
+			tradeSkillButton:SetHighlightTexture(T.Classic and "" or C.media.empty)
 		end
 	end)
 
