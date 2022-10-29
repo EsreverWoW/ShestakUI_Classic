@@ -9,6 +9,7 @@ local MAX_BOSS_FRAMES = _G.MAX_BOSS_FRAMES or 5
 
 -- sourced from FrameXML/PartyMemberFrame.lua
 local MAX_PARTY_MEMBERS = _G.MAX_PARTY_MEMBERS or 4
+local isPartyHooked = false
 
 local hiddenParent = CreateFrame('Frame', nil, UIParent)
 hiddenParent:SetAllPoints()
@@ -34,12 +35,12 @@ local function handleFrame(baseName, doNotReparent)
 			frame:SetParent(hiddenParent)
 		end
 
-		local health = frame.healthBar or frame.healthbar
+		local health = frame.healthBar or frame.healthbar or frame.HealthBar
 		if(health) then
 			health:UnregisterAllEvents()
 		end
 
-		local power = frame.manabar
+		local power = frame.manabar or frame.ManaBar
 		if(power) then
 			power:UnregisterAllEvents()
 		end
@@ -49,7 +50,7 @@ local function handleFrame(baseName, doNotReparent)
 			spell:UnregisterAllEvents()
 		end
 
-		local altpowerbar = frame.powerBarAlt
+		local altpowerbar = frame.powerBarAlt or frame.PowerBarAlt
 		if(altpowerbar) then
 			altpowerbar:UnregisterAllEvents()
 		end
@@ -57,6 +58,16 @@ local function handleFrame(baseName, doNotReparent)
 		local buffFrame = frame.BuffFrame
 		if(buffFrame) then
 			buffFrame:UnregisterAllEvents()
+		end
+
+		local petFrame = frame.PetFrame
+		if(petFrame) then
+			petFrame:UnregisterAllEvents()
+		end
+
+		local totFrame = frame.totFrame
+		if(totFrame) then
+			totFrame:UnregisterAllEvents()
 		end
 	end
 end
@@ -83,11 +94,15 @@ function oUF:DisableBlizzard(unit)
 		handleFrame(PetFrame)
 	elseif(unit == 'target') then
 		handleFrame(TargetFrame)
-		handleFrame(ComboFrame)
+		if(oUF:IsClassic()) then
+			handleFrame(ComboFrame)
+		end
 	elseif(unit == 'focus') then
 		handleFrame(FocusFrame)
-		handleFrame(TargetofFocusFrame)
-	elseif(unit == 'targettarget') then
+		if (oUF:IsClassic()) then
+			handleFrame(TargetofFocusFrame)
+		end
+	elseif(oUF:IsClassic() and unit == 'targettarget') then
 		handleFrame(TargetFrameToT)
 	elseif(unit:match('boss%d?$')) then
 		local id = unit:match('boss(%d)')
@@ -99,12 +114,24 @@ function oUF:DisableBlizzard(unit)
 			end
 		end
 	elseif(unit:match('party%d?$')) then
-		local id = unit:match('party(%d)')
-		if(id) then
-			handleFrame('PartyMemberFrame' .. id)
+		if(oUF:IsClassic()) then
+			local id = unit:match('party(%d)')
+			if(id) then
+				handleFrame('PartyMemberFrame' .. id)
+			else
+				for i = 1, MAX_PARTY_MEMBERS do
+					handleFrame(string.format('PartyMemberFrame%d', i))
+				end
+			end
 		else
-			for i = 1, MAX_PARTY_MEMBERS do
-				handleFrame(string.format('PartyMemberFrame%d', i))
+			if(not isPartyHooked) then
+				isPartyHooked = true
+
+				PartyFrame:UnregisterAllEvents()
+
+				for frame in PartyFrame.PartyMemberFramePool:EnumerateActive() do
+					handleFrame(frame)
+				end
 			end
 		end
 	elseif(unit:match('arena%d?$')) then
