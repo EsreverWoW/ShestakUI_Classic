@@ -513,7 +513,7 @@ end
 ----------------------------------------------------------------------------------------
 C["loot"] = {
 	["lootframe"] = true,						-- Enable loot frame
-	["rolllootframe"] = false,					-- Enable group roll frame (Blizzard doesn't use roll system anymore)
+	["rolllootframe"] = true,					-- Enable group roll frame (Blizzard doesn't use roll system anymore)
 	["icon_size"] = 22,							-- Icon size
 	["width"] = 221,							-- Loot window width
 	["auto_greed"] = false,						-- Push "greed" or "disenchant" button when green item roll at max level (Blizzard doesn't use roll system anymore)
@@ -522,7 +522,6 @@ C["loot"] = {
 }
 
 if T.Classic then
-	C["loot"]["rolllootframe"] = true
 	C["loot"]["auto_confirm_de"] = false
 end
 

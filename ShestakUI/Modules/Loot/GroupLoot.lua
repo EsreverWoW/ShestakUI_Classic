@@ -287,7 +287,7 @@ local function START_LOOT_ROLL(rollID, time)
 	if T.Classic then
 		f:SetPoint("CENTER", UIParent, "CENTER")
 	else
-		f:SetPoint("CENTER", WorldFrame, "CENTER")
+		--BETA f:SetPoint("CENTER", WorldFrame, "CENTER")
 	end
 	f:Show()
 end
