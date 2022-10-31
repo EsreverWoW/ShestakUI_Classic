@@ -1,6 +1,8 @@
 local T, C, L, _ = unpack(select(2, ...))
 if C.bag.enable == true then return end
 
+if not oGlow:IsClassic() then return end
+
 local hook
 local _E
 
