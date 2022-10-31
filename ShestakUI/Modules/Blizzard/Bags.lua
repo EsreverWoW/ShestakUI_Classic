@@ -477,11 +477,10 @@ function Stuffing:CreateReagentContainer()
 
 		local _, _, _, quality = GetContainerItemInfo(-3, i)
 		local clink = GetContainerItemLink(-3, i)
-		if T.Classic then
-			if clink then
-				if quality and quality > 1 then
-					button:SetBackdropBorderColor(GetItemQualityColor(quality))
-				end
+		if clink then
+			if quality and quality > 1 then
+				local r, g, b = GetItemQualityColor(quality)
+				button:SetBackdropBorderColor(r, g, b)
 			end
 		end
 
@@ -1045,7 +1044,7 @@ function Stuffing:InitBags()
 	editbox:SetScript("OnEscapePressed", fullReset)
 	editbox:SetScript("OnEnterPressed", function(self) self:ClearFocus() end)
 	editbox:SetScript("OnEditFocusLost", hideSearch)
-	editbox:SetScript("OnEditFocusGained", editbox.HighlightText)
+	editbox:SetScript("OnEditFocusGained", function(self) self:HighlightText() end)
 	editbox:SetScript("OnTextChanged", updateSearch)
 	editbox:SetText(SEARCH)
 
@@ -1401,7 +1400,8 @@ function Stuffing:PLAYERREAGENTBANKSLOTS_CHANGED(id)
 	if clink then
 		local _, _, _, quality = GetContainerItemInfo(-3, id)
 		if quality and quality > 1 then
-			button:SetBackdropBorderColor(GetItemQualityColor(quality))
+			local r, g, b = GetItemQualityColor(quality)
+			button:SetBackdropBorderColor(r, g, b)
 		end
 	end
 end
