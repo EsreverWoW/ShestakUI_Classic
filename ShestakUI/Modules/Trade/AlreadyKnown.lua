@@ -97,7 +97,9 @@ local function LootFrame_UpdateButton(index)
 		end
 	end
 end
-hooksecurefunc("LootFrame_UpdateButton", LootFrame_UpdateButton)
+if T.Classic then
+	hooksecurefunc("LootFrame_UpdateButton", LootFrame_UpdateButton)
+end
 
 -- Merchant frame
 local function MerchantFrame_UpdateMerchantInfo()
@@ -293,7 +295,9 @@ end
 local isBlizzard_AuctionHouseUILoaded
 if IsAddOnLoaded("Blizzard_AuctionUI") then
 	isBlizzard_AuctionHouseUILoaded = true
-	hooksecurefunc(AuctionHouseFrame.BrowseResultsFrame.ItemList, "RefreshScrollFrame", AuctionHouseFrame_RefreshScrollFrame)
+	if T.Classic then
+		hooksecurefunc(AuctionHouseFrame.BrowseResultsFrame.ItemList, "RefreshScrollFrame", AuctionHouseFrame_RefreshScrollFrame)
+	end
 end
 
 local function AuctionFrameBrowse_Update()

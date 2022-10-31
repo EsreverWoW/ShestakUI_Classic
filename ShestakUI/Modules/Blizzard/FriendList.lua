@@ -155,7 +155,7 @@ end
 
 hooksecurefunc("WhoList_Update", whoFrame)
 if T.Mainline then
-	hooksecurefunc(WhoListScrollFrame, "update", whoFrame)
+	--BETA hooksecurefunc(WhoListScrollFrame, "update", whoFrame)
 end
 
 -- LFRBrowseList
@@ -450,7 +450,8 @@ local function friendsFrame()
 end
 if T.Classic then
 	hooksecurefunc(FriendsFrameFriendsScrollFrame, "update", friendsFrame)
+	hooksecurefunc("FriendsFrame_UpdateFriends", friendsFrame)
 else
-	hooksecurefunc(FriendsListFrameScrollFrame, "update", friendsFrame)
+	--BETA hooksecurefunc(FriendsListFrameScrollFrame, "update", friendsFrame)
+	-- hooksecurefunc("FriendsFrame_UpdateFriends", friendsFrame)
 end
-hooksecurefunc("FriendsFrame_UpdateFriends", friendsFrame)
