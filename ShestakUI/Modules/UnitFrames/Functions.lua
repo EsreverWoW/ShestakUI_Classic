@@ -789,7 +789,7 @@ if T.Classic then
 	end
 else
 	T.PostUpdateButton = function(_, button, unit, data)
-		if button.isHarmful then
+		if data.isHarmful then
 			if not UnitIsFriend("player", unit) and not playerUnits[data.sourceUnit] then
 				if not C.aura.player_aura_only then
 					button:SetBackdropBorderColor(unpack(C.media.border_color))
