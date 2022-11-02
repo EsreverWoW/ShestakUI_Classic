@@ -71,6 +71,8 @@ bar:SetScript("OnEvent", function(self, event)
 	elseif event == "PET_BAR_UPDATE_COOLDOWN" then
 		if T.Classic then
 			PetActionBar_UpdateCooldowns()
+		else
+			PetActionBar:UpdateCooldowns()
 		end
 	end
 end)

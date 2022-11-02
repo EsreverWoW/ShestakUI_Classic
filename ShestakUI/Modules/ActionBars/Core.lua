@@ -538,6 +538,7 @@ T.PetBarUpdate = function()
 					PetActionButton_StartFlash(petActionButton)
 				else
 					petActionButton:StartFlash()
+					petActionButton:GetCheckedTexture():SetAlpha(0.5)
 				end
 			end
 		else
@@ -547,6 +548,7 @@ T.PetBarUpdate = function()
 					PetActionButton_StopFlash(petActionButton)
 				else
 					petActionButton:StopFlash()
+					petActionButton:GetCheckedTexture():SetAlpha(1.0)
 				end
 			end
 		end
