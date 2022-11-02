@@ -457,7 +457,7 @@ local function Shared(self, unit)
 			self.ComboPoints:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, 7)
 			self.ComboPoints:SetSize(player_width, 7)
 
-			local maxComboPoints = T.Classic and 5 or 6
+			local maxComboPoints = T.Classic and 5 or 7
 			for i = 1, maxComboPoints do
 				self.ComboPoints[i] = CreateFrame("StatusBar", self:GetName().."_Combo"..i, self.ComboPoints)
 				self.ComboPoints[i]:SetSize((player_width - 5) / maxComboPoints, 7)
@@ -786,7 +786,7 @@ local function Shared(self, unit)
 				self.ComboPoints:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, 7)
 				self.ComboPoints:SetSize(player_width, 7)
 
-				local maxComboPoints = T.Classic and 5 or 6
+				local maxComboPoints = T.Classic and 5 or 7
 				for i = 1, maxComboPoints do
 					self.ComboPoints[i] = CreateFrame("StatusBar", self:GetName().."_Combo"..i, self.ComboPoints)
 					self.ComboPoints[i]:SetSize((player_width - 5) / maxComboPoints, 7)
