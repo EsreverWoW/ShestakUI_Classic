@@ -1373,12 +1373,17 @@ if experience.enabled then
 				playedtotal, playedlevel = ...
 				playedmsg = GetTime()
 			elseif (event == "UPDATE_FACTION" or event == "PLAYER_LOGIN") and conf.ExpMode == "rep" then
-				local standing, factionID
+				local standing, factionID, standingText
 				repname, standing, minrep, maxrep, currep, factionID = GetWatchedFactionInfo()
-				local friendID, _, _, _, _, _, standingText, _, nextThreshold = T.Mainline and C_GossipInfo.GetFriendshipReputation(factionID)
 				if T.Mainline then
-					if friendID then
-						if not nextThreshold then
+					local reputationInfo = C_GossipInfo.GetFriendshipReputation(factionID)
+					local friendshipID = reputationInfo and reputationInfo.friendshipFactionID
+					if friendshipID and friendshipID > 0 then
+						local repInfo = C_GossipInfo.GetFriendshipReputation(factionID)
+						standingText = repInfo.reaction
+						if repInfo.nextThreshold then
+							minrep, maxrep, currep = repInfo.reactionThreshold, repInfo.nextThreshold, repInfo.standing
+						else
 							minrep, maxrep, currep = 0, 1, 1
 						end
 						standing = 5
@@ -1389,6 +1394,7 @@ if experience.enabled then
 							minrep = 0
 							maxrep = nextThreshold
 							standing = 8
+							standingText = PARAGON
 						end
 					end
 				end
