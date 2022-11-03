@@ -261,18 +261,10 @@ local micromenu = {
 	end},
 	{text = TALENTS_BUTTON, notCheckable = 1, func = function()
 		if not PlayerTalentFrame then
-			if T.Vanilla then
-				PlayerTalentFrame_LoadUI()
-			else
-				TalentFrame_LoadUI()
-			end
+			LoadAddOn("Blizzard_TalentUI")
 		end
 		if T.level >= 10 then
-			if T.Classic then
-				ToggleTalentFrame()
-			else
-				ShowUIPanel(PlayerTalentFrame)
-			end
+			ToggleTalentFrame()
 		else
 			if C.general.error_filter ~= "WHITELIST" then
 				UIErrorsFrame:AddMessage(format(FEATURE_BECOMES_AVAILABLE_AT_LEVEL, 10), 1, 0.1, 0.1)

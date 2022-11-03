@@ -1624,7 +1624,7 @@ if T.Mainline and talents.enabled then
 					LoadAddOn("Blizzard_TalentUI")
 				end
 				if IsShiftKeyDown() then
-					PlayerTalentFrame_Toggle()
+					ToggleTalentFrame()
 				else
 					for index = 1, 4 do
 						local id, name, _, texture = GetSpecializationInfo(index)
