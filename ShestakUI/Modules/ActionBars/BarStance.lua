@@ -11,6 +11,12 @@ if C.actionbar.stancebar_hide then
 		StanceBarFrame:SetParent(StanceBarAnchor)
 	else
 		StanceBar:SetParent(StanceBarAnchor)
+		StanceBar:UnregisterAllEvents()
+		for _, button in pairs(StanceBar.actionButtons) do
+			button:UnregisterAllEvents()
+			button:SetAttribute("statehidden", true)
+			button:Hide()
+		end
 	end
 	StanceBarAnchor:Hide()
 	return
