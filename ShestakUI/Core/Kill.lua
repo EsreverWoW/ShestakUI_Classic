@@ -14,6 +14,10 @@ frame:SetScript("OnEvent", function(_, _, addon)
 		end
 	end
 
+	if ClassPowerBar then
+		ClassPowerBar.OnEvent = T.dummy -- Fix error with druid on logon
+	end
+
 	if C.unitframe.enable and C.raidframe.layout ~= "BLIZZARD" then
 		if T.Classic then
 			InterfaceOptionsFrameCategoriesButton10:SetScale(0.00001)
