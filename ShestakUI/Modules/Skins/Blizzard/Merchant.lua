@@ -18,6 +18,7 @@ local function LoadSkin()
 		MerchantExtraCurrencyBg:StripTextures()
 		MerchantExtraCurrencyInset:StripTextures()
 	end
+	MerchantFramePortrait:SetAlpha(0)
 
 	-- Skin tabs
 	for i = 1, 2 do
@@ -121,10 +122,10 @@ local function LoadSkin()
 	hooksecurefunc("MerchantFrame_UpdateCurrencies", function()
 		for i = 1, MAX_MERCHANT_CURRENCIES do
 			local b = _G["MerchantToken"..i]
-			local t = _G["MerchantToken"..i.."Icon"]
-			local c = _G["MerchantToken"..i.."Count"]
 
 			if b and not b.reskinned then
+				local t = _G["MerchantToken"..i].Icon or _G["MerchantToken"..i.."Icon"]
+				local c = _G["MerchantToken"..i].Count or _G["MerchantToken"..i.."Count"]
 				t:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 				c:SetPoint("RIGHT", t, "LEFT", -3, 0)
 
