@@ -5,7 +5,7 @@ if C.bag.enable ~= true then return end
 --	Based on Stuffing(by Hungtar, editor Tukz)
 ----------------------------------------------------------------------------------------
 local BAGS_BACKPACK = {0, 1, 2, 3, 4}
-local BAGS_BANK = T.Vanilla and {-1, 5, 6, 7, 8, 9, 10} or {-1, 5, 6, 7, 8, 9, 10, 11}
+local BAGS_BANK = T.Vanilla and {-1, 5, 6, 7, 8, 9, 10} or {-1, 5, 6, 7, 8, 9, 10, 11, 12}
 local ST_NORMAL = 1
 local ST_FISHBAG = 2
 local ST_SPECIAL = 3
@@ -564,7 +564,7 @@ function Stuffing:BagFrameSlotNew(p, slot)
 			SetItemButtonTextureVertexColor(ret.frame, 1.0, 1.0, 1.0)
 		end
 	else
-		ret.frame = CreateFrame(T.Classic and "CheckButton" or "ItemButton", "StuffingFBag"..slot.."Slot", p, T.Classic and "BagSlotButtonTemplate" or "")
+		ret.frame = CreateFrame(T.Classic and "CheckButton" or "ItemButton", "StuffingFBag"..slot.."Slot", p, T.Classic and "BagSlotButtonTemplate" or "BaseBagSlotButtonTemplate")
 		if BackdropTemplateMixin then
 			Mixin(ret.frame, BackdropTemplateMixin)
 		end
@@ -578,6 +578,23 @@ function Stuffing:BagFrameSlotNew(p, slot)
 		hooksecurefunc(ret.frame.IconBorder, "Hide", function(self)
 			self:GetParent():SetBackdropBorderColor(unpack(C.media.border_color))
 		end)
+
+		-- BETA for case if BaseBagSlotButtonTemplate will be bugged
+		-- local bag_tex = GetInventoryItemTexture("player", ContainerIDToInventoryID(slot + 1))
+		-- _G[ret.frame:GetName().."IconTexture"]:SetTexture(bag_tex)
+
+		ret.frame.commandName = ""
+
+		local normal2 = ret.frame:GetNormalTexture()
+		if normal2 then
+			normal2:SetTexture()
+			normal2:Hide()
+			normal2:SetAlpha(0)
+		end
+
+		if T.Mainline then
+			ret.frame.CircleMask:Hide()
+		end
 
 		ret.slot = slot
 		table.insert(self.bagframe_buttons, ret)
@@ -1136,7 +1153,11 @@ function Stuffing:Layout(isBank)
 		local bsize = C.bag.button_size
 
 		local w = 2 * 10
-		w = w + ((#bs - 1) * bsize)
+		if isBank then
+			w = w + ((#bs - 2) * bsize) -- BETA
+		else
+			w = w + ((#bs - 1) * bsize)
+		end
 		w = w + ((#bs - 2) * 4)
 
 		fb:SetHeight(2 * 10 + bsize)
@@ -1148,7 +1169,7 @@ function Stuffing:Layout(isBank)
 
 	local idx = 0
 	for _, v in ipairs(bs) do
-		if (not isBank and v <= 3 ) or (isBank and v ~= -1) then
+		if (not isBank and v <= 3 ) or (isBank and v ~= -1 and v ~= 12) then
 			local bsize = C.bag.button_size
 			local b = self:BagFrameSlotNew(fb, v)
 			local xoff = 10
@@ -1163,7 +1184,7 @@ function Stuffing:Layout(isBank)
 			local btns = self.buttons
 			b.frame:HookScript("OnEnter", function()
 				local bag
-				if isBank then bag = v else bag = v + 1 end
+				if isBank then bag = v + 1 else bag = v + 1 end
 
 				for _, val in ipairs(btns) do
 					if val.bag == bag then
