@@ -157,16 +157,10 @@ function button:PLAYER_LOGIN()
 		end
 	end
 
-	GameTooltip:HookScript("OnTooltipSetItem", function(self)
+	local function OnTooltipSetUnit(self)
 		local _, link = self:GetItem()
 
-		local auctionFrame
-
-		if T.Classic then
-			auctionFrame = AuctionFrame
-		else
-			auctionFrame = AuctionHouseFrame
-		end
+		local auctionFrame = T.Classic and AuctionFrame or AuctionHouseFrame
 
 		if link and not InCombatLockdown() and IsAltKeyDown() and not (auctionFrame and auctionFrame:IsShown()) then
 			local itemID = GetItemInfoFromHyperlink(link)
@@ -196,7 +190,13 @@ function button:PLAYER_LOGIN()
 				AutoCastShine_AutoCastStart(button, r, g, b)
 			end
 		end
-	end)
+	end
+
+	if T.Classic then
+		GameTooltip:HookScript("OnTooltipSetUnit", OnTooltipSetUnit)
+	else
+		TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Unit, OnTooltipSetUnit)
+	end
 
 	self:SetFrameStrata("TOOLTIP")
 	self:SetAttribute("*type1", "macro")

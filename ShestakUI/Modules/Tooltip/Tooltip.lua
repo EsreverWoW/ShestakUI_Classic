@@ -396,7 +396,11 @@ local OnTooltipSetUnit = function(self)
 	end
 end
 
-GameTooltip:HookScript("OnTooltipSetUnit", OnTooltipSetUnit)
+if T.Classic then
+	GameTooltip:HookScript("OnTooltipSetUnit", OnTooltipSetUnit)
+else
+	TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Unit, OnTooltipSetUnit)
+end
 
 ----------------------------------------------------------------------------------------
 --	Hide tooltips in combat for action bars, pet bar and stance bar
@@ -417,23 +421,7 @@ end
 --	Fix compare tooltips(by Blizzard)(../FrameXML/GameTooltip.lua)
 ----------------------------------------------------------------------------------------
 if T.Classic then
-	hooksecurefunc("GameTooltip_ShowCompareItem", function(self, anchorFrame)
-		if not self then
-			self = GameTooltip
-		end
-
-		if not anchorFrame then
-			anchorFrame = self.overrideComparisonAnchorFrame or self
-		end
-
-		if self.needsReset then
-			self:ResetSecondaryCompareItem()
-			GameTooltip_AdvanceSecondaryCompareItem(self)
-			self.needsReset = false
-		end
-
-		local shoppingTooltip1, shoppingTooltip2 = unpack(self.shoppingTooltips)
-		local primaryItemShown, secondaryItemShown = shoppingTooltip1:SetCompareItem(shoppingTooltip2, self)
+	hooksecurefunc("GameTooltip_AnchorComparisonTooltips", function(self, anchorFrame, shoppingTooltip1, shoppingTooltip2, primaryItemShown, secondaryItemShown)
 		local leftPos = anchorFrame:GetLeft()
 		local rightPos = anchorFrame:GetRight()
 
@@ -514,7 +502,7 @@ if T.Classic then
 		shoppingTooltip1:SetCompareItem(shoppingTooltip2, self)
 		shoppingTooltip1:Show()
 	end)
-else
+elseif not T.newPatch then
 	hooksecurefunc("GameTooltip_AnchorComparisonTooltips", function(_, anchorFrame, shoppingTooltip1, shoppingTooltip2, _, secondaryItemShown)
 		local point = shoppingTooltip1:GetPoint(2)
 		if secondaryItemShown then
