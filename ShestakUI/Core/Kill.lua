@@ -32,8 +32,10 @@ frame:SetScript("OnEvent", function(_, _, addon)
 		ShowPartyFrame = T.dummy
 		HidePartyFrame = T.dummy
 		CompactUnitFrameProfiles_ApplyProfile = T.dummy
-		CompactRaidFrameManager_UpdateShown = T.dummy
-		CompactRaidFrameManager_UpdateOptionsFlowContainer = T.dummy
+		if T.Classic then
+			CompactRaidFrameManager_UpdateShown = T.dummy
+			CompactRaidFrameManager_UpdateOptionsFlowContainer = T.dummy
+		end
 	end
 
 	if T.Classic then
