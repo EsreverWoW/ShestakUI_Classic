@@ -106,8 +106,8 @@ frame:SetScript("OnEvent", function(_, _, addon)
 		if T.Classic then
 			SetInsertItemsLeftToRight(false)
 		elseif not T.newPatch then -- BETA
-			SetSortBagsRightToLeft(true)
-			SetInsertItemsLeftToRight(false)
+			C_Container.SetSortBagsRightToLeft(true)
+			C_Container.SetInsertItemsLeftToRight(false)
 		end
 	end
 
