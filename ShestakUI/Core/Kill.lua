@@ -95,6 +95,8 @@ frame:SetScript("OnEvent", function(_, _, addon)
 	if C.minimap.enable then
 		if T.Classic then
 			InterfaceOptionsDisplayPanelRotateMinimap:Hide()
+		else
+			SetCVar("minimapTrackingShowAll", 1)
 		end
 	end
 
