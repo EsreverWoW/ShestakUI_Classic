@@ -37,6 +37,7 @@ if T.newPatch then
 	SetSortBagsRightToLeft = C_Container.SetSortBagsRightToLeft
 	SetInsertItemsLeftToRight = C_Container.SetInsertItemsLeftToRight
 	PickupContainerItem = C_Container.PickupContainerItem
+	ContainerIDToInventoryID = C_Container.ContainerIDToInventoryID
 	--GetContainerItemInfo = C_Container.GetContainerItemInfo //-- It's in use more places.
 	
 	GetContainerItemInfo = function(bagIndex, slotIndex)
