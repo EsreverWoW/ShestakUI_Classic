@@ -69,10 +69,10 @@ local function LoadSkin()
 	bg:SetPoint("TOPLEFT", 10, -72)
 	bg:SetPoint("BOTTOMRIGHT", -8, 3)
 
-	CalendarContextMenu:SetTemplate("Transparent")
-	CalendarContextMenu.SetBackdropColor = T.dummy
-	CalendarContextMenu.SetBackdropBorderColor = T.dummy
-	CalendarInviteStatusContextMenu:SetTemplate("Transparent")
+	CalendarContextMenu.NineSlice:SetTemplate("Transparent")
+	-- CalendarContextMenu.SetBackdropColor = T.dummy
+	-- CalendarContextMenu.SetBackdropBorderColor = T.dummy
+	CalendarInviteStatusContextMenu.NineSlice:SetTemplate("Transparent")
 
 	-- Boost frame levels
 	for i = 1, 42 do
@@ -132,9 +132,9 @@ local function LoadSkin()
 	CalendarTexturePickerFrame:SetTemplate("Transparent")
 
 	if T.Mainline then
-		T.SkinScrollBar(CalendarTexturePickerScrollBar)
-		T.SkinScrollBar(CalendarViewEventInviteListScrollFrameScrollBar)
-		T.SkinScrollBar(CalendarCreateEventDescriptionScrollFrameScrollBar)
+		T.SkinScrollBar(CalendarTexturePickerFrame.ScrollBar)
+		--BETA T.SkinScrollBar(CalendarViewEventInviteListScrollFrame.ScrollBar)
+		-- T.SkinScrollBar(CalendarCreateEventDescriptionScrollFrame.ScrollBar)
 	end
 
 	CalendarTexturePickerAcceptButton:SkinButton(true)
@@ -149,6 +149,7 @@ local function LoadSkin()
 	T.SkinEditBox(CalendarMassInviteMaxLevelEdit)
 	CalendarMassInviteAcceptButton:SkinButton()
 	T.SkinCloseButton(CalendarMassInviteCloseButton)
+	T.SkinDropDownBox(CalendarCreateEventCommunityDropDown, 240)
 
 	-- Raid View
 	CalendarViewRaidFrame:SetTemplate("Transparent")
@@ -171,7 +172,7 @@ local function LoadSkin()
 	CalendarEventPickerFrame:SetTemplate("Transparent")
 
 	if T.Mainline then
-		T.SkinScrollBar(CalendarEventPickerScrollBar)
+		-- T.SkinScrollBar(CalendarEventPicker.ScrollBar)
 	end
 
 	CalendarEventPickerCloseButton:SkinButton(true)
