@@ -38,8 +38,9 @@ if T.newPatch or T.Wrath341 then
 	SetInsertItemsLeftToRight = C_Container.SetInsertItemsLeftToRight
 	PickupContainerItem = C_Container.PickupContainerItem
 	ContainerIDToInventoryID = C_Container.ContainerIDToInventoryID
+	GetContainerItemEquipmentSetInfo = C_Container.GetContainerItemEquipmentSetInfo
 	--GetContainerItemInfo = C_Container.GetContainerItemInfo //-- It's in use more places.
-	
+
 	GetContainerItemInfo = function(bagIndex, slotIndex)
 		local info = C_Container.GetContainerItemInfo(bagIndex, slotIndex)
 		if info then
