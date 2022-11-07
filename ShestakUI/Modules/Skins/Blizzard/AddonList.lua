@@ -24,13 +24,19 @@ local function LoadSkin()
 	AddonListInset:SetTemplate("Overlay")
 	AddonListInset:SetPoint("BOTTOMRIGHT", -6, 29)
 
-	for i = 1, MAX_ADDONS_DISPLAYED do
-		T.SkinCheckBox(_G["AddonListEntry"..i.."Enabled"], nil, T.Classic and true)
-		_G["AddonListEntry"..i.."Load"]:SkinButton()
+	if T.Classic then
+		for i = 1, MAX_ADDONS_DISPLAYED do
+			T.SkinCheckBox(_G["AddonListEntry"..i.."Enabled"], nil, true)
+			_G["AddonListEntry"..i.."Load"]:SkinButton()
+		end
 	end
 
-	AddonListScrollFrame:StripTextures()
-	T.SkinScrollBar(AddonListScrollFrameScrollBar)
+	if T.Classic then
+		AddonListScrollFrame:StripTextures()
+		T.SkinScrollBar(AddonListScrollFrameScrollBar)
+	else
+		T.SkinScrollBar(AddonList.ScrollBar)
+	end
 	T.SkinCloseButton(AddonListCloseButton)
 	T.SkinDropDownBox(AddonCharacterDropDown)
 	T.SkinCheckBox(AddonListForceLoad)
