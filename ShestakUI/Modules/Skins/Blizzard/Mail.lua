@@ -145,7 +145,7 @@ local function LoadSkin()
 	if T.Mainline then
 		SendMailBodyEditBox:SetTextColor(1, 1, 1)
 	end
-	OpenMailBodyText:SetTextColor(1, 1, 1)
+	MailTextFontNormal:SetTextColor(1, 1, 1)
 	InvoiceTextFontNormal:SetTextColor(1, 1, 1)
 	OpenMailArithmeticLine:Kill()
 
