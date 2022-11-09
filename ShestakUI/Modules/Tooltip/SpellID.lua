@@ -49,7 +49,7 @@ hooksecurefunc("SetItemRef", function(link)
 end)
 
 local function attachItemTooltip(self)
-	local _, link = self:GetItem()
+	local _, link = T.Classic and self:GetItem() or TooltipUtil.GetDisplayedItem(self)
 	if not link then return end
 	local id = link:match("item:(%d+):")
 	if id then addLine(self, id, true) end

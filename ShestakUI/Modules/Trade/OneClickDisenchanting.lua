@@ -195,7 +195,12 @@ function button:PLAYER_LOGIN()
 	if T.Classic then
 		GameTooltip:HookScript("OnTooltipSetUnit", OnTooltipSetUnit)
 	else
-		TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Unit, OnTooltipSetUnit)
+		local function onTooltipFunction(tooltip, tooltipData)
+			if tooltip == GameTooltip then
+				OnTooltipSetUnit(tooltip)
+			end
+		end
+		TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Unit, onTooltipFunction)
 	end
 
 	self:SetFrameStrata("TOOLTIP")

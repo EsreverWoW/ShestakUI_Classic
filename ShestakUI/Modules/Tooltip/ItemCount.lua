@@ -5,7 +5,7 @@ if C.tooltip.enable ~= true or C.tooltip.item_count ~= true then return end
 --	Item count in bags and bank(by Tukz)
 ----------------------------------------------------------------------------------------
 local function OnTooltipSetItem(self)
-	local _, link = self:GetItem()
+	local _, link = T.Classic and self:GetItem() or TooltipUtil.GetDisplayedItem(self)
 	local num = GetItemCount(link, true)
 
 	if num > 1 then
