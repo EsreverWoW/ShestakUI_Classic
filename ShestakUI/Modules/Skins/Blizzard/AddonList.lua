@@ -29,6 +29,25 @@ local function LoadSkin()
 			T.SkinCheckBox(_G["AddonListEntry"..i.."Enabled"], nil, true)
 			_G["AddonListEntry"..i.."Load"]:SkinButton()
 		end
+	else
+		local function forceSaturation(self, _, force)
+			if force then return end
+			self:SetVertexColor(0.6, 0.6, 0.6)
+			self:SetDesaturated(true, true)
+		end
+
+		hooksecurefunc(AddonList.ScrollBox, "Update", function(self)
+			for i = 1, self.ScrollTarget:GetNumChildren() do
+				local child = select(i, self.ScrollTarget:GetChildren())
+				if not child.styled then
+					T.SkinCheckBox(child.Enabled)
+					child.LoadAddonButton:SkinButton()
+					hooksecurefunc(child.Enabled:GetCheckedTexture(), "SetDesaturated", forceSaturation)
+
+					child.styled = true
+				end
+			end
+		end)
 	end
 
 	if T.Classic then
