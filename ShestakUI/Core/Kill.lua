@@ -20,21 +20,36 @@ frame:SetScript("OnEvent", function(_, _, addon)
 
 	if C.unitframe.enable and C.raidframe.layout ~= "BLIZZARD" then
 		if T.Classic then
-			InterfaceOptionsFrameCategoriesButton10:SetScale(0.00001)
-			InterfaceOptionsFrameCategoriesButton10:SetAlpha(0)
+			InterfaceOptionsFrameCategoriesButton11:SetScale(0.00001)
+			InterfaceOptionsFrameCategoriesButton11:SetAlpha(0)
 		end
-		if not InCombatLockdown() then
-			if C.raidframe.show_raid or not IsAddOnLoaded("Grid2") then -- may need to add more addons here
-				CompactRaidFrameManager:Kill()
-				CompactRaidFrameContainer:Kill()
+		--BETA InterfaceOptionsFrameCategoriesButton10:SetScale(0.00001)
+		-- InterfaceOptionsFrameCategoriesButton10:SetAlpha(0)
+			-- if not InCombatLockdown() then
+			-- CompactRaidFrameManager:Kill()
+		-- CompactRaidFrameContainer:Kill()
+		-- end
+		-- ShowPartyFrame = T.dummy
+		-- HidePartyFrame = T.dummy
+		-- CompactUnitFrameProfiles_ApplyProfile = T.dummy
+		if CompactRaidFrameManager then
+			local function HideFrames()
+				CompactRaidFrameManager:UnregisterAllEvents()
+				CompactRaidFrameContainer:UnregisterAllEvents()
+				if not InCombatLockdown() then
+					CompactRaidFrameManager:Hide()
+					local shown = CompactRaidFrameManager_GetSetting("IsShown")
+					if shown and shown ~= "0" then
+						CompactRaidFrameManager_SetSetting("IsShown", "0")
+					end
+				end
 			end
-		end
-		ShowPartyFrame = T.dummy
-		HidePartyFrame = T.dummy
-		CompactUnitFrameProfiles_ApplyProfile = T.dummy
-		if T.Classic then
-			CompactRaidFrameManager_UpdateShown = T.dummy
-			CompactRaidFrameManager_UpdateOptionsFlowContainer = T.dummy
+			local hiddenFrame = CreateFrame("Frame")
+			hiddenFrame:Hide()
+			hooksecurefunc("CompactRaidFrameManager_UpdateShown", HideFrames)
+			CompactRaidFrameManager:HookScript("OnShow", HideFrames)
+			CompactRaidFrameContainer:HookScript("OnShow", HideFrames)
+			HideFrames()
 		end
 	end
 
@@ -125,7 +140,7 @@ frame:SetScript("OnEvent", function(_, _, addon)
 	end
 
 	if T.Mainline then
-		SetCVar('ActionButtonUseKeyDown', 0) -- BETA
+		SetCVar("ActionButtonUseKeyDown", 0) -- BETA
 	end
 end)
 
