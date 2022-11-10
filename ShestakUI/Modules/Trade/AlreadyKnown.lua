@@ -4,7 +4,6 @@ if C.trade.already_known ~= true then return end
 ----------------------------------------------------------------------------------------
 --	Colorizes recipes/mounts/pets/toys that is already known(AlreadyKnown by Villiv)
 ----------------------------------------------------------------------------------------
-if T.newPatch then return end -- BETA
 local color = {r = 0.1, g = 1, b = 0.1}
 local knowns, lines = {}, {}
 local recipe = Enum.ItemClass.Recipe
@@ -57,6 +56,7 @@ local function IsKnown(itemLink)
 	local _, _, _, _, _, _, _, _, _, _, _, class, subClass = GetItemInfo(itemID)
 	if not (knowables[class] or knowables[subClass]) then return end
 
+	if T.newPatch then return end -- BETA
 	tooltip:ClearLines()
 	tooltip:SetHyperlink(itemLink)
 	if not Scan(2, tooltip:NumLines()) then return end
@@ -256,15 +256,48 @@ if IsAddOnLoaded("Blizzard_GuildBankUI") then
 end
 
 -- Auction frame
-local function AuctionHouseFrame_RefreshScrollFrame(self)
-	local numResults = self.getNumEntries()
-	local buttons = HybridScrollFrame_GetButtons(self.ScrollFrame)
-	local buttonCount = buttons and #buttons or 0
-	local offset = self:GetScrollOffset()
-	for i = 1, buttonCount do
-		local visible = i + offset <= numResults
-		local button = buttons[i]
-		if visible then
+local AuctionHouseFrame_RefreshScrollFrame
+if T.Classic then
+	AuctionHouseFrame_RefreshScrollFrame = function(self)
+		local numResults = self.getNumEntries()
+		local buttons = HybridScrollFrame_GetButtons(self.ScrollFrame)
+		local buttonCount = buttons and #buttons or 0
+		local offset = self:GetScrollOffset()
+		for i = 1, buttonCount do
+			local visible = i + offset <= numResults
+			local button = buttons[i]
+			if visible then
+				if button.rowData.itemKey.itemID then
+					local itemLink
+					if button.rowData.itemKey.itemID == 82800 then -- BattlePet
+						itemLink = format("|Hbattlepet:%d::::::|h[Dummy]|h", button.rowData.itemKey.battlePetSpeciesID)
+					else -- Normal item
+						itemLink = format("item:%d:", button.rowData.itemKey.itemID)
+					end
+
+					if itemLink and IsKnown(itemLink) then
+						-- Highlight
+						button.SelectedHighlight:Show()
+						button.SelectedHighlight:SetVertexColor(color.r, color.g, color.b)
+						button.SelectedHighlight:SetAlpha(.2)
+						-- Icon
+						button.cells[2].Icon:SetVertexColor(color.r, color.g, color.b)
+						button.cells[2].IconBorder:SetVertexColor(color.r, color.g, color.b)
+					else
+						-- Highlight
+						button.SelectedHighlight:SetVertexColor(1, 1, 1)
+						-- Icon
+						button.cells[2].Icon:SetVertexColor(1, 1, 1)
+						button.cells[2].IconBorder:SetVertexColor(1, 1, 1)
+					end
+				end
+			end
+		end
+	end
+else
+	AuctionHouseFrame_RefreshScrollFrame = function(self)
+		-- Derived from https://www.townlong-yak.com/framexml/10.0.0/Blizzard_AuctionHouseUI/Blizzard_AuctionHouseItemList.lua#322
+		self.ScrollBox:ForEachFrame(function(button)
 			if button.rowData.itemKey.itemID then
 				local itemLink
 				if button.rowData.itemKey.itemID == 82800 then -- BattlePet
@@ -272,7 +305,6 @@ local function AuctionHouseFrame_RefreshScrollFrame(self)
 				else -- Normal item
 					itemLink = format("item:%d:", button.rowData.itemKey.itemID)
 				end
-
 				if itemLink and IsKnown(itemLink) then
 					-- Highlight
 					button.SelectedHighlight:Show()
@@ -289,16 +321,14 @@ local function AuctionHouseFrame_RefreshScrollFrame(self)
 					button.cells[2].IconBorder:SetVertexColor(1, 1, 1)
 				end
 			end
-		end
+		end)
 	end
 end
 
 local isBlizzard_AuctionHouseUILoaded
 if IsAddOnLoaded("Blizzard_AuctionUI") then
 	isBlizzard_AuctionHouseUILoaded = true
-	if T.Classic then
-		hooksecurefunc(AuctionHouseFrame.BrowseResultsFrame.ItemList, "RefreshScrollFrame", AuctionHouseFrame_RefreshScrollFrame)
-	end
+	hooksecurefunc(AuctionHouseFrame.BrowseResultsFrame.ItemList, "RefreshScrollFrame", AuctionHouseFrame_RefreshScrollFrame)
 end
 
 local function AuctionFrameBrowse_Update()
