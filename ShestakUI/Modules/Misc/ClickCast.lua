@@ -13,7 +13,7 @@ end
 SpellBinder:SetSize(300, 400)
 SpellBinder:Hide()
 
-_G["SpellBinderPortrait"]:SetTexture("Interface\\Spellbook\\Spellbook-Icon")
+SpellBinderPortrait:SetAlpha(0)
 
 SpellBinder.title = _G["SpellBinderTitle"] or SpellBinder:CreateFontString("SpellBinderTitle", "OVERLAY", "GameFontNormal")
 SpellBinder.title:SetPoint("TOP", _G["SpellBinder"], "TOP", 0, -5)
