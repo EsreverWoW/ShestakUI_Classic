@@ -9,6 +9,7 @@ local oUF = ns.oUF
 
 local CanDispel = {
 	DRUID = {Magic = false, Curse = true, Poison = true},
+	EVOKER = {Magic = false, Curse = true, Poison = true, Disease = true},
 	MAGE = {Curse = true},
 	MONK = {Magic = false, Poison = true, Disease = true},
 	PALADIN = {Magic = false, Poison = true, Disease = true},
