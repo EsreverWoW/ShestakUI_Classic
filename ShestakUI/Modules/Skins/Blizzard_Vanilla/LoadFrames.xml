@@ -14,7 +14,6 @@
 	<Script file="..\Blizzard\Help.lua"/>
 	<Script file="..\Blizzard\Interface.lua"/>
 	<Script file="..\Blizzard\Loot.lua"/>
-	<Script file="..\Blizzard\MacClient.lua"/>
 	<Script file="..\Blizzard\Macro.lua"/>
 	<Script file="..\Blizzard\Mail.lua"/>
 	<Script file="..\Blizzard\Merchant.lua"/>
@@ -35,6 +34,7 @@
 	<Script file="Gossip.lua"/>				<!-- TODO -->
 	<Script file="Inspect.lua"/>
 	<Script file="ItemText.lua"/>
+	<Script file="MacClient.lua"/>
 	<Script file="PetStable.lua"/>
 	<Script file="Quest.lua"/>				<!-- TODO -->
 	<Script file="QuestLog.lua"/>
