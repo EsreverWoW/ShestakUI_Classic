@@ -75,7 +75,7 @@ BGFrame:SetScript("OnMouseUp", function(_, button)
 			end
 		end
 	else
-		if QueueStatusMinimapButton:IsShown() then
+		if QueueStatusButton:IsShown() then
 			if button == "RightButton" then
 				ToggleBattlefieldMap()
 			else

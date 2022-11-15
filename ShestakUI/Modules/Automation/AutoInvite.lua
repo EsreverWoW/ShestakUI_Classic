@@ -37,7 +37,7 @@ if C.automation.accept_invite == true then
 	local ai = CreateFrame("Frame")
 	ai:RegisterEvent("PARTY_INVITE_REQUEST")
 	ai:SetScript("OnEvent", function(_, _, name, _, _, _, _, _, inviterGUID)
-		if (T.Classic and MiniMapBattlefieldFrame:IsShown()) or (T.Mainline and QueueStatusMinimapButton:IsShown()) or GetNumGroupMembers() > 0 then return end
+		if (T.Classic and MiniMapBattlefieldFrame:IsShown()) or (T.Mainline and QueueStatusButton:IsShown()) or GetNumGroupMembers() > 0 then return end
 		if T.Classic and CheckFriend(name) or T.Mainline and CheckFriend(inviterGUID) then
 			RaidNotice_AddMessage(RaidWarningFrame, L_INFO_INVITE..name, {r = 0.41, g = 0.8, b = 0.94}, 3)
 			print(format("|cffffff00"..L_INFO_INVITE..name..".|r"))
@@ -76,8 +76,6 @@ autoinvite:RegisterEvent("CHAT_MSG_BN_WHISPER")
 autoinvite:SetScript("OnEvent", function(_, event, arg1, arg2, ...)
 	if not C.automation.whisper_invite then return end
 
-	local guildName, _, _, realm = GetGuildInfo("player")
-
 	if T.Classic then
 		if ((not UnitExists("party1") or UnitIsGroupLeader("player") or UnitIsGroupAssistant("player"))) and not MiniMapBattlefieldFrame:IsShown() then
 			for word in pairs(list_keyword) do
@@ -104,7 +102,7 @@ autoinvite:SetScript("OnEvent", function(_, event, arg1, arg2, ...)
 			end
 		end
 	else
-		if ((not UnitExists("party1") or UnitIsGroupLeader("player") or UnitIsGroupAssistant("player"))) and not QueueStatusMinimapButton:IsShown() then
+		if ((not UnitExists("party1") or UnitIsGroupLeader("player") or UnitIsGroupAssistant("player"))) and not QueueStatusButton:IsShown() then
 			for word in pairs(list_keyword) do
 				if arg1:lower():match(word) then
 					if event == "CHAT_MSG_WHISPER" then
