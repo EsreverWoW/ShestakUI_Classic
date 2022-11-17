@@ -242,22 +242,18 @@ function Stuffing:SlotUpdate(b)
 		b.frame:UpdateItemContextMatching() -- Update Scrap items
 	end
 
-	if b.frame.UpgradeIcon then
+	if T.Mainline and b.frame.UpgradeIcon then
 		b.frame.UpgradeIcon:SetPoint("TOPLEFT", C.bag.button_size/2.7, -C.bag.button_size/2.7)
 		b.frame.UpgradeIcon:SetSize(C.bag.button_size/1.7, C.bag.button_size/1.7)
-		if T.Mainline and not T.newPatch then -- BETA
-			if IsAddOnLoaded("Pawn") then
-				itemIsUpgrade = PawnIsContainerItemAnUpgrade(b.frame:GetParent():GetID(), b.frame:GetID())
-			else
-				itemIsUpgrade = IsContainerItemAnUpgrade(b.frame:GetParent():GetID(), b.frame:GetID())
-			end
+		if IsAddOnLoaded("Pawn") then
+			itemIsUpgrade = PawnIsContainerItemAnUpgrade(b.frame:GetParent():GetID(), b.frame:GetID())
+		else
+			itemIsUpgrade = IsContainerItemAnUpgrade(b.frame:GetParent():GetID(), b.frame:GetID())
 		end
-		if not T.newPatch then -- BETA
-			if itemIsUpgrade and itemIsUpgrade == true then
-				b.frame.UpgradeIcon:SetShown(true)
-			else
-				b.frame.UpgradeIcon:SetShown(false)
-			end
+		if itemIsUpgrade and itemIsUpgrade == true then
+			b.frame.UpgradeIcon:SetShown(true)
+		else
+			b.frame.UpgradeIcon:SetShown(false)
 		end
 	end
 
