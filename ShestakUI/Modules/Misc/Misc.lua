@@ -242,6 +242,14 @@ hooksecurefunc(StaticPopupDialogs["DELETE_GOOD_ITEM"], "OnShow", function(s) s.e
 UIErrorsFrame:SetFrameLevel(0)
 
 ----------------------------------------------------------------------------------------
+--	Increase speed for AddonList scroll
+----------------------------------------------------------------------------------------
+if T.Mainline then
+	AddonList.ScrollBox.wheelPanScalar = 6
+	AddonList.ScrollBar.wheelPanScalar = 6
+end
+
+----------------------------------------------------------------------------------------
 --	Max Camera Distance
 ----------------------------------------------------------------------------------------
 if C.misc.max_camera_distance == true then
