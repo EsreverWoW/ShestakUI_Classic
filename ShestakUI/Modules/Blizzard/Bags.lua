@@ -4,8 +4,8 @@ if C.bag.enable ~= true then return end
 ----------------------------------------------------------------------------------------
 --	Based on Stuffing(by Hungtar, editor Tukz)
 ----------------------------------------------------------------------------------------
-local BAGS_BACKPACK = {0, 1, 2, 3, 4}
-local BAGS_BANK = T.Vanilla and {-1, 5, 6, 7, 8, 9, 10} or {-1, 5, 6, 7, 8, 9, 10, 11, 12}
+local BAGS_BACKPACK = T.Classic and {0, 1, 2, 3, 4} or {0, 1, 2, 3, 4, 5}
+local BAGS_BANK = T.Vanilla and {-1, 5, 6, 7, 8, 9, 10} or T.Classic and {-1, 5, 6, 7, 8, 9, 10, 11} or {-1, 6, 7, 8, 9, 10, 11, 12}
 local ST_NORMAL = 1
 local ST_FISHBAG = 2
 local ST_SPECIAL = 3
@@ -529,9 +529,9 @@ function Stuffing:BagFrameSlotNew(p, slot)
 
 	local ret = {}
 
-	if slot > 3 then
+	if slot > (T.Classic and 3 or 5) then
 		ret.slot = slot
-		slot = slot - 4
+		slot = slot - (T.Classic and 4 or 5)
 		ret.frame = CreateFrame(T.Classic and "CheckButton" or "ItemButton", "StuffingBBag"..slot.."Slot", p, "BankItemButtonBagTemplate")
 		if BackdropTemplateMixin then
 			Mixin(ret.frame, BackdropTemplateMixin)
@@ -564,7 +564,11 @@ function Stuffing:BagFrameSlotNew(p, slot)
 			SetItemButtonTextureVertexColor(ret.frame, 1.0, 1.0, 1.0)
 		end
 	else
-		ret.frame = CreateFrame(T.Classic and "CheckButton" or "ItemButton", "StuffingFBag"..slot.."Slot", p, T.Classic and "BagSlotButtonTemplate" or "")
+		if T.Classic then
+			ret.frame = CreateFrame(T.Classic and "CheckButton" or "ItemButton", "StuffingFBag"..slot.."Slot", p, "BagSlotButtonTemplate")
+		else
+			ret.frame = CreateFrame(T.Classic and "CheckButton" or "ItemButton", "StuffingFBag"..(slot + 1).."Slot", p, "")
+		end
 		if BackdropTemplateMixin then
 			Mixin(ret.frame, BackdropTemplateMixin)
 		end
@@ -1178,11 +1182,7 @@ function Stuffing:Layout(isBank)
 		local bsize = C.bag.button_size
 
 		local w = 2 * 10
-		if isBank then
-			w = w + ((#bs - 2) * bsize) -- BETA
-		else
-			w = w + ((#bs - 1) * bsize)
-		end
+		w = w + ((#bs - 1) * bsize)
 		w = w + ((#bs - 2) * 4)
 
 		fb:SetHeight(2 * 10 + bsize)
@@ -1194,7 +1194,7 @@ function Stuffing:Layout(isBank)
 
 	local idx = 0
 	for _, v in ipairs(bs) do
-		if (not isBank and v <= 3 ) or (isBank and v ~= -1 and v ~= 12) then
+		if (not isBank and v <= (T.Classic and 3 or 4)) or (isBank and v ~= -1) then
 			local bsize = C.bag.button_size
 			local b = self:BagFrameSlotNew(fb, v)
 			local xoff = 10
@@ -1209,20 +1209,23 @@ function Stuffing:Layout(isBank)
 			local btns = self.buttons
 			b.frame:HookScript("OnEnter", function()
 				local bag
-				if isBank then bag = v + 1 else bag = v + 1 end
+				if isBank then bag = v else bag = v + 1 end
 
 				for _, val in ipairs(btns) do
 					if val.bag == bag then
-						val.frame:SetAlpha(1)
+						-- val.frame:SetAlpha(1)
+						val.frame.searchOverlay:Hide()
 					else
-						val.frame:SetAlpha(0.2)
+						-- val.frame:SetAlpha(0.2)
+						val.frame.searchOverlay:Show()
 					end
 				end
 			end)
 
 			b.frame:HookScript("OnLeave", function()
 				for _, btn in ipairs(btns) do
-					btn.frame:SetAlpha(1)
+					-- btn.frame:SetAlpha(1)
+					btn.frame.searchOverlay:Hide()
 				end
 			end)
 
@@ -1309,6 +1312,9 @@ function Stuffing:Layout(isBank)
 					elseif specialType == 0x10000 then		-- Cooking
 						b.frame:SetBackdropBorderColor(0.9, 0, 0.1)
 					end
+					b.frame.lock = true
+				elseif T.Mainline and i == 5 then 		-- Reagent
+					b.frame:SetBackdropBorderColor(0.5, 0.25, 0.1)
 					b.frame.lock = true
 				end
 
