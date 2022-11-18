@@ -809,7 +809,7 @@ end
 function T.SkinIconSelectionFrame(frame, numIcons, buttonNameTemplate, frameNameOverride)
 	local frameName = frameNameOverride or frame:GetName()
 	local scrollFrame = frame.ScrollFrame or _G[frameName.."ScrollFrame"]
-	local editBox = frame.EditBox or _G[frameName.."EditBox"]
+	local editBox = frame.EditBox or _G[frameName.."EditBox"] or frame.BorderBox.IconSelectorEditBox
 	local okayButton = frame.OkayButton or frame.BorderBox.OkayButton or _G[frameName.."Okay"]
 	local cancelButton = frame.CancelButton or frame.BorderBox.CancelButton or _G[frameName.."Cancel"]
 
@@ -819,11 +819,15 @@ function T.SkinIconSelectionFrame(frame, numIcons, buttonNameTemplate, frameName
 	frame.backdrop:SetPoint("TOPLEFT", 3, 1)
 	frame:SetHeight(frame:GetHeight() + 13)
 
-	scrollFrame:StripTextures()
-	scrollFrame:CreateBackdrop("Overlay")
-	scrollFrame.backdrop:SetPoint("TOPLEFT", 15, 5)
-	scrollFrame.backdrop:SetPoint("BOTTOMRIGHT", 31, -8)
-	scrollFrame:SetHeight(scrollFrame:GetHeight() + 12)
+	if T.Classic then
+		scrollFrame:StripTextures()
+		scrollFrame:CreateBackdrop("Overlay")
+		scrollFrame.backdrop:SetPoint("TOPLEFT", 15, 5)
+		scrollFrame.backdrop:SetPoint("BOTTOMRIGHT", 31, -8)
+		scrollFrame:SetHeight(scrollFrame:GetHeight() + 12)
+	else
+		T.SkinScrollBar(frame.IconSelector.ScrollBar)
+	end
 
 	okayButton:SkinButton()
 	cancelButton:SkinButton()
@@ -833,19 +837,53 @@ function T.SkinIconSelectionFrame(frame, numIcons, buttonNameTemplate, frameName
 	editBox:DisableDrawLayer("BACKGROUND")
 	T.SkinEditBox(editBox)
 
-	if buttonNameTemplate then
-		for i = 1, numIcons do
-			local button = _G[buttonNameTemplate..i]
-			local icon = _G[button:GetName().."Icon"]
+	if T.Classic then
+		if buttonNameTemplate then
+			for i = 1, numIcons do
+				local button = _G[buttonNameTemplate..i]
+				local icon = _G[button:GetName().."Icon"]
 
+				button:StripTextures()
+				button:StyleButton(true)
+				button:SetTemplate("Default")
+
+				icon:ClearAllPoints()
+				icon:SetPoint("TOPLEFT", 2, -2)
+				icon:SetPoint("BOTTOMRIGHT", -2, 2)
+				icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+			end
+		end
+	else
+		local button = frame.BorderBox.SelectedIconArea and frame.BorderBox.SelectedIconArea.SelectedIconButton
+		if button then
+			button:DisableDrawLayer("BACKGROUND")
+			local texture = button.Icon:GetTexture()
 			button:StripTextures()
 			button:StyleButton(true)
 			button:SetTemplate("Default")
 
-			icon:ClearAllPoints()
-			icon:SetPoint("TOPLEFT", 2, -2)
-			icon:SetPoint("BOTTOMRIGHT", -2, 2)
-			icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+			button.Icon:ClearAllPoints()
+			button.Icon:SetPoint("TOPLEFT", 2, -2)
+			button.Icon:SetPoint("BOTTOMRIGHT", -2, 2)
+			button.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+			if texture then
+				button.Icon:SetTexture(texture)
+			end
+		end
+
+		for _, button in next, {frame.IconSelector.ScrollBox.ScrollTarget:GetChildren()} do
+			local texture = button.Icon:GetTexture()
+			button:StripTextures()
+			button:StyleButton(true)
+			button:SetTemplate("Default")
+
+			button.Icon:ClearAllPoints()
+			button.Icon:SetPoint("TOPLEFT", 2, -2)
+			button.Icon:SetPoint("BOTTOMRIGHT", -2, 2)
+			button.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+			if texture then
+				button.Icon:SetTexture(texture)
+			end
 		end
 	end
 end

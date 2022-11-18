@@ -102,7 +102,12 @@ local function LoadSkin()
 
 	-- Popup
 	if T.Mainline then
-		T.SkinIconSelectionFrame(GuildBankPopupFrame, 90, nil, "GuildBankPopup")
+		GuildBankPopupFrame:HookScript("OnShow", function(frame)
+			if not frame.isSkinned then
+				T.SkinIconSelectionFrame(frame, nil, nil, "GuildBankPopup")
+				frame.isSkinned = true
+			end
+		end)
 	end
 end
 
