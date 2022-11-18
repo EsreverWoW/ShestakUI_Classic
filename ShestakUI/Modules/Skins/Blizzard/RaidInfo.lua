@@ -50,7 +50,11 @@ local function LoadSkin()
 	RaidInfoFrame:SetPoint("TOPLEFT", FriendsFrame, "TOPRIGHT", 3, 0)
 	T.SkinCloseButton(RaidInfoCloseButton, RaidInfoFrame)
 	T.SkinCheckBox(RaidFrameAllAssistCheckButton)
-	T.SkinScrollBar(RaidInfoScrollFrameScrollBar)
+	if T.Classic then
+		T.SkinScrollBar(RaidInfoScrollFrameScrollBar)
+	else
+		T.SkinScrollBar(RaidInfoFrame.ScrollBar)
+	end
 end
 
 tinsert(T.SkinFuncs["ShestakUI"], LoadSkin)
