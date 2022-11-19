@@ -36,6 +36,7 @@ local function LoadSkin()
 	for i = 1, getn(frames) do
 		local frame = _G[frames[i]]
 		if frame then
+			frame:StripTextures()
 			frame:SetTemplate("Overlay")
 		end
 	end
@@ -200,7 +201,9 @@ local function LoadSkin()
 			local swatch = _G[swatchName]
 
 			if swatch.SetBackdrop then
-				swatch:SetBackdrop(nil)
+				if T.Classic then
+					swatch:SetBackdrop(nil)
+				end
 			else
 				swatch.NineSlice:SetAlpha(0)
 			end
@@ -245,15 +248,26 @@ local function LoadSkin()
 	for i = 1, #COMBAT_CONFIG_TABS do
 		local tab = _G["CombatConfigTab"..i]
 		if tab then
+			tab:StripTextures()
 			T.SkinTab(tab, true)
-			tab:SetHeight(tab:GetHeight() - 2)
+			tab:SetHeight(tab:GetHeight() - 3)
 			tab:ClearAllPoints()
 			if i == 1 then
-				tab:SetPoint("BOTTOMLEFT", _G["ChatConfigBackgroundFrame"], "TOPLEFT", 0, 1)
+				tab:SetPoint("BOTTOMLEFT", _G["ChatConfigBackgroundFrame"], "TOPLEFT", -2, 1)
 			else
 				tab:SetPoint("LEFT", _G["CombatConfigTab"..i-1], "RIGHT", 1, 0)
 			end
-			_G["CombatConfigTab"..i.."Text"]:SetPoint("BOTTOM", 0, 7)
+			if T.Classic then
+				_G["CombatConfigTab"..i.."Text"]:SetPoint("BOTTOM", 0, 7)
+			else
+				local text = tab.Text
+				if text then
+					text:SetWidth(text:GetWidth() + 10)
+				end
+			end
+		end
+		if T.Mainline then
+			T.SkinScrollBar(ChatConfigCombatSettingsFilters.ScrollBar)
 		end
 	end
 
