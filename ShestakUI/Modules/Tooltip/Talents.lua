@@ -95,6 +95,8 @@ end)
 
 -- HOOK: OnTooltipSetUnit
 local function OnTooltipSetUnit(self)
+	if self ~= GameTooltip or self:IsForbidden() then return end
+
 	-- Abort any delayed inspect in progress
 	ttt:Hide()
 
@@ -156,8 +158,4 @@ local function OnTooltipSetUnit(self)
 	end
 end
 
-if T.Classic then
-	GameTooltip:HookScript("OnTooltipSetUnit", OnTooltipSetUnit)
-else
-	TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Unit, OnTooltipSetUnit)
-end
+TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Unit, OnTooltipSetUnit)

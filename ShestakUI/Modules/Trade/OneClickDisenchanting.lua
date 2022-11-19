@@ -158,6 +158,7 @@ function button:PLAYER_LOGIN()
 	end
 
 	local function OnTooltipSetUnit(self)
+		if self ~= GameTooltip or self:IsForbidden() then return end
 		local _, link = T.Classic and self:GetItem() or TooltipUtil.GetDisplayedItem(self)
 
 		local auctionFrame = T.Classic and AuctionFrame or AuctionHouseFrame
@@ -199,12 +200,7 @@ function button:PLAYER_LOGIN()
 	if T.Classic then
 		GameTooltip:HookScript("OnTooltipSetItem", OnTooltipSetUnit)
 	else
-		local function onTooltipFunction(tooltip, tooltipData)
-			if tooltip == GameTooltip then
-				OnTooltipSetUnit(tooltip)
-			end
-		end
-		TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Item, onTooltipFunction)
+		TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Item, OnTooltipSetUnit)
 	end
 
 	self:SetFrameStrata("TOOLTIP")

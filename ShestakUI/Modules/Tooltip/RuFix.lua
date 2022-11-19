@@ -57,8 +57,20 @@ local function TranslateClass(text)
 	end
 end
 
+local whiteTooltip = {
+	[GameTooltip] = true,
+	[ItemRefTooltip] = true,
+	[ShoppingTooltip1] = true,
+	[ShoppingTooltip2] = true,
+}
+
 local function UpdateTooltip(self)
-	if not self:GetItem() then return end
+	if T.Classic then
+		if not self:GetItem() or self:IsForbidden() then return end
+	else
+		if not whiteTooltip[self] or self:IsForbidden() or not TooltipUtil.GetDisplayedItem(self) then end
+	end
+
 	local tname = self:GetName()
 	for i = 3, self:NumLines() do
 		ttext = _G[tname.."TextLeft"..i]
@@ -77,5 +89,5 @@ if T.Classic then
 	ShoppingTooltip1:HookScript("OnTooltipSetItem", UpdateTooltip)
 	ShoppingTooltip2:HookScript("OnTooltipSetItem", UpdateTooltip)
 else
-	TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Unit, UpdateTooltip)
+	TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Item, UpdateTooltip)
 end

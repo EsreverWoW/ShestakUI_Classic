@@ -19,6 +19,7 @@ local function GetLFDRole(unit)
 end
 
 local function OnTooltipSetUnit()
+	if self ~= GameTooltip or self:IsForbidden() then return end
 	local _, instanceType = IsInInstance()
 	if instanceType == "scenario" then return end
 	local _, unit = GameTooltip:GetUnit()
