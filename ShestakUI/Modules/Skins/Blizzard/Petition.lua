@@ -7,9 +7,16 @@ if C.skins.blizzard_frames ~= true then return end
 local function LoadSkin()
 	PetitionFrame:StripTextures(true)
 	PetitionFrame:CreateBackdrop("Transparent")
-	PetitionFrame.backdrop:SetAllPoints()
-	PetitionFrame.backdrop:SetPoint("TOPLEFT", 10, -12)
-	PetitionFrame.backdrop:SetPoint("BOTTOMRIGHT", -32, 68)
+
+	if T.Classic then
+		PetitionFrame.backdrop:SetPoint("TOPLEFT", 10, -12)
+		PetitionFrame.backdrop:SetPoint("BOTTOMRIGHT", -32, 76)
+	else
+		PetitionFrameInset:StripTextures()
+		PetitionFrame.backdrop:SetAllPoints()
+	end
+
+	PetitionFramePortrait:SetAlpha(0)
 
 	PetitionFrameSignButton:SkinButton()
 	PetitionFrameRequestButton:SkinButton()

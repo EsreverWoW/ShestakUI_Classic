@@ -7,10 +7,16 @@ if C.skins.blizzard_frames ~= true then return end
 local function LoadSkin()
 	GuildRegistrarFrame:StripTextures(true)
 	GuildRegistrarFrame:CreateBackdrop("Transparent")
-	GuildRegistrarFrame.backdrop:SetPoint("TOPLEFT", 10, -12)
-	GuildRegistrarFrame.backdrop:SetPoint("BOTTOMRIGHT", -32, 76)
+	if T.Classic then
+		GuildRegistrarFrame.backdrop:SetPoint("TOPLEFT", 10, -12)
+		GuildRegistrarFrame.backdrop:SetPoint("BOTTOMRIGHT", -32, 76)
+	else
+		GuildRegistrarFrameInset:StripTextures()
+		GuildRegistrarFrame.backdrop:SetAllPoints()
+	end
 
 	GuildRegistrarGreetingFrame:StripTextures()
+	GuildRegistrarFramePortrait:SetAlpha(0)
 
 	GuildRegistrarFramePurchaseButton:SkinButton()
 	GuildRegistrarFrameCancelButton:SkinButton()
@@ -35,8 +41,13 @@ local function LoadSkin()
 	end
 
 	GuildRegistrarPurchaseText:SetTextColor(1, 1, 1)
-	GuildAvailableServicesText:SetTextColor(1, 0.8, 0)
-	GuildAvailableServicesText:SetShadowColor(0, 0, 0)
+	if T.Classic then
+		GuildAvailableServicesText:SetTextColor(1, 0.8, 0)
+		GuildAvailableServicesText:SetShadowColor(0, 0, 0)
+	else
+		AvailableServicesText:SetTextColor(1, 0.8, 0)
+		AvailableServicesText:SetShadowColor(0, 0, 0)
+	end
 end
 
 tinsert(T.SkinFuncs["ShestakUI"], LoadSkin)
