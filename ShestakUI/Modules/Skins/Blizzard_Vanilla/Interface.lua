@@ -8,7 +8,6 @@ local function LoadSkin()
 	InterfaceOptionsFrame:StripTextures()
 	InterfaceOptionsFrame:SetTemplate("Transparent")
 
-	local InterfaceOptionsFrameHeader = T.Classic and InterfaceOptionsFrameHeader or InterfaceOptionsFrame.Header
 	InterfaceOptionsFrameHeader:StripTextures()
 	InterfaceOptionsFrameHeader:ClearAllPoints()
 	InterfaceOptionsFrameHeader:SetPoint("TOP", InterfaceOptionsFrame, 0, 0)
@@ -49,10 +48,6 @@ local function LoadSkin()
 		if button then
 			button:SkinButton()
 		end
-	end
-
-	if T.Mainline then
-		InterfaceOptionsCombatPanel.clickCastingButton:SkinButton()
 	end
 
 	local checkboxes = {
