@@ -24,6 +24,10 @@ local function LoadSkin()
 		_G[frame]:StripTextures(true)
 	end
 
+	if T.Mainline then
+		AchievementFrame.Header:StripTextures(true)
+	end
+
 	local noname_frames = {
 		"AchievementFrameStats",
 		"AchievementFrameSummary",
@@ -72,6 +76,10 @@ local function LoadSkin()
 		AchievementFrameComparisonStatsContainer:CreateBackdrop("Overlay")
 		AchievementFrameComparisonStatsContainer.backdrop:SetPoint("TOPLEFT", -3, 2)
 		AchievementFrameComparisonStatsContainer.backdrop:SetPoint("BOTTOMRIGHT", -2, -3)
+	else
+		AchievementFrameCategories:CreateBackdrop("Overlay")
+		AchievementFrameCategories.backdrop:SetPoint("TOPLEFT", 0, 4)
+		AchievementFrameCategories.backdrop:SetPoint("BOTTOMRIGHT", -2, -3)
 	end
 
 	T.SkinCloseButton(AchievementFrameCloseButton, AchievementFrame.backdrop)
@@ -94,9 +102,14 @@ local function LoadSkin()
 		AchievementFrame.SearchBox:ClearAllPoints()
 		AchievementFrame.SearchBox:SetPoint("TOPRIGHT", AchievementFrame, "TOPRIGHT", -51, 0)
 
-		-- AchievementFrame.searchResults:StripTextures()
-		-- AchievementFrame.searchResults:SetTemplate("Transparent")
-		-- T.SkinCloseButton(AchievementFrame.searchResults.closeButton)
+		AchievementFrame.SearchPreviewContainer:StripTextures()
+		AchievementFrame.SearchPreviewContainer:CreateBackdrop("Transparent")
+		AchievementFrame.SearchPreviewContainer.backdrop:SetPoint('TOPLEFT', -2, 2)
+		AchievementFrame.SearchPreviewContainer.backdrop:SetPoint('BOTTOMRIGHT', AchievementFrame.SearchPreviewContainer.ShowAllSearchResults, 2, -2)
+
+		AchievementFrame.SearchResults:StripTextures()
+		AchievementFrame.SearchResults:SetTemplate("Transparent")
+		T.SkinCloseButton(AchievementFrame.SearchResults.CloseButton)
 	end
 
 	-- ScrollBars
@@ -106,10 +119,13 @@ local function LoadSkin()
 		T.SkinScrollBar(AchievementFrameStatsContainerScrollBar)
 		T.SkinScrollBar(AchievementFrameComparisonContainerScrollBar)
 		T.SkinScrollBar(AchievementFrameComparisonStatsContainerScrollBar)
-	end
-
-	if T.Mainline then
-		-- T.SkinScrollBar(AchievementFrameScrollFrameScrollBar)
+	else
+		T.SkinScrollBar(AchievementFrameCategories.ScrollBar)
+		T.SkinScrollBar(AchievementFrameAchievements.ScrollBar)
+		T.SkinScrollBar(AchievementFrameStats.ScrollBar)
+		T.SkinScrollBar(AchievementFrameComparison.AchievementContainer.ScrollBar)
+		T.SkinScrollBar(AchievementFrameComparison.StatContainer.ScrollBar)
+		T.SkinScrollBar(AchievementFrame.SearchResults.ScrollBar)
 
 		-- AchievementFrameScrollFrameScrollBar:SetPoint("TOPLEFT", AchievementFrameScrollFrame, "TOPRIGHT", -3, -16)
 	end
@@ -120,32 +136,53 @@ local function LoadSkin()
 		_G["AchievementFrameTab"..i]:SetFrameLevel(_G["AchievementFrameTab"..i]:GetFrameLevel() + 2)
 	end
 
-	local function SkinStatusBar(bar)
+	local function SkinStatusBar(bar, comparison)
 		bar:StripTextures()
 		bar:SetStatusBarTexture(C.media.texture)
 		bar:SetStatusBarColor(0, 0.7, 0.1)
 		bar:CreateBackdrop("Overlay")
 
-		if _G[bar:GetName().."Title"] then
-			_G[bar:GetName().."Title"]:SetPoint("LEFT", 4, 0)
-		end
+		if comparison then
+			local title = bar.Title
+			local text = bar.Text
 
-		if _G[bar:GetName().."Label"] then
-			_G[bar:GetName().."Label"]:SetPoint("LEFT", 4, 0)
-		end
+			if title then
+				title:SetPoint("LEFT", 4, 0)
+			end
 
-		if _G[bar:GetName().."Text"] then
-			_G[bar:GetName().."Text"]:SetPoint("RIGHT", -4, 0)
+			if text then
+				text:SetPoint("CENTER")
+			end
+		else
+			local title = _G[bar:GetName().."Title"]
+			local label = _G[bar:GetName().."Label"]
+			local text = _G[bar:GetName().."Text"]
+
+			if title then
+				title:SetPoint("LEFT", 4, 0)
+			end
+
+			if label then
+				label:SetPoint("LEFT", 4, 0)
+			end
+
+			if text then
+				text:SetPoint("RIGHT", -4, 0)
+			end
 		end
 	end
 
+	SkinStatusBar(AchievementFrameSummaryCategoriesStatusBar)
+
 	if T.Classic then
-		SkinStatusBar(AchievementFrameSummaryCategoriesStatusBar)
 		SkinStatusBar(AchievementFrameComparisonSummaryPlayerStatusBar)
 		SkinStatusBar(AchievementFrameComparisonSummaryFriendStatusBar)
 		AchievementFrameComparisonSummaryFriendStatusBar.text:ClearAllPoints()
 		AchievementFrameComparisonSummaryFriendStatusBar.text:SetPoint("CENTER")
 		AchievementFrameComparisonHeader:SetPoint("BOTTOMRIGHT", AchievementFrameComparison, "TOPRIGHT", 45, -20)
+	else
+		SkinStatusBar(AchievementFrameComparison.Summary.Player.StatusBar, true)
+		SkinStatusBar(AchievementFrameComparison.Summary.Friend.StatusBar, true)
 	end
 
 	for i = 1, T.Wrath and 8 or 12 do
@@ -189,6 +226,7 @@ local function LoadSkin()
 				end
 			end
 		end
+		AchievementFrameTab1:SetPoint("TOPLEFT", AchievementFrame, "BOTTOMLEFT", 17, 2)
 	end)
 
 	if T.Classic then
@@ -312,164 +350,188 @@ local function LoadSkin()
 			_G["AchievementFrameAchievementsContainerButton"..i.."Tracked"].SetPoint = T.dummy
 		end
 
-		local compares = {
-			"Player",
-			"Friend"
-		}
+		if T.Classic then
+			local compares = {
+				"Player",
+				"Friend"
+			}
 
-		for _, compare in pairs(compares) do
-			for i = 1, 9 do
-				local frame = "AchievementFrameComparisonContainerButton"..i..compare
+			for _, compare in pairs(compares) do
+				for i = 1, 9 do
+					local frame = "AchievementFrameComparisonContainerButton"..i..compare
 
+					_G[frame]:StripTextures()
+					_G[frame.."Background"]:Kill()
+
+					if _G[frame.."Description"] then
+						_G[frame.."Description"]:SetTextColor(0.6, 0.6, 0.6)
+						_G[frame.."Description"].SetTextColor = T.dummy
+					end
+
+					-- Initiate method of creating a backdrop
+					_G[frame].bg1 = _G[frame]:CreateTexture(nil, "BACKGROUND")
+					_G[frame].bg1:SetDrawLayer("BACKGROUND", 4)
+					_G[frame].bg1:SetTexture(C.media.blank)
+					_G[frame].bg1:SetVertexColor(0.1, 0.1, 0.1)
+					_G[frame].bg1:SetPoint("TOPLEFT", T.mult * 4, -T.mult * 4)
+					_G[frame].bg1:SetPoint("BOTTOMRIGHT", -T.mult * 4, T.mult * 4)
+
+					_G[frame].bg2 = _G[frame]:CreateTexture(nil, "BACKGROUND")
+					_G[frame].bg2:SetDrawLayer("BACKGROUND", 3)
+					_G[frame].bg2:SetColorTexture(0, 0, 0)
+					_G[frame].bg2:SetPoint("TOPLEFT", T.mult * 3, -T.mult * 3)
+					_G[frame].bg2:SetPoint("BOTTOMRIGHT", -T.mult * 3, T.mult * 3)
+
+					_G[frame].bg3 = _G[frame]:CreateTexture(nil, "BACKGROUND")
+					_G[frame].bg3:SetDrawLayer("BACKGROUND", 2)
+					_G[frame].bg3:SetColorTexture(unpack(C.media.border_color))
+					_G[frame].bg3:SetPoint("TOPLEFT", T.mult * 2, -T.mult * 2)
+					_G[frame].bg3:SetPoint("BOTTOMRIGHT", -T.mult * 2, T.mult * 2)
+
+					_G[frame].bg4 = _G[frame]:CreateTexture(nil, "BACKGROUND")
+					_G[frame].bg4:SetDrawLayer("BACKGROUND", 1)
+					_G[frame].bg4:SetColorTexture(0, 0, 0)
+					_G[frame].bg4:SetPoint("TOPLEFT", T.mult, -T.mult)
+					_G[frame].bg4:SetPoint("BOTTOMRIGHT", -T.mult, T.mult)
+
+					if compare == "Friend" then
+						_G[frame.."Shield"]:SetPoint("TOPRIGHT", _G["AchievementFrameComparisonContainerButton"..i.."Friend"], "TOPRIGHT", -20, -2)
+					end
+
+					_G[frame.."IconBling"]:Kill()
+					_G[frame.."IconOverlay"]:Kill()
+					_G[frame.."Icon"]:SetTemplate("Default")
+					_G[frame.."Icon"]:SetHeight(_G[frame.."Icon"]:GetHeight() - 14)
+					_G[frame.."Icon"]:SetWidth(_G[frame.."Icon"]:GetWidth() - 14)
+					_G[frame.."Icon"]:ClearAllPoints()
+					_G[frame.."Icon"]:SetPoint("LEFT", 6, 0)
+					_G[frame.."IconTexture"]:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+					_G[frame.."IconTexture"]:ClearAllPoints()
+					_G[frame.."IconTexture"]:SetPoint("TOPLEFT", 2, -2)
+					_G[frame.."IconTexture"]:SetPoint("BOTTOMRIGHT", -2, 2)
+				end
+			end
+
+			hooksecurefunc("AchievementFrameComparison_DisplayAchievement", function(button)
+				local player = button.player
+				local friend = button.friend
+				player.titleBar:Kill()
+				if friend.titleBar then
+					friend.titleBar:Kill()
+				end
+
+				if not player.bg3 or not friend.bg3 then return end
+
+				if player.accountWide then
+					player.bg3:SetColorTexture(ACHIEVEMENT_BLUE_BORDER_COLOR:GetRGB())
+				else
+					player.bg3:SetColorTexture(unpack(C.media.border_color))
+				end
+
+				if friend.accountWide then
+					friend.bg3:SetColorTexture(ACHIEVEMENT_BLUE_BORDER_COLOR:GetRGB())
+				else
+					friend.bg3:SetColorTexture(unpack(C.media.border_color))
+				end
+			end)
+
+			for i = 1, 20 do
+				local frame = _G["AchievementFrameStatsContainerButton"..i]
+				frame:StyleButton()
+
+				_G["AchievementFrameStatsContainerButton"..i.."BG"]:SetColorTexture(1, 1, 1, 0.2)
+				_G["AchievementFrameStatsContainerButton"..i.."HeaderLeft"]:Kill()
+				_G["AchievementFrameStatsContainerButton"..i.."HeaderRight"]:Kill()
+				_G["AchievementFrameStatsContainerButton"..i.."HeaderMiddle"]:Kill()
+
+				local frame = "AchievementFrameComparisonStatsContainerButton"..i
 				_G[frame]:StripTextures()
-				_G[frame.."Background"]:Kill()
+				_G[frame]:StyleButton()
 
-				if _G[frame.."Description"] then
-					_G[frame.."Description"]:SetTextColor(0.6, 0.6, 0.6)
-					_G[frame.."Description"].SetTextColor = T.dummy
-				end
-
-				-- Initiate method of creating a backdrop
-				_G[frame].bg1 = _G[frame]:CreateTexture(nil, "BACKGROUND")
-				_G[frame].bg1:SetDrawLayer("BACKGROUND", 4)
-				_G[frame].bg1:SetTexture(C.media.blank)
-				_G[frame].bg1:SetVertexColor(0.1, 0.1, 0.1)
-				_G[frame].bg1:SetPoint("TOPLEFT", T.mult * 4, -T.mult * 4)
-				_G[frame].bg1:SetPoint("BOTTOMRIGHT", -T.mult * 4, T.mult * 4)
-
-				_G[frame].bg2 = _G[frame]:CreateTexture(nil, "BACKGROUND")
-				_G[frame].bg2:SetDrawLayer("BACKGROUND", 3)
-				_G[frame].bg2:SetColorTexture(0, 0, 0)
-				_G[frame].bg2:SetPoint("TOPLEFT", T.mult * 3, -T.mult * 3)
-				_G[frame].bg2:SetPoint("BOTTOMRIGHT", -T.mult * 3, T.mult * 3)
-
-				_G[frame].bg3 = _G[frame]:CreateTexture(nil, "BACKGROUND")
-				_G[frame].bg3:SetDrawLayer("BACKGROUND", 2)
-				_G[frame].bg3:SetColorTexture(unpack(C.media.border_color))
-				_G[frame].bg3:SetPoint("TOPLEFT", T.mult * 2, -T.mult * 2)
-				_G[frame].bg3:SetPoint("BOTTOMRIGHT", -T.mult * 2, T.mult * 2)
-
-				_G[frame].bg4 = _G[frame]:CreateTexture(nil, "BACKGROUND")
-				_G[frame].bg4:SetDrawLayer("BACKGROUND", 1)
-				_G[frame].bg4:SetColorTexture(0, 0, 0)
-				_G[frame].bg4:SetPoint("TOPLEFT", T.mult, -T.mult)
-				_G[frame].bg4:SetPoint("BOTTOMRIGHT", -T.mult, T.mult)
-
-				if compare == "Friend" then
-					_G[frame.."Shield"]:SetPoint("TOPRIGHT", _G["AchievementFrameComparisonContainerButton"..i.."Friend"], "TOPRIGHT", -20, -2)
-				end
-
-				_G[frame.."IconBling"]:Kill()
-				_G[frame.."IconOverlay"]:Kill()
-				_G[frame.."Icon"]:SetTemplate("Default")
-				_G[frame.."Icon"]:SetHeight(_G[frame.."Icon"]:GetHeight() - 14)
-				_G[frame.."Icon"]:SetWidth(_G[frame.."Icon"]:GetWidth() - 14)
-				_G[frame.."Icon"]:ClearAllPoints()
-				_G[frame.."Icon"]:SetPoint("LEFT", 6, 0)
-				_G[frame.."IconTexture"]:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-				_G[frame.."IconTexture"]:ClearAllPoints()
-				_G[frame.."IconTexture"]:SetPoint("TOPLEFT", 2, -2)
-				_G[frame.."IconTexture"]:SetPoint("BOTTOMRIGHT", -2, 2)
+				_G[frame.."BG"]:SetColorTexture(1, 1, 1, 0.2)
+				_G[frame.."HeaderLeft"]:Kill()
+				_G[frame.."HeaderRight"]:Kill()
+				_G[frame.."HeaderMiddle"]:Kill()
 			end
+
+			hooksecurefunc("AchievementButton_GetProgressBar", function(index)
+				local frame = _G["AchievementFrameProgressBar"..index]
+				if frame then
+					if not frame.skinned then
+						frame:StripTextures()
+						frame:SetStatusBarTexture(C.media.texture)
+						frame:SetStatusBarColor(0, 0.7, 0.1)
+						frame:SetFrameLevel(frame:GetFrameLevel() + 3)
+						frame:SetHeight(frame:GetHeight() - 2)
+
+						frame.bg1 = frame:CreateTexture(nil, "BACKGROUND")
+						frame.bg1:SetDrawLayer("BACKGROUND", -7)
+						frame.bg1:SetColorTexture(unpack(C.media.backdrop_color))
+						frame.bg1:SetPoint("TOPLEFT", -T.mult * 3, T.mult * 3)
+						frame.bg1:SetPoint("BOTTOMRIGHT", T.mult * 3, -T.mult * 3)
+
+						frame.bg2 = frame:CreateTexture(nil, "BACKGROUND")
+						frame.bg2:SetDrawLayer("BACKGROUND", -6)
+						frame.bg2:SetColorTexture(unpack(C.media.border_color))
+						frame.bg2:SetPoint("TOPLEFT", -T.mult * 2, T.mult * 2)
+						frame.bg2:SetPoint("BOTTOMRIGHT", T.mult * 2, -T.mult * 2)
+
+						frame.bg3 = frame:CreateTexture(nil, "BACKGROUND")
+						frame.bg3:SetDrawLayer("BACKGROUND", -5)
+						frame.bg3:SetColorTexture(unpack(C.media.backdrop_color))
+						frame.bg3:SetPoint("TOPLEFT", -T.mult, T.mult)
+						frame.bg3:SetPoint("BOTTOMRIGHT", T.mult, -T.mult)
+
+						frame.bg4 = frame:CreateTexture(nil, "BACKGROUND")
+						frame.bg4:SetDrawLayer("BACKGROUND", -4)
+						frame.bg4:SetColorTexture(0.1, 0.1, 0.1)
+						frame.bg4:SetPoint("TOPLEFT", 0, 0)
+						frame.bg4:SetPoint("BOTTOMRIGHT", 0, 0)
+
+						frame.text:ClearAllPoints()
+						frame.text:SetPoint("CENTER", frame, "CENTER", 0, -1)
+						frame.text:SetJustifyH("CENTER")
+
+						if index > 1 then
+							frame:ClearAllPoints()
+							frame:SetPoint("TOP", _G["AchievementFrameProgressBar"..index-1], "BOTTOM", 0, -5)
+							frame.SetPoint = T.dummy
+							frame.ClearAllPoints = T.dummy
+						end
+
+						frame.skinned = true
+					end
+				end
+			end)
+		else
+			local function HandleCompareCategory(button)
+				button:DisableDrawLayer('BORDER')
+				-- HideBackdrop(button)
+				button.Background:Hide()
+				button:CreateBackdrop('Transparent')
+				button.backdrop:SetInside(button, 2, 2)
+
+				button.TitleBar:Hide()
+				button.Glow:Hide()
+				button.Icon.frame:Hide()
+				button.Icon.texture:SkinIcon()
+			end
+
+			local Comparison = _G.AchievementFrameComparison
+			hooksecurefunc(Comparison.AchievementContainer.ScrollBox, 'Update', function(frame)
+				for _, child in next, { frame.ScrollTarget:GetChildren() } do
+					if not child.isSkinned then
+						HandleCompareCategory(child.Player)
+						child.Player.Description:SetTextColor(.9, .9, .9)
+						child.Player.Description.SetTextColor = T.dummy
+						HandleCompareCategory(child.Friend)
+
+						child.isSkinned = true
+					end
+				end
+			end)
 		end
 	end
-
-	hooksecurefunc("AchievementFrameComparison_DisplayAchievement", function(button)
-		local player = button.player
-		local friend = button.friend
-		player.titleBar:Kill()
-		if friend.titleBar then
-			friend.titleBar:Kill()
-		end
-
-		if not player.bg3 or not friend.bg3 then return end
-
-		if player.accountWide then
-			player.bg3:SetColorTexture(ACHIEVEMENT_BLUE_BORDER_COLOR:GetRGB())
-		else
-			player.bg3:SetColorTexture(unpack(C.media.border_color))
-		end
-
-		if friend.accountWide then
-			friend.bg3:SetColorTexture(ACHIEVEMENT_BLUE_BORDER_COLOR:GetRGB())
-		else
-			friend.bg3:SetColorTexture(unpack(C.media.border_color))
-		end
-
-		if T.Mainline and not AchievementFrame.searchBox.moved then
-			AchievementFrame.searchBox:SetPoint("TOPRIGHT", AchievementFrameComparisonHeader, "TOPRIGHT", -172, -19)
-			AchievementFrame.searchBox.moved = true
-		end
-	end)
-
-	for i = 1, 20 do
-		local frame = _G["AchievementFrameStatsContainerButton"..i]
-		frame:StyleButton()
-
-		_G["AchievementFrameStatsContainerButton"..i.."BG"]:SetColorTexture(1, 1, 1, 0.2)
-		_G["AchievementFrameStatsContainerButton"..i.."HeaderLeft"]:Kill()
-		_G["AchievementFrameStatsContainerButton"..i.."HeaderRight"]:Kill()
-		_G["AchievementFrameStatsContainerButton"..i.."HeaderMiddle"]:Kill()
-
-		local frame = "AchievementFrameComparisonStatsContainerButton"..i
-		_G[frame]:StripTextures()
-		_G[frame]:StyleButton()
-
-		_G[frame.."BG"]:SetColorTexture(1, 1, 1, 0.2)
-		_G[frame.."HeaderLeft"]:Kill()
-		_G[frame.."HeaderRight"]:Kill()
-		_G[frame.."HeaderMiddle"]:Kill()
-	end
-
-	hooksecurefunc("AchievementButton_GetProgressBar", function(index)
-		local frame = _G["AchievementFrameProgressBar"..index]
-		if frame then
-			if not frame.skinned then
-				frame:StripTextures()
-				frame:SetStatusBarTexture(C.media.texture)
-				frame:SetStatusBarColor(0, 0.7, 0.1)
-				frame:SetFrameLevel(frame:GetFrameLevel() + 3)
-				frame:SetHeight(frame:GetHeight() - 2)
-
-				frame.bg1 = frame:CreateTexture(nil, "BACKGROUND")
-				frame.bg1:SetDrawLayer("BACKGROUND", -7)
-				frame.bg1:SetColorTexture(unpack(C.media.backdrop_color))
-				frame.bg1:SetPoint("TOPLEFT", -T.mult * 3, T.mult * 3)
-				frame.bg1:SetPoint("BOTTOMRIGHT", T.mult * 3, -T.mult * 3)
-
-				frame.bg2 = frame:CreateTexture(nil, "BACKGROUND")
-				frame.bg2:SetDrawLayer("BACKGROUND", -6)
-				frame.bg2:SetColorTexture(unpack(C.media.border_color))
-				frame.bg2:SetPoint("TOPLEFT", -T.mult * 2, T.mult * 2)
-				frame.bg2:SetPoint("BOTTOMRIGHT", T.mult * 2, -T.mult * 2)
-
-				frame.bg3 = frame:CreateTexture(nil, "BACKGROUND")
-				frame.bg3:SetDrawLayer("BACKGROUND", -5)
-				frame.bg3:SetColorTexture(unpack(C.media.backdrop_color))
-				frame.bg3:SetPoint("TOPLEFT", -T.mult, T.mult)
-				frame.bg3:SetPoint("BOTTOMRIGHT", T.mult, -T.mult)
-
-				frame.bg4 = frame:CreateTexture(nil, "BACKGROUND")
-				frame.bg4:SetDrawLayer("BACKGROUND", -4)
-				frame.bg4:SetColorTexture(0.1, 0.1, 0.1)
-				frame.bg4:SetPoint("TOPLEFT", 0, 0)
-				frame.bg4:SetPoint("BOTTOMRIGHT", 0, 0)
-
-				frame.text:ClearAllPoints()
-				frame.text:SetPoint("CENTER", frame, "CENTER", 0, -1)
-				frame.text:SetJustifyH("CENTER")
-
-				if index > 1 then
-					frame:ClearAllPoints()
-					frame:SetPoint("TOP", _G["AchievementFrameProgressBar"..index-1], "BOTTOM", 0, -5)
-					frame.SetPoint = T.dummy
-					frame.ClearAllPoints = T.dummy
-				end
-
-				frame.skinned = true
-			end
-		end
-	end)
 
 	hooksecurefunc("AchievementObjectives_DisplayCriteria", function(objectivesFrame, id)
 		local numCriteria = GetAchievementNumCriteria(id)
