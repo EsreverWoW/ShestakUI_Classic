@@ -22,15 +22,9 @@ local function LoadSkin()
 	KeyBindingFrame:StripTextures()
 	KeyBindingFrame:SetTemplate("Transparent")
 
-	if T.Classic then
-		KeyBindingFrame.header:StripTextures()
-		KeyBindingFrame.header:ClearAllPoints()
-		KeyBindingFrame.header:SetPoint("TOP", KeyBindingFrame, "TOP", 0, -4)
-	else
-		KeyBindingFrame.Header:StripTextures()
-		KeyBindingFrame.Header:ClearAllPoints()
-		KeyBindingFrame.Header:SetPoint("TOP", KeyBindingFrame, "TOP", 0, -4)
-	end
+	KeyBindingFrame.header:StripTextures()
+	KeyBindingFrame.header:ClearAllPoints()
+	KeyBindingFrame.header:SetPoint("TOP", KeyBindingFrame, "TOP", 0, -4)
 
 	KeyBindingFrame.bindingsContainer:StripTextures()
 	KeyBindingFrame.bindingsContainer:SetTemplate("Overlay")
@@ -75,35 +69,16 @@ local function LoadSkin()
 			button.IsSkinned = true
 		end
 	end)
-
-	-- QuickKeybind
-	if T.Mainline then
-		QuickKeybindFrame:StripTextures()
-		QuickKeybindFrame.Header:StripTextures()
-		QuickKeybindFrame:SetTemplate("Transparent")
-
-		local buttons = {
-			"okayButton",
-			"defaultsButton",
-			"cancelButton"
-		}
-
-		for _, v in pairs(buttons) do
-			QuickKeybindFrame[v]:SkinButton(true)
-		end
-
-		T.SkinCheckBox(QuickKeybindFrame.characterSpecificButton)
-	end
 end
 
 T.SkinFuncs["Blizzard_BindingUI"] = LoadSkin
 
+----------------------------------------------------------------------------------------
+--	ClickBindingUI skin
+----------------------------------------------------------------------------------------
 local function LoadSecondarySkin()
 	local frame = ClickBindingFrame
-	T.SkinCloseButton(frame.CloseButton)
-
-	frame:StripTextures()
-	frame:SetTemplate("Transparent")
+	T.SkinFrame(frame)
 
 	frame.TutorialButton.Ring:Hide()
 	frame.TutorialButton:SetPoint("TOPLEFT", frame, "TOPLEFT", -12, 12)
@@ -163,9 +138,8 @@ local function LoadSecondarySkin()
 
 	local tutorial = frame.TutorialFrame
 	tutorial.NineSlice:StripTextures()
-	tutorial.TitleBg:Hide()
-	tutorial:SetTemplate("Transparent")
-	T.SkinCloseButton(tutorial.CloseButton)
+	tutorial:CreateBackdrop("Transparent")
+	tutorial.backdrop:SetInside()
 end
 
 T.SkinFuncs["Blizzard_ClickBindingUI"] = LoadSecondarySkin
