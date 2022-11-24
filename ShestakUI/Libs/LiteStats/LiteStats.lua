@@ -1145,8 +1145,10 @@ end
 if durability.enabled then
 	Inject("Durability", {
 		OnLoad = function(self)
-			CreateFrame("GameTooltip", "LPDURA", nil, "GameTooltipTemplate")
-			LPDURA:SetOwner(WorldFrame, "ANCHOR_NONE")
+			if T.Classic then
+				CreateFrame("GameTooltip", "LPDURA", nil, "GameTooltipTemplate")
+				LPDURA:SetOwner(WorldFrame, "ANCHOR_NONE")
+			end
 			if durability.man then DurabilityFrame.Show = DurabilityFrame.Hide end
 			RegEvents(self, "UPDATE_INVENTORY_DURABILITY MERCHANT_SHOW PLAYER_LOGIN")
 		end,
@@ -1170,11 +1172,26 @@ if durability.enabled then
 								total = GetRepairAllCost(); RepairAllItems()
 							else
 								for id = 1, 18 do
-									local cost = select(3, LPDURA:SetInventoryItem(P, id))
-									if cost ~= 0 and cost <= GetMoney() then
-										if not InRepairMode() then ShowRepairCursor() end
-										PickupInventoryItem(id)
-										total = total + cost
+									if T.Classic then
+										local cost = select(3, LPDURA:SetInventoryItem(P, id))
+										if cost ~= 0 and cost <= GetMoney() then
+											if not InRepairMode() then ShowRepairCursor() end
+											PickupInventoryItem(id)
+											total = total + cost
+										end
+									else
+										local data = C_TooltipInfo.GetInventoryItem(P, id)
+										if data then
+											local argVal = data.args and data.args[7]
+											if argVal and argVal.field == "repairCost" then
+												local cost = argVal.intVal
+												if cost ~= 0 and cost <= GetMoney() then
+													if not InRepairMode() then ShowRepairCursor() end
+													PickupInventoryItem(id)
+													total = total + cost
+												end
+											end
+										end
 									end
 								end
 							end
