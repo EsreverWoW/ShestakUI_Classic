@@ -22,13 +22,27 @@ frame:Register("BANKFRAME_CLOSED", function()
 	atBank = false
 end)
 
-if not T.Vanilla then
+if T.TBC or T.Wrath then
 	frame:Register("GUILDBANKFRAME_OPENED", function()
 		atBank = true
 	end)
 
 	frame:Register("GUILDBANKFRAME_CLOSED", function()
 		atBank = false
+	end)
+elseif T.Mainline then
+	frame:Register("PLAYER_INTERACTION_MANAGER_FRAME_SHOW", function(...)
+		local type = ...
+		if type == 10 then	-- Guild bank
+			atBank = true
+		end
+	end)
+
+	frame:Register("PLAYER_INTERACTION_MANAGER_FRAME_HIDE", function(...)
+		local type = ...
+		if type == 10 then	-- Guild bank
+			atBank = false
+		end
 	end)
 end
 
