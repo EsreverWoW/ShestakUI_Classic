@@ -2,9 +2,9 @@
 	<Include file="..\Blizzard_Vanilla\LoadFrames.xml"/>
 	<Include file="..\Blizzard_TBC\LoadFrames.xml"/>
 
+	<Script file="Achievement.lua"/>
 	<Script file="Glyph.lua"/>
 
-	<Script file="..\Blizzard\Achievement.lua"/>
 	<Script file="..\Blizzard\AlertFrames.lua"/>
 	<Script file="..\Blizzard\BarberShop.lua"/>
 	<Script file="..\Blizzard\Calendar.lua"/>
