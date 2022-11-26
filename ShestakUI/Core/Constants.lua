@@ -39,19 +39,11 @@ if T.newPatch or T.Wrath341 then
 	PickupContainerItem = C_Container.PickupContainerItem
 	ContainerIDToInventoryID = C_Container.ContainerIDToInventoryID
 	GetContainerItemEquipmentSetInfo = C_Container.GetContainerItemEquipmentSetInfo
-	--GetContainerItemInfo = C_Container.GetContainerItemInfo //-- It's in use more places.
 
 	GetContainerItemInfo = GetContainerItemInfo or function(bagIndex, slotIndex)
 		local info = C_Container.GetContainerItemInfo(bagIndex, slotIndex)
 		if info then
 			return info.iconFileID, info.stackCount, info.isLocked, info.quality, info.isReadable, info.hasLoot, info.hyperlink, info.isFiltered, info.hasNoValue, info.itemID, info.isBound
-		end
-	end
-
-	GetContainerItemQuestInfo = GetContainerItemQuestInfo or function(bagIndex, slotIndex)
-		local info = C_Container.GetContainerItemInfo(bagIndex, slotIndex)
-		if info then
-			return info.isQuestItem, info.questID, info.isActive
 		end
 	end
 end

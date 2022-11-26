@@ -204,7 +204,8 @@ function Stuffing:SlotUpdate(b)
 		-- isQuestItem, questId, isActiveQuest
 		if b.itemClassID == Enum.ItemClass.Questitem then isQuestItem = true end
 	else
-		isQuestItem, questId, isActiveQuest = GetContainerItemQuestInfo(b.bag, b.slot)
+		local questData = C_Container.GetContainerItemQuestInfo(b.bag, b.slot)
+		isQuestItem, questId, isActiveQuest = questData.isQuestItem, questData.questID, questData.isActive
 	end
 
 	-- Set all slot color to default ShestakUI on update
