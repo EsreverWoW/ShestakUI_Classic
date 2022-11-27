@@ -12,7 +12,7 @@ local frames = {
 	"ChatConfigFrame", "RaidBrowserFrame", "InterfaceOptionsFrame", "WorldMapFrame",
 	"GameMenuFrame", "VideoOptionsFrame", "GuildInviteFrame", "ItemTextFrame",
 	"OpenMailFrame", "StackSplitFrame", "TutorialFrame", "StaticPopup1",
-	"StaticPopup2", "ScrollOfResurrectionSelectionFrame",
+	"StaticPopup2", "ScrollOfResurrectionSelectionFrame", "ProfessionsFrame",
 
 	"PVPFrame", "QuestLogFrame", "QuestLogDetailFrame", "PVPBannerFrame", "PetStableFrame",
 	"WorldStateScoreFrame", "BankFrame", "MacOptionsFrame", "MissingLootFrame", "ArenaRegistrarFrame"
@@ -69,6 +69,30 @@ local AddOnFrames = {
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("ADDON_LOADED")
 frame:SetScript("OnEvent", function(_, _, addon)
+	-- Fix move
+	if addon == "Blizzard_Collections" then
+		local checkbox = _G.WardrobeTransmogFrame.ToggleSecondaryAppearanceCheckbox
+		checkbox.Label:ClearAllPoints()
+		checkbox.Label:SetPoint("LEFT", checkbox, "RIGHT", 2, 1)
+		checkbox.Label:SetPoint("RIGHT", checkbox, "RIGHT", 160, 1)
+	elseif addon == "Blizzard_EncounterJournal" then
+		local replacement = function(rewardFrame)
+			if rewardFrame.data then
+				_G.EncounterJournalTooltip:ClearAllPoints()
+			end
+			AdventureJournal_Reward_OnEnter(rewardFrame)
+		end
+		_G.EncounterJournal.suggestFrame.Suggestion1.reward:HookScript("OnEnter", replacement)
+		_G.EncounterJournal.suggestFrame.Suggestion2.reward:HookScript("OnEnter", replacement)
+		_G.EncounterJournal.suggestFrame.Suggestion3.reward:HookScript("OnEnter", replacement)
+	elseif addon == "Blizzard_Communities" then
+		local dialog = _G.CommunitiesFrame.NotificationSettingsDialog
+		if dialog then
+			dialog:ClearAllPoints()
+			dialog:SetAllPoints()
+		end
+	end
+
 	if AddOnFrames[addon] then
 		for _, v in pairs(AddOnFrames[addon]) do
 			if _G[v] then
