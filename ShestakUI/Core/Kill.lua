@@ -71,6 +71,7 @@ frame:SetScript("OnEvent", function(_, _, addon)
 	SetCVarBitfield("closedInfoFrames", LE_FRAME_TUTORIAL_PET_JOURNAL, true)
 	if T.Mainline then
 		SetCVarBitfield("closedInfoFrames", LE_FRAME_TUTORIAL_GARRISON_BUILDING, true)
+		SetCVarBitfield("closedInfoFrames", LE_FRAME_TUTORIAL_TALENT_CHANGES, true)
 	end
 
 	SetCVar("countdownForCooldowns", 0)
