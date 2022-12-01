@@ -253,6 +253,7 @@ function T.UploadBW()
 	if mess then
 		mess.db.profile.fontName = "Calibri"
 		mess.db.profile.fontSize = 20
+		mess.db.profile.emphFontName = "Calibri"
 		mess.db.profile.BWMessageAnchor_x = 615
 		mess.db.profile.BWMessageAnchor_y = 440
 		mess.db.profile.BWEmphasizeMessageAnchor_x = 618
@@ -265,14 +266,14 @@ function T.UploadBW()
 		prox.db.profile.fontName = "Calibri"
 		prox.db.profile.objects.ability = false
 	end
+	local altpower = BigWigs:GetPlugin("AltPower")
+	if altpower then
+		altpower.db.profile.fontName = "Calibri"
+	end
 	if T.Classic then
 		BigWigsIconClassicDB.hide = true
 	else
 		BigWigsIconDB.hide = true
-	end
-	BigWigs:GetPlugin("Super Emphasize").db.profile.fontName = "Calibri"
-	if T.Mainline then
-		BigWigs:GetPlugin("Alt Power").db.profile.fontName = "Calibri"
 	end
 	if InCombatLockdown() then
 		print("|cffffff00"..ERR_NOT_IN_COMBAT.."|r")
