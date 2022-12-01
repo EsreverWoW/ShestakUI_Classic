@@ -108,6 +108,10 @@ frame:SetScript("OnEvent", function(_, _, addon)
 			if not InCombatLockdown() then
 				SetCVar("multiBarRightVerticalLayout", 0)
 			end
+		else
+			--if not InCombatLockdown() then
+			--	SetCVar("multiBarRightVerticalLayout", 0)
+			--end
 		end
 	end
 
