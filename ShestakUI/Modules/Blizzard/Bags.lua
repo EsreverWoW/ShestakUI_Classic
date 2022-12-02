@@ -30,6 +30,12 @@ elseif T.class == "DRUID" then
 		{Enum.ItemArmorSubclass.Mail, Enum.ItemArmorSubclass.Plate, Enum.ItemArmorSubclass.Shield},
 		true
 	}
+elseif T.class == "EVOKER" then
+	unusable = {
+		{Enum.ItemWeaponSubclass.Bows, Enum.ItemWeaponSubclass.Guns, Enum.ItemWeaponSubclass.Polearm, Enum.ItemWeaponSubclass.Warglaive, Enum.ItemWeaponSubclass.Thrown, Enum.ItemWeaponSubclass.Crossbow, Enum.ItemWeaponSubclass.Wand},
+		{Enum.ItemArmorSubclass.Plate, Enum.ItemArmorSubclass.Shield},
+		true
+	}
 elseif T.class == "HUNTER" then
 	unusable = {
 		{Enum.ItemWeaponSubclass.Mace1H, Enum.ItemWeaponSubclass.Mace2H, Enum.ItemWeaponSubclass.Warglaive, Enum.ItemWeaponSubclass.Thrown, Enum.ItemWeaponSubclass.Wand},
