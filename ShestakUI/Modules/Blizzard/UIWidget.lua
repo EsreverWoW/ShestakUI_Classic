@@ -42,8 +42,12 @@ if T.Mainline then
 	powerAnchor:SetSize(210, 30)
 	powerAnchor:SetPoint(unpack(C.position.uiwidget_below))
 
-	power:ClearAllPoints()
-	power:SetPoint("TOP", powerAnchor)
+	hooksecurefunc(power, "SetPoint", function(self, _, anchor)
+		if anchor and anchor ~= powerAnchor then
+			self:ClearAllPoints()
+			self:SetPoint("TOP", powerAnchor)
+		end
+	end)
 
 	-- Maw Buff Widget
 	if T.Mainline then
