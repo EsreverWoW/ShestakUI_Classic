@@ -313,10 +313,6 @@ end
 
 if T.Mainline then
 	SpellFlyout:HookScript("OnShow", StyleFlyoutButton)
-	--BETA hooksecurefunc("SpellButton_OnClick", StyleFlyoutButton)
-	-- SpellFlyoutHorizontalBackground:SetAlpha(0)
-	-- SpellFlyoutVerticalBackground:SetAlpha(0)
-	-- SpellFlyoutBackgroundEnd:SetAlpha(0)
 	SpellFlyout.Background:Hide()
 end
 
