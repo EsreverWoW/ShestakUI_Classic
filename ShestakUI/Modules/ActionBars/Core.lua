@@ -4,11 +4,10 @@ if C.actionbar.enable ~= true then return end
 ----------------------------------------------------------------------------------------
 --	Hide Blizzard ActionBars stuff(by Tukz)
 ----------------------------------------------------------------------------------------
-local NUM_STANCE_SLOTS = NUM_STANCE_SLOTS or 10
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("PLAYER_LOGIN")
 frame:SetScript("OnEvent", function()
-	MainMenuBar:SetScale(0.00001)
+	-- MainMenuBar:SetScale(0.00001)
 	MainMenuBar:EnableMouse(false)
 
 	if T.Classic then
@@ -142,7 +141,7 @@ function RightBarMouseOver(alpha)
 
 	if C.actionbar.stancebar_horizontal == false and C.actionbar.stancebar_hide == false then
 		if StanceHolder:IsShown() then
-			for i = 1, NUM_STANCE_SLOTS do
+			for i = 1, 10 do
 				local b = _G["StanceButton"..i]
 				b:SetAlpha(alpha)
 				local c = _G["StanceButton"..i.."Cooldown"]
@@ -154,7 +153,7 @@ function RightBarMouseOver(alpha)
 end
 
 function StanceBarMouseOver(alpha)
-	for i = 1, NUM_STANCE_SLOTS do
+	for i = 1, 10 do
 		local b = _G["StanceButton"..i]
 		b:SetAlpha(alpha)
 		local c = _G["StanceButton"..i.."Cooldown"]
@@ -367,6 +366,15 @@ EventSpiral:SetScript("OnEvent", function()
 			Bar5MouseOver(0)
 		end
 	end
+	if T.Mainline and C.actionbar.custom_bar_enable and C.actionbar.custom_bar_mouseover then
+		CustomBarMouseOver(0)
+	end
+	if T.Mainline and C.actionbar.bar7_enable and C.actionbar.bar7_mouseover then
+		Bar7MouseOver(0)
+	end
+	if T.Mainline and C.actionbar.bar8_enable and C.actionbar.bar8_mouseover then
+		Bar8MouseOver(0)
+	end
 	EventSpiral:UnregisterEvent("PLAYER_ENTERING_WORLD")
 end)
 
@@ -493,7 +501,7 @@ T.ShiftBarUpdate = function()
 	local texture, isActive, isCastable
 	local button, icon, cooldown
 	local start, duration, enable
-	for i = 1, NUM_STANCE_SLOTS do
+	for i = 1, 10 do
 		button = _G["StanceButton"..i]
 		icon = _G["StanceButton"..i.."Icon"]
 		if i <= numForms then
