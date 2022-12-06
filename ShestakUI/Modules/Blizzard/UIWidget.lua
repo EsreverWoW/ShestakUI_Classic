@@ -36,26 +36,28 @@ hooksecurefunc(below, "SetPoint", function(self, _, anchor)
 	end
 end)
 
--- Power Bar Widget
-local powerAnchor = CreateFrame("Frame", "UIWidgetPowerBarAnchor", UIParent)
-powerAnchor:SetSize(210, 30)
-powerAnchor:SetPoint(unpack(C.position.uiwidget_below))
-
-power:ClearAllPoints()
-power:SetPoint("TOP", powerAnchor)
-
--- Maw Buff Widget
 if T.Mainline then
-	local mawAnchor = CreateFrame("Frame", "UIWidgetMawAnchor", UIParent)
-	mawAnchor:SetSize(210, 30)
-	mawAnchor:SetPoint("TOPRIGHT", BuffsAnchor, "BOTTOMRIGHT", 0, -3)
+	-- Power Bar Widget
+	local powerAnchor = CreateFrame("Frame", "UIWidgetPowerBarAnchor", UIParent)
+	powerAnchor:SetSize(210, 30)
+	powerAnchor:SetPoint(unpack(C.position.uiwidget_below))
 
-	hooksecurefunc(maw, "SetPoint", function(self, _, anchor)
-		if anchor and anchor ~= mawAnchor then
-			self:ClearAllPoints()
-			self:SetPoint("TOPRIGHT", mawAnchor)
-		end
-	end)
+	power:ClearAllPoints()
+	power:SetPoint("TOP", powerAnchor)
+
+	-- Maw Buff Widget
+	if T.Mainline then
+		local mawAnchor = CreateFrame("Frame", "UIWidgetMawAnchor", UIParent)
+		mawAnchor:SetSize(210, 30)
+		mawAnchor:SetPoint("TOPRIGHT", BuffsAnchor, "BOTTOMRIGHT", 0, -3)
+
+		hooksecurefunc(maw, "SetPoint", function(self, _, anchor)
+			if anchor and anchor ~= mawAnchor then
+				self:ClearAllPoints()
+				self:SetPoint("TOPRIGHT", mawAnchor)
+			end
+		end)
+	end
 end
 
 -- Mover for all widgets
