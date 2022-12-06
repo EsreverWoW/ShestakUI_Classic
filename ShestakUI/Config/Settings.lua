@@ -44,11 +44,6 @@ C["general"] = {
 	["hide_maw_buffs"] = false,					-- Hide Maw Buffs frame in instances
 }
 
-if T.screenHeight == 1440 then
-	C.general.auto_scale = false
-	C.general.uiscale = 0.64
-end
-
 ----------------------------------------------------------------------------------------
 --	Skins options
 ----------------------------------------------------------------------------------------
