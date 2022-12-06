@@ -4661,6 +4661,8 @@ C["filger_spells"] = {
 			{spellID = 34754, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Improved Spirit Tap
 			{spellID = 49694, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Shadow Weaving
+			{spellID = 15258, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Spirit Tap
 			{spellID = 15271, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Surge of Light
@@ -5120,8 +5122,6 @@ C["filger_spells"] = {
 			{spellID = 64058, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
 			-- Psychic Scream
 			{spellID = 8122, unitID = "target", caster = "player", filter = "DEBUFF"},
-			-- Shadow Vulnerability (Shadow Weaving)
-			{spellID = 15258, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
 			-- Shadow Word: Pain
 			{spellID = 589, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Silence

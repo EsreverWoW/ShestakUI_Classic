@@ -162,7 +162,6 @@ T.DebuffWhiteList = {
 	[SpellName(64044)] = true,	-- Psychic Horror
 	[SpellName(8122)] = true,	-- Psychic Scream
 	[SpellName(9484)] = true,	-- Shackle Undead
-	[SpellName(15258)] = true,	-- Shadow Vulnerability (Shadow Weaving)
 	[SpellName(589)] = true,	-- Shadow Word: Pain
 	[SpellName(15487)] = true,	-- Silence
 	[SpellName(15286)] = true,	-- Vampiric Embrace
@@ -490,6 +489,7 @@ T.BuffWhiteList = {
 	[SpellName(15271)] = true,	-- Spirit Tap
 	-- [SpellName(33151)] = true,	-- Surge of Light
 	[SpellName(64901)] = true,	-- Hymn of Hope
+	[SpellName(15258)] = true,	-- Shadow Weaving
 	-- [SpellName(15290)] = true,	-- Vampiric Embrace
 	-- [SpellName(34919)] = true,	-- Vampiric Touch
 
