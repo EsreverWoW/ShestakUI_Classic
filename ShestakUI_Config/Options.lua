@@ -1566,6 +1566,7 @@ do
 		icons_sumon:ClearAllPoints()
 		icons_sumon:SetPoint("LEFT", icons_leader, "RIGHT", 248, 0)
 		icons_phase:SetPoint("TOPLEFT", icons_leader, "BOTTOMLEFT", 0, 0)
+		plugins_auto_resurrection:SetPoint("TOPLEFT", plugins_over_heal_absorb, "BOTTOMLEFT", 0, 0)
 	end
 end
 
