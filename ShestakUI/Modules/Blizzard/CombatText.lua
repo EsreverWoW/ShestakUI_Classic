@@ -73,7 +73,7 @@ local r, g, b, lowMana, lowHealth
 local function OnEvent(_, event, subevent, powerType)
 	if event == "COMBAT_TEXT_UPDATE" then
 		local arg2, arg3 = GetCurrentCombatTextEventInfo()
-		if SHOW_COMBAT_TEXT == "0" then
+		if (T.Classic and SHOW_COMBAT_TEXT == "0") or (T.Mainline and not CVarCallbackRegistry:GetCVarValueBool("enableFloatingCombatText")) then
 			return
 		else
 			if subevent == "DAMAGE" then
