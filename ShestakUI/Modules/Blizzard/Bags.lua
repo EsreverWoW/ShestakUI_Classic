@@ -477,9 +477,11 @@ function Stuffing:CreateReagentContainer()
 
 		local _, _, _, quality = GetContainerItemInfo(-3, i)
 		local clink = GetContainerItemLink(-3, i)
-		if clink then
-			if quality and quality > 1 then
-				button:SetBackdropBorderColor(GetItemQualityColor(quality))
+		if T.Classic then
+			if clink then
+				if quality and quality > 1 then
+					button:SetBackdropBorderColor(GetItemQualityColor(quality))
+				end
 			end
 		end
 
@@ -638,6 +640,7 @@ function Stuffing:SlotNew(bag, slot)
 		ret.frame:StyleButton()
 		ret.frame:SetTemplate("Default")
 		ret.frame:SetNormalTexture(0)
+		ret.frame:SetFrameStrata("HIGH")
 
 		ret.icon = _G[ret.frame:GetName().."IconTexture"]
 		ret.icon:CropIcon()
