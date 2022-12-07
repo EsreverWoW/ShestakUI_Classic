@@ -98,9 +98,9 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 			_G["StaticPopup"..i.."ItemFrameIconTexture"]:ClearAllPoints()
 			_G["StaticPopup"..i.."ItemFrameIconTexture"]:SetPoint("TOPLEFT", 2, -2)
 			_G["StaticPopup"..i.."ItemFrameIconTexture"]:SetPoint("BOTTOMRIGHT", -2, 2)
-			_G["StaticPopup"..i.."CloseButton"]:SetNormalTexture(T.Classic and "" or C.media.empty)
+			_G["StaticPopup"..i.."CloseButton"]:SetNormalTexture(C.media.empty)
 			_G["StaticPopup"..i.."CloseButton"].SetNormalTexture = T.dummy
-			_G["StaticPopup"..i.."CloseButton"]:SetPushedTexture(T.Classic and "" or C.media.empty)
+			_G["StaticPopup"..i.."CloseButton"]:SetPushedTexture(C.media.empty)
 			_G["StaticPopup"..i.."CloseButton"].SetPushedTexture = T.dummy
 			T.SkinCloseButton(_G["StaticPopup"..i.."CloseButton"])
 
@@ -374,9 +374,9 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 				if navButton and not navButton.isSkinned then
 					navButton:SkinButton(true)
 					if navButton.MenuArrowButton then
-						navButton.MenuArrowButton:SetNormalTexture(T.Classic and "" or C.media.empty)
-						navButton.MenuArrowButton:SetPushedTexture(T.Classic and "" or C.media.empty)
-						navButton.MenuArrowButton:SetHighlightTexture(T.Classic and "" or C.media.empty)
+						navButton.MenuArrowButton:SetNormalTexture(C.media.empty)
+						navButton.MenuArrowButton:SetPushedTexture(C.media.empty)
+						navButton.MenuArrowButton:SetHighlightTexture(C.media.empty)
 					end
 					navButton.xoffset = 1
 					navButton.isSkinned = true

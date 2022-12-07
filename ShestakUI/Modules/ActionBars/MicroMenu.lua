@@ -42,7 +42,7 @@ for _, button in pairs(MICRO_BUTTONS) do
 			button.Flash:SetTexture()
 		end
 	end
-	bu:SetHighlightTexture(T.Classic and "" or C.media.empty)
+	bu:SetHighlightTexture(C.media.empty)
 	bu.SetHighlightTexture = T.dummy
 
 	local f = CreateFrame("Frame", nil, bu)

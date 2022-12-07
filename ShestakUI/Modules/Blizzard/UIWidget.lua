@@ -234,8 +234,8 @@ if T.Mainline then
 	maw.Container.List:SetPoint("TOPRIGHT", maw.Container, "TOPLEFT", -15, 0)
 
 	maw.Container.List:HookScript("OnShow", function(self)
-		self.button:SetPushedTexture(T.Classic and "" or C.media.empty)
-		self.button:SetHighlightTexture(T.Classic and "" or C.media.empty)
+		self.button:SetPushedTexture(C.media.empty)
+		self.button:SetHighlightTexture(C.media.empty)
 		self.button:SetWidth(200)
 		self.button:SetButtonState("NORMAL")
 		self.button:SetPushedTextOffset(0, 0)
@@ -243,8 +243,8 @@ if T.Mainline then
 	end)
 
 	maw.Container.List:HookScript("OnHide", function(self)
-		self.button:SetPushedTexture(T.Classic and "" or C.media.empty)
-		self.button:SetHighlightTexture(T.Classic and "" or C.media.empty)
+		self.button:SetPushedTexture(C.media.empty)
+		self.button:SetHighlightTexture(C.media.empty)
 		self.button:SetWidth(200)
 	end)
 

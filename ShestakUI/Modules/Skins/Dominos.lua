@@ -22,7 +22,7 @@ frame:SetScript("OnEvent", function()
 		local normal = _G[name.."NormalTexture"]
 
 		flash:SetTexture("")
-		button:SetNormalTexture(T.Classic and "" or C.media.empty)
+		button:SetNormalTexture(C.media.empty)
 
 		if border then
 			border:Hide()
@@ -73,11 +73,11 @@ frame:SetScript("OnEvent", function()
 		if not button then return end
 		local flash = _G[name.."Flash"]
 		button:StyleButton()
-		button:SetNormalTexture(T.Classic and "" or C.media.empty)
+		button:SetNormalTexture(C.media.empty)
 
 		hooksecurefunc(button, "SetNormalTexture", function(self, texture)
 			if texture and texture ~= "" then
-				self:SetNormalTexture(T.Classic and "" or C.media.empty)
+				self:SetNormalTexture(C.media.empty)
 			end
 		end)
 
