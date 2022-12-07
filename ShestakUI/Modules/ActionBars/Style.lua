@@ -190,7 +190,7 @@ local function StyleSmallButton(normal, button, icon, name, pet)
 		icon:SetDrawLayer("BACKGROUND", 7)
 
 		if pet then
-			local autocast = button.AutoCastable
+			local autocast = button.AutoCastable or _G[name.."AutoCastable"]
 			autocast:SetSize((C.actionbar.button_size * 2) - 10, (C.actionbar.button_size * 2) - 10)
 			autocast:ClearAllPoints()
 			autocast:SetPoint("CENTER", button, 0, 0)
