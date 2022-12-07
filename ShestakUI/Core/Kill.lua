@@ -109,6 +109,10 @@ frame:SetScript("OnEvent", function(_, _, addon)
 			SetCVar("enableFloatingCombatText", 0)
 		end
 	end
+
+	if T.Mainline then
+		SetCVar('ActionButtonUseKeyDown', 0) -- BETA
+	end
 end)
 
 if T.Mainline then
