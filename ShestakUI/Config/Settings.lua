@@ -619,8 +619,10 @@ C["reminder"] = {
 	["raid_buffs_alpha"] = 0,					-- Transparent icons when the buff is present
 }
 
-if T.Classic then
+if T.Vanilla or T.TBC then
 	C["reminder"]["raid_buffs_size"] = 16
+elseif T.Wrath then
+	C["reminder"]["raid_buffs_size"] = 19
 end
 
 ----------------------------------------------------------------------------------------
