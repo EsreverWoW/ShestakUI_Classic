@@ -39,6 +39,8 @@ end
 local _, ns = ...
 local oUF = ns.oUF
 
+if(oUF:IsClassic()) then return end
+
 local SPELL_POWER_ESSENCE = Enum.PowerType.Essence
 
 local function Update(self, _, unit, powerType)

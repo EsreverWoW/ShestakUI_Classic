@@ -1466,6 +1466,7 @@ do
 	local classic = {
 		arcane,
 		chi,
+		essence,
 		stagger,
 		holy,
 		shard,

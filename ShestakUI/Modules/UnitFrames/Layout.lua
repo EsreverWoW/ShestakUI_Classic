@@ -451,7 +451,7 @@ local function Shared(self, unit)
 		end
 		
 		-- Essence bar
-		if C.unitframe_class_bar.essence == true and T.class == "EVOKER" then
+		if T.Mainline and C.unitframe_class_bar.essence == true and T.class == "EVOKER" then
 			self.Essence = CreateFrame("Frame", self:GetName().."_Essence", self, "BackdropTemplate", "BackdropTemplate")
 			local maxEssence = UnitPowerMax(self.unit, Enum.PowerType.Essence)
 			self.Essence:CreateBackdrop("Default")
