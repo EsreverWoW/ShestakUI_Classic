@@ -124,7 +124,7 @@ for i, spell in pairs(spells) do
 
 	b:SetFontString(l)
 
-	b:RegisterForClicks("LeftButtonDown", "RightButtonDown") -- BETA not working, try to LeftButtonUp
+	b:RegisterForClicks("LeftButtonUp", "RightButtonUp")
 	b:SetAttribute("type1", "spell")
 	b:SetAttribute("spell1", teleport)
 	b:SetAttribute("type2", "spell")
