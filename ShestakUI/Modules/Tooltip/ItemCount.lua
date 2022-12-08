@@ -9,7 +9,7 @@ local function OnTooltipSetItem(self, data)
 	local num
 	if T.Classic then
 		local _, link = self:GetItem()
-		local num = GetItemCount(link, true)
+		num = GetItemCount(link, true)
 	else
 		num = GetItemCount(data.id, true)
 	end
