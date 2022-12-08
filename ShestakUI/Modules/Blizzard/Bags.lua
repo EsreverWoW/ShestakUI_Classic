@@ -542,7 +542,7 @@ function Stuffing:BagFrameSlotNew(p, slot)
 			if r ~= 0.65882 and g ~= 0.65882 and b ~= 0.65882 then
 				self:GetParent():SetBackdropBorderColor(r, g, b)
 			end
-			self:SetTexture("")
+			self:SetTexture(0)
 		end)
 
 		hooksecurefunc(ret.frame.IconBorder, "Hide", function(self)
@@ -572,7 +572,7 @@ function Stuffing:BagFrameSlotNew(p, slot)
 			if r ~= 0.65882 and g ~= 0.65882 and b ~= 0.65882 then
 				self:GetParent():SetBackdropBorderColor(r, g, b)
 			end
-			self:SetTexture("")
+			self:SetTexture(0)
 		end)
 
 		hooksecurefunc(ret.frame.IconBorder, "Hide", function(self)

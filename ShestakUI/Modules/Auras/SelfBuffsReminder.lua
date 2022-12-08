@@ -23,7 +23,7 @@ local function OnEvent(self, event)
 			self.icon:SetTexture(icon)
 			break
 		else
-			self.icon:SetTexture(nil)
+			self.icon:SetTexture(0)
 		end
 	end
 

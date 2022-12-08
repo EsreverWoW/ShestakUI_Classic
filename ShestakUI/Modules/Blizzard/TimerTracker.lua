@@ -8,7 +8,7 @@ local function SkinIt(bar)
 	for i = 1, bar:GetNumRegions() do
 		local region = select(i, bar:GetRegions())
 		if region:GetObjectType() == "Texture" then
-			region:SetTexture(nil)
+			region:SetTexture(0)
 		elseif region:GetObjectType() == "FontString" then
 			region:SetFont(C.media.pixel_font, C.media.pixel_font_size, C.media.pixel_font_style)
 			region:SetShadowOffset(0, 0)

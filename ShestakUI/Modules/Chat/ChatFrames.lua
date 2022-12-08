@@ -78,7 +78,7 @@ local function SetChatStyle(frame)
 
 	-- Hide textures
 	for j = 1, #CHAT_FRAME_TEXTURES do
-		_G[chat..CHAT_FRAME_TEXTURES[j]]:SetTexture(nil)
+		_G[chat..CHAT_FRAME_TEXTURES[j]]:SetTexture(0)
 	end
 
 	-- Removes Default ChatFrame Tabs texture
@@ -293,7 +293,7 @@ local function SetupChatPosAndFont()
 
 		QuickJoinToastButton.Toast:ClearAllPoints()
 		QuickJoinToastButton.Toast:SetPoint(unpack(C.position.bn_popup))
-		QuickJoinToastButton.Toast.Background:SetTexture("")
+		QuickJoinToastButton.Toast.Background:SetTexture(0)
 		QuickJoinToastButton.Toast:CreateBackdrop("Transparent")
 		QuickJoinToastButton.Toast.backdrop:SetPoint("TOPLEFT", 0, 0)
 		QuickJoinToastButton.Toast.backdrop:SetPoint("BOTTOMRIGHT", 0, 0)

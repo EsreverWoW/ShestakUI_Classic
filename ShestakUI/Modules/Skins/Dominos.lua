@@ -21,7 +21,7 @@ frame:SetScript("OnEvent", function()
 		local btname = _G[name.."Name"]
 		local normal = _G[name.."NormalTexture"]
 
-		flash:SetTexture("")
+		flash:SetTexture(0)
 		button:SetNormalTexture(0)
 
 		if border then

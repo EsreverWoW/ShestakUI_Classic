@@ -59,8 +59,8 @@ local function LoadSkin()
 		if ResultIcon:GetNormalTexture() then
 			ResultIcon:GetNormalTexture():CropIcon()
 		end
-		ResultIcon.ResultBorder:SetTexture(nil)
-		ResultIcon.IconBorder:SetTexture(nil)
+		ResultIcon.ResultBorder:SetTexture(0)
+		ResultIcon.IconBorder:SetTexture(0)
 
 		for i = 1, #TradeSkillFrame.DetailsFrame.Contents.Reagents do
 			local button = TradeSkillFrame.DetailsFrame.Contents.Reagents[i]

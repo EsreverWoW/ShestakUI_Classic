@@ -267,7 +267,7 @@ SpellList.makeSpellsList = function(_, db, double)
 	while _G["SpellList"..i.."_cbs"] do
 		_G["SpellList"..i.."_fs"]:SetText("")
 		_G["SpellList"..i.."_fs2"]:SetText("")
-		_G["SpellList"..i.."_texture"]:SetTexture(nil)
+		_G["SpellList"..i.."_texture"]:SetTexture(0)
 		_G["SpellList"..i.."_cbs"]:ClearAllPoints()
 		_G["SpellList"..i.."_cbs"]:Hide()
 		i = i + 1

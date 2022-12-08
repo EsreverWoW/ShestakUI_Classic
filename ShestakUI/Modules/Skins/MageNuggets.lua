@@ -25,7 +25,7 @@ frame:SetScript("OnEvent", function()
 	for i = 1, getn(sparks) do
 		local spark = _G[sparks[i]]
 		if spark then
-			spark:SetTexture(nil)
+			spark:SetTexture(0)
 		end
 	end
 

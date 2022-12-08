@@ -96,7 +96,7 @@ local function LoadSkin()
 
 		if not button.isSkinned then
 			button:GetRegions():Hide()
-			button.selectedTexture:SetTexture(nil)
+			button.selectedTexture:SetTexture(0)
 			button:CreateBackdrop("Overlay")
 			button.backdrop:SetPoint("TOPLEFT", 2, -2)
 			button.backdrop:SetPoint("BOTTOMRIGHT", -2, 2)
@@ -186,7 +186,7 @@ local function LoadSkin()
 
 		if not button.isSkinned then
 			button:GetRegions():Hide()
-			button.selectedTexture:SetTexture(nil)
+			button.selectedTexture:SetTexture(0)
 			button:CreateBackdrop("Overlay")
 			button.backdrop:SetPoint("TOPLEFT", 2, -2)
 			button.backdrop:SetPoint("BOTTOMRIGHT", -2, 2)
@@ -304,12 +304,12 @@ local function LoadSkin()
 			spell.icon:SetPoint("TOPLEFT", 2, -2)
 			spell.icon:SetPoint("BOTTOMRIGHT", -2, 2)
 
-			_G["PetJournalLoadoutPet"..i.."Spell"..j.."Background"]:SetTexture(nil)
-			_G["PetJournalLoadoutPet"..i.."Spell"..j.."Selected"]:SetTexture(nil)
+			_G["PetJournalLoadoutPet"..i.."Spell"..j.."Background"]:SetTexture(0)
+			_G["PetJournalLoadoutPet"..i.."Spell"..j.."Selected"]:SetTexture(0)
 		end
 
 		button.iconBorder:SetAlpha(0)
-		button.qualityBorder:SetTexture("")
+		button.qualityBorder:SetTexture(0)
 		button.levelBG:SetAlpha(0)
 		button.helpFrame:StripTextures()
 
@@ -374,10 +374,10 @@ local function LoadSkin()
 
 	PetJournalPetCardPetInfoIcon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 
-	PetJournalPetCardPetInfoLevelBubble:SetTexture(nil)
+	PetJournalPetCardPetInfoLevelBubble:SetTexture(0)
 	PetJournalPetCardPetInfoLevel:SetFontObject("SystemFont_Outline_Small")
 
-	PetJournalPetCardPetInfoQualityBorder:SetTexture(nil)
+	PetJournalPetCardPetInfoQualityBorder:SetTexture(0)
 
 	PetJournalPetCardHealthFrame.healthBar:StripTextures()
 	PetJournalPetCardHealthFrame.healthBar:CreateBackdrop("Overlay")
@@ -409,8 +409,8 @@ local function LoadSkin()
 	_G.ToyBoxFilterButton.ResetButton:SetPoint("CENTER", _G.ToyBoxFilterButton, "TOPRIGHT", 0, 0)
 
 	for i = 1, 18 do
-		ToyBox.iconsFrame["spellButton"..i].slotFrameCollected:SetTexture("")
-		ToyBox.iconsFrame["spellButton"..i].slotFrameUncollected:SetTexture("")
+		ToyBox.iconsFrame["spellButton"..i].slotFrameCollected:SetTexture(0)
+		ToyBox.iconsFrame["spellButton"..i].slotFrameUncollected:SetTexture(0)
 		local button = ToyBox.iconsFrame["spellButton"..i]
 		local icon = ToyBox.iconsFrame["spellButton"..i].iconTexture
 		local uicon = ToyBox.iconsFrame["spellButton"..i].iconTextureUncollected
@@ -468,8 +468,8 @@ local function LoadSkin()
 
 			button.levelBackground:SetAlpha(0)
 
-			button.slotFrameCollected:SetTexture("")
-			button.slotFrameUncollected:SetTexture("")
+			button.slotFrameCollected:SetTexture(0)
+			button.slotFrameUncollected:SetTexture(0)
 
 			button.iconTexture:SetPoint("TOPLEFT")
 			button.iconTexture:SetPoint("BOTTOMRIGHT")
@@ -587,8 +587,8 @@ local function LoadSkin()
 			button.backdrop:SetPoint("BOTTOMRIGHT", -2, 2)
 			button:StyleButton(nil, 4)
 
-			button.HighlightTexture:SetTexture(nil)
-			button.SelectedTexture:SetTexture(nil)
+			button.HighlightTexture:SetTexture(0)
+			button.SelectedTexture:SetTexture(0)
 
 			button.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 

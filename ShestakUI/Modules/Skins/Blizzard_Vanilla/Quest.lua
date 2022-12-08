@@ -122,7 +122,7 @@ local function LoadSkin()
 				else
 					self:GetParent().backdrop:SetBackdropBorderColor(unpack(C.media.border_color))
 				end
-				self:SetTexture("")
+				self:SetTexture(0)
 			end)
 
 			hooksecurefunc(button.IconBorder, "Hide", function(self)

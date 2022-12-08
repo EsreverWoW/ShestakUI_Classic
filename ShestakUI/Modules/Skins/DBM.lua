@@ -78,7 +78,7 @@ DBMSkin:SetScript("OnEvent", function()
 
 						if not spark.killed then
 							spark:SetAlpha(0)
-							spark:SetTexture(nil)
+							spark:SetTexture(0)
 							spark.killed = true
 						end
 
@@ -177,7 +177,7 @@ DBMSkin:SetScript("OnEvent", function()
 
 		_G["DBM_GUI_OptionsFrameList"]:HookScript("OnShow", function(self) self:SetTemplate("Overlay") end)
 		_G["DBM_GUI_OptionsFrameDBMOptions"]:HookScript("OnShow", function(self) self:SetTemplate("Overlay") end)
-		_G["DBM_GUI_OptionsFrameHeader"]:SetTexture("")
+		_G["DBM_GUI_OptionsFrameHeader"]:SetTexture(0)
 		_G["DBM_GUI_OptionsFrameHeader"]:ClearAllPoints()
 		_G["DBM_GUI_OptionsFrameHeader"]:SetPoint("TOP", DBM_GUI_OptionsFrame, 0, 7)
 

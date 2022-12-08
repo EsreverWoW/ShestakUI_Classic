@@ -294,7 +294,7 @@ local function SkinPetButton(self)
 
 	self.checked = true
 	self:StyleButton()
-	self.SelectedHighlight:SetTexture("")
+	self.SelectedHighlight:SetTexture(0)
 
 	self.CooldownShadow:SetAllPoints()
 	self.CooldownFlash:SetAllPoints()
@@ -362,10 +362,10 @@ for _, tt in pairs(tooltips) do
 	end
 
 	if tt.Delimiter1 then
-		tt.Delimiter1:SetTexture(nil)
-		tt.Delimiter2:SetTexture(nil)
+		tt.Delimiter1:SetTexture(0)
+		tt.Delimiter2:SetTexture(0)
 	elseif tt.Delimiter then
-		tt.Delimiter:SetTexture(nil)
+		tt.Delimiter:SetTexture(0)
 	end
 end
 

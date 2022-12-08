@@ -33,7 +33,7 @@ local function SkinButton(f)
 			local tex = tostring(region:GetTexture())
 
 			if tex and (texList[tex] or tex:find("Border") or tex:find("Background") or tex:find("AlphaMask")) then
-				region:SetTexture(nil)
+				region:SetTexture(0)
 			else
 				region:ClearAllPoints()
 				region:SetPoint("TOPLEFT", f, "TOPLEFT", 2, -2)

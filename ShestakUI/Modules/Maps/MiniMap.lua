@@ -108,7 +108,7 @@ frame:SetScript("OnEvent", function(self, event)
 		MiniMapLFGFrame:ClearAllPoints()
 		MiniMapLFGFrame:SetPoint("TOP", Minimap, "TOP", 1, 6)
 		MiniMapLFGFrame:SetScale(0.8)
-		MiniMapLFGFrame:SetHighlightTexture(nil)
+		MiniMapLFGFrame:SetHighlightTexture(0)
 		if T.Wrath then
 			MiniMapLFGFrameBorder:Hide()
 		else
@@ -142,7 +142,7 @@ end
 
 -- Hide North texture at top
 if T.Classic then
-	MinimapNorthTag:SetTexture(nil)
+	MinimapNorthTag:SetTexture(0)
 end
 
 -- Hide Zone Frame

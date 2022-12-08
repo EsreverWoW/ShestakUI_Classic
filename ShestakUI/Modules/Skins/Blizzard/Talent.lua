@@ -305,7 +305,7 @@ local function LoadSkin()
 
 	for _, button in pairs(PlayerTalentFrameTalents.PvpTalentFrame.TalentList.ScrollFrame.buttons) do
 		button:DisableDrawLayer("BACKGROUND")
-		button.Selected:SetTexture("")
+		button.Selected:SetTexture(0)
 		button:StyleButton()
 
 		button:CreateBackdrop("Default")

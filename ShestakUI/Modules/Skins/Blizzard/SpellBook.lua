@@ -52,7 +52,7 @@ local function LoadSkin()
 				button.TextBackground:Hide()
 				button.TextBackground2:Hide()
 				button.UnlearnedFrame:SetAlpha(0)
-				button:SetCheckedTexture("")
+				button:SetCheckedTexture(0)
 				button:SetPushedTexture(0)
 			end
 

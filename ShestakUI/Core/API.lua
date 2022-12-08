@@ -190,7 +190,7 @@ local function StripTextures(object, kill)
 				if kill then
 					region:Kill()
 				else
-					region:SetTexture(nil)
+					region:SetTexture(0)
 				end
 			end
 		end
@@ -437,7 +437,7 @@ function T.SkinScrollBar(frame)
 		end
 
 		if ThumbTexture then
-			ThumbTexture:SetTexture(nil)
+			ThumbTexture:SetTexture(0)
 			if not frame.thumbbg then
 				frame.thumbbg = CreateFrame("Frame", nil, frame)
 				frame.thumbbg:SetPoint("TOPLEFT", ThumbTexture, "TOPLEFT", 0, -3)
@@ -508,12 +508,12 @@ function T.SkinTab(tab, bg)
 	for _, object in pairs(tabs) do
 		local tex = _G[tab:GetName()..object]
 		if tex then
-			tex:SetTexture(nil)
+			tex:SetTexture(0)
 		end
 	end
 
 	if tab.GetHighlightTexture and tab:GetHighlightTexture() then
-		tab:GetHighlightTexture():SetTexture(nil)
+		tab:GetHighlightTexture():SetTexture(0)
 	else
 		tab:StripTextures()
 	end

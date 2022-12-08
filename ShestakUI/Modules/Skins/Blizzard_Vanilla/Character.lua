@@ -242,7 +242,7 @@ local function LoadSkin()
 
 			button:SkinButton()
 			button:SetTemplate()
-			button:SetCheckedTexture("")
+			button:SetCheckedTexture(0)
 
 			iconDisabled:SetAlpha(0)
 
@@ -274,8 +274,8 @@ local function LoadSkin()
 			factionBar:CreateBackdrop("Default")
 
 			factionButton:SetSize(14, 14)
-			factionButton:SetHighlightTexture(nil)
-			factionButton:SetNormalTexture("")
+			factionButton:SetHighlightTexture(0)
+			factionButton:SetNormalTexture(0)
 			factionButton.SetNormalTexture = T.dummy
 
 			if i == 1 then
@@ -301,7 +301,7 @@ local function LoadSkin()
 			name.SetWidth = T.dummy
 
 			header:SetSize(14, 14)
-			header:SetHighlightTexture(nil)
+			header:SetHighlightTexture(0)
 			header:SetPoint("TOPLEFT", bar, "TOPLEFT", -170, 0)
 
 			war:StripTextures()
@@ -363,7 +363,7 @@ local function LoadSkin()
 	SkillFrameExpandButtonFrame:DisableDrawLayer("BACKGROUND")
 
 	SkillFrameCollapseAllButton:SetSize(14, 14)
-	SkillFrameCollapseAllButton:SetHighlightTexture(nil)
+	SkillFrameCollapseAllButton:SetHighlightTexture(0)
 	SkillFrameCollapseAllButton:SetPoint("LEFT", SkillFrameExpandTabLeft, "RIGHT", -58, -3)
 
 	SkillFrameCollapseAllButtonText:ClearAllPoints()
@@ -398,10 +398,10 @@ local function LoadSkin()
 		bar:SetStatusBarTexture(C.media.blank)
 
 		border:StripTextures()
-		background:SetTexture(nil)
+		background:SetTexture(0)
 
 		label:SetSize(14, 14)
-		label:SetHighlightTexture(nil)
+		label:SetHighlightTexture(0)
 		label:SetPoint("TOPLEFT", bar, "TOPLEFT", -18, 0)
 
 		text:SetPoint("LEFT", label, "RIGHT", 6, -1)

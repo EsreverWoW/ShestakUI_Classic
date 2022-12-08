@@ -137,7 +137,7 @@ local function LoadSecondarySkin()
 				button.FrameHighlight:SetInside(button.backdrop)
 				button.FrameHighlight:SetColorTexture(1, 1, 1, 0.3)
 
-				button.NewOutline:SetTexture("")
+				button.NewOutline:SetTexture(0)
 				hooksecurefunc(button, "Init", updateNewGlow)
 
 				icon.IsSkinned = true

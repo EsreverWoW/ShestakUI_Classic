@@ -113,7 +113,7 @@ local function Update(object, _, unit)
 				object:SetBackdropBorderColor(color.r, color.g, color.b, color.a)
 			end
 		elseif object.DebuffHighlightUseTexture then
-			object.DebuffHighlight:SetTexture(nil)
+			object.DebuffHighlight:SetTexture(0)
 		else
 			local color = origColors[object]
 			object.DebuffHighlight:SetVertexColor(color.r, color.g, color.b, color.a)

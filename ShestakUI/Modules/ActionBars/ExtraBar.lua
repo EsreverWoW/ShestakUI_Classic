@@ -67,10 +67,10 @@ local button = ExtraActionButton1
 local texture = button.style
 local disableTexture = function(style, texture)
 	if texture then
-		style:SetTexture(nil)
+		style:SetTexture(0)
 	end
 end
-button.style:SetTexture(nil)
+button.style:SetTexture(0)
 hooksecurefunc(texture, "SetTexture", disableTexture)
 
 button:SetSize(size, size)

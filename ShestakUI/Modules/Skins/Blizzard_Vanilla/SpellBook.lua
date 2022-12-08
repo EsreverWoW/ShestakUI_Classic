@@ -39,8 +39,8 @@ local function LoadSkin()
 				-- button.TextBackground:Hide()
 				-- button.TextBackground2:Hide()
 				-- button.UnlearnedFrame:SetAlpha(0)
-				button:SetCheckedTexture("")
-				button:SetPushedTexture("")
+				button:SetCheckedTexture(0)
+				button:SetPushedTexture(0)
 			end
 
 			if _G["SpellButton"..i.."Highlight"] then
@@ -128,8 +128,8 @@ local function LoadSkin()
 			tab:SetPoint("LEFT", lastTab, "RIGHT", -16, 0)
 		end
 		tab:StripTextures()
-		tab:SetNormalTexture("")
-		tab:SetHighlightTexture("")
+		tab:SetNormalTexture(0)
+		tab:SetHighlightTexture(0)
 		tab:SetSize(tab:GetWidth() * 0.75, 32)
 		T.SkinTab(tab)
 	end

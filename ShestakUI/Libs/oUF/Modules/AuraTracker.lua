@@ -62,7 +62,7 @@ local function Update(object, _, unit)
 			object.AuraTracker.active = true
 		end
 	elseif not auraName then -- No aura found and one is shown? Kill it since it's no longer active!
-		object.AuraTracker.icon:SetTexture("")
+		object.AuraTracker.icon:SetTexture(0)
 		object.AuraTracker.text:SetText("")
 		object.AuraTracker.active = false
 	end

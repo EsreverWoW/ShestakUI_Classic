@@ -29,7 +29,7 @@ local function LoadSkin()
 			local item = _G["ContainerFrame"..i.."Item"..j]
 			local icon = _G["ContainerFrame"..i.."Item"..j.."IconTexture"]
 
-			item:SetNormalTexture("")
+			item:SetNormalTexture(0)
 			item:StyleButton()
 			item:SetTemplate("Default")
 
@@ -56,7 +56,7 @@ local function LoadSkin()
 		local item = _G["BankFrameItem"..i]
 		local icon = _G["BankFrameItem"..i.."IconTexture"]
 
-		item:SetNormalTexture(nil)
+		item:SetNormalTexture(0)
 		item:StyleButton()
 		item:SetTemplate("Default")
 

@@ -133,7 +133,7 @@ local function LoadSkin()
 		suggestion.centerDisplay.title.text:SetTextColor(1, 1, 1)
 		suggestion.centerDisplay.description.text:SetTextColor(1, 1, 1)
 		suggestion.reward.iconRing:Hide()
-		suggestion.reward.iconRingHighlight:SetTexture("")
+		suggestion.reward.iconRingHighlight:SetTexture(0)
 
 		suggestion.icon.b = CreateFrame("Frame", nil, suggestion)
 		suggestion.icon.b:SetTemplate("Default")
@@ -222,7 +222,7 @@ local function LoadSkin()
 		local item = items[i].lootFrame
 		hooksecurefunc(item.IconBorder, "SetVertexColor", function(self, r, g, b)
 			self:GetParent().IconBackdrop:SetBackdropBorderColor(r, g, b)
-			self:SetTexture("")
+			self:SetTexture(0)
 		end)
 		item:CreateBackdrop("Overlay")
 		item.backdrop:SetPoint("TOPLEFT", 1, -4)
@@ -257,7 +257,7 @@ local function LoadSkin()
 			header.descriptionBG:SetAlpha(0)
 			header.descriptionBGBottom:SetAlpha(0)
 			for i = 4, 18 do
-				select(i, header.button:GetRegions()):SetTexture("")
+				select(i, header.button:GetRegions()):SetTexture(0)
 			end
 
 			header.button:SkinButton()
@@ -295,7 +295,7 @@ local function LoadSkin()
 				header.descriptionBG:SetAlpha(0)
 				header.descriptionBGBottom:SetAlpha(0)
 				for i = 4, 18 do
-					select(i, header.button:GetRegions()):SetTexture("")
+					select(i, header.button:GetRegions()):SetTexture(0)
 				end
 
 				header.description:SetTextColor(1, 1, 1)

@@ -147,7 +147,7 @@ local function OnUpdate(_, update)
 		if runtimer > (fadeInTime + holdTime + fadeOutTime) then
 			tremove(animating, 1)
 			runtimer = 0
-			icon:SetTexture(nil)
+			icon:SetTexture(0)
 			frame:SetBackdropBorderColor(0, 0, 0, 0)
 			frame:SetBackdropColor(0, 0, 0, 0)
 		else

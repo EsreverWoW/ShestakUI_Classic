@@ -136,7 +136,7 @@ ricon:SetHeight(18)
 ricon:SetWidth(18)
 ricon:SetPoint("BOTTOM", GameTooltip, "TOP", 0, 5)
 
-GameTooltip:HookScript("OnHide", function() ricon:SetTexture(nil) end)
+GameTooltip:HookScript("OnHide", function() ricon:SetTexture(0) end)
 
 -- Add "Targeted By" line
 local targetedList = {}
@@ -387,7 +387,7 @@ local OnTooltipSetUnit = function(self)
 		if raidIndex then
 			ricon:SetTexture("Interface\\TargetingFrame\\UI-RaidTargetingIcon_"..raidIndex)
 		else
-			ricon:SetTexture(nil)
+			ricon:SetTexture(0)
 		end
 	end
 
@@ -617,7 +617,7 @@ if T.Mainline then
 		if r ~= 0.65882 and g ~= 0.65882 and b ~= 0.65882 then
 			self:GetParent().backdrop:SetBackdropBorderColor(r, g, b)
 		end
-		self:SetTexture("")
+		self:SetTexture(0)
 	end)
 
 	hooksecurefunc(GameTooltip.ItemTooltip.IconBorder, "Hide", function(self)
@@ -646,7 +646,7 @@ if icon then
 		if r ~= 0.65882 and g ~= 0.65882 and b ~= 0.65882 then
 			self:GetParent().backdrop:SetBackdropBorderColor(r, g, b)
 		end
-		self:SetTexture("")
+		self:SetTexture(0)
 	end)
 
 	hooksecurefunc(reward.IconBorder, "Hide", function(self)

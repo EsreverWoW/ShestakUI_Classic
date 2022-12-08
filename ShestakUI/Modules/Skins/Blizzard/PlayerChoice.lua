@@ -90,7 +90,7 @@ local function LoadSkin()
 						reward.Icon:SkinIcon()
 					end
 					if reward.Name then reward.Name:SetTextColor(1, 1, 1) end
-					if reward.IconBorder then reward.IconBorder:SetTexture("") end
+					if reward.IconBorder then reward.IconBorder:SetTexture(0) end
 					local r, g, b
 					if reward.IconBorder and reward.IconBorder:IsShown() then
 						r, g, b = reward.IconBorder:GetVertexColor()

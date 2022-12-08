@@ -181,8 +181,8 @@ local function LoadSkin()
 
 		if portrait.PortraitRing then
 			portrait.PortraitRing:Hide()
-			portrait.PortraitRingQuality:SetTexture("")
-			portrait.PortraitRingCover:SetTexture("")
+			portrait.PortraitRingQuality:SetTexture(0)
+			portrait.PortraitRingCover:SetTexture(0)
 		end
 
 		if portrait.PuckBorder then portrait.PuckBorder:SetAlpha(0) end
@@ -234,8 +234,8 @@ local function LoadSkin()
 						button.Follower:StyleButton()
 
 						button.Follower.BG:Hide()
-						button.Follower.Selection:SetTexture("")
-						button.Follower.AbilitiesBG:SetTexture("")
+						button.Follower.Selection:SetTexture(0)
+						button.Follower.AbilitiesBG:SetTexture(0)
 						button.Follower.BusyFrame:SetAllPoints()
 						button.Follower.Name:SetWordWrap(false)
 
@@ -253,7 +253,7 @@ local function LoadSkin()
 						if counter and not counter.styled then
 							-- counter:SetTemplate("Default") -- FIXME looks ugly, not pixelperfect
 							if counter.Border then
-								counter.Border:SetTexture("")
+								counter.Border:SetTexture(0)
 							end
 							if counter.Icon then
 								counter.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
@@ -312,7 +312,7 @@ local function LoadSkin()
 			end
 
 			if reward.IconBorder then
-				reward.IconBorder:SetTexture(nil)
+				reward.IconBorder:SetTexture(0)
 			end
 
 			if reward.IconBorder and reward.IconBorder:IsShown() then
@@ -336,7 +336,7 @@ local function LoadSkin()
 
 	hooksecurefunc("GarrisonMissionPage_SetReward", function(frame)
 		frame.BG:Hide()
-		frame.IconBorder:SetTexture("")
+		frame.IconBorder:SetTexture(0)
 		if not frame.backdrop then
 			frame.Icon:SkinIcon()
 			frame.backdrop:SetFrameLevel(frame:GetFrameLevel())
@@ -485,7 +485,7 @@ local function LoadSkin()
 					IconButton.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 					IconButton.Icon:SetDrawLayer("BACKGROUND", 1)
 					IconButton:CreateBackdrop("Default")
-					IconButton.Border:SetTexture(nil)
+					IconButton.Border:SetTexture(0)
 				end
 			end
 		end
@@ -508,8 +508,8 @@ local function LoadSkin()
 			for i = 1, #equipment do
 				local button = equipment[i]
 				if button then
-					button.Border:SetTexture(nil)
-					button.BG:SetTexture(nil)
+					button.Border:SetTexture(0)
+					button.BG:SetTexture(0)
 					button.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 					button:SetScale(1)
 					if not button.backdrop then
@@ -526,7 +526,7 @@ local function LoadSkin()
 			if not autoSpell.backdrop then
 				autoSpell.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 				autoSpell:CreateBackdrop("Default")
-				autoSpell.SpellBorder:SetTexture("")
+				autoSpell.SpellBorder:SetTexture(0)
 				autoSpell.IconMask:Hide()
 			end
 		end
@@ -593,7 +593,7 @@ local function LoadSkin()
 					button.backdrop:SetPoint("BOTTOMRIGHT", 1, -1)
 					button:StyleButton(nil, 1)
 					button.BG:Hide()
-					button.Selection:SetTexture("")
+					button.Selection:SetTexture(0)
 					button.Portrait:SetPoint("TOPLEFT", 2, 0)
 				end
 
@@ -618,7 +618,7 @@ local function LoadSkin()
 		for i = 1, #obj.Traits do
 			btn = obj.Traits[i]
 			if not btn.backdrop then
-				btn.Border:SetTexture(nil)
+				btn.Border:SetTexture(0)
 				btn.Portrait:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 				btn:CreateBackdrop("Default")
 				btn.backdrop:SetPoint("TOPLEFT", btn.Portrait, "TOPLEFT", -2, 2)
@@ -630,7 +630,7 @@ local function LoadSkin()
 			btn = obj.EquipmentFrame.Equipment[i]
 			if not btn.backdrop then
 				btn:DisableDrawLayer("BACKGROUND")
-				btn.Border:SetTexture(nil)
+				btn.Border:SetTexture(0)
 				btn.Counter.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 				btn.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 				btn:CreateBackdrop("Default")
@@ -715,7 +715,7 @@ local function LoadSkin()
 		if r ~= 1 and g ~= 1 and b ~= 1 then
 			CapacitiveFollower.Portrait.IconBackdrop:SetBackdropBorderColor(r, g, b)
 		end
-		self:SetTexture("")
+		self:SetTexture(0)
 	end)
 
 	hooksecurefunc("GarrisonCapacitiveDisplayFrame_Update", function(self)
@@ -816,7 +816,7 @@ local function LoadSkin()
 		if r ~= 1 and g ~= 1 and b ~= 1 then
 			OrderHallMissionFrameMissions.CombatAllyUI.InProgress.PortraitFrame.backdrop:SetBackdropBorderColor(r, g, b)
 		end
-		self:SetTexture("")
+		self:SetTexture(0)
 	end)
 
 	OrderHallMissionFrameMissions.MaterialFrame:StripTextures()

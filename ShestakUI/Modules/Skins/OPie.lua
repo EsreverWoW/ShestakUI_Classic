@@ -177,7 +177,7 @@ local function CreateIndicator(name, parent, size)
 	-- ShestakUI Skin
 
 	if not button.isSkinned then
-		button.NormalTexture:SetTexture(nil)
+		button.NormalTexture:SetTexture(0)
 		button:CreateBackdrop("Overlay")
 		button:StyleButton(nil, 4)
 		button:CreateBackdrop("Default")

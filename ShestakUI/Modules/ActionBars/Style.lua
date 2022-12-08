@@ -65,11 +65,11 @@ local function StyleNormalButton(button, size)
 		-- button:GetNormalTexture():SetAlpha(0)
 		-- button:GetNormalTexture():Hide()
 
-		flash:SetTexture("")
+		flash:SetTexture(0)
 		button:SetNormalTexture(0)
 
 		if float then
-			float:SetTexture("")
+			float:SetTexture(0)
 		end
 
 		if border then
@@ -136,14 +136,14 @@ local function StyleNormalButton(button, size)
 		button.iborder:SetFrameLevel(button:GetFrameLevel())
 
 		if button.QuickKeybindHighlightTexture then
-			button.QuickKeybindHighlightTexture:SetTexture("")
+			button.QuickKeybindHighlightTexture:SetTexture(0)
 		end
 
 		if flyoutBorder then
-			flyoutBorder:SetTexture("")
+			flyoutBorder:SetTexture(0)
 		end
 		if flyoutBorderShadow then
-			flyoutBorderShadow:SetTexture("")
+			flyoutBorderShadow:SetTexture(0)
 		end
 
 		if autocast then
@@ -222,7 +222,7 @@ local function StyleSmallButton(normal, button, icon, name, pet)
 		end
 
 		if button.QuickKeybindHighlightTexture then
-			button.QuickKeybindHighlightTexture:SetTexture("")
+			button.QuickKeybindHighlightTexture:SetTexture(0)
 		end
 
 		button:StyleButton()
@@ -426,8 +426,8 @@ local SLOT_EMPTY_TCOORDS = {
 -- Totem Fly Out
 local function StyleTotemFlyout(flyout)
 	-- Remove blizzard flyout texture
-	flyout.top:SetTexture(nil)
-	flyout.middle:SetTexture(nil)
+	flyout.top:SetTexture(0)
+	flyout.middle:SetTexture(0)
 
 	-- Buttons
 	local last = nil
@@ -470,7 +470,7 @@ local function StyleTotemFlyout(flyout)
 	close:GetHighlightTexture():SetTexture([[Interface\Buttons\ButtonHilight-Square]])
 	close:GetHighlightTexture():SetPoint("TOPLEFT", close, "TOPLEFT", 2, -2)
 	close:GetHighlightTexture():SetPoint("BOTTOMRIGHT", close, "BOTTOMRIGHT", -2, 2)
-	close:GetNormalTexture():SetTexture(nil)
+	close:GetNormalTexture():SetTexture(0)
 	close:ClearAllPoints()
 	close:SetPoint("BOTTOMLEFT", last, "TOPLEFT", 0, C.actionbar.button_space)
 	close:SetPoint("BOTTOMRIGHT", last, "TOPRIGHT", 0, C.actionbar.button_space)
@@ -484,8 +484,8 @@ hooksecurefunc("MultiCastFlyoutFrame_ToggleFlyout", function(self) StyleTotemFly
 
 -- Totem Fly Out Buttons
 local function StyleTotemOpenButton(button, parent)
-	button:GetHighlightTexture():SetTexture(nil)
-	button:GetNormalTexture():SetTexture(nil)
+	button:GetHighlightTexture():SetTexture(0)
+	button:GetNormalTexture():SetTexture(0)
 	button:SetHeight(20)
 	button:ClearAllPoints()
 	button:SetPoint("BOTTOMLEFT", parent, "TOPLEFT", 0, -1)
@@ -517,7 +517,7 @@ local bordercolors = {
 -- Totem Slot Buttons
 local function StyleTotemSlotButton(button, index)
 	button:SetTemplate("Default")
-	button.overlayTex:SetTexture(nil)
+	button.overlayTex:SetTexture(0)
 	button.background:SetDrawLayer("ARTWORK")
 	button.background:ClearAllPoints()
 	button.background:SetPoint("TOPLEFT", button, "TOPLEFT", 2, -2)
@@ -556,7 +556,7 @@ local function StyleTotemActionButton(button, index)
 		icon:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", -2, 2)
 	end
 
-	button.overlayTex:SetTexture(nil)
+	button.overlayTex:SetTexture(0)
 	button.overlayTex:Hide()
 	button:GetNormalTexture():SetTexCoord(0, 0, 0, 0)
 
@@ -597,14 +597,14 @@ local function StyleTotemSpellButton(button, index)
 	end
 
 	button:SetTemplate("Default")
-	button:GetNormalTexture():SetTexture(nil)
+	button:GetNormalTexture():SetTexture(0)
 
 	if not InCombatLockdown() then
 		button:SetSize(C.actionbar.button_size, C.actionbar.button_size)
 	end
 
-	_G[name.."Highlight"]:SetTexture(nil)
-	_G[name.."NormalTexture"]:SetTexture(nil)
+	_G[name.."Highlight"]:SetTexture(0)
+	_G[name.."NormalTexture"]:SetTexture(0)
 	button:StyleButton(true)
 end
 hooksecurefunc("MultiCastSummonSpellButton_Update", function(self) StyleTotemSpellButton(self, 0) end)

@@ -152,7 +152,7 @@ local function LoadSkin()
 					button:SetPoint("CENTER")
 					button:SetHitRectInsets(1, 1, 1, 1)
 
-					highlight:SetTexture("")
+					highlight:SetTexture(0)
 					highlight.SetTexture = T.dummy
 
 					text:ClearAllPoints()

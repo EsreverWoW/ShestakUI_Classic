@@ -624,7 +624,7 @@ T.AuraTrackerTime = function(self, elapsed)
 			self.text:SetTextColor(1, 1, 1)
 		end
 		if self.timeleft <= 0 then
-			self.icon:SetTexture("")
+			self.icon:SetTexture(0)
 			self.text:SetText("")
 		end
 		self.text:SetFormattedText("%.1f", self.timeleft)

@@ -27,7 +27,7 @@ local function LoadSkin()
 	BonusRollFrame.PromptFrame.Timer:SetStatusBarTexture(C.media.texture)
 	BonusRollFrame.PromptFrame.Timer:SetPoint("BOTTOMLEFT", BonusRollFrame.PromptFrame, "BOTTOMLEFT", 0, 1)
 
-	BonusRollFrame.SpecRing:SetTexture("")
+	BonusRollFrame.SpecRing:SetTexture(0)
 	BonusRollFrame.SpecIcon:SetPoint("TOPLEFT", BonusRollFrame, "TOPLEFT", 0, -3)
 	BonusRollFrame.SpecIcon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 	-- BonusRollFrame.SpecIcon:SetTexture("Interface\\Icons\\spell_nature_brilliance")

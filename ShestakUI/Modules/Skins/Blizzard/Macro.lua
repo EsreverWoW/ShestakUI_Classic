@@ -60,7 +60,7 @@ local function LoadSkin()
 	-- Big icon
 	MacroFrameSelectedMacroButton:StripTextures()
 	MacroFrameSelectedMacroButton:StyleButton(true)
-	MacroFrameSelectedMacroButton:GetNormalTexture():SetTexture(nil)
+	MacroFrameSelectedMacroButton:GetNormalTexture():SetTexture(0)
 	MacroFrameSelectedMacroButton:SetTemplate("Default")
 	MacroFrameSelectedMacroButtonIcon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 	MacroFrameSelectedMacroButtonIcon:ClearAllPoints()

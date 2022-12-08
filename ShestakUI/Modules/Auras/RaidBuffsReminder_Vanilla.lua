@@ -39,7 +39,7 @@ local function CheckVanillaElixir()
 	local requireFlask, otherBuffsRequired = T.ReminderFlaskRequirements()
 	local hasFlask, otherBuffsCount, meetsRequirements = false, 0, false
 
-	FlaskFrame.t:SetTexture("")
+	FlaskFrame.t:SetTexture(0)
 
 	if requireFlask then
 		if #flaskBuffs > 0 then

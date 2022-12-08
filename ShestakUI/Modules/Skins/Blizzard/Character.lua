@@ -11,7 +11,7 @@ local function LoadSkin()
 	local function UpdateAzeriteItem(self)
 		if not self.styled then
 			self.AzeriteTexture:SetAlpha(0)
-			self.RankFrame.Texture:SetTexture("")
+			self.RankFrame.Texture:SetTexture(0)
 			self.RankFrame.Label:SetFontObject("SystemFont_Outline_Small")
 			self.RankFrame.Label:SetShadowOffset(0, 0)
 			self.RankFrame.Label:SetPoint("CENTER", self.RankFrame.Texture, 0, 2)
@@ -120,7 +120,7 @@ local function LoadSkin()
 				button.IconBorder:Hide()
 
 				icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-				button:GetNormalTexture():SetTexture(nil)
+				button:GetNormalTexture():SetTexture(0)
 
 				icon:ClearAllPoints()
 				icon:SetPoint("TOPLEFT", 2, -2)
@@ -213,11 +213,11 @@ local function LoadSkin()
 		for _, child in next, {frame.ScrollTarget:GetChildren()} do
 			if child.icon and not child.isSkinned then
 
-				child.BgTop:SetTexture(nil)
-				child.BgBottom:SetTexture(nil)
-				child.BgMiddle:SetTexture(nil)
+				child.BgTop:SetTexture(0)
+				child.BgBottom:SetTexture(0)
+				child.BgMiddle:SetTexture(0)
 
-				child.Check:SetTexture(nil)
+				child.Check:SetTexture(0)
 				child.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 
 				if not child.backdrop then

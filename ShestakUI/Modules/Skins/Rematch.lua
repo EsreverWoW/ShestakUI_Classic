@@ -73,7 +73,7 @@ skin.panels = {
 
 	Toolbar = function(self)
 		for _,button in ipairs(self.Buttons) do
-			button.IconBorder:SetTexture(nil)
+			button.IconBorder:SetTexture(0)
 			button:CreateBackdrop("Overlay")
 			button:StyleButton(nil, 4)
 
@@ -207,7 +207,7 @@ skin.panels = {
 			button.HasStuff:SetAlpha(1)
 		end
 		for _,button in ipairs(self.Top.TypeBar.Buttons) do
-			button.IconBorder:SetTexture(nil)
+			button.IconBorder:SetTexture(0)
 			button:CreateBackdrop("Overlay")
 			button:StyleButton(nil, 4)
 			button:SetSize(20, 20)
@@ -277,7 +277,7 @@ skin.panels = {
 		for i = 1, 3 do
 			for j = 1, 3 do
 				self.Loadouts[i].Abilities[j].IconBorder:Hide()
-				self.Loadouts[i].Abilities[j].IconBorder:SetTexture(nil)
+				self.Loadouts[i].Abilities[j].IconBorder:SetTexture(0)
 				self.Loadouts[i].Abilities[j]:StyleButton(nil, 4)
 				self.Loadouts[i].Abilities[j]:SetSize(30, 30)
 				self.Loadouts[i].Abilities[j]:CreateBackdrop("Default")
@@ -601,12 +601,12 @@ function skin:HandlePanelTab(tab)
 	if not tab then return end
 	for _,texture in ipairs({tab:GetRegions()}) do
 		if texture:GetDrawLayer()=="BACKGROUND" then
-				texture:SetTexture(nil)
+				texture:SetTexture(0)
 		end
 	end
 
 	if tab.GetHighlightTexture and tab:GetHighlightTexture() then
-		tab:GetHighlightTexture():SetTexture(nil)
+		tab:GetHighlightTexture():SetTexture(0)
 	else
 		tab:StripTextures()
 	end
@@ -642,7 +642,7 @@ function skin:HandleAutoScrollFrame(listFrame)
 	downButton:SetSize(downButton:GetWidth() + 7,downButton:GetHeight() + 7)
 
 	local scrollBar = listFrame.ScrollFrame.ScrollBar
-	scrollBar:GetThumbTexture():SetTexture(nil)
+	scrollBar:GetThumbTexture():SetTexture(0)
 	scrollBar.thumbbg = CreateFrame("Frame", nil, scrollBar)
 	scrollBar.thumbbg:SetPoint("TOPLEFT", scrollBar:GetThumbTexture(), "TOPLEFT", 0, -3)
 	scrollBar.thumbbg:SetPoint("BOTTOMRIGHT", scrollBar:GetThumbTexture(), "BOTTOMRIGHT", 0, 3)

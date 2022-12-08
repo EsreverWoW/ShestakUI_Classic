@@ -35,7 +35,7 @@ for _, button in pairs(MICRO_BUTTONS) do
 	bu:SetParent(frame)
 	bu.SetParent = T.dummy
 	if T.Classic then
-		_G[button.."Flash"]:SetTexture("")
+		_G[button.."Flash"]:SetTexture(0)
 	else
 		if button.Flash then
 			button.Flash:SetInside()

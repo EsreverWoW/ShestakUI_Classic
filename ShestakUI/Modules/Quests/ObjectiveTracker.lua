@@ -469,7 +469,7 @@ StageBlock.backdrop:SetPoint("BOTTOMRIGHT", ScenarioStageBlock.NormalBG, -6, 5)
 
 StageBlock.NormalBG:SetAlpha(0)
 StageBlock.FinalBG:SetAlpha(0)
-StageBlock.GlowTexture:SetTexture("")
+StageBlock.GlowTexture:SetTexture(0)
 
 ----------------------------------------------------------------------------------------
 --	Skin ScenarioStageBlock

@@ -118,7 +118,7 @@ local function LoadSkin()
 		button.backdrop:SetAllPoints()
 		button:StyleButton()
 
-		button.bg:SetTexture("")
+		button.bg:SetTexture(0)
 
 		button.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 		button.icon:SetPoint("LEFT", button, "LEFT", 10, 0)
@@ -165,7 +165,7 @@ local function LoadSkin()
 				if r ~= 0.65882 and g ~= 0.65882 and b ~= 0.65882 then
 					self:GetParent().border.backdrop:SetBackdropBorderColor(r, g, b)
 				end
-				self:SetTexture("")
+				self:SetTexture(0)
 			end)
 
 			hooksecurefunc(item.IconBorder, "Hide", function(self)
@@ -177,7 +177,7 @@ local function LoadSkin()
 
 			item.NameFrame:Hide()
 
-			item.shortageBorder:SetTexture(nil)
+			item.shortageBorder:SetTexture(0)
 
 			item.roleIcon1:SetParent(item.border)
 			item.roleIcon2:SetParent(item.border)
@@ -321,9 +321,9 @@ local function LoadSkin()
 	T.SkinCloseButton(LFGDungeonReadyStatusCloseButton, nil, "-")
 	T.SkinCloseButton(LFGDungeonReadyDialogCloseButton, LFGDungeonReadyDialog, "-")
 
-	LFDQueueFrameRandomScrollFrameScrollBackground:SetTexture(nil)
-	LFDQueueFrameRandomScrollFrameScrollBackgroundTopLeft:SetTexture(nil)
-	LFDQueueFrameRandomScrollFrameScrollBackgroundBottomRight:SetTexture(nil)
+	LFDQueueFrameRandomScrollFrameScrollBackground:SetTexture(0)
+	LFDQueueFrameRandomScrollFrameScrollBackgroundTopLeft:SetTexture(0)
+	LFDQueueFrameRandomScrollFrameScrollBackgroundBottomRight:SetTexture(0)
 
 	LFGInvitePopup:StripTextures()
 	LFGInvitePopup:SetTemplate("Transparent")
@@ -539,8 +539,8 @@ local function LoadSecondarySkin()
 
 	local function HandleAffixIcons(self)
 		for _, frame in ipairs(self.Affixes) do
-			frame.Border:SetTexture(nil)
-			frame.Portrait:SetTexture(nil)
+			frame.Border:SetTexture(0)
+			frame.Portrait:SetTexture(0)
 
 			if frame.info then
 				frame.Portrait:SetTexture(CHALLENGE_MODE_EXTRA_AFFIX_INFO[frame.info.key].texture)

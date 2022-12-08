@@ -430,7 +430,7 @@ local function LoadAuctionatorSkin()
 			for i = 1, #tabs do
 				local tab = tabs[i]
 				tab:DisableDrawLayer("BACKGROUND")
-				tab:GetHighlightTexture():SetTexture(nil)
+				tab:GetHighlightTexture():SetTexture(0)
 				tab.backdrop = CreateFrame("Frame", nil, tab)
 				tab.backdrop:SetFrameLevel(tab:GetFrameLevel() - 1)
 				tab.backdrop:SetTemplate("Overlay")
