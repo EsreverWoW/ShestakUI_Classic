@@ -73,7 +73,7 @@ local function StyleNormalButton(button, size)
 		end
 
 		if border then
-			border:Kill()
+			border:SetTexture(0)
 		end
 
 		if not isMultiCast and not isExtraAction then
