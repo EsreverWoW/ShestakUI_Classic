@@ -48,15 +48,17 @@ local function Update(self, _, unit, powerType)
 	local s = 0
 
 	if element.max ~= max then
-		if max == 7 then
-			element[7]:Show()
-			element[6]:Show()
-		elseif max == 6 then
-			element[7]:Hide()
-			element[6]:Show()
-		else
-			element[7]:Hide()
-			element[6]:Hide()
+		if(oUF:IsMainline()) then
+			if max == 7 then
+				element[7]:Show()
+				element[6]:Show()
+			elseif max == 6 then
+				element[7]:Hide()
+				element[6]:Show()
+			else
+				element[7]:Hide()
+				element[6]:Hide()
+			end
 		end
 
 		for i = 1, max do
