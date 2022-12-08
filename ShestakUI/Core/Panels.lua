@@ -220,7 +220,7 @@ toppanel.bcr:SetTexture(C.media.blank)
 
 local r, g, b = unpack(C.media.classborder_color)
 
-if T.Classic then
+if T.Classic and not T.Wrath341 then
 	toppanel.bgl:SetGradientAlpha("HORIZONTAL", r, g, b, 0, r, g, b, 0.1)
 	toppanel.bgr:SetGradientAlpha("HORIZONTAL", r, g, b, 0.1, r, g, b, 0)
 	toppanel.tbl:SetGradientAlpha("HORIZONTAL", 0, 0, 0, 0, 0, 0, 0, 1)

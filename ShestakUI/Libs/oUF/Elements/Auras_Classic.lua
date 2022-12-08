@@ -203,7 +203,7 @@ local function updateAura(element, unit, index, offset, filter, isHarmful, visib
 			end
 
 			if(button.Icon) then button.Icon:SetTexture(texture) end
-			if(button.Count) then button.Count:SetText(count > 1 and count) end
+			if(button.Count) then button.Count:SetText(count > 1 and count or '') end
 
 			local width = element.width or element.size or 16
 			local height = element.height or element.size or 16

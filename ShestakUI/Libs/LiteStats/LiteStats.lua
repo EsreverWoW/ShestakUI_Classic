@@ -648,7 +648,7 @@ if friends.enabled then
 	end
 	local clientTags = {}
 
-	if T.Classic then
+	if T.Classic and not T.Wrath341 then
 		clientTags = {
 			[BNET_CLIENT_D3] = "Diablo 3",
 			[BNET_CLIENT_D2] = "Diablo 2: Resurrected",

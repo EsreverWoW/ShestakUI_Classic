@@ -24,7 +24,7 @@ T.Wrath341 = T.Wrath and T.toc >= 30401
 T.HiDPI = GetScreenHeight() / T.screenHeight < 0.75
 
 -- BETA
-if T.newPatch then
+if T.newPatch or T.Wrath341 then
 	GetContainerNumSlots = _G.GetContainerNumSlots or C_Container.GetContainerNumSlots
 	GetContainerNumFreeSlots = _G.GetContainerNumFreeSlots or C_Container.GetContainerNumFreeSlots
 	GetContainerItemLink = _G.GetContainerItemLink or C_Container.GetContainerItemLink
