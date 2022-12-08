@@ -39,7 +39,7 @@ local function Update(self, _, unit, powerType)
 		end
 	end
 
-	if max == 0 or max > oUF:IsClassic() and 5 or 7 then
+	if max == 0 or max > (oUF:IsClassic() and 5 or 7) then
 		max = MAX_COMBO_POINTS
 	end
 
@@ -180,7 +180,7 @@ local Enable = function(self)
 			element.handler:SetScript("OnEvent", function() Visibility(self) end)
 		end
 
-		for i = 1, oUF:IsClassic() and 5 or 7 do
+		for i = 1, (oUF:IsClassic() and 5 or 7) do
 			element[i]:SetStatusBarColor(unpack(element.Colors[i]))
 		end
 
