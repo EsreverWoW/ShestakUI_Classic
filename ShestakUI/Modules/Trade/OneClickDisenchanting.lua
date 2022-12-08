@@ -158,7 +158,7 @@ function button:PLAYER_LOGIN()
 	end
 
 	local function OnTooltipSetUnit(self)
-		local _, link = self:GetItem()
+		local _, link = T.Classic and self:GetItem() or TooltipUtil.GetDisplayedItem(self)
 
 		local auctionFrame = T.Classic and AuctionFrame or AuctionHouseFrame
 
