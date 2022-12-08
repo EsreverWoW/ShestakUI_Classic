@@ -11,7 +11,11 @@ local function LoadSkin()
 	ChannelFrame.NewButton:SkinButton()
 	ChannelFrame.SettingsButton:SkinButton()
 
-	T.SkinScrollBar(ChannelFrame.ChannelRoster.ScrollFrame.scrollBar)
+	if T.Classic then
+		T.SkinScrollBar(ChannelFrame.ChannelRoster.ScrollFrame.scrollBar)
+	else
+		T.SkinScrollBar(ChannelFrame.ChannelRoster.ScrollBar)
+	end
 	T.SkinScrollBar(ChannelFrame.ChannelList.ScrollBar)
 
 	T.SkinCloseButton(ChannelFrameCloseButton)

@@ -14,6 +14,7 @@ local function LoadSkin()
 	TradePlayerInputMoneyInset:StripTextures()
 	TradeRecipientMoneyInset:StripTextures()
 	TradeRecipientMoneyBg:StripTextures()
+	TradeFramePortrait:SetAlpha(0)
 
 	if T.Mainline then
 		TradeFrame.RecipientOverlay.portrait:SetAlpha(0)
