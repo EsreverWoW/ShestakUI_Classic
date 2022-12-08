@@ -1,5 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
-if T.Classic or C.skins.rematch ~= true or not IsAddOnLoaded("Rematch") then return end
+if C.skins.rematch ~= true or not IsAddOnLoaded("Rematch") then return end
 
 ----------------------------------------------------------------------------------------
 --	Rematch skin

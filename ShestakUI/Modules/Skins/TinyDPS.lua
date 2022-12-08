@@ -1,5 +1,5 @@
 local T, C, L, _ = unpack(select(2, ...))
-if T.Classic or C.skins.tiny_dps ~= true then return end
+if C.skins.tiny_dps ~= true then return end
 
 ----------------------------------------------------------------------------------------
 --	TinyDPS skin
