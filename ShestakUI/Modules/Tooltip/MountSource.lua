@@ -13,9 +13,16 @@ frame:SetScript("OnEvent", function()
 	end
 end)
 
-hooksecurefunc(GameTooltip, "SetUnitAura", function(self, ...)
+local function MountSourceTooltip(self, ...)
 	if not UnitIsPlayer(...) or UnitIsUnit(..., "player") then return end
-	local id = select(10, UnitAura(...))
+	local id
+
+	if T.Classic then
+		id = select(10, UnitAura(...))
+	else
+		local aura = C_UnitAuras.GetAuraDataByAuraInstanceID(...)
+		id = aura and aura.spellId
+	end
 
 	if id and MountCache[id] then
 		local text = NOT_COLLECTED
@@ -35,4 +42,6 @@ hooksecurefunc(GameTooltip, "SetUnitAura", function(self, ...)
 		self:AddLine(" ")
 		self:Show()
 	end
-end)
+end
+
+hooksecurefunc(GameTooltip, "SetUnitBuffByAuraInstanceID", MountSourceTooltip)
