@@ -275,8 +275,6 @@ raidbuff_reminder:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 raidbuff_reminder:RegisterUnitEvent("UNIT_INVENTORY_CHANGED", "player", "")
 raidbuff_reminder:SetScript("OnEvent", OnAuraChange)
 
-local line = math.ceil(C.minimap.size / (C.reminder.raid_buffs_size + 2))
-
 local buffButtons = {
 	"FlaskFrame",
 	"FoodFrame",
@@ -287,6 +285,8 @@ local buffButtons = {
 	"Spell4Frame",
 	"CustomFrame",
 }
+
+local line = math.ceil(C.minimap.size / (C.reminder.raid_buffs_size + 2))
 
 for i = 1, #buffButtons do
 	local name = buffButtons[i]
@@ -306,8 +306,7 @@ for i = 1, #buffButtons do
 end
 
 function UpdatePositions()
-	local line = math.ceil(C.minimap.size / (C.reminder.raid_buffs_size + 2))
-	local first
+	local first, previousBuff
 	for i = 1, #icons do
 		local buff = icons[i]
 		buff:ClearAllPoints()

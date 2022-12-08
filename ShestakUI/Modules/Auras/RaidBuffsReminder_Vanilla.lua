@@ -18,6 +18,8 @@ local spell7Buffs = T.ReminderBuffs["Spell7Buff"]
 local customBuffs = T.ReminderBuffs["Custom"]
 
 local visible
+local icons = {}
+local UpdatePositions
 
 local isPresent = {
 	flask = false,
@@ -196,6 +198,7 @@ local function OnAuraChange(_, event, unit)
 		isPresent.custom = true
 	end
 
+	UpdatePositions()
 	local _, instanceType = IsInInstance()
 	if (not IsInGroup() or instanceType ~= "raid") and C.reminder.raid_buffs_always == false then
 		RaidBuffReminder:SetAlpha(0)
@@ -232,8 +235,6 @@ raidbuff_reminder:RegisterEvent("CHARACTER_POINTS_CHANGED")
 raidbuff_reminder:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 raidbuff_reminder:SetScript("OnEvent", OnAuraChange)
 
-local line = math.ceil(C.minimap.size / (C.reminder.raid_buffs_size + 2))
-
 local buffButtons = {
 	"FlaskFrame",
 	"FoodFrame",
@@ -249,6 +250,8 @@ if T.Wrath then
 	tremove(buffButtons, 7)
 end
 
+local line = math.ceil(C.minimap.size / (C.reminder.raid_buffs_size + 2))
+
 for i = 1, #buffButtons do
 	local name = buffButtons[i]
 	local button = CreateFrame("Frame", name, RaidBuffReminder)
@@ -262,7 +265,30 @@ for i = 1, #buffButtons do
 	button:SetFrameLevel(RaidBuffReminder:GetFrameLevel() + 2)
 
 	button.t = button:CreateTexture(name..".t", "OVERLAY")
-	button.t:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-	button.t:SetPoint("TOPLEFT", 2, -2)
-	button.t:SetPoint("BOTTOMRIGHT", -2, 2)
+	button.t:CropIcon()
+end
+
+function UpdatePositions()
+	local first, previousBuff
+	for i = 1, #icons do
+		local buff = icons[i]
+		buff:ClearAllPoints()
+		if buff:GetAlpha() == C.reminder.raid_buffs_alpha then
+			-- buff:SetPoint("TOP", UIParent, "TOP", 0, 900)
+			line = line + 1
+		else
+			if not first then
+				buff:SetPoint("BOTTOMLEFT", RaidBuffReminder, "BOTTOMLEFT", 0, 0)
+				first = true
+			else
+				buff:SetPoint("LEFT", previousBuff, "RIGHT", 3, 0)
+			end
+			previousBuff = buff
+			if i >= line then
+				buff:SetAlpha(0)
+			else
+				buff:SetAlpha(1)
+			end
+		end
+	end
 end

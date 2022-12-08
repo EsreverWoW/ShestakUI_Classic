@@ -622,7 +622,7 @@ C["reminder"] = {
 if T.Vanilla or T.TBC then
 	C["reminder"]["raid_buffs_size"] = 16
 elseif T.Wrath then
-	C["reminder"]["raid_buffs_size"] = 19
+	C["reminder"]["raid_buffs_size"] = 19.1
 end
 
 ----------------------------------------------------------------------------------------
