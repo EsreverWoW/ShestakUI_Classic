@@ -38,8 +38,10 @@ local function LoadSkin()
 
 	-- Dress Up Frame
 	AuctionFrame:HookScript("OnShow", function()
-		SideDressUpFrame:StripTextures(true)
+		SideDressUpFrame:StripTextures()
 		SideDressUpFrame:SetTemplate("Transparent")
+		SideDressUpFrameBackgroundTop:Kill()
+		SideDressUpFrameBackgroundBot:Kill()
 
 		SideDressUpFrame:ClearAllPoints()
 		SideDressUpFrame:SetPoint("TOPLEFT", AuctionFrame, "TOPRIGHT", 3, 0)
