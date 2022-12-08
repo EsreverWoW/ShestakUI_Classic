@@ -242,7 +242,7 @@ local function LoadSkin()
 
 			button:SkinButton()
 			button:SetTemplate()
-			button:SetCheckedTexture(0)
+			button:SetCheckedTexture("")
 
 			iconDisabled:SetAlpha(0)
 
