@@ -191,9 +191,9 @@ local function HandleTabs(object)
 end
 
 function handler:TRADE_SKILL_SHOW(event)
-	local owner = ATSWFrame or MRTSkillFrame or SkilletFrame or TradeSkillFrame
+	local owner = ATSWFrame or MRTSkillFrame or SkilletFrame or TradeSkillFrame or ProfessionsFrame
 
-	if IsAddOnLoaded("TradeSkillDW") and owner == TradeSkillFrame then
+	if IsAddOnLoaded("TradeSkillDW") and owner == (TradeSkillFrame or ProfessionsFrame) then
 		self:UnregisterEvent(event)
 	else
 		HandleTabs(owner)
