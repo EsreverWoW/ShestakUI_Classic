@@ -22,7 +22,7 @@ local function StyleNormalButton(button, size)
 		local isFlyout = name:match("Flyout")
 		local flyoutBorder = _G[name.."FlyoutBorder"]
 		local flyoutBorderShadow = _G[name.."FlyoutBorderShadow"]
-		local autocast = button.AutoCastable
+		local autocast = button.AutoCastable or _G[name.."AutoCastable"]
 		local shine = _G[name.."Shine"]
 
 		local normal = button.NormalTexture or _G[name.."NormalTexture"]
