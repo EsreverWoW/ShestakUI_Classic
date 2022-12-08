@@ -75,7 +75,7 @@ SlashCmdList.MOUSEOVERBIND = function()
 					self:SetScript("OnHide", nil)
 				end)
 			elseif spellmacro == "MACRO" then
-				self.button.id = self.button:GetID()
+				self.button.id = self.button.selectionIndex or self.button:GetID()
 
 				if localmacros == 1 then self.button.id = self.button.id + MAX_ACCOUNT_MACROS end
 
@@ -86,14 +86,14 @@ SlashCmdList.MOUSEOVERBIND = function()
 				GameTooltip:AddLine(bind.button.name, 1, 1, 1)
 
 				bind.button.bindings = {GetBindingKey(spellmacro.." "..bind.button.name)}
-					if #bind.button.bindings == 0 then
-						GameTooltip:AddLine(L_BIND_NO_SET, 0.6, 0.6, 0.6)
-					else
-						GameTooltip:AddDoubleLine(L_BIND_BINDING, L_BIND_KEY, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6)
-						for i = 1, #bind.button.bindings do
-							GameTooltip:AddDoubleLine(i, bind.button.bindings[i], 1, 1, 1)
-						end
+				if #bind.button.bindings == 0 then
+					GameTooltip:AddLine(L_BIND_NO_SET, 0.6, 0.6, 0.6)
+				else
+					GameTooltip:AddDoubleLine(L_BIND_BINDING, L_BIND_KEY, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6)
+					for i = 1, #bind.button.bindings do
+						GameTooltip:AddDoubleLine(i, bind.button.bindings[i], 1, 1, 1)
 					end
+				end
 				GameTooltip:Show()
 			elseif spellmacro == "STANCE" or spellmacro == "PET" then
 				self.button.id = tonumber(b:GetID())
@@ -334,10 +334,22 @@ SlashCmdList.MOUSEOVERBIND = function()
 		end
 
 		local function registermacro()
-			for i = 1, MAX_ACCOUNT_MACROS do
-				local b = _G["MacroButton"..i]
-				b:HookScript("OnEnter", function(self) bind:Update(self, "MACRO") end)
+			if T.Classic then
+				for i = 1, MAX_ACCOUNT_MACROS do
+					local b = _G["MacroButton"..i]
+					b:HookScript("OnEnter", function(self) bind:Update(self, "MACRO") end)
+				end
+			else
+				hooksecurefunc(MacroFrame, "Update", function(frame)
+					for _, button in next, {frame.MacroSelector.ScrollBox.ScrollTarget:GetChildren()} do
+						if button and not button.hook then
+							button:HookScript("OnEnter", function(self) bind:Update(button, "MACRO") end)
+							button.hook = true
+						end
+					end
+				end)
 			end
+
 			MacroFrameTab1:HookScript("OnMouseUp", function() localmacros = 0 end)
 			MacroFrameTab2:HookScript("OnMouseUp", function() localmacros = 1 end)
 		end
