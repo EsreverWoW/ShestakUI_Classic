@@ -1213,12 +1213,12 @@ if durability.enabled then
 					local perc = dur ~= 0 and dur/dmax or 0
 					local hex = gradient(perc)
 					GameTooltip:AddDoubleLine(durability.gear_icons and format("|T%s:"..t_icon..":"..t_icon..":0:0:64:64:5:59:5:59:%d|t %s", GetInventoryItemTexture(P, slot), t_icon, string) or string,format("|cffaaaaaa%s/%s | %s%s%%", dur, dmax, hex, floor(perc * 100)), 1, 1, 1)
-					if T.newPatch then
+					if T.Classic then
+						totalcost, nodur = totalcost + select(3, LPDURA:SetInventoryItem(P, slot))
+					else
 						local data = LPDURA:GetTooltipData()
 						repairCost = data and data.repairCost or 0
 						totalcost, nodur = totalcost + repairCost
-					else
-						totalcost, nodur = totalcost + select(3, LPDURA:SetInventoryItem(P, slot))
 					end
 				end
 			end
