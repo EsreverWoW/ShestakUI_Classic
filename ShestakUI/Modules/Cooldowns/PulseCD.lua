@@ -86,9 +86,20 @@ local function OnUpdate(_, update)
                             enabled = enabled
                         }
                     end)
-				elseif not T.Wrath341 and v[2] == "item" then
+				elseif v[2] == "item" then
 					getCooldownDetails = memoize(function()
-                        local start, duration, enabled = GetItemCooldown(i)
+                        local start, duration, enabled
+						if T.Wrath341 then
+							if v[4] == "action" then
+								start, duration, enabled = GetActionCooldown(v[5])
+							elseif v[4] == "inventory" then
+								start, duration, enabled = GetInventoryItemCooldown("player", v[5])
+							elseif v[4] == "container" then
+								start, duration, enabled = C_Container.GetContainerItemCooldown(v[5], v[6])
+							end
+						else
+							start, duration, enabled = GetItemCooldown(i)
+						end
                         return {
                             name = GetItemInfo(i),
                             texture = v[3],
@@ -111,18 +122,20 @@ local function OnUpdate(_, update)
                         }
                     end)
 				end
-				local cooldown = getCooldownDetails()
-				if T.pulse_ignored_spells[cooldown.name] then
-					watching[i] = nil
-				else
-					if cooldown.enabled ~= 0 then
-                        if cooldown.duration and cooldown.duration > threshold and cooldown.texture then
-                            cooldowns[i] = getCooldownDetails
-                        end
-                    end
-                    if not (cooldown.enabled == 0 and v[2] == "spell") then
-                        watching[i] = nil
-                    end
+				if getCooldownDetails then
+					local cooldown = getCooldownDetails()
+					if T.pulse_ignored_spells[cooldown.name] then
+						watching[i] = nil
+					else
+						if cooldown.enabled ~= 0 then
+							if cooldown.duration and cooldown.duration > threshold and cooldown.texture then
+								cooldowns[i] = getCooldownDetails
+							end
+						end
+						if not (cooldown.enabled == 0 and v[2] == "spell") then
+							watching[i] = nil
+						end
+					end
 				end
 			end
 		end
@@ -236,7 +249,7 @@ hooksecurefunc("UseAction", function(slot)
 	if actionType == "item" then
 		local texture = GetActionTexture(slot)
 		if texture == 136235 then return end -- prevent temp icon
-		watching[itemID] = {GetTime(), "item", texture}
+		watching[itemID] = {GetTime(), "item", texture, "action", slot}
 	end
 end)
 
@@ -245,7 +258,7 @@ hooksecurefunc("UseInventoryItem", function(slot)
 	if itemID then
 		local texture = GetInventoryItemTexture("player", slot)
 		if texture == 136235 then return end -- prevent temp icon
-		watching[itemID] = {GetTime(), "item", texture}
+		watching[itemID] = {GetTime(), "item", texture, "inventory", slot}
 	end
 end)
 
@@ -254,7 +267,7 @@ hooksecurefunc("UseContainerItem", function(bag, slot)
 	if itemID then
 		local texture = select(10, GetItemInfo(itemID))
 		if texture == 136235 then return end -- prevent temp icon
-		watching[itemID] = {GetTime(), "item", texture}
+		watching[itemID] = {GetTime(), "item", texture, "container", bag, slot}
 	end
 end)
 
