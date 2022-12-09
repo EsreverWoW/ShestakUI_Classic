@@ -131,7 +131,7 @@ local StartTimer = function(sGUID, sID, sName)
 	icon:SetScript("OnUpdate", IconUpdate)
 	icon:SetScript("OnEnter", OnEnter)
 	icon:SetScript("OnLeave", GameTooltip_Hide)
-	if T.Classic and HasWandEquipped() then
+	if T.Classic and not T.Wrath341 and HasWandEquipped() then
 		local wandID = GetInventoryItemID("player", 18)
 		local wandSpeed = GetItemCooldown(wandID)
 		if wandSpeed < 1.5 then wandSpeed = 1.5 end

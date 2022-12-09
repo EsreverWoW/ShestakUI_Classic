@@ -86,7 +86,7 @@ local function OnUpdate(_, update)
                             enabled = enabled
                         }
                     end)
-				elseif v[2] == "item" then
+				elseif not T.Wrath341 and v[2] == "item" then
 					getCooldownDetails = memoize(function()
                         local start, duration, enabled = GetItemCooldown(i)
                         return {

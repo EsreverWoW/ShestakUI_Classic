@@ -99,7 +99,7 @@ Scanner:SetScript("OnEvent", function()
 
 				AutoButton:SetScript("OnUpdate", function()
 					local cd_start, cd_finish, cd_enable = GetContainerItemCooldown(b, s)
-					if T.Classic then
+					if T.Classic and not T.Wrath341 then
 						local wandID = GetInventoryItemID("player", 18)
 						local wandSpeed = GetItemCooldown(wandID)
 						if wandSpeed < 1.5 then wandSpeed = 1.5 end

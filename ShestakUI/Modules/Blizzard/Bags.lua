@@ -214,7 +214,7 @@ function Stuffing:SlotUpdate(b)
 
 	if b.cooldown and StuffingFrameBags and StuffingFrameBags:IsShown() then
 		local start, duration, enable = GetContainerItemCooldown(b.bag, b.slot)
-		if T.Classic and HasWandEquipped() then
+		if T.Classic and not T.Wrath341 and HasWandEquipped() then
 			local wandID = GetInventoryItemID("player", 18)
 			local wandSpeed = GetItemCooldown(wandID)
 			if wandSpeed == 0 then
@@ -353,7 +353,7 @@ end
 function Stuffing:UpdateCooldowns(b)
 	if b.cooldown and StuffingFrameBags and StuffingFrameBags:IsShown() then
 		local start, duration, enable = GetContainerItemCooldown(b.bag, b.slot)
-		if T.Classic and HasWandEquipped() then
+		if T.Classic and not T.Wrath341 and HasWandEquipped() then
 			local wandID = GetInventoryItemID("player", 18)
 			local wandSpeed = GetItemCooldown(wandID)
 			if wandSpeed == 0 then
