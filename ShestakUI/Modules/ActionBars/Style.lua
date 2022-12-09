@@ -566,8 +566,8 @@ local function StyleTotemActionButton(button, index)
 		button:SetFrameLevel(button.slotButton:GetFrameLevel() + 1)
 	end
 
-	button:SetBackdropBorderColor(unpack(bordercolors[((index-1) % 4) + 1]))
-	button:SetBackdropColor(0, 0, 0, 0)
+	-- button:SetBackdropBorderColor(unpack(bordercolors[((index-1) % 4) + 1]))
+	-- button:SetBackdropColor(0, 0, 0, 0)
 	button:StyleButton(true)
 end
 hooksecurefunc("MultiCastActionButton_Update", function(actionButton, actionId, actionIndex, slot) StyleTotemActionButton(actionButton, actionIndex) end)
