@@ -47,7 +47,16 @@ for i = 1, 12 do
 end
 
 local Page = {}
-if T.Wrath then
+if T.Wrath341 then
+	Page = {
+		["DRUID"] = "[bonusbar:1] 7; [bonusbar:2] 8; [bonusbar:3] 9; [bonusbar:4] 10;",
+		["WARRIOR"] = "[bonusbar:1] 7; [bonusbar:2] 8; [bonusbar:3] 9;",
+		["PRIEST"] = "[bonusbar:1] 7;",
+		["ROGUE"] = "[bonusbar:1] 7; [form:3] 7;",
+		["WARLOCK"] = "[form:2] 10;",
+		["DEFAULT"] = "[possessbar] 16; [shapeshift] 17; [overridebar] 18; [vehicleui] 16; [bar:2] 2; [bar:3] 3; [bar:4] 4; [bar:5] 5; [bar:6] 6; [bonusbar: 5] 11;",
+	}
+elseif T.Wrath then
 	Page = {
 		["DRUID"] = "[bonusbar:1] 7; [bonusbar:2] 8; [bonusbar:3] 9; [bonusbar:4] 10;",
 		["WARRIOR"] = "[bonusbar:1] 7; [bonusbar:2] 8; [bonusbar:3] 9;",
