@@ -263,14 +263,9 @@ frame:SetScript("OnEvent", function(self, event)
 			StyleNormalButton(_G["MultiCastActionButton"..i])
 		end
 		if T.Mainline then
+			StyleNormalButton(_G["MultiBar5Button"..i], C.actionbar.editor and C.actionbar.bar6_size)
 			StyleNormalButton(_G["MultiBar6Button"..i], C.actionbar.bar7_size)
 			StyleNormalButton(_G["MultiBar7Button"..i], C.actionbar.bar8_size)
-		end
-	end
-
-	if T.Mainline and C.actionbar.custom_bar_enable then
-		for i = 1, 12 do
-			StyleNormalButton(_G["CustomBarButton"..i], C.actionbar.custom_bar_size)
 		end
 	end
 
@@ -367,6 +362,11 @@ if C.actionbar.hotkey == true then
 			UpdateHotkey(_G["MultiBarRightButton"..i])
 			if T.Wrath then
 				UpdateHotkey(_G["MultiCastActionButton"..i])
+			end
+			if T.Mainline then
+				UpdateHotkey(_G["MultiBar5Button"..i])
+				UpdateHotkey(_G["MultiBar6Button"..i])
+				UpdateHotkey(_G["MultiBar7Button"..i])
 			end
 		end
 		for i = 1, 10 do

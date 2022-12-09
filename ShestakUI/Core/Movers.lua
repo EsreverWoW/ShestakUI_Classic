@@ -40,7 +40,6 @@ T.MoverFrames = {
 	T_DE_BUFF_BAR_Anchor,
 	SplitBarLeft,
 	SplitBarRight,
-	CustomBarAnchor,
 	Bar7Holder,
 	Bar8Holder,
 	UIWidgetPowerBarAnchor
@@ -85,6 +84,7 @@ if C.actionbar.editor then
 	tinsert(T.MoverFrames, Bar3Holder)
 	tinsert(T.MoverFrames, Bar4Holder)
 	tinsert(T.MoverFrames, Bar5Holder)
+	tinsert(T.MoverFrames, Bar6Holder)
 	tremove(T.MoverFrames, 5)	-- RightActionBarAnchor
 	tremove(T.MoverFrames, 4)	-- ActionBarAnchor
 end

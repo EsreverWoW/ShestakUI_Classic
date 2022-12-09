@@ -17,17 +17,7 @@ local ToggleBarText = function(i, text, plus, neg)
 end
 
 local MainBars = function()
-	if C.actionbar.rightbars > 2 then
-		if ShestakUISettingsPerChar.BottomBars == 1 then
-			ActionBarAnchor:SetHeight(C.actionbar.button_size)
-			ToggleBarText(1, "+ + +", true)
-			Bar2Holder:Hide()
-		elseif ShestakUISettingsPerChar.BottomBars == 2 then
-			ActionBarAnchor:SetHeight(C.actionbar.button_size * 2 + C.actionbar.button_space)
-			ToggleBarText(1, "- - -", false, true)
-			Bar2Holder:Show()
-		end
-	elseif C.actionbar.rightbars < 3 and C.actionbar.split_bars ~= true then
+	if C.actionbar.split_bars ~= true then
 		if ShestakUISettingsPerChar.BottomBars == 1 then
 			ActionBarAnchor:SetHeight(C.actionbar.button_size)
 			ToggleBarText(1, "+ + +", true)
@@ -44,7 +34,7 @@ local MainBars = function()
 			Bar2Holder:Show()
 			Bar5Holder:Show()
 		end
-	elseif C.actionbar.rightbars < 3 and C.actionbar.split_bars == true then
+	elseif C.actionbar.split_bars == true then
 		if ShestakUISettingsPerChar.BottomBars == 1 then
 			ActionBarAnchor:SetHeight(C.actionbar.button_size)
 			ToggleBarText(1, "+ + +", true)
@@ -118,8 +108,8 @@ local RightBars = function()
 			RightActionBarAnchor:Show()
 			Bar3Holder:Show()
 			Bar4Holder:Show()
-			if C.actionbar.rightbars > 2 then
-				Bar5Holder:Show()
+			if T.Mainline then
+				Bar6Holder:Show()
 			end
 		elseif ShestakUISettingsPerChar.RightBars == 0 then
 			if not C.actionbar.petbar_horizontal == true then
@@ -131,8 +121,8 @@ local RightBars = function()
 			RightActionBarAnchor:Hide()
 			Bar3Holder:Hide()
 			Bar4Holder:Hide()
-			if C.actionbar.rightbars > 2 then
-				Bar5Holder:Hide()
+			if T.Mainline then
+				Bar6Holder:Hide()
 			end
 		end
 	elseif C.actionbar.rightbars < 3 then
@@ -167,15 +157,15 @@ local RightBars = function()
 			RightActionBarAnchor:Hide()
 			Bar3Holder:Hide()
 			Bar4Holder:Hide()
-			if C.actionbar.rightbars > 2 then
-				Bar5Holder:Hide()
+			if T.Mainline then
+				Bar6Holder:Hide()
 			end
 		end
 	end
 end
 
 local SplitBars = function()
-	if C.actionbar.split_bars == true and C.actionbar.rightbars ~= 3 then
+	if C.actionbar.split_bars == true then
 		if ShestakUISettingsPerChar.SplitBars == true then
 			ToggleBar[3]:ClearAllPoints()
 			ToggleBar[3]:SetPoint("BOTTOMLEFT", SplitBarRight, "BOTTOMRIGHT", C.actionbar.button_space, 0)
@@ -248,11 +238,7 @@ for i = 1, 5 do
 			if InCombatLockdown() then print("|cffffff00"..ERR_NOT_IN_COMBAT.."|r") return end
 			ShestakUISettingsPerChar.BottomBars = ShestakUISettingsPerChar.BottomBars + 1
 
-			if C.actionbar.rightbars > 2 then
-				if ShestakUISettingsPerChar.BottomBars > 2 then
-					ShestakUISettingsPerChar.BottomBars = 1
-				end
-			elseif C.actionbar.rightbars < 3 and C.actionbar.split_bars ~= true then
+			if C.actionbar.split_bars ~= true then
 				if ShestakUISettingsPerChar.BottomBars > 3 then
 					ShestakUISettingsPerChar.BottomBars = 1
 				elseif ShestakUISettingsPerChar.BottomBars > 2 then
@@ -260,7 +246,7 @@ for i = 1, 5 do
 				elseif ShestakUISettingsPerChar.BottomBars < 1 then
 					ShestakUISettingsPerChar.BottomBars = 3
 				end
-			elseif C.actionbar.rightbars < 3 and C.actionbar.split_bars == true then
+			elseif C.actionbar.split_bars == true then
 				if ShestakUISettingsPerChar.BottomBars > 2 then
 					ShestakUISettingsPerChar.BottomBars = 1
 				end
@@ -298,13 +284,13 @@ for i = 1, 5 do
 		end)
 		ToggleBar[i]:SetScript("OnEvent", RightBars)
 	elseif i == 3 then
-		if C.actionbar.split_bars == true and C.actionbar.rightbars ~= 3 then
+		if C.actionbar.split_bars == true then
 			ToggleBar[i]:CreatePanel("Transparent", C.actionbar.button_size / 1.5, ActionBarAnchor:GetHeight(), "BOTTOMLEFT", SplitBarRight, "BOTTOMRIGHT", C.actionbar.button_space, 0)
 			ToggleBarText(i, "<\n<", false, true)
 			ToggleBar[i]:SetFrameLevel(SplitBarRight:GetFrameLevel() + 1)
 		end
 	elseif i == 4 then
-		if C.actionbar.split_bars == true and C.actionbar.rightbars ~= 3 then
+		if C.actionbar.split_bars == true then
 			ToggleBar[i]:CreatePanel("Transparent", C.actionbar.button_size / 1.5, ActionBarAnchor:GetHeight(), "BOTTOMRIGHT", SplitBarLeft, "BOTTOMLEFT", -C.actionbar.button_space, 0)
 			ToggleBarText(i, ">\n>", false, true)
 			ToggleBar[i]:SetFrameLevel(SplitBarLeft:GetFrameLevel() + 1)
