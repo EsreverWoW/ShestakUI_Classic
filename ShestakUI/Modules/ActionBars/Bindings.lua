@@ -334,7 +334,7 @@ SlashCmdList.MOUSEOVERBIND = function()
 		end
 
 		local function registermacro()
-			if T.Classic then
+			if T.Classic and not T.Wrath341 then
 				for i = 1, MAX_ACCOUNT_MACROS do
 					local b = _G["MacroButton"..i]
 					b:HookScript("OnEnter", function(self) bind:Update(self, "MACRO") end)

@@ -43,7 +43,7 @@ local function LoadSkin()
 	MacroFrameTextBackground.backdrop:SetPoint("TOPLEFT", 4, -3)
 	MacroFrameTextBackground.backdrop:SetPoint("BOTTOMRIGHT", -23, 0)
 
-	if T.Classic then
+	if T.Classic and not T.Wrath then
 		MacroButtonScrollFrame:CreateBackdrop("Overlay")
 	end
 
@@ -58,7 +58,7 @@ local function LoadSkin()
 	MacroNewButton:SetPoint("RIGHT", MacroExitButton, "LEFT", -3, 0)
 
 	-- Regular scroll bar
-	if T.Classic then
+	if T.Classic and not T.Wrath341 then
 		T.SkinScrollBar(MacroButtonScrollFrame)
 		T.SkinScrollBar(MacroButtonScrollFrameScrollBar)
 		T.SkinScrollBar(MacroFrameScrollFrameScrollBar)
@@ -73,7 +73,7 @@ local function LoadSkin()
 	MacroFrameSelectedMacroButton:StyleButton(true)
 	MacroFrameSelectedMacroButton:GetNormalTexture():SetTexture(0)
 	MacroFrameSelectedMacroButton:SetTemplate("Default")
-	if T.Classic then
+	if T.Classic and not T.Wrath341 then
 		MacroFrameSelectedMacroButtonIcon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 		MacroFrameSelectedMacroButtonIcon:ClearAllPoints()
 		MacroFrameSelectedMacroButtonIcon:SetPoint("TOPLEFT", 2, -2)
@@ -90,7 +90,7 @@ local function LoadSkin()
 	MacroFrameCharLimitText:SetPoint("BOTTOM", MacroFrameTextBackground, 0, -12)
 
 	-- Skin all buttons
-	if T.Classic then
+	if T.Classic and not T.Wrath341 then
 		for i = 1, MAX_ACCOUNT_MACROS do
 			local b = _G["MacroButton"..i]
 			local t = _G["MacroButton"..i.."Icon"]
@@ -125,7 +125,7 @@ local function LoadSkin()
 	end
 
 	-- Icon selection frame
-	if T.Classic then
+	if T.Classic and not T.Wrath341 then
 		T.SkinIconSelectionFrame(MacroPopupFrame, NUM_MACRO_ICONS_SHOWN, nil, "MacroPopup")
 	else
 		MacroPopupFrame:HookScript("OnShow", function(frame)

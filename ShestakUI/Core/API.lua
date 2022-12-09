@@ -832,14 +832,14 @@ function T.SkinIconSelectionFrame(frame, numIcons, buttonNameTemplate, frameName
 	frame.backdrop:SetPoint("TOPLEFT", 3, 1)
 	frame:SetHeight(frame:GetHeight() + 13)
 
-	if T.Classic then
+	if frame.IconSelector and frame.IconSelector.ScrollBar then
+		T.SkinScrollBar(frame.IconSelector.ScrollBar)
+	elseif T.Classic then
 		scrollFrame:StripTextures()
 		scrollFrame:CreateBackdrop("Overlay")
 		scrollFrame.backdrop:SetPoint("TOPLEFT", 15, 5)
 		scrollFrame.backdrop:SetPoint("BOTTOMRIGHT", 31, -8)
 		scrollFrame:SetHeight(scrollFrame:GetHeight() + 12)
-	else
-		T.SkinScrollBar(frame.IconSelector.ScrollBar)
 	end
 
 	okayButton:SkinButton()
