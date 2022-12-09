@@ -177,7 +177,8 @@ local function UpdateDuration(buff, timeLeft)
 	local quality = GetInventoryItemQuality("player", slotIndex)
 
 	if quality then
-		buff:SetBackdropBorderColor(GetItemQualityColor(quality))
+		local R, G, B = GetItemQualityColor(quality)
+		buff:SetBackdropBorderColor(R, G, B)
 	end
 end
 

@@ -237,8 +237,9 @@ local function LoadSkin()
 		if skillLink then
 			local _, _, quality = GetItemInfo(string.match(skillLink, "item:(%d+)"))
 			if quality then
-				TradeSkillSkillIcon:SetBackdropBorderColor(GetItemQualityColor(quality))
-				TradeSkillSkillName:SetTextColor(GetItemQualityColor(quality))
+				local R, G, B = GetItemQualityColor(quality)
+				TradeSkillSkillIcon:SetBackdropBorderColor(R, G, B)
+				TradeSkillSkillName:SetTextColor(R, G, B)
 			else
 				TradeSkillSkillIcon:SetBackdropBorderColor(unpack(C.media.border_color))
 				TradeSkillSkillName:SetTextColor(1, 1, 1)
@@ -258,8 +259,9 @@ local function LoadSkin()
 			if reagentLink then
 				local _, _, quality = GetItemInfo(string.match(reagentLink, "item:(%d+)"))
 				if quality then
-					icon.backdrop:SetBackdropBorderColor(GetItemQualityColor(quality))
-					reagent:SetBackdropBorderColor(GetItemQualityColor(quality))
+					local R, G, B = GetItemQualityColor(quality)
+					icon.backdrop:SetBackdropBorderColor(R, G, B)
+					reagent:SetBackdropBorderColor(R, G, B)
 					if playerReagentCount < reagentCount then
 						name:SetTextColor(0.5, 0.5, 0.5)
 					else
