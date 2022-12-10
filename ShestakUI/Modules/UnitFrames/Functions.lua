@@ -638,6 +638,8 @@ T.HideAuraFrame = function(self)
 				BuffFrame:UnregisterEvent("UNIT_AURA")
 				BuffFrame:Hide()
 				TemporaryEnchantFrame:Hide()
+			else
+				BuffFrame:Hide()
 			end
 			self.Debuffs:Hide()
 		end
