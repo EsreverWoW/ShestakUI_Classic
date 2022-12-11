@@ -126,7 +126,7 @@ for i, spell in pairs(spells) do
 
 	b:SetFontString(l)
 
-	b:RegisterForClicks("LeftButtonUp", "RightButtonUp")
+	b:RegisterForClicks("AnyUp", "AnyDown")
 	b:SetAttribute("type1", "spell")
 	b:SetAttribute("spell1", teleport)
 	b:SetAttribute("type2", "spell")
