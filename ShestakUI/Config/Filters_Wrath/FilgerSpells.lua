@@ -2664,7 +2664,7 @@ C["filger_spells"] = {
 			Position = {"TOP", P_BUFF_ICON_Anchor},
 
 			-- Arcane Blast
-			{spellID = 36032, unitID = "player", caster = "player", filter = "BUFF"},
+			{spellID = 36032, unitID = "player", caster = "player", filter = "DEBUFF"},
 			-- Arcane Power
 			{spellID = 12042, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Blazing Speed
