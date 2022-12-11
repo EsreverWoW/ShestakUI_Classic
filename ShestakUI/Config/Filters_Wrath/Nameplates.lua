@@ -737,4 +737,6 @@ T.ColorPlate = {
 		["19509"] = color,		-- Sunseeker Harvester
 		["19633"] = color,		-- Bloodwarder Mender
 		-- Magisters' Terrace
+		-- Ulduar
+		["33836"] = color,		-- Bomb Bot
 }
