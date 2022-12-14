@@ -98,6 +98,7 @@ StanceAnchor:RegisterEvent("PLAYER_LOGIN")
 StanceAnchor:RegisterEvent("PLAYER_ENTERING_WORLD")
 StanceAnchor:RegisterEvent("UPDATE_SHAPESHIFT_FORMS")
 StanceAnchor:RegisterEvent("UPDATE_SHAPESHIFT_FORM")
+StanceAnchor:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED")
 StanceAnchor:SetScript("OnEvent", function()
 	local forms = GetNumShapeshiftForms()
 	if forms > 0 and not InCombatLockdown() then
@@ -108,7 +109,10 @@ StanceAnchor:SetScript("OnEvent", function()
 		end
 	end
 	if T.Mainline then
-		RegisterStateDriver(StanceAnchor, "visibility", GetNumShapeshiftForms() == 0 and "hide" or "show")
+		if not StanceAnchor.hook then
+			RegisterStateDriver(StanceAnchor, "visibility", GetNumShapeshiftForms() == 0 and "hide" or "show")
+			StanceAnchor.hook = true
+		end
 	end
 end)
 
