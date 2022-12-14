@@ -123,6 +123,18 @@ else
 end
 RoleUpdater:SetScript("OnEvent", CheckRole)
 
+T.IsHealerSpec = function()
+	local healer = false
+	local spec = GetSpecialization()
+
+	if (T.class == "EVOKER" and spec == 2) or (T.class == "DRUID" and spec == 4) or (T.class == "MONK" and spec == 2) or
+	(T.class == "PALADIN" and spec == 1) or (T.class == "PRIEST" and spec ~= 3) or (T.class == "SHAMAN" and spec == 3) then
+		healer = true
+	end
+
+	return healer
+end
+
 ----------------------------------------------------------------------------------------
 --	Player's buff check
 ----------------------------------------------------------------------------------------
