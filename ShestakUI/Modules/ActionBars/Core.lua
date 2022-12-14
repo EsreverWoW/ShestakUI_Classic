@@ -7,9 +7,7 @@ if C.actionbar.enable ~= true then return end
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("PLAYER_LOGIN")
 frame:SetScript("OnEvent", function()
-	if T.Classic then
-		MainMenuBar:SetScale(0.00001)
-	end
+	MainMenuBar:SetScale(0.00001)
 	MainMenuBar:EnableMouse(false)
 
 	if T.Classic then
