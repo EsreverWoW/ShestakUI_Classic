@@ -98,7 +98,7 @@ StanceAnchor:RegisterEvent("PLAYER_LOGIN")
 StanceAnchor:RegisterEvent("PLAYER_ENTERING_WORLD")
 StanceAnchor:RegisterEvent("UPDATE_SHAPESHIFT_FORMS")
 StanceAnchor:RegisterEvent("UPDATE_SHAPESHIFT_FORM")
-StanceAnchor:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED")
+StanceAnchor:RegisterUnitEvent("PLAYER_SPECIALIZATION_CHANGED", "player", "")
 StanceAnchor:SetScript("OnEvent", function()
 	local forms = GetNumShapeshiftForms()
 	if forms > 0 and not InCombatLockdown() then
