@@ -34,26 +34,28 @@ local function UpdateButtonsText(frame)
 			item = GetInventoryItemLink("player", id)
 		end
 
-		if slot == "ShirtSlot" or slot == "TabardSlot" then
-			text:SetText("")
-		elseif item then
-			local oldilevel = text:GetText()
-			local ilevel = select(4, GetItemInfo(item))
-			local heirloom = select(3, GetItemInfo(item))
+		if text then
+			if slot == "ShirtSlot" or slot == "TabardSlot" then
+				text:SetText("")
+			elseif item then
+				local oldilevel = text:GetText()
+				local ilevel = select(4, GetItemInfo(item))
+				local heirloom = select(3, GetItemInfo(item))
 
-			if ilevel then
-				if ilevel ~= oldilevel then
-					if heirloom == 7 then
-						text:SetText("")
-					else
-						text:SetText("|cFFFFFF00"..ilevel)
+				if ilevel then
+					if ilevel ~= oldilevel then
+						if heirloom == 7 then
+							text:SetText("")
+						else
+							text:SetText("|cFFFFFF00"..ilevel)
+						end
 					end
+				else
+					text:SetText("")
 				end
 			else
 				text:SetText("")
 			end
-		else
-			text:SetText("")
 		end
 	end
 end
