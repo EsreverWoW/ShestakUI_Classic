@@ -829,7 +829,7 @@ if( playerClass == "DRUID" ) then
 		local Rejuvenation = GetSpellInfo(774)
 		local Tranquility = GetSpellInfo(740)
 		local Lifebloom = GetSpellInfo(33763) or "Lifebloom"
-		local EmpoweredRejuv = GetSpellInfo(33886) or "Empowered Rejuv"
+		local EmpoweredRejuv = GetSpellInfo(33886) or "Empowered Rejuvenation"
 		local EmpoweredTouch = GetSpellInfo(33879) or "Empowered Touch"
 		local WildGrowth = GetSpellInfo(48438) or "Wild Growth"
 		local Nourish = GetSpellInfo(50464) or "Nourish"
@@ -1201,10 +1201,10 @@ if( playerClass == "PALADIN" ) then
 		local HealingLight = GetSpellInfo(20237)
 		local HolyLight = GetSpellInfo(635)
 		local Divinity = GetSpellInfo(63646) or "Divinity"
-		local TouchedbytheLight = GetSpellInfo(53592) or "TouchedbytheLight"
-		local BeaconofLight = GetSpellInfo(53563) or "BeaconofLight"
-		local SealofLight = GetSpellInfo(20165) or "SealofLight"
-		local DivineIllumination = GetSpellInfo(31842) or "DivineIllumination"
+		local TouchedbytheLight = GetSpellInfo(53590) or "Touched by the Light"
+		local BeaconofLight = GetSpellInfo(53563) or "Beacon of Light"
+		local SealofLight = GetSpellInfo(20165) or "Seal of Light"
+		local DivineIllumination = GetSpellInfo(31842) or "Divine Illumination"
 		local DivinePlea = GetSpellInfo(54428)
 		local AvengingWrath = GetSpellInfo(31884)
 
@@ -1397,11 +1397,11 @@ if( playerClass == "PRIEST" ) then
 		local BindingHeal = GetSpellInfo(32546) or "Binding Heal"
 		local EmpoweredHealing = GetSpellInfo(33158) or "Empowered Healing"
 		local Renewal = GetSpellInfo(37563) and "37563" -- T4 bonus
-		local Penance = GetSpellInfo(53007) or "Penance"
-		local Grace = GetSpellInfo(47517) or "Grace"
+		local Penance = GetSpellInfo(47540) or "Penance"
+		local Grace = GetSpellInfo(47516) or "Grace"
 		local BlessedResilience = GetSpellInfo(33142) or "Blessed Resilience"
-		local FocusedPower = GetSpellInfo(33190) or "Focused Power"
-		local DivineProvidence = GetSpellInfo(47567) or "Divine Providence"
+		local FocusedPower = GetSpellInfo(33186) or "Focused Power"
+		local DivineProvidence = GetSpellInfo(47562) or "Divine Providence"
 		local EmpoweredRenew = GetSpellInfo(63534) or "Empowered Renew"
 		local TwinDisciplines = GetSpellInfo(47586) or "Twin Disciplines"
 
@@ -1654,10 +1654,11 @@ if( playerClass == "SHAMAN" ) then
 		local ImpChainHeal = GetSpellInfo(30872) or "Improved Chain Heal"
 		local HealingWay = GetSpellInfo(29206) or "Healing Way"
 		local Purification = GetSpellInfo(16178) or "Purification"
-		local EarthShield = GetSpellInfo(49284) or "Earth Shield"
-		local TidalWaves = GetSpellInfo(51566) or "Tidal Waves"
+		local EarthShield = GetSpellInfo(974) or "Earth Shield"
+		local TidalWaves = GetSpellInfo(51562) or "Tidal Waves"
 		local Riptide = GetSpellInfo(61295) or "Riptide"
-		local Earthliving = GetSpellInfo(52000) or "Earthliving"
+		local Earthliving = GetSpellInfo(51945) or "Earthliving"
+		local ElementalWeapons = GetSpellInfo(16266) or "Elemental Weapons"
 
 		hotData[Riptide] = {interval = 3, ticks = 5, coeff = 0.50, levels = {60, 70, 75, 80}, averages = {665, 885, 1435, 1670}}
 		hotData[Earthliving] = {interval = 3, ticks = 4, coeff = 0.80, levels = {30, 40, 50, 60, 70, 80}, averages = {116, 160, 220, 348, 456, 652}}
@@ -1700,6 +1701,7 @@ if( playerClass == "SHAMAN" ) then
 		talentData[ImpChainHeal] = {mod = 0.10, current = 0, spent = 0}
 		talentData[Purification] = {mod = 0.02, current = 0, spent = 0}
 		talentData[TidalWaves] = {mod = 0.04, current = 0, spent = 0}
+		talentData[ElementalWeapons] = {mod = 0.10, current = 0, spent = 0}
 
 		itemSetsData["Skyshatter"] = {31016, 31007, 31012, 31019, 31022, 34543, 34438, 34565}
 		itemSetsData["T7 Resto"] = {40508, 40509, 40510, 40512, 40513, 39583, 39588, 39589, 39590, 39591}
@@ -1768,6 +1770,8 @@ if( playerClass == "SHAMAN" ) then
 				spellPower = (spellPower * (hotData[spellName].coeff * 1.88) * 0.45)
 				spellPower = spellPower / hotData[spellName].ticks
 				healAmount = healAmount / hotData[spellName].ticks
+
+				healModifier = healModifier * (1 + talentData[ElementalWeapons].current)
 
 				totalTicks = hotData[spellName].ticks
 			end
