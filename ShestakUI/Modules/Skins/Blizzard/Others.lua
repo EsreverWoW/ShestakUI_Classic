@@ -44,11 +44,15 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 		}
 
 		GameMenuFrame:StripTextures()
-		if T.Mainline then
+		RolePollPopup:StripTextures()
+		OpacityFrame:StripTextures()
+
+		if T.Classic then
+			AutoCompleteBox:StripTextures()
+			TicketStatusFrameButton:StripTextures()
+		else
 			QueueStatusFrame:StripTextures()
 			LFDRoleCheckPopup:StripTextures()
-			RolePollPopup:StripTextures()
-			OpacityFrame:StripTextures()
 			ColorPickerFrame.Border:Hide()
 		end
 
