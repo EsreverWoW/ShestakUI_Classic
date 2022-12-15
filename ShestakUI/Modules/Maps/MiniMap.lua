@@ -76,11 +76,13 @@ frame:SetScript("OnEvent", function(self, event)
 	end
 
 	-- Invites icon
-	GameTimeCalendarInvitesTexture:ClearAllPoints()
-	GameTimeCalendarInvitesTexture:SetParent(Minimap)
 	if T.Wrath then
+		GameTimeCalendarInvitesTexture:ClearAllPoints()
+		GameTimeCalendarInvitesTexture:SetParent(Minimap)
 		GameTimeCalendarInvitesTexture:SetPoint("TOPRIGHT", Minimap, "TOPRIGHT", 0, 0)
 	elseif T.Mainline then
+		GameTimeCalendarInvitesTexture:ClearAllPoints()
+		GameTimeCalendarInvitesTexture:SetParent(Minimap)
 		GameTimeCalendarInvitesTexture:SetPoint("TOPRIGHT", Minimap, "TOPRIGHT", -1, -4)
 	end
 
