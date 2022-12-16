@@ -549,29 +549,36 @@ if C.minimap.on_top then
 	frame:RegisterEvent("PLAYER_ENTERING_WORLD")
 	frame:SetScript("OnEvent", function()
 		frame:UnregisterEvent("PLAYER_ENTERING_WORLD")
+
 		if LP_Coords then
 			LP_Coords:ClearAllPoints()
 			LP_Coords:SetPoint("BOTTOMRIGHT", MinimapAnchor, "TOPRIGHT", 0, 5)
 		end
+
 		if TeleportMenu then
 			TeleportMenu:ClearAllPoints()
 			TeleportMenu:SetPoint("TOPLEFT", MinimapAnchor, "BOTTOMLEFT", 0, -13)
 		end
+
 		if RaidBuffsAnchor and not ShestakUIPositions[RaidBuffsAnchor:GetName()] then
 			RaidBuffsAnchor:ClearAllPoints()
 			RaidBuffsAnchor:SetPoint("TOPLEFT", MinimapAnchor, "BOTTOMLEFT", 0, -3)
 		end
-		if not ShestakUIPositions[VehicleAnchor:GetName()] then
+
+		if VehicleAnchor and not ShestakUIPositions[VehicleAnchor:GetName()] then
 			VehicleAnchor:ClearAllPoints()
 			VehicleAnchor:SetPoint("TOP", Minimap, "BOTTOM", 0, -27)
 		end
+
 		if TooltipAnchor and not ShestakUIPositions[TooltipAnchor:GetName()] then
 			TooltipAnchor:ClearAllPoints()
 			TooltipAnchor:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -21, 20)
 		end
 
-		GhostFrame:ClearAllPoints()
-		GhostFrame:SetPoint("TOP", Minimap, "BOTTOM", 0, -5)
+		if GhostFrame then
+			GhostFrame:ClearAllPoints()
+			GhostFrame:SetPoint("TOP", Minimap, "BOTTOM", 0, -5)
+		end
 
 		if stArchaeologyFrame then
 			stArchaeologyFrame:ClearAllPoints()
