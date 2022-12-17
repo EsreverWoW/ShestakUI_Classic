@@ -399,7 +399,7 @@ function Filger:OnEvent(event, unit, _, castID)
 							self.actives[spid] = {data = data, name = name, icon = icon, count = nil, start = start, duration = duration, spid = spid, sort = data.sort}
 						end
 					end
-				elseif name and (duration or 0) > 1.5 then
+				elseif name and (duration or 0) > 1.5 and (T.Classic or duration < 900) then
 					if not (T.class == "DEATHKNIGHT" and data.filter == "CD" and duration < 10) then -- Filter rune cd
 						self.actives[spid] = {data = data, name = name, icon = icon, count = nil, start = start, duration = duration, spid = spid, sort = data.sort}
 					end
