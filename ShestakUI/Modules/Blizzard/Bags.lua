@@ -207,7 +207,7 @@ end
 function Stuffing:SlotUpdate(b)
 	local texture, count, locked, quality = GetContainerItemInfo(b.bag, b.slot)
 	texture = texture or 0
-	local clink = GetContainerItemLink(b.bag, b.slot)
+	local clink = C_Container.GetContainerItemLink(b.bag, b.slot)
 	local isQuestItem, questId, isActiveQuest
 	local itemIsUpgrade
 	if T.Classic then
@@ -224,7 +224,7 @@ function Stuffing:SlotUpdate(b)
 	end
 
 	if b.cooldown and StuffingFrameBags and StuffingFrameBags:IsShown() then
-		local start, duration, enable = GetContainerItemCooldown(b.bag, b.slot)
+		local start, duration, enable = C_Container.GetContainerItemCooldown(b.bag, b.slot)
 		if T.Classic and HasWandEquipped() then
 			local wandSpeed = select(2, GetInventoryItemCooldown("player", 18)) or 0
 			if wandSpeed == 0 then
@@ -362,7 +362,7 @@ end
 
 function Stuffing:UpdateCooldowns(b)
 	if b.cooldown and StuffingFrameBags and StuffingFrameBags:IsShown() then
-		local start, duration, enable = GetContainerItemCooldown(b.bag, b.slot)
+		local start, duration, enable = C_Container.GetContainerItemCooldown(b.bag, b.slot)
 		if T.Classic and HasWandEquipped() then
 			local wandSpeed = select(2, GetInventoryItemCooldown("player", 18)) or 0
 			if wandSpeed == 0 then
@@ -477,7 +477,7 @@ function Stuffing:CreateReagentContainer()
 		button:SetSize(C.bag.button_size, C.bag.button_size)
 
 		local _, _, _, quality = GetContainerItemInfo(-3, i)
-		local clink = GetContainerItemLink(-3, i)
+		local clink = C_Container.GetContainerItemLink(-3, i)
 		if clink then
 			if quality and quality > 1 then
 				local r, g, b = GetItemQualityColor(quality)
@@ -745,7 +745,7 @@ local BAGTYPE_SOUL = 0x004
 local BAGTYPE_FISHING = 32768
 
 function Stuffing:BagType(bag)
-	local bagType = select(2, GetContainerNumFreeSlots(bag))
+	local bagType = select(2, C_Container.GetContainerNumFreeSlots(bag))
 
 	if bit.band(bagType, BAGTYPE_QUIVER) > 0 then
 		return ST_QUIVER
@@ -815,7 +815,7 @@ function Stuffing:SearchUpdate(str)
 			end
 		end
 		if b.name then
-			local ilink = GetContainerItemLink(b.bag, b.slot)
+			local ilink = C_Container.GetContainerItemLink(b.bag, b.slot)
 			if ilink then
 				local _, setName = T.Mainline and GetContainerItemEquipmentSetInfo(b.bag, b.slot)
 				setName = setName or ""
@@ -1284,13 +1284,13 @@ function Stuffing:Layout(isBank)
 	end
 
 	for _, i in ipairs(bs) do
-		local x = GetContainerNumSlots(i)
+		local x = C_Container.GetContainerNumSlots(i)
 		if x > 0 then
 			if not self.bags[i] then
 				self.bags[i] = self:BagNew(i, f)
 			end
 
-			slots = slots + GetContainerNumSlots(i)
+			slots = slots + C_Container.GetContainerNumSlots(i)
 		end
 		self.bags_num[i] = x
 	end
@@ -1305,8 +1305,8 @@ function Stuffing:Layout(isBank)
 
 	local idx = 0
 	for _, i in ipairs(bs) do
-		local bag_cnt = GetContainerNumSlots(i)
-		local specialType = select(2, GetContainerNumFreeSlots(i))
+		local bag_cnt = C_Container.GetContainerNumSlots(i)
+		local specialType = select(2, C_Container.GetContainerNumFreeSlots(i))
 		if bag_cnt > 0 then
 			self.bags[i] = self:BagNew(i, f)
 			local bagType = self.bags[i].bagType
@@ -1498,7 +1498,7 @@ end
 function Stuffing:PLAYERREAGENTBANKSLOTS_CHANGED(id)
 	local button = _G["ReagentBankFrameItem"..id]
 	if not button then return end
-	local clink = GetContainerItemLink(-3, id)
+	local clink = C_Container.GetContainerItemLink(-3, id)
 	button:SetBackdropBorderColor(unpack(C.media.border_color))
 
 	if clink then
@@ -1516,7 +1516,7 @@ end
 
 function Stuffing:BAG_UPDATE_DELAYED()
 	for _, i in ipairs(BAGS_BACKPACK) do
-		local numSlots = GetContainerNumSlots(i)
+		local numSlots = C_Container.GetContainerNumSlots(i)
 		if self.bags_num[i] and self.bags_num[i] ~= numSlots then
 			self:Layout()
 			return
@@ -1720,9 +1720,9 @@ function Stuffing:SortBags()
 	end
 
 	for _, slotNum in pairs(bagList) do
-		if GetContainerNumSlots(slotNum) > 0 then
+		if C_Container.GetContainerNumSlots(slotNum) > 0 then
 			BS_itemSwapGrid[slotNum] = {}
-			local family = select(2, GetContainerNumFreeSlots(slotNum))
+			local family = select(2, C_Container.GetContainerNumFreeSlots(slotNum))
 			if family then
 				if family == 0 then family = "Default" end
 				if not BS_bagGroups[family] then
@@ -1737,8 +1737,8 @@ function Stuffing:SortBags()
 	for _, group in pairs(BS_bagGroups) do
 		group.itemList = {}
 		for _, bagSlot in pairs(group.bagSlotNumbers) do
-			for itemSlot = 1, GetContainerNumSlots(bagSlot) do
-				local itemLink = GetContainerItemLink(bagSlot, itemSlot)
+			for itemSlot = 1, C_Container.GetContainerNumSlots(bagSlot) do
+				local itemLink = C_Container.GetContainerItemLink(bagSlot, itemSlot)
 				if itemLink ~= nil then
 					local newItem = {}
 
@@ -1793,12 +1793,12 @@ function Stuffing:SortBags()
 		for index, item in pairs(group.itemList) do
 			local gridSlot = index
 			for _, bagSlotNumber in pairs(group.bagSlotNumbers) do
-				if gridSlot <= GetContainerNumSlots(bagSlotNumber) then
+				if gridSlot <= C_Container.GetContainerNumSlots(bagSlotNumber) then
 					BS_itemSwapGrid[item.startBag][item.startSlot].destinationBag = bagSlotNumber
-					BS_itemSwapGrid[item.startBag][item.startSlot].destinationSlot = GetContainerNumSlots(bagSlotNumber) - gridSlot + 1
+					BS_itemSwapGrid[item.startBag][item.startSlot].destinationSlot = C_Container.GetContainerNumSlots(bagSlotNumber) - gridSlot + 1
 					break
 				else
-					gridSlot = gridSlot - GetContainerNumSlots(bagSlotNumber)
+					gridSlot = gridSlot - C_Container.GetContainerNumSlots(bagSlotNumber)
 				end
 			end
 		end

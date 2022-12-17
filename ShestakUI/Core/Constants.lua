@@ -24,12 +24,6 @@ T.HiDPI = GetScreenHeight() / T.screenHeight < 0.75
 
 -- BETA
 if T.newPatch or T.Classic then
-	GetContainerNumSlots = _G.GetContainerNumSlots or C_Container.GetContainerNumSlots
-	GetContainerNumFreeSlots = _G.GetContainerNumFreeSlots or C_Container.GetContainerNumFreeSlots
-	GetContainerItemLink = _G.GetContainerItemLink or C_Container.GetContainerItemLink
-	GetContainerItemCooldown = _G.GetContainerItemCooldown or C_Container.GetContainerItemCooldown
-	UseContainerItem = _G.UseContainerItem or C_Container.UseContainerItem
-	GetContainerItemID = _G.GetContainerItemID or C_Container.GetContainerItemID
 	SortBags = C_Container.SortBags
 	SortBankBags = C_Container.SortBankBags
 	SortReagentBankBags = C_Container.SortReagentBankBags

@@ -539,8 +539,6 @@ T.ShiftBarUpdate = function()
 			if isActive then
 				if T.Classic then
 					StanceBarFrame.lastSelected = button:GetID()
-				else
-					--BETA StanceBar.lastSelected = button:GetID()
 				end
 				button:SetChecked(true)
 			else

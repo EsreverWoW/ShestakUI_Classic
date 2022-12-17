@@ -260,14 +260,16 @@ hooksecurefunc("UseInventoryItem", function(slot)
 	end
 end)
 
-hooksecurefunc("UseContainerItem", function(bag, slot)
-	local itemID = GetContainerItemID(bag, slot)
-	if itemID then
-		local texture = select(10, GetItemInfo(itemID))
-		if texture == 136235 then return end -- prevent temp icon
-		watching[itemID] = {GetTime(), "item", texture, "container", bag, slot}
-	end
-end)
+if T.Classic then
+	hooksecurefunc(_G.C_Container, "UseContainerItem", function(bag, slot)
+		local itemID = C_Container.GetContainerItemID(bag, slot)
+		if itemID then
+			local texture = select(10, GetItemInfo(itemID))
+			if texture == 136235 then return end -- prevent temp icon
+			watching[itemID] = {GetTime(), "item", texture, "container", bag, slot}
+		end
+	end)
+end
 
 SlashCmdList.PulseCD = function()
 	tinsert(animating, {GetSpellTexture(87214)})
