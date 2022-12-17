@@ -20,7 +20,6 @@ for i = 1, 12 do
 	local b = _G["ActionButton"..i]
 	b:SetSize(C.actionbar.button_size, C.actionbar.button_size)
 	b:ClearAllPoints()
-	-- b:SetParent(Bar1Holder)
 	if C.actionbar.editor then
 		if i <= C.actionbar.bar1_num then
 			if i == 1 then
@@ -89,6 +88,8 @@ bar:RegisterEvent("PLAYER_LOGIN")
 if T.Mainline or T.Wrath then
 	bar:RegisterEvent("UPDATE_VEHICLE_ACTIONBAR")
 	bar:RegisterEvent("UPDATE_OVERRIDE_ACTIONBAR")
+	bar:RegisterEvent("UNIT_ENTERED_VEHICLE")
+	bar:RegisterEvent("UNIT_EXITED_VEHICLE")
 end
 bar:SetScript("OnEvent", function(self, event)
 	if event == "PLAYER_LOGIN" then
@@ -130,6 +131,18 @@ bar:SetScript("OnEvent", function(self, event)
 					end
 				end
 			end
+		end
+	elseif event == "UNIT_ENTERED_VEHICLE" then
+		if UnitHasVehicleUI("player") then
+			for i = 1, NUM_ACTIONBAR_BUTTONS do
+				local button = _G["ActionButton"..i]
+				button:GetCheckedTexture():SetAlpha(0)
+			end
+		end
+	elseif event == "UNIT_EXITED_VEHICLE" then
+		for i = 1, NUM_ACTIONBAR_BUTTONS do
+			local button = _G["ActionButton"..i]
+			button:GetCheckedTexture():SetAlpha(1)
 		end
 	end
 end)
