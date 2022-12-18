@@ -1,22 +1,16 @@
 local T, C, L, _ = unpack(select(2, ...))
 if C.bag.enable == true then return end
 
-if not oGlow:IsClassic() then return end
-
 local hook
 local _E
 
 local pipe = function(self)
-	local id = self:GetID()
-	local name = self:GetName()
-	local size = self.size
+	for _, button in self:EnumerateValidItems() do
+		local bagID = button:GetBagID()
+		local slotID = button:GetID()
+		local slotLink = C_Container.GetContainerItemLink(bagID, slotID)
 
-	for i = 1, size do
-		local bid = size - i + 1
-		local slotFrame = _G[name.."Item"..bid]
-		local slotLink = C_Container.GetContainerItemLink(id, i)
-
-		oGlow:CallFilters("bags", slotFrame, _E and slotLink)
+		oGlow:CallFilters("bags", button, _E and slotLink)
 	end
 end
 
@@ -34,7 +28,12 @@ local enable = function(self)
 	_E = true
 
 	if not hook then
-		hooksecurefunc("ContainerFrame_Update", pipe)
+		for i = 1, NUM_CONTAINER_FRAMES do
+			local frame = _G["ContainerFrame"..i]
+			hooksecurefunc(frame, "UpdateItems", pipe)
+		end
+		hooksecurefunc(ContainerFrameCombinedBags, "UpdateItems", pipe)
+
 		hook = true
 	end
 end
