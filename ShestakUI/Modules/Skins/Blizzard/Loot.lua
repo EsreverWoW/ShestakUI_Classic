@@ -86,73 +86,45 @@ local function LoadSkin()
 	-- Loot frame
 	if C.loot.lootframe == true or (IsAddOnLoaded("AdiBags") or IsAddOnLoaded("ArkInventory") or IsAddOnLoaded("cargBags_Nivaya") or IsAddOnLoaded("cargBags") or IsAddOnLoaded("Bagnon") or IsAddOnLoaded("Combuctor") or IsAddOnLoaded("TBag") or IsAddOnLoaded("BaudBag")) then return end
 
-	if T.Classic then
-		LootFrame:StripTextures()
-		LootFrame:SetTemplate("Transparent")
-		LootFrameInset:StripTextures()
-		LootFramePortraitOverlay:Kill()
+	LootFrame:StripTextures(true)
+	LootFrame:SetTemplate("Transparent")
+	T.SkinCloseButton(LootFrame.ClosePanelButton)
 
-		T.SkinNextPrevButton(LootFrameDownButton)
-		T.SkinNextPrevButton(LootFrameUpButton, true)
+	hooksecurefunc(LootFrameElementMixin, "Init", function(button)
+		local item = button.Item
+		if item and not item.styled then
+			item:StyleButton()
+			item:SetNormalTexture(0)
+			item:SetTemplate("Default")
 
-		T.SkinCloseButton(LootFrameCloseButton)
+			item.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+			item.icon:ClearAllPoints()
+			item.icon:SetPoint("TOPLEFT", 2, -2)
+			item.icon:SetPoint("BOTTOMRIGHT", -2, 2)
 
-		for i = 1, LOOTFRAME_NUMBUTTONS do
-			local slot = _G["LootButton"..i]
-			local icon = _G["LootButton"..i.."IconTexture"]
-			local name = _G["LootButton"..i.."NameFrame"]
+			button:CreateBackdrop("Overlay")
+			button.backdrop:SetPoint("TOPLEFT", 0, 0)
+			button.backdrop:SetPoint("BOTTOMRIGHT", 0, 0)
 
-			slot:StyleButton()
-			slot:SetNormalTexture(0)
-			slot:SetTemplate("Default")
+			button.HighlightNameFrame:SetAlpha(0)
+			button.PushedNameFrame:SetAlpha(0)
+			item.IconBorder:SetAlpha(0)
+			button.NameFrame:Hide()
 
-			icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-			icon:ClearAllPoints()
-			icon:SetPoint("TOPLEFT", 2, -2)
-			icon:SetPoint("BOTTOMRIGHT", -2, 2)
-
-			name:Hide()
-			name.border = CreateFrame("Frame", nil, slot)
-			name.border:CreateBackdrop("Overlay")
-			name.border.backdrop:SetPoint("TOPLEFT", name, 11, -13)
-			name.border.backdrop:SetPoint("BOTTOMRIGHT", name, -8, 12)
+			item.styled = true
 		end
-	else
-		LootFrame:StripTextures(true)
-		LootFrame:SetTemplate("Transparent")
-		T.SkinCloseButton(LootFrame.ClosePanelButton)
 
-		hooksecurefunc(LootFrameElementMixin, "Init", function(button)
-			local item = button.Item
-			if item and not item.styled then
-				item:StyleButton()
-				item:SetNormalTexture(0)
-				item:SetTemplate("Default")
-
-				item.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-				item.icon:ClearAllPoints()
-				item.icon:SetPoint("TOPLEFT", 2, -2)
-				item.icon:SetPoint("BOTTOMRIGHT", -2, 2)
-
-				button:CreateBackdrop("Overlay")
-				button.backdrop:SetPoint("TOPLEFT", 0, 0)
-				button.backdrop:SetPoint("BOTTOMRIGHT", 0, 0)
-
-				button.HighlightNameFrame:SetAlpha(0)
-				button.PushedNameFrame:SetAlpha(0)
-				item.IconBorder:SetAlpha(0)
-				button.NameFrame:Hide()
-
-				item.styled = true
-			end
-
-			button.IconQuestTexture:SetAlpha(0)
-			button.BorderFrame:SetAlpha(0)
-			if button.QualityStripe then
-				button.QualityStripe:SetAlpha(0)
-			end
-		end)
-	end
+		button.IconQuestTexture:SetAlpha(0)
+		button.BorderFrame:SetAlpha(0)
+		if button.QualityStripe then
+			button.QualityStripe:SetAlpha(0)
+		end
+		if button.IconQuestTexture:IsShown() then
+			item:SetBackdropBorderColor(1, 1, 0)
+		else
+			item:SetBackdropBorderColor(unpack(C.media.border_color))
+		end
+	end)
 end
 
 tinsert(T.SkinFuncs["ShestakUI"], LoadSkin)
