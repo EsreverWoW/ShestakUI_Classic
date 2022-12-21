@@ -99,7 +99,6 @@ local function StyleNormalButton(button, size)
 		if C.actionbar.hotkey == true then
 			hotkey:ClearAllPoints()
 			hotkey:SetPoint("TOPRIGHT", 0, -1)
-			hotkey.SetPoint = T.dummy -- BETA It's bad way but work while I find better
 			hotkey:SetFont(C.font.action_bars_font, C.font.action_bars_font_size, C.font.action_bars_font_style)
 			hotkey:SetShadowOffset(C.font.action_bars_font_shadow and 1 or 0, C.font.action_bars_font_shadow and -1 or 0)
 			hotkey:SetWidth(C.actionbar.button_size - 1)
@@ -333,7 +332,7 @@ end
 
 if C.actionbar.hotkey == true then
 	local gsub = string.gsub
-	local function UpdateHotkey(self)
+	local function UpdateHotkey(self, pass)
 		local hotkey = _G[self:GetName().."HotKey"]
 		local text = hotkey:GetText()
 		if not text then return end
@@ -359,6 +358,13 @@ if C.actionbar.hotkey == true then
 		text = gsub(text, KEY_NUMLOCK, "NuL")
 		text = gsub(text, KEY_MOUSEWHEELDOWN, "MWD")
 		text = gsub(text, KEY_MOUSEWHEELUP, "MWU")
+
+		if not pass then
+			hotkey:ClearAllPoints()
+			hotkey:SetPoint("TOPRIGHT", 0, -1)
+			hotkey:SetWidth(self:GetWidth() - 1)
+			hotkey:SetHeight(C.font.action_bars_font_size)
+		end
 
 		if hotkey:GetText() == _G["RANGE_INDICATOR"] then
 			hotkey:SetText("")
@@ -387,11 +393,11 @@ if C.actionbar.hotkey == true then
 			end
 		end
 		for i = 1, 10 do
-			UpdateHotkey(_G["StanceButton"..i])
-			UpdateHotkey(_G["PetActionButton"..i])
+			UpdateHotkey(_G["StanceButton"..i], true)
+			UpdateHotkey(_G["PetActionButton"..i], true)
 		end
 		if T.Mainline then
-			UpdateHotkey(ExtraActionButton1)
+			UpdateHotkey(ExtraActionButton1, true)
 		end
 	end)
 end
