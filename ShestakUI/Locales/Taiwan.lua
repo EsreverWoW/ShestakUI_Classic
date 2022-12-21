@@ -51,6 +51,7 @@ L_MISC_UI_OUTDATED_CLASSIC = "ShestakUI 版本已過期，請至 https://github.
 L_MISC_HEADER_MARK = "滑鼠懸停顯示團隊圖標"
 L_MISC_BINDER_OPEN = "滑鼠綁定"
 L_MISC_SCROLL = "附魔皮紙"
+L_MISC_HEADER_QUEST = "Auto quest button" -- Needs review
 
 -- Raid Utility
 L_RAID_UTIL_DISBAND = "解散團隊"

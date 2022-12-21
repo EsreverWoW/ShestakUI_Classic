@@ -51,6 +51,7 @@ L_MISC_UI_OUTDATED_CLASSIC = "Une version plus récente de ShestakUI est disponi
 L_MISC_HEADER_MARK = "Icône de raid au survol de la souris"
 L_MISC_BINDER_OPEN = "Assignations des boutons de la souris"
 L_MISC_SCROLL = "Parchemin"
+L_MISC_HEADER_QUEST = "Auto quest button" -- Needs review
 
 -- Raid Utility
 L_RAID_UTIL_DISBAND = "Dissoudre le raid"
