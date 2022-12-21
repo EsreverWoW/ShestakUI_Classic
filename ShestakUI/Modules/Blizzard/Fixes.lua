@@ -57,6 +57,11 @@ if T.Mainline then
 	end)
 end
 
+----------------------------------------------------------------------------------------
+--	Fix Keybind taint
+----------------------------------------------------------------------------------------
+_G.SettingsPanel.TransitionBackOpeningPanel = _G.HideUIPanel
+
 ------------------------------------------------------------------------
 -- !!NoTaint2, first-aid addon for Dragon Flight action bars taint.
 -- Code by warbaby 2022-11 http://abyui.top https://github.com/aby-ui
