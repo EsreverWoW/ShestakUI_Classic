@@ -1959,10 +1959,10 @@ if gold.enabled then
 
 				if C.stats.currency_misc then
 					if T.Mainline then
-						titleName = EXPANSION_NAME8
-						Currency(1813)	-- Reservoir Anima
-						Currency(1828)	-- Soul Ash
-						Currency(1767)	-- Stygia
+						titleName = EXPANSION_NAME9
+						Currency(2122)	-- Storm Sigil
+						Currency(2118)	-- Elemental Overflow
+						Currency(2003)	-- Dragon Isles Supplies
 					else
 						titleName = EXPANSION_NAME1
 						Currency(42)	-- Badge of Justice
