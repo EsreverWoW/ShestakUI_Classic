@@ -107,6 +107,14 @@ frame:SetScript("OnEvent", function(_, _, addon)
 					StaticPopup_Show("WATCHFRAME_URL", _, _, text)
 				end
 			end)
+		else
+			hooksecurefunc(AchievementTemplateMixin, "OnClick", function(self)
+				local elementData = self:GetElementData()
+				if elementData and elementData.id and IsControlKeyDown() then
+					local text = linkAchievement:format(elementData.id)
+					StaticPopup_Show("WATCHFRAME_URL", _, _, text)
+				end
+			end)
 		end
 	end
 end)
