@@ -87,7 +87,50 @@ frame:SetScript("OnEvent", function(self, event)
 	end
 
 	-- Hide Game Time
-	GameTimeFrame:Hide() -- BETA Need another solution to keep showing calendar invites
+	if T.Vanilla or T.TBC then
+		GameTimeFrame:Hide()
+	else
+		local InviteTexture = GameTimeCalendarInvitesTexture
+		InviteTexture:ClearAllPoints()
+		InviteTexture:SetParent(Minimap)
+		InviteTexture:SetPoint("TOPRIGHT", Minimap, "TOPRIGHT", -1, -4)
+		GameTimeFrame:Hide()
+
+		-- Create button to show invite tooltip and allow open calendar
+		local button = CreateFrame("Button", nil, Minimap)
+		button:SetAllPoints(InviteTexture)
+		button:Hide()
+
+		button:SetScript("OnEnter", function()
+			if InCombatLockdown() then return end
+			if InviteTexture:IsShown() then
+				GameTooltip:SetOwner(button, "ANCHOR_LEFT")
+				GameTooltip:AddLine(GAMETIME_TOOLTIP_CALENDAR_INVITES)
+				GameTooltip:AddLine(" ")
+				GameTooltip:AddLine(GAMETIME_TOOLTIP_TOGGLE_CALENDAR)
+				GameTooltip:Show()
+			end
+		end)
+
+		button:SetScript("OnLeave", function()
+			GameTooltip:Hide()
+		end)
+
+		button:SetScript("OnClick", function()
+			if InCombatLockdown() then return end
+			if InviteTexture:IsShown() then
+				ToggleCalendar()
+			end
+		end)
+
+		hooksecurefunc(InviteTexture, "Show", function()
+			button:Show()
+		end)
+
+		hooksecurefunc(InviteTexture, "Hide", function()
+			button:Hide()
+		end)
+	end
 
 	-- Move Mail icon
 	if T.Classic then
