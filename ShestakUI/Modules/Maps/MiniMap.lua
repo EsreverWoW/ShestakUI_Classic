@@ -599,6 +599,7 @@ if C.minimap.on_top then
 	frame:RegisterEvent("PLAYER_ENTERING_WORLD")
 	frame:SetScript("OnEvent", function()
 		frame:UnregisterEvent("PLAYER_ENTERING_WORLD")
+		local positionTable = T.CurrentProfile()
 
 		if LP_Coords then
 			LP_Coords:ClearAllPoints()
@@ -610,17 +611,17 @@ if C.minimap.on_top then
 			TeleportMenu:SetPoint("TOPLEFT", MinimapAnchor, "BOTTOMLEFT", 0, -13)
 		end
 
-		if RaidBuffsAnchor and not ShestakUIPositions[RaidBuffsAnchor:GetName()] then
+		if RaidBuffsAnchor and not positionTable[RaidBuffsAnchor:GetName()] then
 			RaidBuffsAnchor:ClearAllPoints()
 			RaidBuffsAnchor:SetPoint("TOPLEFT", MinimapAnchor, "BOTTOMLEFT", 0, -3)
 		end
 
-		if VehicleAnchor and not ShestakUIPositions[VehicleAnchor:GetName()] then
+		if VehicleAnchor and not positionTable[VehicleAnchor:GetName()] then
 			VehicleAnchor:ClearAllPoints()
 			VehicleAnchor:SetPoint("TOP", Minimap, "BOTTOM", 0, -27)
 		end
 
-		if TooltipAnchor and not ShestakUIPositions[TooltipAnchor:GetName()] then
+		if TooltipAnchor and not positionTable[TooltipAnchor:GetName()] then
 			TooltipAnchor:ClearAllPoints()
 			TooltipAnchor:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -21, 20)
 		end
@@ -635,17 +636,17 @@ if C.minimap.on_top then
 			stArchaeologyFrame:SetPoint("TOPRIGHT", Minimap, "BOTTOMRIGHT", 2, -5)
 		end
 
-		if AutoButtonAnchor and not ShestakUIPositions[AutoButtonAnchor:GetName()] then
+		if AutoButtonAnchor and not positionTable[AutoButtonAnchor:GetName()] then
 			AutoButtonAnchor:ClearAllPoints()
 			AutoButtonAnchor:SetPoint("TOPLEFT", Minimap, "BOTTOMLEFT", -2, -27)
 		end
 
-		if AutoButtonAnchor and not ShestakUIPositions[AutoButtonAnchor:GetName()] then
+		if AutoButtonAnchor and not positionTable[AutoButtonAnchor:GetName()] then
 			AutoButtonAnchor:ClearAllPoints()
 			AutoButtonAnchor:SetPoint("TOPLEFT", Minimap, "BOTTOMLEFT", -2, -27)
 		end
 
-		if StuffingFrameBags and not ShestakUIPositions[StuffingFrameBags:GetName()] then
+		if StuffingFrameBags and not positionTable[StuffingFrameBags:GetName()] then
 			StuffingFrameBags:ClearAllPoints()
 			StuffingFrameBags:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -21, 20)
 		end

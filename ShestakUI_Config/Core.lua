@@ -939,7 +939,7 @@ init:SetScript("OnEvent", function()
 			else
 				ShestakUIOptionsGlobal[realm][name] = false
 			end
-			changeProfile()
+			-- changeProfile()
 			ReloadUI()
 		end,
 		OnCancel = function()
