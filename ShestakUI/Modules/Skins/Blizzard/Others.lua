@@ -29,7 +29,6 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 			"GameMenuFrame",
 			"BNToastFrame",
 			"TicketStatusFrameButton",
-			"AutoCompleteBox",
 			"ReadyCheckFrame",
 			"ColorPickerFrame",
 			"LFDRoleCheckPopup",
@@ -55,11 +54,13 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 			RolePollPopup:StripTextures()
 		end
 
-		if T.Mainline then
+		if T.Wrath or T.Mainline then
 			QueueStatusFrame:StripTextures()
 			LFDRoleCheckPopup:StripTextures()
-			ColorPickerFrame.Border:Hide()
 		end
+
+		ColorPickerFrame.Border:Hide()
+		AutoCompleteBox.NineSlice:SetTemplate("Transparent")
 
 		for i = 1, getn(bgskins) do
 			local frame = _G[bgskins[i]]
