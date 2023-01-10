@@ -237,7 +237,7 @@ local function StyleSmallButton(normal, button, icon, name, pet)
 		end
 
 		if button.QuickKeybindHighlightTexture then
-			button.QuickKeybindHighlightTexture:SetTexture(0)
+			button.QuickKeybindHighlightTexture:SetScale(0.0001)
 		end
 
 		button:StyleButton()
