@@ -197,7 +197,7 @@ local function LoadSkin()
 			end
 			-- Icon border
 			if icon and icon:GetObjectType() == "Texture" then
-				if icon:GetTexture() == "Interface\\Icons\\Ability_Warlock_DemonicPower" then
+				if icon:GetTexture() == 236293 then
 					icon.b = CreateFrame("Frame", nil, frame)
 					icon.b:SetTemplate("Default")
 					icon.b:SetPoint("TOPLEFT", icon, "TOPLEFT", -2, 2)
@@ -867,6 +867,7 @@ local function LoadSkin()
 	if T.Mainline then
 		hooksecurefunc(NewToyAlertSystem, "setUpFunction", SkinNewPetMountAlert)
 		hooksecurefunc(NewRuneforgePowerAlertSystem, "setUpFunction", SkinNewPetMountAlert)
+		hooksecurefunc(NewCosmeticAlertFrameSystem, "setUpFunction", SkinNewPetMountAlert)
 	end
 
 	hooksecurefunc("StandardRewardAlertFrame_AdjustRewardAnchors", function(frame)
