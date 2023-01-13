@@ -559,10 +559,15 @@ function Stuffing:BagFrameSlotNew(p, slot)
 		table.insert(self.bagframe_buttons, ret)
 
 		BankFrameItemButton_Update(ret.frame)
-		BankFrameItemButton_UpdateLocked(ret.frame)
 
 		if not ret.frame.tooltipText then
 			ret.frame.tooltipText = ""
+		end
+
+		ret.frame.ID = ret.frame:GetInventorySlot()
+		local quality = GetInventoryItemQuality("player", ret.frame.ID)
+		if quality then
+			ret.frame.quality = quality
 		end
 
 		if slot > GetNumBankSlots() then
@@ -579,16 +584,6 @@ function Stuffing:BagFrameSlotNew(p, slot)
 		if BackdropTemplateMixin then
 			Mixin(ret.frame, BackdropTemplateMixin)
 		end
-		hooksecurefunc(ret.frame.IconBorder, "SetVertexColor", function(self, r, g, b)
-			if r ~= 0.65882 and g ~= 0.65882 and b ~= 0.65882 then
-				self:GetParent():SetBackdropBorderColor(r, g, b)
-			end
-			self:SetTexture(0)
-		end)
-
-		hooksecurefunc(ret.frame.IconBorder, "Hide", function(self)
-			self:GetParent():SetBackdropBorderColor(unpack(C.media.border_color))
-		end)
 
 		ret.frame.ID = ContainerIDToInventoryID(slot + 1)
 		local bag_tex = GetInventoryItemTexture("player", ret.frame.ID)
@@ -624,10 +619,13 @@ function Stuffing:BagFrameSlotNew(p, slot)
 
 		ret.frame:SetTemplate("Default")
 
-		local slotLink = GetInventoryItemLink("player", ret.frame.ID)
-		if slotLink then
-			local _, _, quality = GetItemInfo(slotLink)
-			ret.quality = quality
+		local quality = GetInventoryItemQuality("player", ret.frame.ID)
+		if quality then
+			ret.frame.quality = quality
+			-- else
+			-- C_Timer.After(1, function() -- TODO: Test it if quality not returned after first open
+			-- ret.frame.quality = GetInventoryItemQuality("player", ret.frame.ID)
+			-- end)
 		end
 
 		ret.slot = slot
@@ -641,10 +639,12 @@ function Stuffing:BagFrameSlotNew(p, slot)
 	ret.icon = _G[ret.frame:GetName().."IconTexture"]
 	ret.icon:CropIcon()
 
-	if ret.quality and ret.quality > 1 then
-		local r, g, b = GetItemQualityColor(ret.quality)
+	-- C_Timer.After(2, function()
+	if ret.frame.quality and ret.frame.quality > 1 then
+		local r, g, b = GetItemQualityColor(ret.frame.quality)
 		ret.frame:SetBackdropBorderColor(r, g, b)
 	end
+	-- end)
 
 	return ret
 end
@@ -1514,19 +1514,6 @@ function Stuffing:PLAYER_ENTERING_WORLD()
 end
 
 function Stuffing:PLAYERBANKSLOTS_CHANGED(id)
-	if id > 28 then
-		for _, v in ipairs(self.bagframe_buttons) do
-			if v.frame and v.frame.GetInventorySlot then
-				BankFrameItemButton_Update(v.frame)
-				BankFrameItemButton_UpdateLocked(v.frame)
-
-				if not v.frame.tooltipText then
-					v.frame.tooltipText = ""
-				end
-			end
-		end
-	end
-
 	if self.bankFrame and self.bankFrame:IsShown() then
 		self:BagSlotUpdate(-1)
 	end
@@ -1583,6 +1570,17 @@ function Stuffing:BANKFRAME_OPENED()
 
 	self.bankFrame:Show()
 	Stuffing_Open()
+
+	for _, v in ipairs(self.bagframe_buttons) do
+		if v.frame and v.frame.GetInventorySlot then
+			v.frame:SetBackdropBorderColor(unpack(C.media.border_color))
+			BankFrameItemButton_Update(v.frame)
+
+			if not v.frame.tooltipText then
+				v.frame.tooltipText = ""
+			end
+		end
+	end
 end
 
 function Stuffing:BANKFRAME_CLOSED()
