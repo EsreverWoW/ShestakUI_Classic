@@ -183,7 +183,7 @@
 	<Script file="Modules\Maps\ToggleMenu.lua"/>
 	<Script file="Modules\Maps\WorldMap_Vanilla.lua"/>
 
-	<Script file="Modules\Quests\AutoAccept_Vanilla.lua"/>
+	<Script file="Modules\Quests\AutoAccept_Wrath.lua"/>
 	<Script file="Modules\Quests\AutoButton.lua"/>
 	<Script file="Modules\Quests\ObjectiveTracker_Vanilla.lua"/>
 
