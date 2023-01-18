@@ -2403,7 +2403,7 @@ end
 local function parseHotHeal(casterGUID, wasUpdated, spellID, tickAmount, totalTicks, tickInterval, ...)
 	local spellName = GetSpellInfo(spellID)
 	-- If the user is on 3.3, then anything without a total ticks attached to it is rejected
-	if( not tickAmount or not spellName or select("#", ...) == 0 ) then return end
+	if(not tickInterval or not tickAmount or not spellName or select("#", ...) == 0 ) then return end
 
 	if type(tickAmount) == "table" then
 		tickAmount = table.concat(tickAmount, "@")
