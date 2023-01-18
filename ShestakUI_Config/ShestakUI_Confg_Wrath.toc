@@ -1,4 +1,4 @@
-## Interface: 30400
+## Interface: 30401
 ## Title: ShestakUI (Classic) Config
 ## Notes: In-game configuration for ShestakUI
 ## Author: Shestak
