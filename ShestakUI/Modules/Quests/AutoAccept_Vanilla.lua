@@ -10,14 +10,11 @@ QuickQuest:SetScript("OnEvent", function(self, event, ...) self[event](...) end)
 local QuickQuestDB = {
 	toggle = true,
 	items = true,
-	faireport = true,
 	gossip = true,
 	gossipraid = 1,
 	modifier = "SHIFT",
 	reverse = false,
 	share = false,
-	withered = true,
-	nomi = true,
 }
 
 local QuickQuestBlacklistDB = {
@@ -80,19 +77,10 @@ QuickQuest:Register("QUEST_GREETING", function()
 
 	local active = GetNumActiveQuests()
 	if(active > 0) then
-		local logQuests = GetQuestLogQuests(true)
 		for index = 1, active do
-			local name, complete = GetActiveTitle(index)
+			local _, complete = GetActiveTitle(index)
 			if(complete) then
-				local questID = logQuests[name]
-				if(not questID) then
-					SelectActiveQuest(index)
-				else
-					local _, _, worldQuest = GetQuestTagInfo(questID)
-					if(not worldQuest) then
-						SelectActiveQuest(index)
-					end
-				end
+				SelectActiveQuest(index)
 			end
 		end
 	end
@@ -100,13 +88,8 @@ QuickQuest:Register("QUEST_GREETING", function()
 	local available = GetNumAvailableQuests()
 	if(available > 0) then
 		for index = 1, available do
-			local isTrivial, isIgnored
-			if T.Classic then
-				isTrivial = IsActiveQuestTrivial(index)
-			else
-				isTrivial, _, _, _, isIgnored = GetAvailableQuestInfo(index)
-			end
-			if(not isTrivial and not isIgnored) then
+			local isTrivial = IsActiveQuestTrivial(index)
+			if(not isTrivial) then
 				SelectAvailableQuest(index)
 			end
 		end
@@ -156,28 +139,13 @@ QuickQuest:Register("GOSSIP_SHOW", function()
 			local _, _, trivial, ignored = GetAvailableGossipQuestInfo(index)
 			if(not trivial and not ignored) then
 				SelectGossipAvailableQuest(index)
-			elseif(trivial and npcID == 64337 and QuickQuestDB.nomi) then
-				SelectGossipAvailableQuest(index)
 			end
 		end
 	end
 
 	if(available == 0 and active == 0 and GetNumGossipOptions() == 1) then
-		if(string.match((GetGossipOptions()), TRACKER_HEADER_PROVINGGROUNDS)) then
-			-- ignore proving grounds queue
-			return
-		end
-
-		if(QuickQuestDB.faireport) then
-			if(npcID == 57850) then
-				return SelectGossipOption(1)
-			end
-		end
-
 		if(QuickQuestDB.gossip) then
-			local _, instance, _, _, _, _, _, mapID = GetInstanceInfo()
-			if(QuickQuestDB.withered and instance == "scenario" and mapID == 1626) then return end
-
+			local _, instance = GetInstanceInfo()
 			if(instance == "raid" and QuickQuestDB.gossipraid > 0) then
 				if(GetNumGroupMembers() > 1 and QuickQuestDB.gossipraid < 2) then
 					return
@@ -188,18 +156,6 @@ QuickQuest:Register("GOSSIP_SHOW", function()
 				SelectGossipOption(1)
 			end
 		end
-	end
-end)
-
-local darkmoonNPC = {}
-
-QuickQuest:Register("GOSSIP_CONFIRM", function(index)
-	if(not QuickQuestDB.faireport) then return end
-
-	local npcID = GetNPCID()
-	if(npcID and darkmoonNPC[npcID]) then
-		SelectGossipOption(index, "", true)
-		StaticPopup_Hide("GOSSIP_CONFIRM")
 	end
 end)
 
