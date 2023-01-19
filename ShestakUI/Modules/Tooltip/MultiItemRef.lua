@@ -75,7 +75,7 @@ local ShowTip = function(tip, link)
 	shown = nil
 end
 
-if T.Classic then
+if T.Classic and not T.Wrath341 then
 	local _SetItemRef = SetItemRef
 	function SetItemRef(...)
 		local link = ...
