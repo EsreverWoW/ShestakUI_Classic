@@ -336,10 +336,19 @@ if C.reminder.solo_buffs_enable == true then
 				},
 				["combat"] = true,
 				["instance"] = true,
+				-- ["level"] = 40,
+			},
+			[5] = {	-- Vampiric Embrace group
+				["spells"] = {
+					SpellName(15286),		-- Shadow Protection
+				},
+				["role"] = "Caster",
+				["combat"] = true,
+				["instance"] = true,
 				-- ["level"] = 30,
 			},
 			--[[
-			[5] = {	-- Shadowform group
+			[6] = {	-- Shadowform group
 				["spells"] = {
 					SpellName(15473),		-- Shadowform
 				},
