@@ -7818,8 +7818,16 @@ C["filger_spells"] = {
 			{spellID = 12292, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Enrage (Improved Defensive Stance)
 			{spellID = 57514, unitID = "player", caster = "player", filter = "BUFF", absID = true},
-			-- Enrage (Wrecking Crew)
+			-- Enrage r1 (Wrecking Crew)
 			{spellID = 57518, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Enrage r2 (Wrecking Crew)
+			{spellID = 57519, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Enrage r3 (Wrecking Crew)
+			{spellID = 57520, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Enrage r4 (Wrecking Crew)
+			{spellID = 57521, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Enrage r5 (Wrecking Crew)
+			{spellID = 57522, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Enraged Regeneration
 			{spellID = 55694, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Flurry
@@ -8904,11 +8912,13 @@ C["filger_spells"] = {
 
 			-- Raids: Wrath of the Lich King Classic
 			-- Power Spark [Malygos]
-			{spellID = 56152, unitID = "player", caster = "all", filter = "BUFF"},
+			{spellID = 56152, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Slag Imbued [Ignis the Furnace Master]
 			{spellID = 63536, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Rune of Power [The Assembly of Iron]
 			{spellID = 64320, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Singed [Hodir]
+			{spellID = 65280, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Starlight [Hodir]
 			{spellID = 62807, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Storm Cloud [Hodir]
@@ -8917,6 +8927,10 @@ C["filger_spells"] = {
 			{spellID = 62807, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Toasty Fire [Hodir]
 			{spellID = 62821, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Shadow Crash [General Vezax]
+			{spellID = 63277, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- Saronite Vapors [General Vezax]
+			{spellID = 63322, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Surge of Adrenaline [The Northrend Beasts]
 			{spellID = 68667, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Empowered Darkness [Twin Val'kyr]
