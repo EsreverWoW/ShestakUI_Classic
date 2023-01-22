@@ -159,7 +159,7 @@ function button:PLAYER_LOGIN()
 
 	local function OnTooltipSetUnit(self)
 		if self ~= GameTooltip or self:IsForbidden() then return end
-		local _, link = T.Classic and self:GetItem() or TooltipUtil.GetDisplayedItem(self)
+		local _, link = T.Classic and self:GetItem() or T.Mainline and TooltipUtil.GetDisplayedItem(self)
 
 		local auctionFrame = T.Classic and AuctionFrame or AuctionHouseFrame
 
