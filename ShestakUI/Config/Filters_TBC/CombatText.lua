@@ -103,7 +103,7 @@ elseif T.class == "SHAMAN" then
 		T.aoespam[5672] = 5			-- Healing Stream Totem
 		T.aoespam[1064] = 3			-- Chain Heal
 		-- Damaging spells
-		-- T.aoespam[26545] = 3		-- Lightning Shield
+		-- T.aoespam[324] = 3		-- Lightning Shield
 		T.aoespam[421] = 1			-- Chain Lightning
 		T.aoespam[8349] = 0			-- Fire Nova
 		T.aoespam[8187] = 3			-- Magma Totem

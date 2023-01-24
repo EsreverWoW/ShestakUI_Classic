@@ -1905,8 +1905,6 @@ C["filger_spells"] = {
 			{spellID = 1850, filter = "CD"},
 			-- Enrage
 			{spellID = 5229, filter = "CD", absID = true},
-			-- Enraged Defense
-			{spellID = 6542, filter = "CD"},
 			-- Faerie Fire (Feral)
 			{spellID = 16857, filter = "CD"},
 			-- Feral Charge - Bear
@@ -2052,7 +2050,7 @@ C["filger_spells"] = {
 			-- The Beast Within
 			{spellID = 34471, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Trueshot Aura
-			{spellID = 20905, unitID = "pet", caster = "player", filter = "BUFF"},
+			{spellID = 19506, unitID = "pet", caster = "player", filter = "BUFF"},
 			-- Warp (Warp Stalker)
 			-- {spellID = 35346, unitID = "pet", caster = "all", filter = "BUFF"},
 		},
@@ -2604,7 +2602,7 @@ C["filger_spells"] = {
 
 			-- Pets
 			-- Charge (Boar)
-			{spellID = 7371, filter = "CD"},
+			{spellID = 31426, filter = "CD"},
 			-- Dash (Boar / Cat / Hyena / Raptor / Ravager / Tallstrider / Wolf)
 			{spellID = 61684, filter = "CD"},
 			-- Dive (Bat / Bird of Prey / Carrion Bird / Dragonhawk / Nether Ray / Wind Serpent)
@@ -5237,8 +5235,6 @@ C["filger_spells"] = {
 			-- Self
 			-- Circle of Healing
 			{spellID = 34861, filter = "CD"},
-			-- Desperate Prayer
-			{spellID = 13908, filter = "CD"},
 			-- Devouring Plague
 			{spellID = 2944, filter = "CD"},
 			-- Dispersion

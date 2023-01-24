@@ -146,7 +146,7 @@ elseif T.class == "SHAMAN" then
 		T.aoespam[61295] = 6		-- Riptide
 		T.aoespam[51945] = 3		-- Earthliving
 		-- Damaging spells
-		T.aoespam[26545] = 3		-- Lightning Shield
+		-- T.aoespam[324] = 3			-- Lightning Shield
 		T.aoespam[421] = 1			-- Chain Lightning
 		T.aoespam[8349] = 0			-- Fire Nova
 		T.aoespam[51490] = 0		-- Thunderstorm
