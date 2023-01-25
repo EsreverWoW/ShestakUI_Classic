@@ -6,13 +6,12 @@ if C.actionbar.enable ~= true or C.actionbar.micromenu ~= true then return end
 ----------------------------------------------------------------------------------------
 local frame = CreateFrame("Frame", "MicroAnchor", T_PetBattleFrameHider or UIParent)
 frame:SetPoint(unpack(C.position.micro_menu))
+frame:SetSize(250, 25)
+
 if T.Classic then
-	frame:SetSize(208, 30)
-else
-	frame:SetSize(250, 25)
+	UpdateMicroButtonsParent(frame)
 end
 
-UpdateMicroButtonsParent(frame)
 if C.actionbar.micromenu_mouseover == true then frame:SetAlpha(0) end
 
 local MICRO_BUTTONS = T.Classic and MICRO_BUTTONS or {
@@ -25,9 +24,9 @@ local MICRO_BUTTONS = T.Classic and MICRO_BUTTONS or {
 	"LFDMicroButton",
 	"EJMicroButton",
 	"CollectionsMicroButton",
+	"StoreMicroButton",
 	"MainMenuMicroButton",
 	"HelpMicroButton",
-	"StoreMicroButton",
 }
 
 local colors = {
@@ -54,8 +53,24 @@ for i, button in pairs(MICRO_BUTTONS) do
 		bu:SetSize(22, 29)
 	end
 
-	bu:SetParent(frame)
-	bu.SetParent = T.dummy
+	local point = bu:GetPoint()
+	if point then
+		bu:ClearAllPoints()
+		if T.Classic then
+			if i == 1 then
+				bu:SetPoint("TOPLEFT", frame, "TOPLEFT", -1, 28)
+			else
+				local n = (not T.Vanilla or i <= 7) and i or i - 1
+				bu:SetPoint("TOPLEFT", frame, "TOPLEFT", ((n - 1) * 26) - 1, 28)
+			end
+		else
+			if i == 1 then
+				bu:SetPoint("TOPLEFT", frame, "TOPLEFT", -1, 2)
+			else
+				bu:SetPoint("TOPLEFT", frame, "TOPLEFT", ((i - 1) * 23) - 1, 2)
+			end
+		end
+	end
 
 	bu:SetHighlightTexture(0)
 	bu.SetHighlightTexture = T.dummy
@@ -86,7 +101,7 @@ for i, button in pairs(MICRO_BUTTONS) do
 
 		local highlight = bu:GetHighlightTexture()
 		if highlight then
-			highlight:SetInside(f)
+			highlight:SetAlpha(0)
 		end
 	end
 
@@ -137,28 +152,19 @@ for i, button in pairs(MICRO_BUTTONS) do
 end
 
 -- Fix textures for buttons
-hooksecurefunc("UpdateMicroButtons", function()
-	if T.Classic then
+if T.Classic then
+	hooksecurefunc("UpdateMicroButtons", function()
 		MicroButtonPortrait:ClearAllPoints()
 		MicroButtonPortrait:SetPoint("TOPLEFT", CharacterMicroButton.frame, "TOPLEFT", 2, -2)
 		MicroButtonPortrait:SetPoint("BOTTOMRIGHT", CharacterMicroButton.frame, "BOTTOMRIGHT", -2, 2)
-	end
 
-	CharacterMicroButton:ClearAllPoints()
-	if T.Classic then
-		CharacterMicroButton:SetPoint("BOTTOMLEFT", frame, "BOTTOMLEFT", -2, 0)
-	else
-		CharacterMicroButton:SetPoint("BOTTOMLEFT", frame, "BOTTOMLEFT", -1, -2)
-	end
-
-	if T.Classic then
-		MainMenuBarPerformanceBar:SetPoint("BOTTOM", MainMenuMicroButton, "BOTTOM", 0, 0)
-	else
-		MainMenuMicroButton.MainMenuBarPerformanceBar:SetPoint("BOTTOM", MainMenuMicroButton, "BOTTOM", 0, 4)
-	end
-end)
-
-if T.Mainline then
+		MainMenuBarPerformanceBar:SetTexture(C.media.texture)
+		MainMenuBarPerformanceBar:SetSize(20, 2)
+		MainMenuBarPerformanceBar:ClearAllPoints()
+		MainMenuBarPerformanceBar:SetPoint("BOTTOM", MainMenuMicroButton, "BOTTOM", 0, 2)
+	end)
+else
 	MainMenuMicroButton.MainMenuBarPerformanceBar:SetTexture(C.media.texture)
 	MainMenuMicroButton.MainMenuBarPerformanceBar:SetSize(16, 2)
+	MainMenuMicroButton.MainMenuBarPerformanceBar:SetPoint("BOTTOM", MainMenuMicroButton, "BOTTOM", 0, 4)
 end
