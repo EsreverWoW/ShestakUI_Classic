@@ -31,7 +31,7 @@ function openMail(index)
 		if T.Classic then
 			MiniMapMailFrame:Hide()
 		else
-			MinimapCluster.MailFrame:Hide()
+			MinimapCluster.IndicatorFrame.MailFrame:Hide()
 		end
 		return stopOpening(L_MAIL_COMPLETE)
 	end
@@ -56,7 +56,7 @@ function openMail(index)
 		if T.Classic then
 			MiniMapMailFrame:Hide()
 		else
-			MinimapCluster.MailFrame:Hide()
+			MinimapCluster.IndicatorFrame.MailFrame:Hide()
 		end
 	end
 end
