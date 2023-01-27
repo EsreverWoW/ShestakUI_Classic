@@ -12,7 +12,11 @@ if T.Classic then
 	UpdateMicroButtonsParent(frame)
 end
 
-if C.actionbar.micromenu_mouseover == true then frame:SetAlpha(0) end
+if C.actionbar.micromenu_mouseover then
+	frame:SetAlpha(0)
+	frame:SetScript("OnEnter", function() frame:SetAlpha(1) end)
+	frame:SetScript("OnLeave", function() frame:SetAlpha(0) end)
+end
 
 local MICRO_BUTTONS = T.Classic and MICRO_BUTTONS or {
 	"CharacterMicroButton",
@@ -39,9 +43,9 @@ local colors = {
 	[7]	= {0.7, 0.7, 1},
 	[8]	= {1, 1, 1},
 	[9]	= {1, 0.7, 0.58},
-	[10] = {1, 0.4, 0.4},
-	[11] = {1, 1, 1},
-	[12] = {1, 0.83, 0.50},
+	[10] = {1, 0.83, 0.50},
+	[11] = {1, 0.4, 0.4},
+	[12] = {1, 1, 1},
 }
 
 for i, button in pairs(MICRO_BUTTONS) do
@@ -71,6 +75,9 @@ for i, button in pairs(MICRO_BUTTONS) do
 			end
 		end
 	end
+
+	bu:SetParent(frame)
+	bu.SetParent = T.dummy
 
 	bu:SetHighlightTexture(0)
 	bu.SetHighlightTexture = T.dummy
