@@ -372,12 +372,6 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 		end
 
 		if C.skins.blizzard_frames == true then
-			-- Social Browser frame
-			SocialBrowserFrame:StripTextures()
-			SocialBrowserFrame:SetTemplate("Transparent")
-			T.SkinCloseButton(SocialBrowserFrame.CloseButton)
-			SocialBrowserFrame.CloseButton:SetSize(16, 16)
-
 			-- What's new frame
 			if T.Mainline then
 				SplashFrame:CreateBackdrop("Transparent")
