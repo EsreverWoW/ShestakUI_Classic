@@ -349,7 +349,6 @@ local function LoadSkin()
 	local OrderInfo = OrderView.OrderInfo
 	OrderInfo:StripTextures()
 	OrderInfo.BackButton:SkinButton()
-	OrderInfo.IgnoreButton:SkinButton()
 	OrderInfo.StartOrderButton:SkinButton()
 	OrderInfo.DeclineOrderButton:SkinButton()
 	OrderInfo.ReleaseOrderButton:SkinButton()
