@@ -1567,9 +1567,13 @@ if C.raidframe.auto_position == "DYNAMIC" then
 				if C.raidframe.layout == "AUTO" and ((T.Wrath and not T.Role == "Healer") or (T.Mainline and not T.IsHealerSpec())) then offset = 0 end
 				if C.unitframe.unit_castbar then
 					if C.unitframe.castbar_icon == true then
-						oUF_Player_Castbar:SetPoint(C.position.unitframes.player_castbar[1], C.position.unitframes.player_castbar[2], C.position.unitframes.player_castbar[3], C.position.unitframes.player_castbar[4] + 11, C.position.unitframes.player_castbar[5] + offset)
+						if oUF_Player_Castbar then
+							oUF_Player_Castbar:SetPoint(C.position.unitframes.player_castbar[1], C.position.unitframes.player_castbar[2], C.position.unitframes.player_castbar[3], C.position.unitframes.player_castbar[4] + 11, C.position.unitframes.player_castbar[5] + offset)
+						end
 					else
-						oUF_Player_Castbar:SetPoint(C.position.unitframes.player_castbar[1], C.position.unitframes.player_castbar[2], C.position.unitframes.player_castbar[3], C.position.unitframes.player_castbar[4], C.position.unitframes.player_castbar[5] + offset)
+						if oUF_Player_Castbar then
+							oUF_Player_Castbar:SetPoint(C.position.unitframes.player_castbar[1], C.position.unitframes.player_castbar[2], C.position.unitframes.player_castbar[3], C.position.unitframes.player_castbar[4], C.position.unitframes.player_castbar[5] + offset)
+						end
 					end
 				end
 
@@ -1600,9 +1604,13 @@ elseif C.raidframe.auto_position == "STATIC" then
 			if C.raidframe.layout == "AUTO" and ((T.Wrath and not T.Role == "Healer") or (T.Mainline and not T.IsHealerSpec())) then offset = 0 end
 			if C.unitframe.unit_castbar then
 				if C.unitframe.castbar_icon == true then
-					oUF_Player_Castbar:SetPoint(C.position.unitframes.player_castbar[1], C.position.unitframes.player_castbar[2], C.position.unitframes.player_castbar[3], C.position.unitframes.player_castbar[4] + 11, C.position.unitframes.player_castbar[5] + offset)
+					if oUF_Player_Castbar then
+						oUF_Player_Castbar:SetPoint(C.position.unitframes.player_castbar[1], C.position.unitframes.player_castbar[2], C.position.unitframes.player_castbar[3], C.position.unitframes.player_castbar[4] + 11, C.position.unitframes.player_castbar[5] + offset)
+					end
 				else
-					oUF_Player_Castbar:SetPoint(C.position.unitframes.player_castbar[1], C.position.unitframes.player_castbar[2], C.position.unitframes.player_castbar[3], C.position.unitframes.player_castbar[4], C.position.unitframes.player_castbar[5] + offset)
+					if oUF_Player_Castbar then
+						oUF_Player_Castbar:SetPoint(C.position.unitframes.player_castbar[1], C.position.unitframes.player_castbar[2], C.position.unitframes.player_castbar[3], C.position.unitframes.player_castbar[4], C.position.unitframes.player_castbar[5] + offset)
+					end
 				end
 			end
 
