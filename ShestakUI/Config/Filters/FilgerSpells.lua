@@ -2472,6 +2472,8 @@ C["filger_spells"] = {
 			{spellID = 97463, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Darkness
 			{spellID = 209426, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Anti-Magic Zone
+			{spellID = 145629, unitID = "player", caster = "all", filter = "BUFF"},
 
 			-- Other
 			-- Symbol of Hope
