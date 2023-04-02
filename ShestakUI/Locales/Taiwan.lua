@@ -51,7 +51,7 @@ L_MISC_UI_OUTDATED_CLASSIC = "ShestakUI 版本已過期，請至 https://github.
 L_MISC_HEADER_MARK = "滑鼠懸停顯示團隊圖標"
 L_MISC_BINDER_OPEN = "滑鼠綁定"
 L_MISC_SCROLL = "附魔皮紙"
-L_MISC_HEADER_QUEST = "Auto quest button" -- Needs review
+L_MISC_HEADER_QUEST = "任務道具按鈕"
 
 -- Raid Utility
 L_RAID_UTIL_DISBAND = "解散團隊"
@@ -90,8 +90,8 @@ L_MINIMAP_FARM = "小地圖縮放"
 L_MINIMAP_TOGGLE = "快捷列自由折疊"
 
 -- Chat
-L_CHAT_WHISPER = "From"
-L_CHAT_BN_WHISPER = "From"
+L_CHAT_WHISPER = "來自"
+L_CHAT_BN_WHISPER = "來自"
 L_CHAT_AFK = "[AFK]"
 L_CHAT_DND = "[DND]"
 L_CHAT_GM = "[GM]"
