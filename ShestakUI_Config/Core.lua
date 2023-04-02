@@ -146,6 +146,7 @@ ns.CreateCheckBox = function(parent, option, text, textDesc)
 	end
 
 	f.Text:SetWidth(540)
+	f.Text:SetWordWrap(false)
 
 	f.tooltipText = ns[parent.tag.."_"..option.."_desc"] or textDesc or ns[parent.tag.."_"..option] or text
 

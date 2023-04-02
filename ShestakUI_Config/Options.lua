@@ -1671,6 +1671,7 @@ do
 
 	local show_target_target = ns.CreateCheckBox(parent, "show_target_target", L_GUI_UF_SHOW_TOT)
 	show_target_target:SetPoint("LEFT", show_focus, "RIGHT", 248, 0)
+	show_target_target.Text:SetWidth(270)
 
 	local show_boss = ns.CreateCheckBox(parent, "show_boss", L_GUI_UF_SHOW_BOSS)
 	show_boss:SetPoint("TOPLEFT", show_focus, "BOTTOMLEFT", 0, 0)
@@ -1922,6 +1923,7 @@ do
 
 	local raid_tanks_tt = ns.CreateCheckBox(parent, "raid_tanks_tt", L_GUI_UF_SHOW_TANK_TT)
 	raid_tanks_tt:SetPoint("LEFT", raid_tanks, "RIGHT", 248, 0)
+	raid_tanks_tt.Text:SetWidth(270)
 
 	local solo_mode = ns.CreateCheckBox(parent, "solo_mode", L_GUI_UF_SOLO_MODE)
 	solo_mode:SetPoint("TOPLEFT", raid_tanks, "BOTTOMLEFT", 0, 0)
@@ -2153,12 +2155,14 @@ do
 
 	local tot_debuffs = ns.CreateCheckBox(parent, "tot_debuffs", L_GUI_AURA_TOT_DEBUFFS)
 	tot_debuffs:SetPoint("LEFT", target_auras, "RIGHT", 320, 0)
+	tot_debuffs.Text:SetWidth(200)
 
 	local focus_debuffs = ns.CreateCheckBox(parent, "focus_debuffs", L_GUI_AURA_FOCUS_DEBUFFS)
 	focus_debuffs:SetPoint("TOPLEFT", target_auras, "BOTTOMLEFT", 0, 0)
 
 	local fot_debuffs = ns.CreateCheckBox(parent, "fot_debuffs", L_GUI_AURA_FOT_DEBUFFS)
 	fot_debuffs:SetPoint("LEFT", focus_debuffs, "RIGHT", 320, 0)
+	fot_debuffs.Text:SetWidth(200)
 
 	local pet_debuffs = ns.CreateCheckBox(parent, "pet_debuffs", L_GUI_AURA_PET_DEBUFFS)
 	pet_debuffs:SetPoint("TOPLEFT", focus_debuffs, "BOTTOMLEFT", 0, 0)
@@ -2459,9 +2463,11 @@ do
 
 	local realm = ns.CreateCheckBox(parent, "realm")
 	realm:SetPoint("LEFT", title, "RIGHT", 320, 0)
+	realm.Text:SetWidth(200)
 
 	local target = ns.CreateCheckBox(parent, "target")
 	target:SetPoint("TOPLEFT", title, "BOTTOMLEFT", 0, 0)
+	target.Text:SetWidth(300)
 
 	local rank = ns.CreateCheckBox(parent, "rank")
 	rank:SetPoint("LEFT", target, "RIGHT", 320, 0)
@@ -2664,6 +2670,7 @@ do
 
 	local track_debuffs = ns.CreateCheckBox(parent, "track_debuffs", L_GUI_NAMEPLATE_SHOW_DEBUFFS)
 	track_debuffs:SetPoint("TOPLEFT", clamp, "BOTTOMLEFT", 0, 0)
+	track_debuffs.Text:SetWidth(350)
 
 	local ListButton = CreateFrame("Button", nil, parent, "UIPanelButtonTemplate")
 	ListButton:SetPoint("LEFT", track_debuffs, "RIGHT", 400, 0)
