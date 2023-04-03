@@ -1,6 +1,7 @@
 local T, C
 local _, ns = ...
 local L = ns
+GetAddOnMetadata = GetAddOnMetadata or C_AddOns.GetAddOnMetadata -- FIXME
 
 ----------------------------------------------------------------------------------------
 --	GUI for ShestakUI(by Haleth, Solor)

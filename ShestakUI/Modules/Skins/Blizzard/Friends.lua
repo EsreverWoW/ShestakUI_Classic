@@ -35,7 +35,10 @@ local function LoadSkin()
 	}
 
 	for i = 1, #StripAllTextures do
-		StripAllTextures[i]:StripTextures()
+		local frame = StripAllTextures[i]
+		if frame then
+			frame:StripTextures()
+		end
 	end
 
 	local KillTextures = {
@@ -60,7 +63,6 @@ local function LoadSkin()
 		QuickJoinFrame.JoinQueueButton,
 		QuickJoinRoleSelectionFrame.AcceptButton,
 		QuickJoinRoleSelectionFrame.CancelButton,
-		-- FriendsListFrameScrollFrame.PendingInvitesHeaderButton,
 		FriendsFrameBattlenetFrame.BroadcastFrame.CancelButton,
 		FriendsFrameBattlenetFrame.BroadcastFrame.UpdateButton,
 		RecruitAFriendFrame.RewardClaiming.ClaimOrViewRewardButton,

@@ -70,12 +70,9 @@ local function LoadSkin()
 		EncounterJournalSuggestTab,
 		EncounterJournalDungeonTab,
 		EncounterJournalRaidTab,
-		EncounterJournalLootJournalTab
+		EncounterJournalLootJournalTab,
+		EncounterJournalMonthlyActivitiesTab
 	}
-
-	if T.newPatch then
-		tinsert(mainTabs, 1, EncounterJournalMonthlyActivitiesTab)
-	end
 
 	for _, tab in pairs(mainTabs) do
 		T.SkinTab(tab)
@@ -87,10 +84,7 @@ local function LoadSkin()
 	T.SkinCloseButton(EncounterJournalCloseButton)
 	T.SkinDropDownBox(EncounterJournalInstanceSelectTierDropDown)
 
-	if T.newPatch then
-		EncounterJournalInstanceSelectBG:SetAlpha(0)
-	end
-
+	EncounterJournalInstanceSelectBG:SetAlpha(0)
 	EncounterJournalInstanceSelect.bg:Kill()
 	EncounterJournalEncounterFrameInfoBG:Kill()
 	EncounterJournal.encounter.info.leftShadow:Kill()

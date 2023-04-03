@@ -1,6 +1,6 @@
 local T, C, L, _ = unpack(select(2, ...))
 if C.skins.blizzard_frames ~= true then return end
-
+if T.newPatch then return end -- FIXME
 ----------------------------------------------------------------------------------------
 --	Edit Mode Manager skin
 ----------------------------------------------------------------------------------------

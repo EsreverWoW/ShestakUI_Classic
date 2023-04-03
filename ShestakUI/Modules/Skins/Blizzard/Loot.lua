@@ -12,8 +12,10 @@ local function LoadSkin()
 	T.SkinCloseButton(LootHistoryFrame.CloseButton)
 	T.SkinCloseButton(LootHistoryFrame.ResizeButton, nil, " ")
 
-	LootHistoryFrameScrollFrame:GetRegions():Hide()
-	T.SkinScrollBar(LootHistoryFrameScrollFrameScrollBar)
+	if not T.newPatch then
+		LootHistoryFrameScrollFrame:GetRegions():Hide()
+		T.SkinScrollBar(LootHistoryFrameScrollFrameScrollBar)
+	end
 
 	LootHistoryFrame.ResizeButton:SetTemplate("Default")
 	LootHistoryFrame.ResizeButton:SetWidth(LootHistoryFrame:GetWidth())

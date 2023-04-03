@@ -21,9 +21,7 @@ local function LoadSkin()
 	ClassTalentFrame.TalentsTab.SearchPreviewContainer:StripTextures()
 	ClassTalentFrame.TalentsTab.SearchPreviewContainer:CreateBackdrop("Transparent")
 
-	if T.newPatch then
-		ClassTalentFrame.TalentsTab.InspectCopyButton:SkinButton()
-	end
+	ClassTalentFrame.TalentsTab.InspectCopyButton:SkinButton()
 
 	for _, tab in next, {ClassTalentFrame.TabSystem:GetChildren()} do
 		T.SkinTab(tab)

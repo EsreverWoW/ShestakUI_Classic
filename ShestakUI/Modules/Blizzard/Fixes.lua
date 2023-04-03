@@ -49,12 +49,14 @@ end
 --	Fix SearchLFGLeave() taint
 ----------------------------------------------------------------------------------------
 if T.Mainline then
-	local TaintFix = CreateFrame("Frame")
-	TaintFix:SetScript("OnUpdate", function()
-		if LFRBrowseFrame.timeToClear then
-			LFRBrowseFrame.timeToClear = nil
-		end
-	end)
+	if not T.newPatch then
+		local TaintFix = CreateFrame("Frame")
+		TaintFix:SetScript("OnUpdate", function()
+			if LFRBrowseFrame.timeToClear then
+				LFRBrowseFrame.timeToClear = nil
+			end
+		end)
+	end
 end
 
 ----------------------------------------------------------------------------------------

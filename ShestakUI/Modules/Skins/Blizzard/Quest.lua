@@ -34,11 +34,13 @@ local function LoadSkin()
 	QuestFrameCompleteQuestButton:SkinButton(true)
 
 	T.SkinCloseButton(QuestFrameCloseButton, QuestFrame.backdrop)
-	T.SkinScrollBar(QuestDetailScrollFrameScrollBar)
-	T.SkinScrollBar(QuestProgressScrollFrameScrollBar)
-	T.SkinScrollBar(QuestRewardScrollFrameScrollBar)
-	T.SkinScrollBar(QuestGreetingScrollFrameScrollBar)
-	T.SkinScrollBar(QuestNPCModelTextScrollFrameScrollBar)
+	if not T.newPatch then
+		T.SkinScrollBar(QuestDetailScrollFrameScrollBar)
+		T.SkinScrollBar(QuestProgressScrollFrameScrollBar)
+		T.SkinScrollBar(QuestRewardScrollFrameScrollBar)
+		T.SkinScrollBar(QuestGreetingScrollFrameScrollBar)
+		T.SkinScrollBar(QuestNPCModelTextScrollFrameScrollBar)
+	end
 
 	for i = 1, 6 do
 		local button = _G["QuestProgressItem"..i]
@@ -95,7 +97,9 @@ local function LoadSkin()
 
 	QuestLogPopupDetailFrameScrollFrame:StripTextures()
 	QuestLogPopupDetailFrameScrollFrame:SetPoint("TOPLEFT", 13, -65)
-	T.SkinScrollBar(QuestLogPopupDetailFrameScrollFrameScrollBar)
+	if not T.newPatch then
+		T.SkinScrollBar(QuestLogPopupDetailFrameScrollFrameScrollBar)
+	end
 
 	QuestLogPopupDetailFrame.ShowMapButton:SkinButton(true)
 	QuestLogPopupDetailFrame.ShowMapButton.Text:ClearAllPoints()

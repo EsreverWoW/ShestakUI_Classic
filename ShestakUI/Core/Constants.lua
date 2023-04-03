@@ -3,6 +3,8 @@ local T, C, L, _ = unpack(select(2, ...))
 ----------------------------------------------------------------------------------------
 --	ShestakUI variables
 ----------------------------------------------------------------------------------------
+GetAddOnMetadata = GetAddOnMetadata or C_AddOns.GetAddOnMetadata
+
 T.dummy = function() return end
 T.name = UnitName("player")
 T.race = select(2, UnitRace("player"))
@@ -11,10 +13,10 @@ T.level = UnitLevel("player")
 T.client = GetLocale()
 T.realm = GetRealmName()
 T.color = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[T.class]
-T.version = (GetAddOnMetadata or C_AddOns.GetAddOnMetadata)("ShestakUI", "Version")
+T.version = GetAddOnMetadata("ShestakUI", "Version")
 T.screenWidth, T.screenHeight = GetPhysicalScreenSize()
 T.toc = select(4, GetBuildInfo())
-T.newPatch = T.toc >= 100005
+T.newPatch = T.toc >= 100100
 T.Mainline =_G.WOW_PROJECT_ID == _G.WOW_PROJECT_MAINLINE
 T.Classic = _G.WOW_PROJECT_ID == _G.WOW_PROJECT_CLASSIC or _G.WOW_PROJECT_ID == _G.WOW_PROJECT_BURNING_CRUSADE_CLASSIC or _G.WOW_PROJECT_ID == _G.WOW_PROJECT_WRATH_CLASSIC
 T.Vanilla = _G.WOW_PROJECT_ID == _G.WOW_PROJECT_CLASSIC
