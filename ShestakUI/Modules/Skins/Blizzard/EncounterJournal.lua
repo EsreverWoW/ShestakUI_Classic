@@ -128,9 +128,12 @@ local function LoadSkin()
 	T.SkinScrollBar(EncounterJournalInstanceSelect.ScrollBar)
 	T.SkinScrollBar(EncounterJournalEncounterFrameInfo.LootContainer.ScrollBar)
 	T.SkinScrollBar(EncounterJournalEncounterFrameInstanceFrame.LoreScrollBar)
-	T.SkinScrollBar(EncounterJournalEncounterFrameInfoDetailsScrollFrameScrollBar)
 	T.SkinScrollBar(EncounterJournalEncounterFrameInfo.BossesScrollBar)
-	T.SkinScrollBar(EncounterJournalEncounterFrameInfoOverviewScrollFrameScrollBar)
+
+	if not T.newPatch then
+		T.SkinScrollBar(EncounterJournalEncounterFrameInfoDetailsScrollFrameScrollBar)
+		T.SkinScrollBar(EncounterJournalEncounterFrameInfoOverviewScrollFrameScrollBar)
+	end
 
 	for i = 1, AJ_MAX_NUM_SUGGESTIONS do
 		local suggestion = EncounterJournal.suggestFrame["Suggestion"..i]
@@ -397,7 +400,9 @@ local function LoadSkin()
 
 	local itemSetsFrame = EncounterJournal.LootJournalItems.ItemSetsFrame
 	itemSetsFrame.ClassButton:SkinButton(true)
-	T.SkinScrollBar(itemSetsFrame.scrollBar)
+	if not T.newPatch then
+		T.SkinScrollBar(itemSetsFrame.scrollBar)
+	end
 
 	hooksecurefunc(itemSetsFrame, "ConfigureItemButton", function(_, button)
 		if not button.styled then
@@ -414,14 +419,16 @@ local function LoadSkin()
 		button.backdrop:SetBackdropBorderColor(color.r, color.g, color.b)
 	end)
 
-	local button = itemSetsFrame.buttons
-	for i = 1, #button do
-		local button = button[i]
-		button:CreateBackdrop("Overlay")
-		button.backdrop:SetPoint("TOPLEFT", 2, 2)
-		button.backdrop:SetPoint("BOTTOMRIGHT", 0, 0)
-		button.Background:Hide()
-		button.ItemLevel:SetTextColor(1, 1, 1)
+	if not T.newPatch then
+		local button = itemSetsFrame.buttons
+		for i = 1, #button do
+			local button = button[i]
+			button:CreateBackdrop("Overlay")
+			button.backdrop:SetPoint("TOPLEFT", 2, 2)
+			button.backdrop:SetPoint("BOTTOMRIGHT", 0, 0)
+			button.Background:Hide()
+			button.ItemLevel:SetTextColor(1, 1, 1)
+		end
 	end
 
 	T.SkinScrollBar(EncounterJournal.LootJournal.ScrollBar)

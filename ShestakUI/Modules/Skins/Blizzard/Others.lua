@@ -324,6 +324,11 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 			end
 		end
 
+		if T.newPatch then
+			T.SkinScrollBar(BaudErrorFrameDetailScrollFrame.ScrollBar)
+			T.SkinScrollBar(BaudErrorFrameListScrollBoxScrollBar.ScrollBar)
+		end
+
 		-- Button position or text
 		_G["ColorPickerOkayButton"]:ClearAllPoints()
 		_G["ColorPickerOkayButton"]:SetPoint("BOTTOMLEFT", _G["ColorPickerFrame"], "BOTTOMLEFT", 6, 6)
