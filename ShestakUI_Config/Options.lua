@@ -737,9 +737,6 @@ do
 	local hide_talking_head = ns.CreateCheckBox(parent, "hide_talking_head")
 	hide_talking_head:SetPoint("TOPLEFT", hide_banner, "BOTTOMLEFT", 0, 0)
 
-	local hide_maw_buffs = ns.CreateCheckBox(parent, "hide_maw_buffs")
-	hide_maw_buffs:SetPoint("TOPLEFT", hide_talking_head, "BOTTOMLEFT", 0, 0)
-
 	local InfoButton = CreateFrame("Button", nil, parent, "UIPanelButtonTemplate")
 	InfoButton:SetPoint("BOTTOMRIGHT", parent, "BOTTOMRIGHT", -20, 5)
 	InfoButton:SetSize(100, 23)

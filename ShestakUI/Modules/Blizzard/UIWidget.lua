@@ -335,10 +335,4 @@ if T.Mainline then
 		self.button:SetHighlightTexture(0)
 		self.button:SetWidth(200)
 	end)
-
-	-- Hide Maw Buffs
-	if C.general.hide_maw_buffs then
-		maw:SetAlpha(0)
-		maw:SetScale(0.001)
-	end
 end

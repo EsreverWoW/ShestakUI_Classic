@@ -50,7 +50,6 @@ L.general_color_picker_desc = "Ajoute des boutons de copier/coller et une entré
 L.general_minimize_mouseover = "Bouton pour réduire la fenêtre de quête au survol de la souris"
 L.general_hide_banner = "Masquer la bannière du cadre de butin de Boss"
 L.general_hide_talking_head = "Masquer la fenêtre de dialogue des PNJ's"
-L.general_hide_maw_buffs = "Masquer le cadre des buffs de l'antre en instance"
 
 -- Media options
 L.media_border_color = "   Couleur des bordures"
