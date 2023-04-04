@@ -4,6 +4,8 @@ if C.skins.bubbles ~= true then return end
 ----------------------------------------------------------------------------------------
 --	ChatBubbles skin
 ----------------------------------------------------------------------------------------
+local offset = C.skins.bubbles_offset and C.skins.bubbles_offset or 2
+
 local function styleBubble(bubble)
 	if bubble:IsForbidden() then return end
 
@@ -13,8 +15,8 @@ local function styleBubble(bubble)
 	frame.Tail:Hide()
 
 	frame:CreateBackdrop("Transparent")
-	frame.backdrop:SetPoint("TOPLEFT", 2, -2)
-	frame.backdrop:SetPoint("BOTTOMRIGHT", -2, 2)
+	frame.backdrop:SetPoint("TOPLEFT", offset, -offset)
+	frame.backdrop:SetPoint("BOTTOMRIGHT", -offset, offset)
 	frame.backdrop:SetScale(UIParent:GetScale())
 
 	bubble:SetClampedToScreen(false)
