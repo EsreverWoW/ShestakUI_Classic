@@ -500,7 +500,7 @@ function T.SkinScrollBar(frame, minimal)
 			newThumb:DisableDrawLayer("BACKGROUND")
 			newThumb:DisableDrawLayer("ARTWORK")
 			if not frame.thumbbg then
-				frame.thumbbg = CreateFrame("Frame", nil, frame)
+				frame.thumbbg = CreateFrame("Frame", nil, newThumb)
 				frame.thumbbg:SetPoint("TOPLEFT", newThumb, "TOPLEFT", 0, -3)
 				frame.thumbbg:SetPoint("BOTTOMRIGHT", newThumb, "BOTTOMRIGHT", 0, 3)
 				frame.thumbbg:SetTemplate("Overlay")

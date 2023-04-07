@@ -303,7 +303,9 @@ LootRollAnchor:SetScript("OnEvent", function(_, _, addon)
 
 	LootRollAnchor:UnregisterEvent("ADDON_LOADED")
 	LootRollAnchor:RegisterEvent("START_LOOT_ROLL")
-	LootRollAnchor:RegisterEvent("LOOT_HISTORY_ROLL_CHANGED")
+	if not T.newPatch then
+		LootRollAnchor:RegisterEvent("LOOT_HISTORY_ROLL_CHANGED")
+	end
 
 	UIParent:UnregisterEvent("START_LOOT_ROLL")
 	UIParent:UnregisterEvent("CANCEL_LOOT_ROLL")

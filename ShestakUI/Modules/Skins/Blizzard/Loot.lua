@@ -9,7 +9,11 @@ local function LoadSkin()
 	LootHistoryFrame:StripTextures()
 	LootHistoryFrame:SetTemplate("Transparent")
 
-	T.SkinCloseButton(LootHistoryFrame.CloseButton)
+	if LootHistoryFrame.CloseButton then
+		T.SkinCloseButton(LootHistoryFrame.CloseButton)
+	elseif LootHistoryFrame.ClosePanelButton then
+		T.SkinCloseButton(LootHistoryFrame.ClosePanelButton)
+	end
 	T.SkinCloseButton(LootHistoryFrame.ResizeButton, nil, " ")
 
 	if not T.newPatch then
@@ -44,7 +48,9 @@ local function LoadSkin()
 			end
 		end
 	end
-	hooksecurefunc("LootHistoryFrame_FullUpdate", UpdateLoots)
+	if not T.newPatch then
+		hooksecurefunc("LootHistoryFrame_FullUpdate", UpdateLoots)
+	end
 	LootHistoryFrame:HookScript("OnShow", UpdateLoots)
 
 	-- Master Looter frame
