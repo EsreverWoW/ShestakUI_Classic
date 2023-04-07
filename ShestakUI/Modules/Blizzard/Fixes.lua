@@ -67,13 +67,13 @@ _G.SettingsPanel.TransitionBackOpeningPanel = _G.HideUIPanel
 ----------------------------------------------------------------------------------------
 --	Allow to show ProfessionsFrame and AuctionHouseFrame together
 ----------------------------------------------------------------------------------------
-function GetMaxUIPanelsWidth()
-	if UIParent:GetRight() < 1925 and UIParent:GetRight() > 1915 then
-		return UIParent:GetRight() - UIParent:GetAttribute("RIGHT_OFFSET_BUFFER") + 110
-	else
-		return UIParent:GetRight() - UIParent:GetAttribute("RIGHT_OFFSET_BUFFER")
-	end
-end
+--BETA function GetMaxUIPanelsWidth()
+	-- if UIParent:GetRight() < 1925 and UIParent:GetRight() > 1915 then
+		-- return UIParent:GetRight() - UIParent:GetAttribute("RIGHT_OFFSET_BUFFER") + 110
+	-- else
+		-- return UIParent:GetRight() - UIParent:GetAttribute("RIGHT_OFFSET_BUFFER")
+	-- end
+-- end
 
 ------------------------------------------------------------------------
 -- !!NoTaint2, first-aid addon for Dragon Flight action bars taint.
