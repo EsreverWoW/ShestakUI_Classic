@@ -46,7 +46,7 @@ local function LoadSkin()
 	local RecipeList = frame.CraftingPage.RecipeList
 	RecipeList:StripTextures()
 	RecipeList.BackgroundNineSlice:Hide()
-	T.SkinScrollBar(RecipeList.ScrollBar, true)
+	T.SkinScrollBar(RecipeList.ScrollBar)
 
 	local SchematicForm = frame.CraftingPage.SchematicForm
 	SchematicForm:StripTextures()
@@ -228,7 +228,7 @@ local function LoadSkin()
 		frame:SetTemplate("Transparent")
 
 		T.SkinCloseButton(frame.ClosePanelButton)
-		T.SkinScrollBar(frame.ScrollBar, true)
+		T.SkinScrollBar(frame.ScrollBar)
 
 		hooksecurefunc(frame.ScrollBox, "Update", HandleOutputButtons)
 	end
@@ -303,7 +303,7 @@ local function LoadSkin()
 
 	local BrowseList = Orders.BrowseFrame.RecipeList
 	BrowseList:StripTextures()
-	T.SkinScrollBar(BrowseList.ScrollBar, true)
+	T.SkinScrollBar(BrowseList.ScrollBar)
 	T.SkinEditBox(BrowseList.SearchBox, nil, 16)
 	T.SkinCloseButton(BrowseList.FilterButton.ResetButton)
 	BrowseList.FilterButton.ResetButton:ClearAllPoints()
@@ -314,7 +314,7 @@ local function LoadSkin()
 
 	local OrderList = Orders.BrowseFrame.OrderList
 	OrderList:StripTextures()
-	T.SkinScrollBar(OrderList.ScrollBar, true)
+	T.SkinScrollBar(OrderList.ScrollBar)
 
 	hooksecurefunc(Orders, "SetupTable", function()
 		local maxHeaders = OrderList.HeaderContainer:GetNumChildren()

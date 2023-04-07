@@ -33,7 +33,7 @@ local function LoadSkin()
 	}
 
 	for i = 1, #scrollbars do
-		T.SkinScrollBar(scrollbars[i], true)
+		T.SkinScrollBar(scrollbars[i])
 	end
 
 	local tabs = {

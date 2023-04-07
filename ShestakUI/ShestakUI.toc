@@ -11,6 +11,7 @@
 ## Version: 1.87
 ## SavedVariables: ShestakUISettings, ShestakUIStats, ShestakUIBindings, ShestakUICurrency, ShestakUIPositions
 ## SavedVariablesPerCharacter: ShestakUISettingsPerChar, ShestakUIChatHistory, ShestakUIPositionsPerChar
+## IconTexture: Interface\AddOns\ShestakUI\Media\Textures\Healer.tga
 
 ## OptionalDeps: Blizzard_CombatText, ShestakUI_Config, ShestakUI_Profile, LibStub, CallbackHandler-1.0, LibClassicCasterino, LibClassicDurations, Aptechka, AtlasLoot, cargBags, Clique, epgp, Grid, Grid2, ls_Toasts, LunaUnitFrames, Mapster, Omen, OPie, PitBull4, Postal, Prat-3.0, Quartz, Questie, Recount, Rematch, ShadowedUnitFrames, TidyPlates, TipTac, TipTacTalents, tullaCC, VuhDo, WeakAuras
 ## X-Embeds: LibStub, CallbackHandler-1.0, LibClassicCasterino, LibClassicDurations, LibRangeCheck-2.0, ChatThrottleLib, LibHealComm-4.0

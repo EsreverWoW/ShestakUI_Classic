@@ -425,7 +425,7 @@ addAPI(scrollFrame)
 T.SkinFuncs = {}
 T.SkinFuncs["ShestakUI"] = {}
 
-function T.SkinScrollBar(frame, minimal)
+function T.SkinScrollBar(frame)
 	frame:StripTextures()
 
 	local frameName = frame.GetName and frame:GetName()
@@ -435,7 +435,7 @@ function T.SkinScrollBar(frame, minimal)
 
 	local newThumb = frame.Back and frame:GetThumb()
 
-	if T.newPatch then minimal = true end
+	local minimal = frame:GetWidth() < 10
 
 	if UpButton and DownButton then
 		if not UpButton.icon then
@@ -512,12 +512,20 @@ function T.SkinScrollBar(frame, minimal)
 				hooksecurefunc(newThumb, "Show", function(self)
 					frame:SetAlpha(1)
 				end)
+
+				hooksecurefunc(newThumb, "SetShown", function(self, showThumb)
+					if showThumb then
+						frame:SetAlpha(1)
+					else
+						frame:SetAlpha(0)
+					end
+				end)
 			end
 
 			if minimal then
-				UpButton:SetSize(17, 15)
-				DownButton:SetSize(17, 15)
-				newThumb:SetWidth(17)
+				UpButton:SetSize(14, 14)
+				DownButton:SetSize(14, 14)
+				newThumb:SetWidth(14)
 			end
 		end
 	end
@@ -1142,6 +1150,14 @@ function T.SkinIconBorder(frame, parent)
 			border:SetBackdropBorderColor(unpack(C.media.border_color))
 		end
 	end)
+end
+
+function T.ReplaceIconString(frame, text)
+	if not text then text = frame:GetText() end
+	if not text or text == "" then return end
+
+	local newText, count = gsub(text, "|T([^:]-):[%d+:]+|t", "|T%1:14:14:0:0:64:64:5:59:5:59|t")
+	if count > 0 then frame:SetFormattedText("%s", newText) end
 end
 
 local LoadBlizzardSkin = CreateFrame("Frame")
