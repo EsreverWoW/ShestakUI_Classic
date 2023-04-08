@@ -480,9 +480,7 @@ local function LoadSkin()
 	end)
 
 	-- Wardrobe
-	WardrobeFrame:StripTextures()
-	WardrobeFrame:SetTemplate("Transparent")
-	T.SkinCloseButton(WardrobeFrameCloseButton)
+	T.SkinFrame(WardrobeFrame)
 	T.SkinDropDownBox(WardrobeOutfitDropDown)
 	WardrobeOutfitDropDown:SetSize(221, 34)
 	WardrobeOutfitDropDown.SaveButton:SkinButton()
