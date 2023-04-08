@@ -62,7 +62,11 @@ local function LoadSkin()
 
 	-- Regular scroll bar
 	T.SkinScrollBar(MacroFrame.MacroSelector.ScrollBar)
-	T.SkinScrollBar(MacroFrameScrollFrameScrollBar)
+	if T.newPatch then
+		T.SkinScrollBar(MacroFrameScrollFrame.ScrollBar)
+	else
+		T.SkinScrollBar(MacroFrameScrollFrameScrollBar)
+	end
 
 	-- Big icon
 	MacroFrameSelectedMacroButton:StripTextures()
