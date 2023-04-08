@@ -3,9 +3,9 @@ local T, C, L, _ = unpack(select(2, ...))
 ----------------------------------------------------------------------------------------
 --	Universal Mount macro(by Monolit)
 --	/cancelform [noform:4]
---	/run Mountz("your_ground_mount","your_flying_mount","your_underwater_mount")
+--	/run Mountz("your_ground_mount","your_flying_mount","your_underwater_mount","your_dragonriding_mount")
 ----------------------------------------------------------------------------------------
-function Mountz(groundmount, flyingmount, underwatermount)
+function Mountz(groundmount, flyingmount, underwatermount, dragonridingmount)
 	if not underwatermount then underwatermount = groundmount end
 	local flyablex, swimablex, vjswim, InVj, nofly
 	local num = C_MountJournal.GetNumMounts()
@@ -35,19 +35,35 @@ function Mountz(groundmount, flyingmount, underwatermount)
 	if IsSwimming() and not flyablex and not vjswim then
 		swimablex = true
 	end
+
+	local riding
+	if IsAdvancedFlyableArea() and IsOutdoors() then
+		riding = true
+		flyablex = true
+		if not IsControlKeyDown() then
+			flyingmount = ""
+			groundmount = ""
+		end
+	end
+
 	if IsControlKeyDown() then
 		if IsSwimming() and not vjswim then
 			swimablex = not swimablex
 		elseif not vjswim then
 			flyablex = not flyablex
+			if riding then riding = false end
 		else
 			vjswim = not vjswim
 		end
 	end
-	local mountID = C_MountJournal.GetMountIDs()
-	for _, mountID in pairs(mountID) do
+
+	local mountIDs = C_MountJournal.GetMountIDs()
+	for _, mountID in pairs(mountIDs) do
 		local creatureName, spellID = C_MountJournal.GetMountInfoByID(mountID)
-		if flyingmount and creatureName == flyingmount and flyablex and not swimablex then
+		if dragonridingmount and creatureName == dragonridingmount and riding and not swimablex then
+			C_MountJournal.SummonByID(mountID)
+			return
+		elseif flyingmount and creatureName == flyingmount and flyablex and not swimablex then
 			C_MountJournal.SummonByID(mountID)
 			return
 		elseif groundmount and creatureName == groundmount and not flyablex and not swimablex and not vjswim then
