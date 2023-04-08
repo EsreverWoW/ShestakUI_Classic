@@ -285,7 +285,7 @@ local spellLookupLocalized = {}
 for i = 1, #spellLookup do
 	local name = GetSpellInfo(spellLookup[i])
 	if not name then
-		print("|cffff0000WARNING: spell ID ["..tostring(spellLookup[i]).."] no longer exists! Report this to EsreverWoW.|r")
+		print("|cffff0000ShestakUI: spell ID ["..tostring(spellLookup[i]).."] no longer exists!|r")
 	else
 		spellLookupLocalized[name] = spellLookup[i]
 	end

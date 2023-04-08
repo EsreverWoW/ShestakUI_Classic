@@ -10,7 +10,7 @@ local function SpellName(id)
 	if name then
 		return {name, icon}
 	else
-		print("|cffff0000WARNING: spell ID ["..tostring(id).."] no longer exists! Report this to Shestak.|r")
+		print("|cffff0000ShestakUI: Reminders spell ID ["..tostring(id).."] no longer exists!|r")
 		return {"Empty", ""}
 	end
 end

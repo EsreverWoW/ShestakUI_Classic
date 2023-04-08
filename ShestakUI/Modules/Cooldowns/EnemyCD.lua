@@ -178,11 +178,7 @@ end
 for spell in pairs(T.EnemySpells) do
 	local name = GetSpellInfo(spell)
 	if not name then
-		if T.Classic then
-			print("|cffff0000WARNING: spell ID ["..tostring(spell).."] no longer exists! Report this to EsreverWoW.|r")
-		else
-			print("|cffff0000WARNING: spell ID ["..tostring(spell).."] no longer exists! Report this to Shestak.|r")
-		end
+		print("|cffff0000ShestakUI: spell ID ["..tostring(spell).."] no longer exists!|r")
 	end
 end
 

@@ -511,11 +511,7 @@ if C["filger_spells"] and C["filger_spells"][T.class] then
 				group.spells[id] = data[j]
 			end
 			if not name and not data[j].slotID then
-				if T.Classic then
-					print("|cffff0000WARNING: spell/slot ID ["..(data[j].spellID or data[j].slotID or "UNKNOWN").."] no longer exists! Report this to EsreverWoW.|r")
-				else
-					print("|cffff0000WARNING: spell/slot ID ["..(data[j].spellID or data[j].slotID or "UNKNOWN").."] no longer exists! Report this to Shestak.|r")
-				end
+				print("|cffff0000ShestakUI: spell/slot ID ["..(data[j].spellID or data[j].slotID or "UNKNOWN").."] no longer exists!|r")
 				table.insert(jdx, j)
 			end
 			if ignoreTable[name] then
@@ -531,11 +527,7 @@ if C["filger_spells"] and C["filger_spells"][T.class] then
 		table.insert(SpellGroups, i, group)
 
 		if #data == 0 then
-			if T.Classic then
-				print("|cffff0000WARNING: section ["..data.Name.."] is empty! Report this to EsreverWoW.|r")
-			else
-				print("|cffff0000WARNING: section ["..data.Name.."] is empty! Report this to Shestak.|r")
-			end
+			print("|cffff0000ShestakUI: section ["..data.Name.."] is empty!|r")
 			table.insert(idx, i)
 		end
 	end
