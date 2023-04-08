@@ -892,6 +892,8 @@ do
 	label:SetText(L_GUI_SET_SAVED_SETTTINGS)
 	label:SetTextColor(1, 1, 1)
 	label:SetPoint("LEFT", ProfileBox, "RIGHT", 10, 0)
+	label:SetWordWrap(false)
+	label:SetWidth(230)
 
 	local profileName
 	StaticPopupDialogs.SHESTAKUI_RENAME_PROFILE = {
@@ -1675,6 +1677,7 @@ do
 
 	local boss_on_right = ns.CreateCheckBox(parent, "boss_on_right", L_GUI_UF_BOSS_RIGHT)
 	boss_on_right:SetPoint("LEFT", show_boss, "RIGHT", 248, 0)
+	boss_on_right.Text:SetWidth(270)
 
 	local show_arena = ns.CreateCheckBox(parent, "show_arena", L_GUI_UF_SHOW_ARENA)
 	show_arena:SetPoint("TOPLEFT", show_boss, "BOTTOMLEFT", 0, 0)
@@ -2468,6 +2471,7 @@ do
 
 	local rank = ns.CreateCheckBox(parent, "rank")
 	rank:SetPoint("LEFT", target, "RIGHT", 320, 0)
+	rank.Text:SetWidth(200)
 
 	local talents = ns.CreateCheckBox(parent, "talents")
 	talents:SetPoint("TOPLEFT", target, "BOTTOMLEFT", 0, 0)
@@ -2483,6 +2487,7 @@ do
 
 	local unit_role = ns.CreateCheckBox(parent, "unit_role")
 	unit_role:SetPoint("LEFT", raid_icon, "RIGHT", 320, 0)
+	unit_role.Text:SetWidth(200)
 
 	local who_targetting = ns.CreateCheckBox(parent, "who_targetting")
 	who_targetting:SetPoint("TOPLEFT", raid_icon, "BOTTOMLEFT", 0, 0)
@@ -2749,6 +2754,7 @@ do
 
 	local low_health = ns.CreateCheckBox(parent, "low_health")
 	low_health:SetPoint("LEFT", low_health_color, "RIGHT", 15, 0)
+	low_health.Text:SetWidth(250)
 
 	local cast_color = ns.CreateCheckBox(parent, "cast_color")
 	cast_color:SetPoint("TOPLEFT", low_health_value, "BOTTOMLEFT", 0, -8)
