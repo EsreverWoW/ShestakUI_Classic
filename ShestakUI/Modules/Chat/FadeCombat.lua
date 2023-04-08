@@ -125,9 +125,11 @@ end
 local function checkAgain(self)
 	C_Timer.After(1, function()
 		local f = GetMouseFocus()
-		local name = GetMouseFocus():GetName()
-		if f and name and not name:match("HCIC") then
-			hcic:ChatOnLeave(self)
+		if f then
+			local name = GetMouseFocus():GetName()
+			if name and not name:match("HCIC") then
+				hcic:ChatOnLeave(self)
+			end
 		end
 	end)
 end
