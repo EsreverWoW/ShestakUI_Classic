@@ -89,6 +89,7 @@ local function LoadSkin()
 		end
 	end
 	hooksecurefunc(CriteriaAlertSystem, "setUpFunction", SkinCriteriaAlert)
+	hooksecurefunc(MonthlyActivityAlertSystem, "setUpFunction", SkinCriteriaAlert)
 
 	local function SkinDungeonCompletionAlert(frame)
 		frame:SetAlpha(1)
@@ -829,6 +830,7 @@ local function LoadSkin()
 		end
 	end
 	hooksecurefunc(NewRecipeLearnedAlertSystem, "setUpFunction", SkinNewRecipeLearnedAlert)
+	hooksecurefunc(SkillLineSpecsUnlockedAlertSystem, "setUpFunction", SkinNewRecipeLearnedAlert)
 
 	local function SkinNewPetMountAlert(frame)
 		frame:SetAlpha(1)
