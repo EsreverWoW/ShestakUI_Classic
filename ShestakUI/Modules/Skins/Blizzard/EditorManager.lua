@@ -1,6 +1,6 @@
 local T, C, L, _ = unpack(select(2, ...))
 if C.skins.blizzard_frames ~= true then return end
-if T.newPatch then return end -- FIXME
+
 ----------------------------------------------------------------------------------------
 --	Edit Mode Manager skin
 ----------------------------------------------------------------------------------------
@@ -17,11 +17,24 @@ local function LoadSkin()
 	T.SkinCheckBox(frame.ShowGridCheckButton.Button, 30)
 	T.SkinCheckBox(frame.EnableSnapCheckButton.Button, 30)
 
+	if T.newPatch then
+		T.SkinCheckBox(frame.EnableAdvancedOptionsCheckButton.Button, 30)
+		EditModeManagerFrame.AccountSettings.SettingsContainer.BorderArt:Hide()
+	end
+
 	T.SkinSliderStep(frame.GridSpacingSlider.Slider, true)
 
-	for _, frame in next, {frame.AccountSettings.Settings:GetChildren()} do
-		if frame.Button then
-			T.SkinCheckBox(frame.Button, 30)
+	if T.newPatch then
+		for _, frame in next, {frame.AccountSettings.SettingsContainer.ScrollChild.BasicOptionsContainer:GetChildren()} do
+			if frame.Button then
+				T.SkinCheckBox(frame.Button, 30)
+			end
+		end
+	else
+		for _, frame in next, {frame.AccountSettings.Settings:GetChildren()} do
+			if frame.Button then
+				T.SkinCheckBox(frame.Button, 30)
+			end
 		end
 	end
 
