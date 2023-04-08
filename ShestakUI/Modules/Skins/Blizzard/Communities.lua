@@ -29,7 +29,10 @@ local function LoadSkin()
 	}
 
 	for i = 1, #scrollbars do
-		T.SkinScrollBar(scrollbars[i])
+		local scroll = scrollbars[i]
+		if scroll then
+			T.SkinScrollBar(scroll)
+		end
 	end
 
 	local closeButton = {
@@ -59,13 +62,15 @@ local function LoadSkin()
 	CommunitiesFrame.Chat.InsetFrame:SetTemplate("Overlay")
 	CommunitiesFrame.ChatTab:SetPoint("TOPLEFT", CommunitiesFrame, "TOPRIGHT", 5, -36)
 
-	hooksecurefunc(CommunitiesFrame.Chat.MessageFrame.ScrollBar, "SetPoint", function(self, point, anchor, attachTo, x, y)
-		if anchor == CommunitiesFrame.Chat.MessageFrame and x == 10 and y == -11 then
-			self:SetPoint(point, anchor, attachTo, 11, -7)
-		elseif anchor == CommunitiesFrame.Chat.MessageFrame and x == 10 and y == -17 then
-			self:SetPoint(point, anchor, attachTo, 11, -14)
-		end
-	end)
+	if CommunitiesFrame.Chat.MessageFrame.ScrollBar then -- BETA
+		hooksecurefunc(CommunitiesFrame.Chat.MessageFrame.ScrollBar, "SetPoint", function(self, point, anchor, attachTo, x, y)
+			if anchor == CommunitiesFrame.Chat.MessageFrame and x == 10 and y == -11 then
+				self:SetPoint(point, anchor, attachTo, 11, -7)
+			elseif anchor == CommunitiesFrame.Chat.MessageFrame and x == 10 and y == -17 then
+				self:SetPoint(point, anchor, attachTo, 11, -14)
+			end
+		end)
+	end
 
 	-- CommunitiesFrame.MemberList.ScrollBar:SetPoint("BOTTOMLEFT", CommunitiesFrame.MemberList, "BOTTOMRIGHT", 0, 14)
 	CommunitiesFrame.MemberList:SetPoint("BOTTOMRIGHT", CommunitiesFrame, "BOTTOMRIGHT", -26, 31)
@@ -572,11 +577,15 @@ local function LoadSkin()
 	backdrop4:SetPoint("TOPLEFT", CommunitiesFrameGuildDetailsFrameInfo, "TOPLEFT", 591, -22)
 	backdrop4:SetPoint("BOTTOMRIGHT", CommunitiesFrameGuildDetailsFrameInfo, "BOTTOMRIGHT", 20, -1)
 
-	CommunitiesFrameGuildDetailsFrameInfoMOTDScrollFrameScrollBar:SetPoint("TOPLEFT", CommunitiesFrameGuildDetailsFrameInfoMOTDScrollFrame, "TOPRIGHT", 0, -12)
-	CommunitiesFrameGuildDetailsFrameInfoMOTDScrollFrameScrollBar:SetPoint("BOTTOMLEFT", CommunitiesFrameGuildDetailsFrameInfoMOTDScrollFrame, "BOTTOMRIGHT", 0, 12)
+	if CommunitiesFrameGuildDetailsFrameInfoMOTDScrollFrameScrollBar then -- BETA
+		CommunitiesFrameGuildDetailsFrameInfoMOTDScrollFrameScrollBar:SetPoint("TOPLEFT", CommunitiesFrameGuildDetailsFrameInfoMOTDScrollFrame, "TOPRIGHT", 0, -12)
+		CommunitiesFrameGuildDetailsFrameInfoMOTDScrollFrameScrollBar:SetPoint("BOTTOMLEFT", CommunitiesFrameGuildDetailsFrameInfoMOTDScrollFrame, "BOTTOMRIGHT", 0, 12)
+	end
 
-	CommunitiesFrameGuildDetailsFrameInfoScrollBar:SetPoint("TOPLEFT", CommunitiesFrameGuildDetailsFrameInfo.DetailsFrame, "TOPRIGHT", 0, -12)
-	CommunitiesFrameGuildDetailsFrameInfoScrollBar:SetPoint("BOTTOMLEFT", CommunitiesFrameGuildDetailsFrameInfo.DetailsFrame, "BOTTOMRIGHT", 0, 13)
+	if CommunitiesFrameGuildDetailsFrameInfoScrollBar then -- BETA
+		CommunitiesFrameGuildDetailsFrameInfoScrollBar:SetPoint("TOPLEFT", CommunitiesFrameGuildDetailsFrameInfo.DetailsFrame, "TOPRIGHT", 0, -12)
+		CommunitiesFrameGuildDetailsFrameInfoScrollBar:SetPoint("BOTTOMLEFT", CommunitiesFrameGuildDetailsFrameInfo.DetailsFrame, "BOTTOMRIGHT", 0, 13)
+	end
 
 	-- Guild Message EditBox
 	CommunitiesGuildTextEditFrame:StripTextures()

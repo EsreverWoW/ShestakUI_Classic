@@ -97,7 +97,9 @@ local function LoadSkin()
 
 	QuestLogPopupDetailFrameScrollFrame:StripTextures()
 	QuestLogPopupDetailFrameScrollFrame:SetPoint("TOPLEFT", 13, -65)
-	if not T.newPatch then
+	if T.newPatch then
+		T.SkinScrollBar(QuestLogPopupDetailFrameScrollFrame.ScrollBar)
+	else
 		T.SkinScrollBar(QuestLogPopupDetailFrameScrollFrameScrollBar)
 	end
 
@@ -258,7 +260,11 @@ local function LoadSkin()
 		local isMapQuest = rewardsFrame == MapQuestInfoRewardsFrame
 
 		local numSpellRewards = 0
-		if not T.newPatch then
+		if T.newPatch then
+			local questID = isQuestLog and C_QuestLog.GetSelectedQuest() or GetQuestID()
+			local spellRewards = C_QuestInfoSystem.GetQuestRewardSpells(questID) or {}
+			numSpellRewards = #spellRewards
+		else
 			numSpellRewards = isQuestLog and GetNumQuestLogRewardSpells() or GetNumRewardSpells()
 		end
 		if numSpellRewards > 0 then
