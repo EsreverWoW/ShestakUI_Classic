@@ -344,9 +344,16 @@ local function SkinBar(_, _, line)
 	local label = bar.Label
 
 	if not progressBar.styled then
+		if bar.BarFrame then bar.BarFrame:Hide() end
+		if bar.BarFrame2 then bar.BarFrame2:Hide() end
+		if bar.BarFrame3 then bar.BarFrame3:Hide() end
+		if bar.BarGlow then bar.BarGlow:Hide() end
+		if bar.Sheen then bar.Sheen:Hide() end
+		if bar.IconBG then bar.IconBG:SetAlpha(0) end
 		if bar.BorderLeft then bar.BorderLeft:SetAlpha(0) end
 		if bar.BorderRight then bar.BorderRight:SetAlpha(0) end
 		if bar.BorderMid then bar.BorderMid:SetAlpha(0) end
+
 		bar:SetSize(200, 16)
 		bar:SetStatusBarTexture(C.media.texture)
 		bar:CreateBackdrop("Transparent")
