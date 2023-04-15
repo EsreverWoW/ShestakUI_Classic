@@ -41,6 +41,9 @@ local function LoadSkin()
 	QuestScrollFrame.DetailFrame.BottomDetail:Hide()
 	QuestScrollFrame.Contents.Separator.Divider:Hide()
 	QuestScrollFrame:SetSize(259, 463)
+	if T.newPatch then
+		QuestScrollFrame.Edge:Hide()
+	end
 
 	local CampaignOverview = QuestMapFrame.CampaignOverview
 	CampaignOverview:StripTextures()
