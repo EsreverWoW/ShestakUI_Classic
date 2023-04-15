@@ -138,7 +138,7 @@ local function Visibility(self)
 	else
 		local form = GetShapeshiftFormID()
 
-		if form == CAT_FORM or (UnitHasVehicleUI("player") and UnitPower("vehicle", 4) > 0) then
+		if form == (DRUID_CAT_FORM or 1) or (UnitHasVehicleUI("player") and UnitPower("vehicle", 4) > 0) then
 			element:Show()
 			if self.Debuffs then self.Debuffs:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 2, 19) end
 		else
