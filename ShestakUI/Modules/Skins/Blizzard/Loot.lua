@@ -48,10 +48,11 @@ local function LoadSkin()
 			end
 		end
 	end
+
 	if not T.newPatch then
 		hooksecurefunc("LootHistoryFrame_FullUpdate", UpdateLoots)
+		LootHistoryFrame:HookScript("OnShow", UpdateLoots)
 	end
-	LootHistoryFrame:HookScript("OnShow", UpdateLoots)
 
 	-- Master Looter frame
 	MasterLooterFrame:StripTextures()
