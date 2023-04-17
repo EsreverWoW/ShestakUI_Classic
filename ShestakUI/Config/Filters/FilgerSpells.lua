@@ -899,6 +899,8 @@ C["filger_spells"] = {
 			{spellID = 53209, filter = "CD"},
 			-- Barrage
 			{spellID = 120360, filter = "CD"},
+			-- Rapid Fire
+			{spellID = 257044, filter = "CD", absID = true},
 			-- Disengage
 			{spellID = 781, filter = "CD"},
 			-- Dire Beast
