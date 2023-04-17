@@ -770,7 +770,7 @@ C["filger_spells"] = {
 			-- Posthaste
 			{spellID = 118922, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Volley
-			{spellID = 194386, unitID = "player", caster = "player", filter = "BUFF"},
+			-- {spellID = 194386, unitID = "player", caster = "player", filter = "BUFF"}, -- Delete after while
 			-- Misdirection
 			{spellID = 35079, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Survivalist
@@ -781,6 +781,8 @@ C["filger_spells"] = {
 			{spellID = 194407, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Trueshot
 			{spellID = 288613, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Survival of the Fittest
+			{spellID = 264735, unitID = "player", caster = "player", filter = "BUFF"},
 		},
 		{
 			Name = "P_PROC_ICON",
@@ -798,14 +800,16 @@ C["filger_spells"] = {
 			{spellID = 257622, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Lethal Shots
 			{spellID = 260395, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Lock and Load
+			{spellID = 194594, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Deathblow
+			{spellID = 378770, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Precise Shots
 			{spellID = 260242, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Frenzy
 			{spellID = 272790, unitID = "pet", caster = "player", filter = "BUFF"},
 			-- Steady Focus
 			{spellID = 193533, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Lock and Load
-			{spellID = 194594, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Mok'Nathal Tactics
 			{spellID = 201081, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Mongoose Fury
