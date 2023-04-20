@@ -578,7 +578,7 @@ do
 	tinsert(ns.buttons, CancelButton)
 
 	StaticPopupDialogs.LINK_URL = {
-		text = "Help",
+		text = COMMUNITIES_INVITE_MANAGER_COPY,
 		button1 = OKAY,
 		timeout = 0,
 		whileDead = true,
@@ -660,6 +660,20 @@ do
 	end)
 
 	tinsert(ns.buttons, SaveButton)
+
+	local WikiPage = CreateFrame("Button", nil, frame, "UIPanelButtonTemplate")
+	WikiPage:SetPoint("BOTTOMLEFT", frame, "BOTTOMLEFT", 6, 4)
+	WikiPage:SetSize(100, 23)
+	WikiPage:SetText("Wiki")
+	WikiPage:SetWidth(WikiPage.Text:GetWidth() + 15)
+
+	local url = "https://github.com/Wetxius/ShestakUI_Profile/wiki/"
+	WikiPage:SetScript("OnClick", function()
+		editBox:ClearFocus()
+		StaticPopup_Show("LINK_URL", _, _, url)
+	end)
+
+	tinsert(ns.buttons, WikiPage)
 end
 
 -- Category
