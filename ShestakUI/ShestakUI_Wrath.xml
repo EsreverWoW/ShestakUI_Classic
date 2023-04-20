@@ -187,7 +187,7 @@
 	<Script file="Modules\Quests\AutoButton.lua"/>
 	<Script file="Modules\Quests\ObjectiveTracker_Vanilla.lua"/>
 
-	<Include file="Modules\Skins\Blizzard_Wrath\LoadFrames.xml"/>
+	<Include file="Modules\Skins\Blizzard_Wrath\!LoadFrames.xml"/>
 	<Script file="Modules\Skins\Ace3.lua"/>
 	<Script file="Modules\Skins\AtlasLoot.lua"/>
 	<Script file="Modules\Skins\Aurora.lua"/>
@@ -207,6 +207,7 @@
 	<Script file="Modules\Skins\VanasKoS.lua"/>
 	<Script file="Modules\Skins\WeakAuras.lua"/>
 	<Script file="Modules\Skins\oPie.lua"/>
+	<Script file="Modules\Skins\Plater.lua"/>
 	<Script file="Modules\Skins\Postal.lua"/>
 	<Script file="Modules\Skins\lsToasts.lua"/>
 
