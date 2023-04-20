@@ -301,8 +301,8 @@ local function FindAuras(self, unit)
 
 			local data = SpellGroups[self.Id].spells[name] or SpellGroups[self.Id].spells[spid]
 			if data and (data.caster ~= 1 and (caster == data.caster or data.caster == "all") or MyUnits[caster]) and (not data.unitID or data.unitID == unit) and (not data.absID or spid == data.spellID) then
-				local isTalent = T.Mainline and data.talentID and select(10, GetTalentInfoByID(data.talentID))
-				if ((data.filter == "BUFF" and filter == "HELPFUL") or (data.filter == "DEBUFF" and filter == "HARMFUL")) and (not data.spec or data.spec == T.Spec) and (not data.talentID or isTalent) then
+				local isKnown = T.Mainline and data.requireSpell and IsPlayerSpell(data.requireSpell)
+				if ((data.filter == "BUFF" and filter == "HELPFUL") or (data.filter == "DEBUFF" and filter == "HARMFUL")) and (not data.spec or data.spec == T.Spec) and (not data.requireSpell or isKnown) then
 					if not data.count or count >= data.count then
 						if LibClassicDurations then
 							local durationNew, expirationTimeNew = LibClassicDurations:GetAuraDurationByUnit(data.unitID, spid, caster, name)
@@ -314,7 +314,7 @@ local function FindAuras(self, unit)
 						end
 						self.actives[spid] = {data = data, name = name, icon = icon, count = count, start = expirationTime - duration, duration = duration, spid = spid, sort = data.sort}
 					end
-				elseif data.filter == "ICD" and (data.trigger == "BUFF" or data.trigger == "DEBUFF") and (not data.spec or data.spec == T.Spec) and (not data.talentID or isTalent) then
+				elseif data.filter == "ICD" and (data.trigger == "BUFF" or data.trigger == "DEBUFF") and (not data.spec or data.spec == T.Spec) and (not data.requireSpell or isKnown) then
 					if data.slotID then
 						local slotLink = GetInventoryItemLink("player", data.slotID)
 						_, _, _, _, _, _, _, _, _, icon = GetItemInfo(slotLink)
