@@ -32,6 +32,7 @@ if C.raidcooldown.enable == true then
 		{62618, 180},	-- Power Word: Barrier
 		{33206, 180},	-- Pain Suppression
 		{47788, 180},	-- Guardian Spirit
+		{363534, 180},	-- Rewind
 		{31821, 180},	-- Aura Mastery
 		{98008, 180},	-- Spirit Link Totem
 		{97462, 180},	-- Rallying Cry
@@ -39,6 +40,7 @@ if C.raidcooldown.enable == true then
 		{51052, 120},	-- Anti-Magic Zone
 		{116849, 120},	-- Life Cocoon
 		{6940, 120},	-- Blessing of Sacrifice
+		{374227, 120},	-- Zephyr
 		{102342, 90},	-- Ironbark
 		-- Other
 		{106898, 120},	-- Stampeding Roar
@@ -47,10 +49,10 @@ if C.raidcooldown.enable == true then
 
 	if #C.raidcooldown.spells_list > 0 then
 		-- Sync spell list with new changes
-		if not C.options.raidcooldown.spells_list_ver or C.options.raidcooldown.spells_list_ver < 3 then
-			tinsert(C.raidcooldown.spells_list, {390386, 300})
-			tinsert(C.raidcooldown.spells_list, {391054, 600})
-			C.options.raidcooldown.spells_list_ver = 3
+		if not C.options.raidcooldown.spells_list_ver or C.options.raidcooldown.spells_list_ver < 4 then
+			tinsert(C.raidcooldown.spells_list, {363534, 180})
+			tinsert(C.raidcooldown.spells_list, {374227, 120})
+			C.options.raidcooldown.spells_list_ver = 4
 		end
 		T.raid_spells = C.raidcooldown.spells_list
 	else

@@ -2480,6 +2480,10 @@ C["filger_spells"] = {
 			{spellID = 209426, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Anti-Magic Zone
 			{spellID = 145629, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Zephyr
+			{spellID = 374227, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Rewind
+			{spellID = 363534, unitID = "player", caster = "all", filter = "BUFF"},
 
 			-- Other
 			-- Symbol of Hope
