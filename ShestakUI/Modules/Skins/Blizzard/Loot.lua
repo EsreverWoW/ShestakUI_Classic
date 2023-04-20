@@ -5,6 +5,8 @@ if C.skins.blizzard_frames ~= true then return end
 --	Loot skin
 ----------------------------------------------------------------------------------------
 local function LoadSkin()
+	local LootHistoryFrame = LootHistoryFrame or GroupLootHistoryFrame -- FIXME
+
 	-- Loot History frame
 	LootHistoryFrame:StripTextures()
 	LootHistoryFrame:SetTemplate("Transparent")
