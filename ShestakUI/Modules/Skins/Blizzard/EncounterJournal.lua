@@ -133,6 +133,9 @@ local function LoadSkin()
 	if not T.newPatch then
 		T.SkinScrollBar(EncounterJournalEncounterFrameInfoDetailsScrollFrameScrollBar)
 		T.SkinScrollBar(EncounterJournalEncounterFrameInfoOverviewScrollFrameScrollBar)
+	else
+		T.SkinScrollBar(EncounterJournalEncounterFrameInfoDetailsScrollFrame.ScrollBar)
+		T.SkinScrollBar(EncounterJournalEncounterFrameInfoOverviewScrollFrame.ScrollBar)
 	end
 
 	for i = 1, AJ_MAX_NUM_SUGGESTIONS do
