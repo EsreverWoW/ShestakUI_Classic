@@ -94,19 +94,20 @@ end
 --	Auto select current event boss from LFD tool(EventBossAutoSelect by Nathanyel)
 ----------------------------------------------------------------------------------------
 if T.Mainline then
-	local firstLFD
-	LFDParentFrame:HookScript("OnShow", function()
-		if not firstLFD then
-			firstLFD = 1
-			for i = 1, GetNumRandomDungeons() do
-				local id = GetLFGRandomDungeonInfo(i)
-				local isHoliday = select(15, GetLFGDungeonInfo(id))
-				if isHoliday and not GetLFGDungeonRewards(id) then
-					LFDQueueFrame_SetType(id)
-				end
-			end
-		end
-	end)
+	-- It cause taint SetEntryTitle()
+	-- local firstLFD
+	-- LFDParentFrame:HookScript("OnShow", function()
+		-- if not firstLFD then
+			-- firstLFD = 1
+			-- for i = 1, GetNumRandomDungeons() do
+				-- local id = GetLFGRandomDungeonInfo(i)
+				-- local isHoliday = select(15, GetLFGDungeonInfo(id))
+				-- if isHoliday and not GetLFGDungeonRewards(id) then
+					-- LFDQueueFrame_SetType(id)
+				-- end
+			-- end
+		-- end
+	-- end)
 end
 
 ----------------------------------------------------------------------------------------

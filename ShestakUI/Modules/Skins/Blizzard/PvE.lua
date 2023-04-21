@@ -97,15 +97,18 @@ local function LoadSkin()
 	end)
 
 	local scrollbars = {
-		-- LFGListApplicationViewerScrollFrameScrollBar,
 		LFDQueueFrameSpecific.ScrollBar,
 		LFDQueueFrameRandomScrollFrameScrollBar,
 		RaidFinderQueueFrameScrollFrameScrollBar,
-		-- LFGListEntryCreationSearchScrollFrameScrollBar,
 	}
 
 	for i = 1, #scrollbars do
 		T.SkinScrollBar(scrollbars[i])
+	end
+
+	if T.newPatch then
+		T.SkinScrollBar(LFDQueueFrameRandomScrollFrame.ScrollBar)
+		T.SkinScrollBar(RaidFinderQueueFrameScrollFrame.ScrollBar)
 	end
 
 	-- Set texture to hide circle
@@ -261,13 +264,29 @@ local function LoadSkin()
 	LFGListFrame.SearchPanel.BackToGroupButton:SkinButton()
 	LFGListFrame.SearchPanel.BackButton:SkinButton()
 	LFGListFrame.SearchPanel.SignUpButton:SkinButton()
-	LFGListFrame.SearchPanel.ScrollBox.StartGroupButton:SkinButton()
 	LFGListFrame.SearchPanel.RefreshButton:SkinButton()
 	LFGListFrame.SearchPanel.RefreshButton:SetSize(24, 24)
 	LFGListFrame.SearchPanel.RefreshButton.Icon:SetPoint("CENTER")
 	LFGListFrame.SearchPanel.FilterButton:SkinButton()
 	LFGListFrame.SearchPanel.FilterButton:SetPoint("LEFT", LFGListFrame.SearchPanel.SearchBox, "RIGHT", 5, 0)
-	T.SkinScrollBar(LFGListFrame.SearchPanel.ScrollBar)
+
+	local function skinCreateButton(button)
+		local child = button:GetChildren()
+		if not child.styled and child:IsObjectType("Button") then
+			child:SkinButton()
+			child.styled = true
+		end
+	end
+
+	local delayStyled -- otherwise it taints while listing (from NDui)
+	hooksecurefunc(LFGListFrame.SearchPanel.ScrollBox, "Update", function(self)
+		if not delayStyled then
+			self.StartGroupButton:SkinButton()
+			T.SkinScrollBar(LFGListFrame.SearchPanel.ScrollBar)
+			delayStyled = true
+		end
+		self:ForEachFrame(skinCreateButton)
+	end)
 
 	hooksecurefunc("LFGListApplicationViewer_UpdateApplicant", function(button)
 		if not button.DeclineButton.isSkinned then

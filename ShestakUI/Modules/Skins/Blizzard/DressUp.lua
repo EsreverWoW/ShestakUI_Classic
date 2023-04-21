@@ -20,7 +20,9 @@ local function LoadSkin()
 	DressUpFrameCancelButton:SkinButton()
 	DressUpFrameResetButton:SkinButton()
 	DressUpFrameResetButton:SetPoint("RIGHT", DressUpFrameCancelButton, "LEFT", -2, 0)
-	DressUpFrameUndressButton:SkinButton()
+	if DressUpFrameUndressButton then
+		DressUpFrameUndressButton:SkinButton()
+	end
 
 	local button = DressUpFrame.ToggleOutfitDetailsButton
 	button:SetNormalTexture(134331)
