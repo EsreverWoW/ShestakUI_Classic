@@ -90,6 +90,7 @@ local function LoadSkin()
 		for _, child in next, { frame.ScrollTarget:GetChildren() } do
 			if not child.isSkinned then
 				if child.CheckBox then
+					child.CheckBox:SetSize(28, 28)
 					T.SkinCheckBoxAtlas(child.CheckBox)
 				end
 
