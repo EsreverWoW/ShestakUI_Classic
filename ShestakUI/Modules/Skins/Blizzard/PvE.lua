@@ -109,6 +109,7 @@ local function LoadSkin()
 	if T.newPatch then
 		T.SkinScrollBar(LFDQueueFrameRandomScrollFrame.ScrollBar)
 		T.SkinScrollBar(RaidFinderQueueFrameScrollFrame.ScrollBar)
+		T.SkinScrollBar(LFGListFrame.EntryCreation.ActivityFinder.Dialog.ScrollBar)
 	end
 
 	-- Set texture to hide circle
