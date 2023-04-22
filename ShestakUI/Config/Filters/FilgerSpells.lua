@@ -3185,6 +3185,7 @@ C["filger_spells"] = {
 
 -- Common colldowns for all classes
 T.CustomFilgerSpell = T.CustomFilgerSpell or {}
+T.FilgerIgnoreSpell = T.FilgerIgnoreSpell or {}
 do
 	-- Racial
 	local _, race = UnitRace("player")
@@ -3319,4 +3320,9 @@ do
 	tinsert(T.CustomFilgerSpell, {"P_PROC_ICON", {spellID = 377452, unitID = "player", caster = "all", filter = "BUFF", absID = true}})
 	-- Valarjar's Path [Horn of Valor]
 	tinsert(T.CustomFilgerSpell, {"P_PROC_ICON", {spellID = 215956, unitID = "player", caster = "all", filter = "BUFF", absID = true}})
+
+	-- Remove Serpent Sting if Serpentstalker's Trickery is pick up
+	if IsPlayerSpell(378888) then
+		T.FilgerIgnoreSpell[GetSpellInfo(271788)] = true
+	end
 end

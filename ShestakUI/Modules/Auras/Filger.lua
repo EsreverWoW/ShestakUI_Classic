@@ -441,38 +441,37 @@ end
 
 for _, spell in pairs(C.filger.buff_spells_list) do
 	if spell[2] == T.class then
-		tinsert(T.CustomFilgerSpell, {"P_BUFF_ICON", {spellID = spell[1], unitID = "player", caster = "player", filter = "BUFF", absID = true}})
+		tinsert(T.CustomFilgerSpell, {"P_BUFF_ICON", {spellID = spell[1], unitID = "player", caster = "player", filter = "BUFF", absID = true, custom = true}})
 	end
 end
 
 for _, spell in pairs(C.filger.proc_spells_list) do
 	if spell[2] == T.class then
-		tinsert(T.CustomFilgerSpell, {"P_PROC_ICON", {spellID = spell[1], unitID = "player", caster = "player", filter = "BUFF", absID = true}})
+		tinsert(T.CustomFilgerSpell, {"P_PROC_ICON", {spellID = spell[1], unitID = "player", caster = "player", filter = "BUFF", absID = true, custom = true}})
 	end
 end
 
 for _, spell in pairs(C.filger.debuff_spells_list) do
 	if spell[2] == T.class then
-		tinsert(T.CustomFilgerSpell, {"T_DEBUFF_ICON", {spellID = spell[1], unitID = "target", caster = "player", filter = "DEBUFF", absID = true}})
+		tinsert(T.CustomFilgerSpell, {"T_DEBUFF_ICON", {spellID = spell[1], unitID = "target", caster = "player", filter = "DEBUFF", absID = true, custom = true}})
 	end
 end
 
 for _, spell in pairs(C.filger.aura_bar_spells_list) do
 	if spell[2] == T.class then
-		tinsert(T.CustomFilgerSpell, {"T_DE/BUFF_BAR", {spellID = spell[1], unitID = "target", caster = "player", filter = "DEBUFF", absID = true}})
+		tinsert(T.CustomFilgerSpell, {"T_DE/BUFF_BAR", {spellID = spell[1], unitID = "target", caster = "player", filter = "DEBUFF", absID = true, custom = true}})
 	end
 end
 
 for _, spell in pairs(C.filger.cd_spells_list) do
 	if spell[2] == T.class then
-		tinsert(T.CustomFilgerSpell, {"COOLDOWN", {spellID = spell[1], filter = "CD", absID = true}})
+		tinsert(T.CustomFilgerSpell, {"COOLDOWN", {spellID = spell[1], filter = "CD", absID = true, custom = true}})
 	end
 end
 
-local ignoreTable = {}
 for _, spell in pairs(C.filger.ignore_spells_list) do
 	if spell[2] == T.class then
-		ignoreTable[GetSpellInfo(spell[1])] = true
+		T.FilgerIgnoreSpell[GetSpellInfo(spell[1])] = true
 	end
 end
 
@@ -505,16 +504,17 @@ if C["filger_spells"] and C["filger_spells"][T.class] then
 					name = GetItemInfo(slotLink)
 				end
 			end
-			if name and not ignoreTable[name] or data[j].slotID then
-				local id = data[j].absID and data[j].spellID or GetSpellInfo(data[j].spellID) or data[j].slotID
-				data[j].sort = j
-				group.spells[id] = data[j]
+			if name or data[j].slotID then
+				if T.FilgerIgnoreSpell[name] and not data[j].custom then
+					table.insert(jdx, j)
+				else
+					local id = data[j].absID and data[j].spellID or GetSpellInfo(data[j].spellID) or data[j].slotID
+					data[j].sort = j
+					group.spells[id] = data[j]
+				end
 			end
 			if not name and not data[j].slotID then
 				print("|cffff0000ShestakUI: spell/slot ID ["..(data[j].spellID or data[j].slotID or "UNKNOWN").."] no longer exists!|r")
-				table.insert(jdx, j)
-			end
-			if ignoreTable[name] then
 				table.insert(jdx, j)
 			end
 		end
