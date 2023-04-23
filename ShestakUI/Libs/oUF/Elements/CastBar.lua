@@ -53,16 +53,22 @@ end
 
 local colorStage = {
 	[1] = {1, 0, 0},
+	[2] = {1, 0.9, 0},
+	[3] = {0, 1, 0.5},
+}
+
+local colorStages = {
+	[1] = {1, 0, 0},
 	[2] = {1, 0.4, 0},
 	[3] = {1, 0.9, 0},
 	[4] = {0, 1, 0.5},
 }
 
-local function CreatePip(element, stage)
+local function CreatePip(element, stage, numStages)
 	local frame = CreateFrame("Frame", nil, element)
 	frame:SetSize(2, element:GetHeight())
 
-	local color = colorStage[stage] or {0, 0, 0}
+	local color = numStages == 4 and colorStages[stage] or colorStage[stage] or {0, 0, 0}
 
 	frame.texture = element:CreateTexture(nil, "BORDER", nil, -2)
 	frame.texture:SetTexture(C.media.texture)
@@ -108,7 +114,7 @@ local function UpdatePips(element, numStages)
 
 				* pip - a frame used to depict an empowered stage boundary, typically with a line texture (frame)
 				--]]
-				pip = (element.CreatePip or CreatePip) (element, stage)
+				pip = (element.CreatePip or CreatePip) (element, stage, numStages)
 				element.Pips[stage] = pip
 			end
 
@@ -263,7 +269,7 @@ local function CastStart(self, event, unit)
 		safeZone[isHoriz and 'SetWidth' or 'SetHeight'](safeZone, element[isHoriz and 'GetWidth' or 'GetHeight'](element) * ratio)
 	end
 
-	if(element.empowering) then
+	if(element.empowering) and unit == "player" then
 		--[[ Override: Castbar:UpdatePips(numStages)
 		Handles updates for stage separators (pips) in an empowered cast.
 
