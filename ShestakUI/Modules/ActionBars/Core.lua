@@ -32,7 +32,15 @@ frame:SetScript("OnEvent", function()
 		MicroButtonAndBagsBar:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", 0, -99) -- Prevent scaling for right panels
 		BagsBar:Hide()
 		BagsBar:UnregisterAllEvents()
+	end
 
+	-- Fixed possible taints (from NDui)
+	_G.ActionBarController:UnregisterAllEvents()
+	_G.ActionBarController:RegisterEvent("SETTINGS_LOADED") -- this is needed for page controller to spawn properly
+	_G.ActionBarController:RegisterEvent("UPDATE_EXTRA_ACTIONBAR") -- this is needed to let the ExtraActionBar show
+	_G.ActionBarActionEventsFrame:UnregisterAllEvents()
+
+	if T.Mainline then
 		if not C.actionbar.micromenu then
 			MicroMenu:Hide()
 		end
