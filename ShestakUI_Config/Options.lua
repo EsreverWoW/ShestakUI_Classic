@@ -1673,9 +1673,12 @@ do
 	local castbar_ticks = ns.CreateCheckBox(parent, "castbar_ticks", L_GUI_UF_CASTBAR_TICKS)
 	castbar_ticks:SetPoint("TOPLEFT", castbar_latency, "BOTTOMLEFT", 0, 0)
 
+	local castbar_focus_type = ns.CreateDropDown(parent, "castbar_focus_type", true, L.unitframe_castbar_focus_type, {"ICON", "BAR", "NONE"})
+	castbar_focus_type:SetPoint("TOPLEFT", castbar_ticks, "BOTTOMLEFT", -16, -2)
+
 	-- Frames
 	local subheader = ns.addSubCategory(parent, L_GUI_UF_SUBHEADER_FRAMES)
-	subheader:SetPoint("TOPLEFT", castbar_ticks, "BOTTOMLEFT", 0, -16)
+	subheader:SetPoint("TOPLEFT", castbar_focus_type, "BOTTOMLEFT", 16, -11)
 
 	local show_pet = ns.CreateCheckBox(parent, "show_pet", L_GUI_UF_SHOW_PET)
 	show_pet:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -8)

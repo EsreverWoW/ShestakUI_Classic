@@ -102,6 +102,7 @@ C["unitframe"] = {
 	["castbar_icon"] = false,					-- Show castbar icons
 	["castbar_latency"] = true,					-- Castbar latency
 	["castbar_ticks"] = false,					-- Castbar ticks
+	["castbar_focus_type"] = "ICON",			-- Icon for focus castbar (ICON, BAR, NONE)
 	-- Frames
 	["show_pet"] = true,						-- Show pet frame
 	["show_focus"] = true,						-- Show focus frame

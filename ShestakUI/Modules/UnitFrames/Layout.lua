@@ -980,32 +980,57 @@ local function Shared(self, unit)
 		end
 
 		if unit == "focus" then
-			self.Castbar.Button = CreateFrame("Frame", nil, self.Castbar)
-			self.Castbar.Button:SetSize(65, 65)
-			self.Castbar.Button:SetPoint(unpack(C.position.unitframes.focus_castbar))
-			self.Castbar.Button:SetTemplate("Default")
+			if C.unitframe.castbar_focus_type == "ICON" or C.unitframe.castbar_focus_type == "BAR" then
+				self.Castbar.Button = CreateFrame("Frame", nil, self.Castbar)
+				self.Castbar.Button:SetPoint(unpack(C.position.unitframes.focus_castbar))
+				self.Castbar.Button:SetTemplate("Default")
 
-			self.Castbar.Icon = self.Castbar.Button:CreateTexture(nil, "ARTWORK")
-			self.Castbar.Icon:SetPoint("TOPLEFT", self.Castbar.Button, 2, -2)
-			self.Castbar.Icon:SetPoint("BOTTOMRIGHT", self.Castbar.Button, -2, 2)
-			self.Castbar.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-
-			self.Castbar.Time = T.SetFontString(self.Castbar, C.font.unit_frames_font, C.font.unit_frames_font_size * 2, C.font.unit_frames_font_style)
-			self.Castbar.Time:SetParent(self.Castbar.Button)
-			self.Castbar.Time:SetPoint("CENTER", self.Castbar.Icon, "CENTER", 0, 10)
-			self.Castbar.Time:SetTextColor(1, 1, 1)
-
-			self.Castbar.Time2 = T.SetFontString(self.Castbar, C.font.unit_frames_font, C.font.unit_frames_font_size * 2, C.font.unit_frames_font_style)
-			self.Castbar.Time2:SetParent(self.Castbar.Button)
-			self.Castbar.Time2:SetPoint("CENTER", self.Castbar.Icon, "CENTER", 0, -10)
-			self.Castbar.Time2:SetTextColor(1, 1, 1)
-
-			self.Castbar.CustomTimeText = function(self, duration)
-				self.Time:SetText(("%.1f"):format(self.max))
-				self.Time2:SetText(("%.1f"):format(self.channeling and duration or self.max - duration))
+				self.Castbar.Icon = self.Castbar.Button:CreateTexture(nil, "ARTWORK")
+				self.Castbar.Icon:SetPoint("TOPLEFT", self.Castbar.Button, 2, -2)
+				self.Castbar.Icon:SetPoint("BOTTOMRIGHT", self.Castbar.Button, -2, 2)
+				self.Castbar.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 			end
-			self.Castbar.CustomDelayText = function(self)
-				self.Time:SetText(("|cffaf5050%s %.1f|r"):format(self.channeling and "-" or "+", abs(self.delay)))
+			if C.unitframe.castbar_focus_type == "ICON" then
+				self.Castbar.Button:SetSize(65, 65)
+
+				self.Castbar.Time = T.SetFontString(self.Castbar, C.font.unit_frames_font, C.font.unit_frames_font_size * 2, C.font.unit_frames_font_style)
+				self.Castbar.Time:SetParent(self.Castbar.Button)
+				self.Castbar.Time:SetTextColor(1, 1, 1)
+				self.Castbar.Time:SetPoint("CENTER", self.Castbar.Icon, "CENTER", 0, 10)
+
+				self.Castbar.Time2 = T.SetFontString(self.Castbar, C.font.unit_frames_font, C.font.unit_frames_font_size * 2, C.font.unit_frames_font_style)
+				self.Castbar.Time2:SetParent(self.Castbar.Button)
+				self.Castbar.Time2:SetTextColor(1, 1, 1)
+				self.Castbar.Time2:SetPoint("CENTER", self.Castbar.Icon, "CENTER", 0, -10)
+
+				self.Castbar.CustomTimeText = function(self, duration)
+					self.Time:SetText(("%.1f"):format(self.max))
+					self.Time2:SetText(("%.1f"):format(self.channeling and duration or self.max - duration))
+				end
+				self.Castbar.CustomDelayText = function(self)
+					self.Time:SetText(("|cffaf5050%s %.1f|r"):format(self.channeling and "-" or "+", abs(self.delay)))
+				end
+			elseif C.unitframe.castbar_focus_type == "BAR" then
+				self.Castbar:ClearAllPoints()
+				self.Castbar:SetPoint("TOP", self.Castbar.Icon, "BOTTOM", 0, -7)
+				self.Castbar:SetWidth(C.unitframe.castbar_width - 40)
+				self.Castbar:SetHeight(C.unitframe.castbar_height)
+
+				self.Castbar.Text = T.SetFontString(self.Castbar, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
+				self.Castbar.Text:SetPoint("LEFT", self.Castbar, "LEFT", 2, 0)
+				self.Castbar.Text:SetTextColor(1, 1, 1)
+				self.Castbar.Text:SetJustifyH("LEFT")
+				self.Castbar.Text:SetWordWrap(false)
+				self.Castbar.Text:SetWidth(self.Castbar:GetWidth() - 50)
+
+				self.Castbar.Button:SetSize(self.Castbar:GetHeight() + 30, self.Castbar:GetHeight() + 30)
+
+				self.Castbar.Time = T.SetFontString(self.Castbar, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
+				self.Castbar.Time:SetPoint("RIGHT", self.Castbar, "RIGHT", 0, 0)
+				self.Castbar.Time:SetTextColor(1, 1, 1)
+				self.Castbar.Time:SetJustifyH("RIGHT")
+				self.Castbar.CustomTimeText = T.CustomCastTimeText
+				self.Castbar.CustomDelayText = T.CustomCastDelayText
 			end
 		end
 	end
