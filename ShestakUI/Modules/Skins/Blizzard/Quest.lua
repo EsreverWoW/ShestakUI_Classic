@@ -40,6 +40,12 @@ local function LoadSkin()
 		T.SkinScrollBar(QuestRewardScrollFrameScrollBar)
 		T.SkinScrollBar(QuestGreetingScrollFrameScrollBar)
 		T.SkinScrollBar(QuestNPCModelTextScrollFrameScrollBar)
+	else
+		T.SkinScrollBar(QuestDetailScrollFrame.ScrollBar)
+		T.SkinScrollBar(QuestProgressScrollFrame.ScrollBar)
+		T.SkinScrollBar(QuestRewardScrollFrame.ScrollBar)
+		T.SkinScrollBar(QuestGreetingScrollFrame.ScrollBar)
+		T.SkinScrollBar(QuestNPCModelTextScrollFrame.ScrollBar)
 	end
 
 	for i = 1, 6 do
