@@ -66,6 +66,14 @@ local function LoadSkin()
 		end
 	end)
 
+	local monthlyActivities = EncounterJournalMonthlyActivitiesFrame
+	if monthlyActivities then
+		EncounterJournalMonthlyActivitiesFrame:StripTextures()
+		EncounterJournalMonthlyActivitiesFrame.FilterList:StripTextures()
+		EncounterJournalMonthlyActivitiesFrame.FilterList:SetTemplate("Overlay")
+		T.SkinScrollBar(EncounterJournalMonthlyActivitiesFrame.ScrollBar)
+	end
+
 	local mainTabs = {
 		EncounterJournalSuggestTab,
 		EncounterJournalDungeonTab,
@@ -119,7 +127,10 @@ local function LoadSkin()
 		tab:SetNormalTexture(0)
 		tab:SetPushedTexture(0)
 		tab:SetDisabledTexture(0)
-		tab:SetHighlightTexture(0)
+
+		local hl = tab:GetHighlightTexture()
+		hl:SetColorTexture(1, 1, 1, 0.2)
+		hl:SetAllPoints(tab.backdrop)
 	end
 
 	EncounterJournalEncounterFrameInfoOverviewTab:SetPoint("TOPLEFT", EncounterJournalEncounterFrameInfo, "TOPRIGHT", 8, -40)
@@ -211,6 +222,9 @@ local function LoadSkin()
 		for _, child in next, {frame.ScrollTarget:GetChildren()} do
 			if not child.isSkinned then
 				child:SkinButton()
+				local hl = child:GetHighlightTexture()
+				hl:SetColorTexture(1, 1, 1, 0.2)
+				hl:SetInside(child)
 				child.isSkinned = true
 			end
 		end
