@@ -981,7 +981,7 @@ local function Shared(self, unit)
 
 		if unit == "focus" then
 			if C.unitframe.castbar_focus_type == "ICON" or C.unitframe.castbar_focus_type == "BAR" then
-				self.Castbar.Button = CreateFrame("Frame", nil, self.Castbar)
+				self.Castbar.Button = CreateFrame("Frame", self:GetName().."_CastbarIcon", self.Castbar)
 				self.Castbar.Button:SetPoint(unpack(C.position.unitframes.focus_castbar))
 				self.Castbar.Button:SetTemplate("Default")
 
