@@ -475,7 +475,7 @@ L.filger_show_proc = "Player procs" -- Need review
 L.filger_show_debuff = "Debuffs on target" -- Need review
 L.filger_show_aura_bar = "Aura bars on target" -- Need review
 L.filger_show_special = "Special buffs on player" -- Need review
-L.filger_show_pvp_player = "SPvP debuffs on player" -- Need review
+L.filger_show_pvp_player = "PvP debuffs on player" -- Need review
 L.filger_show_pvp_target = "PvP auras on target" -- Need review
 L.filger_show_cd = "Cooldowns" -- Need review
 L.filger_subheader_size = "Icons size" -- Need review
@@ -589,15 +589,15 @@ L.enemycooldown_show_inparty = "Show in party zone for allies" -- Need review
 L.enemycooldown_class_color = "Enable classcolor border" -- Need review
 
 -- Pulse cooldowns options
-L_GUI_COOLDOWN_PULSE = "Recuperi effetto 'pulse'"
-L_GUI_COOLDOWN_PULSE_SUBTEXT = "Track your cd using a pulse icon in the center of the screen." -- Need review
-L_GUI_COOLDOWN_PULSE_ENABLE = "Mostra i recuperi con effetto 'pulse'"
-L_GUI_COOLDOWN_PULSE_SIZE = "Dimensione dell'icona dei recuperi con effetto 'pulse'"
-L_GUI_COOLDOWN_PULSE_SOUND = "Attiva un suono di avviso"
-L_GUI_COOLDOWN_PULSE_ANIM_SCALE = "Regolazione dell'animazione"
-L_GUI_COOLDOWN_PULSE_HOLD_TIME = "Opacità del tempo d'attesa massimo"
-L_GUI_COOLDOWN_PULSE_THRESHOLD = "Threshold time" -- Need review
-L_GUI_COOLDOWN_PULSE_THRESHOLD_DESC = "Soglia di tempo minimo"
+L.pulsecooldown = "Recuperi effetto 'pulse'"
+L.pulsecooldown_subtext = "Track your cd using a pulse icon in the center of the screen." -- Need review
+L.pulsecooldown_enable = "Mostra i recuperi con effetto 'pulse'"
+L.pulsecooldown_size = "Dimensione dell'icona dei recuperi con effetto 'pulse'"
+L.pulsecooldown_sound = "Attiva un suono di avviso"
+L.pulsecooldown_anim_scale = "Regolazione dell'animazione"
+L.pulsecooldown_hold_time = "Opacità del tempo d'attesa massimo"
+L.pulsecooldown_threshold = "Threshold time" -- Need review
+L.pulsecooldown_threshold_desc = "Soglia di tempo minimo"
 
 -- Threat options
 L_GUI_THREAT = "Barre di minaccia"

@@ -698,7 +698,7 @@ ns.addCategory("automation", L_GUI_AUTOMATION, L_GUI_AUTOMATION_SUBTEXT)
 ns.addCategory("reminder", L_GUI_REMINDER, L_GUI_REMINDER_SUBTEXT)
 ns.addCategory("raidcooldown", L_GUI_COOLDOWN_RAID, L_GUI_COOLDOWN_RAID_SUBTEXT)
 ns.addCategory("enemycooldown", L_GUI_COOLDOWN_ENEMY, L_GUI_COOLDOWN_ENEMY_SUBTEXT)
-ns.addCategory("pulsecooldown", L_GUI_COOLDOWN_PULSE, L_GUI_COOLDOWN_PULSE_SUBTEXT)
+ns.addCategory("pulsecooldown", L.pulsecooldown, L.pulsecooldown_subtext)
 ns.addCategory("threat", L_GUI_THREAT, L_GUI_THREAT_SUBTEXT)
 ns.addCategory("toppanel", L_GUI_TOP_PANEL, L_GUI_TOP_PANEL_SUBTEXT)
 ns.addCategory("stats", L_GUI_STATS, L_GUI_STATS_SUBTEXT)
@@ -3527,22 +3527,22 @@ end
 do
 	local parent = ShestakUIOptionsPanel.pulsecooldown
 
-	local enable = ns.CreateCheckBox(parent, "enable", L_GUI_COOLDOWN_PULSE_ENABLE)
+	local enable = ns.CreateCheckBox(parent, "enable")
 	enable:SetPoint("TOPLEFT", parent.subText, "BOTTOMLEFT", 0, 0)
 
-	local size = ns.CreateNumberSlider(parent, "size", nil, nil, 0, 150, 1, true, L_GUI_COOLDOWN_ENEMY_SIZE)
+	local size = ns.CreateNumberSlider(parent, "size", nil, nil, 0, 150, 1, true)
 	size:SetPoint("TOPLEFT", enable, "BOTTOMLEFT", 0, -20)
 
-	local sound = ns.CreateCheckBox(parent, "sound", L_GUI_COOLDOWN_PULSE_SOUND)
+	local sound = ns.CreateCheckBox(parent, "sound")
 	sound:SetPoint("TOPLEFT", size, "BOTTOMLEFT", 0, -10)
 
-	local anim_scale = ns.CreateNumberSlider(parent, "anim_scale", nil, nil, 0, 3, 0.05, true, L_GUI_COOLDOWN_PULSE_ANIM_SCALE)
+	local anim_scale = ns.CreateNumberSlider(parent, "anim_scale", nil, nil, 0, 3, 0.05, true)
 	anim_scale:SetPoint("TOPLEFT", sound, "BOTTOMLEFT", 0, -20)
 
-	local hold_time = ns.CreateNumberSlider(parent, "hold_time", nil, nil, 0, 5, 1, true, L_GUI_COOLDOWN_PULSE_HOLD_TIME)
+	local hold_time = ns.CreateNumberSlider(parent, "hold_time", nil, nil, 0, 5, 1, true)
 	hold_time:SetPoint("TOPLEFT", anim_scale, "BOTTOMLEFT", 0, -20)
 
-	local threshold = ns.CreateNumberSlider(parent, "threshold", nil, nil, 0, 15, 1, true, L_GUI_COOLDOWN_PULSE_THRESHOLD, L_GUI_COOLDOWN_PULSE_THRESHOLD_DESC)
+	local threshold = ns.CreateNumberSlider(parent, "threshold", nil, nil, 0, 15, 1, true)
 	threshold:SetPoint("TOPLEFT", hold_time, "BOTTOMLEFT", 0, -20)
 end
 

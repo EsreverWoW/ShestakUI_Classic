@@ -590,15 +590,15 @@ L.enemycooldown_show_inparty = "Anzeigen in der Partyzone für Allies"
 L.enemycooldown_class_color = "Klassenfarbige Umrandung aktivieren"
 
 -- Pulse cooldowns options
-L_GUI_COOLDOWN_PULSE = "Pulse Cooldowns"
-L_GUI_COOLDOWN_PULSE_SUBTEXT = "Verfolge CD mit einem Puls-Symbol in der Mitte des Bildschirms."
-L_GUI_COOLDOWN_PULSE_ENABLE = "Zeige Abklingzeitimpuls"
-L_GUI_COOLDOWN_PULSE_SIZE = "Abklingzeitimpuls Symbolgröße"
-L_GUI_COOLDOWN_PULSE_SOUND = "Akustische Warnungen"
-L_GUI_COOLDOWN_PULSE_ANIM_SCALE = "Animationen Skalieren"
-L_GUI_COOLDOWN_PULSE_HOLD_TIME = "Maximale Zeit in der die Anzeige aktiv ist"
-L_GUI_COOLDOWN_PULSE_THRESHOLD = "Threshold time" -- Need review
-L_GUI_COOLDOWN_PULSE_THRESHOLD_DESC = "Minimale Zeitschwälle"
+L.pulsecooldown = "Pulse Cooldowns"
+L.pulsecooldown_subtext = "Verfolge CD mit einem Puls-Symbol in der Mitte des Bildschirms."
+L.pulsecooldown_enable = "Zeige Abklingzeitimpuls"
+L.pulsecooldown_size = "Abklingzeitimpuls Symbolgröße"
+L.pulsecooldown_sound = "Akustische Warnungen"
+L.pulsecooldown_anim_scale = "Animationen Skalieren"
+L.pulsecooldown_hold_time = "Maximale Zeit in der die Anzeige aktiv ist"
+L.pulsecooldown_threshold = "Threshold time" -- Need review
+L.pulsecooldown_threshold_desc = "Minimale Zeitschwälle"
 
 -- Threat options
 L_GUI_THREAT = "Bedrohungsleisten"

@@ -594,15 +594,15 @@ L.enemycooldown_show_inparty = "Отображать в группе для со
 L.enemycooldown_class_color = "Окрашивать края в цвет класса"
 
 -- Pulse cooldowns options
-L_GUI_COOLDOWN_PULSE = "Свои перезарядки"
-L_GUI_COOLDOWN_PULSE_SUBTEXT = "Отслеживание ваших перезарядок с помощью всплывающей иконки в центре экрана."
-L_GUI_COOLDOWN_PULSE_ENABLE = "Отображать иконку окончания перезарядки"
-L_GUI_COOLDOWN_PULSE_SIZE = "Размер иконки окончания перезарядки"
-L_GUI_COOLDOWN_PULSE_SOUND = "Включить звуковое предупреждение"
-L_GUI_COOLDOWN_PULSE_ANIM_SCALE = "Масштаб анимации"
-L_GUI_COOLDOWN_PULSE_HOLD_TIME = "Время до исчезновения"
-L_GUI_COOLDOWN_PULSE_THRESHOLD = "Порог времени"
-L_GUI_COOLDOWN_PULSE_THRESHOLD_DESC = "Минимальный порог времени"
+L.pulsecooldown = "Свои перезарядки"
+L.pulsecooldown_subtext = "Отслеживание ваших перезарядок с помощью всплывающей иконки в центре экрана."
+L.pulsecooldown_enable = "Отображать иконку окончания перезарядки"
+L.pulsecooldown_size = "Размер иконки окончания перезарядки"
+L.pulsecooldown_sound = "Включить звуковое предупреждение"
+L.pulsecooldown_anim_scale = "Масштаб анимации"
+L.pulsecooldown_hold_time = "Время до исчезновения"
+L.pulsecooldown_threshold = "Порог времени"
+L.pulsecooldown_threshold_desc = "Минимальный порог времени"
 
 -- Threat options
 L_GUI_THREAT = "Список угрозы"

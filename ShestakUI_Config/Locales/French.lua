@@ -590,15 +590,15 @@ L.enemycooldown_show_inparty = "Afficher sur le cadre du groupe pour les alliés
 L.enemycooldown_class_color = "Active la couleur de classe pour la bordure des icônes"
 
 -- Pulse cooldowns options
-L_GUI_COOLDOWN_PULSE = "Temps de recharge par îcone d'impulsion"
-L_GUI_COOLDOWN_PULSE_SUBTEXT = "Suivez vos temp de recharge à l’aide d’une icône d’impulsion au centre de l’écran."
-L_GUI_COOLDOWN_PULSE_ENABLE = "Activation de l'îcone d'impulsion"
-L_GUI_COOLDOWN_PULSE_SIZE = "Taille de l'îcone d'impulsion"
-L_GUI_COOLDOWN_PULSE_SOUND = "Avertissement sonore"
-L_GUI_COOLDOWN_PULSE_ANIM_SCALE = "Mise à l'échelle des animations"
-L_GUI_COOLDOWN_PULSE_HOLD_TIME = "Temps maximum pour la rémanence de l'îcone"
-L_GUI_COOLDOWN_PULSE_THRESHOLD = "Temps de déclenchement"
-L_GUI_COOLDOWN_PULSE_THRESHOLD_DESC = "Temps minimum de déclenchement"
+L.pulsecooldown = "Temps de recharge par îcone d'impulsion"
+L.pulsecooldown_subtext = "Suivez vos temp de recharge à l’aide d’une icône d’impulsion au centre de l’écran."
+L.pulsecooldown_enable = "Activation de l'îcone d'impulsion"
+L.pulsecooldown_size = "Taille de l'îcone d'impulsion"
+L.pulsecooldown_sound = "Avertissement sonore"
+L.pulsecooldown_anim_scale = "Mise à l'échelle des animations"
+L.pulsecooldown_hold_time = "Temps maximum pour la rémanence de l'îcone"
+L.pulsecooldown_threshold = "Temps de déclenchement"
+L.pulsecooldown_threshold_desc = "Temps minimum de déclenchement"
 
 -- Threat options
 L_GUI_THREAT = "Barre de menace"

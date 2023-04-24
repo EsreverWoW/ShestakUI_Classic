@@ -476,7 +476,7 @@ L.filger_show_proc = "Player procs" -- Need review
 L.filger_show_debuff = "Debuffs on target" -- Need review
 L.filger_show_aura_bar = "Aura bars on target" -- Need review
 L.filger_show_special = "Special buffs on player" -- Need review
-L.filger_show_pvp_player = "SPvP debuffs on player" -- Need review
+L.filger_show_pvp_player = "PvP debuffs on player" -- Need review
 L.filger_show_pvp_target = "PvP auras on target" -- Need review
 L.filger_show_cd = "Cooldowns" -- Need review
 L.filger_subheader_size = "Icons size" -- Need review
@@ -590,15 +590,15 @@ L.enemycooldown_show_inparty = "Show in party zone for allies" -- Need review
 L.enemycooldown_class_color = "Enable classcolor border" -- Need review
 
 -- Pulse cooldowns options
-L_GUI_COOLDOWN_PULSE = "Cuenta atrás de tiempos de reutilización"
-L_GUI_COOLDOWN_PULSE_SUBTEXT = "Track your cd using a pulse icon in the center of the screen." -- Need review
-L_GUI_COOLDOWN_PULSE_ENABLE = "Mostrar cuentas atrás de tiempos de reutilización"
-L_GUI_COOLDOWN_PULSE_SIZE = "Tamaño de los icono de las cuentas atras de tiempos de reutilización"
-L_GUI_COOLDOWN_PULSE_SOUND = "Aviso sonoro"
-L_GUI_COOLDOWN_PULSE_ANIM_SCALE = "Escalado animado"
-L_GUI_COOLDOWN_PULSE_HOLD_TIME = "Opacidad máxima del tiempo de espera"
-L_GUI_COOLDOWN_PULSE_THRESHOLD = "Threshold time" -- Need review
-L_GUI_COOLDOWN_PULSE_THRESHOLD_DESC = "Umbral de tiempo mínimo"
+L.pulsecooldown = "Cuenta atrás de tiempos de reutilización"
+L.pulsecooldown_subtext = "Track your cd using a pulse icon in the center of the screen." -- Need review
+L.pulsecooldown_enable = "Mostrar cuentas atrás de tiempos de reutilización"
+L.pulsecooldown_size = "Tamaño de los icono de las cuentas atras de tiempos de reutilización"
+L.pulsecooldown_sound = "Aviso sonoro"
+L.pulsecooldown_anim_scale = "Escalado animado"
+L.pulsecooldown_hold_time = "Opacidad máxima del tiempo de espera"
+L.pulsecooldown_threshold = "Threshold time" -- Need review
+L.pulsecooldown_threshold_desc = "Umbral de tiempo mínimo"
 
 -- Threat options
 L_GUI_THREAT = "Barras de Amenaza"
