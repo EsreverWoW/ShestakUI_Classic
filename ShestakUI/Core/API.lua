@@ -216,6 +216,7 @@ end
 ----------------------------------------------------------------------------------------
 local HiddenFrame = CreateFrame("Frame")
 HiddenFrame:Hide()
+T.Hider = HiddenFrame
 local function Kill(object)
 	if object.UnregisterAllEvents then
 		object:UnregisterAllEvents()
@@ -438,7 +439,7 @@ function T.SkinScrollBar(frame)
 	local minimal = frame:GetWidth() < 10
 
 	if UpButton and DownButton then
-		if not UpButton.icon then
+		if not UpButton.icon and not minimal then
 			T.SkinNextPrevButton(UpButton, nil, "Up")
 			if T.Wrath then
 				UpButton:SetSize(UpButton:GetWidth() + 3, UpButton:GetHeight() + 3)
@@ -447,7 +448,7 @@ function T.SkinScrollBar(frame)
 			end
 		end
 
-		if not DownButton.icon then
+		if not DownButton.icon and not minimal then
 			T.SkinNextPrevButton(DownButton, nil, "Down")
 			if T.Wrath then
 				DownButton:SetSize(DownButton:GetWidth() + 3, DownButton:GetHeight() + 3)
@@ -523,9 +524,9 @@ function T.SkinScrollBar(frame)
 			end
 
 			if minimal then
-				UpButton:SetSize(14, 14)
-				DownButton:SetSize(14, 14)
-				newThumb:SetWidth(14)
+				-- UpButton:SetSize(14, 14)
+				-- DownButton:SetSize(14, 14)
+				newThumb:SetWidth(10)
 			end
 		end
 	end
@@ -1136,8 +1137,6 @@ function T.SkinIconBorder(frame, parent)
 		local color = iconColors[atlas]
 		if color then
 			border:SetBackdropBorderColor(color.r, color.g, color.b)
-		else
-			-- border:SetBackdropBorderColor(unpack(C.media.border_color))
 		end
 	end)
 
