@@ -1570,8 +1570,6 @@ C["filger_spells"] = {
 			-- Buffs
 			-- Power of the Dark Side
 			{spellID = 198069, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Lingering Insanity
-			--BETA {spellID = 197937, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Shadowy Insight
 			{spellID = 124430, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Surge of Light
@@ -1957,8 +1955,6 @@ C["filger_spells"] = {
 			{spellID = 108271, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Fury of Air
 			{spellID = 197211, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Windsong
-			--BETA {spellID = 201898, unitID = "player", caster = "player", filter = "BUFF"},
 		},
 		{
 			Name = "P_PROC_ICON",
@@ -1982,8 +1978,6 @@ C["filger_spells"] = {
 			{spellID = 201846, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Crash Lightning
 			{spellID = 187878, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Frostbrand
-			--BETA {spellID = 196834, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Flametongue
 			{spellID = 194084, unitID = "player", caster = "player", filter = "BUFF"},
 		},
@@ -2004,8 +1998,6 @@ C["filger_spells"] = {
 			{spellID = 196840, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Earthgrab
 			{spellID = 64695, unitID = "target", caster = "player", filter = "DEBUFF"},
-			-- Earthen Spike
-			--BETA {spellID = 188089, unitID = "target", caster = "player", filter = "DEBUFF"},
 		},
 		{
 			Name = "T_DE/BUFF_BAR",
@@ -2065,8 +2057,6 @@ C["filger_spells"] = {
 			{spellID = 51505, filter = "CD"},
 			-- Elemental Blast
 			{spellID = 117014, filter = "CD"},
-			-- Flametongue
-			--BETA {spellID = 193796, filter = "CD"},
 			-- Feral Lunge
 			{spellID = 196884, filter = "CD"},
 			-- Cloudburst Totem
@@ -2075,8 +2065,6 @@ C["filger_spells"] = {
 			{spellID = 2484, filter = "CD"},
 			-- Thunderstorm
 			{spellID = 51490, filter = "CD"},
-			-- Windsong
-			--BETA {spellID = 201898, filter = "CD"},
 			-- Stone Bulwark Totem
 			{spellID = 108270, filter = "CD"},
 			-- Capacitor Totem
@@ -3047,8 +3035,6 @@ C["filger_spells"] = {
 			{spellID = 119030, unitID = "target", caster = "all", filter = "BUFF"},
 			-- Phantasm
 			{spellID = 114239, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Greater Fade
-			--BETA {spellID = 213602, unitID = "target", caster = "all", filter = "BUFF"},
 			-- Holy Ward
 			{spellID = 213610, unitID = "target", caster = "all", filter = "BUFF"},
 			-- Debuffs

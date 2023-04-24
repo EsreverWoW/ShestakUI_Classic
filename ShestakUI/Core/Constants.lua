@@ -3,7 +3,7 @@ local T, C, L, _ = unpack(select(2, ...))
 ----------------------------------------------------------------------------------------
 --	ShestakUI variables
 ----------------------------------------------------------------------------------------
-GetAddOnMetadata = GetAddOnMetadata or C_AddOns.GetAddOnMetadata
+GetAddOnMetadata = GetAddOnMetadata or C_AddOns.GetAddOnMetadata -- BETA
 
 T.dummy = function() return end
 T.name = UnitName("player")

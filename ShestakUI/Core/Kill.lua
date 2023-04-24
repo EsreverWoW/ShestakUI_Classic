@@ -63,8 +63,6 @@ frame:SetScript("OnEvent", function(_, _, addon)
 		Advanced_UIScaleSlider:Kill()
 		BagHelpBox:Kill()
 	else
-		--BETA Display_UseUIScale:Kill()
-		-- Display_UIScaleSlider:Kill()
 		TutorialFrameAlertButton:Kill()
 	end
 	SetCVarBitfield("closedInfoFrames", LE_FRAME_TUTORIAL_WORLD_MAP_FRAME, true)
@@ -108,10 +106,6 @@ frame:SetScript("OnEvent", function(_, _, addon)
 			if not InCombatLockdown() then
 				SetCVar("multiBarRightVerticalLayout", 0)
 			end
-		else
-			--if not InCombatLockdown() then
-			--	SetCVar("multiBarRightVerticalLayout", 0)
-			--end
 		end
 	end
 

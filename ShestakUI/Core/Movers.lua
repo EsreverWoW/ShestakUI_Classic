@@ -511,9 +511,6 @@ frame:RegisterEvent("PLAYER_ENTERING_WORLD")
 frame:SetScript("OnEvent", function(self, event)
 	self:UnregisterEvent(event)
 	RestoreUI(self)
-	if T.Mainline then
-		-- C_EditMode.SetActiveLayout(1) -- BETA Remove after while
-	end
 end)
 
 SlashCmdList.MOVING = InitMove
