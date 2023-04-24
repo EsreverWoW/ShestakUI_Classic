@@ -31,7 +31,7 @@ C["media"] = {
 ----------------------------------------------------------------------------------------
 C["general"] = {
 	["welcome_message"] = true,					-- Enable welcome message in chat
-	["auto_scale"] = true,						-- Autoscale
+	["auto_scale"] = true,						-- Auto UI Scale
 	["uiscale"] = 0.75,							-- Your value (between 0.2 and 1) if "auto_scale" is disable
 	-- Blizzard UI
 	["error_filter"] = "BLACKLIST",				-- Filter Blizzard red errors (BLACKLIST, WHITELIST, COMBAT, NONE)
@@ -88,9 +88,9 @@ C["unitframe"] = {
 	-- Main
 	["enable"] = true,							-- Enable unit frames
 	["own_color"] = false,						-- Set your color for health bars
-	["uf_color"] = {0.4, 0.4, 0.4},				-- Color for health bars if ["own_color"] = true
-	["uf_color_bg"] = {0.1, 0.1, 0.1},			-- Color for background
-	["enemy_health_color"] = true,				-- If enable, enemy target color is red
+	["uf_color"] = {0.4, 0.4, 0.4},				-- Color of health bars if ["own_color"] = true
+	["uf_color_bg"] = {0.1, 0.1, 0.1},			-- Color of health background
+	["enemy_health_color"] = true,				-- If enable, enemy target healthbar color is red
 	["show_total_value"] = false,				-- Display of info text on player and target with XXXX/Total
 	["color_value"] = false,					-- Health/mana value is colored
 	["bar_color_value"] = false,				-- Health bar color by current health remaining
