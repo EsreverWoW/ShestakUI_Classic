@@ -1112,14 +1112,15 @@ function T.SkinFrame(frame, backdrop, x, y)
 end
 
 local iconColors = {
-	["auctionhouse-itemicon-border-gray"]		= {r = borderr, g = borderg, b = borderb},
-	["auctionhouse-itemicon-border-white"]		= {r = borderr, g = borderg, b = borderb},
-	["auctionhouse-itemicon-border-green"]		= BAG_ITEM_QUALITY_COLORS[2],
-	["auctionhouse-itemicon-border-blue"]		= BAG_ITEM_QUALITY_COLORS[3],
-	["auctionhouse-itemicon-border-purple"]		= BAG_ITEM_QUALITY_COLORS[4],
-	["auctionhouse-itemicon-border-orange"]		= BAG_ITEM_QUALITY_COLORS[5],
-	["auctionhouse-itemicon-border-artifact"]	= BAG_ITEM_QUALITY_COLORS[6],
-	["auctionhouse-itemicon-border-account"]	= BAG_ITEM_QUALITY_COLORS[7]
+	["uncollected"] = {r = borderr, g = borderg, b = borderb},
+	["gray"]		= {r = borderr, g = borderg, b = borderb},
+	["white"]		= {r = borderr, g = borderg, b = borderb},
+	["green"]		= BAG_ITEM_QUALITY_COLORS[2],
+	["blue"]		= BAG_ITEM_QUALITY_COLORS[3],
+	["purple"]		= BAG_ITEM_QUALITY_COLORS[4],
+	["orange"]		= BAG_ITEM_QUALITY_COLORS[5],
+	["artifact"]	= BAG_ITEM_QUALITY_COLORS[6],
+	["account"]		= BAG_ITEM_QUALITY_COLORS[7]
 }
 
 function T.SkinIconBorder(frame, parent)
@@ -1134,7 +1135,8 @@ function T.SkinIconBorder(frame, parent)
 	end)
 
 	hooksecurefunc(frame, "SetAtlas", function(self, atlas)
-		local color = iconColors[atlas]
+		local atlasAbbr = atlas and strmatch(atlas, "%-(%w+)$")
+		local color = atlasAbbr and iconColors[atlasAbbr]
 		if color then
 			border:SetBackdropBorderColor(color.r, color.g, color.b)
 		end
