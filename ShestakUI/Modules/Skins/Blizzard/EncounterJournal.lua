@@ -419,22 +419,37 @@ local function LoadSkin()
 	itemSetsFrame.ClassButton:SkinButton(true)
 	if not T.newPatch then
 		T.SkinScrollBar(itemSetsFrame.scrollBar)
+	else
+		T.SkinScrollBar(itemSetsFrame.ScrollBar)
+
+		hooksecurefunc(itemSetsFrame.ScrollBox, "Update", function(self)
+			self:ForEachFrame(function(bar)
+				if not bar.styled then
+					bar.ItemLevel:SetTextColor(1, 1, 1)
+					bar.Background:Hide()
+					bar:CreateBackdrop("Overlay")
+					bar.backdrop:SetPoint("TOPLEFT", 0, 2)
+					bar.backdrop:SetPoint("BOTTOMRIGHT", -2, -2)
+
+					bar.styled = true
+				end
+
+				local itemButtons = bar.ItemButtons
+				for i = 1, #itemButtons do
+					local button = itemButtons[i]
+					if not button.styled then
+						button:CreateBackdrop("Overlay")
+						button.backdrop:SetPoint("TOPLEFT", button.Border, 5, -5)
+						button.backdrop:SetPoint("BOTTOMRIGHT", button.Border, -4, 3)
+						button.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+						T.SkinIconBorder(button.Border, button.backdrop)
+						button.Border:SetAtlas(button.Border:GetAtlas()) -- force to update border as it call before we can skin
+						button.styled = true
+					end
+				end
+			end)
+		end)
 	end
-
-	hooksecurefunc(itemSetsFrame, "ConfigureItemButton", function(_, button)
-		if not button.styled then
-			button.Border:SetAlpha(0)
-			button:CreateBackdrop("Overlay")
-			button.backdrop:SetPoint("TOPLEFT", button.Border, 5, -5)
-			button.backdrop:SetPoint("BOTTOMRIGHT", button.Border, -4, 3)
-			button.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-			button.styled = true
-		end
-
-		local quality = select(3, GetItemInfo(button.itemID))
-		local color = ITEM_QUALITY_COLORS[quality or 1]
-		button.backdrop:SetBackdropBorderColor(color.r, color.g, color.b)
-	end)
 
 	if not T.newPatch then
 		local button = itemSetsFrame.buttons
@@ -446,6 +461,21 @@ local function LoadSkin()
 			button.Background:Hide()
 			button.ItemLevel:SetTextColor(1, 1, 1)
 		end
+
+		hooksecurefunc(itemSetsFrame, "ConfigureItemButton", function(_, button)
+			if not button.styled then
+				button.Border:SetAlpha(0)
+				button:CreateBackdrop("Overlay")
+				button.backdrop:SetPoint("TOPLEFT", button.Border, 5, -5)
+				button.backdrop:SetPoint("BOTTOMRIGHT", button.Border, -4, 3)
+				button.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+				button.styled = true
+			end
+
+			local quality = select(3, GetItemInfo(button.itemID))
+			local color = ITEM_QUALITY_COLORS[quality or 1]
+			button.backdrop:SetBackdropBorderColor(color.r, color.g, color.b)
+		end)
 	end
 
 	T.SkinScrollBar(EncounterJournal.LootJournal.ScrollBar)
@@ -463,7 +493,7 @@ local function LoadSkin()
 				btn.backdrop:SetPoint("TOPLEFT", 2, -2)
 				btn.backdrop:SetPoint("BOTTOMRIGHT", 2, 2)
 
-				btn.IsSkinned = true
+				btn.isSkinned = true
 			end
 		end
 	end)
