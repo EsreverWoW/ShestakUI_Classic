@@ -336,12 +336,13 @@ if C.automation.auto_collapse ~= "NONE" then
 end
 
 ----------------------------------------------------------------------------------------
---	Skin simple quest objective progress bar
+--	Skin quest objective progress bar
 ----------------------------------------------------------------------------------------
-local function SkinBar(_, _, line)
+local function SkinProgressBar(_, _, line)
 	local progressBar = line.ProgressBar
 	local bar = progressBar.Bar
 	local label = bar.Label
+	local icon = bar.Icon
 
 	if not progressBar.styled then
 		if bar.BarFrame then bar.BarFrame:Hide() end
@@ -363,59 +364,35 @@ local function SkinBar(_, _, line)
 		label:SetFont(C.media.pixel_font, C.media.pixel_font_size, C.media.pixel_font_style)
 		label:SetDrawLayer("OVERLAY")
 
-		progressBar.styled = true
-	end
-end
+		if icon then
+			icon:SetPoint("RIGHT", 26, 0)
+			icon:SetSize(20, 20)
+			icon:SetMask("")
 
-hooksecurefunc(QUEST_TRACKER_MODULE, "AddProgressBar", SkinBar)
-hooksecurefunc(CAMPAIGN_QUEST_TRACKER_MODULE, "AddProgressBar", SkinBar)
-hooksecurefunc(SCENARIO_TRACKER_MODULE, "AddProgressBar", SkinBar)
+			local border = CreateFrame("Frame", "$parentBorder", bar)
+			border:SetAllPoints(icon)
+			border:SetTemplate("Transparent")
+			border:SetBackdropColor(0, 0, 0, 0)
+			bar.newIconBg = border
 
-----------------------------------------------------------------------------------------
---	Skin quest objective progress bar with icon
-----------------------------------------------------------------------------------------
-local function SkinBarIcon(_, _, line)
-	local progressBar = line.ProgressBar
-	local bar = progressBar.Bar
-	local label = bar.Label
-	local icon = bar.Icon
+			hooksecurefunc(bar.AnimIn, "Play", function()
+				bar.AnimIn:Stop()
+			end)
 
-	if not progressBar.styled then
-		bar.BarFrame:Hide()
-		bar.BarGlow:Kill()
-		bar.Sheen:Hide()
-		bar.IconBG:Kill()
-		bar:SetSize(200, 16)
-		bar:SetStatusBarTexture(C.media.texture)
-		bar:CreateBackdrop("Transparent")
+			BonusObjectiveTrackerProgressBar_PlayFlareAnim = T.dummy
+		end
 
-		label:ClearAllPoints()
-		label:SetPoint("CENTER", 0, -1)
-		label:SetFont(C.media.pixel_font, C.media.pixel_font_size, C.media.pixel_font_style)
-
-		icon:SetPoint("RIGHT", 26, 0)
-		icon:SetSize(20, 20)
-		icon:SetMask("")
-
-		local border = CreateFrame("Frame", "$parentBorder", bar)
-		border:SetAllPoints(icon)
-		border:SetTemplate("Transparent")
-		border:SetBackdropColor(0, 0, 0, 0)
-		bar.newIconBg = border
-
-		hooksecurefunc(bar.AnimIn, "Play", function()
-			bar.AnimIn:Stop()
-		end)
-
-		BonusObjectiveTrackerProgressBar_PlayFlareAnim = T.dummy
 		progressBar.styled = true
 	end
 
-	bar.newIconBg:SetShown(icon:IsShown())
+	if bar.newIconBg then bar.newIconBg:SetShown(icon:IsShown()) end
 end
 
-hooksecurefunc(BONUS_OBJECTIVE_TRACKER_MODULE, "AddProgressBar", SkinBarIcon)
-hooksecurefunc(WORLD_QUEST_TRACKER_MODULE, "AddProgressBar", SkinBarIcon)
+hooksecurefunc(QUEST_TRACKER_MODULE, "AddProgressBar", SkinProgressBar)
+hooksecurefunc(CAMPAIGN_QUEST_TRACKER_MODULE, "AddProgressBar", SkinProgressBar)
+hooksecurefunc(SCENARIO_TRACKER_MODULE, "AddProgressBar", SkinProgressBar)
+hooksecurefunc(BONUS_OBJECTIVE_TRACKER_MODULE, "AddProgressBar", SkinProgressBar)
+hooksecurefunc(WORLD_QUEST_TRACKER_MODULE, "AddProgressBar", SkinProgressBar)
 
 ----------------------------------------------------------------------------------------
 --	Skin Timer bar
