@@ -34,12 +34,6 @@ frame:SetScript("OnEvent", function()
 		BagsBar:UnregisterAllEvents()
 	end
 
-	-- Fixed possible taints (from NDui)
-	_G.ActionBarController:UnregisterAllEvents()
-	_G.ActionBarController:RegisterEvent("SETTINGS_LOADED") -- this is needed for page controller to spawn properly
-	_G.ActionBarController:RegisterEvent("UPDATE_EXTRA_ACTIONBAR") -- this is needed to let the ExtraActionBar show
-	-- _G.ActionBarActionEventsFrame:UnregisterAllEvents() -- It breaks proc highlight
-
 	if T.Mainline then
 		if not C.actionbar.micromenu then
 			MicroMenu:Hide()
@@ -99,6 +93,10 @@ frame:SetScript("OnEvent", function()
 			end
 		end)
 	end
+
+	-- Fixed SetPointBase and ShowBase taints after finish Pet Battle, entering new combat and summon Hunter pet.
+	ActionBarController:UnregisterEvent("UPDATE_VEHICLE_ACTIONBAR")
+	ActionBarController:UnregisterEvent("UPDATE_OVERRIDE_ACTIONBAR")
 end)
 
 ----------------------------------------------------------------------------------------
