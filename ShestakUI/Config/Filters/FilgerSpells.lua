@@ -918,7 +918,7 @@ C["filger_spells"] = {
 			-- Freezing Trap
 			{spellID = 187650, filter = "CD"},
 			-- Tar Trap
-			{spellID = 187698, filter = "CD"},			
+			{spellID = 187698, filter = "CD"},
 			-- Binding Shot
 			{spellID = 117526, filter = "CD"},
 			-- Master's Call
@@ -948,7 +948,7 @@ C["filger_spells"] = {
 			-- Fortitude of the Bear
 			{spellID = 272679, filter = "CD"},
 			-- Volley
-			{spellID = 194386, filter = "CD"},									
+			{spellID = 194386, filter = "CD"},
 			-- Trueshot
 			{spellID = 288613, filter = "CD"},
 			-- Aimed Shot
@@ -958,7 +958,7 @@ C["filger_spells"] = {
 			-- Flare
 			{spellID = 1543, filter = "CD"},
 			-- Salvo
-			{spellID = 400456, filter = "CD"},			
+			{spellID = 400456, filter = "CD"},
 		},
 	},
 	["MAGE"] = {
@@ -3084,7 +3084,7 @@ C["filger_spells"] = {
 			-- Ascendance
 			{spellID = 114052, unitID = "target", caster = "all", filter = "BUFF"},
 			-- Ethereal Form
-			{spellID = 210918, unitID = "target", caster = "all", filter = "BUFF"},
+			{spellID = 210918, unitID = "target", caster = "all", filter = "BUFF"}, -- BETA not exist in 10.1.0
 			-- Debuffs
 			-- Hex
 			{spellID = 51514, unitID = "target", caster = "all", filter = "DEBUFF"},
