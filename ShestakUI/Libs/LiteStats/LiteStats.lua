@@ -1763,14 +1763,11 @@ if damage.enabled then
 		text = {
 			string = function()
 				if IsAddOnLoaded("Details") then
-					local combat = Details:GetCurrentCombat()
-					local player = combat:GetActor(DETAILS_ATTRIBUTE_DAMAGE, T.name)
-					if player then
-						local damageDone = player.total
-						local combatTime = combat:GetCombatTime()
-						local effectiveDPS = damageDone / combatTime
-
-						return format(damage.fmt, DAMAGE, effectiveDPS)
+					_detalhes.data_broker_text = "{dps}"
+					_detalhes:BrokerTick()
+					local effectiveDPS = _detalhes.databroker.text
+					if effectiveDPS and effectiveDPS ~= "0" then
+						return format(damage.alt_fmt, DAMAGE, effectiveDPS)
 					end
 				elseif IsAddOnLoaded("Numeration") then
 					local text = LibStub:GetLibrary("LibDataBroker-1.1"):GetDataObjectByName("Numeration").text
