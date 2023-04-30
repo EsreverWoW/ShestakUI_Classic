@@ -378,8 +378,6 @@ local function SkinProgressBar(_, _, line)
 			hooksecurefunc(bar.AnimIn, "Play", function()
 				bar.AnimIn:Stop()
 			end)
-
-			BonusObjectiveTrackerProgressBar_PlayFlareAnim = T.dummy
 		end
 
 		progressBar.styled = true
@@ -402,10 +400,12 @@ local function SkinTimer(_, _, line)
 	local bar = timerBar.Bar
 
 	if not timerBar.styled then
+		if bar.BorderLeft then bar.BorderLeft:SetAlpha(0) end
+		if bar.BorderRight then bar.BorderRight:SetAlpha(0) end
+		if bar.BorderMid then bar.BorderMid:SetAlpha(0) end
+
 		bar:SetStatusBarTexture(C.media.texture)
-		bar:SetTemplate("Transparent")
-		bar:SetBackdropColor(0, 0, 0, 0)
-		bar:DisableDrawLayer("ARTWORK")
+		bar:CreateBackdrop("Transparent")
 		timerBar.styled = true
 	end
 end
@@ -436,6 +436,7 @@ end)
 --	Kill reward animation when finished dungeon or bonus objectives
 ----------------------------------------------------------------------------------------
 ObjectiveTrackerScenarioRewardsFrame.Show = T.dummy
+BonusObjectiveTrackerProgressBar_PlayFlareAnim = T.dummy
 
 hooksecurefunc("BonusObjectiveTracker_AnimateReward", function()
 	ObjectiveTrackerBonusRewardsFrame:ClearAllPoints()
@@ -474,6 +475,25 @@ ChallengeBlock.StatusBar:CreateBackdrop("Overlay")
 ChallengeBlock.StatusBar.backdrop:SetFrameLevel(ChallengeBlock.backdrop:GetFrameLevel() + 1)
 ChallengeBlock.StatusBar:SetStatusBarColor(0, 0.6, 1)
 ChallengeBlock.StatusBar:SetFrameLevel(ChallengeBlock.StatusBar:GetFrameLevel() + 3)
+
+-- Not tested TODO
+-- hooksecurefunc("Scenario_ChallengeMode_SetUpAffixes", function(self)
+	-- for _, frame in ipairs(self.Affixes) do
+		-- frame.Border:SetTexture(nil)
+		-- frame.Portrait:SetTexture(nil)
+		-- if not frame.styled then
+			-- frame.Portrait:SkinIcon()
+			-- frame.styled = true
+		-- end
+
+		-- if frame.info then
+			-- frame.Portrait:SetTexture(_G.CHALLENGE_MODE_EXTRA_AFFIX_INFO[frame.info.key].texture)
+		-- elseif frame.affixID then
+			-- local _, _, filedataid = C_ChallengeMode.GetAffixInfo(frame.affixID)
+			-- frame.Portrait:SetTexture(filedataid)
+		-- end
+	-- end
+-- end)
 
 ----------------------------------------------------------------------------------------
 --	Skin MawBuffsBlock
