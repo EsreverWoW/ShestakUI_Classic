@@ -3083,8 +3083,6 @@ C["filger_spells"] = {
 			{spellID = 108271, unitID = "target", caster = "all", filter = "BUFF"},
 			-- Ascendance
 			{spellID = 114052, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Ethereal Form
-			{spellID = 210918, unitID = "target", caster = "all", filter = "BUFF"}, -- BETA not exist in 10.1.0
 			-- Debuffs
 			-- Hex
 			{spellID = 51514, unitID = "target", caster = "all", filter = "DEBUFF"},
