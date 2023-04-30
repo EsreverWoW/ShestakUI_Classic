@@ -6,30 +6,126 @@ if C.actionbar.enable ~= true then return end
 ----------------------------------------------------------------------------------------
 local AddonName = ...
 
--- the addon event handler
-local Addon = CreateFrame('Frame', AddonName, _G.InterfaceOptionsFrame)
-
--- how quickly attack actions flash
-local ATTACK_BUTTON_FLASH_TIME = _G.ATTACK_BUTTON_FLASH_TIME
+local Addon = CreateFrame("Frame", AddonName, SettingsPanel or InterfaceOptionsFrame)
 
 -- the name of the database
-local DB_KEY = 'TULLARANGE_COLORS'
+local DB_KEY = "TULLARANGE_COLORS"
 
--- how frequently we want to update colors, in seconds
-local UPDATE_DELAY = 0.2
+-- frequently used globals
+local GetActionInfo = GetActionInfo
+local GetMacroInfo = GetMacroInfo
+local GetMacroSpell = GetMacroSpell
+local GetPetActionInfo = GetPetActionInfo
+local GetPetActionSlotUsable = GetPetActionSlotUsable
+local GetSpellPowerCost = GetSpellPowerCost
+local IsActionInRange = IsActionInRange
+local IsUsableAction = IsUsableAction
+local UnitPower = UnitPower
 
-local ActionHasRange = _G.ActionHasRange
-local After = _G.C_Timer.After
-local GetTime = _G.GetTime
-local IsActionInRange = _G.IsActionInRange
-local IsUsableAction = _G.IsUsableAction
-local GetPetActionInfo = _G.GetPetActionInfo
-local GetPetActionSlotUsable = _G.GetPetActionSlotUsable
-local GetActionInfo = _G.GetActionInfo
-local GetMacroInfo = _G.GetMacroInfo
-local GetMacroSpell = _G.GetMacroSpell
-local GetSpellPowerCost = _G.GetSpellPowerCost
-local UnitPower = _G.UnitPower
+
+local SpecialMacroNames = setmetatable({}, {
+	__index = function(t, k)
+		local result = k:sub(1, 1) == "#"
+
+		t[k] = result
+
+		return result
+	end
+})
+
+local function actionButton_GetState(button)
+	local action = button.action
+	local actionType, actionTypeID = GetActionInfo(action)
+
+	if actionType then
+		if actionType == "macro" then
+			-- for macros with names that start with a #, we prioritize the OOM check
+			-- using a spell cost strategy over other ones to better clarify if the
+			-- macro is actually usable or not
+			local name = GetMacroInfo(actionTypeID)
+
+			if name and SpecialMacroNames[name] then
+				local spellID = GetMacroSpell(actionTypeID)
+
+				-- only run the check for spell macros
+				if spellID then
+					local costs = GetSpellPowerCost(spellID)
+					for i = 1, #costs do
+						local cost = costs[i]
+
+						if UnitPower("player", cost.type) < cost.minCost then
+							return "oom"
+						end
+					end
+				end
+			end
+		end
+
+		local isUsable, notEnoughMana = IsUsableAction(action)
+		if isUsable then
+			if IsActionInRange(action) == false then
+				return "oor"
+			end
+		elseif notEnoughMana then
+			return "oom"
+		else
+			return "unusable"
+		end
+	end
+
+	return "normal"
+end
+
+--------------------------------------------------------------------------------
+-- Saved settings setup stuff
+--------------------------------------------------------------------------------
+
+local function removeDefaults(tbl, defaults)
+	for k, v in pairs(defaults) do
+		if type(tbl[k]) == "table" and type(v) == "table" then
+			removeDefaults(tbl[k], v)
+			if next(tbl[k]) == nil then
+				tbl[k] = nil
+			end
+		elseif tbl[k] == v then
+			tbl[k] = nil
+		end
+	end
+
+	return tbl
+end
+
+local function copyDefaults(tbl, defaults)
+	for k, v in pairs(defaults) do
+		if type(v) == "table" then
+			tbl[k] = copyDefaults(tbl[k] or {}, v)
+		elseif tbl[k] == nil then
+			tbl[k] = v
+		end
+	end
+
+	return tbl
+end
+
+function Addon:GetDatabaseDefaults()
+	return {
+		-- how frequently we want to update, in seconds
+		updateDelay = 0.2,
+
+		-- enable range coloring on pet actions
+		petActions = true,
+
+		-- enable flash animations
+		flashAnimations = true,
+		flashDuration = ATTACK_BUTTON_FLASH_TIME * 1.5,
+
+		-- default colors (r, g, b, a, desaturate)
+		normal = {1, 1, 1, 1, desaturate = false},
+		oor = {1, 0.3, 0.1, 1, desaturate = true},
+		oom = {0.1, 0.3, 1, 1, desaturate = true},
+		unusable = {0.4, 0.4, 0.4, 1, desaturate = false}
+	}
+end
 
 --------------------------------------------------------------------------------
 -- Event Handlers
@@ -47,26 +143,16 @@ function Addon:OnLoad()
 	self.buttonStates = {}
 
 	-- setup script handlers
-	self:SetScript('OnShow', self.OnShow)
-	self:SetScript('OnEvent', self.OnEvent)
+	self:SetScript("OnEvent", self.OnEvent)
+	self:SetScript("OnShow", self.OnShow)
 
 	-- register any events we need to watch
-	self:RegisterEvent('ADDON_LOADED')
-	self:RegisterEvent('PLAYER_LOGIN')
-	self:RegisterEvent('PLAYER_LOGOUT')
+	self:RegisterEvent("ADDON_LOADED")
+	self:RegisterEvent("PLAYER_LOGIN")
+	self:RegisterEvent("PLAYER_LOGOUT")
 
 	-- drop this method, as we won't need it again
 	self.OnLoad = nil
-end
-
--- addon shown (which in this case means that InterfaceOptionsFrame was shown)
--- load the config addon and get rid of this method
-function Addon:OnShow()
-	LoadAddOn(AddonName .. '_Config')
-
-	-- drop this method, as we won't need it again
-	self:SetScript('OnShow', nil)
-	self.OnShow = nil
 end
 
 function Addon:OnEvent(event, ...)
@@ -77,21 +163,28 @@ function Addon:OnEvent(event, ...)
 	end
 end
 
--- when the addon finishes loading...
+-- when the addon finishes loading
 function Addon:ADDON_LOADED(event, addonName)
 	if addonName ~= AddonName then
 		return
 	end
 
 	-- setup our saved settings stuff
-	self:SetupDatabase()
+	local sets = _G[DB_KEY]
+
+	if not sets then
+		sets = {}
+		_G[DB_KEY] = sets
+	end
+
+	self.sets = copyDefaults(sets, self:GetDatabaseDefaults())
 
 	-- get rid of the handler, as we don't need it anymore
 	self:UnregisterEvent(event)
 	self[event] = nil
 end
 
--- when the player first logs in...
+-- when the player first logs in
 function Addon:PLAYER_LOGIN(event)
 	local function button_StartFlash(button)
 		if button:IsVisible() then
@@ -109,41 +202,45 @@ function Addon:PLAYER_LOGIN(event)
 	end
 
 	local function actionButton_UpdateUsable(button)
-		self:UpdateActionButtonState(button, true)
+		local state = actionButton_GetState(button)
+
+		self.buttonStates[button] = state
+
+		local color = self.sets[state]
+		button.icon:SetDesaturated(color.desaturate)
+		button.icon:SetVertexColor(color[1], color[2], color[3], color[4], color[5])
 	end
 
 	-- register existing action buttons
 	-- the method varies between classic and shadowlands, as action buttons in
 	-- shadowlands use ActionBarActionButtonMixin
-	local ActionBarActionButtonMixin = _G.ActionBarActionButtonMixin
+	local ActionBarActionButtonMixin = ActionBarActionButtonDerivedMixin or ActionBarActionButtonMixin
 	if ActionBarActionButtonMixin then
 		local function actionButton_OnLoad(button)
 			button:SetScript("OnUpdate", nil)
-			button:HookScript('OnShow', actionButton_OnShowHide)
-			button:HookScript('OnHide', actionButton_OnShowHide)
+			button:HookScript("OnShow", actionButton_OnShowHide)
+			button:HookScript("OnHide", actionButton_OnShowHide)
 
 			-- Update is called whenever an action button changes, so we
 			-- check here to we if we need to pay attention to the button anymore
-			hooksecurefunc(button, 'Update', actionButton_Update)
+			hooksecurefunc(button, "Update", actionButton_Update)
 
 			-- UpdateUsable is called when the button normally changes
 			-- color when unusuable, so we need to reapply our custom coloring
-			hooksecurefunc(button, 'UpdateUsable', actionButton_UpdateUsable)
+			hooksecurefunc(button, "UpdateUsable", actionButton_UpdateUsable)
 
-			if self:EnableFlashAnimations() then
-				hooksecurefunc(button, 'StartFlash', button_StartFlash)
+			if self.sets.flashAnimations then
+				hooksecurefunc(button, "StartFlash", button_StartFlash)
 			end
 
 			self:UpdateActionButtonWatched(button)
 		end
 
 		-- hook any existing frames that are derived from ActionBarActionButtonMixin
-		local mixin_OnLoad = ActionBarActionButtonMixin.OnLoad
-		local EnumerateFrames = _G.EnumerateFrames
 		local f = EnumerateFrames()
 
 		while f do
-			if f.OnLoad == mixin_OnLoad then
+			if f.OnLoad == ActionBarActionButtonMixin.OnLoad then
 				actionButton_OnLoad(f)
 			end
 
@@ -154,9 +251,9 @@ function Addon:PLAYER_LOGIN(event)
 		hooksecurefunc(ActionBarActionButtonMixin, "OnLoad", actionButton_OnLoad)
 	else
 		local function actionButton_OnUpdate(button)
-			button:SetScript('OnUpdate', nil)
-			button:HookScript('OnShow', actionButton_OnShowHide)
-			button:HookScript('OnHide', actionButton_OnShowHide)
+			button:SetScript("OnUpdate", nil)
+			button:HookScript("OnShow", actionButton_OnShowHide)
+			button:HookScript("OnHide", actionButton_OnShowHide)
 
 			self:UpdateActionButtonWatched(button)
 		end
@@ -165,30 +262,30 @@ function Addon:PLAYER_LOGIN(event)
 		-- register events on update initially, and wipe out their individual on
 		-- update handlers. This is why tullaRange has a negative performance
 		-- impact
-		hooksecurefunc('ActionButton_OnUpdate', actionButton_OnUpdate)
+		hooksecurefunc("ActionButton_OnUpdate", actionButton_OnUpdate)
 
 		-- ActionButton_UpdateUsable is called when the button normally changes
 		-- color when unusuable, so we need to reapply our custom coloring at this
 		-- point
-		hooksecurefunc('ActionButton_UpdateUsable', actionButton_UpdateUsable)
+		hooksecurefunc("ActionButton_UpdateUsable", actionButton_UpdateUsable)
 
 		-- ActionButton_Update is called whenever an action button changes, so we
 		-- check here to we if we need to pay attention to the button anymore or not
-		hooksecurefunc('ActionButton_Update', actionButton_Update)
+		hooksecurefunc("ActionButton_Update", actionButton_Update)
 
 		-- setup flash animations
-		if self:EnableFlashAnimations() then
-			hooksecurefunc('ActionButton_StartFlash', button_StartFlash)
+		if self.sets.flashAnimations then
+			hooksecurefunc("ActionButton_StartFlash", button_StartFlash)
 		end
 	end
 
 	-- register pet actions, if we want to
-	if self:EnablePetActions() then
+	if self.sets.petActions then
 		-- register all pet action slots
 		self.petActions = {}
 
 		for i = 1, NUM_PET_ACTION_SLOTS do
-			tinsert(self.petActions, _G['PetActionButton' .. i])
+			self.petActions[i] =  _G["PetActionButton" .. i]
 		end
 
 		local function petButton_OnShowHide(button)
@@ -197,9 +294,9 @@ function Addon:PLAYER_LOGIN(event)
 		end
 
 		local function petButton_OnUpdate(button)
-			button:SetScript('OnUpdate', nil)
-			button:HookScript('OnShow', petButton_OnShowHide)
-			button:HookScript('OnHide', petButton_OnShowHide)
+			button:SetScript("OnUpdate", nil)
+			button:HookScript("OnShow", petButton_OnShowHide)
+			button:HookScript("OnHide", petButton_OnShowHide)
 			self:UpdatePetActionButtonWatched(button)
 		end
 
@@ -219,25 +316,34 @@ function Addon:PLAYER_LOGIN(event)
 					self.buttonStates[button] = nil
 					self:UpdatePetActionButtonWatched(button)
 				end
-				-- if we don't, wipe any actions we currently are showing
 			else
+				-- if we don't, wipe any actions we currently are showing
 				wipe(self.watchedPetActions)
 			end
 		end
 
 		-- hook any pet button events we need to take care of
 		-- register events on update initially, and wipe out their individual on
-		-- update handlers.
-		local PetActionBar = T.Classic and _G.PetActionBarFrame or _G.PetActionBar
-		if type(PetActionBar.Update) == "function" then
-			hooksecurefunc(PetActionBar, 'Update', petActionBar_Update)
-		end
+		-- update handlers
+		local PetActionBar = _G.PetActionBar
 
-		local buttons = PetActionBar.actionButtons
-		if type(buttons) == "table" then
-			for _, button in pairs(PetActionBar.actionButtons) do
-				hooksecurefunc(button, 'OnUpdate', petButton_OnUpdate)
-				hooksecurefunc(button, 'StartFlash', button_StartFlash)
+		if type(PetActionBar) == "table" then
+			if type(PetActionBar.Update) == "function" then
+				hooksecurefunc(PetActionBar, "Update", petActionBar_Update)
+			end
+
+			if type(PetActionBar.actionButtons) == "table" then
+				for _, button in pairs(PetActionBar.actionButtons) do
+					hooksecurefunc(button, "OnUpdate", petButton_OnUpdate)
+					hooksecurefunc(button, "StartFlash", button_StartFlash)
+				end
+			end
+		else
+			hooksecurefunc("PetActionButton_OnUpdate", petButton_OnUpdate)
+			hooksecurefunc("PetActionBar_Update", petActionBar_Update)
+
+			if self.sets.flashAnimations then
+				hooksecurefunc("PetActionButton_StartFlash", button_StartFlash)
 			end
 		end
 	end
@@ -248,171 +354,106 @@ function Addon:PLAYER_LOGIN(event)
 end
 
 function Addon:PLAYER_LOGOUT()
-	self:CleanupDatabase()
+	if self.sets then
+		removeDefaults(self.sets, self:GetDatabaseDefaults())
+	end
 end
 
 --------------------------------------------------------------------------------
 -- Update API
 --------------------------------------------------------------------------------
 
-local function handleUpdate()
-	if Addon:UpdateButtonStates() then
-		Addon.updating = GetTime()
-		After(UPDATE_DELAY, handleUpdate)
-	else
-		Addon.updating = nil
-	end
-end
 
-function Addon:RequestUpdate()
-	if self.updating ~= nil then
-		return
-	end
+function Addon:HandleUpdate()
+	local states = self.buttonStates
 
-	self.updating = GetTime()
-	After(UPDATE_DELAY, handleUpdate)
-end
+	-- update actions
+	for button in pairs(self.watchedActions) do
+		local state = actionButton_GetState(button)
 
-function Addon:SetButtonState(button, state, force)
-	if self.buttonStates[button] == state and not force then
-		return
-	end
+		if states[button] ~= state then
+			states[button] = state
 
-	self.buttonStates[button] = state
-
-	local r, g, b, a = self:GetColor(state)
-
-	button.icon:SetVertexColor(r, g, b, a)
-end
-
-function Addon:UpdateButtonStates(force)
-	local updatedButtons = false
-
-	if next(self.watchedActions) then
-		for button in pairs(self.watchedActions) do
-			self:UpdateActionButtonState(button, force)
+			local color = self.sets[state]
+			button.icon:SetDesaturated(color.desaturate)
+			button.icon:SetVertexColor(color[1], color[2], color[3], color[4], color[5])
 		end
-
-		updatedButtons = true
 	end
 
-	if next(self.watchedPetActions) then
-		for button in pairs(self.watchedPetActions) do
-			self:UpdatePetActionButtonState(button, force)
-		end
+	-- update pet actions
+	for button in pairs(self.watchedPetActions) do
+		-- pet action button specific stuff
+		local slot = button:GetID() or 0
+		local isUsable, notEnoughMana = GetPetActionSlotUsable(slot)
+		local state
 
-		updatedButtons = true
-	end
+		-- usable (ignoring target information)
+		if isUsable then
+			local _, _, _, _, _, _, _, checksRange, inRange = GetPetActionInfo(slot)
 
-	return updatedButtons
-end
-
-function Addon:GetActionButtonState(button)
-	local action = button.action
-	local actionType, actionTypeId = GetActionInfo(action)
-
-	if not actionType then
-		return 'normal'
-	end
-
-	-- for macros with names that start with a #, we prioritize the OOM check
-	-- using a spell cost strategy over other ones to better clarify if the
-	-- macro is actually usable or not
-	if actionType == 'macro' then
-		local name = GetMacroInfo(actionTypeId)
-
-		if name and name:sub(1, 1) == '#' then
-			local spellId = GetMacroSpell(actionTypeId)
-
-			-- only run the check for spell macros
-			if spellId then
-				local costs = GetSpellPowerCost(spellId)
-
-				for _, cost in ipairs(costs) do
-					if UnitPower('player', cost.type) < cost.minCost then
-						return 'oom'
-					end
-				end
-
-				if IsActionInRange(action) == false then
-					return 'oor'
-				end
-
-				return 'normal'
+			-- but out of range
+			if checksRange and not inRange then
+				state = "oor"
+			else
+				state = "normal"
 			end
+		elseif notEnoughMana then
+			state = "oom"
+		else
+			state = "unusable"
+		end
+
+		if states[button] ~= state then
+			states[button] = state
+
+			local color = self.sets[state]
+			button.icon:SetDesaturated(color.desaturate)
+			button.icon:SetVertexColor(color[1], color[2], color[3], color[4], color[5])
 		end
 	end
-
-	local isUsable, notEnoughMana = IsUsableAction(action)
-	if not isUsable then
-		if notEnoughMana then
-			return 'oom'
-		end
-		return 'unusable'
-	end
-
-	-- we do == false here because IsActionInRange can return one of true
-	-- (has range, in range), false (has range, out of range), and nil (does
-	-- not have range) and we explicitly want to know about (has range, oor)
-	if IsActionInRange(action) == false then
-		return 'oor'
-	end
-
-	return 'normal'
-end
-
-function Addon:UpdateActionButtonState(button, force)
-	self:SetButtonState(button, self:GetActionButtonState(button), force)
 end
 
 function Addon:UpdateActionButtonWatched(button)
-	local action = button.action
-
-	if action and button:IsVisible() and ActionHasRange(action) then
-		self.watchedActions[button] = true
-	else
-		self.watchedActions[button] = nil
-	end
-
-	self:RequestUpdate()
-end
-
--- pet action button specific stuff
-function Addon:GetPetActionButtonState(button)
-	local slot = button:GetID() or 0
-	local _, _, _, _, _, _, _, checksRange, inRange = GetPetActionInfo(slot)
-	local isUsable, notEnoughMana = GetPetActionSlotUsable(slot)
-
-	-- usable (ignoring target information)
-	if isUsable then
-		-- but out of range
-		if checksRange and not inRange then
-			return 'oor'
-		else
-			return 'normal'
+	if button.action and button:IsVisible() and ActionHasRange(button.action) then
+		if not self.watchedActions[button] then
+			self.watchedActions[button] = true
+			self:UpdateActive()
 		end
-	elseif notEnoughMana then
-		return 'oom'
-	else
-		return 'unusable'
+	elseif self.watchedActions[button] then
+		self.watchedActions[button] = nil
+		self:UpdateActive()
 	end
 end
 
-function Addon:UpdatePetActionButtonState(button, force)
-	self:SetButtonState(button, self:GetPetActionButtonState(button), force)
+local function petActionHasRange(id)
+	local _, _, _, _, _, _, _, checksRange = GetPetActionInfo(id)
+
+	return checksRange
 end
 
 function Addon:UpdatePetActionButtonWatched(button)
-	local slot = button:GetID() or 0
-	local _, _, _, _, _, _, _, checksRange = GetPetActionInfo(slot)
-
-	if button:IsVisible() and checksRange then
-		self.watchedPetActions[button] = true
-	else
+	if button:IsVisible() and petActionHasRange(button:GetID() or 0) then
+		if not self.watchedPetActions[button] then
+			self.watchedPetActions[button] = true
+			self:UpdateActive()
+		end
+	elseif self.watchedPetActions[button] then
 		self.watchedPetActions[button] = nil
+		self:UpdateActive()
 	end
+end
 
-	self:RequestUpdate()
+function Addon:UpdateActive()
+	if next(self.watchedActions) or next(self.watchedPetActions) then
+		if not self.ticker then
+			self.ticker = C_Timer.NewTicker(self.sets.updateDelay, function()
+				self:HandleUpdate()
+			end)
+		end
+	elseif self.ticker then
+		self.ticker:Cancel()
+		self.ticker = nil
+	end
 end
 
 --------------------------------------------------------------------------------
@@ -420,10 +461,8 @@ end
 --------------------------------------------------------------------------------
 
 local function alpha_OnFinished(self)
-	local owner = self.owner
-
-	if owner.flashing ~= 1 then
-		Addon:StopButtonFlashing(owner)
+	if self.owner.flashing ~= 1 then
+		Addon:StopButtonFlashing(self.owner)
 	end
 end
 
@@ -432,15 +471,13 @@ function Addon:StartButtonFlashing(button)
 
 	if not animation then
 		animation = button.Flash:CreateAnimationGroup()
-		animation:SetLooping('BOUNCE')
+		animation:SetLooping("BOUNCE")
 
-		local alpha = animation:CreateAnimation('ALPHA')
-
-		alpha:SetDuration(self:GetFlashDuration())
+		local alpha = animation:CreateAnimation("ALPHA")
+		alpha:SetDuration(self.sets.flashDuration)
 		alpha:SetFromAlpha(0)
 		alpha:SetToAlpha(1)
-		alpha:SetScript('OnFinished', alpha_OnFinished)
-
+		alpha:SetScript("OnFinished", alpha_OnFinished)
 		alpha.owner = button
 
 		if self.flashAnimations then
@@ -469,131 +506,6 @@ function Addon:UpdateButtonFlashing(button)
 	else
 		self:StopButtonFlashing(button)
 	end
-end
-
---------------------------------------------------------------------------------
--- Saved settings setup stuff
---------------------------------------------------------------------------------
-
-local function removeDefaults(tbl, defaults)
-	for k, v in pairs(defaults) do
-		if type(tbl[k]) == 'table' and type(v) == 'table' then
-			removeDefaults(tbl[k], v)
-			if next(tbl[k]) == nil then
-				tbl[k] = nil
-			end
-		elseif tbl[k] == v then
-			tbl[k] = nil
-		end
-	end
-
-	return tbl
-end
-
-local function copyDefaults(tbl, defaults)
-	for k, v in pairs(defaults) do
-		if type(v) == 'table' then
-			tbl[k] = copyDefaults(tbl[k] or {}, v)
-		elseif tbl[k] == nil then
-			tbl[k] = v
-		end
-	end
-
-	return tbl
-end
-
-function Addon:SetupDatabase()
-	local sets = _G[DB_KEY]
-
-	if not sets then
-		sets = {}
-		_G[DB_KEY] = sets
-	end
-
-	self.sets = copyDefaults(sets, self:GetDatabaseDefaults())
-end
-
-function Addon:CleanupDatabase()
-	local sets = self.sets
-
-	if sets then
-		removeDefaults(sets, self:GetDatabaseDefaults())
-	end
-end
-
-function Addon:GetDatabaseDefaults()
-	return {
-		-- enable range coloring on pet actions
-		petActions = true,
-
-		-- enable flash animations,
-		flashAnimations = true,
-		flashDuration = ATTACK_BUTTON_FLASH_TIME * 1.5,
-
-		-- default color (r, g, b, a)
-		normal = {1, 1, 1, 1},
-		-- out of range
-		oor = {1, 0.3, 0.1, 1},
-		-- out of mana
-		oom = {0.1, 0.3, 1, 1},
-		-- unusable action
-		unusable = {0.4, 0.4, 0.4, 1}
-	}
-end
-
-function Addon:ResetDatabase()
-	_G[DB_KEY] = nil
-
-	self:SetupDatabase()
-	self:UpdateButtonStates(true)
-end
-
---------------------------------------------------------------------------------
--- Configuration API
---------------------------------------------------------------------------------
-
-function Addon:GetColor(state)
-	local color = self.sets[state]
-
-	return color[1], color[2], color[3], color[4]
-end
-
-function Addon:SetColor(state, r, g, b, a)
-	local color = self.sets[state]
-
-	color[1] = r
-	color[2] = g
-	color[3] = b
-	color[4] = a or 1
-
-	self:UpdateButtonStates(true)
-end
-
--- gets or sets enabling action button flashing
-function Addon:EnableFlashAnimations()
-	return self.sets.flashAnimations
-end
-
-function Addon:SetEnableFlashAnimations(enable)
-	self.sets.flashAnimations = enable
-end
-
--- sets the flash animation speed
-function Addon:GetFlashDuration()
-	return self.sets.flashDuration
-end
-
-function Addon:SetFlashDuration(duration)
-	self.sets.flashDuration = tonumber(duration)
-end
-
--- gets or sets enabling out of range  coloring on pet actions
-function Addon:EnablePetActions()
-	return self.sets.petActions
-end
-
-function Addon:SetEnablePetActions(enable)
-	self.sets.petActions = enable
 end
 
 -- load the addon
