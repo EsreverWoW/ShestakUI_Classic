@@ -145,7 +145,7 @@ if C.chat.background == true then
 	end
 elseif C.stats.bottom_line then
 	local leftpanel = CreateFrame("Frame", "LeftPanel", UIParent)
-	leftpanel:CreatePanel("ClassColor", 1, C.chat.height - 2, "BOTTOMLEFT", BottomPanel, "LEFT", 0, 0)
+	leftpanel:CreatePanel("ClassColor", 1, C.chat.height - 1, "BOTTOMLEFT", BottomPanel, "LEFT", 0, 0)
 end
 
 ----------------------------------------------------------------------------------------
