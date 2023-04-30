@@ -82,3 +82,11 @@ CreateButton(b6, "/3", "/4")
 b6:SetPoint("TOP", b5, "BOTTOM", 0, C.chat.background and -4 or -3)
 b6:SetBackdropBorderColor(0.5, 1, 0.83, 1)
 b6.t:SetVertexColor(1, 0.75, 0.75, 1)
+
+if C.chat.height > 131 then
+	local b7 = CreateFrame("Button", "$parentButton7", frame)
+	CreateButton(b7, "/5", GetChannelName(6) ~= 0 and "/6" or "")
+	b7:SetPoint("TOP", b6, "BOTTOM", 0, C.chat.background and -4 or -3)
+	b7:SetBackdropBorderColor(0.5, 0.7, 0.1, 1)
+	b7.t:SetVertexColor(0.93, 0.8, 0.8, 1)
+end
