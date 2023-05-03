@@ -219,6 +219,8 @@ if T.Classic then
 	MiniMapWorldMapButton.Show = T.dummy
 end
 
+AddonCompartmentFrame:Kill()
+
 -- Garrison icon
 if T.Mainline then
 	if C.minimap.garrison_icon == true then
