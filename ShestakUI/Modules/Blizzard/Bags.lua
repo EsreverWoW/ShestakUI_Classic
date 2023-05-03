@@ -850,14 +850,10 @@ function Stuffing:SearchUpdate(str)
 						for j = 2, 5 do
 							local lineData = data.lines[j]
 							if not lineData then break end
-							local argVal = lineData.args
-							if argVal then
-								local lineText = argVal[2] and argVal[2].stringVal
-								local bindOn = lineText and bindAccount[lineText]
-								if bindOn then
-									isBoA = true
-									break
-								end
+							local title = lineData.leftText
+							if title and bindAccount[title] then
+								isBoA = true
+								break
 							end
 						end
 					end

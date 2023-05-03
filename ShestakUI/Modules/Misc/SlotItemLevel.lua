@@ -25,10 +25,9 @@ local function _getRealItemLevel(slotId, unit)
 
 	for i = 2, #data.lines do
 		local lineData = data.lines[i]
-		local argVal = lineData and lineData.args
-		if argVal then
-			local text = argVal[2] and argVal[2].stringVal
-			local found = text and strfind(text, itemLevelString)
+		local text = lineData and lineData.leftText
+		if text then
+			local found = strfind(text, itemLevelString)
 			if found then
 				local level = strmatch(text, "(%d+)%)?$")
 				if level and (tonumber(level) > 0) then

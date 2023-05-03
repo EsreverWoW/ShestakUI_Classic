@@ -1137,14 +1137,11 @@ if durability.enabled then
 									else
 										local data = C_TooltipInfo.GetInventoryItem(P, id)
 										if data then
-											local argVal = data.args and data.args[7]
-											if argVal and argVal.field == "repairCost" then
-												local cost = argVal.intVal
-												if cost ~= 0 and cost <= GetMoney() then
-													if not InRepairMode() then ShowRepairCursor() end
-													PickupInventoryItem(id)
-													total = total + cost
-												end
+											local cost = data.repairCost
+											if cost and cost ~= 0 and cost <= GetMoney() then
+												if not InRepairMode() then ShowRepairCursor() end
+												PickupInventoryItem(id)
+												total = total + cost
 											end
 										end
 									end
@@ -1188,9 +1185,13 @@ if durability.enabled then
 					if T.Classic then
 						totalcost, nodur = totalcost + select(3, LPDURA:SetInventoryItem(P, slot))
 					else
-						local data = LPDURA:GetTooltipData()
-						repairCost = data and data.repairCost or 0
-						totalcost, nodur = totalcost + repairCost
+						local data = C_TooltipInfo.GetInventoryItem(P, slot)
+						if data and data.repairCost then
+							totalcost = totalcost + data.repairCost
+							if totalcost > 0 then
+								nodur = false
+							end
+						end
 					end
 				end
 			end
