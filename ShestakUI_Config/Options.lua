@@ -544,7 +544,7 @@ do
 	subtitle2:SetWidth(750)
 	subtitle2:SetPoint("TOPLEFT", title2, "BOTTOMLEFT", 0, -8)
 	subtitle2:SetJustifyH("LEFT")
-	subtitle2:SetText((GetAddOnMetadata or C_AddOns.GetAddOnMetadata)("ShestakUI", "X-Credits"))
+	subtitle2:SetText(C_AddOns.GetAddOnMetadata("ShestakUI", "X-Credits"))
 
 	local title3 = frame:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
 	title3:SetPoint("TOPLEFT", subtitle2, "BOTTOMLEFT", 0, -16)
@@ -554,7 +554,7 @@ do
 	subtitle3:SetWidth(750)
 	subtitle3:SetPoint("TOPLEFT", title3, "BOTTOMLEFT", 0, -8)
 	subtitle3:SetJustifyH("LEFT")
-	subtitle3:SetText((GetAddOnMetadata or C_AddOns.GetAddOnMetadata)("ShestakUI", "X-Translation"))
+	subtitle3:SetText(C_AddOns.GetAddOnMetadata("ShestakUI", "X-Translation"))
 
 	local title4 = frame:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
 	title4:SetPoint("TOPLEFT", subtitle3, "BOTTOMLEFT", 0, -16)
@@ -564,7 +564,7 @@ do
 	subtitle4:SetWidth(750)
 	subtitle4:SetPoint("TOPLEFT", title4, "BOTTOMLEFT", 0, -8)
 	subtitle4:SetJustifyH("LEFT")
-	subtitle4:SetText((GetAddOnMetadata or C_AddOns.GetAddOnMetadata)("ShestakUI", "X-Thanks"))
+	subtitle4:SetText(C_AddOns.GetAddOnMetadata("ShestakUI", "X-Thanks"))
 
 	local CancelButton = CreateFrame("Button", nil, frame, "UIPanelButtonTemplate")
 	CancelButton:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -10, 10)

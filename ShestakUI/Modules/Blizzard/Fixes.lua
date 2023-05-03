@@ -46,20 +46,6 @@ if T.client == "ruRU" then
 end
 
 ----------------------------------------------------------------------------------------
---	Fix SearchLFGLeave() taint
-----------------------------------------------------------------------------------------
-if T.Mainline then
-	if not T.newPatch then
-		local TaintFix = CreateFrame("Frame")
-		TaintFix:SetScript("OnUpdate", function()
-			if LFRBrowseFrame.timeToClear then
-				LFRBrowseFrame.timeToClear = nil
-			end
-		end)
-	end
-end
-
-----------------------------------------------------------------------------------------
 --	Fix Keybind taint
 ----------------------------------------------------------------------------------------
 _G.SettingsPanel.TransitionBackOpeningPanel = _G.HideUIPanel

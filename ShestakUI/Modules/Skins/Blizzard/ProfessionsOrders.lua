@@ -208,7 +208,7 @@ local function LoadSkin()
 				button.styled = true
 			end
 
-			if button and T.newPatch then
+			if button then
 				button:SetNormalTexture(0)
 				button:SetPushedTexture(0)
 				button:GetHighlightTexture():Hide()

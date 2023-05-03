@@ -8,10 +8,8 @@ local function LoadSkin()
 	local frame = ProfessionsFrame
 	T.SkinFrame(frame)
 
-	if T.newPatch then
-		T.SkinMaxMinFrame(frame.MaximizeMinimize, frame.CloseButton)
-		T.SkinEditBox(frame.CraftingPage.MinimizedSearchBox, nil, 16)
-	end
+	T.SkinMaxMinFrame(frame.MaximizeMinimize, frame.CloseButton)
+	T.SkinEditBox(frame.CraftingPage.MinimizedSearchBox, nil, 16)
 
 	ProfessionsFrame.CraftingPage.TutorialButton.Ring:Hide()
 	ProfessionsFrame.CraftingPage.TutorialButton:SetPoint("TOPLEFT", frame, "TOPLEFT", -5, 10)
@@ -62,10 +60,7 @@ local function LoadSkin()
 	SchematicForm.backdrop:SetPoint("BOTTOMRIGHT", -3, 5)
 
 	SchematicForm.Background:SetInside(SchematicForm.backdrop, 1, 1)
-
-	if T.newPatch then
-		SchematicForm.MinimalBackground:SetAlpha(0)
-	end
+	SchematicForm.MinimalBackground:SetAlpha(0)
 
 	T.SkinCheckBox(SchematicForm.TrackRecipeCheckBox, 24)
 	T.SkinCheckBox(SchematicForm.AllocateBestQualityCheckBox, 24)
@@ -136,7 +131,7 @@ local function LoadSkin()
 			button.styled = true
 		end
 
-		if button and T.newPatch then
+		if button then
 			button:SetNormalTexture(0)
 			button:SetPushedTexture(0)
 			button:GetHighlightTexture():Hide()

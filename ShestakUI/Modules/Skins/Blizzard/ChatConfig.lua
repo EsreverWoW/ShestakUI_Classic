@@ -278,17 +278,13 @@ local function LoadSkin()
 	_G["ChatConfigCombatSettingsFiltersCopyFilterButton"]:SetPoint("RIGHT", _G["ChatConfigCombatSettingsFiltersDeleteButton"], "LEFT", -3, 0)
 	_G["ChatConfigCombatSettingsFiltersAddFilterButton"]:SetPoint("RIGHT", _G["ChatConfigCombatSettingsFiltersCopyFilterButton"], "LEFT", -3, 0)
 
-	if ChatConfigFrame.ToggleChatButton then
-		if not T.newPatch then
-			ChatConfigFrame.ToggleChatButton:SkinButton()
-			ChatConfigFrame.ToggleChatButton:ClearAllPoints()
-			ChatConfigFrame.ToggleChatButton:SetPoint("LEFT", _G["ChatConfigFrameRedockButton"], "RIGHT", 3, 0)
-		end
-
-		if TextToSpeechCharacterSpecificButton then
-			T.SkinCheckBox(TextToSpeechCharacterSpecificButton, 25)
-		end
+	if T.Classic then
+		ChatConfigFrame.ToggleChatButton:SkinButton()
+		ChatConfigFrame.ToggleChatButton:ClearAllPoints()
+		ChatConfigFrame.ToggleChatButton:SetPoint("LEFT", _G["ChatConfigFrameRedockButton"], "RIGHT", 3, 0)
 	end
+
+	T.SkinCheckBox(TextToSpeechCharacterSpecificButton, 25)
 
 	hooksecurefunc(ChatConfigFrameChatTabManager, "UpdateWidth", function(self)
 		for tab in self.tabPool:EnumerateActive() do

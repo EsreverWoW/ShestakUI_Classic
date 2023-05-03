@@ -3,8 +3,6 @@ local T, C, L, _ = unpack(select(2, ...))
 ----------------------------------------------------------------------------------------
 --	ShestakUI variables
 ----------------------------------------------------------------------------------------
-GetAddOnMetadata = GetAddOnMetadata or C_AddOns.GetAddOnMetadata -- BETA
-
 T.dummy = function() return end
 T.name = UnitName("player")
 T.race = select(2, UnitRace("player"))
@@ -13,7 +11,7 @@ T.level = UnitLevel("player")
 T.client = GetLocale()
 T.realm = GetRealmName()
 T.color = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[T.class]
-T.version = GetAddOnMetadata("ShestakUI", "Version")
+T.version = C_AddOns.GetAddOnMetadata("ShestakUI", "Version")
 T.screenWidth, T.screenHeight = GetPhysicalScreenSize()
 T.toc = select(4, GetBuildInfo())
 T.newPatch = T.toc >= 100100

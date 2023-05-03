@@ -58,17 +58,21 @@ local function LoadSkin()
 	-- Send mail
 	SendMailFrame:StripTextures()
 
-	if T.Mainline then
+	if T.Classic then
+		-- FIXME
+		--[[
+		MailEditBox:StripTextures(true)
+		MailEditBox:CreateBackdrop("Overlay")
+		MailEditBox.backdrop:SetPoint("TOPLEFT", 12, 0)
+		MailEditBox.backdrop:SetPoint("BOTTOMRIGHT", 2, 0)
+		T.SkinScrollBar(MailEditBoxScrollBar)
+		--]]
+	else
 		SendMailScrollFrame:StripTextures(true)
 		SendMailScrollFrame:CreateBackdrop("Overlay")
 		SendMailScrollFrame.backdrop:SetPoint("TOPLEFT", 12, 0)
 		SendMailScrollFrame.backdrop:SetPoint("BOTTOMRIGHT", 2, 0)
-
-		if T.newPatch then
-			T.SkinScrollBar(SendMailScrollFrame.ScrollBar)
-		else
-			T.SkinScrollBar(SendMailScrollFrameScrollBar)
-		end
+		T.SkinScrollBar(SendMailScrollFrame.ScrollBar)
 	end
 
 	select(3, SendMailNameEditBox:GetRegions()):SetDrawLayer("OVERLAY")
@@ -144,12 +148,7 @@ local function LoadSkin()
 	OpenMailScrollFrame:CreateBackdrop("Overlay")
 	OpenMailScrollFrame.backdrop:SetPoint("TOPLEFT", 5, 5)
 	OpenMailScrollFrame.backdrop:SetPoint("BOTTOMRIGHT", 0, -5)
-
-	if T.newPatch then
-		T.SkinScrollBar(OpenMailScrollFrame.ScrollBar)
-	else
-		T.SkinScrollBar(OpenMailScrollFrameScrollBar)
-	end
+	T.SkinScrollBar(OpenMailScrollFrame.ScrollBar)
 
 	if T.Mainline then
 		SendMailBodyEditBox:SetTextColor(1, 1, 1)

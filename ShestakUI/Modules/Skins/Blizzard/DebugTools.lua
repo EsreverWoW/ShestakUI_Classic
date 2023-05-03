@@ -56,9 +56,7 @@ local function LoadSecondarySkin()
 
 	T.SkinNextPrevButton(ScriptErrorsFrame.PreviousError, true)
 	T.SkinNextPrevButton(ScriptErrorsFrame.NextError)
-	if T.Mainline and not T.newPatch then
-		T.SkinScrollBar(ScriptErrorsFrameScrollBar)
-	end
+	T.SkinScrollBar(ScriptErrorsFrame.ScrollFrame.ScrollBar)
 	T.SkinCloseButton(ScriptErrorsFrameClose)
 
 	ScriptErrorsFrame.ScrollFrame:CreateBackdrop("Overlay")

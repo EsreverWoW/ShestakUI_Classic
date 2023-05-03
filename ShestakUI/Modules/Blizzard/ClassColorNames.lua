@@ -137,20 +137,6 @@ end
 
 hooksecurefunc(_G.WhoFrame.ScrollBox, "Update", whoFrame)
 
-if not T.newPatch then
-	-- LFRBrowseList
-	hooksecurefunc("LFRBrowseFrameListButton_SetData", function(button, index)
-		local name, level, _, className, _, _, _, class = SearchLFGGetResults(index)
-
-		if index and class and name and level then
-			button.name:SetText(classColor[class]..name)
-			button.class:SetText(classColor[class]..className)
-			button.level:SetText(diffColor[level]..level)
-			button.level:SetWidth(30)
-		end
-	end)
-end
-
 -- PVPMatchResults
 hooksecurefunc(PVPCellNameMixin, "Populate", function(self, rowData)
 	local name = rowData.name
@@ -186,93 +172,6 @@ hooksecurefunc(PVPCellNameMixin, "Populate", function(self, rowData)
 	local text = self.text
 	text:SetText(n)
 end)
-
-local _VIEW
-
-local function viewChanged(view)
-	_VIEW = view
-end
-
--- GuildList
-local function update()
-	_VIEW = _VIEW or GetCVar("guildRosterView")
-	local playerArea = GetRealZoneText()
-	local buttons = GuildRosterContainer.buttons
-
-	for _, button in ipairs(buttons) do
-		if button:IsShown() and button.online and button.guildIndex then
-			if _VIEW == "tradeskill" then
-				local _, _, _, headerName, _, _, _, playerName, _, _, _, zone, _, classFileName, isMobile = GetGuildTradeSkillInfo(button.guildIndex)
-				if not headerName and playerName then
-					local c = classColorRaw[classFileName]
-					button.string1:SetTextColor(c.r, c.g, c.b)
-					if not isMobile and zone == playerArea then
-						button.string2:SetText("|cff00ff00"..zone)
-					elseif isMobile then
-						button.string2:SetText("|cffa5a5a5"..REMOTE_CHAT)
-					end
-				end
-			else
-				local name, rank, rankIndex, level, _, zone, _, _, _, isAway, classFileName, _, _, isMobile = GetGuildRosterInfo(button.guildIndex)
-				name = string.gsub(name, "-.*", "")
-				local displayedName = classColor[classFileName]..name
-				if isMobile then
-					if isAway == 1 then
-						displayedName = "|TInterface\\ChatFrame\\UI-ChatIcon-ArmoryChat-AwayMobile:14:14:0:0:16:16:0:16:0:16|t"..displayedName.." |cffE7E716"..L_CHAT_AFK.."|r"
-					elseif isAway == 2 then
-						displayedName = "|TInterface\\ChatFrame\\UI-ChatIcon-ArmoryChat-BusyMobile:14:14:0:0:16:16:0:16:0:16|t"..displayedName.." |cffff0000"..L_CHAT_DND.."|r"
-					else
-						displayedName = ChatFrame_GetMobileEmbeddedTexture(0.3, 1, 0.3)..displayedName
-					end
-				else
-					if isAway == 1 then
-						displayedName = displayedName.." |cffE7E716"..L_CHAT_AFK.."|r"
-					elseif isAway == 2 then
-						displayedName = displayedName.." |cffff0000"..L_CHAT_DND.."|r"
-					else
-						displayedName = displayedName
-					end
-				end
-				if _VIEW == "playerStatus" then
-					button.string1:SetText(diffColor[level]..level)
-					button.string2:SetText(displayedName)
-					if not isMobile and zone == playerArea then
-						button.string3:SetText("|cff4cff4c"..zone)
-					elseif isMobile then
-						button.string3:SetText("|cffa5a5a5"..REMOTE_CHAT)
-					end
-				elseif _VIEW == "guildStatus" then
-					button.string1:SetText(displayedName)
-					if rankIndex and rank then
-						button.string2:SetText(guildRankColor[rankIndex]..rank)
-					end
-				elseif _VIEW == "achievement" then
-					button.string1:SetText(diffColor[level]..level)
-					if classFileName and name then
-						button.string2:SetText(displayedName)
-					end
-				elseif _VIEW == "reputation" then
-					button.string1:SetText(diffColor[level]..level)
-					button.string2:SetText(displayedName)
-				end
-			end
-		end
-	end
-end
-
-if not T.newPatch then
-	local loaded = false
-	hooksecurefunc("GuildFrame_LoadUI", function()
-		if loaded then
-			return
-		else
-			loaded = true
-			hooksecurefunc("GuildRoster_SetView", viewChanged)
-			hooksecurefunc("GuildRoster_Update", update)
-			hooksecurefunc(GuildRosterContainer, "update", update)
-		end
-	end)
-end
 
 -- CommunitiesFrame
 local function RefreshList(self)

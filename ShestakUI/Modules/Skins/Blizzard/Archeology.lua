@@ -88,10 +88,7 @@ local function LoadSkin()
 	T.SkinNextPrevButton(ArchaeologyFrameCompletedPagePrevPageButton, nil, "Any")
 	T.SkinNextPrevButton(ArchaeologyFrameSummaryPageNextPageButton, nil, "Any")
 	T.SkinNextPrevButton(ArchaeologyFrameSummaryPagePrevPageButton, nil, "Any")
-
-	if not T.newPatch then
-		T.SkinScrollBar(ArchaeologyFrameArtifactPageHistoryScrollScrollBar)
-	end
+	T.SkinScrollBar(ArchaeologyFrameArtifactPageHistoryScroll.ScrollBar)
 
 	ArchaeologyFrameInfoButton:SetPoint("TOPLEFT", ArchaeologyFrame, 4, -4)
 

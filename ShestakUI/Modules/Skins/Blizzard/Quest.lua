@@ -34,19 +34,11 @@ local function LoadSkin()
 	QuestFrameCompleteQuestButton:SkinButton(true)
 
 	T.SkinCloseButton(QuestFrameCloseButton, QuestFrame.backdrop)
-	if not T.newPatch then
-		T.SkinScrollBar(QuestDetailScrollFrameScrollBar)
-		T.SkinScrollBar(QuestProgressScrollFrameScrollBar)
-		T.SkinScrollBar(QuestRewardScrollFrameScrollBar)
-		T.SkinScrollBar(QuestGreetingScrollFrameScrollBar)
-		T.SkinScrollBar(QuestNPCModelTextScrollFrameScrollBar)
-	else
-		T.SkinScrollBar(QuestDetailScrollFrame.ScrollBar)
-		T.SkinScrollBar(QuestProgressScrollFrame.ScrollBar)
-		T.SkinScrollBar(QuestRewardScrollFrame.ScrollBar)
-		T.SkinScrollBar(QuestGreetingScrollFrame.ScrollBar)
-		T.SkinScrollBar(QuestNPCModelTextScrollFrame.ScrollBar)
-	end
+	T.SkinScrollBar(QuestDetailScrollFrame.ScrollBar)
+	T.SkinScrollBar(QuestProgressScrollFrame.ScrollBar)
+	T.SkinScrollBar(QuestRewardScrollFrame.ScrollBar)
+	T.SkinScrollBar(QuestGreetingScrollFrame.ScrollBar)
+	T.SkinScrollBar(QuestNPCModelTextScrollFrame.ScrollBar)
 
 	for i = 1, 6 do
 		local button = _G["QuestProgressItem"..i]
@@ -103,11 +95,7 @@ local function LoadSkin()
 
 	QuestLogPopupDetailFrameScrollFrame:StripTextures()
 	QuestLogPopupDetailFrameScrollFrame:SetPoint("TOPLEFT", 13, -65)
-	if T.newPatch then
-		T.SkinScrollBar(QuestLogPopupDetailFrameScrollFrame.ScrollBar)
-	else
-		T.SkinScrollBar(QuestLogPopupDetailFrameScrollFrameScrollBar)
-	end
+	T.SkinScrollBar(QuestLogPopupDetailFrameScrollFrame.ScrollBar)
 
 	QuestLogPopupDetailFrame.ShowMapButton:SkinButton(true)
 	QuestLogPopupDetailFrame.ShowMapButton.Text:ClearAllPoints()
@@ -265,15 +253,10 @@ local function LoadSkin()
 		local isQuestLog = QuestInfoFrame.questLog ~= nil
 		local isMapQuest = rewardsFrame == MapQuestInfoRewardsFrame
 
-		local numSpellRewards = 0
-		if T.newPatch then
-			local questID = isQuestLog and C_QuestLog.GetSelectedQuest() or GetQuestID()
-			local spellRewards = C_QuestInfoSystem.GetQuestRewardSpells(questID) or {}
-			numSpellRewards = #spellRewards
-		else
-			numSpellRewards = isQuestLog and GetNumQuestLogRewardSpells() or GetNumRewardSpells()
-		end
-		if numSpellRewards > 0 then
+		local questID = isQuestLog and C_QuestLog.GetSelectedQuest() or GetQuestID()
+		local spellRewards = C_QuestInfoSystem.GetQuestRewardSpells(questID) or {}
+		local numSpellRewards = #spellRewards
+		if numSpellRewards and numSpellRewards > 0 then
 			-- Spell Headers
 			for spellHeader in rewardsFrame.spellHeaderPool:EnumerateActive() do
 				spellHeader:SetVertexColor(1, 1, 1)

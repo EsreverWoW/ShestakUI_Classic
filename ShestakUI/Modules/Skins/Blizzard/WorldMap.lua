@@ -41,18 +41,12 @@ local function LoadSkin()
 	QuestScrollFrame.DetailFrame.BottomDetail:Hide()
 	QuestScrollFrame.Contents.Separator.Divider:Hide()
 	QuestScrollFrame:SetSize(259, 463)
-	if T.newPatch then
-		QuestScrollFrame.Edge:Hide()
-	end
+	QuestScrollFrame.Edge:Hide()
 
 	local CampaignOverview = QuestMapFrame.CampaignOverview
 	CampaignOverview:StripTextures()
 	CampaignOverview.ScrollFrame:StripTextures()
-	if not T.newPatch then
-		T.SkinScrollBar(QuestMapFrameScrollBar)
-	else
-		T.SkinScrollBar(CampaignOverview.ScrollFrame.ScrollBar)
-	end
+	T.SkinScrollBar(CampaignOverview.ScrollFrame.ScrollBar)
 	CampaignOverview:CreateBackdrop("Overlay")
 	CampaignOverview.backdrop:SetPoint("TOPLEFT", CampaignOverview.Header, "TOPLEFT",  8, -2)
 	CampaignOverview.backdrop:SetPoint("BOTTOMRIGHT", CampaignOverview.Header, "BOTTOMRIGHT", -4, 10)
