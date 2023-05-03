@@ -56,7 +56,7 @@ AuroraSkin:SetScript("OnEvent", function()
 	end
 
 	if IsAddOnLoaded("!BaudErrorFrame") then
-		F.ReskinScroll(_G["BaudErrorFrameListScrollBoxScrollBarScrollBar"])
-		F.ReskinScroll(_G["BaudErrorFrameDetailScrollFrameScrollBar"])
+		F.ReskinScroll(BaudErrorFrameListScrollBoxScrollBar.ScrollBar)
+		F.ReskinScroll(BaudErrorFrameDetailScrollFrame.ScrollBar)
 	end
 end)

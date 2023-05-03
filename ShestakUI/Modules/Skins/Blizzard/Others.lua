@@ -284,8 +284,6 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 			"ReadyCheckFrameNoButton",
 			"ColorPickerOkayButton",
 			"ColorPickerCancelButton",
-			"BaudErrorFrameClearButton",
-			"BaudErrorFrameCloseButton",
 			"GuildInviteFrameJoinButton",
 			"GuildInviteFrameDeclineButton",
 			"RolePollPopupAcceptButton",
@@ -317,24 +315,6 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 		if T.Mainline then
 			LFDReadyCheckPopup.YesButton:SkinButton(true)
 			LFDReadyCheckPopup.NoButton:SkinButton(true)
-		end
-
-		-- Reskin scrollbars
-		local scrollbars = {
-			"BaudErrorFrameListScrollBoxScrollBar",
-			"BaudErrorFrameDetailScrollFrame"
-		}
-
-		for _, scrollbar in pairs(scrollbars) do
-			local bars = _G[scrollbar] and _G[scrollbar].ScrollBar
-			if bars then
-				T.SkinScrollBar(bars)
-			end
-		end
-
-		if T.newPatch then
-			T.SkinScrollBar(BaudErrorFrameDetailScrollFrame.ScrollBar)
-			T.SkinScrollBar(BaudErrorFrameListScrollBoxScrollBar.ScrollBar)
 		end
 
 		-- Button position or text
