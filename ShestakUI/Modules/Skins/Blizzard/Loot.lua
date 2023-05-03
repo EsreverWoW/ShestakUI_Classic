@@ -5,28 +5,18 @@ if C.skins.blizzard_frames ~= true then return end
 --	Loot skin
 ----------------------------------------------------------------------------------------
 local function LoadSkin()
-	local LootHistoryFrame = LootHistoryFrame or GroupLootHistoryFrame -- FIXME
-
 	-- Loot History frame
-	LootHistoryFrame:StripTextures()
-	LootHistoryFrame:SetTemplate("Transparent")
+	GroupLootHistoryFrame:StripTextures()
+	GroupLootHistoryFrame:SetTemplate("Transparent")
 
-	if LootHistoryFrame.CloseButton then
-		T.SkinCloseButton(LootHistoryFrame.CloseButton)
-	elseif LootHistoryFrame.ClosePanelButton then
-		T.SkinCloseButton(LootHistoryFrame.ClosePanelButton)
-	end
-	T.SkinCloseButton(LootHistoryFrame.ResizeButton, nil, " ")
+	T.SkinCloseButton(GroupLootHistoryFrame.ClosePanelButton)
+	T.SkinCloseButton(GroupLootHistoryFrame.ResizeButton, nil, " ")
+	T.SkinScrollBar(GroupLootHistoryFrame.ScrollBar)
 
-	if not T.newPatch then
-		LootHistoryFrameScrollFrame:GetRegions():Hide()
-		T.SkinScrollBar(LootHistoryFrameScrollFrameScrollBar)
-	end
-
-	LootHistoryFrame.ResizeButton:SetTemplate("Default")
-	LootHistoryFrame.ResizeButton:SetWidth(LootHistoryFrame:GetWidth())
-	LootHistoryFrame.ResizeButton:ClearAllPoints()
-	LootHistoryFrame.ResizeButton:SetPoint("TOP", LootHistoryFrame, "BOTTOM", 0, -1)
+	GroupLootHistoryFrame.ResizeButton:SetTemplate("Default")
+	GroupLootHistoryFrame.ResizeButton:SetWidth(GroupLootHistoryFrame:GetWidth())
+	GroupLootHistoryFrame.ResizeButton:ClearAllPoints()
+	GroupLootHistoryFrame.ResizeButton:SetPoint("TOP", GroupLootHistoryFrame, "BOTTOM", 0, -1)
 
 	local function UpdateLoots(self)
 		local numItems = C_LootHistory.GetNumItems()
@@ -51,8 +41,8 @@ local function LoadSkin()
 		end
 	end
 	if not T.newPatch then
-		hooksecurefunc("LootHistoryFrame_FullUpdate", UpdateLoots)
-		LootHistoryFrame:HookScript("OnShow", UpdateLoots)
+		hooksecurefunc("GroupLootHistoryFrame_FullUpdate", UpdateLoots)
+		GroupLootHistoryFrame:HookScript("OnShow", UpdateLoots)
 	end
 
 	-- Master Looter frame

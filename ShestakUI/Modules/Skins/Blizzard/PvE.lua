@@ -98,18 +98,13 @@ local function LoadSkin()
 
 	local scrollbars = {
 		LFDQueueFrameSpecific.ScrollBar,
-		LFDQueueFrameRandomScrollFrameScrollBar,
-		RaidFinderQueueFrameScrollFrameScrollBar,
+		LFDQueueFrameRandomScrollFrame.ScrollBar,
+		RaidFinderQueueFrameScrollFrame.ScrollBar,
+		LFGListFrame.EntryCreation.ActivityFinder.Dialog.ScrollBar
 	}
 
 	for i = 1, #scrollbars do
 		T.SkinScrollBar(scrollbars[i])
-	end
-
-	if T.newPatch then
-		T.SkinScrollBar(LFDQueueFrameRandomScrollFrame.ScrollBar)
-		T.SkinScrollBar(RaidFinderQueueFrameScrollFrame.ScrollBar)
-		T.SkinScrollBar(LFGListFrame.EntryCreation.ActivityFinder.Dialog.ScrollBar)
 	end
 
 	-- Set texture to hide circle
@@ -344,12 +339,6 @@ local function LoadSkin()
 	T.SkinCloseButton(PVEFrameCloseButton)
 	T.SkinCloseButton(LFGDungeonReadyStatusCloseButton, nil, "-")
 	T.SkinCloseButton(LFGDungeonReadyDialogCloseButton, LFGDungeonReadyDialog, "-")
-
-	if not T.newPatch then
-		LFDQueueFrameRandomScrollFrameScrollBackground:SetTexture(nil)
-		LFDQueueFrameRandomScrollFrameScrollBackgroundTopLeft:SetTexture(nil)
-		LFDQueueFrameRandomScrollFrameScrollBackgroundBottomRight:SetTexture(nil)
-	end
 
 	LFGInvitePopup:StripTextures()
 	LFGInvitePopup:SetTemplate("Transparent")
