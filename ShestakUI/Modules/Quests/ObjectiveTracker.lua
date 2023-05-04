@@ -3,20 +3,16 @@ local T, C, L, _ = unpack(select(2, ...))
 ----------------------------------------------------------------------------------------
 --	Move ObjectiveTrackerFrame and hide background
 ----------------------------------------------------------------------------------------
-local frame = CreateFrame("Frame", "ObjectiveTrackerAnchor", UIParent)
-frame:SetPoint(unpack(C.position.quest))
-frame:SetSize(224, 150)
-
-ObjectiveTrackerFrame:ClearAllPoints()
-ObjectiveTrackerFrame:SetPoint("TOPLEFT", frame, "TOPLEFT", 20, 0)
-ObjectiveTrackerFrame:SetHeight(T.screenHeight / 1.6)
+local anchor = CreateFrame("Frame", "ObjectiveTrackerAnchor", UIParent)
+anchor:SetPoint(unpack(C.position.quest))
+anchor:SetSize(224, 150)
 
 ObjectiveTrackerFrame.IsUserPlaced = function() return true end
 
 hooksecurefunc(ObjectiveTrackerFrame, "SetPoint", function(_, _, parent)
-	if parent ~= frame then
+	if parent ~= anchor then
 		ObjectiveTrackerFrame:ClearAllPoints()
-		ObjectiveTrackerFrame:SetPoint("TOPLEFT", frame, "TOPLEFT", 20, -20)
+		ObjectiveTrackerFrame:SetPoint("TOPLEFT", anchor, "TOPLEFT", 20, 0)
 	end
 end)
 
@@ -297,7 +293,9 @@ if C.automation.auto_collapse ~= "NONE" then
 	collapse:SetScript("OnEvent", function()
 		if C.automation.auto_collapse == "RAID" then
 			if IsInInstance() then
-				ObjectiveTracker_Collapse()
+				C_Timer.After(0.1, function()
+					ObjectiveTracker_Collapse()
+				end)
 			elseif ObjectiveTrackerFrame.collapsed and not InCombatLockdown() then
 				ObjectiveTracker_Expand()
 			end
@@ -314,7 +312,9 @@ if C.automation.auto_collapse ~= "NONE" then
 						end
 					end)
 				else
-					ObjectiveTracker_Collapse()
+					C_Timer.After(0.1, function()
+						ObjectiveTracker_Collapse()
+					end)
 				end
 			else
 				if not InCombatLockdown() then
@@ -330,7 +330,9 @@ if C.automation.auto_collapse ~= "NONE" then
 				end
 			end
 		elseif C.automation.auto_collapse == "RELOAD" then
-			ObjectiveTracker_Collapse()
+			C_Timer.After(0.1, function()
+				ObjectiveTracker_Collapse()
+			end)
 		end
 	end)
 end
