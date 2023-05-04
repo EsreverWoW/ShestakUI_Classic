@@ -72,7 +72,7 @@ if (tonumber(IOFRAME_SELECTION_PATCH_VERSION) or 0) < 3 then
 end
 
 -- https://www.townlong-yak.com/addons/taintless/fixes/EditModeOpenDrop
-if EditModeManagerFrame and FriendsFrameStatusDropDown and (tonumber(EDITMAN_OPENDROP_PATCH_VERSION) or 0) < 1 then
+if _G.WOW_PROJECT_ID == _G.WOW_PROJECT_MAINLINE and EditModeManagerFrame and FriendsFrameStatusDropDown and (tonumber(EDITMAN_OPENDROP_PATCH_VERSION) or 0) < 1 then
 	EDITMAN_OPENDROP_PATCH_VERSION = 1
 	hooksecurefunc(EditModeManagerFrame, "GetAttribute", function(_, attr)
 		if attr ~= "UIPanelLayout-checkFit" or EDITMAN_OPENDROP_PATCH_VERSION ~= 1

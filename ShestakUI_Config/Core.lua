@@ -24,6 +24,8 @@ end
 local realm = GetRealmName()
 local name = UnitName("player")
 
+GetAddOnMetadata = _G.GetAddOnMetadata or C_AddOns.GetAddOnMetadata
+
 -- [[ Variables ]]
 
 ns.buttons = {}
