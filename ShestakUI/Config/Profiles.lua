@@ -262,19 +262,22 @@ if IsWetxius then
 	C["font"].stats_font = C.media.normal_font
 	C["font"].stats_font_style = "OUTLINE"
 	C["font"].stats_font_size = 12
-	-- C["position"].raid_cooldown = {"TOPLEFT", UIParent, "TOPLEFT", 300, -14}
 	C["position"].bag = {"BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -21, 20}
 	C["position"].bank = {"BOTTOMLEFT", UIParent, "BOTTOMLEFT", 21, 20}
-	C["position"].auto_button = {"BOTTOMLEFT", "oUF_Player" or ChatFrame1, "TOPRIGHT", 33, 83}
 	C["position"].unitframes.arena = {"BOTTOMRIGHT", UIParent, "RIGHT", -55, -70}
 	C["position"].stance_bar = {"TOPRIGHT", "ActionBarAnchor", "TOPLEFT", -3, 0}
+
+	local anchor = _G["oUF_Player"] or ChatFrame1
+	C["position"].auto_button = {"BOTTOMLEFT", anchor, "TOPRIGHT", 33, 83}
 
 	local frame = CreateFrame("Frame")
 	frame:RegisterEvent("PLAYER_LOGIN")
 	frame:SetScript("OnEvent", function()
-		xCT3:SetPoint("CENTER", 0, 305)
-		xCT3:SetWidth(400)
 		C["combattext"].heal_treshold = UnitHealthMax("player")/100
+		if xCT3 then
+			xCT3:SetPoint("CENTER", 0, 305)
+			xCT3:SetWidth(400)
+		end
 		if PTR_IssueReporter then
 			PTR_IssueReporter:SetAlpha(0)
 			PTR_IssueReporter:SetScale(0.001)
