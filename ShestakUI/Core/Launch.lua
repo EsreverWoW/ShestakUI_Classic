@@ -106,10 +106,10 @@ local function InstallUI()
 		if C_ClassTrial.IsClassTrialCharacter() and IsWetxius then
 			SlashCmdList.ONLY_UI()
 		end
-	end
 
-	-- Set to default layout of Blizzard Edit Mode
-	C_EditMode.SetActiveLayout(1)
+		-- Set to default layout of Blizzard Edit Mode
+		C_EditMode.SetActiveLayout(1)
+	end
 
 	ReloadUI()
 end
