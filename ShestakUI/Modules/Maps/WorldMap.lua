@@ -23,7 +23,11 @@ WorldMapFrame:SetClampedToScreen(true)
 local maxQuest = T.Vanilla and 20 or T.Classic and 25 or 35
 local numQuest = CreateFrame("Frame", nil, QuestMapFrame)
 numQuest.text = numQuest:CreateFontString(nil, "ARTWORK", "GameFontNormal")
-numQuest.text:SetPoint("TOP", QuestMapFrame, "TOP", 0, -21)
+if C.skins.blizzard_frames then
+	numQuest.text:SetPoint("TOP", QuestMapFrame, "TOP", 0, -21)
+else
+	numQuest.text:SetPoint("TOP", QuestMapFrame, "TOP", 0, -17)
+end
 numQuest.text:SetJustifyH("LEFT")
 numQuest.text:SetText(select(2, C_QuestLog.GetNumQuestLogEntries()).."/"..maxQuest)
 
