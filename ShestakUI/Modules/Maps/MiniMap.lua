@@ -562,10 +562,14 @@ elseif T.TBC or T.Wrath then
 else
 	if C.minimap.tracking_icon then
 		MinimapCluster.Tracking.Background:Hide()
-		MinimapCluster.Tracking:ClearAllPoints()
-		MinimapCluster.Tracking:SetPoint("BOTTOMLEFT", MinimapAnchor, "BOTTOMLEFT", 5, 6)
+		MinimapCluster.Tracking.Button:ClearAllPoints()
+		MinimapCluster.Tracking.Button:SetPoint("BOTTOMLEFT", MinimapAnchor, "BOTTOMLEFT", 5, 6)
 		MinimapCluster.Tracking.Button:SetHighlightTexture(0)
 		MinimapCluster.Tracking.Button:SetSize(16, 16)
+
+		MinimapCluster.Tracking.Button:SetScript("OnMouseDown", function(self, button)
+			Minimap:GetScript("OnMouseUp")(self, "MiddleButton")
+		end)
 
 		MinimapCluster.Tracking:CreateBackdrop("ClassColor")
 		MinimapCluster.Tracking.backdrop:SetPoint("TOPLEFT", MinimapCluster.Tracking.Button, -2, 2)
