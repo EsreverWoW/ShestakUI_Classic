@@ -60,8 +60,9 @@ local function onUpdate(self, elapsed)
 			local cast = _G["NamePlate"..i.."PlaterUnitFrameCastBar"]
 			if cast then
 				CreateBorderFrame(cast)
-				if cast.Icon then
+				if cast.Icon and not cast.Icon.styled then
 					CreateBorderFrame(cast, cast.Icon)
+					cast.Icon.styled = true
 				end
 			end
 		end
