@@ -1570,12 +1570,8 @@ C["filger_spells"] = {
 			-- Buffs
 			-- Power of the Dark Side
 			{spellID = 198069, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Shadowy Insight
-			{spellID = 124430, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Surge of Light
 			{spellID = 114255, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Surge of Darkness
-			{spellID = 87160, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Twist of Fate
 			{spellID = 123254, unitID = "player", caster = "player", filter = "BUFF"},
 		},

@@ -48,7 +48,6 @@ T.RaidBuffs = {
 	},
 	PRIEST = {
 		{194384, "TOPRIGHT", {0.8, 0.4, 0.2}},				-- Atonement
-		{214206, "TOPRIGHT", {0.8, 0.4, 0.2}},				-- Atonement (PvP)
 		{139, "TOP", {0.4, 0.7, 0.2}},						-- Renew
 		{41635, "BOTTOMRIGHT", {0.2, 0.7, 0.2}},			-- Prayer of Mending
 		{6788, "BOTTOMLEFT", {1, 0, 0}},					-- Weakened Soul
@@ -59,7 +58,6 @@ T.RaidBuffs = {
 	SHAMAN = {
 		{61295, "TOPRIGHT", {0.7, 0.3, 0.7}},				-- Riptide
 		{974, "BOTTOMRIGHT", {0.91, 0.80, 0.44}},			-- Earth Shield
-		{383648, "BOTTOMRIGHT", {0.91, 0.80, 0.44}},		-- Earth Shield (Elemental Orbit)
 	},
 	HUNTER = {
 		{35079, "TOPRIGHT", {0.2, 0.2, 1}},					-- Misdirection
