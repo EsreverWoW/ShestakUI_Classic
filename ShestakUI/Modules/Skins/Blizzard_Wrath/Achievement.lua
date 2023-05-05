@@ -161,7 +161,9 @@ local function LoadSkin()
 		button:StripTextures()
 		highlight:StripTextures()
 
-		frame.Label:SetPoint("LEFT", frame, "LEFT", 4, 0)
+		if frame.Label then
+			frame.Label:SetPoint("LEFT", frame, "LEFT", 4, 0)
+		end
 
 		_G[highlight:GetName().."Middle"]:SetColorTexture(1, 1, 1, 0.3)
 		_G[highlight:GetName().."Middle"]:SetAllPoints(frame)
