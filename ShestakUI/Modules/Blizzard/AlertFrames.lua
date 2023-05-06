@@ -42,14 +42,6 @@ local ReplaceAnchors do
 			relativeAlert = alertFrame
 		end
 
-		-- if C.loot.rolllootframe then
-			-- GroupLootContainer:ClearAllPoints()
-			-- GroupLootContainer:SetPoint(POSITION, relativeAlert, ANCHOR_POINT, 0, YOFFSET)
-		-- else
-			-- GroupLootContainer:ClearAllPoints()
-			-- GroupLootContainer:SetPoint(POSITION, AchievementAnchor, POSITION, 2, FIRST_YOFFSET)
-		-- end
-
 		return relativeAlert
 	end
 
@@ -97,6 +89,8 @@ local ReplaceAnchors do
 end
 
 local function SetUpAlert()
+	GroupLootContainer:EnableMouse(false)
+
 	hooksecurefunc(AlertFrame, "UpdateAnchors", function(self)
 		CheckGrow()
 		self:ClearAllPoints()

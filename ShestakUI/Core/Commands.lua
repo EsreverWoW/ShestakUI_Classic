@@ -342,7 +342,7 @@ if T.Mainline then
 		-- LootUpgradeAlertSystem:AddAlert("|cffa335ee|Hitem:158712::::::::60:66::16:4:6534:6513:1533:4786::::|h[Rezan's Gleaming Eye]|h|r", 1, 1, 1, nil, nil, false)
 		MoneyWonAlertSystem:AddAlert(81500)
 		EntitlementDeliveredAlertSystem:AddAlert("", "Interface\\Icons\\Ability_pvp_gladiatormedallion", TRINKET0SLOT, 214)
-		RafRewardDeliveredAlertSystem:AddAlert("", "Interface\\Icons\\Ability_pvp_gladiatormedallion", TRINKET0SLOT, 214)
+		RafRewardDeliveredAlertSystem:AddAlert("", "Interface\\Icons\\Ability_pvp_gladiatormedallion", TRINKET0SLOT, 214, nil, 2)
 		-- DigsiteCompleteAlertSystem:AddAlert("Human")
 		NewRecipeLearnedAlertSystem:AddAlert(204)
 		NewRuneforgePowerAlertSystem:AddAlert(204)

@@ -754,6 +754,7 @@ local function LoadSkin()
 
 		-- Background
 		frame.StandardBackground:Kill()
+		frame.FancyBackground:Kill()
 		frame.glow:Kill()
 		frame.shine:Kill()
 
