@@ -151,7 +151,6 @@ if Sw2rT1 then
 	C["general"].hide_talking_head = true
 	C["misc"].shift_marking = false
 	C["misc"].raid_tools = false
-	C["misc"].hide_raid_button = true
 	C["trade"].disenchanting = true
 	C["announcements"].pull_countdown = false
 	C["automation"].accept_invite = true

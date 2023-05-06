@@ -757,6 +757,5 @@ C["misc"] = {
 	["click_cast"] = false,						-- Simple click2cast spell binder
 	["click_cast_filter"] = false,				-- Ignore Player and Target frames for click2cast
 	["chars_currency"] = false,					-- Tracks your currency tokens across multiple characters
-	["hide_raid_button"] = false,				-- Button to hide raid frames in DPS layout (top left mouseover)
 	["max_camera_distance"] = true,				-- Increases camera distance to max on login
 }

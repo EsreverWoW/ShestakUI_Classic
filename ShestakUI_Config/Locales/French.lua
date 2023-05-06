@@ -668,5 +668,3 @@ L.misc_click_cast_desc = "Vous permet d’assigner des sorts aux boutons de la s
 L.misc_click_cast_filter = "Ignore les cadres Joueur et Cible pour l'addon click2cast"
 L.misc_chars_currency = "Affiche les jetons et autres monnaies de vos différents personnages"
 L.misc_chars_currency_desc = "Passez la souris sur l’icône de la devise requise dans la fenêtre de caractères pour afficher des informations dans l’infobulle"
-L.misc_hide_raid_button = "Bouton pour masquer les cadres de raid dans la disposition 'DPS'"
-L.misc_hide_raid_button_desc = "Le bouton s’affiche en plaçant la souris dans le coin en haut à gauche"
