@@ -359,7 +359,7 @@ EventHandler:Register('GOSSIP_SHOW', function()
 		-- automatically skip single dialogue under certain conditions
 		local _, instanceType = GetInstanceInfo()
 		if instanceType == 'raid' and QuickQuestDB.general.skipgossipwhen > 0 then
-			if GetNumGroupMembers() == 0 or QuickQuestDB.general.skipgossipwhen == 2 then
+			if GetNumGroupMembers() <= 1 or QuickQuestDB.general.skipgossipwhen == 2 then
 				-- select dialogue if alone or when configured to "Always" while in a raid
 				C_GossipInfo.SelectOption(1)
 				return
