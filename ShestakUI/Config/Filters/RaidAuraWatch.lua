@@ -111,10 +111,8 @@ T.RaidDebuffs = {
 	[SpellName(401809)] = 3,	-- Corrupting Shadow
 	[SpellName(405394)] = 3,	-- Shadowflame
 	-- Experimentation of Dracthyr
-	[SpellName(406317)] = 3,	-- Mutilation 1
-	[SpellName(406365)] = 3,	-- Mutilation 2
-	[SpellName(405392)] = 3,	-- Disintegrate 1
-	[SpellName(405423)] = 3,	-- Disintegrate 2
+	[SpellName(406317)] = 3,	-- Rending Charge
+	[SpellName(405392)] = 3,	-- Disintegrate
 	[SpellName(406233)] = 3,	-- Deep Breath
 	[SpellName(407327)] = 3,	-- Unstable Essence
 	[SpellName(406313)] = 3,	-- Infused Strikes
@@ -123,8 +121,7 @@ T.RaidDebuffs = {
 	[SpellName(408873)] = 3,	-- Heavy Cudgel
 	[SpellName(410353)] = 3,	-- Flaming Cudgel
 	[SpellName(407017)] = 3,	-- Vigorous Gale
-	[SpellName(401407)] = 3,	-- Blazing Spear 1
-	[SpellName(401452)] = 3,	-- Blazing Spear 2
+	[SpellName(401452)] = 3,	-- Blazing Spear
 	[SpellName(409275)] = 3,	-- Magma Flow
 	-- Rashok
 	[SpellName(407547)] = 3,	-- Flaming Upsurge
@@ -140,14 +137,12 @@ T.RaidDebuffs = {
 	[SpellName(405462)] = 3,	-- Dragonfire Traps
 	[SpellName(409942)] = 3,	-- Elimination Protocol
 	-- Magmorax
-	[SpellName(404846)] = 3,	-- Incinerating Maws 1
-	[SpellName(408955)] = 3,	-- Incinerating Maws 2
+	[SpellName(408955)] = 3,	-- Incinerating Maws
 	[SpellName(402994)] = 3,	-- Molten Spittle
 	[SpellName(403747)] = 3,	-- Igniting Roar
 	-- Echo of Neltharion
 	[SpellName(409373)] = 3,	-- Disrupt Earth
-	[SpellName(407220)] = 3,	-- Rushing Shadows 1
-	[SpellName(407182)] = 3,	-- Rushing Shadows 2
+	[SpellName(407182)] = 3,	-- Rushing Shadows
 	[SpellName(405484)] = 3,	-- Surrendering to Corruption
 	[SpellName(409058)] = 3,	-- Seeping Lava
 	[SpellName(402120)] = 3,	-- Collapsed Earth
@@ -169,8 +164,7 @@ T.RaidDebuffs = {
 	[SpellName(390715)] = 6,	-- Primal Rifts
 	[SpellName(370597)] = 6,	-- Kill Order
 	-- Terros
-	[SpellName(382776)] = 5,	-- Awakened Earth 1
-	[SpellName(381253)] = 5,	-- Awakened Earth 2
+	[SpellName(381253)] = 5,	-- Awakened Earth
 	[SpellName(386352)] = 3,	-- Rock Blast
 	[SpellName(382458)] = 6,	-- Resonant Aftermath
 	-- The Primal Council
@@ -181,8 +175,7 @@ T.RaidDebuffs = {
 	[SpellName(371976)] = 4,	-- Chilling Blast
 	[SpellName(372082)] = 5,	-- Enveloping Webs
 	[SpellName(374659)] = 4,	-- Rush
-	[SpellName(374104)] = 5,	-- Wrapped in Webs Slow
-	[SpellName(374503)] = 6,	-- Wrapped in Webs Stun
+	[SpellName(374104)] = 5,	-- Wrapped in Webs
 	[SpellName(373048)] = 3,	-- Suffocating Webs
 	-- Dathea, Ascended
 	[SpellName(391686)] = 5,	-- Conductive Mark
@@ -203,8 +196,10 @@ T.RaidDebuffs = {
 	[SpellName(375620)] = 6,	-- Ionizing Charge
 	[SpellName(375578)] = 4,	-- Flame Sentry
 	-- Raszageth the Storm-Eater
-		-- TODO: DF
-
+	[SpellName(381615)] = 4,	-- Static Charge
+	[SpellName(399713)] = 4,	-- Magnetic Charge
+	[SpellName(385073)] = 5,	-- Ball Lightning
+	[SpellName(377467)] = 4,	-- Fulminating Charge
 -----------------------------------------------------------------
 -- Dungeons
 -----------------------------------------------------------------
@@ -224,8 +219,7 @@ T.RaidDebuffs = {
 	[SpellName(209512)] = 3,	-- Disrupting Energy
 	[SpellName(211473)] = 3,	-- Shadow Slash
 	[SpellName(207979)] = 3,	-- Shockwave
-	[SpellName(207980)] = 3,	-- Disintegration Beam 1
-	[SpellName(207981)] = 3,	-- Disintegration Beam 2
+	[SpellName(207980)] = 3,	-- Disintegration Beam
 	[SpellName(211464)] = 3,	-- Fel Detonation
 	[SpellName(208165)] = 3,	-- Withering Soul
 	[SpellName(209413)] = 3,	-- Suppress
@@ -243,8 +237,7 @@ T.RaidDebuffs = {
 	[SpellName(193743)] = 3,	-- Aegis of Aggramar Wielder
 	[SpellName(199652)] = 3,	-- Sever
 	[SpellName(198944)] = 3,	-- Breach Armor
-	[SpellName(215430)] = 3,	-- Thunderstrike 1
-	[SpellName(215429)] = 3,	-- Thunderstrike 2
+	[SpellName(215430)] = 3,	-- Thunderstrike
 	[SpellName(203963)] = 3,	-- Eye of the Storm
 	[SpellName(196497)] = 3,	-- Ravenous Leap
 	[SpellName(193660)] = 3,	-- Felblaze Rush
@@ -276,16 +269,14 @@ T.RaidDebuffs = {
 	-- Ruby Life Pools
 	[SpellName(392406)] = 3,	-- Thunderclap
 	[SpellName(372820)] = 3,	-- Scorched Earth
-	[SpellName(384823)] = 3,	-- Inferno 1
-	[SpellName(373692)] = 3,	-- Inferno 2
+	[SpellName(384823)] = 3,	-- Inferno
 	[SpellName(381862)] = 3,	-- Infernocore
 	[SpellName(372860)] = 3,	-- Searing Wounds
 	[SpellName(373869)] = 3,	-- Burning Touch
 	[SpellName(385536)] = 3,	-- Flame Dance
 	[SpellName(381518)] = 3,	-- Winds of Change
 	[SpellName(372858)] = 3,	-- Searing Blows
-	[SpellName(372682)] = 3,	-- Primal Chill 1
-	[SpellName(373589)] = 3,	-- Primal Chill 2
+	[SpellName(372682)] = 3,	-- Primal Chill
 	[SpellName(373693)] = 3,	-- Living Bomb
 	[SpellName(392924)] = 3,	-- Shock Blast
 	[SpellName(381515)] = 3,	-- Stormslam
@@ -304,8 +295,7 @@ T.RaidDebuffs = {
 	[SpellName(386912)] = 3,	-- Stormsurge Cloud
 	[SpellName(395669)] = 3,	-- Aftershock
 	[SpellName(384134)] = 3,	-- Pierce
-	[SpellName(388451)] = 3,	-- Stormcaller's Fury 1
-	[SpellName(388446)] = 3,	-- Stormcaller's Fury 2
+	[SpellName(388451)] = 3,	-- Stormcaller's Fury
 	[SpellName(395035)] = 3,	-- Shatter Soul
 	[SpellName(376899)] = 3,	-- Crackling Cloud
 	[SpellName(384492)] = 3,	-- Hunter's Mark
@@ -352,8 +342,8 @@ T.RaidDebuffs = {
 	[SpellName(388984)] = 3,	-- Vicious Ambush
 	[SpellName(388544)] = 3,	-- Barkbreaker
 	[SpellName(377008)] = 3,	-- Deafening Screech
-	-- For some lols
-	[SpellName(374389)] = 3,	-- Gulp Swog Toxin - Kills player on 10 stacks
+	-- Halls of Infusion
+	[SpellName(374389)] = 3,	-- Gulp Swog Toxin
 
 -----------------------------------------------------------------
 -- Dragonflight (Season 2)
@@ -370,8 +360,7 @@ T.RaidDebuffs = {
 	-- Neltharion's Lair
 	[SpellName(199705)] = 3,	-- Devouring
 	[SpellName(199178)] = 3,	-- Spiked Tongue
-	[SpellName(210166)] = 3,	-- Toxic Retch 1
-	[SpellName(217851)] = 3,	-- Toxic Retch 2
+	[SpellName(210166)] = 3,	-- Toxic Retch
 	[SpellName(193941)] = 3,	-- Impaling Shard
 	[SpellName(183465)] = 3,	-- Viscid Bile
 	[SpellName(226296)] = 3,	-- Piercing Shards
@@ -423,14 +412,9 @@ T.RaidDebuffs = {
 -----------------------------------------------------------------
 if C.raidframe.plugins_pvp_debuffs == true then
 	local PvPDebuffs = {
-	-- Evoker
-	[SpellName(355689)] = 4,	-- Landslide
-	[SpellName(370898)] = 1,	-- Permeating Chill
-	[SpellName(360806)] = 3,	-- Sleep Walk
 	-- Death Knight
 	[SpellName(47476)] = 2,		-- Strangulate
-	[SpellName(108194)] = 4,	-- Asphyxiate UH
-	[SpellName(221562)] = 4,	-- Asphyxiate Blood
+	[SpellName(108194)] = 4,	-- Asphyxiate
 	[SpellName(207171)] = 4,	-- Winter is Coming
 	[SpellName(206961)] = 3,	-- Tremble Before Me
 	[SpellName(207167)] = 4,	-- Blinding Sleet
@@ -446,14 +430,11 @@ if C.raidframe.plugins_pvp_debuffs == true then
 	-- Demon Hunter
 	[SpellName(207685)] = 4,	-- Sigil of Misery
 	[SpellName(217832)] = 3,	-- Imprison
-	[SpellName(221527)] = 5,	-- Imprison (Banished version)
 	[SpellName(204490)] = 4,	-- Sigil of Silence
 	[SpellName(179057)] = 3,	-- Chaos Nova
 	[SpellName(211881)] = 4,	-- Fel Eruption
 	[SpellName(205630)] = 3,	-- Illidan's Grasp
-	[SpellName(208618)] = 3,	-- Illidan's Grasp (Afterward)
-	[SpellName(213491)] = 4,	-- Demonic Trample 1
-	[SpellName(208645)] = 4,	-- Demonic Trample 2
+	[SpellName(213491)] = 4,	-- Demonic Trample
 	-- Druid
 	[SpellName(81261)] = 2,		-- Solar Beam
 	[SpellName(5211)] = 4,		-- Mighty Bash
@@ -467,13 +448,15 @@ if C.raidframe.plugins_pvp_debuffs == true then
 	[SpellName(339)] = 1,		-- Entangling Roots
 	[SpellName(2637)] = 1,		-- Hibernate
 	[SpellName(102793)] = 1,	-- Ursol's Vortex
+	-- Evoker
+	[SpellName(355689)] = 4,	-- Landslide
+	[SpellName(370898)] = 1,	-- Permeating Chill
+	[SpellName(360806)] = 3,	-- Sleep Walk
 	-- Hunter
-	[SpellName(202933)] = 4,	-- Spider Sting 1
-	[SpellName(233022)] = 4,	-- Spider Sting 2
+	[SpellName(202933)] = 4,	-- Spider Sting
 	[SpellName(213691)] = 4,	-- Scatter Shot
 	[SpellName(19386)] = 3,		-- Wyvern Sting
 	[SpellName(3355)] = 3,		-- Freezing Trap
-	[SpellName(203337)] = 5,	-- Freezing Trap (PvP Talent)
 	[SpellName(209790)] = 3,	-- Freezing Arrow
 	[SpellName(24394)] = 4,		-- Intimidation
 	[SpellName(117526)] = 4,	-- Binding Shot
@@ -483,18 +466,6 @@ if C.raidframe.plugins_pvp_debuffs == true then
 	[SpellName(212638)] = 1,	-- Tracker's Net
 	[SpellName(200108)] = 1,	-- Ranger's Net
 	-- Mage
-	[SpellName(61721)] = 3,		-- Rabbit
-	[SpellName(61305)] = 3,		-- Black Cat
-	[SpellName(28272)] = 3,		-- Pig
-	[SpellName(28271)] = 3,		-- Turtle
-	[SpellName(126819)] = 3,	-- Porcupine
-	[SpellName(161354)] = 3,	-- Monkey
-	[SpellName(161353)] = 3,	-- Polar Bear
-	[SpellName(61780)] = 3,		-- Turkey
-	[SpellName(161355)] = 3,	-- Penguin
-	[SpellName(161372)] = 3,	-- Peacock
-	[SpellName(277787)] = 3,	-- Direhorn
-	[SpellName(277792)] = 3,	-- Bumblebee
 	[SpellName(118)] = 3,		-- Polymorph
 	[SpellName(82691)] = 3,		-- Ring of Frost
 	[SpellName(31661)] = 3,		-- Dragon's Breath
@@ -523,7 +494,6 @@ if C.raidframe.plugins_pvp_debuffs == true then
 	-- Priest
 	[SpellName(9484)] = 3,		-- Shackle Undead
 	[SpellName(200196)] = 4,	-- Holy Word: Chastise
-	[SpellName(200200)] = 4,	-- Holy Word: Chastise
 	[SpellName(226943)] = 3,	-- Mind Bomb
 	[SpellName(605)] = 5,		-- Mind Control
 	[SpellName(8122)] = 3,		-- Psychic Scream
@@ -542,14 +512,6 @@ if C.raidframe.plugins_pvp_debuffs == true then
 	[SpellName(212182)] = 5,	-- Smoke Bomb
 	-- Shaman
 	[SpellName(51514)] = 3,		-- Hex
-	[SpellName(211015)] = 3,	-- Hex (Cockroach)
-	[SpellName(211010)] = 3,	-- Hex (Snake)
-	[SpellName(211004)] = 3,	-- Hex (Spider)
-	[SpellName(210873)] = 3,	-- Hex (Compy)
-	[SpellName(196942)] = 3,	-- Hex (Voodoo Totem)
-	[SpellName(269352)] = 3,	-- Hex (Skeletal Hatchling)
-	[SpellName(277778)] = 3,	-- Hex (Zandalari Tendonripper)
-	[SpellName(277784)] = 3,	-- Hex (Wicker Mongrel)
 	[SpellName(118905)] = 3,	-- Static Charge
 	[SpellName(77505)] = 4,		-- Earthquake (Knocking down)
 	[SpellName(118345)] = 4,	-- Pulverize (Pet)
