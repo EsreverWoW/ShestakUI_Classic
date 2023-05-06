@@ -58,6 +58,39 @@ local function LoadSkin()
 		if text1 and text1:find("|t") then ccf:SetText(text1:gsub("|T(.-):.-|t", "|T%1:16:16:0:0:64:64:5:59:5:59|t")) end
 		if text2 and text2:find("|t") then pfifc:SetText(text2:gsub("|T(.-):.-|t", "|T%1:16:16:0:0:64:64:5:59:5:59|t")) end
 	end)
+
+	-- Group loot roll
+	hooksecurefunc("GroupLootFrame_OpenNewFrame", function()
+		for i = 1, NUM_GROUP_LOOT_FRAMES do
+			local frame = _G["GroupLootFrame"..i]
+			if not frame.styled then
+				frame:StripTextures()
+				frame:CreateBackdrop("Transparent")
+
+				frame.Timer:CreateBackdrop("Default")
+				frame.Timer:SetStatusBarTexture(C.media.texture)
+				frame.Timer:SetPoint("BOTTOMLEFT", frame, "BOTTOMLEFT", 6, 4)
+
+				frame.IconFrame.Border:SetAlpha(0)
+				frame.IconFrame.Icon:SkinIcon()
+				frame.IconFrame.Icon:ClearAllPoints()
+				frame.IconFrame.Icon:SetPoint("LEFT", frame, 6, 6)
+
+				frame.styled = true
+			end
+		end
+	end)
+
+	-- Loot after finished dungeon (not tested)
+	-- hooksecurefunc("BossBanner_ConfigureLootFrame", function(frame)
+		-- local button = frame.IconHitBox
+		-- if not button.styled then
+			-- frame.Icon:SkinIcon()
+			-- T.SkinIconBorder(button.IconBorder, frame.Icon:GetParent().backdrop)
+
+			-- button.styled = true
+		-- end
+	-- end
 end
 
 tinsert(T.SkinFuncs["ShestakUI"], LoadSkin)
