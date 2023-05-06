@@ -534,10 +534,10 @@ end
 ----------------------------------------------------------------------------------------
 C["loot"] = {
 	["lootframe"] = true,						-- Enable loot frame
-	["rolllootframe"] = true,					-- Enable group roll frame (Blizzard doesn't use roll system anymore)
+	["rolllootframe"] = true,					-- Enable group roll frame
 	["icon_size"] = 22,							-- Icon size
 	["width"] = 221,							-- Loot window width
-	["auto_greed"] = false,						-- Push "greed" or "disenchant" button when green item roll at max level (Blizzard doesn't use roll system anymore)
+	["auto_greed"] = false,						-- Push "greed" or "disenchant" button for green item roll at max level
 	["auto_confirm_de"] = true,					-- Auto confirm disenchant and take BoP loot
 	["faster_loot"] = false,					-- Faster auto looting
 }
