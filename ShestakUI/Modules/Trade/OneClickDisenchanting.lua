@@ -136,19 +136,20 @@ local ores = {
 }
 
 local enchantingItems = {
-	-- Legion enchanting quest line
 	[137195] = true, -- Highmountain Armor
 	[137221] = true, -- Enchanted Raven Sigil
 	[137286] = true, -- Fel-Crusted Rune
-
-	-- Shadowlands profession world quests
+	[181991] = true, -- Antique Stalker's Bow
 	[182021] = true, -- Antique Kyrian Javelin
 	[182043] = true, -- Antique Necromancer's Staff
 	[182067] = true, -- Antique Duelist's Rapier
-	[181991] = true, -- Antique Stalker's Bow
-
-	-- Dragonflight profession items
-	-- https://www.wowhead.com/items?filter=104;0;amount+of+magical+power+can+be+sensed+from+within
+	[198675] = true, -- Lava-Infused Seed
+	[198689] = true, -- Stormbound Horn
+	[198694] = true, -- Enriched Earthen Shard
+	[198798] = true, -- Flashfrozen Scroll
+	[198799] = true, -- Forgotten Arcane Tome
+	[198800] = true, -- Fractured Titanic Sphere
+	[200479] = true, -- Sophic Amalgamation
 	[200939] = true, -- Chromatic Pocketwatch
 	[200940] = true, -- Everflowing Inkwell
 	[200941] = true, -- Seal of Order
@@ -157,18 +158,14 @@ local enchantingItems = {
 	[200945] = true, -- Valiant Hammer
 	[200946] = true, -- Thunderous Blade
 	[200947] = true, -- Carving of Awakening
-	-- https://www.wowhead.com/items?filter=104;0;Disenchant+to+gain+Enchanting+knowledge
-	[198694] = true, -- Enriched Earthen Shard
-	[198798] = true, -- Flashfrozen Scroll
-	[198800] = true, -- Fractured Titanic Sphere
-	[198689] = true, -- Stormbound Horn
-	[198799] = true, -- Forgotten Arcane Tome
-	[198675] = true, -- Lava-Infused Seed
-	[201360] = true, -- Glimmer of Order
-	[201358] = true, -- Glimmer of Air
-	[201357] = true, -- Glimmer of Frost
-	[201359] = true, -- Glimmer of Earth
 	[201356] = true, -- Glimmer of Fire
+	[201357] = true, -- Glimmer of Frost
+	[201358] = true, -- Glimmer of Air
+	[201359] = true, -- Glimmer of Earth
+	[201360] = true, -- Glimmer of Order
+	[204990] = true, -- Lava-Drenched Shadow Crystal
+	[204999] = true, -- Shimmering Aqueous Orb
+	[205001] = true, -- Resonating Arcane Crystal
 }
 
 function button:PLAYER_LOGIN()
