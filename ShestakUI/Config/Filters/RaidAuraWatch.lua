@@ -156,9 +156,10 @@ T.RaidDebuffs = {
 	[SpellName(401135)] = 3,	-- Wild Breath (Evoker)
 	[SpellName(408071)] = 3,	-- Shapeshifter's Fervor
 	-- Scalecommander Sarkareth
------------------------------------------------------------------
--- Vault of the Incarnates
------------------------------------------------------------------
+
+	-----------------------------------------------------------------
+	-- Vault of the Incarnates
+	-----------------------------------------------------------------
 	-- Eranog
 	[SpellName(370648)] = 5,	-- Primal Flow
 	[SpellName(390715)] = 6,	-- Primal Rifts
@@ -210,9 +211,9 @@ T.RaidDebuffs = {
 	-- Dragonflight Season 2
 	[SpellName(408556)] = 6,	-- Entangling Debuff
 
------------------------------------------------------------------
--- Dragonflight (Season 1)
------------------------------------------------------------------
+	-----------------------------------------------------------------
+	-- Dragonflight (Season 1)
+	-----------------------------------------------------------------
 	-- Court of Stars
 	[SpellName(207278)] = 3,	-- Arcane Lockdown
 	[SpellName(209516)] = 3,	-- Mana Fang
@@ -225,12 +226,8 @@ T.RaidDebuffs = {
 	[SpellName(209413)] = 3,	-- Suppress
 	[SpellName(209027)] = 3,	-- Quelling Strike
 	-- Halls of Valor
-	[SpellName(197964)] = 3,	-- Runic Brand Orange
-	[SpellName(197965)] = 3,	-- Runic Brand Yellow
-	[SpellName(197963)] = 3,	-- Runic Brand Purple
-	[SpellName(197967)] = 3,	-- Runic Brand Green
-	[SpellName(197966)] = 3,	-- Runic Brand Blue
-	[SpellName(193783)] = 3,	-- Aegis of Aggramar Up
+	[SpellName(197964)] = 3,	-- Runic Brand
+	[SpellName(193783)] = 3,	-- Aegis of Aggramar
 	[SpellName(196838)] = 3,	-- Scent of Blood
 	[SpellName(199674)] = 3,	-- Wicked Dagger
 	[SpellName(193260)] = 3,	-- Static Field
@@ -342,12 +339,10 @@ T.RaidDebuffs = {
 	[SpellName(388984)] = 3,	-- Vicious Ambush
 	[SpellName(388544)] = 3,	-- Barkbreaker
 	[SpellName(377008)] = 3,	-- Deafening Screech
-	-- Halls of Infusion
-	[SpellName(374389)] = 3,	-- Gulp Swog Toxin
 
------------------------------------------------------------------
--- Dragonflight (Season 2)
------------------------------------------------------------------
+	-----------------------------------------------------------------
+	-- Dragonflight (Season 2)
+	-----------------------------------------------------------------
 	-- Freehold
 	[SpellName(258323)] = 3,	-- Infected Wound
 	[SpellName(257775)] = 3,	-- Plague Step
@@ -398,6 +393,110 @@ T.RaidDebuffs = {
 	[SpellName(76622)] = 3,		-- Sunder Armor
 	[SpellName(88171)] = 3,		-- Hurricane
 	[SpellName(88182)] = 3,		-- Lethargic Poison
+	-- Brackenhide Hollow
+	[SpellName(385361)] = 3,	-- Rotting Sickness
+	[SpellName(378020)] = 3,	-- Gash Frenzy
+	[SpellName(385356)] = 3,	-- Ensnaring Trap
+	[SpellName(373917)] = 3,	-- Decaystrike
+	[SpellName(377864)] = 3,	-- Infectious Spit
+	[SpellName(376933)] = 3,	-- Grasping Vines
+	[SpellName(384425)] = 3,	-- Smell Like Meat
+	[SpellName(373896)] = 3,	-- Withering Rot
+	[SpellName(377844)] = 3,	-- Bladestorm
+	[SpellName(378229)] = 3,	-- Marked for Butchery
+	[SpellName(376149)] = 3,	-- Choking Rotcloud
+	[SpellName(384725)] = 3,	-- Feeding Frenzy
+	[SpellName(385303)] = 3,	-- Teeth Trap
+	[SpellName(368299)] = 3,	-- Toxic Trap
+	[SpellName(384970)] = 3,	-- Scented Meat
+	[SpellName(368091)] = 3,	-- Infected Bite
+	[SpellName(385185)] = 3,	-- Disoriented
+	[SpellName(387210)] = 3,	-- Decaying Strength
+	[SpellName(382808)] = 3,	-- Withering Contagion
+	[SpellName(382723)] = 3,	-- Crushing Smash
+	[SpellName(382787)] = 3,	-- Decay Claws
+	[SpellName(385058)] = 3,	-- Withering Poison
+	[SpellName(383399)] = 3,	-- Rotting Surge
+	[SpellName(367484)] = 3,	-- Vicious Clawmangle
+	[SpellName(367521)] = 3,	-- Bone Bolt
+	[SpellName(368081)] = 3,	-- Withering
+	[SpellName(374245)] = 3,	-- Rotting Creek
+	[SpellName(367481)] = 3,	-- Bloody Bite
+	-- Halls of Infusion
+	[SpellName(387571)] = 3,	-- Focused Deluge
+	[SpellName(383935)] = 3,	-- Spark Volley
+	[SpellName(385555)] = 3,	-- Gulp
+	[SpellName(384524)] = 3,	-- Titanic Fist
+	[SpellName(385963)] = 3,	-- Frost Shock
+	[SpellName(374389)] = 3,	-- Gulp Swog Toxin
+	[SpellName(386743)] = 3,	-- Polar Winds
+	[SpellName(389179)] = 3,	-- Power Overload
+	[SpellName(389181)] = 3,	-- Power Field
+	[SpellName(257274)] = 3,	-- Vile Coating
+	[SpellName(375384)] = 3,	-- Rumbling Earth
+	[SpellName(374563)] = 3,	-- Dazzle
+	[SpellName(389446)] = 3,	-- Nullifying Pulse
+	[SpellName(374615)] = 3,	-- Cheap Shot
+	[SpellName(391610)] = 3,	-- Blinding Winds
+	[SpellName(374724)] = 3,	-- Molten Subduction
+	[SpellName(385168)] = 3,	-- Thunderstorm
+	[SpellName(387359)] = 3,	-- Waterlogged
+	[SpellName(391613)] = 3,	-- Creeping Mold
+	[SpellName(374706)] = 3,	-- Pyretic Burst
+	[SpellName(389443)] = 3,	-- Purifying Blast
+	[SpellName(374339)] = 3,	-- Demoralizing Shout
+	[SpellName(374020)] = 3,	-- Containment Beam
+	[SpellName(391634)] = 3,	-- Deep Chill
+	[SpellName(393444)] = 3,	-- Gushing Wound
+	-- Neltharus
+	[SpellName(374534)] = 3,	-- Heated Swings
+	[SpellName(373735)] = 3,	-- Dragon Strike
+	[SpellName(377018)] = 3,	-- Molten Gold
+	[SpellName(374842)] = 3,	-- Blazing Aegis
+	[SpellName(375890)] = 3,	-- Magma Eruption
+	[SpellName(396332)] = 3,	-- Fiery Focus
+	[SpellName(389059)] = 3,	-- Slag Eruption
+	[SpellName(376784)] = 3,	-- Flame Vulnerability
+	[SpellName(377542)] = 3,	-- Burning Ground
+	[SpellName(374451)] = 3,	-- Burning Chain
+	[SpellName(372461)] = 3,	-- Imbued Magma
+	[SpellName(378818)] = 3,	-- Magma Conflagration
+	[SpellName(377522)] = 3,	-- Burning Pursuit
+	[SpellName(375204)] = 3,	-- Liquid Hot Magma
+	[SpellName(374482)] = 3,	-- Grounding Chain
+	[SpellName(372971)] = 3,	-- Reverberating Slam
+	[SpellName(384161)] = 3,	-- Mote of Combustion
+	[SpellName(374854)] = 3,	-- Erupted Ground
+	[SpellName(373089)] = 3,	-- Scorching Fusillade
+	[SpellName(372224)] = 3,	-- Dragonbone Axe
+	[SpellName(372570)] = 3,	-- Bold Ambush
+	[SpellName(372459)] = 3,	-- Burning
+	[SpellName(372208)] = 3,	-- Djaradin Lava
+	-- Uldaman: Legacy of Tyr
+	[SpellName(368996)] = 3,	-- Purging Flames
+	[SpellName(369792)] = 3,	-- Skullcracker
+	[SpellName(372718)] = 3,	-- Earthen Shards
+	[SpellName(382071)] = 3,	-- Resonating Orb
+	[SpellName(377405)] = 3,	-- Time Sink
+	[SpellName(369006)] = 3,	-- Burning Heat
+	[SpellName(369110)] = 3,	-- Unstable Embers
+	[SpellName(375286)] = 3,	-- Searing Cannonfire
+	[SpellName(372652)] = 3,	-- Resonating Orb
+	[SpellName(377825)] = 3,	-- Burning Pitch
+	[SpellName(369411)] = 3,	-- Sonic Burst
+	[SpellName(382576)] = 3,	-- Scorn of Tyr
+	[SpellName(369366)] = 3,	-- Trapped in Stone
+	[SpellName(369365)] = 3,	-- Curse of Stone
+	[SpellName(369419)] = 3,	-- Venomous Fangs
+	[SpellName(377486)] = 3,	-- Time Blade
+	[SpellName(369818)] = 3,	-- Diseased Bite
+	[SpellName(377732)] = 3,	-- Jagged Bite
+	[SpellName(369828)] = 3,	-- Chomp
+	[SpellName(369811)] = 3,	-- Brutal Slam
+	[SpellName(376325)] = 3,	-- Eternity Zone
+	[SpellName(369337)] = 3,	-- Difficult Terrain
+	[SpellName(376333)] = 3,	-- Temporal Zone
+	[SpellName(377510)] = 3,	-- Stolen Time
 -----------------------------------------------------------------
 -- Other
 -----------------------------------------------------------------
