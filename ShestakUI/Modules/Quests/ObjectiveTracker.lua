@@ -4,15 +4,16 @@ local T, C, L, _ = unpack(select(2, ...))
 --	Move ObjectiveTrackerFrame and hide background
 ----------------------------------------------------------------------------------------
 local anchor = CreateFrame("Frame", "ObjectiveTrackerAnchor", UIParent)
-anchor:SetPoint(C.position.quest[1], C.position.quest[2], C.position.quest[3], C.position.quest[4], C.position.quest[5] - (C.actionbar.micromenu and 24 or 0))
+anchor:SetPoint(C.position.quest[1], C.position.quest[2], C.position.quest[3], C.position.quest[4], C.position.quest[5] - (C.actionbar.micromenu and 27 or 0))
 anchor:SetSize(224, 150)
 
 ObjectiveTrackerFrame.IsUserPlaced = function() return true end
+ObjectiveTrackerFrame:SetClampedToScreen(false)
 
 hooksecurefunc(ObjectiveTrackerFrame, "SetPoint", function(_, _, parent)
 	if parent ~= anchor then
 		ObjectiveTrackerFrame:ClearAllPoints()
-		ObjectiveTrackerFrame:SetPoint("TOPLEFT", anchor, "TOPLEFT", 20, 0)
+		ObjectiveTrackerFrame:SetPoint("TOPLEFT", anchor, "TOPLEFT", 20, 3)
 	end
 end)
 
