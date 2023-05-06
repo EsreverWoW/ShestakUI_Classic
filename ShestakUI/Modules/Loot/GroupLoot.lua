@@ -114,10 +114,12 @@ local function CreateRollButton(parent, ntex, ptex, htex, rolltype, tiptext, ...
 	f:SetScript("OnLeave", HideTip)
 	f:SetScript("OnClick", ClickRoll)
 	f:SetMotionScriptsWhileDisabled(true)
-	local txt = f:CreateFontString(nil, nil)
-	txt:SetFont(C.font.loot_font, C.font.loot_font_size, C.font.loot_font_style)
-	txt:SetShadowOffset(C.font.loot_font_shadow and 1 or 0, C.font.loot_font_shadow and -1 or 0)
-	txt:SetPoint("CENTER", textpos[rolltype][1] or 0, textpos[rolltype][2] or 0)
+	if T.Classic then
+		local txt = f:CreateFontString(nil, nil)
+		txt:SetFont(C.font.loot_font, C.font.loot_font_size, C.font.loot_font_style)
+		txt:SetShadowOffset(C.font.loot_font_shadow and 1 or 0, C.font.loot_font_shadow and -1 or 0)
+		txt:SetPoint("CENTER", textpos[rolltype][1] or 0, textpos[rolltype][2] or 0)
+	end
 	return f, txt
 end
 
@@ -245,13 +247,15 @@ local function START_LOOT_ROLL(rollID, time)
 	f.rollID = rollID
 	f.time = time
 	for i in pairs(f.rolls) do f.rolls[i] = nil end
-	f.needText:SetText(0)
-	f.greedText:SetText(0)
-	if T.Mainline then
-		f.transmogText:SetText(0)
-		f.disenchantText:SetText(0)
+	if T.Classic then
+		f.needText:SetText(0)
+		f.greedText:SetText(0)
+		-- if T.Mainline then
+			-- f.transmogText:SetText(0)
+			-- f.disenchantText:SetText(0)
+		-- end
+		f.passText:SetText(0)
 	end
-	f.passText:SetText(0)
 
 	local texture, name, _, quality, bop, canNeed, canGreed, canDisenchant, reasonNeed, reasonGreed, reasonDisenchant, deSkillRequired, canTransmog = GetLootRollItemInfo(rollID)
 	f.button.icon:SetTexture(texture)
@@ -262,12 +266,16 @@ local function START_LOOT_ROLL(rollID, time)
 	if canNeed then
 		f.need:Enable()
 		f.need:SetAlpha(1)
-		f.needText:SetAlpha(1)
+		if T.Classic then
+			f.needText:SetAlpha(1)
+		end
 		SetDesaturation(f.need:GetNormalTexture(), false)
 	else
 		f.need:Disable()
 		f.need:SetAlpha(0.2)
-		f.needText:SetAlpha(0)
+		if T.Classic then
+			f.needText:SetAlpha(0)
+		end
 		SetDesaturation(f.need:GetNormalTexture(), true)
 		f.need.errtext = _G["LOOT_ROLL_INELIGIBLE_REASON"..reasonNeed]
 	end
@@ -283,12 +291,16 @@ local function START_LOOT_ROLL(rollID, time)
 		if canGreed then
 			f.greed:Enable()
 			f.greed:SetAlpha(1)
-			f.greedText:SetAlpha(1)
+			if T.Classic then
+				f.greedText:SetAlpha(1)
+			end
 			SetDesaturation(f.greed:GetNormalTexture(), false)
 		else
 			f.greed:Disable()
 			f.greed:SetAlpha(0.2)
-			f.greedText:SetAlpha(0)
+			if T.Classic then
+				f.greedText:SetAlpha(0)
+			end
 			SetDesaturation(f.greed:GetNormalTexture(), true)
 			f.greed.errtext = _G["LOOT_ROLL_INELIGIBLE_REASON"..reasonGreed]
 		end
@@ -298,12 +310,12 @@ local function START_LOOT_ROLL(rollID, time)
 		if canDisenchant then
 			f.disenchant:Enable()
 			f.disenchant:SetAlpha(1)
-			f.disenchantText:SetAlpha(1)
+			-- f.disenchantText:SetAlpha(1)
 			SetDesaturation(f.disenchant:GetNormalTexture(), false)
 		else
 			f.disenchant:Disable()
 			f.disenchant:SetAlpha(0.2)
-			f.disenchantText:SetAlpha(0)
+			-- f.disenchantText:SetAlpha(0)
 			SetDesaturation(f.disenchant:GetNormalTexture(), true)
 			f.disenchant.errtext = format(_G["LOOT_ROLL_INELIGIBLE_REASON"..reasonDisenchant], deSkillRequired)
 		end
@@ -380,13 +392,15 @@ local function testRoll(f)
 	f.backdrop:SetBackdropBorderColor(r, g, b, 0.7)
 	f.button.backdrop:SetBackdropBorderColor(r, g, b, 0.7)
 
-	f.needText:SetText(1)
-	f.greedText:SetText(2)
-	if T.Mainline then
-		f.transmogText:SetText(2)
-		f.disenchantText:SetText(0)
+	if T.Classic then
+		f.needText:SetText(1)
+		f.greedText:SetText(2)
+		-- if T.Mainline then
+			-- f.transmogText:SetText(2)
+			-- f.disenchantText:SetText(0)
+		-- end
+		f.passText:SetText(0)
 	end
-	f.passText:SetText(0)
 
 	f.button.link = "item:"..item..":0:0:0:0:0:0:0"
 	if T.Mainline then
