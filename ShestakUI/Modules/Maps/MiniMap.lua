@@ -80,6 +80,12 @@ frame:SetScript("OnEvent", function(self, event)
 				self:SetPoint("TOP", Minimap, "TOP", 1, -1)
 			end
 		end)
+
+		hooksecurefunc(QueueStatusButton, "SetScale", function(self, scale)
+			if scale ~= 0.5 then
+				self:SetScale(0.5)
+			end
+		end)
 	end
 
 	-- Invites icon
@@ -88,15 +94,6 @@ frame:SetScript("OnEvent", function(self, event)
 		GameTimeCalendarInvitesTexture:SetParent(Minimap)
 		GameTimeCalendarInvitesTexture:SetPoint("TOPRIGHT", Minimap, "TOPRIGHT", 0, 0)
 	elseif T.Mainline then
-		GameTimeCalendarInvitesTexture:ClearAllPoints()
-		GameTimeCalendarInvitesTexture:SetParent(Minimap)
-		GameTimeCalendarInvitesTexture:SetPoint("TOPRIGHT", Minimap, "TOPRIGHT", -1, -4)
-	end
-
-	-- Hide Game Time
-	if T.Vanilla or T.TBC then
-		GameTimeFrame:Hide()
-	else
 		local InviteTexture = GameTimeCalendarInvitesTexture
 		InviteTexture:ClearAllPoints()
 		InviteTexture:SetParent(Minimap)
@@ -139,6 +136,11 @@ frame:SetScript("OnEvent", function(self, event)
 		hooksecurefunc(InviteTexture, "Hide", function()
 			button:Hide()
 		end)
+	end
+
+	-- Hide Game Time
+	if T.Vanilla or T.TBC then
+		GameTimeFrame:Hide()
 	end
 
 	-- Move Mail icon
