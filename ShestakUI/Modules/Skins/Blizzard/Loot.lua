@@ -21,16 +21,72 @@ local function LoadSkin()
 		LootHistoryFrame.ResizeButton:SetPoint("TOP", LootHistoryFrame, "BOTTOM", 0, -1)
 	else
 		GroupLootHistoryFrame:StripTextures()
-		GroupLootHistoryFrame:SetTemplate("Transparent")
+		GroupLootHistoryFrame:CreateBackdrop("Transparent")
 
 		T.SkinCloseButton(GroupLootHistoryFrame.ClosePanelButton)
-		T.SkinCloseButton(GroupLootHistoryFrame.ResizeButton, nil, " ")
 		T.SkinScrollBar(GroupLootHistoryFrame.ScrollBar)
+		T.SkinDropDownBox(GroupLootHistoryFrame.EncounterDropDown)
 
-		GroupLootHistoryFrame.ResizeButton:SetTemplate("Default")
-		GroupLootHistoryFrame.ResizeButton:SetWidth(GroupLootHistoryFrame:GetWidth())
-		GroupLootHistoryFrame.ResizeButton:ClearAllPoints()
-		GroupLootHistoryFrame.ResizeButton:SetPoint("TOP", GroupLootHistoryFrame, "BOTTOM", 0, -1)
+		GroupLootHistoryFrame.ResizeButton:StripTextures()
+		GroupLootHistoryFrame.ResizeButton:SetHeight(13)
+
+		do
+			local line1 = GroupLootHistoryFrame.ResizeButton:CreateTexture()
+			line1:SetTexture(C.media.blank)
+			line1:SetVertexColor(0.8, 0.8, 0.8)
+			line1:SetSize(30, T.mult)
+			line1:SetPoint("TOP", 0, -5)
+
+			local line2 = GroupLootHistoryFrame.ResizeButton:CreateTexture()
+			line2:SetTexture(C.media.blank)
+			line2:SetVertexColor(0.8, 0.8, 0.8)
+			line2:SetSize(20, T.mult)
+			line2:SetPoint("TOP", 0, -8)
+
+			local line3 = GroupLootHistoryFrame.ResizeButton:CreateTexture()
+			line3:SetTexture(C.media.blank)
+			line3:SetVertexColor(0.8, 0.8, 0.8)
+			line3:SetSize(10, T.mult)
+			line3:SetPoint("TOP", 0, -11)
+
+			GroupLootHistoryFrame.ResizeButton:HookScript("OnEnter", function()
+				line1:SetVertexColor(unpack(C.media.classborder_color))
+				line2:SetVertexColor(unpack(C.media.classborder_color))
+				line3:SetVertexColor(unpack(C.media.classborder_color))
+			end)
+
+			GroupLootHistoryFrame.ResizeButton:HookScript("OnLeave", function()
+				line1:SetVertexColor(0.8, 0.8, 0.8)
+				line2:SetVertexColor(0.8, 0.8, 0.8)
+				line3:SetVertexColor(0.8, 0.8, 0.8)
+			end)
+		end
+
+		hooksecurefunc(LootHistoryElementMixin, "Init", function(button)
+			local item = button.Item
+			if item and not item.styled then
+				item:StyleButton()
+				item:SetNormalTexture(0)
+				item:SetTemplate("Default")
+				item:SetSize(35, 35)
+
+				item.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+				item.icon:ClearAllPoints()
+				item.icon:SetPoint("TOPLEFT", 2, -2)
+				item.icon:SetPoint("BOTTOMRIGHT", -2, 2)
+
+				button:CreateBackdrop("Overlay")
+				button.backdrop:SetPoint("TOPLEFT", 0, 0)
+				button.backdrop:SetPoint("BOTTOMRIGHT", 0, 0)
+
+				item.IconBorder:SetAlpha(0)
+				button.NameFrame:Hide()
+
+				item.styled = true
+			end
+
+			button.BorderFrame:SetAlpha(0)
+		end)
 	end
 
 	local function UpdateLoots(self)
@@ -60,8 +116,8 @@ local function LoadSkin()
 		hooksecurefunc("LootHistoryFrame_FullUpdate", UpdateLoots)
 		LootHistoryFrame:HookScript("OnShow", UpdateLoots)
 	else
-		hooksecurefunc("GroupLootHistoryFrame_FullUpdate", UpdateLoots)
-		GroupLootHistoryFrame:HookScript("OnShow", UpdateLoots)
+		-- hooksecurefunc("GroupLootHistoryFrame_FullUpdate", UpdateLoots)
+		-- GroupLootHistoryFrame:HookScript("OnShow", UpdateLoots)
 	end
 
 	-- Master Looter frame
