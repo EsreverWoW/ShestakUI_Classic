@@ -60,7 +60,7 @@ hooksecurefunc("CompactUnitFrame_SetUpFrame", function(frame)
 	ClickCastFrames[frame] = true
 end)
 
-local ScrollSpells = CreateFrame("ScrollFrame", "SpellBinderScrollFrameSpellList", _G["SpellBinderInset"], "UIPanelScrollFrameTemplate")
+local ScrollSpells = CreateFrame("ScrollFrame", "SpellBinderScrollFrameSpellList", _G["SpellBinderInset"], "ScrollFrameTemplate")
 ScrollSpells:SetPoint("TOPLEFT", _G["SpellBinderInset"], "TOPLEFT", 0, -5)
 ScrollSpells:SetPoint("BOTTOMRIGHT", _G["SpellBinderInset"], "BOTTOMRIGHT", -30, 5)
 ScrollSpells.child = CreateFrame("Frame", "SpellBinderScrollFrameSpellListChild", ScrollSpells)
@@ -403,7 +403,7 @@ if IsAddOnLoaded("Aurora") then
 	F.CreateBG(SpellBinder.OpenButton)
 	F.CreateBD(SpellBinder)
 	F.ReskinClose(SpellBinderCloseButton)
-	F.ReskinScroll(SpellBinderScrollFrameSpellListScrollBar)
+	F.ReskinScroll(SpellBinderScrollFrameSpellList.ScrollBar)
 elseif C.skins.blizzard_frames == true then
 	SpellBinder:StripTextures()
 	SpellBinder:CreateBackdrop("Transparent")
@@ -431,7 +431,7 @@ elseif C.skins.blizzard_frames == true then
 	SpellBinderScrollFrameSpellList.backdrop:SetPoint("BOTTOMRIGHT", 2, -3)
 	T.SkinCloseButton(SpellBinderCloseButton)
 
-	SpellBinderScrollFrameSpellListScrollBar:SetPoint("TOPLEFT", SpellBinderScrollFrameSpellList, "TOPRIGHT", 6, -13)
-	SpellBinderScrollFrameSpellListScrollBar:SetPoint("BOTTOMLEFT", SpellBinderScrollFrameSpellList, "BOTTOMRIGHT", 6, 13)
-	T.SkinScrollBar(SpellBinderScrollFrameSpellListScrollBar)
+	SpellBinderScrollFrameSpellList.ScrollBar:SetPoint("TOPLEFT", SpellBinderScrollFrameSpellList, "TOPRIGHT", 9, 3)
+	SpellBinderScrollFrameSpellList.ScrollBar:SetPoint("BOTTOMLEFT", SpellBinderScrollFrameSpellList, "BOTTOMRIGHT", 9, -4)
+	T.SkinScrollBar(SpellBinderScrollFrameSpellList.ScrollBar)
 end
