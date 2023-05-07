@@ -739,4 +739,11 @@ T.ColorPlate = {
 		-- Magisters' Terrace
 		-- Ulduar
 		["33836"] = color,		-- Bomb Bot
+		-- TOC / TOGC
+		["5925"] = color,		-- Grounding Totem
+		["34686"] = color,		-- Healing Stream Totem
+		["34687"] = color,		-- Searing Totem
+		["31129"] = color,		-- Strength of Earth Totem VIII
+		["5913"] = color,		-- Tremor Totem
+		["6112"] = color,		-- Windfury Totem
 }
