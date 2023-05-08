@@ -24,14 +24,6 @@ end
 
 -- Tradeskill block
 local tradeskillCurrent, tradeskillTotal, mergeTradeskill = 0, 0, false
-local UNIT_SPELLCAST_SENT = function (self, event, unit, target, castID, spellID)
-	local castbar = self.Castbar
-	castbar.curTarget = (target and target ~= '') and target or nil
-
-	if castbar.isTradeSkill then
-		castbar.tradeSkillCastId = castID
-	end
-end
 -- end block
 
 local function resetAttributes(self)
@@ -223,14 +215,12 @@ local function CastStart(self, event, unit)
 	end
 
 	-- Tradeskill block
-	if(mergeTradeskill and isTradeSkill and UnitIsUnit(unit, 'player')) then
-		element.duration = element.duration + (element.max * tradeskillCurrent);
-		element.max = element.max * tradeskillTotal;
+	if(mergeTradeskill and isTradeSkill and unit == 'player') then
+		element.duration = element.duration + (element.max * tradeskillCurrent)
+		element.max = element.max * tradeskillTotal
 		element.holdTime = 1
 
-		if(unit == 'player') then
-			tradeskillCurrent = tradeskillCurrent + 1;
-		end
+		tradeskillCurrent = tradeskillCurrent + 1
 	end
 	-- end block
 
@@ -377,7 +367,6 @@ local function CastStop(self, event, unit, castID, spellID)
 	end
 	-- end block
 
-
 	resetAttributes(element)
 
 	--[[ Callback: Castbar:PostCastStop(unit, spellID)
@@ -417,10 +406,8 @@ local function CastFail(self, event, unit, castID, spellID)
 	-- Tradeskill block
 	if mergeTradeskill and UnitIsUnit(unit, 'player') then
 		mergeTradeskill = false
-		element.tradeSkillCastId = nil
 	end
 	-- end block
-
 
 	resetAttributes(element)
 	element:SetValue(element.max)
