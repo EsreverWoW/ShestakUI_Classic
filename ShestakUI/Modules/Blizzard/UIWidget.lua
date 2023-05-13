@@ -202,25 +202,27 @@ if T.Mainline then
 		VigorBar[i].bg = VigorBar[i]:CreateTexture(nil, "BORDER")
 		VigorBar[i].bg:SetAllPoints()
 		VigorBar[i].bg:SetTexture(C.media.texture)
-		VigorBar[i].bg:SetVertexColor(0.2, 0.58, 0.8, 0.2)
+		VigorBar[i].bg:SetVertexColor(0.2 * 0.2, 0.58 * 0.2, 0.8 * 0.2)
 
 		VigorBar[i]:SetValue(0)
 	end
 
 	local function SkinVigorBar(widget)
+		if not widget:IsShown() then return end -- Hide our bar if Blizzard's not shown
 		local widgetInfo = C_UIWidgetManager.GetFillUpFramesWidgetVisualizationInfo(4460)
 		if not widgetInfo then return end
-		if not widget:IsShown() then return end -- Hide our bar if Blizzard's not shown
 		
 		VigorBar:Show()
 		local total = widgetInfo.numTotalFrames
 		for i = 1, total do
 			local value = 0
 
+			VigorBar[i]:SetStatusBarColor(0.2, 0.58, 0.8)
 			if widgetInfo.numFullFrames >= i then
 				value = widgetInfo.fillMax
 			elseif widgetInfo.numFullFrames + 1 == i then
 				value = widgetInfo.fillValue
+				VigorBar[i]:SetStatusBarColor(0.2 * 0.6, 0.58 * 0.6, 0.8 * 0.6)
 			else
 				value = widgetInfo.fillMin
 			end
