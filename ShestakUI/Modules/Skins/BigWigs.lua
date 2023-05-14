@@ -283,6 +283,7 @@ function T.UploadBW()
 	end
 end
 
+-- manual command /settings bw
 StaticPopupDialogs.SETTINGS_BIGWIGS = {
 	text = L_POPUP_SETTINGS_BW,
 	button1 = ACCEPT,
