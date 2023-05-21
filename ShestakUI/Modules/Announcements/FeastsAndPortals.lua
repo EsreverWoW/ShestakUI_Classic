@@ -1,4 +1,4 @@
-local T, C, L, _ = unpack(select(2, ...))
+local T, C, L = unpack(ShestakUI)
 if C.announcements.feasts ~= true and C.announcements.portals ~= true and C.announcements.toys ~= true then return end
 
 ----------------------------------------------------------------------------------------

@@ -1,4 +1,4 @@
-local T, C, L, _ = unpack(select(2, ...))
+local T, C, L = unpack(ShestakUI)
 if C.minimap.fog_of_war ~= true then return end
 
 ----------------------------------------------------------------------------------------

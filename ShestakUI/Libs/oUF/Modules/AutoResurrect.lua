@@ -1,4 +1,4 @@
-local T, C, L, _ = unpack(select(2, ...))
+local T, C, L = unpack(ShestakUI)
 if C.unitframe.enable ~= true or C.raidframe.plugins_auto_resurrection ~= true or C.misc.click_cast == true or T.class == "DEMONHUNTER" or T.class == "HUNTER" or T.class == "MAGE" or T.class == "ROGUE" or T.class == "WARRIOR" or (T.Classic and T.class == "WARLOCK") then return end
 
 ----------------------------------------------------------------------------------------

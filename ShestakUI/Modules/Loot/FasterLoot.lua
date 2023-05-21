@@ -1,4 +1,4 @@
-local T, C, L, _ = unpack(select(2, ...))
+local T, C, L = unpack(ShestakUI)
 if C.loot.faster_loot ~= true then return end
 
 ----------------------------------------------------------------------------------------

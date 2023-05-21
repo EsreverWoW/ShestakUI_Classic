@@ -1,4 +1,4 @@
-local T, C, L, _ = unpack(select(2, ...))
+local T, C, L = unpack(ShestakUI)
 if C.announcements.safari_hat ~= true then return end
 
 ----------------------------------------------------------------------------------------

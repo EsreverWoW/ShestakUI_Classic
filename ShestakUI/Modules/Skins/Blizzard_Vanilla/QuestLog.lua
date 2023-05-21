@@ -1,4 +1,4 @@
-local T, C, L, _ = unpack(select(2, ...))
+local T, C, L = unpack(ShestakUI)
 if C.skins.blizzard_frames ~= true or IsAddOnLoaded("QuestLogEx") then return end -- incomplete
 
 ----------------------------------------------------------------------------------------

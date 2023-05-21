@@ -1,4 +1,4 @@
-﻿local T, C, L, _ = unpack(select(2, ...))
+﻿local T, C, L = unpack(ShestakUI)
 if C.chat.enable ~= true or C.chat.hide_combat ~= true then return end
 
 ----------------------------------------------------------------------------------------

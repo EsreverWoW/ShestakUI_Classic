@@ -1,4 +1,4 @@
-local T, C, L, _ = unpack(select(2, ...))
+local T, C, L = unpack(ShestakUI)
 if T.Wrath then return end -- FIXME
 if IsAddOnLoaded("Questie") then return end
 

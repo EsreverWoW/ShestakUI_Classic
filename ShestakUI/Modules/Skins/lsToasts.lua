@@ -1,4 +1,4 @@
-local T, C, L, _ = unpack(select(2, ...))
+local T, C, L = unpack(ShestakUI)
 if C.skins.ls_toasts ~= true or not IsAddOnLoaded("ls_Toasts") then return end
 
 ----------------------------------------------------------------------------------------

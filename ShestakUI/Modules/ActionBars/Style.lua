@@ -1,4 +1,4 @@
-local T, C, L, _ = unpack(ShestakUI)
+local T, C, L = unpack(ShestakUI)
 if C.actionbar.enable ~= true then return end
 
 ----------------------------------------------------------------------------------------

@@ -1,4 +1,4 @@
-local T, C, L, _ = unpack(select(2, ...))
+local T, C, L = unpack(ShestakUI)
 if T.Classic or C.skins.npcscan ~= true then return end
 
 ----------------------------------------------------------------------------------------

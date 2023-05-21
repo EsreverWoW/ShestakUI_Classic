@@ -1,4 +1,4 @@
-local T, C, L, _ = unpack(select(2, ...))
+local T, C, L = unpack(ShestakUI)
 if C.skins.mage_nuggets ~= true then return end
 
 ----------------------------------------------------------------------------------------

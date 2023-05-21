@@ -1,4 +1,4 @@
-local T, C, L = unpack(select(2, ...))
+local T, C, L = unpack(ShestakUI)
 if T.Classic or C.nameplate.enable ~= true or C.nameplate.quests ~= true then return end
 
 ----------------------------------------------------------------------------------------

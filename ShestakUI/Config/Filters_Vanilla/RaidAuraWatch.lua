@@ -1,4 +1,4 @@
-local T, C, L, _ = unpack(select(2, ...))
+local T, C, L = unpack(ShestakUI)
 if C.raidframe.plugins_aura_watch ~= true then return end
 
 ----------------------------------------------------------------------------------------

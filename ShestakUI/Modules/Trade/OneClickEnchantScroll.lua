@@ -1,4 +1,4 @@
-local T, C, L, _ = unpack(select(2, ...))
+local T, C, L = unpack(ShestakUI)
 if C.trade.enchantment_scroll ~= true or IsAddOnLoaded("OneClickEnchantScroll") then return end
 
 ----------------------------------------------------------------------------------------

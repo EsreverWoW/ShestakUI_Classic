@@ -1,4 +1,4 @@
-local T, C, L, _ = unpack(select(2, ...))
+local T, C, L = unpack(ShestakUI)
 if C.general.error_filter ~= "WHITELIST" and C.general.error_filter ~= "BLACKLIST" then return end
 
 ----------------------------------------------------------------------------------------
