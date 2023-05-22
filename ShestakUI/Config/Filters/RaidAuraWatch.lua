@@ -155,6 +155,7 @@ T.RaidDebuffs = {
 	[SpellName(401130)] = 3,	-- Wild Magic (Mage)
 	[SpellName(401135)] = 3,	-- Wild Breath (Evoker)
 	[SpellName(408071)] = 3,	-- Shapeshifter's Fervor
+	[SpellName(410953)] = 3,	-- Volcanic Heart
 	-- Scalecommander Sarkareth
 	[SpellName(403520)] = 3,	-- Embrace of Nothingness
 	[SpellName(401383)] = 3,	-- Oppressing Howl
