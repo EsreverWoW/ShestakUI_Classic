@@ -66,43 +66,6 @@ local ActiveGUID
 local ScannedGUID
 local INSPECT_TIMEOUT = 1.5
 
-local function GetUnitIDFromGUID(guid)
-	local _, _, _, _, _, name = GetPlayerInfoByGUID(guid)
-	if UnitExists(name) then -- unit is in our group and can use its name as a unit ID
-		return name, name
-	elseif UnitGUID("mouseover") == guid then -- unit is under our cursor
-		return "mouseover", name
-	elseif UnitGUID("target") == guid then -- unit is our target
-		return "target", name
-	elseif GetCVar("nameplateShowFriends") == "1" then -- friendly nameplates are visible
-		for i = 1, 30 do
-			local unitID = "nameplate"..i
-			local nameplateGUID = UnitGUID(unitID)
-			if nameplateGUID then
-				if nameplateGUID == guid then
-					return unitID, name
-				end
-			else
-				break
-			end
-		end
-	else -- scan every group member"s target (this is probably overkill)
-		local numMembers = GetNumGroupMembers()
-		if numMembers > 0 then
-			local unitPrefix = IsInRaid() and "raid" or "party"
-			if unitPrefix == "party" then numMembers = numMembers - 1 end
-			for i = 1, numMembers do
-				local unitID = unitPrefix..i.."-target"
-				local targetGUID = UnitGUID(unitID)
-				if targetGUID == guid then
-					return unitID, name
-				end
-			end
-		end
-	end
-	return nil, name
-end
-
 local function ColorDiff(p, t)
 	local diff = t - p
 	local r, g, b
@@ -182,7 +145,9 @@ for _, slot in pairs(InventorySlots) do
 	tip.slot = slot
 end
 
-function OnTooltipSetItem(self)
+local function OnTooltipSetItem(self)
+	-- if self ~= GameTooltip then return end
+
 	local slot = self.slot
 	if(not slot) then
 		return
@@ -404,7 +369,7 @@ end
 
 function E:INSPECT_READY(guid)
 	ActiveGUID = nil
-	local unitID = GetUnitIDFromGUID(guid)
+	local unitID = UnitTokenFromGUID(guid)
 	if unitID then
 		-- local _, class = UnitClass(unitID)
 		-- local colors = class and RAID_CLASS_COLORS[class]
