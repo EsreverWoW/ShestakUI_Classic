@@ -161,6 +161,7 @@ T.RaidDebuffs = {
 	[SpellName(401383)] = 3,	-- Oppressing Howl
 	[SpellName(401951)] = 3,	-- Oblivion
 	[SpellName(407496)] = 3,	-- Infinite Duress
+	[SpellName(401680)] = 3,	-- Mass Disintegrate
 
 	-----------------------------------------------------------------
 	-- Vault of the Incarnates
