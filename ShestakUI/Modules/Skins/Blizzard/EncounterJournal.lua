@@ -337,23 +337,11 @@ local function LoadSkin()
 				header.button.title.SetTextColor = T.dummy
 				header.button.expandedIcon:SetTextColor(1, 1, 1)
 				header.button.expandedIcon.SetTextColor = T.dummy
-				header.button:SkinButton(true)
-				header.button.bg = CreateFrame("Frame", nil, header.button)
-				header.button.bg:SetTemplate("Default")
-				header.button.bg:SetFrameLevel(header.button.bg:GetFrameLevel() - 1)
-				header.button.abilityIcon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-				if header.button.abilityIcon:IsShown() then
-					header.button.bg:Show()
-				else
-					header.button.bg:Hide()
-				end
-				header.isSkinned = true
-			end
 
-			if header.button.abilityIcon:IsShown() then
-				header.button.bg:Show()
-			else
-				header.button.bg:Hide()
+				header.button:SkinButton()
+				header.button.abilityIcon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+
+				header.isSkinned = true
 			end
 
 			index = index + 1
