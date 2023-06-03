@@ -51,26 +51,8 @@ end
 _G.SettingsPanel.TransitionBackOpeningPanel = _G.HideUIPanel
 
 ----------------------------------------------------------------------------------------
---	Collect garbage
+-- !!NoTaint2 (Code by warbaby 2022-11 http://abyui.top https://github.com/aby-ui)
 ----------------------------------------------------------------------------------------
-local eventcount = 0
-local Garbage = CreateFrame("Frame")
-Garbage:RegisterAllEvents()
-Garbage:SetScript("OnEvent", function(self, event)
-	eventcount = eventcount + 1
-
-	if not InCombatLockdown() then
-		if eventcount > 10000 or event == "PLAYER_ENTERING_WORLD" then
-			collectgarbage("collect")
-			eventcount = 0
-		end
-	end
-end)
-
-------------------------------------------------------------------------
--- !!NoTaint2, first-aid addon for Dragon Flight action bars taint.
--- Code by warbaby 2022-11 http://abyui.top https://github.com/aby-ui
--------------------------------------------------------------------------
 if T.Mainline then
 	if IsAddOnLoaded("!!NoTaint2") then return end
 	if not NoTaint2_Proc_ResetActionButtonAction then

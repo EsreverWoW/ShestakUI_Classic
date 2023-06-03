@@ -17,8 +17,6 @@ local strata, level = "MEDIUM", 20
 local profiles = LPSTAT_PROFILES
 local font = LPSTAT_FONT
 local t_icon = LTIPICONSIZE or 20
-local IsAltKeyDown = IsAltKeyDown
-local UpdateMemUse = UpdateAddOnMemoryUsage
 local format = string.format
 local strmatch = string.match
 local strfind = string.find
@@ -407,7 +405,7 @@ if fps.enabled then
 	local memoryt = {}
 	local function UpdateMemory()
 		local totalMemory = 0
-		UpdateMemUse()
+		UpdateAddOnMemoryUsage()
 		wipe(memoryt)
 		for i = 1, GetNumAddOns() do
 			local memory = GetAddOnMemoryUsage(i)
@@ -516,10 +514,10 @@ if fps.enabled then
 		OnLeave = function(self) self.hovered = false end,
 		OnClick = function(self, button)
 			if button == "RightButton" then
-				UpdateMemUse()
+				UpdateAddOnMemoryUsage()
 				local before = gcinfo()
 				collectgarbage()
-				UpdateMemUse()
+				UpdateAddOnMemoryUsage()
 				print(format("|cff66C6FF%s:|r %s", L_STATS_GARBAGE_COLLECTED, formatmem(before - gcinfo())))
 				self.timer, self.text.elapsed = nil, 5
 				self:GetScript("OnEnter")(self)
