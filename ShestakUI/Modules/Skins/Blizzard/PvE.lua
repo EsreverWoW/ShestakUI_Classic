@@ -470,71 +470,6 @@ local function LoadSkin()
 	LFGListFrame.ApplicationViewer.InfoBackground:SkinIcon()
 	LFGListFrame.ApplicationViewer.InfoBackground:SetPoint("TOPLEFT", 1, -27)
 	LFGListFrame.ApplicationViewer.InfoBackground:SetSize(324, 90)
-
-	if IsAddOnLoaded("PremadeGroupsFilter") then
-		PremadeGroupsFilterDialog:StripTextures()
-		PremadeGroupsFilterDialog:CreateBackdrop("Transparent")
-		PremadeGroupsFilterDialog.backdrop:SetPoint("TOPLEFT", 3, 0)
-		PremadeGroupsFilterDialog.backdrop:SetPoint("BOTTOMRIGHT", 0, -1)
-		PremadeGroupsFilterDialog.ResetButton:SkinButton()
-		PremadeGroupsFilterDialog.RefreshButton:SkinButton()
-		T.SkinCloseButton(PremadeGroupsFilterDialog.CloseButton)
-
-		T.SkinCloseButton(PremadeGroupsFilterDialog.MaxMinButtonFrame.MinimizeButton, nil, "-")
-		PremadeGroupsFilterDialog.MaxMinButtonFrame.MinimizeButton:SetHitRectInsets(0, 0, 0, 0)
-		PremadeGroupsFilterDialog.MaxMinButtonFrame.MinimizeButton:ClearAllPoints()
-		PremadeGroupsFilterDialog.MaxMinButtonFrame.MinimizeButton:SetPoint("TOPRIGHT", PremadeGroupsFilterDialog.CloseButton, "TOPLEFT", -3, 0)
-		T.SkinCloseButton(PremadeGroupsFilterDialog.MaxMinButtonFrame.MaximizeButton, nil, "+")
-		PremadeGroupsFilterDialog.MaxMinButtonFrame.MaximizeButton:SetHitRectInsets(0, 0, 0, 0)
-		PremadeGroupsFilterDialog.MaxMinButtonFrame.MaximizeButton:ClearAllPoints()
-		PremadeGroupsFilterDialog.MaxMinButtonFrame.MaximizeButton:SetPoint("TOPRIGHT", PremadeGroupsFilterDialog.CloseButton, "TOPLEFT", -3, 0)
-
-		T.SkinDropDownBox(PremadeGroupsFilterDialog.Difficulty.DropDown)
-		T.SkinEditBox(PremadeGroupsFilterDialog.Expression)
-		PremadeGroupsFilterDialog.Difficulty.DropDown:SetPoint("TOPRIGHT", PremadeGroupsFilterDialog.Difficulty, "TOPRIGHT", 5, 1)
-
-		local checkButtons = {
-			PremadeGroupsFilterDialog.Difficulty.Act,
-			PremadeGroupsFilterDialog.MPRating.Act,
-			PremadeGroupsFilterDialog.PVPRating.Act,
-			PremadeGroupsFilterDialog.Defeated.Act,
-			PremadeGroupsFilterDialog.Members.Act,
-			PremadeGroupsFilterDialog.Tanks.Act,
-			PremadeGroupsFilterDialog.Heals.Act,
-			PremadeGroupsFilterDialog.Dps.Act
-		}
-
-		for _, button in pairs(checkButtons) do
-			button:SetSize(27, 27)
-			T.SkinCheckBox(button)
-		end
-
-		local editBoxes = {
-			PremadeGroupsFilterDialog.MPRating.Min,
-			PremadeGroupsFilterDialog.MPRating.Max,
-			PremadeGroupsFilterDialog.Defeated.Min,
-			PremadeGroupsFilterDialog.Defeated.Max,
-			PremadeGroupsFilterDialog.PVPRating.Min,
-			PremadeGroupsFilterDialog.PVPRating.Max,
-			PremadeGroupsFilterDialog.Members.Min,
-			PremadeGroupsFilterDialog.Members.Max,
-			PremadeGroupsFilterDialog.Tanks.Min,
-			PremadeGroupsFilterDialog.Tanks.Max,
-			PremadeGroupsFilterDialog.Heals.Min,
-			PremadeGroupsFilterDialog.Heals.Max,
-			PremadeGroupsFilterDialog.Dps.Min,
-			PremadeGroupsFilterDialog.Dps.Max
-		}
-
-		for _, box in pairs(editBoxes) do
-			T.SkinEditBox(box, nil, 17)
-		end
-
-		local button = UsePFGButton or UsePGFButton
-		if button then
-			T.SkinCheckBox(button)
-		end
-	end
 end
 
 tinsert(T.SkinFuncs["ShestakUI"], LoadSkin)
@@ -617,3 +552,68 @@ local function LoadSecondarySkin()
 end
 
 T.SkinFuncs["Blizzard_ChallengesUI"] = LoadSecondarySkin
+
+if IsAddOnLoaded("PremadeGroupsFilter") then
+	PremadeGroupsFilterDialog:StripTextures()
+	PremadeGroupsFilterDialog:CreateBackdrop("Transparent")
+	PremadeGroupsFilterDialog.backdrop:SetPoint("TOPLEFT", 3, 0)
+	PremadeGroupsFilterDialog.backdrop:SetPoint("BOTTOMRIGHT", 0, -1)
+	PremadeGroupsFilterDialog.ResetButton:SkinButton()
+	PremadeGroupsFilterDialog.RefreshButton:SkinButton()
+	T.SkinCloseButton(PremadeGroupsFilterDialog.CloseButton)
+
+	T.SkinCloseButton(PremadeGroupsFilterDialog.MaxMinButtonFrame.MinimizeButton, nil, "-")
+	PremadeGroupsFilterDialog.MaxMinButtonFrame.MinimizeButton:SetHitRectInsets(0, 0, 0, 0)
+	PremadeGroupsFilterDialog.MaxMinButtonFrame.MinimizeButton:ClearAllPoints()
+	PremadeGroupsFilterDialog.MaxMinButtonFrame.MinimizeButton:SetPoint("TOPRIGHT", PremadeGroupsFilterDialog.CloseButton, "TOPLEFT", -3, 0)
+	T.SkinCloseButton(PremadeGroupsFilterDialog.MaxMinButtonFrame.MaximizeButton, nil, "+")
+	PremadeGroupsFilterDialog.MaxMinButtonFrame.MaximizeButton:SetHitRectInsets(0, 0, 0, 0)
+	PremadeGroupsFilterDialog.MaxMinButtonFrame.MaximizeButton:ClearAllPoints()
+	PremadeGroupsFilterDialog.MaxMinButtonFrame.MaximizeButton:SetPoint("TOPRIGHT", PremadeGroupsFilterDialog.CloseButton, "TOPLEFT", -3, 0)
+
+	-- T.SkinDropDownBox(PremadeGroupsFilterDialog.Difficulty.DropDown)
+	-- T.SkinEditBox(PremadeGroupsFilterDialog.Expression)
+	-- PremadeGroupsFilterDialog.Difficulty.DropDown:SetPoint("TOPRIGHT", PremadeGroupsFilterDialog.Difficulty, "TOPRIGHT", 5, 1)
+
+	-- local checkButtons = {
+		-- PremadeGroupsFilterDialog.Difficulty.Act,
+		-- PremadeGroupsFilterDialog.MPRating.Act,
+		-- PremadeGroupsFilterDialog.PVPRating.Act,
+		-- PremadeGroupsFilterDialog.Defeated.Act,
+		-- PremadeGroupsFilterDialog.Members.Act,
+		-- PremadeGroupsFilterDialog.Tanks.Act,
+		-- PremadeGroupsFilterDialog.Heals.Act,
+		-- PremadeGroupsFilterDialog.Dps.Act
+	-- }
+
+	-- for _, button in pairs(checkButtons) do
+		-- button:SetSize(27, 27)
+		-- T.SkinCheckBox(button)
+	-- end
+
+	-- local editBoxes = {
+		-- PremadeGroupsFilterDialog.MPRating.Min,
+		-- PremadeGroupsFilterDialog.MPRating.Max,
+		-- PremadeGroupsFilterDialog.Defeated.Min,
+		-- PremadeGroupsFilterDialog.Defeated.Max,
+		-- PremadeGroupsFilterDialog.PVPRating.Min,
+		-- PremadeGroupsFilterDialog.PVPRating.Max,
+		-- PremadeGroupsFilterDialog.Members.Min,
+		-- PremadeGroupsFilterDialog.Members.Max,
+		-- PremadeGroupsFilterDialog.Tanks.Min,
+		-- PremadeGroupsFilterDialog.Tanks.Max,
+		-- PremadeGroupsFilterDialog.Heals.Min,
+		-- PremadeGroupsFilterDialog.Heals.Max,
+		-- PremadeGroupsFilterDialog.Dps.Min,
+		-- PremadeGroupsFilterDialog.Dps.Max
+	-- }
+
+	-- for _, box in pairs(editBoxes) do
+		-- T.SkinEditBox(box, nil, 17)
+	-- end
+
+	local button = UsePFGButton or UsePGFButton
+	if button then
+		T.SkinCheckBox(button)
+	end
+end
