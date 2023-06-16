@@ -281,9 +281,12 @@ local function SetupFlyoutLevel(button, bag, slot)
 		level = _getRealItemLevel(link, "player", slot)
 	end
 
-	if level then
-		button.iLvl:SetText("|cFFFFFF00"..level)
+	level = level or ""
+	if level and tonumber(level) == 1 then
+		level = ""
 	end
+
+	button.iLvl:SetText("|cFFFFFF00"..level)
 end
 
 hooksecurefunc("EquipmentFlyout_DisplayButton", function(button)
