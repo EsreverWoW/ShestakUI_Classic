@@ -940,7 +940,7 @@ function Stuffing:CreateBagFrame(w)
 		end
 	end)
 
-	if ShestakUIPositions[f:GetName()] then
+	if ShestakUIPositions and ShestakUIPositions[f:GetName()] then
 		f:SetPoint(unpack(ShestakUIPositions[f:GetName()]))
 	else
 		if w == "Bank" then
