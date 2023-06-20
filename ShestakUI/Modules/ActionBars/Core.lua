@@ -7,7 +7,9 @@ if C.actionbar.enable ~= true then return end
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("PLAYER_LOGIN")
 frame:SetScript("OnEvent", function()
-	-- MainMenuBar:SetScale(0.00001)
+	if T.Classic then
+		MainMenuBar:SetScale(0.00001)
+	end
 	MainMenuBar:EnableMouse(false)
 
 	if T.Classic then
@@ -116,14 +118,26 @@ function RightBarMouseOver(alpha)
 	end
 
 	if C.actionbar.rightbars > 2 then
-		if MultiBar5:IsShown() then
-			for i = 1, 12 do
-				local b = _G["MultiBar5Button"..i]
-				b:SetAlpha(alpha)
-				local c = _G["MultiBar5Button"..i.."Cooldown"]
-				T.HideSpiral(c, alpha)
+		if T.Classic then
+			if MultiBarBottomRight:IsShown() then
+				for i = 1, 12 do
+					local b = _G["MultiBarBottomRightButton"..i]
+					b:SetAlpha(alpha)
+					local c = _G["MultiBarBottomRightButton"..i.."Cooldown"]
+					T.HideSpiral(c, alpha)
+				end
+				MultiBarBottomRight:SetAlpha(alpha)
 			end
-			MultiBar5:SetAlpha(alpha)
+		else
+			if MultiBar5:IsShown() then
+				for i = 1, 12 do
+					local b = _G["MultiBar5Button"..i]
+					b:SetAlpha(alpha)
+					local c = _G["MultiBar5Button"..i.."Cooldown"]
+					T.HideSpiral(c, alpha)
+				end
+				MultiBar5:SetAlpha(alpha)
+			end
 		end
 	end
 
