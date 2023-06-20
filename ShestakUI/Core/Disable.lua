@@ -15,6 +15,11 @@ if C.actionbar.split_bars == true then
 	C.actionbar.bottombars = 3
 end
 
+if T.Classic and C.actionbar.bottombars == 3 and C.actionbar.rightbars == 3 then
+	C.actionbar.bottombars = 3
+	C.actionbar.rightbars = 2
+end
+
 if C.actionbar.bottombars < 1 then
 	C.actionbar.bottombars = 1
 end

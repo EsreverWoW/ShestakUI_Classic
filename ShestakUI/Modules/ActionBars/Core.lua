@@ -118,14 +118,26 @@ function RightBarMouseOver(alpha)
 	end
 
 	if C.actionbar.rightbars > 2 then
-		if MultiBar5:IsShown() then
-			for i = 1, 12 do
-				local b = _G["MultiBar5Button"..i]
-				b:SetAlpha(alpha)
-				local c = _G["MultiBar5Button"..i.."Cooldown"]
-				T.HideSpiral(c, alpha)
+		if T.Classic then
+			if MultiBarBottomRight:IsShown() then
+				for i = 1, 12 do
+					local b = _G["MultiBarBottomRightButton"..i]
+					b:SetAlpha(alpha)
+					local c = _G["MultiBarBottomRightButton"..i.."Cooldown"]
+					T.HideSpiral(c, alpha)
+				end
+				MultiBarBottomRight:SetAlpha(alpha)
 			end
-			MultiBar5:SetAlpha(alpha)
+		else
+			if MultiBar5:IsShown() then
+				for i = 1, 12 do
+					local b = _G["MultiBar5Button"..i]
+					b:SetAlpha(alpha)
+					local c = _G["MultiBar5Button"..i.."Cooldown"]
+					T.HideSpiral(c, alpha)
+				end
+				MultiBar5:SetAlpha(alpha)
+			end
 		end
 	end
 

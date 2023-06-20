@@ -341,6 +341,7 @@ if T.Classic then
 	C["actionbar"]["rightbars_mouseover"] = false
 	C["actionbar"]["stancebar_mouseover"] = false
 	C["actionbar"]["custom_bar_enable"] = false
+	C["actionbar"]["bar5_row"] = 1
 end
 
 ----------------------------------------------------------------------------------------
