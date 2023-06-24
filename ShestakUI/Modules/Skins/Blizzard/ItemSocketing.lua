@@ -12,7 +12,7 @@ local function LoadSkin()
 	ItemSocketingFrameInset:StripTextures()
 	ItemSocketingScrollFrame:StripTextures()
 	ItemSocketingScrollFrame:CreateBackdrop("Overlay")
-	T.SkinScrollBar(ItemSocketingScrollFrameScrollBar)
+	T.SkinScrollBar(ItemSocketingScrollFrame.ScrollBar)
 	ItemSocketingDescription:DisableDrawLayer("BORDER")
 	ItemSocketingDescription:DisableDrawLayer("BACKGROUND")
 
