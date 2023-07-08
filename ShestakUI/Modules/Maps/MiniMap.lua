@@ -160,11 +160,17 @@ frame:SetScript("OnEvent", function(self, event)
 		end)
 		MiniMapMailIcon:SetTexture("Interface\\AddOns\\ShestakUI\\Media\\Textures\\Mail.tga")
 		MiniMapMailIcon:SetSize(16, 16)
+	end
 
+	-- Move crafting order icon
+	if T.Mainline then
 		local Crafting = MinimapCluster.IndicatorFrame.CraftingOrderFrame
-		Crafting:ClearAllPoints()
-		Crafting:SetParent(Minimap)
-		Crafting:SetPoint("BOTTOM", Minimap, "BOTTOM", 0, 4)
+		hooksecurefunc(Crafting, "SetPoint", function(self, _, anchor)
+			if anchor ~= Minimap then
+				self:ClearAllPoints()
+				self:SetPoint("BOTTOM", Minimap, "BOTTOM", 0, 4)
+			end
+		end)
 	end
 
 	-- Move LFG Eye icon
