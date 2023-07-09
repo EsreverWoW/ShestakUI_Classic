@@ -84,7 +84,7 @@ local function LoadSkin()
 	}
 
 	for i = 1, #scrollbars do
-		T.SkinScrollBar(scrollbars[i])
+		T.SkinScrollBar(scrollbars[i], true)
 	end
 
 	-- Reposition buttons
