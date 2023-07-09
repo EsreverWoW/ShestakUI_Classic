@@ -28,7 +28,6 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 		local bgskins = {
 			"GameMenuFrame",
 			"BNToastFrame",
-			"TicketStatusFrameButton",
 			"ReadyCheckFrame",
 			"ColorPickerFrame",
 			"LFDRoleCheckPopup",
@@ -64,6 +63,7 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 		end
 
 		AutoCompleteBox.NineSlice:SetTemplate("Transparent")
+		TicketStatusFrameButton.NineSlice:SetTemplate("Transparent")
 
 		for i = 1, getn(bgskins) do
 			local frame = _G[bgskins[i]]
