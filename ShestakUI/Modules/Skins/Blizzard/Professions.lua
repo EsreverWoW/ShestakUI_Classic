@@ -434,4 +434,4 @@ local function LoadSkin()
 	end
 end
 
-tinsert(T.SkinFuncs["ShestakUI"], LoadSkin)
+--BETA tinsert(T.SkinFuncs["ShestakUI"], LoadSkin)

@@ -441,10 +441,10 @@ end)
 ObjectiveTrackerScenarioRewardsFrame.Show = T.dummy
 BonusObjectiveTrackerProgressBar_PlayFlareAnim = T.dummy
 
-hooksecurefunc("BonusObjectiveTracker_AnimateReward", function()
-	ObjectiveTrackerBonusRewardsFrame:ClearAllPoints()
-	ObjectiveTrackerBonusRewardsFrame:SetPoint("BOTTOM", UIParent, "TOP", 0, 90)
-end)
+--BETA hooksecurefunc("BonusObjectiveTracker_AnimateReward", function()
+	-- ObjectiveTrackerBonusRewardsFrame:ClearAllPoints()
+	-- ObjectiveTrackerBonusRewardsFrame:SetPoint("BOTTOM", UIParent, "TOP", 0, 90)
+-- end)
 
 ----------------------------------------------------------------------------------------
 --	Skin ScenarioStageBlock
