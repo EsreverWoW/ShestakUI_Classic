@@ -3541,6 +3541,29 @@ do
 
 	local threshold = ns.CreateNumberSlider(parent, "threshold", nil, nil, 0, 15, 1, true)
 	threshold:SetPoint("TOPLEFT", hold_time, "BOTTOMLEFT", 0, -20)
+
+	-- Filtering list
+	local subheader = ns.addSubCategory(parent, L.pulsecooldown_subheader_whitelist)
+	subheader:SetPoint("TOPLEFT", threshold, "BOTTOMLEFT", 0, -10)
+
+	local ListButton = CreateFrame("Button", nil, parent, "UIPanelButtonTemplate")
+	ListButton:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -15)
+	ListButton:SetSize(100, 23)
+	ListButton:SetText(ADD)
+	ListButton:SetWidth(ListButton.Text:GetWidth() + 15)
+	ListButton:SetScript("OnClick", function()
+		if not C.options["pulsecooldown"] then
+			C.options["pulsecooldown"] = {}
+		end
+		if not C.options["pulsecooldown"]["spells_list"] then
+			C.options["pulsecooldown"]["spells_list"] = {}
+		end
+		BuildSpellList(C.options["pulsecooldown"]["spells_list"])
+	end)
+	tinsert(ns.buttons, ListButton)
+
+	local whitelist = ns.CreateCheckBox(parent, "whitelist")
+	whitelist:SetPoint("LEFT", ListButton, "RIGHT", 40, 0)
 end
 
 -- Threat

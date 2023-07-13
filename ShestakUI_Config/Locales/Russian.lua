@@ -603,6 +603,8 @@ L.pulsecooldown_anim_scale = "Масштаб анимации"
 L.pulsecooldown_hold_time = "Время до исчезновения"
 L.pulsecooldown_threshold = "Порог времени"
 L.pulsecooldown_threshold_desc = "Минимальный порог времени"
+L.pulsecooldown_subheader_whitelist = "Список игнорирования"
+L.pulsecooldown_whitelist = "Белый список вместо игнора"
 
 -- Threat options
 L_GUI_THREAT = "Список угрозы"

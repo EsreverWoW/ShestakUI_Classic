@@ -625,6 +625,8 @@ L.pulsecooldown_anim_scale = "Animation scaling"
 L.pulsecooldown_hold_time = "Max opacity hold time"
 L.pulsecooldown_threshold = "Threshold time"
 L.pulsecooldown_threshold_desc = "Minimal threshold time"
+L.pulsecooldown_subheader_whitelist = "Filtering list"
+L.pulsecooldown_whitelist = "Use whitelist instead of ignore list"
 
 -- Threat options
 L_GUI_THREAT = "Threat Bars"

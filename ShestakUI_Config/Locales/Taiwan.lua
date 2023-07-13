@@ -599,6 +599,8 @@ L.pulsecooldown_anim_scale = "動畫縮放"
 L.pulsecooldown_hold_time = "持續時間"
 L.pulsecooldown_threshold = "持續時間最小閾值"
 L.pulsecooldown_threshold_desc = "持續時間最小閾值"
+L.pulsecooldown_subheader_whitelist = "Filtering list" -- Need review
+L.pulsecooldown_whitelist = "Use whitelist instead of ignore list" -- Need review
 
 -- Threat options
 L_GUI_THREAT = "仇恨欄"

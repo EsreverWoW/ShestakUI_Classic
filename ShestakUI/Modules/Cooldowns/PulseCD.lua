@@ -122,7 +122,7 @@ local function OnUpdate(_, update)
 				end
 				if getCooldownDetails then
 					local cooldown = getCooldownDetails()
-					if T.pulse_ignored_spells[cooldown.name] then
+					if (C.pulsecooldown.whitelist and not T.pulse_ignored_spells[cooldown.name]) or (not C.pulsecooldown.whitelist and T.pulse_ignored_spells[cooldown.name]) then
 						watching[i] = nil
 					else
 						if cooldown.enabled ~= 0 then
@@ -140,7 +140,7 @@ local function OnUpdate(_, update)
 		for i, getCooldownDetails in pairs(cooldowns) do
             local cooldown = getCooldownDetails()
             local remaining = cooldown.duration - (GetTime() - cooldown.start)
-            if remaining <= 0 then
+			if remaining <= 0.2 then
                 tinsert(animating, {cooldown.texture, cooldown.isPet, cooldown.name})
                 cooldowns[i] = nil
             end

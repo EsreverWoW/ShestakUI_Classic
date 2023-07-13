@@ -599,6 +599,8 @@ L.pulsecooldown_anim_scale = "Animationen Skalieren"
 L.pulsecooldown_hold_time = "Maximale Zeit in der die Anzeige aktiv ist"
 L.pulsecooldown_threshold = "Threshold time" -- Need review
 L.pulsecooldown_threshold_desc = "Minimale Zeitschwälle"
+L.pulsecooldown_subheader_whitelist = "Filtering list" -- Need review
+L.pulsecooldown_whitelist = "Use whitelist instead of ignore list" -- Need review
 
 -- Threat options
 L_GUI_THREAT = "Bedrohungsleisten"

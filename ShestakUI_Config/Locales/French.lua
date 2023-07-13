@@ -599,6 +599,8 @@ L.pulsecooldown_anim_scale = "Mise à l'échelle des animations"
 L.pulsecooldown_hold_time = "Temps maximum pour la rémanence de l'îcone"
 L.pulsecooldown_threshold = "Temps de déclenchement"
 L.pulsecooldown_threshold_desc = "Temps minimum de déclenchement"
+L.pulsecooldown_subheader_whitelist = "Filtering list" -- Need review
+L.pulsecooldown_whitelist = "Use whitelist instead of ignore list" -- Need review
 
 -- Threat options
 L_GUI_THREAT = "Barre de menace"

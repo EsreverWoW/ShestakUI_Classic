@@ -681,6 +681,7 @@ C["pulsecooldown"] = {
 	["anim_scale"] = 1.5,						-- Animation scaling
 	["hold_time"] = 0,							-- Max opacity hold time
 	["threshold"] = 3,							-- Minimal threshold time
+	["whitelist"] = false,						-- Use whitelist instead of ignore list
 }
 
 ----------------------------------------------------------------------------------------

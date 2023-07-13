@@ -13,6 +13,7 @@ C.raidcooldown.spells_list = {}
 C.raidcooldown.spells_list_ver = 1
 C.enemycooldown.spells_list = {}
 C.enemycooldown.spells_list_ver = 1
+C.pulsecooldown.spells_list = {}
 C.nameplate.debuffs_list = {}
 C.nameplate.buffs_list = {}
 C.combattext.spells_list = {}

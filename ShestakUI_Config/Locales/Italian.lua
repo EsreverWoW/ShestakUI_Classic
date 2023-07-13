@@ -598,6 +598,8 @@ L.pulsecooldown_anim_scale = "Regolazione dell'animazione"
 L.pulsecooldown_hold_time = "Opacità del tempo d'attesa massimo"
 L.pulsecooldown_threshold = "Threshold time" -- Need review
 L.pulsecooldown_threshold_desc = "Soglia di tempo minimo"
+L.pulsecooldown_subheader_whitelist = "Filtering list" -- Need review
+L.pulsecooldown_whitelist = "Use whitelist instead of ignore list" -- Need review
 
 -- Threat options
 L_GUI_THREAT = "Barre di minaccia"

@@ -148,7 +148,20 @@ if C.enemycooldown.enable == true then
 end
 
 if C.pulsecooldown.enable == true then
+	local function SpellName(id)
+		local name = GetSpellInfo(id)
+		if name then
+			return name
+		else
+			print("|cffff0000ShestakUI: Pulse cooldown spell ID ["..tostring(id).."] no longer exists!|r")
+			return "Empty"
+		end
+	end
+
 	T.pulse_ignored_spells = {
-		--GetSpellInfo(spellID),	-- Spell name
+		--SpellName(spellID),	-- Spell name
 	}
+	for _, spell in pairs(C.pulsecooldown.spells_list) do
+		T.pulse_ignored_spells[SpellName(spell)] = true
+	end
 end
