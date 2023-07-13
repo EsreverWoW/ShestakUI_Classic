@@ -18,20 +18,20 @@ end)
 ----------------------------------------------------------------------------------------
 --	Vehicle indicator on mouseover
 ----------------------------------------------------------------------------------------
-if C.general.vehicle_mouseover == true then
-	local function VehicleSeatMouseover(vehicleID)
-		if VehicleSeatIndicator:IsShown() then
-			VehicleSeatIndicator:SetAlpha(0)
-			VehicleSeatIndicator:HookScript("OnEnter", function() VehicleSeatIndicator:SetAlpha(1) end)
-			VehicleSeatIndicator:HookScript("OnLeave", function() VehicleSeatIndicator:SetAlpha(0) end)
+if C.general.vehicle_mouseover then
+	local function VehicleSeatMouseover(self, vehicleID)
+		if self:IsShown() then
+			self:SetAlpha(0)
+			self:HookScript("OnEnter", function() self:SetAlpha(1) end)
+			self:HookScript("OnLeave", function() self:SetAlpha(0) end)
 
 			local _, numSeat = GetVehicleUIIndicator(vehicleID)
 			for i = 1, numSeat do
 				local b = _G["VehicleSeatIndicatorButton"..i]
-				b:HookScript("OnEnter", function() VehicleSeatIndicator:SetAlpha(1) end)
-				b:HookScript("OnLeave", function() VehicleSeatIndicator:SetAlpha(0) end)
+				b:HookScript("OnEnter", function() self:SetAlpha(1) end)
+				b:HookScript("OnLeave", function() self:SetAlpha(0) end)
 			end
 		end
 	end
-	hooksecurefunc("VehicleSeatIndicator_SetUpVehicle", VehicleSeatMouseover)
+	hooksecurefunc(VehicleSeatIndicator, "SetupVehicle", VehicleSeatMouseover)
 end
