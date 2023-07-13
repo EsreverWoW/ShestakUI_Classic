@@ -240,8 +240,6 @@ C["filger_spells"] = {
 
 			-- Dark Slash
 			{spellID = 258860, unitID = "target", caster = "player", filter = "DEBUFF"},
-			-- Nemesis
-			{spellID = 206491, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Sigil of Flame
 			{spellID = 204598, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Sigil of Silence
@@ -345,8 +343,6 @@ C["filger_spells"] = {
 			{spellID = 198589, filter = "CD"},
 			-- Netherwalk
 			{spellID = 196555, filter = "CD"},
-			-- Nemesis
-			{spellID = 206491, filter = "CD"},
 			-- Metamorphosis
 			{spellID = 187827, filter = "CD"},
 			-- Darkness
@@ -1349,8 +1345,6 @@ C["filger_spells"] = {
 			{spellID = 105809, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Avenging Wrath
 			{spellID = 31884, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Seraphim
-			{spellID = 152262, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Ardent Defender
 			{spellID = 31850, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Divine Protection
@@ -1477,8 +1471,6 @@ C["filger_spells"] = {
 			{spellID = 1044, filter = "CD"},
 			-- Rule of Law
 			{spellID = 214202, filter = "CD"},
-			-- Seraphim
-			{spellID = 152262, filter = "CD"},
 			-- Wake of Ashes
 			{spellID = 255937, filter = "CD"},
 			-- Speed of Light
@@ -2816,8 +2808,6 @@ C["filger_spells"] = {
 			{spellID = 116888, unitID = "player", caster = "player", filter = "DEBUFF"},
 			-- Cauterize
 			{spellID = 87023, unitID = "player", caster = "player", filter = "DEBUFF"},
-			-- Nemesis
-			{spellID = 206491, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Touch of Karma
 			{spellID = 125174, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Smoke Bomb
