@@ -31,7 +31,6 @@ L_ANNOUNCE_FP_USE = "%s использует %s."
 L_ANNOUNCE_INTERRUPTED = INTERRUPTED
 
 -- Tooltip
-L_TOOLTIP_NO_TALENT = "Нет талантов"
 L_TOOLTIP_LOADING = "Загрузка..."
 L_TOOLTIP_ACH_STATUS = "Ваш статус:"
 L_TOOLTIP_ACH_COMPLETE = "Ваш статус: Получено "

@@ -2488,14 +2488,11 @@ do
 	rank:SetPoint("LEFT", target, "RIGHT", 320, 0)
 	rank.Text:SetWidth(200)
 
-	local talents = ns.CreateCheckBox(parent, "talents")
-	talents:SetPoint("TOPLEFT", target, "BOTTOMLEFT", 0, 0)
-
 	local average_lvl = ns.CreateCheckBox(parent, "average_lvl", STAT_AVERAGE_ITEM_LEVEL)
-	average_lvl:SetPoint("LEFT", talents, "RIGHT", 320, 0)
+	average_lvl:SetPoint("TOPLEFT", target, "BOTTOMLEFT", 0, 0)
 
 	local show_shift = ns.CreateCheckBox(parent, "show_shift")
-	show_shift:SetPoint("TOPLEFT", talents, "BOTTOMLEFT", 20, 0)
+	show_shift:SetPoint("TOPLEFT", average_lvl, "BOTTOMLEFT", 20, 0)
 
 	local raid_icon = ns.CreateCheckBox(parent, "raid_icon")
 	raid_icon:SetPoint("TOPLEFT", show_shift, "BOTTOMLEFT", -20, 0)
@@ -2526,7 +2523,6 @@ do
 	mount:SetPoint("TOPLEFT", instance_lock, "BOTTOMLEFT", 0, 0)
 
 	local classic = {
-		talents,
 		show_shift,
 		unit_role,
 		achievements,
@@ -2534,7 +2530,6 @@ do
 	}
 
 	local wrath = {
-		talents,
 		show_shift,
 		unit_role,
 		mount

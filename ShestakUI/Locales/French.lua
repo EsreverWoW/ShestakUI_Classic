@@ -31,7 +31,6 @@ L_ANNOUNCE_FP_USE = "%s a utilisé : %s."
 L_ANNOUNCE_INTERRUPTED = INTERRUPTED
 
 -- Tooltip
-L_TOOLTIP_NO_TALENT = "Aucun talent"
 L_TOOLTIP_LOADING = "Chargement..."
 L_TOOLTIP_ACH_STATUS = "Votre statut : "
 L_TOOLTIP_ACH_COMPLETE = "Votre statut : Terminé"

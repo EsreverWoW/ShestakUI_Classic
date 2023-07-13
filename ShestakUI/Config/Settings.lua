@@ -361,7 +361,6 @@ C["tooltip"] = {
 	["realm"] = true,							-- Player realm name in tooltip
 	["rank"] = true,							-- Player guild-rank in tooltip
 	["target"] = true,							-- Target player in tooltip
-	["talents"] = false,						-- Show specialization
 	["average_lvl"] = false,					-- Average items level
 	["show_shift"] = true,						-- Show items level and spec when Shift is pushed
 	["raid_icon"] = false,						-- Raid icon

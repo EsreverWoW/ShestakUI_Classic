@@ -286,7 +286,6 @@ L.tooltip_health_value = "Valor de la vida en números"
 L.tooltip_hidebuttons = "Ocultar descripciones de las barras de acción"
 L.tooltip_hide_combat = "Ocultar descripción en combate"
 L.tooltip_subheader = "Plugins" -- Need review
-L.tooltip_talents = "Mostrar descripción de los talentos"
 L.tooltip_show_shift = "Show when Shift is pushed" -- Need review
 L.tooltip_show_shift_desc = "Show items level and spec when Shift is pushed" -- Need review
 L.tooltip_achievements = "Comparar logros en la descripción"

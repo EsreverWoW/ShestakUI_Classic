@@ -285,7 +285,6 @@ L.tooltip_health_value = "Valore numerico della salute"
 L.tooltip_hidebuttons = "Nascondi i suggerimenti relativi alle barre delle azioni"
 L.tooltip_hide_combat = "Nascondi i suggerimenti in combattimento"
 L.tooltip_subheader = "Plugins" -- Need review
-L.tooltip_talents = "Mostra i talenti nei suggerimenti"
 L.tooltip_show_shift = "Show when Shift is pushed" -- Need review
 L.tooltip_show_shift_desc = "Show items level and spec when Shift is pushed" -- Need review
 L.tooltip_achievements = "Mostra il paragone delle imprese nei suggerimenti"

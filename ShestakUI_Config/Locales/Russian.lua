@@ -289,7 +289,6 @@ L.tooltip_health_value = "Цифровое значение здоровья в 
 L.tooltip_hidebuttons = "Прятать подсказку для кнопок панели команд"
 L.tooltip_hide_combat = "Прятать подсказку в бою"
 L.tooltip_subheader = "Плагины"
-L.tooltip_talents = "Специализация цели в подсказке"
 L.tooltip_show_shift = "Только при зажатой кнопке Shift"
 L.tooltip_show_shift_desc = "Специализация и уровень предметов отображаются, если зажата кнопка Shift"
 L.tooltip_achievements = "Сравнивать достижения в чате с вашими"

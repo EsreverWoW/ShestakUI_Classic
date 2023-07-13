@@ -31,7 +31,6 @@ L_ANNOUNCE_FP_USE = "%s 使用了 %s。"
 L_ANNOUNCE_INTERRUPTED = "已打斷"
 
 -- Tooltip
-L_TOOLTIP_NO_TALENT = "沒有天賦"
 L_TOOLTIP_LOADING = "讀取中..."
 L_TOOLTIP_ACH_STATUS = "你的狀態: "
 L_TOOLTIP_ACH_COMPLETE = "你的狀態: 完成"

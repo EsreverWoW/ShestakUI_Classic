@@ -91,7 +91,6 @@ if T.name == "Oz" and T.realm == "Pozzo dell'Eternità" then
 	C["threat"].width = 125
 	C["threat"].bar_rows = 2
 	C["tooltip"].item_icon = true
-	C["tooltip"].talents = true
 	C["tooltip"].achievements = false
 	C["tooltip"].title = true
 	C["tooltip"].spell_id = true
