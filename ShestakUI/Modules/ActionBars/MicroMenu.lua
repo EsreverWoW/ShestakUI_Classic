@@ -33,21 +33,6 @@ local MICRO_BUTTONS = T.Classic and MICRO_BUTTONS or {
 	"HelpMicroButton",
 }
 
-local colors = {
-	[1]	= {0.35, 0.65, 1},
-	[2]	= {1, 0.58, 0.65},
-	[3]	= {0.21, 1, 0.95},
-	[4]	= {1, 0.62, 0.1},
-	[5]	= {0.96, 1, 0},
-	[6]	= {0, 1, 0.1},
-	[7]	= {0.7, 0.7, 1},
-	[8]	= {1, 1, 1},
-	[9]	= {1, 0.7, 0.58},
-	[10] = {1, 0.83, 0.50},
-	[11] = {1, 0.4, 0.4},
-	[12] = {1, 1, 1},
-}
-
 for i, button in pairs(MICRO_BUTTONS) do
 	local bu = _G[button]
 	local normal = bu:GetNormalTexture()
@@ -109,35 +94,37 @@ for i, button in pairs(MICRO_BUTTONS) do
 		local highlight = bu:GetHighlightTexture()
 		if highlight then
 			highlight:SetAlpha(0)
+			highlight:SetTexCoord(0.1, 0.9, 0.12, 0.9)
 		end
 	end
 
-	if T.Classic then
-		normal:SetTexCoord(0.17, 0.87, 0.5, 0.908)
-	else
-		normal:SetTexCoord(0.1, 0.85, 0.12, 0.78)
-	end
-	normal:ClearAllPoints()
-	normal:SetPoint("TOPLEFT", f, "TOPLEFT", 2, -2)
-	normal:SetPoint("BOTTOMRIGHT", f, "BOTTOMRIGHT", -2, 2)
-	if T.Mainline then
-		normal:SetVertexColor(unpack(colors[i]))
+	if normal then
+		if T.Classic then
+			normal:SetTexCoord(0.17, 0.87, 0.5, 0.908)
+		else
+			normal:SetTexCoord(0.1, 0.85, 0.12, 0.78)
+		end
+		normal:ClearAllPoints()
+		normal:SetPoint("TOPLEFT", f, "TOPLEFT", 2, -2)
+		normal:SetPoint("BOTTOMRIGHT", f, "BOTTOMRIGHT", -2, 2)
 	end
 
-	if T.Classic then
-		pushed:SetTexCoord(0.17, 0.87, 0.5, 0.908)
-	else
-		pushed:SetTexCoord(0.1, 0.85, 0.12, 0.78)
+	if pushed then
+		if T.Classic then
+			pushed:SetTexCoord(0.17, 0.87, 0.5, 0.908)
+		else
+			pushed:SetTexCoord(0.1, 0.85, 0.12, 0.78)
+		end
+		pushed:ClearAllPoints()
+		pushed:SetPoint("TOPLEFT", f, "TOPLEFT", 2, -2)
+		pushed:SetPoint("BOTTOMRIGHT", f, "BOTTOMRIGHT", -2, 2)
 	end
-	pushed:ClearAllPoints()
-	pushed:SetPoint("TOPLEFT", f, "TOPLEFT", 2, -2)
-	pushed:SetPoint("BOTTOMRIGHT", f, "BOTTOMRIGHT", -2, 2)
 
 	if disabled then
 		if T.Classic then
 			disabled:SetTexCoord(0.17, 0.87, 0.5, 0.908)
 		else
-			disabled:SetTexCoord(0.1, 0.85, 0.12, 0.78)
+			disabled:SetTexCoord(0.2, 0.80, 0.22, 0.8)
 		end
 		disabled:ClearAllPoints()
 		disabled:SetPoint("TOPLEFT", f, "TOPLEFT", 2, -2)
@@ -156,6 +143,12 @@ for i, button in pairs(MICRO_BUTTONS) do
 			frame:SetAlpha(0)
 		end
 	end)
+
+	if bu.Background then bu.Background:SetAlpha(0) end
+	if bu.PushedShadow then bu.PushedShadow:SetTexture() end
+	if bu.Shadow then bu.Shadow:SetTexture() end
+	if bu.PushedBackground then bu.PushedBackground:SetAlpha(0) end
+	if bu.PortraitMask then bu.PortraitMask:Hide() end
 end
 
 -- Fix textures for buttons
@@ -174,4 +167,13 @@ else
 	MainMenuMicroButton.MainMenuBarPerformanceBar:SetTexture(C.media.texture)
 	MainMenuMicroButton.MainMenuBarPerformanceBar:SetSize(16, 2)
 	MainMenuMicroButton.MainMenuBarPerformanceBar:SetPoint("BOTTOM", MainMenuMicroButton, "BOTTOM", 0, 4)
+
+	if CharacterMicroButton then
+		local function SkinCharacterPortrait(self)
+			self.Portrait:SetInside(self, 4, 4)
+		end
+
+		hooksecurefunc(CharacterMicroButton, "SetPushed", SkinCharacterPortrait)
+		hooksecurefunc(CharacterMicroButton, "SetNormal", SkinCharacterPortrait)
+	end
 end
