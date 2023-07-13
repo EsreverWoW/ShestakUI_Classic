@@ -120,7 +120,7 @@ local function LoadSkin()
 		button.backdrop:SetAllPoints()
 		button:StyleButton()
 
-		button.bg:SetTexture(0)
+		button.bg:SetTexture("")
 
 		button.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 		button.icon:SetPoint("LEFT", button, "LEFT", 10, 0)
@@ -167,7 +167,7 @@ local function LoadSkin()
 				if r ~= 0.65882 and g ~= 0.65882 and b ~= 0.65882 then
 					self:GetParent().border.backdrop:SetBackdropBorderColor(r, g, b)
 				end
-				self:SetTexture(0)
+				self:SetTexture("")
 			end)
 
 			hooksecurefunc(item.IconBorder, "Hide", function(self)
@@ -179,7 +179,7 @@ local function LoadSkin()
 
 			item.NameFrame:Hide()
 
-			item.shortageBorder:SetTexture(0)
+			item.shortageBorder:SetTexture(nil)
 
 			item.roleIcon1:SetParent(item.border)
 			item.roleIcon2:SetParent(item.border)
@@ -492,21 +492,23 @@ local function LoadSecondarySkin()
 	end)
 
 	local function HandleAffixIcons(self)
-		for _, frame in ipairs(self.Affixes) do
-			frame.Border:SetTexture(0)
-			frame.Portrait:SetTexture(0)
+		if self.Affixes then
+			for _, frame in ipairs(self.Affixes) do
+				frame.Border:SetTexture(nil)
+				frame.Portrait:SetTexture(nil)
 
-			if frame.info then
-				frame.Portrait:SetTexture(CHALLENGE_MODE_EXTRA_AFFIX_INFO[frame.info.key].texture)
-			elseif frame.affixID then
-				local _, _, filedataid = C_ChallengeMode.GetAffixInfo(frame.affixID)
-				frame.Portrait:SetTexture(filedataid)
-			end
-			frame.Portrait:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-			if not frame.backdrop then
-				frame:CreateBackdrop("Default")
-				frame.backdrop:SetPoint("TOPLEFT", frame.Portrait, "TOPLEFT", -2, 2)
-				frame.backdrop:SetPoint("BOTTOMRIGHT", frame.Portrait, "BOTTOMRIGHT", 2, -2)
+				if frame.info then
+					frame.Portrait:SetTexture(CHALLENGE_MODE_EXTRA_AFFIX_INFO[frame.info.key].texture)
+				elseif frame.affixID then
+					local _, _, filedataid = C_ChallengeMode.GetAffixInfo(frame.affixID)
+					frame.Portrait:SetTexture(filedataid)
+				end
+				frame.Portrait:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+				if not frame.backdrop then
+					frame:CreateBackdrop("Default")
+					frame.backdrop:SetPoint("TOPLEFT", frame.Portrait, "TOPLEFT", -2, 2)
+					frame.backdrop:SetPoint("BOTTOMRIGHT", frame.Portrait, "BOTTOMRIGHT", 2, -2)
+				end
 			end
 		end
 	end

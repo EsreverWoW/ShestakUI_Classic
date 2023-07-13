@@ -434,4 +434,4 @@ local function LoadSkin()
 	end
 end
 
---BETA tinsert(T.SkinFuncs["ShestakUI"], LoadSkin)
+T.SkinFuncs["Blizzard_Professions"] = LoadSkin

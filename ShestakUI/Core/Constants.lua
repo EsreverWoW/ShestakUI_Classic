@@ -14,7 +14,7 @@ T.color = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[T.class]
 T.version = C_AddOns.GetAddOnMetadata("ShestakUI", "Version")
 T.screenWidth, T.screenHeight = GetPhysicalScreenSize()
 T.toc = select(4, GetBuildInfo())
-T.newPatch = T.toc >= 100100
+T.newPatch = T.toc >= 100105
 T.Mainline =_G.WOW_PROJECT_ID == _G.WOW_PROJECT_MAINLINE
 T.Classic = _G.WOW_PROJECT_ID == _G.WOW_PROJECT_CLASSIC or _G.WOW_PROJECT_ID == _G.WOW_PROJECT_BURNING_CRUSADE_CLASSIC or _G.WOW_PROJECT_ID == _G.WOW_PROJECT_WRATH_CLASSIC
 T.Vanilla = _G.WOW_PROJECT_ID == _G.WOW_PROJECT_CLASSIC
