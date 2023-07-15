@@ -60,26 +60,26 @@ local function LoadSkin()
 	end)
 
 	-- Group loot roll
-	--BETA hooksecurefunc("GroupLootFrame_OpenNewFrame", function()
-		-- for i = 1, NUM_GROUP_LOOT_FRAMES do
-			-- local frame = _G["GroupLootFrame"..i]
-			-- if not frame.styled then
-				-- frame:StripTextures()
-				-- frame:CreateBackdrop("Transparent")
+	hooksecurefunc("GroupLootContainer_OpenNewFrame", function()
+		for i = 1, 4 do
+			local frame = _G["GroupLootFrame"..i]
+			if not frame.styled then
+				frame:StripTextures()
+				frame:CreateBackdrop("Transparent")
 
-				-- frame.Timer:CreateBackdrop("Default")
-				-- frame.Timer:SetStatusBarTexture(C.media.texture)
-				-- frame.Timer:SetPoint("BOTTOMLEFT", frame, "BOTTOMLEFT", 6, 4)
+				frame.Timer:CreateBackdrop("Default")
+				frame.Timer:SetStatusBarTexture(C.media.texture)
+				frame.Timer:SetPoint("BOTTOMLEFT", frame, "BOTTOMLEFT", 6, 4)
 
-				-- frame.IconFrame.Border:SetAlpha(0)
-				-- frame.IconFrame.Icon:SkinIcon()
-				-- frame.IconFrame.Icon:ClearAllPoints()
-				-- frame.IconFrame.Icon:SetPoint("LEFT", frame, 6, 6)
+				frame.IconFrame.Border:SetAlpha(0)
+				frame.IconFrame.Icon:SkinIcon()
+				frame.IconFrame.Icon:ClearAllPoints()
+				frame.IconFrame.Icon:SetPoint("LEFT", frame, 6, 6)
 
-				-- frame.styled = true
-			-- end
-		-- end
-	-- end)
+				frame.styled = true
+			end
+		end
+	end)
 
 	-- Loot after finished dungeon (not tested)
 	-- hooksecurefunc("BossBanner_ConfigureLootFrame", function(frame)
