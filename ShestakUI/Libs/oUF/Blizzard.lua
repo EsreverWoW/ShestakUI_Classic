@@ -65,7 +65,7 @@ local function handleFrame(baseName, doNotReparent)
 			power:UnregisterAllEvents()
 		end
 
-		local spell = frame.castBar or frame.spellbar
+		local spell = frame.castBar or frame.spellbar or frame.CastingBarFrame
 		if(spell) then
 			spell:UnregisterAllEvents()
 		end
@@ -93,6 +93,16 @@ local function handleFrame(baseName, doNotReparent)
 		local classPowerBar = frame.classPowerBar
 		if(classPowerBar) then
 			classPowerBar:UnregisterAllEvents()
+		end
+
+		local ccRemoverFrame = frame.CcRemoverFrame
+		if(ccRemoverFrame) then
+			ccRemoverFrame:UnregisterAllEvents()
+		end
+
+		local debuffFrame = frame.DebuffFrame
+		if(debuffFrame) then
+			debuffFrame:UnregisterAllEvents()
 		end
 	end
 end
@@ -178,18 +188,10 @@ function oUF:DisableBlizzard(unit)
 			if(not isArenaHooked) then
 				isArenaHooked = true
 
-				-- this disables ArenaEnemyFramesContainer
-				SetCVar('showArenaEnemyFrames', '0')
-				SetCVar('showArenaEnemyPets', '0')
+				handleFrame(CompactArenaFrame)
 
-				-- but still UAE and hide all containers
-				handleFrame(ArenaEnemyFramesContainer)
-				handleFrame(ArenaEnemyPrepFramesContainer)
-				handleFrame(ArenaEnemyMatchFramesContainer)
-
-				for i = 1, MAX_ARENA_ENEMIES do
-					handleFrame('ArenaEnemyMatchFrame' .. i, true)
-					handleFrame('ArenaEnemyPrepFrame' .. i, true)
+				for _, frame in next, CompactArenaFrame.memberUnitFrames do
+					handleFrame(frame, true)
 				end
 			end
 		end
