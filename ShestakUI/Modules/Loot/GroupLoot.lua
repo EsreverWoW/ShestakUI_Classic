@@ -67,13 +67,19 @@ local function LootClick(frame)
 	end
 end
 
-local function OnEvent(frame, _, rollID)
-	cancelled_rolls[rollID] = true
-	if frame.rollID ~= rollID then return end
+local function OnEvent(frame, event, rollID)
+	if event == "CANCEL_ALL_LOOT_ROLLS" then
+		frame.rollID = nil
+		frame.time = nil
+		frame:Hide()
+	else
+		cancelled_rolls[rollID] = true
+		if frame.rollID ~= rollID then return end
 
-	frame.rollID = nil
-	frame.time = nil
-	frame:Hide()
+		frame.rollID = nil
+		frame.time = nil
+		frame:Hide()
+	end
 end
 
 local function StatusUpdate(frame)
@@ -82,23 +88,13 @@ local function StatusUpdate(frame)
 	frame:SetValue(t)
 end
 
-local textpos
-
-if T.Classic then
-	textpos = {
-		[1] = {0, 1},	-- need
-		[2] = {1, 2},	-- greed
-		[0] = {1, -1},	-- pass
-	}
-else
-	textpos = {
-		[1] = {0, 1},	-- need
-		[2] = {1, 0},	-- greed
-		[4] = {2, 0},	-- transmog
-		[3] = {1, 2},	-- disenchant
-		[0] = {1, -0.2},-- pass
-	}
-end
+local textpos = {
+	[1] = {0, 1},	-- need
+	[2] = {1, 2},	-- greed
+	-- [4] = {2, 0},	-- transmog
+	-- [3] = {1, 2},	-- disenchant
+	[0] = {1, -1},	-- pass
+}
 
 local function CreateRollButton(parent, ntex, ptex, htex, rolltype, tiptext, ...)
 	local f = CreateFrame("Button", nil, parent)
@@ -114,12 +110,16 @@ local function CreateRollButton(parent, ntex, ptex, htex, rolltype, tiptext, ...
 	f:SetScript("OnLeave", HideTip)
 	f:SetScript("OnClick", ClickRoll)
 	f:SetMotionScriptsWhileDisabled(true)
+
+	local txt
+
 	if T.Classic then
-		local txt = f:CreateFontString(nil, nil)
+		txt = f:CreateFontString(nil, nil)
 		txt:SetFont(C.font.loot_font, C.font.loot_font_size, C.font.loot_font_style)
 		txt:SetShadowOffset(C.font.loot_font_shadow and 1 or 0, C.font.loot_font_shadow and -1 or 0)
 		txt:SetPoint("CENTER", textpos[rolltype][1] or 0, textpos[rolltype][2] or 0)
 	end
+
 	return f, txt
 end
 
@@ -131,6 +131,7 @@ local function CreateRollFrame()
 	frame:SetFrameLevel(10)
 	frame:SetScript("OnEvent", OnEvent)
 	frame:RegisterEvent("CANCEL_LOOT_ROLL")
+	frame:RegisterEvent("CANCEL_ALL_LOOT_ROLLS")
 	frame:Hide()
 
 	local button = CreateFrame("Button", nil, frame)
@@ -258,10 +259,8 @@ local function START_LOOT_ROLL(rollID, time)
 	if T.Classic then
 		f.needText:SetText(0)
 		f.greedText:SetText(0)
-		-- if T.Mainline then
-			-- f.transmogText:SetText(0)
-			-- f.disenchantText:SetText(0)
-		-- end
+		-- f.transmogText:SetText(0)
+		-- f.disenchantText:SetText(0)
 		f.passText:SetText(0)
 	end
 
@@ -407,10 +406,8 @@ local function testRoll(f)
 	if T.Classic then
 		f.needText:SetText(1)
 		f.greedText:SetText(2)
-		-- if T.Mainline then
-			-- f.transmogText:SetText(2)
-			-- f.disenchantText:SetText(0)
-		-- end
+		-- f.transmogText:SetText(2)
+		-- f.disenchantText:SetText(0)
 		f.passText:SetText(0)
 	end
 
@@ -424,6 +421,10 @@ local function testRoll(f)
 			f.transmog:Hide()
 			f.greed:Show()
 		end
+	end
+
+	if T.Mainline then
+		f.rollID = 1
 	end
 
 	return name
