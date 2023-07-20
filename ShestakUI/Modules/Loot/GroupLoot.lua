@@ -13,6 +13,7 @@ local LootRollAnchor = CreateFrame("Frame", "LootRollAnchor", UIParent)
 LootRollAnchor:SetSize(313, 26)
 
 local function ClickRoll(frame)
+	if T.Mainline and not frame.parent.rollID then return end
 	RollOnLoot(frame.parent.rollID, frame.rolltype)
 end
 
@@ -132,6 +133,7 @@ local function CreateRollFrame()
 	frame:SetScript("OnEvent", OnEvent)
 	frame:RegisterEvent("CANCEL_LOOT_ROLL")
 	frame:RegisterEvent("CANCEL_ALL_LOOT_ROLLS")
+	frame:RegisterEvent("MAIN_SPEC_NEED_ROLL")
 	frame:Hide()
 
 	local button = CreateFrame("Button", nil, frame)
@@ -171,7 +173,7 @@ local function CreateRollFrame()
 		greed, greedText = CreateRollButton(frame, "Interface\\Buttons\\UI-GroupLoot-Coin-Up", "Interface\\Buttons\\UI-GroupLoot-Coin-Highlight", "Interface\\Buttons\\UI-GroupLoot-Coin-Down", 2, GREED, "LEFT", need, "RIGHT", 0, -1)
 		pass, passText = CreateRollButton(frame, "Interface\\Buttons\\UI-GroupLoot-Pass-Up", nil, "Interface\\Buttons\\UI-GroupLoot-Pass-Down", 0, PASS, "LEFT", greed, "RIGHT", 0, 3)
 	else
-		need, needText = CreateRollButton(frame, "lootroll-toast-icon-need-up", "lootroll-toast-icon-need-highlight", "lootroll-toast-icon-need-down", 1, NEED, "LEFT", frame.button, "RIGHT", 6, -1)
+		need, needText = CreateRollButton(frame, "lootroll-toast-icon-need-up", "lootroll-toast-icon-need-highlight", "lootroll-toast-icon-need-down", 1, NEED, "LEFT", frame.button, "RIGHT", 8, -1)
 		greed, greedText = CreateRollButton(frame, "lootroll-toast-icon-greed-up", "lootroll-toast-icon-greed-highlight", "lootroll-toast-icon-greed-down", 2, GREED, "LEFT", need, "RIGHT", 0, 1)
 		transmog, transmogText = CreateRollButton(frame, "lootroll-toast-icon-transmog-up", "lootroll-toast-icon-transmog-highlight", "lootroll-toast-icon-transmog-down", 4, TRANSMOGRIFY, "LEFT", need, "RIGHT", -1, 1)
 		de, deText = CreateRollButton(frame, "Interface\\Buttons\\UI-GroupLoot-DE-Up", "Interface\\Buttons\\UI-GroupLoot-DE-Highlight", "Interface\\Buttons\\UI-GroupLoot-DE-Down", 3, ROLL_DISENCHANT, "LEFT", greed, "RIGHT", -2, -2)
@@ -421,10 +423,6 @@ local function testRoll(f)
 			f.transmog:Hide()
 			f.greed:Show()
 		end
-	end
-
-	if T.Mainline then
-		f.rollID = 1
 	end
 
 	return name
