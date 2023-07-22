@@ -59,8 +59,13 @@ local function LoadSecondarySkin()
 	T.SkinScrollBar(ScriptErrorsFrame.ScrollFrame.ScrollBar)
 	T.SkinCloseButton(ScriptErrorsFrameClose)
 
+	local scroll = ScriptErrorsFrame.ScrollFrame.ScrollBar
+	scroll:SetPoint("TOPLEFT", ScriptErrorsFrame.ScrollFrame, "TOPRIGHT", 10, 2)
+	scroll:SetPoint("BOTTOMLEFT", ScriptErrorsFrame.ScrollFrame, "BOTTOMRIGHT", 10, -3)
+
 	ScriptErrorsFrame.ScrollFrame:CreateBackdrop("Overlay")
 	ScriptErrorsFrame.ScrollFrame:SetSize(ScriptErrorsFrame:GetWidth() - 45, ScriptErrorsFrame:GetHeight() - 72)
+	ScriptErrorsFrame.ScrollFrame.Text:SetSize(ScriptErrorsFrame:GetWidth() - 45, ScriptErrorsFrame:GetHeight() - 72)
 	ScriptErrorsFrame.ScrollFrame.Text:SetFont(C.media.normal_font, 12, "")
 end
 
