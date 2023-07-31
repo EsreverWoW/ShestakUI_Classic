@@ -186,7 +186,6 @@ T.RaidDebuffs = {
 	[SpellName(373048)] = 3,	-- Suffocating Webs
 	-- Dathea, Ascended
 	[SpellName(391686)] = 5,	-- Conductive Mark
-	[SpellName(378277)] = 2,	-- Elemental Equilbrium
 	[SpellName(388290)] = 4,	-- Cyclone
 	-- Kurog Grimtotem
 	[SpellName(377780)] = 5,	-- Skeletal Fractures
