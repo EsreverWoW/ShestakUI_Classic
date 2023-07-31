@@ -591,6 +591,7 @@ if friends.enabled then
 		["D3"] = "Diablo 3",
 		["OSI"] = "Diablo 2: Resurrected",
 		["ANBS"] = "Diablo Immortal",
+		["Fen"] = "Diablo 4",
 		["WTCG"] = "Hearthstone",
 		["Hero"] = "Heroes of the Storm",
 		["Pro"] = "Overwatch",
