@@ -43,6 +43,13 @@ C["general"] = {
 	["hide_talking_head"] = false,				-- Hide Talking Head Frame
 }
 
+--[[
+if T.screenHeight > 1400 and T.screenHeight < 1500 then
+	C.general.auto_scale = false
+	C.general.uiscale = 0.64
+end
+--]]
+
 ----------------------------------------------------------------------------------------
 --	Skins options
 ----------------------------------------------------------------------------------------
