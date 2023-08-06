@@ -134,3 +134,10 @@ end
 if IsAddOnLoaded("QuickQuest") then
 	C.automation.accept_quest = false
 end
+
+----------------------------------------------------------------------------------------
+--	Load external profile settings
+----------------------------------------------------------------------------------------
+if T.PostDisable then
+	T.PostDisable()
+end
