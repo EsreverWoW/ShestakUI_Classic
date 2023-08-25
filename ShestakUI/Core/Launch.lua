@@ -60,6 +60,7 @@ local function InstallUI()
 		end
 
 		-- Enable classcolor automatically on login and on each character without doing /configure each time
+		--[[
 		ToggleChatColorNamesByClassGroup(true, "SAY")
 		ToggleChatColorNamesByClassGroup(true, "EMOTE")
 		ToggleChatColorNamesByClassGroup(true, "YELL")
@@ -80,6 +81,9 @@ local function InstallUI()
 		ToggleChatColorNamesByClassGroup(true, "CHANNEL3")
 		ToggleChatColorNamesByClassGroup(true, "CHANNEL4")
 		ToggleChatColorNamesByClassGroup(true, "CHANNEL5")
+		--]]
+		SetCVar("chatClassColorOverride", 0)
+		SetCVar("colorChatNamesByClass", 1)
 	end
 
 	-- Reset saved variables on char
