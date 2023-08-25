@@ -648,27 +648,24 @@ if friends.enabled then
 	end
 	local clientTags = {}
 
-	if T.Classic and not T.Wrath341 then
-		clientTags = {
-			[BNET_CLIENT_D3] = "Diablo 3",
-			[BNET_CLIENT_D2] = "Diablo 2: Resurrected",
-			[BNET_CLIENT_WTCG] = "Hearthstone",
-			[BNET_CLIENT_HEROES] = "Heroes of the Storm",
-			[BNET_CLIENT_OVERWATCH] = "Overwatch",
-			[BNET_CLIENT_SC] = "StarCraft",
-			[BNET_CLIENT_SC2] = "StarCraft 2",
-			[BNET_CLIENT_DESTINY2] = "Destiny 2",
-			[BNET_CLIENT_COD] = "Call of Duty: Black Ops 4",
-			[BNET_CLIENT_WC3] = "Warcraft 3: Reforged",
-			[BNET_CLIENT_ARCADE] = "Arcade Collection",
-			[BNET_CLIENT_CRASH4] = "Crash Bandicoot 4",
-			[BNET_CLIENT_COD] = "COD: Black Ops 4",
-			[BNET_CLIENT_COD_MW] = "COD: Modern Warfare",
-			[BNET_CLIENT_COD_MW2] = "COD: Modern Warfare 2",
-			[BNET_CLIENT_COD_BOCW] = "COD: Cold War",
-			["BSAp"] = COMMUNITIES_PRESENCE_MOBILE_CHAT
-		}
-	end
+	clientTags = {
+		["D3"] = "Diablo 3",
+		["OSI"] = "Diablo 2: Resurrected",
+		["ANBS"] = "Diablo Immortal",
+		["WTCG"] = "Hearthstone",
+		["Hero"] = "Heroes of the Storm",
+		["Pro"] = "Overwatch",
+		["S1"] = "StarCraft",
+		["S2"] = "StarCraft 2",
+		["W3"] = "Warcraft 3: Reforged",
+		["RTRO"] = "Arcade Collection",
+		["WLBY"] = "Crash Bandicoot 4",
+		["VIPR"] = "COD: Black Ops 4",
+		["LAZR"] = "COD: Modern Warfare 2",
+		["ZEUS"] = "COD: Cold War",
+		["GRY"] = "Warcraft Arclight Rumble",
+		["BSAp"] = COMMUNITIES_PRESENCE_MOBILE_CHAT
+	}
 	Inject("Friends", {
 		OnLoad = function(self) RegEvents(self, "PLAYER_LOGIN PLAYER_ENTERING_WORLD GROUP_ROSTER_UPDATE FRIENDLIST_UPDATE BN_FRIEND_LIST_SIZE_CHANGED BN_FRIEND_ACCOUNT_ONLINE BN_FRIEND_ACCOUNT_OFFLINE BN_FRIEND_INFO_CHANGED BN_FRIEND_ACCOUNT_ONLINE BN_FRIEND_ACCOUNT_OFFLINE BN_FRIEND_INFO_CHANGED") end,
 		OnEvent = function(self, event)

@@ -89,7 +89,7 @@ local function OnUpdate(_, update)
 				elseif v[2] == "item" then
 					getCooldownDetails = memoize(function()
                         local start, duration, enabled
-						if T.Wrath341 then
+						if T.Classic then
 							if v[4] == "action" then
 								start, duration, enabled = GetActionCooldown(v[5])
 							elseif v[4] == "inventory" then
@@ -97,8 +97,6 @@ local function OnUpdate(_, update)
 							elseif v[4] == "container" then
 								start, duration, enabled = C_Container.GetContainerItemCooldown(v[5], v[6])
 							end
-						else
-							start, duration, enabled = GetItemCooldown(i)
 						end
                         return {
                             name = GetItemInfo(i),

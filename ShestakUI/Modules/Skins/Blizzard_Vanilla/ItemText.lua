@@ -28,11 +28,7 @@ local function LoadSkin()
 
 	T.SkinScrollBar(ItemTextScrollFrameScrollBar)
 
-	if T.Wrath341 then
-		ItemTextPageText:SetTextColor("P", 1, 1, 1)
-	else
-		ItemTextPageText:SetTextColor(1, 1, 1)
-	end
+	ItemTextPageText:SetTextColor("P", 1, 1, 1)
 	ItemTextPageText.SetTextColor = T.dummy
 end
 

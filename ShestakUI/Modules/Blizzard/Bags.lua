@@ -629,9 +629,6 @@ function Stuffing:BagFrameSlotNew(p, slot)
 	ret.frame:StyleButton()
 	ret.frame:SetTemplate("Default")
 	ret.frame:SetNormalTexture(0)
-	if T.Classic and not T.Wrath341 then
-		ret.frame:SetCheckedTexture(0)
-	end
 
 	ret.icon = _G[ret.frame:GetName().."IconTexture"]
 	ret.icon:CropIcon()

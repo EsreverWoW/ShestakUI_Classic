@@ -75,32 +75,16 @@ local ShowTip = function(tip, link)
 	shown = nil
 end
 
-if T.Classic and not T.Wrath341 then
-	local _SetItemRef = SetItemRef
-	function SetItemRef(...)
-		local link = ...
-		local handled = strsplit(":", link)
-		if not IsModifiedClick() and handled and types[handled] and not shown then
-			local tip = CreateTip(link)
-			if tip then
-				ShowTip(tip, link)
-			end
-		else
-			return _SetItemRef(...)
+local SetHyperlink = _G.ItemRefTooltip.SetHyperlink
+function _G.ItemRefTooltip:SetHyperlink(link, ...)
+	local handled = strsplit(":", link)
+	if not InCombatLockdown() and not IsModifiedClick() and handled and types[handled] and not shown then
+		local tip = CreateTip(link)
+		if tip then
+			ShowTip(tip, link)
 		end
+		return
 	end
-else
-	local SetHyperlink = _G.ItemRefTooltip.SetHyperlink
-	function _G.ItemRefTooltip:SetHyperlink(link, ...)
-		local handled = strsplit(":", link)
-		if not InCombatLockdown() and not IsModifiedClick() and handled and types[handled] and not shown then
-			local tip = CreateTip(link)
-			if tip then
-				ShowTip(tip, link)
-			end
-			return
-		end
 
-		SetHyperlink(self, link, ...)
-	end
+	SetHyperlink(self, link, ...)
 end

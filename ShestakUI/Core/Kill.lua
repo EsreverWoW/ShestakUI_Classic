@@ -128,9 +128,7 @@ frame:SetScript("OnEvent", function(_, _, addon)
 	end
 
 	if C.bag.enable then
-		if T.Classic and not T.Wrath341 then
-			SetInsertItemsLeftToRight(false)
-		elseif T.Wrath341 then
+		if T.Classic then
 			C_Container.SetInsertItemsLeftToRight(false)
 		else
 			C_Container.SetSortBagsRightToLeft(true)

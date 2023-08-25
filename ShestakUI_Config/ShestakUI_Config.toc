@@ -1,5 +1,5 @@
-## Interface: 11403
-## Interface-Classic: 11403
+## Interface: 11404
+## Interface-Classic: 11404
 ## Interface-BCC: 20504
 ## Interface-Wrath: 30401
 ## Title: ShestakUI (Classic) Config
