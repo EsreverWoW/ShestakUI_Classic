@@ -10,11 +10,6 @@ local function LoadSkin()
 
 	PetStableFrameInset:SetTemplate("Overlay")
 
-	T.SkinRotateButton(PetStableModelRotateLeftButton)
-	T.SkinRotateButton(PetStableModelRotateRightButton)
-	PetStableModelRotateRightButton:ClearAllPoints()
-	PetStableModelRotateRightButton:SetPoint("LEFT", PetStableModelRotateLeftButton, "RIGHT", 3, 0)
-
 	T.SkinNextPrevButton(PetStablePrevPageButton, nil, "Any")
 	T.SkinNextPrevButton(PetStableNextPageButton, nil, "Any")
 
@@ -52,7 +47,7 @@ local function LoadSkin()
 	PetStableDiet:SetSize(20, 20)
 	PetStableDiet:SetPoint("TOPRIGHT", -9, -2)
 
-	PetStableDietTexture:SetTexture("Interface\\Icons\\ability_hunter_beasttraining")
+	PetStableDietTexture:SetTexture(132165)
 	PetStableDietTexture:SkinIcon()
 end
 
