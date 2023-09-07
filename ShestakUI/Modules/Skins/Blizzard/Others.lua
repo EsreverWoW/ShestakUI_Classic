@@ -368,29 +368,37 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 			end
 
 			-- NavBar Buttons (Used in EncounterJournal and HelpFrame)
+			local function NavButtonXOffset(button, point, anchor, point2, _, yoffset, skip)
+				if not skip then
+					button:SetPoint(point, anchor, point2, 1, yoffset, true)
+				end
+			end
+
 			local function SkinNavBarButtons(self)
 				if self:GetParent():GetName() == "WorldMapFrame" then return end
-				local navButton = self.navList[#self.navList]
-				if navButton and not navButton.isSkinned then
-					navButton:SkinButton(true)
-					if navButton.MenuArrowButton then
-						navButton.MenuArrowButton:SetNormalTexture(0)
-						navButton.MenuArrowButton:SetPushedTexture(0)
-						navButton.MenuArrowButton:SetHighlightTexture(0)
+				local total = #self.navList
+				local navButton = self.navList[total]
+				if navButton then
+					if total == 2 then
+						-- EJ.navBar.home.xoffset = 1 (this causes a taint, use the hook below instead)
+						NavButtonXOffset(navButton, navButton:GetPoint())
+						hooksecurefunc(navButton, "SetPoint", NavButtonXOffset)
 					end
-					navButton.xoffset = 1
-					navButton.isSkinned = true
+
+					if not navButton.isSkinned then
+						navButton:SkinButton(true)
+						if navButton.MenuArrowButton then
+							navButton.MenuArrowButton:SetNormalTexture(0)
+							navButton.MenuArrowButton:SetPushedTexture(0)
+							navButton.MenuArrowButton:SetHighlightTexture(0)
+						end
+
+						navButton.xoffset = 1
+						navButton.isSkinned = true
+					end
 				end
 			end
 			hooksecurefunc("NavBar_AddButton", SkinNavBarButtons)
-
-			local function SetHomeButtonOffsetX(self)
-				if self:GetParent():GetName() == "WorldMapFrame" then return end
-				if self.homeButton then
-					self.homeButton.xoffset = 1
-				end
-			end
-			hooksecurefunc("NavBar_Initialize", SetHomeButtonOffsetX)
 
 			if T.client == "ruRU" then
 				_G["DeclensionFrame"]:SetTemplate("Transparent")

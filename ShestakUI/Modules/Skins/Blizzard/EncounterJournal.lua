@@ -284,23 +284,47 @@ local function LoadSkin()
 		end
 	end)
 
-	local function SkinOverviewInfo(self, _, index)
-		local header = self.overviews[index]
-		if not header.isSkinned then
-
-			header.descriptionBG:SetAlpha(0)
-			header.descriptionBGBottom:SetAlpha(0)
-			for i = 4, 18 do
-				select(i, header.button:GetRegions()):SetTexture("")
+	local SkinOverviewInfo
+	do -- this prevents a taint trying to force a color lock by setting it to T.dummy
+		local LockColors = {}
+		local function LockValue(button, r, g, b)
+			if r ~= 1 or g ~= 1 or b ~= 0 then
+				button:SetTextColor(1, 1, 0)
 			end
+		end
 
-			header.button:SkinButton()
-			header.button.title:SetTextColor(1, 1, 0)
-			header.button.title.SetTextColor = T.dummy
-			header.button.expandedIcon:SetTextColor(1, 1, 1)
-			header.button.expandedIcon.SetTextColor = T.dummy
+		local function LockWhite(button, r, g, b)
+			if r ~= 1 or g ~= 1 or b ~= 1 then
+				button:SetTextColor(1, 1, 1)
+			end
+		end
 
-			header.isSkinned = true
+		local function LockColor(button, valuecolor)
+			if LockColors[button] then return end
+
+			hooksecurefunc(button, 'SetTextColor', (valuecolor and LockValue) or LockWhite)
+
+			LockColors[button] = true
+		end
+
+		SkinOverviewInfo = function(frame, _, index)
+			local header = frame.overviews[index]
+			if not header.isSkinned then
+				for i = 4, 18 do
+					select(i, header.button:GetRegions()):SetTexture()
+				end
+
+				header.button:SkinButton()
+
+				LockColor(header.button.title, true)
+				LockColor(header.button.expandedIcon)
+
+				header.descriptionBG:SetAlpha(0)
+				header.descriptionBGBottom:SetAlpha(0)
+				header.description:SetTextColor(1, 1, 1)
+
+				header.isSkinned = true
+			end
 		end
 	end
 	hooksecurefunc("EncounterJournal_SetUpOverview", SkinOverviewInfo)
