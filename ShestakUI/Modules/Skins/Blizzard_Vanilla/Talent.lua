@@ -24,8 +24,10 @@ local function LoadSkin()
 		_G["PlayerTalentFrameTalentPointsText"]:ClearAllPoints()
 		_G["PlayerTalentFrameTalentPointsText"]:SetPoint("RIGHT", _G["PlayerTalentFramePointsBar"], "RIGHT", 0, 0)
 
-		_G["PlayerTalentFrameRoleButton"]:ClearAllPoints()
-		_G["PlayerTalentFrameRoleButton"]:SetPoint("TOPRIGHT", _G["PlayerTalentFrameScrollFrame"], "TOPRIGHT", 0, -6)
+		if _G["PlayerTalentFrameRoleButton"] then
+			_G["PlayerTalentFrameRoleButton"]:ClearAllPoints()
+			_G["PlayerTalentFrameRoleButton"]:SetPoint("TOPRIGHT", _G["PlayerTalentFrameScrollFrame"], "TOPRIGHT", 0, -6)
+		end
 	else
 		_G["PlayerTalentFrameSpentPoints"]:ClearAllPoints()
 		_G["PlayerTalentFrameSpentPoints"]:SetPoint("TOP", _G["PlayerTalentFrame"].backdrop, "TOP", 0, -30)
