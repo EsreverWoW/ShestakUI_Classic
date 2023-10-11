@@ -63,6 +63,8 @@ local function Skin_WeakAuras(frame, type)
 	end
 end
 
+-- TODO: FIXME
+--[[
 hooksecurefunc(WeakAuras.regionPrototype, "create", function(region)
 	if region.regionType == "icon" or region.regionType == "aurabar" then
 		Skin_WeakAuras(region, region.regionType)
@@ -74,3 +76,4 @@ hooksecurefunc(WeakAuras.regionPrototype, "modifyFinish", function(_, region)
 		Skin_WeakAuras(region, region.regionType)
 	end
 end)
+--]]
