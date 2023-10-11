@@ -17,25 +17,15 @@ local function LoadSkin()
 	_G["PlayerTalentFrameTitleText"]:ClearAllPoints()
 	_G["PlayerTalentFrameTitleText"]:SetPoint("TOP", _G["PlayerTalentFrame"].backdrop, "TOP", 0, -6)
 
-	if T.Wrath then
-		_G["PlayerTalentFrameSpentPointsText"]:ClearAllPoints()
-		_G["PlayerTalentFrameSpentPointsText"]:SetPoint("LEFT", _G["PlayerTalentFramePointsBar"], "LEFT", 8, -2)
+	_G["PlayerTalentFrameSpentPointsText"]:ClearAllPoints()
+	_G["PlayerTalentFrameSpentPointsText"]:SetPoint("LEFT", _G["PlayerTalentFramePointsBar"], "LEFT", 8, -2)
 
-		_G["PlayerTalentFrameTalentPointsText"]:ClearAllPoints()
-		_G["PlayerTalentFrameTalentPointsText"]:SetPoint("RIGHT", _G["PlayerTalentFramePointsBar"], "RIGHT", 0, 0)
+	_G["PlayerTalentFrameTalentPointsText"]:ClearAllPoints()
+	_G["PlayerTalentFrameTalentPointsText"]:SetPoint("RIGHT", _G["PlayerTalentFramePointsBar"], "RIGHT", 0, 0)
 
-		if _G["PlayerTalentFrameRoleButton"] then
-			_G["PlayerTalentFrameRoleButton"]:ClearAllPoints()
-			_G["PlayerTalentFrameRoleButton"]:SetPoint("TOPRIGHT", _G["PlayerTalentFrameScrollFrame"], "TOPRIGHT", 0, -6)
-		end
-	else
-		_G["PlayerTalentFrameSpentPoints"]:ClearAllPoints()
-		_G["PlayerTalentFrameSpentPoints"]:SetPoint("TOP", _G["PlayerTalentFrame"].backdrop, "TOP", 0, -30)
-
-		_G["PlayerTalentFrameTalentPointsText"]:ClearAllPoints()
-		_G["PlayerTalentFrameTalentPointsText"]:SetPoint("BOTTOMRIGHT", _G["PlayerTalentFrame"], "BOTTOMLEFT", 220, 84)
-
-		_G["PlayerTalentFrameCancelButton"]:Kill()
+	if _G["PlayerTalentFrameRoleButton"] then
+		_G["PlayerTalentFrameRoleButton"]:ClearAllPoints()
+		_G["PlayerTalentFrameRoleButton"]:SetPoint("TOPRIGHT", _G["PlayerTalentFrameScrollFrame"], "TOPRIGHT", 0, -6)
 	end
 
 	_G["PlayerTalentFrameTab1"]:ClearAllPoints()
