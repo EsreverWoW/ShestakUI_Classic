@@ -9400,9 +9400,9 @@ C["filger_spells"] = {
 			-- Piercing Howl
 			{spellID = 12323, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
 
-			--[[
 			-- Raids: Wrath of the Lich King Classic
-			--]]
+			-- Mutated Slash (Mutated Abomination / Professor Putricide)
+			{spellID = 70542, unitID = "target", caster = "all", filter = "DEBUFF"},
 
 			--[[
 			-- Raids: Burning Crusade Classic
