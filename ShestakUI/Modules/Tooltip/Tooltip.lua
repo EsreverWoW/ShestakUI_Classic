@@ -331,9 +331,7 @@ local OnTooltipSetUnit = function(self)
 			else
 				_G["GameTooltipTextLeft2"]:SetTextColor(0, 1, 1)
 			end
-			if not T.Vanilla and C.tooltip.rank then
-				self:AddLine(RANK..": |cffffffff"..guildRank.."|r")
-			end
+			self:AddLine(RANK..": |cffffffff"..guildRank.."|r")
 		end
 
 		local n = guildName and 3 or 2
@@ -353,10 +351,6 @@ local OnTooltipSetUnit = function(self)
 				line:SetText()
 				break
 			end
-		end
-
-		if T.Vanilla and guildName and C.tooltip.rank then -- Rank line needs to come later for Classic 1.13.*/1.14.* clients
-			self:AddLine(RANK..": |cffffffff"..guildRank.."|r")
 		end
 	else
 		for i = 2, lines do
