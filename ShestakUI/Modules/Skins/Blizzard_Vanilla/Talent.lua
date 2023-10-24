@@ -61,39 +61,37 @@ local function LoadSkin()
 		end
 	end
 
-	if T.Wrath then
-		for i = 1, MAX_TALENT_TABS do
-			local tab = _G["PlayerSpecTab"..i]
-			tab:GetRegions():Hide()
+	for i = 1, MAX_TALENT_TABS do
+		local tab = _G["PlayerSpecTab"..i]
+		tab:GetRegions():Hide()
 
-			tab:SetTemplate("Default")
-			tab:StyleButton(true)
+		tab:SetTemplate("Default")
+		tab:StyleButton(true)
 
-			tab:GetNormalTexture():SetInside()
-			tab:GetNormalTexture():SetTexCoord(0.1, 0.9, 0.1, 0.9)
-		end
-
-		_G["PlayerTalentFrameStatusFrame"]:SetPoint("TOP", 8, -30)
-		_G["PlayerTalentFrameStatusFrame"]:StripTextures()
-
-		_G["PlayerTalentFrameActivateButton"]:SetPoint("TOP", -10, -40)
-		_G["PlayerTalentFrameActivateButton"]:SkinButton()
-
-		_G["PlayerTalentFrameResetButton"]:SetPoint("RIGHT", -2, -1)
-		_G["PlayerTalentFrameResetButton"]:SkinButton()
-
-		_G["PlayerTalentFrameLearnButton"]:SetPoint("RIGHT", _G["PlayerTalentFrameResetButton"], "LEFT", -3, 0)
-		_G["PlayerTalentFrameLearnButton"]:SkinButton()
-
-		_G["PlayerSpecTab1"]:SetPoint("TOPLEFT", _G["PlayerTalentFrame"], "TOPRIGHT", -33, -65)
-		_G["PlayerSpecTab1"].ClearAllPoints = T.dummy
-		_G["PlayerSpecTab1"].SetPoint = T.dummy
-
-		_G["PlayerTalentFramePreviewBar"]:StripTextures()
-		_G["PlayerTalentFramePreviewBarFiller"]:StripTextures()
-
-		_G["PlayerTalentFramePointsBar"]:StripTextures()
+		tab:GetNormalTexture():SetInside()
+		tab:GetNormalTexture():SetTexCoord(0.1, 0.9, 0.1, 0.9)
 	end
+
+	_G["PlayerTalentFrameStatusFrame"]:SetPoint("TOP", 8, -30)
+	_G["PlayerTalentFrameStatusFrame"]:StripTextures()
+
+	_G["PlayerTalentFrameActivateButton"]:SetPoint("TOP", -10, -40)
+	_G["PlayerTalentFrameActivateButton"]:SkinButton()
+
+	_G["PlayerTalentFrameResetButton"]:SetPoint("RIGHT", -2, -1)
+	_G["PlayerTalentFrameResetButton"]:SkinButton()
+
+	_G["PlayerTalentFrameLearnButton"]:SetPoint("RIGHT", _G["PlayerTalentFrameResetButton"], "LEFT", -3, 0)
+	_G["PlayerTalentFrameLearnButton"]:SkinButton()
+
+	_G["PlayerSpecTab1"]:SetPoint("TOPLEFT", _G["PlayerTalentFrame"], "TOPRIGHT", -33, -65)
+	_G["PlayerSpecTab1"].ClearAllPoints = T.dummy
+	_G["PlayerSpecTab1"].SetPoint = T.dummy
+
+	_G["PlayerTalentFramePreviewBar"]:StripTextures()
+	_G["PlayerTalentFramePreviewBarFiller"]:StripTextures()
+
+	_G["PlayerTalentFramePointsBar"]:StripTextures()
 
 	local f = CreateFrame("Frame")
 	f:RegisterEvent("CHARACTER_POINTS_CHANGED")
