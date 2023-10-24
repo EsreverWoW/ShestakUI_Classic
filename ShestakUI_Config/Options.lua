@@ -1688,7 +1688,14 @@ do
 		plugins_over_heal_absorb,
 	}
 
-	if IsClassicBuild() then
+	local wrath = {
+		by_role,
+		icons_phase,
+		plugins_over_absorb,
+		plugins_over_heal_absorb,
+	}
+
+	if IsClassicBuild() and not IsWrathBuild() then
 		HideOptions(classic)
 		icons_raid_mark:SetPoint("TOPLEFT", icons_role, "BOTTOMLEFT", 0, -8)
 		icons_ready_check:ClearAllPoints()
@@ -1697,6 +1704,9 @@ do
 		icons_sumon:ClearAllPoints()
 		icons_sumon:SetPoint("LEFT", icons_leader, "RIGHT", 248, 0)
 		icons_phase:SetPoint("TOPLEFT", icons_leader, "BOTTOMLEFT", 0, 0)
+		plugins_auto_resurrection:SetPoint("TOPLEFT", plugins_over_heal_absorb, "BOTTOMLEFT", 0, 0)
+	elseif IsWrathBuild() then
+		HideOptions(wrath)
 		plugins_auto_resurrection:SetPoint("TOPLEFT", plugins_over_heal_absorb, "BOTTOMLEFT", 0, 0)
 	end
 end
