@@ -20,7 +20,7 @@ WorldMapFrame:SetClampedToScreen(true)
 ----------------------------------------------------------------------------------------
 --	Count of quests
 ----------------------------------------------------------------------------------------
-local maxQuest = 35
+local maxQuest = T.Vanilla and 20 or T.Classic and 25 or 35
 local numQuest = CreateFrame("Frame", nil, QuestMapFrame)
 numQuest.text = numQuest:CreateFontString(nil, "ARTWORK", "GameFontNormal")
 numQuest.text:SetPoint("TOP", QuestMapFrame, "TOP", 0, -21)
