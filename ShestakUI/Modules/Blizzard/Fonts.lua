@@ -143,6 +143,8 @@ end
 
 if LSM then
 	LSM:Register(LSM.MediaType.FONT, "Calibri", [[Interface\AddOns\ShestakUI\Media\Fonts\Normal.ttf]], LOCALE_MASK)
+	LSM:Register(LSM.MediaType.FONT, "Expressway", [[Interface\AddOns\ShestakUI\Media\Fonts\Expressway.ttf]], LOCALE_MASK)
+	LSM:Register(LSM.MediaType.FONT, "Expressway Bold", [[Interface\AddOns\ShestakUI\Media\Fonts\ExpresswayBold.ttf]], LOCALE_MASK)
 	LSM:Register(LSM.MediaType.FONT, "Hooge", [[Interface\AddOns\ShestakUI\Media\Fonts\Pixel.ttf]], LOCALE_MASK)
 	LSM:Register(LSM.MediaType.STATUSBAR, "Smooth!", [[Interface\AddOns\ShestakUI\Media\Textures\Texture.tga]])
 end
