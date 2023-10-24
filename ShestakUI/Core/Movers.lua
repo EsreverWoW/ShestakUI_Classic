@@ -473,7 +473,9 @@ frame:RegisterEvent("PLAYER_ENTERING_WORLD")
 frame:SetScript("OnEvent", function(self, event)
 	self:UnregisterEvent(event)
 	RestoreUI(self)
-	C_EditMode.SetActiveLayout(1) -- BETA Remove after while
+	if T.Mainline then
+		C_EditMode.SetActiveLayout(1) -- BETA Remove after while
+	end
 end)
 
 SlashCmdList.MOVING = InitMove
@@ -525,8 +527,10 @@ StaticPopupDialogs.MOVEUI_RESET = {
 }
 
 -- Replace EditMode with our moving system
-GameMenuButtonEditMode:SetScript("OnClick", function()
-	PlaySound(SOUNDKIT.IG_MAINMENU_OPTION)
-	SlashCmdList.MOVING()
-	HideUIPanel(GameMenuFrame)
-end)
+if T.Mainline then
+	GameMenuButtonEditMode:SetScript("OnClick", function()
+		PlaySound(SOUNDKIT.IG_MAINMENU_OPTION)
+		SlashCmdList.MOVING()
+		HideUIPanel(GameMenuFrame)
+	end)
+end
