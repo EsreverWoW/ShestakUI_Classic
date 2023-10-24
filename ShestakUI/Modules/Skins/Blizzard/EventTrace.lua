@@ -14,7 +14,9 @@ local function LoadSkin()
 	EventTrace.SubtitleBar.OptionsDropDown:SkinButton()
 	T.SkinEditBox(EventTrace.Log.Bar.SearchBox, nil, 16)
 
-	EventTrace.Log.Events.ScrollBar.Background:Hide()
+	if EventTrace.Log.Events.ScrollBar.Background then
+		EventTrace.Log.Events.ScrollBar.Background:Hide()
+	end
 
 	EventTraceTooltip:HookScript("OnShow", function(self)
 		if self.NineSlice then
