@@ -275,7 +275,7 @@ OpenMenuBG:SetScript("OnMouseUp", function()
 	end
 end)
 OpenMenuBG:HookScript("OnEnter", function(self)
-	if (T.class == "MAGE" and T.level >= 11) and _G["TeleportMenu"]:IsShown() then
+	if (T.class == "MAGE" and T.level >= 11) and _G["TeleportMenu"] and _G["TeleportMenu"]:IsShown() then
 	else
 		self:FadeIn()
 	end
