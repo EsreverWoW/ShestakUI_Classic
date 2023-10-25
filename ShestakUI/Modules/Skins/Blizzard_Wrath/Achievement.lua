@@ -36,7 +36,7 @@ local function LoadSkin()
 		if f then
 			for i = 1, _G[frame]:GetNumChildren() do
 				local child = select(i, _G[frame]:GetChildren())
-				if child and not child:GetName() and child.NineSlice then
+				if child and not child:GetName() then
 					child.NineSlice:SetAlpha(0)
 				end
 			end

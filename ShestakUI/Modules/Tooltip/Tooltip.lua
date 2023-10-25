@@ -45,15 +45,7 @@ local backdrop = {
 
 for _, tt in pairs(tooltips) do
 	if not IsAddOnLoaded("Aurora") then
-		if tt.SetBackdrop then
-			tt:SetBackdrop(nil)
-			tt.SetBackdrop = T.dummy
-			if tt.BackdropFrame then
-				tt.BackdropFrame:SetBackdrop(nil)
-			end
-		else
-			tt.NineSlice:SetAlpha(0)
-		end
+		tt.NineSlice:SetAlpha(0)
 		local bg = CreateFrame("Frame", nil, tt)
 		bg:SetPoint("TOPLEFT")
 		bg:SetPoint("BOTTOMRIGHT")

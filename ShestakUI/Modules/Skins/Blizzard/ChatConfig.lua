@@ -200,13 +200,7 @@ local function LoadSkin()
 			local swatchName = nameString..index
 			local swatch = _G[swatchName]
 
-			if swatch.SetBackdrop then
-				if T.Classic then
-					swatch:SetBackdrop(nil)
-				end
-			else
-				swatch.NineSlice:SetAlpha(0)
-			end
+			swatch.NineSlice:SetAlpha(0)
 
 			local bg = CreateFrame("Frame", nil, swatch)
 			bg:SetPoint("TOPLEFT", 0, 0)
@@ -257,13 +251,9 @@ local function LoadSkin()
 			else
 				tab:SetPoint("LEFT", _G["CombatConfigTab"..i-1], "RIGHT", 1, 0)
 			end
-			if T.Classic then
-				_G["CombatConfigTab"..i.."Text"]:SetPoint("BOTTOM", 0, 7)
-			else
-				local text = tab.Text
-				if text then
-					text:SetWidth(text:GetWidth() + 10)
-				end
+			local text = tab.Text
+			if text then
+				text:SetWidth(text:GetWidth() + 10)
 			end
 		end
 		if T.Mainline then

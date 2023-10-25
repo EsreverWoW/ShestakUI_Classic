@@ -19,11 +19,7 @@ local function LoadSkin()
 	end
 
 	EventTraceTooltip:HookScript("OnShow", function(self)
-		if self.NineSlice then
-			self.NineSlice:SetTemplate("Transparent")
-		else
-			self:SetTemplate("Transparent")
-		end
+		self.NineSlice:SetTemplate("Transparent")
 	end)
 end
 
