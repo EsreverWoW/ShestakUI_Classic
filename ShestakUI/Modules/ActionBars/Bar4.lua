@@ -17,7 +17,9 @@ MultiBarRight:SetParent(bar)
 
 bar:RegisterEvent("PLAYER_ENTERING_WORLD")
 bar:SetScript("OnEvent", function(self, event)
-	Settings.SetValue("PROXY_SHOW_ACTIONBAR_4", true)
+	if not T.Classic then
+		Settings.SetValue("PROXY_SHOW_ACTIONBAR_4", true)
+	end
 	local NumPerRows = C.actionbar.bar4_row
 	local NextRowButtonAnchor = _G["MultiBarRightButton1"]
 	for i = 1, 12 do

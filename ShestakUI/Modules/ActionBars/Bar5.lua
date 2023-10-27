@@ -33,7 +33,9 @@ bar:SetFrameStrata("LOW")
 
 bar:RegisterEvent("PLAYER_ENTERING_WORLD")
 bar:SetScript("OnEvent", function(self, event)
-	Settings.SetValue("PROXY_SHOW_ACTIONBAR_5", true)
+	if not T.Classic then
+		Settings.SetValue("PROXY_SHOW_ACTIONBAR_5", true)
+	end
 	local NumPerRows = C.actionbar.bar5_row
 	local NextRowButtonAnchor = _G["MultiBarBottomRightButton1"]
 	for i = 1, 12 do
