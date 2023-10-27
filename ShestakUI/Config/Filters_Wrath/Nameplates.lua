@@ -665,7 +665,7 @@ T.ImportantCast = {
 }
 
 local color = C.nameplate.mob_color
-local color2 = {0, 0.7, 0.6}
+local color_alt = {0, 0.7, 0.6}
 T.ColorPlate = {
 	-- PvP
 		["5925"] = color,		-- Grounding Totem
@@ -712,7 +712,7 @@ T.ColorPlate = {
 		-- Sethekk Halls
 		["18325"] = color,		-- Sethekk Prophet
 		["18327"] = color,		-- Time-Lost Controller
-		["20343"] = color2,		-- Charming Totem
+		["20343"] = color_alt,		-- Charming Totem
 		-- Old Hillsbrad Foothills
 		["17833"] = color,		-- Durnholde Warden
 		["18934"] = color,		-- Durnholde Mage
