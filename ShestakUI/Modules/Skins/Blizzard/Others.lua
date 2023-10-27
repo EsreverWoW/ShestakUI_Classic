@@ -59,7 +59,10 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 			LFDRoleCheckPopup:StripTextures()
 		end
 
-		ColorPickerFrame.Border:Hide()
+		if T.Mainline then
+			ColorPickerFrame.Border:Hide()
+		end
+
 		AutoCompleteBox.NineSlice:SetTemplate("Transparent")
 
 		for i = 1, getn(bgskins) do
@@ -310,12 +313,12 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 
 		-- Reskin scrollbars
 		local scrollbars = {
-			"BaudErrorFrameListScrollBoxScrollBarScrollBar",
-			"BaudErrorFrameDetailScrollFrameScrollBar"
+			"BaudErrorFrameListScrollBoxScrollBar",
+			"BaudErrorFrameDetailScrollFrame"
 		}
 
 		for _, scrollbar in pairs(scrollbars) do
-			local bars = _G[scrollbar]
+			local bars = _G[scrollbar] and _G[scrollbar].ScrollBar
 			if bars then
 				T.SkinScrollBar(bars)
 			end
