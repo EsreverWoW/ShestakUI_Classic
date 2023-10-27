@@ -44,7 +44,6 @@ local function LoadSkin()
 	BankFrame:StripTextures(true)
 	BankFrame:CreateBackdrop("Transparent")
 	BankFrame.backdrop:SetAllPoints()
-	BankFramePortrait:SetAlpha(0)
 
 	BankFrameMoneyFrame:StripTextures()
 
@@ -71,7 +70,7 @@ local function LoadSkin()
 		local bag = BankSlotsFrame["Bag"..i]
 		local icon = bag.icon
 
-		bag.IconBorder:SetAlpha(0)
+		bag.IconBorder:Kill()
 
 		bag:StripTextures()
 		bag:StyleButton()
