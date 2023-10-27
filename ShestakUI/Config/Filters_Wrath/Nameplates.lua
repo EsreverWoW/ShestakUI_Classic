@@ -656,11 +656,11 @@ T.PlateBlacklist = {
 	-- Raid
 }
 
-T.InterruptCast = {
+T.InterruptCast = { -- Yellow border for interruptible cast
 	-- [SpellID] = true,	-- Spell Name
 }
 
-T.ImportantCast = {
+T.ImportantCast = { -- Red border for non-interruptible cast
 	-- [SpellID] = true,	-- Spell Name
 }
 
