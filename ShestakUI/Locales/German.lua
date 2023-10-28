@@ -186,7 +186,7 @@ L_POPUP_ARMORY = "Waffenkammer"
 
 -- Welcome message
 L_WELCOME_LINE_1 = "Willkommen bei ShestakUI "
-L_WELCOME_LINE_2_1 = "Gebe /cfg ein um das Interface zu konfigurieren, oder besuche https://github.com/Shestak/ShestakUI"
+L_WELCOME_LINE_2_1 = "Gebe /cfg ein um das Interface zu konfigurieren, oder besuche https://github.com/Wetxius/ShestakUI_Help/wiki/English"
 L_WELCOME_LINE_2_2 = "für weitere Informationen."
 L_WELCOME_LINE_1_CLASSIC = "Willkommen bei ShestakUI (Classic) "
 L_WELCOME_LINE_2_1_CLASSIC = "Gebe /cfg ein um das Interface zu konfigurieren, oder besuche https://github.com/EsreverWoW/ShestakUI_Classic"

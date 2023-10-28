@@ -186,7 +186,7 @@ L_POPUP_ARMORY = "英雄榜"
 
 -- Welcome message
 L_WELCOME_LINE_1 = "欢迎使用ShestakUI "
-L_WELCOME_LINE_2_1 = "键入 /cfg 进行插件设置, 或者访问https://github.com/Shestak/ShestakUI"
+L_WELCOME_LINE_2_1 = "键入 /cfg 进行插件设置, 或者访问https://github.com/Wetxius/ShestakUI_Help/wiki/English"
 L_WELCOME_LINE_2_2 = "获取更多信息。"
 L_WELCOME_LINE_1_CLASSIC = "欢迎使用ShestakUI (Classic) "
 L_WELCOME_LINE_2_1_CLASSIC = "键入 /cfg 进行插件设置, 或者访问https://github.com/EsreverWoW/ShestakUI_Classic"
