@@ -56,7 +56,7 @@ local function LoadSecondarySkin()
 
 	T.SkinNextPrevButton(ScriptErrorsFrame.PreviousError, true)
 	T.SkinNextPrevButton(ScriptErrorsFrame.NextError)
-	if not T.newPatch then
+	if T.Mainline and not T.newPatch then
 		T.SkinScrollBar(ScriptErrorsFrameScrollBar)
 	end
 	T.SkinCloseButton(ScriptErrorsFrameClose)
