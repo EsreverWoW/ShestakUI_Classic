@@ -9681,3 +9681,4 @@ C["filger_spells"] = {
 }
 
 T.CustomFilgerSpell = T.CustomFilgerSpell or {}
+T.FilgerIgnoreSpell = T.FilgerIgnoreSpell or {}
