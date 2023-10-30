@@ -50,8 +50,8 @@ function frame:PLAYER_LOGIN()
 	SetCVar("nameplateOtherTopInset", C.nameplate.clamp and 0.08 or -1)
 	SetCVar("nameplateOtherBottomInset", C.nameplate.clamp and 0.1 or -1)
 	SetCVar("clampTargetNameplateToScreen", C.nameplate.clamp and "1" or "0")
-	SetCVar("nameplateMaxDistance", C.nameplate.distance or 41)
 
+	SetCVar("nameplateMaxDistance", C.nameplate.distance or 41)
 	SetCVar("nameplatePlayerMaxDistance", 60)
 
 	if C.nameplate.only_name then
