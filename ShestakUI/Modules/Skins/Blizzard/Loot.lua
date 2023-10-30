@@ -6,17 +6,32 @@ if C.skins.blizzard_frames ~= true then return end
 ----------------------------------------------------------------------------------------
 local function LoadSkin()
 	-- Loot History frame
-	GroupLootHistoryFrame:StripTextures()
-	GroupLootHistoryFrame:SetTemplate("Transparent")
+	if T.Classic then
+		LootHistoryFrame:StripTextures()
+		LootHistoryFrame:SetTemplate("Transparent")
 
-	T.SkinCloseButton(GroupLootHistoryFrame.ClosePanelButton)
-	T.SkinCloseButton(GroupLootHistoryFrame.ResizeButton, nil, " ")
-	T.SkinScrollBar(GroupLootHistoryFrame.ScrollBar)
+		T.SkinCloseButton(LootHistoryFrame.CloseButton)
+		T.SkinCloseButton(LootHistoryFrame.ResizeButton, nil, " ")
+		LootHistoryFrameScrollFrame:GetRegions():Hide()
+		T.SkinScrollBar(LootHistoryFrameScrollFrameScrollBar)
 
-	GroupLootHistoryFrame.ResizeButton:SetTemplate("Default")
-	GroupLootHistoryFrame.ResizeButton:SetWidth(GroupLootHistoryFrame:GetWidth())
-	GroupLootHistoryFrame.ResizeButton:ClearAllPoints()
-	GroupLootHistoryFrame.ResizeButton:SetPoint("TOP", GroupLootHistoryFrame, "BOTTOM", 0, -1)
+		LootHistoryFrame.ResizeButton:SetTemplate("Default")
+		LootHistoryFrame.ResizeButton:SetWidth(LootHistoryFrame:GetWidth())
+		LootHistoryFrame.ResizeButton:ClearAllPoints()
+		LootHistoryFrame.ResizeButton:SetPoint("TOP", LootHistoryFrame, "BOTTOM", 0, -1)
+	else
+		GroupLootHistoryFrame:StripTextures()
+		GroupLootHistoryFrame:SetTemplate("Transparent")
+
+		T.SkinCloseButton(GroupLootHistoryFrame.ClosePanelButton)
+		T.SkinCloseButton(GroupLootHistoryFrame.ResizeButton, nil, " ")
+		T.SkinScrollBar(GroupLootHistoryFrame.ScrollBar)
+
+		GroupLootHistoryFrame.ResizeButton:SetTemplate("Default")
+		GroupLootHistoryFrame.ResizeButton:SetWidth(GroupLootHistoryFrame:GetWidth())
+		GroupLootHistoryFrame.ResizeButton:ClearAllPoints()
+		GroupLootHistoryFrame.ResizeButton:SetPoint("TOP", GroupLootHistoryFrame, "BOTTOM", 0, -1)
+	end
 
 	local function UpdateLoots(self)
 		local numItems = C_LootHistory.GetNumItems()
@@ -40,7 +55,11 @@ local function LoadSkin()
 			end
 		end
 	end
-	if not T.newPatch then
+
+	if T.Classic then
+		hooksecurefunc("LootHistoryFrame_FullUpdate", UpdateLoots)
+		LootHistoryFrame:HookScript("OnShow", UpdateLoots)
+	else
 		hooksecurefunc("GroupLootHistoryFrame_FullUpdate", UpdateLoots)
 		GroupLootHistoryFrame:HookScript("OnShow", UpdateLoots)
 	end
