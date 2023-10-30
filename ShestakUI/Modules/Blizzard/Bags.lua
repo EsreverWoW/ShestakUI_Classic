@@ -844,7 +844,7 @@ function Stuffing:SearchUpdate(str)
 				bindType = bind[bindType] or ""
 				minLevel = minLevel or 1
 				local isBoA = false
-				if str and str == "boa" then
+				if str and str == "boa" and T.Mainline then
 					local data = C_TooltipInfo.GetBagItem(b.bag, b.slot)
 					if data then
 						for j = 2, 5 do
