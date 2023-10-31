@@ -876,8 +876,10 @@ local CountOffSets = {
 
 T.CreateAuraWatchIcon = function(_, icon)
 	icon:CreateBorder(nil, true)
-	-- icon.icon:SetPoint("TOPLEFT", icon, 0, 0)
-	-- icon.icon:SetPoint("BOTTOMRIGHT", icon, 0, 0)
+	if T.Classic then
+		icon.icon:SetPoint("TOPLEFT", icon, 0, 0)
+		icon.icon:SetPoint("BOTTOMRIGHT", icon, 0, 0)
+	end
 	icon.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 	icon.icon:SetDrawLayer("ARTWORK")
 	if icon.cd then
