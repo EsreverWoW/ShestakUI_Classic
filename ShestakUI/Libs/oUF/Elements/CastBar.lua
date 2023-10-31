@@ -547,10 +547,6 @@ local function Enable(self, unit)
 			LibClassicCasterino.RegisterCallback(self, 'UNIT_SPELLCAST_INTERRUPTED', CastbarEventHandler)
 		end
 
-		-- Tradeskill block
-		self:RegisterEvent('UNIT_SPELLCAST_SENT', UNIT_SPELLCAST_SENT, true)
-		-- end block
-
 		element.holdTime = 0
 		element.Pips = {}
 
