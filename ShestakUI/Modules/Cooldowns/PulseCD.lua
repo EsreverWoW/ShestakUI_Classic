@@ -88,16 +88,7 @@ local function OnUpdate(_, update)
                     end)
 				elseif v[2] == "item" then
 					getCooldownDetails = memoize(function()
-                        local start, duration, enabled
-						if T.Classic then
-							if v[4] == "action" then
-								start, duration, enabled = GetActionCooldown(v[5])
-							elseif v[4] == "inventory" then
-								start, duration, enabled = GetInventoryItemCooldown("player", v[5])
-							elseif v[4] == "container" then
-								start, duration, enabled = C_Container.GetContainerItemCooldown(v[5], v[6])
-							end
-						end
+						local start, duration, enabled = GetItemCooldown(i)
                         return {
                             name = GetItemInfo(i),
                             texture = v[3],
@@ -247,7 +238,7 @@ hooksecurefunc("UseAction", function(slot)
 	if actionType == "item" then
 		local texture = GetActionTexture(slot)
 		if texture == 136235 then return end -- prevent temp icon
-		watching[itemID] = {GetTime(), "item", texture, "action", slot}
+		watching[itemID] = {GetTime(), "item", texture}
 	end
 end)
 
@@ -256,7 +247,7 @@ hooksecurefunc("UseInventoryItem", function(slot)
 	if itemID then
 		local texture = GetInventoryItemTexture("player", slot)
 		if texture == 136235 then return end -- prevent temp icon
-		watching[itemID] = {GetTime(), "item", texture, "inventory", slot}
+		watching[itemID] = {GetTime(), "item", texture}
 	end
 end)
 
@@ -266,7 +257,7 @@ if T.Classic then
 		if itemID then
 			local texture = select(10, GetItemInfo(itemID))
 			if texture == 136235 then return end -- prevent temp icon
-			watching[itemID] = {GetTime(), "item", texture, "container", bag, slot}
+			watching[itemID] = {GetTime(), "item", texture}
 		end
 	end)
 end

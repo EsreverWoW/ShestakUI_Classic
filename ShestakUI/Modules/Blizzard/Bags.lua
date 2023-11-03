@@ -211,15 +211,9 @@ function Stuffing:SlotUpdate(b)
 		count, locked, quality, clink = info.stackCount, info.isLocked, info.quality, info.hyperlink
 	end
 	local texture = info and info.iconFileID or 0
-	local isQuestItem, questId, isActiveQuest
+	local questData = C_Container.GetContainerItemQuestInfo(b.bag, b.slot)
+	local isQuestItem, questId, isActiveQuest = questData.isQuestItem, questData.questID, questData.isActive
 	local itemIsUpgrade
-	if T.Classic then
-		-- isQuestItem, questId, isActiveQuest
-		if b.itemClassID == Enum.ItemClass.Questitem then isQuestItem = true end
-	else
-		local questData = C_Container.GetContainerItemQuestInfo(b.bag, b.slot)
-		isQuestItem, questId, isActiveQuest = questData.isQuestItem, questData.questID, questData.isActive
-	end
 
 	-- Set all slot color to default ShestakUI on update
 	if not b.frame.lock then

@@ -301,7 +301,7 @@ local function FindAuras(self, unit)
 
 			local data = SpellGroups[self.Id].spells[name] or SpellGroups[self.Id].spells[spid]
 			if data and (data.caster ~= 1 and (caster == data.caster or data.caster == "all") or MyUnits[caster]) and (not data.unitID or data.unitID == unit) and (not data.absID or spid == data.spellID) then
-				local isKnown = T.Mainline and data.requireSpell and IsPlayerSpell(data.requireSpell)
+				local isKnown = data.requireSpell and IsPlayerSpell(data.requireSpell)
 				if ((data.filter == "BUFF" and filter == "HELPFUL") or (data.filter == "DEBUFF" and filter == "HARMFUL")) and (not data.spec or data.spec == T.Spec) and (not data.requireSpell or isKnown) then
 					if not data.count or count >= data.count then
 						if LibClassicDurations then
