@@ -235,21 +235,24 @@ local function friendsFrame()
 		local button = buttons[i]
 		if button:IsShown() then
 			if button.buttonType == FRIENDS_BUTTON_TYPE_WOW then
-				local name, level, class, area, connected = C_FriendList.GetFriendInfo(button.id)
-				if connected then
-					nameText = classColor[class]..name.."|r, "..format(FRIENDS_LEVEL_TEMPLATE, diffColor[level]..level.."|r", class)
-					if area == playerArea then
-						infoText = format("|cff00ff00%s|r", area)
+				local info = C_FriendList.GetFriendInfoByIndex(button.id)
+				if info.connected then
+					nameText = classColor[info.className]..info.name.."|r, "..format(FRIENDS_LEVEL_TEMPLATE, diffColor[info.level]..info.level.."|r", info.className)
+					if info.area == playerArea then
+						infoText = format("|cff00ff00%s|r", info.area)
 					end
 				end
 			elseif button.buttonType == FRIENDS_BUTTON_TYPE_BNET then
-				local _, presenceName, _, _, _, toonID, client, isOnline = BNGetFriendInfo(button.id)
-				if isOnline and client == BNET_CLIENT_WOW then
-					local _, toonName, _, _, _, _, _, class, _, zoneName = BNGetGameAccountInfo(toonID)
-					if presenceName and toonName and class then
-						nameText = format(BATTLENET_NAME_FORMAT, presenceName, "").." "..FRIENDS_WOW_NAME_COLOR_CODE.."("..classColor[class]..classColor[class]..toonName..FRIENDS_WOW_NAME_COLOR_CODE..")"
-						if zoneName == playerArea then
-							infoText = format("|cff00ff00%s|r", zoneName)
+				local accountInfo = C_BattleNet.GetFriendAccountInfo(button.id)
+				if accountInfo.gameAccountInfo.isOnline and accountInfo.gameAccountInfo.clientProgram == BNET_CLIENT_WOW then
+					local accountName = accountInfo.accountName
+					local characterName = accountInfo.gameAccountInfo.characterName
+					local class = accountInfo.gameAccountInfo.className
+					local areaName = accountInfo.gameAccountInfo.areaName
+					if accountName and characterName and class then
+						nameText = format(BATTLENET_NAME_FORMAT, accountName, "").." "..FRIENDS_WOW_NAME_COLOR_CODE.."("..classColor[class]..classColor[class]..characterName..FRIENDS_WOW_NAME_COLOR_CODE..")"
+						if areaName == playerArea then
+							infoText = format("|cff00ff00%s|r", areaName)
 						end
 					end
 				end
