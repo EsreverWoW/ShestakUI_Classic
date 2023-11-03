@@ -89,20 +89,39 @@ local function LoadSkin()
 	MerchantRepairItemButton:StyleButton()
 	MerchantRepairItemButton:SetTemplate("Default")
 	MerchantRepairItemButton:GetRegions():SetTexCoord(0.04, 0.24, 0.06, 0.5)
-	MerchantRepairItemButton:GetRegions():SetInside()
-	MerchantRepairItemButton.Icon:CropIcon()
+	if T.Classic then
+		MerchantRepairItemButton:GetRegions():ClearAllPoints()
+		MerchantRepairItemButton:GetRegions():SetPoint("TOPLEFT", 2, -2)
+		MerchantRepairItemButton:GetRegions():SetPoint("BOTTOMRIGHT", -2, 2)
+	else
+		MerchantRepairItemButton:GetRegions():SetInside()
+		MerchantRepairItemButton.Icon:CropIcon()
+	end
 
 	MerchantRepairAllButton:StyleButton()
 	MerchantRepairAllButton:SetTemplate("Default")
-	MerchantRepairAllButton:GetRegions():SetTexCoord(0.61, 0.82, 0.1, 0.52)
-	MerchantRepairAllButton:GetRegions():SetInside()
-	MerchantRepairAllButton.Icon:CropIcon()
+	if T.Classic then
+		MerchantRepairAllIcon:SetTexCoord(0.34, 0.1, 0.34, 0.535, 0.535, 0.1, 0.535, 0.535)
+		MerchantRepairAllIcon:ClearAllPoints()
+		MerchantRepairAllIcon:SetPoint("TOPLEFT", 2, -2)
+		MerchantRepairAllIcon:SetPoint("BOTTOMRIGHT", -2, 2)
+	else
+		MerchantRepairAllButton:GetRegions():SetTexCoord(0.61, 0.82, 0.1, 0.52)
+		MerchantRepairAllButton:GetRegions():SetInside()
+		MerchantRepairAllButton.Icon:CropIcon()
+	end
 
 	MerchantGuildBankRepairButton:StyleButton()
 	MerchantGuildBankRepairButton:SetTemplate("Default")
 	MerchantGuildBankRepairButton:GetRegions():SetTexCoord(0.61, 0.82, 0.1, 0.52)
-	MerchantGuildBankRepairButton:GetRegions():SetInside()
-	MerchantGuildBankRepairButton.Icon:CropIcon()
+	if T.Classic then
+		MerchantGuildBankRepairButtonIcon:ClearAllPoints()
+		MerchantGuildBankRepairButtonIcon:SetPoint("TOPLEFT", 2, -2)
+		MerchantGuildBankRepairButtonIcon:SetPoint("BOTTOMRIGHT", -2, 2)
+	else
+		MerchantGuildBankRepairButton:GetRegions():SetInside()
+		MerchantGuildBankRepairButton.Icon:CropIcon()
+	end
 
 	-- Misc frames
 	T.SkinCloseButton(MerchantFrameCloseButton, MerchantFrame.backdrop)
