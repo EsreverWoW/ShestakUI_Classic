@@ -2541,12 +2541,10 @@ do
 
 	if IsVanillaBuild() or IsTBCBuild() then
 		HideOptions(classic)
-		average_lvl:SetPoint("TOPLEFT", show_shift, "BOTTOMLEFT", 0, 0)
-		raid_icon:SetPoint("TOPLEFT", average_lvl, "BOTTOMLEFT", 0, -24)
+		raid_icon:SetPoint("TOPLEFT", average_lvl, "BOTTOMLEFT", 0, 0)
 	elseif IsWrathBuild() then
 		HideOptions(wrath)
-		average_lvl:SetPoint("TOPLEFT", show_shift, "BOTTOMLEFT", 0, 0)
-		raid_icon:SetPoint("TOPLEFT", average_lvl, "BOTTOMLEFT", 0, -24)
+		raid_icon:SetPoint("TOPLEFT", average_lvl, "BOTTOMLEFT", 0, 0)
 	else
 		HideOptions(retail)
 	end
