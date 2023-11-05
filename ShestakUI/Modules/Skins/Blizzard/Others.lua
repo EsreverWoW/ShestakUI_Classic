@@ -44,11 +44,6 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 		GameMenuFrame:StripTextures()
 		OpacityFrame:StripTextures()
 
-		if T.Classic then
-			AutoCompleteBox:StripTextures()
-			TicketStatusFrameButton:StripTextures()
-		end
-
 		if T.Wrath then
 			RolePollPopup:StripTextures()
 		end
