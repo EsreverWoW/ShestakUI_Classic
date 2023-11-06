@@ -172,7 +172,15 @@ end
 ----------------------------------------------------------------------------------------
 --	Spec switching(by Monolit)
 ----------------------------------------------------------------------------------------
-if T.Mainline then
+if T.Wrath then
+	SlashCmdList.SPEC = function()
+		local spec = GetActiveTalentGroup()
+		if spec == 1 then SetActiveTalentGroup(2) elseif spec == 2 then SetActiveTalentGroup(1) end
+	end
+	SLASH_SPEC1 = "/ss"
+	SLASH_SPEC2 = "/spec"
+	SLASH_SPEC3 = "/ыы"
+elseif T.Mainline then
 	SlashCmdList.SPEC = function(spec)
 		local canUse, failureReason = C_SpecializationInfo.CanPlayerUseTalentSpecUI()
 		if canUse then
@@ -182,16 +190,6 @@ if T.Mainline then
 		else
 			print("|cffffff00"..failureReason.."|r")
 		end
-	end
-	SLASH_SPEC1 = "/ss"
-	SLASH_SPEC2 = "/spec"
-	SLASH_SPEC3 = "/ыы"
-end
-
-if T.Wrath then
-	SlashCmdList.SPEC = function()
-		local spec = GetActiveTalentGroup()
-		if spec == 1 then SetActiveTalentGroup(2) elseif spec == 2 then SetActiveTalentGroup(1) end
 	end
 	SLASH_SPEC1 = "/ss"
 	SLASH_SPEC2 = "/spec"
@@ -322,7 +320,19 @@ SLASH_CLEAR_CHAT2 = "/сдуфк"
 ----------------------------------------------------------------------------------------
 --	Test Blizzard Alerts
 ----------------------------------------------------------------------------------------
-if T.Mainline then
+if T.Wrath then
+	SlashCmdList.TEST_ACHIEVEMENT = function()
+		PlaySound(SOUNDKIT.LFG_REWARDS)
+		if not AchievementFrame then
+			AchievementFrame_LoadUI()
+		end
+		AchievementAlertSystem:AddAlert(112)
+		MoneyWonAlertSystem:AddAlert(81500)
+		NewRecipeLearnedAlertSystem:AddAlert(204)
+	end
+	SLASH_TEST_ACHIEVEMENT1 = "/tach"
+	SLASH_TEST_ACHIEVEMENT2 = "/ефср"
+elseif T.Mainline then
 	SlashCmdList.TEST_ACHIEVEMENT = function()
 		PlaySound(SOUNDKIT.LFG_REWARDS)
 		if not AchievementFrame then
@@ -348,20 +358,6 @@ if T.Mainline then
 		NewRuneforgePowerAlertSystem:AddAlert(204)
 		NewCosmeticAlertFrameSystem:AddAlert(204)
 		-- BonusRollFrame_StartBonusRoll(242969, 'test', 20, 515, 15, 14)
-	end
-	SLASH_TEST_ACHIEVEMENT1 = "/tach"
-	SLASH_TEST_ACHIEVEMENT2 = "/ефср"
-end
-
-if T.Wrath then
-	SlashCmdList.TEST_ACHIEVEMENT = function()
-		PlaySound(SOUNDKIT.LFG_REWARDS)
-		if not AchievementFrame then
-			AchievementFrame_LoadUI()
-		end
-		AchievementAlertSystem:AddAlert(112)
-		MoneyWonAlertSystem:AddAlert(81500)
-		NewRecipeLearnedAlertSystem:AddAlert(204)
 	end
 	SLASH_TEST_ACHIEVEMENT1 = "/tach"
 	SLASH_TEST_ACHIEVEMENT2 = "/ефср"
