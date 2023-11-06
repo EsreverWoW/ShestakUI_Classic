@@ -145,11 +145,9 @@ if C.nameplate.healer_icon == true then
 						local _, talentSpec = GetSpecializationInfoByID(specID)
 						if name and healerSpecs[talentSpec] then
 							healList[name] = talentSpec
-							if not T.Vanilla then
-								local nameplate = C_NamePlate.GetNamePlateForUnit(format("arena%d", i))
-								if nameplate then
-									nameplate.unitFrame:UpdateAllElements("UNIT_NAME_UPDATE")
-								end
+							local nameplate = C_NamePlate.GetNamePlateForUnit(format("arena%d", i))
+							if nameplate then
+								nameplate.unitFrame:UpdateAllElements("UNIT_NAME_UPDATE")
 							end
 						end
 					end
@@ -480,7 +478,7 @@ local function UpdateTarget(self)
 end
 
 local function UpdateName(self)
-	if C.nameplate.healer_icon == true and self.HPHeal then
+	if C.nameplate.healer_icon == true then
 		local name = self.unitName
 		if name then
 			if healList[name] then
