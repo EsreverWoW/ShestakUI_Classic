@@ -3,20 +3,6 @@ local T, C, L = unpack(ShestakUI)
 ----------------------------------------------------------------------------------------
 --	Change position
 ----------------------------------------------------------------------------------------
-function SetUIPanelAttribute(frame, name, value)
-	local info = UIPanelWindows[frame:GetName()]
-	if not info then return end
-
-	if not frame:GetAttribute("UIPanelLayout-defined") then
-		frame:SetAttribute("UIPanelLayout-defined", true)
-		for name,value in pairs(info) do
-			frame:SetAttribute("UIPanelLayout-"..name, value)
-		end
-	end
-
-	frame:SetAttribute("UIPanelLayout-"..name, value)
-end
-
 WorldMapFrame.BlackoutFrame:StripTextures()
 WorldMapFrame.BlackoutFrame:EnableMouse(false)
 WorldMapFrame:SetScale(0.75)
@@ -25,16 +11,6 @@ WorldMapFrame.ScrollContainer.GetCursorPosition = function()
 	local x, y = MapCanvasScrollControllerMixin.GetCursorPosition()
 	local s = WorldMapFrame:GetScale()
 	return x / s, y / s
-end
-
-table.insert(UISpecialFrames, WorldMapFrame:GetName())
-
-if WorldMapFrame:GetAttribute("UIPanelLayout-area") ~= "center" then
-	SetUIPanelAttribute(WorldMapFrame, "area", "center")
-end
-
-if WorldMapFrame:GetAttribute("UIPanelLayout-allowOtherPanels") ~= true then
-	SetUIPanelAttribute(WorldMapFrame, "allowOtherPanels", true)
 end
 
 ----------------------------------------------------------------------------------------
