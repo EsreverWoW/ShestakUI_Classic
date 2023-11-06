@@ -8,7 +8,7 @@
 ## X-Curse-Project-ID: 468754
 ## X-WoWI-ID: 25934
 ## X-Wago-ID: WqKQbyGx
-## Version: 1.88
+## Version: 1.89
 ## SavedVariables: ShestakUISettings, ShestakUIStats, ShestakUIBindings, ShestakUICurrency, ShestakUIPositions
 ## SavedVariablesPerCharacter: ShestakUISettingsPerChar, ShestakUIChatHistory, ShestakUIPositionsPerChar
 ## IconTexture: Interface\AddOns\ShestakUI\Media\Textures\Logo.tga
