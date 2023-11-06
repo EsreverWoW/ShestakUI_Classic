@@ -181,7 +181,7 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 				button.backdrop:Hide()
 
 				local texture = check:GetTexture()
-				if not button.notCheckable and texture == 375502 then
+				if not button.notCheckable and (T.Classic or texture == 375502) then
 					uncheck:SetTexture()
 					local _, co = check:GetTexCoord()
 					if co == 0 then
