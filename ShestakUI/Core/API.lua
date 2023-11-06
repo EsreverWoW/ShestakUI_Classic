@@ -53,7 +53,7 @@ end
 local function CreateBorder(f, i, o)
 	if i then
 		if f.iborder then return end
-		local border = CreateFrame("Frame", "$parentInnerBorder", f, BackdropTemplateMixin and "BackdropTemplate" or nil)
+		local border = CreateFrame("Frame", "$parentInnerBorder", f, BackdropTemplateMixin and "BackdropTemplate")
 		border:SetPoint("TOPLEFT", Mult, -Mult)
 		border:SetPoint("BOTTOMRIGHT", -Mult, Mult)
 		border:SetBackdrop({
@@ -66,7 +66,7 @@ local function CreateBorder(f, i, o)
 
 	if o then
 		if f.oborder then return end
-		local border = CreateFrame("Frame", "$parentOuterBorder", f, BackdropTemplateMixin and "BackdropTemplate" or nil)
+		local border = CreateFrame("Frame", "$parentOuterBorder", f, BackdropTemplateMixin and "BackdropTemplate")
 		border:SetPoint("TOPLEFT", -Mult, Mult)
 		border:SetPoint("BOTTOMRIGHT", Mult, -Mult)
 		border:SetFrameLevel(f:GetFrameLevel() + 1)
