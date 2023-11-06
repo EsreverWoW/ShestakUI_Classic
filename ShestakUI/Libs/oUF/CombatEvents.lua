@@ -10,7 +10,7 @@ local CombatLogGetCurrentEventInfo = _G.CombatLogGetCurrentEventInfo
 local event_metatable = {
     __call = function(funcs, ...)
         for self, func in next, funcs do
-            if (self:IsVisible()) then
+            if(self:IsVisible()) then
                 func(self, ...)
             end
         end

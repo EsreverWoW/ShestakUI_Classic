@@ -48,7 +48,7 @@ local function updateArenaPreparationElements(self, event, elementName, specID)
 			-- this section just replicates the color options available to the Health and Power elements
 			local r, g, b, color, _
 			-- if(element.colorPower and elementName == 'Power') then
-				-- FIXME: no idea if we can get power type here without the unit
+			-- FIXME: no idea if we can get power type here without the unit
 			if(element.colorClass) then
 				local _, _, _, _, _, class = GetSpecializationInfoByID(specID)
 				color = self.colors.class[class]
