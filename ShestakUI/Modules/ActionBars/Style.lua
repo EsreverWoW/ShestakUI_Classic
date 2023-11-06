@@ -154,7 +154,7 @@ local function StyleNormalButton(button, size)
 			button.SpellCastAnimFrame:SetScale(0.0001) -- 10.1.5 cast texture
 		end
 
-		if button.CooldownFlash.Flipbook then
+		if button.CooldownFlash and button.CooldownFlash.Flipbook then
 			-- button.CooldownFlash.Flipbook:Kill() -- 10.1.5 new GCD flash
 		end
 
