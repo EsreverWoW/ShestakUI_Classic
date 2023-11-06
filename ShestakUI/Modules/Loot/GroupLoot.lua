@@ -132,8 +132,10 @@ local function CreateRollFrame()
 	frame:SetFrameLevel(10)
 	frame:SetScript("OnEvent", OnEvent)
 	frame:RegisterEvent("CANCEL_LOOT_ROLL")
-	frame:RegisterEvent("CANCEL_ALL_LOOT_ROLLS")
-	frame:RegisterEvent("MAIN_SPEC_NEED_ROLL")
+	if T.Mainline then
+		frame:RegisterEvent("CANCEL_ALL_LOOT_ROLLS")
+		frame:RegisterEvent("MAIN_SPEC_NEED_ROLL")
+	end
 	frame:Hide()
 
 	local button = CreateFrame("Button", nil, frame)
