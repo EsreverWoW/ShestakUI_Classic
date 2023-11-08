@@ -24,6 +24,10 @@ local function LoadSkin(self)
 	panel.Background:SetAlpha(0)
 	panel:SetTemplate("Transparent")
 
+	if panel.ScrollFadeOverlay then
+		panel.ScrollFadeOverlay:Hide()
+	end
+
 	if panel.DragonridingPanel then
 		panel.DragonridingPanel.SkillsButton:SkinButton()
 	end

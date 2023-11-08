@@ -990,6 +990,11 @@ function T.SkinIconSelectionFrame(frame, numIcons, buttonNameTemplate, frameName
 			end
 		end
 	end
+
+	local dropdown = frame.BorderBox.IconTypeDropDown and frame.BorderBox.IconTypeDropDown.DropDownMenu
+	if dropdown then
+		T.SkinDropDownBox(dropdown)
+	end
 end
 
 function T.SkinMaxMinFrame(frame, point)

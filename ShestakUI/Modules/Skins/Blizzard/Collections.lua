@@ -72,8 +72,6 @@ local function LoadSkin()
 
 	T.SkinEditBox(MountJournalSearchBox, nil, 18)
 	T.SkinScrollBar(MountJournal.ScrollBar)
-	T.SkinRotateButton(MountJournal.MountDisplay.ModelScene.RotateLeftButton)
-	T.SkinRotateButton(MountJournal.MountDisplay.ModelScene.RotateRightButton)
 
 	MountJournal.ScrollBar:SetPoint("TOPLEFT", MountJournal.ScrollBox, "TOPRIGHT", 1, 35)
 	MountJournal.ScrollBar:SetPoint("BOTTOMLEFT", MountJournal.ScrollBox, "BOTTOMRIGHT", 1, 0)
