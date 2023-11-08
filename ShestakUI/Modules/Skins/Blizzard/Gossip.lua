@@ -59,6 +59,12 @@ local function LoadSkin()
 		end
 	end
 
+	local function replaceTextColor(text, r)
+		if r ~= 1 then
+			text:SetTextColor(1, 1, 1)
+		end
+	end
+
 	_G.QuestFont:SetTextColor(1, 1, 1)
 	_G.QuestFont:SetShadowOffset(1, -1)
 
@@ -79,8 +85,14 @@ local function LoadSkin()
 	hooksecurefunc(GossipFrame.GreetingPanel.ScrollBox, "Update", function(frame)
 		for _, button in next, {frame.ScrollTarget:GetChildren()} do
 			if not button.IsSkinned then
-				local buttonText = select(3, button:GetRegions())
-				if buttonText and buttonText:IsObjectType("FontString") then
+				local buttonText = button.GreetingText or button.GetFontString and button:GetFontString()
+				if buttonText then
+					buttonText:SetTextColor(1, 1, 1)
+					hooksecurefunc(buttonText, "SetTextColor", replaceTextColor)
+				end
+
+				local buttonText = button.GetFontString and button:GetFontString()
+				if buttonText then
 					ReplaceGossipText(button, button:GetText())
 					hooksecurefunc(button, "SetText", ReplaceGossipText)
 					hooksecurefunc(button, "SetFormattedText", ReplaceGossipFormat)
