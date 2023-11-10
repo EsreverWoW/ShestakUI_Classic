@@ -309,7 +309,7 @@ local OnEvent = function(self, event)
 				return
 			end
 
-			if T.Vanilla then
+			if T.Vanilla and not T.Vanilla115 then
 				spellId = T.GetSpellID(spellName)
 			end
 

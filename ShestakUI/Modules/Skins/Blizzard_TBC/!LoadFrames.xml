@@ -45,7 +45,7 @@
 	<Script file="..\Blizzard_Vanilla\TradeSkill.lua"/>			<!-- TODO -->
 	<Script file="..\Blizzard_Vanilla\Trainer.lua"/>
 	<Script file="..\Blizzard_Vanilla\Tutorial.lua"/>
-	<Script file="..\Blizzard_Vanilla\WorldMap.lua"/>
+	<!-- <Script file="..\Blizzard_Vanilla\WorldMap.lua"/> -->
 	<Script file="..\Blizzard_Vanilla\WorldState.lua"/>
 
 	<Script file="Arena.lua"/>

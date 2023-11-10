@@ -3,7 +3,7 @@ local oUF = ns.oUF
 
 if(not oUF:IsClassic()) then return end
 
-local LibClassicDurations = (oUF:IsVanilla() and LibStub('LibClassicDurations'))
+local LibClassicDurations = ((oUF:IsVanilla() and not oUF:IsVanilla115()) and LibStub('LibClassicDurations'))
 
 local VISIBLE = 1
 local HIDDEN = 0

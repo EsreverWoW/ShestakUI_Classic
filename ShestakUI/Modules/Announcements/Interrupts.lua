@@ -36,7 +36,7 @@ frame:SetScript("OnEvent", function()
 		destIcon = GetRaidIcon(destRaidFlags)
 	end
 
-	if T.Vanilla then
+	if T.Vanilla and not T.Vanilla115 then
 		spellID = T.GetSpellID(spellName)
 	end
 

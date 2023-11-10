@@ -215,7 +215,7 @@ function Addon:PLAYER_LOGIN(event)
 	-- the method varies between classic and shadowlands, as action buttons in
 	-- shadowlands use ActionBarActionButtonMixin
 	local ActionBarActionButtonMixin = ActionBarActionButtonDerivedMixin or ActionBarActionButtonMixin
-	if ActionBarActionButtonMixin then
+	if ActionBarActionButtonMixin and not T.Vanilla115 then
 		local function actionButton_OnLoad(button)
 			button:SetScript("OnUpdate", nil)
 			button:HookScript("OnShow", actionButton_OnShowHide)
