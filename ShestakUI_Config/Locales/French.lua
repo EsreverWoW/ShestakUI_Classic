@@ -22,15 +22,15 @@ L_GUI_EXPERT_MODE_DESC = "Modification personnalisée du profil Lua"
 L_GUI_RESET_SPELLS_DESC = "CTRL+Click pour réinitialiser la liste"
 
 -- Profile
-L.profile = "Profile" -- Need review
-L.profile_title = "Profile options" -- Need review
-L.profile_choose = "Choose profile" -- Need review
-L.profile_options = "Settings" -- Need review
-L.profile_movers = "Moving elements" -- Need review
-L.profile_export = "Export" -- Need review
-L.profile_import = "Import" -- Need review
-L.profile_error_lib = "To enable export and import - install WeakAuras" -- Need review
-L.profile_error_code = "Error in imported code!" -- Need review
+L.profile = "Profil"
+L.profile_title = "Options de profil"
+L.profile_choose = "Choisir un profil"
+L.profile_options = "Paramètres"
+L.profile_movers = "Déplacer les éléments"
+L.profile_export = "Exporter"
+L.profile_import = "Importer"
+L.profile_error_lib = "Pour activer l'exportation et l'importation - installer WeakAuras"
+L.profile_error_code = "Erreur dans le code importé !"
 
 -- General options
 L_GUI_GENERAL_SUBTEXT = "Ces paramètres contrôlent les paramètres généraux de l’interface utilisateur. \nTapez '/uihelp' dans le chat pour obtenir de l’aide."
@@ -113,9 +113,9 @@ L_GUI_UF_UNIT_CASTBAR = "Activer la barre d'incantation"
 L_GUI_UF_CASTBAR_ICON = "Voir l'icone de sort sur la barre d'incantation"
 L_GUI_UF_CASTBAR_LATENCY = "Voir la latence sur la barre d'incantation"
 L_GUI_UF_CASTBAR_TICKS = "Affiche les ticks des sorts sur la barre d'incantation"
-L.unitframe_castbar_focus_type = "Icon for focus castbar" -- Needs review
-L.unitframe_castbar_focus_type_icon = "Icon" -- Needs review
-L.unitframe_castbar_focus_type_bar = "Icon with bar" -- Needs review
+L.unitframe_castbar_focus_type = "Icône pour la barre d'incantation du focus"
+L.unitframe_castbar_focus_type_icon = "Icône"
+L.unitframe_castbar_focus_type_bar = "Icône avec barre"
 L_GUI_UF_SUBHEADER_FRAMES = "Cadres d'unités"
 L_GUI_UF_SHOW_PET = "Afficher le cadre du familier"
 L_GUI_UF_SHOW_FOCUS = "Afficher le cadre du focus"
@@ -179,7 +179,7 @@ L_GUI_UF_PLUGINS_SHARD_BAR = "Activier la barre de Fragment d'âme"
 L_GUI_UF_PLUGINS_RUNE_BAR = "Activer la barre de Rune"
 L_GUI_UF_PLUGINS_TOTEM_BAR = "Activer la barre totem pour Shaman"
 L.unitframe_class_bar_totem_other = "Activer la barre totem pour les autres classes"
-L.unitframe_class_bar_essence = "Enable Essence bar for Evoker" -- Need review
+L.unitframe_class_bar_essence = "Activer la barre d'essence pour l'Evoker"
 
 -- Raid Frames options
 L_GUI_UF_RAIDFRAMES_SUBTEXT = "Personnalisez l’apparence des cadres de raid."
@@ -398,10 +398,10 @@ L_GUI_COMBATTEXT_TIME_VISIBLE = "Temps"
 L_GUI_COMBATTEXT_TIME_VISIBLE_DESC = "Temps en seconde durant lequel un message est affiché"
 L_GUI_COMBATTEXT_DK_RUNES = "Afficher le rechargement des runes du chevalier de la mort"
 L_GUI_COMBATTEXT_KILLINGBLOW = "Afficher les coups fatals"
-L.combattext_merge_aoe_spam = "Merges spell spam into single message" -- Needs review
+L.combattext_merge_aoe_spam = "Fusionne les spams de sort en un seul message"
 L.combattext_merge_aoe_spam_desc = "Rassembler tous les dégâts d'un aoe en un seul message"
 L_GUI_COMBATTEXT_MERGE_MELEE = "Rassemble les dégâts multiples en auto attaque"
-L.combattext_merge_all = "Merges all spells" -- Needs review
+L.combattext_merge_all = "Fusionne tous les sorts"
 L_GUI_COMBATTEXT_DISPEL = "Affiche les sorts que vous avez dissipé"
 L_GUI_COMBATTEXT_INTERRUPT = "Affiche les sorts que vous avez interrompu"
 L_GUI_COMBATTEXT_DIRECTION = "Changer la direction de défilement de bas en haut"
@@ -433,7 +433,7 @@ L_GUI_BAGS_SUBTEXT = "Cliquez avec le bouton droit de la souris sur le bouton de
 L_GUI_BAGS_ENABLE = "Activer les sacs"
 L_GUI_BAGS_ILVL = "Afficher le niveau d'objet des armes et armures"
 L.bag_new_items = "Afficher l’animation pour les nouveaux objets"
-L.bag_filter = "Always show filter buttons" -- Need review
+L.bag_filter = "Toujours afficher les boutons de filtrage"
 L_GUI_BAGS_BUTTON_SIZE = "Taille des boutons"
 L_GUI_BAGS_BUTTON_SPACE = "Espacement des boutons"
 L_GUI_BAGS_BANK = "Nombre de colonne pour la banque"
@@ -442,7 +442,7 @@ L_GUI_BAGS_BAG = "Nombre de colonne pour les sacs"
 -- Minimap options
 L_GUI_MINIMAP_SUBTEXT = "Paramètres de la minimap"
 L_GUI_MINIMAP_ENABLE = "Activer minimap"
-L.minimap_on_top = "Move minimap on top right corner" -- Need review
+L.minimap_on_top = "Déplacer la minimap dans le coin supérieur droit"
 L_GUI_MINIMAP_ICON = "Icone de pistage"
 L_GUI_GARRISON_ICON = "Icône de Covenant"
 L_GUI_MINIMAP_SIZE = "Taille de la minicarte"
@@ -598,8 +598,8 @@ L.pulsecooldown_anim_scale = "Mise à l'échelle des animations"
 L.pulsecooldown_hold_time = "Temps maximum pour la rémanence de l'îcone"
 L.pulsecooldown_threshold = "Temps de déclenchement"
 L.pulsecooldown_threshold_desc = "Temps minimum de déclenchement"
-L.pulsecooldown_subheader_whitelist = "Filtering list" -- Need review
-L.pulsecooldown_whitelist = "Use whitelist instead of ignore list" -- Need review
+L.pulsecooldown_subheader_whitelist = "Liste de filtrage"
+L.pulsecooldown_whitelist = "Utiliser la liste blanche au lieu de la liste d'ignorés"
 
 -- Threat options
 L_GUI_THREAT = "Barre de menace"
