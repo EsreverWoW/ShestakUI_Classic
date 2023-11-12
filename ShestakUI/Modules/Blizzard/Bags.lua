@@ -1156,14 +1156,26 @@ function Stuffing:InitBags()
 	editbox:SetAllPoints(detail)
 
 	local buttons = {}
-	local filterTable = {
-		[1] = {3566860, GetItemClassInfo(0)},	-- Consumable
-		[2] = {135280, GetItemClassInfo(2)},	-- Weapon
-		[3] = {132341, GetItemClassInfo(4)},	-- Armor
-		[4] = {132281, GetItemClassInfo(7)},	-- Tradeskill
-		[5] = {236667, ITEM_BIND_QUEST},		-- Quest
-		[6] = {133784, ITEM_BIND_ON_EQUIP},		-- BoE
-	}
+	local filterTable
+	if T.Classic then
+		filterTable = {
+			[1] = {134811, GetItemClassInfo(0)},	-- Consumable
+			[2] = {135280, GetItemClassInfo(2)},	-- Weapon
+			[3] = {132341, GetItemClassInfo(4)},	-- Armor
+			[4] = {132281, GetItemClassInfo(7)},	-- Tradeskill
+			[5] = {134269, ITEM_BIND_QUEST},		-- Quest
+			[6] = {133784, ITEM_BIND_ON_EQUIP},		-- BoE
+		}
+	else
+		filterTable = {
+			[1] = {3566860, GetItemClassInfo(0)},	-- Consumable
+			[2] = {135280, GetItemClassInfo(2)},	-- Weapon
+			[3] = {132341, GetItemClassInfo(4)},	-- Armor
+			[4] = {132281, GetItemClassInfo(7)},	-- Tradeskill
+			[5] = {236667, ITEM_BIND_QUEST},		-- Quest
+			[6] = {133784, ITEM_BIND_ON_EQUIP},		-- BoE
+		}
+	end
 	for i = 1, #filterTable do
 		local button = CreateFrame("Button", "BagsFilterButton"..i, C.bag.filter and f or editbox)
 		button:SetSize(25, 25)
