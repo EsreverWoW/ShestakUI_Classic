@@ -49,9 +49,15 @@ StaticPopupDialogs.CONFIRM_SUMMON.hideOnEscape = nil
 StaticPopupDialogs.ADDON_ACTION_FORBIDDEN.button1 = nil
 StaticPopupDialogs.TOO_MANY_LUA_ERRORS.button1 = nil
 PetBattleQueueReadyFrame.hideOnEscape = nil
-PVPReadyDialog.leaveButton:Hide()
-PVPReadyDialog.enterButton:ClearAllPoints()
-PVPReadyDialog.enterButton:SetPoint("BOTTOM", PVPReadyDialog, "BOTTOM", 0, 25)
+if T.Classic then
+	PVPReadyDialog.hideButton:Hide()
+	PVPReadyDialog.enterButton:ClearAllPoints()
+	PVPReadyDialog.enterButton:SetPoint("BOTTOM", PVPReadyDialog, "BOTTOM", 0, 16)
+else
+	PVPReadyDialog.leaveButton:Hide()
+	PVPReadyDialog.enterButton:ClearAllPoints()
+	PVPReadyDialog.enterButton:SetPoint("BOTTOM", PVPReadyDialog, "BOTTOM", 0, 25)
+end
 
 ----------------------------------------------------------------------------------------
 --	Spin camera while afk(by Telroth and Eclipse)

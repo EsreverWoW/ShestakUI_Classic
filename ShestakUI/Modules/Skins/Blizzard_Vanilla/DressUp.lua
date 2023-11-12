@@ -30,7 +30,9 @@ local function LoadSkin()
 	DressUpFrameCancelButton:SkinButton()
 	DressUpFrameResetButton:SkinButton()
 	DressUpFrameResetButton:SetPoint("RIGHT", DressUpFrameCancelButton, "LEFT", -2, 0)
-	DressUpFrameUndressButton:SkinButton()
+	if DressUpFrameUndressButton then
+		DressUpFrameUndressButton:SkinButton()
+	end
 end
 
 table.insert(T.SkinFuncs["ShestakUI"], LoadSkin)
