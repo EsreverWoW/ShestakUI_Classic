@@ -12,6 +12,7 @@ local function LoadSkin()
 	local function SkinTableAttributeDisplay(frame)
 		if frame.isSkinned then return end
 		T.SkinFrame(frame)
+		frame:SetSize(frame:GetWidth() + 18, frame:GetHeight() + 3)
 		frame.ScrollFrameArt.NineSlice:SetTemplate("Overlay")
 
 		T.SkinNextPrevButton(frame.OpenParentButton, nil, "Up")
