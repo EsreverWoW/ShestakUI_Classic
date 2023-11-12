@@ -24,20 +24,9 @@ T.Wrath = _G.WOW_PROJECT_ID == _G.WOW_PROJECT_WRATH_CLASSIC
 T.HiDPI = GetScreenHeight() / T.screenHeight < 0.75
 
 -- BETA
-if T.newPatch or T.Classic then
-	SortBags = C_Container.SortBags
-	SortBankBags = C_Container.SortBankBags
-	SortReagentBankBags = C_Container.SortReagentBankBags
-	SetSortBagsRightToLeft = C_Container.SetSortBagsRightToLeft
-	SetInsertItemsLeftToRight = C_Container.SetInsertItemsLeftToRight
-	PickupContainerItem = C_Container.PickupContainerItem
-	ContainerIDToInventoryID = C_Container.ContainerIDToInventoryID
-	GetContainerItemEquipmentSetInfo = C_Container.GetContainerItemEquipmentSetInfo
-
-	GetContainerItemInfo = GetContainerItemInfo or function(bagIndex, slotIndex)
-		local info = C_Container.GetContainerItemInfo(bagIndex, slotIndex)
-		if info then
-			return info.iconFileID, info.stackCount, info.isLocked, info.quality, info.isReadable, info.hasLoot, info.hyperlink, info.isFiltered, info.hasNoValue, info.itemID, info.isBound
-		end
+GetContainerItemInfo = GetContainerItemInfo or function(bagIndex, slotIndex)
+	local info = C_Container.GetContainerItemInfo(bagIndex, slotIndex)
+	if info then
+		return info.iconFileID, info.stackCount, info.isLocked, info.quality, info.isReadable, info.hasLoot, info.hyperlink, info.isFiltered, info.hasNoValue, info.itemID, info.isBound
 	end
 end

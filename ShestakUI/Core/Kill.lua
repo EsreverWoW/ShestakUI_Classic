@@ -122,11 +122,9 @@ frame:SetScript("OnEvent", function(_, _, addon)
 	end
 
 	if C.bag.enable then
-		if T.Classic then
-			C_Container.SetInsertItemsLeftToRight(false)
-		else
+		C_Container.SetInsertItemsLeftToRight(false)
+		if T.Mainline then
 			C_Container.SetSortBagsRightToLeft(true)
-			C_Container.SetInsertItemsLeftToRight(false)
 		end
 	end
 
