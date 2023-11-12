@@ -6,7 +6,7 @@ local L = ns
 --	GUI for ShestakUI(by Haleth, Solor)
 ----------------------------------------------------------------------------------------
 local function IsClassicBuild()
-	return _G.WOW_PROJECT_ID == _G.WOW_PROJECT_CLASSIC or _G.WOW_PROJECT_ID == _G.WOW_PROJECT_BURNING_CRUSADE_CLASSIC or _G.WOW_PROJECT_ID == _G.WOW_PROJECT_WRATH_CLASSIC
+	return _G.WOW_PROJECT_ID ~= _G.WOW_PROJECT_MAINLINE
 end
 
 local function IsVanillaBuild()

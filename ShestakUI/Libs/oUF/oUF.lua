@@ -407,7 +407,7 @@ Used to determine if running any version of classic.
 * self - the global oUF object
 --]]
 function oUF:IsClassic()
-	return _G.WOW_PROJECT_ID == _G.WOW_PROJECT_CLASSIC or _G.WOW_PROJECT_ID == _G.WOW_PROJECT_BURNING_CRUSADE_CLASSIC or _G.WOW_PROJECT_ID == _G.WOW_PROJECT_WRATH_CLASSIC
+	return _G.WOW_PROJECT_ID ~= _G.WOW_PROJECT_MAINLINE
 end
 
 --[[ oUF:IsVanilla()

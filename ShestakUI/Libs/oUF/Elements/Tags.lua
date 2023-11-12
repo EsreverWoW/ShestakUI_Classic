@@ -128,7 +128,7 @@ local tagStrings = {
 
 	['difficulty'] = [[function(u)
 		if UnitCanAttack('player', u) then
-			local l = _G.WOW_PROJECT_ID == _G.WOW_PROJECT_MAINLINE and UnitEffectiveLevel(u) or UnitLevel(u)
+			local l = (UnitEffectiveLevel or UnitLevel)(u)
 			return Hex(GetCreatureDifficultyColor((l > 0) and l or 999))
 		end
 	end]],
@@ -169,7 +169,7 @@ local tagStrings = {
 	end]],
 
 	['level'] = [[function(u)
-		local l = _G.WOW_PROJECT_ID ~= _G.WOW_PROJECT_MAINLINE and UnitLevel(u) or UnitEffectiveLevel(u)
+		local l = (UnitEffectiveLevel or UnitLevel)(u)
 		if(_G.WOW_PROJECT_ID == _G.WOW_PROJECT_MAINLINE and (UnitIsWildBattlePet(u) or UnitIsBattlePetCompanion(u))) then
 			l = UnitBattlePetLevel(u)
 		end

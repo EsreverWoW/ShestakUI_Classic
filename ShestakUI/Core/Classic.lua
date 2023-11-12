@@ -142,27 +142,6 @@ C.media.classborder_color = {T.color.r, T.color.g, T.color.b, 1}
 if not T.Vanilla115 then return end
 
 ----------------------------------------------------------------------------------------
---	LibClassicSpellActionCount (by Ennea)
-----------------------------------------------------------------------------------------
-local LibClassicSpellActionCount = LibStub("LibClassicSpellActionCount-1.0", true)
-if LibClassicSpellActionCount then
-	local function UpdateActionCount(button)
-		local text = button.Count
-		local action = button.action
-		if IsConsumableAction(action) or IsStackableAction(action) or (not IsItemAction(action) and LibClassicSpellActionCount:GetActionCount(action) > 0) then
-			local count = LibClassicSpellActionCount:GetActionCount(action)
-			if count > (button.maxDisplayCount or 9999) then
-				text:SetText("*")
-			else
-				text:SetText(count)
-			end
-		end
-	end
-
-	hooksecurefunc("ActionButton_UpdateCount", UpdateActionCount)
-end
-
-----------------------------------------------------------------------------------------
 --	LibClassicDurations (by d87)
 ----------------------------------------------------------------------------------------
 local LibClassicDurations = LibStub("LibClassicDurations")
