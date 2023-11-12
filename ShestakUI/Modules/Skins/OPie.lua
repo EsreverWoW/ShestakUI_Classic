@@ -11,8 +11,14 @@ local buttons = {}
 local prototype = {}
 local STATE_USABLE, STATE_NOMANA, STATE_NORANGE, STATE_UNUSABLE = 0, 1, 2, 3
 
-function prototype:SetIcon(texture)
+function prototype:SetIcon(texture, aspect)
+	-- Not sure if we need to handle the aspect here
 	self.Icon:SetTexture(texture)
+end
+
+function prototype:SetIconAtlas(atlas, aspect)
+	-- Not sure if we need to handle the aspect here
+	self.Icon:SetAtlas(atlas)
 end
 
 function prototype:SetIconTexCoord(a, b, c, d, e, f, g, h)
@@ -67,7 +73,7 @@ function prototype:SetCount(count)
 end
 
 function prototype:SetOverlayIconVertexColor(...)
-	self.overIcon:SetVertexColor(...)
+	self.OverlayIcon:SetVertexColor(...)
 end
 
 local displaySubs = {
@@ -149,6 +155,18 @@ end
 
 local id = 0
 
+function prototype:SetQualityOverlay(quality)
+	if not self.ProfessionQualityOverlayFrame then
+		return
+	end
+	if quality ~= 0 then
+		self.ProfessionQualityOverlayFrame.Texture:SetAtlas("Professions-Icon-Quality-Tier" .. quality .. "-Inv", true)
+		self.ProfessionQualityOverlayFrame:Show()
+	else
+		self.ProfessionQualityOverlayFrame:Hide()
+	end
+end
+
 local function CreateIndicator(name, parent, size, ghost)
 	id = id + 1
 	name = name or "OPieSliceButton"..id
@@ -167,9 +185,15 @@ local function CreateIndicator(name, parent, size, ghost)
 	button.Icon          = _G[name .. "Icon"]
 	button.NormalTexture = _G[name .. "NormalTexture"] -- border
 
-	-- Overlay icon (???)
+	-- Overlay icon
 	button.OverlayIcon = button:CreateTexture(nil, "ARTWORK", nil, 1)
 	button.OverlayIcon:SetPoint("BOTTOMLEFT", button, "BOTTOMLEFT", 4, 4)
+
+	-- Profession Overlay icon (Dragonflight only)
+	--if ver >= 100000 then
+		button.ProfessionQualityOverlayFrame = CreateFrame("Frame", nil, button, "ActionButtonProfessionOverlayTemplate")
+		button.ProfessionQualityOverlayFrame:SetPoint("TOPLEFT", 14, -14)
+	--end
 
 	-- Outer glow (doesn't seem to do anything?)
 	button.GlowTextures = {}
@@ -214,4 +238,8 @@ local function CreateIndicator(name, parent, size, ghost)
 	return button
 end
 
-OPie.UI:RegisterIndicatorConstructor("OpieMasque", {CreateIndicator=CreateIndicator, name="OpieMasque", apiLevel=1})
+local function onParentAlphaChanged(button, alpha)
+button:SetAlpha(alpha)
+end
+
+OPie.UI:RegisterIndicatorConstructor("OpieMasque", {CreateIndicator=CreateIndicator, name="OpieMasque", apiLevel=3, onParentAlphaChanged=onParentAlphaChanged})
