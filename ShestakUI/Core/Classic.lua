@@ -1,17 +1,6 @@
 local T, C, L = unpack(ShestakUI)
 
 ----------------------------------------------------------------------------------------
---	NOOP functions not found in some versions of Classic
-----------------------------------------------------------------------------------------
-if not IsFlying then
-	IsFlying = T.dummy
-end
-
-if not UnitInVehicle then
-	UnitInVehicle = T.dummy
-end
-
-----------------------------------------------------------------------------------------
 --	Specialization Functions
 ----------------------------------------------------------------------------------------
 function T.GetSpecialization(isInspect, isPet, specGroup)
@@ -99,26 +88,6 @@ if not GetAverageItemLevel then
 		if total < 1 or itn < 1 then return 0 end
 
 		return floor(total / itn), floor(total / itn)
-	end
-end
-
-----------------------------------------------------------------------------------------
---	Threat Functions
-----------------------------------------------------------------------------------------
-local threatColors = {
-	[0] = {0.69, 0.69, 0.69},
-	[1] = {1, 1, 0.47},
-	[2] = {1, 0.6, 0},
-	[3] = {1, 0, 0}
-}
-
-if not GetThreatStatusColor then
-	GetThreatStatusColor = _G.GetThreatStatusColor or function(statusIndex)
-		if not (type(statusIndex) == "number" and statusIndex >= 0 and statusIndex < 4) then
-			statusIndex = 0
-		end
-
-		return threatColors[statusIndex][1], threatColors[statusIndex][2], threatColors[statusIndex][3]
 	end
 end
 
