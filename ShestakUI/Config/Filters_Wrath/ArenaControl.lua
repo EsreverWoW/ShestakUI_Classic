@@ -95,7 +95,7 @@ T.ArenaControl = {
 	-- [SpellName(25046)] = 4,		-- Arcane Torrent (Energy)
 	-- [SpellName(50613)] = 4,		-- Arcane Torrent (Runic Power)
 	-- [SpellName(44835)] = 4,		-- Maim Interrupt (incorrect spellID)
-	[SpellName(32747)] = 4,		-- Deadly Throw Interrupt
+	[SpellName(32747)] = 4,		-- Interrupt
 
 	-- Roots
 	[SpellName(53534)] = 3,		-- Chains of Ice
@@ -148,12 +148,12 @@ T.ArenaControl = {
 	[SpellName(12043)] = 1,		-- Presence of Mind
 	-- Paladin
 	[SpellName(31884)] = 1,		-- Avenging Wrath
+	[SpellName(20216)] = 1,		-- Divine Favor
+	[SpellName(31842)] = 1,		-- Divine Illumination
 	[SpellName(1044)] = 1,		-- Hand of Freedom
 	[SpellName(1022)] = 1,		-- Hand of Protection
 	[SpellName(6940)] = 1,		-- Hand of Sacrifice
 	[SpellName(1038)] = 1,		-- Hand of Salvation
-	[SpellName(20216)] = 1,		-- Divine Favor
-	[SpellName(31842)] = 1,		-- Divine Illumination
 	-- Priest
 	[SpellName(64843)] = 1,		-- Divine Hymn
 	[SpellName(6346)] = 1,		-- Fear Ward
@@ -168,7 +168,7 @@ T.ArenaControl = {
 	[SpellName(51713)] = 1,		-- Shadow Dance
 	[SpellName(57933)] = 1,		-- Tricks of the Trade
 	-- Shaman
-	[SpellName(8178)] = 1,		-- Grounding Totem
+	[SpellName(8178)] = 1,		-- Grounding Totem Effect
 	[SpellName(16190)] = 1,		-- Mana Tide Totem
 	[SpellName(55198)] = 1,		-- Tidal Force
 	-- Warlock

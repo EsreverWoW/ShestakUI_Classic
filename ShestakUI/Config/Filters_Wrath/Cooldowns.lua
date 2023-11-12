@@ -158,7 +158,7 @@ if C.enemycooldown.enable == true then
 		{31224, 30},	-- Cloak of Shadows (60sec base / -30sec from talents)
 		{5277, 120},	-- Evasion (180sec base / -60sec from talents / -60sec from 3pc AQ Set)
 		{1856, 120},	-- Vanish (180sec base / -60sec from talents / -30sec from 3pc T1)
-		-- {8178, 11},	-- Grounding Totem (15sec base / -2sec from talents / -1.5sec from 4pc PvP)
+		-- {8178, 11},	-- Grounding Totem Effect (15sec base / -2sec from talents / -1.5sec from 4pc PvP)
 		{18499, 20},	-- Berserker Rage (30sec base / -10sec from talents)
 		{46924, 45},	-- Bladestorm (60sec base / -15sec from glyph)
 		{12975, 120},	-- Last Stand (180sec base / -60sec from glyph)

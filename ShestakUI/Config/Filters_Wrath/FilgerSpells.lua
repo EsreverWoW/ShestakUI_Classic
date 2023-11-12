@@ -684,7 +684,7 @@ C["filger_spells"] = {
 			-- Blood Plague
 			{spellID = 55078, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Crypt Fever
-			{spellID = 50508, unitID = "target", caster = "player", filter = "DEBUFF"},
+			{spellID = 50508, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Chains of Ice
 			{spellID = 53534, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Dark Command
@@ -696,7 +696,7 @@ C["filger_spells"] = {
 			-- Desecration
 			{spellID = 55741, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Ebon Plague
-			{spellID = 51726, unitID = "target", caster = "player", filter = "DEBUFF"},
+			{spellID = 51726, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Frost Fever
 			{spellID = 55095, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Gnaw (Ghoul)
@@ -708,7 +708,7 @@ C["filger_spells"] = {
 			-- Mark of Blood
 			{spellID = 49005, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Strangulate
-			{spellID = 47476, unitID = "target", caster = "player", filter = "DEBUFF"},
+			{spellID = 47476, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Summon Gargoyle
 			{spellID = 49206, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Unholy Blight
@@ -4386,8 +4386,6 @@ C["filger_spells"] = {
 			{spellID = 68055, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Judgement of Wisdom
 			{spellID = 20186, unitID = "target", caster = "player", filter = "DEBUFF"},
-			-- Judgement of the Crusader
-			{spellID = 21183, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Repentance
 			{spellID = 20066, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Righteous Vengeance
@@ -5731,8 +5729,6 @@ C["filger_spells"] = {
 			{spellID = 2818, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Deadly Throw
 			{spellID = 26679, unitID = "target", caster = "player", filter = "DEBUFF"},
-			-- Deadly Throw Interrupt
-			{spellID = 32747, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Dismantle
 			{spellID = 51722, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Expose Armor
@@ -5745,6 +5741,8 @@ C["filger_spells"] = {
 			{spellID = 1776, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Hemorrhage
 			{spellID = 16511, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Interrupt
+			{spellID = 32747, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Kidney Shot
 			{spellID = 408, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Mind-numbing Poison
@@ -8837,7 +8835,7 @@ C["filger_spells"] = {
 			{spellID = 1044, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Fear Ward
 			{spellID = 6346, unitID = "player", caster = "all", filter = "BUFF"},
-			-- Grounding Totem
+			-- Grounding Totem Effect
 			{spellID = 8178, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Divine Intervention
 			{spellID = 19752, unitID = "player", caster = "all", filter = "BUFF"},
@@ -9189,7 +9187,7 @@ C["filger_spells"] = {
 			{spellID = 50613, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
 			-- Maim Interrupt (incorrect spellID)
 			-- {spellID = 44835, unitID = "player", caster = "all", filter = "DEBUFF"},
-			-- Deadly Throw Interrupt
+			-- Interrupt
 			{spellID = 32747, unitID = "player", caster = "all", filter = "DEBUFF"},
 
 			-- Roots
@@ -9572,7 +9570,7 @@ C["filger_spells"] = {
 			{spellID = 76577, unitID = "target", caster = "all", filter = "DEBUFF"},
 
 			-- Shaman
-			-- Grounding Totem
+			-- Grounding Totem Effect
 			{spellID = 8178, unitID = "target", caster = "all", filter = "BUFF"},
 			-- Spiritwalker's Grace
 			{spellID = 79206, unitID = "target", caster = "all", filter = "BUFF"},

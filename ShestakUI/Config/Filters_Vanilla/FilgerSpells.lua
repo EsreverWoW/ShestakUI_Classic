@@ -3087,7 +3087,7 @@ C["filger_spells"] = {
 			{spellID = 1044, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Fear Ward
 			{spellID = 6346, unitID = "player", caster = "all", filter = "BUFF"},
-			-- Grounding Totem
+			-- Grounding Totem Effect
 			{spellID = 8178, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Divine Intervention
 			{spellID = 19752, unitID = "player", caster = "all", filter = "BUFF"},
@@ -3610,7 +3610,7 @@ C["filger_spells"] = {
 			{spellID = 76577, unitID = "target", caster = "all", filter = "DEBUFF"},
 
 			-- Shaman
-			-- Grounding Totem
+			-- Grounding Totem Effect
 			{spellID = 8178, unitID = "target", caster = "all", filter = "BUFF"},
 			-- Spiritwalker's Grace
 			{spellID = 79206, unitID = "target", caster = "all", filter = "BUFF"},

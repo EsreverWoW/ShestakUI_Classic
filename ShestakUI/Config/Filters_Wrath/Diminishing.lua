@@ -211,7 +211,7 @@ T.DiminishingSpells = {
 	[25046] = {"silence"},			-- Arcane Torrent (Energy)
 	[50613] = {"silence"},			-- Arcane Torrent (Runic Power)
 	-- [44835] = {"silence"},			-- Maim Interrupt (incorrect spellID)
-	[32747] = {"silence"},			-- Deadly Throw Interrupt
+	[32747] = {"silence"},			-- Interrupt
 	--]]
 
 	-- Cyclone / Blind

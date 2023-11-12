@@ -1150,10 +1150,10 @@ if C.raidframe.plugins_pvp_debuffs == true then
 		-- Rogue
 		[SpellName(2094)] = 3,		-- Blind
 		[SpellName(1833)] = 3,		-- Cheap Shot
-		[SpellName(32747)] = 3,		-- Deadly Throw Interrupt
 		[SpellName(51722)] = 3,		-- Dismantle
 		[SpellName(1330)] = 3,		-- Garrote - Silence
 		[SpellName(1776)] = 3,		-- Gouge
+		[SpellName(32747)] = 3,		-- Interrupt
 		[SpellName(408)] = 3,		-- Kidney Shot
 		[SpellName(6770)] = 3,		-- Sap
 		[SpellName(18425)] = 3,		-- Silenced - Improved Kick

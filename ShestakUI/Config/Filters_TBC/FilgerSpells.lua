@@ -3102,7 +3102,7 @@ C["filger_spells"] = {
 			{spellID = 2818, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Deadly Throw
 			{spellID = 26679, unitID = "target", caster = "player", filter = "DEBUFF"},
-			-- Deadly Throw Interrupt
+			-- Deadly Interrupt Effect
 			{spellID = 32747, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Expose Armor
 			{spellID = 8647, unitID = "target", caster = "all", filter = "DEBUFF"},
@@ -5076,7 +5076,7 @@ C["filger_spells"] = {
 			{spellID = 1044, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Fear Ward
 			{spellID = 6346, unitID = "player", caster = "all", filter = "BUFF"},
-			-- Grounding Totem
+			-- Grounding Totem Effect
 			{spellID = 8178, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Divine Intervention
 			{spellID = 19752, unitID = "player", caster = "all", filter = "BUFF"},
@@ -5332,7 +5332,7 @@ C["filger_spells"] = {
 			{spellID = 25046, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
 			-- Maim Interrupt (incorrect spellID)
 			-- {spellID = 44835, unitID = "player", caster = "all", filter = "DEBUFF"},
-			-- Deadly Throw Interrupt
+			-- Deadly Interrupt Effect
 			{spellID = 32747, unitID = "player", caster = "all", filter = "DEBUFF"},
 
 			-- Roots
@@ -5691,7 +5691,7 @@ C["filger_spells"] = {
 			{spellID = 76577, unitID = "target", caster = "all", filter = "DEBUFF"},
 
 			-- Shaman
-			-- Grounding Totem
+			-- Grounding Totem Effect
 			{spellID = 8178, unitID = "target", caster = "all", filter = "BUFF"},
 			-- Spiritwalker's Grace
 			{spellID = 79206, unitID = "target", caster = "all", filter = "BUFF"},

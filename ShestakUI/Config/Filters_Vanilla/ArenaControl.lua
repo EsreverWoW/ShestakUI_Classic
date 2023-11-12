@@ -117,7 +117,7 @@ T.ArenaControl = {
 	-- Rogue
 	[SpellName(13877)] = 1,		-- Blade Flurry
 	-- Shaman
-	[SpellName(8178)] = 1,		-- Grounding Totem
+	[SpellName(8178)] = 1,		-- Grounding Totem Effect
 	[SpellName(16190)] = 1,		-- Mana Tide Totem
 	-- Warlock
 	[SpellName(18708)] = 1,		-- Fel Domination
