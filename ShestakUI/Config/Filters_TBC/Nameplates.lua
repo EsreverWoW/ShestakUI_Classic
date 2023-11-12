@@ -81,7 +81,6 @@ T.DebuffWhiteList = {
 	[SpellName(6136)] = true,	-- Chilled (Frost Armor)
 	-- [SpellName(7321)] = true,	-- Chilled (Ice Armor)
 	[SpellName(120)] = true,	-- Cone of Cold
-	[SpellName(18469)] = true,	-- Counterspell - Silenced
 	[SpellName(31661)] = true,	-- Dragon's Breath
 	[SpellName(133)] = true,	-- Fireball
 	[SpellName(22959)] = true,	-- Fire Vulnerability (Improved Scorch)
@@ -93,6 +92,7 @@ T.DebuffWhiteList = {
 	[SpellName(12355)] = true,	-- Impact
 	[SpellName(118)] = true,	-- Polymorph
 	[SpellName(11366)] = true,	-- Pyroblast
+	[SpellName(18469)] = true,	-- Silenced - Improved Counterspell
 	[SpellName(31589)] = true,	-- Slow
 	[SpellName(12579)] = true,	-- Winter's Chill
 

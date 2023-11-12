@@ -3219,8 +3219,6 @@ C["filger_spells"] = {
 			{spellID = 42930, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
 			-- Cone of Cold r8
 			{spellID = 42931, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
-			-- Counterspell - Silenced
-			{spellID = 18469, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Dragon's Breath
 			{spellID = 31661, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Fireball r1
@@ -3307,6 +3305,8 @@ C["filger_spells"] = {
 			{spellID = 68391, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
 			-- Pyroblast
 			{spellID = 11366, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Silenced - Improved Counterspell
+			{spellID = 18469, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Slow
 			{spellID = 31589, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Winter's Chill
@@ -7600,7 +7600,7 @@ C["filger_spells"] = {
 			{spellID = 5484, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Immolate
 			{spellID = 348, unitID = "target", caster = "player", filter = "DEBUFF"},
-			-- Intercept Stun (Felguard)
+			-- Intercept (Felguard)
 			{spellID = 30153, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
 			-- Rain of Fire
 			-- {spellID = 5740, unitID = "target", caster = "player", filter = "DEBUFF"},
@@ -8384,7 +8384,7 @@ C["filger_spells"] = {
 			{spellID = 1715, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
 			-- Improved Hamstring
 			{spellID = 23694, unitID = "target", caster = "player", filter = "DEBUFF"},
-			-- Intercept Stun
+			-- Intercept
 			{spellID = 20253, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Intimidating Shout (Cower)
 			{spellID = 20511, unitID = "target", caster = "player", filter = "DEBUFF"},
@@ -9131,7 +9131,7 @@ C["filger_spells"] = {
 			{spellID = 6215, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
 			-- Howl of Terror
 			{spellID = 5484, unitID = "player", caster = "all", filter = "DEBUFF"},
-			-- Intercept Stun (Felguard)
+			-- Intercept (Felguard)
 			{spellID = 30153, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
 			-- Seduction (Succubus)
 			{spellID = 6358, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
@@ -9145,11 +9145,11 @@ C["filger_spells"] = {
 			{spellID = 12809, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
 			-- Disarm
 			{spellID = 676, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
-			-- Intercept Stun r1
+			-- Intercept r1
 			{spellID = 20253, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
-			-- Intercept Stun r2
+			-- Intercept r2
 			{spellID = 20614, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
-			-- Intercept Stun r3
+			-- Intercept r3
 			{spellID = 20615, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
 			-- Intimidating Shout (Cower)
 			{spellID = 20511, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
@@ -9167,7 +9167,7 @@ C["filger_spells"] = {
 			{spellID = 47476, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Silencing Shot
 			{spellID = 34490, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
-			-- Counterspell - Silenced
+			-- Silenced - Improved Counterspell
 			{spellID = 18469, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Silence
 			{spellID = 15487, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},

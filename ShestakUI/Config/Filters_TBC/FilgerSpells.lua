@@ -1502,8 +1502,6 @@ C["filger_spells"] = {
 			{spellID = 10161, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
 			-- Cone of Cold r6
 			{spellID = 27087, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
-			-- Counterspell - Silenced
-			{spellID = 18469, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Dragon's Breath
 			{spellID = 31661, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Fireball r1
@@ -1576,6 +1574,8 @@ C["filger_spells"] = {
 			{spellID = 12355, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Pyroblast
 			{spellID = 11366, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Silenced - Improved Counterspell
+			{spellID = 18469, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Slow
 			{spellID = 31589, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Winter's Chill
@@ -5312,7 +5312,7 @@ C["filger_spells"] = {
 			-- Silences
 			-- Silencing Shot
 			{spellID = 34490, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
-			-- Counterspell - Silenced
+			-- Silenced - Improved Counterspell
 			{spellID = 18469, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Silence
 			{spellID = 15487, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},

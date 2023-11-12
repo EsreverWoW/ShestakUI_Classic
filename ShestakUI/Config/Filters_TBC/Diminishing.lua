@@ -178,7 +178,7 @@ T.DiminishingSpells = {
 	--[[
 	-- Silences
 	[34490] = {"silence"},			-- Silencing Shot
-	[18469] = {"silence"},			-- Counterspell - Silenced
+	[18469] = {"silence"},			-- Silenced - Improved Counterspell
 	[15487] = {"silence"},			-- Silence
 	[1330] = {"silence"},			-- Garrote - Silence
 	[18425] = {"silence"},			-- Kick - Silenced

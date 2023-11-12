@@ -75,7 +75,7 @@ T.ArenaControl = {
 	-- Warrior
 	[SpellName(7922)] = 5,		-- Charge Stun
 	[SpellName(12809)] = 5,		-- Concussion Blow
-	[SpellName(20253)] = 5,		-- Intercept Stun
+	[SpellName(20253)] = 5,		-- Intercept
 	[SpellName(5246)] = 5,		-- Intimidating Shout
 	[SpellName(46968)] = 5,		-- Shockwave
 	-- Racial
@@ -84,7 +84,7 @@ T.ArenaControl = {
 	-- Silences
 	[SpellName(47476)] = 4,		-- Strangulate
 	[SpellName(34490)] = 4,		-- Silencing Shot
-	[SpellName(18469)] = 4,		-- Counterspell - Silenced
+	[SpellName(18469)] = 4,		-- Silenced - Improved Counterspell
 	[SpellName(63529)] = 4,		-- Silenced - Shield of the Templar
 	[SpellName(15487)] = 4,		-- Silence
 	[SpellName(1330)] = 4,		-- Garrote - Silence

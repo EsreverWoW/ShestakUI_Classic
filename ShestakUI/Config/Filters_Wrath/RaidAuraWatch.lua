@@ -1166,7 +1166,7 @@ if C.raidframe.plugins_pvp_debuffs == true then
 		[SpellName(60995)] = 3,		-- Demon Charge (Metamorphosis)
 		[SpellName(5782)] = 3,		-- Fear
 		[SpellName(5484)] = 3,		-- Howl of Terror
-		[SpellName(30153)] = 3,		-- Intercept Stun (Felguard)
+		[SpellName(30153)] = 3,		-- Intercept (Felguard)
 		[SpellName(6358)] = 3,		-- Seduction (Succubus)
 		[SpellName(30283)] = 3,		-- Shadowfury
 		[SpellName(24259)] = 3,		-- Spell Lock (Felhunter)
@@ -1177,7 +1177,7 @@ if C.raidframe.plugins_pvp_debuffs == true then
 		[SpellName(58373)] = 2,		-- Glyph of Hamstring
 		[SpellName(23694)] = 2,		-- Improved Hamstring
 		[SpellName(5246)] = 3,		-- Intimidating Shout
-		[SpellName(20253)] = 3,		-- Intercept Stun
+		[SpellName(20253)] = 3,		-- Intercept
 		[SpellName(46968)] = 3,		-- Shockwave
 		[SpellName(18498)] = 3,		-- Silenced - Gag Order
 		-- Racial

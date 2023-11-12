@@ -77,7 +77,7 @@ T.ArenaControl = {
 
 	-- Silences
 	[SpellName(34490)] = 4,		-- Silencing Shot
-	[SpellName(18469)] = 4,		-- Counterspell - Silenced
+	[SpellName(18469)] = 4,		-- Silenced - Improved Counterspell
 	[SpellName(15487)] = 4,		-- Silence
 	[SpellName(1330)] = 4,		-- Garrote - Silence
 	[SpellName(18425)] = 4,		-- Kick - Silenced
