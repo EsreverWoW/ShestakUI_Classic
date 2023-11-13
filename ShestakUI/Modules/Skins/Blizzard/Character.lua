@@ -173,7 +173,7 @@ local function LoadSkin()
 		bg:SetSize(165, 1)
 		bg:SetVertexColor(unpack(C.media.border_color))
 
-		local border = CreateFrame("Frame", "$parentOuterBorder", frame, "BackdropTemplate")
+		local border = CreateFrame("Frame", "$parentOuterBorder", frame, BackdropTemplateMixin and "BackdropTemplate")
 		border:SetPoint("TOPLEFT", bg, "TOPLEFT", -T.mult, T.mult)
 		border:SetPoint("BOTTOMRIGHT", bg, "BOTTOMRIGHT", T.mult, -T.mult)
 		border:SetFrameLevel(frame:GetFrameLevel() + 1)

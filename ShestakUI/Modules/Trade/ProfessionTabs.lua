@@ -38,7 +38,7 @@ if T.Mainline then
 
 		local buttons = {}
 		for index, value in pairs(buttonList) do
-			local button = CreateFrame("Button", nil, ProfessionsFrame.CraftingPage.RecipeList, "BackdropTemplate")
+			local button = CreateFrame("Button", nil, ProfessionsFrame.CraftingPage.RecipeList, BackdropTemplateMixin and "BackdropTemplate")
 			button:SetSize(22, 22)
 			button:SetPoint("BOTTOMRIGHT", ProfessionsFrame.CraftingPage.RecipeList.FilterButton, "TOPRIGHT", -(index-1)*27, 10)
 			button:SetTemplate("Overlay")
