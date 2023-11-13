@@ -13,6 +13,8 @@ T.realm = GetRealmName()
 T.color = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[T.class]
 T.version = C_AddOns.GetAddOnMetadata("ShestakUI", "Version")
 T.screenWidth, T.screenHeight = GetPhysicalScreenSize()
+T.HiDPI = GetScreenHeight() / T.screenHeight < 0.75
+
 T.toc = select(4, GetBuildInfo())
 T.newPatch = T.toc >= 100105
 T.Mainline =_G.WOW_PROJECT_ID == _G.WOW_PROJECT_MAINLINE
@@ -22,7 +24,10 @@ T.Vanilla115 = T.Vanilla and T.toc >= 10105
 T.TBC = _G.WOW_PROJECT_ID == _G.WOW_PROJECT_BURNING_CRUSADE_CLASSIC
 T.Wrath = _G.WOW_PROJECT_ID == _G.WOW_PROJECT_WRATH_CLASSIC
 T.Cata = T.Classic and T.toc >= 4e4
-T.HiDPI = GetScreenHeight() / T.screenHeight < 0.75
+T.Hardcore = C_GameRules and C_GameRules.IsHardcoreActive()
+T.SoM = C_Seasons and C_Seasons.HasActiveSeason() and C_Seasons.GetActiveSeason() == Enum.SeasonID.SeasonOfMastery
+-- T.SoD = C_Seasons and C_Seasons.HasActiveSeason() and C_Seasons.GetActiveSeason() == Enum.SeasonID.Placeholder
+T.SoD = (T.Vanilla and GetMaxPlayerLevel() < 60) or (C_Engraving and C_Engraving.IsEngravingEnabled()) or (C_Seasons and C_Seasons.HasActiveSeason() and (C_Seasons.GetActiveSeason() > 1 and C_Seasons.GetActiveSeason() ~= 3))
 
 -- BETA
 GetContainerItemInfo = GetContainerItemInfo or function(bagIndex, slotIndex)
