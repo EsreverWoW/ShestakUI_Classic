@@ -426,7 +426,7 @@ Used to determine if running World of Warcraft: Classic on patch 1.15 or greater
 --]]
 local toc = select(4, GetBuildInfo())
 function oUF:IsVanilla115()
-	return oUF:IsVanilla() and toc >= 10105
+	return oUF:IsVanilla() and toc >= 11500
 end
 
 --[[ oUF:IsTBC()

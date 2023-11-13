@@ -20,7 +20,7 @@ T.newPatch = T.toc >= 100105
 T.Mainline =_G.WOW_PROJECT_ID == _G.WOW_PROJECT_MAINLINE
 T.Classic = _G.WOW_PROJECT_ID ~= _G.WOW_PROJECT_MAINLINE
 T.Vanilla = _G.WOW_PROJECT_ID == _G.WOW_PROJECT_CLASSIC
-T.Vanilla115 = T.Vanilla and T.toc >= 10105
+T.Vanilla115 = T.Vanilla and T.toc >= 11500
 T.TBC = _G.WOW_PROJECT_ID == _G.WOW_PROJECT_BURNING_CRUSADE_CLASSIC
 T.Wrath = _G.WOW_PROJECT_ID == _G.WOW_PROJECT_WRATH_CLASSIC
 T.Cata = T.Classic and T.toc >= 4e4
