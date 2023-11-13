@@ -140,7 +140,11 @@ local targetedList = {}
 local ClassColors = {}
 local token
 for class, color in next, RAID_CLASS_COLORS do
-	ClassColors[class] = ("|cff%.2x%.2x%.2x"):format(color.r * 255, color.g * 255, color.b * 255)
+	if T.Vanilla and class == "SHAMAN" then
+		ClassColors[class] = ("|cff%.2x%.2x%.2x"):format(0 * 255, 0.44 * 255, 0.87 * 255)
+	else
+		ClassColors[class] = ("|cff%.2x%.2x%.2x"):format(color.r * 255, color.g * 255, color.b * 255)
+	end
 end
 
 local function AddTargetedBy()
@@ -178,6 +182,9 @@ local function GetColor(unit)
 		local color = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[class]
 		if color then
 			r, g, b = color.r, color.g, color.b
+			if T.Vanilla and class == "SHAMAN" and not CUSTOM_CLASS_COLORS then
+				r, g, b = 0, 0.44, 0.87
+			end
 		else
 			r, g, b = 1, 1, 1
 		end
