@@ -2523,15 +2523,12 @@ do
 	mount:SetPoint("TOPLEFT", instance_lock, "BOTTOMLEFT", 0, 0)
 
 	local classic = {
-		show_shift,
 		unit_role,
 		achievements,
 		mount
 	}
 
 	local wrath = {
-		show_shift,
-		unit_role,
 		mount
 	}
 

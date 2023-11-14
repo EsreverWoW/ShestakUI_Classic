@@ -44,4 +44,8 @@ local function MountSourceTooltip(self, ...)
 	end
 end
 
-hooksecurefunc(GameTooltip, "SetUnitBuffByAuraInstanceID", MountSourceTooltip)
+if T.Classic then
+	hooksecurefunc(GameTooltip, "SetUnitAura", MountSourceTooltip)
+else
+	hooksecurefunc(GameTooltip, "SetUnitBuffByAuraInstanceID", MountSourceTooltip)
+end

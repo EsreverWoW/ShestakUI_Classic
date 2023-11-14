@@ -65,32 +65,6 @@ function T.GetSpecializationRole()
 	end
 end
 
--- Add later
-if not GetAverageItemLevel then
-	GetAverageItemLevel = function()
-		local slotName = {
-			"HeadSlot", "NeckSlot", "ShoulderSlot", "BackSlot", "ChestSlot", "WristSlot",
-			"HandsSlot", "WaistSlot", "LegsSlot", "FeetSlot", "Finger0Slot", "Finger1Slot",
-			"Trinket0Slot", "Trinket1Slot", "MainHandSlot", "SecondaryHandSlot", "RangedSlot", "AmmoSlot"
-		}
-
-		local total, slot, itn, level = 0, 0, 0, 0
-
-		for i in pairs(slotName) do
-			slot = GetInventoryItemLink("player", GetInventorySlotInfo(slotName[i]))
-			if slot then
-				itn = itn + 1
-				level = select(4, GetItemInfo(slot)) or 0
-				total = total + level
-			end
-		end
-
-		if total < 1 or itn < 1 then return 0 end
-
-		return floor(total / itn), floor(total / itn)
-	end
-end
-
 ----------------------------------------------------------------------------------------
 --	Check if Classic or Burning Crusade Classic / Wrath of the Lich King Classic
 ----------------------------------------------------------------------------------------
