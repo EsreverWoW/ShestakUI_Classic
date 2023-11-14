@@ -254,7 +254,7 @@ local function LoadSkin()
 		end)
 
 		hooksecurefunc("QuestLog_Update", function()
-			local numEntries = C_QuestLog.GetNumQuestLogEntries()
+			local numEntries = GetNumQuestLogEntries()
 			if numEntries == 0 then
 				QuestTrack:Disable()
 			else
@@ -281,7 +281,7 @@ local function LoadSkin()
 
 		--[[
         local function UpdateQuests() -- causing issues
-            local numEntries, numQuests = C_QuestLog.GetNumQuestLogEntries()
+            local numEntries, numQuests = GetNumQuestLogEntries()
             local offset = FauxScrollFrame_GetOffset(QuestLogListScrollFrame)
             local index, questLogTitle, highlight, text
 
