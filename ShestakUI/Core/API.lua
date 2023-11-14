@@ -90,9 +90,7 @@ local function GetTemplate(t)
 end
 
 local function SetTemplate(f, t)
-	if BackdropTemplateMixin then
-		Mixin(f, BackdropTemplateMixin) -- 9.0 to set backdrop
-	end
+	Mixin(f, BackdropTemplateMixin) -- 9.0 to set backdrop
 	GetTemplate(t)
 
 	f:SetBackdrop({
@@ -115,9 +113,7 @@ local function SetTemplate(f, t)
 end
 
 local function CreatePanel(f, t, w, h, a1, p, a2, x, y)
-	if BackdropTemplateMixin then
-		Mixin(f, BackdropTemplateMixin) -- 9.0 to set backdrop
-	end
+	Mixin(f, BackdropTemplateMixin) -- 9.0 to set backdrop
 	GetTemplate(t)
 
 	f:SetWidth(w)

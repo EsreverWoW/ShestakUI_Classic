@@ -121,9 +121,7 @@ local function SkinStatusBar(widget)
 		bar.Spark:SetAlpha(0)
 		local parent = widget:GetParent():GetParent()
 		if parent.castBar or parent.UnitFrame then -- nameplate
-			if BackdropTemplateMixin then
-				Mixin(bar, BackdropTemplateMixin)
-			end
+			Mixin(bar, BackdropTemplateMixin)
 			bar:SetBackdrop({
 				bgFile = C.media.blank,
 				insets = {left = 0, right = 0, top = 0, bottom = 0}

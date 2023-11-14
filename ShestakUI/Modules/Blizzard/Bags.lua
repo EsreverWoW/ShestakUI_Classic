@@ -551,9 +551,7 @@ function Stuffing:BagFrameSlotNew(p, slot)
 		ret.slot = slot
 		slot = slot - (T.Classic and 4 or 5)
 		ret.frame = CreateFrame(T.Classic and "CheckButton" or "ItemButton", "StuffingBBag"..slot.."Slot", p, "BankItemButtonBagTemplate")
-		if BackdropTemplateMixin then
-			Mixin(ret.frame, BackdropTemplateMixin)
-		end
+		Mixin(ret.frame, BackdropTemplateMixin)
 		ret.frame:StripTextures()
 		ret.frame:SetID(slot)
 		hooksecurefunc(ret.frame.IconBorder, "SetVertexColor", function(self, r, g, b)
@@ -592,9 +590,7 @@ function Stuffing:BagFrameSlotNew(p, slot)
 		else
 			ret.frame = CreateFrame(T.Classic and "CheckButton" or "ItemButton", "StuffingFBag"..(slot + 1).."Slot", p, "")
 		end
-		if BackdropTemplateMixin then
-			Mixin(ret.frame, BackdropTemplateMixin)
-		end
+		Mixin(ret.frame, BackdropTemplateMixin)
 
 		ret.frame.ID = C_Container.ContainerIDToInventoryID(slot + 1)
 		local bag_tex = GetInventoryItemTexture("player", ret.frame.ID)
