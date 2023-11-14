@@ -445,6 +445,15 @@ function oUF:IsWrath()
     return _G.WOW_PROJECT_ID == _G.WOW_PROJECT_WRATH_CLASSIC
 end
 
+--[[ oUF:IsCata()
+Used to determine if running Cataclysm Classic.
+
+* self - the global oUF object
+--]]
+function oUF:IsCata()
+	return oUF:IsClassic() and select(4, GetBuildInfo()) >= 4e4
+end
+
 --[[ oUF:RegisterInitCallback(func)
 Used to add a function to a table to be executed upon unit frame/header initialization.
 
