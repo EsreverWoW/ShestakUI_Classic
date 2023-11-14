@@ -92,8 +92,8 @@ end
 local textpos = {
 	[1] = {0, 1},	-- need
 	[2] = {1, 2},	-- greed
-	-- [4] = {2, 0},	-- transmog
-	-- [3] = {1, 2},	-- disenchant
+	[4] = {2, 0},	-- transmog
+	[3] = {1, 2},	-- disenchant
 	[0] = {1, -1},	-- pass
 }
 
@@ -173,7 +173,11 @@ local function CreateRollFrame()
 	if T.Classic then
 		need, needText = CreateRollButton(frame, "Interface\\Buttons\\UI-GroupLoot-Dice-Up", "Interface\\Buttons\\UI-GroupLoot-Dice-Highlight", "Interface\\Buttons\\UI-GroupLoot-Dice-Down", 1, NEED, "LEFT", frame.button, "RIGHT", 7, -1.2)
 		greed, greedText = CreateRollButton(frame, "Interface\\Buttons\\UI-GroupLoot-Coin-Up", "Interface\\Buttons\\UI-GroupLoot-Coin-Highlight", "Interface\\Buttons\\UI-GroupLoot-Coin-Down", 2, GREED, "LEFT", need, "RIGHT", 0, -1)
-		pass, passText = CreateRollButton(frame, "Interface\\Buttons\\UI-GroupLoot-Pass-Up", nil, "Interface\\Buttons\\UI-GroupLoot-Pass-Down", 0, PASS, "LEFT", greed, "RIGHT", 0, 3)
+		if T.Cata then
+			-- transmog, transmogText = CreateRollButton(frame, "lootroll-toast-icon-transmog-up", "lootroll-toast-icon-transmog-highlight", "lootroll-toast-icon-transmog-down", 4, TRANSMOGRIFY, "LEFT", need, "RIGHT", -1, 1)
+			de, deText = CreateRollButton(frame, "Interface\\Buttons\\UI-GroupLoot-DE-Up", "Interface\\Buttons\\UI-GroupLoot-DE-Highlight", "Interface\\Buttons\\UI-GroupLoot-DE-Down", 3, ROLL_DISENCHANT, "LEFT", greed, "RIGHT", 0, -1)
+		end
+		pass, passText = CreateRollButton(frame, "Interface\\Buttons\\UI-GroupLoot-Pass-Up", nil, "Interface\\Buttons\\UI-GroupLoot-Pass-Down", 0, PASS, "LEFT", de or greed, "RIGHT", 0, 3)
 	else
 		need, needText = CreateRollButton(frame, "lootroll-toast-icon-need-up", "lootroll-toast-icon-need-highlight", "lootroll-toast-icon-need-down", 1, NEED, "LEFT", frame.button, "RIGHT", 8, -1)
 		greed, greedText = CreateRollButton(frame, "lootroll-toast-icon-greed-up", "lootroll-toast-icon-greed-highlight", "lootroll-toast-icon-greed-down", 2, GREED, "LEFT", need, "RIGHT", 0, 1)
@@ -262,8 +266,10 @@ local function START_LOOT_ROLL(rollID, time)
 	if T.Classic then
 		f.needText:SetText(0)
 		f.greedText:SetText(0)
-		-- f.transmogText:SetText(0)
-		-- f.disenchantText:SetText(0)
+		if T.Cata then
+			-- f.transmogText:SetText(0)
+			f.disenchantText:SetText(0)
+		end
 		f.passText:SetText(0)
 	end
 
@@ -316,16 +322,20 @@ local function START_LOOT_ROLL(rollID, time)
 		end
 	end
 
-	if T.Mainline then
+	if T.Cata or T.Mainline then
 		if canDisenchant then
 			f.disenchant:Enable()
 			f.disenchant:SetAlpha(1)
-			-- f.disenchantText:SetAlpha(1)
+			if T.Cata then
+				f.disenchantText:SetAlpha(1)
+			end
 			SetDesaturation(f.disenchant:GetNormalTexture(), false)
 		else
 			f.disenchant:Disable()
 			f.disenchant:SetAlpha(0.2)
-			-- f.disenchantText:SetAlpha(0)
+			if T.Cata then
+				f.disenchantText:SetAlpha(0)
+			end
 			SetDesaturation(f.disenchant:GetNormalTexture(), true)
 			f.disenchant.errtext = format(_G["LOOT_ROLL_INELIGIBLE_REASON"..reasonDisenchant], deSkillRequired)
 		end
@@ -409,8 +419,10 @@ local function testRoll(f)
 	if T.Classic then
 		f.needText:SetText(1)
 		f.greedText:SetText(2)
-		-- f.transmogText:SetText(2)
-		-- f.disenchantText:SetText(0)
+		if T.Cata then
+			-- f.transmogText:SetText(2)
+			f.disenchantText:SetText(0)
+		end
 		f.passText:SetText(0)
 	end
 
