@@ -35,7 +35,7 @@ if T.Mainline then
 	SpellActivationOverlayFrame:SetFrameStrata("BACKGROUND")
 end
 
-local LibClassicDurations = T.Vanilla and LibStub("LibClassicDurations")
+local LibClassicDurations = T.Vanilla and not T.Vanilla115 and LibStub("LibClassicDurations")
 
 local Filger = {}
 local MyUnits = {player = true, vehicle = true, pet = true}
