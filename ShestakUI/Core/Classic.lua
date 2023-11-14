@@ -114,6 +114,7 @@ if not CUSTOM_CLASS_COLORS then
 	end
 
 	-- for Blizzard UI elements
+	--[[
 	local frame = CreateFrame("Frame")
 	frame:RegisterEvent("ADDON_LOADED")
 	frame:SetScript("OnEvent", function(_, _, addon)
@@ -164,8 +165,9 @@ if not CUSTOM_CLASS_COLORS then
 			end)
 		end
 	end)
+	--]]
 
-	hooksecurefunc("CompactUnitFrame_UpdateHealthColor", function(frame) -- 371
+	hooksecurefunc("CompactUnitFrame_UpdateHealthColor", function(frame)
 		local opts = frame.optionTable
 		if opts.healthBarColorOverride or not opts.useClassColors
 				or not (opts.allowClassColorsForNPCs or UnitIsPlayer(frame.unit))
