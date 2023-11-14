@@ -61,9 +61,7 @@ else
 	PetBarAnchor:CreatePanel("Invisible", (C.actionbar.button_size + C.actionbar.button_space), (C.actionbar.button_size * 10) + (C.actionbar.button_space * 9), unpack(C.position.right_bars))
 end
 PetBarAnchor:SetFrameStrata("LOW")
-if T.Vanilla or T.TBC then
-	RegisterStateDriver(PetBarAnchor, "visibility", "[pet,nooverridebar,nopossessbar] show; hide")
-elseif T.Wrath then
+if T.Classic then
 	RegisterStateDriver(PetBarAnchor, "visibility", "[pet,nooverridebar,novehicleui,nopossessbar] show; hide")
 else
 	RegisterStateDriver(PetBarAnchor, "visibility", "[pet,novehicleui,nopossessbar,nopetbattle] show; hide")

@@ -54,12 +54,10 @@ local function GetBar()
 end
 
 bar:RegisterEvent("PLAYER_LOGIN")
-if T.Mainline or T.Wrath then
-	bar:RegisterEvent("UPDATE_VEHICLE_ACTIONBAR")
-	bar:RegisterEvent("UPDATE_OVERRIDE_ACTIONBAR")
-	bar:RegisterEvent("UNIT_ENTERED_VEHICLE")
-	bar:RegisterEvent("UNIT_EXITED_VEHICLE")
-end
+bar:RegisterEvent("UPDATE_VEHICLE_ACTIONBAR")
+bar:RegisterEvent("UPDATE_OVERRIDE_ACTIONBAR")
+bar:RegisterEvent("UNIT_ENTERED_VEHICLE")
+bar:RegisterEvent("UNIT_EXITED_VEHICLE")
 bar:SetScript("OnEvent", function(self, event)
 	if event == "PLAYER_LOGIN" then
 		local NumPerRows = C.actionbar.bar1_row

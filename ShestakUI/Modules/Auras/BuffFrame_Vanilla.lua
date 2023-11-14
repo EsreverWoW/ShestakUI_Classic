@@ -117,10 +117,10 @@ local function UpdateBuffAnchors()
 			aboveBuff = buff
 		else
 			if numBuffs == 1 then
-				if mainhand and offhand and (T.Vanilla or T.TBC or not UnitHasVehicleUI("player")) then
+				if mainhand and offhand and not UnitHasVehicleUI("player") then
 					buff:SetPoint("RIGHT", TempEnchant2, "LEFT", -3, 0)
 					aboveBuff = TempEnchant1
-				elseif ((mainhand and not offhand) or (offhand and not mainhand)) and (T.Vanilla or T.TBC or not UnitHasVehicleUI("player")) then
+				elseif ((mainhand and not offhand) or (offhand and not mainhand)) and not UnitHasVehicleUI("player") then
 					buff:SetPoint("RIGHT", TempEnchant1, "LEFT", -3, 0)
 					aboveBuff = TempEnchant1
 				else

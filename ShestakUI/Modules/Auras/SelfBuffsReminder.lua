@@ -38,10 +38,8 @@ local function OnEvent(self, event)
 	if event == "LEARNED_SPELL_IN_TAB" and self.icon:GetTexture() then
 		self:UnregisterAllEvents()
 		self:RegisterUnitEvent("UNIT_AURA", "player", "")
-		if T.Mainline or T.Wrath then
-			self:RegisterEvent("UNIT_ENTERED_VEHICLE")
-			self:RegisterEvent("UNIT_EXITED_VEHICLE")
-		end
+		self:RegisterEvent("UNIT_ENTERED_VEHICLE")
+		self:RegisterEvent("UNIT_EXITED_VEHICLE")
 
 		if group.combat then
 			self:RegisterEvent("PLAYER_REGEN_ENABLED")
@@ -146,10 +144,8 @@ for i = 1, #tab do
 	frame:RegisterEvent("PLAYER_REGEN_ENABLED")
 	frame:RegisterEvent("PLAYER_REGEN_DISABLED")
 	frame:RegisterEvent("ZONE_CHANGED_NEW_AREA")
-	if T.Mainline or T.Wrath then
-		frame:RegisterEvent("UNIT_ENTERED_VEHICLE")
-		frame:RegisterEvent("UNIT_EXITED_VEHICLE")
-	end
+	frame:RegisterEvent("UNIT_ENTERED_VEHICLE")
+	frame:RegisterEvent("UNIT_EXITED_VEHICLE")
 	frame:SetScript("OnEvent", OnEvent)
 	frame:SetScript("OnUpdate", function(self)
 		if not self.icon:GetTexture() then

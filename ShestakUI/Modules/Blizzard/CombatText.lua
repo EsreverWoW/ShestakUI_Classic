@@ -27,14 +27,10 @@ end
 
 -- Detect vehicle
 local function SetUnit()
-	if T.Vanilla or T.TBC then
-		ct.unit = "player"
+	if UnitHasVehicleUI("player") then
+		ct.unit = "vehicle"
 	else
-		if UnitHasVehicleUI("player") then
-			ct.unit = "vehicle"
-		else
-			ct.unit = "player"
-		end
+		ct.unit = "player"
 	end
 	CombatTextSetActiveUnit(ct.unit)
 end
@@ -459,10 +455,8 @@ xCT:RegisterEvent("UNIT_POWER_UPDATE")
 if C.combattext.dk_runes and T.class == "DEATHKNIGHT" then
 	xCT:RegisterEvent("RUNE_POWER_UPDATE")
 end
-if T.Mainline or T.Wrath then
-	xCT:RegisterEvent("UNIT_ENTERED_VEHICLE")
-	xCT:RegisterEvent("UNIT_EXITING_VEHICLE")
-end
+xCT:RegisterEvent("UNIT_ENTERED_VEHICLE")
+xCT:RegisterEvent("UNIT_EXITING_VEHICLE")
 xCT:RegisterEvent("PLAYER_ENTERING_WORLD")
 xCT:SetScript("OnEvent", OnEvent)
 

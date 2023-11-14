@@ -28,33 +28,21 @@ vehicle:SetFrameStrata("HIGH")
 vehicle:Hide()
 
 local function MainMenuBarVehicleLeaveButtonUpdateHook()
-	if T.Vanilla or T.TBC then
+	if CanExitVehicle() then
 		if UnitOnTaxi("player") then
-			vehicle:Show()
 			vehicle:SetScript("OnClick", function(self)
 				TaxiRequestEarlyLanding()
 				self:LockHighlight()
 			end)
 		else
-			vehicle:Hide()
+			vehicle:SetScript("OnClick", function()
+				VehicleExit()
+			end)
 		end
+		vehicle:Show()
 	else
-		if CanExitVehicle() then
-			if UnitOnTaxi("player") then
-				vehicle:SetScript("OnClick", function(self)
-					TaxiRequestEarlyLanding()
-					self:LockHighlight()
-				end)
-			else
-				vehicle:SetScript("OnClick", function()
-					VehicleExit()
-				end)
-			end
-			vehicle:Show()
-		else
-			vehicle:UnlockHighlight()
-			vehicle:Hide()
-		end
+		vehicle:UnlockHighlight()
+		vehicle:Hide()
 	end
 end
 
@@ -64,24 +52,22 @@ else
 	hooksecurefunc(MainMenuBarVehicleLeaveButton, "Update", MainMenuBarVehicleLeaveButtonUpdateHook)
 end
 
-if T.Wrath then
-	vehicle:RegisterEvent("PLAYER_ENTERING_WORLD")
-	vehicle:RegisterEvent("UPDATE_BONUS_ACTIONBAR")
-	vehicle:RegisterEvent("UPDATE_MULTI_CAST_ACTIONBAR")
-	vehicle:RegisterEvent("UNIT_ENTERED_VEHICLE")
-	vehicle:RegisterEvent("UNIT_EXITED_VEHICLE")
-	vehicle:RegisterEvent("VEHICLE_UPDATE")
-	vehicle:SetScript("OnEvent", function(self)
-		if UnitHasVehicleUI("player") then
-			self:SetScript("OnClick", function()
-				VehicleExit()
-			end)
-			self:Show()
-		else
-			self:Hide()
-		end
-	end)
-end
+vehicle:RegisterEvent("PLAYER_ENTERING_WORLD")
+vehicle:RegisterEvent("UPDATE_BONUS_ACTIONBAR")
+vehicle:RegisterEvent("UPDATE_MULTI_CAST_ACTIONBAR")
+vehicle:RegisterEvent("UNIT_ENTERED_VEHICLE")
+vehicle:RegisterEvent("UNIT_EXITED_VEHICLE")
+vehicle:RegisterEvent("VEHICLE_UPDATE")
+vehicle:SetScript("OnEvent", function(self)
+	if UnitHasVehicleUI("player") then
+		self:SetScript("OnClick", function()
+			VehicleExit()
+		end)
+		self:Show()
+	else
+		self:Hide()
+	end
+end)
 
 local function PossessBarUpdateHook()
 	for i = 1, NUM_POSSESS_SLOTS do
@@ -110,14 +96,12 @@ vehicle:SetScript("OnEnter", function(self)
 		GameTooltip:SetText(TAXI_CANCEL, 1, 1, 1)
 		GameTooltip:AddLine(TAXI_CANCEL_DESCRIPTION, 1, 0.8, 0, true)
 		GameTooltip:Show()
-	elseif T.Mainline or T.Wrath then
-		if T.Mainline and IsPossessBarVisible() then
-			GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-			GameTooltip_SetTitle(GameTooltip, CANCEL)
-		else
-			GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-			GameTooltip_SetTitle(GameTooltip, LEAVE_VEHICLE)
-		end
+	elseif IsPossessBarVisible() then
+		GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+		GameTooltip_SetTitle(GameTooltip, CANCEL)
+	else
+		GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+		GameTooltip_SetTitle(GameTooltip, LEAVE_VEHICLE)
 	end
 end)
 vehicle:SetScript("OnLeave", function() GameTooltip:Hide() end)

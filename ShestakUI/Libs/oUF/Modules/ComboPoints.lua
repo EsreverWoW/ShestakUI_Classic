@@ -12,7 +12,7 @@ local function Update(self, _, unit, powerType)
 	local element = self.ComboPoints
 	local cur, max
 
-	if(oUF:IsWrath()) then
+	if(oUF:IsClassic()) then
 		if UnitHasVehicleUI("player") then
 			local petID = select(6, strsplit("-", UnitGUID("pet")))
 			if petID and (petID == "30161" or petID == "32535") then -- Wyrmrest Skytalon
@@ -26,9 +26,6 @@ local function Update(self, _, unit, powerType)
 			cur = UnitPower("player", 14)
 			max = UnitPowerMax("player", 14)
 		end
-	elseif(oUF:IsVanilla() or oUF:IsTBC()) then
-		cur = UnitPower("player", 14)
-		max = UnitPowerMax("player", 14)
 	else
 		if UnitHasVehicleUI("player") then
 			cur = UnitPower("vehicle", 4)
@@ -128,7 +125,7 @@ local function Visibility(self)
 	if(oUF:IsClassic()) then
 		local petGUID = UnitGUID("pet")
 		local petID = petGUID and select(6, petGUID)
-		if GetBonusBarOffset() == 1 or (oUF:IsWrath() and ((UnitHasVehicleUI("player") and UnitPower("vehicle", 14) > 0) or ((petID and (petID == "30161" or petID == "32535")) and GetComboPoints("pet", "pettarget") > 0))) then
+		if GetBonusBarOffset() == 1 or (UnitHasVehicleUI("player") and UnitPower("vehicle", 14) > 0) or (petID and (petID == "30161" or petID == "32535") and GetComboPoints("pet", "pettarget") > 0) then
 			element:Show()
 			if self.Debuffs then self.Debuffs:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 2, 19) end
 		else

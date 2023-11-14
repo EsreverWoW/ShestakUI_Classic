@@ -53,9 +53,7 @@ bar:SetScript("OnEvent", function(self, event)
 			button:Show()
 			self:SetAttribute("addchild", button)
 		end
-		if T.Vanilla or T.TBC then
-			RegisterStateDriver(self, "visibility", "[pet,nooverridebar,nopossessbar] show; hide")
-		elseif T.Wrath then
+		if T.Classic then
 			RegisterStateDriver(self, "visibility", "[pet,nooverridebar,novehicleui,nopossessbar] show; hide")
 		else
 			RegisterStateDriver(self, "visibility", "[pet,novehicleui,nopossessbar,nopetbattle] show; hide")

@@ -183,18 +183,12 @@ local function Visibility(self, event, unit)
 	local element = self.Experience
 	local shouldEnable
 
-	if(oUF:IsClassic() or oUF:IsTBC()) then
-		if(UnitLevel('player') ~= element.__accountMaxLevel) then
-			shouldEnable = true
-		end
-	elseif(oUF:IsWrath()) then
-		if(not UnitHasVehicleUI('player')) then
+	if(not UnitHasVehicleUI('player')) then
+		if(oUF:IsClassic()) then
 			if(UnitLevel('player') ~= element.__accountMaxLevel) then
 				shouldEnable = true
 			end
-		end
-	else
-		if(not UnitHasVehicleUI('player')) then
+		else
 			if(not IsPlayerMaxLevel() and not IsXPUserDisabled()) then
 				shouldEnable = true
 			elseif(ShouldShowHonor() and not IsPlayerMaxHonorLevel()) then
