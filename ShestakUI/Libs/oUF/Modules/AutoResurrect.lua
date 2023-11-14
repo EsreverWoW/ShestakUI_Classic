@@ -31,7 +31,7 @@ elseif T.Wrath then
 		},
 		["DRUID"] = {
 			combat = GetSpellInfo(20484),	-- Rebirth
-			ooc = GetSpellInfo(50769),	-- Revive
+			ooc = GetSpellInfo(50769),		-- Revive
 		},
 		["PALADIN"] = {
 			ooc = GetSpellInfo(7328),		-- Redemption
