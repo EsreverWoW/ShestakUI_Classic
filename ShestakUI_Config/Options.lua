@@ -2622,7 +2622,7 @@ do
 		role_icons,
 	}
 
-	if IsClassicBuild() then
+	if IsVanillaBuild() or IsTBCBuild() then
 		HideOptions(classic)
 	end
 end
