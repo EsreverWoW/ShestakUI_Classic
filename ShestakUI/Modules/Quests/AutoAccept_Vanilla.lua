@@ -4,255 +4,296 @@ if C.automation.accept_quest ~= true then return end
 ----------------------------------------------------------------------------------------
 --	Quest automation(QuickQuest by p3lim)
 ----------------------------------------------------------------------------------------
-local QuickQuest = CreateFrame("Frame")
-QuickQuest:SetScript("OnEvent", function(self, event, ...) self[event](...) end)
-
+local _, ns = ...
 local QuickQuestDB = {
-	toggle = true,
-	items = true,
-	gossip = true,
-	gossipraid = 1,
-	modifier = "SHIFT",
-	reverse = false,
-	share = false,
+	general = {
+		share = false,
+		skipgossip = true,
+		skipgossipwhen = 1,
+		pausekey = 'SHIFT',
+		pausekeyreverse = false,
+	},
+	blocklist = {
+		items = {},
+		npcs = {},
+		quests = {},
+	},
 }
 
-local QuickQuestBlacklistDB = {
-	items = {}
-}
+local EventHandler = CreateFrame('Frame')
+EventHandler.events = {}
+EventHandler:SetScript('OnEvent', function(self, event, ...)
+	self:Trigger(event, ...)
+end)
 
-local metatable = {
-	__call = function(methods, ...)
-		for _, method in next, methods do
-			method(...)
-		end
-	end
-}
-
-local modifier = false
-function QuickQuest:Register(event, method, override)
-	local newmethod
-	if not override then
-		newmethod = function(...)
-			if QuickQuestDB.reverse == modifier then
-				method(...)
-			end
-		end
+function EventHandler:Register(event, func)
+	local registered = not not self.events[event]
+	if not registered then
+		self.events[event] = {}
 	end
 
-	local methods = self[event]
-	if methods then
-		self[event] = setmetatable({methods, newmethod or method}, metatable)
-	else
-		self[event] = newmethod or method
+	for _, f in next, self.events[event] do
+		if f == func then
+			-- avoid the same function being registered multiple times for the same event
+			return
+		end
+	end
+
+	table.insert(self.events[event], func)
+
+	if not registered then
 		self:RegisterEvent(event)
 	end
 end
 
-local function GetNPCID()
-	return tonumber(string.match(UnitGUID('npc') or '', '%w+%-.-%-.-%-.-%-.-%-(.-)%-'))
-end
-
-local ignoreQuestNPC = {}
-
-local function GetQuestLogQuests(onlyComplete)
-	local quests = {}
-	for index = 1, GetNumQuestLogEntries() do
-		local title, _, _, isHeader, _, isComplete, _, questID = GetQuestLogTitle(index)
-		if(not isHeader) then
-			if(onlyComplete and isComplete or not onlyComplete) then
-				quests[title] = questID
+function EventHandler:Unregister(event, func)
+	local funcs = self.events[event]
+	if funcs then
+		for i, f in next, funcs do
+			if f == func then
+				funcs[i] = nil
+				break
 			end
 		end
 	end
 
-	return quests
+	if funcs and #funcs == 0 then
+		self:UnregisterEvent(event)
+	end
 end
 
-QuickQuest:Register("QUEST_GREETING", function()
-	local npcID = GetNPCID()
-	if(ignoreQuestNPC[npcID]) then
-		return
-	end
-
-	local active = GetNumActiveQuests()
-	if(active > 0) then
-		for index = 1, active do
-			local _, complete = GetActiveTitle(index)
-			if(complete) then
-				SelectActiveQuest(index)
-			end
-		end
-	end
-
-	local available = GetNumAvailableQuests()
-	if(available > 0) then
-		for index = 1, available do
-			local isTrivial = IsActiveQuestTrivial(index)
-			if(not isTrivial) then
-				SelectAvailableQuest(index)
-			end
-		end
-	end
-end)
-
-local ignoreGossipNPC = {}
-
-local function GetAvailableGossipQuestInfo(index)
-	local name, level, isTrivial, frequency, isRepeatable, isLegendary, isIgnored = select(((index * 7) - 7) + 1, GetGossipAvailableQuests())
-	return name, level, isTrivial, isIgnored, isRepeatable, frequency == 2, frequency == 3, isLegendary
-end
-
-local function GetActiveGossipQuestInfo(index)
-	local name, level, isTrivial, isComplete, isLegendary, isIgnored = select(((index * 6) - 6) + 1, GetGossipActiveQuests())
-	return name, level, isTrivial, isIgnored, isComplete, isLegendary
-end
-
-QuickQuest:Register("GOSSIP_SHOW", function()
-	local npcID = GetNPCID()
-	if(ignoreQuestNPC[npcID]) then
-		return
-	end
-
-	local active = GetNumGossipActiveQuests()
-	if(active > 0) then
-		local logQuests = GetQuestLogQuests(true)
-		for index = 1, active do
-			local name, _, _, _, completed = GetActiveGossipQuestInfo(index)
-			if(completed) then
-				local questID = logQuests[name]
-				if(not questID) then
-					SelectGossipActiveQuest(index)
-				else
-					local _, _, worldQuest = GetQuestTagInfo(questID)
-					if(not worldQuest) then
-						SelectGossipActiveQuest(index)
-					end
+function EventHandler:Trigger(event, ...)
+	local funcs = self.events[event]
+	if funcs then
+		for _, func in next, funcs do
+			if type(func) == 'string' then
+				self:Trigger(func, ...)
+			else
+				if func(...) then
+					self:Unregister(event, func)
 				end
 			end
 		end
 	end
+end
 
-	local available = GetNumGossipAvailableQuests()
-	if(available > 0) then
-		for index = 1, available do
-			local _, _, trivial, ignored = GetAvailableGossipQuestInfo(index)
-			if(not trivial and not ignored) then
-				SelectGossipAvailableQuest(index)
+ns.EventHandler = EventHandler
+
+local NPC_ID_PATTERN = '%w+%-.-%-.-%-.-%-.-%-(.-)%-'
+function ns.GetNPCID(unit)
+	local npcGUID = UnitGUID(unit or 'npc')
+	if npcGUID then
+		return tonumber(npcGUID:match(NPC_ID_PATTERN))
+	end
+end
+
+function ns.ShouldAcceptTrivialQuests()
+	for index = 1, C_Minimap.GetNumTrackingTypes() do
+		local name, _, isActive = C_Minimap.GetTrackingInfo(index)
+		if name == MINIMAP_TRACKING_TRIVIAL_QUESTS then
+			return isActive
+		end
+	end
+end
+
+function ns.tLength(t)
+	local count = 0
+	for _ in next, t do
+		count = count + 1
+	end
+	return count
+end
+
+local EventHandler = ns.EventHandler
+local paused
+
+local ignoredQuests = {}
+local cashRewards = {
+	[45724] = 1e5, -- Champion's Purse, 10 gold
+}
+local function IsQuestIgnored(questID)
+	if ignoredQuests[questID] then
+		return true
+	end
+
+	local questTitle = tonumber(questID) and C_QuestLog.GetQuestInfo(questID) or ''
+	for key in next, QuickQuestDB.blocklist.quests do
+		if key == questID or questTitle:lower():find(tostring(key):lower()) then
+			return true
+		end
+	end
+
+	return false
+end
+
+EventHandler:Register('GOSSIP_SHOW', function()
+	-- triggered when the player interacts with an NPC that presents dialogue
+	if paused then
+		return
+	end
+
+	if QuickQuestDB.blocklist.npcs[ns.GetNPCID()] then
+		return
+	end
+
+	-- turn in all completed quests
+	for index, info in next, C_GossipInfo.GetActiveQuests() do
+		if not IsQuestIgnored(info.questID) then
+			if info.isComplete then
+				C_GossipInfo.SelectActiveQuest(index)
 			end
 		end
 	end
 
-	if(available == 0 and active == 0 and GetNumGossipOptions() == 1) then
-		if(QuickQuestDB.gossip) then
-			local _, instance = GetInstanceInfo()
-			if(instance == "raid" and QuickQuestDB.gossipraid > 0) then
-				if(GetNumGroupMembers() > 1 and QuickQuestDB.gossipraid < 2) then
-					return
-				end
-
-				SelectGossipOption(1)
-			elseif(instance ~= "raid" and not ignoreGossipNPC[npcID]) then
-				SelectGossipOption(1)
+	-- accept all available quests
+	for index, info in next, C_GossipInfo.GetAvailableQuests() do
+		if not IsQuestIgnored(info.questID) then
+			if not info.isTrivial or ns.ShouldAcceptTrivialQuests() then
+				C_GossipInfo.SelectAvailableQuest(info.questID)
 			end
 		end
 	end
 end)
+EventHandler:Register('QUEST_GREETING', 'GOSSIP_SHOW')
 
-QuestFrame:UnregisterEvent("QUEST_DETAIL")
-QuickQuest:Register("QUEST_DETAIL", function(...)
-	if(not QuickQuestBlacklistDB[GetQuestID()]) then
-		QuestFrame_OnEvent(QuestFrame, "QUEST_DETAIL", ...)
+EventHandler:Register('QUEST_DETAIL', function(questItemID)
+	-- triggered when the information about an available quest is available
+	if paused then
+		return
 	end
-end, true)
 
-QuickQuest:Register("QUEST_DETAIL", function(questStartItemID)
-	--[[
-	if(questStartItemID ~= nil and questStartItemID ~= 0) then
-		AcknowledgeAutoAcceptQuest()
-	else
-		-- XXX: no way to tell if the quest is trivial
-		AcceptQuest()
-	end
-	--]]
 	AcceptQuest()
 end)
 
-QuickQuest:Register("QUEST_ACCEPTED", function(id)
-	if(QuickQuestDB.share) then
-		QuestLogPushQuest(id)
+EventHandler:Register('QUEST_PROGRESS', function()
+	-- triggered when an active quest is selected during turn-in
+	if paused then
+		return
 	end
-end)
 
-local choiceQueue
-QuickQuest:Register("QUEST_ITEM_UPDATE", function()
-	if(choiceQueue and QuickQuest[choiceQueue]) then
-		QuickQuest[choiceQueue]()
+	if QuickQuestDB.blocklist.npcs[ns.GetNPCID()] then
+		return
 	end
-end, true)
 
-QuickQuest:Register("QUEST_PROGRESS", function()
-	if(IsQuestCompletable()) then
-		local requiredItems = GetNumQuestItems()
-		if(requiredItems > 0) then
-			for index = 1, requiredItems do
-				local link = GetQuestItemLink("required", index)
-				if(link) then
-					local id = tonumber(string.match(link, "item:(%d+)"))
-					for _, itemID in next, QuickQuestBlacklistDB.items do
-						if(itemID == id) then
-							return
-						end
-					end
-				else
-					choiceQueue = "QUEST_PROGRESS"
+	if not IsQuestCompletable() then
+		return
+	end
+
+	-- iterate through the items part of the quest
+	for index = 1, GetNumQuestItems() do
+		local itemLink = GetQuestItemLink('required', index)
+		if itemLink then
+			-- check to see if the item is blocked
+			local questItemID = GetItemInfoFromHyperlink(itemLink)
+			for itemID in next, QuickQuestDB.blocklist.items do
+				if itemID == questItemID then
+					-- item is blocked, prevent this quest from opening again and close it
+					ignoredQuests[GetQuestID()] = true
+					CloseQuest()
 					return
 				end
 			end
+		else
+			-- item is not cached yet, trigger the item and wait for the cache to populate
+			EventHandler:Register('QUEST_ITEM_UPDATE', 'QUEST_PROGRESS')
+			GetQuestItemInfo('required', index)
+			return
 		end
-
-		CompleteQuest()
 	end
+
+	CompleteQuest()
+	EventHandler:Unregister('QUEST_ITEM_UPDATE', 'QUEST_PROGRESS')
 end)
 
-QuickQuest:Register("QUEST_COMPLETE", function()
-	local choices = GetNumQuestChoices()
-	if(choices <= 1) then
+EventHandler:Register('QUEST_COMPLETE', function()
+	-- triggered when an active quest is ready to be completed
+	if paused then
+		return
+	end
+
+	if GetNumQuestChoices() <= 1 then
+		-- complete the quest by accepting the first item
 		GetQuestReward(1)
 	end
 end)
 
-local cashRewards = {}
+EventHandler:Register('QUEST_COMPLETE', function()
+	-- triggered when an active quest is ready to be completed
+	local numItemRewards = GetNumQuestChoices()
+	if numItemRewards <= 1 then
+		-- no point iterating over a single item or none at all
+		return
+	end
 
-QuickQuest:Register("QUEST_COMPLETE", function()
-	local choices = GetNumQuestChoices()
-	if(choices > 1) then
-		local bestValue, bestIndex = 0
+	local highestItemValue, highestItemValueIndex = 0
 
-		for index = 1, choices do
-			local link = GetQuestItemLink("choice", index)
-			if(link) then
-				local _, _, _, _, _, _, _, _, _, _, value = GetItemInfo(link)
-				value = cashRewards[tonumber(string.match(link, "item:(%d+):"))] or value
+	-- iterate through the item rewards and automatically select the one worth the most
+	for index = 1, numItemRewards do
+		local itemLink = GetQuestItemLink('choice', index)
+		if itemLink then
+			-- check the value on the item and compare it to the others
+			local _, _, _, _, _, _, _, _, _, _, itemValue = GetItemInfo(itemLink)
+			local itemID = GetItemInfoFromHyperlink(itemLink)
 
-				if(value > bestValue) then
-					bestValue, bestIndex = value, index
-				end
-			else
-				choiceQueue = "QUEST_COMPLETE"
-				return GetQuestItemInfo("choice", index)
+			-- some items are containers that contains currencies of worth
+			itemValue = cashRewards[itemID] or itemValue
+
+			-- compare the values
+			if itemValue > highestItemValue then
+				highestItemValue = itemValue
+				highestItemValueIndex = index
 			end
-		end
-
-		if(bestIndex) then
-			QuestInfoItem_OnClick(QuestInfoRewardsFrame.RewardButtons[bestIndex])
+		else
+			-- item is not cached yet, trigger the item and wait for the cache to populate
+			EventHandler:Register('QUEST_ITEM_UPDATE', 'QUEST_COMPLETE')
+			GetQuestItemInfo('choice', index)
+			return
 		end
 	end
-end, true)
 
-local sub = string.sub
-QuickQuest:Register("MODIFIER_STATE_CHANGED", function(key, state)
-	if(sub(key, 2) == QuickQuestDB.modifier) then
-		modifier = state == 1
+	if highestItemValueIndex then
+		-- this is considered an intrusive action, as we're modifying the UI
+		QuestInfoItem_OnClick(QuestInfoRewardsFrame.RewardButtons[highestItemValueIndex])
 	end
-end, true)
+
+	EventHandler:Unregister('QUEST_ITEM_UPDATE', 'QUEST_COMPLETE')
+end)
+
+EventHandler:Register('QUEST_ACCEPT_CONFIRM', function()
+	-- triggered when a quest is shared in the party, but requires confirmation (like escorts)
+	if paused then
+		return
+	end
+
+	AcceptQuest()
+end)
+
+EventHandler:Register('QUEST_ACCEPTED', function(questID)
+	-- triggered when a quest has been accepted by the player
+	if QuickQuestDB.general.share then
+		local questLogIndex = C_QuestLog.GetLogIndexForQuestID(questID)
+		if questLogIndex then
+			QuestLogPushQuest(questLogIndex)
+		end
+	end
+end)
+
+EventHandler:Register('MODIFIER_STATE_CHANGED', function(key, state)
+	-- triggered when the player clicks any modifier keys on the keyboard
+	if string.sub(key, 2) == QuickQuestDB.general.pausekey then
+		-- change the paused state
+		if QuickQuestDB.general.pausekeyreverse then
+			paused = state ~= 1
+		else
+			paused = state == 1
+		end
+	end
+end)
+
+EventHandler:Register('PLAYER_LOGIN', function()
+	-- triggered when the game has completed the login process
+	if QuickQuestDB.general.pausekeyreverse then
+		-- default to a paused state
+		paused = true
+	end
+end)
