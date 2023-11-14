@@ -189,7 +189,7 @@ local function Shared(self, unit)
 	end
 
 	-- LFD role icons
-	if (T.Mainline or T.Wrath) and C.raidframe.icons_role == true and not (suffix == "target") then
+	if (T.Wrath or T.Mainline) and C.raidframe.icons_role == true and not (suffix == "target") then
 		self.GroupRoleIndicator = self.Health:CreateTexture(nil, "OVERLAY")
 		self.GroupRoleIndicator:SetSize(10 * C.raidframe.icon_multiplier, 10 * C.raidframe.icon_multiplier)
 		self.GroupRoleIndicator:SetPoint("TOP", self.Health, 0, 6)
@@ -210,7 +210,7 @@ local function Shared(self, unit)
 	end
 
 	-- Phase icons
-	if T.Mainline and C.raidframe.icons_phase == true and not (suffix == "target" or suffix == "targettarget") then
+	if (T.Cata or T.Mainline) and C.raidframe.icons_phase == true and not (suffix == "target" or suffix == "targettarget") then
 		self.PhaseIndicator = self.Health:CreateTexture(nil, "OVERLAY")
 		self.PhaseIndicator:SetSize(20 * C.raidframe.icon_multiplier, 20 * C.raidframe.icon_multiplier)
 		self.PhaseIndicator:SetPoint("TOPRIGHT", self.Health, 5, 5)
@@ -491,7 +491,7 @@ oUF:Factory(function(self)
 					"showRaid", true,
 					"groupFilter", tostring(i),
 					"groupBy", "CLASS",
-					"groupingOrder", (T.Classic or T.TBC) and "HUNTER,WARLOCK" or "DEATHKNIGHT,HUNTER,MAGE,WARLOCK",
+					"groupingOrder", (T.Vanilla or T.TBC) and "HUNTER,WARLOCK" or "DEATHKNIGHT,HUNTER,MAGE,WARLOCK",
 					"maxColumns", 5,
 					"unitsPerColumn", 1,
 					"columnSpacing", T.Scale(7),

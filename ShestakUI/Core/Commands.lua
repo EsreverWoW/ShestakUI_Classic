@@ -18,7 +18,7 @@ SLASH_TICKET1 = "/gm"
 SLASH_TICKET2 = "/гм"
 SLASH_TICKET3 = "/пь"
 
-if T.Mainline then
+if T.Cata or T.Mainline then
 	SlashCmdList.JOURNAL = function() ToggleEncounterJournal() end
 	SLASH_JOURNAL1 = "/ej"
 	SLASH_JOURNAL2 = "/уо"
@@ -156,7 +156,7 @@ SLASH_PARTYTORAID4 = "/сщтмуке"
 ----------------------------------------------------------------------------------------
 --	Instance teleport
 ----------------------------------------------------------------------------------------
-if T.Mainline then
+if T.Wrath or T.Mainline then
 	SlashCmdList.INSTTELEPORT = function()
 		local inInstance = IsInInstance()
 		if inInstance then
@@ -366,7 +366,7 @@ end
 ----------------------------------------------------------------------------------------
 --	Test Blizzard Extra Action Button
 ----------------------------------------------------------------------------------------
-if T.Mainline then
+if T.Cata or T.Mainline then
 	SlashCmdList.TEST_EXTRABUTTON = function()
 		if ExtraActionBarFrame:IsShown() then
 			ExtraActionBarFrame:Hide()

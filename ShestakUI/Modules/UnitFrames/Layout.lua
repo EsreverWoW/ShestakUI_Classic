@@ -295,14 +295,14 @@ local function Shared(self, unit)
 		end
 
 		-- LFD role icons
-		if (T.Mainline or T.Wrath) and C.raidframe.icons_role == true then
+		if (T.Wrath or T.Mainline) and C.raidframe.icons_role == true then
 			self.GroupRoleIndicator = self.Health:CreateTexture(nil, "OVERLAY")
 			self.GroupRoleIndicator:SetSize(12, 12)
 			self.GroupRoleIndicator:SetPoint("TOPLEFT", 10, 8)
 		end
 
 		-- Rune bar
-		if (T.Mainline or T.Wrath) and C.unitframe_class_bar.rune == true and T.class == "DEATHKNIGHT" then
+		if C.unitframe_class_bar.rune == true and T.class == "DEATHKNIGHT" then
 			self.Runes = CreateFrame("Frame", self:GetName().."_RuneBar", self)
 			self.Runes:CreateBackdrop("Default")
 			self.Runes:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, 7)
@@ -775,7 +775,7 @@ local function Shared(self, unit)
 			self.Debuffs.initialAnchor = "BOTTOMRIGHT"
 			self.Debuffs["growth-y"] = "UP"
 			self.Debuffs["growth-x"] = "LEFT"
-			if ((T.Mainline or T.Wrath) and T.class == "DEATHKNIGHT" and C.unitframe_class_bar.rune == true)
+			if (T.class == "DEATHKNIGHT" and C.unitframe_class_bar.rune == true)
 			or ((T.class == "DRUID" or T.class == "ROGUE") and C.unitframe_class_bar.combo == true and C.unitframe_class_bar.combo_old ~= true)
 			or (T.class == "SHAMAN" and C.unitframe_class_bar.totem == true)
 			or (T.Mainline and T.class == "WARLOCK" and C.unitframe_class_bar.shard == true) then
@@ -1617,7 +1617,7 @@ if C.raidframe.auto_position == "DYNAMIC" then
 	local frame = CreateFrame("Frame")
 	frame:RegisterEvent("PLAYER_LOGIN")
 	frame:RegisterEvent("GROUP_ROSTER_UPDATE")
-	if C.raidframe.layout == "AUTO" and (T.Mainline or T.Wrath) then
+	if C.raidframe.layout == "AUTO" and (T.Wrath or T.Mainline) then
 		frame:RegisterUnitEvent("PLAYER_SPECIALIZATION_CHANGED", "player", "")
 	end
 	frame:SetScript("OnEvent", Reposition)
@@ -1648,7 +1648,7 @@ elseif C.raidframe.auto_position == "STATIC" then
 
 	local frame = CreateFrame("Frame")
 	frame:RegisterEvent("PLAYER_LOGIN")
-	if C.raidframe.layout == "AUTO" and (T.Mainline or T.Wrath) then
+	if C.raidframe.layout == "AUTO" and (T.Wrath or T.Mainline) then
 		frame:RegisterUnitEvent("PLAYER_SPECIALIZATION_CHANGED", "player", "")
 	end
 	frame:SetScript("OnEvent", Reposition)

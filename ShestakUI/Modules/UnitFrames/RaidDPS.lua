@@ -163,7 +163,7 @@ local function Shared(self, unit)
 	if suffix == "pet" or (suffix == "target" and unit ~= "tank") then
 		self:Tag(self.Info, "[GetNameColor][NameArena]")
 	else
-		if (T.Mainline or T.Wrath) and unit == "party" and C.raidframe.icons_role ~= true then
+		if (T.Wrath or T.Mainline) and unit == "party" and C.raidframe.icons_role ~= true then
 			self:Tag(self.Info, "[LFD] [GetNameColor][NameShort]")
 		else
 			self:Tag(self.Info, "[GetNameColor][NameShort]")
@@ -171,7 +171,7 @@ local function Shared(self, unit)
 	end
 
 	-- LFD role icons
-	if (T.Mainline or T.Wrath) and C.raidframe.icons_role == true and not (suffix == "pet" or suffix == "target") then
+	if (T.Wrath or T.Mainline) and C.raidframe.icons_role == true and not (suffix == "pet" or suffix == "target") then
 		self.GroupRoleIndicator = self.Health:CreateTexture(nil, "OVERLAY")
 		self.GroupRoleIndicator:SetSize(12, 12)
 		self.GroupRoleIndicator:SetPoint("TOPRIGHT", self.Health, 2, 5)
@@ -211,7 +211,7 @@ local function Shared(self, unit)
 	end
 
 	-- Phase icons
-	if T.Mainline and C.raidframe.icons_phase == true and not (suffix == "target") then
+	if (T.Cata or T.Mainline) and C.raidframe.icons_phase == true and not (suffix == "target") then
 		self.PhaseIndicator = self.Health:CreateTexture(nil, "OVERLAY")
 		self.PhaseIndicator:SetSize(18, 18)
 		self.PhaseIndicator:SetPoint("BOTTOMLEFT", self.Health, -5, -10)

@@ -5,6 +5,10 @@ local L = ns
 ----------------------------------------------------------------------------------------
 --	GUI for ShestakUI(by Haleth, Solor)
 ----------------------------------------------------------------------------------------
+local function IsMainlineBuild()
+	return _G.WOW_PROJECT_ID == _G.WOW_PROJECT_MAINLINE
+end
+
 local function IsClassicBuild()
 	return _G.WOW_PROJECT_ID ~= _G.WOW_PROJECT_MAINLINE
 end
@@ -19,6 +23,10 @@ end
 
 local function IsWrathBuild()
 	return _G.WOW_PROJECT_ID == _G.WOW_PROJECT_WRATH_CLASSIC
+end
+
+local function IsCataBuild()
+	return IsClassicBuild() and select(4, GetBuildInfo()) >= 4e4
 end
 
 local function HideOptions(list)
@@ -843,16 +851,14 @@ do
 		vehicle_mouseover,
 		hide_banner,
 		hide_talking_head,
-		hide_maw_buffs
 	}
 
 	local wrath = {
 		hide_banner,
 		hide_talking_head,
-		hide_maw_buffs
 	}
 
-	if IsClassicBuild() and not IsWrathBuild() then
+	if IsVanillaBuild() or IsTBCBuild() then
 		HideOptions(classic)
 		move_blizzard:SetPoint("TOPLEFT", vehicle_mouseover, "BOTTOMLEFT", 16, 0)
 	elseif IsWrathBuild() then
@@ -1827,7 +1833,7 @@ do
 		plugins_absorbs
 	}
 
-	local retail = {
+	local mainline = {
 		bar_color_happiness,
 		plugins_power_spark
 	}
@@ -1835,10 +1841,10 @@ do
 	if IsVanillaBuild() then
 		HideOptions(vanilla)
 		show_target_target:SetPoint("LEFT", show_pet, "RIGHT", 248, 0)
-	elseif IsTBCBuild() or IsWrathBuild() then
+	elseif IsClassicBuild() then
 		HideOptions(classic)
 	else
-		HideOptions(retail)
+		HideOptions(mainline)
 	end
 end
 
@@ -1906,11 +1912,20 @@ do
 		totem_other
 	}
 
-	if IsClassicBuild() and not IsWrathBuild() then
+	local cata = {
+		arcane,
+		chi,
+		stagger,
+		totem_other
+	}
+
+	if IsVanillaBuild() or IsTBCBuild() then
 		HideOptions(classic)
 		totem:SetPoint("TOPLEFT", rune, "BOTTOMLEFT", -20, 0)
 	elseif IsWrathBuild() then
 		HideOptions(wrath)
+	elseif IsCataBuild() then
+		HideOptions(cata)
 	end
 end
 
@@ -2119,7 +2134,12 @@ do
 		plugins_over_heal_absorb,
 	}
 
-	if IsClassicBuild() and not IsWrathBuild() then
+	local cata = {
+		plugins_over_absorb,
+		plugins_over_heal_absorb,
+	}
+
+	if IsVanillaBuild() or IsTBCBuild() then
 		HideOptions(classic)
 		icons_raid_mark:SetPoint("TOPLEFT", icons_role, "BOTTOMLEFT", 0, -8)
 		icons_ready_check:ClearAllPoints()
@@ -2132,6 +2152,8 @@ do
 	elseif IsWrathBuild() then
 		HideOptions(wrath)
 		plugins_auto_resurrection:SetPoint("TOPLEFT", plugins_over_heal_absorb, "BOTTOMLEFT", 0, 0)
+	elseif IsCataBuild() then
+		HideOptions(cata)
 	end
 end
 
@@ -2532,7 +2554,7 @@ do
 		mount
 	}
 
-	local retail = {
+	local mainline = {
 		vendor_price
 	}
 
@@ -2541,8 +2563,8 @@ do
 		raid_icon:SetPoint("TOPLEFT", average_lvl, "BOTTOMLEFT", 0, 0)
 	elseif IsWrathBuild() then
 		HideOptions(wrath)
-	else
-		HideOptions(retail)
+	elseif IsMainlineBuild() then
+		HideOptions(mainline)
 	end
 end
 
@@ -2940,7 +2962,7 @@ do
 		dk_runes
 	}
 
-	if IsClassicBuild() and not IsWrathBuild() then
+	if IsVanillaBuild() or IsTBCBuild() then
 		HideOptions(classic)
 	end
 end
@@ -3044,14 +3066,14 @@ do
 	local auto_confirm_de = ns.CreateCheckBox(parent, "auto_confirm_de", L_GUI_LOOT_AUTODE)
 	auto_confirm_de:SetPoint("TOPLEFT", auto_greed, "BOTTOMLEFT", 0, 0)
 
-	local retail = {
+	local mainline = {
 		rolllootframe,
 		auto_greed,
 		auto_confirm_de,
 	}
 
 	if not IsClassicBuild() then
-		HideOptions(retail)
+		HideOptions(mainline)
 	end
 end
 
@@ -3238,7 +3260,7 @@ do
 	}
 
 	if IsVanillaBuild() then
-		HideOptions(classic)
+		HideOptions(vanilla)
 		pull_countdown:ClearAllPoints()
 		pull_countdown:SetPoint("TOPLEFT", flask_food_auto, "BOTTOMLEFT", -20, 0)
 	elseif IsClassicBuild() then
@@ -3322,14 +3344,21 @@ do
 		auto_role
 	}
 
-	local retail = {
+	local cata = {
+		screenshot,
+		auto_role
+	}
+
+	local mainline = {
 		dismount_stand,
 	}
 
-	if IsClassicBuild() then
+	if IsClassicBuild() and not IsCataBuild() then
 		HideOptions(classic)
+	elseif IsCataBuild() then
+		HideOptions(cata)
 	else
-		HideOptions(retail)
+		HideOptions(mainline)
 	end
 end
 
@@ -3687,7 +3716,7 @@ do
 		currency_archaeology
 	}
 
-	if IsClassicBuild() and not IsWrathBuild() then
+	if IsVanillaBuild() or IsTBCBuild() then
 		HideOptions(classic)
 	elseif IsWrathBuild() then
 		HideOptions(wrath)
@@ -3730,10 +3759,16 @@ do
 		archaeology
 	}
 
-	if IsClassicBuild() and not IsWrathBuild() then
+	local cata = {
+		profession_tabs -- TODO: Fix for Classic
+	}
+
+	if IsVanillaBuild() or IsTBCBuild() then
 		HideOptions(classic)
 	elseif IsWrathBuild() then
 		HideOptions(wrath)
+	elseif IsCataBuild() then
+		HideOptions(cata)
 	end
 end
 
@@ -3774,7 +3809,7 @@ do
 		chars_currency
 	}
 
-	if IsClassicBuild() and not IsWrathBuild() then
+	if IsVanillaBuild() or IsTBCBuild() then
 		HideOptions(classic)
 	end
 end

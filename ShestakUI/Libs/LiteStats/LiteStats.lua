@@ -300,7 +300,7 @@ if clock.enabled then
 					if extended then tr, tg, tb = 0.3, 1, 0.3 else tr, tg, tb = 1, 1, 1 end
 
 					local isHeroic, displayHeroic, displayMythic
-					if T.Mainline or T.Wrath then
+					if T.Wrath or T.Mainline then
 						_, _, isHeroic, _, displayHeroic, displayMythic = GetDifficultyInfo(difficulty)
 						if displayMythic then
 							diff = "M"
@@ -1489,10 +1489,10 @@ if T.Mainline and talents.enabled then
 				self:GetScript("OnMouseUp")(self, b)
 			end)
 
-			if T.Mainline then
-				RegEvents(self, "PLAYER_ENTERING_WORLD PLAYER_TALENT_UPDATE PLAYER_LOOT_SPEC_UPDATED")
-			else
+			if T.Classic then
 				RegEvents(self, "PLAYER_ENTERING_WORLD CHARACTER_POINTS_CHANGED PLAYER_LOOT_SPEC_UPDATED")
+			else
+				RegEvents(self, "PLAYER_ENTERING_WORLD PLAYER_TALENT_UPDATE PLAYER_LOOT_SPEC_UPDATED")
 			end
 		end,
 		OnEvent = function(self)

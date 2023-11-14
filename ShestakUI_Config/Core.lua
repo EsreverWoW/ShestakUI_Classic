@@ -21,6 +21,11 @@ local function IsWrathBuild()
 	return _G.WOW_PROJECT_ID == _G.WOW_PROJECT_WRATH_CLASSIC
 end
 
+local function IsCataBuild()
+	return IsClassicBuild() and select(4, GetBuildInfo()) >= 4e4
+end
+
+
 local realm = GetRealmName()
 local name = UnitName("player")
 
