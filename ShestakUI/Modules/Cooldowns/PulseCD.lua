@@ -88,7 +88,7 @@ local function OnUpdate(_, update)
                     end)
 				elseif v[2] == "item" then
 					getCooldownDetails = memoize(function()
-						local start, duration, enabled = GetItemCooldown(i)
+						local start, duration, enabled = C_Container.GetItemCooldown(i)
                         return {
                             name = GetItemInfo(i),
                             texture = v[3],
