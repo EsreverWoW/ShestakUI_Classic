@@ -2541,7 +2541,6 @@ do
 		raid_icon:SetPoint("TOPLEFT", average_lvl, "BOTTOMLEFT", 0, 0)
 	elseif IsWrathBuild() then
 		HideOptions(wrath)
-		raid_icon:SetPoint("TOPLEFT", average_lvl, "BOTTOMLEFT", 0, 0)
 	else
 		HideOptions(retail)
 	end
@@ -2798,16 +2797,22 @@ do
 		extra_color,
 	}
 
-	local classic = {
+	local tbc = {
 		quests,
 		offtank_color,
 		extra_color,
 	}
 
+	local wrath = {
+		quests
+	}
+
 	if IsVanillaBuild() then
 		HideOptions(vanilla)
-	elseif IsClassicBuild() then
-		HideOptions(classic)
+	elseif IsTBCBuild() then
+		HideOptions(tbc)
+	elseif IsWrathBuild() then
+		HideOptions(wrath)
 	end
 end
 

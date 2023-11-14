@@ -33,7 +33,7 @@ end
 
 frame:RegisterEvent("PLAYER_LOGIN")
 function frame:PLAYER_LOGIN()
-	if T.Mainline and C.nameplate.enhance_threat == true then
+	if C.nameplate.enhance_threat == true then
 		SetCVar("threatWarning", 3)
 	end
 	SetCVar("nameplateGlobalScale", 1)
@@ -661,7 +661,7 @@ local function threatColor(self, forced)
 					local offTank = false
 					if IsInRaid() then
 						for i = 1, GetNumGroupMembers() do
-							if T.Classic then
+							if T.Vanilla or T.TBC then
 								if UnitExists("raid"..i) and not UnitIsUnit("raid"..i, "player") and T.Role == "TANK" then
 									local isTanking = UnitDetailedThreatSituation("raid"..i, self.unit)
 									if isTanking then
