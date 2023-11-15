@@ -28,7 +28,7 @@ local frame = CreateFrame("Frame")
 frame:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 frame:SetScript("OnEvent", function()
 	if not IsInGroup() then return end
-	local _, event, _, sourceGUID, _, _, _, _, destName, _, destRaidFlags, _, _, _, spellID, spellName = CombatLogGetCurrentEventInfo()
+	local _, event, _, sourceGUID, _, _, _, _, destName, _, destRaidFlags, _, _, _, spellID = CombatLogGetCurrentEventInfo()
 	if not (event == "SPELL_INTERRUPT" and sourceGUID == UnitGUID("player")) then return end
 
 	local destIcon = ""
@@ -36,13 +36,5 @@ frame:SetScript("OnEvent", function()
 		destIcon = GetRaidIcon(destRaidFlags)
 	end
 
-	if T.Vanilla and not T.Vanilla115 then
-		spellID = T.GetSpellID(spellName)
-	end
-
-	if spellID == 0 then
-		SendChatMessage(L_ANNOUNCE_INTERRUPTED.." "..destIcon..destName..": "..spellName, T.CheckChat())
-	else
-		SendChatMessage(L_ANNOUNCE_INTERRUPTED.." "..destIcon..destName..": "..GetSpellLink(spellID), T.CheckChat())
-	end
+	SendChatMessage(L_ANNOUNCE_INTERRUPTED.." "..destIcon..destName..": "..GetSpellLink(spellID), T.CheckChat())
 end)

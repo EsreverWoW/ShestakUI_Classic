@@ -147,12 +147,9 @@ end
 
 local OnEvent = function(_, event)
 	if event == "COMBAT_LOG_EVENT_UNFILTERED" then
-		local _, eventType, _, sourceGUID, sourceName, sourceFlags, _, _, _, _, _, spellID, spellName = CombatLogGetCurrentEventInfo()
+		local _, eventType, _, sourceGUID, sourceName, sourceFlags, _, _, _, _, _, spellID = CombatLogGetCurrentEventInfo()
 
 		if eventType == "SPELL_CAST_SUCCESS" and sourceName ~= T.name then
-			if T.Vanilla and not T.Vanilla115 then
-				spellID = T.GetSpellID(spellName)
-			end
 			local _, instanceType = IsInInstance()
 			if show[instanceType] then
 				if band(sourceFlags, COMBATLOG_OBJECT_REACTION_HOSTILE) ~= 0 then

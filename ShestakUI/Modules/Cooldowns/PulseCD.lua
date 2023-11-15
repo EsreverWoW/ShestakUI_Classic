@@ -202,12 +202,9 @@ end
 frame:RegisterUnitEvent("UNIT_SPELLCAST_SUCCEEDED", "player", "")
 
 function frame:COMBAT_LOG_EVENT_UNFILTERED()
-	local _, eventType, _, _, _, sourceFlags, _, _, _, _, _, spellID, spellName = CombatLogGetCurrentEventInfo()
+	local _, eventType, _, _, _, sourceFlags, _, _, _, _, _, spellID = CombatLogGetCurrentEventInfo()
 	if eventType == "SPELL_CAST_SUCCESS" then
 		if (bit.band(sourceFlags, COMBATLOG_OBJECT_TYPE_PET) == COMBATLOG_OBJECT_TYPE_PET and bit.band(sourceFlags, COMBATLOG_OBJECT_AFFILIATION_MINE) == COMBATLOG_OBJECT_AFFILIATION_MINE) then
-			if T.Vanilla and not T.Vanilla115 then
-				spellID = T.GetSpellID(spellName)
-			end
 			local name = GetSpellInfo(spellID)
 			local index = GetPetActionIndexByName(name)
 			if index and not select(7, GetPetActionInfo(index)) then

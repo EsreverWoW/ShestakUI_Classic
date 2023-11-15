@@ -3,8 +3,6 @@ local oUF = ns.oUF
 
 if(not oUF:IsClassic()) then return end
 
-local LibClassicDurations = ((oUF:IsVanilla() and not oUF:IsVanilla115()) and LibStub('LibClassicDurations'))
-
 local VISIBLE = 1
 local HIDDEN = 0
 
@@ -110,17 +108,7 @@ end
 local function updateAura(element, unit, index, offset, filter, isHarmful, visible)
 	local name, texture, count, debuffType, duration, expiration, caster, isStealable,
 	nameplateShowSelf, spellID, canApply, isBossDebuff, casterIsPlayer, nameplateShowAll,
-	timeMod, effect1, effect2, effect3
-
-	if(LibClassicDurations and filter == 'HELPFUL') then
-		name, texture, count, debuffType, duration, expiration, caster, isStealable,
-		nameplateShowSelf, spellID, canApply, isBossDebuff, casterIsPlayer, nameplateShowAll,
-		timeMod, effect1, effect2, effect3 = LibClassicDurations:UnitAura(unit, index, filter)
-	else
-		name, texture, count, debuffType, duration, expiration, caster, isStealable,
-		nameplateShowSelf, spellID, canApply, isBossDebuff, casterIsPlayer, nameplateShowAll,
-		timeMod, effect1, effect2, effect3 = UnitAura(unit, index, filter)
-	end
+	timeMod, effect1, effect2, effect3 = UnitAura(unit, index, filter)
 
 	if(name) then
 		local position = visible + offset + 1
@@ -141,12 +129,6 @@ local function updateAura(element, unit, index, offset, filter, isHarmful, visib
 
 			table.insert(element, button)
 			element.createdButtons = element.createdButtons + 1
-		end
-
-		if(LibClassicDurations and duration == 0 and expiration == 0) then
-			duration, expiration = LibClassicDurations:GetAuraDurationByUnit(unit, spellID, caster, name)
-
-			button.isLibClassicDuration = true
 		end
 
 		button.caster = caster
@@ -442,9 +424,6 @@ end
 local function Enable(self)
 	if(self.Auras or self.Buffs or self.Debuffs) then
 		self:RegisterEvent('UNIT_AURA', UpdateAuras)
-		if(LibClassicDurations) then
-			LibClassicDurations.RegisterCallback(self, 'UNIT_BUFF', UpdateAuras)
-		end
 
 		local auras = self.Auras
 		if(auras) then
@@ -495,9 +474,6 @@ end
 local function Disable(self)
 	if(self.Auras or self.Buffs or self.Debuffs) then
 		self:UnregisterEvent('UNIT_AURA', UpdateAuras)
-		if(LibClassicDurations) then
-			LibClassicDurations.UnregisterCallback(self, 'UNIT_BUFF')
-		end
 
 		if(self.Auras) then self.Auras:Hide() end
 		if(self.Buffs) then self.Buffs:Hide() end

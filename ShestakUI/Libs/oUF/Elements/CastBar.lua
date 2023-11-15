@@ -11,17 +11,6 @@ local UnitCastingInfo = UnitCastingInfo
 local UnitChannelInfo = UnitChannelInfo
 local EventFunctions = {}
 
-local LibClassicCasterino = ((oUF:IsVanilla() and not oUF:IsVanilla115()) and LibStub('LibClassicCasterino', true))
-if(LibClassicCasterino) then
-	UnitCastingInfo = function(unit)
-		return LibClassicCasterino:UnitCastingInfo(unit)
-	end
-
-	UnitChannelInfo = function(unit)
-		return LibClassicCasterino:UnitChannelInfo(unit)
-	end
-end
-
 -- Tradeskill block
 local tradeskillCurrent, tradeskillTotal, mergeTradeskill = 0, 0, false
 -- end block
@@ -555,34 +544,20 @@ local function Enable(self, unit)
 		element.__owner = self
 		element.ForceUpdate = ForceUpdate
 
-		if((oUF:IsVanilla115() or not oUF:IsVanilla()) or self.unit == 'player') then
-			self:RegisterEvent('UNIT_SPELLCAST_START', CastStart)
-			self:RegisterEvent('UNIT_SPELLCAST_CHANNEL_START', CastStart)
-			self:RegisterEvent('UNIT_SPELLCAST_STOP', CastStop)
-			self:RegisterEvent('UNIT_SPELLCAST_CHANNEL_STOP', CastStop)
-			self:RegisterEvent('UNIT_SPELLCAST_DELAYED', CastUpdate)
-			self:RegisterEvent('UNIT_SPELLCAST_CHANNEL_UPDATE', CastUpdate)
-			self:RegisterEvent('UNIT_SPELLCAST_FAILED', CastFail)
-			self:RegisterEvent('UNIT_SPELLCAST_INTERRUPTED', CastFail)
-			if(not oUF:IsClassic()) then
-				self:RegisterEvent('UNIT_SPELLCAST_EMPOWER_START', CastStart)
-				self:RegisterEvent('UNIT_SPELLCAST_EMPOWER_STOP', CastStop)
-				self:RegisterEvent('UNIT_SPELLCAST_EMPOWER_UPDATE', CastUpdate)
-				self:RegisterEvent('UNIT_SPELLCAST_INTERRUPTIBLE', CastInterruptible)
-				self:RegisterEvent('UNIT_SPELLCAST_NOT_INTERRUPTIBLE', CastInterruptible)
-			end
-		elseif(LibClassicCasterino) then
-			local CastbarEventHandler = function(event, ...)
-				return EventFunctions[event](self, event, ...)
-			end
-			LibClassicCasterino.RegisterCallback(self, 'UNIT_SPELLCAST_START', CastbarEventHandler)
-			LibClassicCasterino.RegisterCallback(self, 'UNIT_SPELLCAST_CHANNEL_START', CastbarEventHandler)
-			LibClassicCasterino.RegisterCallback(self, 'UNIT_SPELLCAST_STOP', CastbarEventHandler)
-			LibClassicCasterino.RegisterCallback(self, 'UNIT_SPELLCAST_CHANNEL_STOP', CastbarEventHandler)
-			LibClassicCasterino.RegisterCallback(self, 'UNIT_SPELLCAST_DELAYED', CastbarEventHandler)
-			LibClassicCasterino.RegisterCallback(self, 'UNIT_SPELLCAST_CHANNEL_UPDATE', CastbarEventHandler)
-			LibClassicCasterino.RegisterCallback(self, 'UNIT_SPELLCAST_FAILED', CastbarEventHandler)
-			LibClassicCasterino.RegisterCallback(self, 'UNIT_SPELLCAST_INTERRUPTED', CastbarEventHandler)
+		self:RegisterEvent('UNIT_SPELLCAST_START', CastStart)
+		self:RegisterEvent('UNIT_SPELLCAST_CHANNEL_START', CastStart)
+		self:RegisterEvent('UNIT_SPELLCAST_STOP', CastStop)
+		self:RegisterEvent('UNIT_SPELLCAST_CHANNEL_STOP', CastStop)
+		self:RegisterEvent('UNIT_SPELLCAST_DELAYED', CastUpdate)
+		self:RegisterEvent('UNIT_SPELLCAST_CHANNEL_UPDATE', CastUpdate)
+		self:RegisterEvent('UNIT_SPELLCAST_FAILED', CastFail)
+		self:RegisterEvent('UNIT_SPELLCAST_INTERRUPTED', CastFail)
+		if(not oUF:IsClassic()) then
+			self:RegisterEvent('UNIT_SPELLCAST_EMPOWER_START', CastStart)
+			self:RegisterEvent('UNIT_SPELLCAST_EMPOWER_STOP', CastStop)
+			self:RegisterEvent('UNIT_SPELLCAST_EMPOWER_UPDATE', CastUpdate)
+			self:RegisterEvent('UNIT_SPELLCAST_INTERRUPTIBLE', CastInterruptible)
+			self:RegisterEvent('UNIT_SPELLCAST_NOT_INTERRUPTIBLE', CastInterruptible)
 		end
 
 		element.holdTime = 0
@@ -646,17 +621,6 @@ local function Disable(self)
 		self:UnregisterEvent('UNIT_SPELLCAST_INTERRUPTIBLE', CastInterruptible)
 		self:UnregisterEvent('UNIT_SPELLCAST_NOT_INTERRUPTIBLE', CastInterruptible)
 
-		if(LibClassicCasterino) then
-			LibClassicCasterino.UnregisterCallback(self, 'UNIT_SPELLCAST_START')
-			LibClassicCasterino.UnregisterCallback(self, 'UNIT_SPELLCAST_CHANNEL_START')
-			LibClassicCasterino.UnregisterCallback(self, 'UNIT_SPELLCAST_DELAYED')
-			LibClassicCasterino.UnregisterCallback(self, 'UNIT_SPELLCAST_CHANNEL_UPDATE')
-			LibClassicCasterino.UnregisterCallback(self, 'UNIT_SPELLCAST_STOP')
-			LibClassicCasterino.UnregisterCallback(self, 'UNIT_SPELLCAST_CHANNEL_STOP')
-			LibClassicCasterino.UnregisterCallback(self, 'UNIT_SPELLCAST_FAILED')
-			LibClassicCasterino.UnregisterCallback(self, 'UNIT_SPELLCAST_INTERRUPTED')
-		end
-
 		element:SetScript('OnUpdate', nil)
 
 		if(self.unit == 'player' and not (self.hasChildren or self.isChild or self.isNamePlate)) then
@@ -669,17 +633,6 @@ local function Disable(self)
 			end
 		end
 	end
-end
-
-if(LibClassicCasterino) then
-	EventFunctions['UNIT_SPELLCAST_START'] = CastStart
-	EventFunctions['UNIT_SPELLCAST_CHANNEL_START'] = CastStart
-	EventFunctions['UNIT_SPELLCAST_DELAYED'] = CastUpdate
-	EventFunctions['UNIT_SPELLCAST_CHANNEL_UPDATE'] = CastUpdate
-	EventFunctions['UNIT_SPELLCAST_STOP'] = CastStop
-	EventFunctions['UNIT_SPELLCAST_CHANNEL_STOP'] = CastStop
-	EventFunctions['UNIT_SPELLCAST_FAILED'] = CastFail
-	EventFunctions['UNIT_SPELLCAST_INTERRUPTED'] = CastFail
 end
 
 -- Tradeskill block

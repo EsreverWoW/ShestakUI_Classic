@@ -69,7 +69,7 @@ local r, g, b, lowMana, lowHealth
 local function OnEvent(_, event, subevent, powerType)
 	if event == "COMBAT_TEXT_UPDATE" then
 		local arg2, arg3 = GetCurrentCombatTextEventInfo()
-		if (T.Classic and SHOW_COMBAT_TEXT == "0") or (T.Mainline and not CVarCallbackRegistry:GetCVarValueBool("enableFloatingCombatText")) then
+		if not CVarCallbackRegistry:GetCVarValueBool("enableFloatingCombatText") then
 			return
 		else
 			if subevent == "DAMAGE" then
@@ -838,11 +838,8 @@ if C.combattext.damage then
 					xCT4:AddMessage(amount..""..msg, unpack(color))
 				end
 			elseif eventType == "RANGE_DAMAGE" then
-				local spellId, spellName, _, amount, _, _, _, _, _, critical = select(12, CombatLogGetCurrentEventInfo())
+				local spellId, _, _, amount, _, _, _, _, _, critical = select(12, CombatLogGetCurrentEventInfo())
 				if amount >= C.combattext.treshold then
-					if T.Vanilla and not T.Vanilla115 then
-						spellId = T.GetSpellID(spellName)
-					end
 					local rawamount = amount
 					if C.combattext.short_numbers == true then
 						amount = T.ShortValue(amount)
@@ -879,11 +876,8 @@ if C.combattext.damage then
 					xCT4:AddMessage(amount..""..msg)
 				end
 			elseif eventType == "SPELL_DAMAGE" or (eventType == "SPELL_PERIODIC_DAMAGE" and C.combattext.dot_damage) then
-				local spellId, spellName, spellSchool, amount, _, _, _, _, _, critical = select(12, CombatLogGetCurrentEventInfo())
+				local spellId, _, spellSchool, amount, _, _, _, _, _, critical = select(12, CombatLogGetCurrentEventInfo())
 				if amount >= C.combattext.treshold then
-					if T.Vanilla and not T.Vanilla115 then
-						spellId = T.GetSpellID(spellName)
-					end
 					local color = {}
 					local rawamount = amount
 					if C.combattext.short_numbers == true then
@@ -951,10 +945,7 @@ if C.combattext.damage then
 				end
 				xCT4:AddMessage(missType)
 			elseif eventType == "SPELL_MISSED" or eventType == "RANGE_MISSED" then
-				local spellId, spellName, _, missType = select(12, CombatLogGetCurrentEventInfo())
-				if T.Vanilla and not T.Vanilla115 then
-					spellId = T.GetSpellID(spellName)
-				end
+				local spellId, _, _, missType = select(12, CombatLogGetCurrentEventInfo())
 				if missType == "IMMUNE" and spellId == 204242 then return end -- Consecration slow
 				if C.combattext.icons then
 					if spellId and spellId ~= 0 then
@@ -969,9 +960,6 @@ if C.combattext.damage then
 				xCT4:AddMessage(missType)
 			elseif eventType == "SPELL_DISPEL" and C.combattext.dispel then
 				local id, effect, _, etype = select(15, CombatLogGetCurrentEventInfo())
-				if T.Vanilla and not T.Vanilla115 then
-					id = T.GetSpellID(effect)
-				end
 				local color
 				if C.combattext.icons then
 					if id and id ~= 0 then
@@ -993,9 +981,6 @@ if C.combattext.damage then
 				xCT3:AddMessage(ACTION_SPELL_DISPEL..": "..effect..msg, unpack(color))
 			elseif eventType == "SPELL_STOLEN" and C.combattext.dispel then
 				local id, effect = select(15, CombatLogGetCurrentEventInfo())
-				if T.Vanilla and not T.Vanilla115 then
-					id = T.GetSpellID(effect)
-				end
 				local color = {1, 0.5, 0}
 				if C.combattext.icons then
 					if id and id ~= 0 then
@@ -1012,9 +997,6 @@ if C.combattext.damage then
 				xCT3:AddMessage(ACTION_SPELL_STOLEN..": "..effect..msg, unpack(color))
 			elseif eventType == "SPELL_INTERRUPT" and C.combattext.interrupt then
 				local id, effect = select(15, CombatLogGetCurrentEventInfo())
-				if T.Vanilla and not T.Vanilla115 then
-					id = T.GetSpellID(effect)
-				end
 				local color = {1, 0.5, 0}
 				if C.combattext.icons then
 					if id and id ~= 0 then
@@ -1054,10 +1036,7 @@ if C.combattext.healing then
 		if sourceGUID == ct.pguid or sourceFlags == gflags then
 			if eventType == "SPELL_HEAL" or (eventType == "SPELL_PERIODIC_HEAL" and C.combattext.show_hots) then
 				if C.combattext.healing then
-					local spellId, spellName, _, amount, overhealing, _, critical = select(12, CombatLogGetCurrentEventInfo())
-					if T.Vanilla and not T.Vanilla115 then
-						spellId = T.GetSpellID(spellName)
-					end
+					local spellId, _, _, amount, overhealing, _, critical = select(12, CombatLogGetCurrentEventInfo())
 					if T.healfilter[spellId] then
 						return
 					end

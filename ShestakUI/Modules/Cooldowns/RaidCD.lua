@@ -300,17 +300,13 @@ local OnEvent = function(self, event)
 		end
 	end
 	if event == "COMBAT_LOG_EVENT_UNFILTERED" then
-		local _, eventType, _, _, sourceName, sourceFlags, _, _, _, _, _, spellId, spellName = CombatLogGetCurrentEventInfo()
+		local _, eventType, _, _, sourceName, sourceFlags, _, _, _, _, _, spellId = CombatLogGetCurrentEventInfo()
 		if band(sourceFlags, filter) == 0 then return end
 		if eventType == "SPELL_RESURRECT" or eventType == "SPELL_CAST_SUCCESS" or eventType == "SPELL_AURA_APPLIED" then
 			if sourceName then
 				sourceName = sourceName:gsub("-.+", "")
 			else
 				return
-			end
-
-			if T.Vanilla and not T.Vanilla115 then
-				spellId = T.GetSpellID(spellName)
 			end
 
 			if T.RaidSpells[spellId] and show[select(2, IsInInstance())] and IsInGroup() then
