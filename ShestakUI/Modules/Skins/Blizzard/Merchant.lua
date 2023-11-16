@@ -123,6 +123,15 @@ local function LoadSkin()
 		MerchantGuildBankRepairButton.Icon:CropIcon()
 	end
 
+	local junk = MerchantSellAllJunkButton
+	if junk then
+		junk:StyleButton()
+		junk:SetTemplate("Default")
+		junk:GetRegions():SetTexCoord(0.61, 0.82, 0.1, 0.52)
+		junk:GetRegions():SetInside()
+		junk.Icon:CropIcon()
+	end
+
 	-- Misc frames
 	T.SkinCloseButton(MerchantFrameCloseButton, MerchantFrame.backdrop)
 	T.SkinNextPrevButton(MerchantNextPageButton)
