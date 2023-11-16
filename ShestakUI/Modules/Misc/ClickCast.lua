@@ -48,7 +48,7 @@ for _, v in pairs({
 end
 
 hooksecurefunc("CreateFrame", function(_, name, _, template)
-	if template and template:find("SecureUnitButtonTemplate") then
+	if template and name and template:find("SecureUnitButtonTemplate") then
 		ClickCastFrames[_G[name]] = true
 	end
 end)
