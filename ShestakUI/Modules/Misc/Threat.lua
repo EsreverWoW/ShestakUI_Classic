@@ -17,7 +17,7 @@ end
 local bar, tList, barList = {}, {}, {}
 local targeted = false
 
-local pet_color = ["PET"] = {r = 0, g = 0.7, b = 0, colorStr = "ff00b200"}
+local pet_color = {r = 0, g = 0.7, b = 0, colorStr = "ff00b200"}
 local shaman_color = {r = 0, g = 0.44, b = 0.98, colorStr = "ff0070de"}
 
 local CreateFS = function(frame)
