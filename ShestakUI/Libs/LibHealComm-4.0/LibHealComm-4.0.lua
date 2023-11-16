@@ -964,6 +964,11 @@ if( playerClass == "DRUID" ) then
 		-- Calculate hot heals
 		local wgTicks = {}
 		CalculateHotHealing = function(guid, spellID)
+			-- Treat Druid T10 Rejuvenation like a rank 15 Rejuvenation
+			if spellID == 70691 then
+				spellID = 48441
+			end
+
 			local spellName, spellRank = GetSpellInfo(spellID), SpellIDToRank[spellID]
 			local healAmount = getBaseHealAmount(hotData, spellName, spellID, spellRank)
 			local spellPower = GetSpellBonusHealing()
@@ -2075,7 +2080,7 @@ end
 -- Keep track of where all the data should be going
 local instanceType
 local function updateDistributionChannel()
-	if( instanceType == "pvp" or instanceType == "arena" ) then
+	if( instanceType == "pvp" or instanceType == "arena" or IsInGroup(LE_PARTY_CATEGORY_INSTANCE) ) then
 		distribution = "INSTANCE_CHAT"
 	elseif( IsInRaid() ) then
 		distribution = "RAID"
