@@ -877,14 +877,6 @@ lib.failedItemRequests = {}
 
 -- << Public API
 
---@do-not-package@
--- this is here just for .docmeta
---- A checker function. This type of function is returned by the various Get*Checker() calls.
--- @param unit the unit to check range to.
--- @return **true** if the unit is within the range for this checker.
-local function checker(unit) end
-
---@end-do-not-package@
 --- The callback name that is fired when checkers are changed.
 -- @field
 lib.CHECKERS_CHANGED = "CHECKERS_CHANGED"
