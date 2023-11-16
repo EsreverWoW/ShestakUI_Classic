@@ -1753,6 +1753,8 @@ C["filger_spells"] = {
 			{spellID = 14177, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Evasion
 			{spellID = 5277, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Envenom
+			{spellID = 32645, unitID = "399963", caster = "player", filter = "BUFF"},
 			-- Ghostly Strike
 			{spellID = 14278, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Slice and Dice

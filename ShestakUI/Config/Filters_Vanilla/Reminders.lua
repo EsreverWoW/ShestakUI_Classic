@@ -394,7 +394,16 @@ if C.reminder.solo_buffs_enable == true then
 			[1] = {	-- Main Hand Weapon Enchant group
 				["spells"] = {
 					SpellName(8679),	-- Instant Poison
+					SpellName(8686),	-- Instant Poison II
+					SpellName(8688),	-- Instant Poison III
+					SpellName(11338),	-- Instant Poison IV
+					SpellName(11339),	-- Instant Poison V
+					SpellName(11340),	-- Instant Poison VI
 					SpellName(2823),	-- Deadly Poison
+					SpellName(2824),	-- Deadly Poison II
+					SpellName(11355),	-- Deadly Poison III
+					SpellName(11356),	-- Deadly Poison IV
+					SpellName(25351),	-- Deadly Poison V
 					SpellName(3408),	-- Crippling Poison
 					SpellName(5761),	-- Mind-numbing Poison
 					SpellName(13219),	-- Wound Poison
@@ -408,7 +417,16 @@ if C.reminder.solo_buffs_enable == true then
 			[2] = {	-- Off-Hand Weapon Enchant group
 				["spells"] = {
 					SpellName(8679),	-- Instant Poison
+					SpellName(8686),	-- Instant Poison II
+					SpellName(8688),	-- Instant Poison III
+					SpellName(11338),	-- Instant Poison IV
+					SpellName(11339),	-- Instant Poison V
+					SpellName(11340),	-- Instant Poison VI
 					SpellName(2823),	-- Deadly Poison
+					SpellName(2824),	-- Deadly Poison II
+					SpellName(11355),	-- Deadly Poison III
+					SpellName(11356),	-- Deadly Poison IV
+					SpellName(25351),	-- Deadly Poison V
 					SpellName(3408),	-- Crippling Poison
 					SpellName(5761),	-- Mind-numbing Poison
 					SpellName(13219),	-- Wound Poison

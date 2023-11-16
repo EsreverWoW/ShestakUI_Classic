@@ -700,6 +700,8 @@ C["filger_spells"] = {
 			{spellID = 22570, filter = "CD"},
 			-- Mangle (Bear)
 			{spellID = 33878, filter = "CD"},
+			-- Mangle (Cat)
+			-- {spellID = 33876, filter = "CD"},
 			-- Nature's Grasp
 			{spellID = 16689, filter = "CD"},
 			-- Nature's Swiftness
@@ -2884,6 +2886,8 @@ C["filger_spells"] = {
 			{spellID = 14177, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Evasion
 			{spellID = 5277, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Envenom
+			{spellID = 32645, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Find Weakness
 			{spellID = 31234, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Ghostly Strike

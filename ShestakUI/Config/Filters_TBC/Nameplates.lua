@@ -312,8 +312,8 @@ T.BuffWhiteList = {
 	[SpellName(47000)] = true,	-- Improved Blink
 	-- [SpellName(66)] = true,		-- Invisibility
 	[SpellName(1463)] = true,	-- Mana Shield
-	[SpellName(130)] = true,	-- Slow Fall
 	[SpellName(12043)] = true,	-- Presence of Mind
+	[SpellName(130)] = true,	-- Slow Fall
 
 	-- Paladin
 	[SpellName(31884)] = true,	-- Avenging Wrath

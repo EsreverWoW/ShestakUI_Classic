@@ -268,8 +268,8 @@ T.BuffWhiteList = {
 	[SpellName(11426)] = true,	-- Ice Barrier
 	[SpellName(11958)] = true,	-- Ice Block
 	[SpellName(1463)] = true,	-- Mana Shield
-	[SpellName(130)] = true,	-- Slow Fall
 	[SpellName(12043)] = true,	-- Presence of Mind
+	[SpellName(130)] = true,	-- Slow Fall
 
 	-- Paladin
 	[SpellName(1044)] = true,	-- Blessing of Freedom
