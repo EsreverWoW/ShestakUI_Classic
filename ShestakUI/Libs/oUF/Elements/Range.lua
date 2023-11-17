@@ -5,7 +5,7 @@ local _FRAMES = {}
 local OnRangeFrame
 
 local UnitInRange, UnitIsConnected = UnitInRange, UnitIsConnected
-local LibRangeCheck = oUF:IsClassic() and LibStub("LibRangeCheck-3.0-ShestakUI")
+local LibRangeCheck = oUF:IsClassic() and LibStub("LibRangeCheck-3.0")
 
 local function Update(self, event)
 	local element = self.Range

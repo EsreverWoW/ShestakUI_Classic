@@ -39,7 +39,7 @@ License: MIT
 --
 -- @class file
 -- @name LibRangeCheck-3.0
-local MAJOR_VERSION = "LibRangeCheck-3.0-ShestakUI"
+local MAJOR_VERSION = "LibRangeCheck-3.0"
 local MINOR_VERSION = 3
 
 local lib, oldminor = LibStub:NewLibrary(MAJOR_VERSION, MINOR_VERSION)
