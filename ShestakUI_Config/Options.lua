@@ -1567,6 +1567,7 @@ do
 			-- {"nug_running"}, -- needs work
 			{"omen"},
 			{"opie"},
+			{"plater"},
 			{"postal"},
 			{"recount"},
 			{"skada"},
