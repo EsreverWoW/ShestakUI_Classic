@@ -2561,7 +2561,6 @@ do
 
 	if IsVanillaBuild() or IsTBCBuild() then
 		HideOptions(classic)
-		raid_icon:SetPoint("TOPLEFT", average_lvl, "BOTTOMLEFT", 0, 0)
 	elseif IsWrathBuild() then
 		HideOptions(wrath)
 	elseif IsMainlineBuild() then
