@@ -160,6 +160,7 @@ end
 if T.Mainline then
 	if C.general.hide_banner == true then
 		BossBanner.PlayBanner = function() end
+		BossBanner:UnregisterAllEvents()
 	end
 end
 
