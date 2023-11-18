@@ -18,6 +18,7 @@ local function resetAttributes(self)
 	self.empowering = nil
 	self.notInterruptible = nil
 	self.spellID = nil
+	self.rank = nil
 	self.numStages = nil
 	self.curStage = nil
 
@@ -185,6 +186,12 @@ local function CastStart(self, event, unit)
 		return
 	end
 
+	local rank
+	if(oUF:IsClassic() and not oUF:IsCata()) then
+		rank = spellID and GetSpellSubtext(spellID)
+		rank = rank and strmatch(rank, "%d+")
+	end
+
 	element.casting = event == 'UNIT_SPELLCAST_START'
 	element.channeling = event == 'UNIT_SPELLCAST_CHANNEL_START'
 	element.empowering = event == 'UNIT_SPELLCAST_EMPOWER_START'
@@ -203,6 +210,7 @@ local function CastStart(self, event, unit)
 	element.holdTime = 0
 	element.castID = castID
 	element.spellID = spellID
+	element.rank = rank
 
 	if(element.channeling) then
 		element.duration = endTime - GetTime()
@@ -230,7 +238,11 @@ local function CastStart(self, event, unit)
 	if(element.Icon) then element.Icon:SetTexture(texture or FALLBACK_ICON) end
 	if(element.Shield) then element.Shield:SetShown(notInterruptible) end
 	if(element.Spark) then element.Spark:Show() end
-	if(element.Text) then element.Text:SetText(text) end
+	if(rank) then
+		if(element.Text) then element.Text:SetText(text .. " " .. rank) end
+	else
+		if(element.Text) then element.Text:SetText(text) end
+	end
 	if(element.Time) then element.Time:SetText() end
 
 	local safeZone = element.SafeZone
