@@ -416,15 +416,25 @@ if C.actionbar.hotkey == true then
 	end)
 end
 
-if T.Mainline and C.actionbar.hide_highlight == true then
-	local function HideHighlightButton(self)
-		if self.overlay then
-			self.overlay:Hide()
-			ActionButton_HideOverlayGlow(self)
+if T.Cata or T.Mainline then
+	if C.actionbar.hide_highlight == true then
+		local function HideHighlightButton(self)
+			if self.overlay then
+				self.overlay:Hide()
+				ActionButton_HideOverlayGlow(self)
+			end
 		end
-	end
 
-	hooksecurefunc("ActionButton_ShowOverlayGlow", HideHighlightButton)
+		hooksecurefunc("ActionButton_ShowOverlayGlow", HideHighlightButton)
+	else
+		hooksecurefunc("ActionButton_ShowOverlayGlow", function(button)
+			-- Make proc glow better
+			button.SpellActivationAlert.ProcStartFlipbook:ClearAllPoints()
+			button.SpellActivationAlert.ProcStartFlipbook:SetPoint("TOPLEFT", button, -C.actionbar.button_size * 0.9, C.actionbar.button_size * 0.9)
+			button.SpellActivationAlert.ProcStartFlipbook:SetPoint("BOTTOMRIGHT", button, C.actionbar.button_size * 0.9, -C.actionbar.button_size * 0.9)
+			button.SpellActivationAlert.ProcLoop:Play()
+		end)
+	end
 end
 
 ----------------------------------------------------------------------------------------
