@@ -88,7 +88,7 @@ local function macroBody(class)
 			body = body.."[@mouseover,help,dead] "..oocspell.."; "
 		end
 
-		if not oUF:IsClassic() and class == "WARLOCK" then
+		if oUF:IsMainline() and class == "WARLOCK" then
 			local name = GetSpellInfo(6203)
 			body = body.."\n/use "..name.."\n "
 		end

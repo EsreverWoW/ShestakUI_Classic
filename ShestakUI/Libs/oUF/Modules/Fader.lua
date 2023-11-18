@@ -7,9 +7,6 @@ if C.unitframe.enable ~= true or C.unitframe.plugins_fader ~= true then return e
 local _, ns = ...
 local oUF = ns.oUF
 
-local UnitCastingInfo = UnitCastingInfo or CastingInfo
-local UnitChannelInfo = UnitChannelInfo or ChannelInfo
-
 local strmatch, gmatch = string.match, string.gmatch
 local objects, addon = {}, CreateFrame("Frame")
 

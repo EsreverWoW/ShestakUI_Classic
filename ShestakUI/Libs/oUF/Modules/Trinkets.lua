@@ -20,7 +20,7 @@ local Update = function(self, event, ...)
 	local _, instanceType = IsInInstance()
 
 	if instanceType ~= 'arena' then
-		if(not oUF:IsClassic()) then
+		if(oUF:IsMainline()) then
 			self.Trinket.Icon:SetTexture("Interface\\Icons\\Ability_pvp_gladiatormedallion")
 		end
 		self.Trinket:Hide()

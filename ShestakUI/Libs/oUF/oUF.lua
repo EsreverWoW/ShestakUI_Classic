@@ -417,16 +417,6 @@ function oUF:IsVanilla()
 	return _G.WOW_PROJECT_ID == _G.WOW_PROJECT_CLASSIC
 end
 
---[[ oUF:IsVanilla()
-Used to determine if running World of Warcraft: Classic on patch 1.15 or greater.
-
-* self - the global oUF object
---]]
-local toc = select(4, GetBuildInfo())
-function oUF:IsVanilla115()
-	return oUF:IsVanilla() and toc >= 11500
-end
-
 --[[ oUF:IsTBC()
 Used to determine if running Burning Crusade Classic.
 

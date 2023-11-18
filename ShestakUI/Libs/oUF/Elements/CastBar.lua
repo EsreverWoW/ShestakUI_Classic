@@ -7,10 +7,6 @@ local FAILED = _G.FAILED or 'Failed'
 local INTERRUPTED = _G.INTERRUPTED or 'Interrupted'
 local CASTBAR_STAGE_DURATION_INVALID = -1 -- defined in FrameXML/CastingBarFrame.lua
 
-local UnitCastingInfo = UnitCastingInfo
-local UnitChannelInfo = UnitChannelInfo
-local EventFunctions = {}
-
 -- Tradeskill block
 local tradeskillCurrent, tradeskillTotal, mergeTradeskill = 0, 0, false
 -- end block
@@ -182,11 +178,6 @@ local function CastStart(self, event, unit)
 		event = (numStages and numStages > 0) and 'UNIT_SPELLCAST_EMPOWER_START' or 'UNIT_SPELLCAST_CHANNEL_START'
 	end
 
-	if(not spellID and type(notInterruptible) == "number") then
-		spellID = notInterruptible -- there is no notInterruptible return in some builds of Classic/TBC Classic
-		notInterruptible = false
-	end
-
 	if(not name or (isTradeSkill and element.hideTradeSkills)) then
 		resetAttributes(element)
 		element:Hide()
@@ -239,7 +230,7 @@ local function CastStart(self, event, unit)
 	if(element.Icon) then element.Icon:SetTexture(texture or FALLBACK_ICON) end
 	if(element.Shield) then element.Shield:SetShown(notInterruptible) end
 	if(element.Spark) then element.Spark:Show() end
-	if(element.Text) then element.Text:SetText((oUF:IsVanilla115() or not oUF:IsVanilla()) and text or name) end
+	if(element.Text) then element.Text:SetText(text) end
 	if(element.Time) then element.Time:SetText() end
 
 	local safeZone = element.SafeZone
@@ -552,7 +543,7 @@ local function Enable(self, unit)
 		self:RegisterEvent('UNIT_SPELLCAST_CHANNEL_UPDATE', CastUpdate)
 		self:RegisterEvent('UNIT_SPELLCAST_FAILED', CastFail)
 		self:RegisterEvent('UNIT_SPELLCAST_INTERRUPTED', CastFail)
-		if(not oUF:IsClassic()) then
+		if(oUF:IsMainline()) then
 			self:RegisterEvent('UNIT_SPELLCAST_EMPOWER_START', CastStart)
 			self:RegisterEvent('UNIT_SPELLCAST_EMPOWER_STOP', CastStop)
 			self:RegisterEvent('UNIT_SPELLCAST_EMPOWER_UPDATE', CastUpdate)

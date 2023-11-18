@@ -24,7 +24,7 @@ local function Update(self, event, unit)
 
 	local _, _, _, startTime, endTime, _, _, notInterruptible, spellID = UnitCastingInfo(unit)
 	local mainPowerType = UnitPowerType(unit)
-	local hasAltManaBar = (not oUF:IsClassic() and ALT_POWER_BAR_PAIR_DISPLAY_INFO[playerClass]
+	local hasAltManaBar = (oUF:IsMainline() and ALT_POWER_BAR_PAIR_DISPLAY_INFO[playerClass]
 	and ALT_POWER_BAR_PAIR_DISPLAY_INFO[playerClass][mainPowerType])
 	local mainCost, altCost = 0, 0
 

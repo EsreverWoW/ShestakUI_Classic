@@ -28,7 +28,7 @@ local function GetReputation()
 	local pendingReward, standingText
 	local name, standingID, min, max, cur, factionID = GetWatchedFactionInfo()
 
-	if(not oUF:IsClassic()) then
+	if(oUF:IsMainline()) then
 		local repInfo = C_GossipInfo.GetFriendshipReputation(factionID)
 		local friendshipID = repInfo and repInfo.friendshipFactionID
 
@@ -77,7 +77,7 @@ local function GetReputation()
 	return cur, max, name, factionID, standingID, standingText, pendingReward
 end
 
-if(not oUF:IsClassic()) then
+if(oUF:IsMainline()) then
 	oUF.colors.reaction[MAX_REPUTATION_REACTION + 1] = {0.64, 0.2, 0.93}	-- paragon color
 	oUF.colors.reaction[MAX_REPUTATION_REACTION + 2] = {0, 0.5, 0.9}		-- major faction color
 end

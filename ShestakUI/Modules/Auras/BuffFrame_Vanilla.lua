@@ -155,7 +155,7 @@ local function UpdateDuration(buff, timeLeft)
 	local name = buff:GetName()
 	if not strmatch(name, "TempEnchant") or name == "TempEnchant3" then return end
 
-	local index = strmatch (name, "%d+")
+	local index = strmatch(name, "%d+")
 	local hasMainHandEnchant, _, mainHandCharges, _, hasOffHandEnchant, _, offHandCharges = GetWeaponEnchantInfo()
 	local slotIndex = 16
 	local chargeCount = mainHandCharges

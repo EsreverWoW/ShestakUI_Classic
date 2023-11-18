@@ -20,20 +20,17 @@ local function Update(self, event)
 		element:PreUpdate()
 	end
 
-	local inRange, checkedRange
+	local minRange, maxRange, inRange, checkedRange
 	local connected = UnitIsConnected(unit)
 	if(connected) then
 		if(LibRangeCheck) then
 			-- GetRange(unit, checkVisible, noItems)
-			_, inRange = LibRangeCheck:GetRange(unit, true, true)
-			-- 40yd Vial of the Sunwell Fallback
-			inRange = inRange or IsItemInRange(34471, unit)
-			-- 28yd Follow Fallback
-			inRange = inRange or CheckInteractDistance(unit, 4)
+			minRange, maxRange = LibRangeCheck:GetRange(unit, true, true)
+			inRange = not minRange or maxRange
 		else
 			inRange, checkedRange = UnitInRange(unit)
 		end
-		if((not oUF:IsClassic() and checkedRange and not inRange) or (not inRange)) then
+		if((oUF:IsMainline() and checkedRange and not inRange) or (not inRange)) then
 			self:SetAlpha(element.outsideAlpha)
 		else
 			self:SetAlpha(element.insideAlpha)

@@ -184,7 +184,7 @@ local function Enable(self)
 			self:RegisterEvent('UNIT_HEAL_PREDICTION', Path)
 		end
 
-		if(not oUF:IsClassic()) then
+		if(oUF:IsMainline()) then
 			if element.absorbBar then
 				self:RegisterEvent('UNIT_ABSORB_AMOUNT_CHANGED', Path)
 			end
