@@ -210,6 +210,10 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 			RaiderIO_CustomDropDownListMenuBackdrop:StripTextures()
 		end
 
+		if MyFrameDropDownBackdrop then
+			MyFrameDropDownBackdrop:SetTemplate("Transparent")
+		end
+
 		-- Reskin menu
 		local ChatMenus = {
 			"ChatMenu",
