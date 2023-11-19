@@ -700,8 +700,6 @@ C["filger_spells"] = {
 			{spellID = 22570, filter = "CD"},
 			-- Mangle (Bear)
 			{spellID = 33878, filter = "CD"},
-			-- Mangle (Cat)
-			-- {spellID = 33876, filter = "CD"},
 			-- Nature's Grasp
 			{spellID = 16689, filter = "CD"},
 			-- Nature's Swiftness
