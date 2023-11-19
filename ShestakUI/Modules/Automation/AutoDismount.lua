@@ -50,7 +50,7 @@ local function CheckErrorMessage(_, _, _, msg)
 		DoEmote("stand")
 		UIErrorsFrame:Clear()
 	elseif shapeshiftMessages[msg] then
-		for k, _ in pairs(shapeshiftSpells) do
+		for k in pairs(shapeshiftSpells) do
 			if not InCombatLockdown() then
 				CancelSpellByName(k)
 			end
