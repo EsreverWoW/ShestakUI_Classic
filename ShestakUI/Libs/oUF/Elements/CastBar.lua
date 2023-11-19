@@ -189,7 +189,7 @@ local function CastStart(self, event, unit)
 	local rank
 	if(oUF:IsClassic() and not oUF:IsCata()) then
 		rank = spellID and GetSpellSubtext(spellID)
-		rank = rank and " " .. strmatch(rank, "%d+")
+		rank = rank and strmatch(rank, "%d+")
 	end
 
 	element.casting = event == 'UNIT_SPELLCAST_START'
@@ -238,7 +238,11 @@ local function CastStart(self, event, unit)
 	if(element.Icon) then element.Icon:SetTexture(texture or FALLBACK_ICON) end
 	if(element.Shield) then element.Shield:SetShown(notInterruptible) end
 	if(element.Spark) then element.Spark:Show() end
-	if(element.Text) then element.Text:SetText(text .. rank or "") end
+	if(rank) then
+		if(element.Text) then element.Text:SetText(text .. " " .. rank) end
+	else
+		if(element.Text) then element.Text:SetText(text) end
+	end
 	if(element.Time) then element.Time:SetText() end
 
 	local safeZone = element.SafeZone
