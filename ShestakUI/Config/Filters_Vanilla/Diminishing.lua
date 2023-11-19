@@ -49,7 +49,6 @@ T.DiminishingSpells = {
 	--]]
 
 	-- Disorients
-	[22570] = {"disorient"},		-- Mangle
 	[118] = {"disorient"},			-- Polymorph
 	[28272] = {"disorient"},		-- Polymorph: Pig
 	[28271] = {"disorient"},		-- Polymorph: Turtle

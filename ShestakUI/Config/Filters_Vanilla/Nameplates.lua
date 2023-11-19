@@ -30,7 +30,6 @@ T.DebuffWhiteList = {
 	[SpellName(2637)] = true,	-- Hibernate
 	-- [SpellName(16914)] = true,	-- Hurricane
 	[SpellName(5570)] = true,	-- Insect Swarm
-	[SpellName(22570)] = true,	-- Mangle
 	[SpellName(8921)] = true,	-- Moonfire
 	[SpellName(9005)] = true,	-- Pounce
 	[SpellName(9007)] = true,	-- Pounce Bleed

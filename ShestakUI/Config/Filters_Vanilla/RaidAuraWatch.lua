@@ -199,7 +199,6 @@ if C.raidframe.plugins_pvp_debuffs == true then
 		[SpellName(19975)] = 2,		-- Entangling Roots (Nature's Grasp)
 		[SpellName(19675)] = 2,		-- Feral Charge Effect
 		[SpellName(2637)] = 3,		-- Hibernate
-		[SpellName(22570)] = 3,		-- Mangle
 		[SpellName(9005)] = 3,		-- Pounce
 		-- Hunter
 		[SpellName(19306)] = 2,		-- Counterattack

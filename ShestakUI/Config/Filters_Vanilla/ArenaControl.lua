@@ -22,7 +22,6 @@ T.ArenaControl = {
 	[SpellName(5211)] = 5,		-- Bash
 	[SpellName(16922)] = 5,		-- Celestial Focus
 	[SpellName(2637)] = 5,		-- Hibernate
-	[SpellName(22570)] = 5,		-- Mangle
 	[SpellName(9005)] = 5,		-- Pounce
 	-- Hunter
 	[SpellName(3355)] = 5,		-- Freezing Trap

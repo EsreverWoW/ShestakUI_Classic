@@ -283,8 +283,6 @@ C["filger_spells"] = {
 			-- {spellID = 16914, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Insect Swarm
 			{spellID = 5570, unitID = "target", caster = "player", filter = "DEBUFF"},
-			-- Mangle
-			{spellID = 22570, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Moonfire
 			{spellID = 8921, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Pounce r1
@@ -398,8 +396,6 @@ C["filger_spells"] = {
 			{spellID = 16914, filter = "CD"},
 			-- Innervate
 			{spellID = 29166, filter = "CD"},
-			-- Mangle
-			{spellID = 22570, filter = "CD"},
 			-- Nature's Grasp
 			{spellID = 16689, filter = "CD"},
 			-- Nature's Swiftness
@@ -3130,8 +3126,6 @@ C["filger_spells"] = {
 			{spellID = 16922, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Hibernate
 			{spellID = 2637, unitID = "player", caster = "all", filter = "DEBUFF"},
-			-- Mangle
-			{spellID = 22570, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Pounce r1
 			{spellID = 9005, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
 			-- Pounce r2
