@@ -525,7 +525,7 @@ local kickID = 0
 if C.nameplate.kick_color then
 	if T.Classic then
 		if T.class == "DRUID" and T.SoD then
-			kickID = 410176 -- Skull Bash [Season of Mastery]
+			kickID = 410176 -- Skull Bash [Season of Discovery]
 		elseif T.class == "DRUID" then
 			kickID = 0 -- TODO: Check for S3/S4 Arena Gloves which give Maim an Interrupt
 		elseif T.class == "HUNTER" then
@@ -533,7 +533,7 @@ if C.nameplate.kick_color then
 		elseif T.class == "MAGE" then
 			kickID = 2139
 		elseif T.class == "PALADIN" and T.SoD then
-			kickID = 425609 -- Rebuke [Season of Mastery]
+			kickID = 425609 -- Rebuke [Season of Discovery]
 		elseif T.class == "PALADIN" and T.race == "BloodElf" then
 			kickID = 28730 -- Arcane Torrent
 		elseif T.class == "PRIEST" then
