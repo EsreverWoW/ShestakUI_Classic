@@ -28,6 +28,7 @@
 	<Script file="Communities.lua"/>
 	<Script file="Container.lua"/>
 	<Script file="DressUp.lua"/>
+	<Script file="Engraving.lua"/>
 	<Script file="Friends.lua"/>
 	<Script file="GMSurvey.lua"/>
 	<Script file="Gossip.lua"/>				<!-- TODO -->
