@@ -91,6 +91,7 @@ T.DiminishingSpells = {
 
 	--[[
 	-- Disarms
+	[409495] = {"disarm"},			-- Chimera Shot - Scorpid [Season of Discovery]
 	[14251] = {"disarm"},			-- Riposte
 	[676] = {"disarm"},				-- Disarm
 	--]]
@@ -127,6 +128,7 @@ T.DiminishingSpells = {
 	--]]
 
 	-- Kidney Shot
+	[400009] = {"kidneyshot"},		-- Between the Eyes [Season of Discovery]
 	[408] = {"kidneyshot"},			-- Kidney Shot
 
 	-- Frost Shock

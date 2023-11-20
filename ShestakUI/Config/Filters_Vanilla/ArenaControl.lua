@@ -46,6 +46,7 @@ T.ArenaControl = {
 	[SpellName(8122)] = 5,		-- Psychic Scream
 	[SpellName(9484)] = 5,		-- Shackle Undead
 	-- Rogue
+	[SpellName(400009)] = 5,	-- Between the Eyes [Season of Discovery]
 	[SpellName(2094)] = 5,		-- Blind
 	[SpellName(1833)] = 5,		-- Cheap Shot
 	[SpellName(1776)] = 5,		-- Gouge
@@ -87,6 +88,7 @@ T.ArenaControl = {
 	[SpellName(23694)] = 3,		-- Improved Hamstring
 
 	-- Disarms
+	[SpellName(409495)] = 1,		-- Chimera Shot - Scorpid [Season of Discovery]
 	-- [SpellName(14251)] = 1,		-- Riposte
 	[SpellName(676)] = 1,		-- Disarm
 
@@ -103,7 +105,10 @@ T.ArenaControl = {
 	[SpellName(3045)] = 1,		-- Rapid Fire
 	--Mage
 	[SpellName(12042)] = 1,		-- Arcane Power
+	[SpellName(425124)] = 1,	-- Arcane Surge [Season of Discovery]
 	[SpellName(28682)] = 1,		-- Combustion
+	[SpellName(412326)] = 1,	-- Enlightenment [Season of Discovery]
+	[SpellName(429125)] = 1,	-- Icy Veins [Season of Discovery]
 	[SpellName(12043)] = 1,		-- Presence of Mind
 	-- Paladin
 	[SpellName(1044)] = 1,		-- Blessing of Freedom
@@ -115,10 +120,12 @@ T.ArenaControl = {
 	[SpellName(10060)] = 1,		-- Power Infusion
 	-- Rogue
 	[SpellName(13877)] = 1,		-- Blade Flurry
+	[SpellName(424919)] = 1,		-- Main Gauche [Season of Discovery]
 	-- Shaman
 	[SpellName(8178)] = 1,		-- Grounding Totem Effect
 	[SpellName(16190)] = 1,		-- Mana Tide Totem
 	-- Warlock
+	[SpellName(425463)] = 1,	-- Demonic Grace [Season of Discovery]
 	[SpellName(18708)] = 1,		-- Fel Domination
 	-- Warrior
 	[SpellName(18499)] = 1,		-- Berserker Rage
@@ -136,8 +143,11 @@ T.ArenaControl = {
 	-- Defense abilities
 	[SpellName(22812)] = 1,		-- Barkskin
 	[SpellName(19263)] = 1,		-- Deterrence
+	[SpellName(407804)] = 1,		-- Divine Sacrifice [Season of Discovery]
+	[SpellName(425205)] = 1,	-- Power Word: Barrier [Season of Discovery]
 	[SpellName(5277)] = 1,		-- Evasion
 	[SpellName(1856)] = 1,		-- Vanish
+	[SpellName(425336)] = 1,	-- Shamanistic Rage [Season of Discovery]
 	[SpellName(12976)] = 1,		-- Last Stand
 	[SpellName(23920)] = 1,		-- Spell Reflection
 }

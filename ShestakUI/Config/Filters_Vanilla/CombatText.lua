@@ -25,6 +25,7 @@ if T.class == "DRUID" then
 		T.aoespam[22842] = 3.5		-- Frenzied Regeneration r1
 		T.merge[22895] = 22842		-- Frenzied Regeneration r2
 		T.merge[22896] = 22842		-- Frenzied Regeneration r3
+		T.aoespam[414680] = 3		-- Living Seed [Season of Discovery]
 		T.aoespam[774] = 4			-- Rejuvenation r1
 		T.merge[1058] = 774			-- Rejuvenation r2
 		T.merge[1430] = 774			-- Rejuvenation r3
@@ -49,6 +50,7 @@ if T.class == "DRUID" then
 		T.merge[8918] = 740			-- Tranquility r2
 		T.merge[9862] = 740			-- Tranquility r3
 		T.merge[9863] = 740			-- Tranquility r4
+		T.aoespam[408120] = 4		-- Wild Growth [Season of Discovery]
 		-- Damaging spells
 		T.aoespam[779] = 0			-- Swipe r1
 		T.merge[780] = 779			-- Swipe r2
@@ -65,6 +67,9 @@ if T.class == "DRUID" then
 		T.merge[9833] = 8921		-- Moonfire r8
 		T.merge[9834] = 8921		-- Moonfire r9
 		T.merge[9835] = 8921		-- Moonfire r10
+		T.aoespam[414684] = 3		-- Sunfire [Season of Discovery]
+		T.merge[414687] = 414684	-- Sunfire (Bear) [Season of Discovery]
+		T.merge[414689] = 414684	-- Sunfire (Cat) [Season of Discovery]
 		T.aoespam[16914] = 3		-- Hurricane r1
 		T.merge[17401] = 16914		-- Hurricane r2
 		T.merge[17402] = 16914		-- Hurricane r3
@@ -93,11 +98,24 @@ elseif T.class == "HUNTER" then
 		T.merge[13554] = 1978		-- Serpent Sting r7
 		T.merge[13555] = 1978		-- Serpent Sting r8
 		T.merge[25295] = 1978		-- Serpent Sting r9
+		T.merge[425728] = 1978		-- Serpent Sting r1 (Serpent Spread) [Season of Discovery]
+		T.merge[425729] = 1978		-- Serpent Sting r2 (Serpent Spread) [Season of Discovery]
+		T.merge[425730] = 1978		-- Serpent Sting r3 (Serpent Spread) [Season of Discovery]
+		T.merge[425732] = 1978		-- Serpent Sting r4 (Serpent Spread) [Season of Discovery]
+		T.merge[425733] = 1978		-- Serpent Sting r5 (Serpent Spread) [Season of Discovery]
+		T.merge[425734] = 1978		-- Serpent Sting r6 (Serpent Spread) [Season of Discovery]
+		T.merge[425735] = 1978		-- Serpent Sting r7 (Serpent Spread) [Season of Discovery]
+		T.merge[425736] = 1978		-- Serpent Sting r8 (Serpent Spread) [Season of Discovery]
+		T.merge[425737] = 1978		-- Serpent Sting r9 (Serpent Spread) [Season of Discovery]
+		T.aoespam[415320] = 0.5		-- Flanking Strike [Season of Discovery]
+		T.merge[415326] = 415320	-- Flanking Strike [Season of Discovery]
+		T.merge[415327] = 415320	-- Flanking Strike [Season of Discovery]
 		T.aoespam[2643] = 0			-- Multi-Shot r1
 		T.merge[14288] = 2643		-- Multi-Shot r2
 		T.merge[14289] = 2643		-- Multi-Shot r3
 		T.merge[14290] = 2643		-- Multi-Shot r4
 		T.merge[25294] = 2643		-- Multi-Shot r5
+		T.aoespam[425711] = 0.5		-- Carve [Season of Discovery]
 		T.aoespam[13812] = 3		-- Explosive Trap r1
 		T.merge[14314] = 13812		-- Explosive Trap r2
 		T.merge[14315] = 13812		-- Explosive Trap r3
@@ -119,6 +137,14 @@ elseif T.class == "HUNTER" then
 	end
 elseif T.class == "MAGE" then
 	if C.combattext.merge_aoe_spam then
+		-- Healing spells
+		T.aoespam[401405] = 3		-- Chronomantic Healing [Season of Discovery]
+		T.aoespam[412510] = 3		-- Mass Regeneration [Season of Discovery]
+		T.aoespam[401460] = 3		-- Rapid Regeneration [Season of Discovery]
+		T.aoespam[401417] = 3		-- Regeneration [Season of Discovery]
+		-- Damaging spells
+		T.aoespam[400613] = 3.5		-- Living Bomb [Season of Discovery]
+		T.aoespam[401559] = 3		-- Living Flame [Season of Discovery]
 		T.aoespam[2120] = 0			-- Flamestrike r1
 		T.merge[2121] = 2120		-- Flamestrike r2
 		T.merge[8422] = 2120		-- Flamestrike r3
@@ -178,6 +204,7 @@ elseif T.class == "PALADIN" then
 		T.merge[20912] = 20911		-- Blessing of Sanctuary r2
 		T.merge[20913] = 20911		-- Blessing of Sanctuary r3
 		T.merge[20914] = 20911		-- Blessing of Sanctuary r4
+		T.aoespam[407778] = 0		-- Divine Storm [Season of Discovery]
 		T.aoespam[20925] = 3		-- Holy Shield r1
 		T.merge[20927] = 20925		-- Holy Shield r2
 		T.merge[20928] = 20925		-- Holy Shield r3
@@ -185,7 +212,9 @@ elseif T.class == "PALADIN" then
 elseif T.class == "PRIEST" then
 	if C.combattext.merge_aoe_spam then
 		-- Healing spells
+		T.aoespam[401946] = 1		-- Circle of Healing [Season of Discovery]
 		T.aoespam[15290] = 4		-- Vampiric Embrace
+		T.aoespam[402289] = 2.5		-- Penance [Season of Discovery]
 		T.aoespam[23455] = 0		-- Holy Nova r1
 		T.merge[23458] = 23455		-- Holy Nova r2
 		T.merge[23459] = 23455		-- Holy Nova r3
@@ -208,6 +237,7 @@ elseif T.class == "PRIEST" then
 		T.merge[10961] = 596		-- Prayer of Healing r4
 		T.merge[25316] = 596		-- Prayer of Healing r5
 		-- Damaging spells
+		T.aoespam[413260] = 3		-- Mind Sear [Season of Discovery]
 		T.aoespam[15237] = 0		-- Holy Nova r1
 		T.merge[15430] = 15237		-- Holy Nova r2
 		T.merge[15431] = 15237		-- Holy Nova r3
@@ -228,6 +258,7 @@ elseif T.class == "PRIEST" then
 		T.merge[17313] = 15407		-- Mind Flay r4
 		T.merge[17314] = 15407		-- Mind Flay r5
 		T.merge[18807] = 15407		-- Mind Flay r6
+		T.aoespam[402284] = 2.5		-- Penance [Season of Discovery]
 		T.aoespam[14914] = 3		-- Holy Fire r1
 		T.merge[15262] = 14914		-- Holy Fire r2
 		T.merge[15263] = 14914		-- Holy Fire r3
@@ -236,6 +267,7 @@ elseif T.class == "PRIEST" then
 		T.merge[15266] = 14914		-- Holy Fire r6
 		T.merge[15267] = 14914		-- Holy Fire r7
 		T.merge[15261] = 14914		-- Holy Fire r8
+		T.aoespam[425204] = 2.5		-- Void Plague [Season of Discovery]
 	end
 	if C.combattext.healing then
 		T.healfilter[15290] = false	-- Vampiric Embrace
@@ -260,16 +292,20 @@ elseif T.class == "ROGUE" then
 		T.merge[11336] = 8680		-- Instant Poison V
 		T.merge[11337] = 8680		-- Instant Poison VI
 		T.aoespam[22482] = 3		-- Blade Flurry
+		T.aoespam[399960] = 0		-- Mutilate [Season of Discovery]
+		T.aoespam[424785] = 5		-- Saber Slash [Season of Discovery]
 		T.aoespam[1943] = 5			-- Rupture r1
 		T.merge[8639] = 1943		-- Rupture r2
 		T.merge[8640] = 1943		-- Rupture r3
 		T.merge[11273] = 1943		-- Rupture r4
 		T.merge[11274] = 1943		-- Rupture r5
 		T.merge[11275] = 1943		-- Rupture r6
+		T.merge[399961] = 5374		-- Mutilate Off-Hand [Season of Discovery]
 	end
 elseif T.class == "SHAMAN" then
 	if C.combattext.merge_aoe_spam then
 		-- Healing spells
+		T.aoespam[415242] = 5		-- Healing Rain [Season of Discovery]
 		T.aoespam[5672] = 5			-- Healing Stream Totem r1
 		T.merge[6371] = 5672		-- Healing Stream Totem r2
 		T.merge[6372] = 5672		-- Healing Stream Totem r3
@@ -278,6 +314,7 @@ elseif T.class == "SHAMAN" then
 		T.aoespam[1064] = 3			-- Chain Heal r1
 		T.merge[10622] = 1064		-- Chain Heal r2
 		T.merge[10623] = 1064		-- Chain Heal r3
+		T.aoespam[409333] = 3		-- Ancestral Guidance [Season of Discovery]
 		-- Damaging spells
 		-- T.aoespam[26545] = 3		-- Lightning Shield
 		T.aoespam[421] = 1			-- Chain Lightning r1
@@ -308,6 +345,7 @@ elseif T.class == "SHAMAN" then
 		T.merge[6352] = 3606		-- Searing Bolt r4
 		T.merge[10435] = 3606		-- Searing Bolt r5
 		T.merge[10436] = 3606		-- Searing Bolt r6
+		T.aoespam[409337] = 3		-- Ancestral Guidance [Season of Discovery]
 	end
 elseif T.class == "WARLOCK" then
 	if C.combattext.merge_aoe_spam then
@@ -353,6 +391,12 @@ elseif T.class == "WARLOCK" then
 		T.healfilter[7651] = true	-- Drain Life r4
 		T.healfilter[11699] = true	-- Drain Life r5
 		T.healfilter[11700] = true	-- Drain Life r6
+		T.healfilter[403677] = true	-- Drain Life r1 [Season of Discovery]
+		T.healfilter[403685] = true	-- Drain Life r2 [Season of Discovery]
+		T.healfilter[403686] = true	-- Drain Life r3 [Season of Discovery]
+		T.healfilter[403687] = true	-- Drain Life r4 [Season of Discovery]
+		T.healfilter[403688] = true	-- Drain Life r5 [Season of Discovery]
+		T.healfilter[403689] = true	-- Drain Life r6 [Season of Discovery]
 		T.healfilter[18265] = true	-- Siphon Life r1
 		T.healfilter[18879] = true	-- Siphon Life r2
 		T.healfilter[18880] = true	-- Siphon Life r3

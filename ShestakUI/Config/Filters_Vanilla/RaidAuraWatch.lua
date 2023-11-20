@@ -12,14 +12,21 @@ T.RaidBuffs = {
 															-- Innervate
 		{774, "TOPRIGHT", {0.8, 0.4, 0.8}},					-- Rejuvenation
 		{8936, "BOTTOMLEFT", {0.2, 0.8, 0.2}},				-- Regrowth
-		-- {33763, "TOPLEFT", {0.4, 0.8, 0.2}},				-- Lifebloom
-		-- {48438, "BOTTOMRIGHT", {0.8, 0.4, 0}},				-- Wild Growth
+		{408124, "TOPLEFT", {0.4, 0.8, 0.2}},				-- Lifebloom [Season of Discovery]
+		{408120, "BOTTOMRIGHT", {0.8, 0.4, 0}},				-- Wild Growth [Season of Discovery]
 		-- {102342, "LEFT", {0.45, 0.3, 0.2}, true},			-- Ironbark
 		-- {155777, "RIGHT", {0.4, 0.9, 0.4}},					-- Rejuvenation (Germination)
 	},
+	MAGE = {
+		{401417, "TOPRIGHT", {0.13, 0.87, 0.50}},			-- Regeneration [Season of Discovery]
+		{401460, "TOPRIGHT", {0.8, 0.4, 0.8}},				-- Rapid Regeneration [Season of Discovery]
+		{412510, "TOPRIGHT", {0.13, 0.87, 0.50}},			-- Mass Regeneration [Season of Discovery]
+		{400735, "TOPLEFT", {0.82, 0.29, 0.24}},			-- Temporal Beacon [Season of Discovery]
+		-- {0, "BOTTOM", {0.11, 0.57, 0.71}},				-- PLACEHOLDER [Season of Discovery]
+	},
 	PALADIN = {
 															-- Lay on Hands (Armor Bonus)
-		-- {53563, "TOPRIGHT", {0.7, 0.3, 0.7}},				-- Beacon of Light
+		{407613, "TOPRIGHT", {0.7, 0.3, 0.7}},				-- Beacon of Light [Season of Discovery]
 		-- {114163, "BOTTOMLEFT", {0.9, 0.6, 0.4}},			-- Eternal Flame
 		{1022, "BOTTOMRIGHT", {0.2, 0.2, 1}, true},			-- Blessing of Protection
 		{1044, "BOTTOMRIGHT", {0.89, 0.45, 0}, true},		-- Blessing of Freedom
@@ -29,7 +36,7 @@ T.RaidBuffs = {
 	PRIEST = {
 															-- Abolish Disease (move to all?)
 															-- Fear Ward
-		-- {41635, "BOTTOMRIGHT", {0.2, 0.7, 0.2}},			-- Prayer of Mending
+		{401859, "BOTTOMRIGHT", {0.2, 0.7, 0.2}},			-- Prayer of Mending [Season of Discovery]
 		{139, "BOTTOMLEFT", {0.4, 0.7, 0.2}}, 				-- Renew
 		{17, "TOPLEFT", {0.81, 0.85, 0.1}, true},			-- Power Word: Shield
 		-- {33206, "LEFT", {0.89, 0.1, 0.1}, true},			-- Pain Suppression
@@ -37,7 +44,7 @@ T.RaidBuffs = {
 		{10060, "RIGHT", {0.89, 0.1, 0.1}},					-- Power Infusion
 	},
 	SHAMAN = {
-		-- {974, "BOTTOMLEFT", {0.2, 0.7, 0.2}, true},			-- Earth Shield
+		{974, "BOTTOMLEFT", {0.2, 0.7, 0.2}, true},			-- Earth Shield [Season of Discovery]
 		{29203, "BOTTOMRIGHT", {0.7, 0.4, 0}},				-- Healing Way (Change Color?)
 		{16177, "TOPLEFT", {0.4, 0.7, 0.2}},				-- Ancestral Fortitude
 	},
@@ -182,6 +189,23 @@ T.RaidDebuffs = {
 -- Scholomance
 
 -----------------------------------------------------------------
+-- Season of Discovery
+-----------------------------------------------------------------
+-- Blackfathom Deeps
+	-- Baron Aquanis
+	[SpellName(404275)] = 3,	-- Aqua Strike
+	[SpellName(404806)] = 4,	-- Depth Charge
+	-- Ghamoo-ra
+	[SpellName(407095)] = 3,	-- Crunch Armor
+	-- Lady Sarevess
+	[SpellName(407546)] = 3,	-- Freezing Arrow
+	[SpellName(407653)] = 4,	-- Forked Lightning
+	-- Gellhast
+	-- Lorgus Jett
+	-- Twilight Lord Kelris
+	-- Aku'mai
+
+-----------------------------------------------------------------
 -- Other
 -----------------------------------------------------------------
 
@@ -201,6 +225,7 @@ if C.raidframe.plugins_pvp_debuffs == true then
 		[SpellName(2637)] = 3,		-- Hibernate
 		[SpellName(9005)] = 3,		-- Pounce
 		-- Hunter
+		[SpellName(409495)] = 2,	-- Chimera Shot - Scorpid [Season of Discovery]
 		[SpellName(19306)] = 2,		-- Counterattack
 		[SpellName(19185)] = 2,		-- Entrapment
 		[SpellName(3355)] = 3,		-- Freezing Trap Effect
@@ -230,6 +255,7 @@ if C.raidframe.plugins_pvp_debuffs == true then
 		[SpellName(9484)] = 3,		-- Shackle Undead
 		[SpellName(15487)] = 3,		-- Silence
 		-- Rogue
+		[SpellName(400009)] = 3,	-- Between the Eyes [Season of Discovery]
 		[SpellName(2094)] = 3,		-- Blind
 		[SpellName(1833)] = 3,		-- Cheap Shot
 		[SpellName(1776)] = 3,		-- Gouge

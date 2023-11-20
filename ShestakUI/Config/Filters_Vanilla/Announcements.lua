@@ -9,6 +9,7 @@ if C.announcements.spells == true then
 	T.announce_spells = {
 		20484,	-- Rebirth
 		20707,	-- Soulstone
+		407804,	-- Divine Sacrifice [Season of Discovery]
 		633,	-- Lay on Hands
 		19801,	-- Tranquilizing Shot
 	}

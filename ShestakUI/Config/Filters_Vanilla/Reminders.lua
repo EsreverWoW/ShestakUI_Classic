@@ -110,6 +110,7 @@ if C.reminder.raid_buffs_enable == true or C.announcements.flask_food == true th
 			Physical = {
 				SpellName(25782),	-- Greater Blessing of Might
 				SpellName(19740),	-- Blessing of Might
+				SpellName(425600),	-- Horn of Lordaeron [Season of Discovery]
 			},
 			Threat = {
 				SpellName(25895),	-- Greater Blessing of Salvation
@@ -139,6 +140,7 @@ if C.reminder.raid_buffs_enable == true or C.announcements.flask_food == true th
 		Kings = {
 			SpellName(25898),	-- Greater Blessing of Kings
 			SpellName(20217),	-- Blessing of Kings
+			SpellName(409583),	-- Aspect of the Lion [Season of Discovery]
 		},
 		Mark = {
 			SpellName(21849),	-- Gift of the Wild
@@ -183,7 +185,7 @@ if C.reminder.raid_buffs_enable == true or C.announcements.flask_food == true th
 		local faction = UnitFactionGroup("player")
 		if not faction or faction == "Neutral" then faction = "Alliance" end
 
-		T.ReminderBuffs.Spell4Buff = faction == "Alliance" and T.ReminderBuffs["Kings"] or T.ReminderBuffs["Horde"]["Threat"]
+		T.ReminderBuffs.Spell4Buff = faction == "Alliance" and T.ReminderBuffs["Kings"] or (T.SoD and T.ReminderBuffs["Kings"] or T.ReminderBuffs["Horde"]["Threat"])
 		T.ReminderBuffs.Spell5Buff = T.ReminderBuffs["AP"]
 		T.ReminderBuffs.Spell6Buff = T.ReminderBuffs[faction]["Physical"]
 	end
@@ -242,6 +244,7 @@ if C.reminder.solo_buffs_enable == true then
 					SpellName(13163),	-- Aspect of the Monkey
 					SpellName(13159),	-- Aspect of the Pack
 					SpellName(20043),	-- Aspect of the Wild
+					SpellName(409580),	-- Aspect of the Lion [Season of Discovery]
 				},
 				["combat"] = true,
 				["instance"] = true,
@@ -281,6 +284,7 @@ if C.reminder.solo_buffs_enable == true then
 			[1] = {	-- Righteous Fury group
 				["spells"] = {
 					SpellName(25780),	-- Righteous Fury
+					-- SpellName(407627),	-- Righteous Fury [Season of Discovery]
 				},
 				["role"] = "Tank",
 				["combat"] = true,
@@ -336,6 +340,7 @@ if C.reminder.solo_buffs_enable == true then
 					SpellName(31892),		-- Seal of Blood
 					SpellName(348700),		-- Seal of the Martyr
 					SpellName(348704),		-- Seal of Corruption
+					SpellName(407798),		-- Seal of Martyrdom [Season of Discovery]
 				},
 				["combat"] = true,
 				["instance"] = true,
@@ -439,7 +444,18 @@ if C.reminder.solo_buffs_enable == true then
 			},
 		},
 		SHAMAN = {
-			[1] = {	-- Main Hand Weapon Enchant group
+			[1] = {	-- Shields group
+				["spells"] = {
+					SpellName(408510),	-- Water Shield [Season of Discovery]
+					SpellName(324),		-- Lightning Shield
+					SpellName(974),		-- Earth Shield [Season of Discovery]
+				},
+				["combat"] = true,
+				["instance"] = true,
+				["pvp"] = true,
+				-- ["level"] = 8,
+			},
+			[2] = {	-- Main Hand Weapon Enchant group
 				["spells"] = {
 					SpellName(8232),	-- Windfury Weapon
 					SpellName(8017),	-- Rockbiter Weapon
@@ -455,7 +471,7 @@ if C.reminder.solo_buffs_enable == true then
 				["instance"] = true,
 				["pvp"] = true,
 			},
-			[2] = {	-- Off-Hand Weapon Enchant group
+			[3] = {	-- Off-Hand Weapon Enchant group
 				["spells"] = {
 					SpellName(8232),	-- Windfury Weapon
 					SpellName(8017),	-- Rockbiter Weapon

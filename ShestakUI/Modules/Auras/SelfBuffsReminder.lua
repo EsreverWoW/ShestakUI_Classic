@@ -128,33 +128,36 @@ local function OnEvent(self, event)
 end
 
 for i = 1, #tab do
-	local frame = CreateFrame("Frame", "ReminderFrame"..i, UIParent)
-	frame:CreatePanel("Default", C.reminder.solo_buffs_size, C.reminder.solo_buffs_size, unpack(C.position.self_buffs))
-	frame:SetFrameLevel(6)
-	frame.id = i
+	-- Skip shields group for Shaman's in Vanilla when not playing SoD
+	if not T.Vanilla or T.SoD or (T.Vanilla and (T.class ~= "SHAMAN" or i ~= 1)) then
+		local frame = CreateFrame("Frame", "ReminderFrame"..i, UIParent)
+		frame:CreatePanel("Default", C.reminder.solo_buffs_size, C.reminder.solo_buffs_size, unpack(C.position.self_buffs))
+		frame:SetFrameLevel(6)
+		frame.id = i
 
-	frame.icon = frame:CreateTexture(nil, "OVERLAY")
-	frame.icon:CropIcon()
-	frame.icon:SetSize(C.reminder.solo_buffs_size, C.reminder.solo_buffs_size)
+		frame.icon = frame:CreateTexture(nil, "OVERLAY")
+		frame.icon:CropIcon()
+		frame.icon:SetSize(C.reminder.solo_buffs_size, C.reminder.solo_buffs_size)
 
-	frame:Hide()
+		frame:Hide()
 
-	frame:RegisterUnitEvent("UNIT_AURA", "player", "")
-	frame:RegisterEvent("PLAYER_LOGIN")
-	frame:RegisterEvent("PLAYER_REGEN_ENABLED")
-	frame:RegisterEvent("PLAYER_REGEN_DISABLED")
-	frame:RegisterEvent("ZONE_CHANGED_NEW_AREA")
-	frame:RegisterEvent("UNIT_ENTERED_VEHICLE")
-	frame:RegisterEvent("UNIT_EXITED_VEHICLE")
-	frame:SetScript("OnEvent", OnEvent)
-	frame:SetScript("OnUpdate", function(self)
-		if not self.icon:GetTexture() then
-			self:Hide()
-		end
-	end)
-	frame:SetScript("OnShow", function(self)
-		if not self.icon:GetTexture() then
-			self:Hide()
-		end
-	end)
+		frame:RegisterUnitEvent("UNIT_AURA", "player", "")
+		frame:RegisterEvent("PLAYER_LOGIN")
+		frame:RegisterEvent("PLAYER_REGEN_ENABLED")
+		frame:RegisterEvent("PLAYER_REGEN_DISABLED")
+		frame:RegisterEvent("ZONE_CHANGED_NEW_AREA")
+		frame:RegisterEvent("UNIT_ENTERED_VEHICLE")
+		frame:RegisterEvent("UNIT_EXITED_VEHICLE")
+		frame:SetScript("OnEvent", OnEvent)
+		frame:SetScript("OnUpdate", function(self)
+			if not self.icon:GetTexture() then
+				self:Hide()
+			end
+		end)
+		frame:SetScript("OnShow", function(self)
+			if not self.icon:GetTexture() then
+				self:Hide()
+			end
+		end)
+	end
 end

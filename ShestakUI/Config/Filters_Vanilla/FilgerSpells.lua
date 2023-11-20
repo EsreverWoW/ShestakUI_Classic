@@ -149,6 +149,8 @@ C["filger_spells"] = {
 			{spellID = 16689, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Nature's Swiftness
 			{spellID = 17116, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Savage Roar [Season of Discovery]
+			{spellID = 407988, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Tiger's Fury
 			{spellID = 5217, unitID = "player", caster = "player", filter = "BUFF"},
 		},
@@ -164,6 +166,8 @@ C["filger_spells"] = {
 			-- Buffs
 			-- Clearcasting [Omen of Clarity]
 			{spellID = 16870, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Fury of Stormrage [Season of Discovery]
+			{spellID = 414800, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Trinkets
 			-- Class
@@ -283,6 +287,12 @@ C["filger_spells"] = {
 			-- {spellID = 16914, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Insect Swarm
 			{spellID = 5570, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Lacerate [Season of Discovery]
+			{spellID = 414644, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Mangle (Bear) [Season of Discovery]
+			{spellID = 407995, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Mangle (Cat) [Season of Discovery]
+			-- {spellID = 407993, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Moonfire
 			{spellID = 8921, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Pounce r1
@@ -299,6 +309,12 @@ C["filger_spells"] = {
 			{spellID = 1079, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Soothe Animal
 			{spellID = 2908, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Sunfire [Season of Discovery]
+			{spellID = 414684, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Sunfire (Bear) [Season of Discovery]
+			-- {spellID = 414687, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Sunfire (Cat) [Season of Discovery]
+			-- {spellID = 414689, unitID = "target", caster = "player", filter = "DEBUFF"},
 
 			-- Trinket Effects
 		},
@@ -315,10 +331,16 @@ C["filger_spells"] = {
 
 			-- Abolish Poison
 			{spellID = 2893, unitID = "target", caster = "player", filter = "BUFF"},
+			-- Lifebloom [Season of Discovery]
+			{spellID = 408124, unitID = "target", caster = "player", filter = "BUFF"},
+			-- Living Seed [Season of Discovery]
+			{spellID = 414680, unitID = "target", caster = "player", filter = "BUFF"},
 			-- Regrowth
 			{spellID = 8936, unitID = "target", caster = "player", filter = "BUFF"},
 			-- Rejuvenation
 			{spellID = 774, unitID = "target", caster = "player", filter = "BUFF"},
+			-- Wild Growth [Season of Discovery]
+			{spellID = 408120, unitID = "target", caster = "player", filter = "BUFF"},
 
 			-- Trinket Effects
 			-- Persistent Shield (Absorb, Use) [Scarab Brooch]
@@ -396,6 +418,8 @@ C["filger_spells"] = {
 			{spellID = 16914, filter = "CD"},
 			-- Innervate
 			{spellID = 29166, filter = "CD"},
+			-- Mangle (Bear) [Season of Discovery]
+			{spellID = 407995, filter = "CD"},
 			-- Nature's Grasp
 			{spellID = 16689, filter = "CD"},
 			-- Nature's Swiftness
@@ -404,12 +428,18 @@ C["filger_spells"] = {
 			{spellID = 5215, filter = "CD"},
 			-- Rebirth
 			{spellID = 20484, filter = "CD"},
+			-- Skull Bash [Season of Discovery]
+			{spellID = 410176, filter = "CD"},
+			-- Starsurge [Season of Discovery]
+			{spellID = 417157, filter = "CD"},
 			-- Swiftmend
 			{spellID = 18562, filter = "CD"},
 			-- Tiger's Fury
 			{spellID = 5217, filter = "CD"},
 			-- Tranquility
 			{spellID = 740, filter = "CD"},
+			-- Wild Growth [Season of Discovery]
+			{spellID = 408120, filter = "CD"},
 
 			-- Racial
 			-- Shadowmeld (Night Elf)
@@ -474,10 +504,14 @@ C["filger_spells"] = {
 			-- {spellID = 1539, unitID = "pet", caster = "player", filter = "BUFF"},
 			-- Feign Death
 			{spellID = 5384, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Flanking Strike [Season of Discovery]
+			{spellID = 415320, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Frenzy Effect
 			{spellID = 19615, unitID = "pet", caster = "all", filter = "BUFF"},
 			-- Furious Howl (Wolf)
 			{spellID = 24604, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Kill Command [Season of Discovery]
+			{spellID = 409418, unitID = "pet", caster = "player", filter = "BUFF"},
 			-- Mend Pet
 			{spellID = 136, unitID = "pet", caster = "player", filter = "BUFF"},
 			-- Prowl (Cat)
@@ -486,6 +520,8 @@ C["filger_spells"] = {
 			{spellID = 3045, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Shell Shield (Turtle)
 			{spellID = 26064, unitID = "pet", caster = "all", filter = "BUFF"},
+			-- Sniper Training [Season of Discovery]
+			{spellID = 415401, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Spirit Bond
 			-- {spellID = 19579, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Tame Beast
@@ -503,6 +539,8 @@ C["filger_spells"] = {
 			Position = {"TOP", P_PROC_ICON_Anchor},
 
 			-- Buffs
+			-- Cobra Strikes [Season of Discovery]
+			{spellID = 425714, unitID = "pet", caster = "player", filter = "BUFF"},
 			-- Quick Shots
 			{spellID = 6150, unitID = "player", caster = "player", filter = "BUFF"},
 
@@ -568,12 +606,16 @@ C["filger_spells"] = {
 			{spellID = 3674, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Charge (Boar)
 			{spellID = 25999, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
+			-- Chimera Shot - Scorpid [Season of Discovery]
+			{spellID = 409495, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Concussive Shot
 			{spellID = 5116, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Counterattack
 			{spellID = 19306, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Entrapment
 			{spellID = 19185, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Explosive Shot [Season of Discovery]
+			{spellID = 409552, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Explosive Trap Effect
 			-- {spellID = 13812, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Flare
@@ -666,6 +708,10 @@ C["filger_spells"] = {
 			{spellID = 19434, filter = "CD"},
 			-- Bestial Wrath
 			{spellID = 19574, filter = "CD"},
+			-- Carve [Season of Discovery]
+			{spellID = 425711, filter = "CD"},
+			-- Chimera Shot [Season of Discovery]
+			{spellID = 409433, filter = "CD"},
 			-- Concussive Shot
 			{spellID = 5116, filter = "CD"},
 			-- Counterattack
@@ -676,10 +722,14 @@ C["filger_spells"] = {
 			{spellID = 781, filter = "CD"},
 			-- Distracting Shot
 			{spellID = 20736, filter = "CD"},
+			-- Explosive Shot [Season of Discovery]
+			{spellID = 409552, filter = "CD"},
 			-- Explosive Trap
 			{spellID = 13813, filter = "CD"},
 			-- Feign Death
 			{spellID = 5384, filter = "CD"},
+			-- Flanking Strike [Season of Discovery]
+			{spellID = 415320, filter = "CD"},
 			-- Flare
 			{spellID = 1543, filter = "CD", absID = true},
 			-- Freezing Trap
@@ -690,6 +740,8 @@ C["filger_spells"] = {
 			{spellID = 13795, filter = "CD"},
 			-- Intimidation
 			{spellID = 19577, filter = "CD", absID = true},
+			-- Kill Command [Season of Discovery]
+			{spellID = 409379, filter = "CD"},
 			-- Mongoose Bite
 			{spellID = 1495, filter = "CD"},
 			-- Multi-Shot
@@ -764,10 +816,18 @@ C["filger_spells"] = {
 			IconSize = C.filger.buffs_size,
 			Position = {"TOP", P_BUFF_ICON_Anchor},
 
+			-- Arcane Blast [Season of Discovery]
+			{spellID = 400573, unitID = "player", caster = "player", filter = "DEBUFF"},
 			-- Arcane Power
 			{spellID = 12042, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Arcane Surge [Season of Discovery]
+			{spellID = 425124, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Combustion
 			{spellID = 28682, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Enlightenment [Season of Discovery]
+			{spellID = 412325, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Enlightenment [Season of Discovery]
+			{spellID = 412326, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Evocation
 			{spellID = 12051, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Fire Ward r1
@@ -794,6 +854,8 @@ C["filger_spells"] = {
 			{spellID = 11426, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Ice Block
 			{spellID = 11958, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Icy Veins [Season of Discovery]
+			{spellID = 429125, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Mana Shield r1
 			{spellID = 1463, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Mana Shield r2
@@ -821,6 +883,8 @@ C["filger_spells"] = {
 			-- Buffs
 			-- Clearcasting [Arcane Concentration]
 			{spellID = 12536, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Fingers of Frost [Season of Discovery]
+			{spellID = 400669, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Item Sets
 			-- Enigma's Answer (Spell Hit, Proc) [Enigma Vestments]
@@ -988,6 +1052,10 @@ C["filger_spells"] = {
 			{spellID = 12654, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Impact
 			{spellID = 12355, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Living Bomb [Season of Discovery]
+			{spellID = 400613, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Living Flame [Season of Discovery]
+			-- {spellID = 401558, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Pyroblast
 			{spellID = 11366, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Winter's Chill
@@ -1001,7 +1069,6 @@ C["filger_spells"] = {
 
 			-- Trinket Effects
 		},
-		--[[
 		{
 			Name = "T_DE/BUFF_BAR",
 			Direction = "UP",
@@ -1012,8 +1079,16 @@ C["filger_spells"] = {
 			IconSize = 25,
 			BarWidth = 186,
 			Position = {"LEFT", T_DE_BUFF_BAR_Anchor},
+
+			-- Mass Regeneration [Season of Discovery]
+			{spellID = 412510, unitID = "target", caster = "player", filter = "BUFF"},
+			-- Rapid Regeneration [Season of Discovery]
+			{spellID = 401460, unitID = "target", caster = "player", filter = "BUFF"},
+			-- Regeneration [Season of Discovery]
+			{spellID = 401417, unitID = "target", caster = "player", filter = "BUFF"},
+			-- Temporal Beacon [Season of Discovery]
+			{spellID = 400735, unitID = "target", caster = "player", filter = "BUFF"},
 		},
-		--]]
 		{
 			Name = "PVE/PVP_CC",
 			Direction = "DOWN",
@@ -1050,6 +1125,8 @@ C["filger_spells"] = {
 			-- Self
 			-- Arcane Power
 			{spellID = 12042, filter = "CD"},
+			-- Arcane Surge [Season of Discovery]
+			{spellID = 425124, filter = "CD"},
 			-- Blast Wave
 			{spellID = 11113, filter = "CD"},
 			-- Blink
@@ -1074,8 +1151,14 @@ C["filger_spells"] = {
 			{spellID = 11426, filter = "CD"},
 			-- Ice Block
 			{spellID = 11958, filter = "CD"},
+			-- Icy Veins [Season of Discovery]
+			{spellID = 429125, filter = "CD"},
+			-- Living Flame [Season of Discovery]
+			{spellID = 401556, filter = "CD"},
 			-- Presence of Mind
 			{spellID = 12043, filter = "CD"},
+			-- Rewind Time [Season of Discovery]
+			{spellID = 401462, filter = "CD"},
 
 			-- Racial
 			-- Berserking (Mana)
@@ -1140,8 +1223,14 @@ C["filger_spells"] = {
 			{spellID = 20927, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Holy Shield r3
 			{spellID = 20928, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Horn of Lordaeron [Season of Discovery]
+			{spellID = 425600, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Inspiration Exemplar [Season of Discovery]
+			-- {spellID = 407880, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Retribution Aura
 			-- {spellID = 7294, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Sacrifice Redeemed [Season of Discovery]
+			{spellID = 407805, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Sanctity Aura
 			-- {spellID = 20218, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Seal of Command
@@ -1150,6 +1239,8 @@ C["filger_spells"] = {
 			{spellID = 20164, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Seal of Light
 			{spellID = 20165, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Seal of Martyrdom [Season of Discovery]
+			{spellID = 407798, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Seal of Righteousness
 			{spellID = 21084, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Seal of Wisdom
@@ -1179,6 +1270,8 @@ C["filger_spells"] = {
 			Position = {"TOP", P_PROC_ICON_Anchor},
 
 			-- Buffs
+			-- Aegis [Season of Discovery]
+			{spellID = 425585, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Reckoning
 			{spellID = 20178, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Redoubt
@@ -1296,10 +1389,14 @@ C["filger_spells"] = {
 			IconSize = C.filger.buffs_size,
 			Position = {"TOP", T_DEBUFF_ICON_Anchor},
 
+			-- Avenger's Shield [Season of Discovery]
+			{spellID = 407669, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Consecration
 			-- {spellID = 26573, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Hammer of Justice
 			{spellID = 853, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Hand of Reckoning [Season of Discovery]
+			{spellID = 407631, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Judgement of Justice
 			{spellID = 20184, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Judgement of Light
@@ -1327,7 +1424,6 @@ C["filger_spells"] = {
 			-- Venomhide Poison
 			{spellID = 14795, unitID = "target", caster = "player", filter = "DEBUFF"},
 		},
-		--[[
 		{
 			Name = "T_DE/BUFF_BAR",
 			Direction = "UP",
@@ -1338,8 +1434,10 @@ C["filger_spells"] = {
 			IconSize = 25,
 			BarWidth = 186,
 			Position = {"LEFT", T_DE_BUFF_BAR_Anchor},
+
+			-- Beacon of Light [Season of Discovery]
+			{spellID = 407613, unitID = "target", caster = "player", filter = "BUFF"},
 		},
-		--]]
 		{
 			Name = "PVE/PVP_CC",
 			Direction = "DOWN",
@@ -1368,6 +1466,8 @@ C["filger_spells"] = {
 			Position = {"TOP", COOLDOWN_Anchor},
 
 			-- Self
+			-- Avenger's Shield [Season of Discovery]
+			{spellID = 407669, filter = "CD"},
 			-- Blessing of Freedom
 			{spellID = 1044, filter = "CD"},
 			-- Blessing of Protection
@@ -1376,30 +1476,44 @@ C["filger_spells"] = {
 			{spellID = 6940, filter = "CD"},
 			-- Consecration
 			{spellID = 26573, filter = "CD"},
+			-- Crusader Strike [Season of Discovery]
+			{spellID = 407676, filter = "CD"},
 			-- Divine Favor
 			{spellID = 20216, filter = "CD"},
 			-- Divine Intervention
 			{spellID = 19752, filter = "CD"},
 			-- Divine Protection
 			{spellID = 498, filter = "CD", absID = true},
+			-- Divine Sacrifice [Season of Discovery]
+			{spellID = 407804, filter = "CD"},
 			-- Divine Shield
 			{spellID = 642, filter = "CD"},
+			-- Divine Storm [Season of Discovery]
+			{spellID = 407778, filter = "CD"},
 			-- Exorcism
 			{spellID = 879, filter = "CD"},
+			-- Exorcism [Season of Discovery]
+			-- {spellID = 415068, filter = "CD"},
 			-- Hammer of Justice
 			{spellID = 853, filter = "CD"},
 			-- Hammer of Wrath
 			{spellID = 24275, filter = "CD"},
+			-- Hand of Reckoning [Season of Discovery]
+			{spellID = 407631, filter = "CD"},
 			-- Holy Shield
 			{spellID = 20925, filter = "CD", absID = true},
 			-- Holy Shock
 			{spellID = 20473, filter = "CD"},
 			-- Holy Wrath
 			{spellID = 2812, filter = "CD"},
+			-- Horn of Lordaeron [Season of Discovery]
+			{spellID = 425600, filter = "CD"},
 			-- Judgement
 			{spellID = 20271, filter = "CD", absID = true},
 			-- Lay on Hands
 			{spellID = 633, filter = "CD"},
+			-- Rebuke [Season of Discovery]
+			{spellID = 425609, filter = "CD"},
 			-- Repentance
 			{spellID = 20066, filter = "CD"},
 			-- Turn Evil
@@ -1460,6 +1574,8 @@ C["filger_spells"] = {
 			{spellID = 588, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Inner Focus
 			{spellID = 14751, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Serendipity [Season of Discovery]
+			{spellID = 413247, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Shadowform
 			{spellID = 15473, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Shadowguard
@@ -1592,6 +1708,10 @@ C["filger_spells"] = {
 			{spellID = 17314, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
 			-- Mind Flay r6
 			{spellID = 18807, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Mind Sear (Primary) [Season of Discovery]
+			{spellID = 413259, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Mind Sear (Secondary) [Season of Discovery]
+			{spellID = 413260, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
 			-- Mind Soothe
 			{spellID = 453, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Mind Vision
@@ -1610,6 +1730,8 @@ C["filger_spells"] = {
 			{spellID = 2943, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Vampiric Embrace
 			{spellID = 15286, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Void Plague [Season of Discovery]
+			{spellID = 425204, unitID = "target", caster = "player", filter = "DEBUFF"},
 
 			-- Trinket Effects
 		},
@@ -1636,6 +1758,8 @@ C["filger_spells"] = {
 			{spellID = 7001, unitID = "target", caster = "player", filter = "BUFF"},
 			-- Power Word: Shield
 			{spellID = 17, unitID = "target", caster = "player", filter = "BUFF"},
+			-- Prayer of Mending [Season of Discovery]
+			{spellID = 401859, unitID = "target", caster = "player", filter = "BUFF"},
 			-- Renew
 			{spellID = 139, unitID = "target", caster = "player", filter = "BUFF"},
 			-- Weakened Soul
@@ -1669,6 +1793,8 @@ C["filger_spells"] = {
 			Position = {"TOP", COOLDOWN_Anchor},
 
 			-- Self
+			-- Circle of Healing [Season of Discovery]
+			{spellID = 401946, filter = "CD"},
 			-- Desperate Prayer
 			{spellID = 13908, filter = "CD"},
 			-- Devouring Plague
@@ -1681,24 +1807,36 @@ C["filger_spells"] = {
 			{spellID = 6346, filter = "CD"},
 			-- Feedback
 			{spellID = 13896, filter = "CD"},
+			-- Homunculi [Season of Discovery]
+			{spellID = 402799, filter = "CD"},
 			-- Inner Focus
 			{spellID = 14751, filter = "CD"},
 			-- Lightwell
 			{spellID = 724, filter = "CD"},
 			-- Mind Blast
 			{spellID = 8092, filter = "CD"},
+			-- Penance [Season of Discovery]
+			{spellID = 402174, filter = "CD"},
 			-- Power Infusion
 			{spellID = 10060, filter = "CD"},
+			-- Power Word: Barrier [Season of Discovery]
+			{spellID = 425207, filter = "CD"},
 			-- Power Word: Shield
 			{spellID = 17, filter = "CD"},
+			-- Prayer of Mending [Season of Discovery]
+			{spellID = 401859, filter = "CD"},
 			-- Psychic Scream
 			{spellID = 8122, filter = "CD"},
+			-- Shadow Word: Death [Season of Discovery]
+			{spellID = 401955, filter = "CD"},
 			-- Silence
 			{spellID = 15487, filter = "CD", absID = true},
 			-- Starshards
 			{spellID = 10797, filter = "CD"},
 			-- Vampiric Embrace
 			{spellID = 15286, filter = "CD"},
+			-- Void Plague [Season of Discovery]
+			{spellID = 425204, filter = "CD"},
 
 			-- Racial
 			-- Berserking (Mana)
@@ -1743,6 +1881,8 @@ C["filger_spells"] = {
 
 			-- Adrenaline Rush
 			{spellID = 13750, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Blade Dance [Season of Discovery]
+			{spellID = 400012, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Blade Flurry
 			{spellID = 13877, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Cold Blood
@@ -1753,6 +1893,8 @@ C["filger_spells"] = {
 			{spellID = 32645, unitID = "399963", caster = "player", filter = "BUFF"},
 			-- Ghostly Strike
 			{spellID = 14278, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Main Gauche [Season of Discovery]
+			{spellID = 424919, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Slice and Dice
 			{spellID = 5171, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Sprint
@@ -1839,6 +1981,8 @@ C["filger_spells"] = {
 			IconSize = C.filger.buffs_size,
 			Position = {"TOP", T_DEBUFF_ICON_Anchor},
 
+			-- Between the Eyes [Season of Discovery]
+			{spellID = 400009, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Cheap Shot
 			{spellID = 1833, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Crippling Poison r1
@@ -1861,10 +2005,14 @@ C["filger_spells"] = {
 			{spellID = 408, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Mind-numbing Poison
 			{spellID = 5760, unitID = "target", caster = "all", filter = "DEBUFF"},
+			-- Quick Draw [Season of Discovery]
+			{spellID = 398196, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Riposte
 			{spellID = 14251, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Rupture
 			{spellID = 1943, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Saber Lash [Season of Discovery]
+			{spellID = 424785, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Wound Poison
 			{spellID = 13218, unitID = "target", caster = "all", filter = "DEBUFF"},
 
@@ -1925,6 +2073,8 @@ C["filger_spells"] = {
 			-- Self
 			-- Adrenaline Rush
 			{spellID = 13750, filter = "CD"},
+			-- Between the Eyes [Season of Discovery]
+			{spellID = 400009, filter = "CD"},
 			-- Blade Flurry
 			{spellID = 13877, filter = "CD"},
 			-- Blind
@@ -1945,6 +2095,8 @@ C["filger_spells"] = {
 			{spellID = 1766, filter = "CD"},
 			-- Kidney Shot
 			{spellID = 408, filter = "CD"},
+			-- Main Gauche [Season of Discovery]
+			{spellID = 424919, filter = "CD"},
 			-- Premeditation
 			{spellID = 14183, filter = "CD"},
 			-- Preparation
@@ -1955,6 +2107,8 @@ C["filger_spells"] = {
 			{spellID = 2983, filter = "CD"},
 			-- Stealth
 			{spellID = 1784, filter = "CD"},
+			-- Tease [Season of Discovery]
+			{spellID = 410412, filter = "CD"},
 			-- Vanish
 			{spellID = 1856, filter = "CD"},
 
@@ -2003,6 +2157,8 @@ C["filger_spells"] = {
 			IconSize = C.filger.buffs_size,
 			Position = {"TOP", P_BUFF_ICON_Anchor},
 
+			-- Ancestral Guidance [Season of Discovery]
+			{spellID = 409324, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Elemental Devastation
 			{spellID = 30165, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Elemental Mastery
@@ -2071,10 +2227,14 @@ C["filger_spells"] = {
 			--]]
 			-- Sentry Totem
 			-- {spellID = 6495, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Shamanistic Rage [Season of Discovery]
+			{spellID = 425336, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Stoneskin Totem
 			-- {spellID = 8072, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Strength of Earth
 			-- {spellID = 8076, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Water Shield [Season of Discovery]
+			{spellID = 408510, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Windwall Totem
 			-- {spellID = 15108, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Wrath of Air Totem
@@ -2094,6 +2254,8 @@ C["filger_spells"] = {
 			{spellID = 16246, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Focused Casting (Eye of the Storm)
 			{spellID = 29063, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Shield Mastery [Season of Discovery]
+			{spellID = 408524, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Item Sets
 			-- Lightning Shield (Mp5, Proc) [The Earthshatterer]
@@ -2243,6 +2405,10 @@ C["filger_spells"] = {
 
 			-- Ancestral Fortitude
 			{spellID = 16177, unitID = "target", caster = "player", filter = "BUFF"},
+			-- Earth Shield [Season of Discovery]
+			{spellID = 974, unitID = "target", caster = "player", filter = "BUFF"},
+			-- Earth Shock (Way of Earth) [Season of Discovery]
+			{spellID = 408681, unitID = "target", caster = "player", filter = "BUFF"},
 			-- Healing Way
 			{spellID = 29203, unitID = "target", caster = "player", filter = "BUFF"},
 			-- Lightning Shield (Special, Proc) [The Ten Storms]
@@ -2283,10 +2449,14 @@ C["filger_spells"] = {
 			Position = {"TOP", COOLDOWN_Anchor},
 
 			-- Self
+			-- Ancestral Guidance [Season of Discovery]
+			{spellID = 409324, filter = "CD"},
 			-- Chain Lightning
 			{spellID = 421, filter = "CD"},
 			-- Earth Shock
 			{spellID = 8042, filter = "CD"},
+			-- Earth Shock (Way of Earth) [Season of Discovery]
+			-- {spellID = 408681, filter = "CD"},
 			-- Earthbind Totem
 			{spellID = 2484, filter = "CD"},
 			-- Elemental Mastery
@@ -2299,12 +2469,22 @@ C["filger_spells"] = {
 			{spellID = 8056, filter = "CD"},
 			-- Grounding Totem
 			{spellID = 8177, filter = "CD"},
+			-- Healing Rain [Season of Discovery]
+			{spellID = 415236, filter = "CD"},
+			-- Lava Burst [Season of Discovery]
+			{spellID = 408490, filter = "CD"},
+			-- Lava Lash [Season of Discovery]
+			{spellID = 408507, filter = "CD"},
 			-- Mana Tide Totem
 			{spellID = 16190, filter = "CD"},
+			-- Molten Blast [Season of Discovery]
+			{spellID = 425339, filter = "CD"},
 			-- Nature's Swiftness
 			{spellID = 16188, filter = "CD"},
 			-- Reincarnation
 			{spellID = 20608, filter = "CD"},
+			-- Shamanistic Rage [Season of Discovery]
+			{spellID = 425336, filter = "CD"},
 			-- Stoneclaw Totem
 			{spellID = 5730, filter = "CD"},
 			-- Stormstrike
@@ -2351,6 +2531,10 @@ C["filger_spells"] = {
 			-- {spellID = 6307, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Consume Shadows (Voidwalker)
 			-- {spellID = 17767, unitID = "pet", caster = "all", filter = "BUFF"},
+			-- Demonic Grace [Season of Discovery]
+			{spellID = 425463, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Demonic Pact [Season of Discovery]
+			-- {spellID = 425467, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Eye of Kilrogg
 			-- {spellID = 126, unitID = "player", caster = "player", filter = "BUFF"},
 			--[[
@@ -2465,6 +2649,8 @@ C["filger_spells"] = {
 
 			-- Aftermath
 			{spellID = 18118, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Charge Stun (Metamorphosis) [Season of Discover]
+			{spellID = 7922, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Corruption r1
 			{spellID = 172, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
 			-- Corruption r2
@@ -2511,6 +2697,8 @@ C["filger_spells"] = {
 			{spellID = 1490, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Death Coil
 			{spellID = 6789, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Demonic Howl (Metamorphosis) [Season of Discovery]
+			{spellID = 412789, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Drain Life
 			{spellID = 689, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Drain Mana
@@ -2519,10 +2707,18 @@ C["filger_spells"] = {
 			{spellID = 1120, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Enslave Demon
 			{spellID = 1098, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Haunt [Season of Discovery]
+			{spellID = 403501, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Howl of Terror
 			{spellID = 5484, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Immolate
 			{spellID = 348, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Incinerate [Season of Discovery]
+			{spellID = 412758, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Lake of Fire [Season of Discovery]
+			-- {spellID = 403650, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Menace (Metamorphosis) [Season of Discovery]
+			{spellID = 403828, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Pyroclasm
 			{spellID = 18093, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Rain of Fire
@@ -2591,20 +2787,36 @@ C["filger_spells"] = {
 			-- Self
 			-- Amplify Curse
 			{spellID = 18288, filter = "CD"},
+			-- Chaos Bolt [Season of Discovery]
+			{spellID = 403629, filter = "CD"},
 			-- Conflagrate
 			{spellID = 17962, filter = "CD"},
 			-- Curse of Doom
 			{spellID = 603, filter = "CD"},
+			-- Curse of Recklessness (Metamorphosis) [Season of Discovery]
+			{spellID = 704, filter = "CD"},
 			-- Death Coil
 			{spellID = 6789, filter = "CD"},
+			-- Demon Charge (Metamorphosis) [Season of Discovery]
+			{spellID = 412788, filter = "CD"},
+			-- Demonic Grace (Metamorphosis) [Season of Discovery]
+			{spellID = 425463, filter = "CD"},
+			-- Demonic Howl (Metamorphosis) [Season of Discovery]
+			{spellID = 412789, filter = "CD"},
+			-- Drain Life [Season of Discovery]
+			{spellID = 403677, filter = "CD"},
 			-- Fel Domination
 			{spellID = 18708, filter = "CD"},
+			-- Haunt [Season of Discovery]
+			{spellID = 403501, filter = "CD"},
 			-- Howl of Terror
 			{spellID = 5484, filter = "CD"},
 			-- Inferno
 			{spellID = 1122, filter = "CD", absID = true},
 			-- Ritual of Doom
 			{spellID = 18540, filter = "CD"},
+			-- Shadow Cleave (Metamorphosis) [Season of Discovery]
+			{spellID = 403835, filter = "CD"},
 			-- Shadow Ward
 			{spellID = 6229, filter = "CD"},
 			-- Shadowburn
@@ -2669,6 +2881,8 @@ C["filger_spells"] = {
 			{spellID = 23885, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Death Wish
 			{spellID = 12328, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Flagellation [Season of Discovery]
+			{spellID = 402906, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Flurry
 			{spellID = 12966, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Last Stand
@@ -2696,6 +2910,8 @@ C["filger_spells"] = {
 			{spellID = 16488, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Enrage
 			{spellID = 12880, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Enrage (Consumed By Rage) [Season of Discovery]
+			{spellID = 425415, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 
 			-- Item Sets
 			-- Cheat Death (Special, Proc) [Dreadnaught's Battlegear]
@@ -2920,6 +3136,8 @@ C["filger_spells"] = {
 			{spellID = 7384, filter = "CD"},
 			-- Pummel
 			{spellID = 6552, filter = "CD", absID = true},
+			-- Raging Blow [Season of Discovery]
+			{spellID = 402911, filter = "CD"},
 			-- Recklessness
 			{spellID = 1719, filter = "CD"},
 			-- Retaliation
@@ -2940,6 +3158,8 @@ C["filger_spells"] = {
 			{spellID = 355, filter = "CD"},
 			-- Thunder Clap
 			{spellID = 6343, filter = "CD", absID = true},
+			-- Victory Rush [Season of Discovery]
+			{spellID = 402927, filter = "CD"},
 			-- Whirlwind
 			{spellID = 1680, filter = "CD", absID = true},
 
@@ -3073,14 +3293,20 @@ C["filger_spells"] = {
 			{spellID = 1022, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Blessing of Sacrifice
 			{spellID = 6940, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Divine Sacrifice [Season of Discovery]
+			{spellID = 407804, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Lay on Hands (Armor Bonus)
 			{spellID = 20233, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Power Word: Barrier [Season of Discovery]
+			{spellID = 425205, unitID = "player", caster = "all", filter = "BUFF"},
 
 			-- Other
 			-- Innervate
 			{spellID = 29166, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Mana Tide
 			{spellID = 16191, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Beacon of Light [Season of Discovery]
+			{spellID = 407613, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Blessing of Freedom
 			{spellID = 1044, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Fear Ward
@@ -3095,6 +3321,8 @@ C["filger_spells"] = {
 			{spellID = 1706, unitID = "player", caster = "all", filter = "BUFF", absID = true},
 			-- Power Infusion
 			{spellID = 10060, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Earth Shield [Season of Discovery]
+			{spellID = 974, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Soulstone Resurrection
 			-- {spellID = 20707, unitID = "player", caster = "all", filter = "BUFF"},
 
@@ -3104,6 +3332,10 @@ C["filger_spells"] = {
 
 			-- Raids: Classic
 			-- TODO: Populate this
+
+			-- Season of Discovery
+			-- Riptide Bubbles [Baron Aquanis]
+			{spellID = 405688, unitID = "player", caster = "all", filter = "BUFF"},
 		},
 		{
 			Name = "PVE/PVP_DEBUFF",
@@ -3136,6 +3368,8 @@ C["filger_spells"] = {
 			-- Hunter
 			-- Charge (Boar)
 			{spellID = 25999, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
+			-- Chimera Shot - Scorpid [Season of Discovery]
+			{spellID = 409495, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Freezing Trap Effect
 			{spellID = 3355, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Improved Concussive Shot
@@ -3202,6 +3436,8 @@ C["filger_spells"] = {
 			{spellID = 9484, unitID = "player", caster = "all", filter = "DEBUFF"},
 
 			-- Rogue
+			-- Between the Eyes [Season of Discovery]
+			{spellID = 400009, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Blind
 			{spellID = 2094, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
 			-- Cheap Shot
@@ -3402,6 +3638,8 @@ C["filger_spells"] = {
 			{spellID = 10181, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
 			-- Frostbolt r11
 			{spellID = 25304, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
+			-- Avenger's Shield [Season of Discovery]
+			{spellID = 407669, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Mind Flay r1
 			{spellID = 15407, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
 			-- Mind Flay r2
