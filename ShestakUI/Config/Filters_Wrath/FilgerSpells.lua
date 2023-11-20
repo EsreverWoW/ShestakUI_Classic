@@ -3486,8 +3486,6 @@ C["filger_spells"] = {
 			{spellID = 54428, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Divine Protection
 			{spellID = 498, unitID = "player", caster = "player", filter = "BUFF", absID = true},
-			-- Divine Sacrifice
-			{spellID = 64205, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Divine Shield
 			{spellID = 642, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Fire Resistance Aura
@@ -8815,6 +8813,8 @@ C["filger_spells"] = {
 			{spellID = 31821, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Divine Guardian
 			{spellID = 70940, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Divine Sacrifice
+			{spellID = 64205, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Hand of Protection
 			{spellID = 1022, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Hand of Sacrifice
