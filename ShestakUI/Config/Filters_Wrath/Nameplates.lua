@@ -690,6 +690,15 @@ T.ColorPlate = {
 		["25370"] = color,		-- Sunblade Dusk Priest
 		-- Naxxramas
 		["16385"] = color,		-- Lightning Totem
+		-- Ulduar
+		["33836"] = color,		-- Bomb Bot
+		-- TOC / TOGC
+		["5925"] = color,		-- Grounding Totem
+		["34686"] = color,		-- Healing Stream Totem
+		["34687"] = color,		-- Searing Totem
+		["31129"] = color,		-- Strength of Earth Totem VIII
+		["5913"] = color,		-- Tremor Totem
+		["6112"] = color,		-- Windfury Totem
 	-- Dungeons
 		-- Hellfire Ramparts
 		["17478"] = color,		-- Bleeding Hollow Scryer
@@ -738,13 +747,4 @@ T.ColorPlate = {
 		["19509"] = color,		-- Sunseeker Harvester
 		["19633"] = color,		-- Bloodwarder Mender
 		-- Magisters' Terrace
-		-- Ulduar
-		["33836"] = color,		-- Bomb Bot
-		-- TOC / TOGC
-		["5925"] = color,		-- Grounding Totem
-		["34686"] = color,		-- Healing Stream Totem
-		["34687"] = color,		-- Searing Totem
-		["31129"] = color,		-- Strength of Earth Totem VIII
-		["5913"] = color,		-- Tremor Totem
-		["6112"] = color,		-- Windfury Totem
 }

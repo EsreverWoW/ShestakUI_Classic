@@ -491,4 +491,9 @@ T.ColorPlate = {
 	-- PvP
 	["5925"] = color,		-- Grounding Totem
 	-- Raid
+		-- Zul'Gurub
+		["15112"] = color,		-- Brain Wash Totem
+		-- Naxxramas
+		["16385"] = color,		-- Lightning Totem
+	-- Dungeons
 }
