@@ -40,7 +40,7 @@ License: MIT
 -- @class file
 -- @name LibRangeCheck-3.0
 local MAJOR_VERSION = "LibRangeCheck-3.0"
-local MINOR_VERSION = 3
+local MINOR_VERSION = 4
 
 local lib, oldminor = LibStub:NewLibrary(MAJOR_VERSION, MINOR_VERSION)
 if not lib then
@@ -638,7 +638,7 @@ local function getCheckerForSpellWithMinRange(spellIdx, minRange, range, spellLi
     end
     local minRangeChecker = findMinRangeChecker(minRange, range, spellList)
     if minRangeChecker then
-        checker = function()
+        checker = function(unit)
             if IsSpellInRange(spellIdx, BOOKTYPE_SPELL, unit) == 1 then
                 return true
             elseif minRangeChecker(unit) then
