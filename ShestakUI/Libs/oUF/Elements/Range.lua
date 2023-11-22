@@ -20,13 +20,12 @@ local function Update(self, event)
 		element:PreUpdate()
 	end
 
-	local minRange, maxRange, inRange, checkedRange
+	local inRange, checkedRange
 	local connected = UnitIsConnected(unit)
 	if(connected) then
 		if(LibRangeCheck) then
 			-- GetRange(unit, checkVisible, noItems)
-			minRange, maxRange = LibRangeCheck:GetRange(unit, true, true)
-			inRange = not minRange or maxRange
+			_, inRange = LibRangeCheck:GetRange(unit, true, true)
 		else
 			inRange, checkedRange = UnitInRange(unit)
 		end
