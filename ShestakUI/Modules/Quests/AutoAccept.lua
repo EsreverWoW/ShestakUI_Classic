@@ -240,8 +240,8 @@ function ns.GetNPCID(unit)
 end
 
 function ns.ShouldAcceptTrivialQuests()
-	for index = 1, GetNumTrackingTypes() do
-		local name, _, isActive = GetTrackingInfo(index)
+	for index = 1, C_Minimap.GetNumTrackingTypes() do
+		local name, _, isActive = C_Minimap.GetTrackingInfo(index)
 		if name == MINIMAP_TRACKING_TRIVIAL_QUESTS then
 			return isActive
 		end
@@ -293,7 +293,7 @@ local function IsQuestIgnored(questID)
 		return true
 	end
 
-	local questTitle = tonumber(questID) and C_QuestLog.GetTitleForQuestID(questID) or ''
+	local questTitle = tonumber(questID) and (T.Classic and C_QuestLog.GetQuestInfo or C_QuestLog.GetTitleForQuestID)(questID) or ''
 	for key in next, QuickQuestDB.blocklist.quests do
 		if key == questID or questTitle:lower():find(tostring(key):lower()) then
 			return true
@@ -385,8 +385,8 @@ EventHandler:Register('GOSSIP_SHOW', function()
 	-- turn in all completed quests
 	for index, info in next, C_GossipInfo.GetActiveQuests() do
 		if not IsQuestIgnored(info.questID) then
-			if info.isComplete and not C_QuestLog.IsWorldQuest(info.questID) then
-				C_GossipInfo.SelectActiveQuest(index)
+			if info.isComplete and (T.Classic or not C_QuestLog.IsWorldQuest(info.questID)) then
+				C_GossipInfo.SelectActiveQuest(T.Classic and info.questID or index)
 			end
 		end
 	end
@@ -395,42 +395,44 @@ EventHandler:Register('GOSSIP_SHOW', function()
 	for index, info in next, C_GossipInfo.GetAvailableQuests() do
 		if not IsQuestIgnored(info.questID) then
 			if not info.isTrivial or ns.ShouldAcceptTrivialQuests() then
-				C_GossipInfo.SelectAvailableQuest(index)
+				C_GossipInfo.SelectAvailableQuest(T.Classic and info.questID or index)
 			end
 		end
 	end
 end)
 
-EventHandler:Register('QUEST_GREETING', function()
-	-- triggered when the player interacts with an NPC that hands in/out quests
-	if paused then
-		return
-	end
+if T.Cata or T.Mainline then
+	EventHandler:Register('QUEST_GREETING', function()
+		-- triggered when the player interacts with an NPC that hands in/out quests
+		if paused then
+			return
+		end
 
-	if QuickQuestDB.blocklist.npcs[ns.GetNPCID()] then
-		return
-	end
+		if QuickQuestDB.blocklist.npcs[ns.GetNPCID()] then
+			return
+		end
 
-	-- turn in all completed quests
-	for index = 1, GetNumActiveQuests() do
-		if not IsQuestIgnored(GetActiveQuestID(index)) then
-			local _, isComplete = GetActiveTitle(index)
-			if isComplete and not C_QuestLog.IsWorldQuest(GetActiveQuestID(index)) then
-				SelectActiveQuest(index)
+		-- turn in all completed quests
+		for index = 1, GetNumActiveQuests() do
+			if not IsQuestIgnored(GetActiveQuestID(index)) then
+				local _, isComplete = GetActiveTitle(index)
+				if isComplete and not C_QuestLog.IsWorldQuest(GetActiveQuestID(index)) then
+					SelectActiveQuest(index)
+				end
 			end
 		end
-	end
 
-	-- accept all available quests
-	for index = 1, GetNumAvailableQuests() do
-		local isTrivial, _, _, _, questID = GetAvailableQuestInfo(index)
-		if not IsQuestIgnored(questID) then
-			if not isTrivial or ns.ShouldAcceptTrivialQuests() then
-				SelectAvailableQuest(index)
+		-- accept all available quests
+		for index = 1, GetNumAvailableQuests() do
+			local isTrivial, _, _, _, questID = GetAvailableQuestInfo(index)
+			if not IsQuestIgnored(questID) then
+				if not isTrivial or ns.ShouldAcceptTrivialQuests() then
+					SelectAvailableQuest(index)
+				end
 			end
 		end
-	end
-end)
+	end)
+end
 
 EventHandler:Register('QUEST_DETAIL', function(questItemID)
 	-- triggered when the information about an available quest is available
@@ -438,18 +440,26 @@ EventHandler:Register('QUEST_DETAIL', function(questItemID)
 		return
 	end
 
-	if QuestIsFromAreaTrigger() then
-		-- this type of quest is automatically accepted, but the dialogue is presented in a way that
-		-- the player seems to have a choice to decline it, which they don't, so just accept it
-		AcceptQuest()
-	elseif QuestGetAutoAccept() then
-		-- this type of quest is automatically accepted, but the dialogue persists
-		AcknowledgeAutoAcceptQuest()
-	elseif not C_QuestLog.IsQuestTrivial(GetQuestID()) or ns.ShouldAcceptTrivialQuests() then
+	if T.Classic then
 		if IsQuestIgnored(GetQuestID()) then
 			CloseQuest()
 		else
 			AcceptQuest()
+		end
+	else
+		if QuestIsFromAreaTrigger() then
+			-- this type of quest is automatically accepted, but the dialogue is presented in a way that
+			-- the player seems to have a choice to decline it, which they don't, so just accept it
+			AcceptQuest()
+		elseif QuestGetAutoAccept() then
+			-- this type of quest is automatically accepted, but the dialogue persists
+			AcknowledgeAutoAcceptQuest()
+		elseif not C_QuestLog.IsQuestTrivial(GetQuestID()) or ns.ShouldAcceptTrivialQuests() then
+			if IsQuestIgnored(GetQuestID()) then
+				CloseQuest()
+			else
+				AcceptQuest()
+			end
 		end
 	end
 end)
@@ -546,36 +556,38 @@ EventHandler:Register('QUEST_COMPLETE', function()
 	EventHandler:Unregister('QUEST_ITEM_UPDATE', 'QUEST_COMPLETE')
 end)
 
-EventHandler:Register('QUEST_WATCH_LIST_CHANGED', function()
-	-- triggered when the player's quest log has been altered
-	if paused then
-		return
-	end
-
-	-- check for quest popups whenever the quest log is updated, which also happens on login, and
-	-- when the player loots an item that starts a quest
-	if GetNumAutoQuestPopUps() > 0 then
-		if UnitIsDeadOrGhost('player') then
-			-- can't accept quests while we're dead
-			EventHandler:Register('PLAYER_REGEN_ENABLED', 'QUEST_WATCH_LIST_CHANGED')
+if T.Cata or T.Mainline then
+	EventHandler:Register('QUEST_WATCH_LIST_CHANGED', function()
+		-- triggered when the player's quest log has been altered
+		if paused then
 			return
 		end
 
-		EventHandler:Unregister('PLAYER_REGEN_ENABLED', 'QUEST_WATCH_LIST_CHANGED')
+		-- check for quest popups whenever the quest log is updated, which also happens on login, and
+		-- when the player loots an item that starts a quest
+		if GetNumAutoQuestPopUps() > 0 then
+			if UnitIsDeadOrGhost('player') then
+				-- can't accept quests while we're dead
+				EventHandler:Register('PLAYER_REGEN_ENABLED', 'QUEST_WATCH_LIST_CHANGED')
+				return
+			end
 
-		-- this is considered an intrusive action, as we're modifying the UI
-		local questID, questType = GetAutoQuestPopUp(1)
-		if questType == 'OFFER' then
-			ShowQuestOffer(questID)
-		else
-			ShowQuestComplete(questID)
+			EventHandler:Unregister('PLAYER_REGEN_ENABLED', 'QUEST_WATCH_LIST_CHANGED')
+
+			-- this is considered an intrusive action, as we're modifying the UI
+			local questID, questType = GetAutoQuestPopUp(1)
+			if questType == 'OFFER' then
+				ShowQuestOffer(questID)
+			else
+				ShowQuestComplete(questID)
+			end
+
+			-- remove the popup once accepted/completed, the game logic doesn't handle this,
+			-- but this calls FrameXML API which might cause taints, we'll see
+			AutoQuestPopupTracker_RemovePopUp(questID)
 		end
-
-		-- remove the popup once accepted/completed, the game logic doesn't handle this,
-		-- but this calls FrameXML API which might cause taints, we'll see
-		AutoQuestPopupTracker_RemovePopUp(questID)
-	end
-end)
+	end)
+end
 
 EventHandler:Register('QUEST_ACCEPT_CONFIRM', function()
 	-- triggered when a quest is shared in the party, but requires confirmation (like escorts)
