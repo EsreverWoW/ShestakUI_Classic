@@ -52,22 +52,24 @@ else
 	hooksecurefunc(MainMenuBarVehicleLeaveButton, "Update", MainMenuBarVehicleLeaveButtonUpdateHook)
 end
 
-vehicle:RegisterEvent("PLAYER_ENTERING_WORLD")
-vehicle:RegisterEvent("UPDATE_BONUS_ACTIONBAR")
-vehicle:RegisterEvent("UPDATE_MULTI_CAST_ACTIONBAR")
-vehicle:RegisterEvent("UNIT_ENTERED_VEHICLE")
-vehicle:RegisterEvent("UNIT_EXITED_VEHICLE")
-vehicle:RegisterEvent("VEHICLE_UPDATE")
-vehicle:SetScript("OnEvent", function(self)
-	if UnitHasVehicleUI("player") then
-		self:SetScript("OnClick", function()
-			VehicleExit()
-		end)
-		self:Show()
-	else
-		self:Hide()
-	end
-end)
+if T.Wrath then
+	vehicle:RegisterEvent("PLAYER_ENTERING_WORLD")
+	vehicle:RegisterEvent("UPDATE_BONUS_ACTIONBAR")
+	vehicle:RegisterEvent("UPDATE_MULTI_CAST_ACTIONBAR")
+	vehicle:RegisterEvent("UNIT_ENTERED_VEHICLE")
+	vehicle:RegisterEvent("UNIT_EXITED_VEHICLE")
+	vehicle:RegisterEvent("VEHICLE_UPDATE")
+	vehicle:SetScript("OnEvent", function(self)
+		if UnitHasVehicleUI("player") then
+			self:SetScript("OnClick", function()
+				VehicleExit()
+			end)
+			self:Show()
+		else
+			self:Hide()
+		end
+	end)
+end
 
 local function PossessBarUpdateHook()
 	for i = 1, NUM_POSSESS_SLOTS do
