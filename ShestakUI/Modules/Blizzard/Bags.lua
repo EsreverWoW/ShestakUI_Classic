@@ -700,7 +700,7 @@ function Stuffing:SlotNew(bag, slot)
 		ret.frame:StyleButton()
 		ret.frame:SetTemplate("Default")
 		ret.frame:SetNormalTexture(0)
-		ret.frame:SetFrameStrata("HIGH")
+		ret.frame:SetFrameStrata("MEDIUM")
 
 		ret.icon = _G[ret.frame:GetName().."IconTexture"]
 		ret.icon:CropIcon()
@@ -992,8 +992,11 @@ function Stuffing:CreateBagFrame(w)
 	end
 
 	if w == "Bank" then
+		-- Set frame level to be higher than other bags
+		f:SetFrameLevel(f:GetFrameLevel() + 3)
+
+		-- Reagent button
 		if T.Mainline then
-			-- Reagent button
 			f.b_reagent = CreateFrame("Button", "StuffingReagentButton"..w, f)
 			f.b_reagent:SetSize(105, 20)
 			f.b_reagent:SetPoint("TOPLEFT", 10, -4)

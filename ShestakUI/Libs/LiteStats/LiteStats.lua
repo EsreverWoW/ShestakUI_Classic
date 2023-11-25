@@ -11,7 +11,7 @@ local tthead = {r = 0.40, g = 0.78, b = 1}	-- Headers
 local ttsubh = {r = 0.75, g = 0.90, b = 1}	-- Subheaders
 
 -- Strata/Level for text objects
-local strata, level = "MEDIUM", 20
+local strata, level = "LOW", 20
 
 -- Globals
 local profiles = LPSTAT_PROFILES
@@ -175,7 +175,7 @@ local function Inject(name, stat)
 		anchor_to = m.anchor_to, anchor_from = m.anchor_from,
 		x_off = m.x_off, y_off = m.y_off,
 		height = m.height, width = m.width,
-		strata = m.strata or strata, level = level
+		strata = m.strata or strata, level = m.level or level
 	} do if not stat[k] then stat[k] = v end end
 	if not stat.text then stat.text = {} end
 
