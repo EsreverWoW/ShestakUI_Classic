@@ -1617,6 +1617,14 @@ if coords.enabled then
 			else
 				ToggleFrame(WorldMapFrame)
 			end
+		end,
+		OnEnter = function()
+			if location.enabled then
+				LP_Location.hovered, LP_Location.init = true, true
+				GameTooltip:SetOwner(LP_Location, "ANCHOR_NONE")
+				GameTooltip:ClearAllPoints()
+				GameTooltip:SetPoint(modules.Location.tip_anchor, modules.Location.tip_frame, modules.Location.tip_x, modules.Location.tip_y)
+			end
 		end
 	})
 end
