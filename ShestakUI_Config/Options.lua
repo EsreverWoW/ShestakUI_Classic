@@ -1525,6 +1525,9 @@ do
 
 	local bubble_font_size = ns.CreateNumberSlider(parent, "bubble_font_size", nil, nil, 10, 24, 1, true, CHAT_BUBBLES_TEXT)
 	bubble_font_size:SetPoint("TOPLEFT", tooltip_header_font_size, "BOTTOMLEFT", 0, -20)
+
+	local quest_tracker_font_mult = ns.CreateNumberSlider(parent, "quest_tracker_font_mult", nil, nil, 1, 1.7, 0.05, true)
+	quest_tracker_font_mult:SetPoint("LEFT", bubble_font_size, "RIGHT", 120, 0)
 end
 
 -- Skins
@@ -2178,6 +2181,9 @@ do
 	local player_auras = ns.CreateCheckBox(parent, "player_auras", L_GUI_AURA_PLAYER_AURAS)
 	player_auras:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -10)
 
+	local player_buff_mouseover = ns.CreateCheckBox(parent, "player_buff_mouseover", L_GUI_ACTIONBAR_PETBAR_MOUSEOVER)
+	player_buff_mouseover:SetPoint("LEFT", player_auras, "RIGHT", 320, 0)
+
 	local classcolor_border = ns.CreateCheckBox(parent, "classcolor_border", L_GUI_AURA_CLASSCOLOR_BORDER)
 	classcolor_border:SetPoint("TOPLEFT", player_auras, "BOTTOMLEFT", 0, 0)
 
@@ -2302,6 +2308,9 @@ do
 
 	local stancebar_mouseover = ns.CreateCheckBox(parent, "stancebar_mouseover", L_GUI_ACTIONBAR_STANCEBAR_MOUSEOVER)
 	stancebar_mouseover:SetPoint("TOPLEFT", stancebar_horizontal, "BOTTOMLEFT", 20, 0)
+
+	local stancebar_mouseover_alpha = ns.CreateNumberSlider(parent, "stancebar_mouseover_alpha", nil, nil, 0, 0.7, 0.1, true, L.nameplate_alpha)
+	stancebar_mouseover_alpha:SetPoint("LEFT", stancebar_mouseover, "RIGHT", 224, 0)
 
 	-- stancebar_horizontal.children = {stancebar_mouseover}
 

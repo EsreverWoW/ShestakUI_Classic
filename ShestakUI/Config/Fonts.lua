@@ -112,6 +112,7 @@ C["font"] = {
 	["tooltip_header_font_size"] = 13,
 	["tooltip_font_size"] = 11,
 	["bubble_font_size"] = 14,
+	["quest_tracker_font_mult"] = 1,
 }
 
 C["normal_font"] = {

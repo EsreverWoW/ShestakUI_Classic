@@ -186,9 +186,9 @@ if C.actionbar.stancebar_mouseover == true and (C.actionbar.stancebar_horizontal
 		StanceBarAnchor:SetScript("OnLeave", function() if not HoverBind.enabled then StanceBarMouseOver(0) end end)
 		for i = 1, 10 do
 			local b = _G["StanceButton"..i]
-			b:SetAlpha(0)
+			b:SetAlpha(C.actionbar.stancebar_mouseover_alpha)
 			b:HookScript("OnEnter", function() StanceBarMouseOver(1) end)
-			b:HookScript("OnLeave", function() if not HoverBind.enabled then StanceBarMouseOver(0) end end)
+			b:HookScript("OnLeave", function() if not HoverBind.enabled then StanceBarMouseOver(C.actionbar.stancebar_mouseover_alpha) end end)
 		end
 	end
 end

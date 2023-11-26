@@ -249,6 +249,7 @@ end
 ----------------------------------------------------------------------------------------
 C["aura"] = {
 	["player_buff_size"] = 25,					-- Player buffs size
+	["player_buff_mouseover"] = false,			-- Player buffs on mouseover
 	["debuff_size"] = 25,						-- Debuffs size on unitframes
 	["show_spiral"] = false,					-- Spiral on aura icons
 	["show_timer"] = true,						-- Show cooldown timer on aura icons
@@ -296,6 +297,7 @@ C["actionbar"] = {
 	["stancebar_hide"] = false,					-- Hide stance bar
 	["stancebar_horizontal"] = true,			-- Enable horizontal stance bar
 	["stancebar_mouseover"] = true,				-- Stance bar on mouseover (only for horizontal stance bar)
+	["stancebar_mouseover_alpha"] = 0,			-- Stance bar mouseover alpha
 	-- MicroMenu
 	["micromenu"] = false,						-- Enable micro menu
 	["micromenu_mouseover"] = false,			-- Micro menu on mouseover

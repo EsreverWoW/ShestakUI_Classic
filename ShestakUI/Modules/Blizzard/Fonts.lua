@@ -119,6 +119,12 @@ frame:SetScript("OnEvent", function(_, _, addon)
 	SetFont(PVPArenaTextString, NORMAL, 22, "THINOUTLINE")
 	SetFont(QuestMapRewardsFont, NORMAL, 12, nil, nil, nil, nil, 0, 0, 0, 1, -1)
 	SetFont(NumberFontNormalSmall, NORMAL, 11, "OUTLINE")
+
+	-- Quest tracker
+	if C.font.quest_tracker_font_mult > 1 then
+		SetFont(GameFontNormalMed2, NORMAL, 13 * C.font.quest_tracker_font_mult) -- Quest tracker
+		SetFont(ObjectiveFont, NORMAL, 13 * C.font.quest_tracker_font_mult) -- Quest title and objectives
+	end
 end)
 
 -- Registering fonts in LibSharedMedia

@@ -5,6 +5,7 @@ if C.aura.player_auras ~= true then return end
 --	Style player buff(by Tukz)
 ----------------------------------------------------------------------------------------
 local rowbuffs = 16
+local alpha = 0
 
 local GetFormattedTime = function(s)
 	if s >= 86400 then
@@ -52,6 +53,16 @@ for i = 1, NUM_TEMP_ENCHANT_FRAMES do
 	duration:SetDrawLayer("ARTWORK")
 	duration:SetFont(C.font.auras_font, C.font.auras_font_size, C.font.auras_font_style)
 	duration:SetShadowOffset(C.font.auras_font_shadow and 1 or 0, C.font.auras_font_shadow and -1 or 0)
+
+	if C.aura.player_buff_mouseover then
+		buff:SetParent(BuffsAnchor)
+		buff:HookScript("OnEnter", function()
+			BuffsAnchor:SetAlpha(1)
+		end)
+		buff:HookScript("OnLeave", function()
+			BuffsAnchor:SetAlpha(alpha)
+		end)
+	end
 
 	charges:ClearAllPoints()
 	charges:SetPoint("BOTTOMLEFT", 1, 0)
@@ -184,4 +195,16 @@ end
 
 hooksecurefunc("AuraButton_UpdateDuration", UpdateDuration)
 
-BuffFrame:SetScript("OnUpdate", nil) -- Disable BuffFrame_OnUpdate that change alpha
+-- Mouseover
+if C.aura.player_buff_mouseover then
+	BuffsAnchor:SetAlpha(alpha)
+	BuffsAnchor:HookScript("OnEnter", function()
+		BuffsAnchor:SetAlpha(1)
+	end)
+	BuffsAnchor:HookScript("OnLeave", function()
+		BuffsAnchor:SetAlpha(alpha)
+	end)
+end
+
+-- Disable BuffFrame_OnUpdate that changes alpha
+BuffFrame:SetScript("OnUpdate", nil)

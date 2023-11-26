@@ -5,6 +5,7 @@ if C.aura.player_auras ~= true then return end
 --	Style player buff(by Tukz)
 ----------------------------------------------------------------------------------------
 local rowbuffs = 16
+local alpha = 0
 
 local GetFormattedTime = function(s)
 	if s >= 86400 then
@@ -77,6 +78,15 @@ hooksecurefunc(BuffFrame.AuraContainer, "UpdateGridLayout", function(self, auras
 			hooksecurefunc(aura, "UpdateDuration", function(aura, timeLeft)
 				UpdateDuration(aura, timeLeft)
 			end)
+			if C.aura.player_buff_mouseover then
+				aura:SetParent(BuffsAnchor)
+				aura:HookScript("OnEnter", function()
+					BuffsAnchor:SetAlpha(1)
+				end)
+				aura:HookScript("OnLeave", function()
+					BuffsAnchor:SetAlpha(alpha)
+				end)
+			end
 			aura.hook = true
 		end
 
@@ -89,6 +99,17 @@ hooksecurefunc(BuffFrame.AuraContainer, "UpdateGridLayout", function(self, auras
 		end
 	end
 end)
+
+-- Mouseover
+if C.aura.player_buff_mouseover then
+	BuffsAnchor:SetAlpha(alpha)
+	BuffsAnchor:HookScript("OnEnter", function()
+		BuffsAnchor:SetAlpha(1)
+	end)
+	BuffsAnchor:HookScript("OnLeave", function()
+		BuffsAnchor:SetAlpha(alpha)
+	end)
+end
 
 -- Hide collapse button
 BuffFrame.CollapseAndExpandButton:Kill()

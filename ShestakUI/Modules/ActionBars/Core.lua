@@ -366,7 +366,7 @@ EventSpiral:SetScript("OnEvent", function()
 	end
 
 	if C.actionbar.stancebar_mouseover == true and C.actionbar.stancebar_horizontal == true and C.actionbar.stancebar_hide ~= true then
-		StanceBarMouseOver(0)
+		StanceBarMouseOver(C.actionbar.stancebar_mouseover_alpha)
 	end
 
 	if C.actionbar.bottombars_mouseover then

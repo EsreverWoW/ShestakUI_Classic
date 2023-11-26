@@ -83,6 +83,7 @@ L.font_subheader_bag = "Bags font"
 L.font_subheader_blizzard = "System font size"
 L.font_tooltip_header_font_size = "Tooltip header"
 L.font_tooltip_font_size = "Tooltip text"
+L.font_quest_tracker_font_mult = "Quest text scale"
 L.font_global_font = "Disable Pixel font"
 
 -- Skins options

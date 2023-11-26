@@ -202,6 +202,7 @@ if IsWetxius then
 	C["aura"].cast_by = true
 	C["actionbar"].toggle_mode = false
 	C["actionbar"].bottombars = 3
+	C["actionbar"].stancebar_mouseover_alpha = 0.3
 	C["tooltip"].hide_combat = true
 	C["tooltip"].rank = false
 	C["tooltip"].spell_id = true

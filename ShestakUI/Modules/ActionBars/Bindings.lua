@@ -268,8 +268,8 @@ SlashCmdList.MOUSEOVERBIND = function()
 				if C.actionbar.rightbars_mouseover == true then
 					RightBarMouseOver(0)
 				end
-				if C.actionbar.stancebar_mouseover == true then
-					StanceBarMouseOver(0)
+				if C.actionbar.stancebar_mouseover == true and C.actionbar.stancebar_horizontal == true and C.actionbar.stancebar_hide ~= true then
+					StanceBarMouseOver(C.actionbar.stancebar_mouseover_alpha)
 				end
 				if C.actionbar.petbar_mouseover == true and C.actionbar.petbar_horizontal == true then
 					PetBarMouseOver(0)
