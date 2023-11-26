@@ -40,8 +40,9 @@ License: MIT
 -- @class file
 -- @name LibRangeCheck-3.0
 local MAJOR_VERSION = "LibRangeCheck-3.0"
-local MINOR_VERSION = 6
+local MINOR_VERSION = 7
 
+---@class lib
 local lib, oldminor = LibStub:NewLibrary(MAJOR_VERSION, MINOR_VERSION)
 if not lib then
     return
@@ -628,7 +629,7 @@ local function findMinRangeChecker(origMinRange, origRange, spellList)
         local sid = spellList[i]
         local name, minRange, range, spellIdx = getSpellData(sid)
         if range and spellIdx and origMinRange <= range and range <= origRange and minRange == 0 then
-            return checkers_Spell[findSpellIdx]
+            return checkers_Spell[findSpellIdx(name)]
         end
     end
 end
