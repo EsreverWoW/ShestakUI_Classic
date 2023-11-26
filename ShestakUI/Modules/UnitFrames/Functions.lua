@@ -604,18 +604,6 @@ T.PostCastStart = function(Castbar, unit)
 	end
 end
 
-local function GetFormattedTime(s)
-	local day, hour, minute = 86400, 3600, 60
-	if s >= day then
-		return format("%dd", floor(s / day + 0.5)), s % day
-	elseif s >= hour then
-		return format("%dh", floor(s / hour + 0.5)), s % hour
-	elseif s >= minute then
-		return format("%dm", floor(s / minute + 0.5)), s % minute
-	end
-	return floor(s + 0.5), s - floor(s)
-end
-
 T.CustomCastTimeText = function(self, duration)
 	self.Time:SetText(("%.1f / %.1f"):format(self.channeling and duration or self.max - duration, self.max))
 end
