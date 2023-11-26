@@ -132,7 +132,8 @@ local StartTimer = function(sGUID, sID, sName)
 	icon:SetScript("OnEnter", OnEnter)
 	icon:SetScript("OnLeave", GameTooltip_Hide)
 	if T.Classic and HasWandEquipped() then
-		local wandSpeed = select(2, GetInventoryItemCooldown("player", 18)) or 0
+		local wandID = GetInventoryItemID("player", 18)
+		local wandSpeed = select(2, C_Container.GetItemCooldown(wandID)) or 0
 		if wandSpeed < 1.5 then wandSpeed = 1.5 end
 		if (T.enemy_spells[sID] or 0) > wandSpeed then
 			return CooldownFrame_Set(icon.Cooldown, GetTime(), T.EnemySpells[sID], 1)

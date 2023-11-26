@@ -382,7 +382,8 @@ function Filger:OnEvent(event, unit, _, castID)
 					end
 				end
 				if T.Classic and HasWandEquipped() then
-					local wandSpeed = select(2, GetInventoryItemCooldown("player", 18)) or 0
+					local wandID = GetInventoryItemID("player", 18)
+					local wandSpeed = select(2, C_Container.GetItemCooldown(wandID)) or 0
 					if wandSpeed < 1.5 then wandSpeed = 1.5 end
 					if name and (duration or 0) > wandSpeed then
 						if not (T.class == "DEATHKNIGHT" and data.filter == "CD" and duration < 10) then -- Filter rune cd
