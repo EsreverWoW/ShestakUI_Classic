@@ -84,7 +84,7 @@ L.font_subheader_bag = "背包"
 L.font_subheader_blizzard = "系統"
 L.font_tooltip_header_font_size = "滑鼠提示標題"
 L.font_tooltip_font_size = "滑鼠提示信息"
-L.font_quest_tracker_font_mult = "Quest text scale" -- Need review
+L.font_quest_tracker_font_mult = "任務字體縮放"
 L.font_global_font = "禁用像素字體"
 
 -- Skins options
