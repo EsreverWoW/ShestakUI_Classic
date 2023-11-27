@@ -620,13 +620,15 @@ end
 if C.minimap.on_top then
 	MinimapAnchor:ClearAllPoints()
 	MinimapAnchor:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", -21, -21)
-	BuffsAnchor:ClearAllPoints()
-	BuffsAnchor:SetPoint("TOPRIGHT", MinimapAnchor, "TOPLEFT", -25, 0)
+	if BuffsAnchor then
+		BuffsAnchor:ClearAllPoints()
+		BuffsAnchor:SetPoint("TOPRIGHT", MinimapAnchor, "TOPLEFT", -25, 0)
+	end
 
 	LPSTAT_CONFIG.Location.tip_frame = MinimapAnchor
-	LPSTAT_CONFIG.Location.tip_anchor = "BOTTOMRIGHT"
+	LPSTAT_CONFIG.Location.tip_anchor = "TOPRIGHT"
 	LPSTAT_CONFIG.Location.tip_x = 0
-	LPSTAT_CONFIG.Location.tip_y = -50
+	LPSTAT_CONFIG.Location.tip_y = 0
 
 	local frame = CreateFrame("Frame")
 	frame:RegisterEvent("PLAYER_ENTERING_WORLD")
