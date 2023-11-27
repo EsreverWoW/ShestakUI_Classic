@@ -564,6 +564,8 @@ if IsAddOnLoaded("PremadeGroupsFilter") then
 	PremadeGroupsFilterDialog.RefreshButton:SkinButton()
 	T.SkinCloseButton(PremadeGroupsFilterDialog.CloseButton)
 
+	PremadeGroupsFilterDialog.ResetButton:SetPoint("BOTTOMLEFT", PremadeGroupsFilterDialog, "BOTTOMLEFT", 8, 4)
+
 	T.SkinCloseButton(PremadeGroupsFilterDialog.MaxMinButtonFrame.MinimizeButton, nil, "-")
 	PremadeGroupsFilterDialog.MaxMinButtonFrame.MinimizeButton:SetHitRectInsets(0, 0, 0, 0)
 	PremadeGroupsFilterDialog.MaxMinButtonFrame.MinimizeButton:ClearAllPoints()
@@ -573,46 +575,75 @@ if IsAddOnLoaded("PremadeGroupsFilter") then
 	PremadeGroupsFilterDialog.MaxMinButtonFrame.MaximizeButton:ClearAllPoints()
 	PremadeGroupsFilterDialog.MaxMinButtonFrame.MaximizeButton:SetPoint("TOPRIGHT", PremadeGroupsFilterDialog.CloseButton, "TOPLEFT", -3, 0)
 
-	-- T.SkinDropDownBox(PremadeGroupsFilterDialog.Difficulty.DropDown)
-	-- T.SkinEditBox(PremadeGroupsFilterDialog.Expression)
-	-- PremadeGroupsFilterDialog.Difficulty.DropDown:SetPoint("TOPRIGHT", PremadeGroupsFilterDialog.Difficulty, "TOPRIGHT", 5, 1)
+	local DungeonPanel = _G.PremadeGroupsFilterDungeonPanel
+	if not DungeonPanel then return end
 
-	-- local checkButtons = {
-		-- PremadeGroupsFilterDialog.Difficulty.Act,
-		-- PremadeGroupsFilterDialog.MPRating.Act,
-		-- PremadeGroupsFilterDialog.PVPRating.Act,
-		-- PremadeGroupsFilterDialog.Defeated.Act,
-		-- PremadeGroupsFilterDialog.Members.Act,
-		-- PremadeGroupsFilterDialog.Tanks.Act,
-		-- PremadeGroupsFilterDialog.Heals.Act,
-		-- PremadeGroupsFilterDialog.Dps.Act
-	-- }
+	local ArenaPanel = _G.PremadeGroupsFilterArenaPanel
+	local RBGPanel = _G.PremadeGroupsFilterRBGPanel
+	local RaidPanel = _G.PremadeGroupsFilterRaidPanel
+	local RolePanel = _G.PremadeGroupsFilterRolePanel
+	local MiniPanel = _G.PremadeGroupsFilterMiniPanel
+	local PGFDialog = _G.PremadeGroupsFilterDialog
 
-	-- for _, button in pairs(checkButtons) do
-		-- button:SetSize(27, 27)
-		-- T.SkinCheckBox(button)
-	-- end
+	local names = {"Difficulty", "MPRating", "Members", "Tanks", "Heals", "DPS", "Partyfit", "BLFit", "BRFit", "Defeated", "MatchingId", "PvPRating"}
 
-	-- local editBoxes = {
-		-- PremadeGroupsFilterDialog.MPRating.Min,
-		-- PremadeGroupsFilterDialog.MPRating.Max,
-		-- PremadeGroupsFilterDialog.Defeated.Min,
-		-- PremadeGroupsFilterDialog.Defeated.Max,
-		-- PremadeGroupsFilterDialog.PVPRating.Min,
-		-- PremadeGroupsFilterDialog.PVPRating.Max,
-		-- PremadeGroupsFilterDialog.Members.Min,
-		-- PremadeGroupsFilterDialog.Members.Max,
-		-- PremadeGroupsFilterDialog.Tanks.Min,
-		-- PremadeGroupsFilterDialog.Tanks.Max,
-		-- PremadeGroupsFilterDialog.Heals.Min,
-		-- PremadeGroupsFilterDialog.Heals.Max,
-		-- PremadeGroupsFilterDialog.Dps.Min,
-		-- PremadeGroupsFilterDialog.Dps.Max
-	-- }
+	local function handleGroup(panel)
+		for _, name in pairs(names) do
+			local frame = panel.Group[name]
+			if frame then
+				local check = frame.Act
+				if check then
+					check:SetSize(27, 27)
+					check:SetPoint("TOPLEFT", 5, -1)
+					T.SkinCheckBox(check)
+				end
+				local input = frame.Min
+				if input then
+					T.SkinEditBox(input)
+					T.SkinEditBox(frame.Max)
 
-	-- for _, box in pairs(editBoxes) do
-		-- T.SkinEditBox(box, nil, 17)
-	-- end
+				end
+				if frame.DropDown then
+					T.SkinDropDownBox(frame.DropDown)
+				end
+			end
+		end
+
+		T.SkinEditBox(panel.Advanced.Expression)
+		if panel.Advanced.Expression.EditBox then
+			panel.Advanced.Expression.EditBox:SetFont(C.media.normal_font, 12, "")
+		end
+	end
+
+	handleGroup(RaidPanel)
+	handleGroup(DungeonPanel)
+	handleGroup(ArenaPanel)
+	handleGroup(RBGPanel)
+	handleGroup(RolePanel)
+
+	T.SkinEditBox(MiniPanel.Advanced.Expression)
+	T.SkinEditBox(MiniPanel.Sorting.Expression)
+	MiniPanel.Advanced.Expression.EditBox:SetFont(C.media.normal_font, 12, "")
+	MiniPanel.Sorting.Expression:SetFont(C.media.normal_font, 12, "")
+
+	for i = 1, 8 do
+		local dungeon = PremadeGroupsFilterDungeonPanel.Dungeons["Dungeon" .. i]
+		local check = dungeon and dungeon.Act
+		if check then
+			check:SetSize(27, 27)
+			check:SetPoint("TOPLEFT", 5, -1)
+			T.SkinCheckBox(check)
+		end
+	end
+
+	local popup = PremadeGroupsFilterStaticPopup
+	if popup then
+		popup:StripTextures()
+		popup:SetTemplate("Transparent")
+		T.SkinEditBox(popup.EditBox, nil, 18)
+		popup.Button1:SkinButton()
+		popup.Button2:SkinButton()
+	end
 
 	local button = UsePFGButton or UsePGFButton
 	if button then
