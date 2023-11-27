@@ -427,6 +427,7 @@ L_GUI_AURA_PLAYER_AURA_ONLY = "Только ваши отрицательные 
 L_GUI_AURA_DEBUFF_COLOR_TYPE = "Окрашивать края по их типу"
 L_GUI_AURA_CAST_BY = "Отображать имя того, кто применил эффект"
 L_GUI_AURA_CLASSCOLOR_BORDER = "Окрашивать края в цвет класса"
+L.aura_player_buff_mouseover = "Player buffs on mouseover" -- Needs review
 L.aura_subheader_buffs = "Положительные эффекты игрока"
 L.aura_subheader_debuffs = "Отрцательные эффекты"
 L.aura_subheader_boss = "Ауры босса"

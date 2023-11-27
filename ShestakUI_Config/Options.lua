@@ -2181,7 +2181,7 @@ do
 	local player_auras = ns.CreateCheckBox(parent, "player_auras", L_GUI_AURA_PLAYER_AURAS)
 	player_auras:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -10)
 
-	local player_buff_mouseover = ns.CreateCheckBox(parent, "player_buff_mouseover", L_GUI_ACTIONBAR_PETBAR_MOUSEOVER)
+	local player_buff_mouseover = ns.CreateCheckBox(parent, "player_buff_mouseover")
 	player_buff_mouseover:SetPoint("LEFT", player_auras, "RIGHT", 320, 0)
 
 	local classcolor_border = ns.CreateCheckBox(parent, "classcolor_border", L_GUI_AURA_CLASSCOLOR_BORDER)
