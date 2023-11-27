@@ -147,7 +147,7 @@ LPSTAT_CONFIG = {
 		tip_x = cBN and 0 or C.bag.enable and -50 or -21,
 		tip_y = cBN and 85 or C.bag.enable and 0 or 20,
 		strata = cBN and "DIALOG" or "HIGH",
-		level = 10
+		level = 13
 	},
 -- Top block
 	Stats = {
