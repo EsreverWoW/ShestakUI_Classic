@@ -84,7 +84,7 @@ L.font_subheader_bag = "Police des Sacs"
 L.font_subheader_blizzard = "Taille de la police de l’infobulle"
 L.font_tooltip_header_font_size = "En-tête de l’infobulle"
 L.font_tooltip_font_size = "Texte de l’infobulle"
-L.font_quest_tracker_font_mult = "Quest text scale" -- Need review
+L.font_quest_tracker_font_mult = "Échelle du texte de quête"
 L.font_global_font = "Désactiver Pixel Font"
 
 -- Skins options
