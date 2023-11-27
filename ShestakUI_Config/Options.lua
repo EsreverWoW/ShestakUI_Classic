@@ -2212,7 +2212,7 @@ do
 	pet_debuffs:SetPoint("TOPLEFT", focus_debuffs, "BOTTOMLEFT", 0, 0)
 
 	local player_aura_only = ns.CreateCheckBox(parent, "player_aura_only", L_GUI_AURA_PLAYER_AURA_ONLY)
-	player_aura_only:SetPoint("TOPLEFT", boss_buffs, "BOTTOMLEFT", 0, 0)
+	player_aura_only:SetPoint("TOPLEFT", pet_debuffs, "BOTTOMLEFT", 0, 0)
 
 	local debuff_color_type = ns.CreateCheckBox(parent, "debuff_color_type", L_GUI_AURA_DEBUFF_COLOR_TYPE)
 	debuff_color_type:SetPoint("TOPLEFT", player_aura_only, "BOTTOMLEFT", 0, 0)
