@@ -32,7 +32,7 @@
 	<Script file="Modules\Blizzard\LibShowUIPanel.lua"/>
 	<Script file="Libs\LitePanels\LitePanels.lua"/>
 	<Script file="Libs\LitePanels\Layout.lua"/>
-	<Script file="Config\DataText_TBC.lua"/>
+	<Script file="Config\DataText_Vanilla.lua"/>
 	<Script file="Libs\LiteStats\LiteStats.lua"/>
 	<Script file="Modules\UnitFrames\Colors.lua"/>
 
