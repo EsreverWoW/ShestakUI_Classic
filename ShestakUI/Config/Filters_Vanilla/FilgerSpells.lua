@@ -2228,7 +2228,7 @@ C["filger_spells"] = {
 			-- Sentry Totem
 			-- {spellID = 6495, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Shamanistic Rage [Season of Discovery]
-			{spellID = 425336, unitID = "player", caster = "player", filter = "BUFF"},
+			{spellID = 425336, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Stoneskin Totem
 			-- {spellID = 8072, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Strength of Earth
@@ -2484,7 +2484,7 @@ C["filger_spells"] = {
 			-- Reincarnation
 			{spellID = 20608, filter = "CD"},
 			-- Shamanistic Rage [Season of Discovery]
-			{spellID = 425336, filter = "CD"},
+			{spellID = 425336, filter = "CD", absID = true},
 			-- Stoneclaw Totem
 			{spellID = 5730, filter = "CD"},
 			-- Stormstrike
@@ -3299,6 +3299,8 @@ C["filger_spells"] = {
 			{spellID = 20233, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Power Word: Barrier [Season of Discovery]
 			{spellID = 425205, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Shamanistic Rage [Season of Discovery]
+			{spellID = 433255, unitID = "player", caster = "all", filter = "BUFF", absID = true},
 
 			-- Other
 			-- Innervate
