@@ -7,71 +7,57 @@ if C.unitframe.enable ~= true or C.raidframe.plugins_auto_resurrection ~= true o
 local _, ns = ...
 local oUF = ns.oUF
 
-local classList
+local classList = {
+	["DRUID"] = {
+		combat = GetSpellInfo(20484),	-- Rebirth
+	},
+	["PALADIN"] = {
+		ooc = GetSpellInfo(7328),		-- Redemption
+	},
+	["PRIEST"] = {
+		ooc = GetSpellInfo(2006),		-- Resurrection
+	},
+	["SHAMAN"] = {
+		ooc = GetSpellInfo(2008),		-- Ancestral Spirit
+	}
+}
 
-if T.Vanilla or T.TBC then
-	classList = {
-		["DRUID"] = {
-			combat = GetSpellInfo(20484),	-- Rebirth
-		},
-		["PALADIN"] = {
-			ooc = GetSpellInfo(7328),		-- Redemption
-		},
-		["PRIEST"] = {
-			ooc = GetSpellInfo(2006),		-- Resurrection
-		},
-		["SHAMAN"] = {
-			ooc = GetSpellInfo(2008),		-- Ancestral Spirit
-		}
+if T.SoD then
+	classList["MAGE"] = {
+		combat = GetSpellInfo(430318)	-- Reintegration [Season of Discovery]
 	}
-elseif T.Wrath or T.Cata then
-	classList = {
-		["DEATHKNIGHT"] = {
-			combat = GetSpellInfo(61999),	-- Raise Ally
-		},
-		["DRUID"] = {
-			combat = GetSpellInfo(20484),	-- Rebirth
-			ooc = GetSpellInfo(50769),		-- Revive
-		},
-		["PALADIN"] = {
-			ooc = GetSpellInfo(7328),		-- Redemption
-		},
-		["PRIEST"] = {
-			ooc = GetSpellInfo(2006),		-- Resurrection
-		},
-		["SHAMAN"] = {
-			ooc = GetSpellInfo(2008),		-- Ancestral Spirit
-		}
+end
+
+if T.toc >= 30000 then
+	classList["DEATHKNIGHT"] = {
+		combat = GetSpellInfo(61999),	-- Raise Ally
 	}
-else
-	classList = {
-		["DEATHKNIGHT"] = {
-			combat = GetSpellInfo(61999),	-- Raise Ally
-		},
-		["DRUID"] = {
-			combat = GetSpellInfo(20484),	-- Rebirth
-			ooc = GetSpellInfo(50769),		-- Revive
-		},
-		["EVOKER"] = {
-			ooc = GetSpellInfo(361227),		-- Return
-		},
-		["MONK"] = {
-			ooc = GetSpellInfo(115178),		-- Resuscitate
-		},
-		["PALADIN"] = {
-			combat = GetSpellInfo(391054),	-- Intercession
-			ooc = GetSpellInfo(7328),		-- Redemption
-		},
-		["PRIEST"] = {
-			ooc = GetSpellInfo(2006),		-- Resurrection
-		},
-		["SHAMAN"] = {
-			ooc = GetSpellInfo(2008),		-- Ancestral Spirit
-		},
-		["WARLOCK"] = {
-			combat = GetSpellInfo(6203),	-- Soulstone
-			ooc = GetSpellInfo(6203),		-- Soulstone
-		}
+	classList["DRUID"] = {
+		combat = GetSpellInfo(20484),	-- Rebirth
+		ooc = GetSpellInfo(50769),		-- Revive
+	}
+end
+
+if T.toc >= 40000 then
+	classList["WARLOCK"] = {
+		combat = GetSpellInfo(6203),	-- Soulstone
+		ooc = GetSpellInfo(6203),		-- Soulstone
+	}
+end
+
+if T.toc >= 50000 then
+	classList["MONK"] = {
+		ooc = GetSpellInfo(115178),		-- Resuscitate
+	}
+end
+
+if T.toc >= 100000 then
+	classList["EVOKER"] = {
+		ooc = GetSpellInfo(361227),		-- Return
+	}
+	classList["PALADIN"] = {
+		combat = GetSpellInfo(391054),	-- Intercession
+		ooc = GetSpellInfo(7328),		-- Redemption
 	}
 end
 
