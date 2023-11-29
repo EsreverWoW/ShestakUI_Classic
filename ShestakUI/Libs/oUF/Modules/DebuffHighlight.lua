@@ -10,7 +10,7 @@ local oUF = ns.oUF
 local CanDispel = {
 	DRUID = {Magic = false, Curse = true, Poison = true},
 	EVOKER = {Magic = false, Curse = true, Poison = true, Disease = true},
-	MAGE = {Curse = true},
+	MAGE = {Magic = false, Curse = true},
 	MONK = {Magic = false, Poison = true, Disease = true},
 	PALADIN = {Magic = false, Poison = true, Disease = true},
 	PRIEST = {Magic = false, Disease = true},
@@ -37,7 +37,11 @@ end
 
 local function CheckSpec()
 	if T.Classic then
-		if T.class == "PALADIN" then
+		if T.class == "MAGE" and T.SoD then
+			if IsSpellKnown(412113) then
+				dispellist.Magic = true
+			end
+		elseif T.class == "PALADIN" then
 			dispellist.Magic = true
 		elseif T.class == "PRIEST" then
 			dispellist.Magic = true

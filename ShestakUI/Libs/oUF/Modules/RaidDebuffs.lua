@@ -48,6 +48,7 @@ do
 		},
 		["MAGE"] = {
 			["Curse"] = true,
+			["Magic"] = false, -- for Season of Discovery
 		},
 		["MONK"] = {
 			["Magic"] = false,
@@ -78,8 +79,12 @@ do
 end
 
 local function CheckSpec()
-	if oUF:IsClassic() then
-		if T.class == "PALADIN" then
+	if T.Classic then
+		if T.class == "MAGE" and T.SoD then
+			if IsSpellKnown(412113) then
+				DispellFilter.Magic = true
+			end
+		elseif T.class == "PALADIN" then
 			DispellFilter.Magic = true
 		elseif T.class == "PRIEST" then
 			DispellFilter.Magic = true
