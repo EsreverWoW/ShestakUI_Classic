@@ -155,7 +155,7 @@ hooksecurefunc(Cooldown_MT, "SetCooldown", function(cooldown, start, duration, m
 		timer.duration = duration
 		timer.enabled = true
 		timer.nextUpdate = 0
-		if timer.fontScale >= 0.5 then timer:Show() end
+		if timer.fontScale and timer.fontScale >= 0.5 then timer:Show() end
 	else
 		deactivateDisplay(cooldown)
 	end
