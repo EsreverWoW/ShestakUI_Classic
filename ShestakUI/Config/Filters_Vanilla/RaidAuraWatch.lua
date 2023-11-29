@@ -315,7 +315,6 @@ T.RaidDebuffs = {
 		[SpellName(28410)] = 5,		-- Chains of Kel'Thuzad
 		[SpellName(27819)] = 3,		-- Detonate Mana
 		[SpellName(27808)] = 4,		-- Frost Blast
-		[SpellName(31117)] = 3,		-- Unstable Affliction
 
 -----------------------------------------------------------------
 -- Classic Dungeons

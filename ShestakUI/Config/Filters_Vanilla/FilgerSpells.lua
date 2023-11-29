@@ -2793,8 +2793,6 @@ C["filger_spells"] = {
 			{spellID = 17962, filter = "CD"},
 			-- Curse of Doom
 			{spellID = 603, filter = "CD"},
-			-- Curse of Recklessness (Metamorphosis) [Season of Discovery]
-			{spellID = 704, filter = "CD"},
 			-- Death Coil
 			{spellID = 6789, filter = "CD"},
 			-- Demon Charge (Metamorphosis) [Season of Discovery]
@@ -2813,6 +2811,8 @@ C["filger_spells"] = {
 			{spellID = 5484, filter = "CD"},
 			-- Inferno
 			{spellID = 1122, filter = "CD", absID = true},
+			-- Menace (Metamorphosis) [Season of Discovery]
+			{spellID = 403828, filter = "CD"},
 			-- Ritual of Doom
 			{spellID = 18540, filter = "CD"},
 			-- Shadow Cleave (Metamorphosis) [Season of Discovery]
