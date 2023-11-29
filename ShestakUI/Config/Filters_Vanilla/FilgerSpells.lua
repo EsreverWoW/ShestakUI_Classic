@@ -870,6 +870,8 @@ C["filger_spells"] = {
 			{spellID = 10193, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Presence of Mind
 			{spellID = 12043, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Tangled Causality [Season of Discovery]
+			{spellID = 25771, unitID = "player", caster = "player", filter = "DEBUFF"},
 		},
 		{
 			Name = "P_PROC_ICON",

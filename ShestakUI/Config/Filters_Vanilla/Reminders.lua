@@ -461,6 +461,7 @@ if C.reminder.solo_buffs_enable == true then
 					SpellName(8017),	-- Rockbiter Weapon
 					SpellName(8024),	-- Flametongue Weapon
 					SpellName(8033),	-- Frostbrand Weapon
+					SpellName(430585),	-- Increased Mana Regen and Spell Hit (Blackfathom Mana Oil) [Season of Discovery]
 					SpellName(25123),	-- Brilliant Mana Oil
 					SpellName(25122),	-- Brilliant Wizard Oil
 					SpellName(28898),	-- Blessed Wizard Oil

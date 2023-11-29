@@ -116,6 +116,7 @@ elseif T.class == "HUNTER" then
 		T.merge[14290] = 2643		-- Multi-Shot r4
 		T.merge[25294] = 2643		-- Multi-Shot r5
 		T.aoespam[425711] = 0.5		-- Carve [Season of Discovery]
+		T.merge[433100] = 425711	-- Carve [Season of Discovery]
 		T.aoespam[13812] = 3		-- Explosive Trap r1
 		T.merge[14314] = 13812		-- Explosive Trap r2
 		T.merge[14315] = 13812		-- Explosive Trap r3
@@ -139,6 +140,7 @@ elseif T.class == "MAGE" then
 	if C.combattext.merge_aoe_spam then
 		-- Healing spells
 		T.aoespam[401405] = 3		-- Chronomantic Healing [Season of Discovery]
+		T.merge[433455] = 401405	-- Chronomantic Healing [Season of Discovery]
 		T.aoespam[412510] = 3		-- Mass Regeneration [Season of Discovery]
 		T.aoespam[401460] = 3		-- Rapid Regeneration [Season of Discovery]
 		T.aoespam[401417] = 3		-- Regeneration [Season of Discovery]
