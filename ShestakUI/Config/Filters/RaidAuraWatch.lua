@@ -879,6 +879,7 @@ T.RaidDebuffsReverse = {
 T.RaidDebuffsIgnore = {
 	[980] = true,			-- Agony
 	[1943] = true,			-- Rupture
+	[425180] = true,		-- Vicious Brand
 }
 
 for _, spell in pairs(C.raidframe.plugins_aura_watch_list) do
