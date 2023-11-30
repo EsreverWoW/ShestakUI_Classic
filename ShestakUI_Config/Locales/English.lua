@@ -451,7 +451,7 @@ L_GUI_AURA_PLAYER_AURA_ONLY = "Only your debuff on target frame"
 L_GUI_AURA_DEBUFF_COLOR_TYPE = "Color debuff by type"
 L_GUI_AURA_CAST_BY = "Show who cast a buff/debuff in its tooltip"
 L_GUI_AURA_CLASSCOLOR_BORDER = "Enable classcolor border for player buffs"
-L.aura_player_buff_mouseover = "Player buffs on mouseover"
+L.aura_player_buff_mouseover = "On mouseover"
 L.aura_subheader_buffs = "Player buffs"
 L.aura_subheader_debuffs = "Debuffs"
 
