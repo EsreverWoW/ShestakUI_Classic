@@ -65,4 +65,5 @@ T.black_list = {
 	[OUT_OF_RAGE] = true,
 	[ERR_SPELL_OUT_OF_RANGE] = true,
 	[ERR_TOO_FAR_TO_INTERACT] = true,
+	[ERR_UNIT_NOT_FOUND] = true,
 }
