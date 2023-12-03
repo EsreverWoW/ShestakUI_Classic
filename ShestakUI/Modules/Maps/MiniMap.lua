@@ -537,6 +537,7 @@ if T.Vanilla then
 	if C.minimap.tracking_icon then
 		MiniMapTrackingFrame:ClearAllPoints()
 		MiniMapTrackingFrame:SetPoint("BOTTOMLEFT", MinimapAnchor, "BOTTOMLEFT", -1, -5)
+		MiniMapTrackingFrame.SetPoint = T.dummy
 		MiniMapTrackingBorder:Hide()
 		MiniMapTrackingFrame:SetFrameStrata("HIGH")
 		MiniMapTrackingIcon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
