@@ -39,7 +39,7 @@ function T.GetSpecializationRole()
 	or (T.class == "DRUID" and tree == 2 and GetBonusBarOffset() == 3)
 	or (T.class == "PALADIN" and tree == 2)
 	or (T.class == "ROGUE" and T.SoD and IsPlayerSpell(410412))
-	or (T.class == "SHAMAN" and T.SoD and T.CheckPlayerBuff(GetSpellInfo(408681)))
+	or (T.class == "SHAMAN" and T.SoD and T.CheckPlayerBuff(GetSpellInfo(408680)))
 	or (T.class == "WARLOCK" and T.SoD and T.CheckPlayerBuff(GetSpellInfo(403789)))
 	or (T.class == "WARRIOR" and (tree == 3 or GetBonusBarOffset() == 2)) then
 		return "TANK"

@@ -8,6 +8,7 @@ local frame = CreateFrame("Frame")
 frame:RegisterEvent("PLAYER_ENTERING_WORLD")
 frame:SetScript("OnEvent", function()
 	local _, instanceType = IsInInstance()
+	-- TODO: Fix so the additional SoD raids also have automatic combat logging
 	if instanceType == "raid" and IsInRaid(LE_PARTY_CATEGORY_HOME) then
 		if not LoggingCombat() then
 			LoggingCombat(1)
