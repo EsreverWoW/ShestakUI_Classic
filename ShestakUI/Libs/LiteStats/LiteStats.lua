@@ -1619,7 +1619,7 @@ if coords.enabled then
 			end
 		end,
 		OnEnter = function()
-			if location.enabled then
+			if T.Mainline and location.enabled then -- TODO: FIXME
 				LP_Location.hovered, LP_Location.init = true, true
 				GameTooltip:SetOwner(LP_Location, "ANCHOR_NONE")
 				GameTooltip:ClearAllPoints()
