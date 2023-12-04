@@ -24,6 +24,27 @@ local function LoadSkin()
 
 	-- EngravingFrameCollectedFrame
 	-- EngravingFrameCollectedFrameLabel
+
+	local function UpdateRuneList()
+		for i = 1, #C_Engraving.GetRuneCategories(true, true) do
+			if not _G["EngravingFrameHeader"..i].isSkinned then
+				_G["EngravingFrameHeader"..i]:StripTextures()
+				_G["EngravingFrameHeader"..i]:SetTemplate("Transparent")
+				_G["EngravingFrameHeader"..i].isSkinned = true
+			end
+		end
+
+		for i = 1, #EngravingFrame.scrollFrame.buttons do
+			if not _G["EngravingFrameScrollFrameButton"..i].isSkinned then
+				_G["EngravingFrameScrollFrameButton"..i]:SkinButton()
+				-- _G["EngravingFrameScrollFrameButton"..i.."Icon"]:SkinIcon(true)
+				-- _G["EngravingFrameScrollFrameButton"..i.."Icon"]:SetSize(32, 32)
+				_G["EngravingFrameScrollFrameButton"..i].isSkinned = true
+			end
+		end
+	end
+
+	hooksecurefunc("EngravingFrame_UpdateRuneList", UpdateRuneList)
 end
 
 T.SkinFuncs["Blizzard_EngravingUI"] = LoadSkin
