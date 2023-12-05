@@ -5,6 +5,23 @@ assert(LibStub, format("%s requires LibStub.", major))
 local HealComm = LibStub:NewLibrary(major, minor)
 if( not HealComm ) then return end
 
+-- TODO: Adjust new spells to scale with level
+-- SoD Notes
+--[[
+Lifebloom
+	@1 = 11 over 7, 23 bomb
+	@25 = 45 over 7, 91 bomb
+	WoWHead = 28 over 7, 57 bomb
+Wild Growth
+	@1 = 95 over 7
+	@25 = 378 over 7
+	WoWHead = 238 over 7
+Penance
+	@1 = 42 healing
+	@25 = 171 healing
+	WoWHead = 106
+--]]
+
 local COMM_PREFIX = "LHC40"
 C_ChatInfo.RegisterAddonMessagePrefix(COMM_PREFIX)
 
@@ -81,9 +98,10 @@ local COMBATLOG_OBJECT_AFFILIATION_MINE = COMBATLOG_OBJECT_AFFILIATION_MINE
 local build = floor(select(4,GetBuildInfo())/10000)
 local isTBC = build == 2
 local isWrath = build == 3
+local isSoD = (build == 1 and GetMaxPlayerLevel() < 60) or (C_Engraving and C_Engraving.IsEngravingEnabled()) or (C_Seasons and C_Seasons.HasActiveSeason() and (C_Seasons.GetActiveSeason() > 1 and C_Seasons.GetActiveSeason() ~= Enum.SeasonID.Hardcore))
 
 local spellRankTableData = {
-	[1] = { 774, 8936, 5185, 740, 635, 19750, 139, 2060, 596, 2061, 2054, 2050, 1064, 331, 8004, 136, 755, 689, 746, 33763, 32546, 37563, 48438, 61295, 51945, 50464, 47757 },
+	[1] = { 774, 8936, 5185, 740, 635, 19750, 139, 2060, 596, 2061, 2054, 2050, 1064, 331, 8004, 136, 755, 689, 746, 33763, 32546, 37563, 48438, 61295, 51945, 50464, 47757, 402277, 408120, 408124 },
 	[2] = { 1058, 8938, 5186, 8918, 639, 19939, 6074, 10963, 996, 9472, 2055, 2052, 10622, 332, 8008, 3111, 3698, 699, 1159, 53248, 61299, 51990, 48450, 52986, 48119 },
 	[3] = { 1430, 8939, 5187, 9862, 647, 19940, 6075, 10964, 10960, 9473, 6063, 2053, 10623, 547, 8010, 3661, 3699, 709, 3267, 53249, 61300, 51997, 48451, 52987, 48120 },
 	[4] = { 2090, 8940, 5188, 9863, 1026, 19941, 6076, 10965, 10961, 9474, 6064, 913, 10466, 3662, 3700, 7651, 3268, 25422, 53251, 61301, 51998, 52988 },
@@ -828,10 +846,10 @@ if( playerClass == "DRUID" ) then
 		local Regrowth = GetSpellInfo(8936)
 		local Rejuvenation = GetSpellInfo(774)
 		local Tranquility = GetSpellInfo(740)
-		local Lifebloom = GetSpellInfo(33763) or "Lifebloom"
+		local Lifebloom = GetSpellInfo(33763) or (isSoD and GetSpellInfo(408124)) or "Lifebloom"
 		local EmpoweredRejuv = GetSpellInfo(33886) or "Empowered Rejuvenation"
 		local EmpoweredTouch = GetSpellInfo(33879) or "Empowered Touch"
-		local WildGrowth = GetSpellInfo(48438) or "Wild Growth"
+		local WildGrowth = GetSpellInfo(48438) or (isSoD and GetSpellInfo(408120)) or "Wild Growth"
 		local Nourish = GetSpellInfo(50464) or "Nourish"
 		local MasterShapeshifter = GetSpellInfo(48411) or "Master Shapeshifter"
 		local Genesis = GetSpellInfo(57810) or "Genesis"
@@ -843,6 +861,10 @@ if( playerClass == "DRUID" ) then
 			hotData[Rejuvenation] = { interval = 3, levels = { 4, 10, 16, 22, 28, 34, 40, 46, 52, 58, 60, 63, 69, 75, 80 }, averages = { 40, 70, 145, 225, 305, 380, 485, 610, 760, 945, 1110, 1165, 1325, 1490, 1690 }}
 			hotData[Lifebloom] = {interval = 1, ticks = 7, coeff = 0.66626, dhCoeff = 0.517928287, levels = {64, 72, 80}, averages = {224, 287, 371}, bomb = {480, 616, 776}}
 			hotData[WildGrowth] = {interval = 1, ticks = 7, coeff = 0.8056, levels = {60, 70, 75, 80}, averages = {686, 861, 1239, 1442}}
+		elseif isSoD then
+			hotData[Rejuvenation] = { interval = 3, levels = { 4, 10, 16, 22, 28, 34, 40, 46, 52, 58, 60, 63, 69 }, averages = { 32, 56, 116, 180, 244, 304, 388, 488, 608, 756, 888, 932, 1060 }}
+			hotData[Lifebloom] = {interval = 1, ticks = 7, coeff = 0.357, dhCoeff = 0.274, levels = {1}, averages = {11}, bomb = {23}}
+			hotData[WildGrowth] = {interval = 1, ticks = 7, coeff = 0.427, levels = {1}, averages = {95}}
 		else
 			hotData[Rejuvenation] = { interval = 3, levels = { 4, 10, 16, 22, 28, 34, 40, 46, 52, 58, 60, 63, 69 }, averages = { 32, 56, 116, 180, 244, 304, 388, 488, 608, 756, 888, 932, 1060 }}
 			hotData[Lifebloom] = {interval = 1, ticks = 7, coeff = 0.52, dhCoeff = 0.34335, levels = {64}, averages = {273}, bomb = {600}}
@@ -1207,7 +1229,7 @@ if( playerClass == "PALADIN" ) then
 		local HolyLight = GetSpellInfo(635)
 		local Divinity = GetSpellInfo(63646) or "Divinity"
 		local TouchedbytheLight = GetSpellInfo(53590) or "Touched by the Light"
-		local BeaconofLight = GetSpellInfo(53563) or "Beacon of Light"
+		local BeaconofLight = GetSpellInfo(53563) or (isSoD and GetSpellInfo(407613)) or "Beacon of Light"
 		local SealofLight = GetSpellInfo(20165) or "Seal of Light"
 		local DivineIllumination = GetSpellInfo(31842) or "Divine Illumination"
 		local DivinePlea = GetSpellInfo(54428)
@@ -1402,7 +1424,7 @@ if( playerClass == "PRIEST" ) then
 		local BindingHeal = GetSpellInfo(32546) or "Binding Heal"
 		local EmpoweredHealing = GetSpellInfo(33158) or "Empowered Healing"
 		local Renewal = GetSpellInfo(37563) and "37563" -- T4 bonus
-		local Penance = GetSpellInfo(47540) or "Penance"
+		local Penance = GetSpellInfo(47540) or (isSoD and GetSpellInfo(402174)) or "Penance"
 		local Grace = GetSpellInfo(47516) or "Grace"
 		local BlessedResilience = GetSpellInfo(33142) or "Blessed Resilience"
 		local FocusedPower = GetSpellInfo(33186) or "Focused Power"
@@ -1461,7 +1483,11 @@ if( playerClass == "PRIEST" ) then
 			{avg(1042, 1338), avg(1043, 1340), avg(1045, 1342), avg(1047, 1344), avg(1049, 1346), avg(1051, 1348), avg(1053, 1350), avg(1055, 1352)},
 			{avg(1619, 2081), avg(1622, 2084), avg(1625, 2087), avg(1628, 2090), avg(1631, 2093)},
 			{avg(1952, 2508), avg(1955, 2512), avg(1959, 2516)} }}
-		spellData[Penance] = {_isChanneled = true, coeff = 0.857, ticks = 3, levels = {60, 70, 75, 80}, averages = {avg(670, 756), avg(805, 909), avg(1278, 1442), avg(1484, 1676)}}
+		if isSoD then
+			spellData[Penance] = {_isChanneled = true, coeff = 0.455, ticks = 3, levels = {1}, averages = {avg(42, 47)}}
+		else
+			spellData[Penance] = {_isChanneled = true, coeff = 0.857, ticks = 3, levels = {60, 70, 75, 80}, averages = {avg(670, 756), avg(805, 909), avg(1278, 1442), avg(1484, 1676)}}
+		end
 
 		talentData[ImprovedRenew] = {mod = 0.05, current = 0, spent = 0}
 		talentData[SpiritualHealing] = {mod = 0.02, current = 0, spent = 0}
@@ -2466,7 +2492,7 @@ local function parseHotBomb(casterGUID, wasUpdated, spellID, amount, ...)
 	pending.endTime = hotPending.endTime
 	pending.spellID = spellID
 	pending.bitType = BOMB_HEALS
-	pending.stack = isWrath and hotPending.stack or 1 -- TBC Lifebloom bomb heal does not stack
+	pending.stack = (isWrath or isSoD) and hotPending.stack or 1 -- TBC Lifebloom bomb heal does not stack
 
 	loadHealList(pending, amount, pending.stack, pending.endTime, nil, ...)
 
@@ -2815,12 +2841,19 @@ local function setCastData(priority, name, guid)
 end
 
 -- Penance sends different spellIDs on UNIT_SPELLCAST_SENT and UNIT_SPELLCAST_START. Reported on beta / remove this once fixed.
-local penanceIDs = {
-	[47540] = 47757,
-	[53005] = 52986,
-	[53006] = 52987,
-	[53007] = 52988,
-}
+local penanceIDs
+if isSoD then
+	penanceIDs = {
+		[402174] = 402277,
+	}
+else
+	penanceIDs = {
+		[47540] = 47757,
+		[53005] = 52986,
+		[53006] = 52987,
+		[53007] = 52988,
+	}
+end
 -- When the game tries to figure out the UnitID from the name it will prioritize players over non-players
 -- if there are conflicts in names it will pull the one with the least amount of current health
 function HealComm:UNIT_SPELLCAST_SENT(unit, targetName, castGUID, spellID)
@@ -2950,7 +2983,7 @@ function HealComm:UNIT_SPELLCAST_CHANNEL_STOP(unit, _, spellID)
 	if( not spellData[spellName] ) then return end
 
 	-- End heal if a Penance cast is stopped prematurely (e.g. by movement)
-	if( spellName == GetSpellInfo(53007) ) then
+	if( spellName == GetSpellInfo(53007) or (isSoD and spellName == GetSpellInfo(402174)) ) then
 		parseHealEnd(playerGUID, nil, "name", spellID, true)
 		sendMessage(format("S::%d:1", spellID or 0))
 	end
