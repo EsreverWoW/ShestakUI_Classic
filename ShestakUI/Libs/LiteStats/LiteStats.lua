@@ -826,7 +826,9 @@ if friends.enabled then
 								if self.altdown then
 									if GetRealZoneText() == areaName then zone_r, zone_g, zone_b = 0.3, 1.0, 0.3 else zone_r, zone_g, zone_b = 0.65, 0.65, 0.65 end
 									if GetRealmName() == realmName then realm_r, realm_g, realm_b = 0.3, 1.0, 0.3 else realm_r, realm_g, realm_b = 0.65, 0.65, 0.65 end
-									GameTooltip:AddDoubleLine("  "..areaName, realmName, zone_r, zone_g, zone_b, realm_r, realm_g, realm_b)
+									if areaName then
+										GameTooltip:AddDoubleLine("  "..areaName, realmName, zone_r, zone_g, zone_b, realm_r, realm_g, realm_b)
+									end
 								end
 							else
 								if client == "App" then
