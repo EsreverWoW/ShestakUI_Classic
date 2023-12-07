@@ -147,7 +147,7 @@ LPSTAT_CONFIG = {
 		tip_x = cBN and 0 or C.bag.enable and -50 or -21,
 		tip_y = cBN and 85 or C.bag.enable and 0 or 20,
 		strata = cBN and "DIALOG" or "HIGH",
-		level = 13
+		level = 13,
 	},
 -- Top block
 	Stats = {
@@ -176,18 +176,21 @@ LPSTAT_CONFIG = {
 		fmt = class"B: ".."%d/%d",
 		anchor_frame = "Stat", anchor_to = "left", anchor_from = "right",
 		x_off = 3, y_off = 0,
+		strata = "HIGH",
 	},
 	Loot = {
 		enabled = C.toppanel.enable,
 		fmt = class"L: ".."%s",
 		anchor_frame = "Bags", anchor_to = "left", anchor_from = "right",
 		x_off = 3, y_off = 0,
+		strata = "HIGH",
 	},
 	Nameplates = {
 		enabled = C.toppanel.enable,
 		fmt = class"N: ".."%s",
 		anchor_frame = "Loot", anchor_to = "left", anchor_from = "right",
 		x_off = 3, y_off = 0,
+		strata = "HIGH",
 	},
 }
 
