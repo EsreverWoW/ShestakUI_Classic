@@ -1,6 +1,6 @@
 local T, C, L = unpack(ShestakUI)
 if T.Wrath then return end -- FIXME
-if IsAddOnLoaded("Questie") then return end
+if Questie and Questie.db and Questie.db.profile and Questie.db.profile.trackerEnabled then return end
 
 ----------------------------------------------------------------------------------------
 --	Move QuestWatchFrame (with ModernQuestWatch from Ketho - EU-Boulderfist)
