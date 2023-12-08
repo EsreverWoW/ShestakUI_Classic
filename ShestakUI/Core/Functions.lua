@@ -111,6 +111,9 @@ if T.Classic and not T.Wrath then
 	RoleUpdater:RegisterEvent("CHARACTER_POINTS_CHANGED")
 	RoleUpdater:RegisterUnitEvent("UNIT_INVENTORY_CHANGED", "player", "")
 	RoleUpdater:RegisterEvent("UPDATE_BONUS_ACTIONBAR")
+	if T.SoD then
+		RoleUpdater:RegisterEvent("RUNE_UPDATED")
+	end
 elseif T.Wrath then
 	RoleUpdater:RegisterEvent("PLAYER_TALENT_UPDATE")
 	RoleUpdater:RegisterUnitEvent("UNIT_INVENTORY_CHANGED", "player", "")
