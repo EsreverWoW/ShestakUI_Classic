@@ -126,7 +126,7 @@ if T.Classic then
 end
 strip:RegisterForClicks("AnyUp")
 strip:SetScript("OnClick", function(self, button)
-	local actor = T.Classic and self.model or T.Mainline and DressUpFrame.ModelScene:GetPlayerActor()
+	local actor = T.Classic and DressUpFrame.DressUpModel or T.Mainline and DressUpFrame.ModelScene:GetPlayerActor()
 	if not actor then return end
 	if button == "RightButton" then
 		actor:UndressSlot(19)
