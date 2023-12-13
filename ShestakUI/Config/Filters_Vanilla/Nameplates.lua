@@ -491,6 +491,8 @@ T.ColorPlate = {
 	-- PvP
 	["5925"] = color,		-- Grounding Totem
 	-- Raid
+		-- Blackfathom Deeps [Season of Discovery]
+		["207457"] = color,		-- Corrupted Lightning Shield Totem
 		-- Zul'Gurub
 		["15112"] = color,		-- Brain Wash Totem
 		-- Naxxramas
