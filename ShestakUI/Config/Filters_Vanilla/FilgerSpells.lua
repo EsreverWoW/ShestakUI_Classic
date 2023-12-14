@@ -2555,6 +2555,8 @@ C["filger_spells"] = {
 			-- {spellID = 755, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Hellfire
 			-- {spellID = 1949, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Incinerate [Season of Discovery]
+			{spellID = 412758, unitID = "player", caster = "player", filter = "BUFF"},
 			--[[
 			-- Master Demonologist (Imp - Reduced Threat)
 			{spellID = 23759, unitID = "player", caster = "player", filter = "BUFF", absID = true},
@@ -2715,8 +2717,6 @@ C["filger_spells"] = {
 			{spellID = 5484, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Immolate
 			{spellID = 348, unitID = "target", caster = "player", filter = "DEBUFF"},
-			-- Incinerate [Season of Discovery]
-			{spellID = 412758, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Lake of Fire [Season of Discovery]
 			-- {spellID = 403650, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Menace (Metamorphosis) [Season of Discovery]
@@ -2804,7 +2804,7 @@ C["filger_spells"] = {
 			-- Demonic Howl (Metamorphosis) [Season of Discovery]
 			{spellID = 412789, filter = "CD"},
 			-- Drain Life [Season of Discovery]
-			{spellID = 403677, filter = "CD"},
+			{spellID = 403677, filter = "CD", absID = true},
 			-- Fel Domination
 			{spellID = 18708, filter = "CD"},
 			-- Haunt [Season of Discovery]
