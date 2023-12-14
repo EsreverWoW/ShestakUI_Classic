@@ -127,9 +127,10 @@ local function OnEvent(self, event)
 	end
 end
 
+local isDeadlyBrew = T.SoD and C_Engraving.IsRuneEquipped(48141)
 for i = 1, #tab do
 	-- Skip shields group for Shaman's in Vanilla when not playing SoD
-	if not T.Vanilla or T.SoD or (T.Vanilla and (T.class ~= "SHAMAN" or i ~= 1)) then
+	if not T.Vanilla or (T.SoD and not isDeadlyBrew) or (T.Vanilla and (T.class ~= "SHAMAN" or i ~= 1)) then
 		local frame = CreateFrame("Frame", "ReminderFrame"..i, UIParent)
 		frame:CreatePanel("Default", C.reminder.solo_buffs_size, C.reminder.solo_buffs_size, unpack(C.position.self_buffs))
 		frame:SetFrameLevel(6)
