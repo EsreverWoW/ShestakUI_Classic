@@ -19,8 +19,17 @@ local mp5IgnoredSpells = {
 	[11688]	= true,	-- Life Tap r5
 	[11689]	= true,	-- Life Tap r6
 	[27222]	= true,	-- Life Tap r7
+	[57946]	= true,	-- Life Tap r8
+	[31818]	= true,	-- Life Tap (Effect)
+	[32553]	= true,	-- Life Tap (Effect)
 	[18182]	= true,	-- Improved Life Tap r1
 	[18183]	= true,	-- Improved Life Tap r2
+	[18194]	= true,	-- Mana Regeneration
+	[24363]	= true,	-- Mana Regeneration
+	[25694]	= true,	-- Well Fed
+	[25941]	= true,	-- Well Fed
+	[28509]	= true,	-- Greater Mana Regeneration
+	[53764]	= true,	-- Mighty Mana Regeneration
 }
 
 -- Sets tick time to the last possible time based on the last tick
