@@ -7,6 +7,7 @@ if C.reminder.solo_buffs_enable ~= true then return end
 local tab = T.ReminderSelfBuffs[T.class]
 if not tab then return end
 local playerBuff = {}
+local isDeadlyBrew = T.SoD and C_Engraving.IsRuneEquipped(48141)
 
 local function OnEvent(self, event)
 	local group = tab[self.id]
@@ -81,14 +82,14 @@ local function OnEvent(self, event)
 	specpass == true and rolepass == true and not UnitInVehicle("player") then
 		if group.mainhand then
 			local hasMainHandEnchant = GetWeaponEnchantInfo()
-			if not hasMainHandEnchant then
+			if not hasMainHandEnchant and not isDeadlyBrew then
 				self:Show()
 				if canplaysound == true then PlaySoundFile(C.media.warning_sound, "Master") end
 			end
 			return
 		elseif group.offhand then
 			local _, _, _, _, hasOffHandEnchant = GetWeaponEnchantInfo()
-			if not hasOffHandEnchant and C_PaperDollInfo.OffhandHasWeapon() then
+			if not hasOffHandEnchant and C_PaperDollInfo.OffhandHasWeapon() and not isDeadlyBrew then
 				self:Show()
 				if canplaysound == true then PlaySoundFile(C.media.warning_sound, "Master") end
 			end
@@ -127,10 +128,9 @@ local function OnEvent(self, event)
 	end
 end
 
-local isDeadlyBrew = T.SoD and C_Engraving.IsRuneEquipped(48141)
 for i = 1, #tab do
 	-- Skip shields group for Shaman's in Vanilla when not playing SoD
-	if not T.Vanilla or (T.SoD and not isDeadlyBrew) or (T.Vanilla and (T.class ~= "SHAMAN" or i ~= 1)) then
+	if not T.Vanilla or T.SoD or (T.Vanilla and (T.class ~= "SHAMAN" or i ~= 1)) then
 		local frame = CreateFrame("Frame", "ReminderFrame"..i, UIParent)
 		frame:CreatePanel("Default", C.reminder.solo_buffs_size, C.reminder.solo_buffs_size, unpack(C.position.self_buffs))
 		frame:SetFrameLevel(6)
