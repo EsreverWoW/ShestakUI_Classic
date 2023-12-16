@@ -290,9 +290,9 @@ C["filger_spells"] = {
 			-- Lacerate [Season of Discovery]
 			{spellID = 414644, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Mangle (Bear) [Season of Discovery]
-			{spellID = 407995, unitID = "target", caster = "player", filter = "DEBUFF"},
+			{spellID = 407995, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Mangle (Cat) [Season of Discovery]
-			-- {spellID = 407993, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- {spellID = 407993, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Moonfire
 			{spellID = 8921, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Pounce r1

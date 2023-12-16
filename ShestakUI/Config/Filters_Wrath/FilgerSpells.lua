@@ -1753,9 +1753,9 @@ C["filger_spells"] = {
 			-- Maim
 			{spellID = 22570, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Mangle (Bear)
-			{spellID = 33878, unitID = "target", caster = "player", filter = "DEBUFF"},
+			{spellID = 33878, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Mangle (Cat)
-			{spellID = 33876, unitID = "target", caster = "player", filter = "DEBUFF"},
+			{spellID = 33876, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Moonfire
 			{spellID = 8921, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Pounce r1
