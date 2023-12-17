@@ -7,6 +7,16 @@ local FAILED = _G.FAILED or 'Failed'
 local INTERRUPTED = _G.INTERRUPTED or 'Interrupted'
 local CASTBAR_STAGE_DURATION_INVALID = -1 -- defined in FrameXML/CastingBarFrame.lua
 
+local UnitChannelInfo = UnitChannelInfo
+local EventFunctions = {}
+
+local LibClassicCasterino = (oUF:IsVanilla() and LibStub('LibClassicCasterino-ShestakUI', true))
+if(LibClassicCasterino) then
+	UnitChannelInfo = function(unit)
+		return LibClassicCasterino:UnitChannelInfo(unit)
+	end
+end
+
 -- Tradeskill block
 local tradeskillCurrent, tradeskillTotal, mergeTradeskill = 0, 0, false
 -- end block
@@ -190,6 +200,10 @@ local function CastStart(self, event, unit)
 	if(oUF:IsClassic() and not oUF:IsCata()) then
 		rank = spellID and GetSpellSubtext(spellID)
 		rank = rank and strmatch(rank, "%d+")
+	end
+
+	if(not text or text == '' or text == CHANNELING) then
+		text = name
 	end
 
 	element.casting = event == 'UNIT_SPELLCAST_START'
@@ -548,13 +562,23 @@ local function Enable(self, unit)
 		element.ForceUpdate = ForceUpdate
 
 		self:RegisterEvent('UNIT_SPELLCAST_START', CastStart)
-		self:RegisterEvent('UNIT_SPELLCAST_CHANNEL_START', CastStart)
 		self:RegisterEvent('UNIT_SPELLCAST_STOP', CastStop)
-		self:RegisterEvent('UNIT_SPELLCAST_CHANNEL_STOP', CastStop)
 		self:RegisterEvent('UNIT_SPELLCAST_DELAYED', CastUpdate)
-		self:RegisterEvent('UNIT_SPELLCAST_CHANNEL_UPDATE', CastUpdate)
 		self:RegisterEvent('UNIT_SPELLCAST_FAILED', CastFail)
 		self:RegisterEvent('UNIT_SPELLCAST_INTERRUPTED', CastFail)
+		self:RegisterEvent('UNIT_SPELLCAST_CHANNEL_UPDATE', CastUpdate)
+
+		if(not oUF:IsVanilla() or self.unit == 'player') then
+			self:RegisterEvent('UNIT_SPELLCAST_CHANNEL_START', CastStart)
+			self:RegisterEvent('UNIT_SPELLCAST_CHANNEL_STOP', CastStop)
+		elseif(LibClassicCasterino) then
+			local CastbarEventHandler = function(event, ...)
+				return EventFunctions[event](self, event, ...)
+			end
+			LibClassicCasterino.RegisterCallback(self, 'UNIT_SPELLCAST_CHANNEL_START', CastbarEventHandler)
+			LibClassicCasterino.RegisterCallback(self, 'UNIT_SPELLCAST_CHANNEL_STOP', CastbarEventHandler)
+		end
+
 		if(oUF:IsMainline()) then
 			self:RegisterEvent('UNIT_SPELLCAST_EMPOWER_START', CastStart)
 			self:RegisterEvent('UNIT_SPELLCAST_EMPOWER_STOP', CastStop)
@@ -624,6 +648,11 @@ local function Disable(self)
 		self:UnregisterEvent('UNIT_SPELLCAST_INTERRUPTIBLE', CastInterruptible)
 		self:UnregisterEvent('UNIT_SPELLCAST_NOT_INTERRUPTIBLE', CastInterruptible)
 
+		if(LibClassicCasterino) then
+			LibClassicCasterino.UnregisterCallback(self, 'UNIT_SPELLCAST_CHANNEL_START')
+			LibClassicCasterino.UnregisterCallback(self, 'UNIT_SPELLCAST_CHANNEL_STOP')
+		end
+
 		element:SetScript('OnUpdate', nil)
 
 		if(self.unit == 'player' and not (self.hasChildren or self.isChild or self.isNamePlate)) then
@@ -636,6 +665,11 @@ local function Disable(self)
 			end
 		end
 	end
+end
+
+if(LibClassicCasterino) then
+	EventFunctions['UNIT_SPELLCAST_CHANNEL_START'] = CastStart
+	EventFunctions['UNIT_SPELLCAST_CHANNEL_STOP'] = CastStop
 end
 
 -- Tradeskill block
