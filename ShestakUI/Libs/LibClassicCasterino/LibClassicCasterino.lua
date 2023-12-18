@@ -100,6 +100,14 @@ local makeCastUID = function(guid, spellName)
 	return npcID..spellName
 end
 
+local penanceIDs = {
+	[402174] = 402174,
+	[402261] = 402174,
+	[402277] = 402174,
+	[402284] = 402174,
+	[402289] = 402174,
+}
+
 local function CastStart(srcGUID, castType, spellName, spellID, overrideCastTime, isSrcEnemyPlayer )
 	-- This cast time can't be used reliably because it's changing depending on player's own haste
 	local _, _, icon, castTime = GetSpellInfo(spellID)
@@ -199,9 +207,8 @@ function f:COMBAT_LOG_EVENT_UNFILTERED(event)
 		else
 			local castUID = makeCastUID(srcGUID, spellName)
 			local cachedTime = castTimeCache[castUID]
-			local spellID = NPCspellNameToID[spellName] -- just for the icon
-			if not spellID then
-				spellID = 4036 -- Engineering Icon
+			if not spellID or spellID == 0 then
+				spellID = NPCspellNameToID[spellName] or 4036 -- Engineering for fallback icon
 			end
 			if cachedTime then
 				CastStart(srcGUID, "CAST", spellName, spellID, cachedTime*1000)
@@ -215,6 +222,12 @@ function f:COMBAT_LOG_EVENT_UNFILTERED(event)
 		CastStop(srcGUID, "CAST", "INTERRUPTED", "STOP")
 
 	elseif eventType == "SPELL_CAST_SUCCESS" then
+		-- We need to adjust penance IDs and skip processing if penance is already being cast
+		spellID = penanceIDs[spellID] or spellID
+		local isPenance = penanceIDs[spellID]
+		local currentCast = casters[srcGUID]
+		local alreadyCastingPenance = currentCast and penanceIDs[currentCast[6]]
+
 		if isSrcPlayer then
 			if classChannelsByAura[spellID] then
 				-- SPELL_CAST_SUCCESS can come right after AURA_APPLIED, so ignoring it
@@ -222,14 +235,14 @@ function f:COMBAT_LOG_EVENT_UNFILTERED(event)
 			elseif classChannelsByCast[spellID] then
 				-- Channels fire SPELL_CAST_SUCCESS at their start
 				local isChanneling = classChannelsByCast[spellID]
-				if isChanneling then
+				if isChanneling and not alreadyCastingPenance then
 					local isSrcFriendlyPlayer = bit_band(srcFlags, COMBATLOG_OBJECT_REACTION_FRIENDLY) > 0
-					CastStart(srcGUID, "CHANNEL", spellName, spellID, nil, not isSrcFriendlyPlayer)
+					CastStart(srcGUID, "CHANNEL", spellName, spellID, isPenance and 2000, not isSrcFriendlyPlayer)
 				end
 				return
 			end
 		end
-		if not isSrcPlayer then
+		if not isSrcPlayer and not alreadyCastingPenance then
 			local castUID = makeCastUID(srcGUID, spellName)
 			local cachedTime = castTimeCache[castUID]
 			if not cachedTime then
@@ -384,6 +397,11 @@ end
 local Passthrough = function(self, event, unit, ...)
 	if unit == "player" or UnitIsUnit(unit, "player") then
 		callbacks:Fire(event, unit, ...)
+	elseif event == "UNIT_SPELLCAST_CHANNEL_STOP" then
+		local guid = UnitGUID(unit)
+		if guid then
+			CastStop(guid, nil, "SUCCEEDED", "STOP")
+		end
 	end
 end
 if isBC then
@@ -592,32 +610,33 @@ classChannelsByAura = {
 	[19305] = 6,    -- Starshards
 
 	-- DRUID
-	[17402] = 10,  -- Hurricane
-	[9863] = 10,      -- Tranquility
+	[17402] = 10,   -- Hurricane
+	[9863] = 10,    -- Tranquility
 
 	-- HUNTER
-	[6197] = 60,     -- Eagle Eye
-	[13544] = 5,     -- Mend Pet
-	[1515] = 20,     -- Tame Beast
-	[1002] = 60,     -- Eyes of the Beast
-	[14295] = 6,     -- Volley
+	[6197] = 60,    -- Eagle Eye
+	[13544] = 5,    -- Mend Pet
+	[1515] = 20,    -- Tame Beast
+	[1002] = 60,    -- Eyes of the Beast
+	[14295] = 6,    -- Volley
 
-	[10187] = 8,     -- Blizzard
-	[12051] = 8,     -- Evocation
+	[10187] = 8,    -- Blizzard
+	[12051] = 8,    -- Evocation
 
 	-- PRIEST
 	[18807] = 3,    -- Mind Flay
 	[2096] = 60,    -- Mind Vision
 	[10912] = 3,    -- Mind Control
+	[413259] = 5,   -- Mind Sear [Season of Discovery]
 
 	-- WARLOCK
-	[126] = 45,       -- Eye of Kilrogg
+	[126] = 45,     -- Eye of Kilrogg
 	[11700] = 5,    -- Drain Life
 	[11704] = 5,    -- Drain Mana
 	[11675] = 15,   -- Drain Soul
 	[11678] = 8,    -- Rain of Fire
-	[11684] = 15,     -- Hellfire
-	[11695] = 10,     -- Health Funnel
+	[11684] = 15,   -- Hellfire
+	[11695] = 10,   -- Health Funnel
 	[6358] = 15,    -- Seduction
 	[17854] = 10,   -- Consume Shadows (Voidwalker)
 }
@@ -626,9 +645,14 @@ classChannelsByCast = {
 	[13278] = 4,    -- Gnomish Death Ray
 
 	-- MAGE
-	[25345] = 5,     -- Arcane Missiles
-}
+	[25345] = 5,    -- Arcane Missiles
+	[412510] = 3,   -- Mass Regeneration [Season of Discovery]
+	[401460] = 3,   -- Rapid Regeneration [Season of Discovery]
+	[401417] = 3,   -- Regeneration [Season of Discovery]
 
+	-- PRIEST
+	[402174] = 2,   -- Penance [Season of Discovery]
+}
 
 for id in pairs(classCasts) do
 	spellNameToID[GetSpellInfo(id)] = id
