@@ -264,9 +264,9 @@ local function LoadSkin()
 			QuestLogListScrollFrame:Show()
 		end)
 
-		QUESTS_DISPLAYED = 20
+		QUESTS_DISPLAYED = 25
 
-		for i = 7, 20 do
+		for i = 7, QUESTS_DISPLAYED do
 			local questLogTitle = CreateFrame("Button", "QuestLogTitle"..i, QuestLogFrame, "QuestLogTitleButtonTemplate")
 
 			questLogTitle:SetID(i)
