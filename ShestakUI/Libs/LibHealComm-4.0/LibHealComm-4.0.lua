@@ -2026,8 +2026,8 @@ if( isSoD and playerClass == "MAGE" ) then
 		local MassRegeneration = GetSpellInfo(412510) or "Mass Regeneration"
 		local Regeneration = GetSpellInfo(401417) or "Regeneration"
 
-		spellData[MassRegeneration] = {_isChanneled = true, coeff = 0.081 * 3, interval = 1,  ticks = 3, levels = {nil}, averages = generateSODAverages(38.258376, 0.54, 0.904195, 0.161311) }
-		spellData[Regeneration] = {_isChanneled = true, coeff = 0.243 * 3 , interval = 1, ticks = 3, levels = {nil}, averages = generateSODAverages(38.258376,  1.0, 0.018012, 0.044141)}
+		spellData[MassRegeneration] = {_isChanneled = true, coeff = 0.081 * 3, interval = 1,  ticks = 3, levels = {nil}, averages = generateSODAverages(38.258376, 0.42, 0.904195, 0.161311) }
+		spellData[Regeneration] = {_isChanneled = true, coeff = 0.243 * 3 , interval = 1, ticks = 3, levels = {nil}, averages = generateSODAverages(38.258376,  0.42, 0.904195, 0.161311)}
 
 		GetHealTargets = function(bitType, guid, spellID)
 			local spellName = GetSpellInfo(spellID)
