@@ -40,7 +40,7 @@ License: MIT
 -- @class file
 -- @name LibRangeCheck-3.0
 local MAJOR_VERSION = "LibRangeCheck-3.0"
-local MINOR_VERSION = 8
+local MINOR_VERSION = 9
 
 ---@class lib
 local lib, oldminor = LibStub:NewLibrary(MAJOR_VERSION, MINOR_VERSION)
@@ -795,7 +795,7 @@ local function getRange(unit, noItems)
             return getRangeWithCheckerList(unit, noItems and lib.friendNoItemsRC or lib.friendRC)
         end
     else
-        return getRangeWithCheckerList(unit, InCombatLockdownRestriction(unit) and lib.miscRC or lib.miscRCInCombat)
+        return getRangeWithCheckerList(unit, InCombatLockdownRestriction(unit) and lib.miscRCInCombat or lib.miscRC)
     end
 end
 
