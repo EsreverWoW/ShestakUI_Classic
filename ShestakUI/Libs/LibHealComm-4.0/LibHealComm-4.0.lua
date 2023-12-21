@@ -3244,17 +3244,6 @@ end
 
 -- Spell was cast somehow
 function HealComm:CastSpell(arg, unit)
-
-	--Set lastSentID so macro heals work
-	if tonumber(arg) then
-		lastSentID = arg
-	else
-		local _, _, _, _, _, _, spellID = GetSpellInfo(arg)
-		lastSentID = spellID
-	end
-	guidPriorities[lastSentID] = nil
-
-
 	-- If the spell is waiting for a target and it's a spell action button then we know that the GUID has to be mouseover or a key binding cast.
 	if( unit and UnitCanAssist("player", unit)  ) then
 		setCastData(4, UnitName(unit), UnitGUID(unit))
