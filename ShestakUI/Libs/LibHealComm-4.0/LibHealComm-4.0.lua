@@ -1747,7 +1747,7 @@ if( playerClass == "PRIEST" ) then
 	end
 end
 
--- Keep track of current cast targer of Healing Rain
+-- Keep track of current cast target of Healing Rain
 local healingRainTargetGUID
 
 if( playerClass == "SHAMAN" ) then
@@ -1895,7 +1895,7 @@ if( playerClass == "SHAMAN" ) then
 
 			if( isSoD and spellName == HealingRain ) then
 				--HoT duration is equal to remaining duration of aura
-				local _, _, count, _, _, expiration = unitHasAura("player", HealingRain)
+				local _, _, _, _, _, expiration = unitHasAura("player", HealingRain)
 				local ticksLeft = ceil(expiration - GetTime())
 				totalTicks = ticksLeft
 			end
