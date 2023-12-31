@@ -1690,6 +1690,12 @@ C["filger_spells"] = {
 
 			-- Blackout
 			{spellID = 15269, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Cripple (Homunculi) [Season of Discovery]
+			{spellID = 402808, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
+			-- Degrade (Homunculi) [Season of Discovery]
+			{spellID = 402818, unitID = "target", caster = "all", filter = "DEBUFF"},
+			-- Demoralize (Homunculi) [Season of Discovery]
+			{spellID = 402811, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Devouring Plague
 			{spellID = 2944, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Hex of Weakness

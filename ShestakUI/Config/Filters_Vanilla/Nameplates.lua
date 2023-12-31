@@ -109,6 +109,9 @@ T.DebuffWhiteList = {
 
 	-- Priest
 	[SpellName(15269)] = true,	-- Blackout
+	[SpellName(402808)] = true,	-- Cripple (Homunculi) [Season of Discovery]
+	[SpellName(402818)] = true,	-- Degrade (Homunculi) [Season of Discovery]
+	[SpellName(402811)] = true,	-- Demoralize (Homunculi) [Season of Discovery]
 	[SpellName(2944)] = true,	-- Devouring Plague
 	[SpellName(9035)] = true,	-- Hex of Weakness
 	[SpellName(14914)] = true,	-- Holy Fire
