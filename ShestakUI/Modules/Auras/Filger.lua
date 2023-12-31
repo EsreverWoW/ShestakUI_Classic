@@ -35,6 +35,8 @@ if T.Mainline then
 	SpellActivationOverlayFrame:SetFrameStrata("BACKGROUND")
 end
 
+local LibClassicDurations = T.Vanilla and LibStub("LibClassicDurations")
+
 local Filger = {}
 local MyUnits = {player = true, vehicle = true, pet = true}
 local SpellGroups = {}
@@ -302,6 +304,14 @@ local function FindAuras(self, unit)
 				local isKnown = data.requireSpell and IsPlayerSpell(data.requireSpell)
 				if ((data.filter == "BUFF" and filter == "HELPFUL") or (data.filter == "DEBUFF" and filter == "HARMFUL")) and (not data.spec or data.spec == T.Spec) and (not data.requireSpell or isKnown) then
 					if not data.count or count >= data.count then
+						if LibClassicDurations then
+							local durationNew, expirationTimeNew = LibClassicDurations:GetAuraDurationByUnit(data.unitID, spid, caster, name)
+
+							if durationNew and durationNew > 0 then
+								duration = durationNew
+								expirationTime = expirationTimeNew
+							end
+						end
 						self.actives[spid] = {data = data, name = name, icon = icon, count = count, start = expirationTime - duration, duration = duration, spid = spid, sort = data.sort}
 					end
 				elseif data.filter == "ICD" and (data.trigger == "BUFF" or data.trigger == "DEBUFF") and (not data.spec or data.spec == T.Spec) and (not data.requireSpell or isKnown) then

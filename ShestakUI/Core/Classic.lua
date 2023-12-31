@@ -77,6 +77,14 @@ end
 if not T.Vanilla then return end
 
 ----------------------------------------------------------------------------------------
+--	LibClassicDurations (by d87)
+----------------------------------------------------------------------------------------
+local LibClassicDurations = LibStub("LibClassicDurations")
+if LibClassicDurations then
+	LibClassicDurations:Register("ShestakUI")
+end
+
+----------------------------------------------------------------------------------------
 --	TBC+ Shaman Coloring (config option later)
 ----------------------------------------------------------------------------------------
 if not CUSTOM_CLASS_COLORS then
