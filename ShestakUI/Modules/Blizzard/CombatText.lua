@@ -326,7 +326,8 @@ local function OnEvent(_, event, subevent, powerType)
 		end
 	elseif event == "RUNE_POWER_UPDATE" then
 		local arg1 = subevent
-		if GetRuneCooldown(arg1) ~= 0 then return end
+		local validRuneType = arg1 and type(arg1) == "number" and arg1 >= 0 and arg1 <= 6
+		if not validRuneType or GetRuneCooldown(arg1) ~= 0 then return end
 		if T.Wrath then
 			local rune = GetRuneType(arg1)
 			local msg
