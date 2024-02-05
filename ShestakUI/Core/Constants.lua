@@ -26,8 +26,7 @@ T.Wrath = _G.WOW_PROJECT_ID == _G.WOW_PROJECT_WRATH_CLASSIC
 T.Cata = T.Classic and T.toc >= 4e4
 T.Hardcore = C_GameRules and C_GameRules.IsHardcoreActive()
 T.SoM = C_Seasons and C_Seasons.HasActiveSeason() and C_Seasons.GetActiveSeason() == Enum.SeasonID.SeasonOfMastery
--- T.SoD = C_Seasons and C_Seasons.HasActiveSeason() and C_Seasons.GetActiveSeason() == Enum.SeasonID.Placeholder
-T.SoD = (T.Vanilla and GetMaxPlayerLevel() < 60) or (C_Engraving and C_Engraving.IsEngravingEnabled()) or (C_Seasons and C_Seasons.HasActiveSeason() and (C_Seasons.GetActiveSeason() > 1 and C_Seasons.GetActiveSeason() ~= Enum.SeasonID.Hardcore))
+T.SoD = C_Seasons and C_Seasons.HasActiveSeason() and (C_Seasons.GetActiveSeason() == Enum.SeasonID.SeasonOfDiscovery or C_Seasons.GetActiveSeason() == Enum.SeasonID.Placeholder)
 
 -- BETA
 GetContainerItemInfo = GetContainerItemInfo or function(bagIndex, slotIndex)

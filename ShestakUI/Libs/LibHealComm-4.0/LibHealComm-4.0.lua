@@ -165,7 +165,7 @@ if( not HealComm.compressGUID  ) then
 	HealComm.compressGUID = setmetatable({}, {
 		__index = function(tbl, guid)
 			local str
-			if strsub(guid,1,6) ~= "Player" then
+			if strsub(guid, 1, 6) ~= "Player" then
 				for unit, pguid in pairs(activePets) do
 					if pguid == guid and UnitExists(unit) then
 						str = "p-" .. strmatch(UnitGUID(unit), "^%w*-([-%w]*)$")
@@ -186,14 +186,14 @@ if( not HealComm.compressGUID  ) then
 		__index = function(tbl, str)
 			if( not str ) then return nil end
 			local guid
-			if strsub(str,1,2) == "p-" then
-				local unit = HealComm.guidToUnit["Player-"..strsub(str,3)]
+			if strsub(str, 1, 2) == "p-" then
+				local unit = HealComm.guidToUnit["Player-" .. strsub(str, 3)]
 				if not unit then
 					return nil
 				end
 				guid = activePets[unit]
 			else
-				guid = "Player-"..str
+				guid = "Player-" .. str
 			end
 
 			rawset(tbl, str, guid)
@@ -281,7 +281,7 @@ local function removeRecord(pending, guid)
 	end
 
 	-- Shift any records after this ones index down 5 to account for the removal
-	for i=1, #(pending), 5 do
+	for i = 1, #(pending), 5 do
 		local guid = pending[i]
 		if( pending[guid] > id ) then
 			pending[guid] = pending[guid] - 5
@@ -290,7 +290,7 @@ local function removeRecord(pending, guid)
 end
 
 local function removeRecordList(pending, inc, comp, ...)
-	for i=1, select("#", ...), inc do
+	for i = 1, select("#", ...), inc do
 		local guid = select(i, ...)
 		guid = comp and decompressGUID[guid] or guid
 
@@ -310,7 +310,7 @@ local function removeRecordList(pending, inc, comp, ...)
 	end
 
 	-- Redo all the id maps
-	for i=1, #(pending), 5 do
+	for i = 1, #(pending), 5 do
 		pending[pending[i]] = i
 	end
 end
@@ -338,7 +338,7 @@ local function removeAllRecords(guid)
 
 					-- Shift everything back
 					if( #(pending) > 0 ) then
-						for i=1, #(pending), 5 do
+						for i = 1, #(pending), 5 do
 							local guid = pending[i]
 							if( pending[guid] > id ) then
 								pending[guid] = pending[guid] - 5
@@ -432,7 +432,7 @@ function HealComm:GetTimeframeHealAmount(guid, bitFlag, startTime, time, ignoreG
 			if( not ignoreGUID or ignoreGUID ~= casterGUID ) and (not srcGUID or srcGUID == casterGUID) then
 				for _, pending in pairs(spells) do
 					if( pending.bitType and bit.band(pending.bitType, bitFlag) > 0 ) then
-						for i=1, #(pending), 5 do
+						for i = 1, #(pending), 5 do
 							local targetGUID = pending[i]
 							if( not guid or targetGUID == guid ) then
 								local amount = pending[i + 1]
@@ -483,7 +483,7 @@ function HealComm:GetNextHealAmount(guid, bitFlag, time, ignoreGUID, srcGUID)
 			if( not ignoreGUID or ignoreGUID ~= casterGUID ) and (not srcGUID or srcGUID == casterGUID) then
 				for _, pending in pairs(spells) do
 					if( pending.bitType and bit.band(pending.bitType, bitFlag) > 0 ) then
-						for i=1, #(pending), 5 do
+						for i = 1, #(pending), 5 do
 							local targetGUID = pending[i]
 							if( not guid or targetGUID == guid ) then
 								local amount = pending[i + 1]
@@ -889,7 +889,7 @@ end
 -- Values for SOD have been taken from https://github.com/jezzi23/stat_weights_classic
 local function generateSODAverages(baseAmount, levelCoeff, levelScaling, levelScalingSquared)
 	local averages = {}
-	for lvl=1,60 do
+	for lvl = 1, 60 do
 		averages[lvl] = levelCoeff * (baseAmount + levelScaling * lvl + levelScalingSquared * lvl * lvl)
 	end
 	return {averages}
@@ -1155,7 +1155,7 @@ if( playerClass == "DRUID" ) then
 				table.wipe(wgTicks)
 				local tickModifier = equippedSetCache["Lasherweave"] >= 2 and 0.70 or 1
 				local tickAmount = healAmount / hotData[spellName].ticks
-				for i=1, hotData[spellName].ticks do
+				for i = 1, hotData[spellName].ticks do
 					table.insert(wgTicks, math.ceil(healModifier * ((healAmount + tickAmount * (3 - (i - 1) * tickModifier)) + (spellPower * spModifier))))
 				end
 
@@ -1248,7 +1248,7 @@ if( playerClass == "DRUID" ) then
 				-- Glyph of Healing Touch
 				if( glyphCache[54825] ) then
 					healAmount = healAmount / 2
-					castTime = max(castTime - 1.5,1.5)
+					castTime = max(castTime - 1.5, 1.5)
 				end
 
 				spellPower = spellPower * (((castTime / 3.5) * (isWrath and 1.88 or 1)) + (talentData[EmpoweredTouch].current * (isWrath and 2 or 1)))
@@ -1329,7 +1329,7 @@ if( playerClass == "PALADIN" ) then
 				{avg(445, 499), avg(447, 502), avg(450, 505), avg(452, 507), avg(455, 510), avg(458, 512)},
 				{avg(588, 658), avg(591, 661), avg(594, 664), avg(597, 667), avg(600, 670)},
 				{avg(682, 764), avg(685, 768), avg(688, 771), avg(692, 775), avg(695, 778)},
-				{avg(785,879), avg(788,883)} }}
+				{avg(785, 879), avg(788, 883)} }}
 		else
 			spellData[HolyLight] = { coeff = 2.5 / 3.5, levels = {1, 6, 14, 22, 30, 38, 46, 54, 60, 62, 70}, averages = {
 				{avg(39, 47), avg(39, 48), avg(40, 49), avg(41, 50), avg(42, 51)},
@@ -2420,8 +2420,8 @@ end
 
 -- Cache player talent data for spells we need
 function HealComm:CHARACTER_POINTS_CHANGED()
-	for tabIndex=1, GetNumTalentTabs() do
-		for i=1, GetNumTalents(tabIndex) do
+	for tabIndex = 1, GetNumTalentTabs() do
+		for i = 1, GetNumTalents(tabIndex) do
 			local name, _, _, _, spent = GetTalentInfo(tabIndex, i)
 			if( name and talentData[name] ) then
 				talentData[name].current = talentData[name].mod * spent
@@ -2454,7 +2454,7 @@ end
 -- COMM CODE
 local function loadHealAmount(...)
 	local tbl = HealComm:RetrieveTable()
-	for i=1, select("#", ...) do
+	for i = 1, select("#", ...) do
 		tbl[i] = tonumber((select(i, ...)))
 	end
 
@@ -2469,7 +2469,7 @@ local function loadHealList(pending, amount, stack, endTime, ticksLeft, ...)
 	if( amount ~= -1 and amount ~= "-1" ) then
 		amount = not pending.hasVariableTicks and amount or loadHealAmount(strsplit("@", amount))
 
-		for i=1, select("#", ...) do
+		for i = 1, select("#", ...) do
 			local guid = select(i, ...)
 			local decompGUID = guid and decompressGUID[guid]
 			if( decompGUID ) then
@@ -2679,7 +2679,7 @@ local function parseHealEnd(casterGUID, pending, checkField, spellID, interrupte
 			removeRecord(pending, pending[i - 4])
 		end
 	else
-		for i=1, select("#", ...) do
+		for i = 1, select("#", ...) do
 			local guid = decompressGUID[select(i, ...)]
 
 			if guid then
@@ -2732,7 +2732,7 @@ local function parseHealDelayed(casterGUID, startTimeRelative, endTimeRelative, 
 	end
 
 	wipe(tempPlayerList)
-	for i=1, #(pending), 5 do
+	for i = 1, #(pending), 5 do
 		pending[i + 3] = endTime
 		tinsert(tempPlayerList, pending[i])
 	end
@@ -3097,7 +3097,7 @@ HealComm.UNIT_SPELLCAST_CHANNEL_START = HealComm.UNIT_SPELLCAST_START
 
 local spellCastSucceeded = {}
 local function hasNS()
-	local i=1
+	local i = 1
 	repeat
 		local spellID = select(10, UnitBuff("player", i))
 		if spellID == 17116 or spellID == 16188 then
@@ -3388,7 +3388,7 @@ function HealComm:UNIT_PET(unit)
 		removeAllRecords(activeGUID)
 
 		rawset(self.compressGUID, activeGUID, nil)
-		rawset(self.decompressGUID, "p-"..strsub(guid,8), nil)
+		rawset(self.decompressGUID, "p-" ..  strsub(guid, 8), nil)
 		guidToUnit[activeGUID] = nil
 		guidToGroup[activeGUID] = nil
 		activePets[unit] = nil
@@ -3513,7 +3513,7 @@ function HealComm:OnInitialize()
 	end
 
 	-- Cache glyphs initially
-	for id=1, GetNumGlyphSockets() do
+	for id = 1, GetNumGlyphSockets() do
 		local enabled, _, glyphID = GetGlyphSocketInfo(id)
 		if( enabled and glyphID ) then
 			glyphCache[glyphID] = true
