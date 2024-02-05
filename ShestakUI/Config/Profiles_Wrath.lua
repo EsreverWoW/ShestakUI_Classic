@@ -42,3 +42,10 @@ end
 if T.level ~= MAX_PLAYER_LEVEL then
 
 end
+
+----------------------------------------------------------------------------------------
+--	Load external profile https://github.com/Wetxius/ShestakUI_Profile
+----------------------------------------------------------------------------------------
+if ShestakUICustomProfile then
+	ShestakUICustomProfile()
+end
