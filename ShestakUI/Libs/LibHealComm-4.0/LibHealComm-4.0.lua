@@ -1,7 +1,7 @@
 if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then return end
 
 local major = "LibHealComm-4.0"
-local minor = 111
+local minor = 112
 assert(LibStub, format("%s requires LibStub.", major))
 
 local HealComm = LibStub:NewLibrary(major, minor)
@@ -87,21 +87,21 @@ local build = floor(select(4, GetBuildInfo()) / 10000)
 local isTBC = build == 2
 local isWrath = build == 3
 local isClassicEra = build == 1
---https://warcraft.wiki.gg/wiki/Enum.SeasonID
+-- https://warcraft.wiki.gg/wiki/Enum.SeasonID
 local isSoD = HasActiveSeason() and GetActiveSeason() == (Enum.SeasonID.SeasonOfDiscovery or Enum.SeasonID.Placeholder) and isClassicEra
 
 local spellRankTableData = {
-	[1] = { 774, 8936, 5185, 740, 635, 19750, 139, 2060, 596, 2061, 2054, 2050, 1064, 331, 8004, 136, 755, 689, 746, 33763, 32546, 37563, 48438, 61295, 51945, 50464, 47757, 408120, 408124, 402277, 415236, 415240, 412510, 401417 },
-	[2] = { 1058, 8938, 5186, 8918, 639, 19939, 6074, 10963, 996, 9472, 2055, 2052, 10622, 332, 8008, 3111, 3698, 699, 1159, 53248, 61299, 51990, 48450, 52986, 48119 },
-	[3] = { 1430, 8939, 5187, 9862, 647, 19940, 6075, 10964, 10960, 9473, 6063, 2053, 10623, 547, 8010, 3661, 3699, 709, 3267, 53249, 61300, 51997, 48451, 52987, 48120 },
-	[4] = { 2090, 8940, 5188, 9863, 1026, 19941, 6076, 10965, 10961, 9474, 6064, 913, 10466, 3662, 3700, 7651, 3268, 25422, 53251, 61301, 51998, 52988 },
-	[5] = { 2091, 8941, 5189, 1042, 19942, 6077, 22009, 25314, 25316, 10915, 939, 10467, 13542, 11693, 11699, 7926, 25423, 26983, 51999 },
-	[6] = { 3627, 9750, 6778, 3472, 19943, 6078, 10916, 959, 10468, 13543, 11694, 11700, 7927, 23569, 24412, 25210, 25308, 52000, 55458, 48446 },
-	[7] = { 8910, 9856, 8903, 10328, 10927, 10917, 8005, 13544, 11695, 10838, 27137, 25213, 25420, 27219, 55459, 48447, 48072 },
-	[8] = { 9839, 9857, 9758, 10329, 10928, 10395, 10839, 23568, 24413, 25233, 27259, 27220, 27046, 48784, 49275, 48062 },
-	[9] = { 9840, 9858, 9888, 25292, 10929, 10396, 18608, 25235, 48785, 49276, 48063, 48989, 47856, 47857 },
-	[10] = { 9841, 9889, 25315, 25357, 18610, 23567, 24414, 26980, 27135, 48070, 48990 },
-	[11] = { 25299, 25297, 30020, 27136, 25221, 25391, 27030, 48442, 48071 },
+	[1] = { 774, 8936, 5185, 740, 635, 19750, 139, 2060, 596, 2061, 2054, 2050, 1064, 331, 8004, 136, 755, 689, 746, 33763, 32546, 37563, 48438, 61295, 51945, 50464, 47757, 408120, 408124, 402277, 415236, 415240, 412510, 401417, 417057, 425268 },
+	[2] = { 1058, 8938, 5186, 8918, 639, 19939, 6074, 10963, 996, 9472, 2055, 2052, 10622, 332, 8008, 3111, 3698, 699, 1159, 53248, 61299, 51990, 48450, 52986, 48119, 417058, 425269 },
+	[3] = { 1430, 8939, 5187, 9862, 647, 19940, 6075, 10964, 10960, 9473, 6063, 2053, 10623, 547, 8010, 3661, 3699, 709, 3267, 53249, 61300, 51997, 48451, 52987, 48120, 417059, 425270 },
+	[4] = { 2090, 8940, 5188, 9863, 1026, 19941, 6076, 10965, 10961, 9474, 6064, 913, 10466, 3662, 3700, 7651, 3268, 25422, 53251, 61301, 51998, 52988, 417060, 425271 },
+	[5] = { 2091, 8941, 5189, 1042, 19942, 6077, 22009, 25314, 25316, 10915, 939, 10467, 13542, 11693, 11699, 7926, 25423, 26983, 51999, 417061, 425272 },
+	[6] = { 3627, 9750, 6778, 3472, 19943, 6078, 10916, 959, 10468, 13543, 11694, 11700, 7927, 23569, 24412, 25210, 25308, 52000, 55458, 48446, 417062, 425273 },
+	[7] = { 8910, 9856, 8903, 10328, 10927, 10917, 8005, 13544, 11695, 10838, 27137, 25213, 25420, 27219, 55459, 48447, 48072, 417063, 425274 },
+	[8] = { 9839, 9857, 9758, 10329, 10928, 10395, 10839, 23568, 24413, 25233, 27259, 27220, 27046, 48784, 49275, 48062, 417064, 425275 },
+	[9] = { 9840, 9858, 9888, 25292, 10929, 10396, 18608, 25235, 48785, 49276, 48063, 48989, 47856, 47857, 417065, 425276 },
+	[10] = { 9841, 9889, 25315, 25357, 18610, 23567, 24414, 26980, 27135, 48070, 48990, 417066, 425277 },
+	[11] = { 25299, 25297, 30020, 27136, 25221, 25391, 27030, 48442, 48071, 417068 },
 	[12] = { 26981, 26978, 25222, 25396, 27031, 48781, 48443 },
 	[13] = { 26982, 26979, 48782, 49272, 48067, 45543 },
 	[14] = { 49273, 48377, 48440, 48068, 51827 },
@@ -172,7 +172,7 @@ if( not HealComm.compressGUID  ) then
 					end
 				end
 				if not str then
-					--assert(str, "Could not encode: "..guid)
+					-- assert(str, "Could not encode: " .. guid)
 					return nil
 				end
 			else
@@ -808,11 +808,11 @@ end
 -- Any other modifiers such as Mortal Strike or Avenging Wrath are applied after everything else
 
 local function calculateGeneralAmount(level, amount, spellPower, spModifier, healModifier)
-	--SOD runes have no spell level and are treated as playerLevel
+	-- SOD runes have no spell level and are treated as playerLevel
 	level = level or isSoD and playerLevel
 	local penalty = level > 20 and 1 or (1 - ((20 - level) * 0.0375))
 	if isWrath then
-		--https://wowwiki-archive.fandom.com/wiki/Downranking
+		-- https://wowwiki-archive.fandom.com/wiki/Downranking
 		penalty = min(1, max(0, (22 + (level + 5) - playerLevel) / 20))
 	elseif isTBC then
 		-- TBC added another downrank penalty
@@ -881,12 +881,12 @@ local function getBaseHealAmount(spellData, spellName, spellID, spellRank)
 	if type(average) == "number" then
 		return average
 	end
-	--SOD runes have no spell level and are treated as playerLevel
+	-- SOD runes have no spell level and are treated as playerLevel
 	local requiresLevel = spellData.levels[spellRank] or isSoD and 1
 	return average[min(playerLevel - requiresLevel + 1, #average)]
 end
 
---Values for SOD have been taken from https://github.com/jezzi23/stat_weights_classic
+-- Values for SOD have been taken from https://github.com/jezzi23/stat_weights_classic
 local function generateSODAverages(baseAmount, levelCoeff, levelScaling, levelScalingSquared)
 	local averages = {}
 	for lvl=1,60 do
@@ -988,7 +988,11 @@ if( playerClass == "DRUID" ) then
 				{205 * 5, 206 * 5, 207 * 5, 208 * 5, 209 * 5, 210 * 5, 211 * 5},
 				{294 * 5} }}
 		end
-		spellData[Nourish] = {coeff = 0.358005, levels = {80}, averages = {avg(1883, 2187)}}
+		if isSoD then
+			spellData[Nourish] = {coeff = 0.357, levels = {nil}, averages = generateSODAverages(38.949830, avg(1.61, 1.89), 0.606705, 0.167780)}
+		elseif isWrath then
+			spellData[Nourish] = {coeff = 0.358005, levels = {80}, averages = {avg(1883, 2187)}}
+		end
 
 		talentData[GiftofNature] = {mod = 0.02, current = 0, spent = 0}
 		talentData[ImprovedRejuv] = {mod = 0.05, current = 0, spent = 0}
@@ -1554,7 +1558,7 @@ if( playerClass == "PRIEST" ) then
 			{avg(1619, 2081), avg(1622, 2084), avg(1625, 2087), avg(1628, 2090), avg(1631, 2093)},
 			{avg(1952, 2508), avg(1955, 2512), avg(1959, 2516)} }}
 		if isSoD then
-			spellData[Penance] = {_isChanneled = true, coeff = 0.857, ticks = 3, levels = {nil}, averages = generateSODAverages(38.258376, 1.06, 0.904195, 0.161311)}
+			spellData[Penance] = {_isChanneled = true, coeff = 0.857, ticks = 3, levels = {nil}, averages = generateSODAverages(38.258376, 1.06 * 0.8, 0.904195, 0.161311)}
 		else
 			spellData[Penance] = {_isChanneled = true, coeff = 0.857, ticks = 3, levels = {60, 70, 75, 80}, averages = {avg(670, 756), avg(805, 909), avg(1278, 1442), avg(1484, 1676)}}
 		end
@@ -1603,7 +1607,7 @@ if( playerClass == "PRIEST" ) then
 				local group = guidToGroup[guid]
 
 				for groupGUID, id in pairs(guidToGroup) do
-					--We skip the rangecheck in Wrath since range would have to be measured from our target to its party and we can't do that
+					-- We skip the rangecheck in Wrath since range would have to be measured from our target to its party and we can't do that
 					local unit = isWrath and "player" or guidToUnit[groupGUID]
 					local testUnit = guidToUnit[groupGUID]
 					-- Dispel Magic is chosen because it's learned before PoH and maintains 30y range through the expansions
@@ -1660,6 +1664,14 @@ if( playerClass == "PRIEST" ) then
 				if( equippedSetCache["Oracle"] >= 5 or equippedSetCache["Avatar"] >= 4 ) then
 					healAmount = healAmount + (healAmount / totalTicks) -- Add Tick Amount gained by Set.
 					totalTicks = totalTicks + 1
+				end
+
+				-- SOD Empowered Renew Rune on Belt
+				if isSoD then
+					local belt_rune = C_Engraving.GetRuneForEquipmentSlot(6)
+					if belt_rune and belt_rune.itemEnchantmentID == 7026 then
+						spellPower = spellPower * 1.15
+					end
 				end
 
 				spellPower = spellPower * ((isWrath and 1.88 or 1) * (1 + (talentData[EmpoweredRenew].current)))
@@ -1771,7 +1783,7 @@ if( playerClass == "SHAMAN" ) then
 		if isSoD then
 			hotData[Earthliving] = {interval = 3, ticks = 4, coeff = 0.364, levels = {30, 40, 50, 60, 70, 80}, averages = {116, 160, 220, 348, 456, 652}}
 			
-			--Multiplied generateSODAverages levelCoeff by 10 for number of ticks
+			-- Multiplied generateSODAverages levelCoeff by 10 for number of ticks
 			hotData[HealingRain] = {interval = 1, ticks = 10, coeff = 10 * 0.063, levels = {nil}, averages = generateSODAverages(29.888200, 10*0.15, 0.690312, 0.136267)}
 		end
 
@@ -1894,7 +1906,7 @@ if( playerClass == "SHAMAN" ) then
 			healAmount = calculateGeneralAmount(hotData[spellName].levels[spellRank], healAmount, spellPower, spModifier, healModifier)
 
 			if( isSoD and spellName == HealingRain ) then
-				--HoT duration is equal to remaining duration of aura
+				-- HoT duration is equal to remaining duration of aura
 				local _, _, _, _, _, expiration = unitHasAura("player", HealingRain)
 				local ticksLeft = ceil(expiration - GetTime())
 				totalTicks = ticksLeft
@@ -2037,7 +2049,7 @@ if( isSoD and playerClass == "MAGE" ) then
 				local group = guidToGroup[guid]
 
 				for groupGUID, id in pairs(guidToGroup) do
-					--We skip the rangecheck since range would have to be measured from our target to its party and we can't do that
+					-- We skip the rangecheck since range would have to be measured from our target to its party and we can't do that
 					local testUnit = guidToUnit[groupGUID]
 					if( id == group and guid ~= groupGUID and UnitIsVisible(testUnit) and not UnitHasVehicleUI(testUnit) ) then
 						targets = targets .. "," .. compressGUID[groupGUID]
@@ -2948,8 +2960,8 @@ function HealComm:COMBAT_LOG_EVENT_UNFILTERED(...)
 			-- Hot faded that we cast
 			local pending = pendingHots[playerGUID] and pendingHots[playerGUID][spellName]
 			if hotData[spellName] then
-				--Healing Rain aura affects all targets even if they do not receive the heal
-				--Do not send message unless they are in same group
+				-- Healing Rain aura affects all targets even if they do not receive the heal
+				-- Do not send message unless they are in same group
 				if( isSoD and (spellName == GetSpellInfo(415236) or spellName == "Healing Rain") and guidToGroup[healingRainTargetGUID] ~= guidToGroup[destGUID] ) then
 					return
 				end
@@ -3039,7 +3051,7 @@ end
 function HealComm:UNIT_SPELLCAST_START(unit, cast, spellID)
 	local spellName = GetSpellInfo(spellID)
 
-	--Save target of healing rain cast
+	-- Save target of healing rain cast
 	if( isSoD and (spellName == GetSpellInfo(415236) or spellName == "Healing Rain") ) then
 		healingRainTargetGUID = castGUIDs[spellID]
 	end
@@ -3244,6 +3256,17 @@ end
 
 -- Spell was cast somehow
 function HealComm:CastSpell(arg, unit)
+
+	-- Macro Heals with /stopcasting do not trigger UNIT_SPELLCAST_SENT
+	-- so we must set lastSentID here
+	local spellID
+	if tonumber(arg) then spellID = arg else spellID = select(7, GetSpellInfo(arg)) end
+	local spellName = GetSpellInfo(spellID)
+	if spellName and (hotData[spellName] or spellData[spellName]) then
+		lastSentID = penanceIDs[spellID] or spellID
+		guidPriorities[lastSentID] = nil
+	end
+
 	-- If the spell is waiting for a target and it's a spell action button then we know that the GUID has to be mouseover or a key binding cast.
 	if( unit and UnitCanAssist("player", unit)  ) then
 		setCastData(4, UnitName(unit), UnitGUID(unit))
