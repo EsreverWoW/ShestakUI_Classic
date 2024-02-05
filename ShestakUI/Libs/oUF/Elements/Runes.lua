@@ -58,7 +58,7 @@ local function UpdateColor(self, event, runeID, alt)
 
 	local r, g, b = color[1], color[2], color[3]
 
-	if(oUF:IsWrath() and validRuneType) then
+	if((oUF:IsWrath() or oUF:IsCata()) and validRuneType) then
 		element[runeID]:SetStatusBarColor(r, g, b)
 
 		local bg = element[runeID].bg
