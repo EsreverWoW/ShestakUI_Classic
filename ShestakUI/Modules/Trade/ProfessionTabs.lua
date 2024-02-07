@@ -117,18 +117,22 @@ local function UpdateSelectedTabs(object)
 		handler:RegisterEvent("CURRENT_SPELL_CAST_CHANGED")
 	end
 
-	for index = 1, #tabs[object] do
-		local tab = tabs[object][index]
-		tab:SetChecked(IsCurrentSpell(tab.name))
+	if tabs[object] then
+		for index = 1, #tabs[object] do
+			local tab = tabs[object][index]
+			tab:SetChecked(IsCurrentSpell(tab.name))
+		end
 	end
 end
 
 local function ResetTabs(object)
-	for index = 1, #tabs[object] do
-		tabs[object][index]:Hide()
-	end
+	if tabs[object] then
+		for index = 1, #tabs[object] do
+			tabs[object][index]:Hide()
+		end
 
-	tabs[object].index = 0
+		tabs[object].index = 0
+	end
 end
 
 local function UpdateTab(object, name, rank, texture, hat)
