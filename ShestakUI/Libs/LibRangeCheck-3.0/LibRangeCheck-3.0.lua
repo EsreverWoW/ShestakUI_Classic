@@ -40,7 +40,7 @@ License: MIT
 -- @class file
 -- @name LibRangeCheck-3.0
 local MAJOR_VERSION = "LibRangeCheck-3.0"
-local MINOR_VERSION = 11
+local MINOR_VERSION = 12
 
 ---@class lib
 local lib, oldminor = LibStub:NewLibrary(MAJOR_VERSION, MINOR_VERSION)
@@ -50,9 +50,10 @@ end
 
 local isRetail = WOW_PROJECT_ID == WOW_PROJECT_MAINLINE
 local isWrath = WOW_PROJECT_ID == WOW_PROJECT_WRATH_CLASSIC
+local isEra = WOW_PROJECT_ID == WOW_PROJECT_CLASSIC
 
 local InCombatLockdownRestriction
-if isRetail then
+if isRetail or isEra then
     InCombatLockdownRestriction = function(unit) return InCombatLockdown() and not UnitCanAttack("player", unit) end
 else
     InCombatLockdownRestriction = function() return false end
