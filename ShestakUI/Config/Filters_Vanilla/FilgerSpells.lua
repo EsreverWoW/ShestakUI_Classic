@@ -632,6 +632,8 @@ C["filger_spells"] = {
 			{spellID = 409552, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Explosive Trap Effect
 			-- {spellID = 13812, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Expose Weakness [Season of Discovery]
+			{spellID = 409507, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
 			-- Flare
 			-- {spellID = 1543, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Frost Trap Aura

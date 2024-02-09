@@ -53,6 +53,7 @@ T.DebuffWhiteList = {
 	[SpellName(19185)] = true,	-- Entrapment
 	[SpellName(409552)] = true,	-- Explosive Shot [Season of Discovery]
 	[SpellName(13812)] = true,	-- Explosive Trap Effect
+	[SpellName(409507)] = true,	-- Expose Weakness [Season of Discovery]
 	[SpellName(1543)] = true,	-- Flare
 	[SpellName(3355)] = true,	-- Freezing Trap Effect
 	[SpellName(13810)] = true,	-- Frost Trap Aura
