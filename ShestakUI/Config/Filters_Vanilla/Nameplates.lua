@@ -233,7 +233,9 @@ T.BuffWhiteList = {
 	-- Druid
 	[SpellName(2893)] = true,	-- Abolish Poison
 	[SpellName(22812)] = true,	-- Barkskin
+	[SpellName(417141)] = true,	-- Berserk [Season of Discovery]
 	[SpellName(1850)] = true,	-- Dash
+	-- [SpellName(408261)] = true,	-- Dreamstate [Season of Discovery]
 	[SpellName(5229)] = true,	-- Enrage
 	[SpellName(22842)] = true,	-- Frenzied Regeneration
 	[SpellName(414800)] = true,	-- Fury of Stormrage [Season of Discovery]
@@ -249,6 +251,7 @@ T.BuffWhiteList = {
 	[SpellName(8936)] = true,	-- Regrowth
 	[SpellName(774)] = true,	-- Rejuvenation
 	[SpellName(407988)] = true,	-- Savage Roar [Season of Discovery]
+	[SpellName(408024)] = true,	-- Survival Instincts [Season of Discovery]
 	[SpellName(5217)] = true,	-- Tiger's Fury
 	-- [SpellName(5225)] = true,	-- Track Humanoids
 	[SpellName(740)] = true,	-- Tranquility

@@ -98,8 +98,10 @@ T.ArenaControl = {
 
 	-- Buffs
 	-- Druid
+	[SpellName(417141)] = 1,	-- Berserk [Season of Discovery]
 	[SpellName(29166)] = 1,		-- Innervate
 	[SpellName(17116)] = 1,		-- Nature's Swiftness
+	[SpellName(408024)] = 1,	-- Survival Instincts [Season of Discovery]
 	-- Hunter
 	[SpellName(19574)] = 1,		-- Bestial Wrath
 	[SpellName(3045)] = 1,		-- Rapid Fire

@@ -137,6 +137,8 @@ C["filger_spells"] = {
 
 			-- Barkskin
 			{spellID = 22812, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Berserk [Season of Discovery]
+			{spellID = 417141, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Dash
 			{spellID = 1850, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Enrage
@@ -151,6 +153,8 @@ C["filger_spells"] = {
 			{spellID = 17116, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Savage Roar [Season of Discovery]
 			{spellID = 407988, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Survival Instincts [Season of Discovery]
+			{spellID = 408024, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Tiger's Fury
 			{spellID = 5217, unitID = "player", caster = "player", filter = "BUFF"},
 		},
@@ -166,8 +170,14 @@ C["filger_spells"] = {
 			-- Buffs
 			-- Clearcasting [Omen of Clarity]
 			{spellID = 16870, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Eclipse (Lunar) [Season of Discovery]
+			{spellID = 408255, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Eclipse (Solar) [Season of Discovery]
+			{spellID = 408250, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Fury of Stormrage [Season of Discovery]
 			{spellID = 414800, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Dreamstate [Season of Discovery]
+			{spellID = 408261, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Trinkets
 			-- Class
@@ -398,6 +408,8 @@ C["filger_spells"] = {
 			{spellID = 22812, filter = "CD"},
 			-- Bash
 			{spellID = 5211, filter = "CD"},
+			-- Berserk [Season of Discovery]
+			{spellID = 417141, filter = "CD", absID = true},
 			-- Challenging Roar
 			{spellID = 5209, filter = "CD"},
 			-- Cower
@@ -432,6 +444,8 @@ C["filger_spells"] = {
 			{spellID = 410176, filter = "CD"},
 			-- Starsurge [Season of Discovery]
 			{spellID = 417157, filter = "CD"},
+			-- Survival Instincts [Season of Discovery]
+			{spellID = 408024, filter = "CD"},
 			-- Swiftmend
 			{spellID = 18562, filter = "CD"},
 			-- Tiger's Fury

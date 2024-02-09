@@ -19,6 +19,7 @@ if C.raidcooldown.enable == true then
 		{724, 600},		-- Lightwell
 		{409324, 120},	-- Ancestral Guidance [Season of Discovery]
 		-- Defense
+		{408024, 180},	-- Survival Instincts [Season of Discovery]
 		{1022, 300},	-- Blessing of Protection (300sec base / -120sec from talents)
 		{407804, 120},	-- Divine Sacrifice [Season of Discovery]
 		{633, 3600},	-- Lay on Hands (3600sec base / -1200sec from talents / -720sec from 4pc T3)
