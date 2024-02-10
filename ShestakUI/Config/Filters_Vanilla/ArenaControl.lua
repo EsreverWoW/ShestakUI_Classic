@@ -88,7 +88,7 @@ T.ArenaControl = {
 	[SpellName(23694)] = 3,		-- Improved Hamstring
 
 	-- Disarms
-	[SpellName(409495)] = 1,		-- Chimera Shot - Scorpid [Season of Discovery]
+	[SpellName(409495)] = 1,	-- Chimera Shot - Scorpid [Season of Discovery]
 	-- [SpellName(14251)] = 1,		-- Riposte
 	[SpellName(676)] = 1,		-- Disarm
 
@@ -123,7 +123,7 @@ T.ArenaControl = {
 	[SpellName(10060)] = 1,		-- Power Infusion
 	-- Rogue
 	[SpellName(13877)] = 1,		-- Blade Flurry
-	[SpellName(424919)] = 1,		-- Main Gauche [Season of Discovery]
+	[SpellName(424919)] = 1,	-- Main Gauche [Season of Discovery]
 	-- Shaman
 	[SpellName(8178)] = 1,		-- Grounding Totem Effect
 	[SpellName(16190)] = 1,		-- Mana Tide Totem
@@ -146,7 +146,7 @@ T.ArenaControl = {
 	-- Defense abilities
 	[SpellName(22812)] = 1,		-- Barkskin
 	[SpellName(19263)] = 1,		-- Deterrence
-	[SpellName(407804)] = 1,		-- Divine Sacrifice [Season of Discovery]
+	[SpellName(407804)] = 1,	-- Divine Sacrifice [Season of Discovery]
 	[SpellName(425294)] = 1,	-- Dispersion [Season of Discovery]
 	[SpellName(425205)] = 1,	-- Power Word: Barrier [Season of Discovery]
 	[SpellName(5277)] = 1,		-- Evasion

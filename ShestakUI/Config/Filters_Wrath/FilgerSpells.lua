@@ -6944,7 +6944,7 @@ C["filger_spells"] = {
 			{spellID = 16166, filter = "CD"},
 			-- Feral Spirit
 			{spellID = 51533, filter = "CD"},
-			-- Fire Nova Totem
+			-- Fire Nova
 			{spellID = 1535, filter = "CD"},
 			-- Flame Shock
 			{spellID = 8050, filter = "CD"},
