@@ -330,6 +330,10 @@ elseif T.class == "SHAMAN" then
 		T.merge[8503] = 8349		-- Fire Nova r3
 		T.merge[11306] = 8349		-- Fire Nova r4
 		T.merge[11307] = 8349		-- Fire Nova r5
+		T.merge[408424] = 8349		-- Fire Nova r2 [Season of Discovery]
+		T.merge[408426] = 8349		-- Fire Nova r3 [Season of Discovery]
+		T.merge[408427] = 8349		-- Fire Nova r4 [Season of Discovery]
+		T.merge[408428] = 8349		-- Fire Nova r5 [Season of Discovery]
 		T.aoespam[8187] = 3			-- Magma Totem r1
 		T.merge[10579] = 8187		-- Magma Totem r2
 		T.merge[10580] = 8187		-- Magma Totem r3

@@ -47,6 +47,7 @@ T.RaidBuffs = {
 		{974, "BOTTOMLEFT", {0.2, 0.7, 0.2}, true},			-- Earth Shield [Season of Discovery]
 		{29203, "BOTTOMRIGHT", {0.7, 0.4, 0}},				-- Healing Way (Change Color?)
 		{16177, "TOPLEFT", {0.4, 0.7, 0.2}},				-- Ancestral Fortitude
+		{408696, "BOTTOM", {0.2, 0.2, 0.1}},				-- Spirit of the Alpha [Season of Discovery]
 	},
 	WARLOCK = {
 		{20707, "TOPRIGHT", {0.7, 0.32, 0.75}},				-- Soulstone

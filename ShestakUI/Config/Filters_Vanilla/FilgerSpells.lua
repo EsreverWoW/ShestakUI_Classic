@@ -2225,6 +2225,10 @@ C["filger_spells"] = {
 
 			-- Ancestral Guidance [Season of Discovery]
 			{spellID = 409324, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Decoy Totem (Redirect) [Season of Discovery]
+			{spellID = 425876, unitID = "player", caster = "all", filter = "BUFF", absID = true},
+			-- Decoy Totem (Immunity) [Season of Discovery]
+			-- {spellID = 436391, unitID = "player", caster = "all", filter = "BUFF", absID = true},
 			-- Elemental Devastation
 			{spellID = 30165, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Elemental Mastery
@@ -2320,6 +2324,10 @@ C["filger_spells"] = {
 			{spellID = 16246, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Focused Casting (Eye of the Storm)
 			{spellID = 29063, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Maelstrom Weapon [Season of Discovery]
+			{spellID = 409946, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Power Surge [Season of Discovery]
+			{spellID = 415105, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Shield Mastery [Season of Discovery]
 			{spellID = 408524, unitID = "player", caster = "player", filter = "BUFF"},
 
@@ -2479,6 +2487,8 @@ C["filger_spells"] = {
 			{spellID = 29203, unitID = "target", caster = "player", filter = "BUFF"},
 			-- Lightning Shield (Special, Proc) [The Ten Storms]
 			-- {spellID = 23552, unitID = "target", caster = "player", filter = "BUFF", absID = true},
+			-- Spirit of the Alpha [Season of Discovery]
+			{spellID = 408696, unitID = "target", caster = "player", filter = "BUFF"},
 			-- Totemic Power (Armor, Proc) [The Earthshatterer]
 			{spellID = 28827, unitID = "target", caster = "player", filter = "BUFF", absID = true},
 			-- Totemic Power (Attack Power, Proc) [The Earthshatterer]
@@ -2519,6 +2529,8 @@ C["filger_spells"] = {
 			{spellID = 409324, filter = "CD"},
 			-- Chain Lightning
 			{spellID = 421, filter = "CD"},
+			-- Decoy Totem [Season of Discovery]
+			{spellID = 425874, filter = "CD"},
 			-- Earth Shock
 			{spellID = 8042, filter = "CD"},
 			-- Earth Shock (Way of Earth) [Season of Discovery]
@@ -2527,6 +2539,8 @@ C["filger_spells"] = {
 			{spellID = 2484, filter = "CD"},
 			-- Elemental Mastery
 			{spellID = 16166, filter = "CD"},
+			-- Fire Nova [Season of Discovery]
+			{spellID = 408341, filter = "CD"},
 			-- Fire Nova Totem
 			{spellID = 1535, filter = "CD"},
 			-- Flame Shock
@@ -3395,6 +3409,8 @@ C["filger_spells"] = {
 			{spellID = 10060, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Earth Shield [Season of Discovery]
 			{spellID = 974, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Spirit of the Alpha [Season of Discovery]
+			{spellID = 408696, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Soulstone Resurrection
 			-- {spellID = 20707, unitID = "player", caster = "all", filter = "BUFF"},
 

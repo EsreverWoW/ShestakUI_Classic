@@ -404,6 +404,8 @@ T.BuffWhiteList = {
 	[SpellName(14143)] = true,	-- Remorseless Attacks
 
 	-- Shaman
+	[SpellName(425876)] = true,	-- Decoy Totem (Redirect) [Season of Discovery]
+	-- [SpellName(436391)] = true,	-- Decoy Totem (Immunity) [Season of Discovery]
 	[SpellName(974)] = true,	-- Earth Shield [Season of Discovery]
 	[SpellName(30165)] = true,	-- Elemental Devastation
 	-- [SpellName(16246)] = true,	-- Elemental Focus (Clearcasting)
@@ -419,13 +421,16 @@ T.BuffWhiteList = {
 	-- [SpellName(5672)] = true,	-- Healing Stream
 	[SpellName(29203)] = true,	-- Healing Way
 	[SpellName(324)] = true,	-- Lightning Shield
+	[SpellName(409946)] = true,	-- Maelstrom Weapon [Season of Discovery]
 	-- [SpellName(5677)] = true,	-- Mana Spring Totem
 	[SpellName(16191)] = true,	-- Mana Tide Totem
 	[SpellName(16188)] = true,	-- Nature's Swiftness
 	-- [SpellName(10596)] = true,	-- Nature Resistance Totem
+	[SpellName(415105)] = true,	-- Power Surge [Season of Discovery]
 	-- [SpellName(6495)] = true,	-- Sentry Totem
 	[SpellName(425336)] = true,	-- Shamanistic Rage [Season of Discovery]
 	-- [SpellName(408525)] = true,	-- Shield Mastery [Season of Discovery]
+	-- [SpellName(408696)] = true,	-- Spirit of the Alpha [Season of Discovery]
 	-- [SpellName(8072)] = true,	-- Stoneskin Totem
 	-- [SpellName(8076)] = true,	-- Strength of Earth
 	[SpellName(30803)] = true,	-- Unleashed Rage
