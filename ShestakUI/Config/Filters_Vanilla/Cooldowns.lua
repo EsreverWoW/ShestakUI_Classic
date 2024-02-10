@@ -87,6 +87,7 @@ if C.enemycooldown.enable == true then
 		{6346, 30},		-- Fear Ward
 		{402004, 180},	-- Pain Suppression [Season of Discovery]
 		{425207, 180},	-- Power Word: Barrier [Season of Discovery]
+		{426490, 180},	-- Rallying Cry [Season of Discovery]
 		{5277, 210},	-- Evasion (300sec base / -90sec from talents / -60sec from 3pc AQ Set)
 		{424919, 20},	-- Main Gauche [Season of Discovery]
 		{1856, 210},	-- Vanish (300sec base / -90sec from talents / -30sec from 3pc T1)

@@ -412,6 +412,9 @@ elseif T.class == "WARLOCK" then
 	end
 elseif T.class == "WARRIOR" then
 	if C.combattext.merge_aoe_spam then
+		-- Healing spells
+		T.aoespam[402913] = 3.5		-- Enraged Regeneration [Season of Discovery]
+		-- Damaging spells
 		T.aoespam[845] = 0.5		-- Cleave r1
 		T.merge[7369] = 845			-- Cleave r2
 		T.merge[11608] = 845		-- Cleave r3

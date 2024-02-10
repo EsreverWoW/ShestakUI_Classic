@@ -52,6 +52,10 @@ T.RaidBuffs = {
 	WARLOCK = {
 		{20707, "TOPRIGHT", {0.7, 0.32, 0.75}},				-- Soulstone
 	},
+	WARRIOR = {
+		{403338, "TOPRIGHT", {0.89, 0.1, 0.1}},				-- Intervene [Season of Discovery]
+		-- {59665, "TOPLEFT", {0.2, 0.2, 0.1}},				-- Vigilance
+	},
 	ALL = {
 		{23333, "LEFT", {1, 0, 0}, true}, 					-- Warsong flag, Horde
 		{23335, "LEFT", {0, 0, 1}, true},					-- Warsong flag, Alliance

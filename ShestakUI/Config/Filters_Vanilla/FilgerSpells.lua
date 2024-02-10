@@ -2971,6 +2971,8 @@ C["filger_spells"] = {
 			{spellID = 23885, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Death Wish
 			{spellID = 12328, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Enraged Regeneration [Season of Discovery]
+			{spellID = 402913, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Flagellation [Season of Discovery]
 			{spellID = 402906, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Flurry
@@ -2998,6 +3000,8 @@ C["filger_spells"] = {
 			-- Buffs
 			-- Blood Craze
 			{spellID = 16488, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Blood Surge [Season of Discovery]
+			{spellID = 413399, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Enrage
 			{spellID = 12880, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Enrage (Consumed By Rage) [Season of Discovery]
@@ -3160,7 +3164,6 @@ C["filger_spells"] = {
 			-- Venomhide Poison
 			{spellID = 14795, unitID = "target", caster = "player", filter = "DEBUFF"},
 		},
-		--[[
 		{
 			Name = "T_DE/BUFF_BAR",
 			Direction = "UP",
@@ -3171,8 +3174,10 @@ C["filger_spells"] = {
 			IconSize = 25,
 			BarWidth = 186,
 			Position = {"LEFT", T_DE_BUFF_BAR_Anchor},
+
+			-- Intervene [Season of Discovery]
+			{spellID = 403338, unitID = "target", caster = "player", filter = "BUFF"},
 		},
-		--]]
 		--[[
 		{
 			Name = "PVE/PVP_CC",
@@ -3212,8 +3217,12 @@ C["filger_spells"] = {
 			{spellID = 12328, filter = "CD"},
 			-- Disarm
 			{spellID = 676, filter = "CD", absID = true},
+			-- Enraged Regeneration [Season of Discovery]
+			{spellID = 402913, filter = "CD"},
 			-- Intercept
 			{spellID = 20252, filter = "CD"},
+			-- Intervene [Season of Discovery]
+			{spellID = 403338, filter = "CD"},
 			-- Intimidating Shout
 			{spellID = 5246, filter = "CD"},
 			-- Last Stand
@@ -3228,6 +3237,8 @@ C["filger_spells"] = {
 			{spellID = 6552, filter = "CD", absID = true},
 			-- Raging Blow [Season of Discovery]
 			{spellID = 402911, filter = "CD"},
+			-- Rallying Cry [Season of Discovery]
+			{spellID = 426490, filter = "CD"},
 			-- Recklessness
 			{spellID = 1719, filter = "CD"},
 			-- Retaliation
@@ -3242,6 +3253,8 @@ C["filger_spells"] = {
 			{spellID = 23922, filter = "CD"},
 			-- Shield Wall
 			{spellID = 871, filter = "CD"},
+			-- Slam [Season of Discovery]
+			{spellID = 1464, filter = "CD"},
 			-- Sweeping Strikes
 			{spellID = 12292, filter = "CD"},
 			-- Taunt
@@ -3393,6 +3406,8 @@ C["filger_spells"] = {
 			{spellID = 425205, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Shamanistic Rage [Season of Discovery]
 			{spellID = 433255, unitID = "player", caster = "all", filter = "BUFF", absID = true},
+			-- Rallying Cry [Season of Discovery]
+			{spellID = 426490, unitID = "player", caster = "all", filter = "BUFF"},
 
 			-- Other
 			-- Innervate
@@ -3423,6 +3438,8 @@ C["filger_spells"] = {
 			{spellID = 408696, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Soulstone Resurrection
 			-- {spellID = 20707, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Intervene [Season of Discovery]
+			{spellID = 403338, unitID = "player", caster = "all", filter = "BUFF"},
 
 			-- Trinket Effects
 			-- Persistent Shield (Absorb, Use) [Scarab Brooch]
