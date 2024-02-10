@@ -1247,6 +1247,8 @@ C["filger_spells"] = {
 			{spellID = 25771, unitID = "player", caster = "player", filter = "DEBUFF"},
 			-- Frost Resistance Aura
 			-- {spellID = 19888, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Guarded by the Light [Season of Discovery]
+			{spellID = 415058, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Holy Shield r1
 			{spellID = 20925, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Holy Shield r2
@@ -1279,6 +1281,8 @@ C["filger_spells"] = {
 			{spellID = 21082, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Shadow Resistance Aura
 			-- {spellID = 19876, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Sheath of Light [Season of Discovery]
+			{spellID = 426159, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Vengeance r1
 			{spellID = 20050, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Vengeance r2
@@ -1306,6 +1310,8 @@ C["filger_spells"] = {
 			{spellID = 20178, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Redoubt
 			{spellID = 20128, unitID = "player", caster = "player", filter = "BUFF"},
+			-- The Art of War [Season of Discovery]
+			{spellID = 53489, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Item Sets
 			-- Crusader's Wrath (Spell Power, Proc) [Lightforge Armor / Soulforge Armor]
@@ -1467,6 +1473,10 @@ C["filger_spells"] = {
 
 			-- Beacon of Light [Season of Discovery]
 			{spellID = 407613, unitID = "target", caster = "player", filter = "BUFF"},
+			-- Sacred Shield [Season of Discovery]
+			{spellID = 412019, unitID = "target", caster = "player", filter = "BUFF", absID = true},
+			-- Sheath of Light [Season of Discovery]
+			{spellID = 426162, unitID = "target", caster = "player", filter = "BUFF"},
 		},
 		{
 			Name = "PVE/PVP_CC",
@@ -3345,6 +3355,8 @@ C["filger_spells"] = {
 			{spellID = 16191, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Beacon of Light [Season of Discovery]
 			{spellID = 407613, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Sacred Shield [Season of Discovery]
+			{spellID = 412019, unitID = "player", caster = "all", filter = "BUFF", absID = true},
 			-- Blessing of Freedom
 			{spellID = 1044, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Fear Ward

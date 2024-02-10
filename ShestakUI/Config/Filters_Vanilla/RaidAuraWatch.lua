@@ -31,7 +31,7 @@ T.RaidBuffs = {
 		{1022, "BOTTOMRIGHT", {0.2, 0.2, 1}, true},			-- Blessing of Protection
 		{1044, "BOTTOMRIGHT", {0.89, 0.45, 0}, true},		-- Blessing of Freedom
 		{6940, "BOTTOMRIGHT", {0.89, 0.1, 0.1}, true},		-- Blessing of Sacrifice
-		-- {53601, "TOPLEFT", {0.4, 0.7, 0.2}, true},			-- Sacred Shield
+		{412019, "TOPLEFT", {0.4, 0.7, 0.2}, true},			-- Sacred Shield [Season of Discovery]
 	},
 	PRIEST = {
 															-- Abolish Disease (move to all?)

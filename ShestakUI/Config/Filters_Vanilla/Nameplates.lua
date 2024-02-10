@@ -352,6 +352,8 @@ T.BuffWhiteList = {
 	[SpellName(21082)] = true,	-- Seal of the Crusader
 	-- [SpellName(5502)] = true,	-- Sense Undead
 	-- [SpellName(19876)] = true,	-- Shadow Resistance Aura
+	[SpellName(426162)] = true,	-- Sheath of Light [Season of Discovery]
+	[SpellName(53489)] = true,	-- The Art of War [Season of Discovery]
 	[SpellName(20050)] = true,	-- Vengeance
 
 	-- Priest
