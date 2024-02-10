@@ -903,6 +903,12 @@ C["filger_spells"] = {
 			{spellID = 12536, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Fingers of Frost [Season of Discovery]
 			{spellID = 400669, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Fireball! [Brain Freeze] [Season of Discovery]
+			{spellID = 400730, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Hot Streak [Season of Discovery]
+			{spellID = 400624, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Missile Barrage [Season of Discovery]
+			{spellID = 400589, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Item Sets
 			-- Enigma's Answer (Spell Hit, Proc) [Enigma Vestments]
@@ -1066,6 +1072,8 @@ C["filger_spells"] = {
 			{spellID = 10181, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
 			-- Frostbolt r11
 			{spellID = 25304, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Frostfire Bolt [Season of Discovery]
+			{spellID = 401502, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Ignite
 			{spellID = 12654, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Impact
@@ -1076,6 +1084,8 @@ C["filger_spells"] = {
 			-- {spellID = 401558, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Pyroblast
 			{spellID = 11366, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Spellfrost Bolt [Season of Discovery]
+			{spellID = 412532, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Winter's Chill
 			{spellID = 12579, unitID = "target", caster = "all", filter = "DEBUFF"},
 
@@ -1098,6 +1108,8 @@ C["filger_spells"] = {
 			BarWidth = 186,
 			Position = {"LEFT", T_DE_BUFF_BAR_Anchor},
 
+			-- Chronostatic Preservation [Season of Discovery]
+			{spellID = 436516, unitID = "target", caster = "player", filter = "BUFF"},
 			-- Mass Regeneration [Season of Discovery]
 			{spellID = 412510, unitID = "target", caster = "player", filter = "BUFF"},
 			-- Rapid Regeneration [Season of Discovery]
@@ -3664,6 +3676,10 @@ C["filger_spells"] = {
 			{spellID = 10181, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
 			-- Frostbolt r11
 			{spellID = 25304, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
+			-- Frostfire Bolt [Season of Discovery]
+			{spellID = 401502, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- Spellfrost Bolt [Season of Discovery]
+			{spellID = 412532, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Avenger's Shield [Season of Discovery]
 			{spellID = 407669, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Mind Flay r1

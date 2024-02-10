@@ -22,7 +22,7 @@ T.RaidBuffs = {
 		{401460, "TOPRIGHT", {0.8, 0.4, 0.8}},				-- Rapid Regeneration [Season of Discovery]
 		{412510, "TOPRIGHT", {0.13, 0.87, 0.50}},			-- Mass Regeneration [Season of Discovery]
 		{400735, "TOPLEFT", {0.82, 0.29, 0.24}},			-- Temporal Beacon [Season of Discovery]
-		-- {0, "BOTTOM", {0.11, 0.57, 0.71}},				-- PLACEHOLDER [Season of Discovery]
+		{436516, "BOTTOM", {0.11, 0.57, 0.71}},				-- Chronostatic Preservation [Season of Discovery]
 	},
 	PALADIN = {
 															-- Lay on Hands (Armor Bonus)

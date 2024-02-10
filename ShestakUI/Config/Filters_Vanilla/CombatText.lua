@@ -141,6 +141,7 @@ elseif T.class == "MAGE" then
 		-- Healing spells
 		T.aoespam[401405] = 3		-- Chronomantic Healing [Season of Discovery]
 		T.merge[433455] = 401405	-- Chronomantic Healing [Season of Discovery]
+		T.aoespam[436516] = 3		-- Chronostatic Preservation [Season of Discovery]
 		T.aoespam[412510] = 3		-- Mass Regeneration [Season of Discovery]
 		T.aoespam[401460] = 3		-- Rapid Regeneration [Season of Discovery]
 		T.aoespam[401417] = 3		-- Regeneration [Season of Discovery]
