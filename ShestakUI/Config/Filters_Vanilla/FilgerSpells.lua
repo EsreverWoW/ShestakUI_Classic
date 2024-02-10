@@ -1594,6 +1594,8 @@ C["filger_spells"] = {
 			IconSize = C.filger.buffs_size,
 			Position = {"TOP", P_BUFF_ICON_Anchor},
 
+			-- Dispersion [Season of Discovery]
+			{spellID = 425294, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Elune's Grace
 			{spellID = 2651, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Fade r1
@@ -1614,6 +1616,8 @@ C["filger_spells"] = {
 			{spellID = 588, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Inner Focus
 			{spellID = 14751, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Mind Spike [Season of Discovery]
+			{spellID = 431655, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Serendipity [Season of Discovery]
 			{spellID = 413247, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Shadowform
@@ -1845,6 +1849,8 @@ C["filger_spells"] = {
 			{spellID = 13908, filter = "CD"},
 			-- Devouring Plague
 			{spellID = 2944, filter = "CD"},
+			-- Dispersion [Season of Discovery]
+			{spellID = 425294, filter = "CD"},
 			-- Elune's Grace
 			{spellID = 2651, filter = "CD"},
 			-- Fade
@@ -1875,6 +1881,8 @@ C["filger_spells"] = {
 			{spellID = 8122, filter = "CD"},
 			-- Shadow Word: Death [Season of Discovery]
 			{spellID = 401955, filter = "CD"},
+			-- Spirit of the Redeemer [Season of Discovery]
+			{spellID = 425284, filter = "CD"},
 			-- Silence
 			{spellID = 15487, filter = "CD", absID = true},
 			-- Starshards
@@ -3343,6 +3351,8 @@ C["filger_spells"] = {
 			{spellID = 407804, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Lay on Hands (Armor Bonus)
 			{spellID = 20233, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Pain Suppression [Season of Discovery]
+			{spellID = 402004, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Power Word: Barrier [Season of Discovery]
 			{spellID = 425205, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Shamanistic Rage [Season of Discovery]

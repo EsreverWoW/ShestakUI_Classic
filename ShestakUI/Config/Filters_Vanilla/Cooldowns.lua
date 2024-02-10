@@ -23,6 +23,8 @@ if C.raidcooldown.enable == true then
 		{1022, 300},	-- Blessing of Protection (300sec base / -120sec from talents)
 		{407804, 120},	-- Divine Sacrifice [Season of Discovery]
 		{633, 3600},	-- Lay on Hands (3600sec base / -1200sec from talents / -720sec from 4pc T3)
+		{425294, 120},	-- Dispersion [Season of Discovery]
+		{402004, 180},	-- Pain Suppression [Season of Discovery]
 		{425207, 180},	-- Power Word: Barrier [Season of Discovery]
 		{871, 1800},	-- Shield Wall
 		{12975, 600},	-- Last Stand
@@ -83,6 +85,7 @@ if C.enemycooldown.enable == true then
 		{498, 300},		-- Divine Protection
 		{642, 300},		-- Divine Shield
 		{6346, 30},		-- Fear Ward
+		{402004, 180},	-- Pain Suppression [Season of Discovery]
 		{425207, 180},	-- Power Word: Barrier [Season of Discovery]
 		{5277, 210},	-- Evasion (300sec base / -90sec from talents / -60sec from 3pc AQ Set)
 		{424919, 20},	-- Main Gauche [Season of Discovery]
