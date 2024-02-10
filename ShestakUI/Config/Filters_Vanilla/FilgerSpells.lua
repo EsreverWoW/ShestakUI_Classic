@@ -1949,6 +1949,12 @@ C["filger_spells"] = {
 			{spellID = 14278, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Main Gauche [Season of Discovery]
 			{spellID = 424919, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Master of Subtlety [Season of Discovery]
+			{spellID = 425098, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Rolling with the Punches [Season of Discovery]
+			{spellID = 400015, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Shadowstep [Season of Discovery]
+			{spellID = 406722, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Slice and Dice
 			{spellID = 5171, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Sprint
@@ -2067,6 +2073,8 @@ C["filger_spells"] = {
 			{spellID = 1943, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Saber Lash [Season of Discovery]
 			{spellID = 424785, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Waylay [Season of Discovery]
+			{spellID = 415725, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Wound Poison
 			{spellID = 13218, unitID = "target", caster = "all", filter = "DEBUFF"},
 
@@ -2151,12 +2159,16 @@ C["filger_spells"] = {
 			{spellID = 408, filter = "CD"},
 			-- Main Gauche [Season of Discovery]
 			{spellID = 424919, filter = "CD"},
+			-- Poisoned Knife [Season of Discovery]
+			{spellID = 425012, filter = "CD"},
 			-- Premeditation
 			{spellID = 14183, filter = "CD"},
 			-- Preparation
 			{spellID = 14185, filter = "CD"},
 			-- Riposte
 			{spellID = 14251, filter = "CD"},
+			-- Shadowstep [Season of Discovery]
+			{spellID = 400029, filter = "CD"},
 			-- Sprint
 			{spellID = 2983, filter = "CD"},
 			-- Stealth

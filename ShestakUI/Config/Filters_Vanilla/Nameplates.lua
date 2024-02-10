@@ -151,6 +151,7 @@ T.DebuffWhiteList = {
 	[SpellName(1943)] = true,	-- Rupture
 	[SpellName(424785)] = true,	-- Saber Lash [Season of Discovery]
 	[SpellName(6770)] = true,	-- Sap
+	[SpellName(415725)] = true,	-- Waylay [Season of Discovery]
 	[SpellName(13218)] = true,	-- Wound Poison
 
 	-- Shaman
@@ -394,6 +395,9 @@ T.BuffWhiteList = {
 	[SpellName(5277)] = true,	-- Evasion
 	[SpellName(14278)] = true,	-- Ghostly Strike
 	[SpellName(424919)] = true,	-- Main Gauche [Season of Discovery]
+	[SpellName(425098)] = true,	-- Master of Subtlety [Season of Discovery]
+	[SpellName(400015)] = true,	-- Rolling with the Punches [Season of Discovery]
+	[SpellName(406722)] = true,	-- Shadowstep [Season of Discovery]
 	[SpellName(5171)] = true,	-- Slice and Dice
 	[SpellName(2983)] = true,	-- Sprint
 	-- [SpellName(1784)] = true,	-- Stealth

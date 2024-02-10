@@ -303,6 +303,7 @@ elseif T.class == "ROGUE" then
 		T.merge[11273] = 1943		-- Rupture r4
 		T.merge[11274] = 1943		-- Rupture r5
 		T.merge[11275] = 1943		-- Rupture r6
+		T.aoespam[399986] = 3		-- Shuriken Toss [Season of Discovery]
 		T.merge[399961] = 5374		-- Mutilate Off-Hand [Season of Discovery]
 	end
 elseif T.class == "SHAMAN" then
