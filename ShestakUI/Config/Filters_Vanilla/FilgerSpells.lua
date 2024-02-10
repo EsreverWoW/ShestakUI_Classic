@@ -2668,6 +2668,12 @@ C["filger_spells"] = {
 			Position = {"TOP", P_PROC_ICON_Anchor},
 
 			-- Buffs
+			-- Dance of the Wicked [Season of Discovery]
+			{spellID = 412800, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Demonic Knowledge [Season of Discovery]
+			-- {spellID = 412735, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Shadow and Flame [Season of Discovery]
+			{spellID = 426311, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Shadow Trance
 			{spellID = 17941, unitID = "player", caster = "player", filter = "BUFF"},
 
@@ -2805,6 +2811,8 @@ C["filger_spells"] = {
 			-- {spellID = 5740, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Seduction (Succubus)
 			{spellID = 6358, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
+			-- Shadowflame [Season of Discovery]
+			{spellID = 426325, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Shadow Vulnerability r1 (Improved Shadow Bolt)
 			{spellID = 17794, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
 			-- Shadow Vulnerability r2 (Improved Shadow Bolt)
@@ -2897,6 +2905,8 @@ C["filger_spells"] = {
 			{spellID = 18540, filter = "CD"},
 			-- Shadow Cleave (Metamorphosis) [Season of Discovery]
 			{spellID = 403835, filter = "CD"},
+			-- Shadowflame [Season of Discovery]
+			{spellID = 426320, filter = "CD"},
 			-- Shadow Ward
 			{spellID = 6229, filter = "CD"},
 			-- Shadowburn

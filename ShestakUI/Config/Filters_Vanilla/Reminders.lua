@@ -495,6 +495,14 @@ if C.reminder.solo_buffs_enable == true then
 				["instance"] = true,
 				["pvp"] = true,
 			},
+			[2] = {	-- Grimoire of Synergy [Season of Discovery] group
+				["spells"] = {
+					SpellName(426301),	-- Grimoire of Synergy
+				},
+				["combat"] = true,
+				["instance"] = true,
+				["pvp"] = true,
+			},
 		},
 		WARRIOR = {
 			[1] = {	-- Battle Shout group
