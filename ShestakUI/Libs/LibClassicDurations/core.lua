@@ -19,7 +19,7 @@ Usage example 1:
 --]================]
 if WOW_PROJECT_ID ~= WOW_PROJECT_CLASSIC then return end
 
-local MAJOR, MINOR = "LibClassicDurations", 69
+local MAJOR, MINOR = "LibClassicDurations", 71
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
@@ -613,7 +613,7 @@ function f:CombatLogHandler(...)
     end
 
     if  eventType == "SPELL_MISSED" and
-    bit_band(srcFlags, COMBATLOG_OBJECT_AFFILIATION_MINE) == COMBATLOG_OBJECT_AFFILIATION_MINE
+            bit_band(srcFlags, COMBATLOG_OBJECT_AFFILIATION_MINE) == COMBATLOG_OBJECT_AFFILIATION_MINE
     then
         local missType = auraType
         -- ABSORB BLOCK DEFLECT DODGE EVADE IMMUNE MISS PARRY REFLECT RESIST
@@ -712,12 +712,12 @@ function f:CombatLogHandler(...)
             local isEnemyBuff = not isDstFriendly and auraType == "BUFF"
             -- print(eventType, srcGUID, "=>", dstName, spellID, spellName, auraType )
             if  eventType == "SPELL_AURA_REFRESH" or
-            eventType == "SPELL_AURA_APPLIED" or
-            eventType == "SPELL_AURA_APPLIED_DOSE"
+                    eventType == "SPELL_AURA_APPLIED" or
+                    eventType == "SPELL_AURA_APPLIED_DOSE"
             then
                 if  not opts.castFilter or
-                castEventPass or
-                isEnemyBuff
+                        castEventPass or
+                        isEnemyBuff
                 then
                     SetTimer(srcGUID, dstGUID, dstName, dstFlags, spellID, spellName, opts, auraType)
                 end
@@ -732,8 +732,8 @@ function f:CombatLogHandler(...)
 
                 FireToUnits("UNIT_BUFF", dstGUID)
                 if  eventType == "SPELL_AURA_REFRESH" or
-                eventType == "SPELL_AURA_APPLIED" or
-                eventType == "SPELL_AURA_APPLIED_DOSE"
+                        eventType == "SPELL_AURA_APPLIED" or
+                        eventType == "SPELL_AURA_APPLIED_DOSE"
                 then
                     FireToUnits("UNIT_BUFF_GAINED", dstGUID, spellID)
                 end
@@ -764,20 +764,17 @@ end
 -- ENEMY BUFFS
 ---------------------------
 local makeBuffInfo = function(spellID, applicationTable, dstGUID, srcGUID)
-    local name, rank, icon, castTime, minRange, maxRange, _spellId = GetSpellInfo(spellID)
-    local durationFunc, startTime, auraType, comboPoints = unpack(applicationTable)
-    local duration = cleanDuration(durationFunc, spellID, srcGUID, comboPoints) -- srcGUID isn't needed actually
-    -- no DRs on buffs
-    local expirationTime = startTime + duration
-    if duration == INFINITY then
-        duration = 0
-        expirationTime = 0
+    local spellName = GetSpellInfo(spellID)
+    local icon = GetSpellTexture(spellID)
+    local opts = spells[spellID]
+    local buffInfo = { spellName, icon, 0, (opts and opts.buffType), 0, 0, nil, nil, nil, spellID, false, false, false, false, 1 }
+    local isStacking = opts and opts.stacking
+    local duration, expirationTime = GetGUIDAuraTime(dstGUID, spellName, spellID, srcGUID, isStacking)
+    if duration then
+        buffInfo[5] = duration
+        buffInfo[6] = expirationTime
     end
-    local now = GetTime()
-    if expirationTime > now then
-        local buffType = spells[spellID] and spells[spellID].buffType
-        return { name, icon, 0, buffType, duration, expirationTime, nil, nil, nil, spellID, false, false, false, false, 1 }
-    end
+    return buffInfo
 end
 
 local shouldDisplayAura = function(auraTable)
@@ -794,6 +791,33 @@ local scanTip = lib.scanTip
 scanTip:SetOwner(WorldFrame, "ANCHOR_NONE")
 local function RegenerateBuffList(unit, dstGUID)
     local buffs = {}
+
+
+    local guidTable = guids[dstGUID]
+    if not guidTable then
+        return
+    end
+
+    for spellID, t in pairs(guidTable) do
+        if t.applications then
+            for srcGUID, auraTable in pairs(t.applications) do
+                if auraTable[3] == "BUFF" then
+                    local buffInfo = makeBuffInfo(spellID, auraTable, dstGUID, nil)
+                    if buffInfo then
+                        tinsert(buffs, buffInfo)
+                    end
+                end
+            end
+        else
+            if t[3] == "BUFF" then
+                local buffInfo = makeBuffInfo(spellID, t, dstGUID, nil)
+                if buffInfo then
+                    tinsert(buffs, buffInfo)
+                end
+            end
+        end
+    end
+    --[[
     local spellName
     for i=1, 32 do
         scanTip:ClearLines()
@@ -819,6 +843,7 @@ local function RegenerateBuffList(unit, dstGUID)
             break
         end
     end
+    ]]
 
     buffCache[dstGUID] = buffs
     buffCacheValid[dstGUID] = GetTime() + BUFF_CACHE_EXPIRATION_TIME -- Expiration timestamp
@@ -947,7 +972,7 @@ if playerClass == "MAGE" then
 
         -- Overriding spellName for Improved blizzard's spellIDs
         if spellName == Chilled and
-        spellID == 12486 or spellID == 12484 or spellID == 12485
+                spellID == 12486 or spellID == 12484 or spellID == 12485
         then
             spellName = "ImpBlizzard"
         end
