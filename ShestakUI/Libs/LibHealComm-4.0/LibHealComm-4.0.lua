@@ -1,7 +1,7 @@
 if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then return end
 
 local major = "LibHealComm-4.0"
-local minor = 112
+local minor = 113
 assert(LibStub, format("%s requires LibStub.", major))
 
 local HealComm = LibStub:NewLibrary(major, minor)
@@ -78,6 +78,7 @@ local CombatLogGetCurrentEventInfo = CombatLogGetCurrentEventInfo
 local UnitHasVehicleUI = UnitHasVehicleUI or function() end
 local GetGlyphSocketInfo = GetGlyphSocketInfo or function() end
 local GetNumGlyphSockets = GetNumGlyphSockets or function() return 0 end
+local C_Engraving = C_Engraving
 
 local MAX_RAID_MEMBERS = MAX_RAID_MEMBERS
 local MAX_PARTY_MEMBERS = MAX_PARTY_MEMBERS
@@ -91,15 +92,15 @@ local isClassicEra = build == 1
 local isSoD = HasActiveSeason() and GetActiveSeason() == (Enum.SeasonID.SeasonOfDiscovery or Enum.SeasonID.Placeholder) and isClassicEra
 
 local spellRankTableData = {
-	[1] = { 774, 8936, 5185, 740, 635, 19750, 139, 2060, 596, 2061, 2054, 2050, 1064, 331, 8004, 136, 755, 689, 746, 33763, 32546, 37563, 48438, 61295, 51945, 50464, 47757, 408120, 408124, 402277, 415236, 415240, 412510, 401417, 417057, 425268 },
-	[2] = { 1058, 8938, 5186, 8918, 639, 19939, 6074, 10963, 996, 9472, 2055, 2052, 10622, 332, 8008, 3111, 3698, 699, 1159, 53248, 61299, 51990, 48450, 52986, 48119, 417058, 425269 },
-	[3] = { 1430, 8939, 5187, 9862, 647, 19940, 6075, 10964, 10960, 9473, 6063, 2053, 10623, 547, 8010, 3661, 3699, 709, 3267, 53249, 61300, 51997, 48451, 52987, 48120, 417059, 425270 },
-	[4] = { 2090, 8940, 5188, 9863, 1026, 19941, 6076, 10965, 10961, 9474, 6064, 913, 10466, 3662, 3700, 7651, 3268, 25422, 53251, 61301, 51998, 52988, 417060, 425271 },
-	[5] = { 2091, 8941, 5189, 1042, 19942, 6077, 22009, 25314, 25316, 10915, 939, 10467, 13542, 11693, 11699, 7926, 25423, 26983, 51999, 417061, 425272 },
-	[6] = { 3627, 9750, 6778, 3472, 19943, 6078, 10916, 959, 10468, 13543, 11694, 11700, 7927, 23569, 24412, 25210, 25308, 52000, 55458, 48446, 417062, 425273 },
-	[7] = { 8910, 9856, 8903, 10328, 10927, 10917, 8005, 13544, 11695, 10838, 27137, 25213, 25420, 27219, 55459, 48447, 48072, 417063, 425274 },
-	[8] = { 9839, 9857, 9758, 10329, 10928, 10395, 10839, 23568, 24413, 25233, 27259, 27220, 27046, 48784, 49275, 48062, 417064, 425275 },
-	[9] = { 9840, 9858, 9888, 25292, 10929, 10396, 18608, 25235, 48785, 49276, 48063, 48989, 47856, 47857, 417065, 425276 },
+	[1] = { 774, 8936, 5185, 740, 635, 19750, 139, 2060, 596, 2061, 2054, 2050, 1064, 331, 8004, 136, 755, 689, 746, 33763, 32546, 37563, 48438, 61295, 51945, 50464, 47757, 408120, 408124, 402277, 415236, 415240, 412510, 401417, 417057, 425268, 436937 },
+	[2] = { 1058, 8938, 5186, 8918, 639, 19939, 6074, 10963, 996, 9472, 2055, 2052, 10622, 332, 8008, 3111, 3698, 699, 1159, 53248, 61299, 51990, 48450, 52986, 48119, 417058, 425269, 436938 },
+	[3] = { 1430, 8939, 5187, 9862, 647, 19940, 6075, 10964, 10960, 9473, 6063, 2053, 10623, 547, 8010, 3661, 3699, 709, 3267, 53249, 61300, 51997, 48451, 52987, 48120, 417059, 425270, 436939 },
+	[4] = { 2090, 8940, 5188, 9863, 1026, 19941, 6076, 10965, 10961, 9474, 6064, 913, 10466, 3662, 3700, 7651, 3268, 25422, 53251, 61301, 51998, 52988, 417060, 425271, 436940 },
+	[5] = { 2091, 8941, 5189, 1042, 19942, 6077, 22009, 25314, 25316, 10915, 939, 10467, 13542, 11693, 11699, 7926, 25423, 26983, 51999, 417061, 425272, 436942 },
+	[6] = { 3627, 9750, 6778, 3472, 19943, 6078, 10916, 959, 10468, 13543, 11694, 11700, 7927, 23569, 24412, 25210, 25308, 52000, 55458, 48446, 417062, 425273, 436943 },
+	[7] = { 8910, 9856, 8903, 10328, 10927, 10917, 8005, 13544, 11695, 10838, 27137, 25213, 25420, 27219, 55459, 48447, 48072, 417063, 425274, 436944 },
+	[8] = { 9839, 9857, 9758, 10329, 10928, 10395, 10839, 23568, 24413, 25233, 27259, 27220, 27046, 48784, 49275, 48062, 417064, 425275, 436945 },
+	[9] = { 9840, 9858, 9888, 25292, 10929, 10396, 18608, 25235, 48785, 49276, 48063, 48989, 47856, 47857, 417065, 425276, 436946  },
 	[10] = { 9841, 9889, 25315, 25357, 18610, 23567, 24414, 26980, 27135, 48070, 48990, 417066, 425277 },
 	[11] = { 25299, 25297, 30020, 27136, 25221, 25391, 27030, 48442, 48071, 417068 },
 	[12] = { 26981, 26978, 25222, 25396, 27031, 48781, 48443 },
@@ -1234,7 +1235,7 @@ if( playerClass == "DRUID" ) then
 					healModifier = healModifier * bonus
 				end
 
-				spellPower = spellPower * ((spellData[spellName].coeff * 1.88) + talentData[EmpoweredTouch].current)
+				spellPower = spellPower * ((spellData[spellName].coeff * (isWrath and 1.88 or 1)) + talentData[EmpoweredTouch].current)
 				-- Healing Touch
 			elseif( spellName == HealingTouch ) then
 
@@ -1611,7 +1612,17 @@ if( playerClass == "PRIEST" ) then
 					local unit = isWrath and "player" or guidToUnit[groupGUID]
 					local testUnit = guidToUnit[groupGUID]
 					-- Dispel Magic is chosen because it's learned before PoH and maintains 30y range through the expansions
-					if( id == group and guid ~= groupGUID and (IsSpellInRange(DispelMagic, unit) == 1 or CheckInteractDistance(unit, 4)) and UnitIsVisible(testUnit) and not UnitHasVehicleUI(testUnit) ) then
+
+					-- Patch 1.15.1 CheckInteractDistance is not able to be used on friendly targets in combat
+					local InCombatLockdownRestriction
+					if isClassicEra then
+						InCombatLockdownRestriction = InCombatLockdown() and not UnitCanAttack("player", unit)
+					else
+						InCombatLockdownRestriction = false
+					end
+					local inRange = IsSpellInRange(DispelMagic, unit) == 1 or (not InCombatLockdownRestriction and CheckInteractDistance(unit, 4))
+
+					if( id == group and guid ~= groupGUID and inRange and UnitIsVisible(testUnit) and not UnitHasVehicleUI(testUnit) ) then
 						targets = targets .. "," .. compressGUID[groupGUID]
 					end
 				end
@@ -1664,6 +1675,14 @@ if( playerClass == "PRIEST" ) then
 				if( equippedSetCache["Oracle"] >= 5 or equippedSetCache["Avatar"] >= 4 ) then
 					healAmount = healAmount + (healAmount / totalTicks) -- Add Tick Amount gained by Set.
 					totalTicks = totalTicks + 1
+				end
+
+				-- SOD Empowered Renew Rune on Belt
+				if isSoD then
+					local belt_rune = C_Engraving.GetRuneForEquipmentSlot(6)
+					if belt_rune and belt_rune.itemEnchantmentID == 7026 then
+						spellPower = spellPower * 1.15
+					end
 				end
 
 				-- SOD Empowered Renew Rune on Belt
