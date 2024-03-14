@@ -181,7 +181,7 @@ frame:SetScript("OnEvent", function(self, event)
 		MiniMapLFGFrame:SetPoint("TOP", Minimap, "TOP", 1, 6)
 		MiniMapLFGFrame:SetScale(0.8)
 		MiniMapLFGFrame:SetHighlightTexture(0)
-		if T.Wrath then
+		if T.Wrath or T.Cata then
 			MiniMapLFGFrameBorder:Hide()
 		else
 			MiniMapLFGBorder:Hide()
@@ -552,11 +552,11 @@ if T.Vanilla then
 		MiniMapTrackingBorder:Hide()
 		MiniMapTrackingIcon:Hide()
 	end
-elseif T.TBC or T.Wrath then
+elseif T.TBC or T.Wrath or T.Cata then
 	if C.minimap.tracking_icon then
 		MiniMapTrackingBackground:Hide()
 		MiniMapTracking:ClearAllPoints()
-		if T.Wrath then
+		if T.Wrath or T.Cata then
 			MiniMapTracking:SetPoint("BOTTOMLEFT", MinimapAnchor, "BOTTOMLEFT", -1, -5)
 			MiniMapTrackingButtonBorder:Hide()
 		else

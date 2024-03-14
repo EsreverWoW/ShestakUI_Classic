@@ -4,19 +4,23 @@ local T, C, L = unpack(ShestakUI)
 --	Specialization Functions
 ----------------------------------------------------------------------------------------
 function T.GetSpecialization(isInspect, isPet, specGroup)
-	if (isInspect or isPet) then
-		return
-	end
-	local specIndex
-	local max = 0
-	for tabIndex = 1, GetNumTalentTabs() do
-		local spent = select(3, GetTalentTabInfo(tabIndex, "player", T.Wrath and specGroup))
-		if spent > max then
-			specIndex = tabIndex
-			max = spent
+	if T.Cata then
+		return GetPrimaryTalentTree(isInspect, isPet, specGroup)
+	else
+		if (isInspect or isPet) then
+			return
 		end
+		local specIndex
+		local max = 0
+		for tabIndex = 1, GetNumTalentTabs() do
+			local spent = select(3, GetTalentTabInfo(tabIndex, "player", T.Wrath and specGroup))
+			if spent > max then
+				specIndex = tabIndex
+				max = spent
+			end
+		end
+		return specIndex
 	end
-	return specIndex
 end
 
 local isCaster = {

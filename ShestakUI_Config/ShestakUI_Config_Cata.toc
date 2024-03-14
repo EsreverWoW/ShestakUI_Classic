@@ -1,0 +1,27 @@
+## Interface: 40400
+## Title: ShestakUI (Classic) Config
+## Notes: In-game configuration for ShestakUI
+## Author: Shestak
+## Version: 2.06
+## X-Curse-Project-ID: 468754
+## X-WoWI-ID: 25934
+## X-Wago-ID: WqKQbyGx
+## RequiredDeps: ShestakUI
+## SavedVariables: ShestakUIOptionsGlobal, ShestakUIOptions
+## SavedVariablesPerCharacter: ShestakUIOptionsPerChar
+
+## X-Website: https://github.com/EsreverWoW/ShestakUI_Classic
+## X-Credits: Haleth, Solor
+## X-Thanks: Tryllemann, Wetxius
+
+Locales\English.lua
+Locales\Chinese.lua
+Locales\French.lua
+Locales\German.lua
+Locales\Italian.lua
+Locales\Russian.lua
+Locales\Spanish.lua
+Locales\Taiwan.lua
+
+Core.lua
+Options.lua
