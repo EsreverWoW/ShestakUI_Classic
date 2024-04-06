@@ -98,7 +98,7 @@ T.DebuffWhiteList = {
 
 	-- Paladin
 	[SpellName(31935)] = true,	-- Avenger's Shield
-	-- [SpellName(26573)] = true,	-- Consecration
+	[SpellName(26573)] = true,	-- Consecration
 	[SpellName(853)] = true,	-- Hammer of Justice
 	[SpellName(31803)] = true,	-- Holy Vengeance
 	[SpellName(20184)] = true,	-- Judgement of Justice

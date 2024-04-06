@@ -135,8 +135,6 @@ C["filger_spells"] = {
 			IconSize = C.filger.buffs_size,
 			Position = {"TOP", P_BUFF_ICON_Anchor},
 
-			-- Barkskin
-			{spellID = 22812, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Berserk [Season of Discovery]
 			{spellID = 417141, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Dash
@@ -189,6 +187,12 @@ C["filger_spells"] = {
 			-- Darkmoon Cards
 			-- Aura of the Blue Dragon (Special, Proc) [Darkmoon Card: Blue Dragon]
 			{spellID = 23684, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Decay (Special, Proc) [Darkmoon Card: Decay] [Season of Discovery]
+			{spellID = 446393, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Overgrowth (Special, Proc) [Darkmoon Card: Overgrowth] [Season of Discovery]
+			{spellID = 446394, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Torment (Special, Proc) [Darkmoon Card: Torment] [Season of Discovery]
+			{spellID = 446391, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
 
 			-- PvP Trinkets
 			-- Aura of Protection (Absorb, Use) [Arena Grand Master]
@@ -261,6 +265,14 @@ C["filger_spells"] = {
 			-- Rings
 			-- Spell Blasting (Spell Power, Proc) [Wrath of Cenarius]
 			{spellID = 25906, unitID = "player", caster = "player", filter = "BUFF"},
+
+			-- Weapons
+			-- Bloodbark Cleave (Special, Use) [Bloodbark Crusher / Ritualist's Hammer] [Season of Discovery]
+			{spellID = 436482, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Haste (Physical Haste, Proc) [Manual Crowd Pummeler]
+			{spellID = 13494, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Haste (Physical Haste, Proc) [Empyrean Demolisher]
+			{spellID = 21165, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 
 			-- Enchants
 			-- Holy Strength (Strength) [Enchant Weapon - Crusader]
@@ -520,18 +532,26 @@ C["filger_spells"] = {
 			{spellID = 5384, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Flanking Strike [Season of Discovery]
 			{spellID = 415320, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Focus Fire [Season of Discovery]
+			{spellID = 428726, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Frenzy Effect
 			{spellID = 19615, unitID = "pet", caster = "all", filter = "BUFF"},
 			-- Furious Howl (Wolf)
 			{spellID = 24604, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Kill Command [Season of Discovery]
 			{spellID = 409418, unitID = "pet", caster = "player", filter = "BUFF"},
+			-- Lock and Load [Season of Discovery]
+			{spellID = 415414, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Mend Pet
 			{spellID = 136, unitID = "pet", caster = "player", filter = "BUFF"},
 			-- Prowl (Cat)
 			-- {spellID = 24450, unitID = "pet", caster = "all", filter = "BUFF"},
 			-- Rapid Fire
 			{spellID = 3045, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Rapid Killing [Season of Discovery]
+			{spellID = 415407, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Raptor Fury [Season of Discovery]
+			{spellID = 415362, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Shell Shield (Turtle)
 			{spellID = 26064, unitID = "pet", caster = "all", filter = "BUFF"},
 			-- Sniper Training [Season of Discovery]
@@ -568,6 +588,12 @@ C["filger_spells"] = {
 			-- Darkmoon Cards
 			-- Aura of the Blue Dragon (Special, Proc) [Darkmoon Card: Blue Dragon]
 			{spellID = 23684, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Decay (Special, Proc) [Darkmoon Card: Decay] [Season of Discovery]
+			{spellID = 446393, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Overgrowth (Special, Proc) [Darkmoon Card: Overgrowth] [Season of Discovery]
+			{spellID = 446394, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Torment (Special, Proc) [Darkmoon Card: Torment] [Season of Discovery]
+			{spellID = 446391, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
 
 			-- PvP Trinkets
 			-- Aura of Protection (Absorb, Use) [Arena Grand Master]
@@ -648,6 +674,8 @@ C["filger_spells"] = {
 			{spellID = 19229, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Intimidation
 			{spellID = 24394, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
+			-- Lava Breath [Season of Discovery]
+			{spellID = 444678, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Scatter Shot
 			{spellID = 19503, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Scorpid Poison r1 (Scorpid)
@@ -838,6 +866,8 @@ C["filger_spells"] = {
 			{spellID = 12042, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Arcane Surge [Season of Discovery]
 			{spellID = 425124, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Balefire Bolt [Season of Discovery]
+			{spellID = 428878, unitID = "player", caster = "player", filter = "DEBUFF"},
 			-- Combustion
 			{spellID = 28682, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Enlightenment [Season of Discovery]
@@ -938,6 +968,12 @@ C["filger_spells"] = {
 			-- Darkmoon Cards
 			-- Aura of the Blue Dragon (Special, Proc) [Darkmoon Card: Blue Dragon]
 			{spellID = 23684, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Decay (Special, Proc) [Darkmoon Card: Decay] [Season of Discovery]
+			{spellID = 446393, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Overgrowth (Special, Proc) [Darkmoon Card: Overgrowth] [Season of Discovery]
+			{spellID = 446394, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Torment (Special, Proc) [Darkmoon Card: Torment] [Season of Discovery]
+			{spellID = 446391, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
 
 			-- PvP Trinkets
 			-- Aura of Protection (Absorb, Use) [Arena Grand Master]
@@ -1116,6 +1152,8 @@ C["filger_spells"] = {
 			{spellID = 401460, unitID = "target", caster = "player", filter = "BUFF"},
 			-- Regeneration [Season of Discovery]
 			{spellID = 401417, unitID = "target", caster = "player", filter = "BUFF"},
+			-- Temporal Anomaly [Season of Discovery]
+			{spellID = 428895, unitID = "target", caster = "player", filter = "BUFF"},
 			-- Temporal Beacon [Season of Discovery]
 			{spellID = 400735, unitID = "target", caster = "player", filter = "BUFF"},
 		},
@@ -1169,6 +1207,8 @@ C["filger_spells"] = {
 			{spellID = 120, filter = "CD"},
 			-- Counterspell
 			{spellID = 2139, filter = "CD"},
+			-- Displacement [Season of Discovery]
+			{spellID = 428861, filter = "CD"},
 			-- Fire Blast
 			{spellID = 2136, filter = "CD"},
 			-- Fire Ward
@@ -1177,6 +1217,8 @@ C["filger_spells"] = {
 			{spellID = 122, filter = "CD"},
 			-- Frost Ward
 			{spellID = 6143, filter = "CD"},
+			-- Frozen Orb [Season of Discovery]
+			{spellID = 440802, filter = "CD"},
 			-- Ice Barrier
 			{spellID = 11426, filter = "CD"},
 			-- Ice Block
@@ -1189,6 +1231,8 @@ C["filger_spells"] = {
 			{spellID = 12043, filter = "CD"},
 			-- Rewind Time [Season of Discovery]
 			{spellID = 401462, filter = "CD"},
+			-- Temporal Anomaly [Season of Discovery]
+			{spellID = 428885, filter = "CD"},
 
 			-- Racial
 			-- Berserking (Mana)
@@ -1259,6 +1303,8 @@ C["filger_spells"] = {
 			{spellID = 425600, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Inspiration Exemplar [Season of Discovery]
 			-- {spellID = 407880, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Light's Grace [Season of Discovery]
+			{spellID = 428909, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Retribution Aura
 			-- {spellID = 7294, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Sacrifice Redeemed [Season of Discovery]
@@ -1327,6 +1373,12 @@ C["filger_spells"] = {
 			-- Darkmoon Cards
 			-- Aura of the Blue Dragon (Special, Proc) [Darkmoon Card: Blue Dragon]
 			{spellID = 23684, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Decay (Special, Proc) [Darkmoon Card: Decay] [Season of Discovery]
+			{spellID = 446393, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Overgrowth (Special, Proc) [Darkmoon Card: Overgrowth] [Season of Discovery]
+			{spellID = 446394, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Torment (Special, Proc) [Darkmoon Card: Torment] [Season of Discovery]
+			{spellID = 446391, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
 
 			-- PvP Trinkets
 			-- Aura of Protection (Absorb, Use) [Arena Grand Master]
@@ -1409,6 +1461,8 @@ C["filger_spells"] = {
 			{spellID = 13494, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Haste (Physical Haste, Proc) [Empyrean Demolisher]
 			{spellID = 21165, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Parasomnia (Special, Proc) [Parasomnia] [Season of Discovery]
+			{spellID = 446707, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Strength of the Champion (Strength, Proc) [Arcanite Champion]
 			{spellID = 16916, unitID = "player", caster = "player", filter = "BUFF"},
 
@@ -1428,11 +1482,13 @@ C["filger_spells"] = {
 			-- Avenger's Shield [Season of Discovery]
 			{spellID = 407669, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Consecration
-			-- {spellID = 26573, unitID = "target", caster = "player", filter = "DEBUFF"},
+			{spellID = 26573, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Hammer of Justice
 			{spellID = 853, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Hand of Reckoning [Season of Discovery]
 			{spellID = 407631, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Holy Wrath [Season of Discovery]
+			{spellID = 2812, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Judgement of Justice
 			{spellID = 20184, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Judgement of Light
@@ -1536,6 +1592,8 @@ C["filger_spells"] = {
 			-- {spellID = 415068, filter = "CD"},
 			-- Hammer of Justice
 			{spellID = 853, filter = "CD"},
+			-- Hammer of the Righteous [Season of Discovery]
+			{spellID = 407632, filter = "CD"},
 			-- Hammer of Wrath
 			{spellID = 24275, filter = "CD"},
 			-- Hand of Reckoning [Season of Discovery]
@@ -1647,6 +1705,8 @@ C["filger_spells"] = {
 			{spellID = 14743, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Spirit Tap
 			{spellID = 15271, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Surge of Light [Season of Discovery]
+			{spellID = 431666, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Item Sets
 			-- Divine Protection (Absorb, Proc) [Vestments of the Devout / Vestments of the Virtuous]
@@ -1666,6 +1726,12 @@ C["filger_spells"] = {
 			-- Darkmoon Cards
 			-- Aura of the Blue Dragon (Special, Proc) [Darkmoon Card: Blue Dragon]
 			{spellID = 23684, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Decay (Special, Proc) [Darkmoon Card: Decay] [Season of Discovery]
+			{spellID = 446393, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Overgrowth (Special, Proc) [Darkmoon Card: Overgrowth] [Season of Discovery]
+			{spellID = 446394, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Torment (Special, Proc) [Darkmoon Card: Torment] [Season of Discovery]
+			{spellID = 446391, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
 
 			-- PvP Trinkets
 			-- Aura of Protection (Absorb, Use) [Arena Grand Master]
@@ -1734,6 +1800,12 @@ C["filger_spells"] = {
 			{spellID = 15269, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Cripple (Homunculi) [Season of Discovery]
 			{spellID = 402808, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
+			-- Curse of the Elements (Eye of the Void) [Season of Discovery]
+			{spellID = 402792, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
+			-- Curse of Shadow (Eye of the Void) [Season of Discovery]
+			{spellID = 402791, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
+			-- Curse of Tongues (Eye of the Void) [Season of Discovery]
+			{spellID = 402794, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
 			-- Degrade (Homunculi) [Season of Discovery]
 			{spellID = 402818, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Demoralize (Homunculi) [Season of Discovery]
@@ -1782,6 +1854,8 @@ C["filger_spells"] = {
 			{spellID = 15286, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
 			-- Void Plague [Season of Discovery]
 			{spellID = 425204, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Void Zone [Season of Discovery]
+			{spellID = 431681, unitID = "target", caster = "player", filter = "DEBUFF"},
 
 			-- Trinket Effects
 		},
@@ -1800,6 +1874,8 @@ C["filger_spells"] = {
 			{spellID = 552, unitID = "target", caster = "player", filter = "BUFF"},
 			-- Armor of Faith (Absorb, Proc) [Vestments of Faith]
 			{spellID = 28810, unitID = "target", caster = "player", filter = "BUFF"},
+			-- Divine Aegis [Season of Discovery]
+			{spellID = 431624, unitID = "target", caster = "player", filter = "BUFF"},
 			-- Greater Heal (HoT, Proc) [Vestments of Transcendence]
 			{spellID = 22009, unitID = "target", caster = "player", filter = "BUFF"},
 			-- Inspiration
@@ -1853,6 +1929,8 @@ C["filger_spells"] = {
 			{spellID = 425294, filter = "CD"},
 			-- Elune's Grace
 			{spellID = 2651, filter = "CD"},
+			-- Eye of the Void [Season of Discovery]
+			{spellID = 402789, filter = "CD"},
 			-- Fade
 			{spellID = 586, filter = "CD", absID = true},
 			-- Fear Ward
@@ -1891,6 +1969,8 @@ C["filger_spells"] = {
 			{spellID = 15286, filter = "CD"},
 			-- Void Plague [Season of Discovery]
 			{spellID = 425204, filter = "CD"},
+			-- Void Zone [Season of Discovery]
+			{spellID = 431681, filter = "CD"},
 
 			-- Racial
 			-- Berserking (Mana)
@@ -2041,14 +2121,16 @@ C["filger_spells"] = {
 			IconSize = C.filger.buffs_size,
 			Position = {"TOP", T_DEBUFF_ICON_Anchor},
 
+			-- Atrophic Poison [Season of Discovery]
+			{spellID = 439473, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Between the Eyes [Season of Discovery]
 			{spellID = 400009, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Cheap Shot
 			{spellID = 1833, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Crippling Poison r1
-			{spellID = 3409, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			{spellID = 3409, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
 			-- Crippling Poison r2
-			{spellID = 11201, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			{spellID = 11201, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
 			-- Deadly Poison
 			{spellID = 2818, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Expose Armor
@@ -2062,17 +2144,23 @@ C["filger_spells"] = {
 			-- Kick - Silenced
 			{spellID = 18425, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Kidney Shot
-			{spellID = 408, unitID = "target", caster = "player", filter = "DEBUFF"},
+			{spellID = 408, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Mind-numbing Poison
 			{spellID = 5760, unitID = "target", caster = "all", filter = "DEBUFF"},
+			-- Numbing Poison [Season of Discovery]
+			{spellID = 439472, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Quick Draw [Season of Discovery]
 			{spellID = 398196, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Riposte
-			{spellID = 14251, unitID = "target", caster = "player", filter = "DEBUFF"},
+			{spellID = 14251, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Rupture
 			{spellID = 1943, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Saber Lash [Season of Discovery]
 			{spellID = 424785, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Sap
+			{spellID = 6770, unitID = "target", caster = "all", filter = "DEBUFF"},
+			-- Sebacious Poison [Season of Discovery]
+			{spellID = 439471, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Waylay [Season of Discovery]
 			{spellID = 415725, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Wound Poison
@@ -2285,6 +2373,8 @@ C["filger_spells"] = {
 			-- Mana Spring Totem r4
 			{spellID = 10494, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			--]]
+			-- Mental Dexterity [Season of Discovery]
+			-- {spellID = 415144, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Nature's Swiftness
 			{spellID = 16188, unitID = "player", caster = "player", filter = "BUFF"},
 			--[[
@@ -2303,6 +2393,8 @@ C["filger_spells"] = {
 			-- {spellID = 8072, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Strength of Earth
 			-- {spellID = 8076, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Two-Handed Mastery [Season of Discovery]
+			-- {spellID = 436365, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Water Shield [Season of Discovery]
 			{spellID = 408510, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Windwall Totem
@@ -2330,6 +2422,8 @@ C["filger_spells"] = {
 			{spellID = 415105, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Shield Mastery [Season of Discovery]
 			{spellID = 408524, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Tidal Waves [Season of Discovery]
+			{spellID = 432041, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Item Sets
 			-- Lightning Shield (Mp5, Proc) [The Earthshatterer]
@@ -2349,6 +2443,12 @@ C["filger_spells"] = {
 			-- Darkmoon Cards
 			-- Aura of the Blue Dragon (Special, Proc) [Darkmoon Card: Blue Dragon]
 			{spellID = 23684, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Decay (Special, Proc) [Darkmoon Card: Decay] [Season of Discovery]
+			{spellID = 446393, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Overgrowth (Special, Proc) [Darkmoon Card: Overgrowth] [Season of Discovery]
+			{spellID = 446394, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Torment (Special, Proc) [Darkmoon Card: Torment] [Season of Discovery]
+			{spellID = 446391, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
 
 			-- PvP Trinkets
 			-- Aura of Protection (Absorb, Use) [Arena Grand Master]
@@ -2423,6 +2523,8 @@ C["filger_spells"] = {
 			{spellID = 13494, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Haste (Physical Haste, Proc) [Empyrean Demolisher]
 			{spellID = 21165, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Stun (Special, Proc) [Bloodstorm War Totem / Corrupted Smashbringer] [Season of Discovery]
+			{spellID = 446707, unitID = "target", caster = "player", filter = "DEBUFF"},
 
 			-- Enchants
 			-- Holy Strength (Strength) [Enchant Weapon - Crusader]
@@ -2487,6 +2589,8 @@ C["filger_spells"] = {
 			{spellID = 29203, unitID = "target", caster = "player", filter = "BUFF"},
 			-- Lightning Shield (Special, Proc) [The Ten Storms]
 			-- {spellID = 23552, unitID = "target", caster = "player", filter = "BUFF", absID = true},
+			-- Riptide [Season of Discovery]
+			{spellID = 408521, unitID = "target", caster = "player", filter = "BUFF"},
 			-- Spirit of the Alpha [Season of Discovery]
 			{spellID = 408696, unitID = "target", caster = "player", filter = "BUFF"},
 			-- Totemic Power (Armor, Proc) [The Earthshatterer]
@@ -2563,6 +2667,8 @@ C["filger_spells"] = {
 			{spellID = 16188, filter = "CD"},
 			-- Reincarnation
 			{spellID = 20608, filter = "CD"},
+			-- Riptide [Season of Discovery]
+			{spellID = 408521, filter = "CD"},
 			-- Shamanistic Rage [Season of Discovery]
 			{spellID = 425336, filter = "CD", absID = true},
 			-- Stoneclaw Totem
@@ -2607,6 +2713,8 @@ C["filger_spells"] = {
 
 			-- Amplify Curse
 			{spellID = 18288, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Backdraft [Season of Discovery]
+			{spellID = 427713, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Blood Pact (Imp)
 			-- {spellID = 6307, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Consume Shadows (Voidwalker)
@@ -2633,6 +2741,8 @@ C["filger_spells"] = {
 			-- {spellID = 755, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Hellfire
 			-- {spellID = 1949, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Immolation Aura [Season of Discovery]
+			{spellID = 427726, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Incinerate [Season of Discovery]
 			{spellID = 412758, unitID = "player", caster = "player", filter = "BUFF"},
 			--[[
@@ -2657,6 +2767,8 @@ C["filger_spells"] = {
 			-- {spellID = 25228, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Tainted Blood (Felhunter)
 			-- {spellID = 19478, unitID = "pet", caster = "all", filter = "BUFF"},
+			-- Vengeance [Season of Discovery]
+			{spellID = 426195, unitID = "player", caster = "player", filter = "BUFF"},
 		},
 		{
 			Name = "P_PROC_ICON",
@@ -2687,6 +2799,12 @@ C["filger_spells"] = {
 			-- Darkmoon Cards
 			-- Aura of the Blue Dragon (Special, Proc) [Darkmoon Card: Blue Dragon]
 			{spellID = 23684, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Decay (Special, Proc) [Darkmoon Card: Decay] [Season of Discovery]
+			{spellID = 446393, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Overgrowth (Special, Proc) [Darkmoon Card: Overgrowth] [Season of Discovery]
+			{spellID = 446394, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Torment (Special, Proc) [Darkmoon Card: Torment] [Season of Discovery]
+			{spellID = 446391, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
 
 			-- PvP Trinkets
 			-- Aura of Protection (Absorb, Use) [Arena Grand Master]
@@ -2831,6 +2949,10 @@ C["filger_spells"] = {
 			{spellID = 21949, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
 			-- Tainted Blood Effect (Felhunter)
 			{spellID = 19479, unitID = "target", caster = "all", filter = "DEBUFF"},
+			-- Unstable Affliction [Season of Discovery]
+			{spellID = 427717, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Unstable Affliction (Silence) [Season of Discovery]
+			{spellID = 427719, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
 
 			-- Trinket Effects
 		},
@@ -2913,6 +3035,8 @@ C["filger_spells"] = {
 			{spellID = 17877, filter = "CD"},
 			-- Soul Fire
 			{spellID = 6353, filter = "CD"},
+			-- Vengeance [Season of Discovery]
+			{spellID = 426195, filter = "CD"},
 
 			-- Pets
 			-- Rain of Fire (Doomguard)
@@ -2969,8 +3093,12 @@ C["filger_spells"] = {
 			{spellID = 29131, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Bloodthirst
 			{spellID = 23885, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Commanding Shout [Season of Discovery]
+			{spellID = 403215, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Death Wish
 			{spellID = 12328, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Enrage (Wrecking Crew) [Season of Discovery]
+			{spellID = 427066, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Enraged Regeneration [Season of Discovery]
 			{spellID = 402913, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Flagellation [Season of Discovery]
@@ -2979,6 +3107,8 @@ C["filger_spells"] = {
 			{spellID = 12966, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Last Stand
 			{spellID = 12975, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Rampage [Season of Discovery]
+			{spellID = 426942, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Recklessness
 			{spellID = 1719, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Retaliation
@@ -3006,6 +3136,8 @@ C["filger_spells"] = {
 			{spellID = 12880, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Enrage (Consumed By Rage) [Season of Discovery]
 			{spellID = 425415, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Taste for Blood [Season of Discovery]
+			{spellID = 426969, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Item Sets
 			-- Cheat Death (Special, Proc) [Dreadnaught's Battlegear]
@@ -3019,6 +3151,16 @@ C["filger_spells"] = {
 			-- Class
 			-- Gift of Life (Health, Use) [Lifegiving Gem]
 			{spellID = 23725, unitID = "player", caster = "player", filter = "BUFF"},
+
+			-- Darkmoon Cards
+			-- Aura of the Blue Dragon (Special, Proc) [Darkmoon Card: Blue Dragon]
+			{spellID = 23684, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Decay (Special, Proc) [Darkmoon Card: Decay] [Season of Discovery]
+			{spellID = 446393, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Overgrowth (Special, Proc) [Darkmoon Card: Overgrowth] [Season of Discovery]
+			{spellID = 446394, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Torment (Special, Proc) [Darkmoon Card: Torment] [Season of Discovery]
+			{spellID = 446391, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
 
 			-- PvP Trinkets
 			-- Aura of Protection (Absorb, Use) [Arena Grand Master]
@@ -3069,6 +3211,8 @@ C["filger_spells"] = {
 			{spellID = 13494, unitID = "player", caster = "player", filter = "BUFF", absID = true},
 			-- Haste (Physical Haste, Proc) [Empyrean Demolisher]
 			{spellID = 21165, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Parasomnia (Special, Proc) [Parasomnia] [Season of Discovery]
+			{spellID = 446707, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Strength of the Champion (Strength, Proc) [Arcanite Champion]
 			{spellID = 16916, unitID = "player", caster = "player", filter = "BUFF"},
 
@@ -3392,6 +3536,8 @@ C["filger_spells"] = {
 			{spellID = 23538, unitID = "player", caster = "all", filter = "BUFF", absID = true},
 
 			-- Damage Reduction
+			-- Barkskin [Season of Discovery]
+			{spellID = 22812, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Blessing of Protection
 			{spellID = 1022, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Blessing of Sacrifice
@@ -3641,6 +3787,8 @@ C["filger_spells"] = {
 			{spellID = 24259, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
 			-- Shield Bash - Silenced
 			{spellID = 18498, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- Unstable Affliction (Silence) [Season of Discovery]
+			{spellID = 427719, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
 
 			-- Roots
 			-- Entangling Roots r1

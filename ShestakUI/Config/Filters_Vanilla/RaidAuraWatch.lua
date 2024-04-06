@@ -14,6 +14,7 @@ T.RaidBuffs = {
 		{8936, "BOTTOMLEFT", {0.2, 0.8, 0.2}},				-- Regrowth
 		{408124, "TOPLEFT", {0.4, 0.8, 0.2}},				-- Lifebloom [Season of Discovery]
 		{408120, "BOTTOMRIGHT", {0.8, 0.4, 0}},				-- Wild Growth [Season of Discovery]
+		{428713, "LEFT", {0.45, 0.3, 0.2}, true},			-- Barkskin [Season of Discovery]
 		-- {102342, "LEFT", {0.45, 0.3, 0.2}, true},			-- Ironbark
 		-- {155777, "RIGHT", {0.4, 0.9, 0.4}},					-- Rejuvenation (Germination)
 	},
@@ -21,6 +22,7 @@ T.RaidBuffs = {
 		{401417, "TOPRIGHT", {0.13, 0.87, 0.50}},			-- Regeneration [Season of Discovery]
 		{401460, "TOPRIGHT", {0.8, 0.4, 0.8}},				-- Rapid Regeneration [Season of Discovery]
 		{412510, "TOPRIGHT", {0.13, 0.87, 0.50}},			-- Mass Regeneration [Season of Discovery]
+		{428895, "BOTTOMRIGHT", {0.19, 0.58, 0.85}},		-- Temporal Anomaly [Season of Discovery]
 		{400735, "TOPLEFT", {0.82, 0.29, 0.24}},			-- Temporal Beacon [Season of Discovery]
 		{436516, "BOTTOM", {0.11, 0.57, 0.71}},				-- Chronostatic Preservation [Season of Discovery]
 	},
@@ -44,6 +46,7 @@ T.RaidBuffs = {
 		{10060, "RIGHT", {0.89, 0.1, 0.1}},					-- Power Infusion
 	},
 	SHAMAN = {
+		{408521, "TOPRIGHT", {0.7, 0.3, 0.7}, true},		-- Riptide [Season of Discovery]
 		{974, "BOTTOMLEFT", {0.2, 0.7, 0.2}, true},			-- Earth Shield [Season of Discovery]
 		{29203, "BOTTOMRIGHT", {0.7, 0.4, 0}},				-- Healing Way (Change Color?)
 		{16177, "TOPLEFT", {0.4, 0.7, 0.2}},				-- Ancestral Fortitude

@@ -2577,8 +2577,6 @@ C["filger_spells"] = {
 			{spellID = 2643, filter = "CD"},
 			-- Rapid Fire
 			{spellID = 3045, filter = "CD"},
-			-- Rapid Killing
-			{spellID = 35098, filter = "CD"},
 			-- Raptor Strike
 			{spellID = 2973, filter = "CD"},
 			-- Readiness
@@ -4365,7 +4363,7 @@ C["filger_spells"] = {
 			-- Blood Corruption
 			{spellID = 53742, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Consecration
-			-- {spellID = 26573, unitID = "target", caster = "player", filter = "DEBUFF"},
+			{spellID = 26573, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Hammer of Justice
 			{spellID = 853, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Hand of Reckoning
@@ -5724,7 +5722,7 @@ C["filger_spells"] = {
 			-- Cheap Shot
 			{spellID = 1833, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Crippling Poison
-			{spellID = 3409, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			{spellID = 3409, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
 			-- Deadly Poison
 			{spellID = 2818, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Deadly Throw
@@ -5744,13 +5742,15 @@ C["filger_spells"] = {
 			-- Interrupt
 			{spellID = 32747, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Kidney Shot
-			{spellID = 408, unitID = "target", caster = "player", filter = "DEBUFF"},
+			{spellID = 408, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Mind-numbing Poison
 			{spellID = 5760, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Riposte
-			{spellID = 14251, unitID = "target", caster = "player", filter = "DEBUFF"},
+			{spellID = 14251, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Rupture
 			{spellID = 1943, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Sap
+			{spellID = 6770, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Savage Combat
 			{spellID = 58684, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Silenced - Improved Kick

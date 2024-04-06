@@ -132,7 +132,7 @@ T.DebuffWhiteList = {
 	-- Paladin
 	[SpellName(31935)] = true,	-- Avenger's Shield
 	[SpellName(53742)] = true,	-- Blood Corruption
-	-- [SpellName(26573)] = true,	-- Consecration
+	[SpellName(26573)] = true,	-- Consecration
 	[SpellName(853)] = true,	-- Hammer of Justice
 	[SpellName(62124)] = true,	-- Hand of Reckoning
 	[SpellName(21183)] = true,	-- Heart of the Crusader

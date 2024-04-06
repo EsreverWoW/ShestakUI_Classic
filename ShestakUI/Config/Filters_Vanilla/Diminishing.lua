@@ -11,6 +11,7 @@ T.DiminishingSpells = {
 	[5211] = {"stun"},				-- Bash
 	[9005] = {"stun"},				-- Pounce
 	[24394] = {"stun"},				-- Intimidation
+	[428739] = {"stun"},				-- Deep Freeze [Season of Discovery]
 	[853] = {"stun"},				-- Hammer of Justice
 	[1833] = {"stun"},				-- Cheap Shot
 	[22703] = {"stun"},				-- Inferno Effect
@@ -76,6 +77,9 @@ T.DiminishingSpells = {
 
 	-- Horrors
 	[6789] = {"horror"},			-- Death Coil
+
+	-- Unstable Affliction
+	[427719] = {"ua"},				-- Unstable Affliction (Silence) [Season of Discovery]
 
 	-- Roots
 	-- [19675] = {"root"},				-- Feral Charge Effect

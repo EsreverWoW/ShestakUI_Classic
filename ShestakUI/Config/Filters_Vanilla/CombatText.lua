@@ -51,6 +51,7 @@ if T.class == "DRUID" then
 		T.merge[9862] = 740			-- Tranquility r3
 		T.merge[9863] = 740			-- Tranquility r4
 		T.aoespam[408120] = 4		-- Wild Growth [Season of Discovery]
+		T.aoespam[417147] = 3		-- Efflorescence [Season of Discovery]
 		-- Damaging spells
 		T.aoespam[779] = 0			-- Swipe r1
 		T.merge[780] = 779			-- Swipe r2
@@ -203,6 +204,7 @@ elseif T.class == "PALADIN" then
 		T.merge[20922] = 26573		-- Consecration r3
 		T.merge[20923] = 26573		-- Consecration r4
 		T.merge[20924] = 26573		-- Consecration r5
+		T.aoespam[407632] = 1		-- Hammer of the Righteous [Season of Discovery]
 		T.aoespam[20911] = 3		-- Blessing of Sanctuary r1
 		T.merge[20912] = 20911		-- Blessing of Sanctuary r2
 		T.merge[20913] = 20911		-- Blessing of Sanctuary r3
@@ -271,6 +273,7 @@ elseif T.class == "PRIEST" then
 		T.merge[15267] = 14914		-- Holy Fire r7
 		T.merge[15261] = 14914		-- Holy Fire r8
 		T.aoespam[425204] = 2.5		-- Void Plague [Season of Discovery]
+		T.aoespam[431681] = 3		-- Void Zone [Season of Discovery]
 	end
 	if C.combattext.healing then
 		T.healfilter[15290] = false	-- Vampiric Embrace
@@ -319,6 +322,7 @@ elseif T.class == "SHAMAN" then
 		T.merge[10622] = 1064		-- Chain Heal r2
 		T.merge[10623] = 1064		-- Chain Heal r3
 		T.aoespam[409333] = 3		-- Ancestral Guidance [Season of Discovery]
+		T.aoespam[408521] = 6		-- Riptide [Season of Discovery]
 		-- Damaging spells
 		-- T.aoespam[26545] = 3		-- Lightning Shield
 		T.aoespam[421] = 1			-- Chain Lightning r1
@@ -354,6 +358,7 @@ elseif T.class == "SHAMAN" then
 		T.merge[10435] = 3606		-- Searing Bolt r5
 		T.merge[10436] = 3606		-- Searing Bolt r6
 		T.aoespam[409337] = 3		-- Ancestral Guidance [Season of Discovery]
+		-- T.aoespam[432129] = 3		-- Rolling Thunder [Season of Discovery]
 	end
 elseif T.class == "WARLOCK" then
 	if C.combattext.merge_aoe_spam then

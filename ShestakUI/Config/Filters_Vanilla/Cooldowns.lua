@@ -19,6 +19,7 @@ if C.raidcooldown.enable == true then
 		{724, 600},		-- Lightwell
 		{409324, 120},	-- Ancestral Guidance [Season of Discovery]
 		-- Defense
+		-- {428713, 60},	-- Barkskin [Season of Discovery]
 		{408024, 180},	-- Survival Instincts [Season of Discovery]
 		{1022, 300},	-- Blessing of Protection (300sec base / -120sec from talents)
 		{407804, 120},	-- Divine Sacrifice [Season of Discovery]
@@ -26,6 +27,7 @@ if C.raidcooldown.enable == true then
 		{425294, 120},	-- Dispersion [Season of Discovery]
 		{402004, 180},	-- Pain Suppression [Season of Discovery]
 		{425207, 180},	-- Power Word: Barrier [Season of Discovery]
+		{426195, 180},	-- Vengeance [Season of Discovery]
 		{871, 1800},	-- Shield Wall
 		{12975, 600},	-- Last Stand
 		-- Taunts

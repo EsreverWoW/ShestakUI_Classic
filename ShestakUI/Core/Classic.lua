@@ -37,6 +37,7 @@ local isCaster = {
 }
 
 function T.GetSpecializationRole()
+	-- TODO: Use IsSpellKnownOrOverridesKnown instead for checking rune slot spellIDs
 	local tree = T.GetSpecialization()
 	-- eventually check for tank stats in case a tanking in a non-traditional spec (mostly for warriors)
 	if (T.class == "DEATHKNIGHT" and T.CheckPlayerBuff(GetSpellInfo(48263)))

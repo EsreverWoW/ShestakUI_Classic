@@ -105,6 +105,7 @@ T.ArenaControl = {
 	-- Hunter
 	[SpellName(19574)] = 1,		-- Bestial Wrath
 	[SpellName(3045)] = 1,		-- Rapid Fire
+	[SpellName(415407)] = 1,		-- Rapid Killing [Season of Discovery]
 	--Mage
 	[SpellName(12042)] = 1,		-- Arcane Power
 	[SpellName(425124)] = 1,	-- Arcane Surge [Season of Discovery]
@@ -152,6 +153,7 @@ T.ArenaControl = {
 	[SpellName(5277)] = 1,		-- Evasion
 	[SpellName(1856)] = 1,		-- Vanish
 	[SpellName(425336)] = 1,	-- Shamanistic Rage [Season of Discovery]
+	[SpellName(426195)] = 1,	-- Vengeance [Season of Discovery]
 	[SpellName(12976)] = 1,		-- Last Stand
 	[SpellName(23920)] = 1,		-- Spell Reflection
 }

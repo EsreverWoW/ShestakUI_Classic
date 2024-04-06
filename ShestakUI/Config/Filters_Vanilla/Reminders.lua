@@ -266,6 +266,7 @@ if C.reminder.solo_buffs_enable == true then
 					SpellName(168),		-- Frost Armor
 					SpellName(6117),	-- Mage Armor
 					SpellName(7302),	-- Ice Armor
+					SpellName(428741),	-- Molten Armor [Season of Discovery]
 				},
 				["combat"] = true,
 				["instance"] = true,
@@ -412,6 +413,9 @@ if C.reminder.solo_buffs_enable == true then
 					SpellName(3408),	-- Crippling Poison
 					SpellName(5761),	-- Mind-numbing Poison
 					SpellName(13219),	-- Wound Poison
+					SpellName(439465),	-- Atrophic Poison [Season of Discovery]
+					SpellName(439464),	-- Numbing Poison [Season of Discovery]
+					SpellName(439462),	-- Sebacious Poison [Season of Discovery]
 				},
 				["mainhand"] = true,
 				["combat"] = true,
@@ -435,6 +439,9 @@ if C.reminder.solo_buffs_enable == true then
 					SpellName(3408),	-- Crippling Poison
 					SpellName(5761),	-- Mind-numbing Poison
 					SpellName(13219),	-- Wound Poison
+					SpellName(439465),	-- Atrophic Poison [Season of Discovery]
+					SpellName(439464),	-- Numbing Poison [Season of Discovery]
+					SpellName(439462),	-- Sebacious Poison [Season of Discovery]
 				},
 				["offhand"] = true,
 				["combat"] = true,
@@ -508,6 +515,7 @@ if C.reminder.solo_buffs_enable == true then
 			[1] = {	-- Battle Shout group
 				["spells"] = {
 					SpellName(6673),	-- Battle Shout
+					SpellName(403215),	-- Commanding Shout [Season of Discovery]
 				},
 				["combat"] = true,
 				["instance"] = true,
@@ -519,6 +527,7 @@ if C.reminder.solo_buffs_enable == true then
 					SpellName(2457),		-- Battle Stance
 					SpellName(2458),		-- Berserker Stance
 					SpellName(71),			-- Defensive Stance
+					SpellName(412513),		-- Gladiator Stance [Season of Discovery]
 				},
 				["combat"] = true,
 				["instance"] = true,
