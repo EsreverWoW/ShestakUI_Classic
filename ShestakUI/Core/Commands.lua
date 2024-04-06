@@ -172,7 +172,7 @@ end
 ----------------------------------------------------------------------------------------
 --	Spec switching(by Monolit)
 ----------------------------------------------------------------------------------------
-if T.Wrath then
+if T.SoD or T.Wrath then
 	SlashCmdList.SPEC = function()
 		local spec = GetActiveTalentGroup()
 		if spec == 1 then SetActiveTalentGroup(2) elseif spec == 2 then SetActiveTalentGroup(1) end
