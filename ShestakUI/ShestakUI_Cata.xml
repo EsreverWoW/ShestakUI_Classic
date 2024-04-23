@@ -36,21 +36,21 @@
 	<Script file="Libs\LiteStats\LiteStats.lua"/>
 	<Script file="Modules\UnitFrames\Colors.lua"/>
 
-	<Script file="Config\Filters_Wrath\Announcements.lua"/>
-	<Script file="Config\Filters_Wrath\ArenaControl.lua"/>
-	<Script file="Config\Filters_Wrath\AutoButton.lua"/>
-	<Script file="Config\Filters_Wrath\BadBuffs.lua"/>
-	<Script file="Config\Filters_Wrath\ChannelingTicks.lua"/>
-	<Script file="Config\Filters_Wrath\ChatSpam.lua"/>
-	<Script file="Config\Filters_Wrath\CombatText.lua"/>
-	<Script file="Config\Filters_Wrath\Cooldowns.lua"/>
-	<Script file="Config\Filters_Wrath\Diminishing.lua"/>
-	<Script file="Config\Filters_Wrath\Errors.lua"/>
-	<Script file="Config\Filters_Wrath\FilgerSpells.lua"/>
-	<Script file="Config\Filters_Wrath\Nameplates.lua"/>
-	<Script file="Config\Filters_Wrath\OpenItems.lua"/>
-	<Script file="Config\Filters_Wrath\RaidAuraWatch.lua"/>
-	<Script file="Config\Filters_Wrath\Reminders.lua"/>
+	<Script file="Config\Filters_Cata\Announcements.lua"/>
+	<Script file="Config\Filters_Cata\ArenaControl.lua"/>
+	<Script file="Config\Filters_Cata\AutoButton.lua"/>
+	<Script file="Config\Filters_Cata\BadBuffs.lua"/>
+	<Script file="Config\Filters_Cata\ChannelingTicks.lua"/>
+	<Script file="Config\Filters_Cata\ChatSpam.lua"/>
+	<Script file="Config\Filters_Cata\CombatText.lua"/>
+	<Script file="Config\Filters_Cata\Cooldowns.lua"/>
+	<Script file="Config\Filters_Cata\Diminishing.lua"/>
+	<Script file="Config\Filters_Cata\Errors.lua"/>
+	<Script file="Config\Filters_Cata\FilgerSpells.lua"/>
+	<Script file="Config\Filters_Cata\Nameplates.lua"/>
+	<Script file="Config\Filters_Cata\OpenItems.lua"/>
+	<Script file="Config\Filters_Cata\RaidAuraWatch.lua"/>
+	<Script file="Config\Filters_Cata\Reminders.lua"/>
 
 	<Script file="Core\API.lua"/>
 	<Script file="Core\Functions.lua"/>
