@@ -80,6 +80,7 @@
 	<Script file="Modules\Misc\Threat.lua"/>
 
 	<Script file="Modules\Trade\AlreadyKnown.lua"/>
+	<Script file="Modules\Trade\Archaeology.lua"/>
 	<Script file="Modules\Trade\Merchant.lua"/>
 	<Script file="Modules\Trade\OneClickBuyOut.lua"/>
 	<Script file="Modules\Trade\OneClickDisenchanting.lua"/>
