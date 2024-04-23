@@ -26,7 +26,7 @@ local function IsWrathBuild()
 end
 
 local function IsCataBuild()
-	return IsClassicBuild() and select(4, GetBuildInfo()) >= 4e4
+	return _G.WOW_PROJECT_ID == _G.WOW_PROJECT_CATACLYSM_CLASSIC
 end
 
 local function HideOptions(list)

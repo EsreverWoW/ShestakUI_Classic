@@ -22,8 +22,8 @@ T.Classic = _G.WOW_PROJECT_ID ~= _G.WOW_PROJECT_MAINLINE
 T.Vanilla = _G.WOW_PROJECT_ID == _G.WOW_PROJECT_CLASSIC
 T.Vanilla115 = T.Vanilla and T.toc >= 11500
 T.TBC = _G.WOW_PROJECT_ID == _G.WOW_PROJECT_BURNING_CRUSADE_CLASSIC
-T.Wrath = _G.WOW_PROJECT_ID == _G.WOW_PROJECT_WRATH_CLASSIC and T.toc < 4e4
-T.Cata = T.Classic and T.toc >= 4e4
+T.Wrath = _G.WOW_PROJECT_ID == _G.WOW_PROJECT_WRATH_CLASSIC
+T.Cata = _G.WOW_PROJECT_ID == _G.WOW_PROJECT_CATACLYSM_CLASSIC
 T.Hardcore = C_GameRules and C_GameRules.IsHardcoreActive()
 T.SoM = C_Seasons and C_Seasons.HasActiveSeason() and C_Seasons.GetActiveSeason() == Enum.SeasonID.SeasonOfMastery
 T.SoD = C_Seasons and C_Seasons.HasActiveSeason() and (C_Seasons.GetActiveSeason() == Enum.SeasonID.SeasonOfDiscovery or C_Seasons.GetActiveSeason() == Enum.SeasonID.Placeholder)
