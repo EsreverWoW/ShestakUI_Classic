@@ -272,7 +272,7 @@ if StreamingIcon then
 end
 
 -- GhostFrame
-if T.Mainline then
+if T.Mainline or T.Cata then
 	GhostFrame:StripTextures()
 	GhostFrame:SetTemplate("Overlay")
 	GhostFrame:StyleButton()
