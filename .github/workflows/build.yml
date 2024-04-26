@@ -19,6 +19,17 @@ jobs:
         with:
           fetch-depth: 100
 
+      - name: Create Cataclysm Classic Package
+        uses: BigWigsMods/packager@master
+        if: ${{ success() && github.event_name != 'pull_request' && contains(github.ref, 'tags/') }}
+        with:
+          args: -g cata -p 468754 -w 25934 -a WqKQbyGx
+        env:
+          CF_API_KEY: ${{ secrets.CF_API_KEY }}
+          GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}
+          WOWI_API_TOKEN: ${{ secrets.WOWI_API_TOKEN }}
+          WAGO_API_TOKEN: ${{ secrets.WAGO_API_TOKEN }}
+
       - name: Create Wrath Classic Package
         uses: BigWigsMods/packager@master
         if: ${{ success() && github.event_name != 'pull_request' && contains(github.ref, 'tags/') }}
