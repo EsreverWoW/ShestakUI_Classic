@@ -55,6 +55,7 @@
 	<Script file="Modules\GCD.lua"/>
 	<Script file="Modules\HarmonyOrbs.lua"/>
 	<Script file="Modules\HolyPower.lua"/>
+	<Script file="Modules\EclipseBar.lua"/>
 	<Script file="Modules\QuestIcon.lua"/>
 	<Script file="Modules\PowerSpark.lua"/>
 	<Script file="Modules\RaidDebuffs.lua"/>

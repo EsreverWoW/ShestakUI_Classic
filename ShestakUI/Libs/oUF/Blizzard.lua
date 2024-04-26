@@ -114,7 +114,7 @@ function oUF:DisableBlizzard(unit)
 		handleFrame(PlayerFrame)
 
 		-- For the damn vehicle support:
-		if(oUF:IsWrath()) then
+		if(oUF:IsWrath() or oUF:IsCata()) then
 			PlayerFrame:RegisterEvent('PLAYER_ENTERING_WORLD')
 			PlayerFrame:RegisterEvent('UNIT_ENTERING_VEHICLE')
 			PlayerFrame:RegisterEvent('UNIT_ENTERED_VEHICLE')

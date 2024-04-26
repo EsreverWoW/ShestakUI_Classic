@@ -1876,8 +1876,11 @@ do
 	local essence = ns.CreateCheckBox(parent, "essence")
 	essence:SetPoint("TOPLEFT", chi, "BOTTOMLEFT", 0, 0)
 
+	local eclipse = ns.CreateCheckBox(parent, "eclipse", L_GUI_UF_PLUGINS_ECLIPSE_BAR)
+	eclipse:SetPoint("TOPLEFT", essence, "BOTTOMLEFT", IsCataBuild() and -20 or 0, 0)
+
 	local stagger = ns.CreateCheckBox(parent, "stagger", L_GUI_UF_PLUGINS_STAGGER_BAR)
-	stagger:SetPoint("TOPLEFT", essence, "BOTTOMLEFT", 0, 0)
+	stagger:SetPoint("TOPLEFT", eclipse, "BOTTOMLEFT", 0, 0)
 
 	local holy = ns.CreateCheckBox(parent, "holy", L_GUI_UF_PLUGINS_HOLY_BAR)
 	holy:SetPoint("TOPLEFT", stagger, "BOTTOMLEFT", 0, 0)
@@ -1886,7 +1889,7 @@ do
 	shard:SetPoint("TOPLEFT", holy, "BOTTOMLEFT", 0, 0)
 
 	local rune = ns.CreateCheckBox(parent, "rune", L_GUI_UF_PLUGINS_RUNE_BAR)
-	rune:SetPoint("TOPLEFT", shard, "BOTTOMLEFT", 0, 0)
+	rune:SetPoint("TOPLEFT", shard, "BOTTOMLEFT", IsWrathBuild() and -20 or 0, 0)
 
 	local totem = ns.CreateCheckBox(parent, "totem", L_GUI_UF_PLUGINS_TOTEM_BAR)
 	totem:SetPoint("TOPLEFT", rune, "BOTTOMLEFT", 0, 0)
@@ -1910,6 +1913,7 @@ do
 	local wrath = {
 		arcane,
 		chi,
+		essence,
 		stagger,
 		holy,
 		shard,
@@ -1919,8 +1923,13 @@ do
 	local cata = {
 		arcane,
 		chi,
+		essence,
 		stagger,
 		totem_other
+	}
+
+	local mainline = {
+		eclipse
 	}
 
 	if IsVanillaBuild() or IsTBCBuild() then
@@ -1930,6 +1939,8 @@ do
 		HideOptions(wrath)
 	elseif IsCataBuild() then
 		HideOptions(cata)
+	elseif IsMainlineBuild() then
+		HideOptions(mainline)
 	end
 end
 

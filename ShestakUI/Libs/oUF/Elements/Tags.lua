@@ -92,6 +92,15 @@ local tagStrings = {
 		return UnitCreatureFamily(u) or UnitCreatureType(u)
 	end]],
 
+	['pereclipse'] = [[function(u)
+		local m = UnitPowerMax('player', Enum.PowerType.Balance)
+		if(m == 0) then
+			return 0
+		else
+			return math.abs(UnitPower('player', Enum.PowerType.Balance) / m * 100)
+		end
+	end]],
+
 	['curmana'] = [[function(unit)
 		return UnitPower(unit, Enum.PowerType.Mana)
 	end]],
@@ -452,6 +461,7 @@ local tagEvents = {
 	['classification']      = 'UNIT_CLASSIFICATION_CHANGED',
 	['cpoints']             = 'UNIT_POWER_FREQUENT PLAYER_TARGET_CHANGED',
 	['curhp']               = 'UNIT_HEALTH UNIT_MAXHEALTH',
+	['pereclipse']			= 'UNIT_POWER_FREQUENT',
 	['curmana']             = 'UNIT_POWER_UPDATE UNIT_MAXPOWER',
 	['curpp']               = 'UNIT_POWER_UPDATE UNIT_MAXPOWER',
 	['dead']                = 'UNIT_HEALTH',

@@ -295,7 +295,7 @@ local function Shared(self, unit)
 		end
 
 		-- LFD role icons
-		if (T.Wrath or T.Mainline) and C.raidframe.icons_role == true then
+		if (T.Wrath or T.Cata or T.Mainline) and C.raidframe.icons_role == true then
 			self.GroupRoleIndicator = self.Health:CreateTexture(nil, "OVERLAY")
 			self.GroupRoleIndicator:SetSize(12, 12)
 			self.GroupRoleIndicator:SetPoint("TOPLEFT", 10, 8)
@@ -401,15 +401,16 @@ local function Shared(self, unit)
 		end
 
 		-- Holy Power bar
-		if T.Mainline and C.unitframe_class_bar.holy == true and T.class == "PALADIN" then
+		if (T.Cata or T.Mainline) and C.unitframe_class_bar.holy == true and T.class == "PALADIN" then
 			self.HolyPower = CreateFrame("Frame", self:GetName().."_HolyPowerBar", self)
 			self.HolyPower:CreateBackdrop("Default")
 			self.HolyPower:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, 7)
 			self.HolyPower:SetSize(player_width, 7)
 
-			for i = 1, 5 do
+			local maxHolyPower = T.Classic and 3 or 5
+			for i = 1, maxHolyPower do
 				self.HolyPower[i] = CreateFrame("StatusBar", self:GetName().."_HolyPower"..i, self.HolyPower)
-				self.HolyPower[i]:SetSize((player_width - 4) / 5, 7)
+				self.HolyPower[i]:SetSize((player_width - (T.Classic and 2 or 4)) / maxHolyPower, 7)
 				if i == 1 then
 					self.HolyPower[i]:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, 7)
 				else
@@ -426,15 +427,16 @@ local function Shared(self, unit)
 		end
 
 		-- Soul Shards bar
-		if T.Mainline and C.unitframe_class_bar.shard == true and T.class == "WARLOCK" then
+		if (T.Cata or T.Mainline) and C.unitframe_class_bar.shard == true and T.class == "WARLOCK" then
 			self.SoulShards = CreateFrame("Frame", self:GetName().."_SoulShardsBar", self)
 			self.SoulShards:CreateBackdrop("Default")
 			self.SoulShards:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, 7)
 			self.SoulShards:SetSize(player_width, 7)
 
-			for i = 1, 5 do
+			local maxSoulShards = T.Classic and 3 or 5
+			for i = 1, maxSoulShards do
 				self.SoulShards[i] = CreateFrame("StatusBar", self:GetName().."_SoulShards"..i, self.SoulShards)
-				self.SoulShards[i]:SetSize((player_width - 4) / 5, 7)
+				self.SoulShards[i]:SetSize((player_width - (T.Classic and 2 or 4)) / maxSoulShards, 7)
 				if i == 1 then
 					self.SoulShards[i]:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, 7)
 				else
@@ -563,6 +565,40 @@ local function Shared(self, unit)
 			CreateFrame("Frame"):SetScript("OnUpdate", function() T.UpdateClassMana(self) end)
 			self.ClassMana = T.SetFontString(self.Power, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
 			self.ClassMana:SetTextColor(1, 0.49, 0.04)
+		end
+
+		-- Eclipse bar
+		if T.Cata and T.class == "DRUID" then
+			if C.unitframe_class_bar.eclipse == true then
+				self.EclipseBar = CreateFrame("Frame", self:GetName().."_EclipseBar", self)
+				self.EclipseBar:CreateBackdrop("Default")
+				self.EclipseBar:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, 7)
+				self.EclipseBar:SetSize(217, 7)
+
+				self.EclipseBar.LunarBar = CreateFrame("StatusBar", nil, self.EclipseBar)
+				self.EclipseBar.LunarBar:SetPoint("LEFT", self.EclipseBar, "LEFT", 0, 0)
+				self.EclipseBar.LunarBar:SetSize(self.EclipseBar:GetWidth(), self.EclipseBar:GetHeight())
+				self.EclipseBar.LunarBar:SetStatusBarTexture(C.media.texture)
+				self.EclipseBar.LunarBar:SetStatusBarColor(0.80, 0.80, 0.20)
+
+				self.EclipseBar.SolarBar = CreateFrame("StatusBar", nil, self.EclipseBar)
+				self.EclipseBar.SolarBar:SetPoint("LEFT", self.EclipseBar.LunarBar:GetStatusBarTexture(), "RIGHT", 0, 0)
+				self.EclipseBar.SolarBar:SetSize(self.EclipseBar:GetWidth(), self.EclipseBar:GetHeight())
+				self.EclipseBar.SolarBar:SetStatusBarTexture(C.media.texture)
+				self.EclipseBar.SolarBar:SetStatusBarColor(0.30, 0.30, 0.80)
+
+				self.EclipseBar.Text = T.SetFontString(self.EclipseBar.SolarBar, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
+				self.EclipseBar.Text:SetPoint("CENTER", self.EclipseBar, "CENTER", -6, 0)
+
+				self.EclipseBar.Pers = T.SetFontString(self.EclipseBar.SolarBar, C.font.unit_frames_font, C.font.unit_frames_font_size, C.font.unit_frames_font_style)
+				self.EclipseBar.Pers:SetPoint("LEFT", self.EclipseBar.Text, "RIGHT", 2, 0)
+				self:Tag(self.EclipseBar.Pers, "[pereclipse]%")
+
+				self.EclipseBar:SetScript("OnShow", function() T.UpdateEclipse(self, false) end)
+				self.EclipseBar:SetScript("OnUpdate", function() T.UpdateEclipse(self, true) end)
+				self.EclipseBar:SetScript("OnHide", function() T.UpdateEclipse(self, false) end)
+				self.EclipseBar.PostUpdatePower = T.EclipseDirection
+			end
 		end
 
 		-- Experience bar
@@ -776,9 +812,11 @@ local function Shared(self, unit)
 			self.Debuffs["growth-y"] = "UP"
 			self.Debuffs["growth-x"] = "LEFT"
 			if (T.class == "DEATHKNIGHT" and C.unitframe_class_bar.rune == true)
+			or (T.Cata and T.class == "DRUID" and C.unitframe_class_bar.eclipse == true)
 			or ((T.class == "DRUID" or T.class == "ROGUE") and C.unitframe_class_bar.combo == true and C.unitframe_class_bar.combo_old ~= true)
+			or (T.Cata and T.class == "PALADIN" and C.unitframe_class_bar.holy == true)
 			or (T.class == "SHAMAN" and C.unitframe_class_bar.totem == true)
-			or (T.Mainline and T.class == "WARLOCK" and C.unitframe_class_bar.shard == true) then
+			or ((T.Cata or T.Mainline) and T.class == "WARLOCK" and C.unitframe_class_bar.shard == true) then
 				self.Debuffs:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 2, 19)
 			else
 				self.Debuffs:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 2, 5)
@@ -1138,7 +1176,7 @@ local function Shared(self, unit)
 	end
 
 	if C.unitframe.show_boss and unit == "boss" then
-		if T.Mainline then
+		if T.Cata or T.Mainline then
 			self.AlternativePower = CreateFrame("StatusBar", nil, self.Health, BackdropTemplateMixin and "BackdropTemplate")
 			self.AlternativePower:SetFrameLevel(self.Health:GetFrameLevel() + 1)
 			self.AlternativePower:SetHeight(5)

@@ -4,7 +4,7 @@ local Private = oUF.Private
 
 local unitSelectionType = Private.unitSelectionType
 
-if(oUF:IsClassic()) then return end
+if(oUF:IsClassic() and not oUF:IsCata()) then return end
 
 -- sourced from FrameXML/UnitPowerBarAlt.lua
 local ALTERNATE_POWER_INDEX = Enum.PowerType.Alternate or 10

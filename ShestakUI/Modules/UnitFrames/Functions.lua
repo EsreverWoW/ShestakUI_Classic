@@ -8,6 +8,34 @@ local _, ns = ...
 local oUF = ns.oUF
 T.oUF = oUF
 
+T.EclipseDirection = function(self)
+	if GetEclipseDirection() == "sun" then
+		self.Text:SetText("|cff4478BC>>|r")
+	elseif GetEclipseDirection() == "moon" then
+		self.Text:SetText("|cffE5994C<<|r")
+	else
+		self.Text:SetText("")
+	end
+end
+
+T.UpdateEclipse = function(self, login)
+	local eb = self.EclipseBar
+	local txt = self.EclipseBar.Text
+
+	if login then
+		eb:SetScript("OnUpdate", nil)
+	end
+
+	if eb:IsShown() then
+		txt:Show()
+		if self.Debuffs then self.Debuffs:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 2, 19) end
+	else
+		txt:Hide()
+		if (C.unitframe_class_bar.combo_always == true or GetShapeshiftFormID() == CAT_FORM) and C.unitframe_class_bar.combo_old ~= true then return end
+		if self.Debuffs then self.Debuffs:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 2, 5) end
+	end
+end
+
 T.UpdateAllElements = function(frame)
 	for _, v in ipairs(frame.__elements) do
 		v(frame, "UpdateElement", frame.unit)

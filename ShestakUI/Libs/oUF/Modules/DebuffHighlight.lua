@@ -138,7 +138,7 @@ local function Enable(object)
 
 	-- Make sure aura scanning is active for this object
 	object:RegisterEvent("UNIT_AURA", Update)
-	if oUF:IsClassic() and not oUF:IsWrath() then
+	if oUF:IsVanilla() or oUF:IsTBC() then
 		object:RegisterEvent("CHARACTER_POINTS_CHANGED", CheckSpec, true)
 	else
 		object:RegisterEvent("PLAYER_TALENT_UPDATE", CheckSpec, true)
@@ -161,7 +161,7 @@ end
 local function Disable(object)
 	if object.DebuffHighlightBackdrop or object.DebuffHighlightBackdropBorder or object.DebuffHighlight then
 		object:UnregisterEvent("UNIT_AURA", Update)
-		if oUF:IsClassic() and not oUF:IsWrath() then
+		if oUF:IsVanilla() or oUF:IsTBC() then
 			object:UnregisterEvent("CHARACTER_POINTS_CHANGED", CheckSpec)
 		else
 			object:UnregisterEvent("PLAYER_TALENT_UPDATE", CheckSpec)

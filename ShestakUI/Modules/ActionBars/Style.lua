@@ -426,7 +426,7 @@ if T.Cata or T.Mainline then
 		end
 
 		hooksecurefunc("ActionButton_ShowOverlayGlow", HideHighlightButton)
-	else
+	elseif T.Mainline then
 		hooksecurefunc("ActionButton_ShowOverlayGlow", function(button)
 			-- Make proc glow better
 			button.SpellActivationAlert.ProcStartFlipbook:ClearAllPoints()
@@ -440,7 +440,7 @@ end
 ----------------------------------------------------------------------------------------
 --	TotemBar style
 ----------------------------------------------------------------------------------------
-if not T.Wrath or T.class ~= "SHAMAN" then return end
+if (not T.Wrath and not T.Cata) or T.class ~= "SHAMAN" then return end
 
 local SLOT_EMPTY_TCOORDS = {
 	[EARTH_TOTEM_SLOT] = {

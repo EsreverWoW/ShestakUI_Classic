@@ -4,7 +4,7 @@ if C.unitframe.enable ~= true or T.class ~= "WARLOCK" then return end
 local _, ns = ...
 local oUF = ns.oUF
 
-if(oUF:IsClassic()) then return end
+if(oUF:IsClassic() and not oUF:IsCata()) then return end
 
 local SPELL_POWER_SOUL_SHARDS = Enum.PowerType.SoulShards or 7
 

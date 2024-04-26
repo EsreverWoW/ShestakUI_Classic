@@ -304,7 +304,7 @@ local function initObject(unit, style, styleFunc, header, ...)
 			object:SetAttribute('*type1', 'target')
 			object:SetAttribute('*type2', 'togglemenu')
 
-			if(oUF:IsMainline() or oUF:IsWrath()) then
+			if(not oUF:IsVanilla() and not oUF:IsTBC()) then
 				object:SetAttribute('toggleForVehicle', true)
 			end
 

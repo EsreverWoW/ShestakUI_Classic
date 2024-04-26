@@ -3,9 +3,9 @@ if(select(2, UnitClass('player')) ~= 'DEATHKNIGHT') then return end
 local _, ns = ...
 local oUF = ns.oUF
 
-if(oUF:IsClassic() and not oUF:IsWrath()) then return end
+if(oUF:IsVanilla() or oUF:IsTBC()) then return end
 
-local runemap = oUF:IsWrath() and {1, 2, 5, 6, 3, 4} or {1, 2, 3, 4, 5, 6}
+local runemap = oUF:IsClassic() and {1, 2, 5, 6, 3, 4} or {1, 2, 3, 4, 5, 6}
 local hasSortOrder = false
 
 local function onUpdate(self, elapsed)
@@ -44,7 +44,7 @@ local function UpdateColor(self, event, runeID, alt)
 	local validRuneType = (runeID and type(runeID) == "number" and runeID >= 0 and runeID <= 6)
 
 	local color
-	if(oUF:IsWrath()) then
+	if(oUF:IsClassic()) then
 		local runeType = validRuneType and GetRuneType(runeID) or alt
 		color = runeType and self.colors.runes[runeType] or self.colors.power.RUNES
 	else
@@ -58,7 +58,7 @@ local function UpdateColor(self, event, runeID, alt)
 
 	local r, g, b = color[1], color[2], color[3]
 
-	if((oUF:IsWrath() or oUF:IsCata()) and validRuneType) then
+	if(oUF:IsClassic() and validRuneType) then
 		element[runeID]:SetStatusBarColor(r, g, b)
 
 		local bg = element[runeID].bg
@@ -66,7 +66,7 @@ local function UpdateColor(self, event, runeID, alt)
 			local mu = bg.multiplier or 1
 			bg:SetVertexColor(r * mu, g * mu, b * mu)
 		end
-	elseif(not oUF:IsWrath()) then
+	elseif(not oUF:IsClassic()) then
 		for index = 1, #element do
 			element[index]:SetStatusBarColor(r, g, b)
 
@@ -136,7 +136,7 @@ local function Update(self, event)
 				rune:SetScript('OnUpdate', onUpdate)
 			end
 
-			if(oUF:IsWrath()) then
+			if(oUF:IsClassic()) then
 				UpdateColor(self, event, runeID)
 			end
 
