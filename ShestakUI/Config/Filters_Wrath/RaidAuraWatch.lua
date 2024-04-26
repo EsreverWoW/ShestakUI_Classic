@@ -1218,6 +1218,7 @@ if C.raidframe.plugins_pvp_debuffs == true then
 		[SpellName(61780)] = 3,		-- Polymorph: Turkey
 		[SpellName(28271)] = 3,		-- Polymorph: Turtle
 		[SpellName(59634)] = 3,		-- Polymorph - Penguin
+		[SpellName(55080)] = 2,		-- Shattered Barrier
 		[SpellName(18469)] = 3,		-- Silenced - Improved Counterspell
 		-- Paladin
 		[SpellName(853)] = 3,		-- Hammer of Justice
@@ -1243,6 +1244,7 @@ if C.raidframe.plugins_pvp_debuffs == true then
 		[SpellName(18425)] = 3,		-- Silenced - Improved Kick
 		-- Shaman
 		[SpellName(58861)] = 3,		-- Bash (Spirit Wolf)
+		[SpellName(53019)] = 3,		-- Earth's Grasp
 		[SpellName(51514)] = 3,		-- Hex
 		[SpellName(39796)] = 3,		-- Stoneclaw Totem
 		-- Warlock

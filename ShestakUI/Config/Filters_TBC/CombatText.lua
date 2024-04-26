@@ -194,11 +194,11 @@ elseif T.class == "MAGE" then
 elseif T.class == "PALADIN" then
 	if C.combattext.merge_aoe_spam then
 		-- Healing spells
-		T.aoespam[20267] = 6		-- Judgment of Light r1
-		T.merge[20341] = 20267		-- Judgment of Light r2
-		T.merge[20342] = 20267		-- Judgment of Light r3
-		T.merge[20343] = 20267		-- Judgment of Light r4
-		T.merge[27163] = 20267		-- Judgment of Light r5
+		T.aoespam[20267] = 6		-- Judgement of Light r1
+		T.merge[20341] = 20267		-- Judgement of Light r2
+		T.merge[20342] = 20267		-- Judgement of Light r3
+		T.merge[20343] = 20267		-- Judgement of Light r4
+		T.merge[27163] = 20267		-- Judgement of Light r5
 		-- Damaging spells
 		T.aoespam[26573] = 3		-- Consecration r1
 		T.merge[20116] = 26573		-- Consecration r2
@@ -251,6 +251,7 @@ elseif T.class == "PRIEST" then
 		T.merge[10961] = 596		-- Prayer of Healing r4
 		T.merge[25316] = 596		-- Prayer of Healing r5
 		T.merge[25308] = 596		-- Prayer of Healing r6
+		T.aoespam[33110] = 3		-- Prayer of Mending
 		-- Damaging spells
 		T.aoespam[15237] = 0		-- Holy Nova r1
 		T.merge[15430] = 15237		-- Holy Nova r2
@@ -479,7 +480,7 @@ elseif T.class == "WARRIOR" then
 		T.merge[12850] = 12162		-- Deep Wounds r2
 		T.merge[12868] = 12162		-- Deep Wounds r3
 		T.aoespam[1680] = 1.5		-- Whirlwind
-		T.merge[44949] = 1680		-- Whirlwind [Trigger]
+		T.merge[44949] = 1680		-- Whirlwind Off-Hand
 		T.aoespam[6343] = 0			-- Thunder Clap r1
 		T.merge[8198] = 6343		-- Thunder Clap r2
 		T.merge[8204] = 6343		-- Thunder Clap r3

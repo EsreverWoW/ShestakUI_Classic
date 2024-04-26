@@ -82,40 +82,27 @@ if C.reminder.raid_buffs_enable == true or C.announcements.flask_food == true th
 			SpellName(66623),	-- Well Fed (+40 Attack Power / 47 Spell Power / +40 Stamina) [Bountiful Feast]
 		},
 		Mp5 = {
-			SpellName(25894),	-- Greater Blessing of Wisdom
-			SpellName(19742),	-- Blessing of Wisdom
 			SpellName(5677),	-- Mana Spring
 		},
 		AP = {
-			SpellName(25782),	-- Greater Blessing of Might
 			SpellName(19740),	-- Blessing of Might
 			SpellName(6673),	-- Battle Shout
 		},
 		Intellect = {
-			SpellName(23028),	-- Arcane Brilliance
 			SpellName(1459),	-- Arcane Intellect
 			SpellName(46302),	-- K'iru's Song of Victory
 			SpellName(61316),	-- Dalaran Brilliance
-			SpellName(61024),	-- Dalaran Intellect
 			SpellName(8096),	-- Intellect [Scroll of Intellect]
 		},
 		Kings = {
-			SpellName(25898),	-- Greater Blessing of Kings
 			SpellName(20217),	-- Blessing of Kings
 			SpellName(69378),	-- Blessing of Forgotten Kings [Drums of Forgotten Kings]
 		},
 		Mark = {
-			SpellName(21849),	-- Gift of the Wild
 			SpellName(1126),	-- Mark of the Wild
-			SpellName(69381),	-- Gift of the Wild [Drums of the Wild]
-		},
-		Spirit = {
-			SpellName(27681),	-- Prayer of Spirit
-			SpellName(14752),	-- Divine Spirit
 		},
 		Stamina = {
 			SpellName(21562),	-- Prayer of Fortitude
-			SpellName(1243),	-- Power Word: Fortitude
 			SpellName(46302),	-- K'iru's Song of Victory
 			SpellName(69377),	-- Fortitude [Runescroll of Fortitude]
 		},
@@ -190,7 +177,6 @@ if C.reminder.solo_buffs_enable == true then
 			[1] = {	-- Mark of the Wild group
 				["spells"] = {
 					SpellName(1126),	-- Mark of the Wild
-					SpellName(21849),	-- Gift of the Wild
 				},
 				["combat"] = true,
 				["instance"] = true,
@@ -199,13 +185,10 @@ if C.reminder.solo_buffs_enable == true then
 		HUNTER = {
 			[1] = {	-- Aspects group
 				["spells"] = {
-					SpellName(61846),	-- Aspect of the Dragonhawk
 					SpellName(13165),	-- Aspect of the Hawk
-					SpellName(13161),	-- Aspect of the Beast
 					SpellName(5118),	-- Aspect of the Cheetah
-					SpellName(13163),	-- Aspect of the Monkey
+					SpellName(82661),	-- Aspect of the Fox
 					SpellName(13159),	-- Aspect of the Pack
-					SpellName(34074),	-- Aspect of the Viper
 					SpellName(20043),	-- Aspect of the Wild
 				},
 				["combat"] = true,
@@ -226,7 +209,7 @@ if C.reminder.solo_buffs_enable == true then
 			[1] = {	-- Armors group
 				["spells"] = {
 					SpellName(30482),	-- Molten Armor
-					SpellName(168),		-- Frost Armor
+					SpellName(7302),	-- Frost Armor
 					SpellName(6117),	-- Mage Armor
 					SpellName(7302),	-- Ice Armor
 				},
@@ -237,10 +220,8 @@ if C.reminder.solo_buffs_enable == true then
 			[2] = {	-- Intellect group
 				["spells"] = {
 					SpellName(1459),	-- Arcane Intellect
-					SpellName(23028),	-- Arcane Brilliance
 					SpellName(46302),	-- K'iru's Song of Victory
 					SpellName(61316),	-- Dalaran Brilliance
-					SpellName(61024),	-- Dalaran Intellect
 				},
 				["combat"] = true,
 				["instance"] = true,
@@ -262,9 +243,7 @@ if C.reminder.solo_buffs_enable == true then
 					SpellName(465),		-- Devotion Aura
 					SpellName(7294),	-- Retribution Aura
 					SpellName(19746),	-- Concentration Aura
-					SpellName(19891),	-- Fire Resistance Aura
-					SpellName(19888),	-- Frost Resistance Aura
-					SpellName(19876),	-- Shadow Resistance Aura
+					SpellName(19891),	-- Resistance Aura
 				},
 				["combat"] = true,
 				["instance"] = true,
@@ -274,11 +253,6 @@ if C.reminder.solo_buffs_enable == true then
 					SpellName(20217),	-- Blessing of Kings
 					SpellName(19740),	-- Blessing of Might
 					SpellName(20911),	-- Blessing of Sanctuary
-					SpellName(19742),	-- Blessing of Wisdom
-					SpellName(25898),	-- Greater Blessing of Kings
-					SpellName(25782),	-- Greater Blessing of Might
-					SpellName(25899),	-- Greater Blessing of Sanctuary
-					SpellName(25894),	-- Greater Blessing of Wisdom
 				},
 				["combat"] = true,
 				["instance"] = true,
@@ -286,15 +260,11 @@ if C.reminder.solo_buffs_enable == true then
 			},
 			[4] = {	-- Seals group
 				["spells"] = {
-					SpellName(21084),		-- Seal of Righteousness
-					SpellName(31892),		-- Seal of Blood
-					SpellName(20375),		-- Seal of Command
+					SpellName(31801),		-- Seal of Truth
 					SpellName(348704),		-- Seal of Corruption
+					SpellName(20154),		-- Seal of Righteousness
 					SpellName(20164),		-- Seal of Justice
-					SpellName(20165),		-- Seal of Light
-					SpellName(31801),		-- Seal of Vengeance
-					SpellName(20166),		-- Seal of Wisdom
-					SpellName(348700),		-- Seal of the Martyr
+					SpellName(20165),		-- Seal of Insight
 				},
 				["combat"] = true,
 				["instance"] = true,
@@ -305,6 +275,7 @@ if C.reminder.solo_buffs_enable == true then
 			[1] = {	-- Inner Fire/Will group
 				["spells"] = {
 					SpellName(588),		-- Inner Fire
+					SpellName(73413),	-- Inner Will
 				},
 				["combat"] = true,
 				["instance"] = true,
@@ -313,32 +284,21 @@ if C.reminder.solo_buffs_enable == true then
 			},
 			[2] = {	-- Stamina Group
 				["spells"] = {
-					SpellName(1243),	-- Power Word: Fortitude
 					SpellName(21562),	-- Prayer of Fortitude
 					SpellName(46302),	-- K'iru's Song of Victory
 				},
 				["combat"] = true,
 				["instance"] = true,
 			},
-			[3] = {	-- Spirit
+			[3] = {	-- Shadow Resistance group
 				["spells"] = {
-					SpellName(14752),	-- Divine Spirit
-					SpellName(27681),	-- Prayer of Spirit
+					SpellName(27683),		-- Shadow Protection
 				},
 				["combat"] = true,
 				["instance"] = true,
 				-- ["level"] = 30,
 			},
-			[4] = {	-- Shadow Resistance group
-				["spells"] = {
-					SpellName(976),		-- Shadow Protection
-					SpellName(27683),	-- Prayer of Shadow Protection
-				},
-				["combat"] = true,
-				["instance"] = true,
-				-- ["level"] = 30,
-			},
-			[5] = {	-- Vampiric Embrace group
+			[4] = {	-- Vampiric Embrace group
 				["spells"] = {
 					SpellName(15286),		-- Vampiric Embrace
 				},
@@ -348,7 +308,7 @@ if C.reminder.solo_buffs_enable == true then
 				-- ["level"] = 30,
 			},
 			--[[
-			[6] = {	-- Shadowform group
+			[5] = {	-- Shadowform group
 				["spells"] = {
 					SpellName(15473),		-- Shadowform
 				},
@@ -362,27 +322,10 @@ if C.reminder.solo_buffs_enable == true then
 			[1] = {	-- Main Hand Weapon Enchant group
 				["spells"] = {
 					SpellName(8679),	-- Instant Poison
-					SpellName(8686),	-- Instant Poison II
-					SpellName(8688),	-- Instant Poison III
-					SpellName(11338),	-- Instant Poison IV
-					SpellName(11339),	-- Instant Poison V
-					SpellName(11340),	-- Instant Poison VI
-					SpellName(26891),	-- Instant Poison VII
-					SpellName(57967),	-- Instant Poison VIII
-					SpellName(57968),	-- Instant Poison IX
 					SpellName(2823),	-- Deadly Poison
-					SpellName(2824),	-- Deadly Poison II
-					SpellName(11355),	-- Deadly Poison III
-					SpellName(11356),	-- Deadly Poison IV
-					SpellName(25351),	-- Deadly Poison V
-					SpellName(26967),	-- Deadly Poison VI
-					SpellName(27186),	-- Deadly Poison VII
-					SpellName(57972),	-- Deadly Poison VIII
-					SpellName(57973),	-- Deadly Poison IX
 					SpellName(3408),	-- Crippling Poison
 					SpellName(5761),	-- Mind-numbing Poison
 					SpellName(13219),	-- Wound Poison
-					SpellName(26785),	-- Anesthetic Poison
 				},
 				["mainhand"] = true,
 				["combat"] = true,
@@ -393,27 +336,10 @@ if C.reminder.solo_buffs_enable == true then
 			[2] = {	-- Off-Hand Weapon Enchant group
 				["spells"] = {
 					SpellName(8679),	-- Instant Poison
-					SpellName(8686),	-- Instant Poison II
-					SpellName(8688),	-- Instant Poison III
-					SpellName(11338),	-- Instant Poison IV
-					SpellName(11339),	-- Instant Poison V
-					SpellName(11340),	-- Instant Poison VI
-					SpellName(26891),	-- Instant Poison VII
-					SpellName(57967),	-- Instant Poison VIII
-					SpellName(57968),	-- Instant Poison IX
 					SpellName(2823),	-- Deadly Poison
-					SpellName(2824),	-- Deadly Poison II
-					SpellName(11355),	-- Deadly Poison III
-					SpellName(11356),	-- Deadly Poison IV
-					SpellName(25351),	-- Deadly Poison V
-					SpellName(26967),	-- Deadly Poison VI
-					SpellName(27186),	-- Deadly Poison VII
-					SpellName(57972),	-- Deadly Poison VIII
-					SpellName(57973),	-- Deadly Poison IX
 					SpellName(3408),	-- Crippling Poison
 					SpellName(5761),	-- Mind-numbing Poison
 					SpellName(13219),	-- Wound Poison
-					SpellName(26785),	-- Anesthetic Poison
 				},
 				["offhand"] = true,
 				["combat"] = true,
@@ -465,16 +391,7 @@ if C.reminder.solo_buffs_enable == true then
 			[1] = {	-- Armors group
 				["spells"] = {
 					SpellName(28176),	-- Fel Armor
-					SpellName(706),		-- Demon Armor
-					SpellName(687),		-- Demon Skin
-				},
-				["combat"] = true,
-				["instance"] = true,
-				["pvp"] = true,
-			},
-			[2] = {	-- Amplify Curse group
-				["spells"] = {
-					SpellName(18288),	-- Amplify Curse
+					SpellName(687),		-- Demon Armor
 				},
 				["combat"] = true,
 				["instance"] = true,

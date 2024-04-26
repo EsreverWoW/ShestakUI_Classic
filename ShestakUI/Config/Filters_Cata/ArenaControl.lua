@@ -23,13 +23,11 @@ T.ArenaControl = {
 	[SpellName(49203)] = 5,		-- Hungering Cold
 	-- Druid
 	[SpellName(5211)] = 5,		-- Bash
-	[SpellName(16922)] = 5,		-- Celestial Focus
 	[SpellName(33786)] = 5,		-- Cyclone
 	[SpellName(2637)] = 5,		-- Hibernate
 	[SpellName(22570)] = 5,		-- Maim
 	[SpellName(9005)] = 5,		-- Pounce
 	-- Hunter
-	[SpellName(60210)] = 5,		-- Freezing Arrow Effect
 	[SpellName(3355)] = 5,		-- Freezing Trap
 	[SpellName(24394)] = 5,		-- Intimidation
 	[SpellName(1513)] = 5,		-- Scare Beast
@@ -49,13 +47,14 @@ T.ArenaControl = {
 	-- Paladin
 	[SpellName(853)] = 5,		-- Hammer of Justice
 	[SpellName(20066)] = 5,		-- Repentance
-	[SpellName(20170)] = 5,		-- Stun (Seal of Justice Proc)
 	[SpellName(10326)] = 5,		-- Turn Evil
 	-- Priest
+	[SpellName(88625)] = 5,		-- Holy Word: Chastise
 	[SpellName(605)] = 5,		-- Mind Control
 	[SpellName(64044)] = 5,		-- Psychic Horror
 	[SpellName(8122)] = 5,		-- Psychic Scream
 	[SpellName(9484)] = 5,		-- Shackle Undead
+	[SpellName(87204)] = 5,		-- Sin and Punishment
 	-- Rogue
 	[SpellName(2094)] = 5,		-- Blind
 	[SpellName(1833)] = 5,		-- Cheap Shot
@@ -64,9 +63,12 @@ T.ArenaControl = {
 	[SpellName(6770)] = 5,		-- Sap
 	-- Shaman
 	[SpellName(58861)] = 5,		-- Bash (Spirit Wolf)
+	[SpellName(76780)] = 5,		-- Bind Elemental
+	[SpellName(53019)] = 5,		-- Earth's Grasp
 	[SpellName(51514)] = 5,		-- Hex
 	[SpellName(39796)] = 5,		-- Stoneclaw Totem
 	-- Warlock
+	[SpellName(93975)] = 5,		-- Aura of Foreboding
 	[SpellName(6789)] = 5,		-- Death Coil
 	[SpellName(5782)] = 5,		-- Fear
 	[SpellName(5484)] = 5,		-- Howl of Terror
@@ -78,14 +80,17 @@ T.ArenaControl = {
 	[SpellName(20253)] = 5,		-- Intercept
 	[SpellName(5246)] = 5,		-- Intimidating Shout
 	[SpellName(46968)] = 5,		-- Shockwave
+	[SpellName(85388)] = 5,		-- Throwdown
 	-- Racial
 	[SpellName(20549)] = 5,		-- War Stomp
 
 	-- Silences
 	[SpellName(47476)] = 4,		-- Strangulate
+	[SpellName(80964)] = 4,		-- Skull Bash (Bear)
+	[SpellName(80965)] = 4,		-- Skull Bash (Cat)
+	[SpellName(81261)] = 4,		-- Solar Beam
 	[SpellName(34490)] = 4,		-- Silencing Shot
 	[SpellName(18469)] = 4,		-- Silenced - Improved Counterspell
-	[SpellName(63529)] = 4,		-- Silenced - Shield of the Templar
 	[SpellName(15487)] = 4,		-- Silence
 	[SpellName(1330)] = 4,		-- Garrote - Silence
 	[SpellName(18425)] = 4,		-- Silenced - Improved Kick
@@ -105,12 +110,12 @@ T.ArenaControl = {
 	[SpellName(19185)] = 3,		-- Entrapment
 	[SpellName(33395)] = 3,		-- Freeze (Water Elemental)
 	[SpellName(122)] = 3,		-- Frost Nova
-	[SpellName(12494)] = 3,		-- Frostbite
+	[SpellName(82691)] = 3,		-- Ring of Frost
+	[SpellName(55080)] = 3,		-- Shattered Barrier
 	[SpellName(58373)] = 3,		-- Glyph of Hamstring
 	[SpellName(23694)] = 3,		-- Improved Hamstring
 
 	-- Disarms
-	[SpellName(53359)] = 1,		-- Chimera Shot - Scorpid
 	[SpellName(64346)] = 1,		-- Fiery Payback
 	[SpellName(51722)] = 1,		-- Dismantle
 	[SpellName(676)] = 1,		-- Disarm
@@ -123,11 +128,10 @@ T.ArenaControl = {
 	-- Buffs
 	-- Death Knight
 	[SpellName(49028)] = 1,		-- Dancing Rune Weapon
-	[SpellName(49796)] = 1,		-- Deathchill
-	[SpellName(63560)] = 1,		-- Ghoul Frenzy (Ghoul)
+	[SpellName(63560)] = 1,		-- Dark Transformation (Ghoul)
 	[SpellName(49039)] = 1,		-- Lichborne
+	[SpellName(51271)] = 1,		-- Pillar of Frost
 	[SpellName(61777)] = 1,		-- Summon Gargoyle
-	[SpellName(51271)] = 1,		-- Unbreakable Armor
 	-- Druid
 	[SpellName(50334)] = 1,		-- Berserk
 	[SpellName(29166)] = 1,		-- Innervate
@@ -142,23 +146,23 @@ T.ArenaControl = {
 	[SpellName(34471)] = 1,		-- The Beast Within
 	--Mage
 	[SpellName(12042)] = 1,		-- Arcane Power
-	[SpellName(28682)] = 1,		-- Combustion
 	[SpellName(12472)] = 1,		-- Icy Veins
 	[SpellName(55342)] = 1,		-- Mirror Image
 	[SpellName(12043)] = 1,		-- Presence of Mind
 	-- Paladin
 	[SpellName(31884)] = 1,		-- Avenging Wrath
-	[SpellName(20216)] = 1,		-- Divine Favor
-	[SpellName(31842)] = 1,		-- Divine Illumination
+	[SpellName(31842)] = 1,		-- Divine Favor
 	[SpellName(1044)] = 1,		-- Hand of Freedom
 	[SpellName(1022)] = 1,		-- Hand of Protection
 	[SpellName(6940)] = 1,		-- Hand of Sacrifice
 	[SpellName(1038)] = 1,		-- Hand of Salvation
+	[SpellName(85696)] = 1,		-- Zealotry
 	-- Priest
 	[SpellName(64843)] = 1,		-- Divine Hymn
 	[SpellName(6346)] = 1,		-- Fear Ward
 	[SpellName(47788)] = 1,		-- Guardian Spirit
 	[SpellName(33206)] = 1,		-- Pain Suppression
+	[SpellName(87193)] = 5,		-- Paralysis
 	[SpellName(10060)] = 1,		-- Power Infusion
 	[SpellName(64901)] = 1,		-- Hymn of Hope
 	-- Rogue
@@ -199,9 +203,9 @@ T.ArenaControl = {
 	[SpellName(19263)] = 1,		-- Deterrence
 	[SpellName(66)] = 1,		-- Invisibility
 	[SpellName(31821)] = 1,		-- Aura Mastery
-	[SpellName(70940)] = 1,		-- Divine Guardian
 	[SpellName(64205)] = 1,		-- Divine Sacrifice
 	[SpellName(47585)] = 1,		-- Dispersion
+	[SpellName(62618)] = 1,		-- Power Word: Barrier
 	[SpellName(31224)] = 1,		-- Cloak of Shadows
 	[SpellName(5277)] = 1,		-- Evasion
 	[SpellName(1856)] = 1,		-- Vanish

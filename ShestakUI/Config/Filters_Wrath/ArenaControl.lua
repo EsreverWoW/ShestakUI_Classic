@@ -64,6 +64,7 @@ T.ArenaControl = {
 	[SpellName(6770)] = 5,		-- Sap
 	-- Shaman
 	[SpellName(58861)] = 5,		-- Bash (Spirit Wolf)
+	[SpellName(53019)] = 5,		-- Earth's Grasp
 	[SpellName(51514)] = 5,		-- Hex
 	[SpellName(39796)] = 5,		-- Stoneclaw Totem
 	-- Warlock
@@ -106,6 +107,7 @@ T.ArenaControl = {
 	[SpellName(33395)] = 3,		-- Freeze (Water Elemental)
 	[SpellName(122)] = 3,		-- Frost Nova
 	[SpellName(12494)] = 3,		-- Frostbite
+	[SpellName(55080)] = 3,		-- Shattered Barrier
 	[SpellName(58373)] = 3,		-- Glyph of Hamstring
 	[SpellName(23694)] = 3,		-- Improved Hamstring
 

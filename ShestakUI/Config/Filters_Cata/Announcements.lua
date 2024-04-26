@@ -63,6 +63,7 @@ if C.announcements.portals == true then
 		[32266] = true,		-- Exodar
 		[49360] = true,		-- Theramore
 		[33691] = true,		-- Shattrath
+		[88345] = true,		-- Tol Barad
 		-- Horde
 		[11417] = true,		-- Orgrimmar
 		[11420] = true,		-- Thunder Bluff
@@ -70,6 +71,7 @@ if C.announcements.portals == true then
 		[32267] = true,		-- Silvermoon
 		[49361] = true,		-- Stonard
 		[35717] = true,		-- Shattrath
+		[88346] = true,		-- Tol Barad
 		-- Alliance/Horde
 		[28148] = true,		-- Karazhan
 		[53142] = true,		-- Dalaran
@@ -78,35 +80,62 @@ end
 
 
 if C.announcements.bad_gear == true then
+	local badRings = {
+		[40585] = true,		-- Signet of the Kirin Tor
+		[40586] = true,		-- Band of the Kirin Tor
+		[44934] = true,		-- Loop of the Kirin Tor
+		[44935] = true,		-- Ring of the Kirin Tor
+		[45688] = true,		-- Inscribed Band of the Kirin Tor
+		[45689] = true,		-- Inscribed Loop of the Kirin Tor
+		[45690] = true,		-- Inscribed Ring of the Kirin Tor
+		[45691] = true,		-- Inscribed Signet of the Kirin Tor
+		[48954] = true,		-- Etched Band of the Kirin Tor
+		[48955] = true,		-- Etched Loop of the Kirin Tor
+		[48956] = true,		-- Etched Ring of the Kirin Tor
+		[48957] = true,		-- Etched Signet of the Kirin Tor
+		[51557] = true,		-- Runed Signet of the Kirin Tor
+		[51558] = true,		-- Runed Loop of the Kirin Tor
+		[51559] = true,		-- Runed Ring of the Kirin Tor
+		[51560] = true,		-- Runed Band of the Kirin Tor
+	}
+
 	T.AnnounceBadGear = {
 		-- Head
 		[1] = {
-			33820,	-- Weather-Beaten Fishing Hat
-			19972,	-- Lucky Fishing Hat
+			[33820] = true,	-- Weather-Beaten Fishing Hat
+			[19972] = true,	-- Lucky Fishing Hat
 		},
 		-- Neck
 		[2] = {
-			32757,	-- Blessed Medallion of Karabor
+			[32757] = true,	-- Blessed Medallion of Karabor
 		},
 		-- Feet
 		[8] = {
-			50287,	-- Boots of the Bay
-			19969,	-- Nat Pagle's Extreme Anglin' Boots
+			[50287] = true,	-- Boots of the Bay
+			[19969] = true,	-- Nat Pagle's Extreme Anglin' Boots
+		},
+		-- Rings
+		[11] = badRings,
+		[12] = badRings,
+		-- Back
+		[15] = {
+			[65360] = true,		-- Cloak of Coordination (Alliance)
+			[65274] = true,		-- Cloak of Coordination (Horde)
 		},
 		-- Main-Hand
 		[16] = {
-			44050,	-- Mastercraft Kalu'ak Fishing Pole
-			45992,	-- Jeweled Fishing Pole
-			45991,	-- Bone Fishing Pole
-			45858,	-- Nat's Lucky Fishing Pole
-			19970,	-- Arcanite Fishing Pole
-			19022,	-- Nat Pagle's Extreme Angler FC-5000
-			25978,	-- Seth's Graphite Fishing Pole
-			6367,	-- Big Iron Fishing Pole
-			6366,	-- Darkwood Fishing Pole
-			6365,	-- Strong Fishing Pole
-			12225,	-- Blump Family Fishing Pole
-			6256,	-- Fishing Pole
+			[44050] = true,	-- Mastercraft Kalu'ak Fishing Pole
+			[45992] = true,	-- Jeweled Fishing Pole
+			[45991] = true,	-- Bone Fishing Pole
+			[45858] = true,	-- Nat's Lucky Fishing Pole
+			[19970] = true,	-- Arcanite Fishing Pole
+			[19022] = true,	-- Nat Pagle's Extreme Angler FC-5000
+			[25978] = true,	-- Seth's Graphite Fishing Pole
+			[6367] = true,	-- Big Iron Fishing Pole
+			[6366] = true,	-- Darkwood Fishing Pole
+			[6365] = true,	-- Strong Fishing Pole
+			[12225] = true,	-- Blump Family Fishing Pole
+			[6256] = true,	-- Fishing Pole
 		},
 	}
 end

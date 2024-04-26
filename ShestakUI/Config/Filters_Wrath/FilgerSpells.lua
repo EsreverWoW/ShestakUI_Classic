@@ -849,7 +849,7 @@ C["filger_spells"] = {
 			-- Stoneform (Dwarf)
 			{spellID = 20594, filter = "CD"},
 			-- War Stomp (Tauren)
-			{spellID = 20600, filter = "CD", absID = true},
+			{spellID = 20549, filter = "CD", absID = true},
 			-- Will of the Forsaken (Forsaken)
 			{spellID = 7744, filter = "CD"},
 
@@ -933,6 +933,8 @@ C["filger_spells"] = {
 			{spellID = 48391, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Predator's Swiftness
 			{spellID = 69369, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Savage Defense
+			{spellID = 62606, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Item Sets
 			-- Elune's Wrath (Special, Proc) [Nightsong Garb]
@@ -1952,7 +1954,7 @@ C["filger_spells"] = {
 			-- Shadowmeld (Night Elf)
 			{spellID = 58984, filter = "CD"},
 			-- War Stomp (Tauren)
-			{spellID = 20600, filter = "CD", absID = true},
+			{spellID = 20549, filter = "CD", absID = true},
 
 			-- Items
 			-- Back
@@ -2023,8 +2025,8 @@ C["filger_spells"] = {
 			{spellID = 58914, unitID = "pet", caster = "player", filter = "BUFF"},
 			-- Lock and Load
 			{spellID = 56453, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Master Tactician
-			{spellID = 34833, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Master's Call
+			{spellID = 62305, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Mend Pet
 			{spellID = 136, unitID = "pet", caster = "player", filter = "BUFF"},
 			-- Misdirection
@@ -2630,7 +2632,7 @@ C["filger_spells"] = {
 			-- Stoneform (Dwarf)
 			{spellID = 20594, filter = "CD"},
 			-- War Stomp (Tauren)
-			{spellID = 20600, filter = "CD", absID = true},
+			{spellID = 20549, filter = "CD", absID = true},
 
 			-- Items
 			-- Back
@@ -2663,8 +2665,6 @@ C["filger_spells"] = {
 			{spellID = 36032, unitID = "player", caster = "player", filter = "DEBUFF"},
 			-- Arcane Power
 			{spellID = 12042, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Blazing Speed
-			{spellID = 31643, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Combustion
 			{spellID = 28682, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Evocation
@@ -2746,6 +2746,8 @@ C["filger_spells"] = {
 			-- Buffs
 			-- Arcane Potency
 			-- {spellID = 57529, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Blazing Speed
+			{spellID = 31643, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Burning Determination
 			{spellID = 54748, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Clearcasting [Arcane Concentration]
@@ -3185,8 +3187,24 @@ C["filger_spells"] = {
 			IconSize = C.filger.buffs_size,
 			Position = {"TOP", T_DEBUFF_ICON_Anchor},
 
-			-- Blast Wave
-			{spellID = 11113, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Blast Wave r1
+			{spellID = 11113, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Blast Wave r2
+			{spellID = 13018, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Blast Wave r3
+			{spellID = 13019, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Blast Wave r4
+			{spellID = 13020, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Blast Wave r5
+			{spellID = 13021, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Blast Wave r6
+			{spellID = 27133, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Blast Wave r7
+			{spellID = 33933, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Blast Wave r8
+			{spellID = 42944, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Blast Wave r9
+			{spellID = 42945, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
 			-- Blizzard
 			-- {spellID = 10, unitID = "target", caster = "player", filter = "DEBUFF"},
 			--[[
@@ -3217,6 +3235,8 @@ C["filger_spells"] = {
 			{spellID = 42930, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
 			-- Cone of Cold r8
 			{spellID = 42931, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Deep Freeze
+			{spellID = 44572, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Dragon's Breath
 			{spellID = 31661, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Fireball r1
@@ -3251,12 +3271,10 @@ C["filger_spells"] = {
 			{spellID = 42832, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
 			-- Fireball r16
 			{spellID = 42833, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
-			-- Fire Vulnerability (Improved Scorch)
-			{spellID = 22959, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Flamestrike
 			-- {spellID = 2120, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
 			-- Frost Nova
-			{spellID = 122, unitID = "target", caster = "player", filter = "DEBUFF"},
+			{spellID = 122, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Frostbite
 			{spellID = 12494, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Frostbolt r1
@@ -3297,12 +3315,16 @@ C["filger_spells"] = {
 			{spellID = 12654, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Impact
 			{spellID = 12355, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Improved Scorch
+			{spellID = 22959, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Living Bomb
 			{spellID = 44457, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Permafrost
 			{spellID = 68391, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
 			-- Pyroblast
 			{spellID = 11366, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Shattered Barrier
+			{spellID = 55080, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Silenced - Improved Counterspell
 			{spellID = 18469, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Slow
@@ -3398,6 +3420,8 @@ C["filger_spells"] = {
 			{spellID = 120, filter = "CD"},
 			-- Counterspell
 			{spellID = 2139, filter = "CD"},
+			-- Deep Freeze
+			{spellID = 44572, filter = "CD"},
 			-- Dragon's Breath
 			{spellID = 31661, filter = "CD"},
 			-- Fire Blast
@@ -4361,7 +4385,7 @@ C["filger_spells"] = {
 			-- Avenger's Shield
 			{spellID = 31935, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Blood Corruption
-			{spellID = 53742, unitID = "target", caster = "player", filter = "DEBUFF"},
+			{spellID = 356110, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Consecration
 			{spellID = 26573, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Hammer of Justice
@@ -4378,7 +4402,7 @@ C["filger_spells"] = {
 			{spellID = 20184, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Judgement of Light
 			{spellID = 20185, unitID = "target", caster = "player", filter = "DEBUFF"},
-			-- Judgement of the Just
+			-- Judgements of the Just
 			{spellID = 68055, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Judgement of Wisdom
 			{spellID = 20186, unitID = "target", caster = "player", filter = "DEBUFF"},
@@ -6082,6 +6106,8 @@ C["filger_spells"] = {
 			{spellID = 52179, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Clearcasting (Elemental Focus)
 			{spellID = 16246, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Lava Flows
+			{spellID = 65264, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Maelstrom Weapon
 			{spellID = 53817, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Nature's Guardian
@@ -6812,7 +6838,7 @@ C["filger_spells"] = {
 			-- Stoneclaw Totem
 			{spellID = 39796, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Stormstrike
-			{spellID = 17364, unitID = "target", caster = "all", filter = "DEBUFF"},
+			{spellID = 17364, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Twin Howl
 			{spellID = 58857, unitID = "target", caster = "all", filter = "DEBUFF"},
 
@@ -6917,6 +6943,8 @@ C["filger_spells"] = {
 			BarWidth = 189,
 			Position = {"LEFT", PVE_PVP_CC_Anchor},
 
+			-- Earth's Grasp
+			{spellID = 53019, unitID = "focus", caster = "all", filter = "DEBUFF"},
 			-- Hex
 			{spellID = 51514, unitID = "focus", caster = "all", filter = "DEBUFF", absID = true},
 		},
@@ -6993,7 +7021,7 @@ C["filger_spells"] = {
 			-- Gift of the Naaru (Draenei)
 			{spellID = 28880, filter = "CD"},
 			-- War Stomp (Tauren)
-			{spellID = 20600, filter = "CD", absID = true},
+			{spellID = 20549, filter = "CD", absID = true},
 
 			-- Items
 			-- Back
@@ -7031,13 +7059,13 @@ C["filger_spells"] = {
 			-- Consume Shadows (Voidwalker)
 			-- {spellID = 17767, unitID = "pet", caster = "all", filter = "BUFF"},
 			-- Demonic Empowerment (Imp - Increased Critical Strike)
-			{spellID = 54444, unitID = "player", caster = "all", filter = "BUFF", absID = true},
+			{spellID = 54444, unitID = "pet", caster = "all", filter = "BUFF", absID = true},
 			-- Demonic Empowerment (Voidwalker - Increased Health/Increased Threat Generation)
-			{spellID = 54443, unitID = "player", caster = "all", filter = "BUFF", absID = true},
+			{spellID = 54443, unitID = "pet", caster = "all", filter = "BUFF", absID = true},
 			-- Demonic Empowerment (Succubus - Improved Invisibility)
-			{spellID = 54436, unitID = "player", caster = "all", filter = "BUFF", absID = true},
+			{spellID = 54436, unitID = "pet", caster = "all", filter = "BUFF", absID = true},
 			-- Demonic Empowerment (Felguard - Increased Attack Speed/CC Immunity)
-			{spellID = 54508, unitID = "player", caster = "all", filter = "BUFF", absID = true},
+			{spellID = 54508, unitID = "pet", caster = "all", filter = "BUFF", absID = true},
 			-- Demonic Pact
 			-- {spellID = 48090, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Eye of Kilrogg
@@ -8534,6 +8562,8 @@ C["filger_spells"] = {
 			{spellID = 55694, filter = "CD"},
 			-- Heroic Fury
 			{spellID = 60970, filter = "CD"},
+			-- Heroic Strike
+			{spellID = 78, filter = "CD"},
 			-- Heroic Throw
 			{spellID = 57755, filter = "CD"},
 			-- Intercept
@@ -8558,6 +8588,8 @@ C["filger_spells"] = {
 			{spellID = 20230, filter = "CD"},
 			-- Revenge
 			{spellID = 6572, filter = "CD"},
+			-- Shattering Throw
+			{spellID = 64382, filter = "CD"},
 			-- Shield Bash
 			{spellID = 72, filter = "CD"},
 			-- Shield Block
@@ -8599,7 +8631,7 @@ C["filger_spells"] = {
 			-- Stoneform (Dwarf)
 			{spellID = 20594, filter = "CD"},
 			-- War Stomp (Tauren)
-			{spellID = 20600, filter = "CD", absID = true},
+			{spellID = 20549, filter = "CD", absID = true},
 			-- Will of the Forsaken (Forsaken)
 			{spellID = 7744, filter = "CD"},
 
@@ -8830,7 +8862,7 @@ C["filger_spells"] = {
 			-- Innervate
 			{spellID = 29166, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Hymn of Hope
-			{spellID = 64901, unitID = "player", caster = "all", filter = "BUFF"},
+			{spellID = 64904, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Mana Tide
 			{spellID = 16191, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Hand of Freedom
@@ -9247,6 +9279,8 @@ C["filger_spells"] = {
 			{spellID = 27088, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
 			-- Frostbite
 			{spellID = 12494, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- Shattered Barrier
+			{spellID = 55080, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Glyph of Hamstring
 			{spellID = 58373, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Improved Hamstring
@@ -9279,6 +9313,10 @@ C["filger_spells"] = {
 			{spellID = 27133, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
 			-- Blast Wave r7
 			{spellID = 33933, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
+			-- Blast Wave r8
+			{spellID = 42944, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
+			-- Blast Wave r9
+			{spellID = 42945, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
 			--[[
 			-- Chilled r1 (Blizzard)
 			{spellID = 12484, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
@@ -9307,6 +9345,8 @@ C["filger_spells"] = {
 			{spellID = 42930, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
 			-- Cone of Cold r8
 			{spellID = 42931, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
+			-- Deep Freeze
+			{spellID = 44572, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Frostbolt r1
 			{spellID = 116, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
 			-- Frostbolt r2

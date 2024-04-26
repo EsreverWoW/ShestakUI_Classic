@@ -194,10 +194,10 @@ elseif T.class == "MAGE" then
 elseif T.class == "PALADIN" then
 	if C.combattext.merge_aoe_spam then
 		-- Healing spells
-		T.aoespam[20267] = 6		-- Judgment of Light r1
-		T.merge[20341] = 20267		-- Judgment of Light r2
-		T.merge[20342] = 20267		-- Judgment of Light r3
-		T.merge[20343] = 20267		-- Judgment of Light r4
+		T.aoespam[20267] = 6		-- Judgement of Light r1
+		T.merge[20341] = 20267		-- Judgement of Light r2
+		T.merge[20342] = 20267		-- Judgement of Light r3
+		T.merge[20343] = 20267		-- Judgement of Light r4
 		-- Damaging spells
 		T.aoespam[26573] = 3		-- Consecration r1
 		T.merge[20116] = 26573		-- Consecration r2

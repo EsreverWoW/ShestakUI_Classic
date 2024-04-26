@@ -183,7 +183,6 @@ if T.Vanilla or T.TBC then
 		[GetSpellInfo(8071)]   = 136098,	-- Stoneskin Totem
 		[GetSpellInfo(8075)]   = 136023,	-- Strength of Earth Totem
 		[GetSpellInfo(8143)]   = 136108,	-- Tremor Totem
-		[GetSpellInfo(8177)]   = 136039,	-- Grounding Totem
 		-- Fire
 		[GetSpellInfo(1535)]   = 135824,	-- Fire Nova Totem
 		[GetSpellInfo(3599)]   = 135825,	-- Searing Totem
@@ -199,22 +198,30 @@ if T.Vanilla or T.TBC then
 		[GetSpellInfo(16190)]  = 135861,	-- Mana Tide Totem
 		-- Air
 		[GetSpellInfo(6495)]   = 136082,	-- Sentry Totem
+		[GetSpellInfo(8177)]   = 136039,	-- Grounding Totem
 		[GetSpellInfo(8512)]   = 136114,	-- Windfury Totem
 		[GetSpellInfo(8835)]   = 136046,	-- Grace of Air Totem
 		[GetSpellInfo(10595)]  = 136061,	-- Nature Resistance Totem
 		[GetSpellInfo(15107)]  = 136022,	-- Windwall Totem
 		[GetSpellInfo(25908)]  = 136013,	-- Tranquil Air Totem
 	}
+
+	if T.TBC then
+		totemData[GetSpellInfo(2062)] = 136024 -- Earth Elemental Totem
+		totemData[GetSpellInfo(2894)] = 135790 -- Fire Elemental Totem
+		totemData[GetSpellInfo(3738)] = 136092 -- Wrath of Air Totem
+	end
 elseif T.Wrath then
 	totemData = {
 		-- Earth
+		[GetSpellInfo(2062)]   = 136024,	-- Earth Elemental Totem
 		[GetSpellInfo(2484)]   = 136102,	-- Earthbind Totem
 		[GetSpellInfo(5730)]   = 136097,	-- Stoneclaw Totem
 		[GetSpellInfo(8071)]   = 136098,	-- Stoneskin Totem
 		[GetSpellInfo(8075)]   = 136023,	-- Strength of Earth Totem
 		[GetSpellInfo(8143)]   = 136108,	-- Tremor Totem
-		[GetSpellInfo(8177)]   = 136039,	-- Grounding Totem
 		-- Fire
+		[GetSpellInfo(2894)]   = 135790,	-- Fire Elemental Totem
 		[GetSpellInfo(1535)]   = 135824,	-- Fire Nova Totem
 		[GetSpellInfo(3599)]   = 135825,	-- Searing Totem
 		[GetSpellInfo(8181)]   = 135866,	-- Frost Resistance Totem
@@ -223,47 +230,41 @@ elseif T.Wrath then
 		-- Water
 		[GetSpellInfo(5394)]   = 135127,	-- Healing Stream Totem
 		[GetSpellInfo(5675)]   = 136053,	-- Mana Spring Totem
-		-- [GetSpellInfo(8166)]   = 136070,	-- Poison Cleansing Totem
-		[GetSpellInfo(8170)]   = 136019,	-- Disease Cleansing Totem
+		[GetSpellInfo(8170)]   = 136019,	-- Cleansing Totem
 		[GetSpellInfo(8184)]   = 135832,	-- Fire Resistance Totem
 		[GetSpellInfo(16190)]  = 135861,	-- Mana Tide Totem
 		-- Air
+		[GetSpellInfo(3738)]   = 136092,	-- Wrath of Air Totem
 		[GetSpellInfo(6495)]   = 136082,	-- Sentry Totem
+		[GetSpellInfo(8177)]   = 136039,	-- Grounding Totem
 		[GetSpellInfo(8512)]   = 136114,	-- Windfury Totem
-		-- [GetSpellInfo(8835)]   = 136046,	-- Grace of Air Totem
 		[GetSpellInfo(10595)]  = 136061,	-- Nature Resistance Totem
-		-- [GetSpellInfo(15107)]  = 136022,	-- Windwall Totem
-		-- [GetSpellInfo(25908)]  = 136013,	-- Tranquil Air Totem
 	}
 elseif T.Cata then
 	totemData = {
 		-- Earth
+		[GetSpellInfo(2062)]   = 136024,	-- Earth Elemental Totem
 		[GetSpellInfo(2484)]   = 136102,	-- Earthbind Totem
 		[GetSpellInfo(5730)]   = 136097,	-- Stoneclaw Totem
 		[GetSpellInfo(8071)]   = 136098,	-- Stoneskin Totem
 		[GetSpellInfo(8075)]   = 136023,	-- Strength of Earth Totem
 		[GetSpellInfo(8143)]   = 136108,	-- Tremor Totem
-		[GetSpellInfo(8177)]   = 136039,	-- Grounding Totem
 		-- Fire
-		[GetSpellInfo(1535)]   = 135824,	-- Fire Nova Totem
+		[GetSpellInfo(2894)]   = 135790,	-- Fire Elemental Totem
 		[GetSpellInfo(3599)]   = 135825,	-- Searing Totem
-		-- [GetSpellInfo(8181)]   = 135866,	-- Frost Resistance Totem
 		[GetSpellInfo(8190)]   = 135826,	-- Magma Totem
 		[GetSpellInfo(8227)]   = 136040,	-- Flametongue Totem
 		-- Water
 		[GetSpellInfo(5394)]   = 135127,	-- Healing Stream Totem
 		[GetSpellInfo(5675)]   = 136053,	-- Mana Spring Totem
-		-- [GetSpellInfo(8166)]   = 136070,	-- Poison Cleansing Totem
-		-- [GetSpellInfo(8170)]   = 136019,	-- Disease Cleansing Totem
-		[GetSpellInfo(8184)]   = 135832,	-- Fire Resistance Totem
+		[GetSpellInfo(8184)]   = 135832,	-- Elemental Resistance Totem
 		[GetSpellInfo(16190)]  = 135861,	-- Mana Tide Totem
 		-- Air
-		-- [GetSpellInfo(6495)]   = 136082,	-- Sentry Totem
+		[GetSpellInfo(3738)]   = 136092,	-- Wrath of Air Totem
+		[GetSpellInfo(8177)]   = 136039,	-- Grounding Totem
 		[GetSpellInfo(8512)]   = 136114,	-- Windfury Totem
-		-- [GetSpellInfo(8835)]   = 136046,	-- Grace of Air Totem
-		-- [GetSpellInfo(10595)]  = 136061,	-- Nature Resistance Totem
-		-- [GetSpellInfo(15107)]  = 136022,	-- Windwall Totem
-		-- [GetSpellInfo(25908)]  = 136013,	-- Tranquil Air Totem
+		[GetSpellInfo(87718)]  = 136013,	-- Totem of Tranquil Mind
+		[GetSpellInfo(98008)]  = 237586,	-- Spirit Link Totem
 	}
 else
 	totemData = {

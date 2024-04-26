@@ -471,7 +471,7 @@ C["filger_spells"] = {
 			-- Shadowmeld (Night Elf)
 			{spellID = 20580, filter = "CD"},
 			-- War Stomp (Tauren)
-			{spellID = 20600, filter = "CD", absID = true},
+			{spellID = 20549, filter = "CD", absID = true},
 
 			-- Items
 			-- Back
@@ -831,7 +831,7 @@ C["filger_spells"] = {
 			-- Stoneform (Dwarf)
 			{spellID = 20594, filter = "CD"},
 			-- War Stomp (Tauren)
-			{spellID = 20600, filter = "CD", absID = true},
+			{spellID = 20549, filter = "CD", absID = true},
 
 			-- Items
 			-- Back
@@ -1026,8 +1026,16 @@ C["filger_spells"] = {
 			IconSize = C.filger.buffs_size,
 			Position = {"TOP", T_DEBUFF_ICON_Anchor},
 
-			-- Blast Wave
-			{spellID = 11113, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Blast Wave r1
+			{spellID = 11113, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Blast Wave r2
+			{spellID = 13018, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Blast Wave r3
+			{spellID = 13019, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Blast Wave r4
+			{spellID = 13020, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
+			-- Blast Wave r5
+			{spellID = 13021, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
 			-- Blizzard
 			-- {spellID = 10, unitID = "target", caster = "player", filter = "DEBUFF"},
 			--[[
@@ -1083,7 +1091,7 @@ C["filger_spells"] = {
 			-- Flamestrike
 			-- {spellID = 2120, unitID = "target", caster = "player", filter = "DEBUFF", absID = true},
 			-- Frost Nova
-			{spellID = 122, unitID = "target", caster = "player", filter = "DEBUFF"},
+			{spellID = 122, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Frostbite
 			{spellID = 12494, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Frostbolt r1
@@ -2682,7 +2690,7 @@ C["filger_spells"] = {
 			-- Blood Fury
 			{spellID = 23234, filter = "CD", absID = true},
 			-- War Stomp (Tauren)
-			{spellID = 20600, filter = "CD", absID = true},
+			{spellID = 20549, filter = "CD", absID = true},
 
 			-- Items
 			-- Back
@@ -3363,6 +3371,8 @@ C["filger_spells"] = {
 			{spellID = 676, filter = "CD", absID = true},
 			-- Enraged Regeneration [Season of Discovery]
 			{spellID = 402913, filter = "CD"},
+			-- Heroic Strike
+			{spellID = 78, filter = "CD"},
 			-- Intercept
 			{spellID = 20252, filter = "CD"},
 			-- Intervene [Season of Discovery]
@@ -3426,7 +3436,7 @@ C["filger_spells"] = {
 			-- Stoneform (Dwarf)
 			{spellID = 20594, filter = "CD"},
 			-- War Stomp (Tauren)
-			{spellID = 20600, filter = "CD", absID = true},
+			{spellID = 20549, filter = "CD", absID = true},
 			-- Will of the Forsaken (Forsaken)
 			{spellID = 7744, filter = "CD"},
 

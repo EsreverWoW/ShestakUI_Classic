@@ -31,13 +31,13 @@ if C.raidcooldown.enable == true then
 		{2825, 300},	-- Bloodlust
 		{32182, 300},	-- Heroism
 		-- Healing
-		{740, 480},		-- Tranquility r1 (480sec base / -288sec from talents / -240sec from 8pc T1)
-		{8918, 480},	-- Tranquility r2 (480sec base / -288sec from talents / -240sec from 8pc T1)
-		{9862, 480},	-- Tranquility r3 (480sec base / -288sec from talents / -240sec from 8pc T1)
-		{9863, 480},	-- Tranquility r4 (480sec base / -288sec from talents / -240sec from 8pc T1)
-		{26983, 480},	-- Tranquility r5 (480sec base / -288sec from talents / -240sec from 8pc T1)
-		{48446, 480},	-- Tranquility r6 (480sec base / -288sec from talents / -240sec from 8pc T1)
-		{48447, 480},	-- Tranquility r7 (480sec base / -288sec from talents / -240sec from 8pc T1)
+		{740, 480},		-- Tranquility r1 (480sec base / -288sec from talents / -72sec from 8pc T1)
+		{8918, 480},	-- Tranquility r2 (480sec base / -288sec from talents / -72sec from 8pc T1)
+		{9862, 480},	-- Tranquility r3 (480sec base / -288sec from talents / -72sec from 8pc T1)
+		{9863, 480},	-- Tranquility r4 (480sec base / -288sec from talents / -72sec from 8pc T1)
+		{26983, 480},	-- Tranquility r5 (480sec base / -288sec from talents / -72sec from 8pc T1)
+		{48446, 480},	-- Tranquility r6 (480sec base / -288sec from talents / -72sec from 8pc T1)
+		{48447, 480},	-- Tranquility r7 (480sec base / -288sec from talents / -72sec from 8pc T1)
 		{64843, 480},	-- Divine Hymn
 		{724, 180},		-- Lightwell r1
 		{27870, 180},	-- Lightwell r2
@@ -47,12 +47,14 @@ if C.raidcooldown.enable == true then
 		{48087, 180},	-- Lightwell r6
 		-- Defense
 		{48707, 45},	-- Anti-Magic Shell
-		{51052, 180},	-- Anti-Magic Zone
+		{51052, 120},	-- Anti-Magic Zone
 		{42650, 600},	-- Army of the Dead
 		{49222, 60},	-- Bone Shield (60sec base / -10sec from 4pc T9)
 		{48792, 120},	-- Icebound Fortitude
+		{22812, 60},	-- Barkskin (60sec base / -12sec from 4pc T9)
 		{61336, 180},	-- Survival Instincts
 		{31821, 120},	-- Aura Mastery
+		{498, 180},		-- Divine Protection (180sec base / -60sec from talents / -30sec from 4pc T9)
 		{64205, 120},	-- Divine Sacrifice
 		{1022, 300},	-- Hand of Protection r1 (300sec base / -120sec from talents)
 		{5599, 300},	-- Hand of Protection r2 (300sec base / -120sec from talents)
@@ -124,28 +126,28 @@ if C.enemycooldown.enable == true then
 		{19386, 54},	-- Wyvern Sting (60sec base / -6sec from glyph)
 		{31661, 20},	-- Dragon's Breath
 		{11113, 30},	-- Blast Wave (30sec base / -4sec from 4pc T4)
-		{853, 40},		-- Hammer of Justice (60sec base / -20sec from talents / -10sec from talents / -0.5sec from ZG neck)
+		{853, 40},		-- Hammer of Justice (60sec base / -20sec from talents / -10sec from talents)
 		{20066, 60},	-- Repentance
 		{6789, 120},	-- Death Coil (120sec base / -18sec from 5pc ZG Set)
 		{64044, 120},	-- Psychic Horror
 		{8122, 23},		-- Psychic Scream (30sec base / -3sec from gloves / -4sec from talents / +8sec from glyph)
-		{2094, 90},		-- Blind (180sec base / -90sec from talents)
+		{2094, 120},	-- Blind (180sec base / -60sec from talents)
 		{5484, 32},		-- Howl of Terror (40sec base / -8sec from glyph)
 		{30283, 20},	-- Shadowfury
 		{12809, 30},	-- Concussion Blow
 		{46968, 17},	-- Shockwave (20sec base / -3sec from glyph)
 		-- Defense abilities
 		{48707, 45},	-- Anti-Magic Shell
-		{51052, 180},	-- Anti-Magic Zone
+		{51052, 120},	-- Anti-Magic Zone
 		{49222, 60},	-- Bone Shield (60sec base / -10sec from 4pc T9)
 		{48792, 120},	-- Icebound Fortitude
 		{51271, 60},	-- Unbreakable Armor (60sec base / -10sec from 4pc T9)
 		{55233, 60},	-- Vampiric Blood (60sec base / -10sec from 4pc T9)
 		{22812, 60},	-- Barkskin (60sec base / -12sec from 4pc T9)
-		{19263, 50},	-- Deterrence (60sec base / -10sec from glyph)
+		{19263, 90},	-- Deterrence (90sec base / -10sec from glyph)
 		{45438, 240},	-- Ice Block (300sec base / -60sec from talents / -40sec from 4pc T4)
-		{66, 60},		-- Invisibility (180sec base / -120sec from talents)
-		{1044, 25},		-- Hand of Freedom (25sec base / -4sec from talents)
+		{66, 126},		-- Invisibility (180sec base / -54sec from talents)
+		{1044, 25},		-- Hand of Freedom
 		{6940, 120},	-- Hand of Sacrifice
 		{1038, 120},	-- Hand of Salvation
 		{1022, 180},	-- Hand of Protection (300sec base / -120sec from talents)
@@ -153,14 +155,14 @@ if C.enemycooldown.enable == true then
 		{642, 300},		-- Divine Shield (300sec base / -60sec from talents)
 		{6346, 120},	-- Fear Ward (180sec base / -60sec from glyph)
 		{47585, 75},	-- Dispersion (120sec base / -45sec from glyph)
-		{47788, 144},	-- Guardian Spirit
+		{47788, 180},	-- Guardian Spirit
 		{33206, 144},	-- Pain Suppression (180sec base / -36sec from talents)
-		{31224, 30},	-- Cloak of Shadows (60sec base / -30sec from talents)
+		{31224, 60},	-- Cloak of Shadows (90sec base / -30sec from talents)
 		{5277, 120},	-- Evasion (180sec base / -60sec from talents / -60sec from 3pc AQ Set)
 		{1856, 120},	-- Vanish (180sec base / -60sec from talents / -30sec from 3pc T1)
 		-- {8178, 11},	-- Grounding Totem Effect (15sec base / -2sec from talents / -1.5sec from 4pc PvP)
 		{18499, 20},	-- Berserker Rage (30sec base / -10sec from talents)
-		{46924, 45},	-- Bladestorm (60sec base / -15sec from glyph)
+		{46924, 75},	-- Bladestorm (90sec base / -15sec from glyph)
 		{12975, 120},	-- Last Stand (180sec base / -60sec from glyph)
 		{2565, 40},		-- Shield Block (60sec base / -20sec from talents / -10sec from 4pc T9)
 		{871, 180},		-- Shield Wall (300sec base / -60sec from talents / -120sec from glyph)

@@ -98,6 +98,7 @@ T.DebuffWhiteList = {
 
 	-- Paladin
 	[SpellName(31935)] = true,	-- Avenger's Shield
+	[SpellName(356110)] = true,	-- Blood Corruption
 	[SpellName(26573)] = true,	-- Consecration
 	[SpellName(853)] = true,	-- Hammer of Justice
 	[SpellName(31803)] = true,	-- Holy Vengeance
@@ -453,8 +454,8 @@ T.BuffWhiteList = {
 	-- [SpellName(5500)] = true,	-- Sense Demons
 	[SpellName(17941)] = true,	-- Shadow Trance
 	[SpellName(6229)] = true,	-- Shadow Ward
-	[SpellName(20707)] = true,	-- Soulstone Resurrection
 	[SpellName(25228)] = true,	-- Soul Link
+	[SpellName(20707)] = true,	-- Soulstone Resurrection
 	[SpellName(19478)] = true,	-- Tainted Blood (Felhunter)
 
 	-- Warrior

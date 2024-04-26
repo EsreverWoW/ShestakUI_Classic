@@ -19,9 +19,10 @@ if C.raidcooldown.enable == true then
 		{724, 600},		-- Lightwell
 		{409324, 120},	-- Ancestral Guidance [Season of Discovery]
 		-- Defense
-		-- {428713, 60},	-- Barkskin [Season of Discovery]
+		{428713, 60},	-- Barkskin [Season of Discovery]
 		{408024, 180},	-- Survival Instincts [Season of Discovery]
 		{1022, 300},	-- Blessing of Protection (300sec base / -120sec from talents)
+		{498, 300},		-- Divine Protection
 		{407804, 120},	-- Divine Sacrifice [Season of Discovery]
 		{633, 3600},	-- Lay on Hands (3600sec base / -1200sec from talents / -720sec from 4pc T3)
 		{425294, 120},	-- Dispersion [Season of Discovery]
@@ -71,7 +72,7 @@ if C.enemycooldown.enable == true then
 		{19503, 30},	-- Scatter Shot
 		{19386, 120},	-- Wyvern Sting
 		{11113, 45},	-- Blast Wave
-		{853, 45},		-- Hammer of Justice (60sec base / -10sec from 4pc PvP / -15sec from talents / -0.5sec from ZG neck)
+		{853, 45},		-- Hammer of Justice (60sec base / -10sec from 4pc PvP / -15sec from talents)
 		{20066, 60},	-- Repentance
 		{6789, 120},	-- Death Coil (120sec base / -18sec from 5pc ZG Set)
 		{8122, 26},		-- Psychic Scream (30sec base / -4sec from talents)
@@ -80,6 +81,8 @@ if C.enemycooldown.enable == true then
 		{12809, 45},	-- Concussion Blow
 		-- Defense abilities
 		{22812, 60},	-- Barkskin
+		{428713, 60},	-- Barkskin [Season of Discovery]
+		{408024, 180},	-- Survival Instincts [Season of Discovery]
 		{19263, 300},	-- Deterrence
 		{11958, 300},	-- Ice Block
 		{1044, 14},		-- Blessing of Freedom (20sec base / -6sec from talents)

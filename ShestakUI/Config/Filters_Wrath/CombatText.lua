@@ -31,13 +31,17 @@ if T.class == "DEATHKNIGHT" then
 		T.aoespam[49217] = 3		-- Wandering Plague
 		-- Merging mh/oh strikes
 		T.aoespam[49020] = 0.5		-- Obliterate MH
-		-- T.aoespam[66198] = 0		-- Obliterate OH
+		T.merge[66198] = 49020		-- Obliterate OH
 		T.aoespam[49998] = 0.5		-- Death Strike MH
-		-- T.aoespam[66188] = 0		-- Death Strike OH
+		T.merge[66188] = 49998		-- Death Strike OH
 		T.aoespam[45462] = 0.5		-- Plague Strike MH
-		-- T.aoespam[66216] = 0		-- Plague Strike OH
+		T.merge[66216] = 45462		-- Plague Strike OH
 		T.aoespam[49143] = 0.5		-- Frost Strike MH
-		-- T.aoespam[66196] = 0		-- Frost Strike OH
+		T.merge[66196] = 49143		-- Frost Strike OH
+		T.aoespam[45902] = 0.5		-- Blood Strike MH
+		T.merge[66215] = 45902		-- Blood Strike OH
+		T.aoespam[56815] = 0.5		-- Rune Strike MH
+		T.merge[66217] = 56815		-- Rune Strike OH
 	end
 	if C.combattext.healing then
 		T.healfilter[50475] = true	-- Blood Presence
@@ -278,7 +282,7 @@ elseif T.class == "MAGE" then
 elseif T.class == "PALADIN" then
 	if C.combattext.merge_aoe_spam then
 		-- Healing spells
-		T.aoespam[20267] = 6		-- Judgment of Light
+		T.aoespam[20267] = 6		-- Judgement of Light
 		-- Damaging spells
 		T.aoespam[53600] = 0.5		-- Shield of the Righteous r1
 		T.merge[61411] = 53600		-- Shield of the Righteous r2
@@ -292,6 +296,7 @@ elseif T.class == "PALADIN" then
 		T.merge[48819] = 26573		-- Consecration r8
 		T.aoespam[53385] = 0		-- Divine Storm
 		T.aoespam[53595] = 1		-- Hammer of the Righteous
+		T.aoespam[20424] = 1		-- Seal of Command
 		T.aoespam[20925] = 3		-- Holy Shield r1
 		T.merge[20927] = 20925		-- Holy Shield r2
 		T.merge[20928] = 20925		-- Holy Shield r3
@@ -346,6 +351,7 @@ elseif T.class == "PRIEST" then
 		T.merge[25316] = 596		-- Prayer of Healing r5
 		T.merge[25308] = 596		-- Prayer of Healing r6
 		T.merge[48072] = 596		-- Prayer of Healing r7
+		T.aoespam[33110] = 3		-- Prayer of Mending
 		-- Damaging spells
 		T.aoespam[49821] = 3		-- Mind Sear r1
 		T.merge[53022] = 49821		-- Mind Sear r2
@@ -429,7 +435,7 @@ elseif T.class == "ROGUE" then
 		T.merge[57964] = 8680		-- Instant Poison VIII
 		T.aoespam[22482] = 3		-- Blade Flurry
 		T.aoespam[57841] = 3		-- Killing Spree
-		T.merge[57842] = 57841		-- Killing Spree [Trigger]
+		T.merge[57842] = 57841		-- Killing Spree Off-Hand
 		T.aoespam[5374] = 0			-- Mutilate r1
 		T.merge[34414] = 5374		-- Mutilate r2
 		T.merge[34416] = 5374		-- Mutilate r3
@@ -445,7 +451,6 @@ elseif T.class == "ROGUE" then
 		T.merge[26867] = 1943		-- Rupture r7
 		T.merge[48671] = 1943		-- Rupture r8
 		T.merge[48672] = 1943		-- Rupture r9
-		T.merge[27576] = 5374		-- Mutilate Off-Hand
 		T.merge[27576] = 5374		-- Mutilate Off-Hand r1
 		T.merge[34415] = 5374		-- Mutilate Off-Hand r2
 		T.merge[34417] = 5374		-- Mutilate Off-Hand r3
@@ -595,6 +600,8 @@ elseif T.class == "WARLOCK" then
 		T.healfilter[27220] = true	-- Drain Life r8
 		T.healfilter[47857] = true	-- Drain Life r9
 		T.healfilter[63108] = true	-- Siphon Life
+		T.healfilter[63106] = true	-- Siphon Life
+		T.healfilter[54181] = true	-- Fel Synergy
 	end
 elseif T.class == "WARRIOR" then
 	if C.combattext.merge_aoe_spam then
@@ -642,7 +649,7 @@ elseif T.class == "WARRIOR" then
 		T.merge[12850] = 12162		-- Deep Wounds r2
 		T.merge[12868] = 12162		-- Deep Wounds r3
 		T.aoespam[1680] = 1.5		-- Whirlwind
-		T.merge[44949] = 1680		-- Whirlwind [Trigger]
+		T.merge[44949] = 1680		-- Whirlwind Off-Hand
 		T.aoespam[6343] = 0			-- Thunder Clap r1
 		T.merge[8198] = 6343		-- Thunder Clap r2
 		T.merge[8204] = 6343		-- Thunder Clap r3

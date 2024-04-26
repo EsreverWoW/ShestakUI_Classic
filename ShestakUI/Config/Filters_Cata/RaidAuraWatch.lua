@@ -21,19 +21,18 @@ T.RaidBuffs = {
 		{34477, "TOPRIGHT", {0.2, 0.2, 1}},					-- Misdirection
 	},
 	PALADIN = {
-															-- Lay on Hands (Physical Damage Reduction)
 		{53563, "TOPRIGHT", {0.7, 0.3, 0.7}},				-- Beacon of Light
-		-- {114163, "BOTTOMLEFT", {0.9, 0.6, 0.4}},			-- Eternal Flame
+		{82327, "BOTTOMLEFT", {0.9, 0.6, 0.4}},				-- Holy Radiance
 		{1022, "BOTTOMRIGHT", {0.2, 0.2, 1}, true},			-- Hand of Protection
 		{1044, "BOTTOMRIGHT", {0.89, 0.45, 0}, true},		-- Hand of Freedom
 		{6940, "BOTTOMRIGHT", {0.89, 0.1, 0.1}, true},		-- Hand of Sacrifice
 		{1038, "BOTTOMRIGHT", {0.93, 0.75, 0}, true},		-- Hand of Salvation
-		{53601, "TOPLEFT", {0.4, 0.7, 0.2}, true},			-- Sacred Shield
+		{86273, "TOPLEFT", {0.4, 0.7, 0.2}, true},			-- Illuminated Healing
 	},
 	PRIEST = {
-															-- Abolish Disease (move to all?)
 															-- Fear Ward
 															-- Guardian Spirit
+															-- Echo of Light
 		{41635, "BOTTOMRIGHT", {0.2, 0.7, 0.2}},			-- Prayer of Mending
 		{139, "BOTTOMLEFT", {0.4, 0.7, 0.2}}, 				-- Renew
 		{17, "TOPLEFT", {0.81, 0.85, 0.1}, true},			-- Power Word: Shield
@@ -68,7 +67,6 @@ T.RaidBuffs = {
 		{23333, "LEFT", {1, 0, 0}, true}, 					-- Warsong flag, Horde
 		{23335, "LEFT", {0, 0, 1}, true},					-- Warsong flag, Alliance
 		{34976, "LEFT", {1, 0, 0}, true}, 					-- Netherstorm Flag
-		{2893, "RIGHT", {0, 1, 0}, true}, 					-- Abolish Poison
 		{36488, "RIGHT", {0.89, 0.1, 0.1}, true},			-- Infernal Protection [Cosmic Infuser]
 		{26470, "RIGHT", {0.8, 0.2, 0}, true},				-- Persistent Shield [Scarab Brooch]
 		{64413, "RIGHT", {0.8, 0.2, 0}, true},				-- Protection of Ancient Kings [Val'anyr, Hammer of Ancient Kings]
@@ -1168,7 +1166,8 @@ T.RaidDebuffs = {
 -----------------------------------------------------------------
 -- Other
 -----------------------------------------------------------------
-
+	[SpellName(87023)] = 4,		-- Cauterize
+	[SpellName(94794)] = 4,		-- Rocket Fuel Leak
 }
 
 -----------------------------------------------------------------
@@ -1183,7 +1182,6 @@ if C.raidframe.plugins_pvp_debuffs == true then
 		[SpellName(47476)] = 3,		-- Strangulate
 		-- Druid
 		[SpellName(5211)] = 3,		-- Bash
-		[SpellName(16922)] = 3,		-- Celestial Focus
 		[SpellName(33786)] = 3,		-- Cyclone
 		[SpellName(339)] = 2,		-- Entangling Roots
 		[SpellName(19975)] = 2,		-- Entangling Roots (Nature's Grasp)
@@ -1191,11 +1189,12 @@ if C.raidframe.plugins_pvp_debuffs == true then
 		[SpellName(2637)] = 3,		-- Hibernate
 		[SpellName(22570)] = 3,		-- Maim
 		[SpellName(9005)] = 3,		-- Pounce
+		[SpellName(80964)] = 3,		-- Skull Bash (Bear)
+		[SpellName(80965)] = 3,		-- Skull Bash (Cat)
+		[SpellName(81261)] = 2,		-- Solar Beam
 		-- Hunter
-		[SpellName(53359)] = 2,		-- Chimera Shot - Scorpid
 		[SpellName(19306)] = 2,		-- Counterattack
 		[SpellName(19185)] = 2,		-- Entrapment
-		[SpellName(60210)] = 3,		-- Freezing Arrow Effect
 		[SpellName(3355)] = 3,		-- Freezing Trap Effect
 		[SpellName(2637)] = 3,		-- Hibernate
 		[SpellName(24394)] = 3,		-- Intimidation
@@ -1207,7 +1206,6 @@ if C.raidframe.plugins_pvp_debuffs == true then
 		[SpellName(31661)] = 3,		-- Dragon's Breath
 		[SpellName(64346)] = 3,		-- Fiery Payback
 		[SpellName(33395)] = 2,		-- Freeze (Water Elemental)
-		[SpellName(12494)] = 2,		-- Frostbite
 		[SpellName(122)] = 2,		-- Frost Nova
 		[SpellName(12355)] = 3,		-- Impact
 		[SpellName(118)] = 3,		-- Polymorph
@@ -1218,15 +1216,16 @@ if C.raidframe.plugins_pvp_debuffs == true then
 		[SpellName(61780)] = 3,		-- Polymorph: Turkey
 		[SpellName(28271)] = 3,		-- Polymorph: Turtle
 		[SpellName(59634)] = 3,		-- Polymorph - Penguin
+		[SpellName(55080)] = 2,		-- Shattered Barrier
 		[SpellName(18469)] = 3,		-- Silenced - Improved Counterspell
 		-- Paladin
 		[SpellName(853)] = 3,		-- Hammer of Justice
 		[SpellName(20066)] = 3,		-- Repentance
-		[SpellName(63529)] = 3,		-- Silenced - Shield of the Templar
-		[SpellName(20170)] = 3,		-- Stun (Seal of Justice Proc)
 		[SpellName(10326)] = 3,		-- Turn Evil
 		-- Priest
+		[SpellName(88625)] = 3,		-- Holy Word: Chastise
 		[SpellName(605)] = 3,		-- Mind Control
+		[SpellName(87193)] = 3,		-- Paralysis
 		[SpellName(64044)] = 3,		-- Psychic Horror
 		[SpellName(8122)] = 3,		-- Psychic Scream
 		[SpellName(9484)] = 3,		-- Shackle Undead
@@ -1241,13 +1240,17 @@ if C.raidframe.plugins_pvp_debuffs == true then
 		[SpellName(408)] = 3,		-- Kidney Shot
 		[SpellName(6770)] = 3,		-- Sap
 		[SpellName(18425)] = 3,		-- Silenced - Improved Kick
+		[SpellName(76577)] = 5,		-- Smoke Bomb
 		-- Shaman
 		[SpellName(58861)] = 3,		-- Bash (Spirit Wolf)
+		[SpellName(76780)] = 3,		-- Bind Elemental
+		[SpellName(53019)] = 3,		-- Earth's Grasp
 		[SpellName(51514)] = 3,		-- Hex
 		[SpellName(39796)] = 3,		-- Stoneclaw Totem
 		-- Warlock
+		[SpellName(93975)] = 3,		-- Aura of Foreboding
 		[SpellName(6789)] = 3,		-- Death Coil
-		[SpellName(60995)] = 3,		-- Demon Charge (Metamorphosis)
+		[SpellName(60995)] = 3,		-- Demon Leap (Metamorphosis)
 		[SpellName(5782)] = 3,		-- Fear
 		[SpellName(5484)] = 3,		-- Howl of Terror
 		[SpellName(30153)] = 3,		-- Intercept (Felguard)
@@ -1264,6 +1267,7 @@ if C.raidframe.plugins_pvp_debuffs == true then
 		[SpellName(20253)] = 3,		-- Intercept
 		[SpellName(46968)] = 3,		-- Shockwave
 		[SpellName(18498)] = 3,		-- Silenced - Gag Order
+		[SpellName(85388)] = 3,		-- Throwdown
 		-- Racial
 		[SpellName(28730)] = 3,		-- Arcane Torrent
 		[SpellName(20549)] = 3,		-- War Stomp

@@ -22,11 +22,9 @@ T.CastBarTicks = {
 	-- Druid
 	[SpellName(740)] = 4,		-- Tranquility
 	[SpellName(16914)] = 10,	-- Hurricane
-	-- Hunter
-	[SpellName(1510)] = 6,		-- Volley
 	-- Mage
-	-- [SpellName(5143)] = 5,		-- Arcane Missiles (accurate for r13 - lower ranks have less ticks)
-	[SpellName(12051)] = 4,		-- Evocation
+	-- [SpellName(5143)] = 3,		-- Arcane Missiles (can be talented to have more ticks)
+	[SpellName(12051)] = 3,		-- Evocation
 	[SpellName(10)] = 8,		-- Blizzard
 	-- Priest
 	[SpellName(64843)] = 4,		-- Divine Hymn
@@ -38,7 +36,6 @@ T.CastBarTicks = {
 	[SpellName(1120)] = 5,		-- Drain Soul
 	[SpellName(755)] = 10,		-- Health Funnel
 	[SpellName(689)] = 5,		-- Drain Life
-	[SpellName(5138)] = 5,		-- Drain Mana
 	[SpellName(1949)] = 15,		-- Hellfire
 	[SpellName(5740)] = 4,		-- Rain of Fire
 }

@@ -68,27 +68,27 @@ if C.announcements.bad_gear == true then
 	T.AnnounceBadGear = {
 		-- Head
 		[1] = {
-			33820,	-- Weather-Beaten Fishing Hat
-			19972,	-- Lucky Fishing Hat
+			[33820] = true,	-- Weather-Beaten Fishing Hat
+			[19972] = true,	-- Lucky Fishing Hat
 		},
 		-- Neck
 		[2] = {
-			32757,	-- Blessed Medallion of Karabor
+			[32757] = true,	-- Blessed Medallion of Karabor
 		},
 		-- Feet
 		[8] = {
-			19969,	-- Nat Pagle's Extreme Anglin' Boots
+			[19969] = true,	-- Nat Pagle's Extreme Anglin' Boots
 		},
 		-- Main-Hand
 		[16] = {
-			19970,	-- Arcanite Fishing Pole
-			19022,	-- Nat Pagle's Extreme Angler FC-5000
-			25978,	-- Seth's Graphite Fishing Pole
-			6367,	-- Big Iron Fishing Pole
-			6366,	-- Darkwood Fishing Pole
-			6365,	-- Strong Fishing Pole
-			12225,	-- Blump Family Fishing Pole
-			6256,	-- Fishing Pole
+			[19970] = true,	-- Arcanite Fishing Pole
+			[19022] = true,	-- Nat Pagle's Extreme Angler FC-5000
+			[25978] = true,	-- Seth's Graphite Fishing Pole
+			[6367] = true,	-- Big Iron Fishing Pole
+			[6366] = true,	-- Darkwood Fishing Pole
+			[6365] = true,	-- Strong Fishing Pole
+			[12225] = true,	-- Blump Family Fishing Pole
+			[6256] = true,	-- Fishing Pole
 		},
 	}
 end

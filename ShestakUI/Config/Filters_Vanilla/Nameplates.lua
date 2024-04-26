@@ -490,8 +490,8 @@ T.BuffWhiteList = {
 	[SpellName(426311)] = true,	-- Shadow and Flame [Season of Discovery]
 	[SpellName(17941)] = true,	-- Shadow Trance
 	[SpellName(6229)] = true,	-- Shadow Ward
-	[SpellName(20707)] = true,	-- Soulstone Resurrection
 	[SpellName(25228)] = true,	-- Soul Link
+	[SpellName(20707)] = true,	-- Soulstone Resurrection
 	[SpellName(19478)] = true,	-- Tainted Blood (Felhunter)
 	[SpellName(426195)] = true,	-- Vengeance [Season of Discovery]
 

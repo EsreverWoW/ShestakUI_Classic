@@ -38,6 +38,7 @@ if C.raidcooldown.enable == true then
 		{27871, 360},	-- Lightwell r3
 		{28275, 360},	-- Lightwell r4
 		-- Defense
+		{22812, 60},	-- Barkskin
 		{1022, 300},	-- Blessing of Protection r1 (300sec base / -120sec from talents)
 		{5599, 300},	-- Blessing of Protection r2 (300sec base / -120sec from talents)
 		{10278, 300},	-- Blessing of Protection r3 (300sec base / -120sec from talents)
@@ -45,6 +46,7 @@ if C.raidcooldown.enable == true then
 		-- {20729, 30},		-- Blessing of Sacrifice r2
 		-- {27147, 30},		-- Blessing of Sacrifice r3
 		-- {27148, 30},		-- Blessing of Sacrifice r4
+		{498, 300},		-- Divine Protection
 		{633, 3600},	-- Lay on Hands r1 (3600sec base / -1200sec from talents / -720sec from 4pc T3)
 		{2800, 3600},	-- Lay on Hands r2 (3600sec base / -1200sec from talents / -720sec from 4pc T3)
 		{10310, 3600},	-- Lay on Hands r3 (3600sec base / -1200sec from talents / -720sec from 4pc T3)
@@ -100,11 +102,11 @@ if C.enemycooldown.enable == true then
 		{19386, 120},	-- Wyvern Sting
 		{31661, 20},	-- Dragon's Breath
 		{11113, 30},	-- Blast Wave (30sec base / -4sec from 4pc T4)
-		{853, 35},		-- Hammer of Justice (60sec base / -10sec from 4pc PvP / -15sec from talents / -0.5sec from ZG neck)
+		{853, 35},		-- Hammer of Justice (60sec base / -10sec from 4pc PvP / -15sec from talents)
 		{20066, 60},	-- Repentance
 		{6789, 120},	-- Death Coil (120sec base / -18sec from 5pc ZG Set)
 		{8122, 23},		-- Psychic Scream (30sec base / -3sec from gloves / -4sec from talents)
-		{2094, 90},		-- Blind (180sec base / -90sec from talents)
+		{2094, 120},	-- Blind (180sec base / -60sec from talents)
 		{5484, 40},		-- Howl of Terror
 		{30283, 20},	-- Shadowfury
 		{12809, 45},	-- Concussion Blow
