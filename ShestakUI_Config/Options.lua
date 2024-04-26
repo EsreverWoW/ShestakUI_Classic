@@ -1904,6 +1904,7 @@ do
 		chi,
 		essence,
 		stagger,
+		eclipse,
 		holy,
 		shard,
 		rune,
@@ -1915,6 +1916,7 @@ do
 		chi,
 		essence,
 		stagger,
+		eclipse,
 		holy,
 		shard,
 		totem_other
