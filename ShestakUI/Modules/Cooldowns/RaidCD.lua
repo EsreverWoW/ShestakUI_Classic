@@ -322,9 +322,9 @@ local OnEvent = function(self, event)
 		for _, v in pairs(bars) do
 			v.endTime = 0
 		end
-	elseif event == "ENCOUNTER_END" and select(2, IsInInstance()) == "raid" and (T.Wrath or T.Mainline) then
+	elseif event == "ENCOUNTER_END" and select(2, IsInInstance()) == "raid" and (T.Wrath or T.Cata or T.Mainline) then
 		for _, v in pairs(bars) do
-			if T.Mainline or not v.duration or (T.Wrath and v.duration >= 120 and v.duration < 600) then
+			if T.Mainline or not v.duration or ((T.Wrath or T.Cata) and v.duration >= 120 and v.duration < 600) then
 				v.endTime = 0
 			end
 		end

@@ -44,11 +44,11 @@ SkinBlizzUI:SetScript("OnEvent", function(_, _, addon)
 		GameMenuFrame:StripTextures()
 		OpacityFrame:StripTextures()
 
-		if T.Wrath then
+		if T.Wrath or T.Cata then
 			RolePollPopup:StripTextures()
 		end
 
-		if T.Wrath or T.Mainline then
+		if T.Wrath or T.Cata or T.Mainline then
 			QueueStatusFrame:StripTextures()
 			LFDRoleCheckPopup:StripTextures()
 		end

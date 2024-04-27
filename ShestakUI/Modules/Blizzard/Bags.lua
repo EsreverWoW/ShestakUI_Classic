@@ -1483,7 +1483,7 @@ function Stuffing:ADDON_LOADED(addon)
 	self:RegisterEvent("BANKFRAME_CLOSED")
 	self:RegisterEvent("PLAYERBANKSLOTS_CHANGED")
 	self:RegisterEvent("PLAYERBANKBAGSLOTS_CHANGED")
-	if T.TBC or T.Wrath then
+	if T.TBC or T.Wrath or T.Cata then
 		self:RegisterEvent("GUILDBANKFRAME_OPENED")
 		self:RegisterEvent("GUILDBANKFRAME_CLOSED")
 	end

@@ -34,7 +34,7 @@ frame:SetScript("OnEvent", function(self, event)
 	MinimapBackdrop:SetSize(MinimapAnchor:GetWidth(), MinimapAnchor:GetWidth())
 
 	-- Instance Difficulty icon
-	if T.Wrath then
+	if T.Wrath or T.Cata then
 		MiniMapInstanceDifficulty:SetParent(Minimap)
 		MiniMapInstanceDifficulty:ClearAllPoints()
 		MiniMapInstanceDifficulty:SetPoint("TOPRIGHT", Minimap, "TOPRIGHT", 3, 2)
@@ -89,7 +89,7 @@ frame:SetScript("OnEvent", function(self, event)
 	end
 
 	-- Invites icon
-	if T.Wrath then
+	if T.Wrath or T.Cata then
 		GameTimeCalendarInvitesTexture:ClearAllPoints()
 		GameTimeCalendarInvitesTexture:SetParent(Minimap)
 		GameTimeCalendarInvitesTexture:SetPoint("TOPRIGHT", Minimap, "TOPRIGHT", 0, 0)

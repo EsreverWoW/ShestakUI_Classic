@@ -300,7 +300,7 @@ if clock.enabled then
 					if extended then tr, tg, tb = 0.3, 1, 0.3 else tr, tg, tb = 1, 1, 1 end
 
 					local isHeroic, displayHeroic, displayMythic
-					if T.Wrath or T.Mainline then
+					if T.Wrath or T.Cata or T.Mainline then
 						_, _, isHeroic, _, displayHeroic, displayMythic = GetDifficultyInfo(difficulty)
 						if displayMythic then
 							diff = "M"
@@ -1929,7 +1929,7 @@ if gold.enabled then
 				-- Currency(1580, false, true)	-- Seal of Wartorn Fate
 				-- end
 
-				if T.Wrath and C.stats.currency_raid and T.level == MAX_PLAYER_LEVEL then
+				if (T.Wrath or T.Cata) and C.stats.currency_raid and T.level == MAX_PLAYER_LEVEL then
 					--[[
 					titleName = L_STATS_CURRENCY_RAID
 					Currency(101, false, false)	-- Emblem of Heroism

@@ -107,14 +107,14 @@ local function CheckRole()
 end
 local RoleUpdater = CreateFrame("Frame")
 RoleUpdater:RegisterEvent("PLAYER_ENTERING_WORLD")
-if T.Classic and not T.Wrath then
+if T.Vanilla or T.TBC then
 	RoleUpdater:RegisterEvent("CHARACTER_POINTS_CHANGED")
 	RoleUpdater:RegisterUnitEvent("UNIT_INVENTORY_CHANGED", "player", "")
 	RoleUpdater:RegisterEvent("UPDATE_BONUS_ACTIONBAR")
 	if T.SoD then
 		RoleUpdater:RegisterEvent("RUNE_UPDATED")
 	end
-elseif T.Wrath then
+elseif T.Wrath or T.Cata then
 	RoleUpdater:RegisterEvent("PLAYER_TALENT_UPDATE")
 	RoleUpdater:RegisterUnitEvent("UNIT_INVENTORY_CHANGED", "player", "")
 	RoleUpdater:RegisterEvent("UPDATE_BONUS_ACTIONBAR")

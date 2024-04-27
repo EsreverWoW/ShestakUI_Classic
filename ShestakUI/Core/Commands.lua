@@ -156,7 +156,7 @@ SLASH_PARTYTORAID4 = "/сщтмуке"
 ----------------------------------------------------------------------------------------
 --	Instance teleport
 ----------------------------------------------------------------------------------------
-if T.Wrath or T.Mainline then
+if T.Wrath or T.Cata or T.Mainline then
 	SlashCmdList.INSTTELEPORT = function()
 		local inInstance = IsInInstance()
 		if inInstance then
@@ -172,7 +172,7 @@ end
 ----------------------------------------------------------------------------------------
 --	Spec switching(by Monolit)
 ----------------------------------------------------------------------------------------
-if T.SoD or T.Wrath then
+if T.SoD or T.Wrath or T.Cata then
 	SlashCmdList.SPEC = function()
 		local spec = GetActiveTalentGroup()
 		if spec == 1 then SetActiveTalentGroup(2) elseif spec == 2 then SetActiveTalentGroup(1) end
@@ -320,7 +320,7 @@ SLASH_CLEAR_CHAT2 = "/сдуфк"
 ----------------------------------------------------------------------------------------
 --	Test Blizzard Alerts
 ----------------------------------------------------------------------------------------
-if T.Wrath then
+if T.Wrath or T.Cata then
 	SlashCmdList.TEST_ACHIEVEMENT = function()
 		PlaySound(SOUNDKIT.LFG_REWARDS)
 		if not AchievementFrame then
@@ -366,7 +366,7 @@ end
 ----------------------------------------------------------------------------------------
 --	Test Blizzard Extra Action Button
 ----------------------------------------------------------------------------------------
-if T.Cata or T.Mainline then
+if T.Mainline then
 	SlashCmdList.TEST_EXTRABUTTON = function()
 		if ExtraActionBarFrame:IsShown() then
 			ExtraActionBarFrame:Hide()

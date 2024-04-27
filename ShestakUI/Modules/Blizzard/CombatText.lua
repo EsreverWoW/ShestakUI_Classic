@@ -328,7 +328,7 @@ local function OnEvent(_, event, subevent, powerType)
 		local arg1 = subevent
 		local validRuneType = arg1 and type(arg1) == "number" and arg1 >= 0 and arg1 <= 6
 		if not validRuneType or GetRuneCooldown(arg1) ~= 0 then return end
-		if T.Wrath then
+		if T.Wrath or T.Cata then
 			local rune = GetRuneType(arg1)
 			local msg
 			if rune == 1 then

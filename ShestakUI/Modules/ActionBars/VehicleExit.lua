@@ -52,7 +52,7 @@ else
 	hooksecurefunc(MainMenuBarVehicleLeaveButton, "Update", MainMenuBarVehicleLeaveButtonUpdateHook)
 end
 
-if T.Wrath then
+if T.Wrath or T.Cata then
 	vehicle:RegisterEvent("PLAYER_ENTERING_WORLD")
 	vehicle:RegisterEvent("UPDATE_BONUS_ACTIONBAR")
 	vehicle:RegisterEvent("UPDATE_MULTI_CAST_ACTIONBAR")
@@ -85,7 +85,7 @@ local function PossessBarUpdateHook()
 	end
 end
 
-if T.Wrath then
+if T.Wrath or T.Cata then
 	hooksecurefunc("PossessBar_UpdateState", PossessBarUpdateHook)
 elseif T.Mainline then
 	hooksecurefunc(PossessActionBar, "UpdateState", PossessBarUpdateHook)

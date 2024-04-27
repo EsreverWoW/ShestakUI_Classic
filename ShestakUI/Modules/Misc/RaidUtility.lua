@@ -127,7 +127,11 @@ end
 -- Raid Control Panel
 CreateButton("RaidUtilityRaidControlButton", RaidUtilityPanel, "UIPanelButtonTemplate", (RaidUtilityPanel:GetWidth() * 0.8), 18, "TOPLEFT", RaidUtilityReadyCheckButton, "BOTTOMLEFT", 0, -5, RAID_CONTROL)
 RaidUtilityRaidControlButton:SetScript("OnMouseUp", function()
-	ToggleFriendsFrame(4)
+	if T.Cata then
+		ToggleFriendsFrame(3)
+	else
+		ToggleFriendsFrame(4)
+	end
 end)
 
 local function ToggleRaidUtil(self, event)

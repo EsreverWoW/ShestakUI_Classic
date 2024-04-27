@@ -99,7 +99,7 @@ frame:RegisterEvent("SPELL_UPDATE_USABLE")
 frame:RegisterEvent("SPELL_UPDATE_COOLDOWN")
 frame:RegisterEvent("PLAYER_LEAVE_COMBAT")
 frame:RegisterEvent("READY_CHECK")
-if T.Wrath or T.Mainline then
+if T.Wrath or T.Cata or T.Mainline then
 	frame:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
 end
 frame:SetScript("OnEvent", CheckBuffs)

@@ -188,7 +188,7 @@ addon:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 SlashCmdList.EnemyCD = function()
 	if T.Classic then
 		StartTimer(UnitGUID(T.name), 6552)
-		StartTimer(UnitGUID(T.name), 19244)
+		StartTimer(UnitGUID(T.name), 19647)
 		StartTimer(UnitGUID(T.name), 15487)
 		StartTimer(UnitGUID(T.name), 1499)
 	else
