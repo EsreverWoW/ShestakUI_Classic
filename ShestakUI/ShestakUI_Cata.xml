@@ -186,7 +186,7 @@
 
 	<Script file="Modules\Quests\AutoAccept.lua"/>
 	<Script file="Modules\Quests\AutoButton.lua"/>
-	<!-- <Script file="Modules\Quests\ObjectiveTracker.lua"/> --> <!-- TODO: Fix this -->
+	<Script file="Modules\Quests\ObjectiveTracker_Wrath.lua"/>
 
 	<Include file="Modules\Skins\Blizzard_Wrath\!LoadFrames.xml"/>
 	<Script file="Modules\Skins\Ace3.lua"/>
