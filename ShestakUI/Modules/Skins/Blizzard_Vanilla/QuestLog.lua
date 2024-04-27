@@ -5,7 +5,7 @@ if C.skins.blizzard_frames ~= true or IsAddOnLoaded("QuestLogEx") then return en
 --	QuestLog skin
 ----------------------------------------------------------------------------------------
 local function LoadSkin()
-	if T.Wrath then
+	if T.Wrath or T.Cata then
 		return -- TODO
 	else
 		QuestLogTimerText:SetTextColor(1, 1, 1)

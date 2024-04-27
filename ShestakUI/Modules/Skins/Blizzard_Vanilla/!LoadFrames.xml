@@ -33,9 +33,7 @@
 	<Script file="GMSurvey.lua"/>
 	<Script file="Gossip.lua"/>				<!-- TODO -->
 	<Script file="Inspect.lua"/>
-	<Script file="Interface.lua"/>
 	<Script file="ItemText.lua"/>
-	<Script file="MacClient.lua"/>
 	<Script file="PetStable.lua"/>
 	<Script file="Quest.lua"/>				<!-- TODO -->
 	<Script file="QuestLog.lua"/>

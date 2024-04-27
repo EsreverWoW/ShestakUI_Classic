@@ -103,7 +103,7 @@ local function LoadSkin()
 	T.SkinScrollBar(AchievementFrameComparisonStatsContainerScrollBar)
 
 	-- Tabs
-	for i = 1, 2 do
+	for i = 1, T.Wrath and 2 or 3 do
 		T.SkinTab(_G["AchievementFrameTab"..i])
 		_G["AchievementFrameTab"..i]:SetFrameLevel(_G["AchievementFrameTab"..i]:GetFrameLevel() + 2)
 	end

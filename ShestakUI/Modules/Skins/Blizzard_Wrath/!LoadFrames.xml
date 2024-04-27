@@ -32,9 +32,7 @@
 	<Script file="..\Blizzard_Vanilla\GMSurvey.lua"/>
 	<Script file="..\Blizzard_Vanilla\Gossip.lua"/>				<!-- TODO -->
 	<Script file="..\Blizzard_Vanilla\Inspect.lua"/>
-	<Script file="..\Blizzard_Vanilla\Interface.lua"/>
 	<Script file="..\Blizzard_Vanilla\ItemText.lua"/>
-	<Script file="..\Blizzard_Vanilla\MacClient.lua"/>
 	<Script file="..\Blizzard_Vanilla\PetStable.lua"/>
 	<Script file="..\Blizzard_Vanilla\Quest.lua"/>				<!-- TODO -->
 	<Script file="..\Blizzard_Vanilla\QuestLog.lua"/>

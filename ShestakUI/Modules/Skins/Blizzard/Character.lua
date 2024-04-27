@@ -49,39 +49,47 @@ local function LoadSkin()
 		"Trinket0Slot",
 		"Trinket1Slot",
 		"MainHandSlot",
-		"SecondaryHandSlot"
+		"SecondaryHandSlot",
+		"RangedSlot"
 	}
 
-	select(16, CharacterMainHandSlot:GetRegions()):Hide()
-	select(16, CharacterSecondaryHandSlot:GetRegions()):Hide()
+	if T.Mainline then
+		select(16, CharacterMainHandSlot:GetRegions()):Hide()
+		select(16, CharacterSecondaryHandSlot:GetRegions()):Hide()
+	end
 
 	for _, i in pairs(slots) do
-		_G["Character"..i.."Frame"]:Hide()
-		local icon = _G["Character"..i.."IconTexture"]
 		local slot = _G["Character"..i]
-		local border = _G["Character"..i].IconBorder
 
-		border:SetAlpha(0)
-		slot:StyleButton()
-		slot:SetNormalTexture(0)
-		slot.SetHighlightTexture = T.dummy
-		slot:GetHighlightTexture().SetAllPoints = T.dummy
-		slot:SetFrameLevel(slot:GetFrameLevel() + 2)
-		slot:SetTemplate("Default")
+		if slot then
+			_G["Character"..i.."Frame"]:Hide()
+			local icon = _G["Character"..i.."IconTexture"]
+			local border = _G["Character"..i].IconBorder
 
-		icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-		icon:ClearAllPoints()
-		icon:SetPoint("TOPLEFT", 2, -2)
-		icon:SetPoint("BOTTOMRIGHT", -2, 2)
+			border:SetAlpha(0)
+			slot:StyleButton()
+			slot:SetNormalTexture(0)
+			slot.SetHighlightTexture = T.dummy
+			slot:GetHighlightTexture().SetAllPoints = T.dummy
+			slot:SetFrameLevel(slot:GetFrameLevel() + 2)
+			slot:SetTemplate("Default")
 
-		if slot.popoutButton:GetPoint() == "TOP" then
-			slot.popoutButton:SetPoint("TOP", slot, "BOTTOM", 0, 2)
-		else
-			slot.popoutButton:SetPoint("LEFT", slot, "RIGHT", -2, 0)
+			icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+			icon:ClearAllPoints()
+			icon:SetPoint("TOPLEFT", 2, -2)
+			icon:SetPoint("BOTTOMRIGHT", -2, 2)
+
+			if slot.popoutButton:GetPoint() == "TOP" then
+				slot.popoutButton:SetPoint("TOP", slot, "BOTTOM", 0, 2)
+			else
+				slot.popoutButton:SetPoint("LEFT", slot, "RIGHT", -2, 0)
+			end
+
+			if T.Mainline then
+				hooksecurefunc(slot, "DisplayAsAzeriteItem", UpdateAzeriteItem)
+				hooksecurefunc(slot, "DisplayAsAzeriteEmpoweredItem", UpdateAzeriteEmpoweredItem)
+			end
 		end
-
-		hooksecurefunc(slot, "DisplayAsAzeriteItem", UpdateAzeriteItem)
-		hooksecurefunc(slot, "DisplayAsAzeriteEmpoweredItem", UpdateAzeriteEmpoweredItem)
 	end
 
 	-- Strip Textures
@@ -184,13 +192,15 @@ local function LoadSkin()
 		border:SetBackdropBorderColor(unpack(C.media.backdrop_color))
 	end
 
-	CharacterStatsPane.ItemLevelFrame.Value:SetFont(C.media.normal_font, 18, "")
-	CharacterStatsPane.ItemLevelFrame.Value:SetShadowOffset(1, -1)
-	CharacterStatsPane.ItemLevelFrame.Background:Hide()
+	if T.Mainline then
+		CharacterStatsPane.ItemLevelFrame.Value:SetFont(C.media.normal_font, 18, "")
+		CharacterStatsPane.ItemLevelFrame.Value:SetShadowOffset(1, -1)
+		CharacterStatsPane.ItemLevelFrame.Background:Hide()
 
-	SkinStatsPane(CharacterStatsPane.ItemLevelCategory)
-	SkinStatsPane(CharacterStatsPane.AttributesCategory)
-	SkinStatsPane(CharacterStatsPane.EnhancementsCategory)
+		SkinStatsPane(CharacterStatsPane.ItemLevelCategory)
+		SkinStatsPane(CharacterStatsPane.AttributesCategory)
+		SkinStatsPane(CharacterStatsPane.EnhancementsCategory)
+	end
 
 	-- Titles
 	hooksecurefunc(_G.PaperDollFrame.TitleManagerPane.ScrollBox, "Update", function(frame)
@@ -279,62 +289,141 @@ local function LoadSkin()
 	hooksecurefunc("PaperDollFrame_UpdateSidebarTabs", FixSidebarTabCoords)
 
 	-- Reputation
-	hooksecurefunc(_G.ReputationFrame.ScrollBox, "Update", function(frame)
-		for _, child in next, { frame.ScrollTarget:GetChildren() } do
-			local container = child.Container
-			if container and not container.IsSkinned then
-				container:StripTextures()
+	if T.Classic then
+		local function UpdateFactionSkins()
+			-- ReputationListScrollFrame:StripTextures()
+			ReputationFrame:StripTextures(true)
+			local factionOffset = FauxScrollFrame_GetOffset(ReputationListScrollFrame)
+			for i = 1, GetNumFactions() do
+				local statusbar = _G["ReputationBar"..i.."ReputationBar"]
+				local button = _G["ReputationBar"..i.."ExpandOrCollapseButton"]
+				local factionIndex = factionOffset + i
+				local _, _, _, _, _, _, _, _, _, isCollapsed = GetFactionInfo(factionIndex)
 
-				if container.ExpandOrCollapseButton then
-					T.SkinExpandOrCollapse(container.ExpandOrCollapseButton)
+				if statusbar then
+					statusbar:SetStatusBarTexture(C.media.texture)
+
+					if not statusbar.backdrop then
+						statusbar:CreateBackdrop("Overlay")
+					end
+
+					_G["ReputationBar"..i.."Background"]:SetTexture(nil)
+					_G["ReputationBar"..i.."ReputationBarHighlight1"]:SetTexture(nil)
+					_G["ReputationBar"..i.."ReputationBarHighlight2"]:SetTexture(nil)
+					_G["ReputationBar"..i.."ReputationBarAtWarHighlight1"]:SetTexture(nil)
+					_G["ReputationBar"..i.."ReputationBarAtWarHighlight2"]:SetTexture(nil)
+					_G["ReputationBar"..i.."ReputationBarLeftTexture"]:SetTexture(nil)
+					_G["ReputationBar"..i.."ReputationBarRightTexture"]:SetTexture(nil)
 				end
 
-				if container.ReputationBar then
-					container.ReputationBar:StripTextures()
-					container.ReputationBar:SetStatusBarTexture(C.media.texture)
-					if not container.ReputationBar.backdrop then
-						container.ReputationBar:CreateBackdrop("Overlay")
+				if button then
+					if not button.isSkinned then
+						T.SkinExpandOrCollapse(button)
+						if isCollapsed then
+							button.bg.plus:Show()
+						else
+							button.bg.plus:Hide()
+						end
+						button.isSkinned = true
 					end
 				end
-
-				container.IsSkinned = true
 			end
+			ReputationDetailFrame:StripTextures()
+			ReputationDetailFrame:SetTemplate("Transparent")
+			ReputationDetailFrame:SetPoint("TOPLEFT", ReputationFrame, "TOPRIGHT", 3, 0)
+			T.SkinCloseButton(ReputationDetailCloseButton)
+			T.SkinCheckBox(ReputationDetailMainScreenCheckBox)
+			T.SkinCheckBox(ReputationDetailInactiveCheckBox)
+			T.SkinCheckBox(ReputationDetailAtWarCheckBox)
 		end
-	end)
+		ReputationFrame:HookScript("OnShow", UpdateFactionSkins)
+		hooksecurefunc("ExpandFactionHeader", UpdateFactionSkins)
+		hooksecurefunc("CollapseFactionHeader", UpdateFactionSkins)
+	else
+		hooksecurefunc(_G.ReputationFrame.ScrollBox, "Update", function(frame)
+			for _, child in next, { frame.ScrollTarget:GetChildren() } do
+				local container = child.Container
+				if container and not container.IsSkinned then
+					container:StripTextures()
 
-	ReputationDetailFrame:StripTextures()
-	ReputationDetailFrame:SetTemplate("Transparent")
-	ReputationDetailFrame:SetPoint("TOPLEFT", ReputationFrame, "TOPRIGHT", 3, 0)
-	T.SkinCloseButton(ReputationDetailCloseButton)
-	T.SkinCheckBox(ReputationDetailMainScreenCheckBox)
-	T.SkinCheckBox(ReputationDetailInactiveCheckBox)
-	T.SkinCheckBox(ReputationDetailAtWarCheckBox)
-	ReputationDetailViewRenownButton:SkinButton()
+					if container.ExpandOrCollapseButton then
+						T.SkinExpandOrCollapse(container.ExpandOrCollapseButton)
+					end
+
+					if container.ReputationBar then
+						container.ReputationBar:StripTextures()
+						container.ReputationBar:SetStatusBarTexture(C.media.texture)
+						if not container.ReputationBar.backdrop then
+							container.ReputationBar:CreateBackdrop("Overlay")
+						end
+					end
+
+					container.IsSkinned = true
+				end
+			end
+		end)
+
+		ReputationDetailFrame:StripTextures()
+		ReputationDetailFrame:SetTemplate("Transparent")
+		ReputationDetailFrame:SetPoint("TOPLEFT", ReputationFrame, "TOPRIGHT", 3, 0)
+		T.SkinCloseButton(ReputationDetailCloseButton)
+		T.SkinCheckBox(ReputationDetailMainScreenCheckBox)
+		T.SkinCheckBox(ReputationDetailInactiveCheckBox)
+		T.SkinCheckBox(ReputationDetailAtWarCheckBox)
+		ReputationDetailViewRenownButton:SkinButton()
+	end
 
 	-- Currency
-	TokenFramePopup:StripTextures()
-	TokenFramePopup:SetTemplate("Transparent")
-	TokenFramePopup:SetPoint("TOPLEFT", TokenFrame, "TOPRIGHT", 3, 0)
-	if TokenFramePopup.CloseButton then
-		T.SkinCloseButton(TokenFramePopup.CloseButton)
-	end
-	T.SkinCheckBox(TokenFramePopup.InactiveCheckBox)
-	T.SkinCheckBox(TokenFramePopup.BackpackCheckBox)
+	if T.Classic then
+		TokenFrame:HookScript("OnShow", function()
+			local buttons = TokenFrameContainer.buttons
+			local numButtons = #buttons
 
-	hooksecurefunc(_G.TokenFrame.ScrollBox, "Update", function(frame)
-		for _, child in next, {frame.ScrollTarget:GetChildren()} do
-			if child.Highlight and not child.styled then
-				child.CategoryLeft:SetAlpha(0)
-				child.CategoryRight:SetAlpha(0)
-				child.CategoryMiddle:SetAlpha(0)
-				child.Highlight:Kill()
+			for i = 1, numButtons do
+				local button = buttons[i]
+				if button then
+					button.highlight:Kill()
+					button.categoryMiddle:Kill()
+					button.categoryLeft:Kill()
+					button.categoryRight:Kill()
 
-				child.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-
-				child.styled = true
+					if button.icon then
+						button.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+					end
+				end
 			end
+			TokenFramePopup:StripTextures()
+			TokenFramePopup:SetTemplate("Transparent")
+			TokenFramePopup:SetPoint("TOPLEFT", TokenFrame, "TOPRIGHT", 3, 0)
+			T.SkinCloseButton(TokenFramePopupCloseButton)
+			T.SkinCheckBox(TokenFramePopupBackpackCheckBox)
+			T.SkinCheckBox(TokenFramePopupInactiveCheckBox)
+		end)
+	else
+		TokenFramePopup:StripTextures()
+		TokenFramePopup:SetTemplate("Transparent")
+		TokenFramePopup:SetPoint("TOPLEFT", TokenFrame, "TOPRIGHT", 3, 0)
+		if TokenFramePopup.CloseButton then
+			T.SkinCloseButton(TokenFramePopup.CloseButton)
 		end
-	end)
+		T.SkinCheckBox(TokenFramePopup.InactiveCheckBox)
+		T.SkinCheckBox(TokenFramePopup.BackpackCheckBox)
+
+		hooksecurefunc(_G.TokenFrame.ScrollBox, "Update", function(frame)
+			for _, child in next, {frame.ScrollTarget:GetChildren()} do
+				if child.Highlight and not child.styled then
+					child.CategoryLeft:SetAlpha(0)
+					child.CategoryRight:SetAlpha(0)
+					child.CategoryMiddle:SetAlpha(0)
+					child.Highlight:Kill()
+
+					child.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+
+					child.styled = true
+				end
+			end
+		end)
+	end
 end
 
 tinsert(T.SkinFuncs["ShestakUI"], LoadSkin)

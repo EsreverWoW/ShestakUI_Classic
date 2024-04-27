@@ -188,7 +188,7 @@
 	<Script file="Modules\Quests\AutoButton.lua"/>
 	<Script file="Modules\Quests\ObjectiveTracker_Wrath.lua"/>
 
-	<Include file="Modules\Skins\Blizzard_Wrath\!LoadFrames.xml"/>
+	<Include file="Modules\Skins\Blizzard_Cata\!LoadFrames.xml"/>
 	<Script file="Modules\Skins\Ace3.lua"/>
 	<Script file="Modules\Skins\AtlasLoot.lua"/>
 	<Script file="Modules\Skins\Aurora.lua"/>
