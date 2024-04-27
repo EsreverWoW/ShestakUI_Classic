@@ -92,4 +92,5 @@ C["position"] = {
 
 if T.Classic then
 	C.position.quest = {"TOPLEFT", UIParent, "TOPLEFT", 40, -36}
+	C.position.raid_cooldown = {"TOPLEFT", UIParent, "TOPLEFT", 21, -21}
 end
