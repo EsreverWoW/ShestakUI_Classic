@@ -293,7 +293,7 @@ local function START_LOOT_ROLL(rollID, time)
 			f.needText:SetAlpha(0)
 		end
 		SetDesaturation(f.need:GetNormalTexture(), true)
-		f.need.errtext = _G["LOOT_ROLL_INELIGIBLE_REASON"..reasonNeed]
+		f.need.errtext = _G["LOOT_ROLL_INELIGIBLE_REASON"..reasonNeed] or ""
 	end
 
 	if canTransmog and T.Mainline then
@@ -318,7 +318,7 @@ local function START_LOOT_ROLL(rollID, time)
 				f.greedText:SetAlpha(0)
 			end
 			SetDesaturation(f.greed:GetNormalTexture(), true)
-			f.greed.errtext = _G["LOOT_ROLL_INELIGIBLE_REASON"..reasonGreed]
+			f.greed.errtext = _G["LOOT_ROLL_INELIGIBLE_REASON"..reasonGreed] or ""
 		end
 	end
 
@@ -337,7 +337,11 @@ local function START_LOOT_ROLL(rollID, time)
 				f.disenchantText:SetAlpha(0)
 			end
 			SetDesaturation(f.disenchant:GetNormalTexture(), true)
-			f.disenchant.errtext = format(_G["LOOT_ROLL_INELIGIBLE_REASON"..reasonDisenchant], deSkillRequired)
+			if reasonDisenchant and _G["LOOT_ROLL_INELIGIBLE_REASON"..reasonDisenchant] and deSkillRequired then
+				f.disenchant.errtext = format(_G["LOOT_ROLL_INELIGIBLE_REASON"..reasonDisenchant] or "", deSkillRequired)
+			else
+				f.disenchant.errtext = ""
+			end
 		end
 	end
 
