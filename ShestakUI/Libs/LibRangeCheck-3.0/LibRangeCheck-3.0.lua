@@ -39,8 +39,8 @@ License: MIT
 --
 -- @class file
 -- @name LibRangeCheck-3.0
-local MAJOR_VERSION = "LibRangeCheck-3.0"
-local MINOR_VERSION = 12
+local MAJOR_VERSION = "LibRangeCheck-3.0-ShestakUI"
+local MINOR_VERSION = 14
 
 ---@class lib
 local lib, oldminor = LibStub:NewLibrary(MAJOR_VERSION, MINOR_VERSION)
@@ -50,10 +50,10 @@ end
 
 local isRetail = WOW_PROJECT_ID == WOW_PROJECT_MAINLINE
 local isWrath = WOW_PROJECT_ID == WOW_PROJECT_WRATH_CLASSIC
-local isEra = WOW_PROJECT_ID == WOW_PROJECT_CLASSIC
-
+local isCata = WOW_PROJECT_ID == WOW_PROJECT_WRATH_CLASSIC
+local isEra = WOW_PROJECT_ID == WOW_PROJECT_CATACLYSM_CLASSIC
 local InCombatLockdownRestriction
-if isRetail or isEra then
+if isRetail or isEra or isCata then
     InCombatLockdownRestriction = function(unit) return InCombatLockdown() and not UnitCanAttack("player", unit) end
 else
     InCombatLockdownRestriction = function() return false end
@@ -625,7 +625,7 @@ local function getSpellData(sid)
     return name, fixRange(minRange), fixRange(range), findSpellIdx(name)
 end
 
-local function findMinRangeChecker(origMinRange, origRange, spellList)
+local function findMinRangeChecker(origMinRange, origRange, spellList, interactLists)
     for i = 1, #spellList do
         local sid = spellList[i]
         local name, minRange, range, spellIdx = getSpellData(sid)
@@ -633,14 +633,19 @@ local function findMinRangeChecker(origMinRange, origRange, spellList)
             return checkers_Spell[findSpellIdx(name)]
         end
     end
+    for index, range in pairs(interactLists) do
+        if origMinRange <= range and range <= origRange then
+            return checkers_Interact[index]
+        end
+    end
 end
 
-local function getCheckerForSpellWithMinRange(spellIdx, minRange, range, spellList)
+local function getCheckerForSpellWithMinRange(spellIdx, minRange, range, spellList, interactLists)
     local checker = checkers_SpellWithMin[spellIdx]
     if checker then
         return checker
     end
-    local minRangeChecker = findMinRangeChecker(minRange, range, spellList)
+    local minRangeChecker = findMinRangeChecker(minRange, range, spellList, interactLists)
     if minRangeChecker then
         checker = function(unit)
             if IsSpellInRange(spellIdx, BOOKTYPE_SPELL, unit) == 1 then
@@ -684,6 +689,12 @@ local function createCheckerList(spellList, itemList, interactList)
         end
     end
 
+    if interactList and not next(res) then
+        for index, range in pairs(interactList) do
+            addChecker(res, range, nil, checkers_Interact[index], "interact:" .. index)
+        end
+    end
+
     if spellList then
         for i = 1, #spellList do
             local sid = spellList[i]
@@ -700,7 +711,7 @@ local function createCheckerList(spellList, itemList, interactList)
                 end
 
                 if minRange then
-                    local checker = getCheckerForSpellWithMinRange(spellIdx, minRange, range, spellList)
+                    local checker = getCheckerForSpellWithMinRange(spellIdx, minRange, range, spellList, interactList)
                     if checker then
                         addChecker(res, range, minRange, checker, "spell:" .. sid .. ":" .. tostring(name))
                         addChecker(resInCombat, range, minRange, checker, "spell:" .. sid .. ":" .. tostring(name))
@@ -710,12 +721,6 @@ local function createCheckerList(spellList, itemList, interactList)
                     addChecker(resInCombat, range, minRange, checkers_Spell[spellIdx], "spell:" .. sid .. ":" .. tostring(name))
                 end
             end
-        end
-    end
-
-    if interactList and not next(res) then
-        for index, range in pairs(interactList) do
-            addChecker(res, range, nil, checkers_Interact[index], "interact:" .. index)
         end
     end
 
@@ -1217,6 +1222,12 @@ function lib:SPELLS_CHANGED()
     self:scheduleInit()
 end
 
+function lib:CVAR_UPDATE(_, cvar)
+    if cvar == "ShowAllSpellRanks" then
+        self:scheduleInit()
+    end
+end
+
 function lib:UNIT_INVENTORY_CHANGED(event, unit)
     if self.initialized and unit == "player" and self.handSlotItem ~= GetInventoryItemLink("player", HandSlotId) then
         self:scheduleInit()
@@ -1340,7 +1351,11 @@ function lib:activate()
         frame:RegisterEvent("CHARACTER_POINTS_CHANGED")
         frame:RegisterEvent("SPELLS_CHANGED")
 
-        if isRetail or isWrath then
+        if isEra or isWrath or isCata then
+            frame:RegisterEvent("CVAR_UPDATE")
+        end
+
+        if isRetail or isWrath or isCata then
             frame:RegisterEvent("PLAYER_TALENT_UPDATE")
         end
 
