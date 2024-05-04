@@ -249,7 +249,7 @@ local function Shared(self, unit)
 
 	-- Incoming heals and heal/damage absorbs
 	if C.raidframe.plugins_healcomm == true then
-		if T.Classic and not T.Cata then
+		if T.Classic then
 			local healBar = CreateFrame("StatusBar", nil, self)
 			healBar:SetAllPoints(self.Health)
 			healBar:SetStatusBarTexture(C.media.texture)
@@ -257,10 +257,6 @@ local function Shared(self, unit)
 			self.HealPrediction = healBar
 		else
 			T.CreateHealthPrediction(self)
-
-			if T.Classic then
-				self.HealthPrediction.frequentUpdates = true
-			end
 		end
 	end
 

@@ -3,9 +3,9 @@
 local _, ns = ...
 local oUF = ns.oUF
 
-if(oUF:IsMainline() or oUF:IsCata()) then return end
+if(oUF:IsMainline()) then return end
 
-local HealComm = LibStub("LibHealComm-4.0")
+local HealComm = not oUF:IsCata() and LibStub("LibHealComm-4.0")
 
 local function Update(self, event, unit)
 	if(self.unit ~= unit) then return end
@@ -14,10 +14,9 @@ local function Update(self, event, unit)
 	if(hp.PreUpdate) then hp:PreUpdate(unit) end
 
 	local GUID = UnitGUID(unit)
-	local OverTimeHeals = (HealComm:GetHealAmount(GUID, HealComm.OVERTIME_AND_BOMB_HEALS) or 0) * (HealComm:GetHealModifier(GUID) or 1)
+	local OverTimeHeals = HealComm and ((HealComm:GetHealAmount(GUID, HealComm.OVERTIME_AND_BOMB_HEALS) or 0) * (HealComm:GetHealModifier(GUID) or 1)) or 0
 	local DirectHeals = UnitGetIncomingHeals(unit) or 0
 	local IncomingHeals = DirectHeals >= DirectHeals + OverTimeHeals and DirectHeals or DirectHeals + OverTimeHeals
-	-- local IncomingHeals = (HealComm:GetHealAmount(GUID, HealComm.ALL_HEALS) or 0) * (HealComm:GetHealModifier(GUID) or 1)
 	local Health = UnitHealth(unit)
 	local MaxHealth = UnitHealthMax(unit)
 
@@ -47,7 +46,7 @@ local function Enable(self)
 	if(element) then
 		element.__owner = self
 		element.ForceUpdate = ForceUpdate
-		element.healType = element.healType or HealComm.ALL_HEALS
+		element.healType = element.healType or HealComm and HealComm.ALL_HEALS
 
 		self:RegisterEvent('UNIT_MAXHEALTH', Path)
 		self:RegisterEvent('UNIT_HEALTH_FREQUENT', Path)
@@ -71,12 +70,14 @@ local function Enable(self)
 			HealCommUpdate(guid)
 		end
 
-		HealComm.RegisterCallback(element, 'HealComm_HealStarted', HealComm_Heal_Update)
-		HealComm.RegisterCallback(element, 'HealComm_HealUpdated', HealComm_Heal_Update)
-		HealComm.RegisterCallback(element, 'HealComm_HealDelayed', HealComm_Heal_Update)
-		HealComm.RegisterCallback(element, 'HealComm_HealStopped', HealComm_Heal_Update)
-		HealComm.RegisterCallback(element, 'HealComm_ModifierChanged', HealComm_Modified)
-		HealComm.RegisterCallback(element, 'HealComm_GUIDDisappeared', HealComm_Modified)
+		if(HealComm) then
+			HealComm.RegisterCallback(element, 'HealComm_HealStarted', HealComm_Heal_Update)
+			HealComm.RegisterCallback(element, 'HealComm_HealUpdated', HealComm_Heal_Update)
+			HealComm.RegisterCallback(element, 'HealComm_HealDelayed', HealComm_Heal_Update)
+			HealComm.RegisterCallback(element, 'HealComm_HealStopped', HealComm_Heal_Update)
+			HealComm.RegisterCallback(element, 'HealComm_ModifierChanged', HealComm_Modified)
+			HealComm.RegisterCallback(element, 'HealComm_GUIDDisappeared', HealComm_Modified)
+		end
 
 		if(not element.maxOverflow) then
 			element.maxOverflow = 1.05
@@ -109,12 +110,14 @@ local function Disable(self)
 			element.otherBar:Hide()
 		end
 
-		HealComm.UnregisterCallback(element, 'HealComm_HealStarted')
-		HealComm.UnregisterCallback(element, 'HealComm_HealUpdated')
-		HealComm.UnregisterCallback(element, 'HealComm_HealDelayed')
-		HealComm.UnregisterCallback(element, 'HealComm_HealStopped')
-		HealComm.UnregisterCallback(element, 'HealComm_ModifierChanged')
-		HealComm.UnregisterCallback(element, 'HealComm_GUIDDisappeared')
+		if(HealComm) then
+			HealComm.UnregisterCallback(element, 'HealComm_HealStarted')
+			HealComm.UnregisterCallback(element, 'HealComm_HealUpdated')
+			HealComm.UnregisterCallback(element, 'HealComm_HealDelayed')
+			HealComm.UnregisterCallback(element, 'HealComm_HealStopped')
+			HealComm.UnregisterCallback(element, 'HealComm_ModifierChanged')
+			HealComm.UnregisterCallback(element, 'HealComm_GUIDDisappeared')
+		end
 
 		self:UnregisterEvent('UNIT_MAXHEALTH', Path)
 		self:UnregisterEvent('UNIT_HEALTH_FREQUENT', Path)
