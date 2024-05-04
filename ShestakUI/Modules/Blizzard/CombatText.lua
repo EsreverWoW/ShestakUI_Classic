@@ -125,7 +125,7 @@ local function OnEvent(_, event, subevent, powerType)
 					end
 					xCT2:AddMessage("+"..arg3, 0.1, 0.5, 0.1)
 				end
-			elseif subevent == "ABSORB_ADDED" and CVarCallbackRegistry:GetCVarValueBool("floatingCombatTextCombatHealingAbsorbSelf") then
+			elseif T.Mainline and subevent == "ABSORB_ADDED" and CVarCallbackRegistry:GetCVarValueBool("floatingCombatTextCombatHealingAbsorbSelf") then
 				if arg3 >= C.combattext.heal_treshold then
 					if C.combattext.short_numbers == true then
 						arg3 = T.ShortValue(arg3)
