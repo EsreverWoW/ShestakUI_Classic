@@ -1666,7 +1666,7 @@ do
 
 	-- Cast bars
 	local subheader = ns.addSubCategory(parent, L_GUI_UF_SUBHEADER_CAST)
-	subheader:SetPoint("TOPLEFT", IsClassicBuild() and bar_color_happiness or player_name, "BOTTOMLEFT", 0, -16)
+	subheader:SetPoint("TOPLEFT", (IsClassicBuild() and not IsCataBuild()) and bar_color_happiness or player_name, "BOTTOMLEFT", 0, -16)
 
 	local unit_castbar = ns.CreateCheckBox(parent, "unit_castbar", L_GUI_UF_UNIT_CASTBAR)
 	unit_castbar:SetPoint("TOPLEFT", subheader, "BOTTOMLEFT", 0, -8)
@@ -1833,6 +1833,12 @@ do
 	}
 
 	local classic = {
+		plugins_enemy_spec,
+		plugins_absorbs
+	}
+
+	local cata = {
+		bar_color_happiness,
 		plugins_enemy_spec,
 		plugins_absorbs
 	}

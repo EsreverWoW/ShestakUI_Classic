@@ -157,6 +157,7 @@ if T.Classic then
 	C["unitframe"]["plugins_experience_bar"] = true
 else
 	C["unitframe"]["plugins_power_spark"] = false
+	C["unitframe"]["bar_color_happiness"] = false
 end
 
 ----------------------------------------------------------------------------------------

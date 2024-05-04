@@ -88,7 +88,7 @@ T.PostUpdateHealth = function(health, unit, min, max)
 	if unit == "pet" then
 		local _, class = UnitClass("player")
 		local r, g, b = unpack(T.oUF_colors.class[class])
-		if T.Classic and T.class == "HUNTER" and C.unitframe.bar_color_happiness then
+		if T.Classic and not T.Cata and T.class == "HUNTER" and C.unitframe.bar_color_happiness then
 			local mood = GetPetHappiness()
 			if mood then
 				if mood ~= 3 then

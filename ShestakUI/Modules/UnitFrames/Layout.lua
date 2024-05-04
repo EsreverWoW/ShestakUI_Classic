@@ -77,7 +77,7 @@ local function Shared(self, unit)
 		self.Health.colorReaction = true
 	end
 
-	if unit == "pet" and C.unitframe.bar_color_happiness == true then
+	if T.Classic and not T.Cata and unit == "pet" and C.unitframe.bar_color_happiness == true then
 		self.Health.colorHappiness = true
 	else
 		self.Health.colorHappiness = false
