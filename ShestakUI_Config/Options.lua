@@ -1851,8 +1851,10 @@ do
 	if IsVanillaBuild() then
 		HideOptions(vanilla)
 		show_target_target:SetPoint("LEFT", show_pet, "RIGHT", 248, 0)
-	elseif IsClassicBuild() then
+	elseif IsTBCBuild() or IsWrathBuild() then
 		HideOptions(classic)
+	elseif IsCataBuild() then
+		HideOptions(cata)
 	else
 		HideOptions(mainline)
 	end
