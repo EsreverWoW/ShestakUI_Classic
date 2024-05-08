@@ -50,8 +50,8 @@ end
 
 local isRetail = WOW_PROJECT_ID == WOW_PROJECT_MAINLINE
 local isWrath = WOW_PROJECT_ID == WOW_PROJECT_WRATH_CLASSIC
-local isCata = WOW_PROJECT_ID == WOW_PROJECT_WRATH_CLASSIC
-local isEra = WOW_PROJECT_ID == WOW_PROJECT_CATACLYSM_CLASSIC
+local isCata = WOW_PROJECT_ID == WOW_PROJECT_CATACLYSM_CLASSIC
+local isEra = WOW_PROJECT_ID == WOW_PROJECT_CLASSIC
 local InCombatLockdownRestriction
 if isRetail or isEra or isCata then
     InCombatLockdownRestriction = function(unit) return InCombatLockdown() and not UnitCanAttack("player", unit) end
