@@ -83,26 +83,33 @@ if C.reminder.raid_buffs_enable == true or C.announcements.flask_food == true th
 		},
 		Mp5 = {
 			SpellName(5677),	-- Mana Spring
+			SpellName(19740),	-- Blessing of Might
+			SpellName(54424),	-- Fel Intelligence
 		},
 		AP = {
 			SpellName(19740),	-- Blessing of Might
-			SpellName(6673),	-- Battle Shout
+			SpellName(53138),	-- Abomination's Might
+			SpellName(19506),	-- Trueshot Aura
+			SpellName(30808),	-- Unleashed Rage
 		},
 		Intellect = {
 			SpellName(1459),	-- Arcane Intellect
-			SpellName(46302),	-- K'iru's Song of Victory
 			SpellName(61316),	-- Dalaran Brilliance
+			SpellName(54424),	-- Fel Intelligence
+			SpellName(46302),	-- K'iru's Song of Victory
 			SpellName(8096),	-- Intellect [Scroll of Intellect]
 		},
-		Kings = {
+		Stats = {
+			SpellName(1126),	-- Mark of the Wild
+			SpellName(90363),	-- Embrace of the Shale Spider
 			SpellName(20217),	-- Blessing of Kings
 			SpellName(69378),	-- Blessing of Forgotten Kings [Drums of Forgotten Kings]
 		},
-		Mark = {
-			SpellName(1126),	-- Mark of the Wild
-		},
 		Stamina = {
 			SpellName(21562),	-- Prayer of Fortitude
+			SpellName(90364),	-- Qiraji Fortitude
+			SpellName(6307),	-- Blood Pact
+			SpellName(469),		-- Commanding Shout
 			SpellName(46302),	-- K'iru's Song of Victory
 			SpellName(69377),	-- Fortitude [Runescroll of Fortitude]
 		},
@@ -111,8 +118,7 @@ if C.reminder.raid_buffs_enable == true or C.announcements.flask_food == true th
 		},
 	}
 
-	T.ReminderBuffs.Spell3Buff = T.ReminderBuffs["Kings"]
-	T.ReminderBuffs.Spell4Buff = T.ReminderBuffs["Mark"]
+	T.ReminderBuffs.Spell3Buff = T.ReminderBuffs["Stats"]
 
 	-- Amount of "other" buffs to consider a fulfillment of the Flask reminder
 	function T.ReminderFlaskRequirements()
@@ -124,14 +130,14 @@ if C.reminder.raid_buffs_enable == true or C.announcements.flask_food == true th
 
 	-- Caster buffs
 	function T.ReminderCasterBuffs()
-		T.ReminderBuffs.Spell5Buff = T.ReminderBuffs["Intellect"]
-		T.ReminderBuffs.Spell6Buff = T.ReminderBuffs["Mp5"]
+		T.ReminderBuffs.Spell4Buff = T.ReminderBuffs["Intellect"]
+		T.ReminderBuffs.Spell5Buff = T.ReminderBuffs["Mp5"]
 	end
 
 	-- Physical buffs
 	function T.ReminderPhysicalBuffs()
-		T.ReminderBuffs.Spell5Buff = T.ReminderBuffs["Stamina"]
-		T.ReminderBuffs.Spell6Buff = T.ReminderBuffs["AP"]
+		T.ReminderBuffs.Spell4Buff = T.ReminderBuffs["Stamina"]
+		T.ReminderBuffs.Spell5Buff = T.ReminderBuffs["AP"]
 	end
 end
 
@@ -166,7 +172,9 @@ if C.reminder.solo_buffs_enable == true then
 			[1] = {	-- Horn of Winter group
 				["spells"] = {
 					SpellName(57330),	-- Horn of Winter
+					SpellName(93435),	-- Roar of Courage
 					SpellName(8076),	-- Strength of Earth
+					SpellName(6673),	-- Battle Shout
 				},
 				["combat"] = true,
 				["instance"] = true,
@@ -177,6 +185,8 @@ if C.reminder.solo_buffs_enable == true then
 			[1] = {	-- Mark of the Wild group
 				["spells"] = {
 					SpellName(1126),	-- Mark of the Wild
+					SpellName(90363),	-- Embrace of the Shale Spider
+					SpellName(20217),	-- Blessing of Kings
 				},
 				["combat"] = true,
 				["instance"] = true,
@@ -199,6 +209,9 @@ if C.reminder.solo_buffs_enable == true then
 			[2] = {	-- Trueshot group
 				["spells"] = {
 					SpellName(19506),	-- Trueshot Aura
+					SpellName(19740),	-- Blessing of Might
+					SpellName(53138),	-- Abomination's Might
+					SpellName(30808),	-- Unleashed Rage
 				},
 				["combat"] = true,
 				["instance"] = true,
@@ -220,8 +233,9 @@ if C.reminder.solo_buffs_enable == true then
 			[2] = {	-- Intellect group
 				["spells"] = {
 					SpellName(1459),	-- Arcane Intellect
-					SpellName(46302),	-- K'iru's Song of Victory
 					SpellName(61316),	-- Dalaran Brilliance
+					SpellName(54424),	-- Fel Intelligence
+					SpellName(46302),	-- K'iru's Song of Victory
 				},
 				["combat"] = true,
 				["instance"] = true,
@@ -285,6 +299,9 @@ if C.reminder.solo_buffs_enable == true then
 			[2] = {	-- Stamina Group
 				["spells"] = {
 					SpellName(21562),	-- Prayer of Fortitude
+					SpellName(90364),	-- Qiraji Fortitude
+					SpellName(6307),	-- Blood Pact
+					SpellName(469),		-- Commanding Shout
 					SpellName(46302),	-- K'iru's Song of Victory
 				},
 				["combat"] = true,
