@@ -1778,6 +1778,8 @@ C["filger_spells"] = {
 			{spellID = 1079, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Soothe Animal
 			{spellID = 2908, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Trauma [Warrior Ability]
+			{spellID = 46857, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
 			-- Typhoon
 			{spellID = 61391, unitID = "target", caster = "player", filter = "DEBUFF"},
 

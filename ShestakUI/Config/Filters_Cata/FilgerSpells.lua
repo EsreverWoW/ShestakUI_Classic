@@ -1696,6 +1696,8 @@ C["filger_spells"] = {
 			{spellID = 93402, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Thrash
 			{spellID = 77758, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Trauma [Warrior Ability]
+			{spellID = 46857, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
 			-- Typhoon
 			{spellID = 61391, unitID = "target", caster = "player", filter = "DEBUFF"},
 
