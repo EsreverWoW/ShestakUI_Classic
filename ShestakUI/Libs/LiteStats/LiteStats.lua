@@ -1076,7 +1076,7 @@ if durability.enabled then
 								for id = 1, 18 do
 									if T.Classic then
 										local cost = select(3, LPDURA:SetInventoryItem(P, id))
-										if cost ~= 0 and cost <= GetMoney() then
+										if cost and cost ~= 0 and cost <= GetMoney() then
 											if not InRepairMode() then ShowRepairCursor() end
 											PickupInventoryItem(id)
 											total = total + cost
